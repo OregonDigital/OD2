@@ -78,7 +78,6 @@ services:
     expose:
       - 8983
     volumes:
-      - .:/app
       - solr:/opt/solr/server/solr
     networks:
       internal:
@@ -117,6 +116,7 @@ services:
       - SECRET_KEY_BASE=asdf
       - RAILS_CACHE_STORE_URL=memcache
     volumes:
+      - .:/data
       - app:/data/tmp/uploads
     networks:
       internal:
@@ -178,9 +178,6 @@ services:
       - DOCKER_TLS_VERIFY
       - DOCKER_HOST
       - DOCKER_CERT_PATH
-    ports:
-      - 8080:80
-      - 8443:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # You must uncomment this line if and only if you are running docker-machine

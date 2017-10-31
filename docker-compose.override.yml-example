@@ -1,0 +1,8 @@
+# Example for exposing the load balancer for local dev; just copy this to docker-compose.override.yml
+version: '2'
+
+services:
+  lb:
+    ports:
+      - 8080:80
+      - 8443:443
