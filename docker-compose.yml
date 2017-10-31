@@ -78,7 +78,6 @@ services:
     expose:
       - 8983
     volumes:
-      - .:/app
       - solr:/opt/solr/server/solr
     networks:
       internal:
@@ -117,6 +116,7 @@ services:
       - SECRET_KEY_BASE=asdf
       - RAILS_CACHE_STORE_URL=memcache
     volumes:
+      - .:/data
       - app:/data/tmp/uploads
     networks:
       internal:
