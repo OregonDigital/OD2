@@ -23,3 +23,6 @@
 .byebug_history
 
 coverage/*
+
+# Ignore local overrides
+/docker-compose.override.yml
