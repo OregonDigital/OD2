@@ -10,6 +10,7 @@ volumes:
   zk3:
   zkconf:
   app:
+  application:
 
 networks:
   external:
@@ -78,7 +79,6 @@ services:
     expose:
       - 8983
     volumes:
-      - .:/app
       - solr:/opt/solr/server/solr
     networks:
       internal:
@@ -118,6 +118,7 @@ services:
       - RAILS_CACHE_STORE_URL=memcache
     volumes:
       - app:/data/tmp/uploads
+      - application:/data/app
     networks:
       internal:
 
