@@ -10,6 +10,7 @@ RUN mkdir /data
 WORKDIR /data
 ADD Gemfile /data/Gemfile
 ADD Gemfile.lock /data/Gemfile.lock
+RUN gem install bundler
 RUN bundle install
 ADD . /data
 #RUN bundle exec rake assets:precompile

@@ -10,6 +10,8 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/db/postgres
+pg_upgrade_*.log
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -26,3 +28,7 @@ coverage/*
 
 # Ignore local overrides
 /docker-compose.override.yml
+
+/public/system
+/vendor/bundle
+.byebug_history

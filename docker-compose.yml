@@ -5,10 +5,6 @@ volumes:
   solr:
   db:
   redis:
-  zk1:
-  zk2:
-  zk3:
-  zkconf:
   app:
 
 networks:
@@ -16,71 +12,20 @@ networks:
   internal:
 
 services:
-  zoo1:
-    image: zookeeper
-    restart: always
-    environment:
-      - ZOO_MY_ID=1
-      - ZOO_SERVERS=server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
-    expose:
-      - 2181
-      - 2888
-      - 3888
-    volumes:
-      - zk1:/data
-      - zkconf:/conf
-    networks:
-      internal:
-       aliases:
-         - zookeeper_cluster
-  zoo2:
-    image: zookeeper
-    restart: always
-    environment:
-      - ZOO_MY_ID=2
-      - ZOO_SERVERS=server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
-    expose:
-      - 2181
-      - 2888
-      - 3888
-    volumes:
-      - zk2:/data
-      - zkconf:/conf
-    networks:
-      internal:
-       aliases:
-         - zookeeper_cluster
-  zoo3:
-    image: zookeeper
-    restart: always
-    environment:
-      - ZOO_MY_ID=3
-      - ZOO_SERVERS=server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
-    expose:
-      - 2181
-      - 2888
-      - 3888
-    volumes:
-      - zk3:/data
-      - zkconf:/conf
-    networks:
-      internal:
-       aliases:
-         - zookeeper_cluster
-
   solr:
     image: solr
-    command: solr -c -f -z zookeeper_cluster:2181
-    depends_on:
-      - zoo1
-      - zoo2
-      - zoo3
     expose:
       - 8983
     volumes:
-      - solr:/opt/solr/server/solr
+      - solr:/opt/solr/server/solr/mycores
+      - ./solr/conf:/opt/solr/server/solr/configsets/_default/conf
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - development
     networks:
       internal:
+      external:
 
   fcrepo:
     image: cbeer/fcrepo4:4.7
@@ -103,18 +48,17 @@ services:
   app:
     build: .
     environment:
-      - REDIS_HOST=redis
+      - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
       - DATABASE_URL=postgresql://postgres@db/postgres
       - FEDORA_URL=http://fcrepo:8080/fcrepo/rest
-      - SOLR_URL=http://solr:8983/solr/
-      - SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER=sidekiq
-      - SETTINGS__SOLR__URL=http://solr:8983/solr/
-      - SETTINGS__ZOOKEEPER__CONNECTION_STR=zookeeper_cluster:2181/configs
-      - RAILS_ENV=development
-      - RAILS_SERVE_STATIC_FILES=true
-      - RAILS_LOG_TO_STDOUT=true
-      - SECRET_KEY_BASE=asdf
+      - FITS_PATH=/opt/fits-1.0.5/fits.sh
       - RAILS_CACHE_STORE_URL=memcache
+      - RAILS_ENV=development
+      - RAILS_LOG_TO_STDOUT=true
+      - RAILS_SERVE_STATIC_FILES=true
+      - REDIS_HOST=redis
+      - SECRET_KEY_BASE=asdf
+      - SOLR_URL=http://solr:8983/solr/development
     volumes:
       - .:/data
       - app:/data/tmp/uploads
@@ -129,9 +73,6 @@ services:
       - solr
       - fcrepo
       - redis
-      - zoo1
-      - zoo2
-      - zoo3
       - memcache
       - db_migrate
     expose:
@@ -147,21 +88,13 @@ services:
       - solr
       - fcrepo
       - redis
-      - zoo1
-      - zoo2
-      - zoo3
       - initialize_app
       - db_migrate
 
   initialize_app:
     extends: app
     restart: on-failure
-    #command: bundle exec rails zookeeper:upload
     command: echo 'Not using Zookeeper'
-    depends_on:
-      - zoo1
-      - zoo2
-      - zoo3
 
   db_migrate:
     extends: app
