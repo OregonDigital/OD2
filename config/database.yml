@@ -24,8 +24,8 @@ production:
   <<: *default
   encoding: unicode
   pool: 50
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
+  database: <%= ENV.fetch('RDS_DB_NAME', 'postgres') %>
+  username: <%= ENV.fetch('RDS_USERNAME', 'postgres') %>
+  password: <%= ENV.fetch('RDS_PASSWORD', 'postgres') %>
+  host: <%= ENV.fetch('RDS_HOSTNAME', 'localhost') %>
+  port: <%= ENV.fetch('RDS_PORT', 5432) %>
