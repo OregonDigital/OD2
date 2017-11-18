@@ -1,0 +1,13 @@
+# Database
+RDS_DB_NAME: postgres
+RDS_HOSTNAME: localhost
+RDS_PASSWORD: 'postgres'
+RDS_PORT: '5432'
+RDS_USERNAME: postgres
+
+# Redis for background jobs and notifications
+REDIS_HOST: localhost
+REDIS_PORT: '6379'
+
+# Secret key for Devise and Rails security
+SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
