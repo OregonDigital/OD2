@@ -1,5 +1,5 @@
 directory '/data0/hydra/current'
-bind 'unix:///data0/hydra/shared/sockets/puma.sock'
+bind 'tcp://127.0.0.1:3000'
 pidfile '/data0/hydra/shared/tmp/puma/puma.pid'
 state_path '/data0/hydra/shared/tmp/puma/puma.state'
 workers 4
