@@ -1,24 +1,26 @@
-# README
+# Oregon Digital
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Heading info.  Project info.  Stuff.  Things.
 
-Things you may want to cover:
+## Docker setup
 
-* Ruby version
+    docker-compose up -d
 
-* System dependencies
+Running rake tasks:
 
-* Configuration
+    docker-compose exec workers rake -T
 
-* Database creation
+When you do anything that changes the filesystem (rake tasks or otherwise), you
+may want to pass through your user ID so that on your local filesystem you
+still own the files:
 
-* Database initialization
+    docker-compose exec -u 1000 workers rake -T
 
-* How to run the test suite
+(Your user id may or may not be 1000 - use `id -g` or similar to find your
+actual user id)
 
-* Services (job queues, cache servers, search engines, etc.)
+It may behoove you to create an alias for this kind of thing:
 
-* Deployment instructions
-
-* ...
+    alias dwork='docker-compose exec -u 1000 workers'
+    dwork rake -T
+    dwork rails generate ...
