@@ -25,7 +25,6 @@ services:
       - development
     networks:
       internal:
-      external:
 
   fcrepo:
     image: cbeer/fcrepo4:4.7
