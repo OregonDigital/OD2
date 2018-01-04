@@ -24,3 +24,14 @@ It may behoove you to create an alias for this kind of thing:
     alias dwork='docker-compose exec -u 1000 workers'
     dwork rake -T
     dwork rails generate ...
+
+## Local development
+
+Use Docker!  To expose the app to localhost (so you can just visit
+`http://localhost` instead of finding the app's IP address via crazy docker
+inspect commands), do this:
+
+    cp docker-compose.override.yml-example docker-compose.override.yml
+
+You can also customize that file to expose ports for things like Solr or
+Fedora, Redis, etc.
