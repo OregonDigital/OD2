@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'tzinfo-data'
 
-gem 'hyrax', '2.0.0.rc1'
+gem 'hyrax', github: 'samvera/hyrax'
 gem 'rsolr', '>= 1.0'
 gem 'jquery-rails'
 gem 'devise'
@@ -52,6 +52,9 @@ group :development do
 end
 
 group :development, :test do
+  # Dockerize for a dev workflow
+  gem 'docker-stack'
+
   gem 'solr_wrapper', '>= 0.3'
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'

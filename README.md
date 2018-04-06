@@ -2,6 +2,31 @@
 
 Heading info.  Project info.  Stuff.  Things.
 
+## Docker Stack setup
+
+Docker Stack has some nice built in rake tasks for managing the containers and infrastructure launched, such as resetting the containers, starting, stopping, etc.
+
+Install Docker, Docker-Machine and get it running.. this a CLI for docker running VirtualBox
+
+    brew install docker
+    brew install docker-machine
+    brew install docker-compose
+    docker-machine create default
+    docker-machine start default
+    eval "$(docker-machine env)"
+    # maybe add the eval line to your .zshrc!
+    echo $DOCKER_HOST
+    # make note of the ip address, likely 192.168.99.100
+
+Launch the docker services configured in `.docker-stack/od2-development/docker-compose.yml`
+
+    bundle exec docker:dev:up
+
+Run the Rails app, if it's not configured as part of the docker-compose already. Export the SOLR_URL and FEDORA_URL if you prefer it that way.
+
+    SOLR_URL=http://192.168.99.100:8983 FEDORA_URL=http://192.168.99.100:8984 bundle exec rails s
+
+
 ## Docker setup
 
     docker-compose up -d

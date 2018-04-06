@@ -1,0 +1,34 @@
+---
+version: '3.4'
+volumes:
+  fedora: 
+  solr: 
+services:
+  fedora:
+    image: nulib/fcrepo4
+    volumes:
+    - fedora:/data
+    ports:
+    - 8986:8080
+  solr:
+    image: solr:7.2-alpine
+    ports:
+    - 8985:8983
+    volumes:
+    - solr:/opt/solr/server/solr/mycores
+    - "../../solr:/solr_config"
+    entrypoint:
+    - docker-entrypoint.sh
+    - solr-precreate
+    - test-core
+    - "/solr_config/conf"
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - "-O"
+      - "/dev/null"
+      - http://localhost:8983/solr/
+      interval: 30s
+      timeout: 5s
+      retries: 3
