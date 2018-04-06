@@ -20,7 +20,7 @@ Install Docker, Docker-Machine and get it running.. this a CLI for docker runnin
 
 Launch the docker services configured in `.docker-stack/od2-development/docker-compose.yml`
 
-    bundle exec docker:dev:up
+    bundle exec rails docker:dev:up
 
 Run the Rails app, if it's not configured as part of the docker-compose already. Export the SOLR_URL and FEDORA_URL if you prefer it that way.
 
