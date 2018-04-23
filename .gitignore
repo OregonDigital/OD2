@@ -34,3 +34,6 @@ coverage/*
 .byebug_history
 
 config/local_env.yml
+
+fits.log
+.vscode/*

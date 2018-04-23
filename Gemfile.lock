@@ -204,6 +204,9 @@ GEM
     connection_pool (2.2.1)
     crass (1.0.4)
     daemons (1.2.6)
+    debase (0.2.2)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.2)
     declarative (0.0.10)
     declarative-option (0.1.0)
     deprecation (1.0.0)
@@ -627,6 +630,8 @@ GEM
       json
       multipart-post
       oauth2
+    ruby-debug-ide (0.6.1)
+      rake (>= 0.8.1)
     ruby-progressbar (1.9.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
@@ -752,6 +757,8 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  debase
+  debase-ruby_core_source
   devise
   devise-guests (~> 0.6)
   fcrepo_wrapper
@@ -764,6 +771,7 @@ DEPENDENCIES
   rails (~> 5.1.4)
   rsolr (>= 1.0)
   rspec-rails
+  ruby-debug-ide
   sass-rails (~> 5.0)
   selenium-webdriver
   sidekiq
