@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'tzinfo-data'
 
-gem 'hyrax', '2.0.0.rc1'
+gem 'hyrax', git: 'https://github.com/samvera/hyrax.git'
 gem 'rsolr', '>= 1.0'
 gem 'jquery-rails'
 gem 'devise'
