@@ -5,7 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
@@ -50,15 +49,27 @@ group :development do
 end
 
 group :development, :test do
-  gem 'solr_wrapper', '>= 0.3'
-  gem 'fcrepo_wrapper'
-  gem 'rspec-rails'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
   gem 'debase'
   gem 'debase-ruby_core_source'
+  gem 'fcrepo_wrapper'
+  gem 'poltergeist'
+  gem 'rspec-rails'
   gem 'ruby-debug-ide'
+  gem 'selenium-webdriver'
+  gem 'solr_wrapper', '>= 0.3'
+  gem 'webmock'
+end
+
+group :test do
+  gem 'coveralls', '~> 0.8'
+  gem 'database_cleaner'
+  gem 'equivalent-xml'
+  gem 'rails-controller-testing'
+  gem 'rspec'
+  gem 'rspec-mocks'
+  gem 'rspec_junit_formatter'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'simplecov', '>= 0.9'
 end
