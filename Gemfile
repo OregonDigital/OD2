@@ -33,11 +33,11 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'tzinfo-data'
 
-gem 'hyrax', git: 'https://github.com/samvera/hyrax.git'
-gem 'rsolr', '>= 1.0'
-gem 'jquery-rails'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
+gem 'hyrax', github: 'samvera/hyrax', branch: '2.1-stable'
+gem 'jquery-rails'
+gem 'rsolr', '>= 1.0'
 gem 'sidekiq'
 
 group :development do
