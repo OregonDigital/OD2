@@ -8,24 +8,24 @@ default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  database: <%= ENV.fetch('RDS_DB_NAME', 'postgres') %>
+  username: <%= ENV.fetch('RDS_USERNAME', 'postgres') %>
+  password: <%= ENV.fetch('RDS_PASSWORD', 'postgres') %>
+  host: <%= ENV.fetch('RDS_HOSTNAME', 'localhost') %>
+  port: <%= ENV.fetch('RDS_PORT', 5432) %>
 
 development:
   <<: *default
-  database: od2_development
+  database: development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: od2_test
+  database: test
 
 production:
   <<: *default
   encoding: unicode
   pool: 50
-  database: <%= ENV.fetch('RDS_DB_NAME', 'postgres') %>
-  username: <%= ENV.fetch('RDS_USERNAME', 'postgres') %>
-  password: <%= ENV.fetch('RDS_PASSWORD', 'postgres') %>
-  host: <%= ENV.fetch('RDS_HOSTNAME', 'localhost') %>
-  port: <%= ENV.fetch('RDS_PORT', 5432) %>

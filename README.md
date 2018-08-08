@@ -1,5 +1,7 @@
 # Oregon Digital
 
+[![CircleCI](https://circleci.com/gh/OregonDigital/OD2.svg?style=svg)](https://circleci.com/gh/OregonDigital/OD2)
+
 Heading info.  Project info.  Stuff.  Things.
 
 ## Docker setup
