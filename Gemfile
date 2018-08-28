@@ -34,7 +34,7 @@ gem 'tzinfo-data'
 
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
-gem 'hyrax', github: 'samvera/hyrax', branch: '2.1-stable'
+gem 'hyrax', github: 'samvera/hyrax', tag: 'v2.2.0'
 gem 'jquery-rails'
 gem 'rsolr', '>= 1.0'
 gem 'sidekiq'
