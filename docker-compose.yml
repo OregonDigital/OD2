@@ -47,17 +47,10 @@ services:
   app:
     build: .
     environment:
-      - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
-      - DATABASE_URL=postgresql://postgres@db/postgres
-      - FEDORA_URL=http://fcrepo:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
-      - RAILS_CACHE_STORE_URL=memcache
       - RAILS_ENV=development
       - RAILS_LOG_TO_STDOUT=true
       - RAILS_SERVE_STATIC_FILES=true
-      - REDIS_HOST=redis
-      - SECRET_KEY_BASE=asdf
-      - SOLR_URL=http://solr:8983/solr/development
     volumes:
       - .:/data
       - app:/data/tmp/uploads
@@ -81,7 +74,7 @@ services:
     extends: app
     command: bundle exec sidekiq
     environment:
-      - SETTINGS__FITS_PATH=/opt/fits-1.0.5/fits.sh
+      - FITS_PATH=/opt/fits-1.0.5/fits.sh
     depends_on:
       - db
       - solr
