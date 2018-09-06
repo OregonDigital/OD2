@@ -1,0 +1,8 @@
+de:
+  hyrax:
+    icons:
+      default_hyrax:     'fa fa-file-text-o'
+    select_type:
+      default_hyrax:
+        description:        "Default hyrax Werke"
+        name:               "Default Hyrax"

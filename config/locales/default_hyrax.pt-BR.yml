@@ -1,0 +1,8 @@
+pt-BR:
+  hyrax:
+    icons:
+      default_hyrax:     'fa fa-file-text-o'
+    select_type:
+      default_hyrax:
+        description:        "Default hyrax trabalhos"
+        name:               "Default Hyrax"
