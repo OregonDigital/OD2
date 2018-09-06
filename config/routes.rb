@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
+
   mount Blacklight::Engine => '/'
-  
+
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -13,12 +13,14 @@ Rails.application.routes.draw do
   mount Hyrax::Engine, at: '/'
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
-  curation_concerns_basic_routes
+  #curation_concerns_basic_routes
   concern :exportable, Blacklight::Routes::Exportable.new
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
   end
+
+  resources "default_hyraxes", path: '/concern/default_hyraxes', controller: 'hyrax/default_hyraxes'
 
   resources :bookmarks do
     concerns :exportable
