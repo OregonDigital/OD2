@@ -11,12 +11,12 @@ test:
 production:
   user: fedoraAdmin
   password: fedoraAdmin
-  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8080/rest') %>
+  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8080/fcrepo/rest') %>
   base_path: /production
   request: { timeout: 1000, open_timeout: 1000}
 staging:
   user: fedoraAdmin
   password: fedoraAdmin
-  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8080/rest') %>
+  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8080/fcrepo/rest') %>
   base_path: /staging
   request: { timeout: 1000, open_timeout: 1000}

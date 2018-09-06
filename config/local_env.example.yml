@@ -16,7 +16,7 @@
 SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
 
 # Fedora Repository URL
-# FEDORA_URL: http://fcrepo:8080/rest
+# FEDORA_URL: http://fcrepo:8080/fcrepo/rest
 
 # Background job queue
 # ACTIVE_JOB_QUEUE_ADAPTER: sidekiq
