@@ -1,9 +1,13 @@
 development:
-  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-  port: <%= ENV['REDIS_PORT'] || 6379 %>
+  host: <%= ENV.fetch('REDIS_HOST', 'localhost') %>
+  port: <%= ENV.fetch('REDIS_PORT', 6379) %>
 test:
-  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-  port: <%= ENV['REDIS_PORT'] || 6379 %>
+  host: <%= ENV.fetch('REDIS_HOST', 'localhost') %>
+  port: <%= ENV.fetch('REDIS_PORT', 6379) %>
 production:
-  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-  port: <%= ENV['REDIS_PORT'] || 6379 %>
+  host: <%= ENV.fetch('REDIS_HOST', 'localhost') %>
+  port: <%= ENV.fetch('REDIS_PORT', 6379) %>
+staging:
+  host: <%= ENV.fetch('REDIS_HOST', 'localhost') %>
+  port: <%= ENV.fetch('REDIS_PORT', 6379) %>
+

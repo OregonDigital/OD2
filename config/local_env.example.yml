@@ -1,13 +1,22 @@
 # Database
-RDS_DB_NAME: postgres
-RDS_HOSTNAME: localhost
-RDS_PASSWORD: 'postgres'
-RDS_PORT: '5432'
-RDS_USERNAME: postgres
+# RDS_DB_NAME: postgres
+# RDS_HOSTNAME: localhost
+# RDS_PASSWORD: 'postgres'
+# RDS_PORT: '5432'
+# RDS_USERNAME: postgres
 
 # Redis for background jobs and notifications
-REDIS_HOST: localhost
-REDIS_PORT: '6379'
+# REDIS_HOST: localhost
+# REDIS_PORT: '6379'
+
+# SOLR Server URL
+# SOLR_URL: http://solr:8983
 
 # Secret key for Devise and Rails security
 SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
+
+# Fedora Repository URL
+# FEDORA_URL: http://fcrepo:8080/rest
+
+# Background job queue
+# ACTIVE_JOB_QUEUE_ADAPTER: sidekiq

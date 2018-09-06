@@ -36,7 +36,7 @@ jobs:
           sudo gem install solr_wrapper
       - run:
           name: Start SOLR
-          command: solr_wrapper -n hydra-test -p 8985 --version 6.6.1
+          command: solr_wrapper -n test -p 8985 --version 6.6.1
           background: true
       - run:
           name: Start FCREPO

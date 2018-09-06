@@ -6,4 +6,8 @@ test:
 
 production:
   adapter: redis
-  url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:<%= ENV['REDIS_PORT'] || '6379' %>
+  url: redis://<%= ENV.fetch('REDIS_HOST', 'localhost') %>:<%= ENV.fetch('REDIS_PORT', '6379') %>
+
+staging:
+  adapter: redis
+  url: redis://<%= ENV.fetch('REDIS_HOST', 'localhost') %>:<%= ENV.fetch('REDIS_PORT', '6379') %>

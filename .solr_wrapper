@@ -5,4 +5,4 @@ instance_dir: tmp/solr-development
 collection:
   persist: true
   dir: solr/config/
-  name: hydra-development
+  name: development

@@ -1,15 +1,22 @@
 development:
   user: fedoraAdmin
   password: fedoraAdmin
-  url: <%= ENV['FEDORA_URL'] || "http://127.0.0.1:#{ENV.fetch('FCREPO_DEVELOPMENT_PORT', 8984)}/rest" %>
-  base_path: /dev
+  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8984/rest') %>
+  base_path: /development
 test:
   user: fedoraAdmin
   password: fedoraAdmin
-  url: <%= ENV['FEDORA_URL'] || "http://127.0.0.1:#{ENV.fetch('FCREPO_TEST_PORT', 8986)}/rest" %>
+  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8986/rest') %>
   base_path: /test
 production:
   user: fedoraAdmin
   password: fedoraAdmin
-  url: <%= ENV['FEDORA_URL'] || "http://127.0.0.1:8983/fedora/rest" %>
-  base_path: /prod
+  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8080/rest') %>
+  base_path: /production
+  request: { timeout: 1000, open_timeout: 1000}
+staging:
+  user: fedoraAdmin
+  password: fedoraAdmin
+  url: <%= ENV.fetch('FEDORA_URL', 'http://localhost:8080/rest') %>
+  base_path: /staging
+  request: { timeout: 1000, open_timeout: 1000}
