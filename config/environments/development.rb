@@ -53,4 +53,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.active_job.queue_adapter = ENV.fetch('ACTIVE_JOB_QUEUE_ADAPTER', 'inline').to_sym
+
+  # Whitelist docker containers for webconsole during development
+  config.web_console.whitelisted_ips = '172.0.0.0/8'
 end
