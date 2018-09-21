@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     concerns :exportable
   end
 
-  resources "default_hyraxes", path: '/concern/default_hyraxes', controller: 'hyrax/default_hyraxes'
+  resources "hyrax_default_hyraxes", path: '/concern/default_hyraxes', controller: 'hyrax/default_hyraxes'
 
   resources :bookmarks do
     concerns :exportable
