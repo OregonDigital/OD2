@@ -1,0 +1,8 @@
+en:
+  hyrax:
+    icons:
+      image:     'fa fa-file-text-o'
+    select_type:
+      image:
+        description:        "Image works"
+        name:               "Image"
