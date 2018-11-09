@@ -1,15 +1,15 @@
 version: '2'
 
 volumes:
-  fcrepo:
-  solr:
-  db:
-  redis:
-  app:
+  ? fcrepo
+  ? solr
+  ? db
+  ? redis
+  ? app
 
 networks:
-  external:
-  internal:
+  ? external
+  ? internal
 
 services:
   solr:
@@ -22,9 +22,9 @@ services:
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - development
+      - ${RAILS_ENV}
     networks:
-      internal:
+      ? internal
 
   fcrepo:
     image: cbeer/fcrepo4:4.7
@@ -35,14 +35,14 @@ services:
     environment:
       - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
     networks:
-      internal:
+      ? internal
 
   db:
     image: postgres
     volumes:
       - db:/var/lib/postgresql/data
     networks:
-      internal:
+      ? internal
 
   app:
     build: .
@@ -52,17 +52,17 @@ services:
       - FEDORA_URL=http://fcrepo:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
       - RAILS_CACHE_STORE_URL=memcache
-      - RAILS_ENV=development
+      - RAILS_ENV=${RAILS_ENV}
       - RAILS_LOG_TO_STDOUT=true
       - RAILS_SERVE_STATIC_FILES=true
       - REDIS_HOST=redis
       - SECRET_KEY_BASE=asdf
-      - SOLR_URL=http://solr:8983/solr/development
+      - SOLR_URL=http://solr:8983/solr/${RAILS_ENV}
     volumes:
       - .:/data
       - app:/data/tmp/uploads
     networks:
-      internal:
+      ? internal
 
   web:
     extends: app
@@ -115,8 +115,8 @@ services:
       # You must uncomment this line if and only if you are running docker-machine
       # - $DOCKER_CERT_PATH:$DOCKER_CERT_PATH
     networks:
-      internal:
-      external:
+      ? internal
+      ? external
 
   redis:
     image: redis:3
@@ -124,9 +124,9 @@ services:
     volumes:
       - redis:/data
     networks:
-      internal:
+      ? internal
 
   memcache:
     image: memcached
     networks:
-      internal:
+      ? internal
