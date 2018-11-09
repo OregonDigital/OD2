@@ -301,6 +301,11 @@ GEM
       nokogiri (>= 1.4.3)
     erubi (1.7.1)
     execjs (2.7.0)
+    factory_bot (4.11.1)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.11.1)
+      factory_bot (~> 4.11.1)
+      railties (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.4)
@@ -494,7 +499,7 @@ GEM
       carrierwave (>= 0.5.8)
       rails (>= 5.0.0)
     memoist (0.16.0)
-    method_source (0.9.1)
+    method_source (0.9.2)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
@@ -815,7 +820,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     xml-simple (1.1.5)
-    xpath (3.1.0)
+    xpath (3.2.0)
       nokogiri (~> 1.8)
 
 PLATFORMS
@@ -823,7 +828,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  capybara (~> 2.13)
+  capybara (~> 2.17)
   coffee-rails (~> 4.2)
   coveralls (~> 0.8)
   database_cleaner
@@ -832,6 +837,7 @@ DEPENDENCIES
   devise
   devise-guests (~> 0.6)
   equivalent-xml
+  factory_bot_rails
   fcrepo_wrapper
   hydra-role-management
   hyrax!
@@ -842,7 +848,7 @@ DEPENDENCIES
   pg
   poltergeist
   puma (~> 3.7)
-  rails (~> 5.1.4)
+  rails (~> 5.1.6)
   rails-controller-testing
   rsolr (>= 1.0)
   rspec
@@ -865,4 +871,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.4
+   1.17.1
