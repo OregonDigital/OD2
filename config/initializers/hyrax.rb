@@ -1,4 +1,8 @@
 Hyrax.config do |config|
+  # Injected via `rails g hyrax:work Generic`
+  config.register_curation_concern :generic
+  # Injected via `rails g hyrax:work Image`
+  config.register_curation_concern :image
   # Register roles that are expected by your implementation.
   # @see Hyrax::RoleRegistry for additional details.
   # @note there are magical roles as defined in Hyrax::RoleRegistry::MAGIC_ROLES
