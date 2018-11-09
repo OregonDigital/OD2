@@ -205,13 +205,6 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     clipboard-rails (1.7.1)
     cliver (0.3.2)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
     coveralls (0.8.22)
@@ -461,7 +454,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.2.2)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -490,7 +483,7 @@ GEM
     noid-rails (3.0.0)
       actionpack (>= 5.0.0, < 6)
       noid (~> 0.9)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     nokogumbo (1.5.0)
       nokogiri
@@ -668,7 +661,7 @@ GEM
       rake (>= 0.8.1)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
-    rubyzip (1.2.1)
+    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     samvera-nesting_indexer (2.0.0)
       dry-equalizer
@@ -800,7 +793,6 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara (~> 2.13)
-  coffee-rails (~> 4.2)
   coveralls (~> 0.8)
   database_cleaner
   debase
@@ -813,6 +805,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  loofah (>= 2.2.3)
   pg
   poltergeist
   puma (~> 3.7)
@@ -824,6 +817,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   ruby-debug-ide
+  rubyzip (>= 1.2.2)
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers!
