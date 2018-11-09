@@ -8,6 +8,7 @@ end
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
+gem 'hydra-role-management'
 gem 'hyrax', github: 'samvera/hyrax', tag: 'v2.4.0'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
