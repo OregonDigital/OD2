@@ -37,3 +37,7 @@ config/local_env.yml
 
 fits.log
 .vscode/*
+
+rules.log
+log/rules.log
+blazegraph.jnl
