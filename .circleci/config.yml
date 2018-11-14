@@ -79,6 +79,6 @@ jobs:
           path: /tmp/test-results
           destination: test-results
       - store_artifacts:
-          path: /tmp/screenshots
+          path: ./tmp/screenshots
       - store_artifacts:
-          path: /tmp/capybara
+          path: ./tmp/capybara
