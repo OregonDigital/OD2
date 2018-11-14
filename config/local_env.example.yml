@@ -10,7 +10,7 @@ REDIS_HOST: localhost
 REDIS_PORT: '6379'
 
 OD2_TRIPLESTORE_ADAPTER_TYPE: blazegraph
-OD2_TRIPLESTORE_ADAPTER_URL: 'http://127.0.0.1:9999/blazegraph/namespace/<%= ENV.fetch('RAILS_ENV') %>/sparql'
+# OD2_TRIPLESTORE_ADAPTER_URL: 'http://127.0.0.1:9999/blazegraph/namespace/<%= ENV.fetch('RAILS_ENV') %>/sparql'
 # Docker
 # SCHOLARSARCHIVE_TRIPLESTORE_ADAPTER_URL: 'http://blazegraph:8080/bigdata/namespace/<%= ENV.fetch('RAILS_ENV') %>/sparql'
 
