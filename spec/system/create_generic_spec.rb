@@ -54,6 +54,9 @@ RSpec.describe 'Create a Generic', js: true, type: :system do
       click_on 'Save'
       expect(page).to have_content('My Test Work')
       expect(page).to have_content 'Your files are being processed by Hyrax in the background.'
+
+      # save a successful screenshot if running in CI for build artifacts
+      save_screenshot if ENV.fetch('CI', nil)
     end
   end
 end

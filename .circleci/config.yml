@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.5-node-browsers
         environment:
+          CAPYBARA_APP_HOST: http://test:3001
           FEDORA_URL: http://localhost:8080/fcrepo/rest
           RAILS_ENV: test
           RDS_DB_NAME: test
@@ -14,7 +15,6 @@ jobs:
           REDIS_HOST: localhost
           REDIS_PORT: "6379"
           SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
-          SELENIUM_HUB_URL: http://localhost:4444/wd/hub
           SOLR_URL: http://localhost:8985/solr/hydra-test
       - image: circleci/postgres:9.5-alpine-ram
         environment:
@@ -27,7 +27,6 @@ jobs:
           CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
       - image: solr:7-alpine
         command: bin/solr -cloud -noprompt -f -p 8985
-      - image: selenium/standalone-chrome:3.141.5-astatine
     working_directory: ~/app
     steps:
       - run:
@@ -79,3 +78,7 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+      - store_artifacts:
+          path: /tmp/screenshots
+      - store_artifacts:
+          path: /tmp/capybara
