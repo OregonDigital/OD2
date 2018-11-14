@@ -1,8 +1,9 @@
 # Oregon Digital
 
 [![CircleCI](https://circleci.com/gh/OregonDigital/OD2.svg?style=svg)](https://circleci.com/gh/OregonDigital/OD2)
+[![Coverage Status](https://coveralls.io/repos/github/OregonDigital/OD2/badge.svg?branch=master)](https://coveralls.io/github/OregonDigital/OD2?branch=master)
 
-Heading info.  Project info.  Stuff.  Things.
+Heading info. Project info. Stuff. Things.
 
 ## Docker setup
 
@@ -29,7 +30,7 @@ It may behoove you to create an alias for this kind of thing:
 
 ## Local development
 
-Use Docker!  To expose the app to localhost (so you can just visit
+Use Docker! To expose the app to localhost (so you can just visit
 `http://localhost` instead of finding the app's IP address via crazy docker
 inspect commands), do this:
 
