@@ -11,14 +11,14 @@ volumes:
   redis-dev:
 
 services:
+  ##
+  # Basic Rails application build image
   app: &app
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - .:/data # mount current directory into the image
-    expose:
-      - 3000
     networks:
       external:
       internal:
@@ -28,6 +28,8 @@ services:
     tmpfs:
       - /data/log
 
+  ##
+  # Development environment for application
   dev: &dev
     <<: *app
     environment:
@@ -45,21 +47,36 @@ services:
       - RDS_USERNAME=postgres
       - REDIS_HOST=redis-dev
       - SECRET_KEY_BASE=asdf
-      - SELENIUM_DRIVER_URL=http://chrome:4444/wd/hub
       - SOLR_URL=http://solr-dev:8983/solr/development
     depends_on:
-      - chrome
       - db-dev
       - solr-dev
       - fcrepo-dev
       - redis-dev
       - memcache
+      - workers
+    expose:
+      - 3000
   server:
     <<: *dev
-    command: bash -c "./build/validate-migrated.sh && bundle exec puma -C config/puma/development.rb"
+    command: >
+      bash -c "./build/validate_migrated.sh &&
+      bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid &&
+      tail -f log/development.log"
     ports:
       - 3000:3000
+  workers:
+    <<: *dev
+    command: bundle exec sidekiq
+    depends_on:
+      - db-dev
+      - solr-dev
+      - fcrepo-dev
+      - redis-dev
+      - memcache
 
+  ##
+  # Test environment for application
   test: &test
     <<: *app
     environment:
@@ -91,19 +108,17 @@ services:
     volumes:
       - .:/data # mount current directory into the image
       - ./tmp:/tmp
-    command: bash -c "./build/validate_migrated.sh && puma -C config/puma/test.rb -d && tail -f log/test.log"
+    command: >
+      bash -c "./build/validate_migrated.sh &&
+      puma -b tcp://0.0.0.0:3001 -e test -d &&
+      tail -f log/test.log"
     expose:
       - 3001
     ports:
       - 3001:3001
-    networks:
-      external:
-      internal:
 
-  #  spring:
-  #    <<: *test
-  #    command: bash -c "./build/validate-migrated.sh && bundle exec spring server"
-
+  ##
+  # Selenium and Chrome for System (browser) tests
   selenium-hub:
     image: selenium/hub:3.141.5-astatine
     volumes:
@@ -130,6 +145,8 @@ services:
       internal:
       external:
 
+  ##
+  # SOLR Index server
   solr: &solr
     image: solr
     expose:
@@ -155,6 +172,8 @@ services:
       - solr-precreate
       - test
 
+  ##
+  # Fedora repository server
   fcrepo: &fcrepo
     image: cbeer/fcrepo4:4.7
     environment:
@@ -171,6 +190,8 @@ services:
     <<: *fcrepo
     tmpfs: /data
 
+  ##
+  # Postgres database server
   db: &db
     image: postgres
     networks:
@@ -187,16 +208,8 @@ services:
       - POSTGRES_DB=test
     tmpfs: /var/lib/postgresql/data
 
-  workers:
-    <<: *app
-    command: bundle exec sidekiq
-    depends_on:
-      - db-dev
-      - solr-dev
-      - fcrepo-dev
-      - redis-dev
-      - memcache
-
+  ##
+  # Redis queue server
   redis: &redis
     image: redis:3
     command: redis-server
@@ -210,6 +223,8 @@ services:
     <<: *redis
     tmpfs: /data
 
+  ##
+  # Memcache cache server
   memcache:
     image: memcached
     networks:
