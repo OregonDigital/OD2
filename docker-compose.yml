@@ -63,8 +63,6 @@ services:
       bash -c "./build/validate_migrated.sh &&
       bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid &&
       tail -f log/development.log"
-    ports:
-      - 3000:3000
   workers:
     <<: *dev
     command: bundle exec sidekiq
@@ -114,8 +112,6 @@ services:
       tail -f log/test.log"
     expose:
       - 3001
-    ports:
-      - 3001:3001
 
   ##
   # Selenium and Chrome for System (browser) tests
@@ -123,8 +119,6 @@ services:
     image: selenium/hub:3.141.5-astatine
     volumes:
       - ./spec/fixtures:/data/spec/fixtures
-    ports:
-      - "4444:4444"
     networks:
       internal:
       external:
@@ -139,8 +133,6 @@ services:
       - HUB_PORT=4444
     expose:
       - 5900
-    ports:
-      - 5900:5900
     networks:
       internal:
       external:
