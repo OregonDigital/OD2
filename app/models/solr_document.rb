@@ -22,7 +22,11 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
-  # Do content negotiation for AF models. 
+  # Do content negotiation for AF models.
 
   use_extension( Hydra::ContentNegotiation )
+  
+  def oembed_url
+    self[Solrizer.solr_name('oembed_url')]
+  end
 end

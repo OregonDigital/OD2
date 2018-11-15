@@ -6,6 +6,6 @@ module Hyrax
     include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm
 
     self.model_class = ::Generic
-    self.terms += [:resource_type]
+    self.terms += [:resource_type, :oembed_url]
   end
 end
