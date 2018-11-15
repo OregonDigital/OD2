@@ -21,6 +21,8 @@ gem 'sidekiq'
 gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
 gem 'ruby-oembed'
+gem 'net-http-persistent', '~> 2.9'
+gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
