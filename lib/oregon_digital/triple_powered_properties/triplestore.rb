@@ -10,8 +10,8 @@ module OregonDigital::TriplePoweredProperties
     def self.fetch(uri)
       unless uri.blank?
         begin
-          @triplestore ||= TriplestoreAdapter::Triplestore.new(TriplestoreAdapter::Client.new(ENV["SCHOLARSARCHIVE_TRIPLESTORE_ADAPTER_TYPE"] || "blazegraph",
-                                                      ENV["SCHOLARSARCHIVE_TRIPLESTORE_ADAPTER_URL"] || 'http://localhost:9999/blazegraph/namespace/development/sparql'))
+          @triplestore ||= TriplestoreAdapter::Triplestore.new(TriplestoreAdapter::Client.new(ENV["OREGONDIGITAL_TRIPLESTORE_ADAPTER_TYPE"] || "blazegraph",
+                                                      ENV["OREGONDIGITAL_TRIPLESTORE_ADAPTER_URL"] || 'http://localhost:9999/blazegraph/namespace/development/sparql'))
           @triplestore.fetch(uri, from_remote: true)
         rescue TriplestoreAdapter::TriplestoreException => e
           raise e

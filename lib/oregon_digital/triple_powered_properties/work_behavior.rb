@@ -5,10 +5,10 @@ module OregonDigital::TriplePoweredProperties
     included do
 
       # store the triple powered property labels in SOLR
-      self.indexer = ScholarsArchive::TriplePoweredProperties::WorkIndexer
+      self.indexer = OregonDigital::TriplePoweredProperties::WorkIndexer
 
       # server side validation for triple powered property values being valid urls
-      self.validates_with ScholarsArchive::TriplePoweredProperties::HasUrlValidator
+      self.validates_with OregonDigital::TriplePoweredProperties::HasUrlValidator
 
       class_attribute :triple_powered_properties
 
@@ -38,7 +38,7 @@ module OregonDigital::TriplePoweredProperties
         if result.is_a?(String)
           labels[uri] << result
         else
-          labels[uri] << ScholarsArchive::TriplePoweredProperties::Triplestore.predicate_labels(result).values.flatten.compact
+          labels[uri] << OregonDigital::TriplePoweredProperties::Triplestore.predicate_labels(result).values.flatten.compact
         end
       end
       labels
@@ -77,7 +77,7 @@ module OregonDigital::TriplePoweredProperties
       self[property].map do |uri|
         begin
           # Fetch the graph from the triplestore, or return the uri
-          graph = ScholarsArchive::TriplePoweredProperties::Triplestore.fetch(uri)
+          graph = OregonDigital::TriplePoweredProperties::Triplestore.fetch(uri)
           { uri: uri, result: graph }
         rescue TriplestoreAdapter::TriplestoreException
           { uri: uri, result: uri }

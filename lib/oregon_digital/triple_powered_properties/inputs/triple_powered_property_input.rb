@@ -119,8 +119,8 @@ module OregonDigital::TriplePoweredProperties::Inputs
       return "<div itemscope itemtype='' class='triple_powered_labels hidden' data-rdf-uri=''></div>".html_safe if uri.blank?
 
       begin
-        graph = ScholarsArchive::TriplePoweredProperties::Triplestore.fetch(uri)
-        predicate_labels = ScholarsArchive::TriplePoweredProperties::Triplestore.predicate_labels(graph)
+        graph = OregonDigital::TriplePoweredProperties::Triplestore.fetch(uri)
+        predicate_labels = OregonDigital::TriplePoweredProperties::Triplestore.predicate_labels(graph)
       rescue TriplestoreAdapter::TriplestoreException => e
         return "<div class='triple_powered_labels'><span class='error'>Failed to fetch labels for this URL.</span></div>".html_safe
       end

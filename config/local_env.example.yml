@@ -1,0 +1,18 @@
+# Database
+RDS_DB_NAME: postgres
+RDS_HOSTNAME: localhost
+RDS_PASSWORD: 'postgres'
+RDS_PORT: '5432'
+RDS_USERNAME: postgres
+
+# Redis for background jobs and notifications
+REDIS_HOST: localhost
+REDIS_PORT: '6379'
+
+SCHOLARSARCHIVE_TRIPLESTORE_ADAPTER_TYPE: blazegraph
+SCHOLARSARCHIVE_TRIPLESTORE_ADAPTER_URL: 'http://127.0.0.1:9999/blazegraph/namespace/<%= ENV.fetch('RAILS_ENV') %>/sparql'
+# Docker
+#SCHOLARSARCHIVE_TRIPLESTORE_ADAPTER_URL: 'http://blazegraph:8080/bigdata/namespace/<%= ENV.fetch('RAILS_ENV') %>/sparql'
+
+# Secret key for Devise and Rails security
+SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
