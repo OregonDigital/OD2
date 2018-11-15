@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe OregonDigital::TriplePoweredProperties::WorkBehavior do
   let(:url) { 'http://opaquenamespace.org/ns/TestVocabulary/TestTerm' }
-  subject { DefaultWork.new({ based_near: [ url ], title: ['TestTest'] }) }
+  subject { Generic.new({ based_near: [ url ], title: ['TestTest'] }) }
   let(:label) { 'hello' }
 
   before do

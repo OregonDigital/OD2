@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::TriplePoweredProperties::WorkIndexer do
   let(:url) { 'http://opaquenamespace.org/ns/TestVocabulary/TestTerm' }
   subject(:solr_document) { service.generate_solr_document }
   let(:service) { described_class.new(work) }
-  let(:work) { DefaultWork.new({ based_near: [ url ], title: ['TestTest'] }) }
+  let(:work) { Generic.new({ based_near: [ url ], title: ['TestTest'] }) }
   let(:label) { 'hello' }
 
   describe "#generate_solr_document" do
