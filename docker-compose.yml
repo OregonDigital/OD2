@@ -48,6 +48,7 @@ services:
       - REDIS_HOST=redis-dev
       - SECRET_KEY_BASE=asdf
       - SOLR_URL=http://solr-dev:8983/solr/development
+      - TRIPLESTORE_ADAPTER_TYPE=blazegraph
     depends_on:
       - db-dev
       - solr-dev
