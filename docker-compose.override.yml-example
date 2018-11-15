@@ -17,6 +17,14 @@ services:
     ports:
       - 3001:3001
 
+  # Map Blazegraph port to localhost
+  blazegraph-dev:
+    networks:
+      internal:
+      external:
+    ports:
+      - 9999:8080
+
   # Map Selenium hub UI to localhost
   selenium-hub:
     ports:

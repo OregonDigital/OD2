@@ -1,14 +1,15 @@
-version: "3"
+version: '3'
 
 networks:
-  external:
-  internal:
+  ? external
+  ? internal
 
 volumes:
-  db-dev:
-  fcrepo-dev:
-  solr-dev:
-  redis-dev:
+  ? db-dev
+  ? blazegraph-dev
+  ? fcrepo-dev
+  ? solr-dev
+  ? redis-dev
 
 services:
   ##
@@ -20,8 +21,8 @@ services:
     volumes:
       - .:/data # mount current directory into the image
     networks:
-      external:
-      internal:
+      ? external
+      ? internal
     # use tmpfs for tmp and log for performance and to allow
     # multiple builds in parallel. Both directories are mounted
     # into the image AFTER the working directory is mounted.
@@ -49,8 +50,10 @@ services:
       - SECRET_KEY_BASE=asdf
       - SOLR_URL=http://solr-dev:8983/solr/development
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
+      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/rw/sparql
     depends_on:
       - db-dev
+      - blazegraph-dev
       - solr-dev
       - fcrepo-dev
       - redis-dev
@@ -69,6 +72,7 @@ services:
     command: bundle exec sidekiq
     depends_on:
       - db-dev
+      - blazegraph-dev
       - solr-dev
       - fcrepo-dev
       - redis-dev
@@ -96,10 +100,13 @@ services:
       - SECRET_KEY_BASE=asdf
       - SELENIUM_DRIVER_URL=http://selenium-hub:4444/wd/hub
       - SOLR_URL=http://solr-test:8983/solr/test
+      - TRIPLESTORE_ADAPTER_TYPE=blazegraph
+      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/rw/sparql
     depends_on:
       - chrome
       - selenium-hub
       - db-test
+      - blazegraph-test
       - solr-test
       - fcrepo-test
       - redis-test
@@ -121,8 +128,8 @@ services:
     volumes:
       - ./spec/fixtures:/data/spec/fixtures
     networks:
-      internal:
-      external:
+      ? internal
+      ? external
   chrome:
     image: selenium/node-chrome-debug:3.141.5-astatine
     volumes:
@@ -135,8 +142,8 @@ services:
     expose:
       - 5900
     networks:
-      internal:
-      external:
+      ? internal
+      ? external
 
   ##
   # SOLR Index server
@@ -145,7 +152,7 @@ services:
     expose:
       - 8983
     networks:
-      internal:
+      ? internal
   solr-dev:
     <<: *solr
     volumes:
@@ -174,7 +181,7 @@ services:
     expose:
       - 8080
     networks:
-      internal:
+      ? internal
   fcrepo-dev:
     <<: *fcrepo
     volumes:
@@ -184,11 +191,30 @@ services:
     tmpfs: /data
 
   ##
+  # Fedora repository server
+  blazegraph: &blazegraph
+    image: lyrasis/blazegraph:2.1.5
+    expose:
+      - 8080
+    networks:
+      ? internal
+  blazegraph-dev:
+    <<: *blazegraph
+    volumes:
+      - blazegraph-dev:/var/lib/jetty
+      - ./config/blazegraph/RWStore.properties:/RWStore.properties
+  blazegraph-test:
+    <<: *blazegraph
+    volumes:
+      - ./config/blazegraph/RWStore.properties:/RWStore.properties
+    tmpfs: /var/lib/jetty
+
+  ##
   # Postgres database server
   db: &db
     image: postgres
     networks:
-      internal:
+      ? internal
   db-dev:
     <<: *db
     environment:
@@ -207,7 +233,7 @@ services:
     image: redis:3
     command: redis-server
     networks:
-      internal:
+      ? internal
   redis-dev:
     <<: *redis
     volumes:
@@ -221,4 +247,4 @@ services:
   memcache:
     image: memcached
     networks:
-      internal:
+      ? internal
