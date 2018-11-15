@@ -2,7 +2,7 @@
 #  `rails generate hyrax:work Generic`
 class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ScholarsArchive::TriplePoweredProperties::WorkBehavior
+  include ::ScholarsArchive::TriplePoweredProperties::WorkBehavior
 
   self.indexer = GenericIndexer
   # Change this to restrict which works can be added as a child.
