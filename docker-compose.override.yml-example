@@ -1,20 +1,28 @@
-# Example for exposing the load balancer for local dev and ruby remote debugger; just copy this to docker-compose.override.yml
-version: '2'
+version: '3'
 
 services:
-  lb:
-    ports:
-      - 8080:80
-      - 8443:443
-  # Expose the web application to the external network, and start the server allowing for remote debugging
-  web:
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rdebug-ide --host 0.0.0.0 --port 1234 -- bin/rails server -p 3000 -b 0.0.0.0"
+
+  # Map the application and debugging port to localhost
+  server:
+    #command: bash -c "rm -f tmp/pids/server.pid && bundle exec rdebug-ide --host 0.0.0.0 --port 1234 -- bin/rails server -p 3000 -b 0.0.0.0"
     ports:
       - 3000:3000
       - 1234:1234
     expose:
       - 3000
       - 1234
-    networks:
-      internal:
-      external:
+
+  # Map the application port to localhost
+  test:
+    ports:
+      - 3001:3001
+
+  # Map Selenium hub UI to localhost
+  selenium-hub:
+    ports:
+      - 4444:4444
+
+  # Map the VNC viewer port (for debugging) to localhost
+  chrome:
+    ports:
+      - 5900:5900
