@@ -49,7 +49,6 @@ services:
       - SECRET_KEY_BASE=asdf
       - SOLR_URL=http://solr-dev:8983/solr/development
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
-      - TRIPLESTORE_ADAPTER_URL='http://127.0.0.1:9999/blazegraph/namespace/<%= ENV.fetch('RAILS_ENV') %>/sparql' 
     depends_on:
       - db-dev
       - solr-dev
