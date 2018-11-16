@@ -23,10 +23,12 @@ RUN mkdir -p /opt/fits && \
 RUN mkdir /data
 WORKDIR /data
 
+# Add the application code
+ADD . /data
+
 # install node dependencies, after there are some included
 # COPY package.json yarn.lock /data/
 # RUN yarn install
 
 # bundle gem dependencies
-COPY  Gemfile Gemfile.lock /data/
 RUN bundle install -j $(nproc)

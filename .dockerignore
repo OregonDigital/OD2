@@ -3,5 +3,13 @@ db/*.sqlite3
 db/*.sqlite3-journal
 log/*
 tmp/*
+public/branding/*
+node_modules/*
+coverage/*
 Dockerfile
 README.rdoc
+
+fits.log
+.byebug_history
+docker-compose.override.yml
+
