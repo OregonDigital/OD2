@@ -65,7 +65,7 @@ services:
     <<: *dev
     command: >
       bash -c "./build/validate_migrated.sh &&
-      bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid &&
+      bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid -b tcp://0.0.0.0:3000 &&
       tail -f log/development.log"
   workers:
     <<: *dev
