@@ -322,8 +322,6 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.4)
       faraday
-    fcrepo_wrapper (0.9.0)
-      ruby-progressbar
     ffi (1.9.25)
     flipflop (2.4.0)
       activesupport (>= 4.0)
@@ -756,11 +754,6 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
     slop (4.6.2)
-    solr_wrapper (2.0.0)
-      faraday
-      retriable
-      ruby-progressbar
-      rubyzip
     solrizer (3.4.1)
       activesupport
       daemons
@@ -850,7 +843,6 @@ DEPENDENCIES
   devise-guests (~> 0.6)
   equivalent-xml
   factory_bot_rails
-  fcrepo_wrapper
   hydra-role-management
   hyrax!
   jbuilder (~> 2.5)
@@ -876,7 +868,6 @@ DEPENDENCIES
   shoulda-matchers!
   sidekiq
   simplecov (>= 0.9)
-  solr_wrapper (>= 0.3)
   spring
   spring-watcher-listen (~> 2.0.0)
   triplestore-adapter!

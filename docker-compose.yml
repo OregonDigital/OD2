@@ -157,7 +157,7 @@ services:
     <<: *solr
     volumes:
       - solr-dev:/opt/solr/server/solr/mycores
-      - ./solr/conf:/opt/solr/server/solr/configsets/_default/conf
+      - ./config/solr/conf:/opt/solr/server/solr/configsets/_default/conf
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -166,7 +166,7 @@ services:
     <<: *solr
     volumes:
       - ./tmp/solr/mycores:/opt/solr/server/solr/mycores
-      - ./solr/conf:/opt/solr/server/solr/configsets/_default/conf
+      - ./config/solr/conf:/opt/solr/server/solr/configsets/_default/conf
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate

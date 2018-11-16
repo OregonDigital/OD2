@@ -41,12 +41,10 @@ group :development, :test do
   gem 'debase'
   gem 'debase-ruby_core_source'
   gem 'factory_bot_rails'
-  gem 'fcrepo_wrapper'
   gem 'poltergeist'
   gem 'rspec-rails'
   gem 'ruby-debug-ide'
   gem 'selenium-webdriver'
-  gem 'solr_wrapper', '>= 0.3'
   gem 'webmock'
 end
 
