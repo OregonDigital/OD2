@@ -7,6 +7,5 @@ module Hyrax
 
     self.model_class = ::Generic
     self.terms += [:resource_type, :oembed_url]
-    include OD2::GenericFormBehavior
   end
 end

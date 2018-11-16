@@ -10,8 +10,6 @@ module OD2
                    :material, :measurements, :physical_extent, :technique, :exhibit, :primary_set, :set, :conversion, :copy_location, :date_digitized, :file_size, :institution, :modified, :replaces_url, :submission_date, :box, :gps_latitude, :gps_longitude, :location, :street_address, :ranger_district, :tgn, :water_basin, :award_date, :created,
                    :collected_date, :date, :issued, :view_date, :acquisition_date, :accession_number, :barcode, :hydrologic_unit_code, :item_locator, :longitude_latitude_identification, :copyright_claimant, :rights, :rights_holder, :license, :use_restrictions, :access_restrictions ]
 
-    self.required_fields -= [:creator, :title, :contributor]
-
     def primary_terms
       []
     end
