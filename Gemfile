@@ -14,12 +14,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'pg'
 gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.1.6'
 gem 'rsolr', '>= 1.0'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
+gem 'ruby-oembed'
+gem 'net-http-persistent', '~> 2.9'
+gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
@@ -34,9 +37,10 @@ end
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 2.17'
   gem 'debase'
   gem 'debase-ruby_core_source'
+  gem 'factory_bot_rails'
   gem 'fcrepo_wrapper'
   gem 'poltergeist'
   gem 'rspec-rails'

@@ -1,131 +1,249 @@
-version: '2'
-
-volumes:
-  ? fcrepo
-  ? solr
-  ? db
-  ? redis
-  ? app
+version: '3'
 
 networks:
   ? external
   ? internal
 
+volumes:
+  ? db-dev
+  ? blazegraph-dev
+  ? fcrepo-dev
+  ? solr-dev
+  ? redis-dev
+
 services:
-  solr:
-    image: solr
-    expose:
-      - 8983
+  ##
+  # Basic Rails application build image
+  app: &app
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - solr:/opt/solr/server/solr/mycores
-      - ./solr/conf:/opt/solr/server/solr/configsets/_default/conf
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - ${RAILS_ENV}
+      - .:/data # mount current directory into the image
     networks:
+      ? external
       ? internal
+    # use tmpfs for tmp and log for performance and to allow
+    # multiple builds in parallel. Both directories are mounted
+    # into the image AFTER the working directory is mounted.
+    tmpfs:
+      - /data/log
 
-  fcrepo:
-    image: cbeer/fcrepo4:4.7
-    expose:
-      - 8080
-    volumes:
-      - fcrepo:/data
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
-    networks:
-      ? internal
-
-  db:
-    image: postgres
-    volumes:
-      - db:/var/lib/postgresql/data
-    networks:
-      ? internal
-
-  app:
-    build: .
+  ##
+  # Development environment for application
+  dev: &dev
+    <<: *app
     environment:
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
-      - DATABASE_URL=postgresql://postgres@db/postgres
-      - FEDORA_URL=http://fcrepo:8080/fcrepo/rest
+      - FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
       - RAILS_CACHE_STORE_URL=memcache
-      - RAILS_ENV=${RAILS_ENV}
+      - RAILS_ENV=development
       - RAILS_LOG_TO_STDOUT=true
       - RAILS_SERVE_STATIC_FILES=true
-      - REDIS_HOST=redis
+      - RDS_DB_NAME=postgres
+      - RDS_HOSTNAME=db-dev
+      - RDS_PASSWORD=postgres
+      - RDS_PORT='5432'
+      - RDS_USERNAME=postgres
+      - REDIS_HOST=redis-dev
       - SECRET_KEY_BASE=asdf
-      - SOLR_URL=http://solr:8983/solr/${RAILS_ENV}
-    volumes:
-      - .:/data
-      - app:/data/tmp/uploads
-    networks:
-      ? internal
-
-  web:
-    extends: app
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -p 3000 -b '0.0.0.0'"
+      - SOLR_URL=http://solr-dev:8983/solr/development
+      - TRIPLESTORE_ADAPTER_TYPE=blazegraph
+      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/rw/sparql
     depends_on:
-      - db
-      - solr
-      - fcrepo
-      - redis
+      - db-dev
+      - blazegraph-dev
+      - solr-dev
+      - fcrepo-dev
+      - redis-dev
       - memcache
-      - db_migrate
+      - workers
     expose:
       - 3000
-
+  server:
+    <<: *dev
+    command: >
+      bash -c "./build/validate_migrated.sh &&
+      bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid &&
+      tail -f log/development.log"
   workers:
-    extends: app
+    <<: *dev
     command: bundle exec sidekiq
-    environment:
-      - SETTINGS__FITS_PATH=/opt/fits-1.0.5/fits.sh
     depends_on:
-      - db
-      - solr
-      - fcrepo
-      - redis
-      - initialize_app
-      - db_migrate
+      - db-dev
+      - blazegraph-dev
+      - solr-dev
+      - fcrepo-dev
+      - redis-dev
+      - memcache
 
-  initialize_app:
-    extends: app
-    restart: on-failure
-    command: echo 'Not using Zookeeper'
-
-  db_migrate:
-    extends: app
-    restart: on-failure
-    command: bundle exec rails db:migrate
-    depends_on:
-      - db
-
-  lb:
-    image: dockercloud/haproxy:1.5.3
-    links:
-      - web
+  ##
+  # Test environment for application
+  test: &test
+    <<: *app
     environment:
-      - DOCKER_TLS_VERIFY
-      - DOCKER_HOST
-      - DOCKER_CERT_PATH
+      - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
+      - CAPYBARA_APP_HOST=http://test:3001
+      - FEDORA_URL=http://fcrepo-test:8080/fcrepo/rest
+      - FITS_PATH=/opt/fits-1.0.5/fits.sh
+      - RAILS_CACHE_STORE_URL=memcache
+      - RAILS_ENV=test
+      - RAILS_LOG_TO_STDOUT=true
+      - RAILS_SERVE_STATIC_FILES=true
+      - RDS_DB_NAME=postgres
+      - RDS_HOSTNAME=db-test
+      - RDS_PASSWORD=postgres
+      - RDS_PORT='5432'
+      - RDS_USERNAME=postgres
+      - REDIS_HOST=redis-test
+      - SECRET_KEY_BASE=asdf
+      - SELENIUM_DRIVER_URL=http://selenium-hub:4444/wd/hub
+      - SOLR_URL=http://solr-test:8983/solr/test
+      - TRIPLESTORE_ADAPTER_TYPE=blazegraph
+      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/rw/sparql
+    depends_on:
+      - chrome
+      - selenium-hub
+      - db-test
+      - blazegraph-test
+      - solr-test
+      - fcrepo-test
+      - redis-test
+      - memcache
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      # You must uncomment this line if and only if you are running docker-machine
-      # - $DOCKER_CERT_PATH:$DOCKER_CERT_PATH
+      - .:/data # mount current directory into the image
+      - ./tmp:/tmp
+    command: >
+      bash -c "./build/validate_migrated.sh &&
+      puma -b tcp://0.0.0.0:3001 -e test -d &&
+      tail -f log/test.log"
+    expose:
+      - 3001
+
+  ##
+  # Selenium and Chrome for System (browser) tests
+  selenium-hub:
+    image: selenium/hub:3.141.5-astatine
+    volumes:
+      - ./spec/fixtures:/data/spec/fixtures
+    networks:
+      ? internal
+      ? external
+  chrome:
+    image: selenium/node-chrome-debug:3.141.5-astatine
+    volumes:
+      - ./spec/fixtures:/data/spec/fixtures
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+    expose:
+      - 5900
     networks:
       ? internal
       ? external
 
-  redis:
-    image: redis:3
-    command: redis-server
-    volumes:
-      - redis:/data
+  ##
+  # SOLR Index server
+  solr: &solr
+    image: solr
+    expose:
+      - 8983
     networks:
       ? internal
+  solr-dev:
+    <<: *solr
+    volumes:
+      - solr-dev:/opt/solr/server/solr/mycores
+      - ./solr/conf:/opt/solr/server/solr/configsets/_default/conf
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - development
+  solr-test:
+    <<: *solr
+    volumes:
+      - ./tmp/solr/mycores:/opt/solr/server/solr/mycores
+      - ./solr/conf:/opt/solr/server/solr/configsets/_default/conf
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - test
 
+  ##
+  # Fedora repository server
+  fcrepo: &fcrepo
+    image: cbeer/fcrepo4:4.7
+    environment:
+      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
+    expose:
+      - 8080
+    networks:
+      ? internal
+  fcrepo-dev:
+    <<: *fcrepo
+    volumes:
+      - fcrepo-dev:/data
+  fcrepo-test:
+    <<: *fcrepo
+    tmpfs: /data
+
+  ##
+  # Fedora repository server
+  blazegraph: &blazegraph
+    image: lyrasis/blazegraph:2.1.5
+    expose:
+      - 8080
+    networks:
+      ? internal
+  blazegraph-dev:
+    <<: *blazegraph
+    volumes:
+      - blazegraph-dev:/var/lib/jetty
+      - ./config/blazegraph/RWStore.properties:/RWStore.properties
+  blazegraph-test:
+    <<: *blazegraph
+    volumes:
+      - ./config/blazegraph/RWStore.properties:/RWStore.properties
+    tmpfs: /var/lib/jetty
+
+  ##
+  # Postgres database server
+  db: &db
+    image: postgres
+    networks:
+      ? internal
+  db-dev:
+    <<: *db
+    environment:
+      - POSTGRES_DB=development
+    volumes:
+      - db-dev:/var/lib/postgresql/data
+  db-test:
+    <<: *db
+    environment:
+      - POSTGRES_DB=test
+    tmpfs: /var/lib/postgresql/data
+
+  ##
+  # Redis queue server
+  redis: &redis
+    image: redis:3
+    command: redis-server
+    networks:
+      ? internal
+  redis-dev:
+    <<: *redis
+    volumes:
+      - redis-dev:/data
+  redis-test:
+    <<: *redis
+    tmpfs: /data
+
+  ##
+  # Memcache cache server
   memcache:
     image: memcached
     networks:
