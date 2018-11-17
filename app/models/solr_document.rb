@@ -25,7 +25,39 @@ class SolrDocument
   # Do content negotiation for AF models.
 
   use_extension( Hydra::ContentNegotiation )
-  
+
+  def colour_content
+    self[Solrizer.solr_name('colour_content')]
+  end
+
+  def color_space
+    self[Solrizer.solr_name('color_space')]
+  end
+
+  def height
+    self[Solrizer.solr_name('height')]
+  end 
+
+  def orientation
+    self[Solrizer.solr_name('orientation')]
+  end
+
+  def photograph_orientation
+    self[Solrizer.solr_name('photograph_orientation')]
+  end
+
+  def resolution
+    self[Solrizer.solr_name('resolution')]
+  end
+
+  def view
+    self[Solrizer.solr_name('view')]
+  end
+
+  def width
+    self[Solrizer.solr_name('width')]
+  end
+
   def oembed_url
     self[Solrizer.solr_name('oembed_url')]
   end
