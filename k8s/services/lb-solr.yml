@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: solr-loadbalancer
+  creationTimestamp: null
+  labels:
+    io.kompose.service: solr
+spec:
+  selector:
+    io.kompose.service: solr
+  ports:
+  - name: "solr"
+    port: 8983
+    targetPort: 8983
+  type: LoadBalancer
+status:
+  loadBalancer:

@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-loadbalancer
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web
+spec:
+  selector:
+    io.kompose.service: web
+  ports:
+  - name: "rails"
+    port: 3000
+    targetPort: 3000
+  type: LoadBalancer
+status:
+  loadBalancer:

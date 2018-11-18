@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: fcrepo-loadbalancer
+  creationTimestamp: null
+  labels:
+    io.kompose.service: fcrepo
+spec:
+  selector:
+    io.kompose.service: fcrepo
+  ports:
+    - name: 'fcrepo'
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
+status:
+  ? loadBalancer

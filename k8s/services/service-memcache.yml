@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.override.yml convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: memcache
+  name: memcache
+spec:
+  ports:
+  - name: "11211"
+    port: 11211
+    targetPort: 11211
+  selector:
+    io.kompose.service: memcache
+status:
+  loadBalancer: {}
