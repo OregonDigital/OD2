@@ -10,7 +10,7 @@ RSpec.describe OregonDigital::TriplePoweredProperties::WorkBehavior do
   end
 
   describe '#uri_labels' do
-    it 'should have triple powered properties with labels' do
+    xit 'should have triple powered properties with labels' do
       expect(subject.triple_powered_properties).to be_a_kind_of(Array)
       expect(subject.uri_labels(:based_near)[url]).to be_a_kind_of(Array)
       #TODO Check to see if we want this actually nested arrays... [[]]
