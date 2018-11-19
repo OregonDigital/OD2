@@ -159,11 +159,9 @@ services:
   solr-dev:
     <<: *solr
     volumes:
-      - solr-dev:/opt/solr/server/solr/mycores
+      - solr-dev:/opt/solr/server/solr
   solr-test:
     <<: *solr
-    volumes:
-      - ./tmp/solr/mycores:/opt/solr/server/solr/mycores
 
   ##
   # Fedora repository server
