@@ -1,4 +1,4 @@
-module OD2
+module OregonDigital
   module GenericMetadata
     extend ActiveSupport::Concern
 
