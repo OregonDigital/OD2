@@ -487,7 +487,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :submission_date, predicate: ::RDF::Vocab::DC.submitted do |index|
+      property :submission_date, predicate: ::RDF::Vocab::DC.dateSubmitted do |index|
         index.as :stored_searchable
       end
 
