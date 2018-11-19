@@ -594,6 +594,10 @@ module OD2
       property :access_restrictions, predicate: RDF::URI('http://data.archiveshub.ac.uk/def/accessRestrictions') do |index|
         index.as :stored_searchable
       end
+
+      property :oembed_url, predicate: RDF::URI('http://opaquenamespace.org/ns/oembed') do |index|
+       index.as :stored_searchable
+      end
     end
   end
 end
