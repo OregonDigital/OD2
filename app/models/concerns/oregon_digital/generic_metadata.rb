@@ -19,11 +19,11 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :caption_title, predicate: RDF::URI('http://opaquenamespace.org/ns/captionTitle do |index|
+      property :caption_title, predicate: RDF::URI('http://opaquenamespace.org/ns/captionTitle') do |index|
         index.as :stored_searchable
       end
 
-      property :tribal_title, predicate: RDF::URI('http://opaquenamespace.org/ns/tribalTitle do |index|
+      property :tribal_title, predicate: RDF::URI('http://opaquenamespace.org/ns/tribalTitle') do |index|
         index.as :stored_searchable
       end
 
