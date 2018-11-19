@@ -64,7 +64,8 @@ services:
   server:
     <<: *dev
     command: >
-      bash -c "./build/validate_migrated.sh &&
+      bash -c "./build/create_solr_index.sh &&
+      ./build/validate_migrated.sh &&
       bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid -b tcp://0.0.0.0:3000 &&
       tail -f log/development.log"
   workers:
@@ -115,7 +116,8 @@ services:
       - .:/data # mount current directory into the image
       - ./tmp:/tmp
     command: >
-      bash -c "./build/validate_migrated.sh &&
+      bash -c "./build/create_solr_index.sh &&
+      ./build/validate_migrated.sh &&
       puma -b tcp://0.0.0.0:3001 -e test -d &&
       tail -f log/test.log"
     expose:
@@ -148,7 +150,8 @@ services:
   ##
   # SOLR Index server
   solr: &solr
-    image: solr
+    image: solr:6-alpine
+    command: /opt/solr/bin/solr -cloud -noprompt -f -p 8983
     expose:
       - 8983
     networks:
@@ -157,25 +160,15 @@ services:
     <<: *solr
     volumes:
       - solr-dev:/opt/solr/server/solr/mycores
-      - ./config/solr/conf:/opt/solr/server/solr/configsets/_default/conf
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - development
   solr-test:
     <<: *solr
     volumes:
       - ./tmp/solr/mycores:/opt/solr/server/solr/mycores
-      - ./config/solr/conf:/opt/solr/server/solr/configsets/_default/conf
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - test
 
   ##
   # Fedora repository server
   fcrepo: &fcrepo
-    image: cbeer/fcrepo4:4.7
+    image: ualbertalib/docker-fcrepo4:4.7
     environment:
       - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
     expose:
@@ -212,7 +205,7 @@ services:
   ##
   # Postgres database server
   db: &db
-    image: postgres
+    image: postgres:10-alpine
     networks:
       ? internal
   db-dev:
@@ -230,7 +223,7 @@ services:
   ##
   # Redis queue server
   redis: &redis
-    image: redis:3
+    image: redis:4-alpine
     command: redis-server
     networks:
       ? internal

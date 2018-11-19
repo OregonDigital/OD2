@@ -17,6 +17,11 @@ services:
     ports:
       - 3001:3001
 
+  # Map the SOLR port to localhost
+  solr-dev:
+    ports:
+      - 8983:8983
+
   # Map Blazegraph port to localhost
   blazegraph-dev:
     networks:
