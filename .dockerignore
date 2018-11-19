@@ -6,10 +6,11 @@ tmp/*
 public/branding/*
 node_modules/*
 coverage/*
+k8s/*
+
 Dockerfile
 README.rdoc
 
 fits.log
 .byebug_history
 docker-compose.override.yml
-

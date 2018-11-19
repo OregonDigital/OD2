@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    built_by: od2-infra/ansible/od2
+    built_by: od2
   creationTimestamp: null
   labels:
     io.kompose.service: workers
@@ -51,7 +51,7 @@ spec:
               value: 'blazegraph'
             - name: TRIPLESTORE_ADAPTER_URL
               value: 'http://blazegraph.default.svc.cluster.local:8080/bigdata/namespace/rw/sparql'
-          image: 030754751862.dkr.ecr.us-west-2.amazonaws.com/web:WC2-0.0.1-d5511bd
+          image: od2_dev:latest
           name: workers
           resources: {}
           volumeMounts:

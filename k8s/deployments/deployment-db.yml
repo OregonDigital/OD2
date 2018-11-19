@@ -2,8 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -o k8s/kompose.yml
-    kompose.version: 1.16.0 (0c01309)
+    built_by: od2
   creationTimestamp: null
   labels:
     io.kompose.service: db
@@ -19,15 +18,15 @@ spec:
         io.kompose.service: db
     spec:
       containers:
-      - image: postgres
-        name: db
-        resources: {}
-        volumeMounts:
-        - mountPath: /var/lib/postgresql
+        - image: postgres:10
           name: db
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: db
       restartPolicy: Always
       volumes:
-      - name: db
-        persistentVolumeClaim:
-          claimName: db
+        - name: db
+          persistentVolumeClaim:
+            claimName: db
 status: {}

@@ -2,8 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -o k8s/kompose.yml
-    kompose.version: 1.16.0 (0c01309)
+    built_by: od2
   creationTimestamp: null
   labels:
     io.kompose.service: redis
@@ -19,17 +18,17 @@ spec:
         io.kompose.service: redis
     spec:
       containers:
-      - args:
-        - redis-server
-        image: redis:3
-        name: redis
-        resources: {}
-        volumeMounts:
-        - mountPath: /data
+        - args:
+            - redis-server
+          image: redis:4
           name: redis
+          resources: {}
+          volumeMounts:
+            - mountPath: /data
+              name: redis
       restartPolicy: Always
       volumes:
-      - name: redis
-        persistentVolumeClaim:
-          claimName: redis
+        - name: redis
+          persistentVolumeClaim:
+            claimName: redis
 status: {}
