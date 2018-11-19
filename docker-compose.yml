@@ -162,8 +162,6 @@ services:
       - solr-dev:/opt/solr/server/solr
   solr-test:
     <<: *solr
-    volumes:
-      - ./tmp/solr:/opt/solr/server/solr
 
   ##
   # Fedora repository server
