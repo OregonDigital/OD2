@@ -1,8 +1,9 @@
 module OregonDigital
   module GenericFormBehavior
     extend ActiveSupport::Concern
+    included do
 
-    self.terms += [:alternative, :caption_title, :tribal_title, :arranger, :artist, :author, :cartographer, :collector, :composer, :creator_display, :dedicatee, :donor, :designer, :editor, :former_owner, :illustrator, :interviewee, :interviewer, :lyricist, :owner, :patron, :photographer, :print_maker, :recipient, :scribe,
+      self.terms += [:alternative, :caption_title, :tribal_title, :arranger, :artist, :author, :cartographer, :collector, :composer, :creator_display, :dedicatee, :donor, :designer, :editor, :former_owner, :illustrator, :interviewee, :interviewer, :lyricist, :owner, :patron, :photographer, :print_maker, :recipient, :scribe,
                    :transcriber, :translator, :abstract, :accepted_name_usage, :biographical_information, :canzoniere_poems, :compass_direction, :contents, :cover_description, :cover, :description_of_manifestation, :form_of_work, :identification_verification_status, :inscription, :layout, :military_highest_rank, :military_occupation,
                    :military_service_location, :mode_of_issuance, :mods_note, :object_orientation, :original_name_usage, :tribal_notes, :source_condition, :specimentype, :temporal, :taxon_class, :cultural_context, :ethnographic_term, :event, :family, :genus, :order, :species, :subject, :military_branch, :phylum_or_division, :sports_team,
                    :state_or_edition, :style_or_period, :lc_subject, :tribal_classes, :tribal_terms, :common_name, :scientific_name_authorship, :higher_classification, :identification_verification_status, :award, :legal_name, :box_name, :box_number, :citation, :current_repository_id, :folder_name, :folder_number, :local_collection_id,
@@ -10,12 +11,13 @@ module OregonDigital
                    :material, :measurements, :physical_extent, :technique, :exhibit, :primary_set, :set, :conversion, :copy_location, :date_digitized, :file_size, :institution, :modified, :replaces_url, :submission_date, :box, :gps_latitude, :gps_longitude, :location, :street_address, :ranger_district, :tgn, :water_basin, :award_date, :created,
                    :collected_date, :date, :issued, :view_date, :acquisition_date, :accession_number, :barcode, :hydrologic_unit_code, :item_locator, :longitude_latitude_identification, :copyright_claimant, :rights, :rights_holder, :license, :use_restrictions, :access_restrictions ]
 
-    def primary_terms
-      []
-    end
+      def primary_terms
+        []
+      end
 
-    def secondary_terms
-      []
+      def secondary_terms
+        []
+      end
     end
   end
 end
