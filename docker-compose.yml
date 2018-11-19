@@ -150,7 +150,7 @@ services:
   ##
   # SOLR Index server
   solr: &solr
-    image: solr
+    image: solr:6-alpine
     command: /opt/solr/bin/solr -cloud -noprompt -f -p 8983
     expose:
       - 8983
@@ -205,7 +205,7 @@ services:
   ##
   # Postgres database server
   db: &db
-    image: postgres:10
+    image: postgres:10-alpine
     networks:
       ? internal
   db-dev:
@@ -223,7 +223,7 @@ services:
   ##
   # Redis queue server
   redis: &redis
-    image: redis:4
+    image: redis:4-alpine
     command: redis-server
     networks:
       ? internal
