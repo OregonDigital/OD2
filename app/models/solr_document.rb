@@ -36,7 +36,7 @@ class SolrDocument
 
   def height
     self[Solrizer.solr_name('height')]
-  end 
+  end
 
   def orientation
     self[Solrizer.solr_name('orientation')]
@@ -60,5 +60,13 @@ class SolrDocument
 
   def oembed_url
     self[Solrizer.solr_name('oembed_url')]
+  end
+
+  def height
+    self[Solrizer.solr_name('height')]
+  end
+
+  def width
+    self[Solrizer.solr_name('width')]
   end
 end
