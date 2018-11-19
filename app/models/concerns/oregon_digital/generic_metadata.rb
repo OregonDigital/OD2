@@ -151,7 +151,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :cover, predicate: ::RDF::Vocab::DC11.cover do |index|
+      property :coverage, predicate: ::RDF::Vocab::DC11.coverage do |index|
         index.as :stored_searchable
       end
 
