@@ -2,8 +2,8 @@
 #  `rails generate hyrax:work Video`
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include OD2::GenericMetadata
-  include OD2::VideoMetadata
+  include ::OregonDigital::GenericMetadata
+  include ::OregonDigital::VideoMetadata
 
   self.indexer = VideoIndexer
   # Change this to restrict which works can be added as a child.

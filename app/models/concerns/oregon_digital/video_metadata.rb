@@ -1,4 +1,4 @@
-module OD2
+module OregonDigital
   module VideoMetadata
     extend ActiveSupport::Concern
 
