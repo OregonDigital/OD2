@@ -11,4 +11,8 @@ class Generic < ActiveFedora::Base
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
+
+  def set_defaults
+    super
+  end
 end
