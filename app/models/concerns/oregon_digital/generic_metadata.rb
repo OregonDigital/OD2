@@ -415,7 +415,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :type, predicate: ::RDF::Vocab::DC.type do |index|
+      property :dcmi_type, predicate: ::RDF::Vocab::DC.type do |index|
         index.as :stored_searchable, :facetable
       end
 
