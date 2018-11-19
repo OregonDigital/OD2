@@ -507,7 +507,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :street_address, predicate: ::RDF::Vocab::MODS.streetAddress do |index|
+      property :street_address, predicate: ::RDF::Vocab::MADS.streetAddress do |index|
         index.as :stored_searchable
       end
 
