@@ -18,7 +18,7 @@ spec:
         io.kompose.service: db
     spec:
       containers:
-        - image: postgres:10
+        - image: postgres:10-alpine
           name: db
           resources: {}
           volumeMounts:

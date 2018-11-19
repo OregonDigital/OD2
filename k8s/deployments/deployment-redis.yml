@@ -20,7 +20,7 @@ spec:
       containers:
         - args:
             - redis-server
-          image: redis:4
+          image: redis:4-alpine
           name: redis
           resources: {}
           volumeMounts:

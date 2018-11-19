@@ -21,7 +21,12 @@ spec:
         - args:
             - bash
             - -c
-            - rm -f tmp/pids/puma.pid && bundle exec rails s puma -P tmp/pids/puma.pid -b 0.0.0.0 -p 3000 -e development && tail -f log/development.log
+            - >
+              ./build/create_solr_index.sh &&
+              ./build/validate_migrated.sh &&
+              rm -f tmp/pids/puma.pid &&
+              bundle exec rails s puma -P tmp/pids/puma.pid -b 0.0.0.0 -p 3000 -e development &&
+              tail -f log/development.log
           env:
             - name: ACTIVE_JOB_QUEUE_ADAPTER
               value: 'sidekiq'
@@ -52,6 +57,8 @@ spec:
             - name: TRIPLESTORE_ADAPTER_URL
               value: 'http://blazegraph.default.svc.cluster.local:8080/bigdata/namespace/rw/sparql'
           image: od2_dev:latest
+          # As awkward as it seems to me, this will ensure to use the local Docker image instead of trying remote
+          imagePullPolicy: Never
           name: web
           ports:
             - containerPort: 3000

@@ -52,6 +52,8 @@ spec:
             - name: TRIPLESTORE_ADAPTER_URL
               value: 'http://blazegraph.default.svc.cluster.local:8080/bigdata/namespace/rw/sparql'
           image: od2_dev:latest
+          # As awkward as it seems to me, this will ensure to use the local Docker image instead of trying remote
+          imagePullPolicy: Never
           name: workers
           resources: {}
           volumeMounts:
