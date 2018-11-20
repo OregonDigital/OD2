@@ -102,7 +102,7 @@ module OD2
                :is_version_of,
                :has_part,
                :relation,
-               :type,
+               :dcmi_type,
                :work_type,
                :extent,
                :format,
