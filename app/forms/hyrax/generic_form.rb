@@ -3,6 +3,7 @@
 module Hyrax
   # Generated form for Generic
   class GenericForm < Hyrax::Forms::WorkForm
+    include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm
     self.model_class = ::Generic
     self.terms += [:resource_type, :oembed_url, :alternative, :caption_title, :tribal_title, :arranger, :artist, :author, :cartographer, :collector, :composer, :creator_display, :dedicatee, :donor, :designer, :editor, :former_owner, :illustrator, :interviewee, :interviewer, :lyricist, :owner, :patron, :photographer, :print_maker, :recipient, :scribe,
                    :transcriber, :translator, :abstract, :accepted_name_usage, :biographical_information, :canzoniere_poems, :compass_direction, :contents, :cover_description, :coverage, :description_of_manifestation, :form_of_work, :identification_verification_status, :inscription, :layout, :military_highest_rank, :military_occupation,

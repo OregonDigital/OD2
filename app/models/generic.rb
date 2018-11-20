@@ -2,7 +2,7 @@
 #  `rails generate hyrax:work Generic`
 class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  #include ::OregonDigital::TriplePoweredProperties::WorkBehavior
+  include ::OregonDigital::TriplePoweredProperties::WorkBehavior
   include OregonDigital::GenericMetadata
   include ::Hyrax::BasicMetadata
 
