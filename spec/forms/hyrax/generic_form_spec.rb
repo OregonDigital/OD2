@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Hyrax::GenericForm do
   let(:new_form) { described_class.new(Generic.new, nil, double('Controller')) }
   let(:user) do
-    User.new(email: 'test@example.com', guest: false) { |u| u.save!(validate: false) }
+    create(:user)
   end
   let(:ability) { double('Ability') }
 
@@ -111,12 +111,12 @@ RSpec.describe Hyrax::GenericForm do
   has_finding_aid
   has_part
   has_version
-  is_part_of
+  isPartOf
   is_version_of
   has_part
   relation
   dcmi_type
-  work_type
+  workType
   extent
   format
   material
@@ -158,7 +158,7 @@ RSpec.describe Hyrax::GenericForm do
   rights_holder
   license
   use_restrictions
-  access_restriction].each do |t|
+  access_restrictions].each do |t|
       expect(described_class.terms).to include(t)
     end
   end

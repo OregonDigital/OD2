@@ -9,13 +9,8 @@ class Generic < ActiveFedora::Base
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
 
-  # oEmbed property
-  property :oembed_url, predicate: ::RDF::Vocab::DC.abstract do |index|
-    index.as :stored_searchable
-  end
-
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::GenericMetadata
-  include ::Hyrax::BasicMetadata
+
 end

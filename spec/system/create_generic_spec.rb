@@ -38,7 +38,6 @@ RSpec.describe 'Create a Generic', js: true, type: :system do
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Keyword', with: 'testing')
 
-      select('In Copyright', from: 'Rights statement')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
 
