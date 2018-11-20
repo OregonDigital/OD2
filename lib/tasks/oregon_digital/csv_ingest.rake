@@ -46,7 +46,7 @@ end
 
 def process_line(line, fields, email, logger)
     vals = line.split("\t")
-    work = send(vals[WORKTYPE])
+    work = vals[WORKTYPE].humanize.constantize.new
     work.id = vals[ID]
     numfields = fields.length
     (SKIPTO..numfields-1).each do |i|
@@ -64,26 +64,6 @@ def process_line(line, fields, email, logger)
     work
 end
 
-def image
-  return Image.new
-end
-
-def generic
-  return Generic.new
-end
-
-def video
-  return Video.new
-end
-
-def audio
-  return Audio.new
-end
-
-def document
-  return Document.new
-end
-
 def prep_files(line, filedir, user, logger)
   
   files = line.split("\t")[FILENAMES].split("|")
@@ -91,7 +71,7 @@ def prep_files(line, filedir, user, logger)
   files.each do |file|
     f = Hyrax::UploadedFile.new(user: user, file: File.open("#{filedir}/#{file}"))
     f.save
-    uploaded_files << f
+    uploaded_files += [f]
   end
   uploaded_files
   rescue StandardError => e
@@ -113,7 +93,7 @@ def set_admin_set(work)
     id = work.admin_set_id
   end
   admin_set = AdminSet.find(id)
-  admin_set.members << work
+  admin_set.members += [work]
   work
 end
 
