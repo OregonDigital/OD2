@@ -2,6 +2,7 @@
 #  `rails generate hyrax:work Image`
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ::OregonDigital::ImageMetadata
 
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.
