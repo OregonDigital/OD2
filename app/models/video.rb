@@ -2,7 +2,6 @@
 #  `rails generate hyrax:work Video`
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::OregonDigital::GenericMetadata
   include ::OregonDigital::VideoMetadata
 
   self.indexer = VideoIndexer
@@ -13,5 +12,4 @@ class Video < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
-  include ::OregonDigital::TriplePoweredProperties::WorkBehavior
 end
