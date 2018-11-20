@@ -36,7 +36,7 @@ module OD2
                :compass_direction,
                :contents,
                :cover_description,
-               :cover,
+               :coverage,
                :description_of_manifestation,
                :form_of_work,
                :identification_verification_status,
