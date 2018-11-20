@@ -3,7 +3,7 @@
 module Hyrax
   # Generated form for Document
   class DocumentForm < Hyrax::Forms::WorkForm
-    include ::OregonDigital::VideoFormBehavior
+    include ::OregonDigital::DocumentFormBehavior
 
     self.model_class = ::Document
   end

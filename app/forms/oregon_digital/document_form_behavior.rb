@@ -1,4 +1,4 @@
-module OD2
+module OregonDigital
   module DocumentFormBehavior
     extend ActiveSupport::Concern
     included do

@@ -1,4 +1,4 @@
-module OD2
+module OregonDigital
   module DocumentMetadata
     extend ActiveSupport::Concern
      # Usage notes and expectations can be found in the Metadata Application Profile:
