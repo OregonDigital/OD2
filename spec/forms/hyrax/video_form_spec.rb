@@ -1,9 +1,9 @@
 # Generated via
-#  `rails generate hyrax:work Image`
+#  `rails generate hyrax:work Video`
 require 'rails_helper'
 
-RSpec.describe Hyrax::ImageForm do
-  let(:new_form) { described_class.new(Image.new, nil, double('Controller')) }
+RSpec.describe Hyrax::VideoForm do
+  let(:new_form) { described_class.new(Video.new, nil, double('Controller')) }
   let(:user) { create(:user) }
   let(:ability) { double('Ability') }
 
@@ -13,7 +13,7 @@ RSpec.describe Hyrax::ImageForm do
   end
 
   it 'responds to terms with the proper list of terms' do
-    %i[colour_content color_space height orientation photograph_orientation resolution view width].each do |t|
+      %i[height width].each do |t|
       expect(described_class.terms).to include(t)
     end
   end

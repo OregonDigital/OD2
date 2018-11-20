@@ -36,7 +36,7 @@ class SolrDocument
 
   def height
     self[Solrizer.solr_name('height')]
-  end 
+  end
 
   def orientation
     self[Solrizer.solr_name('orientation')]
