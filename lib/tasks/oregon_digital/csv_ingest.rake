@@ -7,7 +7,7 @@
 #  if read_groups is included, this will override the default of public
 #  if admin_set_id is included, it will override admin_set/default
 #args: path to dir containing all files including csv, name of the csv, email
-#called like this: rake oregon_digital:csv_ingest csv=mymetadata.csv filedir=/data email=admin@example.org
+#called like this: rake oregon_digital:csv_ingest csv=mymetadata.csv filedir=/data/allthefiles email=admin@example.org
 
 WORKTYPE = 0
 FILENAMES = 1
@@ -51,12 +51,9 @@ def process_line(line, fields, email, logger)
     numfields = fields.length
     (SKIPTO..numfields-1).each do |i|
       vals[i].split("|").each do |v|
-        field = check_property(fields[i], work)
-        if field
-          work.send(field) << v.strip unless v.blank?
-        elsif !v.blank?
-          logger.error("Problem using #{fields[i]} with #{vals[WORKTYPE]}")
-        end
+        work.send(fields[i].strip.to_sym) << v.strip
+        rescue StandardError => e
+          logger.error(e.message)
       end
     end
     work.depositor = email
@@ -95,10 +92,5 @@ def set_admin_set(work)
   admin_set = AdminSet.find(id)
   admin_set.members += [work]
   work
-end
-
-def check_property(field, work)
-  check = (work.respond_to? field.strip.to_sym) ? field.strip.to_sym : false
-  check
 end
 
