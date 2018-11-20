@@ -13,6 +13,5 @@ class Generic < ActiveFedora::Base
   validates :title, presence: { message: 'Your work must have a title.' }
 
   def set_defaults
-    super
   end
 end
