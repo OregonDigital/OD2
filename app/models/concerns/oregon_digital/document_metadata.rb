@@ -9,11 +9,11 @@ module OD2
          index.as :stored_searchable
        end
 
-       property :first_line, :predicate => ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLine') do |index|
+       property :first_line, :predicate => ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLine'), multiple: false do |index|
          index.as :stored_searchable
        end
 
-       property :first_line_chorus, :predicate => ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLineChorus') do |index|
+       property :first_line_chorus, :predicate => ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLineChorus'), multiple: false do |index|
          index.as :stored_searchable
        end
 
