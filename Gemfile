@@ -29,8 +29,10 @@ gem 'loofah', '>= 2.2.3'
 gem 'rubyzip', '>= 1.2.2'
 
 # Honeycomb
-gem 'honeycomb-rails'
-gem 'libhoney'
+group :development, :test, :production do
+  gem 'honeycomb-rails'
+  gem 'libhoney'
+end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

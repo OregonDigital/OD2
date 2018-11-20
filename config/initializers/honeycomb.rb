@@ -1,18 +1,22 @@
 # config/initializers/honeycomb.rb
 
 require 'libhoney'
-key = 'fa01b2227f761b5c1f11ae1a680f14da'
-dataset = "od2-rails"
+#key = 'fa01b2227f761b5c1f11ae1a680f14da'
+#dataset = "od2-rails"
+key = ENV.fetch('HCIO_KEY')
+dataset = ENV.fetch('HCIO_DS', 'od2-rails')
 
-$libhoney = Libhoney::Client.new(
-  writekey: key,
-  dataset: dataset,
-  user_agent_addition: HoneycombRails::USER_AGENT_SUFFIX,
-)
+if %w[production staging development].include? Rails.env
+  $libhoney = Libhoney::Client.new(
+    writekey: key,
+    dataset: dataset,
+    user_agent_addition: HoneycombRails::USER_AGENT_SUFFIX,
+  )
 
-HoneycombRails.configure do |conf|
-  conf.writekey = key
-  conf.dataset = dataset
-  conf.db_dataset = dataset + "-db"
-  conf.client = $libhoney
+  HoneycombRails.configure do |conf|
+    conf.writekey = key
+    conf.dataset = dataset
+    conf.db_dataset = dataset + "-db"
+    conf.client = $libhoney
+  end
 end
