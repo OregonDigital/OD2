@@ -42,7 +42,7 @@ RSpec.describe 'Create a Video',  js: true, type: :system do
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
 
-      choose('image_visibility_open')
+      choose('video_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
