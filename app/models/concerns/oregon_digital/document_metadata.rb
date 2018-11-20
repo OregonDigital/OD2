@@ -5,7 +5,7 @@ module OregonDigital
      # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
      included do
 
-       property :contained_in_journal, :predicate => ::RDF::URI('http://sw-portal.deri.org/ontologies/swportal/containedInJournal') do |index|
+       property :contained_in_journal, :predicate => ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal') do |index|
          index.as :stored_searchable
        end
 
@@ -17,7 +17,7 @@ module OregonDigital
          index.as :stored_searchable
        end
 
-       property :has_number, :predicate => ::RDF::URI('http://sw-portal.deri.org/ontologies/swportal/hasNumber') do |index|
+       property :has_number, :predicate => ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasNumber') do |index|
          index.as :stored_searchable, :facetable
        end
 
@@ -29,7 +29,7 @@ module OregonDigital
          index.as :stored_searchable
        end
 
-       property :is_volume, :predicate => ::RDF::URI('http://sw-portal.deri.org/ontologies/swportal/isVolume') do |index|
+       property :is_volume, :predicate => ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasVolume') do |index|
          index.as :stored_searchable, :facetable
        end
 
