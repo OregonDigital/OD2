@@ -2,8 +2,7 @@
 #  `rails generate hyrax:work Document`
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  # include OD2::GenericMetadata
-  include OD2::DocumentMetadata
+  include ::OregonDigital::DocumentMetadata
 
   self.indexer = DocumentIndexer
   # Change this to restrict which works can be added as a child.
@@ -13,5 +12,4 @@ class Document < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::Hyrax::BasicMetadata
-  include ::OregonDigital::TriplePoweredProperties::WorkBehavior
 end
