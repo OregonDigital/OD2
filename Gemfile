@@ -28,6 +28,12 @@ gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'loofah', '>= 2.2.3'
 gem 'rubyzip', '>= 1.2.2'
 
+# Honeycomb
+group :production, :staging do
+  gem 'honeycomb-rails'
+  gem 'libhoney'
+end
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
