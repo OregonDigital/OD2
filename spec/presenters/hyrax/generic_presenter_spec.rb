@@ -19,7 +19,7 @@ RSpec.describe Hyrax::GenericPresenter do
 
   it "delegates the method to solr document" do
     props.each do |prop|
-      expect(presenter).to delegate_method(prop.to_sym).to(:solr_document)
+      expect(presenter).to delegate_method(prop).to(:solr_document)
     end
   end
 end

@@ -1,5 +1,3 @@
-# Generated via
-#  `rails generate hyrax:work Audio`
 require 'rails_helper'
 
 RSpec.describe Generic do
@@ -13,7 +11,7 @@ RSpec.describe Generic do
   describe "metadata" do
     it "has descriptive generic metadata" do
       props.each do |prop|
-        expect(subject).to respond_to(:contributor)
+        expect(subject).to respond_to(prop)
       end
     end
   end
