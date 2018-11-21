@@ -1,3 +1,4 @@
+<%# Generic metadata %>
 <%= presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified'), html_dl: true) %>
 <%= presenter.attribute_to_html(:creator, render_as: :faceted, html_dl: true) %>
 <%= presenter.attribute_to_html(:contributor, render_as: :faceted, html_dl: true) %>
@@ -14,6 +15,7 @@
 <%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
 <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
 <%= presenter.attribute_to_html(:oembed_url, render_as: :oembed, html_dl: true) %>
+<%# Image metadata %>
 <%= presenter.attribute_to_html(:colour_content, html_dl: true) %>
 <%= presenter.attribute_to_html(:color_space, html_dl: true) %>
 <%= presenter.attribute_to_html(:height, html_dl: true) %>
@@ -22,3 +24,14 @@
 <%= presenter.attribute_to_html(:resolution, html_dl: true) %>
 <%= presenter.attribute_to_html(:view, html_dl: true) %>
 <%= presenter.attribute_to_html(:width, html_dl: true) %>
+<%# Document metadata %>
+<%= presenter.attribute_to_html(:contained_in_journal, html_dl: true) %>
+<%= presenter.attribute_to_html(:first_line, html_dl: true) %>
+<%= presenter.attribute_to_html(:first_line_chorus, html_dl: true) %>
+<%= presenter.attribute_to_html(:has_number, html_dl: true) %>
+<%= presenter.attribute_to_html(:host_item, html_dl: true) %>
+<%= presenter.attribute_to_html(:instrumentation, html_dl: true) %>
+<%= presenter.attribute_to_html(:is_volume, html_dl: true) %>
+<%= presenter.attribute_to_html(:larger_work, html_dl: true) %>
+<%= presenter.attribute_to_html(:number_of_pages, html_dl: true) %>
+<%= presenter.attribute_to_html(:table_of_contents, html_dl: true) %>
