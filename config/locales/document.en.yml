@@ -1,0 +1,38 @@
+en:
+  hyrax:
+    icons:
+      document:     'fa fa-file-text-o'
+    select_type:
+      document:
+        description:        "Document works"
+        name:               "Document"
+  simple_form:
+    hints:
+      defaults:
+        contained_in_journal: "Journal or magazine which contains the resource."
+        first_line: "Direct transcription of the first line of lyrics appearing in a song."
+        first_line_chorus: "Direct transcription of the first line of the chorus (refrain) appearing in a song."
+        has_number: "List the number, without No. in front of it."
+        host_item: "This information allows users to locate the physical piece that contains the component part described in the record."
+        instrumentation: "Listing of the performing forces called for by a particular piece of sheet music, including both voices and external instruments."
+        is_volume: "List the volume number, without Vol. in front of it."
+        larger_work: "Use when the item being cataloged is part of a larger work with a known title."
+        number_of_pages: "List the number of pages without pgs or pages following number."
+        table_of_contents: "List of subunits of resource."
+    labels:
+      defaults:
+        contained_in_journal: "Contained in Journal"
+        first_line: "First Line"
+        first_line_chorus: "First Line Chorus"
+        has_number: "Number"
+        host_item: "Host Item"
+        is_volume: "Volume"
+        larger_work: "Larger Work"
+        number_of_pages: "Number of Pages"
+        table_of_contents: "Table of Contents"
+  blacklight:
+    search:
+      fields:
+        facet:
+        has_number_sim: "Number"
+        is_volume_sim: "Volume"
