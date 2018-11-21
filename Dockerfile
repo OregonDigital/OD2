@@ -1,4 +1,7 @@
 FROM ruby:2.5.1
+
+ARG RAILS_ENV
+
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -30,5 +33,4 @@ ADD . /data
 # COPY package.json yarn.lock /data/
 # RUN yarn install
 
-# bundle gem dependencies
-RUN bundle install -j $(nproc)
+RUN ./build/install_gems.sh
