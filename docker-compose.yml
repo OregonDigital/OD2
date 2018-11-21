@@ -47,6 +47,7 @@ services:
       - RDS_PORT='5432'
       - RDS_USERNAME=postgres
       - REDIS_HOST=redis-dev
+      - REDIS_PORT='6379'
       - SECRET_KEY_BASE=asdf
       - SOLR_URL=http://solr-dev:8983/solr/development
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
@@ -99,6 +100,7 @@ services:
       - RDS_PORT='5432'
       - RDS_USERNAME=postgres
       - REDIS_HOST=redis-test
+      - REDIS_PORT='6379'
       - SECRET_KEY_BASE=asdf
       - SELENIUM_DRIVER_URL=http://selenium-hub:4444/wd/hub
       - SOLR_URL=http://solr-test:8983/solr/test
