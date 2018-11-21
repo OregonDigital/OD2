@@ -1,0 +1,16 @@
+<footer class="navbar navbar-inverse site-footer">
+  <div class="container-fluid">
+    <div class="navbar-text text-left">
+        <p><%= t('hyrax.footer.service_html') %></p>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-text text-right">
+        <p class='deployed-version'>
+          Oregon Digital <%= ENV.fetch('DEPLOYED_VERSION', OregonDigital::VERSION) %>
+        </p>
+        <p>Powered by Hyrax <%= Hyrax::VERSION %></p>
+        <p><%= t('hyrax.footer.copyright_html') %></p>
+      </div>
+    </div>
+  </div>
+</footer>

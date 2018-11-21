@@ -1,10 +1,10 @@
 # Generated via
-#  `rails generate hyrax:work Image`
-class Image < ActiveFedora::Base
+#  `rails generate hyrax:work Video`
+class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::OregonDigital::ImageMetadata
+  include ::OregonDigital::VideoMetadata
 
-  self.indexer = ImageIndexer
+  self.indexer = VideoIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }

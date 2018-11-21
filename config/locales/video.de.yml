@@ -1,0 +1,8 @@
+de:
+  hyrax:
+    icons:
+      video:     'fa fa-file-text-o'
+    select_type:
+      video:
+        description:        "Video Werke"
+        name:               "Video"
