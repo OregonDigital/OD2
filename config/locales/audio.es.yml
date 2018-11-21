@@ -1,0 +1,10 @@
+es:
+  hyrax:
+    icons:
+      audio:     'fa fa-file-text-o'
+    select_type:
+      audio:
+        # TODO: translate `human_name` into Spanish
+        description:        "Audio trabajos"
+        name:               "Audio"
+        # TODO: translate `human_name` into Spanish

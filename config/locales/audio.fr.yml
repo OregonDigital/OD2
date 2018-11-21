@@ -1,0 +1,8 @@
+fr:
+  hyrax:
+    icons:
+      audio:     'fa fa-file-text-o'
+    select_type:
+      audio:
+        description:        "Audio œuvres"
+        name:               "Audio"
