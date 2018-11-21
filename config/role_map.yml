@@ -19,4 +19,5 @@ test:
     - patron1@example.com
     - leland_himself@example.com
 
+staging: {}
 production: {}
