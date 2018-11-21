@@ -14,8 +14,10 @@
 pg_upgrade_*.log
 
 # Ignore all logfiles and tempfiles.
+/tmp/pids/*
 /log/*
 /tmp/*
+!/tmp/pids/.keep
 !/log/.keep
 !/tmp/.keep
 

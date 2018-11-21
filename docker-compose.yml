@@ -66,8 +66,7 @@ services:
   server:
     <<: *dev
     command: >
-      bash -c "./build/create_solr_index.sh &&
-      ./build/validate_migrated.sh &&
+      bash -c "./build/entrypoint.sh &&
       bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid -b tcp://0.0.0.0:3000 &&
       tail -f log/development.log"
   workers:
@@ -120,8 +119,7 @@ services:
       - .:/data # mount current directory into the image
       - ./tmp:/tmp
     command: >
-      bash -c "./build/create_solr_index.sh &&
-      ./build/validate_migrated.sh &&
+      bash -c "./build/entrypoint.sh &&
       puma -b tcp://0.0.0.0:3001 -e test -d &&
       tail -f log/test.log"
     expose:
