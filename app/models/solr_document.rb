@@ -26,6 +26,19 @@ class SolrDocument
 
   use_extension( Hydra::ContentNegotiation )
 
+  def self.solrized_methods(property_names)
+    property_names.each do |property_name|
+      define_method property_name.to_sym do
+        values = self[Solrizer.solr_name(property_name)]
+        if values.respond_to?(:each)
+          values.reject(&:blank?)
+        else
+          values
+        end
+      end
+    end
+  end
+
   ### Image Metadata ###
   def colour_content
     self[Solrizer.solr_name('colour_content')]
@@ -100,7 +113,8 @@ class SolrDocument
     self[Solrizer.solr_name('table_of_contents')]
   end
 
-  ### Generic Metadata ###
+  solrized_methods OregonDigital::GenericMetadata::PROPERTIES
+
   def oembed_url
     self[Solrizer.solr_name('oembed_url')]
   end

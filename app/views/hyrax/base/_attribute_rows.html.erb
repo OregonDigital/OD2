@@ -1,20 +1,3 @@
-<%# Generic metadata %>
-<%= presenter.attribute_to_html(:date_modified, label: t('hyrax.base.show.last_modified'), html_dl: true) %>
-<%= presenter.attribute_to_html(:creator, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:contributor, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:publisher, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:language, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:identifier, render_as: :linked, search_field: 'identifier_tesim', html_dl: true) %>
-<%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:date_created, render_as: :linked, search_field: 'date_created_tesim', html_dl: true) %>
-<%= presenter.attribute_to_html(:based_near_label, html_dl: true) %>
-<%= presenter.attribute_to_html(:related_url, render_as: :external_link, html_dl: true) %>
-<%= presenter.attribute_to_html(:resource_type, render_as: :faceted, html_dl: true) %>
-<%= presenter.attribute_to_html(:source, html_dl: true) %>
-<%= presenter.attribute_to_html(:rights_statement, render_as: :rights_statement, html_dl: true) %>
-<%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
-<%= presenter.attribute_to_html(:oembed_url, render_as: :oembed, html_dl: true) %>
 <%# Image metadata %>
 <%= presenter.attribute_to_html(:colour_content, html_dl: true) %>
 <%= presenter.attribute_to_html(:color_space, html_dl: true) %>
@@ -35,3 +18,6 @@
 <%= presenter.attribute_to_html(:larger_work, html_dl: true) %>
 <%= presenter.attribute_to_html(:number_of_pages, html_dl: true) %>
 <%= presenter.attribute_to_html(:table_of_contents, html_dl: true) %>
+<% OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+  <%= presenter.attribute_to_html(attr, html_dl: true) %>
+<% end %>

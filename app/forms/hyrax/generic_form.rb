@@ -6,6 +6,12 @@ module Hyrax
     include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm
 
     self.model_class = ::Generic
-    self.terms += [:resource_type, :oembed_url]
+    self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
+
+    self.required_fields = []
+
+    def primary_terms
+      OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) + [:keyword, :title]
+    end
   end
 end
