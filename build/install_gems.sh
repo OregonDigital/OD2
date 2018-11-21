@@ -1,8 +1,8 @@
 #!/bin/sh
 
 if [ "${RAILS_ENV}" = 'production' ] || [ "${RAILS_ENV}" = 'staging' ]; then
-  echo "Cannot auto-install gems in ${RAILS_ENV}, exiting"
-  exit 1
+  echo "Bundle install without development or test gems."
+  bundle install --without development test -j $(nproc)
+else
+  bundle install -j $(nproc)
 fi
-
-bundle install
