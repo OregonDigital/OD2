@@ -1,0 +1,17 @@
+en:
+  hyrax:
+    icons:
+      video:     'fa fa-file-text-o'
+    select_type:
+      video:
+        description:        "Video works"
+        name:               "Video"
+    simple_form:
+      hints:
+        defaults:
+          height: "Height of digital image. List the number of pixels."
+          width: "Width of digital image. List the number of pixels."
+      labels:
+        defaults:
+          height: "Pixel Height"
+          width: "Pixel Width"
