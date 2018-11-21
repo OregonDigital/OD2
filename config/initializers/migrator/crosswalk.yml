@@ -1,0 +1,502 @@
+crosswalk:
+  - property: alternative
+    predicate: http://purl.org/dc/terms/alternative
+    multiple: true
+  - property: tribal_title
+    predicate: http://opaquenamespace.org/ns/tribalTitle
+    multiple: true
+  - property: title
+    predicate: http://purl.org/dc/terms/title
+    multiple: true
+  - property: arranger
+    predicate: http://id.loc.gov/vocabulary/relators/arr
+    multiple: true
+  - property: artist
+    predicate: http://id.loc.gov/vocabulary/relators/art
+    multiple: true
+  - property: author
+    predicate: http://id.loc.gov/vocabulary/relators/aut
+    multiple: true
+  - property: cartographer
+    predicate: http://id.loc.gov/vocabulary/relators/ctg
+    multiple: true
+  - property: collector
+    predicate: http://id.loc.gov/vocabulary/relators/col
+    multiple: true
+  - property: composer
+    predicate: http://id.loc.gov/vocabulary/relators/cmp
+    multiple: true
+  - property: creator
+    predicate: http://purl.org/dc/elements/1.1/creator
+    multiple: true
+  - property: creator_display
+    predicate: http://opaquenamespace.org/ns/cco_creatorDisplay
+    multiple: true
+  - property: contributor
+    predicate: http://purl.org/dc/elements/1.1/contributor
+    multiple: true
+  - property: dedicatee
+    predicate: http://id.loc.gov/vocabulary/relators/dte
+    multiple: true
+  - property: donor
+    predicate: http://id.loc.gov/vocabulary/relators/dnr
+    multiple: true
+  - property: designer
+    predicate: http://id.loc.gov/vocabulary/relators/dsr
+    multiple: true
+  - property: editor
+    predicate: http://id.loc.gov/vocabulary/relators/edt
+    multiple: true
+  - property: former_owner
+    predicate: http://id.loc.gov/vocabulary/relators/fmo
+    multiple: true
+  - property: illustrator
+    predicate: http://id.loc.gov/vocabulary/relators/ill
+    multiple: true
+  - property: interviewee
+    predicate: http://id.loc.gov/vocabulary/relators/ive
+    multiple: true
+  - property: interviewer
+    predicate: http://id.loc.gov/vocabulary/relators/ivr
+    multiple: true
+  - property: lyricist
+    predicate: http://id.loc.gov/vocabulary/relators/lyr
+    multiple: true
+  - property: owner
+    predicate: http://id.loc.gov/vocabulary/relators/own
+    multiple: false
+  - property: patron
+    predicate: http://id.loc.gov/vocabulary/relators/pat
+    multiple: true
+  - property: photographer
+    predicate: http://id.loc.gov/vocabulary/relators/pht
+    multiple: true
+  - property: print_maker
+    predicate: http://id.loc.gov/vocabulary/relators/prm
+    multiple: true
+  - property: recipient
+    predicate: http://id.loc.gov/vocabulary/relators/rcp
+    multiple: true
+  - property: scribe
+    predicate: http://id.loc.gov/vocabulary/relators/scr
+    multiple: true
+  - property: transcriber
+    predicate: http://id.loc.gov/vocabulary/relators/trc
+    multiple: true
+  - property: translator
+    predicate: http://id.loc.gov/vocabulary/relators/trl
+    multiple: true
+  - property: abstract
+    predicate: http://purl.org/dc/terms/abstract
+    multiple: true
+  - property: accepted_name_usage
+    predicate: http://rs.tdwg.org/dwc/terms/acceptedNameUsage
+    multiple: true
+  - property: biographical_information
+    predicate: http://rdaregistry.info/Elements/a/P50113
+    multiple: true
+  - property: canzoniere_poems
+    predicate: http://opaquenamespace.org/ns/canzonierePoems
+    multiple: true
+  - property: compass_direction
+    predicate: http://opaquenamespace.org/ns/compassDirection
+    multiple: true
+  - property: contents
+    predicate: http://opaquenamespace.org/ns/contents
+    multiple: true
+  - property: cover_description
+    predicate: http://opaquenamespace.org/ns/coverDescription
+    multiple: true
+  - property: coverage
+    predicate: http://purl.org/dc/elements/1.1/coverage
+    multiple: true
+  - property: description
+    predicate: http://purl.org/dc/terms/description
+    multiple: true
+  - property: description_of_manifestation
+    predicate: http://rdaregistry.info/Elements/w/P10265
+    multiple: true
+  - property: first_line
+    predicate: http://opaquenamespace.org/ns/sheetmusic_firstLine
+    multiple: false
+  - property: first_line_chorus
+    predicate: http://opaquenamespace.org/ns/sheetmusic_firstLineChorus
+    multiple: false
+  - property: form_of_work
+    predicate: http://rdaregistry.info/Elements/w/P10004
+    multiple: true
+  - property: identification_verification_status
+    predicate: http://rs.tdwg.org/dwc/terms/identificationVerificationStatus
+    multiple: false
+  - property: inscription
+    predicate: http://purl.org/vra/hasInscription
+    multiple: true
+  - property: instrumentation
+    predicate: http://opaquenamespace.org/ns/sheetmusic_Instrumentation
+    multiple: true
+  - property: layout
+    predicate: http://rdaregistry.info/Elements/m/P30155
+    multiple: true
+  - property: military_highest_rank
+    predicate: http://opaquenamespace.org/ns/militaryHighestRank
+    multiple: false
+  - property: military_occupation
+    predicate: http://opaquenamespace.org/ns/militaryOccupation
+    multiple: true
+  - property: military_service_location
+    predicate: http://opaquenamespace.org/ns/militaryServiceLocation
+    multiple: true
+  - property: mode_of_issuance
+    predicate: http://rdaregistry.info/Elements/m/P30003
+    multiple: true
+  - property: mods_note
+    predicate: http://www.loc.gov/mods/rdf/v1#note
+    multiple: true
+  - property: number_of_pages
+    predicate: http://schema.org/numberOfPages
+    multiple: true
+  - property: object_orientation
+    predicate: http://opaquenamespace.org/ns/objectOrientation
+    multiple: false
+  - property: original_name_usage
+    predicate: http://rs.tdwg.org/dwc/terms/originalNameUsage
+    multiple: true
+  - property: photograph_orientation
+    predicate: http://opaquenamespace.org/ns/photographOrientation
+    multiple: false
+  - property: tribal_notes
+    predicate: http://opaquenamespace.org/ns/tribalNotes
+    multiple: true
+  - property: source_condition
+    predicate: http://opaquenamespace.org/ns/sourceCondition
+    multiple: true
+  - property: specimen_type
+    predicate: http://opaquenamespace.org/ns/specimenType
+    multiple: false
+  - property: table_of_contents
+    predicate: http://purl.org/dc/terms/tableOfContents
+    multiple: true
+  - property: temporal
+    predicate: http://purl.org/dc/terms/temporal
+    multiple: true
+  - property: view
+    predicate: http://opaquenamespace.org/ns/cco_viewDescription
+    multiple: true
+  - property: taxon_class
+    predicate: http://rs.tdwg.org/dwc/terms/class
+    multiple: true
+  - property: cultural_context
+    predicate: http://purl.org/vra/culturalContext
+    multiple: true
+  - property: ethnographic_term
+    predicate: http://opaquenamespace.org/ns/ethnographic
+    multiple: true
+  - property: event
+    predicate: http://schema.org/Event
+    multiple: true
+  - property: family
+    predicate: http://rs.tdwg.org/dwc/terms/family
+    multiple: true
+  - property: genus
+    predicate: http://rs.tdwg.org/dwc/terms/genus
+    multiple: true
+  - property: order
+    predicate: http://rs.tdwg.org/dwc/terms/order
+    multiple: true
+  - property: species
+    predicate: http://rs.tdwg.org/dwc/terms/specificEpithet
+    multiple: true
+  - property: keyword
+    predicate: http://purl.org/dc/elements/1.1/subject
+    multiple: true
+  - property: military_branch
+    predicate: http://opaquenamespace.org/ns/militaryBranch
+    multiple: true
+  - property: phylum_or_division
+    predicate: http://rs.tdwg.org/dwc/terms/phylum
+    multiple: true
+  - property: sports_team
+    predicate: http://opaquenamespace.org/ns/sportsTeam
+    multiple: true
+  - property: state_or_edition
+    predicate: http://opaquenamespace.org/ns/vra_stateEdition
+    multiple: true
+  - property: style_or_period
+    predicate: http://purl.org/vra/hasStylePeriod
+    multiple: true
+  - property: subject
+    predicate: http://purl.org/dc/terms/subject
+    multiple: true
+  - property: tribal_classes
+    predicate: http://opaquenamespace.org/ns/tribalClasses
+    multiple: true
+  - property: tribal_terms
+    predicate: http://opaquenamespace.org/ns/tribalTerms
+    multiple: true
+  - property: common_name
+    predicate: http://rs.tdwg.org/dwc/terms/vernacularName
+    multiple: true
+  - property: scientific_name_authorship
+    predicate: http://rs.tdwg.org/dwc/terms/scientificNameAuthorship
+    multiple: true
+  - property: higher_classification
+    predicate: http://rs.tdwg.org/dwc/terms/higherClassification
+    multiple: true
+  - property: award
+    predicate: http://schema.org/award
+    multiple: true
+  - property: legal_name
+    predicate: http://schema.org/legalName
+    multiple: true
+  - property: box
+    predicate: http://schema.org/box
+    multiple: true
+  - property: gps_latitude
+    predicate: http://www.w3.org/2003/12/exif/ns/gpsLatitude
+    multiple: false
+  - property: gps_longitude
+    predicate: http://www.w3.org/2003/12/exif/ns/gpsLongitude
+    multiple: false
+  - property: location
+    predicate: http://purl.org/dc/terms/spatial
+    multiple: true
+  - property: street_address
+    predicate: http://www.loc.gov/mads/rdf/v1#streetAddress
+    multiple: true
+  - property: ranger_district
+    predicate: http://opaquenamespace.org/ns/rangerDistrict
+    multiple: true
+  - property: tgn
+    predicate: http://dbpedia.org/ontology/HistoricPlace
+    multiple: true
+  - property: water_basin
+    predicate: http://opaquenamespace.org/ns/waterBasin
+    multiple: true
+  - property: award_date
+    predicate: http://opaquenamespace.org/ns/awardDate
+    multiple: true
+  - property: date_created
+    predicate: http://purl.org/dc/terms/created
+    multiple: true
+  - property: collected_date
+    predicate: http://opaquenamespace.org/ns/collectedDate
+    multiple: true
+  - property: date
+    predicate: http://purl.org/dc/terms/date
+    multiple: true
+  - property: issued
+    predicate: http://purl.org/dc/terms/issued
+    multiple: true
+  - property: view_date
+    predicate: http://opaquenamespace.org/ns/cco_viewDate
+    multiple: true
+  - property: acquisition_date
+    predicate: http://opaquenamespace.org/ns/acquisitionDate
+    multiple: true
+  - property: accession_number
+    predicate: http://opaquenamespace.org/ns/cco_accessionNumber
+    multiple: true
+  - property: barcode
+    predicate: http://id.loc.gov/ontologies/bibframe/barcode
+    multiple: true
+  - property: hydrologic_unit_code
+    predicate: http://opaquenamespace.org/ns/hydrologicUnitCode
+    multiple: true
+  - property: identifier
+    predicate: http://purl.org/dc/terms/identifier
+    multiple: true
+  - property: item_locator
+    predicate: http://purl.org/ontology/holding/label
+    multiple: true
+  - property: longitude_latitude_identification
+    predicate: http://opaquenamespace.org/ns/llid
+    multiple: true
+  - property: copyright_claimant
+    predicate: http://id.loc.gov/vocabulary/relators/cpc
+    multiple: true
+  - property: rights_statement
+    predicate: http://www.europeana.eu/schemas/edm/rights
+    multiple: false
+  - property: rights_note
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#rightsExpression
+    multiple: true
+  - property: rights_holder
+    predicate: http://opaquenamespace.org/ns/rightsHolder
+    multiple: true
+  - property: license
+    predicate: http://purl.org/dc/terms/rights
+    multiple: false
+  - property: use_restrictions
+    predicate: http://rdaregistry.info/Elements/u/P60497
+    multiple: true
+  - property: access_restrictions
+    predicate: http://purl.org/dc/terms/accessRights
+    multiple: false
+  - property: box_name
+    predicate: http://opaquenamespace.org/ns/boxName
+    multiple: true
+  - property: box_number
+    predicate: http://opaquenamespace.org/ns/boxNumber
+    multiple: true
+  - property: citation
+    predicate: http://schema.org/citation
+    multiple: true
+  - property: contained_in_journal
+    predicate: http://purl.org/net/nknouf/ns/bibtex/hasJournal
+    multiple: true
+  - property: current_repository_id
+    predicate: http://opaquenamespace.org/ns/vra_idCurrentRepository
+    multiple: true
+  - property: folder_name
+    predicate: http://opaquenamespace.org/ns/folderName
+    multiple: true
+  - property: folder_number
+    predicate: http://opaquenamespace.org/ns/folderNumber
+    multiple: true
+  - property: has_number
+    predicate: http://purl.org/net/nknouf/ns/bibtex/hasNumber
+    multiple: true
+  - property: is_volume
+    predicate: http://purl.org/net/nknouf/ns/bibtex/hasVolume
+    multiple: true
+  - property: language
+    predicate: http://purl.org/dc/terms/language
+    multiple: true
+  - property: local_collection_id
+    predicate: http://opaquenamespace.org/ns/localCollectionID
+    multiple: true
+  - property: local_collection_name
+    predicate: http://opaquenamespace.org/ns/localCollectionName
+    multiple: true
+  - property: location_copyshelf_location
+    predicate: http://www.loc.gov/mods/rdf/v1#locationCopyShelfLocator
+    multiple: true
+  - property: publisher
+    predicate: http://purl.org/dc/terms/publisher
+    multiple: true
+  - property: place_of_production
+    predicate: http://rdaregistry.info/Elements/u/P60161
+    multiple: true
+  - property: provenance
+    predicate: http://purl.org/dc/terms/provenance
+    multiple: true
+  - property: publication_place
+    predicate: http://id.loc.gov/vocabulary/relators/pup
+    multiple: true
+  - property: repository
+    predicate: http://id.loc.gov/vocabulary/relators/rps
+    multiple: false
+  - property: source
+    predicate: http://purl.org/dc/terms/source
+    multiple: true
+  - property: series_name
+    predicate: http://opaquenamespace.org/ns/seriesName
+    multiple: true
+  - property: series_number
+    predicate: http://opaquenamespace.org/ns/seriesNumber
+    multiple: true
+  - property: art_series
+    predicate: http://opaquenamespace.org/ns/artSeries
+    multiple: true
+  - property: has_finding_aid
+    predicate: http://lod.xdams.org/reload/oad/has_findingAid
+    multiple: true
+  - property: has_part
+    predicate: http://purl.org/dc/terms/hasPart
+    multiple: true
+  - property: has_version
+    predicate: http://purl.org/dc/terms/hasVersion
+    multiple: true
+  - property: host_item
+    predicate: http://opaquenamespace.org/ns/sheetmusic_hostItem
+    multiple: true
+  - property: isPartOf
+    predicate: http://purl.org/dc/terms/isPartOf
+    multiple: true
+  - property: is_version_of
+    predicate: http://purl.org/dc/terms/isVersionOf
+    multiple: true
+  - property: larger_work
+    predicate: http://opaquenamespace.org/ns/sheetmusic_largerWork
+    multiple: true
+  - property: relation
+    predicate: http://purl.org/dc/terms/relation
+    multiple: true
+  - property: resource_type
+    predicate: http://purl.org/dc/terms/type
+    multiple: false
+  - property: workType
+    predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+    multiple: true
+  - property: extent
+    predicate: http://purl.org/dc/terms/extent
+    multiple: true
+  - property: format
+    predicate: http://purl.org/dc/terms/format
+    multiple: true
+  - property: material
+    predicate: http://purl.org/vra/material
+    multiple: true
+  - property: measurements
+    predicate: http://opaquenamespace.org/ns/vra_measurements
+    multiple: true
+  - property: orientation
+    predicate: http://www.w3.org/2003/12/exif/ns/orientation
+    multiple: true
+  - property: physical_extent
+    predicate: http://www.loc.gov/mods/rdf/v1#physicalExtent
+    multiple: true
+  - property: technique
+    predicate: http://purl.org/vra/hasTechnique
+    multiple: true
+  - property: exhibit
+    predicate: http://opaquenamespace.org/ns/exhibit
+    multiple: true
+  - property: primary_set
+    predicate: http://opaquenamespace.org/ns/primarySet
+    multiple: false
+  - property: set
+    predicate: http://opaquenamespace.org/ns/set
+    multiple: true
+  - property: color_content
+    predicate: http://rdaregistry.info/Elements/e/P20224
+    multiple: true
+  - property: color_space
+    predicate: http://www.w3.org/2003/12/exif/ns/colorSpace
+    multiple: true
+  - property: conversion
+    predicate: http://opaquenamespace.org/ns/conversionSpecifications
+    multiple: true
+  - property: copy_location
+    predicate: http://www.loc.gov/mods/rdf/v1#locationCopySublocation
+    multiple: true
+  - property: date_digitized
+    predicate: http://opaquenamespace.org/ns/dateDigitized
+    multiple: false
+  - property: file_size
+    predicate: http://rdaregistry.info/Elements/m/P30183
+    multiple: false
+  - property: height
+    predicate: http://www.w3.org/2003/12/exif/ns/height
+    multiple: false
+  - property: institution
+    predicate: http://opaquenamespace.org/ns/contributingInstitution
+    multiple: true
+  - property: date_modified
+    predicate: http://purl.org/dc/terms/modified
+    multiple: true
+  - property: replaces_url
+    predicate: http://purl.org/dc/terms/replaces
+    multiple: false
+  - property: resolution
+    predicate: http://www.w3.org/2003/12/exif/ns/resolution
+    multiple: false
+  - property: date_uploaded
+    predicate: http://purl.org/dc/terms/dateSubmitted
+    multiple: false
+  - property: width
+    predicate: http://www.w3.org/2003/12/exif/ns/width
+    multiple: false
+  - property: oembed_url
+    predicate: http://opaquenamespace.org/ns/oembed
+    multiple: false
