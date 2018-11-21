@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Append some data into Honeycomb events to support tracing
-  if %w[production staging development].include? Rails.env
+  if %w[production staging].include? Rails.env
     def append_info_to_payload(payload)
       super(payload)
       honeycomb_metadata["trace.trace_id"] = request.request_id

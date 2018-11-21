@@ -105,8 +105,8 @@ services:
       - SOLR_URL=http://solr-test:8983/solr/test
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/rw/sparql
-      - HCIO_DS=od2-rails
-      - HCIO_KEY=d5529d94d4e989bb1fc1b1cfc559ebba
+      - HONEYCOMB_DS=od2-rails
+      - HONEYCOMB_KEY=d5529d94d4e989bb1fc1b1cfc559ebba
     depends_on:
       - chrome
       - selenium-hub
