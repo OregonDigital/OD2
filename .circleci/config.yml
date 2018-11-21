@@ -16,8 +16,6 @@ jobs:
           REDIS_PORT: '6379'
           SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
           SOLR_URL: http://localhost:8985/solr/hydra-test
-          HONEYCOMB_DS: od2-rails
-          HONEYCOMB_KEY: d5529d94d4e989bb1fc1b1cfc559ebba
       - image: circleci/postgres:9.5-alpine-ram
         environment:
           POSTGRES_DB: test
