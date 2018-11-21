@@ -1,10 +1,10 @@
 # config/initializers/honeycomb.rb
 
-require 'libhoney'
-key = ENV.fetch('HONEYCOMB_KEY')
-dataset = ENV.fetch('HONEYCOMB_DS', 'od2-rails')
-
 if %w[production staging].include? Rails.env
+  require 'libhoney'
+  key = ENV.fetch('HONEYCOMB_KEY')
+  dataset = ENV.fetch('HONEYCOMB_DS', 'od2-rails')
+
   $libhoney = Libhoney::Client.new(
     writekey: key,
     dataset: dataset,
