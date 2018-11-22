@@ -17,12 +17,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system do
     end
 
     scenario do
-      visit '/dashboard'
-      click_link 'Works'
-      expect(page).to have_content 'Add new work'
-      click_link 'Add new work'
-      choose 'payload_concern', option: 'Generic', visible: false
-      click_on 'Create work'
+      visit new_hyrax_generic_path
 
       expect(page).to have_content 'Add New Generic'
       click_link 'Files' # switch tab

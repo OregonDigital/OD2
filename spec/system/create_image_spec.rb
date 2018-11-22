@@ -17,12 +17,7 @@ RSpec.describe 'Create a Image',  js: true, type: :system do
     end
 
     scenario do
-      visit '/dashboard'
-      click_link 'Works'
-      expect(page).to have_content 'Add new work'
-      click_link 'Add new work'
-      choose 'payload_concern', option: 'Image', visible: false
-      click_button 'Create work'
+      visit new_hyrax_image_path
 
       expect(page).to have_content 'Add New Image'
       click_link 'Files' # switch tab
