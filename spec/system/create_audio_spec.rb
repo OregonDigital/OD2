@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe 'Create a Document', js: true, type: :system do
+RSpec.describe 'Create a Audio', js: true, type: :system do
   context 'a logged in user' do
     let(:user) { create(:user) }
     let!(:ability) { ::Ability.new(user) }
@@ -17,9 +17,9 @@ RSpec.describe 'Create a Document', js: true, type: :system do
     end
 
     scenario do
-      visit new_hyrax_document_path
+      visit new_hyrax_audio_path
 
-      expect(page).to have_content 'Add New Document'
+      expect(page).to have_content 'Add New Audio'
       click_link 'Files' # switch tab
       expect(page).to have_content 'Add files'
       expect(page).to have_content 'Add folder'
@@ -32,12 +32,13 @@ RSpec.describe 'Create a Document', js: true, type: :system do
       fill_in('Title', with: 'My Test Work')
       fill_in('Creator', with: 'Doe, Jane')
       fill_in('Keyword', with: 'testing')
-
-      select('In Copyright', from: 'Rights statement')
+      # TODO: Rights statement list is missing from generic model, uncomment/resolve
+      # line below when when rights_statement list is ready
+      # select('In Copyright', from: 'Rights statement')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
 
-      choose('document_visibility_open')
+      choose('audio_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
