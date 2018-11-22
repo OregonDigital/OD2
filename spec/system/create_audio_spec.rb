@@ -17,12 +17,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system do
     end
 
     scenario do
-      visit '/dashboard'
-      click_link 'Works'
-      expect(page).to have_content 'Add new work'
-      click_link 'Add new work'
-      choose 'payload_concern', option: 'Audio', visible: false
-      click_on 'Create work'
+      visit new_hyrax_audio_path
 
       expect(page).to have_content 'Add New Audio'
       click_link 'Files' # switch tab

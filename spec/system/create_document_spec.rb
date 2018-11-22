@@ -17,12 +17,7 @@ RSpec.describe 'Create a Document', js: true, type: :system do
     end
 
     scenario do
-      visit '/dashboard'
-      click_link 'Works'
-      expect(page).to have_content 'Add new work'
-      click_link 'Add new work'
-      choose 'payload_concern', option: 'Document', visible: false
-      click_on 'Create work'
+      visit new_hyrax_document_path
 
       expect(page).to have_content 'Add New Document'
       click_link 'Files' # switch tab

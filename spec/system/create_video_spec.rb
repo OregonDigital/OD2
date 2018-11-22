@@ -17,12 +17,7 @@ RSpec.describe 'Create a Video',  js: true, type: :system do
     end
 
     scenario do
-      visit '/dashboard'
-      click_link 'Works'
-      expect(page).to have_content 'Add new work'
-      click_link 'Add new work'
-      choose 'payload_concern', option: 'Video', visible: false
-      click_button 'Create work'
+      visit new_hyrax_video_path
 
       expect(page).to have_content 'Add New Video'
       click_link 'Files' # switch tab
