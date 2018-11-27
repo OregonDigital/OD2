@@ -4,6 +4,7 @@ class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior
   include ::OregonDigital::VideoMetadata
+  include ::OregonDigital::GenericMetadata
 
   self.indexer = VideoIndexer
   # Change this to restrict which works can be added as a child.

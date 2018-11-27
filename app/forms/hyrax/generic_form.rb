@@ -8,10 +8,14 @@ module Hyrax
     self.model_class = ::Generic
     self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
 
-    self.required_fields = []
+    self.required_fields = [:title, :dcmi_type, :rights_statement]
 
     def primary_terms
-      OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) + [:keyword, :title]
+      [:title, :rights_statement, :dcmi_type] + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
+    end
+
+    def secondary_terms
+      []
     end
   end
 end
