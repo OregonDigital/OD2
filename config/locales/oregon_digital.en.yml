@@ -4,3 +4,8 @@ en:
     oembeds:
       index:
         manage_oembeds: "Manage oEmbeds"
+      table_headers:
+        title: "Title"
+        uri: "URI"
+        oembed_link: "oEmbed Link"
+        oembed_status: "oEmbed Status"
