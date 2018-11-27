@@ -39,3 +39,8 @@ services:
   chrome:
     ports:
       - 5900:5900
+
+  # Map the IIIF server to work on localhost 8080
+  rais-dev:
+    ports:
+      - 8080:8080

@@ -37,6 +37,7 @@ services:
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
       - FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
+      - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
       - RAILS_CACHE_STORE_URL=memcache
       - RAILS_ENV=development
       - RAILS_LOG_TO_STDOUT=true
@@ -59,6 +60,7 @@ services:
       - blazegraph-dev
       - solr-dev
       - fcrepo-dev
+      - rais-dev
       - redis-dev
       - memcache
       - workers
@@ -90,6 +92,7 @@ services:
       - CAPYBARA_APP_HOST=http://test:3001
       - FEDORA_URL=http://fcrepo-test:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
+      - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
       - RAILS_CACHE_STORE_URL=memcache
       - RAILS_ENV=test
       - RAILS_LOG_TO_STDOUT=true
@@ -116,6 +119,7 @@ services:
       - solr-test
       - fcrepo-test
       - redis-test
+      - rais-test
       - memcache
     volumes:
       - .:/data # mount current directory into the image
@@ -236,6 +240,29 @@ services:
   redis-test:
     <<: *redis
     tmpfs: /data
+
+  ##
+  # RAIS IIIF server
+  rais: &rais
+    image: uolibraries/rais
+    environment:
+      - RAIS_ADDRESS=:8080
+      - RAIS_IIIFURL=http://localhost:8080/iiif
+      - RAIS_IIIFINFOCACHESIZE=10000
+      - RAIS_TILEPATH=/var/local/images
+    expose:
+      - 8080
+    networks:
+      ? internal
+      ? external
+  rais-dev:
+    <<: *rais
+    volumes:
+      - ./tmp/shared/derivatives:/var/local/images
+  rais-test:
+    <<: *rais
+    volumes:
+      - ./tmp/shared/derivatives:/var/local/images
 
   ##
   # Memcache cache server
