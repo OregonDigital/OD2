@@ -5,5 +5,22 @@
     </tr>
   </thead>
   <tbody>
+  <% assets_with_oembed.each do |curation_concern| %>
+    <tr>
+      <td class="human-readable-type"><%= curation_concern.human_readable_type %></td>
+      <td class="title"><%= link_to curation_concern, main_app.polymorphic_path(curation_concern)  %></td>
+      <td class="uri"><%= visibility_badge(curation_concern.visibility) %></td>
+      <td class="oembed_link">
+        <ul>
+        <% curation_concern.oembed_url.each do |oembed_url| %>
+          <li>
+            <a href="<%= oembed_url %>"><%= oembed_url %></a>
+          </li>
+        <% end %>
+        </ul>
+      </td>
+      <td class="oembed_status"><%= visibility_badge(curation_concern.visibility) %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
