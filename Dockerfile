@@ -23,6 +23,12 @@ RUN mkdir -p /opt/fits && \
   curl -fSL -o /opt/fits-1.0.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip && \
   cd /opt && unzip fits-1.0.5.zip && chmod +X fits-1.0.5/fits.sh
 
+# install Kakadu for jp2 derivatives
+RUN curl -fSL -o /opt/kakadu.zip http://kakadusoftware.com/wp-content/uploads/2014/06/KDU7A2_Demo_Apps_for_Ubuntu-x86-64_170827.zip && \
+  cd /opt && unzip kakadu.zip && mv KDU7A2_Demo_Apps_for_Ubuntu-x86-64_170827 kakadu
+ENV PATH="/opt/kakadu:${PATH}"
+ENV LD_LIBRARY_PATH="/opt/kakadu:${LD_LIBRARY_PATH}"
+
 RUN mkdir /data
 WORKDIR /data
 
