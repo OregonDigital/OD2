@@ -52,8 +52,9 @@ services:
       - SOLR_URL=http://solr-dev:8983/solr/development
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/rw/sparql
-      - HONEYCOMB_DS=buzzzzzzzzzzzzzzzzzzzzz
-      - HONEYCOMB_KEY=buzzzzzzzzzzzzzzzzzzzzz
+      - HONEYCOMB_DATASET=od2-rails
+      - HONEYCOMB_WRITEKEY=fa01b2227f761b5c1f11ae1a680f14da
+      - HONEYCOMB_SERVICE=od2
     depends_on:
       - db-dev
       - blazegraph-dev
@@ -106,8 +107,9 @@ services:
       - SOLR_URL=http://solr-test:8983/solr/test
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/rw/sparql
-      - HONEYCOMB_DS=buzzzzzzzzzzzzzzzzzzzzz
-      - HONEYCOMB_KEY=buzzzzzzzzzzzzzzzzzzzzz
+      - HONEYCOMB_DATASET=od2-rails
+      - HONEYCOMB_WRITEKEY=fa01b2227f761b5c1f11ae1a680f14da
+      - HONEYCOMB_SERVICE=od2
     depends_on:
       - chrome
       - selenium-hub
