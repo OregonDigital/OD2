@@ -30,8 +30,8 @@ gem 'rubyzip', '>= 1.2.2'
 
 # Honeycomb
 group :production, :staging do
-  gem 'honeycomb-rails'
-  gem 'libhoney'
+  gem 'sequel'
+  gem 'honeycomb-beeline'
 end
 
 group :development do
