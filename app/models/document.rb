@@ -2,8 +2,6 @@
 #  `rails generate hyrax:work Document`
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::OregonDigital::DocumentMetadata
-  include ::OregonDigital::GenericMetadata
 
 
   self.indexer = DocumentIndexer
@@ -13,5 +11,6 @@ class Document < ActiveFedora::Base
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
-  include ::Hyrax::BasicMetadata
+  include ::OregonDigital::DocumentMetadata
+  include ::OregonDigital::GenericMetadata
 end

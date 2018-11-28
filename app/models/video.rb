@@ -3,8 +3,6 @@
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior
-  include ::OregonDigital::VideoMetadata
-  include ::OregonDigital::GenericMetadata
 
   self.indexer = VideoIndexer
   # Change this to restrict which works can be added as a child.
@@ -13,5 +11,6 @@ class Video < ActiveFedora::Base
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
+  include ::OregonDigital::VideoMetadata
   include ::OregonDigital::GenericMetadata
 end
