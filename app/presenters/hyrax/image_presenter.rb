@@ -2,6 +2,7 @@
 #  `rails generate hyrax:work Image`
 module Hyrax
   class ImagePresenter < Hyrax::WorkShowPresenter
-    delegate :resource_type, :colour_content, :color_space, :height, :orientation, :photograph_orientation, :resolution, :view, :width, to: :solr_document
+    delegate *OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym), to: :solr_document 
+    delegate *OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym), to: :solr_document 
   end
 end
