@@ -7,6 +7,5 @@ en:
         all: "All oEmbed Works"
       table_headers:
         title: "Title"
-        uri: "URI"
         oembed_link: "oEmbed Link"
         oembed_status: "oEmbed Status"

@@ -10,9 +10,5 @@ module OregonDigital
     def initialize(solr_document)
       @solr_document = solr_document
     end
-
-    # def oembed_url
-    #   solr_document.oembed_url.join(', ')
-    # end
   end
 end
