@@ -125,6 +125,8 @@ GEM
       activemodel (= 5.1.6)
       activesupport (= 5.1.6)
       arel (~> 8.0)
+    activerecord-honeycomb (0.3.0)
+      libhoney
     activerecord-import (0.27.0)
       activerecord (>= 3.2)
     activesupport (5.1.6)
@@ -324,6 +326,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.4)
       faraday
+    faraday-honeycomb (0.3.0)
+      libhoney (>= 1.5.0)
     ffi (1.9.25)
     flipflop (2.4.0)
       activesupport (>= 4.0)
@@ -359,9 +363,12 @@ GEM
       concurrent-ruby (~> 1.0)
     hashdiff (0.3.7)
     hiredis (0.6.3)
-    honeycomb-rails (0.8.1)
-      libhoney (>= 1.9)
-      rails (>= 3.0.0)
+    honeycomb-beeline (0.5.0)
+      activerecord-honeycomb (>= 0.3.0)
+      faraday-honeycomb (>= 0.2.1)
+      libhoney (>= 1.8.1)
+      rack-honeycomb (>= 0.3.0)
+      sequel-honeycomb (>= 0.2.1)
     htmlentities (4.3.4)
     http (3.3.0)
       addressable (~> 2.3)
@@ -583,6 +590,8 @@ GEM
       rails (~> 5.0)
       rdf
     rack (2.0.6)
+    rack-honeycomb (0.3.0)
+      libhoney (>= 1.5.0)
     rack-protection (2.0.3)
       rack
     rack-test (1.1.0)
@@ -744,6 +753,9 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    sequel (5.14.0)
+    sequel-honeycomb (0.3.3)
+      libhoney
     shex (0.5.2)
       ebnf (~> 1.1)
       json-ld (>= 2.2, < 4.0)
@@ -863,12 +875,11 @@ DEPENDENCIES
   devise-guests (~> 0.6)
   equivalent-xml
   factory_bot_rails
-  honeycomb-rails
+  honeycomb-beeline
   hydra-role-management
   hyrax!
   jbuilder (~> 2.5)
   jquery-rails
-  libhoney
   listen (>= 3.0.5, < 3.2)
   loofah (>= 2.2.3)
   net-http-persistent (~> 2.9)
@@ -887,6 +898,7 @@ DEPENDENCIES
   rubyzip (>= 1.2.2)
   sass-rails (~> 5.0)
   selenium-webdriver
+  sequel
   shoulda-matchers!
   sidekiq
   simplecov (>= 0.9)
