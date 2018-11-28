@@ -30,7 +30,9 @@ RSpec.describe 'Create a Image',  js: true, type: :system do
       end
       click_link 'Descriptions' # switch tab
       fill_in('Title', with: 'My Test Work')
-      fill_in('Creator', with: 'Doe, Jane')
+      within('div.image_creator') do
+        fill_in('Creator', with: 'Doe, Jane')
+      end
       fill_in('Keyword', with: 'testing')
 
       select('In Copyright', from: 'Rights statement')
