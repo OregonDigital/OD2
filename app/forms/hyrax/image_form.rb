@@ -1,7 +1,4 @@
-# Generated via
-#  `rails generate hyrax:work Image`
 module Hyrax
-  # Generated form for Image
   class ImageForm < Hyrax::GenericForm
     include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm
     self.model_class = ::Image
