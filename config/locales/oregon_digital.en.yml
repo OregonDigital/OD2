@@ -1,0 +1,12 @@
+
+en:
+  oregon_digital:
+    oembeds:
+      index:
+        manage_oembeds: "Manage oEmbeds"
+        all: "All oEmbed Works"
+      table_headers:
+        type: "Type of Item"
+        title: "Title"
+        oembed_link: "oEmbed Link"
+        oembed_status: "oEmbed Status"

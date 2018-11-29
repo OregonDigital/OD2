@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
+
   mount Blacklight::Engine => '/'
-  
+
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
+
+  resources :oembeds, controller: 'oregon_digital/oembeds', only: :index
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
