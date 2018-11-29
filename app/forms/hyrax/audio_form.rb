@@ -9,7 +9,7 @@ module Hyrax
     self.model_class = ::Audio
 
     def primary_terms
-      required_fields + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
+      required_fields + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type]) + [:keyword, :title, :creator] 
     end
 
     def secondary_terms

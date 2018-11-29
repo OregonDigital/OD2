@@ -11,7 +11,7 @@ module Hyrax
     self.required_fields = [:title, :dcmi_type, :rights_statement]
 
     def primary_terms
-      [:title, :rights_statement, :dcmi_type] + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
+      required_fields + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
     end
 
     def secondary_terms

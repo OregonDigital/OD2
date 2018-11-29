@@ -8,7 +8,7 @@ module Hyrax
     self.terms += OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym)
 
     def primary_terms
-      required_fields + OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym) +(OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
+      required_fields + OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym) + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
     end
 
     def secondary_terms
