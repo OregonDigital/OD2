@@ -29,7 +29,6 @@ RSpec.describe 'Create a Image',  js: true, type: :system do
         attach_file('files[]', upload_file_path)
       end
       click_link 'Descriptions' # switch tab
-
       within('div.image_title') do
         fill_in('Title', with: 'Test Title')
       end
