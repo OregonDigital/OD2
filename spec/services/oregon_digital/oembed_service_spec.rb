@@ -2,7 +2,7 @@ RSpec.describe OregonDigital::OembedService do
   subject { described_class }
 
   let!(:work_with_oembed) do
-    build(:work, oembed_url: ["https://www.youtube.com/watch?v=8ZtInClXe1Q"]).tap do |work|
+    build(:work, oembed_url: "https://www.youtube.com/watch?v=8ZtInClXe1Q").tap do |work|
       work.save(validate: false)
     end
   end
