@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
   skip_after_action :discard_flash_if_xhr
 
   protect_from_forgery with: :exception
+
+  def append_info_to_payload(payload)
+    super(payload)
+    Rack::Honeycomb.add_field(request.env, 'version', ENV.fetch('DEPLOYED_VERSION', OregonDigital::VERSION))
+    Rack::Honeycomb.add_field(request.env, 'classname', self.class.name)
+  end
 end
