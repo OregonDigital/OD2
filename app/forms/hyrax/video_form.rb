@@ -2,19 +2,14 @@
 #  `rails generate hyrax:work Video`
 module Hyrax
   # Generated form for Video
-  class VideoForm < Hyrax::Forms::WorkForm
-    include ::OregonDigital::VideoFormBehavior
-    self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
-    self.required_fields = [:title, :dcmi_type, :rights_statement]
+  class VideoForm < Hyrax::GenericForm
+    include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm
 
     self.model_class = ::Video
+    self.terms += OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym)
 
     def primary_terms
-      OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) + [:title, :rights_statement]
-    end
-
-    def secondary_terms
-      []
+      required_fields + OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym) + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type]) 
     end
   end
 end
