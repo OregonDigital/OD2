@@ -2,15 +2,16 @@
 #  `rails generate hyrax:work Audio`
 module Hyrax
   # Generated form for Audio
-  class AudioForm < Hyrax::Forms::WorkForm
+  class AudioForm < Hyrax::GenericForm
     include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm
-    self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
     self.model_class = ::Audio
 
-    self.required_fields = []
-
     def primary_terms
-      OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) + [:keyword, :title]
+      required_fields + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
+    end
+
+    def secondary_terms
+      []
     end
   end
 end

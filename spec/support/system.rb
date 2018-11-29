@@ -24,7 +24,13 @@ RSpec.configure do |config|
       Capybara.ignore_hidden_elements = false
       Capybara.javascript_driver = :selenium
     else
-      driven_by :selenium_chrome_headless
+      Capybara.register_driver :headless_chrome do |app|
+        options = Selenium::WebDriver::Chrome::Options.new
+        %w[headless window-size=1280x1280 disable-gpu].each { |arg| options.add_argument(arg) }
+        Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+      end
+
+      driven_by :headless_chrome
     end
   end
 

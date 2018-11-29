@@ -1,0 +1,16 @@
+<% provide :page_header do %>
+  <h1><span class="fa fa-sitemap"></span><%= t('.manage_oembeds') %></h1>
+<% end %>
+
+<div class="panel panel-default tabs">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#all" data-toggle="tab"><%= t('.all') %></a></li>
+  </ul>
+  <div class="panel-body">
+    <div class="tab-content">
+      <div class="tab-pane active" id="all">
+        <%= render "list_oembeds" %>
+      </div>
+    </div>
+  </div>
+</div>

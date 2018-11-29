@@ -29,9 +29,11 @@ RSpec.describe 'Create a Audio', js: true, type: :system do
         attach_file('files[]', upload_file_path)
       end
       click_link 'Descriptions' # switch tab
-      fill_in('Title', with: 'My Test Work')
-      fill_in('Creator', with: 'Doe, Jane')
-      fill_in('Keyword', with: 'testing')
+      within('div.audio_title') do
+        fill_in('Title', with: 'Test Title')
+      end
+      select('In Copyright', from: 'Rights')
+      fill_in('Dcmi type', with: "test type") 
       # TODO: Rights statement list is missing from generic model, uncomment/resolve
       # line below when when rights_statement list is ready
       # select('In Copyright', from: 'Rights statement')
@@ -43,12 +45,12 @@ RSpec.describe 'Create a Audio', js: true, type: :system do
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
 
-      check('agreement')
+      check('agreement', visible: false)
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
 
       click_on 'Save'
-      expect(page).to have_content('My Test Work')
+      expect(page).to have_content('Test Title')
       expect(page).to have_content 'Your files are being processed by Hyrax in the background.'
 
       # save a successful screenshot if running in CI for build artifacts

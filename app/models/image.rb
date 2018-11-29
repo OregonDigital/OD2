@@ -3,7 +3,6 @@
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior
-  include ::OregonDigital::ImageMetadata
 
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.
@@ -12,5 +11,6 @@ class Image < ActiveFedora::Base
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
+  include ::OregonDigital::ImageMetadata
   include ::OregonDigital::GenericMetadata
 end
