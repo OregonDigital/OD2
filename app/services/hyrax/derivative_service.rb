@@ -14,10 +14,14 @@ class Hyrax::DerivativeService
   attr_reader :valid_services
   delegate :mime_type, :uri, to: :file_set
 
+  # OVERRIDDEN again!  Forcing self.class.services to use our service first.
+  # The initializer appears to set the var for hyrax *before* these overrides
+  # are loaded, which causes us to lose the setting, which means defaulting to
+  # the wrong value....
   def initialize(file_set)
-    self.services ||= [Hyrax::FileSetDerivativesService]
+    self.class.services = [OregonDigital::FileSetDerivativesService]
     @file_set = file_set
-    @valid_services = self.services.map { |s| s.new(file_set) }.select(&:valid?)
+    @valid_services = self.class.services.map { |s| s.new(file_set) }.select(&:valid?)
     @valid_services.empty? ? self : @valid_services
   end
 
