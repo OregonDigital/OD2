@@ -4,7 +4,15 @@ en:
     oembeds:
       index:
         manage_oembeds: "Manage oEmbeds"
+        oembed_edit: "Edit oEmbed"
         all: "All oEmbed Works"
+      edit:
+        oembed_update: "Update oEmbed"
+        manage_oembeds_html: "Manage oEmbed for %{cc}"
+        oembed_broken_html: "This oEmbed URL is broken"
+        oembed_apply: "Update & Resolve"
+        oembed_cancel: "Cancel and manage all oEmbeds"
+        oembed_return: "Return to editing this Work"
       table_headers:
         type: "Type of Item"
         title: "Title"
