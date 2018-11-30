@@ -6,6 +6,7 @@ en:
         manage_oembeds: "Manage oEmbeds"
         oembed_edit: "Edit oEmbed"
         all: "All oEmbed Works"
+        errors: "oEmbed errors"
       edit:
         oembed_update: "Update oEmbed"
         manage_oembeds_html: "Manage oEmbed for %{cc}"
