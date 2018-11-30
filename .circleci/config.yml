@@ -45,6 +45,7 @@ jobs:
             sudo apt-get install -y clamav-freshclam clamav-daemon libclamav-dev
             sudo apt-get install -t jessie-backports -y openjdk-8-jre-headless ca-certificates-java
             sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
+            sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools
             sudo update-alternatives --config java
       - run:
           name: Fetch clamav databases
