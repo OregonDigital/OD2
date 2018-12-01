@@ -1,11 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ "${RAILS_ENV}" = 'production' ] || [ "${RAILS_ENV}" = 'staging' ]; then
-  echo "Cannot auto-create SOLR collection for ${RAILS_ENV}, exiting"
-  exit 1
-fi
-
+# Allow production or staging environment to run the script, manually during cluster creation
 SOLR_HOST=$(echo $SOLR_URL | cut -d '/' -f 1,2,3)
 
 # Upload the hyrax SOLR configurations
