@@ -1,11 +1,8 @@
-# This file is used by Rack-based servers to start the application.
-
-require_relative 'config/environment'
+# frozen_string_literal:true
 
 # Initialize Honeycomb before everything else
-if %w[production staging].include? Rails.env
-  require 'honeycomb-beeline'
-  Honeycomb.init
-end
+require 'honeycomb-beeline'
+Honeycomb.init
 
+require_relative 'config/environment'
 run Rails.application
