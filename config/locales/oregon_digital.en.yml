@@ -2,20 +2,22 @@
 en:
   oregon_digital:
     oembeds:
-      index:
-        manage_oembeds: "Manage oEmbeds"
-        oembed_edit: "Edit oEmbed"
-        all: "All oEmbed Works"
-        errors: "oEmbed errors"
       edit:
-        oembed_update: "Update oEmbed"
+        header:
+          current: Current oEmbed URL
         manage_oembeds_html: "Manage oEmbed for %{cc}"
-        oembed_broken_html: "This oEmbed URL is broken"
         oembed_apply: "Update & Resolve"
+        oembed_broken_html: "This oEmbed URL is broken"
         oembed_cancel: "Cancel and manage all oEmbeds"
         oembed_return: "Return to editing this Work"
+        oembed_update: "Update oEmbed"
+      index:
+        all: "All oEmbed Works"
+        errors: "oEmbed errors"
+        manage_oembeds: "Manage oEmbeds"
+        oembed_edit: "Edit oEmbed"
       table_headers:
-        type: "Type of Item"
-        title: "Title"
         oembed_link: "oEmbed Link"
         oembed_status: "oEmbed Status"
+        title: "Title"
+        type: "Type of Item"
