@@ -11,14 +11,6 @@ module OregonDigital
       @solr_document = solr_document
     end
 
-    def oembed_error_history(solr_document)
-      solr_document['oembed_error_history_ssim']
-    end
-
-    def oembed_last_error_date
-      solr_document['oembed_last_error_date'].to_formatted_s(:rfc822)
-    end
-
     def self.errors_to_html(e)
       html = "<dt>oEmbed encounted an error</dt>"
       html << "<dd>#{e.message}</dd>"
