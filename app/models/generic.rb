@@ -17,6 +17,7 @@ class Generic < ActiveFedora::Base
 
   # If the oembed_url changed all previous errors are invalid
   def resolve_oembed_errors
-    OembedError.find_by(document_id: self.id).delete() if self.oembed_url_changed?
+    errors = OembedError.find_by(document_id: self.id)
+    errors.delete() if self.oembed_url_changed? unless errors.nil?
   end
 end
