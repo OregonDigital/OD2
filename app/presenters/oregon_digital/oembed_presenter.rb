@@ -18,5 +18,11 @@ module OregonDigital
     def oembed_last_error_date
       solr_document['oembed_last_error_date'].to_formatted_s(:rfc822)
     end
+
+    def self.errors_to_html(e)
+      html = "<dt>oEmbed encounted an error</dt>"
+      html << "<dd>#{e.message}</dd>"
+      return html.html_safe
+    end
   end
 end
