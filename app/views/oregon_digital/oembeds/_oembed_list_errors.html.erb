@@ -1,7 +1,7 @@
 <%# To render this view pass `curation_concern` (e.g. `object: curation_concern`) %>
 <%= link_to curation_concern, edit_oembed_path(curation_concern) %>
 <ul>
-  <% curation_concern.oembed_error_history.each do |entry| %>
+  <% errors.oembed_errors.each do |entry| %>
     <% unless entry.empty? %>
       <li><%= entry %></li>
     <% end %>
