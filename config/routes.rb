@@ -9,10 +9,10 @@ Rails.application.routes.draw do
     concerns :searchable
   end
 
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions: 'users/sessions', registrations: 'users/registrations' }
   devise_scope :user do
     get 'users/auth/cas', to: 'users/omniauth_authorize#passthru', defaults: { provider: :cas }, as: "new_osu_session"
-    get 'users/auth/shibboleth', to: 'users/omniauth_authorize#passthru', defaults: { provider: :cas }, as: "new_uo_session"
+    get 'users/auth/saml', to: 'users/omniauth_authorize#passthru', defaults: { provider: :saml }, as: "new_uo_session"
   end
 
   mount Hydra::RoleManagement::Engine => '/'

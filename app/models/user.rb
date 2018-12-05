@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
   include Blacklight::User
   # Include default devise modules. Others available are:
-  devise  :database_authenticatable, :registerable, :omniauthable, omniauth_providers: [:cas]
+  devise :database_authenticatable, :registerable, :omniauthable, omniauth_providers: [:cas, :saml]
 
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
@@ -24,18 +24,13 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(access_token)
-    if access_token.provider.to_s == "cas"
-      User.where(email: "#{access_token.uid}@oregonstate.edu").first_or_create do |user|
-        user.email = "#{access_token.uid}@oregonstate.edu"
-      end
-    elsif access_token.provider.to_s == "shibboleth"
-      User.where(email: "#{access_token.uid}@uoregon.edu").first_or_create do |user|
-        user.email = "#{access_token.uid}@uoregon.edu"
-      end
-    else
-      User.where(email: "#{access_token.uid}").first_or_create do |user|
-        user.email = "#{access_token.uid}"
-      end
+    email = case access_token.provider.to_s
+      when "cas" then "#{access_token.extra.osuprimarymail}"
+      when "saml" then "#{access_token.uid}@uoregon.edu"
+      else access_token.uid
+    end
+    User.where(email: email).first_or_create do |user|
+      user.email = email
     end
   end
 end

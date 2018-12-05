@@ -31,7 +31,7 @@ gem 'rubyzip', '>= 1.2.2'
 
 # Login gems
 gem 'omniauth-cas'
-gem 'omniauth-shibboleth'
+gem 'omniauth-saml'
 
 # Honeycomb
 gem 'sequel'

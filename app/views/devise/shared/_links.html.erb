@@ -20,6 +20,7 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+    <!-- OVERRIDE HERE TO CHANGE LABELS -->
+    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider).to_s == 'Saml' ? 'University of Oregon' : 'Oregon State University' }", omniauth_authorize_path(resource_name, provider) %><br />
   <% end -%>
 <% end -%>
