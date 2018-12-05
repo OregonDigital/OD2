@@ -1,13 +1,16 @@
+# frozen_string_literal:true
+
 RSpec.describe OregonDigital::OembedsController do
   let(:user) { create(:user) }
   let(:a_work) { create(:work, user: user) }
   let(:not_my_work) { create(:work) }
+
   before { sign_in user }
 
   describe '#index' do
-    it 'shows me the page' do
-      expect(controller).to receive(:add_breadcrumb).with('Home', subject.root_path)
-      expect(controller).to receive(:add_breadcrumb).with('Dashboard', subject.hyrax.dashboard_path)
+    it 'renders the dashboard' do
+      expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)
+      expect(controller).to receive(:add_breadcrumb).with('Dashboard', controller.hyrax.dashboard_path)
       expect(controller).to receive(:add_breadcrumb).with('Manage oEmbeds', Rails.application.routes.url_helpers.oembeds_path)
       get :index
       expect(response).to be_success
@@ -25,8 +28,8 @@ RSpec.describe OregonDigital::OembedsController do
     end
     context 'when I have permission to edit the object' do
       it 'shows me the page' do
-        expect(controller).to receive(:add_breadcrumb).with('Home', subject.root_path)
-        expect(controller).to receive(:add_breadcrumb).with('Dashboard', subject.hyrax.dashboard_path)
+        expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)
+        expect(controller).to receive(:add_breadcrumb).with('Dashboard', controller.hyrax.dashboard_path)
         expect(controller).to receive(:add_breadcrumb).with('Manage oEmbeds', Rails.application.routes.url_helpers.oembeds_path)
         expect(controller).to receive(:add_breadcrumb).with('Update oEmbed', '#')
         get :edit, params: { id: a_work }

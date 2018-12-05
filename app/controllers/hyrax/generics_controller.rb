@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Generic`
+# frozen_string_literal:true
+
 module Hyrax
   # Generated controller for Generic
   class GenericsController < ApplicationController

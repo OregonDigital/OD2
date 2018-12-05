@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Document`
+# frozen_string_literal:true
+
 module Hyrax
   # Generated controller for Document
   class DocumentsController < ApplicationController

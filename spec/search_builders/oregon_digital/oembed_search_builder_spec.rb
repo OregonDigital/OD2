@@ -1,24 +1,27 @@
+# frozen_string_literal:true
+
 RSpec.describe OregonDigital::OembedSearchBuilder do
+  subject { processor_chain }
+
+  let(:processor_chain) { search_builder.processor_chain }
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
 
-  describe "#processor_chain" do
-    subject { search_builder.processor_chain }
-
-    it { is_expected.to eq [:with_pagination, :with_sorting, :only_oembed] }
+  describe '#processor_chain' do
+    it { is_expected.to eq %i[with_pagination with_sorting only_oembed] }
   end
 
-  describe "#with_sorting" do
-    subject { {} }
+  describe '#with_sorting' do
+    let(:processor_chain) { {} }
 
-    before { search_builder.with_sorting(subject) }
+    before { search_builder.with_sorting(processor_chain) }
     it { is_expected.to eq(sort: 'system_create_dtsi desc') }
   end
 
-  describe "#only_oembed" do
-    subject { {} }
+  describe '#only_oembed' do
+    let(:processor_chain) { {} }
 
-    before { search_builder.only_oembed(subject) }
+    before { search_builder.only_oembed(processor_chain) }
     it { is_expected.to eq(fq: 'oembed_url_tesim:*') }
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 RSpec.describe 'Create a Audio', js: true, type: :system do
-  context 'a logged in user' do
+  context 'with a logged in user' do
     let(:user) { create(:user) }
     let!(:ability) { ::Ability.new(user) }
     let(:upload_file_path) { "#{Rails.root}/spec/fixtures/test.jpg" }
@@ -16,7 +16,8 @@ RSpec.describe 'Create a Audio', js: true, type: :system do
       sign_in_as user
     end
 
-    scenario do
+    # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
+    it do
       visit new_hyrax_audio_path
 
       expect(page).to have_content 'Add New Audio'
@@ -33,7 +34,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system do
         fill_in('Title', with: 'Test Title')
       end
       select('In Copyright', from: 'Rights')
-      fill_in('Dcmi type', with: "test type") 
+      fill_in('Dcmi type', with: 'test type')
       # TODO: Rights statement list is missing from generic model, uncomment/resolve
       # line below when when rights_statement list is ready
       # select('In Copyright', from: 'Rights statement')
@@ -54,7 +55,10 @@ RSpec.describe 'Create a Audio', js: true, type: :system do
       expect(page).to have_content 'Your files are being processed by Hyrax in the background.'
 
       # save a successful screenshot if running in CI for build artifacts
+      # rubocop:disable Lint/Debugger
       save_screenshot if ENV.fetch('CI', nil)
+      # rubocop:enable Lint/Debugger
     end
+    # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
   end
 end

@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Audio`
+# frozen_string_literal:true
+
 module Hyrax
   module Actors
     class AudioActor < Hyrax::Actors::BaseActor

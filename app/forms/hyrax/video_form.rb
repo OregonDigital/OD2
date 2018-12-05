@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Video`
+# frozen_string_literal:true
+
 module Hyrax
   # Generated form for Video
   class VideoForm < Hyrax::GenericForm
@@ -9,7 +9,7 @@ module Hyrax
     self.terms += OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym)
 
     def primary_terms
-      required_fields + OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym) + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type]) 
+      required_fields + OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym) + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])
     end
   end
 end

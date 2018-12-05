@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 module OregonDigital
   # Presents oembed objects
   class OembedPresenter

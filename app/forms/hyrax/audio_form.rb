@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Audio`
+# frozen_string_literal:true
+
 module Hyrax
   # Generated form for Audio
   class AudioForm < Hyrax::GenericForm

@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Generic`
+# frozen_string_literal:true
+
 class GenericIndexer < Hyrax::WorkIndexer
   # This indexes the default metadata. You can remove it if you want to
   # provide your own metadata and indexing.

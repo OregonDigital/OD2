@@ -1,7 +1,7 @@
-# Generated via
-#  `rails generate hyrax:work Video`
+# frozen_string_literal:true
+
 module Hyrax
   class VideoPresenter < Hyrax::GenericPresenter
-    delegate *OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym), to: :solr_document 
+    delegate(*OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym), to: :solr_document)
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 FactoryBot.define do
   factory :work, class: Generic do
     transient do
@@ -22,7 +24,7 @@ FactoryBot.define do
       work.save! if work.member_of_collections.present?
     end
 
-    title { ["Test title"] }
+    title { ['Test title'] }
     visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE }
 
     after(:build) do |work, evaluator|

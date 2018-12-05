@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 require 'triplestore_adapter'
 
 module OregonDigital::TriplePoweredProperties
@@ -8,14 +10,12 @@ module OregonDigital::TriplePoweredProperties
     # @param uri [String] the uri for the graph
     # @return [RDF::Graph] the graph
     def self.fetch(uri)
-      unless uri.blank?
-        begin
-          @triplestore ||= TriplestoreAdapter::Triplestore.new(TriplestoreAdapter::Client.new(ENV["TRIPLESTORE_ADAPTER_TYPE"] || "blazegraph",
-                                                      ENV["TRIPLESTORE_ADAPTER_URL"] || 'http://localhost:9999/blazegraph/namespace/development/sparql'))
-          @triplestore.fetch(uri, from_remote: true)
-        rescue TriplestoreAdapter::TriplestoreException => e
-          raise e
-        end
+      return if uri.blank?
+      begin
+        @triplestore ||= TriplestoreAdapter::Triplestore.new(TriplestoreAdapter::Client.new(ENV['TRIPLESTORE_ADAPTER_TYPE'], ENV['TRIPLESTORE_ADAPTER_URL']))
+        @triplestore.fetch(uri, from_remote: true)
+      rescue TriplestoreAdapter::TriplestoreException => e
+        raise e
       end
     end
 
@@ -38,12 +38,11 @@ module OregonDigital::TriplePoweredProperties
       labels = {}
       return labels if graph.nil?
 
-      self.rdf_label_predicates.each do |predicate|
+      rdf_label_predicates.each do |predicate|
         labels[predicate.to_s] = []
-        labels[predicate.to_s] << graph
-                    .query(predicate: predicate)
-                    .select { |statement| !statement.is_a?(Array) }
-                    .map { |statement| statement.object.to_s }
+        labels[predicate.to_s] << graph.query(predicate: predicate)
+                                       .reject { |statement| statement.is_a?(Array) }
+                                       .map { |statement| statement.object.to_s }
         labels[predicate.to_s].flatten!.compact!
       end
       labels

@@ -20,6 +20,8 @@ jobs:
           REDIS_PORT: '6379'
           SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
           SOLR_URL: http://localhost:8985/solr/hydra-test
+          TRIPLESTORE_ADAPTER_TYPE: blazegraph
+          TRIPLESTORE_ADAPTER_URL: http://localhost:8080/bigdata/namespace/rw/sparql
       - image: circleci/postgres:9.5-alpine-ram
         environment:
           POSTGRES_DB: test
@@ -56,6 +58,9 @@ jobs:
       - run:
           name: Install Ruby Dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - run:
+          name: Run Rubocop
+          command: bundle exec rubocop
       - save_cache:
           key: gemfile-{{ checksum "Gemfile.lock" }}
           paths:

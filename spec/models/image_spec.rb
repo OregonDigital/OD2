@@ -1,70 +1,25 @@
-# Generated via
-#  `rails generate hyrax:work Image`
-require 'rails_helper'
+# frozen_string_literal:true
 
 RSpec.describe Image do
-  let(:props) {OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)}
+  subject { build(:image, title: ['foo']) }
 
-  it 'has a title' do
-    subject.title = ['foo']
-    expect(subject.title).to eq ['foo']
-  end
+  let(:model) { subject }
+  let(:props) { OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym) }
 
-  it 'has a colour_content' do
-    subject.colour_content = ['Color']
-    expect(subject.colour_content).to eq ['Color']
-  end
+  it { is_expected.to have_attributes(title: ['foo']) }
+  it { is_expected.to have_attributes(colour_content: ['Color']) }
+  it { is_expected.to have_attributes(color_space: ['RGB']) }
+  it { is_expected.to have_attributes(height: '100') }
+  it { is_expected.to have_attributes(orientation: ['Horizontal']) }
+  it { is_expected.to have_attributes(photograph_orientation: 'west') }
+  it { is_expected.to have_attributes(resolution: '72') }
+  it { is_expected.to have_attributes(view: ['exterior']) }
+  it { is_expected.to have_attributes(width: '200') }
 
-  it 'has a color_space' do
-    subject.color_space = ['RGB']
-    expect(subject.color_space).to eq ['RGB']
-  end
-
-  it 'has a height' do
-    subject.height = '100'
-    expect(subject.height).to eq '100'
-  end
-
-  it 'has an orientation' do
-    subject.orientation = ['Horizontal']
-    expect(subject.orientation).to eq ['Horizontal']
-  end
-
-  it 'has an photograph_orientation' do
-    subject.photograph_orientation = 'west'
-    expect(subject.photograph_orientation).to eq 'west'
-  end
-
-  it 'has an photograph_orientation' do
-    subject.resolution = '72'
-    expect(subject.resolution).to eq '72'
-  end
-
-  it 'has an view' do
-    subject.view = ['exterior']
-    expect(subject.view).to eq ['exterior']
-  end
-
-  it 'has an width' do
-    subject.width = '200'
-    expect(subject.width).to eq '200'
-  end
-
-  describe "metadata" do
-    it "has descriptive image metadata" do
-      expect(subject).to respond_to(:colour_content)
-      expect(subject).to respond_to(:color_space)
-      expect(subject).to respond_to(:height)
-      expect(subject).to respond_to(:orientation)
-      expect(subject).to respond_to(:photograph_orientation)
-      expect(subject).to respond_to(:resolution)
-      expect(subject).to respond_to(:view)
-      expect(subject).to respond_to(:width)
-    end
-
-    it "has descriptive generic metadata" do
+  describe 'metadata' do
+    it 'has descriptive metadata' do
       props.each do |prop|
-        expect(subject).to respond_to(prop)
+        expect(model).to respond_to(prop)
       end
     end
   end

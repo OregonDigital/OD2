@@ -1,34 +1,19 @@
-# Generated via
-#  `rails generate hyrax:work Video`
-require 'rails_helper'
+# frozen_string_literal:true
 
 RSpec.describe Video do
-  let(:props) {OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)}
+  subject { build(:video, title: ['foo']) }
 
-  it 'has a title' do
-    subject.title = ['foo']
-    expect(subject.title).to eq ['foo']
-  end
+  let(:model) { subject }
+  let(:props) { OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym) }
 
-  it 'has a height' do
-    subject.height = '100'
-    expect(subject.height).to eq '100'
-  end
+  it { is_expected.to have_attributes(title: ['foo']) }
+  it { is_expected.to have_attributes(height: '100') }
+  it { is_expected.to have_attributes(width: '200') }
 
-  it 'has an width' do
-    subject.width = '200'
-    expect(subject.width).to eq '200'
-  end
-
-  describe "metadata" do
-    it "has descriptive video metadata" do
-      expect(subject).to respond_to(:height)
-      expect(subject).to respond_to(:width)
-    end
-
-    it "has descriptive generic metadata" do
+  describe 'metadata' do
+    it 'has descriptive metadata' do
       props.each do |prop|
-        expect(subject).to respond_to(prop)
+        expect(model).to respond_to(prop)
       end
     end
   end

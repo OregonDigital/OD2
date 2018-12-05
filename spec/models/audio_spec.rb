@@ -1,19 +1,17 @@
-# Generated via
-#  `rails generate hyrax:work Audio`
-require 'rails_helper'
+# frozen_string_literal:true
 
 RSpec.describe Audio do
-  let(:props) {OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)}
+  subject { model }
 
-  it 'has a title' do
-    subject.title = ['foo']
-    expect(subject.title).to eq ['foo']
-  end
+  let(:model) { build(:audio, title: ['foo']) }
+  let(:props) { OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) }
 
-  describe "metadata" do
-    it "has descriptive generic metadata" do
+  it { is_expected.to have_attributes(title: ['foo']) }
+
+  describe 'metadata' do
+    it 'has descriptive metadata' do
       props.each do |prop|
-        expect(subject).to respond_to(prop)
+        expect(model).to respond_to(prop)
       end
     end
   end
