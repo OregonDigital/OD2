@@ -8,7 +8,7 @@ module OregonDigital
     def with_errored_oembed(solr_params)
       error_ids = OembedError.all.map(&:document_id).join(' OR ')
       solr_params[:fq] ||= []
-      solr_params[:fq] = "id:(#{error_ids})"
+      solr_params[:fq] = "id:(#{error_ids})" unless error_ids.blank?
     end
   end
 end
