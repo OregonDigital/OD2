@@ -1,0 +1,7 @@
+<%# To render this view pass `curation_concern and errors` (e.g. `locals: { curation_concern: curation_concern, errors: errors }`) %>
+<%= link_to curation_concern, edit_oembed_path(curation_concern) %>
+<ul>
+  <% errors.oembed_errors.each do |entry| %>
+    <li><%= entry %></li>
+  <% end %>
+</ul>
