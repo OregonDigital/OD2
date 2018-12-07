@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :oembeds, controller: 'oregon_digital/oembeds', only: [:index, :edit]
+  resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
