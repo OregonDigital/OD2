@@ -1,0 +1,4 @@
+<% assets_with_errored_oembed.each do |curation_concern| %>
+  <% errors = @errors.find_by(document_id: curation_concern.id) %>
+  <%= render partial: 'oembed_list_errors', locals: { curation_concern: curation_concern, errors: errors } %>
+<% end %>

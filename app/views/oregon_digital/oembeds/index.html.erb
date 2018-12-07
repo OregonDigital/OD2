@@ -5,11 +5,15 @@
 <div class="panel panel-default tabs">
   <ul class="nav nav-tabs">
     <li class="active"><a href="#all" data-toggle="tab"><%= t('.all') %></a></li>
+    <li><a href="#errors" data-toggle="tab"><%= t('.errors') %></a></li>
   </ul>
   <div class="panel-body">
     <div class="tab-content">
       <div class="tab-pane active" id="all">
         <%= render "list_oembeds" %>
+      </div>
+      <div class="tab-pane" id="errors">
+        <%= render "list_errored_oembeds" %>
       </div>
     </div>
   </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181109163343) do
+ActiveRecord::Schema.define(version: 20181203183652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,14 @@ ActiveRecord::Schema.define(version: 20181109163343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["namespace"], name: "index_minter_states_on_namespace", unique: true
+  end
+
+  create_table "oembed_errors", force: :cascade do |t|
+    t.string "document_id"
+    t.text "oembed_errors"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_oembed_errors_on_document_id", unique: true
   end
 
   create_table "permission_template_accesses", id: :serial, force: :cascade do |t|
