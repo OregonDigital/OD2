@@ -22,7 +22,7 @@ RSpec.describe OregonDigital::TriplePoweredProperties::Triplestore do
             'Accept' => '*/*',
             'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
             'Connection' => 'keep-alive',
-            'Host' => 'blazegraph-test:8080',
+            'Host' => 'ci-test:8080',
             'Keep-Alive' => '30',
             'User-Agent' => 'Ruby'
           }
