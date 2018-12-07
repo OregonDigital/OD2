@@ -16,7 +16,7 @@ RSpec.describe OregonDigital::TriplePoweredProperties::Triplestore do
         )
         .to_return(status: 200, body: '', headers: {})
 
-      stub_request(:get, 'http://blazegraph-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/blah%3E')
+      stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/blah%3E')
         .with(
           headers: {
             'Accept' => '*/*',

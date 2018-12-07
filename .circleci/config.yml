@@ -21,7 +21,7 @@ jobs:
           SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
           SOLR_URL: http://localhost:8985/solr/hydra-test
           TRIPLESTORE_ADAPTER_TYPE: blazegraph
-          TRIPLESTORE_ADAPTER_URL: http://localhost:8080/bigdata/namespace/rw/sparql
+          TRIPLESTORE_ADAPTER_URL: http://ci-test:8080/bigdata/namespace/rw/sparql
       - image: circleci/postgres:9.5-alpine-ram
         environment:
           POSTGRES_DB: test
