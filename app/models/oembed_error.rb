@@ -3,7 +3,7 @@ class OembedError < ApplicationRecord
 
   validates_presence_of :document_id
 
-  # Make errors a unique array and touch this object to update updated_at
+  # Make errors a unique array
   before_save :unique_errors
 
   # Make sure oembed_errors initializes as an array
@@ -17,6 +17,7 @@ class OembedError < ApplicationRecord
   # up a bunch of the same error
   def unique_errors
     self.oembed_errors = self.oembed_errors.map(&:to_s).uniq
+    # Touch this object to update updated_at
     self.touch if self.persisted?
   end
 end
