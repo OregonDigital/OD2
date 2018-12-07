@@ -32,7 +32,7 @@ RSpec.describe Hyrax::Renderers::OembedAttributeRenderer do
       let(:renderer) { described_class.new(field, ['https://www.google.com']) }
 
       it { expect(renderer).not_to be_microdata(field) }
-      it { expect(subject).to include('No embeddable content') }
+      it { expect{subject}.to raise_error(OEmbed::NotFound) }
     end
   end
 end

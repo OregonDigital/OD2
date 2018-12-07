@@ -11,6 +11,12 @@ module OregonDigital
         presenters(builder)
       end
 
+      # Returns all assets with oEmbed URL set which have reported an error
+      def assets_with_errored_oembed
+        builder = OregonDigital::ErroredOembedSearchBuilder.new(self)
+        presenters(builder)
+      end
+
       private
 
         def presenter_class

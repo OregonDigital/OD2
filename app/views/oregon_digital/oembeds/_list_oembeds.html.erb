@@ -6,11 +6,12 @@
   </thead>
   <tbody>
   <% assets_with_oembed.each do |curation_concern| %>
+    <% errors = @errors.find_by(document_id: curation_concern.id) %>
     <tr>
       <td class="human-readable-type"><%= curation_concern.human_readable_type %></td>
-      <td class="title"><%= link_to curation_concern, main_app.polymorphic_path(curation_concern)  %></td>
+      <td class="title"><%= link_to curation_concern, edit_oembed_path(curation_concern)  %></td>
       <td class="oembed_link"><%= link_to curation_concern.oembed_url.first, curation_concern.oembed_url.first %></td>
-      <td class="oembed_status"><%= content_tag(:span, "Good", class: "label label-success") %></td>
+      <td class="oembed_status"><%= errors.nil? ? content_tag(:span, "Good", class: "label label-success") : content_tag(:span, "Error", class: "label label-danger") %></td>
     </tr>
   <% end %>
   </tbody>
