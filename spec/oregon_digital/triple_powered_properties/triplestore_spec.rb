@@ -7,26 +7,9 @@ RSpec.describe OregonDigital::TriplePoweredProperties::Triplestore do
   describe '#fetch' do
     before do
       stub_request(:get, 'http://opaquenamespace.org/ns/blah')
-        .with(
-          headers: {
-            'Accept' => 'application/n-triples, text/plain;q=0.2, application/ld+json, application/x-ld+json, application/rdf+xml, text/turtle, text/rdf+turtle, application/turtle;q=0.2, application/x-turtle;q=0.2, */*;q=0.1',
-            'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'User-Agent' => 'Ruby'
-          }
-        )
         .to_return(status: 200, body: '', headers: {})
 
       stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/blah%3E')
-        .with(
-          headers: {
-            'Accept' => '*/*',
-            'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'Connection' => 'keep-alive',
-            'Host' => 'ci-test:8080',
-            'Keep-Alive' => '30',
-            'User-Agent' => 'Ruby'
-          }
-        )
         .to_return(status: 200, body: '', headers: {})
     end
     it 'sets the triplestore as an instance of TriplestoreAdapter::Triplestore' do
