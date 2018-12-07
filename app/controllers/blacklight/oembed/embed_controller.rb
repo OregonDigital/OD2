@@ -10,11 +10,11 @@ module Blacklight::Oembed
     def get_embed_content(url, add_params)
       begin
         OEmbed::Providers.get(url, **add_params).html.html_safe
-      rescue OEmbed::NotFound
+      rescue OEmbed::NotFound => e
         # Create OembedError for oEmbed Errors dashboard
-        ids = Generic.search_with_conditions(oembed_url: url)
-        ids.each do |id|
-          errors = OembedError.find_or_create_by(document_id: id)
+        works = Generic.search_with_conditions(oembed_url: url)
+        works.each do |work|
+          errors = OembedError.find_or_create_by(document_id: work.id)
           errors.oembed_errors << e
           errors.save
         end
