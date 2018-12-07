@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  before_action :authenticate_user!
+
   if %w[production staging development].include? Rails.env
     def append_info_to_payload(payload)
       super(payload)
