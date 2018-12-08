@@ -1,6 +1,8 @@
 # frozen_string_literal:true
 
 RSpec.describe OregonDigital::ErroredOembedSearchBuilder do
+  subject { processor_chain }
+
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
   let(:solr_params) { Blacklight::Solr::Request.new }
