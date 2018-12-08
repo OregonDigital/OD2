@@ -14,7 +14,7 @@ module Hyrax
     def add_oembed_error(error)
       errors = OembedError.find_or_create_by(document_id: params['id'])
       errors.oembed_errors << error unless errors.oembed_errors.include? error
-      errors.save if errors.changed? || errors.new_record?
+      errors.save
     end
   end
 end

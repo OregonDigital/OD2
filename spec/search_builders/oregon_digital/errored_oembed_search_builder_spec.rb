@@ -1,8 +1,11 @@
 # frozen_string_literal:true
 
 RSpec.describe OregonDigital::ErroredOembedSearchBuilder do
+  subject { processor_chain }
+
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
+  let(:processor_chain) { search_builder.processor_chain }
 
   describe '#processor_chain' do
     subject { search_builder.processor_chain }
