@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 Hyrax.config do |config|
   # Injected via `rails g hyrax:work Generic`
   config.register_curation_concern :generic
@@ -139,8 +141,8 @@ Hyrax.config do |config|
 
   # Temporary paths to hold uploads before they are ingested into FCrepo
   # These must be lambdas that return a Pathname. Can be configured separately
-  config.upload_path = ->() { Rails.root.join('tmp', 'shared', 'uploads') }
-  config.cache_path = ->() { Rails.root.join('tmp', 'shared', 'uploads', 'cache') }
+  config.upload_path = -> { Rails.root.join('tmp', 'shared', 'uploads') }
+  config.cache_path = -> { Rails.root.join('tmp', 'shared', 'uploads', 'cache') }
 
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
@@ -210,7 +212,7 @@ Hyrax.config do |config|
     if defined? BrowseEverything
       config.browse_everything = BrowseEverything.config
     else
-      Rails.logger.warn "BrowseEverything is not installed"
+      Rails.logger.warn 'BrowseEverything is not installed'
     end
   rescue Errno::ENOENT
     config.browse_everything = nil
@@ -258,10 +260,9 @@ Hyrax.config do |config|
 
   # Fields to display in the IIIF metadata section; default is the required fields
   config.iiif_metadata_fields = Hyrax::Forms::WorkForm.required_fields
-
 end
 
-Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
+Date::DATE_FORMATS[:standard] = '%m/%d/%Y'
 
 Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local::TableBasedAuthority')
 Qa::Authorities::Local.register_subauthority('languages', 'Qa::Authorities::Local::TableBasedAuthority')

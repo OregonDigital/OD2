@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 config = YAML.safe_load(ERB.new(IO.read(Rails.root + 'config' + 'redis.yml')).result)[Rails.env].with_indifferent_access
 
 redis_conn = { url: "redis://#{config[:host]}:#{config[:port]}/" }

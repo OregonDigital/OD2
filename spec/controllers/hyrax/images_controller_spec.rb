@@ -1,9 +1,7 @@
-# Generated via
-#  `rails generate hyrax:work Image`
-require 'rails_helper'
+# frozen_string_literal:true
 
 RSpec.describe Hyrax::ImagesController do
-  it "has tests" do
-    skip "Add your tests here"
+  it 'has tests' do
+    skip 'Add your tests here'
   end
 end

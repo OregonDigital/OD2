@@ -1,10 +1,12 @@
+# frozen_string_literal:true
+
 module OregonDigital
   module ImageMetadata
     extend ActiveSupport::Concern
-     # Usage notes and expectations can be found in the Metadata Application Profile:
+    # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
 
-    PROPERTIES = %w[colour_content color_space height orientation photograph_orientation resolution view width].freeze 
+    PROPERTIES = %w[colour_content color_space height orientation photograph_orientation resolution view width].freeze
 
     included do
       property :colour_content, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/e/P20224') do |index|
@@ -38,7 +40,6 @@ module OregonDigital
       property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
         index.as :stored_searchable
       end
-
     end
   end
 end

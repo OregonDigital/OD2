@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Document`
+# frozen_string_literal:true
+
 class DocumentIndexer < Hyrax::WorkIndexer
   # This indexes the default metadata. You can remove it if you want to
   # provide your own metadata and indexing.

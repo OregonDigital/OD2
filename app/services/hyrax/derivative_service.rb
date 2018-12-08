@@ -1,8 +1,10 @@
+# frozen_string_literal:true
+
 class Hyrax::DerivativeService
   class_attribute :services
 
   # OVERRIDDEN, allow for setting the derivatives in an initializer or using the default
-  # TODO : Replace when upstream is refactored/fixed
+  # TODO: Replace when upstream is refactored/fixed
   def self.for(file_set)
     new(file_set)
   end

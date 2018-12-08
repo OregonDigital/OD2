@@ -47,6 +47,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'rspec-rails'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
   gem 'ruby-debug-ide'
   gem 'selenium-webdriver'
   gem 'webmock'

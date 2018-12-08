@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 module OregonDigital
   class OembedService < Hyrax::RestrictionService
     class << self
@@ -19,9 +21,9 @@ module OregonDigital
 
       private
 
-        def presenter_class
-          OregonDigital::OembedPresenter
-        end
+      def presenter_class
+        OregonDigital::OembedPresenter
+      end
     end
   end
 end

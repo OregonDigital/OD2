@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Video`
+# frozen_string_literal:true
+
 module Hyrax
   # Generated controller for Video
   class VideosController < ApplicationController

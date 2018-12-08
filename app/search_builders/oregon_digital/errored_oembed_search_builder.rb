@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 module OregonDigital
   # Finds oembed objects
   class ErroredOembedSearchBuilder < OembedSearchBuilder

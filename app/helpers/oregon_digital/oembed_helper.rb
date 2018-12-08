@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 module OregonDigital
   module OembedHelper
     def assets_with_oembed

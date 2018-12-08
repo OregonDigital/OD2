@@ -1,11 +1,10 @@
-# Generated via
-#  `rails generate hyrax:work Video`
-require 'rails_helper'
+# frozen_string_literal:true
 
 RSpec.describe Hyrax::VideoForm do
-  let(:new_form) { described_class.new(Video.new, nil, double('Controller')) }
+  let(:new_form) { described_class.new(Video.new, nil, instance_double('Controller')) }
   let(:user) { create(:user) }
-  let(:ability) { double('Ability') }
+  let(:ability) { instance_double('Ability') }
+  let(:props) { OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym) }
 
   before do
     allow(new_form).to receive(:current_ability).and_return(ability)
@@ -13,7 +12,7 @@ RSpec.describe Hyrax::VideoForm do
   end
 
   it 'responds to terms with the proper list of terms' do
-      %i[height width].each do |t|
+    props.each do |t|
       expect(described_class.terms).to include(t)
     end
   end
