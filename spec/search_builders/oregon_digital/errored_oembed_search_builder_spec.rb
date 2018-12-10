@@ -18,26 +18,10 @@ RSpec.describe OregonDigital::ErroredOembedSearchBuilder do
 
     before { search_builder.with_errored_oembed(solr_params) }
     it { expect(solr_params[:fq]).to eq(["id:(#{oembed_error.document_id})"]) }
-
-    context 'with a filter already set' do
-      let(:solr_params) { Blacklight::Solr::Request.new(fq: ['test']) }
-
-      it 'makes a proper composite query when filters exist' do
-        expect(solr_params[:fq]).to eq(['test', " AND id:(#{oembed_error.document_id})"])
-      end
-    end
   end
 
   describe 'with no errored oembeds' do
     before { search_builder.with_errored_oembed(solr_params) }
     it { expect(solr_params[:fq]).to eq(['-id:*']) }
-
-    context 'with a filter already set' do
-      let(:solr_params) { Blacklight::Solr::Request.new(fq: ['test']) }
-
-      it 'makes a proper composite query when filters exist' do
-        expect(solr_params[:fq]).to eq(['test', ' AND -id:*'])
-      end
-    end
   end
 end

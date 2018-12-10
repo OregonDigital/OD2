@@ -8,9 +8,8 @@ module OregonDigital
     def with_errored_oembed(solr_params)
       ids = OembedError.all.map(&:document_id).join(' OR ')
       solr_params[:fq] ||= []
-      query = solr_params[:fq].length.zero? ? '' : ' AND '
       filter = ids.blank? ? '-id:*' : "id:(#{ids})"
-      solr_params[:fq] << "#{query}#{filter}"
+      solr_params[:fq] << filter
     end
   end
 end
