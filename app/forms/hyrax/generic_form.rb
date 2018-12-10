@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Generic`
+# frozen_string_literal:true
+
 module Hyrax
   # Generated form for Generic
   class GenericForm < Hyrax::Forms::WorkForm
@@ -8,7 +8,7 @@ module Hyrax
     self.model_class = ::Generic
     self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
 
-    self.required_fields = [:title, :dcmi_type, :rights_statement]
+    self.required_fields = %i[title dcmi_type rights_statement]
 
     def primary_terms
       required_fields + (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:dcmi_type])

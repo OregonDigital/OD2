@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Generic`
+# frozen_string_literal:true
+
 class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior
@@ -17,7 +17,7 @@ class Generic < ActiveFedora::Base
 
   # If the oembed_url changed all previous errors are invalid
   def resolve_oembed_errors
-    errors = OembedError.find_by(document_id: self.id)
-    errors.delete() if self.oembed_url_changed? unless errors.nil?
+    errors = OembedError.find_by(document_id: id)
+    errors.delete if oembed_url_changed? && !errors.blank?
   end
 end

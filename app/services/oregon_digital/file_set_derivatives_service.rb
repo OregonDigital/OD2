@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 module OregonDigital
   class FileSetDerivativesService
     attr_reader :file_set
@@ -48,6 +50,7 @@ module OregonDigital
                                                                     processor: 'jpeg2k_image',
                                                                     url: derivative_url('jp2') }])
     end
+
     def create_image_derivatives(filename)
       Hydra::Derivatives::ImageDerivatives.create(filename,
                                                   outputs: [{ label: :full,
@@ -55,7 +58,6 @@ module OregonDigital
                                                               url: derivative_url('jpg'),
                                                               layer: 0 }])
     end
-
 
     def derivative_path_factory
       Hyrax::DerivativePath

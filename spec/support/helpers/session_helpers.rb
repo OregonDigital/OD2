@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 module Helpers
   module SessionHelpers
     def sign_in_as(who = :user)

@@ -1,22 +1,20 @@
-module OregonDigital::TriplePoweredProperties::Inputs
+# frozen_string_literal:true
 
+module OregonDigital::TriplePoweredProperties::Inputs
   ##
   # Levered hydra-editors multi_value input field to handle triple powered properties label fetching
   # and rendering
   class TriplePoweredPropertyInput < SimpleForm::Inputs::CollectionInput
-
     ##
     # Render the input field as a multi_value or single field
     #
     # @param wrapper_options [Hash] the hash supplied by the partial
-    def input(wrapper_options)
+    def input(_wrapper_options)
       @rendered_first_element = false
       input_html_classes.unshift('string')
       input_html_options[:name] ||= "#{object_name}[#{attribute_name}][]"
 
-      # ensure the multi_value class is included if it was provided as part of the options
-      input_options[:wrapper_html] ||= { class: '' }
-      input_options[:wrapper_html][:class] += input_options[:multi_value] ? ' multi_value' : ''
+      build_wrapper_html(input_options)
 
       # Render the multiple or a single field for this TriplePoweredPropertyInput
       input_options[:multi_value] ? render_multi : render_field(collection.first, 0)
@@ -76,9 +74,8 @@ module OregonDigital::TriplePoweredProperties::Inputs
     # Although the 'index' parameter is not used in this implementation it is useful in an
     # an overridden version of this method, especially when the field is a complex object and
     # the override defines nested fields.
-    def build_field_options(value, index)
+    def build_field_options(value, _index)
       options = input_html_options.dup
-
       options[:value] = value
       if @rendered_first_element
         options[:id] = nil
@@ -90,7 +87,6 @@ module OregonDigital::TriplePoweredProperties::Inputs
       options[:class] += ["#{input_dom_id} form-control multi-text-field"]
       options[:'aria-labelledby'] = label_id
       @rendered_first_element = true
-
       options
     end
 
@@ -101,7 +97,7 @@ module OregonDigital::TriplePoweredProperties::Inputs
     # @param index [Integer] the index of this property value
     def build_field(value, index)
       options = build_field_options(value, index)
-      if options.delete(:type) == 'textarea'.freeze
+      if options.delete(:type) == 'textarea'
         @builder.text_area(attribute_name, options)
       else
         @builder.text_field(attribute_name, options)
@@ -121,7 +117,7 @@ module OregonDigital::TriplePoweredProperties::Inputs
       begin
         graph = OregonDigital::TriplePoweredProperties::Triplestore.fetch(uri)
         predicate_labels = OregonDigital::TriplePoweredProperties::Triplestore.predicate_labels(graph)
-      rescue TriplestoreAdapter::TriplestoreException => e
+      rescue TriplestoreAdapter::TriplestoreException
         return "<div class='triple_powered_labels'><span class='error'>Failed to fetch labels for this URL.</span></div>".html_safe
       end
 
@@ -135,16 +131,16 @@ module OregonDigital::TriplePoweredProperties::Inputs
     # @param uri [String] the RDF endpoint containing the labels
     def build_label_list(predicate_labels, uri)
       count = predicate_labels.values.flatten.size
-      return "<span itemprop='uri'>#{uri}</span>" if count == 0
+      return "<span itemprop='uri'>#{uri}</span>" if count.zero?
 
       spans = []
-      predicate_labels.each_pair { |k, v|
+      predicate_labels.each_pair do |k, v|
         spans << v.map { |label| "<span itemtype='#{k}' itemprop='label'>#{label}</span>" }
-      }
+      end
       spans.flatten!
 
       first_span = spans.delete_at(0)
-      return first_span if spans.size == 0
+      return first_span if spans.size.zero?
 
       <<-HTML
         <span class='toggle badge'
@@ -175,8 +171,14 @@ module OregonDigital::TriplePoweredProperties::Inputs
       @collection ||= Array.wrap(object[attribute_name]).reject { |value| value.to_s.strip.blank? } + ['']
     end
 
-    def multiple?;
-      true;
+    def multiple?
+      true
+    end
+
+    def build_wrapper_html(input_options)
+      # ensure the multi_value class is included if it was provided as part of the options
+      input_options[:wrapper_html] ||= { class: '' }
+      input_options[:wrapper_html][:class] += input_options[:multi_value] ? ' multi_value' : ''
     end
   end
 end

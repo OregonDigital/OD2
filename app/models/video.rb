@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Video`
+# frozen_string_literal:true
+
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior

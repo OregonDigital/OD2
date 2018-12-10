@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 module Hyrax
   class ImageForm < Hyrax::GenericForm
     include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm

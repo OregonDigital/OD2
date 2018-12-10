@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Image`
+# frozen_string_literal:true
+
 module Hyrax
   # Generated controller for Image
   class ImagesController < ApplicationController

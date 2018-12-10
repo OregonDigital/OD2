@@ -2,14 +2,14 @@
 
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'rspec/rails'
 require 'active_fedora/cleaner'
 require 'capybara/rspec'
-Dir[File.join(Rails.root, "spec/support/**/*.rb")].each { |f| require f }
+Dir[File.join(Rails.root, 'spec/support/**/*.rb')].each { |f| require f }
 
 require 'shoulda/matchers'
 require 'triplestore_adapter'
@@ -86,15 +86,15 @@ RSpec.configure do |config|
       ActiveFedora.fedora.connection.send(:init_base_path) if example.metadata[:js]
     end
     Hyrax.config.nested_relationship_reindexer = if example.metadata[:with_nested_reindexing]
-                                                    # Use the default relationship reindexer (and the cascading reindexing of child documents)
-                                                    Hyrax.config.default_nested_relationship_reindexer
-                                                  else
-                                                    # Don't use the nested relationship reindexer. This slows everything down quite a bit.
-                                                    ->(id:, extent:) {}
-                                                  end
+                                                   # Use the default relationship reindexer (and the cascading reindexing of child documents)
+                                                   Hyrax.config.default_nested_relationship_reindexer
+                                                 else
+                                                   # Don't use the nested relationship reindexer. This slows everything down quite a bit.
+                                                   ->(id:, extent:) {}
+                                                 end
   end
 
-  config.after(:each) do
+  config.after do
     Warden.test_mode!
   end
 end

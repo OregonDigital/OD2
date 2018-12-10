@@ -1,5 +1,5 @@
-# Generated via
-#  `rails generate hyrax:work Audio`
+# frozen_string_literal:true
+
 class Audio < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior

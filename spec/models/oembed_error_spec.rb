@@ -1,20 +1,20 @@
-require 'rails_helper'
+# frozen_string_literal:true
 
 RSpec.describe OembedError, type: :model do
-  let(:error) { "ERROR ERROR ERROR" }
+  subject { model }
 
-  it 'initializes oembed_url as an array' do
-    expect(subject.oembed_errors).to be_an_instance_of(Array)
+  let(:model) { build(:oembed_error, oembed_errors: ['ERROR ERROR ERROR']) }
+  let(:error) { 'ERROR ERROR ERROR' }
+
+  before do
+    model.oembed_errors << error
   end
 
-  it 'stores only unique errors' do
-    subject.oembed_errors << error
-    subject.oembed_errors << error
+  it { expect(model.oembed_errors).to be_an_instance_of(Array) }
+  it { expect(model.oembed_errors.count).to eq(2) }
 
-    expect(subject.oembed_errors.count).to eq(2)
-
-    subject.run_callbacks :save
-
-    expect(subject.oembed_errors.count).to eq(1)
+  it 'prevents error duplication' do
+    model.run_callbacks :save
+    expect(model.oembed_errors.count).to eq(1)
   end
 end

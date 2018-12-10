@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 class OembedAttributeRenderer < Hyrax::Renderers::AttributeRenderer
     def attribute_value_to_html(value)
       html = "<div class='oembed-widget>'"

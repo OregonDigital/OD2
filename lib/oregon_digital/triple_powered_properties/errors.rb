@@ -1,6 +1,7 @@
+# frozen_string_literal:true
+
 module OregonDigital::TriplePoweredProperties
   module Errors
-
     ##
     # Base error
     class TriplePoweredPropertyError < StandardError

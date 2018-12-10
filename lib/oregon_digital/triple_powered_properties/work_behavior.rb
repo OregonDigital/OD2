@@ -1,14 +1,15 @@
+# frozen_string_literal:true
+
 module OregonDigital::TriplePoweredProperties
   module WorkBehavior
     extend ActiveSupport::Concern
 
     included do
-
       # store the triple powered property labels in SOLR
       self.indexer = OregonDigital::TriplePoweredProperties::WorkIndexer
 
       # server side validation for triple powered property values being valid urls
-      self.validates_with OregonDigital::TriplePoweredProperties::HasUrlValidator
+      validates_with OregonDigital::TriplePoweredProperties::HasUrlValidator
 
       class_attribute :triple_powered_properties
 
@@ -61,7 +62,7 @@ module OregonDigital::TriplePoweredProperties
     def build_uri_graphs
       graphs = {}
       # iterate through each of the properties having RDF URIs and fetch the graphs from the triplestore
-      self.triple_powered_properties.each do |property|
+      triple_powered_properties.each do |property|
         graphs[property] = fetch(property)
       end
       graphs
@@ -75,13 +76,11 @@ module OregonDigital::TriplePoweredProperties
     def fetch(property)
       # iterate through each of the uri's stored in the property of this model
       self[property].map do |uri|
-        begin
-          # Fetch the graph from the triplestore, or return the uri
-          graph = OregonDigital::TriplePoweredProperties::Triplestore.fetch(uri)
-          { uri: uri, result: graph }
-        rescue TriplestoreAdapter::TriplestoreException
-          { uri: uri, result: uri }
-        end
+        # Fetch the graph from the triplestore, or return the uri
+        graph = OregonDigital::TriplePoweredProperties::Triplestore.fetch(uri)
+        { uri: uri, result: graph }
+      rescue TriplestoreAdapter::TriplestoreException
+        { uri: uri, result: uri }
       end
     end
   end

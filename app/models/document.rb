@@ -1,9 +1,7 @@
-# Generated via
-#  `rails generate hyrax:work Document`
+# frozen_string_literal:true
+
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-
-
   self.indexer = DocumentIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
