@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
-  if %w[production staging development].include? Rails.env
+  if %w[production staging development].include? Rails.env 
     def append_info_to_payload(payload)
       super(payload)
       Rack::Honeycomb.add_field(request.env, 'version', ENV.fetch('DEPLOYED_VERSION', OregonDigital::VERSION))
