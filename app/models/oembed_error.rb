@@ -16,6 +16,13 @@ class OembedError < ApplicationRecord
     @oembed_errors ||= [attributes[:oembed_error]]
   end
 
+  def add_error(error)
+    oembed_errors << error unless oembed_errors.include? error
+    save
+  end
+
+  private
+
   # Store errors as a symbol/string and we only want unique errors to avoid
   # stacking up a bunch of the same error
   def unique_errors

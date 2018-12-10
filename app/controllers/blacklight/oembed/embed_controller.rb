@@ -1,9 +1,10 @@
-# Override blacklight-oembed gem controller. We're only interested in
-# get_embed_content, but keep the changes compatible incase we can use 
-# Blacklight later
-module Blacklight::Oembed
-  class EmbedController < ActionController::Base
+# frozen_string_literal: true
 
+module Blacklight::Oembed
+  # Override blacklight-oembed gem controller. We're only interested in
+  # get_embed_content, but keep the changes compatible incase we can use
+  # Blacklight later
+  class EmbedController < ActionController::Base
     def show
       render json: { html: get_embed_content(params[:url], additional_params) }
     end
@@ -11,22 +12,20 @@ module Blacklight::Oembed
     private
 
     def get_embed_content(url, add_params)
+      # rubocop:disable Style/RedundantBegin
       begin
+        # rubocop:enable Style/RedundantBegin
         # Retrieve embeddable content from cache, or store if not found
         Rails.cache.fetch("embed/#{url}", expires_in: 12.hours) do
           OEmbed::Providers.get(url, **add_params).html.html_safe
         end
-      rescue OEmbed::NotFound => e
+      rescue OEmbed::Error => e
         # Create OembedError for oEmbed Errors dashboard
-        works = Generic.search_with_conditions(oembed_url: url)
-        works.each do |work|
-          errors = OembedError.find_or_create_by(document_id: work.id)
-          errors.oembed_errors << e
-          errors.save
+        Generic.search_with_conditions(oembed_url: url).each do |work|
+          OembedError.find_or_create_by(document_id: work.id).add_error(e)
         end
 
-        response.status = 400
-        ""
+        "<dt>oEmbed encounted an error</dt><dd>#{e.message}</dd>".html_safe
       end
     end
 
