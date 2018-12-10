@@ -1,6 +1,7 @@
 FROM ruby:2.5.1
 
 ARG RAILS_ENV
+ARG SECRET_KEY_BASE
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -46,3 +47,7 @@ RUN ./build/install_gems.sh
 
 # Add the application code
 ADD . /data
+
+RUN if [ "${RAILS_ENV}" = "production" ] || [ "${RAILS_ENV}" = "staging" ]; then \
+  RAILS_ENV=${RAILS_ENV} SECRET_KEY_BASE=${SECRET_KEY_BASE} bundle exec rails assets:precompile; \
+  fi
