@@ -20,24 +20,23 @@ RSpec.describe Hyrax::Renderers::OembedAttributeRenderer do
   end
 
   describe '#attribute_to_html' do
-    subject { rendered }
+    subject { Nokogiri::HTML(rendered) }
 
     let(:rendered) { renderer.render }
-    let(:field) { :oembed_url }
+    let(:expected) { Nokogiri::HTML(tr_content) }
 
-    context 'with embeddable oembed url' do
+    context 'with a value' do
       let(:renderer) { described_class.new(field, ['https://www.youtube.com/watch?v=8ZtInClXe1Q']) }
+      let(:field) { :oembed_url }
+      let(:tr_content) do
+        '<tr><th>oEmbed</th>' \
+         '<td><ul class=\'tabular\'><li class="attribute attribute-oembed_url">' \
+         '<div class=\'oembed-widget\'>' \
+         '<div data-embed-url="/oembed/embed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D8ZtInClXe1Q">' \
+         '</div></div></li></ul></td></tr>'
+      end
 
-      it { expect(renderer).not_to be_microdata(field) }
-      it { is_expected.to include '<iframe' }
-      it { is_expected.to include 'src="https://www.youtube.com/embed/8ZtInClXe1Q?feature=oembed"' }
-    end
-
-    context 'with unembeddable oembed url' do
-      let(:renderer) { described_class.new(field, ['https://www.google.com']) }
-
-      it { expect(renderer).not_to be_microdata(field) }
-      it { is_expected.to include 'No embeddable content' }
+      it { is_expected.to be_equivalent_to(expected) }
     end
   end
 end
