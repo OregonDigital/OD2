@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
+  mount Blacklight::Oembed::Engine, at: 'oembed'
   mount Blacklight::Engine => '/'
   concern :searchable, Blacklight::Routes::Searchable.new
 

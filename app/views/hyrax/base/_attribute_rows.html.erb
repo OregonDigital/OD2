@@ -1,4 +1,4 @@
-<% OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+<% OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym).reject{ |attr| attr == :oembed_url }.each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <% OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
@@ -10,9 +10,4 @@
 <% OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
-<% begin %>
-  <%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>
-<% rescue OEmbed::Error => e %>
-  <% controller.add_oembed_error(e) %>
-  <%= OregonDigital::OembedPresenter.errors_to_html(e) %>
-<% end %>
+<%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>

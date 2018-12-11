@@ -21,6 +21,7 @@ gem 'sidekiq'
 gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
 gem 'ruby-oembed'
+gem 'blacklight-oembed'
 gem 'net-http-persistent', '~> 2.9'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 

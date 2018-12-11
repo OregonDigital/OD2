@@ -12,9 +12,5 @@ module OregonDigital
     def initialize(solr_document)
       @solr_document = solr_document
     end
-
-    def self.errors_to_html(error)
-      "<dt>oEmbed encounted an error</dt><dd>#{error.message}</dd>".html_safe
-    end
   end
 end

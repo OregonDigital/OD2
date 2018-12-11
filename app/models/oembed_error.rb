@@ -6,7 +6,7 @@ class OembedError < ApplicationRecord
 
   validates_presence_of :document_id
 
-  # Make errors a unique array and touch this object to update updated_at
+  # Make errors a unique array
   before_save :unique_errors
 
   # Make sure oembed_errors initializes as an array
@@ -15,6 +15,13 @@ class OembedError < ApplicationRecord
     @document_id ||= attributes[:document_id]
     @oembed_errors ||= [attributes[:oembed_error]]
   end
+
+  def add_error(error)
+    oembed_errors << error unless oembed_errors.include? error
+    save
+  end
+
+  private
 
   # Store errors as a symbol/string and we only want unique errors to avoid
   # stacking up a bunch of the same error

@@ -186,6 +186,11 @@ GEM
       bootstrap-sass (~> 3.0)
       openseadragon (>= 0.2.0)
       rails
+    blacklight-oembed (0.2.0)
+      blacklight (>= 5.0, < 7)
+      bootstrap-sass (~> 3.0)
+      rails
+      ruby-oembed
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -882,6 +887,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  blacklight-oembed
   byebug
   capybara (~> 2.17)
   coffee-rails (~> 4.2)
