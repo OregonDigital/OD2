@@ -12,21 +12,17 @@ module Blacklight::Oembed
     private
 
     def get_embed_content(url, add_params)
-      # rubocop:disable Style/RedundantBegin
-      begin
-        # rubocop:enable Style/RedundantBegin
-        # Retrieve embeddable content from cache, or store if not found
-        Rails.cache.fetch("embed/#{url}", expires_in: 12.hours) do
-          OEmbed::Providers.get(url, **add_params).html.html_safe
-        end
-      rescue OEmbed::Error => e
-        # Create OembedError for oEmbed Errors dashboard
-        Generic.search_with_conditions(oembed_url: url).each do |work|
-          OembedError.find_or_create_by(document_id: work.id).add_error(e)
-        end
-
-        "<dt>oEmbed encounted an error</dt><dd>#{e.message}</dd>".html_safe
+      # Retrieve embeddable content from cache, or store if not found
+      Rails.cache.fetch("embed/#{url}", expires_in: 12.hours) do
+        OEmbed::Providers.get(url, **add_params).html.html_safe
       end
+    rescue OEmbed::Error => e
+      # Create OembedError for oEmbed Errors dashboard
+      Generic.search_with_conditions(oembed_url: url).each do |work|
+        OembedError.find_or_create_by(document_id: work.id).add_error(e)
+      end
+
+      "<dt>oEmbed encounted an error</dt><dd>#{e.message}</dd>".html_safe
     end
 
     ##
