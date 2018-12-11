@@ -32,11 +32,17 @@ ENV LD_LIBRARY_PATH="/opt/kakadu:${LD_LIBRARY_PATH}"
 RUN mkdir /data
 WORKDIR /data
 
-# Add the application code
-ADD . /data
+# Pre-install gems so we aren't reinstalling all the gems when literally any
+# filesystem change happens
+ADD Gemfile /data
+ADD Gemfile.lock /data
+RUN mkdir /data/build
+ADD ./build/install_gems.sh /data/build
+RUN ./build/install_gems.sh
 
 # install node dependencies, after there are some included
 # COPY package.json yarn.lock /data/
 # RUN yarn install
 
-RUN ./build/install_gems.sh
+# Add the application code
+ADD . /data
