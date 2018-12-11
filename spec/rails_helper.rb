@@ -78,6 +78,14 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
+  config.around do |example|
+    unless example.metadata[:type] == :system
+      DatabaseCleaner.cleaning do
+        example.run
+      end
+    end
+  end
+
   config.before do |example|
     if example.metadata[:clean_repo]
       ActiveFedora::Cleaner.clean!

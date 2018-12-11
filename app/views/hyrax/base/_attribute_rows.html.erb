@@ -1,24 +1,13 @@
-<%# Image metadata %>
-<%= presenter.attribute_to_html(:colour_content, html_dl: true) %>
-<%= presenter.attribute_to_html(:color_space, html_dl: true) %>
-<%= presenter.attribute_to_html(:height, html_dl: true) %>
-<%= presenter.attribute_to_html(:orientation, html_dl: true) %>
-<%= presenter.attribute_to_html(:photograph_orientation, html_dl: true) %>
-<%= presenter.attribute_to_html(:resolution, html_dl: true) %>
-<%= presenter.attribute_to_html(:view, html_dl: true) %>
-<%= presenter.attribute_to_html(:width, html_dl: true) %>
-<%# Document metadata %>
-<%= presenter.attribute_to_html(:contained_in_journal, html_dl: true) %>
-<%= presenter.attribute_to_html(:first_line, html_dl: true) %>
-<%= presenter.attribute_to_html(:first_line_chorus, html_dl: true) %>
-<%= presenter.attribute_to_html(:has_number, html_dl: true) %>
-<%= presenter.attribute_to_html(:host_item, html_dl: true) %>
-<%= presenter.attribute_to_html(:instrumentation, html_dl: true) %>
-<%= presenter.attribute_to_html(:is_volume, html_dl: true) %>
-<%= presenter.attribute_to_html(:larger_work, html_dl: true) %>
-<%= presenter.attribute_to_html(:number_of_pages, html_dl: true) %>
-<%= presenter.attribute_to_html(:table_of_contents, html_dl: true) %>
 <% OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
-  <%= presenter.attribute_to_html(attr, html_dl: true) %>
+  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
+<% end %>
+<% OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
+<% end %>
+<% OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
+<% end %>
+<% OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>
