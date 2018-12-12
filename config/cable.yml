@@ -6,7 +6,7 @@ test:
 
 staging:
   adapter: redis
-  url: redis://<%= ENV['REDIS_HOST'] %>:<%= ENV['REDIS_PORT'] %>
+  # url: redis://<%= ENV['REDIS_HOST'] %>:<%= ENV['REDIS_PORT'] %>
 
 production:
   adapter: redis
