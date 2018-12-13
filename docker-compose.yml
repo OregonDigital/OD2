@@ -76,7 +76,7 @@ services:
       tail -f log/development.log"
   workers:
     <<: *dev
-    command: bundle exec sidekiq
+    command: bash -c "./build/install_gems.sh && bundle exec sidekiq"
     depends_on:
       - db-dev
       - blazegraph-dev
