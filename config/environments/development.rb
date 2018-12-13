@@ -35,19 +35,17 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => ENV.fetch('DEFAULT_URL_OPTION', 'localhost:3000') }
 
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-  address: 'smtp.gmail.com',
-  port: 587,
-  authentication: 'plain',
-  enable_starttls_auto: true,
-  user_name: 'etstestmail123',
-  password: 'etstest123'
+    address: ENV.fetch('SMTP_ADDRESS' ,'smtp.gmail.com'),
+    port: ENV.fetch('SMTP_PORT' , 587),
+    user_name: ENV.fetch('SMTP_USERNAME', 'etstestmail123'),
+    password: ENV.fetch('SMTP_PASSWORD', 'etstest123')
   }
 
   # Print deprecation notices to the Rails logger.
