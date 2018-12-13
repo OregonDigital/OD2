@@ -39,8 +39,6 @@ module OregonDigital
       property :description, predicate: ::RDF::Vocab::DC.description
       property :rights_statement, predicate: ::RDF::Vocab::EDM.rights
       property :identifier, predicate: ::RDF::Vocab::DC.identifier
-      property :bibliographic_citation, predicate: ::RDF::Vocab::DC.bibliographicCitation
-      property :related_url, predicate: ::RDF::RDFS.seeAlso
 
       property :alternative, predicate: ::RDF::Vocab::DC.alternative do |index|
         index.as :stored_searchable
@@ -118,7 +116,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :owner, predicate: ::RDF::Vocab::MARCRelators.own do |index|
+      property :owner, predicate: ::RDF::Vocab::MARCRelators.own, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
 
