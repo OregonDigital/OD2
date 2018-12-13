@@ -9,11 +9,11 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   # Uncomment this block if you want to add custom indexing behavior:
   def generate_solr_document
-   super.tap do |solr_doc|
-     OregonDigital::GenericMetadata::PROPERTIES.map(&:to_s).each do |prop|
-      solr_doc["#{prop}_ssim"] = object.attributes[prop.to_s]
-      solr_doc["#{prop}_tesim"] = object.attributes[prop.to_s]
-     end
-   end
+    super.tap do |solr_doc|
+      OregonDigital::GenericMetadata::PROPERTIES.map(&:to_s).each do |prop|
+        solr_doc["#{prop}_ssim"] = object.attributes[prop.to_s]
+        solr_doc["#{prop}_tesim"] = object.attributes[prop.to_s]
+      end
+    end
   end
 end
