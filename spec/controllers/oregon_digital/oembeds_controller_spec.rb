@@ -3,7 +3,7 @@
 RSpec.describe OregonDigital::OembedsController do
   let(:user) { create(:user) }
   let(:a_work) { create(:work, user: user) }
-  let(:not_my_work) { create(:generic) }
+  let(:not_my_work) { create(:work) }
 
   before { sign_in user }
 
