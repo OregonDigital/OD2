@@ -178,5 +178,5 @@ Style/SymbolArray:
     - 'app/models/user.rb'
 
 RSpec/InstanceVariable:
-  Excluse:
+  Exclude:
     - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
