@@ -176,3 +176,7 @@ Metrics/MethodLength:
 Style/SymbolArray:
   Exclude:
     - 'app/models/user.rb'
+
+RSpec/InstanceVariable:
+  Excluse:
+    - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
