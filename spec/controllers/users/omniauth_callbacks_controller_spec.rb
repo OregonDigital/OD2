@@ -1,31 +1,35 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:user) { create(:user) }
-  let(:user_object) { User }
-  let(:provider) { double("Provider") }
+  let(:user_ob) { User }
+  let(:provider) { double('Provider') }
+  let(:merged_env) { request.env.merge({'omniauth.auth' => provider}) }
+  let(:req) { @request }
 
-  context "#cas" do
+  context 'when #cas' do
     before do
-      allow(user_object).to receive(:from_omniauth).with(anything).and_return(user)
-      allow(request).to receive(:env).and_return(request.env.merge({"omniauth.auth" => provider}))
-      allow(provider).to receive(:provider).and_return("cas")
-    end 
-    it "should redirect when authenticated" do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
+      allow(user_ob).to receive(:from_omniauth).with(anything).and_return(user)
+      allow(request).to receive(:env).and_return(merged_env)
+      allow(provider).to receive(:provider).and_return('cas')
+    end
+    it 'redirects when authenticated' do
+      req.env['devise.mapping'] = Devise.mappings[:user]
       get :cas
 
       expect(response.status).to eq 302
     end
   end
-  context "#saml" do
+  context 'when #saml' do
     before do
-      allow(user_object).to receive(:from_omniauth).with(anything).and_return(user)
-      allow(request).to receive(:env).and_return(request.env.merge({"omniauth.auth" => provider}))
-      allow(provider).to receive(:provider).and_return("cas")
+      allow(user_ob).to receive(:from_omniauth).with(anything).and_return(user)
+      allow(request).to receive(:env).and_return(merged_env)
+      allow(provider).to receive(:provider).and_return('cas')
     end 
-    it "should redirect when authenticated" do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
+    it 'redirects when authenticated' do
+      req.env['devise.mapping'] = Devise.mappings[:user]
       get :saml
 
       expect(response.status).to eq 302
