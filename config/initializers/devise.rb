@@ -253,10 +253,10 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :cas, host: 'login.oregonstate.edu', url: 'https://login.oregonstate.edu/cas'
+  config.omniauth :cas, host: ENV.fetch('CAS_HOST', 'login.oregonstate.edu'), url: ENV.fetch('CAS_URL', 'https://login.oregonstate.edu/cas')
   config.omniauth :saml,
-                  idp_cert: 'cert',
-                  idp_sso_target_url: 'https://shibboleth.uoregon.edu/idp/profile/SAML2/Redirect/SSO'
+                  idp_cert: ENV.fetch('SAML_CERT', 'cert'),
+                  idp_sso_target_url: ENV.fetch('SAML_URL', 'https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO')
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
