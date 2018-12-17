@@ -45,14 +45,6 @@ RSpec/DescribeClass:
     - 'spec/system/**/*'
     - 'spec/views/**/*'
 
-Metrics/BlockLength:
-  Exclude:
-    - 'config/environments/*.rb'
-
-Style/SymbolArray:
-  Exclude:
-    - 'app/models/user.rb'
-
 RSpec/LetSetup:
   Enabled: false
 

@@ -165,6 +165,7 @@ Metrics/BlockLength:
     - 'app/controllers/catalog_controller.rb'
     - 'config/initializers/hyrax.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/environments/*.rb'
 
 Metrics/MethodLength:
   Exclude:
@@ -175,3 +176,7 @@ Metrics/MethodLength:
 RSpec/InstanceVariable:
   Exclude:
     - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
+
+Style/SymbolArray:
+  Exclude:
+    - 'app/models/user.rb'
