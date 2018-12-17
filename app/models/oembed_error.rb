@@ -8,6 +8,7 @@ class OembedError < ApplicationRecord
 
   # Make errors a unique array
   before_save :unique_errors
+  after_save :alert_depositor
 
   # Make sure oembed_errors initializes as an array
   def initialize(attributes = {})
@@ -27,6 +28,10 @@ class OembedError < ApplicationRecord
   # stacking up a bunch of the same error
   def unique_errors
     oembed_errors.map!(&:to_s).uniq!
-    touch if persisted?
+  end
+
+  def alert_depositor
+    user = User.find_by_user_key(Generic.find(document_id).depositor)
+    Hyrax.config.callback.run(:after_oembed_error, user, oembed_errors)
   end
 end
