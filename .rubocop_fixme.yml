@@ -165,17 +165,12 @@ Metrics/BlockLength:
     - 'app/controllers/catalog_controller.rb'
     - 'config/initializers/hyrax.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
-    - 'config/environments/*.rb'
 
 Metrics/MethodLength:
   Exclude:
     - 'lib/oregon_digital/triple_powered_properties/inputs/triple_powered_property_input.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
-
-Style/SymbolArray:
-  Exclude:
-    - 'app/models/user.rb'
 
 RSpec/InstanceVariable:
   Exclude:

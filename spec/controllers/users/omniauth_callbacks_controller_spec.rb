@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:user) { create(:user) }
   let(:user_ob) { User }
