@@ -31,7 +31,10 @@ class OembedError < ApplicationRecord
   end
 
   def alert_depositor
+    # Only alert user if new errors are added
+    return unless saved_change_to_oembed_errors?
+
     user = User.find_by_user_key(Generic.find(document_id).depositor)
-    Hyrax.config.callback.run(:after_oembed_error, user, oembed_errors) if saved_change_to_oembed_errors?
+    Hyrax.config.callback.run(:after_oembed_error, user, oembed_errors)
   end
 end
