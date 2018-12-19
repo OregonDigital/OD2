@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :oembed_error do
-    sequence(:document_id) { |n| ["MyID-#{n}"] }
+    document_id { create(:work).id }
     oembed_errors { ['MyText'] }
   end
 end

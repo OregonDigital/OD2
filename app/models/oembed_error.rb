@@ -8,6 +8,7 @@ class OembedError < ApplicationRecord
 
   # Make errors a unique array
   before_save :unique_errors
+  after_save :alert_depositor
 
   # Make sure oembed_errors initializes as an array
   def initialize(attributes = {})
@@ -27,6 +28,13 @@ class OembedError < ApplicationRecord
   # stacking up a bunch of the same error
   def unique_errors
     oembed_errors.map!(&:to_s).uniq!
-    touch if persisted?
+  end
+
+  def alert_depositor
+    # Only alert user if new errors are added
+    return unless saved_change_to_oembed_errors?
+
+    user = User.find_by_user_key(ActiveFedora::Base.find(document_id).depositor)
+    Hyrax.config.callback.run(:after_oembed_error, user, oembed_errors)
   end
 end
