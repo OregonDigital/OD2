@@ -115,6 +115,10 @@ services:
       - SOLR_URL=http://solr-test:8983/solr/test
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/rw/sparql
+      - CAS_HOST=login.oregonstate.edu
+      - CAS_URL=https://login.oregonstate.edu/cas
+      - SAML_CERT=cert
+      - SAML_URL=https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO
     depends_on:
       - chrome
       - selenium-hub

@@ -29,6 +29,10 @@ gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'loofah', '>= 2.2.3'
 gem 'rubyzip', '>= 1.2.2'
 
+# Login gems
+gem 'omniauth-cas'
+gem 'omniauth-saml'
+
 # Honeycomb
 gem 'sequel'
 gem 'honeycomb-beeline'
