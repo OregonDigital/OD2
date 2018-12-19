@@ -20,3 +20,7 @@ en:
         oembed_status: 'oEmbed Status'
         title: 'Title'
         type: 'Type of Item'
+    notifications:
+      oembed_error:
+        message: 'The oEmbed URL attached to a work you deposited has encounted an error: %{messages}'
+        subject: 'Erroring oEmbed content'
