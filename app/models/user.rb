@@ -16,6 +16,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable
 
+  # method needed for messaging
+  def mailboxer_email(_obj = nil)
+    email
+  end
+
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
