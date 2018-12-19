@@ -54,7 +54,7 @@ module OregonDigital
 
     # Stripping off the */* to work around https://github.com/rails/rails/issues/9940
     def default_accept_header
-      RDF::Util::File::HttpAdapter.default_accept_header.sub(%r/, \*\/\*;q=0\.1\Z/, '')
+      RDF::Util::File::HttpAdapter.default_accept_header.sub(%r{/, \*\/\*;q=0\.1\Z/}, '')
     end
 
     def append_label_and_uri(solr_doc, solr_field_key, field_info, val)

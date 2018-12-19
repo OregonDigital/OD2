@@ -84,7 +84,7 @@ Metrics/LineLength:
 
 Naming/UncommunicativeMethodParamName:
   Exclude:
-    - ''
+    - 'app/indexers/oregon_digital/metadata_indexer.rb'
 Metrics/AbcSize:
   Exclude:
     - 'app/indexers/oregon_digital/deep_indexing_service.rb'
