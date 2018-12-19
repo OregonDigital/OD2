@@ -2,8 +2,8 @@ module OregonDigital
   # This class gets called by ActiveFedora::IndexingService#olrize_rdf_assertions
   class MetadataIndexer < ActiveFedora::RDF::IndexingService
     class_attribute :stored_and_facetable_fields, :stored_fields, :symbol_fields
-    self.stored_and_facetable_fields = %i[]
-    self.stored_fields = OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
+    self.stored_and_facetable_fields = %i[license]
+    self.stored_fields = OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) - [:license]
     self.symbol_fields = %i[]
 
     private

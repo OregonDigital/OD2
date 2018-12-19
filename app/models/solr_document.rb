@@ -29,8 +29,6 @@ class SolrDocument
       define_method property_name.to_sym do
         values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
 
-        Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        Rails.logger.info self[Solrizer.solr_name(property_name.to_s, :stored_searchable)] 
         if values.respond_to?(:each)
           values.reject(&:blank?)
         else
