@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-class DocumentIndexer < Hyrax::WorkIndexer
+class GenericIndexer < Hyrax::WorkIndexer
   def generate_solr_document
     super.tap do |solr_doc|
       OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_s).each do |prop|
