@@ -1,18 +1,15 @@
 # frozen_string_literal:true
 
-class ImageIndexer < Hyrax::WorkIndexer
-  # This indexes the default metadata. You can remove it if you want to
-  # provide your own metadata and indexing.
-  include Hyrax::IndexesBasicMetadata
-
-  # Fetch remote labels for based_near. You can remove this if you don't want
-  # this behavior
-  include Hyrax::IndexesLinkedMetadata
-
-  # Uncomment this block if you want to add custom indexing behavior:
-  # def generate_solr_document
-  #  super.tap do |solr_doc|
-  #    solr_doc['my_custom_field_ssim'] = object.my_custom_property
-  #  end
-  # end
+class ImageIndexer < GenericIndexer
+  def generate_solr_document
+    super.tap do |solr_doc|
+      OregonDigital::ImageMetadata::PROPERTIES.map(&:to_s).each do |prop|
+        if !object.attributes[prop.to_s].is_a? ActiveTriples::Relation
+          solr_doc["#{prop}_tesim"] = object.attributes[prop].nil? ? "" : object.attributes[prop] 
+        else
+          solr_doc["#{prop}_tesim"] = object.attributes[prop].to_a.blank? ? [""] : object.attributes[prop].to_a  
+        end
+      end
+    end
+  end
 end
