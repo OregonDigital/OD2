@@ -28,4 +28,3 @@ class DocumentIndexer < Hyrax::WorkIndexer
     solr_doc["#{prop}_ssim"] = attr.nil? ? '' : attr
   end
 end
-

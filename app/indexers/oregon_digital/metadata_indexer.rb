@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OregonDigital
+  # OVERRIDE FROM HYRAX TO ADD OUR OWN FIELDS
   class MetadataIndexer < ActiveFedora::RDF::IndexingService
     class_attribute :stored_and_facetable_fields, :stored_fields, :symbol_fields
     self.stored_and_facetable_fields = %i[license]

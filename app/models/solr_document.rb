@@ -32,7 +32,6 @@ class SolrDocument
         else
           values
         end
-        values
       end
     end
   end

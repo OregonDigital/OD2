@@ -45,7 +45,7 @@ module OregonDigital
 
     def fetch_value(value)
       Rails.logger.info "Fetching #{jkvalue.rdf_subject} from the authorative source. (this is slow)"
-      value.fetch(headers: { 'Accept'.freeze => default_accept_header })
+      value.fetch(headers: { 'Accept' => default_accept_header })
     rescue IOError, SocketError => e
       # IOError could result from a 500 error on the remote server
       # SocketError results if there is no server to connect to
@@ -54,7 +54,7 @@ module OregonDigital
 
     # Stripping off the */* to work around https://github.com/rails/rails/issues/9940
     def default_accept_header
-      RDF::Util::File::HttpAdapter.default_accept_header.sub(/, \*\/\*;q=0\.1\Z/, '')
+      RDF::Util::File::HttpAdapter.default_accept_header.sub(%r/, \*\/\*;q=0\.1\Z/, '')
     end
 
     def append_label_and_uri(solr_doc, solr_field_key, field_info, val)
