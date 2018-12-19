@@ -10,8 +10,12 @@ class GenericIndexer < Hyrax::WorkIndexer
       OregonDigital::GenericMetadata::PROPERTIES.map(&:to_s).each do |prop|
         if !object.attributes[prop.to_s].is_a? ActiveTriples::Relation
           solr_doc["#{prop}_tesim"] = object.attributes[prop].nil? ? "" : object.attributes[prop] 
+          solr_doc["#{prop}_sim"] = object.attributes[prop].nil? ? "" : object.attributes[prop] 
+          solr_doc["#{prop}_ssim"] = object.attributes[prop].nil? ? "" : object.attributes[prop] 
         else
           solr_doc["#{prop}_tesim"] = object.attributes[prop].to_a.blank? ? [""] : object.attributes[prop].to_a  
+          solr_doc["#{prop}_sim"] = object.attributes[prop].to_a.blank? ? [""] : object.attributes[prop].to_a  
+          solr_doc["#{prop}_ssim"] = object.attributes[prop].to_a.blank? ? [""] : object.attributes[prop].to_a  
         end
       end
     end
