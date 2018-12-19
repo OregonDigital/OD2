@@ -14,7 +14,9 @@ module OregonDigital
       property :resource_type, predicate: ::RDF::Vocab::DC.type
       property :creator, predicate: ::RDF::Vocab::DC11.creator
       property :contributor, predicate: ::RDF::Vocab::DC11.contributor
-      property :description, predicate: ::RDF::Vocab::DC.description
+      property :description, predicate: ::RDF::Vocab::DC.description do |index|
+        index.as :stored_searchable
+      end
       property :rights_statement, predicate: ::RDF::Vocab::EDM.rights
       property :identifier, predicate: ::RDF::Vocab::DC.identifier
 

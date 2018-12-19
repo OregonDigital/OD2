@@ -256,7 +256,9 @@ Devise.setup do |config|
   config.omniauth :cas, host: ENV.fetch('CAS_HOST', 'login.oregonstate.edu'), url: ENV.fetch('CAS_URL', 'https://login.oregonstate.edu/cas')
   config.omniauth :saml,
                   idp_cert: ENV.fetch('SAML_CERT', 'cert'),
-                  idp_sso_target_url: ENV.fetch('SAML_URL', 'https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO')
+                  idp_sso_target_url: ENV.fetch('SAML_URL', 'https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO'),
+                  issuer: "http://od2-staging.library.oregonstate.edu/users/auth/saml"#,
+                  #certificate: "blah"
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

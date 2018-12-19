@@ -24,20 +24,25 @@ class SolrDocument
   use_extension(Hydra::ContentNegotiation)
 
   def self.solrized_methods(property_names)
+    
     property_names.each do |property_name|
       define_method property_name.to_sym do
-        values = self[Solrizer.solr_name(property_name)]
+        values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
+
+        Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        Rails.logger.info self[Solrizer.solr_name(property_name.to_s, :stored_searchable)] 
         if values.respond_to?(:each)
           values.reject(&:blank?)
         else
           values
         end
+        values
       end
     end
   end
 
-  solrized_methods OregonDigital::DocumentMetadata::PROPERTIES
   solrized_methods OregonDigital::GenericMetadata::PROPERTIES
+  solrized_methods OregonDigital::DocumentMetadata::PROPERTIES
   solrized_methods OregonDigital::ImageMetadata::PROPERTIES
   solrized_methods OregonDigital::VideoMetadata::PROPERTIES
 end
