@@ -10,6 +10,7 @@ Metrics/LineLength:
     - 'app/forms/hyrax/generic_form.rb'
     - 'app/forms/hyrax/image_form.rb'
     - 'app/forms/hyrax/video_form.rb'
+    - 'app/indexers/oregon_digital/deep_indexing_service.rb'
     - 'app/models/ability.rb'
     - 'app/models/concerns/oregon_digital/document_metadata.rb'
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'

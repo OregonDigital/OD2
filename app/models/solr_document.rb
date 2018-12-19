@@ -24,11 +24,9 @@ class SolrDocument
   use_extension(Hydra::ContentNegotiation)
 
   def self.solrized_methods(property_names)
-    
     property_names.each do |property_name|
       define_method property_name.to_sym do
         values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
-
         if values.respond_to?(:each)
           values.reject(&:blank?)
         else
