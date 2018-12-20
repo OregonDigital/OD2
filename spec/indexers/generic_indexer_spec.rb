@@ -4,7 +4,7 @@ RSpec.describe GenericIndexer do
   let(:solr_doc) { {} }
   let(:attributes) { { title: at, dcmi_type: 'MyType' } }
   let(:at) { instance_double('ActiveTriples::Relation') }
-  let(:dc) { described_class.new }
+  let(:dc) { described_class.new(solr_doc) }
   let(:dc_call) { dc.generate_solr_document }
 
   context 'when #generate_solr_document is called' do
