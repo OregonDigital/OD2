@@ -5,8 +5,6 @@ class GenericIndexer < Hyrax::WorkIndexer
     super.tap do |solr_doc|
       OregonDigital::GenericMetadata::PROPERTIES.map(&:to_s).each do |prop|
         attr = object.attributes[prop]
-        Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" if prop == "dcmi_type" 
-        Rails.logger.info attr if prop == "dcmi_type"
         if attr.is_a? ActiveTriples::Relation
           index_value_for_multiple(solr_doc, attr, prop)
         else
