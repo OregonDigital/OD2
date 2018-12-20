@@ -10,7 +10,7 @@ RSpec.describe GenericIndexer do
   context 'when #generate_solr_document is called' do
     before do
       allow(dc).to receive(:generate_solr_document).and_return(solr_doc)
-      allow(object).to receive(:attributes).and_return(attributes)
+      allow(solr_doc).to receive(:attributes).and_return(attributes)
       allow(at).to receive(:is_a?).and_return(true)
       allow(at).to receive(:to_a).and_return(['MyTitle'])
     end
