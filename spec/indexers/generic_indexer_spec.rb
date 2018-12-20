@@ -16,7 +16,8 @@ RSpec.describe GenericIndexer do
       allow(at).to receive(:to_a).and_return(['MyTitle'])
     end
     it 'calls the proper methods' do
-      expect(dc_call).to receive(:index_value_for_singular).once
+      dc_call
+      expect_any_instance_of(dc).to receive(:index_value_for_singular).once
       # expect(described_class).to receive(:index_value_for_singular).once
     end
   end
