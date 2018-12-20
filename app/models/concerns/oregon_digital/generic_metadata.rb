@@ -412,10 +412,6 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      # property :dcmi_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
-      #   index.as :stored_searchable, :facetable
-      # end
-
       property :workType, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/workType') do |index|
         index.as :stored_searchable, :facetable
       end
@@ -515,10 +511,6 @@ module OregonDigital
       property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate') do |index|
         index.as :stored_searchable, :facetable
       end
-
-      # property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
-      #   index.as :stored_searchable
-      # end
 
       property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate') do |index|
         index.as :stored_searchable
