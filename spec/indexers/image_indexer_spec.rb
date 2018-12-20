@@ -2,6 +2,5 @@
 
 RSpec.describe ImageIndexer do
   xit 'does things' do
-
   end
 end

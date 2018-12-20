@@ -2,6 +2,5 @@
 
 RSpec.describe AudioIndexer do
   xit 'does things' do
-
   end
 end

@@ -2,6 +2,5 @@
 
 RSpec.describe VideoIndexer do
   xit 'does things' do
-
   end
 end

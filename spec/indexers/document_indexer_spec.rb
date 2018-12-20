@@ -2,6 +2,5 @@
 
 RSpec.describe DocumentIndexer do
   xit 'does things' do
-
   end
 end
