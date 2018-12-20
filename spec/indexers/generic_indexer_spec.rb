@@ -14,7 +14,7 @@ RSpec.describe GenericIndexer do
       allow(gw).to receive(:attributes).and_return(attr)
     end
     it 'calls the proper methods' do
-      expect(dc_call["dcmi_type_tesim"]).to eq 'MyType'
+      expect(dc_call['dcmi_type_tesim']).to eq 'MyType'
     end
   end
 end
