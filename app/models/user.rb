@@ -17,6 +17,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :omniauthable, omniauth_providers: [:cas, :saml]
 
+  # method needed for messaging
+  def mailboxer_email(_obj = nil)
+    email
+  end
+
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
