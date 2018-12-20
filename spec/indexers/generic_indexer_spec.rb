@@ -16,7 +16,7 @@ RSpec.describe GenericIndexer do
       allow(at).to receive(:to_a).and_return(['MyTitle'])
     end
     it 'calls the proper methods' do
-      expect(dc_call["title_tesim"]).to eq "MyTitle"
+      expect(dc_call['title_tesim']).to eq 'MyTitle'
     end
   end
 end
