@@ -1,6 +1,6 @@
-# 439 offenses!
 Metrics/LineLength:
-  IgnoredPatterns: ['\A#']
+  # Ignore comment lines that may being with spaces
+  IgnoredPatterns: ['(\A|\s)#']
   Exclude:
     - 'app/controllers/application_controller.rb'
     - 'app/controllers/catalog_controller.rb'
@@ -48,39 +48,8 @@ Metrics/LineLength:
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_indexer.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
-    - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
-    - 'spec/factories/admin_sets.rb'
-    - 'spec/factories/file_sets.rb'
-    - 'spec/factories/generic_works.rb'
-    - 'spec/factories/permission_templates.rb'
-    - 'spec/factories/users.rb'
-    - 'spec/forms/hyrax/audio_form_spec.rb'
-    - 'spec/forms/hyrax/document_form_spec.rb'
-    - 'spec/forms/hyrax/generic_form_spec.rb'
-    - 'spec/forms/hyrax/image_form_spec.rb'
-    - 'spec/forms/hyrax/video_form_spec.rb'
-    - 'spec/models/document_spec.rb'
-    - 'spec/models/file_set_spec.rb'
-    - 'spec/oregon_digital/triple_powered_properties/triple_powered_form_spec.rb'
-    - 'spec/oregon_digital/triple_powered_properties/triplestore_spec.rb'
-    - 'spec/oregon_digital/triple_powered_properties/work_behavior_spec.rb'
-    - 'spec/oregon_digital/triple_powered_properties/work_indexer_spec.rb'
-    - 'spec/oregon_digital/version_spec.rb'
-    - 'spec/presenters/hyrax/document_presenter_spec.rb'
-    - 'spec/presenters/oregon_digital/oembed_presenter_spec.rb'
-    - 'spec/rails_helper.rb'
-    - 'spec/renderers/hyrax/renderers/oembed_attribute_renderer_spec.rb'
-    - 'spec/search_builders/oregon_digital/errored_oembed_search_builder_spec.rb'
-    - 'spec/services/oregon_digital/oembed_service_spec.rb'
-    - 'spec/spec_helper.rb'
-    - 'spec/support/system.rb'
-    - 'spec/support/webmock.rb'
-    - 'spec/support/workflow.rb'
-    - 'spec/system/create_audio_spec.rb'
-    - 'spec/system/create_document_spec.rb'
-    - 'spec/system/create_generic_spec.rb'
-    - 'spec/system/create_image_spec.rb'
-    - 'spec/system/create_video_spec.rb'
+    # allow all specs to have long lines, these don't really need fixing
+    - 'spec/**/*'
 
 Naming/UncommunicativeMethodParamName:
   Exclude:
