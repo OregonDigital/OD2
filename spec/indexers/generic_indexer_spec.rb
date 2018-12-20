@@ -12,11 +12,9 @@ RSpec.describe GenericIndexer do
     before do
       # allow(dc).to receive(:generate_solr_document).and_return(solr_doc)
       allow(gw).to receive(:attributes).and_return(attr)
-      allow(at).to receive(:is_a?).and_return(true)
-      allow(at).to receive(:to_a).and_return(['MyTitle'])
     end
     it 'calls the proper methods' do
-      expect(dc_call).to eq 'MyTitle'
+      expect(dc_call["dcmi_type_tesim"]).to eq 'MyType'
     end
   end
 end
