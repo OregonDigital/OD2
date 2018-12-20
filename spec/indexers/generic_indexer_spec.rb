@@ -17,7 +17,7 @@ RSpec.describe GenericIndexer do
     end
     it 'calls the proper methods' do
       dc.generate_solr_document
-      expect(dc).to receive(:index_value_for_multiple).once
+      expect(dc).to receive(:index_value_for_singular).once
       # expect(described_class).to receive(:index_value_for_singular).once
     end
   end
