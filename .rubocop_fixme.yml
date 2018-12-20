@@ -86,10 +86,6 @@ Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'app/indexers/oregon_digital/metadata_indexer.rb'
 
-RSpec/AnyInstance:
-  Exclude:
-    - 'spec/indexers/generic_indexer_spec.rb'
-
 Metrics/AbcSize:
   Exclude:
     - 'app/indexers/oregon_digital/deep_indexing_service.rb'
