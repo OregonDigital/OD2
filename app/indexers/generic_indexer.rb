@@ -1,6 +1,9 @@
 # frozen_string_literal:true
 
 class GenericIndexer < Hyrax::WorkIndexer
+  include OregonDigital::IndexesBasicMetadata
+  include OregonDigital::IndexesLinkedMetadata
+
   def generate_solr_document
     super.tap do |solr_doc|
       OregonDigital::GenericMetadata::PROPERTIES.map(&:to_s).each do |prop|
