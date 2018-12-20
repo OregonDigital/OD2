@@ -1,8 +1,6 @@
 # frozen_string_literal:true
 
 RSpec.describe ImageIndexer do
-  xit 'does things' do
-  end
   let(:solr_doc) { {} }
   let(:attr) { { dcmi_type: 'MyType' }.with_indifferent_access }
   let(:dc) { described_class.new(gw) }
