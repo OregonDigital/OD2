@@ -1,19 +1,33 @@
 # frozen_string_literal:true
 
 class GenericIndexer < Hyrax::WorkIndexer
-  # This indexes the default metadata. You can remove it if you want to
-  # provide your own metadata and indexing.
+  include OregonDigital::IndexesBasicMetadata
+  include OregonDigital::IndexesLinkedMetadata
 
-  # Fetch remote labels for based_near. You can remove this if you don't want
-  # this behavior
-
-  # Uncomment this block if you want to add custom indexing behavior:
   def generate_solr_document
     super.tap do |solr_doc|
       OregonDigital::GenericMetadata::PROPERTIES.map(&:to_s).each do |prop|
-        solr_doc["#{prop}_ssim"] = object.attributes[prop.to_s]
-        solr_doc["#{prop}_tesim"] = object.attributes[prop.to_s]
+        attr = object.attributes[prop]
+        if attr.is_a? ActiveTriples::Relation
+          index_value_for_multiple(solr_doc, attr, prop)
+        else
+          index_value_for_singular(solr_doc, attr, prop)
+        end
       end
     end
+  end
+
+  private
+
+  def index_value_for_multiple(solr_doc, attr, prop)
+    solr_doc["#{prop}_tesim"] = attr.to_a.blank? ? [''] : attr.to_a
+    solr_doc["#{prop}_sim"] = attr.to_a.blank? ? [''] : attr.to_a
+    solr_doc["#{prop}_ssim"] = attr.to_a.blank? ? [''] : attr.to_a
+  end
+
+  def index_value_for_singular(solr_doc, attr, prop)
+    solr_doc["#{prop}_tesim"] = attr.nil? ? '' : attr
+    solr_doc["#{prop}_sim"] = attr.nil? ? '' : attr
+    solr_doc["#{prop}_ssim"] = attr.nil? ? '' : attr
   end
 end

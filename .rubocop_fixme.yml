@@ -10,6 +10,8 @@ Metrics/LineLength:
     - 'app/forms/hyrax/generic_form.rb'
     - 'app/forms/hyrax/image_form.rb'
     - 'app/forms/hyrax/video_form.rb'
+    - 'app/indexers/oregon_digital/deep_indexing_service.rb'
+    - 'app/indexers/oregon_digital/metadata_indexer.rb'
     - 'app/models/ability.rb'
     - 'app/models/concerns/oregon_digital/document_metadata.rb'
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'
@@ -80,8 +82,13 @@ Metrics/LineLength:
     - 'spec/system/create_image_spec.rb'
     - 'spec/system/create_video_spec.rb'
 
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - 'app/indexers/oregon_digital/metadata_indexer.rb'
+
 Metrics/AbcSize:
   Exclude:
+    - 'app/indexers/oregon_digital/deep_indexing_service.rb'
     - 'lib/oregon_digital/triple_powered_properties/triplestore.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
