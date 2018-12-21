@@ -10,9 +10,9 @@ class Users::SessionsController < Devise::SessionsController
   protected
 
   def redirect_if_university
-    case Mail::Address.new(params[:user][:email]).domain.to_s
-    when 'uoregon.edu' then redirect_to new_uo_session_path
-    when 'oregonstate.edu' then redirect_to new_osu_session_path
+    case Mail::Address.new(params[:user][:email]).domain.to_s.split('.').last(2).first
+    when 'uoregon' then redirect_to new_uo_session_path
+    when 'oregonstate' then redirect_to new_osu_session_path
     end
   end
 end
