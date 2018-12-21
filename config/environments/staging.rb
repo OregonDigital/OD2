@@ -34,7 +34,7 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL_OPTION', 'localhost:3000') }
+  config.action_mailer.default_url_options = { host: ENV.fetch('STAGING_DEFAULT_URL_OPTION', 'localhost:3000') }
 
   config.action_mailer.perform_caching = false
 

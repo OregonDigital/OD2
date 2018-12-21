@@ -119,6 +119,7 @@ services:
       - CAS_URL=https://login.oregonstate.edu/cas
       - SAML_CERT=cert
       - SAML_URL=https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO
+      - STAGING_DEFAULT_URL_OPTION=od2-staging.library.oregonstate.edu
     depends_on:
       - chrome
       - selenium-hub
