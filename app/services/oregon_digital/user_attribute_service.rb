@@ -4,7 +4,7 @@ module OregonDigital
   # This object is used to inspect specific attributes of a user
   class UserAttributeService
     def initialize(user_params)
-      @domain = Mail::Address.new(user_params[:email]).to_s
+      @domain = Mail::Address.new(user_params[:email]).domain.to_s
       @parsed_domain = @domain.split('.')[-2]
       @rails_paths = Rails.application.routes.url_helpers
     end
