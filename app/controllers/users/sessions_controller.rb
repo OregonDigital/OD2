@@ -14,6 +14,7 @@ class Users::SessionsController < Devise::SessionsController
     case domain.to_s.split('.').last(2).first
     when 'uoregon' then redirect_to new_uo_session_path
     when 'oregonstate' then redirect_to new_osu_session_path
+    when 'orst' then redirect_to new_osu_session_path
     end
   end
 end
