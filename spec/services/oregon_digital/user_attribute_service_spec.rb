@@ -6,15 +6,17 @@ RSpec.describe OregonDigital::UserAttributeService do
   let(:service) { described_class.new(user_params) }
   let(:router) { Rails.application.routes.url_helpers }
 
-  context "when no email exists" do
+  context 'when no email exists' do
     it { expect(service.email_redirect_path).to be_nil }
   end
-  context "when osu email" do
+  context 'when osu email' do
     let(:email) { 'blah@oregonstate.edu' }
-    it { expect(service.email_redirect_path).to eq "#{router.new_osu_session_path}" }
+
+    it { expect(service.email_redirect_path).to eq router.new_osu_session_path.to_s }
   end
-  context "when osu email" do
+  context 'when osu email' do
     let(:email) { 'blah@uoregon.edu' }
-    it { expect(service.email_redirect_path).to eq "#{router.new_uo_session_path}" }
+
+    it { expect(service.email_redirect_path).to eq router.new_uo_session_path.to_s }
   end
 end
