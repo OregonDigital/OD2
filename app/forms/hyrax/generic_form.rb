@@ -8,7 +8,7 @@ module Hyrax
     self.model_class = ::Generic
     self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
 
-    self.required_fields = %i[title dcmi_type rights_statement]
+    self.required_fields = %i[title resource_type rights_statement]
 
     def primary_terms
       # Push the required fields to the top of the form
