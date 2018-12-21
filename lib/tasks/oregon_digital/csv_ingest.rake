@@ -47,7 +47,7 @@ def process(csv, filedir, email)
 end
 
 def process_line(line, fields, email, logger)
-  vals = line.split('\t')
+  vals = line.split("\t")
   work = vals[WORKTYPE].humanize.constantize.new
   work.id = vals[ID]
   numfields = fields.length
@@ -64,7 +64,7 @@ def process_line(line, fields, email, logger)
 end
 
 def prep_files(line, filedir, user, logger)
-  files = line.split('\t')[FILENAMES].split('|')
+  files = line.split("\t")[FILENAMES].split('|')
   uploaded_files = []
   files.each do |file|
     f = Hyrax::UploadedFile.new(user: user, file: File.open("#{filedir}/#{file}"))
