@@ -9,7 +9,7 @@ en:
   simple_form:
     hints:
       defaults:
-        colour_content: "For black and white images, use Black & White. For color images or color tables / charts in a publication, use Color."
+        color_content: "For black and white images, use Black & White. For color images or color tables / charts in a publication, use Color."
         color_space: "List the color space specifier (usually RGB or CMYK)."
         height: "Height of digital image. List the number of pixels."
         orientation: "The image orientation viewed in terms of rows and columns. Use ‘horizontal’ or ‘vertical’."
@@ -19,7 +19,7 @@ en:
         width: "Width of digital image. List the number of pixels."
     labels:
       defaults:
-        colour_content: "Color Content"
+        color_content: "Color Content"
         color_space: "Color Space"
         height: "Pixel Height"
         orientation: "Orientation"
