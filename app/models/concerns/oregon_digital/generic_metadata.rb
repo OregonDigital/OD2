@@ -132,7 +132,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :biographical_information, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/biographical_information') do |index|
+      property :biographical_information, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/biographicalInformation') do |index|
         index.as :stored_searchable
       end
 
