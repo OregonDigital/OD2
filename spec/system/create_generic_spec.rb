@@ -33,6 +33,9 @@ RSpec.describe 'Create a Generic', js: true, type: :system do
       within('div.generic_title') do
         fill_in('Title', with: 'Test Title')
       end
+      within('div.generic_identifier') do
+        fill_in('Identifier', with: 'Test ID')
+      end
       select('In Copyright', from: 'Rights')
       select('Article', from: 'Resource type')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
