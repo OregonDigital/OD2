@@ -5,7 +5,7 @@ module OregonDigital
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
-    PROPERTIES = %w[abstract accepted_name_usage access_restrictions accession_number acquisition_date alternative arranger art_series artist author award award_date barcode biographical_information box box_name box_number canzoniere_poems caption_title cartographer citation collected_date collector common_name compass_direction composer contents contributor conversion copy_location copyright_claimant cover_description coverage creator creator_display cultural_context current_repository_id date date_digitized dedicatee description description_of_manifestation designer donor editor ethnographic_term event exhibit extent family file_size folder_name folder_number form_of_work format former_owner genus gps_latitude gps_longitude has_finding_aid has_part has_version higher_classification hydrologic_unit_code identification_verification_status identifier illustrator inscription institution interviewee interviewer isPartOf is_version_of issued item_locator keyword language layout legal_name license local_collection_id local_collection_name location location_copyshelf_location longitude_latitude_identification lyricist material measurements military_branch military_highest_rank military_occupation military_service_location mode_of_issuance mods_note object_orientation oembed_url order original_name_usage owner patron photographer phylum_or_division physical_extent place_of_production primary_set print_maker provenance publication_place publisher ranger_district recipient relation replaces_url repository resource_type rights_holder rights_statement scientific_name_authorship scribe series_name series_number set source source_condition species specimen_type sports_team state_or_edition street_address style_or_period subject taxon_class technique temporal tgn transcriber translator tribal_classes tribal_notes tribal_terms tribal_title use_restrictions view_date water_basin workType].freeze
+    PROPERTIES = %w[abstract accepted_name_usage access_restrictions accession_number acquisition_date alternative arranger art_series artist author award award_date barcode biographical_information box box_name box_number canzoniere_poems cartographer citation collected_date collector common_name compass_direction composer contents contributor conversion copy_location copyright_claimant cover_description coverage creator creator_display cultural_context current_repository_id date date_digitized dedicatee description description_of_manifestation designer donor editor ethnographic_term event exhibit extent family file_size folder_name folder_number form_of_work format former_owner genus gps_latitude gps_longitude has_finding_aid has_part has_version higher_classification hydrologic_unit_code identification_verification_status identifier illustrator inscription institution interviewee interviewer isPartOf is_version_of issued item_locator keyword language layout legal_name license local_collection_id local_collection_name location location_copyshelf_location longitude_latitude_identification lyricist material measurements military_branch military_highest_rank military_occupation military_service_location mode_of_issuance mods_note object_orientation oembed_url order original_name_usage owner patron photographer phylum_or_division physical_extent place_of_production primary_set print_maker provenance publication_place publisher ranger_district recipient relation replaces_url repository resource_type rights_holder rights_statement scientific_name_authorship scribe series_name series_number set source source_condition species specimen_type sports_team state_or_edition street_address style_or_period subject taxon_class technique temporal tgn transcriber translator tribal_classes tribal_notes tribal_terms tribal_title use_restrictions view_date water_basin workType].freeze
 
     included do
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
@@ -21,10 +21,6 @@ module OregonDigital
       property :identifier, predicate: ::RDF::Vocab::DC.identifier
 
       property :alternative, predicate: ::RDF::Vocab::DC.alternative do |index|
-        index.as :stored_searchable
-      end
-
-      property :caption_title, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/captionTitle') do |index|
         index.as :stored_searchable
       end
 
@@ -136,7 +132,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :biographical_information, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/biographical_information') do |index|
+      property :biographical_information, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/biographicalInformation') do |index|
         index.as :stored_searchable
       end
 
@@ -160,11 +156,11 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :description_of_manifestation, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/descriptionofmanifestation') do |index|
+      property :description_of_manifestation, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/descriptionOfManifestation') do |index|
         index.as :stored_searchable
       end
 
-      property :form_of_work, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/formofwork') do |index|
+      property :form_of_work, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/formOfWork') do |index|
         index.as :stored_searchable
       end
 
@@ -192,7 +188,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :mode_of_issuance, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/modeofissuance') do |index|
+      property :mode_of_issuance, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/modeOfIssuance') do |index|
         index.as :stored_searchable
       end
 
@@ -228,7 +224,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :cultural_context, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_culturalContext') do |index|
+      property :cultural_context, predicate: ::RDF::URI.new('http://purl.org/vra/culturalContext') do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -276,7 +272,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :style_or_period, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_hasStylePeriod') do |index|
+      property :style_or_period, predicate: ::RDF::URI.new('http://purl.org/vra/StylePeriod') do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -356,7 +352,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :place_of_production, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/placeOfProduction/en') do |index|
+      property :place_of_production, predicate: ::RDF::URI.new('http://www.rdaregistry.info/Elements/u/placeOfProduction') do |index|
         index.as :stored_searchable
       end
 
@@ -424,7 +420,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :material, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_material') do |index|
+      property :material, predicate: ::RDF::URI.new('http://purl.org/vra/material') do |index|
         index.as :stored_searchable
       end
 
@@ -436,7 +432,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :technique, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_hasTechnique') do |index|
+      property :technique, predicate: ::RDF::URI.new('http://purl.org/vra/hasTechnique') do |index|
         index.as :stored_searchable
       end
 
@@ -500,7 +496,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :tgn, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tgn') do |index|
+      property :tgn, predicate: ::RDF::URI.new('http://dbpedia.org/ontology/HistoricPlace') do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -573,7 +569,7 @@ module OregonDigital
       end
 
       property :oembed_url, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/oembed'), multiple: false do |index|
-        index.as :stored_searchable
+        index.as :facetable
       end
 
       property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location
