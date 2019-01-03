@@ -52,3 +52,11 @@ RSpec/InstanceVariable:
 Style/SymbolArray:
   Exclude:
     - 'app/models/user.rb'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'

@@ -20,7 +20,7 @@ module OregonDigital::TriplePoweredProperties
       end
     end
 
-    def triplestore_client
+    def self.triplestore_client
       TriplestoreAdapter::Client.new(ENV['TRIPLESTORE_ADAPTER_TYPE'], ENV['TRIPLESTORE_ADAPTER_URL'])
     end
 
