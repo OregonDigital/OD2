@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Sets the expected behaviors and validations for a document
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   self.indexer = DocumentIndexer

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Sets behaviors for the solr document
 class SolrDocument
   include Blacklight::Solr::Document
   include Blacklight::Gallery::OpenseadragonSolrDocument

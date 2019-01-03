@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Display configurations for how to render an oembed url
 class OembedAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   def attribute_value_to_html(value)
     div = content_tag(

@@ -3,6 +3,7 @@
 require 'triplestore_adapter'
 
 module OregonDigital::TriplePoweredProperties
+  # Configuration to allow connection to triplestore
   class Triplestore
     ##
     # Query the graph found at the supplied uri

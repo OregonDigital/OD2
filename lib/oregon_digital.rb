@@ -2,6 +2,7 @@
 
 require 'oregon_digital/version'
 
+# Sets logger for application
 module OregonDigital
   extend ActiveSupport::Autoload
 

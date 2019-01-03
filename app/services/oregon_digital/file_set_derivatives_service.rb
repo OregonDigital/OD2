@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital
+  # Helps with the generation of file set derivatives
   class FileSetDerivativesService
     attr_reader :file_set
     delegate :uri, :mime_type, to: :file_set

@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital::TriplePoweredProperties
+  # Allows a work to be triple powered
   module WorkBehavior
     extend ActiveSupport::Concern
 

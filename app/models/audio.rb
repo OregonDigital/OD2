@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Sets the expected attributes and other important values for an audio work
 class Audio < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior

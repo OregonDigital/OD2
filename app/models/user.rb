@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# sets basic behaviors for a user
 class User < ApplicationRecord
   # Connects this user object to Hydra behaviors.
   include Hydra::User

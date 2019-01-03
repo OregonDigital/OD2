@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# This is the base controller of the application. Basic setup for the rest of the app occurs here.
 class ApplicationController < ActionController::Base
   helper Openseadragon::OpenseadragonHelper
   # Adds a few additional behaviors into the application controller

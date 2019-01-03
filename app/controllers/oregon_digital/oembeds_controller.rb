@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital
+  # This controller sets up the dashboard configuration for the oembed management system.
   class OembedsController < ApplicationController
     attr_accessor :curation_concern
     helper_method :curation_concern

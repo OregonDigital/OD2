@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital::TriplePoweredProperties
+  # Checks attribute to see if it is a triple powered field
   module TriplePoweredForm
     ##
     # Checks the model of this form to evaluate if a property is triple powered

@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital::TriplePoweredProperties
+  # Indexes attributes specifically based on triple powered fields
   class WorkIndexer < Hyrax::WorkIndexer
     ##
     # Iterate through each of the triple powered properties to store its labels in solr
