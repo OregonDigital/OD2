@@ -29,7 +29,6 @@ module OregonDigital::TriplePoweredProperties
     # @return [Hash<String,Array<String>>] a hash keyed on the URI with its labels as the value
     def uri_labels(property)
       labels = {}
-
       return labels if uri_graphs.nil?
       return labels if uri_graphs[property].nil?
 
@@ -40,10 +39,14 @@ module OregonDigital::TriplePoweredProperties
         if result.is_a?(String)
           labels[uri] << result
         else
-          labels[uri] << OregonDigital::TriplePoweredProperties::Triplestore.predicate_labels(result).values.flatten.compact
+          labels[h[:uri]] << triplestore_predicate_labels(h)
         end
       end
       labels
+    end
+
+    def triplestore_predicate_labels(h)
+      OregonDigital::TriplePoweredProperties::Triplestore.predicate_labels(h[:result]).values.flatten.compact
     end
 
     def uri_graphs

@@ -13,6 +13,7 @@ AllCops:
     - 'bin/**/*'
     - 'Gemfile'
     - 'Rakefile'
+    - 'config/**/*'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']
@@ -37,8 +38,14 @@ Style/SingleLineBlockParams:
 Rails/ApplicationJob:
   Enabled: false
 
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
 Rails/ApplicationRecord:
   Enabled: false
+
+Metrics/LineLength:
+  Max: 120
 
 RSpec/DescribeClass:
   Exclude:

@@ -13,11 +13,15 @@ module OregonDigital::TriplePoweredProperties
     def self.fetch(uri)
       return if uri.blank?
       begin
-        @triplestore ||= TriplestoreAdapter::Triplestore.new(TriplestoreAdapter::Client.new(ENV['TRIPLESTORE_ADAPTER_TYPE'], ENV['TRIPLESTORE_ADAPTER_URL']))
+        @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
         @triplestore.fetch(uri, from_remote: true)
       rescue TriplestoreAdapter::TriplestoreException => e
         raise e
       end
+    end
+
+    def triplestore_client
+      TriplestoreAdapter::Client.new(ENV['TRIPLESTORE_ADAPTER_TYPE'], ENV['TRIPLESTORE_ADAPTER_URL'])
     end
 
     ##

@@ -2,18 +2,14 @@
 
 # sets basic behaviors for a user
 class User < ApplicationRecord
-  # Connects this user object to Hydra behaviors.
   include Hydra::User
-  # Connects this user object to Role-management behaviors.
   include Hydra::RoleManagement::UserRoles
-  # Connects this user object to Hyrax behaviors.
   include Hyrax::User
   include Hyrax::UserUsageStats
-
-  if Blacklight::Utils.needs_attr_accessible?
-    attr_accessible :email, :password, :password_confirmation
-  end
   include Blacklight::User
+
+  attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
+
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :recoverable,
          :omniauthable, omniauth_providers: [:cas, :saml]

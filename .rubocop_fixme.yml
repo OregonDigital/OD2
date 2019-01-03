@@ -1,59 +1,15 @@
 Metrics/LineLength:
-  # Ignore comment lines that may being with spaces
+  # Ignore comment lines that may begin with spaces
   IgnoredPatterns: ['(\A|\s)#']
   Exclude:
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/catalog_controller.rb'
     - 'app/controllers/oregon_digital/oembeds_controller.rb'
-    - 'app/forms/hyrax/audio_form.rb'
-    - 'app/forms/hyrax/document_form.rb'
-    - 'app/forms/hyrax/generic_form.rb'
-    - 'app/forms/hyrax/image_form.rb'
-    - 'app/forms/hyrax/video_form.rb'
-    - 'app/indexers/oregon_digital/deep_indexing_service.rb'
-    - 'app/indexers/oregon_digital/metadata_indexer.rb'
-    - 'app/models/ability.rb'
     - 'app/models/concerns/oregon_digital/document_metadata.rb'
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'
     - 'app/models/concerns/oregon_digital/image_metadata.rb'
     - 'app/models/concerns/oregon_digital/video_metadata.rb'
-    - 'app/models/file_set.rb'
-    - 'app/models/search_builder.rb'
-    - 'app/models/solr_document.rb'
-    - 'app/presenters/hyrax/document_presenter.rb'
-    - 'app/presenters/hyrax/generic_presenter.rb'
-    - 'app/presenters/hyrax/image_presenter.rb'
-    - 'app/presenters/hyrax/video_presenter.rb'
-    - 'app/search_builders/oregon_digital/oembed_search_builder.rb'
-    - 'app/services/hyrax/derivative_service.rb'
-    - 'app/services/oregon_digital/file_set_derivatives_service.rb'
-    - 'config/application.rb'
-    - 'config/environments/development.rb'
-    - 'config/environments/production.rb'
-    - 'config/environments/staging.rb'
-    - 'config/environments/test.rb'
-    - 'config/initializers/devise.rb'
-    - 'config/initializers/hydra_config.rb'
-    - 'config/initializers/hyrax.rb'
-    - 'config/initializers/mailboxer.rb'
-    - 'config/initializers/redis_config.rb'
-    - 'config/initializers/sidekiq.rb'
-    - 'config/initializers/simple_form.rb'
-    - 'config/initializers/simple_form_bootstrap.rb'
-    - 'config/routes.rb'
-    - 'lib/oregon_digital/triple_powered_properties/has_url_validator.rb'
-    - 'lib/oregon_digital/triple_powered_properties/inputs/triple_powered_property_input.rb'
-    - 'lib/oregon_digital/triple_powered_properties/triple_powered_form.rb'
-    - 'lib/oregon_digital/triple_powered_properties/triplestore.rb'
-    - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
-    - 'lib/oregon_digital/triple_powered_properties/work_indexer.rb'
-    - 'lib/tasks/oregon_digital/csv_ingest.rake'
-    # allow all specs to have long lines, these don't really need fixing
     - 'spec/**/*'
-
-Naming/UncommunicativeMethodParamName:
-  Exclude:
-    - 'app/indexers/oregon_digital/metadata_indexer.rb'
+    - 'config/**/*'
+    - 'app/controllers/catalog_controller.rb'
 
 Metrics/AbcSize:
   Exclude:
@@ -71,14 +27,6 @@ Metrics/ModuleLength:
   Exclude:
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'
 
-RSpec/ExampleLength:
-  Exclude:
-    - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
-
-RSpec/MultipleExpectations:
-  Exclude:
-    - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
-
 Metrics/ClassLength:
   Exclude:
     - 'app/controllers/catalog_controller.rb'
@@ -86,13 +34,10 @@ Metrics/ClassLength:
 
 Metrics/BlockLength:
   Exclude:
-    - 'config/routes.rb'
     - 'lib/tasks/*.rake'
     - 'spec/**/*.rb'
+    - 'config/**/*'
     - 'app/controllers/catalog_controller.rb'
-    - 'config/initializers/hyrax.rb'
-    - 'config/initializers/simple_form_bootstrap.rb'
-    - 'config/environments/*.rb'
 
 Metrics/MethodLength:
   Exclude:
