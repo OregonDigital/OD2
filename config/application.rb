@@ -10,6 +10,7 @@ require 'triplestore_adapter'
 Bundler.require(*Rails.groups)
 
 module OD2
+  # Sets application wide config
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1

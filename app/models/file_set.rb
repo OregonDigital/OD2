@@ -1,12 +1,15 @@
 # frozen_string_literal:true
 
+# Sets the expected behaviors for file sets
 class FileSet < ActiveFedora::Base
   include ::Hyrax::FileSetBehavior
 
   ##
   # Generate an encoded iiif url for this FileSet
-  # @param base_url [String] : provided by iiif_image_url_builder or iiif_info_url_builder, looks like http://localhost
-  # @return [String] : a url to the iiif server with a properly encoded identifier, looks like http://IIIFSERVER/ab%2fcd%2f12%2f24%2fz-jp2.jp2
+  # @param base_url [String] : provided by iiif_image_url_builder or
+  # iiif_info_url_builder, looks like http://localhost
+  # @return [String] : a url to the iiif server with a properly encoded identifier,
+  # looks like http://IIIFSERVER/ab%2fcd%2f12%2f24%2fz-jp2.jp2
   def iiif_url(base_url)
     iiif_server_base_url = ENV.fetch('IIIF_SERVER_BASE_URL', base_url)
     jp2_file = derivative_path_for_reference('jp2')

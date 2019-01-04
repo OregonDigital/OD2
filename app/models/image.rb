@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Sets the expected behaviors for an image work
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior

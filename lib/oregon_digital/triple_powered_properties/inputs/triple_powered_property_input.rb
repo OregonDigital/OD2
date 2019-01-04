@@ -112,16 +112,29 @@ module OregonDigital::TriplePoweredProperties::Inputs
     #
     # @param uri [String] the uri to the RDF resource containing the labels
     def build_label(uri)
-      return "<div itemscope itemtype='' class='triple_powered_labels hidden' data-rdf-uri=''></div>".html_safe if uri.blank?
+      return label_html.html_safe if uri.blank?
 
       begin
         graph = OregonDigital::TriplePoweredProperties::Triplestore.fetch(uri)
         predicate_labels = OregonDigital::TriplePoweredProperties::Triplestore.predicate_labels(graph)
       rescue TriplestoreAdapter::TriplestoreException
-        return "<div class='triple_powered_labels'><span class='error'>Failed to fetch labels for this URL.</span></div>".html_safe
+        return error_html.html_safe
       end
 
-      "<div itemscope itemtype='#{uri}' class='triple_powered_labels' data-rdf-uri='#{uri}'>#{build_label_list(predicate_labels, uri)}</div>".html_safe
+      uri_html(uri, predicate_labels).html_safe
+    end
+
+    def label_html
+      "<div itemscope itemtype='' class='triple_powered_labels hidden' data-rdf-uri=''></div>"
+    end
+
+    def error_html
+      "<div class='triple_powered_labels'><span class='error'>Failed to fetch labels for this URL.</span></div>"
+    end
+
+    def uri_html(uri, predicate_labels)
+      built_labels = build_label_list(predicate_labels, uri)
+      "<div itemscope itemtype='#{uri}' class='triple_powered_labels' data-rdf-uri='#{uri}'>#{built_labels}</div>"
     end
 
     ##
@@ -142,6 +155,10 @@ module OregonDigital::TriplePoweredProperties::Inputs
       first_span = spans.delete_at(0)
       return first_span if spans.size.zero?
 
+      set_label_html(count, first_span, spans)
+    end
+
+    def set_label_html(count, first_span, spans)
       <<-HTML
         <span class='toggle badge'
           data-show-all="Show all labels. (#{count})"

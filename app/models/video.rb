@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Sets basic behaviors for a video work
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior

@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Sets the expected behaviors of a generic work
 class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior

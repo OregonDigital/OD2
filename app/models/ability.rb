@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Sets the abilities of the user and authorizes actions
 class Ability
   include Hydra::Ability
 

@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital
+  # Helps with the checking of assets with oembeds
   class OembedService < Hyrax::RestrictionService
     class << self
       #

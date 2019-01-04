@@ -3,6 +3,7 @@
 require 'uri'
 
 module OregonDigital::TriplePoweredProperties
+  # Can validate if attribute is a url
   class HasUrlValidator < ActiveModel::Validator
     ##
     # Evaluate each triple powered property value to ensure it is a valid URL

@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# Helps with the generation of derivatives
 class Hyrax::DerivativeService
   class_attribute :services
 

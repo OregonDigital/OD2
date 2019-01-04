@@ -1,5 +1,7 @@
 # frozen_string_literal:true
 
+# This controller drives the configuration of the applications searching
+# indexing, displays, and other various discovery methods
 class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
