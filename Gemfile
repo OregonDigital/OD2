@@ -36,6 +36,7 @@ gem 'omniauth-saml'
 # Honeycomb
 gem 'sequel'
 gem 'honeycomb-beeline'
+gem 'rack-honeycomb', '~> 0.5.0'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
