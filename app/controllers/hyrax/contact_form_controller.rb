@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Hyrax
+  # OVERRIDE FROM HYRAX
   class ContactFormController < ApplicationController
     include ContactFormRecaptchaBehavior
     before_action :build_contact_form
@@ -17,7 +20,7 @@ module Hyrax
         end
       else
         flash.now[:error] = 'Sorry, this message was not sent successfully. '
-        flash.now[:error] << @contact_form.errors.full_messages.map(&:to_s).join(", ")
+        flash.now[:error] << @contact_form.errors.full_messages.map(&:to_s).join(', ')
       end
       render :new
     rescue RuntimeError => exception
@@ -33,18 +36,17 @@ module Hyrax
     # Override this method if you want to perform additional operations
     # when a email is successfully sent, such as sending a confirmation
     # response to the user.
-    def after_deliver
-    end
+    def after_deliver; end
 
     private
 
-      def build_contact_form
-        @contact_form = Hyrax::ContactForm.new(contact_form_params)
-      end
+    def build_contact_form
+      @contact_form = Hyrax::ContactForm.new(contact_form_params)
+    end
 
-      def contact_form_params
-        return {} unless params.key?(:contact_form)
-        params.require(:contact_form).permit(:contact_method, :category, :name, :email, :subject, :message)
-      end
+    def contact_form_params
+      return {} unless params.key?(:contact_form)
+      params.require(:contact_form).permit(:contact_method, :category, :name, :email, :subject, :message)
+    end
   end
 end
