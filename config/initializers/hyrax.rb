@@ -260,6 +260,20 @@ Hyrax.config do |config|
 
   # Fields to display in the IIIF metadata section; default is the required fields
   config.iiif_metadata_fields = Hyrax::Forms::WorkForm.required_fields
+  
+  # Enables the use of Google ReCaptcha on the contact form.
+  # A site key and secret key need to be supplied in order for google
+  # to authenticate and authorize/validate the 
+  config.recaptcha = true
+  #
+  # ReCaptcha site key and secret key, supplied by google after
+  # registering a domain.
+  config.recaptcha_site_key = ENV.fetch('RECAPTCHA_SITE_KEY', 'xxxx_XXXXXXXXXXfffffffffff')
+  # WARNING: KEEP THIS SECRET. DO NOT STORE IN REPOSITORY
+  config.recaptcha_secret_key = ENV.fetch('RECAPTCHA_SITE_KEY', 'xxxx_XXXXXXXXXXfffffffffff')
+
+
+
 end
 
 Date::DATE_FORMATS[:standard] = '%m/%d/%Y'

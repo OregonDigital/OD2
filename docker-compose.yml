@@ -57,6 +57,8 @@ services:
       - SOLR_URL=http://solr-dev:8983/solr/development
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/rw/sparql
+      - RECAPTCHA_SECRET_KEY=asdfasdfasdfasdfasdfadsfasdfadfsfa
+      - RECAPTCHA_SITE_KEY=asdfasdfadsfasdfasdfasdfasdfasdfad
     depends_on:
       - db-dev
       - blazegraph-dev
@@ -119,6 +121,8 @@ services:
       - CAS_URL=https://login.oregonstate.edu/cas
       - SAML_CERT=cert
       - SAML_URL=https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO
+      - RECAPTCHA_SECRET_KEY=asdfasdfasdfasdfasdfadsfasdfadfsfa
+      - RECAPTCHA_SITE_KEY=asdfasdfadsfasdfasdfasdfasdfasdfad
     depends_on:
       - chrome
       - selenium-hub
