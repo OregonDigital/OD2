@@ -208,13 +208,13 @@ services:
   blazegraph-dev:
     <<: *blazegraph
     volumes:
-      - blazegraph-dev:/var/lib/jetty
+      - blazegraph-dev:/data
       - ./config/blazegraph/RWStore.properties:/RWStore.properties
   blazegraph-test:
     <<: *blazegraph
     volumes:
       - ./config/blazegraph/RWStore.properties:/RWStore.properties
-    tmpfs: /var/lib/jetty
+    tmpfs: /data
 
   ##
   # Postgres database server
