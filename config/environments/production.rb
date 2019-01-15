@@ -38,7 +38,11 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :smtp
+  if ENV.fetch('SMTP_ENABLED', '0').to_i > 0
+    config.action_mailer.delivery_method = :smtp
+  else
+    config.action_mailer.delivery_method = :test
+  end
 
   config.action_mailer.smtp_settings = {
     authentication: :login,
