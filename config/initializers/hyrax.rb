@@ -270,7 +270,7 @@ Hyrax.config do |config|
   # registering a domain.
   config.recaptcha_site_key = ENV.fetch('RECAPTCHA_SITE_KEY', 'xxxx_XXXXXXXXXXfffffffffff')
   # WARNING: KEEP THIS SECRET. DO NOT STORE IN REPOSITORY
-  config.recaptcha_secret_key = ENV.fetch('RECAPTCHA_SITE_KEY', 'xxxx_XXXXXXXXXXfffffffffff')
+  config.recaptcha_secret_key = ENV.fetch('RECAPTCHA_SECRET_KEY', 'xxxx_XXXXXXXXXXfffffffffff')
 
 
 
