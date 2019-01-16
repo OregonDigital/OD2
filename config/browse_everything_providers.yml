@@ -14,6 +14,7 @@ file_system:
 # google_drive:
 #   :client_id: YOUR_GOOGLE_API_CLIENT_ID
 #   :client_secret: YOUR_GOOGLE_API_CLIENT_SECRET
+<% if Rails.env.staging? || Rails.env.production? %>
 s3:
   :bucket: <%= ENV['AWS_S3_BUCKET'] %>
   :response_type: :signed_url # set to :public_url for public urls or :s3_uri for an s3://BUCKET/KEY uri
@@ -21,3 +22,5 @@ s3:
   :app_secret: <%= ENV['AWS_S3_APP_SECRET'] %> # explicitly here, or left out to use system-configured
   :region: <%= ENV['AWS_S3_REGION'] %> # defaults.
 #   See https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/
+<% end %>
+
