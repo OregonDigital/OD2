@@ -29,6 +29,7 @@ en:
           subject_tesim: Subject
         show:
           based_near_tesim: Location
+          contributor: Contributor
           contributor_tesim: Contributor
           creator_tesim: Creator
           date_created_tesim: Date Created
