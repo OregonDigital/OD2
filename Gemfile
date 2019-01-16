@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'browse-everything'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
