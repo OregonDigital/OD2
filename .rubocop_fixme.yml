@@ -43,7 +43,6 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Exclude:
-    - 'app/indexers/generic_indexer.rb'
     - 'lib/oregon_digital/triple_powered_properties/inputs/triple_powered_property_input.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
