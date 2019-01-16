@@ -1,15 +1,15 @@
 terms:
-  - id: Complex Object 
+  - id: http://purl.org/dc/dcmitype/Collection
     term: Complex Object 
-  - id: Dataset 
+  - id: http://purl.org/dc/dcmitype/Dataset
     term: Dataset
-  - id: Image
+  - id: http://purl.org/dc/dcmitype/Image
     term: Image
-  - id: Moving Image
+  - id: http://purl.org/dc/dcmitype/MovingImage
     term: Moving Image
-  - id: Physical Object
+  - id: http://purl.org/dc/dcmitype/PhysicalObject
     term: Physical Object
-  - id: Sound
+  - id: http://purl.org/dc/dcmitype/Sound
     term: Sound
-  - id: Text
+  - id: http://purl.org/dc/dcmitype/Text
     term: Text
