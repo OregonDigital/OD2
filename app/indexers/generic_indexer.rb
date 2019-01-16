@@ -9,7 +9,7 @@ class GenericIndexer < Hyrax::WorkIndexer
     super.tap do |solr_doc|
       OregonDigital::GenericMetadata::PROPERTIES.map(&:to_s).each do |prop|
         attr = object.attributes[prop]
-        if prop == 'date_created' || prop == 'date_uploaded'
+        if ['date_created', 'date_uploaded'].include? prop
           solr_doc["#{prop}_tesim"] = [Date.today] if object.attributes[prop].empty?
         elsif attr.is_a? ActiveTriples::Relation
           index_value_for_multiple(solr_doc, attr, prop)
