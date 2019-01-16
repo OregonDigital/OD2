@@ -3,7 +3,7 @@
 # The file_system provider can be a path to any directory on the server where your application is running.
 #
 ---
-<% if Rails.env.development? %>
+<% if Rails.env.development? || Rails.env.test? %>
 file_system:
   :home: <%= ENV['BROWSEEVERYTHING_FILESYSTEM_PATH'] || '/tmp' %>
 <% end %>
