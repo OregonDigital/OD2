@@ -1,0 +1,40 @@
+schema_org:
+  based_near:
+    property: contentLocation
+    type: "http://schema.org/Place"
+    value: name
+  contributor:
+    property: contributor
+    # used as the itemprop value for itemscoped attributes
+    type: "http://schema.org/Person"
+    value: name
+  creator:
+    property: creator
+    type: "http://schema.org/Person"
+    value: name
+  date_created:
+    property: dateCreated
+  description:
+    property: description
+  keyword:
+    property: keywords
+  language:
+    property: inLanguage
+  publisher:
+    property: publisher
+    type: "http://schema.org/Organization"
+    value: name
+  resource_type:
+    Complex Object: "http://purl.org/dc/dcmitype/Collection"
+    Dataset: "http://purl.org/dc/dcmitype/Dataset"
+    Image: "http://purl.org/dc/dcmitype/Image"
+    Moving Image: "http://purl.org/dc/dcmitype/MovingImage"
+    Physical Object: "http://purl.org/dc/dcmitype/PhysicalObject"
+    Sound: "http://purl.org/dc/dcmitype/Sound"
+    Text: "http://purl.org/dc/dcmitype/Text"
+  subject:
+    property: about
+    type: "http://schema.org/Thing"
+    value: name
+  title:
+    property: name
