@@ -5,7 +5,8 @@ module Hyrax
   module ContactFormRecaptchaBehavior
     def check_recaptcha
       if recaptcha?
-        return true if verify_recaptcha(model: @contact_form)
+        if verify_recaptcha(model: @contact_form)
+          true
         else
           flash.now[:error] = 'Captcha did not verify properly.'
           false
