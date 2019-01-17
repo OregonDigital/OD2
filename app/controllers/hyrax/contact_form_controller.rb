@@ -13,10 +13,7 @@ module Hyrax
       # not spam and a valid form
       if @contact_form.valid?
         if check_recaptcha
-          ContactMailer.contact(@contact_form).deliver_now
-          flash.now[:notice] = 'Thank you for your message!'
-          after_deliver
-          @contact_form = ContactForm.new
+          deliver_message
         end
       else
         flash.now[:error] = 'Sorry, this message was not sent successfully. '
@@ -30,6 +27,13 @@ module Hyrax
       logger.error("Contact form failed to send: #{exception.inspect}")
       flash.now[:error] = 'Sorry, this message was not delivered.'
       render :new
+    end
+
+    def deliver_message
+      ContactMailer.contact(@contact_form).deliver_now
+      flash.now[:notice] = 'Thank you for your message!'
+      after_deliver
+      @contact_form = ContactForm.new
     end
 
     # Override this method if you want to perform additional operations
