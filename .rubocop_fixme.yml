@@ -14,6 +14,7 @@ Metrics/LineLength:
 Metrics/AbcSize:
   Exclude:
     - 'app/indexers/oregon_digital/deep_indexing_service.rb'
+    - 'app/controllers/hyrax/contact_form_controller.rb'
     - 'lib/oregon_digital/triple_powered_properties/triplestore.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
@@ -60,3 +61,7 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
+
+RSpec/NestedGroups:
+  Exclude:
+    - 'spec/controllers/hyrax/contact_form_controller_spec.rb'

@@ -39,6 +39,9 @@ gem 'sequel'
 gem 'honeycomb-beeline'
 gem 'rack-honeycomb', '~> 0.5.0'
 
+# Recaptcha
+gem "recaptcha", require: "recaptcha/rails"
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
