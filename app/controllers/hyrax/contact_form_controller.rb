@@ -11,10 +11,8 @@ module Hyrax
 
     def create
       # not spam and a valid form
-      if @contact_form.valid?
-        if check_recaptcha
-          deliver_message
-        end
+      if @contact_form.valid? && check_recaptcha
+        deliver_message
       else
         flash.now[:error] = 'Sorry, this message was not sent successfully. '
       end
