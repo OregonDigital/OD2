@@ -36,6 +36,7 @@ gem 'omniauth-saml'
 # Honeycomb
 gem 'sequel'
 gem 'honeycomb-beeline'
+gem 'rack-honeycomb', '~> 0.5.0'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"

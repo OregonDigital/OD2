@@ -14,7 +14,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -255,9 +255,11 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :cas, host: ENV.fetch('CAS_HOST', 'login.oregonstate.edu'), url: ENV.fetch('CAS_URL', 'https://login.oregonstate.edu/cas')
   config.omniauth :saml,
-                  idp_cert: ENV.fetch('SAML_CERT', 'cert'),
+                  idp_cert: ENV.fetch('SAML_IDP_CERT', 'cert'),
                   idp_sso_target_url: ENV.fetch('SAML_URL', 'https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO'),
-                  issuer: 'http://od2-staging.library.oregonstate.edu/users/auth/saml'
+                  issuer: ENV.fetch('SAML_ISSUER', 'http://od2-staging.library.oregonstate.edu/users/auth/saml'),
+                  private_key: ENV.fetch('SAML_PRIVATE_KEY', 'key'),
+                  cert: ENV.fetch('SAML_CERT', 'cert')
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

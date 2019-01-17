@@ -440,7 +440,7 @@ GEM
     ice_nine (0.11.2)
     iiif_manifest (0.5.0)
       activesupport (>= 4)
-    jaro_winkler (1.5.1-x86_64-darwin-17)
+    jaro_winkler (1.5.1)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -612,7 +612,7 @@ GEM
       rails (~> 5.0)
       rdf
     rack (2.0.6)
-    rack-honeycomb (0.3.0)
+    rack-honeycomb (0.5.0)
       libhoney (>= 1.5.0)
     rack-protection (2.0.3)
       rack
@@ -927,6 +927,7 @@ DEPENDENCIES
   pg
   poltergeist
   puma (~> 3.7)
+  rack-honeycomb (~> 0.5.0)
   rails (~> 5.1.6)
   rails-controller-testing
   recaptcha

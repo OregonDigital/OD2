@@ -119,10 +119,13 @@ services:
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/rw/sparql
       - CAS_HOST=login.oregonstate.edu
       - CAS_URL=https://login.oregonstate.edu/cas
-      - SAML_CERT=cert
+      - SAML_IDP_CERT=cert
       - SAML_URL=https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO
       - RECAPTCHA_SECRET_KEY=asdfasdfasdfasdfasdfadsfasdfadfsfa
       - RECAPTCHA_SITE_KEY=asdfasdfadsfasdfasdfasdfasdfasdfad
+      - SAML_ISSUER=http://od2-staging.library.oregonstate.edu/users/auth/saml
+      - SAML_PRIVATE_KEY=key
+      - SAML_CERT=cert
     depends_on:
       - chrome
       - selenium-hub
@@ -212,13 +215,13 @@ services:
   blazegraph-dev:
     <<: *blazegraph
     volumes:
-      - blazegraph-dev:/var/lib/jetty
+      - blazegraph-dev:/data
       - ./config/blazegraph/RWStore.properties:/RWStore.properties
   blazegraph-test:
     <<: *blazegraph
     volumes:
       - ./config/blazegraph/RWStore.properties:/RWStore.properties
-    tmpfs: /var/lib/jetty
+    tmpfs: /data
 
   ##
   # Postgres database server
