@@ -121,7 +121,6 @@ services:
       - SAML_URL=https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO
       - SAML_ISSUER=http://od2-staging.library.oregonstate.edu/users/auth/saml
       - SAML_PRIVATE_KEY=key
-      - SAML_CERT=cert
     depends_on:
       - chrome
       - selenium-hub
