@@ -1,0 +1,28 @@
+#
+# To make browse-everything aware of a provider, uncomment the info for that provider and add your API key information.
+# The file_system provider can be a path to any directory on the server where your application is running.
+#
+---
+<% if Rails.env.development? || Rails.env.test? %>
+file_system:
+  :home: <%= ENV['BROWSEEVERYTHING_FILESYSTEM_PATH'] || '/tmp' %>
+<% end %>
+# dropbox:
+#   :app_key: YOUR_DROPBOX_APP_KEY
+#   :app_secret: YOUR_DROPBOX_APP_SECRET
+# box:
+#   :client_id: YOUR_BOX_CLIENT_ID
+#   :client_secret: YOUR_BOX_CLIENT_SECRET
+# google_drive:
+#   :client_id: YOUR_GOOGLE_API_CLIENT_ID
+#   :client_secret: YOUR_GOOGLE_API_CLIENT_SECRET
+<% if Rails.env.staging? || Rails.env.production? %>
+s3:
+  :bucket: <%= ENV['AWS_S3_BUCKET'] %>
+  :response_type: :signed_url # set to :public_url for public urls or :s3_uri for an s3://BUCKET/KEY uri
+  :app_key: <%= ENV['AWS_S3_APP_KEY'] %> # :app_key, :app_secret, and :region can be specified
+  :app_secret: <%= ENV['AWS_S3_APP_SECRET'] %> # explicitly here, or left out to use system-configured
+  :region: <%= ENV['AWS_S3_REGION'] %> # defaults.
+#   See https://aws.amazon.com/blogs/security/a-new-and-standardized-way-to-manage-credentials-in-the-aws-sdks/
+<% end %>
+
