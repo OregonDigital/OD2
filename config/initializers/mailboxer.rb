@@ -5,7 +5,7 @@ Mailboxer.setup do |config|
   config.uses_emails = true
 
   # Configures the default from for emails sent for Messages and Notifications
-  config.default_from = 'no-reply@mailboxer.com'
+  config.default_from = ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
 
   # Configures the methods needed by mailboxer
   config.email_method = :mailboxer_email
