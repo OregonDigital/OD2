@@ -10,6 +10,7 @@ volumes:
   ? fcrepo-dev
   ? solr-dev
   ? redis-dev
+  ? bundled
 
 services:
   ##
@@ -20,6 +21,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/data # mount current directory into the image
+      - bundled:/usr/local/bundle
     networks:
       ? external
       ? internal
@@ -148,6 +150,7 @@ services:
     volumes:
       - .:/data # mount current directory into the image
       - ./tmp:/tmp
+      - bundled:/usr/local/bundle
     command: >
       bash -c "./build/entrypoint.sh &&
       puma -b tcp://0.0.0.0:3001 -e test -d &&
