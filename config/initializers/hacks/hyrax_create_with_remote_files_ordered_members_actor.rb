@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-Hyrax::Actors::CreateWithRemoteFilesActor.class_eval do
+Hyrax::Actors::CreateWithRemoteFilesOrderedMembersActor.class_eval do
   # @param [HashWithIndifferentAccess] remote_files
   # @return [TrueClass]
   def attach_files(env, remote_files)
