@@ -28,4 +28,5 @@ class SolrDocument
   solrized_methods OregonDigital::DocumentMetadata::PROPERTIES
   solrized_methods OregonDigital::ImageMetadata::PROPERTIES
   solrized_methods OregonDigital::VideoMetadata::PROPERTIES
+  solrized_methods OregonDigital::GenericMetadata::CONTROLLED
 end
