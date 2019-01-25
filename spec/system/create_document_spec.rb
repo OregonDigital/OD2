@@ -37,7 +37,7 @@ RSpec.describe 'Create a Document', js: true, type: :system do
         fill_in('Identifier', with: 'Test ID')
       end
       select('In Copyright', from: 'Rights')
-      select('Article', from: 'Resource type')
+      select('Image', from: 'Resource type')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
 
