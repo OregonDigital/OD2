@@ -5,6 +5,8 @@ RSpec.describe Hyrax::DocumentForm do
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
   let(:props) { OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_sym) }
+  let(:terms) { new_form.primary_terms + new_form.secondary_terms }
+  let(:model) { create(:document) }
 
   before do
     allow(new_form).to receive(:current_ability).and_return(ability)
@@ -14,6 +16,12 @@ RSpec.describe Hyrax::DocumentForm do
   it 'responds to terms with the proper list of terms' do
     props.each do |prop|
       expect(described_class.terms).to include(prop)
+    end
+  end
+
+  it 'matches terms to model properties' do
+    terms.each do |term|
+      expect(model).to respond_to(term)
     end
   end
 end
