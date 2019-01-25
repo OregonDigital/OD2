@@ -15,7 +15,7 @@ RSpec.describe Hyrax::GenericForm do
 
   it 'responds to terms with the proper list of terms' do
     props.each do |t|
-      expect(described_class.terms).to include(t)
+      expect(terms).to include(t)
     end
   end
 
