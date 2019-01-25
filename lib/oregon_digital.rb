@@ -11,4 +11,9 @@ module OregonDigital
   def self.logger
     @logger ||= Rails.logger
   end
+
+
+  eager_autoload do
+    autoload :ControlledVocabularies
+  end
 end
