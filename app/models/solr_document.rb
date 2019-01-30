@@ -11,12 +11,14 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
   use_extension(Hydra::ContentNegotiation)
 
-  def self.solrized_methods(property_names)
+  def self.solrized_methods(property_names, model)
     property_names.each do |property_name|
       define_method property_name.to_sym do
         values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
         if values.respond_to?(:each)
           values.reject(&:blank?)
+        elsif values.blank?
+          Hyrax::FormMetadataService.multiple?(model, property_name) ? [] : ''
         else
           values
         end
@@ -24,8 +26,8 @@ class SolrDocument
     end
   end
 
-  solrized_methods OregonDigital::GenericMetadata::PROPERTIES
-  solrized_methods OregonDigital::DocumentMetadata::PROPERTIES
-  solrized_methods OregonDigital::ImageMetadata::PROPERTIES
-  solrized_methods OregonDigital::VideoMetadata::PROPERTIES
+  solrized_methods OregonDigital::GenericMetadata::PROPERTIES, Generic
+  solrized_methods OregonDigital::DocumentMetadata::PROPERTIES, Document
+  solrized_methods OregonDigital::ImageMetadata::PROPERTIES, Image
+  solrized_methods OregonDigital::VideoMetadata::PROPERTIES, Video
 end
