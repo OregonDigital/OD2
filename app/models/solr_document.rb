@@ -15,14 +15,20 @@ class SolrDocument
     property_names.each do |property_name|
       define_method property_name.to_sym do
         values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
-        if values.respond_to?(:each)
-          values.reject(&:blank?)
-        elsif values.blank?
-          Hyrax::FormMetadataService.multiple?(model, property_name) ? [] : ''
-        else
-          values
-        end
+        valid_solr_doc_values(values, model, property_name)
       end
+    end
+  end
+
+  private
+
+  def valid_solr_doc_values(values, model, property_name)
+    if values.respond_to?(:each)
+      values.reject(&:blank?)
+    elsif values.blank?
+      Hyrax::FormMetadataService.multiple?(model, property_name) ? [] : ''
+    else
+      values
     end
   end
 
