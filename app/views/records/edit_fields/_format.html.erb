@@ -1,8 +1,8 @@
 <%= f.input key,
             as: :controlled_vocabulary,
-            placeholder: 'Search for a location',
+            placeholder: 'Search for a format',
             input_html: {
-              class: 'form-control controlled_field',
+              class: 'form-control',
               data: { 'autocomplete-url' => "/authorities/search/format",
                       'autocomplete' => key.to_s + '_ld' }
             },

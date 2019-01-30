@@ -17,7 +17,6 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require blacklight/blacklight
-//= require copy_controlled_uri
 
 //= require_directory .
 //= require hyrax
