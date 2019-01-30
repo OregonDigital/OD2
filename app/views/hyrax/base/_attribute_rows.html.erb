@@ -1,4 +1,4 @@
-<% OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym).reject{ |attr| attr == :oembed_url }.each do |attr| %>
+<% (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)).reject{ |attr| [:description, :license, :oembed_url].include? attr }.each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <% OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>

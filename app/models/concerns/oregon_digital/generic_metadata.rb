@@ -476,6 +476,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :rights_note, predicate: ::RDF::Vocab::EBUCore.rightsExpression do |index|
+        index.as :stored_searchable
+      end
+
       property :box, predicate: ::RDF::Vocab::SCHEMA.box do |index|
         index.as :stored_searchable
       end
