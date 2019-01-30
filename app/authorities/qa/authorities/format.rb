@@ -20,8 +20,8 @@ module Qa::Authorities
 
       # Reformats the data received from the service
       def parse_authority_response(response)
-          { 'id' => "#{response.first["@id"]}",
-            'label' => label.call(response) }
+          [{ 'id' => "#{response.first["@id"]}",
+            'label' => label.call(response) }]
       end
   end
 end

@@ -19,6 +19,5 @@
 //= require blacklight/blacklight
 //= require copy_controlled_uri
 
-//= require_tree .
+//= require_directory .
 //= require hyrax
-
