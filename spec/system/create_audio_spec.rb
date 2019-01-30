@@ -36,7 +36,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system do
       within('div.audio_identifier') do
         fill_in('Identifier', with: 'Test ID')
       end
-      select('Image', from: 'Resource type')
+      select('Article', from: 'Type')
       select('In Copyright', from: 'Rights')
       # TODO: Rights statement list is missing from generic model, uncomment/resolve
       # line below when when rights_statement list is ready
