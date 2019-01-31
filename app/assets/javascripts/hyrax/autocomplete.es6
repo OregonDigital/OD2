@@ -9,15 +9,12 @@ export default class Autocomplete {
    * @param {string} fieldName - The name of the field (e.g. 'based_near')
    * @param {string} url - The url for the autocompete search endpoint
    */
-  setup (element, fieldName, url) {
+  setup (element, fieldName, url, fieldType=null) {
     // OVERRIDE FROM HYRAX
-    // Add linked data support for arbitrary autocomplete fields
-    if (fieldName.endsWith('_ld')) {
-      new LinkedData(element, url)
-      return
-    }
-    // END OVERRIDE
-    switch (fieldName) {
+    // Add linked data support for arbitrary autocomplete fields by accepting
+    //  fieldType param on the initial field or fieldType override from controlled_vocabulary fieldmanager
+    var switchVal = element.data('fieldType') || fieldType || fieldName
+    switch (switchVal) {
       case 'work':
         new Resource(
           element,
@@ -30,11 +27,13 @@ export default class Autocomplete {
           element,
           url)
         break
+      case 'linked_data':
       case 'based_near':
         new LinkedData(element, url)
       default:
         new Default(element, url)
         break
+    // END OVERRIDE
     }
   }
 }
