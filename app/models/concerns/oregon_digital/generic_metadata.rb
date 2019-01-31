@@ -571,7 +571,9 @@ module OregonDigital
       end
 
       property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location
-      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType
+      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
+        index.as :stored_searchable, :facetable
+      end 
 
       id_blank = proc { |attributes| attributes[:id].blank? }
 
