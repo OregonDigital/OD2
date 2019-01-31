@@ -79,7 +79,9 @@ RSpec.configure do |config|
   end
 
   config.around do |example|
-    unless example.metadata[:type] == :system
+    if example.metadata[:type] == :system
+      example.run
+    else
       DatabaseCleaner.cleaning do
         example.run
       end

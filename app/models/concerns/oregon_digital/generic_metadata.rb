@@ -16,9 +16,12 @@ module OregonDigital
       property :resource_type, predicate: ::RDF::Vocab::DC.type
       property :creator, predicate: ::RDF::Vocab::DC11.creator
       property :contributor, predicate: ::RDF::Vocab::DC11.contributor
+      property :date_created, predicate: ::RDF::Vocab::DC.created
+
       property :description, predicate: ::RDF::Vocab::DC.description do |index|
         index.as :stored_searchable
       end
+
       property :rights_statement, predicate: ::RDF::Vocab::EDM.rights
       property :identifier, predicate: ::RDF::Vocab::DC.identifier
 
@@ -467,6 +470,10 @@ module OregonDigital
       end
 
       property :replaces_url, predicate: ::RDF::Vocab::DC.replaces, multiple: false do |index|
+        index.as :stored_searchable
+      end
+
+      property :rights_note, predicate: ::RDF::Vocab::EBUCore.rightsExpression do |index|
         index.as :stored_searchable
       end
 
