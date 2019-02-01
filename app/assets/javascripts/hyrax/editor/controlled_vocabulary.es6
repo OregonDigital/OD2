@@ -1,5 +1,3 @@
-//= require handlebars-v4.0.5.js
-
 import { FieldManager } from 'hydra-editor/field_manager'
 import Handlebars from 'handlebars'
 import Autocomplete from 'hyrax/autocomplete'
