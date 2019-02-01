@@ -14,8 +14,7 @@ module OregonDigital
         label = super
 
         unless parentFeature.empty? || RDF::URI(label.first).valid?
-          #TODO: Identify more featureCodes that should cause us to terminate the sequence
-
+          # TODO: Identify more featureCodes that should cause us to terminate the sequence
           return label if top_level_element?
 
           parent_label = parentFeature.first.is_a? ActiveTriples::Resource ? parentFeature.first.rdf_label.first : []
