@@ -7,7 +7,7 @@ RSpec.describe Qa::Authorities::ExtendedGeonames do
   let(:fcl) { 'Area' }
 
   it { expect(geonames_instance.label.call(label_hash, fcl)).to eq 'my_label' }
-  describe "#search" do
+  describe '#search' do
     before do
       allow(geonames_instance).to receive(:json).with(:anything).and_return(response)
       allow(geonames_instance).to receive(:build_query_url).with('http://my.queryuri.com').and_return(response)

@@ -27,7 +27,7 @@ module Hyrax
     end
 
     def self.build_permitted_params
-      super << { format_attributes: [:id, :_destroy] }
+      super << { format_attributes: %i[id _destroy] }
     end
   end
 end
