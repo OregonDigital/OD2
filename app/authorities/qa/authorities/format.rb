@@ -16,7 +16,7 @@ module Qa::Authorities
     end
 
     def build_query_url(q)
-      CGI.escape(q)
+      URI.escape(q)
     end
 
     private
