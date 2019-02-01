@@ -2,6 +2,8 @@
 
 # This handles the omniauth callback to grab a user and sign them in
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :verify_authenticity_token, only: [:saml, :failure]
+
   def cas
     find_user_and_redirect
   end
