@@ -12,7 +12,7 @@ module OregonDigital
         'http://www.geonames.org/ontology#S' => 'Spot',
         'http://www.geonames.org/ontology#T' => 'Hypsographic',
         'http://www.geonames.org/ontology#U' => 'Undersea',
-        'http://www.geonames.org/ontology#V' => 'Vegetation'}[uri]
+        'http://www.geonames.org/ontology#V' => 'Vegetation' }[uri]
     end
   end
 end
