@@ -15,6 +15,7 @@ module OregonDigital
 
         unless parentFeature.empty? || RDF::URI(label.first).valid?
           #TODO: Identify more featureCodes that should cause us to terminate the sequence
+
           return label if top_level_element?
 
           parent_label = parentFeature.first.is_a? ActiveTriples::Resource ? parentFeature.first.rdf_label.first : []
@@ -48,7 +49,7 @@ module OregonDigital
       end
 
       def top_level_element?
-        feature_code = self.featureCode.first
+        feature_code = featureCode.first
         top_level_codes = [RDF::URI('http://www.geonames.org/ontology#A.PCLI')]
         featureCode.respond_to?(:rdf_subject) && top_level_codes.include?(feature_code.rdf_subject)
       end
