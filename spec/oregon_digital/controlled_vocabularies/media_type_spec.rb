@@ -8,6 +8,6 @@ RSpec.describe OregonDigital::ControlledVocabularies::MediaType do
       allow(media_type).to receive(:rdf_label).and_return(['RDF_Label'])
       allow(media_type).to receive(:rdf_subject).and_return('RDF.Subject.Org')
     end
-    it { media_type.solrize eq ['RDF.Subject.Org', { label: 'RDF_Label$RDF.Subject.Org' }] }
+    it { expect(media_type.solrize).to eq ['RDF.Subject.Org', { label: 'RDF_Label$RDF.Subject.Org' }] }
   end
 end
