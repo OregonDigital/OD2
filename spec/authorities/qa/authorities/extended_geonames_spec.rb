@@ -2,7 +2,7 @@
 
 RSpec.describe Qa::Authorities::ExtendedGeonames do
   let(:geonames_instance) { described_class.new }
-  let(:response) { [{ 'geonames': [{ 'geonameId': 'myId', 'name': 'myName', 'adminName1': 'adminName1', 'countryName': 'countryName', 'fcl': 'A' }.with_indifferent_access] }.with_indifferent_access] }
+  let(:response) { { 'geonames': [{ 'geonameId': 'myId', 'name': 'myName', 'adminName1': 'adminName1', 'countryName': 'countryName', 'fcl': 'A' }.with_indifferent_access] }.with_indifferent_access }
   let(:label_hash) { { geonameId: 'myId', name: 'myName', adminName1: 'adminName1', countryName: 'countryName' }.with_indifferent_access }
   let(:fcl) { 'Area' }
 
