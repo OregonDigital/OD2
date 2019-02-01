@@ -10,6 +10,6 @@ RSpec.describe Qa::Authorities::Format do
       allow(format_instance).to receive(:json).with(:anything).and_return(response)
       allow(format_instance).to receive(:build_query_url).with('http://my.queryuri.com').and_return(response)
     end
-    it { expect(format_instance.search('http://my.queryuri.com')) eq [{ 'id': 'my_id', 'label': 'mylabel' }] }
+    it { expect(format_instance.search('http://my.queryuri.com')).to eq [{ 'id': 'my_id', 'label': 'mylabel' }] }
   end
 end

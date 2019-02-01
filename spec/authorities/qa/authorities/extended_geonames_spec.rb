@@ -6,7 +6,7 @@ RSpec.describe Qa::Authorities::ExtendedGeonames do
   let(:label_hash) { { 'geonameId': 'myId', 'name': 'myName', 'adminName1': 'adminName1', 'countryName': 'countryName' } }
   let(:fcl) { 'Area' }
 
-  it { expect(geonames_instance.label.call(label_hash, fcl)).to eq 'my_label'}
+  it { expect(geonames_instance.label.call(label_hash, fcl)).to eq 'my_label' }
   describe "#search" do
     before do
       allow(geonames_instance).to receive(:json).with(:anything).and_return(response)
