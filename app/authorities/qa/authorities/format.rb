@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 module Qa::Authorities
+  # Format QA Object
   class Format < Qa::Authorities::Base
     include WebServiceBase
 
     class_attribute :label
 
     self.label = lambda do |item|
-      [item.first["http://www.w3.org/2000/01/rdf-schema#label"].first["@value"]].compact.join(', ')
+      [item.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']].compact.join(', ')
     end
 
     def search(q)
@@ -13,15 +16,15 @@ module Qa::Authorities
     end
 
     def build_query_url(q)
-      URI.escape(q)
+      CGI.escape(q)
     end
 
     private
 
-      # Reformats the data received from the service
-      def parse_authority_response(response)
-          [{ 'id' => "#{response.first["@id"]}",
-            'label' => label.call(response) }]
-      end
+    # Reformats the data received from the service
+    def parse_authority_response(response)
+      [{ 'id' => response.first['@id'].to_s,
+         'label' => label.call(response) }]
+    end
   end
 end

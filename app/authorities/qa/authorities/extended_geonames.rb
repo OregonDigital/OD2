@@ -29,8 +29,7 @@ module Qa::Authorities
         'S' => 'Spot',
         'T' => 'Hypsographic',
         'U' => 'Undersea',
-        'V' => 'Vegetation'
-      }[fcl]
+        'V' => 'Vegetation' }[fcl]
     end
   end
 end
