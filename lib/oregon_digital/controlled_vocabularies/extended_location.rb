@@ -18,7 +18,7 @@ module OregonDigital
           return label if top_level_element?
 
           parent_label = parentFeature.first.is_a? ActiveTriples::Resource ? parentFeature.first.rdf_label.first : []
-          return label if parent_label.empty? || RDF::URI(parent_label).valid? || parent_label.starts_with? '_:'
+          return label if parent_label.empty? || RDF::URI(parent_label).valid? || parent_label.starts_with?('_:')
 
           fc_label = OregonDigital::FeatureClassUriToLabel.new.uri_to_label(featureClass.first.id.to_s) unless featureClass.blank?
           label = "#{label.first} , #{parent_label} (#{fc_label}) " unless parent_label.include?('(')
