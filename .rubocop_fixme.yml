@@ -10,7 +10,7 @@ Metrics/LineLength:
     - 'spec/**/*'
     - 'config/**/*'
     - 'app/controllers/catalog_controller.rb'
-    - 'lib/oregon_digital/controlled_vocabularies/location.rb'
+    - 'lib/hyrax/controlled_vocabularies/location.rb'
 
 Metrics/AbcSize:
   Exclude:
