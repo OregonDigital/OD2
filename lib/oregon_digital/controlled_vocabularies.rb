@@ -7,7 +7,6 @@ module OregonDigital
 
     eager_autoload do
       autoload :MediaType
-      autoload :ExtendedLocation
     end
   end
 end

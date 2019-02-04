@@ -67,11 +67,3 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Exclude:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
-
-Metrics/CyclomaticComplexity:
-  Exclude:
-    - 'lib/oregon_digital/controlled_vocabularies/location.rb'
-
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'lib/oregon_digital/controlled_vocabularies/location.rb'

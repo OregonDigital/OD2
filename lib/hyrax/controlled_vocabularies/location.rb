@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
-module OregonDigital
+module Hyrax
   module ControlledVocabularies
-    # Media Type object for storing labels and uris
-    class Location < Hyrax::ControlledVocabularies::Location
+    # Location object
+    class Location < ActiveTriples::Resource
       configure rdf_label: ::RDF::Vocab::GEONAMES.name
 
       property :parentFeature, predicate: RDF::URI('http://www.geonames.org/ontology#parentFeature'), class_name: 'Hyrax::ControlledVocabularies::Location'
@@ -11,7 +9,6 @@ module OregonDigital
       property :featureCode, predicate: RDF::URI('http://www.geonames.org/ontology#featureCode')
       property :featureClass, predicate: RDF::URI('http://www.geonames.org/ontology#featureClass')
 
-      # Return a tuple of url & label
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
@@ -27,7 +24,6 @@ module OregonDigital
         @label = super
 
         unless valid_label_without_parent
-          # TODO: Identify more featureCodes that should cause us to terminate the sequence
           return @label if top_level_element?
 
           parent_label = label_or_blank
