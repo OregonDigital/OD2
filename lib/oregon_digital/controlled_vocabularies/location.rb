@@ -3,11 +3,20 @@
 module OregonDigital
   module ControlledVocabularies
     # Media Type object for storing labels and uris
-    class ExtendedLocation < Hyrax::ControlledVocabularies::Location
+    class Location < Hyrax::ControlledVocabularies::Location
+      configure rdf_label: ::RDF::Vocab::GEONAMES.name
+
       property :parentFeature, predicate: RDF::URI('http://www.geonames.org/ontology#parentFeature'), class_name: 'Hyrax::ControlledVocabularies::Location'
       property :parentCountry, predicate: RDF::URI('http://www.geonames.org/ontology#parentCountry'), class_name: 'Hyrax::ControlledVocabularies::Location'
       property :featureCode, predicate: RDF::URI('http://www.geonames.org/ontology#featureCode')
       property :featureClass, predicate: RDF::URI('http://www.geonames.org/ontology#featureClass')
+
+      # Return a tuple of url & label
+      def solrize
+        return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label.first.to_s == rdf_subject.to_s
+
+        [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
+      end
 
       # Overrides rdf_label to recursively add location disambiguation when available.
       def rdf_label
