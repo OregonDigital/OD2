@@ -257,7 +257,7 @@ Devise.setup do |config|
   config.omniauth :saml,
                   idp_cert: ENV.fetch('SAML_IDP_CERT', 'cert'),
                   idp_sso_target_url: ENV.fetch('SAML_URL', 'https://shibboleth-test.uoregon.edu/idp/profile/SAML2/Redirect/SSO'),
-                  issuer: ENV.fetch('SAML_ISSUER', 'http://od2-staging.library.oregonstate.edu/users/auth/saml?locale=en'),
+                  issuer: ENV.fetch('SAML_ISSUER', 'http://od2-staging.library.oregonstate.edu/users/auth/saml'),
                   private_key: ENV.fetch('SAML_PRIVATE_KEY', 'key'),
                   certificate: ENV.fetch('SAML_CERT', nil),
                   uid_attribute: 'urn:oid:0.9.2342.19200300.100.1.1'
