@@ -13,6 +13,7 @@ RSpec.describe OregonDigital::TriplePoweredProperties::WorkIndexer do
       allow(work).to receive(:fetch).and_return(['Blahbalh'])
       allow(work).to receive(:uri_labels).and_return(based_near: ['Blahblah'])
     end
+
     it 'appends the labels into the solr_document' do
       expect(solr_document['based_near_tesim']).to eq ['Blahblah']
     end

@@ -17,11 +17,13 @@ RSpec.describe OregonDigital::ErroredOembedSearchBuilder do
     let!(:oembed_error) { create(:oembed_error) }
 
     before { search_builder.with_errored_oembed(solr_params) }
+
     it { expect(solr_params[:fq]).to eq(["id:(#{oembed_error.document_id})"]) }
   end
 
   describe 'with no errored oembeds' do
     before { search_builder.with_errored_oembed(solr_params) }
+
     it { expect(solr_params[:fq]).to eq(['-id:*']) }
   end
 end

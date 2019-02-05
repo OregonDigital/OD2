@@ -13,6 +13,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       allow(request).to receive(:env).and_return(merged_env)
       allow(provider).to receive(:provider).and_return('cas')
     end
+
     it 'redirects when authenticated' do
       req.env['devise.mapping'] = Devise.mappings[:user]
       get :cas
@@ -20,12 +21,14 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       expect(response.status).to eq 302
     end
   end
+
   context 'when #saml' do
     before do
       allow(user_ob).to receive(:from_omniauth).with(anything).and_return(user)
       allow(request).to receive(:env).and_return(merged_env)
       allow(provider).to receive(:provider).and_return('cas')
     end
+
     it 'redirects when authenticated' do
       req.env['devise.mapping'] = Devise.mappings[:user]
       get :saml

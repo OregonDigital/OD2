@@ -12,6 +12,7 @@ module OregonDigital::TriplePoweredProperties
     # @return [RDF::Graph] the graph
     def self.fetch(uri)
       return if uri.blank?
+
       begin
         @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
         @triplestore.fetch(uri, from_remote: true)

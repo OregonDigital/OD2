@@ -15,6 +15,7 @@ RSpec.describe OregonDigital::OembedSearchBuilder do
     let(:processor_chain) { {} }
 
     before { search_builder.with_sorting(processor_chain) }
+
     it { is_expected.to eq(sort: 'system_create_dtsi desc') }
   end
 
@@ -22,6 +23,7 @@ RSpec.describe OregonDigital::OembedSearchBuilder do
     let(:processor_chain) { {} }
 
     before { search_builder.only_oembed(processor_chain) }
+
     it { is_expected.to eq(fq: ['oembed_url_tesim:*']) }
   end
 end
