@@ -26,6 +26,7 @@ RSpec.describe OregonDigital::OembedsController do
         expect(flash[:alert]).to eq 'You are not authorized to access this page.'
       end
     end
+
     context 'when I have permission to edit the object' do
       it 'shows me the page' do
         expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)

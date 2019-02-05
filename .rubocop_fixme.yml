@@ -1,16 +1,3 @@
-Metrics/LineLength:
-  # Ignore comment lines that may begin with spaces
-  IgnoredPatterns: ['(\A|\s)#']
-  Exclude:
-    - 'app/controllers/oregon_digital/oembeds_controller.rb'
-    - 'app/models/concerns/oregon_digital/document_metadata.rb'
-    - 'app/models/concerns/oregon_digital/generic_metadata.rb'
-    - 'app/models/concerns/oregon_digital/image_metadata.rb'
-    - 'app/models/concerns/oregon_digital/video_metadata.rb'
-    - 'spec/**/*'
-    - 'config/**/*'
-    - 'app/controllers/catalog_controller.rb'
-
 Metrics/AbcSize:
   Exclude:
     - 'app/indexers/oregon_digital/deep_indexing_service.rb'

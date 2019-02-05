@@ -22,35 +22,42 @@ RSpec.describe Hyrax::ContactFormController, type: :controller do
     before do
       controller.instance_variable_set(:@contact_form, contact_form)
     end
+
     context 'when recaptcha is enabled' do
       let(:params) { required_params }
 
       before do
         allow(controller).to receive(:recaptcha?).and_return(true)
       end
+
       context 'with and the recaptcha is not verified' do
         before do
           allow(controller).to receive(:verify_recaptcha).and_return(false)
         end
+
         it 'returns false and throws an error' do
           expect(controller.check_recaptcha).to eq(false)
         end
       end
+
       context 'with and the recaptcha is verified' do
         before do
           allow(controller).to receive(:verify_recaptcha).and_return(true)
         end
+
         it 'returns a true value' do
           expect(controller.check_recaptcha).to eq(true)
         end
       end
     end
+
     context 'when recaptcha is not enabled' do
       let(:params) { required_params }
 
       before do
         allow(controller).to receive(:recaptcha?).and_return(false)
       end
+
       it 'returns true and processes the email normally' do
         expect(controller.check_recaptcha).to eq(true)
       end
