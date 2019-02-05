@@ -56,6 +56,7 @@ group :development, :test do
   gem 'debase-ruby_core_source'
   gem 'factory_bot_rails'
   gem 'poltergeist'
+  gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rspec'

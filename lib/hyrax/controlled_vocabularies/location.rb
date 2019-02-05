@@ -67,14 +67,13 @@ module Hyrax
 
       # Fetch parent features if they exist. Necessary for automatic population of rdf label.
       def fetch(*args, &_block)
-        binding.pry
-        result = super(*args, &_block)
-        return result if top_level_element?
+        resource = super
+        return resource if top_level_element?
 
         parentFeature.each do |feature|
-          feature.fetch(*args, &_block)
+          feature.fetch
         end
-        result
+        resource
       end
 
       # Persist parent features.
