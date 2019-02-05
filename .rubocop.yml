@@ -45,7 +45,7 @@ Rails/ApplicationRecord:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 120
+  Enabled: false
 
 RSpec/DescribeClass:
   Exclude:
