@@ -12,6 +12,7 @@ RSpec.describe OregonDigital::TriplePoweredProperties::Triplestore do
       stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/blah%3E')
         .to_return(status: 200, body: '', headers: {})
     end
+
     it 'sets the triplestore as an instance of TriplestoreAdapter::Triplestore' do
       triplestore.fetch('http://opaquenamespace.org/ns/blah')
       expect(triplestore.instance_variable_get(:@triplestore)).to be_kind_of TriplestoreAdapter::Triplestore

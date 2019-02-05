@@ -26,6 +26,7 @@ FactoryBot.define do
       after(:build) do |file, _evaluator|
         file.title = ['testfile']
       end
+
       after(:create) do |file, evaluator|
         Hydra::Works::UploadFileToFileSet.call(file, evaluator.content) if evaluator.content
         create(:work, user: evaluator.user).members << file
