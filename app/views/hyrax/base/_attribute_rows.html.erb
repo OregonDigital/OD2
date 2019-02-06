@@ -10,4 +10,7 @@
 <% OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
+<% OregonDigital::GenericMetadata::CONTROLLED.map(&:to_sym).each do |attr| %>
+  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
+<% end %>
 <%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>

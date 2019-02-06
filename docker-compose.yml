@@ -66,6 +66,7 @@ services:
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/rw/sparql
       - RECAPTCHA_SECRET_KEY=asdfasdfasdfasdfasdfadsfasdfadfsfa
       - RECAPTCHA_SITE_KEY=asdfasdfadsfasdfasdfasdfasdfasdfad
+      - GEONAMES_USERNAME=etsdev
     depends_on:
       - db-dev
       - blazegraph-dev
@@ -137,6 +138,7 @@ services:
       - RECAPTCHA_SITE_KEY=asdfasdfadsfasdfasdfasdfasdfasdfad
       - SAML_ISSUER=http://od2-staging.library.oregonstate.edu/users/auth/saml
       - SAML_PRIVATE_KEY=key
+      - GEONAMES_USERNAME=etsdev
     depends_on:
       - chrome
       - selenium-hub
