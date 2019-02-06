@@ -206,7 +206,7 @@ services:
       - docker-entrypoint.sh
       - solr-precreate
       - test
-      - /opt/solr/od2_con
+      - /opt/solr/od2_conf
 
   ##
   # Fedora repository server
