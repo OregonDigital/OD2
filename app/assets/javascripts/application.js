@@ -18,6 +18,8 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require blacklight/blacklight
 
-//= require_tree .
+//= require_directory .
 //= require hyrax
 
+// Required for Hyrax override in assets/javascripts/hyrax/editor/controlled_vocabulary.es6
+//= require handlebars-v4.0.5
