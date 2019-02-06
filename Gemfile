@@ -25,6 +25,7 @@ gem 'ruby-oembed'
 gem 'blacklight-oembed'
 gem 'net-http-persistent', '~> 2.9'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
+gem 'faraday_middleware', '~> 0.10.0'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'

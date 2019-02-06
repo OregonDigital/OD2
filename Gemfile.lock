@@ -335,6 +335,8 @@ GEM
       faraday
     faraday-honeycomb (0.3.0)
       libhoney (>= 1.5.0)
+    faraday_middleware (0.10.1)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.9.25)
     flipflop (2.4.0)
       activesupport (>= 4.0)
@@ -922,6 +924,7 @@ DEPENDENCIES
   devise-guests (~> 0.6)
   equivalent-xml
   factory_bot_rails
+  faraday_middleware (~> 0.10.0)
   honeycomb-beeline
   hydra-role-management
   hyrax!
@@ -965,4 +968,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.17.1
+   1.17.2

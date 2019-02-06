@@ -4,6 +4,7 @@ module Qa::Authorities
   # Format QA Object
   class Format < Qa::Authorities::Base
     include WebServiceBase
+    include OregonDigital::Authorities::WebServiceRedirect
 
     class_attribute :label
 
@@ -16,7 +17,7 @@ module Qa::Authorities
     end
 
     def build_query_url(q)
-      query = CGI.escape(q)
+      query = q.split('/').map(&CGI.method(:escape)).join('/')
       "https://w3id.org/spar/mediatype/#{query}"
     end
 
