@@ -41,10 +41,18 @@ jobs:
             echo "deb http://http.debian.net/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
             sudo apt-get update -qq
             sudo apt-get upgrade -qq
-            sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils
+            sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg
+            sudo apt-get install -y clamav-freshclam clamav-daemon libclamav-dev
             sudo apt-get install -t jessie-backports -y openjdk-8-jre-headless ca-certificates-java
             sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
             sudo update-alternatives --config java
+      - run:
+          name: Fetch clamav databases
+          command: |
+            sudo wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
+            sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
+            sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
+            sudo chown clamav:clamav /var/lib/clamav/*.cvd
       - checkout
       - restore_cache:
           key: gemfile-{{ checksum "Gemfile.lock" }}
@@ -65,6 +73,7 @@ jobs:
           key: gemfile-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+            - ./var/lib/clamav
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
