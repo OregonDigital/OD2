@@ -17,7 +17,7 @@ module Qa::Authorities
 
     def build_query_url(q)
       query = CGI.escape(q)
-      "https://w3id.org/spar/mediatype/#{query}" 
+      "https://w3id.org/spar/mediatype/#{query}"
     end
 
     private
