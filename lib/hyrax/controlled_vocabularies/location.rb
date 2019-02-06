@@ -13,12 +13,7 @@ module Hyrax
 
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
-
         [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
-      end
-
-      def rdf_label_uri_same?
-        rdf_label.first.to_s == rdf_subject.to_s
       end
 
       # Overrides rdf_label to recursively add location disambiguation when available.
@@ -35,6 +30,30 @@ module Hyrax
           build_label(parent_label, fc_label)
         end
         Array(@label)
+      end
+
+      # Fetch parent features if they exist. Necessary for automatic population of rdf label.
+      def fetch
+        resource = super
+        return resource if top_level_element?
+
+        parentFeature.each(&:fetch)
+        resource
+      end
+
+      # Persist parent features.
+      def persist!
+        result = super
+        return result if top_level_element?
+
+        parentFeature.each(&:persist!)
+        result
+      end
+
+      private
+
+      def rdf_label_uri_same?
+        rdf_label.first.to_s == rdf_subject.to_s
       end
 
       def top_level_parent(parent_label)
@@ -63,26 +82,6 @@ module Hyrax
 
       def valid_or_blank_parent?
         parent_label.empty? || RDF::URI(parent_label).valid?
-      end
-
-      # Fetch parent features if they exist. Necessary for automatic population of rdf label.
-      def fetch(*args, &_block)
-        resource = super
-        return resource if top_level_element?
-
-        parentFeature.each do |feature|
-          feature.fetch
-        end
-        resource
-      end
-
-      # Persist parent features.
-      def persist!
-        result = super
-        return result if top_level_element?
-
-        parentFeature.each(&:persist!)
-        result
       end
 
       def top_level_element?
