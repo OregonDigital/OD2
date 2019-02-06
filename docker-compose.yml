@@ -8,7 +8,7 @@ volumes:
   ? db-dev
   ? blazegraph-dev
   ? fcrepo-dev
-  ? solr-dev
+  ? solr
   ? redis-dev
   ? bundled
 
@@ -186,17 +186,27 @@ services:
   # SOLR Index server
   solr: &solr
     image: solr:6-alpine
-    command: /opt/solr/bin/solr -cloud -noprompt -f -p 8983
     expose:
       - 8983
     networks:
       ? internal
+    volumes:
+      - ./config/solr/config:/opt/solr/od2_conf
+      - solr:/opt/solr/server/mycores
   solr-dev:
     <<: *solr
-    volumes:
-      - solr-dev:/opt/solr/server/solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - development
+      - /opt/solr/od2_conf
   solr-test:
     <<: *solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - test
+      - /opt/solr/od2_con
 
   ##
   # Fedora repository server
