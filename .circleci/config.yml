@@ -49,11 +49,10 @@ jobs:
       - run:
           name: Fetch clamav databases
           command: |
-            mkdir -p /var/lib/clamav
-            wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
-            wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
-            wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
-            chown clamav:clamav /var/lib/clamav/*.cvd
+            sudo wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
+            sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
+            sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
+            sudo chown clamav:clamav /var/lib/clamav/*.cvd
       - checkout
       - restore_cache:
           key: gemfile-{{ checksum "Gemfile.lock" }}
