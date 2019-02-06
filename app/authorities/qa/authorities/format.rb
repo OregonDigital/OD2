@@ -16,17 +16,17 @@ module Qa::Authorities
       parse_authority_response(json(build_query_url(q)))
     end
 
-    def build_query_url(q)
-      query = q.split('/').map(&CGI.method(:escape)).join('/')
-      "https://w3id.org/spar/mediatype/#{query}"
-    end
-
     private
 
     # Reformats the data received from the service
     def parse_authority_response(response)
       [{ 'id' => response.first['@id'].to_s,
          'label' => label.call(response) }]
+    end
+
+    def build_query_url(q)
+      query = q.split('/').map(&CGI.method(:escape)).join('/')
+      "https://w3id.org/spar/mediatype/#{query}"
     end
   end
 end

@@ -10,11 +10,27 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
   end
 
   describe '#solrize' do
-    before do
-      allow(location).to receive(:rdf_label).and_return(['RDF_Label'])
-      allow(location).to receive(:rdf_subject).and_return('RDF.Subject.Org')
+    context 'with a valid label and subject' do
+      before do
+        allow(location).to receive(:rdf_label).and_return(['RDF_Label'])
+        allow(location).to receive(:rdf_subject).and_return('RDF.Subject.Org')
+      end
+      it { expect(location.solrize).to eq ['RDF.Subject.Org', { label: 'RDF_Label$RDF.Subject.Org' }] }
     end
-    it { expect(location.solrize).to eq ['RDF.Subject.Org', { label: 'RDF_Label$RDF.Subject.Org' }] }
+    context 'without a label' do
+      before do
+        allow(location).to receive(:rdf_label).and_return([''])
+        allow(location).to receive(:rdf_subject).and_return('RDF.Subject.Org')
+      end
+      it { expect(location.solrize).to eq ['RDF.Subject.Org'] }
+    end
+    context 'when label and uri are the same' do
+      before do
+        allow(location).to receive(:rdf_label).and_return(['RDF.Subject.Org'])
+        allow(location).to receive(:rdf_subject).and_return('RDF.Subject.Org')
+      end
+      it { expect(location.solrize).to eq ['RDF.Subject.Org'] }
+    end
   end
 
   describe '#fetch' do
@@ -62,6 +78,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
       before do
         allow(location).to receive(:parentFeature).and_return(parent_feature)
         allow(location).to receive(:top_level_element?).and_return(true)
+        allow(location).to receive(:valid_label_without_parent).and_return(false)
       end
       it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University'] }
     end
@@ -69,6 +86,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
       before do
         allow(location).to receive(:parentFeature).and_return(parent_feature)
         allow(location).to receive(:top_level_element?).and_return(false)
+        allow(location).to receive(:valid_label_without_parent).and_return(false)
         allow(location).to receive(:label_or_blank).and_return('Parent Label')
         allow(location).to receive(:top_level_parent).with('Parent Label').and_return(true)
       end
@@ -78,11 +96,12 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
       before do
         allow(location).to receive(:parentFeature).and_return(parent_feature)
         allow(location).to receive(:top_level_element?).and_return(false)
+        allow(location).to receive(:valid_label_without_parent).and_return(false)
         allow(location).to receive(:label_or_blank).and_return('Parent Label')
         allow(location).to receive(:top_level_parent).with('Parent Label').and_return(false)
-        allow(location).to receive(:featureClass).and_return('http://www.geonames.org/ontology#A')
+        allow(location).to receive(:featureClass).and_return([described_class.new('http://www.geonames.org/ontology#A')])
       end
-      it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University'] }
+      it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University , Parent Label, (Administrative Boundary) '] }
     end
   end
 end
