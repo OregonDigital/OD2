@@ -71,7 +71,7 @@ Hyrax.config do |config|
   # config.persistent_hostpath = 'http://localhost/files/'
 
   # If you have ffmpeg installed and want to transcode audio and video set to true
-  # config.enable_ffmpeg = false
+  config.enable_ffmpeg = true
 
   # Hyrax uses NOIDs for files and collections instead of Fedora UUIDs
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
@@ -112,7 +112,7 @@ Hyrax.config do |config|
 
   # Location autocomplete uses geonames to search for named regions
   # Username for connecting to geonames
-  # config.geonames_username = ''
+  config.geonames_username = ENV.fetch('GEONAMES_USERNAME', 'etsdev')
 
   # Should the acceptance of the licence agreement be active (checkbox), or
   # implied when the save button is pressed? Set to true for active
@@ -260,10 +260,10 @@ Hyrax.config do |config|
 
   # Fields to display in the IIIF metadata section; default is the required fields
   config.iiif_metadata_fields = Hyrax::Forms::WorkForm.required_fields
-  
+
   # Enables the use of Google ReCaptcha on the contact form.
   # A site key and secret key need to be supplied in order for google
-  # to authenticate and authorize/validate the 
+  # to authenticate and authorize/validate the
   config.recaptcha = true
   #
   # ReCaptcha site key and secret key, supplied by google after

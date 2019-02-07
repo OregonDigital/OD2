@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'browse-everything'
+gem 'clamav'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
@@ -25,6 +26,7 @@ gem 'ruby-oembed'
 gem 'blacklight-oembed'
 gem 'net-http-persistent', '~> 2.9'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
+gem 'faraday_middleware', '~> 0.10.0'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
@@ -56,6 +58,7 @@ group :development, :test do
   gem 'debase-ruby_core_source'
   gem 'factory_bot_rails'
   gem 'poltergeist'
+  gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rspec'
