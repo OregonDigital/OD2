@@ -13,7 +13,11 @@ module Qa::Authorities
     end
 
     def search(q)
-      parse_authority_response(json(build_query_url(q)))
+      if OregonDigital::ControlledVocabularies::MediaType.in_vocab?(q)
+        parse_authority_response(json(q))
+      else
+        []
+      end
     end
 
     private
@@ -22,11 +26,6 @@ module Qa::Authorities
     def parse_authority_response(response)
       [{ 'id' => response.first['@id'].to_s,
          'label' => label.call(response) }]
-    end
-
-    def build_query_url(q)
-      query = q.split('/').map(&CGI.method(:escape)).join('/')
-      "https://w3id.org/spar/mediatype/#{query}"
     end
   end
 end

@@ -574,11 +574,11 @@ module OregonDigital
       end
 
       property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location
-      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::Resource do |index|
+      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
         index.as :stored_searchable, :facetable
       end
       property :local_collection_name, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/localCollectionName'),
-                                       class_name: OregonDigital::ControlledVocabularies::Resource do |index|
+                                       class_name: OregonDigital::ControlledVocabularies::LocalCollectionName do |index|
         index.as :stored_searchable, :facetable
       end
 
