@@ -5,9 +5,8 @@ echo "Building ${RAILS_ENV}"
 rm -f tmp/pids/puma.pid
 ./build/install_gems.sh
 
-# Do not auto-create SOLR or Migrations for production or staging environments
+# Do not auto-migrate for production or staging environments
 if [ "${RAILS_ENV}" != 'production' ] && [ "${RAILS_ENV}" != 'staging' ]; then
-  ./build/create_solr_index.sh
   ./build/validate_migrated.sh
 fi
 
