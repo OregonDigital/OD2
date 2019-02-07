@@ -13,9 +13,8 @@ module Qa::Authorities
     end
 
     def search(q)
-      valid_uri = %r{http[s]?:\/\/opaquenamespace.org\/ns\/localCollectionName\/(.*)}
-      if (match = valid_uri.match(q))
-        parse_authority_response(json(build_query_url(match.captures[0])))
+      if OregonDigital::ControlledVocabularies::LocalCollectionName.in_vocab?(q)
+        parse_authority_response(json(q + '.jsonld'))
       else
         []
       end
@@ -27,10 +26,6 @@ module Qa::Authorities
     def parse_authority_response(response)
       [{ 'id' => response['@id'].to_s,
          'label' => label.call(response) }]
-    end
-
-    def build_query_url(q)
-      "http://opaquenamespace.org/ns/localCollectionName/#{q}.jsonld"
     end
   end
 end
