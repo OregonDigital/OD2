@@ -226,6 +226,7 @@ GEM
       mime-types (>= 1.16)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    clamav (0.4.1)
     clipboard-rails (1.7.1)
     cliver (0.3.2)
     coderay (1.1.2)
@@ -915,6 +916,7 @@ DEPENDENCIES
   browse-everything
   byebug
   capybara (~> 2.17)
+  clamav
   coffee-rails (~> 4.2)
   coveralls (~> 0.8)
   database_cleaner
