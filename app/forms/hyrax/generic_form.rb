@@ -27,7 +27,11 @@ module Hyrax
     end
 
     def self.build_permitted_params
-      super << { format_attributes: %i[id _destroy] }
+      params = super
+      OregonDigital::GenericMetadata::CONTROLLED.each do |prop|
+        params << { prop.gsub('_label', '_attributes') => %i[id _destroy] }
+      end
+      params
     end
   end
 end

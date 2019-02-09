@@ -2,11 +2,11 @@
 
 module OregonDigital
   module ControlledVocabularies
-    # Media Type object for storing labels and uris
-    class MediaType < Resource
+    # Local Collection Name object for storing labels and uris
+    class LocalCollectionName < Resource
       # Return T/F if a URI is in the vocab
       def self.in_vocab?(uri)
-        valid_uri = %r{^http[s]?:\/\/w3id.org\/spar\/mediatype\/.*/.*}
+        valid_uri = %r{^http[s]?:\/\/opaquenamespace.org\/ns\/localCollectionName\/.*}
         valid_uri.match?(uri)
       end
     end
