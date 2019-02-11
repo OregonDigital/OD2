@@ -1,3 +1,5 @@
+# frozen_string_literal:true
+
 if Hyrax.config.recaptcha?
   Recaptcha.configure do |config|
     config.site_key  = Hyrax.config.recaptcha_site_key

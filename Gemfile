@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'browse-everything'
-gem 'clamav'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
@@ -44,10 +43,12 @@ gem 'rack-honeycomb', '~> 0.5.0'
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
 
+group :staging, :production do
+  gem 'clamav', git: 'https://github.com/eagleas/clamav', branch: 'master'
+end
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end
 
