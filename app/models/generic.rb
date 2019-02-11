@@ -6,6 +6,7 @@ class Generic < ActiveFedora::Base
   include ::OregonDigital::TriplePoweredProperties::WorkBehavior
 
   before_save :resolve_oembed_errors
+  validate :terms_in_controlled_vocabulary
 
   self.indexer = GenericIndexer
   # Change this to restrict which works can be added as a child.
@@ -20,5 +21,14 @@ class Generic < ActiveFedora::Base
   def resolve_oembed_errors
     errors = OembedError.find_by(document_id: id)
     errors.delete if oembed_url_changed? && !errors.blank?
+  end
+
+  def terms_in_controlled_vocabulary
+    controlled_properties.each do |terms|
+      self.send(terms).each do |term|
+        Rails.logger.info(term)
+        errors.add(:term, "URI #{term} not in vocabulary") unless term.valid?
+      end
+    end
   end
 end
