@@ -97,7 +97,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :owner, predicate: ::RDF::Vocab::MARCRelators.own, multiple: false do |index|
+      property :owner, predicate: ::RDF::Vocab::MARCRelators.own do |index|
         index.as :stored_searchable, :facetable
       end
 
