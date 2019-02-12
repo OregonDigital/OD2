@@ -17,7 +17,7 @@ RUN gem install bundler
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
   build-essential libpq-dev libreoffice imagemagick unzip ghostscript vim \
-  ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-8-jre --fix-missing
+  ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-8-jre --fix-missing --allow-unauthenticated
 
 # install clamav for antivirus
 # fetch clamav local database
