@@ -194,7 +194,7 @@ services:
       ? internal
     volumes:
       - ./config/solr/config:/opt/solr/od2_conf
-      - solr:/opt/solr/server/mycores
+      - solr:/opt/solr/server/solr/mycores
   solr-dev:
     <<: *solr
     entrypoint:
