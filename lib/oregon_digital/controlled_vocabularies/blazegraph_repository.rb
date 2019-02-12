@@ -9,6 +9,14 @@ module OregonDigital
         rest_client.delete(deletes)
         rest_client.inserts(inserts)
       end
+
+      def each(&block)
+        each_statement(&block)
+      end
+
+      def each_statement(&block)
+        rest_client.get_statements.each_statement(&block)
+      end
     end
   end
 end
