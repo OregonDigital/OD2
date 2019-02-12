@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: ada4e53c158775117d08f78598b3f024deb283ef
-  branch: persist-hyrax-actor-stack
+  revision: bef206d75486d7b3795a44221fe2cfb9c46cfb76
   specs:
     hyrax-migrator (0.1.0)
       aasm
+      aws-sdk-s3
       bagit
       haml
       rails (~> 5.1.6)
