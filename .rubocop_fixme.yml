@@ -34,6 +34,10 @@ Metrics/MethodLength:
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
 
+Naming/AccessorMethodName:
+  Exclude:
+    - 'lib/oregon_digital/controlled_vocabularies/resource.rb'
+
 RSpec/InstanceVariable:
   Exclude:
     - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
