@@ -192,11 +192,11 @@ services:
       - 8983
     networks:
       ? internal
-    volumes:
-      - ./config/solr/config:/opt/solr/od2_conf
-      - solr:/opt/solr/server/mycores
   solr-dev:
     <<: *solr
+    volumes:
+      - ./config/solr/config:/opt/solr/od2_conf
+      - solr:/opt/solr/server/solr/mycores
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -204,6 +204,8 @@ services:
       - /opt/solr/od2_conf
   solr-test:
     <<: *solr
+    volumes:
+      - ./config/solr/config:/opt/solr/od2_conf
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
