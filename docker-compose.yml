@@ -236,6 +236,7 @@ services:
       - 8080
     networks:
       ? internal
+    command: bash -c "chmod a+wx /data && ./entrypoint.sh"
   blazegraph-dev:
     <<: *blazegraph
     volumes:
