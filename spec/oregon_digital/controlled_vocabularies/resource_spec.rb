@@ -26,4 +26,19 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
       it { expect(resource.solrize).to eq ['RDF.Subject.Org'] }
     end
   end
+
+  describe '#set_subject!' do
+    context 'with a term in the vocabulary' do
+      before do
+        allow(resource).to receive(:uri_in_vocab?).and_return(true)
+      end
+      it { expect { resource.set_subject!('http://my.queryuri.com') }.not_to raise_error(OregonDigital::ControlledVocabularies::ControlledVocabularyError) }
+    end
+    context 'with a term not in the vocabulary' do
+      before do
+        allow(resource).to receive(:uri_in_vocab?).and_return(false)
+      end
+      it { expect { resource.set_subject!('http://my.queryuri.com') }.to raise_error(OregonDigital::ControlledVocabularies::ControlledVocabularyError) }
+    end
+  end
 end
