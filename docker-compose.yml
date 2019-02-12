@@ -63,7 +63,7 @@ services:
       - SECRET_KEY_BASE=asdf
       - SOLR_URL=http://solr-dev:8983/solr/development
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
-      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/rw/sparql
+      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/kb/sparql
       - RECAPTCHA_SECRET_KEY=asdfasdfasdfasdfasdfadsfasdfadfsfa
       - RECAPTCHA_SITE_KEY=asdfasdfadsfasdfasdfasdfasdfasdfad
       - GEONAMES_USERNAME=etsdev
@@ -129,7 +129,7 @@ services:
       - SELENIUM_DRIVER_URL=http://selenium-hub:4444/wd/hub
       - SOLR_URL=http://solr-test:8983/solr/test
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
-      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/rw/sparql
+      - TRIPLESTORE_ADAPTER_URL=http://blazegraph-test:8080/bigdata/namespace/kb/sparql
       - CAS_HOST=login.oregonstate.edu
       - CAS_URL=https://login.oregonstate.edu/cas
       - SAML_IDP_CERT=cert
