@@ -4,8 +4,25 @@ module OregonDigital
   module ControlledVocabularies
     # Generic object for storing labels and uris
     class Resource < ActiveTriples::Resource
-      # Validate resource is in the vocabulary
-      validate :uri_in_vocab
+
+      ##
+      # Override ActiveTriples::Resource to enforce vocabulary membership
+      #
+      # @see ActiveTriples::Resource
+      def initialize(*args, &block)
+        super
+        if !node?
+          resource_uri = rdf_subject
+          @rdf_subject = nil
+          set_subject!(resource_uri)
+        end
+      end
+
+      def set_subject!(uri_or_str)
+        raise ControlledVocabularyError,
+              "Term not in controlled vocabulary: #{uri_or_str}" unless uri_in_vocab(uri_or_str.to_s)
+        super
+      end
 
       # Return a tuple of url & label
       def solrize
@@ -19,9 +36,11 @@ module OregonDigital
         rdf_label.first.to_s == rdf_subject.to_s
       end
 
-      def uri_in_vocab
-        errors.add(:uri, "URI #{id} not in vocabulary") unless self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(id)
+      def uri_in_vocab(uri)
+        self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(uri)
       end
     end
+
+    class ControlledVocabularyError < StandardError; end
   end
 end
