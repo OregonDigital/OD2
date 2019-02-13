@@ -10,6 +10,10 @@ module OregonDigital
         valid_uri = %r{^http[s]?:\/\/w3id.org\/spar\/mediatype\/.*/.*}
         valid_uri.match?(uri)
       end
+
+      def reload
+        true
+      end
     end
   end
 end
