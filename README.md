@@ -45,10 +45,30 @@ Start the development server:
 
 _Open another terminal window (unless you run the previous command `detached`)._
 
+Automatic setup
+---
+
 On the first time building and starting the server, Hyrax defaults must be created and loaded. Run the commands on the server container.
 
+*"docker-compose exec" only works if the server is running.  The first-run
+command only works if the server has already been initialized.  Make sure
+migrations have finished running before you do these steps.*
+
+```bash
+docker-compose exec server ./build/firstrun.sh
+```
+
+This will take a few minutes.  Once it's done, you can visit
+`http://localhost:3000/users/sign_in?locale=en` and log in as
+"admin@example.org" with the password "admin123".
+
+Manual
+---
+
+Or to run the commands manually:
+
     docker-compose run server bash
-    ... wait for a shell session to start ...
+    # ... wait for a shell session to start ...
     bundle exec rails hyrax:default_admin_set:create
     bundle exec rails hyrax:default_collection_types:create
     bundle exec rails hyrax:workflow:load
@@ -58,7 +78,7 @@ Visit http://localhost:3000/users/sign_up?locale=en to register an account.
 Return to the server container shell session, start Rails console, create an `admin` role, and assign it to the user that was just created.
 
     bundle exec rails c
-    ... wait for the Rails console to start ...
+    # ... wait for the Rails console to start ...
     Role.create(name: 'admin')
     User.last.roles << Role.last
 
