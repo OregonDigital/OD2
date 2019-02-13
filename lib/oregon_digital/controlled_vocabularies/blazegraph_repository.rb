@@ -17,6 +17,10 @@ module OregonDigital
         each_statement(&block)
       end
 
+      def insert_statement(statement)
+        rest_client.insert([statement])
+      end
+
       def each_statement(&block)
         t = RDF::Literal("blah")
         rest_client.get_statements(subject: t, predicate: t, object: t, context: t, include_inferred: false)
