@@ -8,11 +8,6 @@ module OregonDigital
         OregonDigital::Client.new(ENV['TRIPLESTORE_ADAPTER_TYPE'], ENV['TRIPLESTORE_ADAPTER_URL'])
       end
 
-      def delete_insert(deletes, inserts)
-        rest_client.delete(deletes)
-        rest_client.inserts(inserts)
-      end
-
       def each(&block)
         each_statement(&block)
       end
@@ -22,12 +17,17 @@ module OregonDigital
       end
 
       def each_statement(&block)
-        t = RDF::Literal("blah")
-        rest_client.get_statements(subject: t, predicate: t, object: t, context: t, include_inferred: false)
+        rest_client.get_statements.each_statement(&block)
       end
 
       def insert_statement(statement)
         rest_client.insert([statement])
+      end
+
+      def query(subject)
+        statements = subject[:subject].fetch
+        rest_client.insert([statements])
+        subject[:subject]
       end
     end
   end
