@@ -5,6 +5,8 @@ module OregonDigital
     # Local Collection Name object for storing labels and uris
     class LocalCollectionName < Resource
       # Return T/F if a URI is in the vocab
+      configure repository: :blazegraph
+
       def self.in_vocab?(uri)
         valid_uri = %r{^http[s]?:\/\/opaquenamespace.org\/ns\/localCollectionName\/.*}
         valid_uri.match?(uri)
