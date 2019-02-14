@@ -9,7 +9,7 @@ module Qa::Authorities
     class_attribute :label
 
     self.label = lambda do |item|
-      [item.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']].compact.join(', ')
+      [item].compact.join(', ')
     end
 
     def search(q)
@@ -24,8 +24,18 @@ module Qa::Authorities
 
     # Reformats the data received from the service
     def parse_authority_response(response)
-      [{ 'id' => response.first['@id'].to_s,
-         'label' => label.call(response) }]
+      id = find_response_id(response)
+      parsed_label = find_response_label(response)
+      [{ 'id' => id,
+         'label' => label.call(parsed_label) }]
+    end
+
+    def find_response_id(response)
+      response.first['@id'] || response.second['@id'] 
+    end
+
+    def find_response_label(response)
+      response.second['http://www.w3.org/2000/01/rdf-schema#label'].first['@value'] 
     end
   end
 end
