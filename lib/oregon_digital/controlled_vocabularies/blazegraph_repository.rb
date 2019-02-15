@@ -9,25 +9,33 @@ module OregonDigital
       end
 
       def each(&block)
-        each_statement(&block)
+        return enum_for(:each) unless block_given?
+        enum = rest_client.get_statements.each_statement
+        enum.each do |statement|
+          block.call(statement)
+        end
       end
 
       def insert_statement(statement)
         rest_client.insert([statement])
       end
 
-      def each_statement(&block)
-        rest_client.get_statements.each_statement(&block)
+      # def each_statement
+      #   rest_client.get_statements.each_statement
+      # end
+
+      def delete_statement(statement)
+        rest_client.delete([statement])
       end
 
-      def insert_statement(statement)
-        rest_client.insert([statement])
-      end
+      # protected
 
-      def query(subject)
-        statements = subject[:subject].fetch
-        rest_client.insert([statements])
-        subject[:subject]
+      def query_pattern(pattern, **options, &block)
+        return enum_for(:query_pattern, pattern, options) unless block_given?
+        enum = statements = rest_client.get_statements(pattern.to_h).each_statement
+        enum.each do |statement|
+          block.call(statement)
+        end
       end
     end
   end
