@@ -11,10 +11,6 @@ module OregonDigital
         valid_uri = %r{^http[s]?:\/\/vocab.getty.edu\/tgn\/.*}
         valid_uri.match?(uri)
       end
-
-      def reload
-        true
-      end
     end
   end
 end

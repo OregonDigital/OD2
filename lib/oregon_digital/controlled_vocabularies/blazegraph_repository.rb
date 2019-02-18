@@ -28,13 +28,18 @@ module OregonDigital
         rest_client.delete([statement])
       end
 
-      # protected
+      protected
 
       def query_pattern(pattern, **options, &block)
         return enum_for(:query_pattern, pattern, options) unless block_given?
+
+        pattern.subject = nil if pattern.subject && pattern.subject.node?
+        pattern.predicate = nil if pattern.predicate && pattern.predicate.node?
+        pattern.object = nil if pattern.object && pattern.object.node?
+
         enum = statements = rest_client.get_statements(pattern.to_h).each_statement
         enum.each do |statement|
-          block.call(statement)
+          yield statement
         end
       end
     end
