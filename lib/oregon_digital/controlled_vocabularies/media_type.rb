@@ -11,10 +11,6 @@ module OregonDigital
         valid_uri.match?(uri)
         true
       end
-
-      def reload
-        true
-      end
     end
   end
 end

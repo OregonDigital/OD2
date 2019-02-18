@@ -53,13 +53,15 @@ module OregonDigital
     # Returns statements matching the subject
     # @param [String] subject url
     # @return [RDF::Enumerable] RDF statements
-    def get_statements(subject: nil, predicate: nil, object: nil, 
+    def get_statements(subject: nil, predicate: nil, object: nil,
                        context: nil, include_inferred: false)
       st_query = access_path_query(subject, predicate, object, context)
       uri = URI.parse(format("%{uri}?GETSTMTS#{st_query}&include_inferred=#{include_inferred}", {uri: @uri}))
       request = Net::HTTP::Get.new(uri)
       response = @http.request(uri, request)
-      RDF::Reader.for(:ntriples).new(response.body)
+      return RDF::Reader.for(:ntriples).new(response.body) if response.is_a? Net::HTTPSuccess
+      raise RequestError.new("#{response.code}: #{response.body}\n" \
+                             "Processing query #{st_query}")
     end
 
     ##
@@ -101,12 +103,12 @@ module OregonDigital
       port = ":#{@uri.port}" if @uri.port != 80
       "#{@uri.scheme}://#{@uri.host}#{port}"
     end
-    
+
     def access_path_query(subject, predicate, object, context)
       str = {s: subject, p: predicate, o: object, c: context}.map do |k, v|
         v ? "#{k}=#{v.to_base}" : nil
       end.compact.join('&')
-      str.empty? ? str : "&#{str}" 
+      str.empty? ? str : "&#{str}"
     end
   end
 end

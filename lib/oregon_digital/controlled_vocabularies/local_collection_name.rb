@@ -11,10 +11,6 @@ module OregonDigital
         valid_uri = %r{^http[s]?:\/\/opaquenamespace.org\/ns\/localCollectionName\/.*}
         valid_uri.match?(uri)
       end
-
-      def reload
-        true
-      end
     end
   end
 end
