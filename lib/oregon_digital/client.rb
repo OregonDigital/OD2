@@ -38,7 +38,7 @@ module OregonDigital
     # Get statements from the server
     # @param [String] subject url
     # @raise [TriplestoreAdapter::TriplestoreException] if the provider doesn't implement this method
-    def get_statements(subject: nil, predicate: nil, object: nil, context: nil, include_inferred: false)
+    def get_statements(subject: nil, predicate: nil, object: nil, context: nil, include_inferred: false, graph_name: nil)
       raise TriplestoreAdapter::TriplestoreException.new("#{@provider.class.name} missing get_statements method.") unless @provider.respond_to?(:get_statements)
       @provider.get_statements(subject: subject, predicate: predicate, object: object, context: context, include_inferred: include_inferred)
     end
