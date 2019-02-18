@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: bef206d75486d7b3795a44221fe2cfb9c46cfb76
+  revision: d5d056b7d85b79f3a31e07ed5404460640bfc301
   specs:
     hyrax-migrator (0.1.0)
       aasm
@@ -9,6 +9,7 @@ GIT
       haml
       rails (~> 5.1.6)
       rdf
+      rubyzip
       sidekiq
 
 GIT
@@ -167,17 +168,17 @@ GEM
     awesome_nested_set (3.1.4)
       activerecord (>= 4.0.0, < 5.3)
     aws-eventstream (1.0.1)
-    aws-partitions (1.110.0)
-    aws-sdk-core (3.37.0)
+    aws-partitions (1.140.0)
+    aws-sdk-core (3.46.2)
       aws-eventstream (~> 1.0)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.11.0)
-      aws-sdk-core (~> 3, >= 3.26.0)
+    aws-sdk-kms (1.13.0)
+      aws-sdk-core (~> 3, >= 3.39.0)
       aws-sigv4 (~> 1.0)
-    aws-sdk-s3 (1.23.1)
-      aws-sdk-core (~> 3, >= 3.26.0)
+    aws-sdk-s3 (1.30.1)
+      aws-sdk-core (~> 3, >= 3.39.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
@@ -687,7 +688,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    rdf (3.0.9)
+    rdf (3.0.10)
       hamster (~> 3.0)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (2.2.1)

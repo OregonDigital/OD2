@@ -6,6 +6,7 @@ Hyrax::Migrator::Middleware.config do |config|
     Hyrax::Migrator::Actors::BagValidatorActor,
     Hyrax::Migrator::Actors::CrosswalkMetadataActor,
     Hyrax::Migrator::Actors::ModelLookupActor,
+    Hyrax::Migrator::Actors::FileUploadActor,
     Hyrax::Migrator::Actors::PersistWorkActor
   ]
 end
@@ -29,13 +30,18 @@ Hyrax::Migrator.config do |config|
   config.register_model Audio
 
   # Migration user
-  config.migration_user = 'noreply@oregondigital.org'
+  config.migration_user = 'admin@example.org'
 
   # The model crosswalk used by ModelLookupService
   config.model_crosswalk = File.join(Rails.root, 'config/initializers/migrator/model_crosswalk.yml')
 
   # The crosswalk metadata file that lists properties and predicates
   config.crosswalk_metadata_file = File.join(Rails.root, 'config/initializers/migrator/crosswalk.yml')
+
+  # The crosswalk overrides metadata file for properties and predicates that need special handling
+  config.crosswalk_overrides_file = File.join(Rails.root, 'config/initializers/migrator/crosswalk_overrides.yml')
+
+  config.upload_storage_service = :aws_s3
 
   # The service used to upload files ready for migration. It defaults to file_system for test and development. On staging and production, it defaults to aws_s3
   # config.upload_storage_service = if Rails.env.staging? || Rails.env.production?

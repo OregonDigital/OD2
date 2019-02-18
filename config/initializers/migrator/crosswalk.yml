@@ -64,7 +64,7 @@ crosswalk:
     multiple: true
   - property: owner
     predicate: http://id.loc.gov/vocabulary/relators/own
-    multiple: false
+    multiple: true
   - property: patron
     predicate: http://id.loc.gov/vocabulary/relators/pat
     multiple: true
@@ -323,7 +323,7 @@ crosswalk:
   - property: rights_holder
     predicate: http://opaquenamespace.org/ns/rightsHolder
     multiple: true
-  - property: license
+  - property: rights_statement
     predicate: http://purl.org/dc/terms/rights
     multiple: false
   - property: use_restrictions
@@ -424,7 +424,7 @@ crosswalk:
     multiple: true
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
-    multiple: false
+    multiple: true
   - property: workType
     predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
     multiple: true
@@ -484,7 +484,7 @@ crosswalk:
     multiple: true
   - property: date_modified
     predicate: http://purl.org/dc/terms/modified
-    multiple: true
+    multiple: false
   - property: replaces_url
     predicate: http://purl.org/dc/terms/replaces
     multiple: false

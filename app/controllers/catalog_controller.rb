@@ -89,29 +89,37 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field solr_name('title', :stored_searchable)
-    config.add_show_field solr_name('description', :stored_searchable)
-    config.add_show_field solr_name('keyword', :stored_searchable)
-    config.add_show_field solr_name('subject', :stored_searchable)
-    config.add_show_field solr_name('creator', :stored_searchable)
-    config.add_show_field solr_name('contributor', :stored_searchable)
-    config.add_show_field solr_name('publisher', :stored_searchable)
-    config.add_show_field solr_name('based_near_label', :stored_searchable)
-    config.add_show_field solr_name('language', :stored_searchable)
-    config.add_show_field solr_name('date_uploaded', :stored_searchable)
-    config.add_show_field solr_name('date_modified', :stored_searchable)
-    config.add_show_field solr_name('date_created', :stored_searchable)
-    config.add_show_field solr_name('rights_statement', :stored_searchable)
-    config.add_show_field solr_name('license', :stored_searchable)
-    config.add_show_field solr_name('resource_type', :stored_searchable), label: 'Resource Type'
-    config.add_show_field solr_name('format', :stored_searchable)
-    config.add_show_field solr_name('identifier', :stored_searchable)
-    config.add_show_field solr_name('contained_in_journal', :stored_searchable)
-    config.add_show_field solr_name('first_line', :stored_searchable)
-    config.add_show_field solr_name('first_line_chorus', :stored_searchable)
-    config.add_show_field solr_name('host_item', :stored_searchable)
-    config.add_show_field solr_name('instrumentation', :stored_searchable)
-    config.add_show_field solr_name('table_of_contents', :stored_searchable)
+    # List of fields that aren't searchable based on MAP
+    rejected_search_fields = %w[
+      art_series box canzoniere_poems citation color_content color_space compass_direction contents conversion cover_description
+      date_digitized date_modified date_uploaded description description_of_manifestation
+      extent file_size form_of_work gps_latitude gps_longitude has_number has_part height higher_classification hydrologic_unit_code
+      identification_verification_status is_version_of is_volume larger_work longitude_latitude_identification
+      measurements military_highest_rank mode_of_issuance mods_note number_of_pages object_orientation oembed_url orientation original_filename
+      photograph_orientation physical_extent primary_set replaces_url resolution
+      source_condition specimen_type state_or_edition temporal tribal_notes use_restrictions view width
+    ]
+    # Add the controlled vocabulary label form of rejected terms
+    rejected_search_fields += rejected_search_fields.map { |field| "#{field}_label" }
+    # Add the non-label form of controlled vocabular terms
+    rejected_search_fields += OregonDigital::GenericMetadata::CONTROLLED.map { |field| field.gsub('_label', '') }
+
+    # Add all fields as searchable, reject the non-searchable fields
+    OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
+    end
+    OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
+    end
+    OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
+    end
+    OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
+    end
+    OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
+    end
 
     # 'fielded' search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
