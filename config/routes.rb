@@ -16,6 +16,12 @@ Rails.application.routes.draw do
     get 'users/auth/saml', to: 'users/omniauth_authorize#passthru', defaults: { provider: :saml }, as: 'new_uo_session'
   end
 
+  # For Sidekiq administration UI
+  authenticate :user, ->(u) { u.admin? } do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   mount Hydra::RoleManagement::Engine => '/'
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'
