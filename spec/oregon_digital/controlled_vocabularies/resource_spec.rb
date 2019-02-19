@@ -43,9 +43,8 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
     context 'when an rdf_subject is returned' do
       before do
         allow(resource).to receive(:rdf_subject).and_return('www.blah.com')
-        allow(triplestore).to receive(:fetch).with('www.blah.com').and_return(bg_graph)
+        allow(resource.triplestore).to receive(:fetch).with('www.blah.com').and_return(bg_graph)
       end
-      it { expect(resource.triplestore).to receive(:fetch).once }
       it { expect(resource.triplestore_fetch).to eq bg_graph }
     end
   end

@@ -40,6 +40,10 @@ module OregonDigital
         !URI.parse(rdf_subject).hostname.nil? ? triplestore.fetch(rdf_subject) : RDF::Graph.new
       end
 
+      def triplestore
+        OregonDigital::TriplePoweredProperties::Triplestore
+      end
+
       private
 
       def rdf_label_uri_same?
@@ -49,10 +53,6 @@ module OregonDigital
       def uri_in_vocab?(uri)
         self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(uri)
         true
-      end
-
-      def triplestore
-        OregonDigital::TriplePoweredProperties::Triplestore
       end
     end
     class ControlledVocabularyError < StandardError; end
