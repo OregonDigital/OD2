@@ -2,6 +2,13 @@
 
 RSpec.describe OregonDigital::ControlledVocabularies::Resource do
   let(:resource) { described_class.new }
+  let(:new_rdf_graph) { RDF::Graph.new }
+  let(:bg_graph) do 
+    graph = new_rdf_graph
+    graph.name = 'bg'
+    graph
+  end
+
 
   describe '#solrize' do
     context 'with a valid label and subject' do
@@ -24,6 +31,23 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
         allow(resource).to receive(:rdf_subject).and_return('RDF.Subject.Org')
       end
       it { expect(resource.solrize).to eq ['RDF.Subject.Org'] }
+    end
+  end
+  
+  describe '#triplestore_fetch' do
+    context 'when no rdf_subject is returned' do
+      before do
+        allow(resource).to receive(:rdf_subject).and_return('')
+      end
+      it { expect(resource.triplestore_fetch).to eq new_rdf_graph }
+    end
+    context 'when an rdf_subject is returned' do
+      before do
+        allow(resource).to receive(:rdf_subject).and_return('www.blah.com')
+        allow(triplestore).to receive(:fetch).with('www.blah.com').and_return(bg_graph)
+      end
+      it { expect(resource.triplestore).to receive(:fetch).once }
+      it { expect(resource.triplestore_fetch).to eq bg_graph }
     end
   end
 

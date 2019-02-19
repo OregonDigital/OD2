@@ -31,6 +31,15 @@ module OregonDigital
         [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
       end
 
+      def persist!
+        triplestore_fetch
+        @persisted = true
+      end
+      
+      def triplestore_fetch
+        !URI.parse(rdf_subject).hostname.nil? triplestore.fetch(rdf_subject) : RDF::Graph.new
+      end
+
       private
 
       def rdf_label_uri_same?
@@ -40,12 +49,6 @@ module OregonDigital
       def uri_in_vocab?(uri)
         self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(uri)
         true
-      end
-
-      def persist!
-        super
-        triplestore.fetch(rdf_subject)
-        @persisted = true
       end
 
       def triplestore
