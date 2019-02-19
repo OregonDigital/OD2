@@ -37,7 +37,7 @@ module OregonDigital
       end
       
       def triplestore_fetch
-        !URI.parse(rdf_subject).hostname.nil? triplestore.fetch(rdf_subject) : RDF::Graph.new
+        !URI.parse(rdf_subject).hostname.nil? ? triplestore.fetch(rdf_subject) : RDF::Graph.new
       end
 
       private

@@ -3,12 +3,11 @@
 RSpec.describe OregonDigital::ControlledVocabularies::Resource do
   let(:resource) { described_class.new }
   let(:new_rdf_graph) { RDF::Graph.new }
-  let(:bg_graph) do 
+  let(:bg_graph) do
     graph = new_rdf_graph
     graph.name = 'bg'
     graph
   end
-
 
   describe '#solrize' do
     context 'with a valid label and subject' do
