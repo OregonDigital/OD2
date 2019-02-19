@@ -4,21 +4,6 @@ module OregonDigital
   module ControlledVocabularies
     # Generic object for storing labels and uris
     class Resource < ActiveTriples::Resource
-      ##
-      # Override ActiveTriples::Resource to enforce vocabulary membership
-      #
-      # @see ActiveTriples::Resource
-      # def initialize(*args, &block)
-      #   super
-      #   # If rdf_subject wasn't set, we're done
-      #   return if node?
-
-      #   # Reset rdf_subject and set it through the proper method
-      #   resource_uri = @rdf_subject
-      #   @rdf_subject = nil
-      #   set_subject!(resource_uri)
-      # end
-
       # Override ActiveTriples::Resource.set_subject! to throw exception if term isn't in vocab
       def set_subject!(uri_or_str)
         raise ControlledVocabularyError, "Term not in controlled vocabulary: #{uri_or_str}" unless
@@ -42,8 +27,17 @@ module OregonDigital
         self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(uri)
         true
       end
-    end
 
+      def persist!
+        super
+        triplestore.fetch(rdf_subject)
+        @persisted = true
+      end
+
+      def triplestore
+        OregonDigital::TriplePoweredProperties::Triplestore
+      end
+    end
     class ControlledVocabularyError < StandardError; end
   end
 end
