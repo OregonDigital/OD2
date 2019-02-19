@@ -47,7 +47,6 @@ module Hyrax
         return result if top_level_element?
 
         parentFeature.each(&:persist!)
-        persist_uri_to_triplestore(rdf_subject.to_s) unless top_level_element?
         result
       end
 
