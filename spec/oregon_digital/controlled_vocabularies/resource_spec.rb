@@ -32,7 +32,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
       it { expect(resource.solrize).to eq ['RDF.Subject.Org'] }
     end
   end
-  
+
   describe '#triplestore_fetch' do
     context 'when no rdf_subject is returned' do
       before do
