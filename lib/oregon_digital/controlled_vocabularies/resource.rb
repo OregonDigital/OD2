@@ -37,15 +37,11 @@ module OregonDigital
       end
 
       def triplestore_fetch
-        subject_hostname.nil? ? triplestore.fetch(rdf_subject) : RDF::Graph.new
+        URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
       end
 
       def triplestore
         OregonDigital::TriplePoweredProperties::Triplestore
-      end
-
-      def subject_hostname
-        !URI.parse(rdf_subject).hostname
       end
 
       private
