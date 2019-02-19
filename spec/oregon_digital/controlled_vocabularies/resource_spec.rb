@@ -44,6 +44,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
       before do
         allow(resource).to receive(:rdf_subject).and_return('www.blah.com')
         allow(resource.triplestore).to receive(:fetch).with('www.blah.com').and_return(bg_graph)
+        allow(resource).to receive(:subject_hostname).and_return('www')
       end
       it { expect(resource.triplestore_fetch).to eq bg_graph }
     end
