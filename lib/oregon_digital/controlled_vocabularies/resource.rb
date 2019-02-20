@@ -18,6 +18,15 @@ module OregonDigital
         set_subject!(resource_uri)
       end
 
+      ##
+      # Override fetch to use the triplestore caching mechanism to get the graph,
+      # store it locally, and fetch it from the cache, then assign it to the resources
+      # "persistence_strategy.graph" which makes other methods like "rdf_label" make
+      # use of the provided graph.
+      def fetch(*args, &_block)
+        persistence_strategy.graph = triplestore_fetch
+      end
+
       # Override ActiveTriples::Resource.set_subject! to throw exception if term isn't in vocab
       def set_subject!(uri_or_str)
         raise ControlledVocabularyError, "Term not in controlled vocabulary: #{uri_or_str}" unless
