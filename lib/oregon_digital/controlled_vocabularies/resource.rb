@@ -23,7 +23,7 @@ module OregonDigital
       # store it locally, and fetch it from the cache, then assign it to the resources
       # "persistence_strategy.graph" which makes other methods like "rdf_label" make
       # use of the provided graph.
-      def fetch(*args, &_block)
+      def fetch(*_args, &_block)
         persistence_strategy.graph = triplestore_fetch
       end
 
@@ -38,11 +38,6 @@ module OregonDigital
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
         [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
-      end
-
-      def persist!
-        triplestore_fetch
-        @persisted = true
       end
 
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
