@@ -34,7 +34,7 @@ module Qa::Authorities
     # Sparontologies has been returning inconsistent data on where the id is placed,
     # so this accounts for it being in the two possible spots
     def find_response_id(response)
-      response.first['@id'] || response.second['@id']
+      response.first['@id'].blank? ? response.second['@id'] : response.first['@id']
     end
 
     # Response can be found here http://www.sparontologies.net/mediatype/text/css.json
