@@ -30,10 +30,12 @@ module Qa::Authorities
          'label' => label.call(parsed_label) }]
     end
 
+    # Repsonse can be found here http://www.sparontologies.net/mediatype/text/css.json
     def find_response_id(response)
       response.first['@id'] || response.second['@id']
     end
 
+    # Response can be found here http://www.sparontologies.net/mediatype/text/css.json
     def find_response_label(response)
       response.second['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']
     end
