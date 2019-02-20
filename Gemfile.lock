@@ -18,6 +18,19 @@ GIT
       sparql-client
 
 GIT
+  remote: https://github.com/samvera/hydra-derivatives.git
+  revision: 8c22c5797769ea07461a8da739d5e7e996679501
+  specs:
+    hydra-derivatives (3.4.1)
+      active-fedora (>= 11.3.1, < 13)
+      active_encode (~> 0.1)
+      activesupport (>= 4.0, < 6)
+      addressable (~> 2.5)
+      deprecation
+      mime-types (> 2.0, < 4.0)
+      mini_magick (>= 3.2, < 5)
+
+GIT
   remote: https://github.com/samvera/hyrax.git
   revision: c0699505fc89d54a7545c9e5b3ff9235e1733e80
   tag: v2.4.0
@@ -410,14 +423,6 @@ GEM
     hydra-core (10.6.0)
       hydra-access-controls (= 10.6.0)
       railties (>= 4.0.0, < 6)
-    hydra-derivatives (3.4.1)
-      active-fedora (>= 11.3.1, < 13)
-      active_encode (~> 0.1)
-      activesupport (>= 4.0, < 6)
-      addressable (~> 2.5)
-      deprecation
-      mime-types (> 2.0, < 4.0)
-      mini_magick (>= 3.2, < 5)
     hydra-editor (4.0.2)
       active-fedora (>= 9.0.0)
       almond-rails (~> 0.1)
@@ -929,6 +934,7 @@ DEPENDENCIES
   factory_bot_rails
   faraday_middleware (~> 0.10.0)
   honeycomb-beeline
+  hydra-derivatives!
   hydra-role-management
   hyrax!
   jbuilder (~> 2.5)
