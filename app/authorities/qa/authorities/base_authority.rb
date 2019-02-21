@@ -1,13 +1,11 @@
 
 module Qa::Authorities
   # Base authority
-  class EthnographicTerm < Qa::Authorities::Base
+  class BaseAuthority < Qa::Authorities::Base
     include WebServiceBase
     include OregonDigital::Authorities::WebServiceRedirect
 
-    included do
-      class_attribute :label
-    end
+    class_attribute :label
 
     private
 

@@ -2,10 +2,10 @@
 
 module Qa::Authorities
   # Format QA Object
-  class Format < Qa::Authorities::Base
+  class Format < BaseAuthority
 
     self.label = lambda do |item|
-      [item].compact.join(', ')
+      [item.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']].compact.join(', ')
     end
 
     def search(q)
