@@ -2,11 +2,7 @@
 
 module Qa::Authorities
   # Local Collection Name QA Object
-  class LocalCollectionName < Qa::Authorities::Base
-    include WebServiceBase
-    include OregonDigital::Authorities::WebServiceRedirect
-
-    class_attribute :label
+  class LocalCollectionName < BaseAuthority
 
     self.label = lambda do |item|
       [item['rdfs:label']['@value']].compact.join(', ')
@@ -18,14 +14,6 @@ module Qa::Authorities
       else
         []
       end
-    end
-
-    private
-
-    # Reformats the data received from the service
-    def parse_authority_response(response)
-      [{ 'id' => response['@id'].to_s,
-         'label' => label.call(response) }]
     end
   end
 end
