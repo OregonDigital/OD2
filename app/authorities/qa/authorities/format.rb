@@ -39,7 +39,7 @@ module Qa::Authorities
 
     # Response can be found here http://www.sparontologies.net/mediatype/text/css.json
     def find_response_label(response)
-      response.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']
+      response.first['http://www.w3.org/2000/01/rdf-schema#label'].blank? ? response.second['http://www.w3.org/2000/01/rdf-schema#label'].first['@value'] : response.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']
     end
   end
 end
