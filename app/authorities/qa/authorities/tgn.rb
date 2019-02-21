@@ -3,7 +3,6 @@
 module Qa::Authorities
   # EthnographicTerm QA Object
   class Tgn < BaseAuthority
-
     self.label = lambda do |item|
       [item.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']].compact.join(', ')
     end

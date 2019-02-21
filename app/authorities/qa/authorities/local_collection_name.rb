@@ -3,7 +3,6 @@
 module Qa::Authorities
   # Local Collection Name QA Object
   class LocalCollectionName < BaseAuthority
-
     self.label = lambda do |item|
       [item['rdfs:label']['@value']].compact.join(', ')
     end
