@@ -28,10 +28,12 @@ module OregonDigital
       end
 
       def sanitize_subject_uri(subject)
-        if OregonDigital::ControlledVocabularies::MediaType.in_vocab?(subject.to_s) 
-          uri = URI.parse(subject.to_s)
-          "#{uri.scheme}://#{uri.hostname + uri.request_uri.split('.')[0]}.rdf"
-        end
+        parse_subject_uri if OregonDigital::ControlledVocabularies::MediaType.in_vocab?(subject.to_s) 
+      end
+      
+      def parse_subject_uri
+        uri = URI.parse(subject.to_s)
+        "#{uri.scheme}://#{uri.hostname + uri.request_uri.split('.')[0]}.rdf"
       end
     end
   end

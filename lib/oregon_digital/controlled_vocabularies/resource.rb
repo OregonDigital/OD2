@@ -58,7 +58,6 @@ module OregonDigital
 
       def uri_in_vocab?(uri)
         self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(uri)
-        true
       end
     end
     class ControlledVocabularyError < StandardError; end
