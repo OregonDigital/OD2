@@ -3,8 +3,6 @@
 module Hyrax
   # Generated form for Generic
   class GenericForm < Hyrax::Forms::WorkForm
-    include ::OregonDigital::TriplePoweredProperties::TriplePoweredForm
-
     self.model_class = ::Generic
     self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
     self.terms = self.terms.uniq

@@ -47,7 +47,7 @@ module OregonDigital
       end
 
       def triplestore
-        OregonDigital::TriplePoweredProperties::Triplestore
+        OregonDigital::Triplestore
       end
 
       private

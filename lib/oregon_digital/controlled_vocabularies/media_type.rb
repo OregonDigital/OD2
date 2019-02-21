@@ -32,7 +32,7 @@ module OregonDigital
       end
 
       def parse_subject_uri
-        uri = URI.parse(subject.to_s)
+        uri = URI.parse(rdf_subject.to_s)
         "#{uri.scheme}://#{uri.hostname + uri.request_uri.split('.')[0]}.rdf"
       end
     end
