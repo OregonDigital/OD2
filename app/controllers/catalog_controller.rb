@@ -107,22 +107,6 @@ class CatalogController < ApplicationController
     # Add all fields as searchable, reject the non-searchable fields
     OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
       config.add_show_field solr_name(prop, :stored_searchable)
-    end
-    OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-    end
-    OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-    end
-    OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-    end
-    OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-    end
-
-    # Search fields
-    OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
       config.add_search_field(prop) do |field|
         solr_name = solr_name(prop, :stored_searchable)
         field.solr_local_parameters = {
@@ -132,6 +116,7 @@ class CatalogController < ApplicationController
       end
     end
     OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
       config.add_search_field(prop) do |field|
         solr_name = solr_name(prop, :stored_searchable)
         field.solr_local_parameters = {
@@ -141,6 +126,7 @@ class CatalogController < ApplicationController
       end
     end
     OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
       config.add_search_field(prop) do |field|
         solr_name = solr_name(prop, :stored_searchable)
         field.solr_local_parameters = {
@@ -150,6 +136,7 @@ class CatalogController < ApplicationController
       end
     end
     OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
       config.add_search_field(prop) do |field|
         solr_name = solr_name(prop, :stored_searchable)
         field.solr_local_parameters = {
@@ -159,6 +146,7 @@ class CatalogController < ApplicationController
       end
     end
     OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      config.add_show_field solr_name(prop, :stored_searchable)
       config.add_search_field(prop) do |field|
         solr_name = solr_name(prop, :stored_searchable)
         field.solr_local_parameters = {
