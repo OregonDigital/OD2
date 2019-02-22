@@ -15,7 +15,7 @@ module Qa::Authorities
       end
     end
 
-    def find_term(response, q)
+    def find_term(response, _q)
       [response]
     end
   end
