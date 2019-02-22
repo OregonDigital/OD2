@@ -123,39 +123,49 @@ class CatalogController < ApplicationController
 
     # Search fields
     OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      solr_name = solr_name(prop, :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
+      end
     end
     OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      solr_name = solr_name(prop, :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
+      end
     end
     OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      solr_name = solr_name(prop, :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
+      end
     end
     OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      solr_name = solr_name(prop, :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
+      end
     end
     OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      solr_name = solr_name(prop, :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
+      end
     end
 
     # 'fielded' search configuration. Used by pulldown among other places.
@@ -181,147 +191,6 @@ class CatalogController < ApplicationController
       field.solr_parameters = {
         qf: "#{all_names} file_format_tesim all_text_timv",
         pf: title_name.to_s
-      }
-    end
-
-    # Now we see how to over-ride Solr request handler defaults, in this
-    # case for a BL 'search field', which is really a dismax aggregate
-    # of Solr search fields.
-    # creator, title, description, publisher, date_created,
-    # subject, language, resource_type, format, identifier, based_near,
-    config.add_search_field('contributor') do |field|
-      # solr_parameters hash are sent to Solr as ordinary url query params.
-
-      # :solr_local_parameters will be sent using Solr LocalParams
-      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-      # Solr parameter de-referencing like $title_qf.
-      # See: http://wiki.apache.org/solr/LocalParams
-      solr_name = solr_name('contributor', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('creator') do |field|
-      solr_name = solr_name('creator', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('title') do |field|
-      solr_name = solr_name('title', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('description') do |field|
-      field.label = 'Abstract or Summary'
-      solr_name = solr_name('description', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('publisher') do |field|
-      solr_name = solr_name('publisher', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('date_created') do |field|
-      solr_name = solr_name('created', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('subject') do |field|
-      solr_name = solr_name('subject', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('language') do |field|
-      solr_name = solr_name('language', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('resource_type') do |field|
-      solr_name = solr_name('resource_type', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('format') do |field|
-      solr_name = solr_name('format', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('identifier') do |field|
-      solr_name = solr_name('id', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('based_near') do |field|
-      field.label = 'Location'
-      solr_name = solr_name('based_near_label', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('keyword') do |field|
-      solr_name = solr_name('keyword', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('depositor') do |field|
-      solr_name = solr_name('depositor', :symbol)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('rights_statement') do |field|
-      solr_name = solr_name('rights_statement', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-
-    config.add_search_field('license') do |field|
-      solr_name = solr_name('license', :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
       }
     end
 
