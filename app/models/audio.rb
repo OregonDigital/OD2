@@ -3,7 +3,6 @@
 # Sets the expected attributes and other important values for an audio work
 class Audio < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::OregonDigital::TriplePoweredProperties::WorkBehavior
 
   self.indexer = AudioIndexer
   # Change this to restrict which works can be added as a child.

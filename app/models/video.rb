@@ -3,7 +3,6 @@
 # Sets basic behaviors for a video work
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::OregonDigital::TriplePoweredProperties::WorkBehavior
 
   self.indexer = VideoIndexer
   # Change this to restrict which works can be added as a child.

@@ -3,7 +3,6 @@
 # Sets the expected behaviors for an image work
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::OregonDigital::TriplePoweredProperties::WorkBehavior
 
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.

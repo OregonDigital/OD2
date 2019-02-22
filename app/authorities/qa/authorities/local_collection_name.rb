@@ -2,30 +2,21 @@
 
 module Qa::Authorities
   # Local Collection Name QA Object
-  class LocalCollectionName < Qa::Authorities::Base
-    include WebServiceBase
-    include OregonDigital::Authorities::WebServiceRedirect
-
-    class_attribute :label
-
+  class LocalCollectionName < BaseAuthority
     self.label = lambda do |item|
-      [item['rdfs:label']['@value']].compact.join(', ')
+      [item.first['rdfs:label']['@value']].compact.join(', ')
     end
 
     def search(q)
       if OregonDigital::ControlledVocabularies::LocalCollectionName.in_vocab?(q)
-        parse_authority_response(json(q + '.jsonld'))
+        parse_authority_response(find_term(json(q + '.jsonld'), q))
       else
         []
       end
     end
 
-    private
-
-    # Reformats the data received from the service
-    def parse_authority_response(response)
-      [{ 'id' => response['@id'].to_s,
-         'label' => label.call(response) }]
+    def find_term(response, _q)
+      [response]
     end
   end
 end

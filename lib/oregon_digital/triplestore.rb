@@ -2,7 +2,7 @@
 
 require 'triplestore_adapter'
 
-module OregonDigital::TriplePoweredProperties
+module OregonDigital
   # Configuration to allow connection to triplestore
   class Triplestore
     ##
