@@ -121,6 +121,43 @@ class CatalogController < ApplicationController
       config.add_show_field solr_name(prop, :stored_searchable)
     end
 
+    # Search fields
+    OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      solr_name = solr_name(prop, :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+    OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      solr_name = solr_name(prop, :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+    OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      solr_name = solr_name(prop, :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+    OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      solr_name = solr_name(prop, :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+    OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
+      solr_name = solr_name(prop, :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+
     # 'fielded' search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
