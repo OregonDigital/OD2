@@ -5,7 +5,7 @@ RSpec.describe Qa::Authorities::Format do
   let(:response) { [{}, { 'http://www.w3.org/2000/01/rdf-schema#label': [{ '@value': 'mylabel' }], '@id': 'my_id' }.with_indifferent_access] }
   let(:label) { 'mylabel' }
 
-  it { expect(format_instance.label.call(label)).to eq 'mylabel' }
+  it { expect(format_instance.label.call(response)).to eq 'mylabel' }
   describe '#search' do
     before do
       allow(format_instance).to receive(:json).with(anything).and_return(response)
