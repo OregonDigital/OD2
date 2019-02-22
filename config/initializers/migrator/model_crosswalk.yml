@@ -1,0 +1,6 @@
+---
+'info:fedora/afmodel:Image': Image
+'info:fedora/afmodel:Video': Video
+'info:fedora/afmodel:Document': Document
+'info:fedora/afmodel:Audio': Audio
+'info:fedora/afmodel:Generic': Generic
