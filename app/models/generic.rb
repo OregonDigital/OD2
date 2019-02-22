@@ -3,7 +3,6 @@
 # Sets the expected behaviors of a generic work
 class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  include ::OregonDigital::TriplePoweredProperties::WorkBehavior
 
   before_save :resolve_oembed_errors
 

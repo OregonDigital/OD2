@@ -1,0 +1,11 @@
+overrides:
+  - property: source
+    predicate: http://purl.org/dc/elements/1.1/source
+    multiple: true
+  - predicate: http://opaquenamespace.org/ns/fullText
+    function: return_nil
+  - predicate: http://opaquenamespace.org/ns/full
+    function: return_nil
+  - property: rightsHolder
+    predicate: http://opaquenamespace.org/right/rightsHolder
+    multiple: true

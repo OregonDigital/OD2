@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe OregonDigital::TriplePoweredProperties::Triplestore do
+RSpec.describe OregonDigital::Triplestore do
   let(:triplestore) { described_class }
   let(:label) { 'Blah' }
 
