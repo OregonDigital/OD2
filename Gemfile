@@ -64,6 +64,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rspec'
