@@ -4,7 +4,6 @@ module OregonDigital
   module ControlledVocabularies
     # Generic object for storing labels and uris
     class Resource < ActiveTriples::Resource
-      ##
       # Override ActiveTriples::Resource to enforce vocabulary membership
       #
       # @see ActiveTriples::Resource
@@ -17,6 +16,15 @@ module OregonDigital
         resource_uri = @rdf_subject
         @rdf_subject = nil
         set_subject!(resource_uri)
+      end
+
+      ##
+      # Override fetch to use the triplestore caching mechanism to get the graph,
+      # store it locally, and fetch it from the cache, then assign it to the resources
+      # "persistence_strategy.graph" which makes other methods like "rdf_label" make
+      # use of the provided graph.
+      def fetch(*_args, &_block)
+        persistence_strategy.graph = triplestore_fetch
       end
 
       # Override ActiveTriples::Resource.set_subject! to throw exception if term isn't in vocab
@@ -32,6 +40,16 @@ module OregonDigital
         [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
       end
 
+      # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
+      # it should return an empty graph.
+      def triplestore_fetch
+        URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
+      end
+
+      def triplestore
+        OregonDigital::Triplestore
+      end
+
       private
 
       def rdf_label_uri_same?
@@ -42,7 +60,6 @@ module OregonDigital
         self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(uri)
       end
     end
-
     class ControlledVocabularyError < StandardError; end
   end
 end
