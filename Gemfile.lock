@@ -1,4 +1,18 @@
 GIT
+  remote: https://github.com/OregonDigital/hyrax-migrator.git
+  revision: d5d056b7d85b79f3a31e07ed5404460640bfc301
+  specs:
+    hyrax-migrator (0.1.0)
+      aasm
+      aws-sdk-s3
+      bagit
+      haml
+      rails (~> 5.1.6)
+      rdf
+      rubyzip
+      sidekiq
+
+GIT
   remote: https://github.com/eagleas/clamav
   revision: adac6261cbe8f24c1fc9e8044e7ae9d280641921
   branch: master
@@ -95,6 +109,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.0.1)
+      concurrent-ruby (~> 1.0)
     actioncable (5.1.6)
       actionpack (= 5.1.6)
       nio4r (~> 2.0)
@@ -183,6 +199,9 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    bagit (0.4.3)
+      docopt (~> 0.5.0)
+      validatable (~> 1.6)
     bcp47 (0.3.3)
       i18n
     bcrypt (3.1.12)
@@ -286,6 +305,7 @@ GEM
       devise
     diff-lcs (1.3)
     docile (1.3.1)
+    docopt (0.5.0)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dropbox_api (0.1.12)
@@ -896,6 +916,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.5)
     unicode-display_width (1.4.0)
+    validatable (1.6.7)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.6.2)
@@ -937,6 +958,7 @@ DEPENDENCIES
   hydra-derivatives!
   hydra-role-management
   hyrax!
+  hyrax-migrator!
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

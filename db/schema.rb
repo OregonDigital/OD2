@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181203183652) do
+ActiveRecord::Schema.define(version: 20181213181357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,18 @@ ActiveRecord::Schema.define(version: 20181203183652) do
     t.boolean "enabled", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "hyrax_migrator_works", force: :cascade do |t|
+    t.string "pid", null: false
+    t.string "file_path"
+    t.string "aasm_state"
+    t.string "status_message"
+    t.string "status"
+    t.text "env"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pid"], name: "index_hyrax_migrator_works_on_pid", unique: true
   end
 
   create_table "job_io_wrappers", id: :serial, force: :cascade do |t|
