@@ -14,5 +14,6 @@ module OregonDigital
   eager_autoload do
     autoload :ControlledVocabularies
     autoload :Derivatives
+    autoload :Triplestore
   end
 end
