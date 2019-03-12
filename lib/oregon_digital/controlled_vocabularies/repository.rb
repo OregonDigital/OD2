@@ -12,6 +12,13 @@ module OregonDigital
         nil
       end
 
+      def self.in_vocab?(uri)
+        all_endpoints.each do |endpoint|
+          return true if endpoint.expression.match?(uri)
+        end
+        false
+      end
+
       def self.all_endpoints
         [
           OregonDigital::ControlledVocabularies::Vocabularies::Ulan,
