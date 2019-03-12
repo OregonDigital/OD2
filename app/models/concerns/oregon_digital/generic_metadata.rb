@@ -13,17 +13,29 @@ module OregonDigital
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
       property :import_url, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#importUrl'), multiple: false
-      property :resource_type, predicate: ::RDF::Vocab::DC.type
-      property :creator, predicate: ::RDF::Vocab::DC11.creator
-      property :contributor, predicate: ::RDF::Vocab::DC11.contributor
-      property :date_created, predicate: ::RDF::Vocab::DC.created
+      property :resource_type, predicate: ::RDF::Vocab::DC.type do |index|
+        index.as :stored_searchable, :facetable
+      end
+      property :creator, predicate: ::RDF::Vocab::DC11.creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+      property :contributor, predicate: ::RDF::Vocab::DC11.contributor do |index|
+        index.as :stored_searchable, :facetable
+      end
+      property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
+        index.as :stored_searchable
+      end
 
       property :description, predicate: ::RDF::Vocab::DC.description do |index|
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights
-      property :identifier, predicate: ::RDF::Vocab::DC.identifier
+      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights do |index|
+        index.as :stored_searchable
+      end
+      property :identifier, predicate: ::RDF::Vocab::DC.identifier do |index|
+        index.as :stored_searchable
+      end
 
       property :alternative, predicate: ::RDF::Vocab::DC.alternative do |index|
         index.as :stored_searchable
@@ -566,7 +578,9 @@ module OregonDigital
       end
 
       # Controlled vocabulary terms
-      property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location
+      property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location do |index|
+        index.as :stored_searchable, :facetable
+      end
       property :ethnographic_term, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/ethnographic'),
                                    class_name: OregonDigital::ControlledVocabularies::EthnographicTerm do |index|
         index.as :stored_searchable, :facetable
