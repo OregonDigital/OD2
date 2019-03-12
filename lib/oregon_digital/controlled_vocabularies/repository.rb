@@ -19,6 +19,8 @@ module OregonDigital
         false
       end
 
+      private
+
       def self.all_endpoints
         [
           OregonDigital::ControlledVocabularies::Vocabularies::Ulan,
