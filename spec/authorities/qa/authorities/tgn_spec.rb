@@ -4,7 +4,7 @@ RSpec.describe Qa::Authorities::Tgn do
   let(:tgn_instance) { described_class.new }
   let(:response) { [{ 'http://www.w3.org/2000/01/rdf-schema#label': [{ '@value': 'mylabel' }], '@id': 'my_id' }.with_indifferent_access] }
 
-  it { expect(tgn_instance.label.call(response)).to eq 'mylabel' }
+  it { expect(tgn_instance.label.call(response, nil)).to eq 'mylabel' }
   describe '#search' do
     before do
       allow(tgn_instance).to receive(:json).with(anything).and_return(response)

@@ -4,7 +4,7 @@ RSpec.describe Qa::Authorities::LocalCollectionName do
   let(:local_collection_name_instance) { described_class.new }
   let(:response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'my_id' }.with_indifferent_access] }
 
-  it { expect(local_collection_name_instance.label.call(response)).to eq 'mylabel' }
+  it { expect(local_collection_name_instance.label.call(response, nil)).to eq 'mylabel' }
   describe '#search' do
     before do
       allow(local_collection_name_instance).to receive(:json).with(anything).and_return(response)
