@@ -360,7 +360,6 @@ module OregonDigital
       property :publication_place, predicate: ::RDF::Vocab::MARCRelators.pup do |index|
         index.as :stored_searchable
       end
-
       
       property :source, predicate: ::RDF::Vocab::DC.source do |index|
         index.as :stored_searchable

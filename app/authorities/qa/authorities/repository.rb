@@ -8,7 +8,7 @@ module Qa::Authorities
     end
 
     def search(q)
-      vocabulary = OregonDigital::ControlledVocabularies::Repository.query_to_vocabulary(q) 
+      vocabulary = OregonDigital::ControlledVocabularies::Repository.query_to_vocabulary(q)
       if vocabulary.present?
         parse_authority_response(find_term(json(vocabulary.as_query(q)), q), vocabulary)
       else
