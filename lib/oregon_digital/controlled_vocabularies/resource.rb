@@ -50,6 +50,20 @@ module OregonDigital
         OregonDigital::Triplestore
       end
 
+      # Return Vocabulary class with matching URI regex
+      def self.query_to_vocabulary(uri)
+        return nil if all_endpoints.blank?
+        all_endpoints.each do |endpoint|
+          return endpoint if endpoint.expression.match?(uri)
+        end
+        nil
+      end
+
+      # Return T/F if a URI is in the vocab
+      def self.in_vocab?(uri)
+        query_to_vocabulary(uri).present?
+      end
+
       private
 
       def rdf_label_uri_same?

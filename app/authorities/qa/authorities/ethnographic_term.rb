@@ -3,14 +3,14 @@
 module Qa::Authorities
   # EthnographicTerm QA Object
   class EthnographicTerm < BaseAuthority
-    self.label = lambda do |item, _vocabulary|
-      [item.first['http://www.loc.gov/mads/rdf/v1#authoritativeLabel'].first['@value']].compact.join(', ')
+    self.label = lambda do |data, vocabulary|
+      [vocabulary.label(data)].compact.join(', ')
     end
 
     def search(q)
-      vocabulary = nil
-      if OregonDigital::ControlledVocabularies::EthnographicTerm.in_vocab?(q)
-        parse_authority_response(find_term(json(q), q), vocabulary)
+      vocabulary = OregonDigital::ControlledVocabularies::EthnographicTerm.query_to_vocabulary(q)
+      if vocabulary.present?
+        parse_authority_response(find_term(json(vocabulary.as_query(q)), q), vocabulary)
       else
         []
       end
