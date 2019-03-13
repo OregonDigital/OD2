@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Qa::Authorities
-  # EthnographicTerm QA Object
+  # Repository QA Object
   class Repository < BaseAuthority
     self.label = lambda do |data, vocabulary|
       [vocabulary.label(data)].compact.join(', ')

@@ -2,9 +2,9 @@
 
 module OregonDigital
   module ControlledVocabularies
-    # Ethnographic Term object for storing labels and uris
+    # Repository object for storing labels and uris
     class Repository < Resource
-      # Return T/F if a URI is in the vocab
+      # Return Vocabulary class with matching URI regex
       def self.query_to_vocabulary(uri)
         all_endpoints.each do |endpoint|
           return endpoint if endpoint.expression.match?(uri)
@@ -12,11 +12,9 @@ module OregonDigital
         nil
       end
 
+      # Return T/F if a URI is in the vocab
       def self.in_vocab?(uri)
-        all_endpoints.each do |endpoint|
-          return true if endpoint.expression.match?(uri)
-        end
-        false
+        query_to_vocabulary(uri).present?
       end
 
       def self.all_endpoints
