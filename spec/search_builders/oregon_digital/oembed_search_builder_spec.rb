@@ -24,6 +24,6 @@ RSpec.describe OregonDigital::OembedSearchBuilder do
 
     before { search_builder.only_oembed(processor_chain) }
 
-    it { is_expected.to eq(fq: ['oembed_url_tesim:*']) }
+    it { is_expected.to eq(fq: ['oembed_url_sim:*']) }
   end
 end
