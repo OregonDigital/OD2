@@ -2,9 +2,9 @@
 
 RSpec.describe Qa::Authorities::Repository do
   let(:repository_instance) { described_class.new }
-  let(:ons_request) {'http://opaquenamespace.org/ns/repository/my_id.jsonld'}
-  let(:ulan_request) {'http://vocab.getty.edu/ulan/my_id.jsonld'}
-  let(:loc_names_request) {'http://id.loc.gov/authorities/names/my_id.jsonld'}
+  let(:ons_request) { 'http://opaquenamespace.org/ns/repository/my_id.jsonld' }
+  let(:ulan_request) { 'http://vocab.getty.edu/ulan/my_id.jsonld' }
+  let(:loc_names_request) { 'http://id.loc.gov/authorities/names/my_id.jsonld' }
   let(:ons_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/repository/my_id' }.with_indifferent_access] }
   let(:ulan_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
   let(:loc_names_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/names/my_id' }.with_indifferent_access] }
