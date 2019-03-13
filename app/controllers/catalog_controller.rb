@@ -168,20 +168,20 @@ class CatalogController < ApplicationController
 
     # Add all fields as searchable, reject the non-searchable fields
     OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| reject_facet_fields.include? attr }.each do |prop|
-      config.add_facet_field solr_name(prop, :facetable), label:I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
     end
     OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| reject_facet_fields.include? attr }.each do |prop|
-      config.add_facet_field solr_name(prop, :facetable), label:I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
     end
     OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| reject_facet_fields.include? attr }.each do |prop|
-      config.add_facet_field solr_name(prop, :facetable), label:I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
     end
     OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| reject_facet_fields.include? attr }.each do |prop|
-      config.add_facet_field solr_name(prop, :facetable), label:I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
     end
     OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| reject_facet_fields.include? attr }.each do |prop|
       label = prop.gsub('_label', '')
-      config.add_facet_field solr_name(prop, :facetable), label:I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5
     end
 
     # 'fielded' search configuration. Used by pulldown among other places.
