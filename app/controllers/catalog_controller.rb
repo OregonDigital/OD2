@@ -84,6 +84,10 @@ class CatalogController < ApplicationController
 
     # Add all fields as searchable, reject the non-searchable fields
     OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Document.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
       if Document.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable)
         config.add_search_field(prop) do |field|
@@ -94,11 +98,17 @@ class CatalogController < ApplicationController
           }
         end
       end
+
+      # Add property as facetable
       if Document.properties[prop].behaviors.include?(:facetable)
         config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
     OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Generic.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
       if Generic.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable)
         config.add_search_field(prop) do |field|
@@ -109,11 +119,17 @@ class CatalogController < ApplicationController
           }
         end
       end
+
+      # Add property as facetable
       if Generic.properties[prop].behaviors.include?(:facetable)
         config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
     OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Image.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
       if Image.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable)
         config.add_search_field(prop) do |field|
@@ -124,11 +140,17 @@ class CatalogController < ApplicationController
           }
         end
       end
+
+      # Add property as facetable
       if Image.properties[prop].behaviors.include?(:facetable)
         config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
     OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Video.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
       if Video.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable)
         config.add_search_field(prop) do |field|
@@ -139,12 +161,19 @@ class CatalogController < ApplicationController
           }
         end
       end
+
+      # Add property as facetable
       if Video.properties[prop].behaviors.include?(:facetable)
         config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
     OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_fields.include? attr }.each do |prop|
       label = prop.gsub('_label', '')
+
+      # Skip if this property isn't indexed
+      next if Generic.properties[label].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
       if Generic.properties[label].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable)
         config.add_search_field(prop) do |field|
@@ -155,6 +184,8 @@ class CatalogController < ApplicationController
           }
         end
       end
+
+      # Add property as facetable
       if Generic.properties[label].behaviors.include?(:facetable)
         config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5
       end
