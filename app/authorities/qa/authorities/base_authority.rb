@@ -11,9 +11,9 @@ module Qa::Authorities
     private
 
     # Reformats the data received from the service
-    def parse_authority_response(term)
+    def parse_authority_response(term, vocabulary)
       [{ 'id' => term.first['@id'].to_s,
-         'label' => label.call(term) }]
+         'label' => label.call(term, vocabulary) }]
     end
 
     def find_term(response, q)
