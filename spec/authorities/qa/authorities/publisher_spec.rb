@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe Qa::Authorities::Repository do
+RSpec.describe Qa::Authorities::Publisher do
   let(:repository_instance) { described_class.new }
   let(:ons_request) { 'http://opaquenamespace.org/ns/repository/my_id.jsonld' }
   let(:ulan_request) { 'http://vocab.getty.edu/ulan/my_id.jsonld' }
@@ -12,7 +12,7 @@ RSpec.describe Qa::Authorities::Repository do
   it { expect(repository_instance.label.call(ons_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsRepository)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::Ulan)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call(ons_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator)).to eq 'mylabel' }
   describe '#search' do
     before do
       allow(repository_instance).to receive(:json).with(ons_request).and_return(ons_response)
@@ -23,6 +23,7 @@ RSpec.describe Qa::Authorities::Repository do
       it { expect(repository_instance.search('http://opaquenamespace.org/ns/repository/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/repository/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://vocab.getty.edu/ulan/my_id')).to eq [{ id: 'http://vocab.getty.edu/ulan/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://id.loc.gov/authorities/names/my_id')).to eq [{ id: 'http://id.loc.gov/authorities/names/my_id', label: 'mylabel' }.with_indifferent_access] }
+      it { expect(repository_instance.search('http://opaquenamespace.org/ns/creator/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/repository/my_id', label: 'mylabel' }.with_indifferent_access] }
     end
     context 'with a uri not in the vocabulary' do
       it { expect(repository_instance.search('http://my.queryuri.com')).to eq [] }
