@@ -52,7 +52,7 @@ module OregonDigital
 
       # Return Vocabulary class with matching URI regex
       def self.query_to_vocabulary(uri)
-        return nil if all_endpoints.blank?
+        return nil unless respond_to? :all_endpoints
         all_endpoints.each do |endpoint|
           return endpoint if endpoint.expression.match?(uri)
         end
