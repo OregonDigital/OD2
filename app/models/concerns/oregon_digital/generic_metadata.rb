@@ -7,19 +7,13 @@ module OregonDigital
     # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
     PROPERTIES = %w[abstract accepted_name_usage access_restrictions accession_number acquisition_date alternative arranger art_series artist author award award_date barcode biographical_information box box_name box_number based_near canzoniere_poems cartographer citation collected_date collector common_name compass_direction composer contents contributor conversion copy_location copyright_claimant cover_description coverage creator creator_display cultural_context current_repository_id date date_created date_digitized dedicatee description description_of_manifestation designer donor editor ethnographic_term event exhibit extent family file_size folder_name folder_number form_of_work format former_owner genus gps_latitude gps_longitude has_finding_aid has_part has_version higher_classification hydrologic_unit_code identification_verification_status identifier illustrator inscription institution interviewee interviewer isPartOf is_version_of issued item_locator keyword language layout legal_name license local_collection_id local_collection_name location location_copyshelf_location longitude_latitude_identification lyricist material measurements military_branch military_highest_rank military_occupation military_service_location mode_of_issuance mods_note object_orientation oembed_url order original_name_usage owner patron photographer phylum_or_division physical_extent place_of_production primary_set print_maker provenance publication_place publisher ranger_district recipient relation replaces_url repository resource_type rights_holder rights_statement scientific_name_authorship scribe series_name series_number set source source_condition species specimen_type sports_team state_or_edition street_address style_or_period subject taxon_class technique temporal tgn transcriber translator tribal_classes tribal_notes tribal_terms tribal_title use_restrictions view_date water_basin workType].freeze
-    CONTROLLED = %w[arranger_label based_near_label ethnographic_term_label format_label local_collection_name_label repository_label tgn_label].freeze
+    CONTROLLED = %w[arranger_label artist_label author_label based_near_label cartographer_label collector_label composer_label contributor_label creator_label dedicatee_label designer_label donor editor_label ethnographic_term_label format_label illustrator_label interviewee_label interviewer_label local_collection_name_label lyricist_label owner_label patron_label photographer_label print_maker_label recipient_label repository_label scribe_label tgn_label transcriber translator_label].freeze
 
     included do
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
       property :import_url, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#importUrl'), multiple: false
       property :resource_type, predicate: ::RDF::Vocab::DC.type do |index|
-        index.as :stored_searchable, :facetable
-      end
-      property :creator, predicate: ::RDF::Vocab::DC11.creator do |index|
-        index.as :stored_searchable, :facetable
-      end
-      property :contributor, predicate: ::RDF::Vocab::DC11.contributor do |index|
         index.as :stored_searchable, :facetable
       end
       property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
@@ -45,95 +39,11 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :artist, predicate: ::RDF::Vocab::MARCRelators.art do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :author, predicate: ::RDF::Vocab::MARCRelators.aut do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :cartographer, predicate: ::RDF::Vocab::MARCRelators.ctg do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :collector, predicate: ::RDF::Vocab::MARCRelators.col do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :composer, predicate: ::RDF::Vocab::MARCRelators.cmp do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :creator_display, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_creatorDisplay') do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :dedicatee, predicate: ::RDF::Vocab::MARCRelators.dte do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :donor, predicate: ::RDF::Vocab::MARCRelators.dnr do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :editor, predicate: ::RDF::Vocab::MARCRelators.edt do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :former_owner, predicate: ::RDF::Vocab::MARCRelators.fmo do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :illustrator, predicate: ::RDF::Vocab::MARCRelators.ill do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :interviewee, predicate: ::RDF::Vocab::MARCRelators.ive do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :interviewer, predicate: ::RDF::Vocab::MARCRelators.ivr do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :lyricist, predicate: ::RDF::Vocab::MARCRelators.lyr do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :owner, predicate: ::RDF::Vocab::MARCRelators.own do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :patron, predicate: ::RDF::Vocab::MARCRelators.pat do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :photographer, predicate: ::RDF::Vocab::MARCRelators.pht do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :print_maker, predicate: ::RDF::Vocab::MARCRelators.prm do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :recipient, predicate: ::RDF::Vocab::MARCRelators.rcp do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :scribe, predicate: ::RDF::Vocab::MARCRelators.scr do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :transcriber, predicate: ::RDF::Vocab::MARCRelators.trc do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :translator, predicate: ::RDF::Vocab::MARCRelators.trl do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -574,6 +484,98 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :artist, predicate: ::RDF::Vocab::MARCRelators.art, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :author, predicate: ::RDF::Vocab::MARCRelators.aut, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :cartographer, predicate: ::RDF::Vocab::MARCRelators.ctg, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :collector, predicate: ::RDF::Vocab::MARCRelators.col, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :composer, predicate: ::RDF::Vocab::MARCRelators.cmp, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :creator, predicate: ::RDF::Vocab::DC11.creator, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :contributor, predicate: ::RDF::Vocab::DC11.contributor, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :dedicatee, predicate: ::RDF::Vocab::MARCRelators.dte, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :donor, predicate: ::RDF::Vocab::MARCRelators.dnr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :editor, predicate: ::RDF::Vocab::MARCRelators.edt, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :illustrator, predicate: ::RDF::Vocab::MARCRelators.ill, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :interviewee, predicate: ::RDF::Vocab::MARCRelators.ive, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :interviewer, predicate: ::RDF::Vocab::MARCRelators.ivr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :lyricist, predicate: ::RDF::Vocab::MARCRelators.lyr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :owner, predicate: ::RDF::Vocab::MARCRelators.own, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :patron, predicate: ::RDF::Vocab::MARCRelators.pat, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :photographer, predicate: ::RDF::Vocab::MARCRelators.pht, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :print_maker, predicate: ::RDF::Vocab::MARCRelators.prm, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :recipient, predicate: ::RDF::Vocab::MARCRelators.rcp, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :scribe, predicate: ::RDF::Vocab::MARCRelators.scr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :transcriber, predicate: ::RDF::Vocab::MARCRelators.trc, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :translator, predicate: ::RDF::Vocab::MARCRelators.trl, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location do |index|
         index.as :stored_searchable, :facetable
       end
@@ -601,8 +603,32 @@ module OregonDigital
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties
-      self.controlled_properties = %i[arranger based_near ethnographic_term format local_collection_name repository tgn]
+      self.controlled_properties = %i[arranger artist author based_near cartographer collector composer contributor creator dedicatee designer donor editor ethnographic_term format illustrator interviewee interviewer local_collection_name lyricist owner patron photographer print_maker recipient repository scribe tgn transcriber translator]
 
+      accepts_nested_attributes_for :arranger, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :artist, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :author, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :cartographer, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :collector, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :composer, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :creator, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :contributor, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :dedicatee, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :donor, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :designer, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :editor, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :illustrator, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :interviewee, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :interviewer, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :lyricist, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :owner, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :patron, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :photographer, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :print_maker, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :recipient, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :scribe, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :transcriber, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :translator, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :arranger, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :based_near, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :ethnographic_term, reject_if: id_blank, allow_destroy: true
