@@ -12,7 +12,6 @@ RSpec.describe Qa::Authorities::Repository do
   it { expect(repository_instance.label.call(ons_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsRepository)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::Ulan)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
   describe '#search' do
     before do
       allow(repository_instance).to receive(:json).with(ons_request).and_return(ons_response)

@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe OregonDigital::ControlledVocabularies::Repository do
+RSpec.describe OregonDigital::ControlledVocabularies::Publisher do
   let(:vocab) { described_class }
 
   describe '#in_vocab?' do
