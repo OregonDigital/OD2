@@ -8,6 +8,19 @@ module Qa::Authorities
 
     class_attribute :label
 
+    self.label = lambda do |data, vocabulary|
+      [vocabulary.label(data)].compact.join(', ')
+    end
+
+    def search(q)
+      vocabulary = controlled_vocabulary.query_to_vocabulary(q)
+      if vocabulary.present?
+        parse_authority_response(find_term(json(vocabulary.as_query(q)), q), vocabulary)
+      else
+        []
+      end
+    end
+
     private
 
     # Reformats the data received from the service
@@ -17,7 +30,8 @@ module Qa::Authorities
     end
 
     def find_term(response, q)
-      response.select { |resp| resp['@id'] == q }
+      selected_id = response.select { |resp| resp['@id'] == q }
+      selected_id.blank? ? [response] : selected_id
     end
   end
 end
