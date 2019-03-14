@@ -3,14 +3,14 @@
 module Qa::Authorities
   # Format QA Object
   class Format < BaseAuthority
-    self.label = lambda do |item, _vocabulary|
-      [item.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']].compact.join(', ')
+    self.label = lambda do |data, vocabulary|
+      [vocabulary.label(data)].compact.join(', ')
     end
 
     def search(q)
-      vocabulary = nil
-      if OregonDigital::ControlledVocabularies::MediaType.in_vocab?(q)
-        parse_authority_response(find_term(json(q), q), vocabulary)
+      vocabulary = OregonDigital::ControlledVocabularies::MediaType.query_to_vocabulary(q)
+      if vocabulary.present?
+        parse_authority_response(find_term(json(vocabulary.as_query(q)), q), vocabulary)
       else
         []
       end
