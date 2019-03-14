@@ -15,7 +15,7 @@ module OregonDigital
 
     def only_oembed(solr_params)
       solr_params[:fq] ||= []
-      solr_params[:fq] << 'oembed_url_tesim:*'
+      solr_params[:fq] << 'oembed_url_sim:*'
     end
   end
 end
