@@ -9,7 +9,7 @@ module OregonDigital
       end
 
       def self.label(data)
-        data.first['http://www.w3.org/2004/02/skos/core#prefLabel'].first['@value']
+        data.first['http://www.loc.gov/mads/rdf/v1#authoritativeLabel'].first['@value']
       end
 
       def self.as_query(q)
