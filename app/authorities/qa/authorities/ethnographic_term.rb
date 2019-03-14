@@ -3,17 +3,8 @@
 module Qa::Authorities
   # EthnographicTerm QA Object
   class EthnographicTerm < BaseAuthority
-    self.label = lambda do |data, vocabulary|
-      [vocabulary.label(data)].compact.join(', ')
-    end
-
-    def search(q)
-      vocabulary = OregonDigital::ControlledVocabularies::EthnographicTerm.query_to_vocabulary(q)
-      if vocabulary.present?
-        parse_authority_response(find_term(json(vocabulary.as_query(q)), q), vocabulary)
-      else
-        []
-      end
+    def controlled_vocabulary
+      OregonDigital::ControlledVocabularies::EthnographicTerm
     end
   end
 end
