@@ -26,7 +26,7 @@ RSpec.describe Qa::Authorities::Publisher do
       it { expect(repository_instance.search('http://opaquenamespace.org/ns/repository/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/repository/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://vocab.getty.edu/ulan/my_id')).to eq [{ id: 'http://vocab.getty.edu/ulan/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://id.loc.gov/authorities/names/my_id')).to eq [{ id: 'http://id.loc.gov/authorities/names/my_id', label: 'mylabel' }.with_indifferent_access] }
-      it { expect(repository_instance.search('http://opaquenamespace.org/ns/creator/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/repository/my_id', label: 'mylabel' }.with_indifferent_access] }
+      it { expect(repository_instance.search('http://opaquenamespace.org/ns/creator/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/creator/my_id', label: 'mylabel' }.with_indifferent_access] }
     end
     context 'with a uri not in the vocabulary' do
       it { expect(repository_instance.search('http://my.queryuri.com')).to eq [] }
