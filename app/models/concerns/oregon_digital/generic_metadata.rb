@@ -7,7 +7,7 @@ module OregonDigital
     # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
     PROPERTIES = %w[abstract accepted_name_usage access_restrictions accession_number acquisition_date alternative arranger art_series artist author award award_date barcode biographical_information box box_name box_number based_near canzoniere_poems cartographer citation collected_date collector common_name compass_direction composer contents contributor conversion copy_location copyright_claimant cover_description coverage creator creator_display cultural_context current_repository_id date date_created date_digitized dedicatee description description_of_manifestation designer donor editor ethnographic_term event exhibit extent family file_size folder_name folder_number form_of_work format former_owner genus gps_latitude gps_longitude has_finding_aid has_part has_version higher_classification hydrologic_unit_code identification_verification_status identifier illustrator inscription institution interviewee interviewer isPartOf is_version_of issued item_locator keyword language layout legal_name license local_collection_id local_collection_name location location_copyshelf_location longitude_latitude_identification lyricist material measurements military_branch military_highest_rank military_occupation military_service_location mode_of_issuance mods_note object_orientation oembed_url order original_name_usage owner patron photographer phylum_or_division physical_extent place_of_production primary_set print_maker provenance publication_place publisher ranger_district recipient relation replaces_url repository resource_type rights_holder rights_statement scientific_name_authorship scribe series_name series_number set source source_condition species specimen_type sports_team state_or_edition street_address style_or_period subject taxon_class technique temporal tgn transcriber translator tribal_classes tribal_notes tribal_terms tribal_title use_restrictions view_date water_basin workType].freeze
-    CONTROLLED = %w[arranger_label artist_label author_label based_near_label cartographer_label collector_label composer_label contributor_label creator_label dedicatee_label designer_label donor editor_label ethnographic_term_label format_label illustrator_label interviewee_label interviewer_label local_collection_name_label lyricist_label owner_label patron_label photographer_label print_maker_label recipient_label repository_label scribe_label tgn_label transcriber translator_label].freeze
+    CONTROLLED = %w[arranger_label artist_label author_label based_near_label cartographer_label collector_label composer_label contributor_label creator_label dedicatee_label designer_label donor editor_label ethnographic_term_label format_label illustrator_label interviewee_label interviewer_label local_collection_name_label lyricist_label owner_label patron_label photographer_label print_maker_label publisher_label recipient_label repository_label scribe_label tgn_label transcriber translator_label].freeze
 
     included do
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
@@ -257,10 +257,6 @@ module OregonDigital
 
       property :location_copyshelf_location, predicate: ::RDF::Vocab::MODS.locationCopyShelfLocator do |index|
         index.as :stored_searchable
-      end
-
-      property :publisher, predicate: ::RDF::Vocab::DC.publisher do |index|
-        index.as :stored_searchable, :facetable
       end
 
       property :language, predicate: ::RDF::Vocab::DC.language do |index|
@@ -579,17 +575,21 @@ module OregonDigital
       property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location do |index|
         index.as :stored_searchable, :facetable
       end
+
       property :ethnographic_term, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/ethnographic'),
                                    class_name: OregonDigital::ControlledVocabularies::EthnographicTerm do |index|
         index.as :stored_searchable, :facetable
       end
+
       property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
         index.as :stored_searchable, :facetable
       end
+
       property :local_collection_name, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/localCollectionName'),
                                        class_name: OregonDigital::ControlledVocabularies::LocalCollectionName do |index|
         index.as :stored_searchable, :facetable
       end
+
       property :tgn, predicate: ::RDF::URI.new('http://dbpedia.org/ontology/HistoricPlace'),
                      class_name: OregonDigital::ControlledVocabularies::HistoricPlace do |index|
         index.as :stored_searchable, :facetable
@@ -600,10 +600,15 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :publisher, predicate: ::RDF::Vocab::DC.publisher,
+                           class_name: OregonDigital::ControlledVocabularies::Publisher do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties
-      self.controlled_properties = %i[arranger artist author based_near cartographer collector composer contributor creator dedicatee designer donor editor ethnographic_term format illustrator interviewee interviewer local_collection_name lyricist owner patron photographer print_maker recipient repository scribe tgn transcriber translator]
+      self.controlled_properties = %i[arranger artist author based_near cartographer collector composer contributor creator dedicatee designer donor editor ethnographic_term format illustrator interviewee interviewer local_collection_name lyricist owner patron photographer print_maker publisher recipient repository scribe tgn transcriber translator]
 
       accepts_nested_attributes_for :arranger, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :artist, reject_if: id_blank, allow_destroy: true
@@ -636,6 +641,7 @@ module OregonDigital
       accepts_nested_attributes_for :local_collection_name, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :repository, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :tgn, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :publisher, reject_if: id_blank, allow_destroy: true
     end
   end
 end
