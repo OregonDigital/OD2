@@ -594,31 +594,38 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :taxon_class, predicate: ::RDF::Vocab::DWC.class do |index|
+      property :taxon_class, predicate: ::RDF::Vocab::DWC.class,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :family, predicate: ::RDF::Vocab::DWC.family do |index|
+      property :family, predicate: ::RDF::Vocab::DWC.family,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :genus, predicate: ::RDF::Vocab::DWC.genus do |index|
+      property :genus, predicate: ::RDF::Vocab::DWC.genus,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :order, predicate: ::RDF::Vocab::DWC.order do |index|
+      property :order, predicate: ::RDF::Vocab::DWC.order,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet do |index|
+      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum do |index|
+      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :common_name, predicate: ::RDF::Vocab::DWC.vernacularName do |index|
+      property :common_name, predicate: ::RDF::Vocab::DWC.vernacularName,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable
       end
 
