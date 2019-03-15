@@ -1,11 +1,6 @@
 # frozen_string_literal:true
 
 RSpec.describe Qa::Authorities::Culture do
-
-          # OregonDigital::ControlledVocabularies::Vocabularies::GettyAat,
-          # OregonDigital::ControlledVocabularies::Vocabularies::LocSubjects,
-          # OregonDigital::ControlledVocabularies::Vocabularies::LocNames,
-          # OregonDigital::ControlledVocabularies::Vocabularies::OnsCulture,
   let(:repository_instance) { described_class.new }
   let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.jsonld' }
   let(:loc_names_request) { 'http://id.loc.gov/authorities/names/my_id.jsonld' }

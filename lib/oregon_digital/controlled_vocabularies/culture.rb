@@ -9,7 +9,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::GettyAat,
           OregonDigital::ControlledVocabularies::Vocabularies::LocSubjects,
           OregonDigital::ControlledVocabularies::Vocabularies::LocNames,
-          OregonDigital::ControlledVocabularies::Vocabularies::OnsCulture,
+          OregonDigital::ControlledVocabularies::Vocabularies::OnsCulture
         ]
       end
     end
