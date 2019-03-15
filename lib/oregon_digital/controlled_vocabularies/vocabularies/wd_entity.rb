@@ -9,7 +9,7 @@ module OregonDigital
       end
 
       def self.label(data)
-        data.first['http://www.w3.org/2004/02/skos/core#prefLabel'].select { |label| label['@language'] == I18n.locale.to_s }.first['@value']
+        data.first['entities'].first.second['labels'][I18n.locale.to_s]['value']
       end
 
       def self.as_query(q)
