@@ -13,7 +13,7 @@ RSpec.describe Qa::Authorities::Creator do
   let(:ons_osu_academic_units_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/osuAcademicUnits/my_id' }.with_indifferent_access] }
   let(:ulan_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
   let(:loc_names_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/names/my_id' }.with_indifferent_access] }
-  let(:wd_entity_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel', '@language': I18n.locale.to_s }], '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
+  let(:wd_entity_response) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale.to_s}": { 'value': 'mylabel' } } } }, '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
 
   it { expect(repository_instance.label.call(ons_creator_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(ons_people_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople)).to eq 'mylabel' }
