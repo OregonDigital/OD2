@@ -9,7 +9,7 @@ module OregonDigital
       end
 
       def self.label(data)
-        data.first.first.second['http://www.w3.org/2000/01/rdf-schema#label'].select{ |label| label['lang'] == I18n.locale.to_s }.first['value']
+        data.first.first.second['http://www.w3.org/2000/01/rdf-schema#label'].select { |label| label['lang'] == I18n.locale.to_s }.first['value']
       end
 
       def self.as_query(q)
