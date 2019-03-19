@@ -2,7 +2,7 @@
 
 RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
   let(:vocab) { described_class }
-  let(:new_vocab) { described_class.new('http://www.blah.com') }
+  let(:new_vocab) { described_class.new('http://ubio.org/authority/metadata.php?lsid=urn:lsid:ubio.org:namebank:1187711') }
 
   describe '#in_vocab?' do
     context 'when in vocab' do
