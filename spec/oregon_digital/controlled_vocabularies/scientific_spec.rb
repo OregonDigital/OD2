@@ -27,7 +27,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
     context 'when in vocab' do
       it 'calls the proper method' do
         new_vocab.fetch('blah', 'blah')
-        expect(new_vocab).to have_received(fetch_and_store).once
+        expect(new_vocab).to have_received(:fetch_and_store).once
       end
     end
   end
