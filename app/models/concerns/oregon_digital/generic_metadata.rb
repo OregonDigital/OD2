@@ -600,27 +600,27 @@ module OregonDigital
       end
 
       property :family, predicate: ::RDF::Vocab::DWC.family,
-                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
       property :genus, predicate: ::RDF::Vocab::DWC.genus,
-                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+                       class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
       property :order, predicate: ::RDF::Vocab::DWC.order,
-                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+                       class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
       property :species, predicate: ::RDF::Vocab::DWC.specificEpithet,
-                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+                         class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
       property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum,
-                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+                                    class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 

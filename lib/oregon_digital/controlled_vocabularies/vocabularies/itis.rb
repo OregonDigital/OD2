@@ -5,7 +5,6 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class Itis
       def self.expression
-        #https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=154260
         %r{^http[s]?:\/\/www.itis.gov\/servlet\/SingleRpt\/SingleRpt\?search_topic=TSN&search_value=(.*)}
       end
 

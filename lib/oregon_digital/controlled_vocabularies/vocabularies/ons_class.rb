@@ -18,4 +18,3 @@ module OregonDigital
     end
   end
 end
-

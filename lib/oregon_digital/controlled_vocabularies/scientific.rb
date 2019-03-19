@@ -18,7 +18,7 @@ module OregonDigital
 
       def fetch(*_args, &_block)
         case self.class.query_to_vocabulary(rdf_subject.to_s)
-        when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis' 
+        when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
           fetch_and_store
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
           fetch_and_store
@@ -41,13 +41,21 @@ module OregonDigital
 
       def subject_label
         vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
-        return case vocabulary.to_s
+        case vocabulary.to_s
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
-          uri = vocabulary.as_query(rdf_subject.to_s)
-          JSON.parse(Faraday.get(uri) { |req| req.headers['Accept'] = 'application/json' }.body)["scientificName"]['combinedName']
+          parse_json   
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
-          Nokogiri::XML(Faraday.get(rdf_subject).body).at_xpath("/rdf:RDF/rdf:Description/dc:title/text()")
+          parse_xml
         end
+      end
+
+      def parse_json
+        uri = vocabulary.as_query(rdf_subject.to_s)
+        JSON.parse(Faraday.get(uri) { |req| req.headers['Accept'] = 'application/json' }.body)['scientificName']['combinedName']
+      end
+
+      def parse_xml
+        Nokogiri::XML(Faraday.get(rdf_subject).body).at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
       end
     end
   end
