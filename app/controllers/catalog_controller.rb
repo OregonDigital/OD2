@@ -41,18 +41,8 @@ class CatalogController < ApplicationController
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     config.add_facet_field solr_name('human_readable_type', :facetable), label: 'Type', limit: 5
-    config.add_facet_field solr_name('resource_type', :facetable), label: 'Resource Type', limit: 5
-    config.add_facet_field solr_name('creator', :facetable), limit: 5
-    config.add_facet_field solr_name('contributor', :facetable), label: 'Contributor', limit: 5
-    config.add_facet_field solr_name('keyword', :facetable), limit: 5
-    config.add_facet_field solr_name('subject', :facetable), limit: 5
-    config.add_facet_field solr_name('language', :facetable), limit: 5
-    config.add_facet_field solr_name('based_near_label', :facetable), limit: 5
-    config.add_facet_field solr_name('publisher', :facetable), limit: 5
     config.add_facet_field solr_name('file_format', :facetable), limit: 5
     config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
-    config.add_facet_field solr_name('has_number', :facetable), limit: 5
-    config.add_facet_field solr_name('is_volume', :facetable), limit: 5
 
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
@@ -89,70 +79,115 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    # List of fields that aren't searchable based on MAP
-    rejected_search_fields = %w[
-      art_series box canzoniere_poems citation color_content color_space compass_direction contents conversion cover_description
-      date_digitized date_modified date_uploaded description description_of_manifestation
-      extent file_size form_of_work gps_latitude gps_longitude has_number has_part height higher_classification hydrologic_unit_code
-      identification_verification_status is_version_of is_volume larger_work longitude_latitude_identification
-      measurements military_highest_rank mode_of_issuance mods_note number_of_pages object_orientation oembed_url orientation original_filename
-      photograph_orientation physical_extent primary_set replaces_url resolution
-      source_condition specimen_type state_or_edition temporal tribal_notes use_restrictions view width
-    ]
-    # Add the controlled vocabulary label form of rejected terms
-    rejected_search_fields += rejected_search_fields.map { |field| "#{field}_label" }
-    # Add the non-label form of controlled vocabular terms
-    rejected_search_fields += OregonDigital::GenericMetadata::CONTROLLED.map { |field| field.gsub('_label', '') }
+    # Reject the non-label form of controlled vocabular terms from being searchable or indexable
+    rejected_fields = OregonDigital::GenericMetadata::CONTROLLED.map { |field| field.gsub('_label', '') }
 
     # Add all fields as searchable, reject the non-searchable fields
-    OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-      config.add_search_field(prop) do |field|
-        solr_name = solr_name(prop, :stored_searchable)
-        field.solr_local_parameters = {
-          qf: solr_name,
-          pf: solr_name
-        }
+    OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Document.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
+      if Document.properties[prop].behaviors.include?(:stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_search_field(prop) do |field|
+          solr_name = solr_name(prop, :stored_searchable)
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+      end
+
+      # Add property as facetable
+      if Document.properties[prop].behaviors.include?(:facetable)
+        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
-    OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-      config.add_search_field(prop) do |field|
-        solr_name = solr_name(prop, :stored_searchable)
-        field.solr_local_parameters = {
-          qf: solr_name,
-          pf: solr_name
-        }
+    OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Generic.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
+      if Generic.properties[prop].behaviors.include?(:stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_search_field(prop) do |field|
+          solr_name = solr_name(prop, :stored_searchable)
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+      end
+
+      # Add property as facetable
+      if Generic.properties[prop].behaviors.include?(:facetable)
+        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
-    OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-      config.add_search_field(prop) do |field|
-        solr_name = solr_name(prop, :stored_searchable)
-        field.solr_local_parameters = {
-          qf: solr_name,
-          pf: solr_name
-        }
+    OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Image.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
+      if Image.properties[prop].behaviors.include?(:stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_search_field(prop) do |field|
+          solr_name = solr_name(prop, :stored_searchable)
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+      end
+
+      # Add property as facetable
+      if Image.properties[prop].behaviors.include?(:facetable)
+        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
-    OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-      config.add_search_field(prop) do |field|
-        solr_name = solr_name(prop, :stored_searchable)
-        field.solr_local_parameters = {
-          qf: solr_name,
-          pf: solr_name
-        }
+    OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      # Skip if this property isn't indexed
+      next if Video.properties[prop].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
+      if Video.properties[prop].behaviors.include?(:stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_search_field(prop) do |field|
+          solr_name = solr_name(prop, :stored_searchable)
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+      end
+
+      # Add property as facetable
+      if Video.properties[prop].behaviors.include?(:facetable)
+        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
       end
     end
-    OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_search_fields.include? attr }.each do |prop|
-      config.add_show_field solr_name(prop, :stored_searchable)
-      config.add_search_field(prop) do |field|
-        solr_name = solr_name(prop, :stored_searchable)
-        field.solr_local_parameters = {
-          qf: solr_name,
-          pf: solr_name
-        }
+    OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_fields.include? attr }.each do |prop|
+      label = prop.gsub('_label', '')
+
+      # Skip if this property isn't indexed
+      next if Generic.properties[label].behaviors.nil?
+
+      # Add property as searchable all fields box and individually
+      if Generic.properties[label].behaviors.include?(:stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_search_field(prop) do |field|
+          solr_name = solr_name(prop, :stored_searchable)
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+      end
+
+      # Add property as facetable
+      if Generic.properties[label].behaviors.include?(:facetable)
+        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5
       end
     end
 

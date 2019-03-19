@@ -10,13 +10,9 @@ module OregonDigital
     PROPERTIES = %w[height width].freeze
 
     included do
-      property :height, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :height, predicate: ::RDF::Vocab::EXIF.height, multiple: false
 
-      property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false
     end
   end
 end
