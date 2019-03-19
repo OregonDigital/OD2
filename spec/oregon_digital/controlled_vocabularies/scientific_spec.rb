@@ -20,15 +20,4 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
       it { expect(vocab.query_to_vocabulary('http://my.queryuri.com')).to be nil }
     end
   end
-  describe '#fetch' do
-    before do
-      allow(new_vocab).to receive(:fetch).with(anything, anything)
-    end
-    context 'when in vocab' do
-      it 'calls the proper method' do
-        new_vocab.fetch('blah', 'blah')
-        expect(new_vocab).to have_received(:fetch_and_store).once
-      end
-    end
-  end
 end
