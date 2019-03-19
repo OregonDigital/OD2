@@ -11,6 +11,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsCommonNames,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsClass,
           OregonDigital::ControlledVocabularies::Vocabularies::WdEntity,
+          OregonDigital::ControlledVocabularies::Vocabularies::Itis,
           OregonDigital::ControlledVocabularies::Vocabularies::Ubio
         ]
       end
@@ -22,13 +23,19 @@ module OregonDigital
       end
 
       def statement
-        RDF::Statement.new(rdf_subject, RDF::Vocab::SKOS.prefLabel, subject_label) 
+        RDF::Statement.new(rdf_subject, RDF::Vocab::SKOS.prefLabel, subject_label)
       end
 
       def subject_label
-        Nokogiri::XML(Faraday.get(rdf_subject).body).at_xpath("/rdf:RDF/rdf:Description/dc:title/text()")
+        vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
+        return case vocabulary.to_s
+        when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
+          uri = vocabulary.as_query(rdf_subject.to_s)
+          JSON.parse(Faraday.get(uri) { |req| req.headers['Accept'] = 'application/json' }.body)["scientificName"]['combinedName']
+        when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
+          Nokogiri::XML(Faraday.get(rdf_subject).body).at_xpath("/rdf:RDF/rdf:Description/dc:title/text()")
+        end
       end
     end
   end
 end
-
