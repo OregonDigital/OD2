@@ -20,6 +20,7 @@ module OregonDigital
       end
 
       private
+
       def rdf_label_uri_same?
         rdf_label.select { |lang_label| lang_label.language == I18n.locale }.first.to_s == rdf_subject.to_s
       end
