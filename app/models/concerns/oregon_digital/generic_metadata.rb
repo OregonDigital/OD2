@@ -307,7 +307,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :workType, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/workType') do |index|
+      property :workType, predicate: ::RDF::URI.new('https://www.w3.org/1999/02/22-rdf-syntax-ns#type') do |index|
         index.as :stored_searchable, :facetable
       end
 
