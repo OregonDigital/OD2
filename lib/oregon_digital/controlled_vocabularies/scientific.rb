@@ -17,6 +17,19 @@ module OregonDigital
       end
 
       def fetch(*_args, &_block)
+        case self.class.query_to_vocabulary(rdf_subject.to_s)
+        when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis' 
+          fetch_and_store
+        when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
+          fetch_and_store
+        else
+          super
+        end
+      end
+
+      private
+
+      def fetch_and_store
         new_statement = statement
         OregonDigital::Triplestore.triplestore_client.insert([new_statement])
         self << statement
