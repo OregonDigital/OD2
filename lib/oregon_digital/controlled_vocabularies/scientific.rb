@@ -43,13 +43,13 @@ module OregonDigital
         vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
         case vocabulary.to_s
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
-          parse_json
+          parse_json(vocabulary)
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
-          parse_xml
+          parse_xml(vocabulary)
         end
       end
 
-      def parse_json
+      def parse_json(vocabulary)
         uri = vocabulary.as_query(rdf_subject.to_s)
         JSON.parse(Faraday.get(uri) { |req| req.headers['Accept'] = 'application/json' }.body)['scientificName']['combinedName']
       end
