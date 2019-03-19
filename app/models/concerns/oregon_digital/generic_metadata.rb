@@ -139,14 +139,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :taxon_class, predicate: ::RDF::Vocab::DWC.class do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :cultural_context, predicate: ::RDF::URI.new('http://purl.org/vra/culturalContext') do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :event, predicate: ::RDF::Vocab::SCHEMA.Event do |index|
         index.as :stored_searchable
       end
