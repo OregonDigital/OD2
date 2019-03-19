@@ -3,17 +3,17 @@
 module OregonDigital
   module ControlledVocabularies::Vocabularies
     # Receives information pulled from the endpoint and can parse and generate queries
-    class OnsGenus
+    class Ubio
       def self.expression
-        %r{^http[s]?:\/\/opaquenamespace.org\/ns\/genus\/.*}
+        %r{.+ubio.org\/authority\/metadata.*}
       end
 
       def self.label(data)
-        data.first['rdfs:label']['@value']
+        data.at_xpath("/rdf:RDF/rdf:Description/dc:title/text()")
       end
 
       def self.as_query(q)
-        q + '.jsonld'
+        q
       end
     end
   end

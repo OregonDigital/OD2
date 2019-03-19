@@ -10,8 +10,21 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPhylum,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsCommonNames,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsClass,
-          OregonDigital::ControlledVocabularies::Vocabularies::WdEntity
+          OregonDigital::ControlledVocabularies::Vocabularies::WdEntity,
+          OregonDigital::ControlledVocabularies::Vocabularies::Ubio
         ]
+      end
+
+      def fetch
+        OregonDigital::Triplestore.client.insert([statement])
+      end
+
+      def statement
+        RDF::Statement.new(rdf_subject, RDF::SKOS.prefLabel, subject_label)
+      end
+
+      def subject_label
+        Nokogiri::XML(Faraday.get(rdf_subject.gsub('\\', '')).body).at_xpath("/rdf:RDF/rdf:Description/dc:title/text()")
       end
     end
   end
