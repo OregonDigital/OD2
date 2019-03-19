@@ -33,4 +33,3 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
     end
   end
 end
-
