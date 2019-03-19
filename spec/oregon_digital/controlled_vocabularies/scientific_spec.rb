@@ -23,7 +23,6 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
   describe '#fetch' do
     before do
       allow(new_vocab).to receive(:fetch).with(anything, anything)
-      allow(new_vocab).to receive(rdf_subject).and_return('http://ubio.org/authority/metadata.php?lsid=urn:lsid:ubio.org:namebank:1187711')
     end
     context 'when in vocab' do
       it 'calls the proper method' do
