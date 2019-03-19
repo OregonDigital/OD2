@@ -1,8 +1,6 @@
-http[s]?:\/\/www.itis.gov\/servlet\/SingleRpt\/SingleRpt\?search_topic=TSN&search_value=(.*)
-
 # frozen_string_literal:true
 
-RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::SparMediaType do
+RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::Itis do
   let(:vocab) { described_class }
   let(:data) { { 'scientificName': { 'combinedName': 'blah' }.with_indifferent_access }.with_indifferent_access }
   let(:query) { 'http://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=12345' }
