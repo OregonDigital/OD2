@@ -43,7 +43,7 @@ module OregonDigital
         vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
         case vocabulary.to_s
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
-          parse_json   
+          parse_json
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
           parse_xml
         end
