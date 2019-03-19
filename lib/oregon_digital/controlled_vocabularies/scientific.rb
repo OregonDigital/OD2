@@ -15,16 +15,18 @@ module OregonDigital
         ]
       end
 
-      def fetch
-        OregonDigital::Triplestore.client.insert([statement])
+      def fetch(*_args, &_block)
+        new_statement = statement
+        OregonDigital::Triplestore.triplestore_client.insert([new_statement])
+        self << statement
       end
 
       def statement
-        RDF::Statement.new(rdf_subject, RDF::SKOS.prefLabel, subject_label)
+        RDF::Statement.new(rdf_subject, RDF::Vocab::SKOS.prefLabel, subject_label) 
       end
 
       def subject_label
-        Nokogiri::XML(Faraday.get(rdf_subject.gsub('\\', '')).body).at_xpath("/rdf:RDF/rdf:Description/dc:title/text()")
+        Nokogiri::XML(Faraday.get(rdf_subject).body).at_xpath("/rdf:RDF/rdf:Description/dc:title/text()")
       end
     end
   end
