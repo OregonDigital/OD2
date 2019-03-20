@@ -18,9 +18,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :height, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :height, predicate: ::RDF::Vocab::EXIF.height, multiple: false
 
       property :orientation, predicate: ::RDF::Vocab::EXIF.orientation do |index|
         index.as :stored_searchable
@@ -38,9 +36,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false
     end
   end
 end

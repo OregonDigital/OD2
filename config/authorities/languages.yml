@@ -1,0 +1,1334 @@
+terms:
+    - active: true
+      id: ""
+      term: ""
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/eng
+      term: English
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/abk
+      term: Abkhazian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ace
+      term: Achinese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ach
+      term: Acoli
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ada
+      term: Adangme
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ady
+      term: Adyghe |  Adygei
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/aar
+      term: Afar
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/afa
+      term: Afro-Asiatic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ain
+      term: Ainu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/aka
+      term: Akan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/akk
+      term: Akkadian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/alb
+      term: Albanian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ale
+      term: Aleut
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/alg
+      term: Algonquian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tut
+      term: Altaic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/amh
+      term: Amharic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/anp
+      term: Angika
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/apa
+      term: Apache languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ara
+      term: Arabic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/arg
+      term: Aragonese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/arp
+      term: Arapaho
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/arw
+      term: Arawak
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/arm
+      term: Armenian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/rup
+      term: Aromanian |  Arumanian |  Macedo-Romanian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/art
+      term: Artificial languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/asm
+      term: Assamese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ast
+      term: Asturian |  Bable |  Leonese |  Asturleonese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ath
+      term: Athapascan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/aus
+      term: Australian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/map
+      term: Austronesian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ava
+      term: Avaric
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ave
+      term: Avestan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/aym
+      term: Aymara
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/aze
+      term: Azerbaijani
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ban
+      term: Balinese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bat
+      term: Baltic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bal
+      term: Baluchi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bam
+      term: Bambara
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bai
+      term: Bamileke languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bad
+      term: Banda languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bnt
+      term: Bantu languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bas
+      term: Basa
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bak
+      term: Bashkir
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/baq
+      term: Basque
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/btk
+      term: Batak languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bej
+      term: Beja |  Bedawiyet
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bel
+      term: Belarusian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bem
+      term: Bemba
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ber
+      term: Berber languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bih
+      term: Bihari languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bik
+      term: Bikol
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bin
+      term: Bini |  Edo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bis
+      term: Bislama
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/byn
+      term: Blin |  Bilin
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zbl
+      term: Blissymbols |  Blissymbolics |  Bliss
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nob
+      term: "Bokm\xC3\xA5l, Norwegian |  Norwegian Bokm\xC3\xA5l"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bos
+      term: Bosnian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bra
+      term: Braj
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bre
+      term: Breton
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bug
+      term: Buginese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bul
+      term: Bulgarian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bua
+      term: Buriat
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bur
+      term: Burmese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cad
+      term: Caddo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cat
+      term: Catalan |  Valencian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cau
+      term: Caucasian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cel
+      term: Celtic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cai
+      term: Central American Indian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/khm
+      term: Central Khmer
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chg
+      term: Chagatai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cmc
+      term: Chamic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cha
+      term: Chamorro
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/che
+      term: Chechen
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chr
+      term: Cherokee
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chy
+      term: Cheyenne
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chb
+      term: Chibcha
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nya
+      term: Chichewa |  Chewa |  Nyanja
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chi
+      term: Chinese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chn
+      term: Chinook jargon
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chp
+      term: Chipewyan |  Dene Suline
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cho
+      term: Choctaw
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chu
+      term: Church Slavic |  Old Slavonic |  Church Slavonic |  Old Bulgarian |  Old Church
+        Slavonic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chk
+      term: Chuukese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chv
+      term: Chuvash
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nwc
+      term: Classical Newari |  Old Newari |  Classical Nepal Bhasa
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/syc
+      term: Classical Syriac
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cop
+      term: Coptic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cor
+      term: Cornish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cos
+      term: Corsican
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cre
+      term: Cree
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mus
+      term: Creek
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/crp
+      term: Creoles and pidgins
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cpe
+      term: Creoles and pidgins, English based
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cpf
+      term: Creoles and pidgins, French-based
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cpp
+      term: Creoles and pidgins, Portuguese-based
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/crh
+      term: Crimean Tatar |  Crimean Turkish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hrv
+      term: Croatian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cus
+      term: Cushitic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ces
+      term: Czech
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dak
+      term: Dakota
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dan
+      term: Danish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dar
+      term: Dargwa
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/del
+      term: Delaware
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/din
+      term: Dinka
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/div
+      term: Divehi |  Dhivehi |  Maldivian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dgr
+      term: Dogrib
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dra
+      term: Dravidian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dua
+      term: Duala
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dut
+      term: Dutch |  Flemish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dum
+      term: Dutch, Middle (ca.1050-1350)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dyu
+      term: Dyula
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/frs
+      term: Eastern Frisian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/egy
+      term: Egyptian (Ancient)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/elx
+      term: Elamite
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/enm
+      term: English, Middle (1100-1500)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ang
+      term: English, Old (ca.450-1100)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/myv
+      term: Erzya
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/est
+      term: Estonian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ewe
+      term: Ewe
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fan
+      term: Fang
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fat
+      term: Fanti
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fao
+      term: Faroese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fij
+      term: Fijian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fil
+      term: Filipino |  Pilipino
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fin
+      term: Finnish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fiu
+      term: Finno-Ugrian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fon
+      term: Fon
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fra
+      term: French
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/frm
+      term: French, Middle (ca.1400-1600)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fro
+      term: French, Old (842-ca.1400)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fur
+      term: Friulian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ful
+      term: Fulah
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gaa
+      term: Ga
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gla
+      term: Gaelic |  Scottish Gaelic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/car
+      term: Galibi Carib
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/glg
+      term: Galician
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lug
+      term: Ganda
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gay
+      term: Gayo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gba
+      term: Gbaya
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gez
+      term: Geez
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/geo
+      term: Georgian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/deu
+      term: German
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gmh
+      term: German, Middle High (ca.1050-1500)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/goh
+      term: German, Old High (ca.750-1050)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gem
+      term: Germanic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gil
+      term: Gilbertese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gon
+      term: Gondi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gor
+      term: Gorontalo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/got
+      term: Gothic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/grb
+      term: Grebo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/grc
+      term: Greek, Ancient (to 1453)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ell
+      term: Greek, Modern (1453-)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/grn
+      term: Guarani
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/guj
+      term: Gujarati
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gwi
+      term: Gwich'in
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hai
+      term: Haida
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hat
+      term: Haitian |  Haitian Creole
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hau
+      term: Hausa
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/haw
+      term: Hawaiian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/heb
+      term: Hebrew
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/her
+      term: Herero
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hil
+      term: Hiligaynon
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/him
+      term: Himachali languages |  Western Pahari languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hmo
+      term: Hiri Motu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hit
+      term: Hittite
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hmn
+      term: Hmong |  Mong
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hun
+      term: Hungarian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hup
+      term: Hupa
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/iba
+      term: Iban
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ice
+      term: Icelandic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ibo
+      term: Igbo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ijo
+      term: Ijo languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ilo
+      term: Iloko
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/smn
+      term: Inari Sami
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/inc
+      term: Indic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ine
+      term: Indo-European languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ind
+      term: Indonesian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/inh
+      term: Ingush
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ina
+      term: Interlingua (International Auxiliary Language Association)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ile
+      term: Interlingue |  Occidental
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ipk
+      term: Inupiaq
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ira
+      term: Iranian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gle
+      term: Irish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mga
+      term: Irish, Middle (900-1200)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sga
+      term: Irish, Old (to 900)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/iro
+      term: Iroquoian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ita
+      term: Italian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/jpn
+      term: Japanese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/jav
+      term: Javanese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/jrb
+      term: Judeo-Arabic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/jpr
+      term: Judeo-Persian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kbd
+      term: Kabardian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kab
+      term: Kabyle
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kac
+      term: Kachin |  Jingpho
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kal
+      term: Kalaallisut |  Greenlandic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/xal
+      term: Kalmyk |  Oirat
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kam
+      term: Kamba
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kau
+      term: Kanuri
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kaa
+      term: Kara-Kalpak
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/krc
+      term: Karachay-Balkar
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/krl
+      term: Karelian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kar
+      term: Karen languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kas
+      term: Kashmiri
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/csb
+      term: Kashubian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kaz
+      term: Kazakh
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kha
+      term: Khasi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/khi
+      term: Khoisan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kho
+      term: Khotanese |  Sakan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kik
+      term: Kikuyu |  Gikuyu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kmb
+      term: Kimbundu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kin
+      term: Kinyarwanda
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kir
+      term: Kirghiz |  Kyrgyz
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tlh
+      term: Klingon |  tlhIngan-Hol
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kom
+      term: Komi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kon
+      term: Kongo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kor
+      term: Korean
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kos
+      term: Kosraean
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kpe
+      term: Kpelle
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kro
+      term: Kru languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kua
+      term: Kuanyama |  Kwanyama
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kum
+      term: Kumyk
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kur
+      term: Kurdish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kru
+      term: Kurukh
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kut
+      term: Kutenai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lad
+      term: Ladino
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lam
+      term: Lamba
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/day
+      term: Land Dayak languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lao
+      term: Lao
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lat
+      term: Latin
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lav
+      term: Latvian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lez
+      term: Lezghian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lim
+      term: Limburgan |  Limburger |  Limburgish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lit
+      term: Lithuanian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nds
+      term: Low German |  Low Saxon |  German, Low |  Saxon, Low
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/dsb
+      term: Lower Sorbian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/loz
+      term: Lozi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lub
+      term: Luba-Katanga
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lua
+      term: Luba-Lulua
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lui
+      term: Luiseno
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/smj
+      term: Lule Sami
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lun
+      term: Lunda
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/luo
+      term: Luo (Kenya and Tanzania)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lus
+      term: Lushai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ltz
+      term: Luxembourgish |  Letzeburgesch
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mac
+      term: Macedonian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mad
+      term: Madurese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mag
+      term: Magahi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mak
+      term: Makasar
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mlg
+      term: Malagasy
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/may
+      term: Malay
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mlt
+      term: Maltese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mnc
+      term: Manchu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mdr
+      term: Mandar
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/man
+      term: Mandingo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mni
+      term: Manipuri
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mno
+      term: Manobo languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mao
+      term: Maori
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/arn
+      term: Mapudungun |  Mapuche
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/chm
+      term: Mari
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mah
+      term: Marshallese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mas
+      term: Masai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/myn
+      term: Mayan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/men
+      term: Mende
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mic
+      term: Mi'kmaq |  Micmac
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/min
+      term: Minangkabau
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mwl
+      term: Mirandese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/moh
+      term: Mohawk
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mdf
+      term: Moksha
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mkh
+      term: Mon-Khmer languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/lol
+      term: Mongo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mon
+      term: Mongolian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cnr
+      term: Montenegrin
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mos
+      term: Mossi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mul
+      term: Multiple languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mun
+      term: Munda languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nah
+      term: Nahuatl languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nau
+      term: Nauru
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nav
+      term: Navajo |  Navaho
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nde
+      term: Ndebele, North |  North Ndebele
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nbl
+      term: Ndebele, South |  South Ndebele
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nap
+      term: Neapolitan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/new
+      term: Nepal Bhasa |  Newari
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nia
+      term: Nias
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nic
+      term: Niger-Kordofanian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ssa
+      term: Nilo-Saharan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/niu
+      term: Niuean
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zxx
+      term: No linguistic content |  Not applicable
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nog
+      term: Nogai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/non
+      term: Norse, Old
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nai
+      term: North American Indian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/frr
+      term: Northern Frisian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sme
+      term: Northern Sami
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nor
+      term: Norwegian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nno
+      term: Norwegian Nynorsk |  Nynorsk, Norwegian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nub
+      term: Nubian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nym
+      term: Nyamwezi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nyn
+      term: Nyankole
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nyo
+      term: Nyoro
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nzi
+      term: Nzima
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/oci
+      term: Occitan (post 1500)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/arc
+      term: Official Aramaic (700-300 BCE) |  Imperial Aramaic (700-300 BCE)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/oji
+      term: Ojibwa
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ori
+      term: Oriya
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/orm
+      term: Oromo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/osa
+      term: Osage
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/oss
+      term: Ossetian |  Ossetic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/oto
+      term: Otomian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pal
+      term: Pahlavi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pau
+      term: Palauan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pam
+      term: Pampanga |  Kapampangan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pag
+      term: Pangasinan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pan
+      term: Panjabi |  Punjabi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/paa
+      term: Papuan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nso
+      term: Pedi |  Sepedi |  Northern Sotho
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fas
+      term: Persian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/peo
+      term: Persian, Old (ca.600-400 B.C.)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/phi
+      term: Philippine languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/phn
+      term: Phoenician
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pon
+      term: Pohnpeian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pol
+      term: Polish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/por
+      term: Portuguese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pra
+      term: Prakrit languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pro
+      term: "Proven\xC3\xA7al, Old (to 1500) | Occitan, Old (to 1500)"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/pus
+      term: Pushto |  Pashto
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/que
+      term: Quechua
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/rap
+      term: Rapanui
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/rar
+      term: Rarotongan |  Cook Islands Maori
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/qaa-qtz
+      term: Reserved for local use
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/roa
+      term: Romance languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ron
+      term: Romanian |  Moldavian |  Moldovan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/roh
+      term: Romansh
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/rom
+      term: Romany
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/run
+      term: Rundi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/rus
+      term: Russian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sal
+      term: Salishan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sam
+      term: Samaritan Aramaic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/smi
+      term: Sami languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/smo
+      term: Samoan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sad
+      term: Sandawe
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sag
+      term: Sango
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/srd
+      term: Sardinian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sco
+      term: Scots
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sel
+      term: Selkup
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sem
+      term: Semitic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/srp
+      term: Serbian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/srr
+      term: Serer
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/shn
+      term: Shan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sna
+      term: Shona
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/iii
+      term: Sichuan Yi |  Nuosu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/scn
+      term: Sicilian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sid
+      term: Sidamo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sgn
+      term: Sign Languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bla
+      term: Siksika
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/snd
+      term: Sindhi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sin
+      term: Sinhala |  Sinhalese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sit
+      term: Sino-Tibetan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sio
+      term: Siouan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sms
+      term: Skolt Sami
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/den
+      term: Slave (Athapascan)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sla
+      term: Slavic languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/slk
+      term: Slovak
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/slv
+      term: Slovenian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sog
+      term: Sogdian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/son
+      term: Songhai languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/snk
+      term: Soninke
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/wen
+      term: Sorbian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sot
+      term: Sotho, Southern
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sai
+      term: South American Indian languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/alt
+      term: Southern Altai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sma
+      term: Southern Sami
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/spa
+      term: Spanish |  Castilian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/srn
+      term: Sranan Tongo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zgh
+      term: Standard Moroccan Tamazight
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/suk
+      term: Sukuma
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sux
+      term: Sumerian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sun
+      term: Sundanese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ssw
+      term: Swati
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/swe
+      term: Swedish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gsw
+      term: Swiss German |  Alemannic |  Alsatian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/syr
+      term: Syriac
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tah
+      term: Tahitian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tai
+      term: Tai languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tgk
+      term: Tajik
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tmh
+      term: Tamashek
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tat
+      term: Tatar
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tel
+      term: Telugu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ter
+      term: Tereno
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tet
+      term: Tetum
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tha
+      term: Thai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/bod
+      term: Tibetan
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tig
+      term: Tigre
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tir
+      term: Tigrinya
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tem
+      term: Timne
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tiv
+      term: Tiv
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tli
+      term: Tlingit
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tpi
+      term: Tok Pisin
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tkl
+      term: Tokelau
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tog
+      term: Tonga (Nyasa)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ton
+      term: Tonga (Tonga Islands)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tsi
+      term: Tsimshian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tso
+      term: Tsonga
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tsn
+      term: Tswana
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tum
+      term: Tumbuka
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tup
+      term: Tupi languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tur
+      term: Turkish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ota
+      term: Turkish, Ottoman (1500-1928)
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tuk
+      term: Turkmen
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tvl
+      term: Tuvalu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tyv
+      term: Tuvinian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/twi
+      term: Twi
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/udm
+      term: Udmurt
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/uga
+      term: Ugaritic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/uig
+      term: Uighur |  Uyghur
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ukr
+      term: Ukrainian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/umb
+      term: Umbundu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mis
+      term: Uncoded languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/und
+      term: Undetermined
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hsb
+      term: Upper Sorbian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/uzb
+      term: Uzbek
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/vai
+      term: Vai
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ven
+      term: Venda
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/vie
+      term: Vietnamese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/vot
+      term: Votic
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/wak
+      term: Wakashan languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/wln
+      term: Walloon
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/was
+      term: Washo
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cym
+      term: Welsh
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fry
+      term: Western Frisian
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/wal
+      term: Wolaitta |  Wolaytta
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/wol
+      term: Wolof
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/xho
+      term: Xhosa
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sah
+      term: Yakut
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/yao
+      term: Yao
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/yap
+      term: Yapese
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/yid
+      term: Yiddish
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/yor
+      term: Yoruba
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ypk
+      term: Yupik languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/znd
+      term: Zande languages
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zap
+      term: Zapotec
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zza
+      term: Zaza |  Dimili |  Dimli |  Kirdki |  Kirmanjki |  Zazaki
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zha
+      term: Zhuang |  Chuang
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zul
+      term: Zulu
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zun
+      term: Zuni

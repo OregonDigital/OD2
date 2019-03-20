@@ -7,7 +7,7 @@ module OregonDigital
     # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
     PROPERTIES = %w[abstract accepted_name_usage access_restrictions accession_number acquisition_date alternative arranger art_series artist author award award_date barcode biographical_information box box_name box_number based_near canzoniere_poems cartographer citation collected_date collector common_name compass_direction composer contents contributor conversion copy_location copyright_claimant cover_description coverage creator creator_display cultural_context current_repository_id date date_created date_digitized dedicatee description description_of_manifestation designer donor editor ethnographic_term event exhibit extent family file_size folder_name folder_number form_of_work format former_owner genus gps_latitude gps_longitude has_finding_aid has_part has_version higher_classification hydrologic_unit_code identification_verification_status identifier illustrator inscription institution interviewee interviewer isPartOf is_version_of issued item_locator keyword language layout legal_name license local_collection_id local_collection_name location location_copyshelf_location longitude_latitude_identification lyricist material measurements military_branch military_highest_rank military_occupation military_service_location mode_of_issuance mods_note object_orientation oembed_url order original_name_usage owner patron photographer phylum_or_division physical_extent place_of_production primary_set print_maker provenance publication_place publisher ranger_district recipient relation replaces_url repository resource_type rights_holder rights_statement scientific_name_authorship scribe series_name series_number set source source_condition species specimen_type sports_team state_or_edition street_address style_or_period subject taxon_class technique temporal tgn transcriber translator tribal_classes tribal_notes tribal_terms tribal_title use_restrictions view_date water_basin workType].freeze
-    CONTROLLED = %w[arranger_label artist_label author_label based_near_label cartographer_label collector_label composer_label contributor_label creator_label cultural_context_label dedicatee_label designer_label donor_label editor_label ethnographic_term_label format_label illustrator_label interviewee_label interviewer_label local_collection_name_label lyricist_label military_branch_label owner_label patron_label photographer_label print_maker_label publisher_label recipient_label repository_label scribe_label style_or_period_label subject_label tgn_label transcriber_label translator_label].freeze
+    CONTROLLED = %w[arranger_label artist_label author_label based_near_label cartographer_label collector_label common_name_label composer_label contributor_label creator_label cultural_context_label dedicatee_label designer_label donor_label editor_label ethnographic_term_label family_label form_of_work_label format_label genus_label illustrator_label institution_label interviewee_label interviewer_label local_collection_name_label lyricist_label military_branch_label order_label owner_label patron_label photographer_label phylum_or_division_label print_maker_label publisher_label recipient_label repository_label scribe_label species_label style_or_period_label subject_label taxon_class_label tgn_label transcriber_label translator_label workType_label].freeze
 
     included do
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
@@ -83,10 +83,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :form_of_work, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/formOfWork') do |index|
-        index.as :stored_searchable
-      end
-
       property :identification_verification_status, predicate: ::RDF::Vocab::DWC.identificationVerificationStatus, multiple: false do |index|
         index.as :stored_searchable
       end
@@ -143,35 +139,11 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :taxon_class, predicate: ::RDF::Vocab::DWC.class do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :event, predicate: ::RDF::Vocab::SCHEMA.Event do |index|
         index.as :stored_searchable
       end
 
-      property :family, predicate: ::RDF::Vocab::DWC.family do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :genus, predicate: ::RDF::Vocab::DWC.genus do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :order, predicate: ::RDF::Vocab::DWC.order do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :keyword, predicate: ::RDF::Vocab::DC11.subject do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -183,19 +155,11 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :subject, predicate: ::RDF::Vocab::DC.subject do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :tribal_classes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalClasses') do |index|
         index.as :stored_searchable
       end
 
       property :tribal_terms, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalTerms') do |index|
-        index.as :stored_searchable
-      end
-
-      property :common_name, predicate: ::RDF::Vocab::DWC.vernacularName do |index|
         index.as :stored_searchable
       end
 
@@ -303,7 +267,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :workType, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/workType') do |index|
+      property :workType, predicate: ::RDF::URI.new('https://www.w3.org/1999/02/22-rdf-syntax-ns#type') do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -353,10 +317,6 @@ module OregonDigital
 
       property :file_size, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/filesize'), multiple: false do |index|
         index.as :stored_searchable
-      end
-
-      property :institution, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution') do |index|
-        index.as :stored_searchable, :facetable
       end
 
       property :replaces_url, predicate: ::RDF::Vocab::DC.replaces, multiple: false do |index|
@@ -579,7 +539,17 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :form_of_work, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/formOfWork'),
+                              class_name: OregonDigital::ControlledVocabularies::FormOfWork do |index|
+        index.as :stored_searchable
+      end
+
       property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :institution, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'),
+                             class_name: OregonDigital::ControlledVocabularies::Institution do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -603,6 +573,46 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :workType, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/workType'),
+                          class_name: OregonDigital::ControlledVocabularies::WorkType do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :taxon_class, predicate: ::RDF::Vocab::DWC.class,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :family, predicate: ::RDF::Vocab::DWC.family,
+                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :genus, predicate: ::RDF::Vocab::DWC.genus,
+                       class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :order, predicate: ::RDF::Vocab::DWC.order,
+                       class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet,
+                         class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum,
+                                    class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :common_name, predicate: ::RDF::Vocab::DWC.vernacularName,
+                             class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
+        index.as :stored_searchable
+      end
+
       property :military_branch, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryBranch'),
                                  class_name: OregonDigital::ControlledVocabularies::Subject do |index|
         index.as :stored_searchable, :facetable
@@ -615,13 +625,15 @@ module OregonDigital
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties
-      self.controlled_properties = %i[arranger artist author based_near cartographer collector composer contributor creator cultural_context dedicatee designer donor editor ethnographic_term format illustrator interviewee interviewer local_collection_name lyricist military_branch owner patron photographer print_maker publisher recipient repository scribe style_or_period subject tgn transcriber translator]
+      self.controlled_properties = %i[arranger artist author based_near cartographer collector common_name composer contributor creator cultural_context dedicatee designer donor editor ethnographic_term family form_of_work format genus illustrator institution interviewee interviewer local_collection_name lyricist military_branch order owner patron photographer phylum_or_division print_maker publisher recipient repository scribe species style_or_period subject taxon_class tgn transcriber translator workType]
 
       accepts_nested_attributes_for :arranger, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :artist, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :author, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :based_near, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :cartographer, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :collector, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :common_name, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :composer, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :creator, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :contributor, reject_if: id_blank, allow_destroy: true
@@ -629,30 +641,37 @@ module OregonDigital
       accepts_nested_attributes_for :donor, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :designer, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :editor, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :ethnographic_term, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :family, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :format, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :genus, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :illustrator, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :interviewee, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :interviewer, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :local_collection_name, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :lyricist, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :military_branch, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :order, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :owner, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :patron, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :photographer, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :phylum_or_division, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :print_maker, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :publisher, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :recipient, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :repository, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :scribe, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :species, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :subject, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :taxon_class, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :tgn, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :transcriber, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :translator, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :arranger, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :based_near, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :cultural_context, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :ethnographic_term, reject_if: id_blank, allow_destroy: true
       accepts_nested_attributes_for :style_or_period, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :format, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :local_collection_name, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :repository, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :tgn, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :publisher, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :institution, reject_if: id_blank, allow_destroy: true
+      accepts_nested_attributes_for :workType, reject_if: id_blank, allow_destroy: true
     end
   end
 end
