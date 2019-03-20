@@ -29,6 +29,10 @@ module Qa::Authorities
          'label' => label.call(term, vocabulary) }]
     end
 
+    def xml(url)
+      OregonDigital::XmlParseService.xml(url.delete('\\'))
+    end
+
     def find_term(response, q)
       selected_id = response.select { |resp| resp['@id'] == q }
       selected_id.blank? ? [response] : selected_id

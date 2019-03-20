@@ -21,10 +21,6 @@ module Qa::Authorities
       end
     end
 
-    def xml(url)
-      OregonDigital::XmlParseService.xml(url.delete('\\'))
-    end
-
     def find_term(response, q)
       { q: q, response: response }
     end
