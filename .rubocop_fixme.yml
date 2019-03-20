@@ -30,6 +30,7 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Exclude:
+    - 'lib/oregon_digital/controlled_vocabularies/subject.rb'
     - 'lib/oregon_digital/triple_powered_properties/inputs/triple_powered_property_input.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
