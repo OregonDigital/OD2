@@ -35,7 +35,7 @@ module OregonDigital
         end
       end
 
-       private
+      private
 
       def fetch_and_store
         new_statement = statement
@@ -43,7 +43,7 @@ module OregonDigital
         self << statement
       end
 
-       def statement
+      def statement
         RDF::Statement.new(rdf_subject, RDF::Vocab::SKOS.prefLabel, subject_label)
       end
 
@@ -56,7 +56,7 @@ module OregonDigital
         end
       end
 
-       def parse_json(vocabulary)
+      def parse_json(vocabulary)
         uri = vocabulary.as_query(rdf_subject.to_s)
         JSON.parse(Faraday.get(uri) { |req| req.headers['Accept'] = 'application/json' }.body)['scientificName']['combinedName']
       end
