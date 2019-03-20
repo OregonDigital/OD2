@@ -26,22 +26,7 @@ module OregonDigital
         else
           super
         end
-      end
-
-      private
-
-      def fetch_itis_statement(vocabulary, subject)
-        OregonDigital::ItisService.fetch_itis_statement(vocabulary, subject)
-      end
-
-      def fetch_ubio_statement(vocabulary, subject)
-        OregonDigital::UbioService.fetch_ubio_statement(vocabulary, subject)
-      end
-
-      def store_statement(statement)
-        OregonDigital::Triplestore.triplestore_client.insert([statement])
-        self << statement
-      end
+      end 
     end
   end
 end

@@ -66,6 +66,29 @@ module OregonDigital
 
       private
 
+      def fetch_ubio_statement(vocabulary, subject)
+       label = xml_parse_service.xml(vocabulary.as_query(subject.to_s)).at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
+       statement(subject, label)
+      end
+
+      def fetch_itis_statement(vocabulary, subject)
+        label = json_parse_service.json(vocabulary.as_query(subject.to_s))['scientificName']['combinedName']
+        statement(subject, label)
+      end
+
+      def self.json_parse_service
+        OregonDigital::JsonParseService
+      end
+
+      def self.xml_parse_service
+        OregonDigital::XmlParseService
+      end
+
+      def store_statement(statement)
+        OregonDigital::Triplestore.triplestore_client.insert([statement])
+        self << statement
+      end
+
       def rdf_label_uri_same?
         rdf_label.first.to_s == rdf_subject.to_s
       end
