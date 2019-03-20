@@ -6,11 +6,8 @@ module OregonDigital
       Nokogiri::XML(query_xml(query).body)
     end
 
-    private
-
     def self.query_xml(query)
       Faraday.get(query)
     end
   end
 end
-

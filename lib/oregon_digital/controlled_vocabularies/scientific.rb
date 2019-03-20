@@ -26,7 +26,7 @@ module OregonDigital
         else
           super
         end
-      end 
+      end
     end
   end
 end

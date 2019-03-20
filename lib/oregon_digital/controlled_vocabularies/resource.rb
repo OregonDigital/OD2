@@ -67,8 +67,8 @@ module OregonDigital
       private
 
       def fetch_ubio_statement(vocabulary, subject)
-       label = xml_parse_service.xml(vocabulary.as_query(subject.to_s)).at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
-       statement(subject, label)
+        label = xml_parse_service.xml(vocabulary.as_query(subject.to_s)).at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
+        statement(subject, label)
       end
 
       def fetch_itis_statement(vocabulary, subject)
@@ -76,11 +76,11 @@ module OregonDigital
         statement(subject, label)
       end
 
-      def self.json_parse_service
+      def json_parse_service
         OregonDigital::JsonParseService
       end
 
-      def self.xml_parse_service
+      def xml_parse_service
         OregonDigital::XmlParseService
       end
 

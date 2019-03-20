@@ -6,8 +6,6 @@ module OregonDigital
       JSON.parse(query_json(query).body)
     end
 
-    private
-
     def self.query_json(query)
       Faraday.get(query) { |req| req.headers['Accept'] = 'application/json' }
     end
