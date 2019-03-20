@@ -17,11 +17,12 @@ module OregonDigital
       end
 
       def fetch(*_args, &_block)
-        case self.class.query_to_vocabulary(rdf_subject.to_s)
+        vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
+        case vocabulary
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
-          fetch_and_store
+          store_statement(fetch_itis_statement(vocabulary, rdf_subject))
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
-          fetch_and_store
+          store_statement(fetch_ubio_statement(vocabulary, rdf_subject))
         else
           super
         end
@@ -29,33 +30,17 @@ module OregonDigital
 
       private
 
-      def fetch_and_store
-        new_statement = statement
-        OregonDigital::Triplestore.triplestore_client.insert([new_statement])
+      def fetch_itis_statement(vocabulary, subject)
+        OregonDigital::ItisService.fetch_itis_statement(vocabulary, subject)
+      end
+
+      def fetch_ubio_statement(vocabulary, subject)
+        OregonDigital::UbioService.fetch_ubio_statement(vocabulary, subject)
+      end
+
+      def store_statement(statement)
+        OregonDigital::Triplestore.triplestore_client.insert([statement])
         self << statement
-      end
-
-      def statement
-        RDF::Statement.new(rdf_subject, RDF::Vocab::SKOS.prefLabel, subject_label)
-      end
-
-      def subject_label
-        vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
-        case vocabulary.to_s
-        when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
-          parse_json(vocabulary)
-        when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
-          parse_xml(vocabulary)
-        end
-      end
-
-      def parse_json(vocabulary)
-        uri = vocabulary.as_query(rdf_subject.to_s)
-        JSON.parse(Faraday.get(uri) { |req| req.headers['Accept'] = 'application/json' }.body)['scientificName']['combinedName']
-      end
-
-      def parse_xml
-        Nokogiri::XML(Faraday.get(rdf_subject).body).at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
       end
     end
   end
