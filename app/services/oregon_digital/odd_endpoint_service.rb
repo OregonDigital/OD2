@@ -5,7 +5,7 @@ module OregonDigital
 
     private
 
-    def self.statement(vocabulary, subject, label)
+    def self.statement(subject, label)
       RDF::Statement.new(subject, RDF::Vocab::SKOS.prefLabel, label)
     end
   end

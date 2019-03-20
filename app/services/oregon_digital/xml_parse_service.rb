@@ -3,12 +3,12 @@
 module OregonDigital
   class XmlParseService
     def self.xml(query)
-      Nokogiri::XML(query_response(query).body)
+      Nokogiri::XML(query_xml(query).body)
     end
 
     private
 
-    def query_xml(query)
+    def self.query_xml(query)
       Faraday.get(query)
     end
   end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module OregonDigital
-  class UbioService
+  class UbioService < OddEndpointService
     def self.fetch_ubio_statement(vocabulary, subject)
-      statement(vocabulary, subject, ubio_label(vocabulary, subject))
+      statement(subject, ubio_label(vocabulary, subject))
     end
 
     private

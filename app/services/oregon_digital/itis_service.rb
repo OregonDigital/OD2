@@ -3,7 +3,7 @@
 module OregonDigital
   class ItisService < OddEndpointService
     def self.fetch_itis_statement(vocabulary, subject)
-      statement(vocabulary, subject, itis_label(vocabulary, subject))
+      statement(subject, itis_label(vocabulary, subject))
     end
 
     private
