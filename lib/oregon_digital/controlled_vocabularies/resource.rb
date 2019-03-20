@@ -84,6 +84,10 @@ module OregonDigital
         OregonDigital::XmlParseService
       end
 
+      def statement(subject, label)
+        RDF::Statement.new(subject, RDF::Vocab::SKOS.prefLabel, label)
+      end
+
       def store_statement(statement)
         OregonDigital::Triplestore.triplestore_client.insert([statement])
         self << statement

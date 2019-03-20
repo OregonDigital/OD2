@@ -18,7 +18,7 @@ module OregonDigital
 
       def fetch(*_args, &_block)
         vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
-        case vocabulary
+        case vocabulary.to_s
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Itis'
           store_statement(fetch_itis_statement(vocabulary, rdf_subject))
         when 'OregonDigital::ControlledVocabularies::Vocabularies::Ubio'
