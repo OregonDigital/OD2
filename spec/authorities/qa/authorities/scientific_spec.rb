@@ -18,4 +18,3 @@ RSpec.describe Qa::Authorities::Scientific do
     end
   end
 end
-

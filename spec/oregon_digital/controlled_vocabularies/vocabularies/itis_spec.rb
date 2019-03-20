@@ -9,4 +9,3 @@ RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::Itis do
   it { expect(vocab.label(data)).to eq 'blah' }
   it { expect(vocab.as_query(query)).to eq 'https://www.itis.gov/ITISWebService/jsonservice/getFullRecordFromTSN?tsn=12345' }
 end
-
