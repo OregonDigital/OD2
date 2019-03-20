@@ -22,7 +22,7 @@ module Qa::Authorities
     end
 
     def xml(url)
-      Nokogiri::XML(Faraday.get(url.delete('\\')).body)
+      OregonDigital::XmlParseService.xml(url.delete('\\'))
     end
 
     def find_term(response, q)
