@@ -12,6 +12,10 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
 
+Style/TernaryParentheses:
+  Exclude:
+    - 'lib/hyrax/controlled_vocabularies/location.rb'
+
 Metrics/ModuleLength:
   Exclude:
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'

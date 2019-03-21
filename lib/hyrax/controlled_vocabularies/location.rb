@@ -27,8 +27,7 @@ module Hyrax
           return @label if top_level_parent(parent_label)
 
           fc_label = OregonDigital::FeatureClassUriToLabel.new.uri_to_label(featureClass.first.id.to_s) unless featureClass.blank?
-          @label = "#{@label.first} , #{parent_label} (#{fc_label}) " unless parent_label.include?('(')
-          @label = "#{@label.first} , #{parent_label}".gsub(/\((.*)\)/, " (#{fc_label}) " ) if parent_label.include?('(')
+          build_label(parent_label, fc_label)
         end
         Array(@label)
       end
@@ -67,6 +66,18 @@ module Hyrax
 
       def label_or_blank
         (parentFeature.first.is_a? ActiveTriples::Resource) ? parentFeature.first.rdf_label.first : []
+      end
+
+      def build_label(parent_label, fc_label)
+        if parent_label.include?('(')
+          set_location_label(@label, parent_label.gsub(/(, )?\((.*)\)/, ''), fc_label)
+        else
+          set_location_label(@label, parent_label, fc_label)
+        end
+      end
+
+      def set_location_label(label, parent_label, fc_label)
+        @label = "#{label.first} , #{parent_label}, (#{fc_label}) "
       end
 
       def valid_or_blank_parent?(parent_label)
