@@ -27,13 +27,14 @@ module Hyrax
           return @label if top_level_parent(parent_label)
 
           fc_label = OregonDigital::FeatureClassUriToLabel.new.uri_to_label(featureClass.first.id.to_s) unless featureClass.blank?
-          build_label(parent_label, fc_label)
+          @label = "#{@label.first} , #{parent_label} (#{fc_label}) " unless parent_label.include?('(')
+          @label = "#{@label.first} , #{parent_label}".gsub(/\((.*)\)/, " (#{fc_label}) " ) if parent_label.include?('(')
         end
         Array(@label)
       end
 
       # Fetch parent features if they exist. Necessary for automatic population of rdf label.
-      def fetch
+      def fetch(*_args, &_block)
         resource = super
         return resource if top_level_element?
 
@@ -57,7 +58,7 @@ module Hyrax
       end
 
       def top_level_parent(parent_label)
-        valid_or_blank_parent? || parent_label.starts_with?('_:')
+        valid_or_blank_parent?(parent_label) || parent_label.starts_with?('_:')
       end
 
       def valid_label_without_parent
@@ -65,29 +66,17 @@ module Hyrax
       end
 
       def label_or_blank
-        parentFeature.first.is_a? ActiveTriples::Resource ? parentFeature.first.rdf_label.first : []
+        (parentFeature.first.is_a? ActiveTriples::Resource) ? parentFeature.first.rdf_label.first : []
       end
 
-      def build_label(parent_label, fc_label)
-        if parent_label.include?('(')
-          set_location_label(@label, parent_label.gsub(/\((.*)\)/), fc_label)
-        else
-          set_location_label(@label, parent_label, fc_label)
-        end
-      end
-
-      def set_location_label(label, parent_label, fc_label)
-        @label = "#{label.first} , #{parent_label}, (#{fc_label}) "
-      end
-
-      def valid_or_blank_parent?
+      def valid_or_blank_parent?(parent_label)
         parent_label.empty? || RDF::URI(parent_label).valid?
       end
 
       def top_level_element?
         feature_code = featureCode.first
         top_level_codes = [RDF::URI('http://www.geonames.org/ontology#A.PCLI')]
-        featureCode.respond_to?(:rdf_subject) && top_level_codes.include?(feature_code.rdf_subject)
+        feature_code.respond_to?(:rdf_subject) && top_level_codes.include?(feature_code.rdf_subject)
       end
     end
   end
