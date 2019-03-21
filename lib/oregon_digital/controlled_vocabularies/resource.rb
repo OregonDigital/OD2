@@ -66,6 +66,11 @@ module OregonDigital
 
       private
 
+      def store_statement(statement)
+        OregonDigital::Triplestore.triplestore_client.insert([statement])
+        self << statement
+      end
+
       def rdf_label_uri_same?
         rdf_label.first.to_s == rdf_subject.to_s
       end

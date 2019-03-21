@@ -21,10 +21,6 @@ module Qa::Authorities
       end
     end
 
-    def xml(url)
-      Nokogiri::XML(Faraday.get(url.delete('\\')).body)
-    end
-
     def find_term(response, q)
       { q: q, response: response }
     end
