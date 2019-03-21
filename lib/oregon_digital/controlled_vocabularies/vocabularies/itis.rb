@@ -16,6 +16,19 @@ module OregonDigital
         tsn = expression.match(q).captures.first
         "https://www.itis.gov/ITISWebService/jsonservice/getFullRecordFromTSN?tsn=#{tsn}"
       end
+
+      def self.fetch(vocabulary, subject)
+        label = json_parse_service.json(vocabulary.as_query(subject.to_s))['scientificName']['combinedName']
+        statement(subject, label)
+      end
+
+      def self.json_parse_service
+        OregonDigital::JsonParseService
+      end
+
+      def self.statement(subject, label)
+        RDF::Statement.new(subject, RDF::Vocab::SKOS.prefLabel, label)
+      end
     end
   end
 end
