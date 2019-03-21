@@ -12,7 +12,7 @@ module OregonDigital::Authorities
     # @return [Faraday::Response]
     def response(url)
       connection = Faraday.new(url) do |b|
-        b.use FaradayMiddleware::FollowRedirects
+        b.use FaradayMiddleware::FollowRedirects, limit: 5
         b.adapter :net_http
       end
       connection.get { |req| req.headers['Accept'] = 'application/json' }
