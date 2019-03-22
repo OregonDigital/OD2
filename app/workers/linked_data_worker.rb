@@ -6,7 +6,7 @@ class LinkedDataWorker
   attr_writer :triplestore
 
   def perform(uri)
-    @triplestore.fetch(uri, from_remote: true)
+    triplestore.fetch(uri, from_remote: true)
     # TODO: Email user on success
   end
 

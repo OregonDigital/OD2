@@ -18,8 +18,11 @@ module OregonDigital
         @triplestore.fetch(uri, from_remote: true)
       rescue TriplestoreAdapter::TriplestoreException => e
         # TODO: Email user about failure
-        # TODO: Be more smart about when/why we enqueue
-        LinkedDataWorker.perform_in(15.minutes, uri)
+
+        # Parse HTTP status code and enqueue if in the 4xx or 5xx range
+        error = e.message.match(/\(([0-9]*)\)$/)
+        LinkedDataWorker.perform_in(15.minutes, uri) if error.present? && error.to_i >= 400
+
         raise e
       end
     end
