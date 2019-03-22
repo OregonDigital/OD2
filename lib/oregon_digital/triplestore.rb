@@ -17,6 +17,8 @@ module OregonDigital
         @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
         @triplestore.fetch(uri, from_remote: true)
       rescue TriplestoreAdapter::TriplestoreException => e
+        # TODO: Email user about failure
+        LinkedDataWorker.perform_in(15.minutes, uri)
         raise e
       end
     end
