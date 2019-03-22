@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe LinkedDataWorker, type: :worker do
   let(:worker) { described_class.new }
@@ -9,7 +11,7 @@ RSpec.describe LinkedDataWorker, type: :worker do
 
   describe '#perform' do
     it 'attempts a fetch from the triplestore' do
-      triplestore = double()
+      triplestore = double
       worker.triplestore = triplestore
 
       expect(triplestore).to receive(:fetch).with(:uri, from_remote: true)
