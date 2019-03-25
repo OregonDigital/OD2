@@ -4,10 +4,14 @@
 class LinkedDataWorker
   include Sidekiq::Worker
   attr_writer :triplestore
+  attr_accessor :uri, :user
 
-  def perform(uri)
+  def perform(uri, user)
+    @uri = uri
+    @user = user
     triplestore.fetch(uri, from_remote: true)
     # TODO: Email user on success
+    Hyrax.config.callback.run(:ld_fetch_success, @user, @uri)
   end
 
   def triplestore
@@ -16,5 +20,6 @@ class LinkedDataWorker
 
   sidekiq_retries_exhausted do |msg, ex|
     # TODO: Email user about death of retries
+    Hyrax.config.callback.run(:ld_fetch_exhaust, @user, @uri)
   end
 end

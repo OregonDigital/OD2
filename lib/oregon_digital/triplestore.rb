@@ -10,20 +10,25 @@ module OregonDigital
     #
     # @param uri [String] the uri for the graph
     # @return [RDF::Graph] the graph
-    def self.fetch(uri)
+    def self.fetch(uri, user)
       return if uri.blank?
 
       begin
         @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
         @triplestore.fetch(uri, from_remote: true)
       rescue TriplestoreAdapter::TriplestoreException => e
-        # TODO: Email user about failure
-
+        # TODO: Prevent double and duplicate job submission/emails
         # Parse HTTP status code and enqueue if in the 4xx or 5xx range
-        error = e.message.match(/\(([0-9]*)\)$/)
-        LinkedDataWorker.perform_in(15.minutes, uri) if error.present? && error.to_i >= 400
+        error = e.message.match(/\(([0-9]*)\)$/).captures.first
+        if error.present? && error.to_i >= 400
+          LinkedDataWorker.perform_in(15.minutes, uri, user)
 
-        raise e
+          # Email user about failure
+          Hyrax.config.callback.run(:ld_fetch_error, user, uri)
+          nil
+        else
+          raise e
+        end
       end
     end
 
