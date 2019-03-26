@@ -33,6 +33,7 @@ coverage/*
 
 /public/system
 /public/branding
+/public/assets*
 
 /vendor/bundle
 .byebug_history
