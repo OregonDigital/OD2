@@ -17,18 +17,10 @@ module OregonDigital
         @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
         @triplestore.fetch(uri, from_remote: true)
       rescue TriplestoreAdapter::TriplestoreException => e
-        # TODO: Prevent double and duplicate job submission/emails
         # Parse HTTP status code and enqueue if in the 4xx or 5xx range
         error = e.message.match(/\(([0-9]*)\)$/).captures.first
-        if error.present? && error.to_i >= 400
-          LinkedDataWorker.perform_in(15.minutes, uri, user)
-
-          # Email user about failure
-          Hyrax.config.callback.run(:ld_fetch_error, user, uri)
-          nil
-        else
-          raise e
-        end
+        raise e unless error.present? && error.to_i >= 400
+        enqueue_fetch_failure(uri, user)
       end
     end
 
@@ -63,6 +55,21 @@ module OregonDigital
         labels[predicate.to_s].flatten!.compact!
       end
       labels
+    end
+
+    ##
+    # Returns an RDF::Graph that is stored as a placeholder
+    #
+    # @param uri [RDF::Uri] the URI to fetch
+    # @param [User] the user to alert about this failed fetch
+    def self.enqueue_fetch_failure(uri, user)
+      # Email user about failure
+      Hyrax.config.callback.run(:ld_fetch_error, user, uri)
+
+      LinkedDataWorker.perform_in(15.minutes, uri, user)
+      # Store a dummy graph to prevent multiple enqueues
+      dummy_graph = RDF::Graph.new.insert(RDF::Statement(RDF::URI(uri), rdf_label_predicates.last, '- enqueued for fetching -'))
+      @triplestore.store(dummy_graph)
     end
   end
 end

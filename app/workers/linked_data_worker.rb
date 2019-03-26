@@ -8,9 +8,20 @@ class LinkedDataWorker
 
   def perform(uri, user)
     @uri = uri
-    @user = user
-    triplestore.fetch(uri, from_remote: true)
-    # TODO: Email user on success
+    @user = User.find_by_user_key(user)
+
+    # Remove and save initial graph
+    graph = delete_old_graph
+    begin
+      # Attempt fresh fetch
+      triplestore.fetch(@uri, from_remote: true)
+    rescue TriplestoreAdapter::TriplestoreException => e
+      # Restore initial graph and retry later
+      triplestore.store(graph)
+      raise e
+    end
+
+    # Email user on success
     Hyrax.config.callback.run(:ld_fetch_success, @user, @uri)
   end
 
@@ -18,8 +29,14 @@ class LinkedDataWorker
     @triplestore ||= TriplestoreAdapter::Triplestore.new(OregonDigital::Triplestore.triplestore_client)
   end
 
-  sidekiq_retries_exhausted do |msg, ex|
-    # TODO: Email user about death of retries
+  def delete_old_graph
+    graph = triplestore.fetch(@uri)
+    triplestore.client.delete(graph)
+    graph
+  end
+
+  sidekiq_retries_exhausted do
+    # Email user about exhaustion of retries
     Hyrax.config.callback.run(:ld_fetch_exhaust, @user, @uri)
   end
 end
