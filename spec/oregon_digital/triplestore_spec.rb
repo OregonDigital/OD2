@@ -3,6 +3,7 @@
 RSpec.describe OregonDigital::Triplestore do
   let(:triplestore) { described_class }
   let(:label) { 'Blah' }
+  let(:user) { build(:user) }
 
   describe '#fetch' do
     before do
@@ -14,7 +15,7 @@ RSpec.describe OregonDigital::Triplestore do
     end
 
     it 'sets the triplestore as an instance of TriplestoreAdapter::Triplestore' do
-      triplestore.fetch('http://opaquenamespace.org/ns/blah')
+      triplestore.fetch('http://opaquenamespace.org/ns/blah', :user)
       expect(triplestore.instance_variable_get(:@triplestore)).to be_kind_of TriplestoreAdapter::Triplestore
     end
   end

@@ -19,8 +19,7 @@ module OregonDigital
       rescue TriplestoreAdapter::TriplestoreException => e
         # Parse HTTP status code and enqueue if in the 4xx or 5xx range
         error = e.message.match(/\(([0-9]*)\)$/).captures.first
-        raise e unless error.present? && error.to_i >= 400
-        enqueue_fetch_failure(uri, user)
+        raise e unless error.present? && error.to_i >= 400 && enqueue_fetch_failure(uri, user)
       end
     end
 
@@ -63,6 +62,7 @@ module OregonDigital
     # @param uri [RDF::Uri] the URI to fetch
     # @param [User] the user to alert about this failed fetch
     def self.enqueue_fetch_failure(uri, user)
+      return nil if user.nil?
       # Email user about failure
       Hyrax.config.callback.run(:ld_fetch_error, user, uri)
 
