@@ -66,7 +66,7 @@ module OregonDigital
       # Email user about failure
       Hyrax.config.callback.run(:ld_fetch_error, user, uri)
 
-      LinkedDataWorker.perform_in(15.minutes, uri, user)
+      FetchGraphWorker.perform_in(15.minutes, uri, user)
       # Store a dummy graph to prevent multiple enqueues
       dummy_graph = RDF::Graph.new.insert(RDF::Statement(RDF::URI(uri), rdf_label_predicates.last, '- enqueued for fetching -'))
       @triplestore.store(dummy_graph)

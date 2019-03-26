@@ -42,7 +42,7 @@ RSpec.describe OregonDigital::Triplestore do
   describe '#enqueue_fetch_failure' do
     before do
       allow(Hyrax.config.callback).to receive(:run)
-      allow(LinkedDataWorker).to receive(:perform_in)
+      allow(FetchGraphWorker).to receive(:perform_in)
       stub_request(:post, 'http://ci-test:8080/bigdata/namespace/rw/sparql')
         .to_return(status: 200, body: '', headers: {})
     end
@@ -51,7 +51,7 @@ RSpec.describe OregonDigital::Triplestore do
       triplestore.enqueue_fetch_failure(:uri, :user)
     end
     it 'enqueues a retry job' do
-      expect(LinkedDataWorker).to receive(:perform_in).with(15.minutes, :uri, :user)
+      expect(FetchGraphWorker).to receive(:perform_in).with(15.minutes, :uri, :user)
       triplestore.enqueue_fetch_failure(:uri, :user)
     end
     it 'stubs data in the triplestore' do

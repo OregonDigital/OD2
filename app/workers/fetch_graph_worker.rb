@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Sidekiq Worker for fetching linked data labels
-class LinkedDataWorker
+class FetchGraphWorker
   include Sidekiq::Worker
   attr_writer :triplestore
   attr_accessor :uri, :user
