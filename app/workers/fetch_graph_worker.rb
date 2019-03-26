@@ -3,6 +3,8 @@
 # Sidekiq Worker for fetching linked data labels
 class FetchGraphWorker
   include Sidekiq::Worker
+  sidekiq_options retry: 11 # Around 2.5 days of retries
+
   attr_writer :triplestore
   attr_accessor :uri, :user
 
