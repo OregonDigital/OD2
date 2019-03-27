@@ -14,7 +14,10 @@
                         {
                             "notification_type": "email",
                             "name": "Hyrax::Workflow::PendingReviewNotification",
-                            "to": ["approving"]
+                            "to": ["approving"],
+                            "recipients": { 
+                                "cc": ["oregondigitalref@uoregon.edu"] 
+                            }
                         }
                     ],
                     "methods": [
