@@ -12,16 +12,11 @@ class FetchGraphWorker
     @uri = uri
     @user = User.find_by_user_key(user)
 
-    # Remove and save initial graph
-    graph = delete_old_graph
-    begin
-      # Attempt fresh fetch
-      triplestore.fetch(@uri, from_remote: true)
-    rescue TriplestoreAdapter::TriplestoreException => e
-      # Restore initial graph and retry later
-      triplestore.store(graph)
-      raise e
-    end
+    # Exit early and skip notifying user if graph is already local
+    return if triplestore.fetch(@uri)
+
+    # Attempt fresh fetch and raise exception if failed again
+    triplestore.fetch(@uri, from_remote: true)
 
     # Email user on success
     Hyrax.config.callback.run(:ld_fetch_success, @user, @uri)
@@ -29,12 +24,6 @@ class FetchGraphWorker
 
   def triplestore
     @triplestore ||= TriplestoreAdapter::Triplestore.new(OregonDigital::Triplestore.triplestore_client)
-  end
-
-  def delete_old_graph
-    graph = triplestore.fetch(@uri)
-    triplestore.client.delete(graph)
-    graph
   end
 
   sidekiq_retries_exhausted do

@@ -43,8 +43,7 @@ module OregonDigital
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
       # it should return an empty graph.
       def triplestore_fetch
-        user = parent.respond_to?(:depositor) ? User.find_by_user_key(parent.depositor.first) : nil
-        URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject, user) : RDF::Graph.new
+        URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
       end
 
       def triplestore
