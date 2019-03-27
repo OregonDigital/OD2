@@ -3,7 +3,7 @@
 # Sets the expected behaviors of a generic work
 class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
-  attr_accessor :graph_fetch_failures
+  attr_writer :graph_fetch_failures
 
   # before_create :prefetch_graphs
   before_save :resolve_oembed_errors, :prefetch_graphs

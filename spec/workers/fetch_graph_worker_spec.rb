@@ -13,10 +13,9 @@ RSpec.describe FetchGraphWorker, type: :worker do
   describe '#perform' do
     before do
       worker.triplestore = double
-      allow(worker).to receive(:delete_old_graph).and_return(RDF::Graph.new)
     end
-    it 'attempts a fetch from the triplestore' do
-      expect(worker.triplestore).to receive(:fetch).with(:uri, from_remote: true)
+    it 'attempts a local and remote fetch' do
+      expect(worker.triplestore).to receive(:fetch).twice
       worker.perform(:uri, :user)
     end
   end
