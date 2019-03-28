@@ -52,6 +52,10 @@ en:
     institution_name:       "Institution"
     institution_name_full:  "The Institution Name"
     account_name:           "My Institution Account Id"
+    notifications:
+      workflow:
+        pending_review:
+          message: The work %{price} has been uploaded and is ready for your review.
     directory:
       suffix:               "@example.org"
     footer:
