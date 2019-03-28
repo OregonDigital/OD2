@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OregonDigital
   # Mailer for contacting the submitter
   class ContactMailer < ActionMailer::Base
