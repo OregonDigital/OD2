@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 module OregonDigital
-  # Add the submitter as a cc
+  # Basically the same thing as Hyrax::ContactForm with headers for the submitter
   class ContactForm < Hyrax::ContactForm
-    def headers
-      super.merge(cc: email)
+    # Declare the e-mail headers. It accepts anything the mail method
+    # in ActionMailer accepts.
+    def submitter_headers
+      {
+        subject: "#{Hyrax.config.subject_prefix} #{subject}",
+        to: email,
+        from: Hyrax.config.contact_email
+      }
     end
   end
 end

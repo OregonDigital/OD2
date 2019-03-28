@@ -37,7 +37,9 @@ module Hyrax
     # Override this method if you want to perform additional operations
     # when a email is successfully sent, such as sending a confirmation
     # response to the user.
-    def after_deliver; end
+    def after_deliver;
+      OregonDigital::ContactMailer.contact(@contact_form).deliver_now
+    end
 
     private
 
