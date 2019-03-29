@@ -1,6 +1,46 @@
 version: 2
 jobs:
-  build:
+  checkout_code:
+    docker:
+      - image: circleci/ruby:2.5-node-browsers
+    working_directory: ~/app
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/app
+
+  bundle:
+    docker:
+      - image: circleci/ruby:2.5-node-browsers
+    working_directory: ~/app
+    steps:
+      - run:
+          name: Update Debian Packages
+          command: |
+            sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/app
+  lint:
+    docker:
+      - image: circleci/ruby:2.5-node-browsers
+    working_directory: ~/app
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+      - run: bundle --path vendor/bundle
+      - run: bundle exec rubocop
+  test:
     docker:
       - image: circleci/ruby:2.5-node-browsers
         environment:
@@ -45,7 +85,6 @@ jobs:
             sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
             sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
             sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools
-            sudo update-alternatives --config java
       - run:
           name: Fetch clamav databases
           command: |
@@ -53,9 +92,10 @@ jobs:
             sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
             sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
             sudo chown clamav:clamav /var/lib/clamav/*.cvd
-      - checkout
       - restore_cache:
-          key: gemfile-{{ checksum "Gemfile.lock" }}
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run:
           name: Load config into SolrCloud
           command: |
@@ -64,25 +104,13 @@ jobs:
             curl -H "Content-type:application/octet-stream" --data-binary @solr_hyrax_config.zip "http://localhost:8985/solr/admin/configs?action=UPLOAD&name=hyrax"
             curl -H 'Content-type: application/json' http://localhost:8985/api/collections/ -d '{create: {name: hydra-test, config: hyrax, numShards: 1}}'
       - run:
-          name: Install Ruby Dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - run:
-          name: Run Rubocop
-          command: bundle exec rubocop
-      - save_cache:
-          key: gemfile-{{ checksum "Gemfile.lock" }}
-          paths:
-            - ./vendor/bundle
-            - ./var/lib/clamav
-      - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Wait for Redis
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
-      - run:
-          name: Create DB
-          command: bundle exec rake db:create db:schema:load --trace
+      - run: bundle --path vendor/bundle
+      - run: bundle exec rake db:create db:schema:load --trace
       - run:
           name: Run Tests
           command: |
@@ -100,3 +128,17 @@ jobs:
           path: ./tmp/screenshots
       - store_artifacts:
           path: ./tmp/capybara
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - checkout_code
+      - bundle:
+          requires:
+            - checkout_code
+      - lint:
+          requires:
+            - bundle
+      - test:
+          requires:
+            - lint
