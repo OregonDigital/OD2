@@ -2,502 +2,672 @@ crosswalk:
   - property: alternative
     predicate: http://purl.org/dc/terms/alternative
     multiple: true
+    function:
   - property: tribal_title
     predicate: http://opaquenamespace.org/ns/tribalTitle
     multiple: true
+    function:
   - property: title
     predicate: http://purl.org/dc/terms/title
     multiple: true
-  - property: arranger
+    function:
+  - property: arranger_attribute
     predicate: http://id.loc.gov/vocabulary/relators/arr
     multiple: true
-  - property: artist
+    function: attributes_data
+  - property: artist_attribute
     predicate: http://id.loc.gov/vocabulary/relators/art
     multiple: true
-  - property: author
+    function: attributes_data
+  - property: author_attribute
     predicate: http://id.loc.gov/vocabulary/relators/aut
     multiple: true
-  - property: cartographer
+    function: attributes_data
+  - property: cartographer_attribute
     predicate: http://id.loc.gov/vocabulary/relators/ctg
     multiple: true
-  - property: collector
+    function: attributes_data
+  - property: collector_attribute
     predicate: http://id.loc.gov/vocabulary/relators/col
     multiple: true
-  - property: composer
+    function: attributes_data
+  - property: composer_attribute
     predicate: http://id.loc.gov/vocabulary/relators/cmp
     multiple: true
-  - property: creator
+    function: attributes_data
+  - property: creator_attribute
     predicate: http://purl.org/dc/elements/1.1/creator
     multiple: true
+    function: attributes_data
   - property: creator_display
     predicate: http://opaquenamespace.org/ns/cco_creatorDisplay
     multiple: true
-  - property: contributor
+    function:
+  - property: contributor_attribute
     predicate: http://purl.org/dc/elements/1.1/contributor
     multiple: true
-  - property: dedicatee
+    function: attributes_data
+  - property: dedicatee_attribute
     predicate: http://id.loc.gov/vocabulary/relators/dte
     multiple: true
-  - property: donor
+    function: attributes_data
+  - property: donor_attribute
     predicate: http://id.loc.gov/vocabulary/relators/dnr
     multiple: true
-  - property: designer
+    function: attributes_data
+  - property: designer_attribute
     predicate: http://id.loc.gov/vocabulary/relators/dsr
     multiple: true
-  - property: editor
+    function: attributes_data
+  - property: editor_attribute
     predicate: http://id.loc.gov/vocabulary/relators/edt
     multiple: true
-  - property: former_owner
-    predicate: http://id.loc.gov/vocabulary/relators/fmo
-    multiple: true
-  - property: illustrator
+    function: attributes_data
+  - property: illustrator_attribute
     predicate: http://id.loc.gov/vocabulary/relators/ill
     multiple: true
-  - property: interviewee
+    function: attributes_data
+  - property: interviewee_attribute
     predicate: http://id.loc.gov/vocabulary/relators/ive
     multiple: true
-  - property: interviewer
+    function: attributes_data
+  - property: interviewer_attribute
     predicate: http://id.loc.gov/vocabulary/relators/ivr
     multiple: true
-  - property: lyricist
+    function: attributes_data
+  - property: lyricist_attribute
     predicate: http://id.loc.gov/vocabulary/relators/lyr
     multiple: true
-  - property: owner
+    function: attributes_data
+  - property: owner_attribute
     predicate: http://id.loc.gov/vocabulary/relators/own
     multiple: true
-  - property: patron
+    function: attributes_data
+  - property: patron_attribute
     predicate: http://id.loc.gov/vocabulary/relators/pat
     multiple: true
-  - property: photographer
+    function: attributes_data
+  - property: photographer_attribute
     predicate: http://id.loc.gov/vocabulary/relators/pht
     multiple: true
-  - property: print_maker
+    function: attributes_data
+  - property: print_maker_attribute
     predicate: http://id.loc.gov/vocabulary/relators/prm
     multiple: true
-  - property: recipient
+    function: attributes_data
+  - property: recipient_attribute
     predicate: http://id.loc.gov/vocabulary/relators/rcp
     multiple: true
-  - property: scribe
+    function: attributes_data
+  - property: scribe_attribute
     predicate: http://id.loc.gov/vocabulary/relators/scr
     multiple: true
-  - property: transcriber
+    function: attributes_data
+  - property: transcriber_attribute
     predicate: http://id.loc.gov/vocabulary/relators/trc
     multiple: true
-  - property: translator
+    function: attributes_data
+  - property: translator_attribute
     predicate: http://id.loc.gov/vocabulary/relators/trl
     multiple: true
+    function: attributes_data
   - property: abstract
     predicate: http://purl.org/dc/terms/abstract
     multiple: true
+    function:
   - property: accepted_name_usage
     predicate: http://rs.tdwg.org/dwc/terms/acceptedNameUsage
     multiple: true
+    function:
   - property: biographical_information
     predicate: http://rdaregistry.info/Elements/a/P50113
     multiple: true
+    function:
   - property: canzoniere_poems
     predicate: http://opaquenamespace.org/ns/canzonierePoems
     multiple: true
+    function:
   - property: compass_direction
     predicate: http://opaquenamespace.org/ns/compassDirection
     multiple: true
-  - property: contents
-    predicate: http://opaquenamespace.org/ns/contents
-    multiple: true
+    function:
   - property: cover_description
     predicate: http://opaquenamespace.org/ns/coverDescription
     multiple: true
+    function:
   - property: coverage
     predicate: http://purl.org/dc/elements/1.1/coverage
     multiple: true
+    function:
   - property: description
     predicate: http://purl.org/dc/terms/description
     multiple: true
+    function:
   - property: description_of_manifestation
     predicate: http://rdaregistry.info/Elements/w/P10265
     multiple: true
+    function:
   - property: first_line
     predicate: http://opaquenamespace.org/ns/sheetmusic_firstLine
     multiple: false
+    function:
   - property: first_line_chorus
     predicate: http://opaquenamespace.org/ns/sheetmusic_firstLineChorus
     multiple: false
-  - property: form_of_work
+    function:
+  - property: form_of_work_attribute
     predicate: http://rdaregistry.info/Elements/w/P10004
     multiple: true
+    function: attributes_data
+  - property: former_owner
+    predicate: http://id.loc.gov/vocabulary/relators/fmo
+    multiple: true
+    function:
   - property: identification_verification_status
     predicate: http://rs.tdwg.org/dwc/terms/identificationVerificationStatus
     multiple: false
+    function:
   - property: inscription
     predicate: http://purl.org/vra/hasInscription
     multiple: true
+    function:
   - property: instrumentation
     predicate: http://opaquenamespace.org/ns/sheetmusic_Instrumentation
     multiple: true
+    function:
   - property: layout
     predicate: http://rdaregistry.info/Elements/m/P30155
     multiple: true
+    function:
   - property: military_highest_rank
     predicate: http://opaquenamespace.org/ns/militaryHighestRank
     multiple: false
+    function:
   - property: military_occupation
     predicate: http://opaquenamespace.org/ns/militaryOccupation
     multiple: true
+    function:
   - property: military_service_location
     predicate: http://opaquenamespace.org/ns/militaryServiceLocation
     multiple: true
+    function:
   - property: mode_of_issuance
     predicate: http://rdaregistry.info/Elements/m/P30003
     multiple: true
+    function:
   - property: mods_note
     predicate: http://www.loc.gov/mods/rdf/v1#note
     multiple: true
+    function:
   - property: number_of_pages
     predicate: http://schema.org/numberOfPages
     multiple: true
+    function:
   - property: object_orientation
     predicate: http://opaquenamespace.org/ns/objectOrientation
     multiple: false
+    function:
   - property: original_name_usage
     predicate: http://rs.tdwg.org/dwc/terms/originalNameUsage
     multiple: true
+    function:
   - property: photograph_orientation
     predicate: http://opaquenamespace.org/ns/photographOrientation
     multiple: false
+    function:
   - property: tribal_notes
     predicate: http://opaquenamespace.org/ns/tribalNotes
     multiple: true
+    function:
   - property: source_condition
     predicate: http://opaquenamespace.org/ns/sourceCondition
     multiple: true
+    function:
   - property: specimen_type
     predicate: http://opaquenamespace.org/ns/specimenType
     multiple: false
+    function:
   - property: table_of_contents
     predicate: http://purl.org/dc/terms/tableOfContents
     multiple: true
+    function:
   - property: temporal
     predicate: http://purl.org/dc/terms/temporal
     multiple: true
+    function:
   - property: view
     predicate: http://opaquenamespace.org/ns/cco_viewDescription
     multiple: true
-  - property: taxon_class
+    function:
+  - property: taxon_class_attribute
     predicate: http://rs.tdwg.org/dwc/terms/class
     multiple: true
-  - property: cultural_context
+    function: attributes_data
+  - property: cultural_context_attribute
     predicate: http://purl.org/vra/culturalContext
     multiple: true
-  - property: ethnographic_term
+    function: attributes_data
+  - property: ethnographic_term_attribute
     predicate: http://opaquenamespace.org/ns/ethnographic
     multiple: true
+    function: attributes_data
   - property: event
     predicate: http://schema.org/Event
     multiple: true
-  - property: family
+    function:
+  - property: family_attribute
     predicate: http://rs.tdwg.org/dwc/terms/family
     multiple: true
-  - property: genus
+    function: attributes_data
+  - property: genus_attribute
     predicate: http://rs.tdwg.org/dwc/terms/genus
     multiple: true
-  - property: order
+    function: attributes_data
+  - property: order_attribute
     predicate: http://rs.tdwg.org/dwc/terms/order
     multiple: true
-  - property: species
+    function: attributes_data
+  - property: species_attribute
     predicate: http://rs.tdwg.org/dwc/terms/specificEpithet
     multiple: true
+    function: attributes_data
   - property: keyword
     predicate: http://purl.org/dc/elements/1.1/subject
     multiple: true
-  - property: military_branch
+    function:
+  - property: military_branch_attribute
     predicate: http://opaquenamespace.org/ns/militaryBranch
     multiple: true
-  - property: phylum_or_division
+    function: attributes_data
+  - property: phylum_or_division_attribute
     predicate: http://rs.tdwg.org/dwc/terms/phylum
     multiple: true
+    function: attributes_data
   - property: sports_team
     predicate: http://opaquenamespace.org/ns/sportsTeam
     multiple: true
+    function:
   - property: state_or_edition
     predicate: http://opaquenamespace.org/ns/vra_stateEdition
     multiple: true
-  - property: style_or_period
+    function:
+  - property: style_or_period_attribute
     predicate: http://purl.org/vra/hasStylePeriod
     multiple: true
-  - property: subject
+    function: attributes_data
+  - property: subject_attribute
     predicate: http://purl.org/dc/terms/subject
     multiple: true
+    function: attributes_data
   - property: tribal_classes
     predicate: http://opaquenamespace.org/ns/tribalClasses
     multiple: true
+    function:
   - property: tribal_terms
     predicate: http://opaquenamespace.org/ns/tribalTerms
     multiple: true
-  - property: common_name
+    function:
+  - property: common_name_attribute
     predicate: http://rs.tdwg.org/dwc/terms/vernacularName
     multiple: true
+    function: attributes_data
   - property: scientific_name_authorship
     predicate: http://rs.tdwg.org/dwc/terms/scientificNameAuthorship
     multiple: true
+    function:
   - property: higher_classification
     predicate: http://rs.tdwg.org/dwc/terms/higherClassification
     multiple: true
+    function:
   - property: award
     predicate: http://schema.org/award
     multiple: true
+    function:
   - property: legal_name
     predicate: http://schema.org/legalName
     multiple: true
+    function:
   - property: box
     predicate: http://schema.org/box
     multiple: true
+    function:
   - property: gps_latitude
     predicate: http://www.w3.org/2003/12/exif/ns/gpsLatitude
     multiple: false
+    function:
   - property: gps_longitude
     predicate: http://www.w3.org/2003/12/exif/ns/gpsLongitude
     multiple: false
-  - property: location
+    function:
+  - property: location_attribute
     predicate: http://purl.org/dc/terms/spatial
     multiple: true
+    function: attributes_data
   - property: street_address
     predicate: http://www.loc.gov/mads/rdf/v1#streetAddress
     multiple: true
-  - property: ranger_district
+    function:
+  - property: ranger_district_attribute
     predicate: http://opaquenamespace.org/ns/rangerDistrict
     multiple: true
-  - property: tgn
+    function: attributes_data
+  - property: tgn_attribute
     predicate: http://dbpedia.org/ontology/HistoricPlace
     multiple: true
-  - property: water_basin
+    function: attributes_data
+  - property: water_basin_attribute
     predicate: http://opaquenamespace.org/ns/waterBasin
     multiple: true
+    function: attributes_data
   - property: award_date
     predicate: http://opaquenamespace.org/ns/awardDate
     multiple: true
+    function:
   - property: date_created
     predicate: http://purl.org/dc/terms/created
     multiple: true
+    function:
   - property: collected_date
     predicate: http://opaquenamespace.org/ns/collectedDate
     multiple: true
+    function:
   - property: date
     predicate: http://purl.org/dc/terms/date
     multiple: true
+    function:
   - property: issued
     predicate: http://purl.org/dc/terms/issued
     multiple: true
+    function:
   - property: view_date
     predicate: http://opaquenamespace.org/ns/cco_viewDate
     multiple: true
+    function:
   - property: acquisition_date
     predicate: http://opaquenamespace.org/ns/acquisitionDate
     multiple: true
+    function:
   - property: accession_number
     predicate: http://opaquenamespace.org/ns/cco_accessionNumber
     multiple: true
+    function:
   - property: barcode
     predicate: http://id.loc.gov/ontologies/bibframe/barcode
     multiple: true
+    function:
   - property: hydrologic_unit_code
     predicate: http://opaquenamespace.org/ns/hydrologicUnitCode
     multiple: true
+    function:
   - property: identifier
     predicate: http://purl.org/dc/terms/identifier
     multiple: true
+    function:
   - property: item_locator
-    predicate: http://purl.org/ontology/holding/label
+    predicate: http://purl.org/ontology/holding#label
     multiple: true
+    function:
   - property: longitude_latitude_identification
     predicate: http://opaquenamespace.org/ns/llid
     multiple: true
+    function:
   - property: copyright_claimant
     predicate: http://id.loc.gov/vocabulary/relators/cpc
     multiple: true
-  - property: rights_statement
+    function:
+  - property: rights_statement_attribute
     predicate: http://www.europeana.eu/schemas/edm/rights
     multiple: false
-  - property: rights_note
+    function: attributes_data
+  - property:
     predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#rightsExpression
     multiple: true
+    function:
   - property: rights_holder
-    predicate: http://opaquenamespace.org/ns/rightsHolder
+    predicate: http://purl.org/dc/terms/rightsHolder
     multiple: true
-  - property: rights_statement
+    function:
+  - property: license_attribute
     predicate: http://purl.org/dc/terms/rights
     multiple: false
+    function: attributes_data
   - property: use_restrictions
     predicate: http://rdaregistry.info/Elements/u/P60497
     multiple: true
-  - property: access_restrictions
+    function:
+  - property: access_restrictions_attribute
     predicate: http://purl.org/dc/terms/accessRights
     multiple: false
+    function: attributes_data
   - property: box_name
     predicate: http://opaquenamespace.org/ns/boxName
     multiple: true
+    function:
   - property: box_number
     predicate: http://opaquenamespace.org/ns/boxNumber
     multiple: true
+    function:
   - property: citation
     predicate: http://schema.org/citation
     multiple: true
+    function:
   - property: contained_in_journal
-    predicate: http://purl.org/net/nknouf/ns/bibtex/hasJournal
+    predicate: http://purl.org/net/nknouf/ns/bibtex#hasJournal
     multiple: true
+    function:
   - property: current_repository_id
     predicate: http://opaquenamespace.org/ns/vra_idCurrentRepository
     multiple: true
+    function:
   - property: folder_name
     predicate: http://opaquenamespace.org/ns/folderName
     multiple: true
+    function:
   - property: folder_number
     predicate: http://opaquenamespace.org/ns/folderNumber
     multiple: true
+    function:
   - property: has_number
-    predicate: http://purl.org/net/nknouf/ns/bibtex/hasNumber
+    predicate: http://purl.org/net/nknouf/ns/bibtex#hasNumber
     multiple: true
+    function:
   - property: is_volume
-    predicate: http://purl.org/net/nknouf/ns/bibtex/hasVolume
+    predicate: http://purl.org/net/nknouf/ns/bibtex#hasVolume
     multiple: true
-  - property: language
+    function:
+  - property: language_attribute
     predicate: http://purl.org/dc/terms/language
     multiple: true
+    function: attributes_data
   - property: local_collection_id
     predicate: http://opaquenamespace.org/ns/localCollectionID
     multiple: true
-  - property: local_collection_name
+    function:
+  - property: local_collection_name_attribute
     predicate: http://opaquenamespace.org/ns/localCollectionName
     multiple: true
+    function: attributes_data
   - property: location_copyshelf_location
     predicate: http://www.loc.gov/mods/rdf/v1#locationCopyShelfLocator
     multiple: true
-  - property: publisher
+    function:
+  - property: publisher_attribute
     predicate: http://purl.org/dc/terms/publisher
     multiple: true
-  - property: place_of_production
+    function: attributes_data
+  - property: place_of_production_attribute
     predicate: http://rdaregistry.info/Elements/u/P60161
     multiple: true
+    function: attributes_data
   - property: provenance
     predicate: http://purl.org/dc/terms/provenance
     multiple: true
-  - property: publication_place
+    function:
+  - property: publication_place_attribute
     predicate: http://id.loc.gov/vocabulary/relators/pup
     multiple: true
-  - property: repository
+    function: attributes_data
+  - property: repository_attribute
     predicate: http://id.loc.gov/vocabulary/relators/rps
     multiple: false
+    function: attributes_data
   - property: source
     predicate: http://purl.org/dc/terms/source
     multiple: true
+    function:
   - property: series_name
     predicate: http://opaquenamespace.org/ns/seriesName
     multiple: true
+    function:
   - property: series_number
     predicate: http://opaquenamespace.org/ns/seriesNumber
     multiple: true
+    function:
   - property: art_series
     predicate: http://opaquenamespace.org/ns/artSeries
     multiple: true
+    function:
   - property: has_finding_aid
     predicate: http://lod.xdams.org/reload/oad/has_findingAid
     multiple: true
+    function:
   - property: has_part
     predicate: http://purl.org/dc/terms/hasPart
     multiple: true
+    function:
   - property: has_version
     predicate: http://purl.org/dc/terms/hasVersion
     multiple: true
+    function:
   - property: host_item
     predicate: http://opaquenamespace.org/ns/sheetmusic_hostItem
     multiple: true
+    function:
   - property: isPartOf
     predicate: http://purl.org/dc/terms/isPartOf
     multiple: true
+    function:
   - property: is_version_of
     predicate: http://purl.org/dc/terms/isVersionOf
     multiple: true
+    function:
   - property: larger_work
     predicate: http://opaquenamespace.org/ns/sheetmusic_largerWork
     multiple: true
+    function:
   - property: relation
     predicate: http://purl.org/dc/terms/relation
     multiple: true
-  - property: resource_type
+    function:
+  - property: resource_type_attribute
     predicate: http://purl.org/dc/terms/type
-    multiple: true
-  - property: workType
+    multiple: false
+    function: attributes_data
+  - property: workType_attribute
     predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
     multiple: true
+    function: attributes_data
   - property: extent
     predicate: http://purl.org/dc/terms/extent
     multiple: true
-  - property: format_attributes
+    function:
+  - property: format_attribute
     predicate: http://purl.org/dc/terms/format
     multiple: true
     function: attributes_data
   - property: material
     predicate: http://purl.org/vra/material
     multiple: true
+    function:
   - property: measurements
     predicate: http://opaquenamespace.org/ns/vra_measurements
     multiple: true
+    function:
   - property: orientation
     predicate: http://www.w3.org/2003/12/exif/ns/orientation
     multiple: true
+    function:
   - property: physical_extent
     predicate: http://www.loc.gov/mods/rdf/v1#physicalExtent
     multiple: true
+    function:
   - property: technique
     predicate: http://purl.org/vra/hasTechnique
     multiple: true
+    function:
   - property: exhibit
     predicate: http://opaquenamespace.org/ns/exhibit
     multiple: true
+    function:
   - property: primary_set
     predicate: http://opaquenamespace.org/ns/primarySet
     multiple: false
+    function:
   - property: set
     predicate: http://opaquenamespace.org/ns/set
-    multiple: true
+    multiple: false
+    function:
   - property: color_content
     predicate: http://rdaregistry.info/Elements/e/P20224
     multiple: true
+    function:
   - property: color_space
     predicate: http://www.w3.org/2003/12/exif/ns/colorSpace
     multiple: true
+    function:
   - property: conversion
     predicate: http://opaquenamespace.org/ns/conversionSpecifications
     multiple: true
+    function:
   - property: copy_location
     predicate: http://www.loc.gov/mods/rdf/v1#locationCopySublocation
     multiple: true
+    function:
   - property: date_digitized
     predicate: http://opaquenamespace.org/ns/dateDigitized
     multiple: false
+    function:
   - property: file_size
     predicate: http://rdaregistry.info/Elements/m/P30183
     multiple: false
+    function:
   - property: height
     predicate: http://www.w3.org/2003/12/exif/ns/height
     multiple: false
-  - property: institution
+    function:
+  - property: institution_attribute
     predicate: http://opaquenamespace.org/ns/contributingInstitution
     multiple: true
+    function: attributes_data
   - property: date_modified
     predicate: http://purl.org/dc/terms/modified
+    multiple: true
+    function:
+  - property: original_filename
+    predicate: http://www.loc.gov/premis/rdf/v3/originalName
     multiple: false
+    function:
   - property: replaces_url
     predicate: http://purl.org/dc/terms/replaces
     multiple: false
+    function:
   - property: resolution
     predicate: http://www.w3.org/2003/12/exif/ns/resolution
     multiple: false
+    function:
   - property: date_uploaded
     predicate: http://purl.org/dc/terms/dateSubmitted
     multiple: false
+    function:
   - property: width
     predicate: http://www.w3.org/2003/12/exif/ns/width
     multiple: false
+    function:
   - property: oembed_url
     predicate: http://opaquenamespace.org/ns/oembed
     multiple: false
+    function:
+  - property: contents
+    predicate: http://opaquenamespace.org/ns/contents
+    multiple: true
+    function:
