@@ -5,7 +5,8 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class OnsBase
       def self.label(data)
-        data.first['rdfs:label']['@value']
+        Rails.logger.info data['rdfs:label']
+        data['rdfs:label']['@value']
       end
 
       def self.as_query(q)
