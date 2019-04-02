@@ -2,43 +2,75 @@ version: 2
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.5-node-browsers
+      - image: circleci/ruby:2.5
     working_directory: ~/app
     steps:
+      - restore_cache:
+          name: Restore code from cache
+          keys:
+            - v1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          name: Save code cache
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ~/app
-
+            - '.git'
+      - persist_to_workspace:
+          root: ~/
+          paths:
+          - app/*
+          - app/**/*          
   bundle:
     docker:
       - image: circleci/ruby:2.5-node-browsers
-    working_directory: ~/app
+    working_directory: ~/app      
     steps:
+      - attach_workspace:
+          at: ~/    
       - run:
           name: Update Debian Packages
           command: |
-            sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev
+            sudo apt-get update -qq
+            sudo apt-get upgrade -qq
+            sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg
+            sudo apt-get install -y clamav-freshclam clamav-daemon libclamav-dev
+            sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
+            sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
+            sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools
+      - run:
+          name: Fetch clamav databases
+          command: |
+            sudo wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
+            sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
+            sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
+            sudo chown clamav:clamav /var/lib/clamav/*.cvd
       - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --path vendor/bundle
+          name: Restore bundle from cache
+          keys:
+            - v1-bundle-{{ checksum "Gemfile" }}
+      - run:
+          name: Update bundler
+          command: gem install bundler -v 1.17.2
+      - run:
+          name: Install dependencies
+          command: bundle check || bundle install
       - save_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+          name: Save bundle cache
+          key: v1-bundle-{{ checksum "Gemfile" }}
           paths:
-            - ~/app
+            - ~/app/vendor/bundle
+      - persist_to_workspace:
+          root: /
+          paths:
+          - var/lib/clamav/*           
+
   lint:
     docker:
       - image: circleci/ruby:2.5-node-browsers
     working_directory: ~/app
     steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle --path vendor/bundle
+      - attach_workspace:
+          at: ~/        
       - run: bundle exec rubocop
   test:
     docker:
@@ -75,27 +107,8 @@ jobs:
         command: bin/solr -cloud -noprompt -f -p 8985
     working_directory: ~/app
     steps:
-      - run:
-          name: Update Debian Packages
-          command: |
-            sudo apt-get update -qq
-            sudo apt-get upgrade -qq
-            sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg
-            sudo apt-get install -y clamav-freshclam clamav-daemon libclamav-dev
-            sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
-            sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
-            sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools
-      - run:
-          name: Fetch clamav databases
-          command: |
-            sudo wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
-            sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
-            sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
-            sudo chown clamav:clamav /var/lib/clamav/*.cvd
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+      - attach_workspace:
+          at: ~/      
       - run:
           name: Load config into SolrCloud
           command: |
@@ -109,7 +122,6 @@ jobs:
       - run:
           name: Wait for Redis
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
-      - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load --trace
       - run:
           name: Run Tests
