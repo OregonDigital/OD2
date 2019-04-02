@@ -9,7 +9,7 @@ module OregonDigital
       end
 
       def self.label(data)
-        data.at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
+        data.first.at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
       end
 
       def self.as_query(q)
