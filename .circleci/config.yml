@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Update Debian Packages for ClamAV
           command: |
-            sudo apt-get install -y clamav-freshclam clamav-daemon libclamav-dev          
+            sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev         
       - restore_cache:
           name: Restore bundle from cache
           keys:
