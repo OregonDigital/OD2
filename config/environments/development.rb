@@ -67,4 +67,10 @@ Rails.application.configure do
 
   # Whitelist docker containers for webconsole during development
   config.web_console.whitelisted_ips = ['172.0.0.0/8', '192.0.0.0/8']
+
+  config.assets.configure do |env|
+    env.register_mime_type 'text/haml', extensions: ['.html']
+    env.register_transformer 'text/haml', 'text/html', Tilt::HamlTemplate
+    env.register_engine '.haml', Tilt::HamlTemplate
+  end
 end

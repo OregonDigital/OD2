@@ -53,4 +53,6 @@ ADD . /data
 
 RUN if [ "${RAILS_ENV}" = "production" ] || [ "${RAILS_ENV}" = "staging" ]; then \
   RAILS_ENV=${RAILS_ENV} SECRET_KEY_BASE=${SECRET_KEY_BASE} bundle exec rails assets:precompile; \
+  cp public/assets/404-*.html public/404.html; \
+  cp public/assets/500-*.html public/500.html; \
   fi
