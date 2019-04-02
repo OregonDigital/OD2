@@ -23,6 +23,8 @@ jobs:
   bundle:
     docker:
       - image: circleci/ruby:2.5-node-browsers
+    environment:
+      BUNDLE_PATH: vendor/bundle
     working_directory: ~/app      
     steps:
       - attach_workspace:
@@ -60,13 +62,14 @@ jobs:
           paths:
             - ~/app/vendor/bundle
       - persist_to_workspace:
-          root: /
+          root: ~/
           paths:
           - var/lib/clamav/*           
-
   lint:
     docker:
       - image: circleci/ruby:2.5-node-browsers
+    environment:
+      BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
     steps:
       - attach_workspace:
@@ -76,6 +79,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.5-node-browsers
         environment:
+          BUNDLE_PATH: vendor/bundle
           CAPYBARA_APP_HOST: http://test:3001
           FEDORA_URL: http://localhost:8080/fcrepo/rest
           HONEYCOMB_DATASET: od2-rails-test
