@@ -1,45 +1,49 @@
-version: 2
+version: 2.1
+orbs:
+  samvera: samvera/circleci-orb@0
 jobs:
-  checkout_code:
-    docker:
-      - image: circleci/ruby:2.5-node-browsers
-    working_directory: ~/app
-    steps:
-      - checkout
-      - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/app
-
   bundle:
-    docker:
-      - image: circleci/ruby:2.5-node-browsers
-    working_directory: ~/app
+    parameters:
+      ruby_version:
+        type: string
+        default: 2.5.1
+      bundler_version:
+        type: string
+        default: 1.17.3
+      rails_version:
+        type: string
+        default: '5.1.6'
+    executor:
+      name: 'samvera/ruby'
+      ruby_version: << parameters.ruby_version >>
+    resource_class: medium+
+    environment:
+      RAILS_VERSION: << parameters.rails_version >>
+      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
     steps:
-      - run:
-          name: Update Debian Packages
-          command: |
-            sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --path vendor/bundle
-      - save_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+      - samvera/cached_checkout
+      - samvera/bundle_for_gem:
+          ruby_version: << parameters.ruby_version >>
+          bundler_version: << parameters.bundler_version >>
+          project: od2
+      - persist_to_workspace:
+          root: ~/
           paths:
-            - ~/app
+          - project/*
+          - project/**/*        
   lint:
-    docker:
-      - image: circleci/ruby:2.5-node-browsers
-    working_directory: ~/app
+    parameters:
+      ruby_version:
+        type: string
+        default: 2.5.1
+    executor:
+      name: 'samvera/ruby'
+      ruby_version: << parameters.ruby_version >>
+    resource_class: medium+
     steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle --path vendor/bundle
-      - run: bundle exec rubocop
+      - attach_workspace:
+          at: ~/
+      - samvera/rubocop
   test:
     docker:
       - image: circleci/ruby:2.5-node-browsers
@@ -73,8 +77,9 @@ jobs:
           CATALINA_OPTS: '-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC'
       - image: solr:7-alpine
         command: bin/solr -cloud -noprompt -f -p 8985
-    working_directory: ~/app
     steps:
+      - attach_workspace:
+          at: ~/    
       - run:
           name: Update Debian Packages
           command: |
@@ -92,10 +97,6 @@ jobs:
             sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
             sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
             sudo chown clamav:clamav /var/lib/clamav/*.cvd
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run:
           name: Load config into SolrCloud
           command: |
@@ -109,7 +110,6 @@ jobs:
       - run:
           name: Wait for Redis
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
-      - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load --trace
       - run:
           name: Run Tests
@@ -132,10 +132,7 @@ workflows:
   version: 2
   ci:
     jobs:
-      - checkout_code
       - bundle:
-          requires:
-            - checkout_code
       - lint:
           requires:
             - bundle
