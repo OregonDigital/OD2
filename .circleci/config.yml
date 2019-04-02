@@ -36,7 +36,7 @@ jobs:
       - restore_cache:
           name: Restore bundle from cache
           keys:
-            - v1-bundle-{{ checksum "Gemfile.lock" }}
+            - v2-bundle-{{ checksum "Gemfile.lock" }}
       - run:
           name: Update bundler
           command: gem install bundler -v 1.17.2
@@ -45,7 +45,7 @@ jobs:
           command: bundle check || bundle install
       - save_cache:
           name: Save bundle cache
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+          key: v2-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - ~/app/vendor/bundle
       - persist_to_workspace:
