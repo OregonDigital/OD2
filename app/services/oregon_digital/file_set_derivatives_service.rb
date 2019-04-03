@@ -47,6 +47,7 @@ module OregonDigital
     end
 
     def create_pdf_derivatives(filename)
+      extract_full_text(filename, uri)
       OregonDigital::Derivatives::Image::GMRunner.create(filename,
                                                          outputs: [{ label: :thumbnail,
                                                                      size: '120x120>',
