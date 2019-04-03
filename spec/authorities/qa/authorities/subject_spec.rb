@@ -21,11 +21,11 @@ RSpec.describe Qa::Authorities::Subject do
   let(:loc_names_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/names/my_id' }.with_indifferent_access] }
   let(:loc_orgs_response) { [{ 'http://www.loc.gov/mads/rdf/v1#authoritativeLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/vocabulary/organizations/my_id' }.with_indifferent_access] }
   let(:loc_subjects_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/subjects/my_id' }.with_indifferent_access] }
-  let(:ons_creator_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/creator/my_id' }.with_indifferent_access] }
-  let(:ons_osu_academic_units_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/osuAcademicUnits/my_id' }.with_indifferent_access] }
-  let(:ons_osu_buildings_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/osuBuildings/my_id' }.with_indifferent_access] }
-  let(:ons_people_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/people/my_id' }.with_indifferent_access] }
-  let(:ons_subject_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/subject/my_id' }.with_indifferent_access] }
+  let(:ons_creator_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/creator/my_id' }.with_indifferent_access }
+  let(:ons_osu_academic_units_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/osuAcademicUnits/my_id' }.with_indifferent_access }
+  let(:ons_osu_buildings_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/osuBuildings/my_id' }.with_indifferent_access }
+  let(:ons_people_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/people/my_id' }.with_indifferent_access }
+  let(:ons_subject_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/subject/my_id' }.with_indifferent_access }
   let(:ulan_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
   let(:wd_entity_response) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale.to_s}": { 'value': 'mylabel' } } } }, '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
 
@@ -35,11 +35,11 @@ RSpec.describe Qa::Authorities::Subject do
   it { expect(repository_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_orgs_response, OregonDigital::ControlledVocabularies::Vocabularies::LocOrgs)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_subjects_response, OregonDigital::ControlledVocabularies::Vocabularies::LocSubjects)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(ons_creator_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(ons_osu_academic_units_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuAcademicUnits)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(ons_osu_buildings_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuBuildings)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(ons_people_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(ons_subject_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsSubject)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call([ons_creator_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call([ons_osu_academic_units_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuAcademicUnits)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call([ons_osu_buildings_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuBuildings)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call([ons_people_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call([ons_subject_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsSubject)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::Ulan)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(wd_entity_response, OregonDigital::ControlledVocabularies::Vocabularies::WdEntity)).to eq 'mylabel' }
   describe '#search' do
@@ -50,11 +50,11 @@ RSpec.describe Qa::Authorities::Subject do
       allow(repository_instance).to receive(:json).with(loc_names_request).and_return(loc_names_response)
       allow(repository_instance).to receive(:json).with(loc_orgs_request).and_return(loc_orgs_response)
       allow(repository_instance).to receive(:json).with(loc_subjects_request).and_return(loc_subjects_response)
-      allow(repository_instance).to receive(:json).with(ons_creator_request).and_return(ons_creator_response)
-      allow(repository_instance).to receive(:json).with(ons_osu_academic_units_request).and_return(ons_osu_academic_units_response)
-      allow(repository_instance).to receive(:json).with(ons_osu_buildings_request).and_return(ons_osu_buildings_response)
-      allow(repository_instance).to receive(:json).with(ons_people_request).and_return(ons_people_response)
-      allow(repository_instance).to receive(:json).with(ons_subject_request).and_return(ons_subject_response)
+      allow(repository_instance).to receive(:json).with(ons_creator_request).and_return([ons_creator_response])
+      allow(repository_instance).to receive(:json).with(ons_osu_academic_units_request).and_return([ons_osu_academic_units_response])
+      allow(repository_instance).to receive(:json).with(ons_osu_buildings_request).and_return([ons_osu_buildings_response])
+      allow(repository_instance).to receive(:json).with(ons_people_request).and_return([ons_people_response])
+      allow(repository_instance).to receive(:json).with(ons_subject_request).and_return([ons_subject_response])
       allow(repository_instance).to receive(:json).with(ulan_request).and_return(ulan_response)
       allow(repository_instance).to receive(:json).with(wd_entity_request).and_return(wd_entity_response)
     end
