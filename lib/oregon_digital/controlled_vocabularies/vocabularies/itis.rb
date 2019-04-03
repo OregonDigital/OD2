@@ -9,7 +9,7 @@ module OregonDigital
       end
 
       def self.label(data)
-        data['scientificName']['combinedName']
+        data.first['scientificName']['combinedName']
       end
 
       def self.as_query(q)
