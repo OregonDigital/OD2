@@ -22,7 +22,7 @@ module Qa::Authorities
     end
 
     def find_term(response, q)
-      { q: q, response: response }
+      { q: q, response: super }
     end
   end
 end

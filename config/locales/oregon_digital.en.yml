@@ -24,3 +24,12 @@ en:
       oembed_error:
         message: 'The oEmbed URL attached to a work you deposited has encounted an error: %{messages}'
         subject: 'Erroring oEmbed content'
+      ld_fetch_success:
+        message: 'The label and related information for your requested resource at %{uri} has been successfully retrieved'
+        subject: '%{uri} successfully retrieved'
+      ld_fetch_error:
+        message: 'The label and related information for the resource you requested at %{uri} is not currently available. Oregon Digital will retry the source endpoint and will notify you when the data has been retrieved and the field has been successfully updated.'
+        subject: '%{uri} is not responding'
+      ld_fetch_exhaust:
+        message: 'The source endpoint for your requested resource at %{uri} is not responding. Oregon Digital has given up retrieving data from the source endpoint. Please contact an Oregon Digital system administrator about this issue.'
+        subject: '%{uri} exhausted retries'
