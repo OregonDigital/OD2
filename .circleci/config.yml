@@ -1,49 +1,75 @@
-version: 2
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@3.1.0
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.5-node-browsers
+      - image: circleci/ruby:2.5
     working_directory: ~/app
     steps:
+      - restore_cache:
+          name: Restore code from cache
+          keys:
+            - v1-source-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          name: Save code cache
+          key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ~/app
-
+            - '.git'
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app/*
+            - app/**/*
   bundle:
     docker:
       - image: circleci/ruby:2.5-node-browsers
+    environment:
+      BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
-          name: Update Debian Packages
+          name: Update Debian Packages for ClamAV
           command: |
             sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev
       - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --path vendor/bundle
+          name: Restore bundle from cache
+          keys:
+            - v2-bundle-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Update bundler
+          command: gem install bundler -v 1.17.2
+      - run:
+          name: Install dependencies
+          command: bundle check || bundle install
       - save_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+          name: Save bundle cache
+          key: v2-bundle-{{ checksum "Gemfile.lock" }}
           paths:
-            - ~/app
+            - ~/app/vendor/bundle
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app/*
+            - app/**/*
   lint:
     docker:
       - image: circleci/ruby:2.5-node-browsers
+    environment:
+      BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
     steps:
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
-      - run: bundle --path vendor/bundle
+      - attach_workspace:
+          at: ~/
       - run: bundle exec rubocop
   test:
     docker:
       - image: circleci/ruby:2.5-node-browsers
         environment:
+          BUNDLE_PATH: vendor/bundle
           CAPYBARA_APP_HOST: http://test:3001
           FEDORA_URL: http://localhost:8080/fcrepo/rest
           HONEYCOMB_DATASET: od2-rails-test
@@ -75,6 +101,8 @@ jobs:
         command: bin/solr -cloud -noprompt -f -p 8985
     working_directory: ~/app
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
           name: Update Debian Packages
           command: |
@@ -92,10 +120,6 @@ jobs:
             sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
             sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
             sudo chown clamav:clamav /var/lib/clamav/*.cvd
-      - restore_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run:
           name: Load config into SolrCloud
           command: |
@@ -109,7 +133,6 @@ jobs:
       - run:
           name: Wait for Redis
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
-      - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load --trace
       - run:
           name: Run Tests
@@ -129,7 +152,6 @@ jobs:
       - store_artifacts:
           path: ./tmp/capybara
 workflows:
-  version: 2
   ci:
     jobs:
       - checkout_code
@@ -142,3 +164,21 @@ workflows:
       - test:
           requires:
             - lint
+      - aws-ecr/build_and_push_image:
+          name: Build and push staging
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+          repo: staging
+          extra-build-args: '--build-arg RAILS_ENV=staging'
+      - aws-ecr/build_and_push_image:
+          name: Build and push production
+          requires:
+            - test
+          filters:
+            branches:
+              only: deploy
+          repo: web
+          extra-build-args: '--build-arg RAILS_ENV=production'

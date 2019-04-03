@@ -959,6 +959,7 @@ DEPENDENCIES
   equivalent-xml
   factory_bot_rails
   faraday_middleware (~> 0.10.0)
+  haml
   honeycomb-beeline
   hydra-derivatives!
   hydra-role-management
