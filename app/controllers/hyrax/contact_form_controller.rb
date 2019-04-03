@@ -37,18 +37,20 @@ module Hyrax
     # Override this method if you want to perform additional operations
     # when a email is successfully sent, such as sending a confirmation
     # response to the user.
-    def after_deliver; end
+    def after_deliver
+      OregonDigital::ContactMailer.contact(@contact_form).deliver_now
+    end
 
     private
 
     def build_contact_form
-      @contact_form = Hyrax::ContactForm.new(contact_form_params)
+      @contact_form = OregonDigital::ContactForm.new(contact_form_params)
     end
 
     def contact_form_params
-      return {} unless params.key?(:contact_form)
+      return {} unless params.key?(:oregon_digital_contact_form)
 
-      params.require(:contact_form).permit(:contact_method, :category, :name, :email, :subject, :message)
+      params.require(:oregon_digital_contact_form).permit(:contact_method, :category, :name, :email, :subject, :message)
     end
   end
 end

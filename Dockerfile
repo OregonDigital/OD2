@@ -1,7 +1,4 @@
-FROM ruby:2.5.1
-
-ARG RAILS_ENV
-ARG SECRET_KEY_BASE
+FROM ruby:2.5.1 as builder
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -41,18 +38,21 @@ WORKDIR /data
 ADD Gemfile /data
 ADD Gemfile.lock /data
 RUN mkdir /data/build
+
+ARG RAILS_ENV=development
+ENV RAILS_ENV=${RAILS_ENV}
+
 ADD ./build/install_gems.sh /data/build
 RUN ./build/install_gems.sh
-
-# install node dependencies, after there are some included
-# COPY package.json yarn.lock /data/
-# RUN yarn install
 
 # Add the application code
 ADD . /data
 
+FROM builder
+
 RUN if [ "${RAILS_ENV}" = "production" ] || [ "${RAILS_ENV}" = "staging" ]; then \
-  RAILS_ENV=${RAILS_ENV} SECRET_KEY_BASE=${SECRET_KEY_BASE} bundle exec rails assets:precompile; \
+  echo "Precompiling assets with $RAILS_ENV environment"; \
+  RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
   cp public/assets/404-*.html public/404.html; \
   cp public/assets/500-*.html public/500.html; \
   fi
