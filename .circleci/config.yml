@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@3.1.0
 jobs:
   checkout_code:
     docker:
@@ -18,21 +20,21 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-          - app/*
-          - app/**/*          
+            - app/*
+            - app/**/*
   bundle:
     docker:
       - image: circleci/ruby:2.5-node-browsers
     environment:
       BUNDLE_PATH: vendor/bundle
-    working_directory: ~/app      
+    working_directory: ~/app
     steps:
       - attach_workspace:
           at: ~/
       - run:
           name: Update Debian Packages for ClamAV
           command: |
-            sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev         
+            sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev
       - restore_cache:
           name: Restore bundle from cache
           keys:
@@ -51,8 +53,8 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-          - app/*
-          - app/**/*           
+            - app/*
+            - app/**/*
   lint:
     docker:
       - image: circleci/ruby:2.5-node-browsers
@@ -61,7 +63,7 @@ jobs:
     working_directory: ~/app
     steps:
       - attach_workspace:
-          at: ~/        
+          at: ~/
       - run: bundle exec rubocop
   test:
     docker:
@@ -100,7 +102,7 @@ jobs:
     working_directory: ~/app
     steps:
       - attach_workspace:
-          at: ~/      
+          at: ~/
       - run:
           name: Update Debian Packages
           command: |
@@ -117,7 +119,7 @@ jobs:
             sudo wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
             sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
             sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
-            sudo chown clamav:clamav /var/lib/clamav/*.cvd          
+            sudo chown clamav:clamav /var/lib/clamav/*.cvd
       - run:
           name: Load config into SolrCloud
           command: |
@@ -150,7 +152,6 @@ jobs:
       - store_artifacts:
           path: ./tmp/capybara
 workflows:
-  version: 2
   ci:
     jobs:
       - checkout_code
@@ -163,3 +164,21 @@ workflows:
       - test:
           requires:
             - lint
+      - aws-ecr/build_and_push_image:
+          name: Build and push staging
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+          repo: staging
+          extra-build-args: '--build-arg RAILS_ENV=staging'
+      - aws-ecr/build_and_push_image:
+          name: Build and push production
+          requires:
+            - test
+          filters:
+            branches:
+              only: deploy
+          repo: web
+          extra-build-args: '--build-arg RAILS_ENV=production'
