@@ -37,6 +37,14 @@ module OregonDigital
       end
     end
 
+    # The destination_name parameter has to match up with the file parameter
+    # passed to the DownloadsController
+    def derivative_url(destination_name, sequence = nil)
+      path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
+      path = path.sub(/\.jp2$/, format('-%04d.jp2', sequence)) if sequence
+      URI("file://#{path}").to_s
+    end
+
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
     def create_image_derivatives(filename)
       OregonDigital::Derivatives::Image::Utils.tmp_file('bmp') do |out_path|
@@ -47,13 +55,16 @@ module OregonDigital
     end
 
     def create_pdf_derivatives(filename)
+      create_thumbnail(filename)
       extract_full_text(filename, uri)
-      OregonDigital::Derivatives::Image::GMRunner.create(filename,
-                                                         outputs: [{ label: :thumbnail,
-                                                                     size: '120x120>',
-                                                                     format: 'jpg',
-                                                                     url: derivative_url('thumbnail'),
-                                                                     layer: 0 }])
+
+      pdf = MiniMagick::Image.open(filename)
+      0.upto(pdf.pages.length - 1) do |pagenum|
+        OregonDigital::Derivatives::Image::Utils.tmp_file('bmp') do |out_path|
+          manual_convert(filename, pagenum, out_path)
+          create_zoomable_page(out_path, pagenum)
+        end
+      end
     end
 
     def create_thumbnail(filename)
@@ -66,10 +77,14 @@ module OregonDigital
     end
 
     def create_zoomable(filename)
+      create_zoomable_page(filename, nil)
+    end
+
+    def create_zoomable_page(filename, pagenum)
       OregonDigital::Derivatives::Image::JP2Runner.create(filename,
                                                           outputs: [{ label: :jp2,
                                                                       mime_type: mime_type,
-                                                                      url: derivative_url('jp2'),
+                                                                      url: derivative_url('jp2', pagenum),
                                                                       tile_size: '1024',
                                                                       compression: '20',
                                                                       layer: 0 }])
@@ -102,6 +117,14 @@ module OregonDigital
     def bmp_to_bmp(source, dest)
       File.unlink(dest)
       FileUtils.ln_s(source, dest)
+    end
+
+    def manual_convert(filename, pagenum, out_path)
+      MiniMagick::Tool::Convert.new do |cmd|
+        cmd.density(300)
+        cmd << format('%<filename>s[%<page>d]', filename: filename, page: pagenum)
+        cmd << out_path
+      end
     end
 
     # Returns the JP2Processor class of choice
