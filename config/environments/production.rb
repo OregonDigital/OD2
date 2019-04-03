@@ -111,4 +111,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.assets.configure do |env|
+    env.register_mime_type 'text/haml', extensions: ['.haml']
+    env.register_transformer 'text/haml', 'text/html', Tilt::HamlTemplate
+    env.register_engine '.haml', Tilt::HamlTemplate
+  end
 end
