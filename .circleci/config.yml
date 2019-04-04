@@ -170,12 +170,13 @@ jobs:
           command: |
             export APP_VERSION=$(cat lib/oregon_digital/version.rb | grep VERSION | cut -d "=" -f 2 | sed "s/['\" ]//g")
             export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
+            echo export DATETIME=$(date "+%Y%m%d%H%M%S") >> $BASH_ENV
             echo export DEPLOYED_VERSION="$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
       - aws-ecr/build-and-push-image:
           attach-workspace: false
           checkout: false
           repo: << parameters.repo >>
-          tag: $DEPLOYED_VERSION
+          tag: '$DATETIME-$DEPLOYED_VERSION'
           extra-build-args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
 
 workflows:
@@ -197,7 +198,7 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only: deployed-version-env-build
           repo: web
           environment: staging
       - build_and_push:
