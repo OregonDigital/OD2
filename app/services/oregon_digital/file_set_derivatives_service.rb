@@ -37,12 +37,31 @@ module OregonDigital
       end
     end
 
+    # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
+    def sequence_path(path, sequence = nil)
+      return path unless sequence
+
+      ext = File.extname(path)
+      dirname = File.dirname(path)
+      path_no_ext = File.join(dirname, File.basename(path, ext))
+      format('%<noext>s-%<sequence>04d%<ext>s', noext: path_no_ext, sequence: sequence, ext: ext)
+    end
+
     # The destination_name parameter has to match up with the file parameter
     # passed to the DownloadsController
     def derivative_url(destination_name, sequence = nil)
       path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
-      path = path.sub(/\.jp2$/, format('-%04d.jp2', sequence)) if sequence
-      URI("file://#{path}").to_s
+      seq_path = sequence_path(path, sequence)
+      URI("file://#{seq_path}").to_s
+    end
+
+    # Returns a sorted list of all derivatives of the given name (typically a sequence)
+    def sorted_derivative_urls(destination_name)
+      path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
+      ext = File.extname(path)
+      derivative_path_factory.derivatives_for_reference(file_set).select do |derivative|
+        File.extname(derivative) == ext
+      end.sort
     end
 
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
