@@ -194,7 +194,7 @@ workflows:
       - build_and_push:
           name: Build and push staging
           requires:
-            - checkout_code
+            - test
           filters:
             branches:
               only: master
@@ -203,7 +203,7 @@ workflows:
       - build_and_push:
           name: Build and push production
           requires:
-            - checkout_code
+            - test
           filters:
             branches:
               only: deploy
