@@ -151,6 +151,34 @@ jobs:
           path: ./tmp/screenshots
       - store_artifacts:
           path: ./tmp/capybara
+  build_and_push:
+    parameters:
+      repo:
+        type: string
+        default: ''
+      environment:
+        type: string
+        default: ''
+    executor:
+      name: 'aws-ecr/default'
+    working_directory: ~/app
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Generate deployed version
+          command: |
+            export APP_VERSION=$(cat lib/oregon_digital/version.rb | grep VERSION | cut -d "=" -f 2 | sed "s/['\" ]//g")
+            export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
+            echo export DATETIME=$(date "+%Y%m%d%H%M%S") >> $BASH_ENV
+            echo export DEPLOYED_VERSION="$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
+      - aws-ecr/build-and-push-image:
+          attach-workspace: false
+          checkout: false
+          repo: << parameters.repo >>
+          tag: '$DATETIME-$DEPLOYED_VERSION'
+          extra-build-args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
+
 workflows:
   ci:
     jobs:
@@ -164,21 +192,21 @@ workflows:
       - test:
           requires:
             - lint
-      - aws-ecr/build_and_push_image:
+      - build_and_push:
           name: Build and push staging
           requires:
             - test
           filters:
             branches:
               only: master
-          repo: staging
-          extra-build-args: '--build-arg RAILS_ENV=staging'
-      - aws-ecr/build_and_push_image:
+          repo: web
+          environment: staging
+      - build_and_push:
           name: Build and push production
           requires:
             - test
           filters:
             branches:
               only: deploy
-          repo: web
-          extra-build-args: '--build-arg RAILS_ENV=production'
+          repo: production
+          environment: production
