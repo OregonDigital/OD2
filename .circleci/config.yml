@@ -198,7 +198,7 @@ workflows:
             - test
           filters:
             branches:
-              only: deployed-version-env-build
+              only: master
           repo: web
           environment: staging
       - build_and_push:
