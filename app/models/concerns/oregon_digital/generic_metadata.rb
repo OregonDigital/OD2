@@ -55,7 +55,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :biographical_information, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/biographicalInformation') do |index|
+      property :biographical_information, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/P50113') do |index|
         index.as :stored_searchable
       end
 
@@ -75,7 +75,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :description_of_manifestation, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/descriptionOfManifestation') do |index|
+      property :description_of_manifestation, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/P10271') do |index|
         index.as :stored_searchable
       end
 
@@ -103,7 +103,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :mode_of_issuance, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/modeOfIssuance') do |index|
+      property :mode_of_issuance, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30003') do |index|
         index.as :stored_searchable
       end
 
@@ -203,7 +203,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :place_of_production, predicate: ::RDF::URI.new('http://www.rdaregistry.info/Elements/u/placeOfProduction') do |index|
+      property :place_of_production, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60161') do |index|
         index.as :stored_searchable
       end
 
@@ -295,7 +295,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :file_size, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/filesize'), multiple: false do |index|
+      property :file_size, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30183'), multiple: false do |index|
         index.as :stored_searchable
       end
 
@@ -391,7 +391,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :use_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/useRestrictions') do |index|
+      property :use_restrictions, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60497') do |index|
         index.as :stored_searchable
       end
 
@@ -515,7 +515,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :form_of_work, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/formOfWork'),
+      property :form_of_work, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/P10004'),
                               class_name: OregonDigital::ControlledVocabularies::FormOfWork do |index|
         index.as :stored_searchable
       end
