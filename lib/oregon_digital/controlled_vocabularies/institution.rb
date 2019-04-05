@@ -16,6 +16,7 @@ module OregonDigital
       def solrize
         label = rdf_label.select { |lang_label| lang_label.language == I18n.locale }.first
         return [rdf_subject.to_s] if label.to_s.blank? || rdf_label_uri_same?
+
         [rdf_subject.to_s, { label: "#{label}$#{rdf_subject}" }]
       end
 

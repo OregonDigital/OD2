@@ -12,6 +12,7 @@ module Qa::Authorities
     def json(url)
       json = super
       return json unless controlled_vocabulary.query_to_vocabulary(url) == OregonDigital::ControlledVocabularies::Vocabularies::WdEntity
+
       json['@id'] = url
       json
     end

@@ -101,9 +101,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      if Document.properties[prop].behaviors.include?(:facetable)
-        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
-      end
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Document.properties[prop].behaviors.include?(:facetable)
     end
     OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -122,9 +120,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      if Generic.properties[prop].behaviors.include?(:facetable)
-        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
-      end
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable)
     end
     OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -143,9 +139,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      if Image.properties[prop].behaviors.include?(:facetable)
-        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
-      end
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable)
     end
     OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -164,9 +158,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      if Video.properties[prop].behaviors.include?(:facetable)
-        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5
-      end
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Video.properties[prop].behaviors.include?(:facetable)
     end
     OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_fields.include? attr }.each do |prop|
       label = prop.gsub('_label', '')
@@ -187,9 +179,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      if Generic.properties[label].behaviors.include?(:facetable)
-        config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5
-      end
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5 if Generic.properties[label].behaviors.include?(:facetable)
     end
 
     # 'fielded' search configuration. Used by pulldown among other places.
