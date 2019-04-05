@@ -14,6 +14,7 @@ AllCops:
     - 'Gemfile'
     - 'Rakefile'
     - 'config/**/*'
+    - 'tmp/**/*'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']

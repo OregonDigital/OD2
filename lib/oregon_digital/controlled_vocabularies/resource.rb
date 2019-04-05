@@ -31,12 +31,14 @@ module OregonDigital
       def set_subject!(uri_or_str)
         raise ControlledVocabularyError, "Term not in controlled vocabulary: #{uri_or_str}" unless
           uri_in_vocab?(uri_or_str.to_s)
+
         super
       end
 
       # Return a tuple of url & label
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
+
         [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
       end
 
@@ -53,6 +55,7 @@ module OregonDigital
       # Return Vocabulary class with matching URI regex
       def self.query_to_vocabulary(uri)
         return nil unless respond_to? :all_endpoints
+
         all_endpoints.each do |endpoint|
           return endpoint if endpoint.expression.match?(uri)
         end
