@@ -17,8 +17,8 @@ module Hyrax
         flash.now[:error] = 'Sorry, this message was not sent successfully. '
       end
       render :new
-    rescue RuntimeError => exception
-      handle_create_exception(exception)
+    rescue RuntimeError => e
+      handle_create_exception(e)
     end
 
     def handle_create_exception(exception)
