@@ -4,9 +4,6 @@ test:
 development:
   host: <%= ENV['REDIS_HOST'] %>
   port: <%= ENV['REDIS_PORT'] %>
-staging:
-  host: <%= ENV['REDIS_HOST'] %>
-  port: <%= ENV['REDIS_PORT'] %>
 production:
   host: <%= ENV['REDIS_HOST'] %>
   port: <%= ENV['REDIS_PORT'] %>

@@ -72,6 +72,7 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug
+  config.log_level = ENV.fetch('RAILS_LOG_LEVEL', 'debug').to_sym
 
   # Prepend all log lines with the following tags.
   config.log_tags = %i[request_id]
@@ -111,9 +112,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.assets.configure do |env|
-    env.register_mime_type 'text/haml', extensions: ['.haml']
-    env.register_transformer 'text/haml', 'text/html', Tilt::HamlTemplate
-    env.register_engine '.haml', Tilt::HamlTemplate
-  end
 end

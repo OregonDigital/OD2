@@ -10,3 +10,10 @@ Rails.application.config.assets.version = '1.0'
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('app/assets/html')
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
+
+# Add haml template parsing capabilities
+Rails.application.config.assets.configure do |env|
+  env.register_mime_type 'text/haml', extensions: ['.haml']
+  env.register_transformer 'text/haml', 'text/html', Tilt::HamlTemplate
+  env.register_engine '.haml', Tilt::HamlTemplate
+end

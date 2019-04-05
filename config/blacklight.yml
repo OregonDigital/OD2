@@ -5,7 +5,6 @@ test:
   <<: *default
 development:
   <<: *default
-staging:
-  <<: *default
+: <<: *default
 production:
   <<: *default

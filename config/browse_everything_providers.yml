@@ -16,7 +16,7 @@ file_system:
 # google_drive:
 #   :client_id: YOUR_GOOGLE_API_CLIENT_ID
 #   :client_secret: YOUR_GOOGLE_API_CLIENT_SECRET
-<% if Rails.env.staging? || Rails.env.production? %>
+<% if Rails.env.production? %>
 s3:
   :bucket: <%= ENV['AWS_S3_BUCKET'] %>
   :response_type: :signed_url # set to :public_url for public urls or :s3_uri for an s3://BUCKET/KEY uri

@@ -8,9 +8,6 @@ test:
 development:
   <<: *default
   base_path: /dev
-staging:
-  <<: *default
-  base_path: /prod
 production:
   <<: *default
   base_path: /prod

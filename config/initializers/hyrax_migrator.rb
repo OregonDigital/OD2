@@ -43,8 +43,8 @@ Hyrax::Migrator.config do |config|
 
   config.upload_storage_service = :aws_s3
 
-  # The service used to upload files ready for migration. It defaults to file_system for test and development. On staging and production, it defaults to aws_s3
-  # config.upload_storage_service = if Rails.env.staging? || Rails.env.production?
+  # The service used to upload files ready for migration. It defaults to file_system for test and development. On production, it defaults to aws_s3
+  # config.upload_storage_service = if Rails.env.production?
   #                                   :aws_s3
   #                                 else
   #                                   :file_system
