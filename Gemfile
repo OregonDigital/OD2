@@ -48,7 +48,7 @@ gem 'rack-honeycomb', '~> 0.5.0'
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
 
-group :staging, :production do
+group :production do
   gem 'clamav', git: 'https://github.com/eagleas/clamav', branch: 'master'
 end
 

@@ -1,5 +1,7 @@
 # frozen_string_literal:true
 
-if Rails.env.staging? || Rails.env.production?
+# `defined? ClamAV` raises an exception in environments other than production,
+# and the application should only load the database if ClamAV is loaded
+if Rails.env.production?
   ClamAV.instance.loaddb if defined? ClamAV
 end
