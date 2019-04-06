@@ -171,7 +171,7 @@ jobs:
             export APP_VERSION=$(cat lib/oregon_digital/version.rb | grep VERSION | cut -d "=" -f 2 | sed "s/['\" ]//g")
             export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
             export DATETIME=$(date "+%Y%m%d%H%M%S")
-            echo export DATETIME="$DATETIME" >> $BASH_ENV
+            echo export TAG="$DATETIME-$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$APP_VERSION-$GIT_SHORT_HASH-$DATETIME" >> $BASH_ENV
       - aws-ecr/build-and-push-image:
           attach-workspace: false
@@ -179,7 +179,7 @@ jobs:
           repo: << parameters.repo >>
           # Tag helps to enable autodeploy kubernetes, deploying the most recent image
           # in the repository sorted by the images tag, so YYYYMMDDHHMMSS makes is so.
-          tag: '$DATETIME-$DEPLOYED_VERSION'
+          tag: '$TAG'
           extra-build-args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
 
 workflows:
