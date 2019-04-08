@@ -3,19 +3,18 @@
 namespace :oregon_digital do
   desc 'Get the OregonDigital application version'
   task :daily_email do
-    #Grab all the users
+    # Grab all the users
     user_list = User.all
 
-    #Needed variables
+    # Needed variables
     review_users, changes_users, review_items, changes_items = []
-    review_hash = {}
 
     # Grab the entities in a specific workflow
-    review_entities = Sipity::Workflow.all.first.workflow_states.where(name: "pending_review").entities
-    changes_entities = Sipity::Workflow.all.first.workflow_states.where(name: "changes_required").entities 
+    review_entities = Sipity::Workflow.all.first.workflow_states.where(name: 'pending_review').entities
+    changes_entities = Sipity::Workflow.all.first.workflow_states.where(name: 'changes_required').entities
 
     # For each entitiy, grab the object if the entity was updated on "Today"
-    review_entities.each do |e| 
+    review_entities.each do |e|
       review_items << ActiveFedora::Base.find(e.proxy_for_global_id.split('/').last) if e.updated_at.to_date == Date.today
     end
 
@@ -30,7 +29,7 @@ namespace :oregon_digital do
       end
     end
 
-    # get all users that have items in the changes required step 
+    # get all users that have items in the changes required step
     changes_items.each do |i|
       changes_users << User.where(email: i.depositor)
     end
