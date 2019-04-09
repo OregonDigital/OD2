@@ -1,16 +1,16 @@
-<% (OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)).reject{ |attr| [:description, :license, :oembed_url].include? attr }.each do |attr| %>
+<% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:description, :license, :oembed_url].include? attr }.each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
-<% OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+<% Video.video_properties.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
-<% OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+<% Document.document_properties.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
-<% OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym).each do |attr| %>
+<% Image.image_properties.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
-<% OregonDigital::GenericMetadata::CONTROLLED.map(&:to_sym).each do |attr| %>
+<% Generic.controlled_props.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>

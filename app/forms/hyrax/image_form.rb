@@ -5,6 +5,6 @@ module Hyrax
   # as well as applies any necessary behavior we want the form to include
   class ImageForm < Hyrax::GenericForm
     self.model_class = ::Image
-    self.terms += OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym)
+    self.terms += Image.image_properties.map(&:to_sym)
   end
 end

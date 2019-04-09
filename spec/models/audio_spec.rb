@@ -4,7 +4,7 @@ RSpec.describe Audio do
   subject { model }
 
   let(:model) { build(:audio, title: ['foo']) }
-  let(:props) { OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) }
+  let(:props) { Generic.generic_properties.map(&:to_sym) }
 
   it { is_expected.to have_attributes(title: ['foo']) }
 

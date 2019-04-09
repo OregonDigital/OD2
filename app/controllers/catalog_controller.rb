@@ -81,10 +81,10 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     # Reject the non-label form of controlled vocabular terms from being searchable or indexable
-    rejected_fields = OregonDigital::GenericMetadata::CONTROLLED.map { |field| field.gsub('_label', '') }
+    rejected_fields = Generic.controlled_props.map { |field| field.gsub('_label', '') }
 
     # Add all fields as searchable, reject the non-searchable fields
-    OregonDigital::DocumentMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+    Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Document.properties[prop].behaviors.nil?
 
@@ -103,7 +103,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Document.properties[prop].behaviors.include?(:facetable)
     end
-    OregonDigital::GenericMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+    Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Generic.properties[prop].behaviors.nil?
 
@@ -122,7 +122,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable)
     end
-    OregonDigital::ImageMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+    Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Image.properties[prop].behaviors.nil?
 
@@ -141,7 +141,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable)
     end
-    OregonDigital::VideoMetadata::PROPERTIES.reject { |attr| rejected_fields.include? attr }.each do |prop|
+    Video.video_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Video.properties[prop].behaviors.nil?
 
@@ -160,7 +160,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Video.properties[prop].behaviors.include?(:facetable)
     end
-    OregonDigital::GenericMetadata::CONTROLLED.reject { |attr| rejected_fields.include? attr }.each do |prop|
+    Generic.controlled_props.reject { |attr| rejected_fields.include? attr }.each do |prop|
       label = prop.gsub('_label', '')
 
       # Skip if this property isn't indexed

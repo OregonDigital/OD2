@@ -6,9 +6,8 @@ module OregonDigital
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
-    PROPERTIES = %w[contained_in_journal first_line first_line_chorus has_number instrumentation is_volume larger_work number_of_pages table_of_contents].freeze
-
     included do
+      initial_properties = self.properties.keys
       property :contained_in_journal, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal') do |index|
         index.as :stored_searchable
       end
@@ -43,6 +42,10 @@ module OregonDigital
 
       property :table_of_contents, predicate: ::RDF::Vocab::DC.tableOfContents do |index|
         index.as :stored_searchable
+      end
+
+      define_singleton_method :document_properties do
+        (self.properties.select { |k, v| v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
       end
     end
   end
