@@ -38,7 +38,7 @@ module OregonDigital
       property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false
 
       define_singleton_method :image_properties do
-        (properties.select { |_k, v| v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
+        (properties.select { |_k, v| v.class_name.nil? }.keys - initial_properties)
       end
     end
   end

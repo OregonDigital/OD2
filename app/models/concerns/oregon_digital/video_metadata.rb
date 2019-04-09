@@ -12,7 +12,7 @@ module OregonDigital
       property :height, predicate: ::RDF::Vocab::EXIF.height, multiple: false
       property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false
       define_singleton_method :video_properties do
-        (properties.select { |_k, v| v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
+        (properties.select { |_k, v| v.class_name.nil? }.keys - initial_properties)
       end
     end
   end
