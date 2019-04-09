@@ -4,7 +4,7 @@ RSpec.describe Generic do
   subject { model }
 
   let(:model) { build(:generic, title: ['foo'], depositor: user.email) }
-  let(:props) { Generic.generic_properties.map(&:to_sym) }
+  let(:props) { described_class.generic_properties.map(&:to_sym) }
   let(:user) { create(:user) }
   let(:uri) { RDF::URI.new('http://opaquenamespace.org/ns/TestVocabulary/TestTerm') }
 

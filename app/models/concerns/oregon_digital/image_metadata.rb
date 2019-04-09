@@ -8,7 +8,7 @@ module OregonDigital
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
 
     included do
-      initial_properties = self.properties.keys
+      initial_properties = properties.keys
       property :color_content, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/e/P20224') do |index|
         index.as :stored_searchable
       end
@@ -38,7 +38,7 @@ module OregonDigital
       property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false
 
       define_singleton_method :image_properties do
-        (self.properties.select { |k, v| v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
+        (properties.reject { |_k, v| !v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
       end
     end
   end

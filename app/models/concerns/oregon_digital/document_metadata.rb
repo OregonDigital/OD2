@@ -7,7 +7,7 @@ module OregonDigital
     # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
     included do
-      initial_properties = self.properties.keys
+      initial_properties = properties.keys
       property :contained_in_journal, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal') do |index|
         index.as :stored_searchable
       end
@@ -45,7 +45,7 @@ module OregonDigital
       end
 
       define_singleton_method :document_properties do
-        (self.properties.select { |k, v| v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
+        (properties.reject { |_k, v| !v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
       end
     end
   end

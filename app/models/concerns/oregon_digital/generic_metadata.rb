@@ -8,7 +8,7 @@ module OregonDigital
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
 
     included do
-      initial_properties = self.properties.keys
+      initial_properties = properties.keys
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
       property :import_url, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#importUrl'), multiple: false
@@ -603,20 +603,20 @@ module OregonDigital
       class_attribute :controlled_properties
 
       # Sets controlled values
-      self.controlled_properties = self.properties.select { |k, v| !v.class_name.nil? }.keys.map(&:to_sym)
+      self.controlled_properties = properties.reject { |_k, v| v.class_name.nil? }.keys.map(&:to_sym)
 
       # Allows for the controlled properties to accept nested data
-      self.controlled_properties.each do |prop|
+      controlled_properties.each do |prop|
         accepts_nested_attributes_for prop, reject_if: id_blank, allow_destroy: true
       end
 
       # defines a method for Generic to be able to grab a list of properties
       define_singleton_method :controlled_props do
-        self.controlled_properties.each_with_object([]) { |prop, array| array << "#{prop.to_s}_label" }.freeze
+        controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }.freeze
       end
 
       define_singleton_method :generic_properties do
-        (self.properties.select { |k, v| v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
+        (properties.reject { |_k, v| !v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
       end
     end
   end

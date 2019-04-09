@@ -4,7 +4,7 @@ RSpec.describe Image do
   subject { build(:image, title: ['foo']) }
 
   let(:model) { subject }
-  let(:props) { Image.image_properties.map(&:to_sym) }
+  let(:props) { described_class.image_properties.map(&:to_sym) }
 
   it { is_expected.to have_attributes(title: ['foo']) }
   it { is_expected.to have_attributes(color_content: ['Color']) }
