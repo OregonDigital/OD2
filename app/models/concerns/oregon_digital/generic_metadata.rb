@@ -616,7 +616,7 @@ module OregonDigital
       end
 
       define_singleton_method :generic_properties do
-        (properties.reject { |_k, v| !v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
+        (properties.select { |_k, v| v.class_name.nil? }.keys - initial_properties).map(&:to_sym)
       end
     end
   end
