@@ -43,10 +43,9 @@ module OregonDigital
       property :table_of_contents, predicate: ::RDF::Vocab::DC.tableOfContents do |index|
         index.as :stored_searchable
       end
-      puts properties.keys
 
       define_singleton_method :document_properties do
-        (properties.select { |_k, v| v.class_name.nil? }.keys - initial_properties)
+        (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
     end
   end

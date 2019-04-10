@@ -603,7 +603,7 @@ module OregonDigital
       class_attribute :controlled_properties
 
       # Sets controlled values
-      self.controlled_properties = properties.reject { |_k, v| v.class_name.nil? }.keys.map(&:to_sym)
+      self.controlled_properties = properties.select { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys.map(&:to_sym)
 
       # Allows for the controlled properties to accept nested data
       controlled_properties.each do |prop|
@@ -616,7 +616,7 @@ module OregonDigital
       end
 
       define_singleton_method :generic_properties do
-        (properties.select { |_k, v| v.class_name.nil? }.keys - initial_properties)
+        (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
     end
   end
