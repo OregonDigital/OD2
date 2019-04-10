@@ -7,8 +7,8 @@ namespace :oregon_digital do
     user_list = User.all
 
     # Needed variables
-    review_users = [] 
-    changes_users = [] 
+    review_users = []
+    changes_users = []
     review_items = []
     changes_items = []
 

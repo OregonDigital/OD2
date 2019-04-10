@@ -7,7 +7,7 @@ module OregonDigital
       @user = params[:user]
       @need_keyword = params[:need_keyword]
       @url = 'http://oregondigital.org/notifications'
-      mail(to: @user.email, subject: "Required #{ @need_keyword } in Oregon Digital")
+      mail(to: @user.email, subject: "Required #{@need_keyword} in Oregon Digital")
     end
   end
 end
