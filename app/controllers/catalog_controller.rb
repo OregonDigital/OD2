@@ -86,7 +86,7 @@ class CatalogController < ApplicationController
     # Add all fields as searchable, reject the non-searchable fields
     Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
-      next if Document.properties[prop].behaviors.nil? || Generic.properties.keys?(prop)
+      next if Document.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
       # Add property as searchable all fields box and individually
       if Document.properties[prop].behaviors.include?(:stored_searchable)
@@ -143,7 +143,7 @@ class CatalogController < ApplicationController
     end
     Video.video_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
-      next if Video.properties[prop].behaviors.nil? || Generic.properties.keys?(prop)
+      next if Video.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
       # Add property as searchable all fields box and individually
       if Video.properties[prop].behaviors.include?(:stored_searchable)
