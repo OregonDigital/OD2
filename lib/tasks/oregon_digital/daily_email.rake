@@ -2,16 +2,19 @@
 
 namespace :oregon_digital do
   desc 'Get the OregonDigital application version'
-  task :daily_email do
+  task daily_email: :environment do
     # Grab all the users
     user_list = User.all
 
     # Needed variables
-    review_users, changes_users, review_items, changes_items = []
+    review_users = [] 
+    changes_users = [] 
+    review_items = []
+    changes_items = []
 
     # Grab the entities in a specific workflow
-    review_entities = Sipity::Workflow.all.first.workflow_states.where(name: 'pending_review').entities
-    changes_entities = Sipity::Workflow.all.first.workflow_states.where(name: 'changes_required').entities
+    review_entities = Sipity::Workflow.all.first.workflow_states.where(name: 'pending_review').first.entities
+    changes_entities = Sipity::Workflow.all.first.workflow_states.where(name: 'changes_required').first.entities
 
     # For each entitiy, grab the object if the entity was updated on "Today"
     review_entities.each do |e|
