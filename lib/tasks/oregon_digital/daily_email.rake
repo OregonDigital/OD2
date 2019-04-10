@@ -36,10 +36,10 @@ namespace :oregon_digital do
 
     # email review users with list of
     changes_users.each do |user|
-      OregonDigital::ChangesMailer.with(user: user).deliver_now
+      OregonDigital::NotificationMailer.with(user: user, need_keyword: 'changes').deliver_now
     end
     review_users.each do |user|
-      OregonDigital::ReviewMailer.with(user: user).deliver_now
+      OregonDigital::NotificationMailer.with(user: user, need_keyword: 'reviews').deliver_now
     end
   end
 end
