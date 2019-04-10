@@ -86,7 +86,7 @@ class CatalogController < ApplicationController
     # Add all fields as searchable, reject the non-searchable fields
     Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
-      next if Document.properties[prop].behaviors.nil?
+      next if (Document.properties[prop].behaviors.nil? || Generic.properties.keys.include?(prop))
 
       # Add property as searchable all fields box and individually
       if Document.properties[prop].behaviors.include?(:stored_searchable)
@@ -124,7 +124,7 @@ class CatalogController < ApplicationController
     end
     Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
-      next if Image.properties[prop].behaviors.nil?
+      next if (Image.properties[prop].behaviors.nil? || Generic.properties.keys.include?(prop))
 
       # Add property as searchable all fields box and individually
       if Image.properties[prop].behaviors.include?(:stored_searchable)
@@ -143,7 +143,7 @@ class CatalogController < ApplicationController
     end
     Video.video_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
-      next if Video.properties[prop].behaviors.nil?
+      next if (Video.properties[prop].behaviors.nil? || Generic.properties.keys.include?(prop))
 
       # Add property as searchable all fields box and individually
       if Video.properties[prop].behaviors.include?(:stored_searchable)
@@ -160,7 +160,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Video.properties[prop].behaviors.include?(:facetable)
     end
-    Generic.controlled_props.reject { |attr| rejected_fields.include? attr }.each do |prop|
+    Generic.controlled_props.each do |prop|
       label = prop.gsub('_label', '')
 
       # Skip if this property isn't indexed
