@@ -5,7 +5,7 @@ RSpec.describe Hyrax::GenericPresenter do
   let(:model) { build(:generic) }
   let(:ability) { instance_double('Ability') }
   let(:solr_document) { SolrDocument.new(model.attributes) }
-  let(:props) { OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) }
+  let(:props) { Generic.generic_properties.map(&:to_sym) }
 
   it 'delegates the method to solr document' do
     props.each do |prop|

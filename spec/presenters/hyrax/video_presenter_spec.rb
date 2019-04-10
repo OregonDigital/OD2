@@ -5,7 +5,7 @@ RSpec.describe Hyrax::VideoPresenter do
   let(:model) { build(:video) }
   let(:ability) { instance_double('Ability') }
   let(:solr_document) { SolrDocument.new(model.attributes) }
-  let(:props) { OregonDigital::VideoMetadata::PROPERTIES.map(&:to_sym) }
+  let(:props) { Video.video_properties.map(&:to_sym) }
 
   it 'delegates the method to solr document' do
     props.each do |prop|
