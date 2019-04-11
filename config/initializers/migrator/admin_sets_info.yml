@@ -1,0 +1,7 @@
+admin_sets:
+  - title: UO
+    description: 'UO description'
+  - title: OSU
+    description: 'OSU description'
+  - title: OSU SCARC
+    description: 'OSU SCARC description'
