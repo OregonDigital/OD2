@@ -611,7 +611,7 @@ module OregonDigital
       end
 
       # defines a method for Generic to be able to grab a list of properties
-      define_singleton_method :controlled_props do
+      define_singleton_method :controlled_property_labels do
         controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }.freeze
       end
 

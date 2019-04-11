@@ -36,5 +36,5 @@ class SolrDocument
   solrized_methods Document.document_properties, Document
   solrized_methods Image.image_properties, Image
   solrized_methods Video.video_properties, Video
-  solrized_methods Generic.controlled_props, Generic
+  solrized_methods Generic.controlled_property_labels, Generic
 end

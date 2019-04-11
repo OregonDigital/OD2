@@ -10,7 +10,7 @@
 <% Image.image_properties.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
-<% Generic.controlled_props.map(&:to_sym).each do |attr| %>
+<% Generic.controlled_property_labels.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>
