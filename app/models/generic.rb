@@ -6,7 +6,7 @@ class Generic < ActiveFedora::Base
   attr_writer :graph_fetch_failures
 
   # before_create :prefetch_graphs
-  before_save :resolve_oembed_errors, :prefetch_graphs
+  before_save :resolve_oembed_errors
 
   self.indexer = GenericIndexer
   # Change this to restrict which works can be added as a child.
