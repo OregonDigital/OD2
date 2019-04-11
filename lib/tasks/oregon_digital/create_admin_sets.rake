@@ -8,7 +8,7 @@ namespace :oregon_digital do
 
     puts 'Creating admin sets'
 
-    admin_sets = YAML.load_file("#{Rails.root.to_s}/config/initializers/migrator/admin_sets_info.yml")['admin_sets']
+    admin_sets = YAML.load_file("#{Rails.root}/config/initializers/migrator/admin_sets_info.yml")['admin_sets']
 
     admin_sets.each do |admin_set|
       title = admin_set['title']
