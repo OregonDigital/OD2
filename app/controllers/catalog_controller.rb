@@ -160,7 +160,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Video.properties[prop].behaviors.include?(:facetable)
     end
-    Generic.controlled_props.each do |prop|
+    Generic.controlled_property_labels.each do |prop|
       label = prop.gsub('_label', '')
 
       # Skip if this property isn't indexed
