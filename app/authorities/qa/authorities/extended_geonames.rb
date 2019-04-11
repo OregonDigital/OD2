@@ -13,6 +13,8 @@ module Qa::Authorities
 
     # Reformats the data received from the service
     def parse_authority_response(response)
+      Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      Rails.logger.info response
       response['geonames'].map do |result|
         # Note: the trailing slash is meaningful.
         { 'id' => "http://sws.geonames.org/#{result['geonameId']}/",
