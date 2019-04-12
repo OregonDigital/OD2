@@ -1,10 +1,10 @@
-# frozen_string_literal:true
+# frozen_string_literal: true
 
 module OregonDigital
   # Provide select options for the license (dcterms:rights) field
-  class LanguageService < Hyrax::QaSelectService
-    def initialize(_authority_name = nil)
-      super('languages')
+  class RightsStatementService < Hyrax::QaSelectService
+    def initialize
+      super('rights_statements')
     end
 
     def all_labels(values)

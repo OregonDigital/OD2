@@ -1,6 +1,9 @@
 <% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:description, :license, :oembed_url].include? attr }.each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
+<%= presenter.attribute_to_html(:language_label, html_dl: true, label: t("simple_form.labels.defaults.license")) %>
+<%= presenter.attribute_to_html(:type_label, html_dl: true, label: t("simple_form.labels.defaults.license")) %>
+<%= presenter.attribute_to_html(:rights_statement_label, html_dl: true, label: t("simple_form.labels.defaults.license")) %>
 <% Video.video_properties.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
