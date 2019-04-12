@@ -1,4 +1,4 @@
-<% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:description, :license, :oembed_url].include? attr }.each do |attr| %>
+<% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:title, :description, :license, :oembed_url].include? attr }.each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <% Video.video_properties.map(&:to_sym).each do |attr| %>
