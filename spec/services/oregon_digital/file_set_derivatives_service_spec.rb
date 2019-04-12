@@ -143,4 +143,99 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       service.bmp_to_bmp('orig.bmp', 'tmp.bmp')
     end
   end
+
+  describe '#create_pdf_derivatives' do
+    let(:bogus_pdf) { '/bogus/path/to/file.pdf' }
+    let(:tmp_bmp) { '/tmp/path/to/file.bmp' }
+    let(:mime_type) { 'application/pdf' }
+    let(:minimagick) { double }
+    let(:pages) { [double, double, double, double, double] }
+
+    before do
+      allow(OregonDigital::Derivatives::Image::Utils).to receive(:tmp_file).with('bmp').and_yield(tmp_bmp)
+      allow(service).to receive(:create_thumbnail)
+      allow(service).to receive(:extract_full_text)
+      allow(service).to receive(:manual_convert)
+      allow(service).to receive(:create_zoomable_page)
+
+      allow(MiniMagick::Image).to receive(:open).with(bogus_pdf).and_return(minimagick)
+      allow(minimagick).to receive(:pages).and_return(pages)
+    end
+
+    it 'creates a thumbnail' do
+      expect(service).to receive(:create_thumbnail).with(bogus_pdf)
+      service.create_pdf_derivatives(bogus_pdf)
+    end
+
+    it 'generates OCR' do
+      expect(service).to receive(:extract_full_text).with(bogus_pdf, uri)
+      service.create_pdf_derivatives(bogus_pdf)
+    end
+
+    it 'converts each page to a bitmap' do
+      pages.each_with_index do |_, i|
+        expect(service).to receive(:manual_convert).with(bogus_pdf, i, tmp_bmp)
+      end
+
+      service.create_pdf_derivatives(bogus_pdf)
+    end
+
+    it "creates a zoomable image from each page's bitmap" do
+      pages.each_with_index do |_, i|
+        expect(service).to receive(:create_zoomable_page).with(tmp_bmp, i)
+      end
+      service.create_pdf_derivatives(bogus_pdf)
+    end
+  end
+
+  describe '#manual_convert' do
+    # This seems awful, but I want the free behaviors of an array, and rspec
+    # won't let me just add :density to an array as an expectation unless the
+    # method is already there
+    let(:convert) do
+      c = []
+      c.define_singleton_method(:density) { |_| nil }
+      c
+    end
+
+    # Make sure we're always calling the function in the same way
+    let(:func) do
+      proc { service.manual_convert('in.pdf', 4, 'out.tmp') }
+    end
+
+    before do
+      allow(MiniMagick::Tool::Convert).to receive(:new).and_yield(convert)
+    end
+
+    it 'uses minimagick to generate a convert command' do
+      expect(MiniMagick::Tool::Convert).to receive(:new).once
+      func.call
+    end
+
+    it 'sets the PDF density to 300' do
+      expect(convert).to receive(:density).with(300)
+      func.call
+    end
+
+    it 'sets up the proper convert parameters' do
+      func.call
+      expect(convert).to eq(['in.pdf[4]', 'out.tmp'])
+    end
+  end
+
+  describe '#create_zoomable_page' do
+    before do
+      allow(OregonDigital::Derivatives::Image::JP2Runner).to receive(:create)
+    end
+
+    it 'kicks off the JP2Runner' do
+      expect(OregonDigital::Derivatives::Image::JP2Runner).to receive(:create).once
+      service.create_zoomable_page('file', 4)
+    end
+
+    it 'calls derivative_url with a page number' do
+      expect(service).to receive(:derivative_url).with('jp2', 4)
+      service.create_zoomable_page('file', 4)
+    end
+  end
 end
