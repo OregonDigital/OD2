@@ -6,7 +6,7 @@
     <div class="navbar-right">
       <div class="navbar-text text-right">
         <p class='deployed-version'>
-          Oregon Digital <%= ENV.fetch('DEPLOYED_VERSION', OregonDigital::VERSION) %>
+          Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
         </p>
         <p>Powered by Hyrax <%= Hyrax::VERSION %></p>
         <p><%= t('hyrax.footer.copyright_html') %></p>
