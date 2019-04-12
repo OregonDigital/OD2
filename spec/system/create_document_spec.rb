@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe 'Create a Document', js: true, type: :system do
+RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
   context 'with a logged in user' do
     let(:user) { create(:user) }
     let!(:ability) { ::Ability.new(user) }
