@@ -5,7 +5,7 @@ RSpec.describe Hyrax::ImagePresenter do
   let(:model) { build(:image) }
   let(:ability) { instance_double('Ability') }
   let(:solr_document) { SolrDocument.new(model.attributes) }
-  let(:props) { OregonDigital::ImageMetadata::PROPERTIES.map(&:to_sym) }
+  let(:props) { Image.image_properties.map(&:to_sym) }
 
   it 'delegates the method to solr document' do
     props.each do |prop|

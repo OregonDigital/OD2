@@ -4,7 +4,7 @@ RSpec.describe Document do
   subject { model }
 
   let(:model) { build(:document, title: ['foo']) }
-  let(:props) { OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_sym) }
+  let(:props) { described_class.document_properties.map(&:to_sym) }
 
   it { is_expected.to have_attributes(title: ['foo']) }
 

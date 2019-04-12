@@ -4,7 +4,7 @@ RSpec.describe Hyrax::AudioForm do
   let(:new_form) { described_class.new(Audio.new, nil, instance_double('Controller')) }
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
-  let(:props) { OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym) }
+  let(:props) { Generic.generic_properties.map(&:to_sym) }
   let(:terms) { new_form.primary_terms + new_form.secondary_terms }
   let(:model) { create(:audio) }
 

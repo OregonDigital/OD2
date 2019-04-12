@@ -4,7 +4,7 @@ module Hyrax
   # Generated form for Generic
   class GenericForm < Hyrax::Forms::WorkForm
     self.model_class = ::Generic
-    self.terms += OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym)
+    self.terms += Generic.generic_properties.map(&:to_sym)
     self.terms = self.terms.uniq
 
     self.required_fields = %i[title resource_type rights_statement identifier]
@@ -26,7 +26,7 @@ module Hyrax
 
     def self.build_permitted_params
       params = super
-      OregonDigital::GenericMetadata::CONTROLLED.each do |prop|
+      Generic.controlled_property_labels.each do |prop|
         params << { prop.gsub('_label', '_attributes') => %i[id _destroy] }
       end
       params

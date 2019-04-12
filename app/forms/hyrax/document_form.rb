@@ -5,6 +5,7 @@ module Hyrax
   # as well as applies any necessary behavior we want the form to include
   class DocumentForm < Hyrax::GenericForm
     self.model_class = ::Document
-    self.terms += OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_sym)
+    self.terms += Document.document_properties.map(&:to_sym)
+    self.terms = self.terms.uniq
   end
 end

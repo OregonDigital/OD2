@@ -3,6 +3,6 @@
 module Hyrax
   # Display config for document object
   class DocumentPresenter < Hyrax::GenericPresenter
-    delegate(*OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_sym), to: :solr_document)
+    delegate(*Document.document_properties.map(&:to_sym), to: :solr_document)
   end
 end

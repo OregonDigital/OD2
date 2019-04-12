@@ -6,10 +6,9 @@ module OregonDigital
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
-    PROPERTIES = %w[abstract accepted_name_usage access_restrictions accession_number acquisition_date alternative arranger art_series artist author award award_date barcode biographical_information box box_number based_near cartographer citation collected_date collector common_name compass_direction composer contents contributor conversion copy_location copyright_claimant cover_description coverage creator creator_display cultural_context current_repository_id date date_created date_digitized dedicatee description description_of_manifestation designer donor editor ethnographic_term event exhibit extent family file_size folder_name folder_number form_of_work format former_owner genus gps_latitude gps_longitude has_finding_aid has_part has_version hydrologic_unit_code identification_verification_status identifier illustrator inscription institution interviewee interviewer isPartOf is_version_of issued item_locator keyword language layout legal_name license local_collection_id local_collection_name location location_copyshelf_location longitude_latitude_identification lyricist material measurements military_branch military_highest_rank military_occupation military_service_location mode_of_issuance mods_note object_orientation oembed_url order original_name_usage owner patron photographer phylum_or_division physical_extent place_of_production print_maker provenance publication_place publisher ranger_district recipient relation replaces_url repository resource_type rights_holder rights_statement scientific_name_authorship series_name series_number source source_condition species specimen_type sports_team state_or_edition street_address style_or_period subject taxon_class technique temporal tgn transcriber translator tribal_classes tribal_notes tribal_terms tribal_title use_restrictions view_date water_basin workType].freeze
-    CONTROLLED = %w[arranger_label artist_label author_label based_near_label cartographer_label collector_label common_name_label composer_label contributor_label creator_label cultural_context_label dedicatee_label designer_label donor_label editor_label ethnographic_term_label family_label form_of_work_label format_label genus_label illustrator_label institution_label interviewee_label interviewer_label local_collection_name_label lyricist_label military_branch_label order_label owner_label patron_label photographer_label phylum_or_division_label print_maker_label publisher_label recipient_label repository_label species_label style_or_period_label subject_label taxon_class_label tgn_label transcriber_label translator_label workType_label].freeze
 
     included do
+      initial_properties = properties.keys
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
       property :import_url, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#importUrl'), multiple: false
@@ -403,6 +402,7 @@ module OregonDigital
         index.as :facetable
       end
 
+      # End of normal properties
       # Controlled vocabulary terms
       property :arranger, predicate: ::RDF::Vocab::MARCRelators.arr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
@@ -601,52 +601,23 @@ module OregonDigital
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties
-      self.controlled_properties = %i[arranger artist author based_near cartographer collector common_name composer contributor creator cultural_context dedicatee designer donor editor ethnographic_term family form_of_work format genus illustrator institution interviewee interviewer local_collection_name lyricist military_branch order owner patron photographer phylum_or_division print_maker publisher recipient repository species style_or_period subject taxon_class tgn transcriber translator workType]
 
-      accepts_nested_attributes_for :arranger, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :artist, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :author, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :based_near, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :cartographer, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :collector, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :common_name, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :composer, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :creator, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :contributor, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :dedicatee, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :donor, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :designer, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :editor, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :ethnographic_term, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :family, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :format, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :genus, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :illustrator, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :interviewee, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :interviewer, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :local_collection_name, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :lyricist, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :military_branch, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :order, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :owner, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :patron, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :photographer, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :phylum_or_division, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :print_maker, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :publisher, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :recipient, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :repository, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :species, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :subject, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :taxon_class, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :tgn, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :transcriber, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :translator, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :cultural_context, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :style_or_period, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :form_of_work, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :institution, reject_if: id_blank, allow_destroy: true
-      accepts_nested_attributes_for :workType, reject_if: id_blank, allow_destroy: true
+      # Sets controlled values
+      self.controlled_properties = properties.select { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys.map(&:to_sym)
+
+      # Allows for the controlled properties to accept nested data
+      controlled_properties.each do |prop|
+        accepts_nested_attributes_for prop, reject_if: id_blank, allow_destroy: true
+      end
+
+      # defines a method for Generic to be able to grab a list of properties
+      define_singleton_method :controlled_property_labels do
+        controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }.freeze
+      end
+
+      define_singleton_method :generic_properties do
+        (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
+      end
     end
   end
 end

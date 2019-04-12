@@ -3,7 +3,7 @@
 module Hyrax
   # Display config for generic object
   class GenericPresenter < Hyrax::WorkShowPresenter
-    delegate(*OregonDigital::GenericMetadata::PROPERTIES.map(&:to_sym), to: :solr_document)
-    delegate(*OregonDigital::GenericMetadata::CONTROLLED.map(&:to_sym), to: :solr_document)
+    delegate(*Generic.generic_properties.map(&:to_sym), to: :solr_document)
+    delegate(*Generic.controlled_property_labels.map(&:to_sym), to: :solr_document)
   end
 end

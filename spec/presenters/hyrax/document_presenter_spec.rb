@@ -5,7 +5,7 @@ RSpec.describe Hyrax::DocumentPresenter do
   let(:model) { build(:document) }
   let(:ability) { instance_double('Ability') }
   let(:solr_document) { SolrDocument.new(model.attributes) }
-  let(:props) { OregonDigital::DocumentMetadata::PROPERTIES.map(&:to_sym) }
+  let(:props) { Document.document_properties.map(&:to_sym) }
 
   it 'delegates the method to solr document' do
     props.each do |prop|
