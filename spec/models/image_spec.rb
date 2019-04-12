@@ -6,6 +6,8 @@ RSpec.describe Image do
   let(:model) { subject }
   let(:props) { described_class.image_properties.map(&:to_sym) }
 
+  it { expect(described_class.image_properties.include?('height')).to eq true }
+  it { expect(described_class.image_properties.include?('title')).to eq false }
   it { is_expected.to have_attributes(title: ['foo']) }
   it { is_expected.to have_attributes(color_content: ['Color']) }
   it { is_expected.to have_attributes(color_space: ['RGB']) }

@@ -6,6 +6,8 @@ RSpec.describe Video do
   let(:model) { subject }
   let(:props) { described_class.video_properties.map(&:to_sym) }
 
+  it { expect(described_class.video_properties.include?('height')).to eq true }
+  it { expect(described_class.video_properties.include?('title')).to eq false }
   it { is_expected.to have_attributes(title: ['foo']) }
   it { is_expected.to have_attributes(height: '100') }
   it { is_expected.to have_attributes(width: '200') }
