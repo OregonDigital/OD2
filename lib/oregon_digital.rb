@@ -15,5 +15,6 @@ module OregonDigital
     autoload :ControlledVocabularies
     autoload :Derivatives
     autoload :Triplestore
+    autoload :FeatureClassUriToLabel
   end
 end
