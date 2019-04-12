@@ -8,7 +8,7 @@ module OregonDigital
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
 
     included do
-      initial_properties =  properties.keys
+      initial_properties = properties.keys
       property :height, predicate: ::RDF::Vocab::EXIF.height, multiple: false
       property :width, predicate: ::RDF::Vocab::EXIF.width, multiple: false
       define_singleton_method :video_properties do
