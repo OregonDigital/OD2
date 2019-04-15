@@ -82,7 +82,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     # Reject the non-label form of controlled vocabular terms from being searchable or indexable
     rejected_fields = Generic.controlled_property_labels.map { |field| field.gsub('_label', '') }
-    rejected_fields += ['rights_statement', 'resource_type', 'license', 'language']
+    rejected_fields += %w[rights_statement resource_type license language]
 
     # Add all fields as searchable, reject the non-searchable fields
     Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -182,15 +182,13 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5 if Generic.properties[label].behaviors.include?(:facetable)
     end
-    config.add_show_field solr_name('license_label', :stored_searchable)
     config.add_show_field solr_name('language_label', :stored_searchable)
     config.add_show_field solr_name('type_label', :stored_searchable)
     config.add_show_field solr_name('rights_statement_label', :stored_searchable)
 
-    config.add_facet_field solr_name('license_label', :facetable), label: I18n.translate("simple_form.labels.defaults.license"), limit: 5
-    config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate("simple_form.labels.defaults.language"), limit: 5
-    config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate("simple_form.labels.defaults.type"), limit: 5
-    config.add_facet_field solr_name('rights_statement_label', :facetable), label: I18n.translate("simple_form.labels.defaults.rights_statement"), limit: 5
+    config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
+    config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
+    config.add_facet_field solr_name('rights_statement_label', :facetable), label: I18n.translate('simple_form.labels.defaults.rights_statement'), limit: 5
     # 'fielded' search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #

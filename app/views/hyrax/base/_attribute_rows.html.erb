@@ -1,9 +1,9 @@
-<% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:description, :license, :oembed_url].include? attr }.each do |attr| %>
+<% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:description, :language, :license, :oembed_url, :resource_type, :rights_statement].include? attr }.each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
-<%= presenter.attribute_to_html(:language_label, html_dl: true, label: t("simple_form.labels.defaults.license")) %>
-<%= presenter.attribute_to_html(:type_label, html_dl: true, label: t("simple_form.labels.defaults.license")) %>
-<%= presenter.attribute_to_html(:rights_statement_label, html_dl: true, label: t("simple_form.labels.defaults.license")) %>
+<%= presenter.attribute_to_html(:language_label, html_dl: true, label: t("simple_form.labels.defaults.language")) %>
+<%= presenter.attribute_to_html(:type_label, html_dl: true, label: t("simple_form.labels.defaults.resource_type")) %>
+<%= presenter.attribute_to_html(:rights_statement_label, html_dl: true, label: t("simple_form.labels.defaults.rights_statement")) %>
 <% Video.video_properties.map(&:to_sym).each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
