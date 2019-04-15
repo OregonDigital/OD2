@@ -26,6 +26,7 @@ class SolrDocument
     if values.respond_to?(:each)
       values.reject(&:blank?)
     elsif values.blank?
+      Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
       Hyrax::FormMetadataService.multiple?(model, property_name) ? [] : ''
     else
       values
