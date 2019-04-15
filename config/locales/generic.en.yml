@@ -107,7 +107,7 @@ en:
         item_locator: "Call numbers, shelf marks or similar labels for an item."
         longitude_latitude_identification: "The LLID was developed for Oregon Department of Environmental Quality staff and the public to obtain geographic information about locations of interest."
         copyright_claimant: "Original copyright holder or registrant."
-        rights_statement: "Apply one rights statement. Use Creative Commons or RightsStatements.com. Rights policies for Oregon Digital are summarized at: http://oregondigital.org/copyright."
+        rights_statement: "Apply 1 standardized rights statement. Explanations of the statements can be found at https://rightsstatements.org/en/"
         rights_note: "Include explanation of copyright status."
         rights_holder: "List the individual or organization who is the current copyright holder."
         license: "Refinement of dc:rights. A legal document giving official permission to do something with the resource. Use cc predicate with Creative Commons licenses."
