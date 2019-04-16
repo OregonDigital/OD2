@@ -14,3 +14,18 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  */
+
+/*### START DMc - A toe-dip (first OD2 pull request 4/16/19) of calming CSS - and might be more appropriate elsewhere and as a mixin eventually ###*/
+.dropdown-menu {
+  display: block;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.open .dropdown-menu {
+  opacity: 1;
+}
+/*### END DMc - A toe-dip (first OD2 pull request 4/16/19) of calming CSS - and might be more appropriate elsewhere and as a mixin eventually ###*/
