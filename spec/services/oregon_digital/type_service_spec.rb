@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'rails_helper'
-describe OregonDigital::TyoeService do
+describe OregonDigital::TypeService do
   let(:service) { described_class.new }
 
   describe '#all_labels' do

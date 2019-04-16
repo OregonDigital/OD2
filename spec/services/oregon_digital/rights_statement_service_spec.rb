@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'rails_helper'
 describe OregonDigital::RightsStatementService do
   let(:service) { described_class.new }
 
