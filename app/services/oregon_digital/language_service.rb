@@ -8,7 +8,7 @@ module OregonDigital
     end
 
     def all_labels(values)
-      @authority.all.select { |r| values.include?(r[:id]) }.map { |hash| hash['label'] }
+      @authority.all.select { |r| values.include?(r[:id]) }.map { |hash| hash['label'] }.reject(&:blank?)
     end
 
     def select_sorted_all_options
