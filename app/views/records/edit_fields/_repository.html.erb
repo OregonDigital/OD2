@@ -2,6 +2,7 @@
             as: :controlled_vocabulary,
             placeholder: 'Search for a Repository using a valid URI',
             input_html: {
+              class: 'form-control',
               data: { 'autocomplete-url' => "/authorities/search/repository",
                       'autocomplete' => key,
                       'field-type' => 'linked_data' }
