@@ -47,18 +47,18 @@ en:
           title_tesim: Title
           oembed_url: oEmbed
   hyrax:
-    product_name:           "Hyrax"
-    product_twitter_handle: "@SamveraRepo"
-    institution_name:       "Institution"
-    institution_name_full:  "The Institution Name"
-    account_name:           "My Institution Account Id"
+    product_name: 'Hyrax'
+    product_twitter_handle: '@SamveraRepo'
+    institution_name: 'Institution'
+    institution_name_full: 'The Institution Name'
+    account_name: 'My Institution Account Id'
     directory:
-      suffix:               "@example.org"
+      suffix: '@example.org'
     footer:
-      copyright_html: "<strong>Copyright &copy; 2017 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      copyright_html: '<strong>Copyright &copy; 2019 Samvera</strong> Licensed under the Apache License, Version 2.0'
       service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
     toolbar:
       osu:
-        login: "OSU Login"
+        login: 'OSU Login'
       uo:
-        login: "UO Login"
+        login: 'UO Login'
