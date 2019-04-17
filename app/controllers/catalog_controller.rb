@@ -58,13 +58,13 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
     config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
     config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keywords', link_to_search: solr_name('keyword', :facetable)
-    config.add_index_field solr_name('subject', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable)
-    config.add_index_field solr_name('creator', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
-    config.add_index_field solr_name('contributor', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
+    config.add_index_field solr_name('subject_label', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable)
+    config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
+    config.add_index_field solr_name('contributor_label', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
     config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
     config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
-    config.add_index_field solr_name('publisher', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
-    config.add_index_field solr_name('based_near', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near', :facetable)
+    config.add_index_field solr_name('publisher_label', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
+    config.add_index_field solr_name('based_near_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near_label', :facetable)
     config.add_index_field solr_name('language_label', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language_label', :facetable)
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
@@ -81,7 +81,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     # Reject the non-label form of controlled vocabular terms from being searchable or indexable
     rejected_fields = Generic.controlled_property_labels.map { |field| field.gsub('_label', '') }
-    rejected_fields += %w[rights_statement resource_type license language]
+    rejected_fields += %w[based_near rights_statement resource_type license language]
 
     # Add all fields as searchable, reject the non-searchable fields
     Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
