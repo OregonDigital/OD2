@@ -9,10 +9,54 @@ en:
           generic_type_sim: Type
           keyword_sim: Keyword
           language_sim: Language
-          publisher_sim: Publisher
+          publisher_label_sim: Publisher
           subject_sim: Subject
+          owner_label_sim: Owner
+          workType_label_sim: Work Type
+          arranger_label_sim: Arranger
+          artist_label_sim: Artist
+          author_label_sim: Author
+          cartographer_label_sim: Cartographer
+          collector_label_sim: Collector
+          composer_label_sim: Composer
+          creator_label_sim: Creator
+          contributor_label_sim: Contributor
+          dedicatee_label_sim: Dedicatee
+          donor_label_sim: Donor
+          designer_label_sim: Designer
+          editor_label_sim: Editor
+          illustrator_label_sim: Illustrator
+          interviewee_label_sim: Interviewee
+          interviewer_label_sim: Imterviewer
+          lyricist_label_sim: Lyricist
+          patron_label_sim: Patron
+          photographer_label_sim: Photographer
+          print_maker_label_sim: Print Maker
+          recipient_label_sim: Recipient
+          transcriber_label_sim: Transcriber
+          translator_label_sim: Translator
+          based_near_label_sim: Location
+          cultural_context_label_sim: Cultural Context
+          ethnographic_term_label_sim: Ethnographic Term
+          style_or_period_label_sim: Style or Period
+          form_of_work_label_sim: Form of Work
+          format_label_sim: Format
+          institution_label_sim: Institution
+          local_collection_name_label_sim: Local Collection Name
+          tgn_label_sim: Geographic Name
+          repository_label_sim: Repository
+          publisher_label_sim: Publisher
+          taxon_class_label_sim: Taxon Class
+          family_label_sim: Family
+          genus_label_sim: Genus
+          order_label_sim: Order
+          species_label_sim: Species
+          phylum_or_division_label_sim: Phylum or Division
+          common_name_label_sim: Common Name
+          military_branch_label_sim: Military Branch
+          subject_label_sim: Subject
         index:
-          based_near_tesim: Location
+          based_near_label_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
           date_created_tesim: Date Created
@@ -22,13 +66,57 @@ en:
           file_format_tesim: File Format
           identifier_tesim: Identifier
           keyword_tesim: Keyword
-          language_tesim: Language
+          language_label_tesim: Language
           license_tesim: License
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
           subject_tesim: Subject
+          owner_label_tesim: Owner
+          workType_label_tesim: Work Type
+          arranger_label_tesim: Arranger
+          artist_label_tesim: Artist
+          author_label_tesim: Author
+          cartographer_label_tesim: Cartographer
+          collector_label_tesim: Collector
+          composer_label_tesim: Composer
+          creator_label_tesim: Creator
+          contributor_label_tesim: Contributor
+          dedicatee_label_tesim: Dedicatee
+          donor_label_tesim: Donor
+          designer_label_tesim: Designer
+          editor_label_tesim: Editor
+          illustrator_label_tesim: Illustrator
+          interviewee_label_tesim: Interviewee
+          interviewer_label_tesim: Imterviewer
+          lyricist_label_tesim: Lyricist
+          patron_label_tesim: Patron
+          photographer_label_tesim: Photographer
+          print_maker_label_tesim: Print Maker
+          recipient_label_tesim: Recipient
+          transcriber_label_tesim: Transcriber
+          translator_label_tesim: Translator
+          based_near_label_tesim: Location
+          cultural_context_label_tesim: Cultural Context
+          ethnographic_term_label_tesim: Ethnographic Term
+          style_or_period_label_tesim: Style or Period
+          form_of_work_label_tesim: Form of Work
+          format_label_tesim: Format
+          institution_label_tesim: Institution
+          local_collection_name_label_tesim: Local Collection Name
+          tgn_label_tesim: Geographic Name
+          repository_label_tesim: Repository
+          publisher_label_tesim: Publisher
+          taxon_class_label_tesim: Taxon Class
+          family_label_tesim: Family
+          genus_label_tesim: Genus
+          order_label_tesim: Order
+          species_label_tesim: Species
+          phylum_or_division_label_tesim: Phylum or Division
+          common_name_label_tesim: Common Name
+          military_branch_label_tesim: Military Branch
+          subject_label_tesim: Subject
         show:
-          based_near_tesim: Location
+          based_near_label_tesim: Location
           contributor: Contributor
           contributor_tesim: Contributor
           creator_tesim: Creator
@@ -39,13 +127,72 @@ en:
           file_format_tesim: File Format
           identifier_tesim: Identifier
           keyword_tesim: Keyword
-          language_tesim: Language
+          language_label_tesim: Language
           license_tesim: License
           publisher_tesim: Publisher
           rights_statement_tesim: Rights Statement
           subject_tesim: Subject
           title_tesim: Title
           oembed_url: oEmbed
+          based_near_label_tesim: Location
+          contributor_tesim: Contributor
+          creator_tesim: Creator
+          date_created_tesim: Date Created
+          date_modified_dtsi: Date Modified
+          date_uploaded_dtsi: Date Uploaded
+          description_tesim: Description
+          file_format_tesim: File Format
+          identifier_tesim: Identifier
+          keyword_tesim: Keyword
+          language_label_tesim: Language
+          license_tesim: License
+          publisher_label_tesim: Publisher
+          rights_statement_tesim: Rights Statement
+          subject_tesim: Subject
+          owner_label_tesim: Owner
+          workType_label_tesim: Work Type
+          arranger_label_tesim: Arranger
+          artist_label_tesim: Artist
+          author_label_tesim: Author
+          cartographer_label_tesim: Cartographer
+          collector_label_tesim: Collector
+          composer_label_tesim: Composer
+          creator_label_tesim: Creator
+          contributor_label_tesim: Contributor
+          dedicatee_label_tesim: Dedicatee
+          donor_label_tesim: Donor
+          designer_label_tesim: Designer
+          editor_label_tesim: Editor
+          illustrator_label_tesim: Illustrator
+          interviewee_label_tesim: Interviewee
+          interviewer_label_tesim: Imterviewer
+          lyricist_label_tesim: Lyricist
+          patron_label_tesim: Patron
+          photographer_label_tesim: Photographer
+          print_maker_label_tesim: Print Maker
+          recipient_label_tesim: Recipient
+          transcriber_label_tesim: Transcriber
+          translator_label_tesim: Translator
+          based_near_label_tesim: Location
+          cultural_context_label_tesim: Cultural Context
+          ethnographic_term_label_tesim: Ethnographic Term
+          style_or_period_label_tesim: Style or Period
+          form_of_work_label_tesim: Form of Work
+          format_label_tesim: Format
+          institution_label_tesim: Institution
+          local_collection_name_label_tesim: Local Collection Name
+          tgn_label_tesim: Geographic Name
+          repository_label_tesim: Repository
+          publisher_label_tesim: Publisher
+          taxon_class_label_tesim: Taxon Class
+          family_label_tesim: Family
+          genus_label_tesim: Genus
+          order_label_tesim: Order
+          species_label_tesim: Species
+          phylum_or_division_label_tesim: Phylum or Division
+          common_name_label_tesim: Common Name
+          military_branch_label_tesim: Military Branch
+          subject_label_tesim: Subject
   hyrax:
     product_name: 'Hyrax'
     product_twitter_handle: '@SamveraRepo'
