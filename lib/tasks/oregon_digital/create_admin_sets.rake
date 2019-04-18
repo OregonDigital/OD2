@@ -11,25 +11,21 @@ namespace :oregon_digital do
     admin_sets = YAML.load_file("#{Rails.root}/config/initializers/migrator/admin_sets_info.yml")['admin_sets']
 
     admin_sets.each do |admin_set|
+      id = admin_set['id']
       title = admin_set['title']
       description = admin_set['description']
-      if admin_set_exists?(title, description) == true
-        puts "Admin set with title \"#{title}\" and description \"#{description}\" already exists."
+      if AdminSet.exists?(id)
+        puts "AdminSet with id \"#{id}\" title \"#{title}\" and description \"#{description}\" already exists."
         next
       end
 
-      admin_set_instance = AdminSet.new(title: [title], description: [description])
+      admin_set_instance = AdminSet.new(id: id, title: [title], description: [description])
       admin_set_record = Hyrax::AdminSetCreateService.call(admin_set: admin_set_instance, creating_user: user)
       if admin_set_record == true
-        puts "Successfully created AdminSet with title \"#{title}\" and description \"#{description}\""
+        puts "Successfully created AdminSet with id \"#{id}\" title \"#{title}\" and description \"#{description}\""
       else
-        puts "Unable to create AdminSet with title \"#{title}\" and description \"#{description}\""
+        puts "Unable to create AdminSet with id \"#{id}\" title \"#{title}\" and description \"#{description}\""
       end
     end
   end
-end
-
-def admin_set_exists?(title, description)
-  a = AdminSet.where(title: title, description: description).first
-  a.present? ? true : false
 end
