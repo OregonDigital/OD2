@@ -52,27 +52,26 @@ class CatalogController < ApplicationController
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
-    config.add_facet_fields_to_solr_request!
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
     config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
     config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keywords', link_to_search: solr_name('keyword', :facetable)
-    config.add_index_field solr_name('subject_label', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject_label', :facetable)
-    config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator_label', :facetable)
-    config.add_index_field solr_name('contributor_label', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor_label', :facetable)
+    config.add_index_field solr_name('subject_label', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable)
+    config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable)
+    config.add_index_field solr_name('contributor_label', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
     config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
     config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
     config.add_index_field solr_name('publisher_label', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
     config.add_index_field solr_name('based_near_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('based_near_label', :facetable)
-    config.add_index_field solr_name('language_label', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language', :facetable)
+    config.add_index_field solr_name('language_label', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language_label', :facetable)
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
-    config.add_index_field solr_name('rights_statement_label', :stored_searchable), helper_method: :rights_statement_links
-    config.add_index_field solr_name('license_label', :stored_searchable), helper_method: :license_links
-    config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('resource_type', :facetable)
+    config.add_index_field solr_name('rights_statement_label', :stored_searchable), label: 'Rights Statement', link_to_search: solr_name('rights_statement_label', :facetable)
+    config.add_index_field solr_name('license_label', :stored_searchable), label: 'License', link_to_search: solr_name('license_label', :facetable)
+    config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable)
     config.add_index_field solr_name('file_format', :stored_searchable), link_to_search: solr_name('file_format', :facetable)
     config.add_index_field solr_name('identifier', :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
     config.add_index_field solr_name('embargo_release_date', :stored_sortable, type: :date), label: 'Embargo release date', helper_method: :human_readable_date
@@ -82,7 +81,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     # Reject the non-label form of controlled vocabular terms from being searchable or indexable
     rejected_fields = Generic.controlled_property_labels.map { |field| field.gsub('_label', '') }
-    rejected_fields += %w[rights_statement resource_type license language]
+    rejected_fields += %w[based_near rights_statement resource_type license language]
 
     # Add all fields as searchable, reject the non-searchable fields
     Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -187,9 +186,11 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('rights_statement_label', :stored_searchable)
 
     config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
-    config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
+    config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.resource_type'), limit: 5
     config.add_facet_field solr_name('rights_statement_label', :facetable), label: I18n.translate('simple_form.labels.defaults.rights_statement'), limit: 5
     config.add_facet_field solr_name('license_label', :facetable), label: I18n.translate('simple_form.labels.defaults.license'), limit: 5
+    config.add_facet_fields_to_solr_request!
+
     # 'fielded' search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
