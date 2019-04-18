@@ -11,6 +11,7 @@ RSpec.describe Generic do
   it { is_expected.to have_attributes(title: ['foo']) }
   it { expect(described_class.generic_properties.include?('tribal_title')).to eq true }
   it { expect(described_class.generic_properties.include?('based_near')).to eq false }
+  it { expect(described_class.controlled_properties.include?(:genus)).to eq true }
 
   describe 'metadata' do
     it 'has descriptive metadata' do
