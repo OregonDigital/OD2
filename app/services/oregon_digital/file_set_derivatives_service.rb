@@ -59,9 +59,10 @@ module OregonDigital
     def sorted_derivative_urls(destination_name)
       path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
       ext = File.extname(path)
-      derivative_path_factory.derivatives_for_reference(file_set).select do |derivative|
+      paths = derivative_path_factory.derivatives_for_reference(file_set).select do |derivative|
         File.extname(derivative) == ext
-      end.sort
+      end
+      paths.collect { |pth| URI("file://#{pth}").to_s }.sort
     end
 
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
