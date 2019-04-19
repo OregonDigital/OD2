@@ -30,6 +30,8 @@ module OregonDigital
                                      iiif_endpoint: iiif_endpoint)
     end
 
+    # Returns the derivative file's label - this appears to be used by Hyrax
+    # and/or IIIFManifest to present a label for a presenter's image
     def to_s
       label
     end
