@@ -1,0 +1,10 @@
+admin_sets:
+  - id: uo
+    title: University of Oregon
+    description: 'Works created, managed and administered by the University of Oregon.'
+  - id: osu
+    title: Oregon State University
+    description: 'Works created, managed and administered by Oregon State University, not including materials administered by the Special Collections and Archives Research Center.'
+  - id: osu-scarc
+    title: Special Collections and Archives Research Center, Oregon State University Libraries and Press
+    description: 'Works created, managed and administered by the Special Collections and Archives Research Center, Oregon State University Libraries and Press.'
