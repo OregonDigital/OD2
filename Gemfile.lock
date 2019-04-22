@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: d5fd5dda80fc2021a9573ff74d524d133e825c0f
+  revision: 3d916ea9228e85b27529d6c428c9fcc121782ad9
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -111,7 +111,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.0.2)
+    aasm (5.0.3)
       concurrent-ruby (~> 1.0)
     actioncable (5.1.7)
       actionpack (= 5.1.7)
@@ -189,10 +189,10 @@ GEM
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.16.0)
+    aws-sdk-kms (1.17.0)
       aws-sdk-core (~> 3, >= 3.48.2)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.36.0)
+    aws-sdk-s3 (1.36.1)
       aws-sdk-core (~> 3, >= 3.48.2)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
