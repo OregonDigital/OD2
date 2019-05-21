@@ -8,3 +8,8 @@ Provide the rationale or user story that describes "why" this issue should be ad
 ### Related work
 
 Link to related tickets or prior related work here.
+
+
+### Accessibility Concerns
+
+Add any information here to indicate any known or suspected accessibility issues for this ticket
