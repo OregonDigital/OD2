@@ -40,6 +40,39 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
     end
   end
 
+  describe '#sorted_derivative_urls' do
+    let(:dpf) { instance_double('Hyrax::DerivativePathFactory') }
+    let(:ext) { 'jp2' }
+    let(:path1) { 'zoomable.jp2' }
+    let(:path2) { 'thumbnail.jpg' }
+    let(:path3) { 'page2.jp2' }
+
+    before do
+      allow(service).to receive(:derivative_path_factory).and_return dpf
+      allow(dpf).to receive(:derivative_path_for_reference).with(valid_file_set, ext).and_return "foo.#{ext}"
+      allow(dpf).to receive(:derivatives_for_reference).with(valid_file_set).and_return([path1, path2, path3])
+    end
+
+    # Rubocop won't let us make two expectations, otherwise this would just be
+    # part of the "only returns files with the expected extension" test
+    it 'returns the right number of files' do
+      expect(service.sorted_derivative_urls(ext).length).to eq(2)
+    end
+
+    it 'only returns files with the expected extension' do
+      expect(service.sorted_derivative_urls(ext)).to all(match(/\.#{ext}\Z/))
+    end
+
+    it 'sorts the results' do
+      urls = service.sorted_derivative_urls(ext)
+      expect(urls).to eq(urls.sort)
+    end
+
+    it 'prefixes the paths' do
+      expect(service.sorted_derivative_urls(ext)).to all(match(%r{\Afile://}))
+    end
+  end
+
   describe '#create_image_derivatives' do
     let(:bogus_jpg) { '/bogus/path/to/file.jpg' }
     let(:tmp_bmp) { '/tmp/path/to/file.bmp' }
@@ -220,6 +253,30 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
     it 'sets up the proper convert parameters' do
       func.call
       expect(convert).to eq(['in.pdf[4]', 'out.tmp'])
+    end
+  end
+
+  describe '#create_thumbnail' do
+    before do
+      allow(OregonDigital::Derivatives::Image::GMRunner).to receive(:create)
+    end
+
+    it 'kicks off the Graphics Magick runner' do
+      expect(OregonDigital::Derivatives::Image::GMRunner).to receive(:create).once
+      service.create_thumbnail('file')
+    end
+
+    it 'calls derivative_url' do
+      expect(service).to receive(:derivative_url).with('thumbnail')
+      service.create_thumbnail('file')
+    end
+  end
+
+  describe '#create_zoomable' do
+    it 'delegates to create_zoomable_page with no page name' do
+      filename = 'filename.jp2'
+      expect(service).to receive(:create_zoomable_page).with(filename, nil).once
+      service.create_zoomable(filename)
     end
   end
 
