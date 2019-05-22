@@ -19,14 +19,14 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :description, predicate: ::RDF::Vocab::DC.description do |index|
+      property :description, advance_search: true, predicate: ::RDF::Vocab::DC.description do |index|
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights do |index|
+      property :rights_statement, advance_search: false, predicate: ::RDF::Vocab::EDM.rights do |index|
         index.as :stored_searchable, :facetable
       end
-      property :identifier, predicate: ::RDF::Vocab::DC.identifier do |index|
+      property :identifier, advance_search: false, predicate: ::RDF::Vocab::DC.identifier do |index|
         index.as :stored_searchable
       end
 
@@ -38,7 +38,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :creator_display, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_creatorDisplay') do |index|
+      property :creator_display, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_creatorDisplay') do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -50,23 +50,19 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :accepted_name_usage, predicate: ::RDF::Vocab::DWC.acceptedNameUsage do |index|
+      property :accepted_name_usage, advance_search: false, predicate: ::RDF::Vocab::DWC.acceptedNameUsage do |index|
         index.as :stored_searchable
       end
 
-      property :biographical_information, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/P50113') do |index|
+      property :biographical_information, advance_search: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/a/P50113') do |index|
         index.as :stored_searchable
       end
 
-      property :compass_direction, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/compassDirection') do |index|
-        index.as :stored_searchable
-      end
+      property :compass_direction, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/compassDirection')
 
-      property :contents, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents') do |index|
-        index.as :stored_searchable
-      end
+      property :contents, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents')
 
-      property :cover_description, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/coverDescription') do |index|
+      property :cover_description, advance_search: true, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/coverDescription') do |index|
         index.as :stored_searchable
       end
 
@@ -74,21 +70,17 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :description_of_manifestation, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/P10271') do |index|
+      property :description_of_manifestation, advance_search: true, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/P10271') do |index|
         index.as :stored_searchable
       end
 
-      property :identification_verification_status, predicate: ::RDF::Vocab::DWC.identificationVerificationStatus, multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :identification_verification_status, predicate: ::RDF::Vocab::DWC.identificationVerificationStatus, multiple: false
 
       property :inscription, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_inscription') do |index|
         index.as :stored_searchable
       end
 
-      property :layout, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30155') do |index|
-        index.as :stored_searchable
-      end
+      property :layout, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30155')
 
       property :military_highest_rank, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryHighestRank'), multiple: false do |index|
         index.as :stored_searchable
@@ -98,41 +90,29 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :military_service_location, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
+      property :military_service_location, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
         index.as :stored_searchable
       end
 
       property :mode_of_issuance, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30003') do |index|
+        index.as :facetable
+      end
+
+      property :mods_note, predicate: ::RDF::Vocab::MODS.note
+
+      property :object_orientation, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/objectOrientation'), multiple: false
+
+      property :original_name_usage, advance_search: false, predicate: ::RDF::Vocab::DWC.originalNameUsage do |index|
         index.as :stored_searchable
       end
 
-      property :mods_note, predicate: ::RDF::Vocab::MODS.note do |index|
-        index.as :stored_searchable
-      end
+      property :tribal_notes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes')
 
-      property :object_orientation, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/objectOrientation'), multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :source_condition, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/sourceCondition')
 
-      property :original_name_usage, predicate: ::RDF::Vocab::DWC.originalNameUsage do |index|
-        index.as :stored_searchable
-      end
+      property :specimen_type, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/specimenType'), multiple: false
 
-      property :tribal_notes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes') do |index|
-        index.as :stored_searchable
-      end
-
-      property :source_condition, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/sourceCondition') do |index|
-        index.as :stored_searchable
-      end
-
-      property :specimen_type, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/specimenType'), multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :temporal, predicate: ::RDF::Vocab::DC.temporal do |index|
-        index.as :stored_searchable
-      end
+      property :temporal, predicate: ::RDF::Vocab::DC.temporal
 
       property :event, predicate: ::RDF::Vocab::SCHEMA.Event do |index|
         index.as :stored_searchable
@@ -146,9 +126,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :state_or_edition, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_stateEdition') do |index|
-        index.as :stored_searchable
-      end
+      property :state_or_edition, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_stateEdition')
 
       property :tribal_classes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalClasses') do |index|
         index.as :stored_searchable
@@ -158,7 +136,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :scientific_name_authorship, predicate: ::RDF::Vocab::DWC.scientificNameAuthorship do |index|
+      property :scientific_name_authorship, advance_search: false, predicate: ::RDF::Vocab::DWC.scientificNameAuthorship do |index|
         index.as :stored_searchable
       end
 
@@ -171,14 +149,12 @@ module OregonDigital
       end
 
       property :box_number, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/boxNumber') do |index|
-        index.as :stored_searchable
+        index.as :stored_searchable, :facetable
       end
 
-      property :citation, predicate: ::RDF::Vocab::SCHEMA.citation do |index|
-        index.as :stored_searchable
-      end
+      property :citation, predicate: ::RDF::Vocab::SCHEMA.citation
 
-      property :current_repository_id, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_idCurrentRepository') do |index|
+      property :current_repository_id, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_idCurrentRepository') do |index|
         index.as :stored_searchable
       end
 
@@ -194,27 +170,27 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :location_copyshelf_location, predicate: ::RDF::Vocab::MODS.locationCopyShelfLocator do |index|
+      property :location_copyshelf_location, advance_search: false, predicate: ::RDF::Vocab::MODS.locationCopyShelfLocator do |index|
         index.as :stored_searchable
       end
 
-      property :language, predicate: ::RDF::Vocab::DC.language do |index|
+      property :language, advance_search: false, predicate: ::RDF::Vocab::DC.language do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :place_of_production, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60161') do |index|
+      property :place_of_production, advance_search: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60161') do |index|
         index.as :stored_searchable
       end
 
-      property :provenance, predicate: ::RDF::Vocab::DC.provenance do |index|
+      property :provenance, advance_search: false, predicate: ::RDF::Vocab::DC.provenance do |index|
         index.as :stored_searchable
       end
 
-      property :publication_place, predicate: ::RDF::Vocab::MARCRelators.pup do |index|
+      property :publication_place, advance_search: false, predicate: ::RDF::Vocab::MARCRelators.pup do |index|
         index.as :stored_searchable
       end
 
-      property :source, predicate: ::RDF::Vocab::DC.source do |index|
+      property :source, advance_search: false, predicate: ::RDF::Vocab::DC.source do |index|
         index.as :stored_searchable
       end
 
@@ -226,19 +202,15 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :art_series, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/artSeries') do |index|
+      property :art_series, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/artSeries')
+
+      property :has_finding_aid, advance_search: false, predicate: ::RDF::URI.new('http://lod.xdams.org/reload/oad/has_findingAid') do |index|
         index.as :stored_searchable
       end
 
-      property :has_finding_aid, predicate: ::RDF::URI.new('http://lod.xdams.org/reload/oad/has_findingAid') do |index|
-        index.as :stored_searchable
-      end
+      property :has_part, predicate: ::RDF::Vocab::DC.hasPart
 
-      property :has_part, predicate: ::RDF::Vocab::DC.hasPart do |index|
-        index.as :stored_searchable
-      end
-
-      property :has_version, predicate: ::RDF::Vocab::DC.hasVersion do |index|
+      property :has_version, advance_search: false, predicate: ::RDF::Vocab::DC.hasVersion do |index|
         index.as :stored_searchable
       end
 
@@ -246,9 +218,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :is_version_of, predicate: ::RDF::Vocab::DC.isVersionOf do |index|
-        index.as :stored_searchable
-      end
+      property :is_version_of, predicate: ::RDF::Vocab::DC.isVersionOf
 
       property :relation, predicate: ::RDF::Vocab::DC.relation do |index|
         index.as :stored_searchable, :facetable
@@ -258,23 +228,17 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :extent, predicate: ::RDF::Vocab::DC.extent do |index|
+      property :extent, predicate: ::RDF::Vocab::DC.extent
+
+      property :material, advance_search: false, predicate: ::RDF::URI.new('http://purl.org/vra/material') do |index|
         index.as :stored_searchable
       end
 
-      property :material, predicate: ::RDF::URI.new('http://purl.org/vra/material') do |index|
-        index.as :stored_searchable
-      end
+      property :measurements, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_measurements')
 
-      property :measurements, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_measurements') do |index|
-        index.as :stored_searchable
-      end
+      property :physical_extent, predicate: ::RDF::Vocab::MODS.physicalExtent
 
-      property :physical_extent, predicate: ::RDF::Vocab::MODS.physicalExtent do |index|
-        index.as :stored_searchable
-      end
-
-      property :technique, predicate: ::RDF::URI.new('http://purl.org/vra/hasTechnique') do |index|
+      property :technique, advance_search: false, predicate: ::RDF::URI.new('http://purl.org/vra/hasTechnique') do |index|
         index.as :stored_searchable
       end
 
@@ -282,41 +246,27 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :conversion, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/conversionSpecifications') do |index|
+      property :conversion, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/conversionSpecifications')
+
+      property :copy_location, advance_search: false, predicate: ::RDF::Vocab::MODS.locationCopySublocation do |index|
         index.as :stored_searchable
       end
 
-      property :copy_location, predicate: ::RDF::Vocab::MODS.locationCopySublocation do |index|
+      property :date_digitized, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/dateDigitized'), multiple: false
+
+      property :file_size, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30183'), multiple: false
+
+      property :replaces_url, predicate: ::RDF::Vocab::DC.replaces, multiple: false
+
+      property :rights_note, advance_search: false, predicate: ::RDF::Vocab::EBUCore.rightsExpression do |index|
         index.as :stored_searchable
       end
 
-      property :date_digitized, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/dateDigitized'), multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :box, predicate: ::RDF::Vocab::SCHEMA.box
 
-      property :file_size, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30183'), multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :gps_latitude, predicate: ::RDF::Vocab::EXIF.gpsLatitude, multiple: false
 
-      property :replaces_url, predicate: ::RDF::Vocab::DC.replaces, multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :rights_note, predicate: ::RDF::Vocab::EBUCore.rightsExpression do |index|
-        index.as :stored_searchable
-      end
-
-      property :box, predicate: ::RDF::Vocab::SCHEMA.box do |index|
-        index.as :stored_searchable
-      end
-
-      property :gps_latitude, predicate: ::RDF::Vocab::EXIF.gpsLatitude, multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :gps_longitude, predicate: ::RDF::Vocab::EXIF.gpsLongitude, multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :gps_longitude, predicate: ::RDF::Vocab::EXIF.gpsLongitude, multiple: false
 
       property :location, predicate: ::RDF::Vocab::DC.spatial do |index|
         index.as :stored_searchable, :facetable
@@ -335,7 +285,7 @@ module OregonDigital
       end
 
       property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate') do |index|
-        index.as :stored_searchable, :facetable
+        index.as :stored_searchable
       end
 
       property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate') do |index|
@@ -350,57 +300,49 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate') do |index|
+      property :view_date, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate') do |index|
         index.as :stored_searchable
       end
 
-      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate') do |index|
+      property :acquisition_date, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate') do |index|
         index.as :stored_searchable
       end
 
-      property :accession_number, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_accessionNumber') do |index|
+      property :accession_number, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_accessionNumber') do |index|
         index.as :stored_searchable
       end
 
-      property :barcode, predicate: ::RDF::Vocab::Bibframe.barcode do |index|
+      property :barcode, advance_search: false, predicate: ::RDF::Vocab::Bibframe.barcode do |index|
         index.as :stored_searchable
       end
 
-      property :hydrologic_unit_code, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/hydrologicUnitCode') do |index|
+      property :hydrologic_unit_code, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/hydrologicUnitCode')
+
+      property :item_locator, advance_search: false, predicate: ::RDF::URI.new('http://purl.org/ontology/holding') do |index|
         index.as :stored_searchable
       end
 
-      property :item_locator, predicate: ::RDF::URI.new('http://purl.org/ontology/holding') do |index|
+      property :longitude_latitude_identification, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/llid')
+
+      property :copyright_claimant, advance_search: false, predicate: ::RDF::Vocab::MARCRelators.cpc do |index|
         index.as :stored_searchable
       end
 
-      property :longitude_latitude_identification, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/llid') do |index|
+      property :rights_holder, advance_search: false, predicate: ::RDF::Vocab::DC.rightsHolder do |index|
         index.as :stored_searchable
       end
 
-      property :copyright_claimant, predicate: ::RDF::Vocab::MARCRelators.cpc do |index|
-        index.as :stored_searchable
-      end
-
-      property :rights_holder, predicate: ::RDF::Vocab::DC.rightsHolder do |index|
-        index.as :stored_searchable
-      end
-
-      property :license, predicate: ::RDF::Vocab::CC.License do |index|
+      property :license, advance_search: false, predicate: ::RDF::Vocab::CC.License do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :use_restrictions, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60497') do |index|
+      property :use_restrictions, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60497')
+
+      property :access_restrictions, advance_search: false, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: false do |index|
         index.as :stored_searchable
       end
 
-      property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :oembed_url, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/oembed'), multiple: false do |index|
-        index.as :facetable
-      end
+      property :oembed_url, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/oembed'), multiple: false
 
       # End of normal properties
       # Controlled vocabulary terms
@@ -517,10 +459,10 @@ module OregonDigital
 
       property :form_of_work, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/w/P10004'),
                               class_name: OregonDigital::ControlledVocabularies::FormOfWork do |index|
-        index.as :stored_searchable
+        index.as :stored_searchable, :facetable
       end
 
-      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
+      property :format, advance_search: false, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -589,7 +531,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :military_branch, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryBranch'),
+      property :military_branch, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryBranch'),
                                  class_name: OregonDigital::ControlledVocabularies::Subject do |index|
         index.as :stored_searchable, :facetable
       end
