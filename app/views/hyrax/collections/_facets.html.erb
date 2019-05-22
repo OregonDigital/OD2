@@ -17,7 +17,7 @@
 
   <%# OVERRIDE FROM BLACKLIGHT to limit customize which facets are displayed %>
   <div id="facet-panel-collapse" class="collapse panel-group">
-    <%= render_facet_partials %>
+    <%= render_facet_partials @configured_facets %>
   </div>
 </div>
 <% end %>
