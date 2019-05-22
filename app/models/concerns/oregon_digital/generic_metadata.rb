@@ -342,7 +342,9 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :oembed_url, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/oembed'), multiple: false
+      property :oembed_url, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/oembed'), multiple: false do |index|
+        index.as :facetable
+      end
 
       # End of normal properties
       # Controlled vocabulary terms

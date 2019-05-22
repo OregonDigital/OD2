@@ -81,7 +81,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     # Reject the non-label form of controlled vocabular terms from being searchable or indexable
     rejected_fields = Generic.controlled_property_labels.map { |field| field.gsub('_label', '') }
-    rejected_fields += %w[based_near rights_statement resource_type license language]
+    rejected_fields += %w[based_near rights_statement resource_type license language oembed_url]
 
     # Add all fields as searchable, reject the non-searchable fields
     Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
