@@ -90,14 +90,14 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Document.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable) unless Document.properties[prop]['advance_search']
         config.add_search_field(prop) do |field|
           solr_name = solr_name(prop, :stored_searchable)
           field.solr_local_parameters = {
             qf: solr_name,
             pf: solr_name
           }
-        end
+        end if Document.properties[prop]['advance_search'] || Document.properties[prop]['advance_search'].nil?
       end
 
       # Add property as facetable
@@ -109,14 +109,14 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Generic.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable) unless Generic.properties[prop]['advance_search']
         config.add_search_field(prop) do |field|
           solr_name = solr_name(prop, :stored_searchable)
           field.solr_local_parameters = {
             qf: solr_name,
             pf: solr_name
           }
-        end
+        end if Generic.properties[prop]['advance_search'] || Generic.properties[prop]['advance_search'].nil?
       end
 
       # Add property as facetable
@@ -128,14 +128,14 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Image.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable) unless Image.properties[prop]['advance_search']
         config.add_search_field(prop) do |field|
           solr_name = solr_name(prop, :stored_searchable)
           field.solr_local_parameters = {
             qf: solr_name,
             pf: solr_name
           }
-        end
+        end if Image.properties[prop]['advance_search'] || Image.properties[prop]['advance_search'].nil?
       end
 
       # Add property as facetable
@@ -147,14 +147,14 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Video.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable) unless Video.properties[prop]['advance_search']
         config.add_search_field(prop) do |field|
           solr_name = solr_name(prop, :stored_searchable)
           field.solr_local_parameters = {
             qf: solr_name,
             pf: solr_name
           }
-        end
+        end if Video.properties[prop]['advance_search'] || Video.properties[prop]['advance_search'].nil?
       end
 
       # Add property as facetable
@@ -168,14 +168,14 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Generic.properties[label].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable)
+        config.add_show_field solr_name(prop, :stored_searchable) unless Generic.properties[label]['advance_search']
         config.add_search_field(prop) do |field|
           solr_name = solr_name(prop, :stored_searchable)
           field.solr_local_parameters = {
             qf: solr_name,
             pf: solr_name
           }
-        end
+        end if Generic.properties[label]['advance_search'] || Generic.properties[label]['advance_search'].nil?
       end
 
       # Add property as facetable
