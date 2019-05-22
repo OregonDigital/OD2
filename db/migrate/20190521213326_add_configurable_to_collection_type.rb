@@ -1,5 +1,5 @@
 class AddConfigurableToCollectionType < ActiveRecord::Migration[5.1]
   def change
-    add_column :hyrax_collection_types, :configurable, :boolean
+    add_column :hyrax_collection_types, :facet_configurable, :boolean
   end
 end
