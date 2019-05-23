@@ -165,7 +165,7 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
       end
 
       context 'with invalid params' do
-        it 'returns a success response (i.e. to display the 'new' template)' do
+        it 'returns a success response (i.e. to display the new template)' do
           post :create, params: { collection_type: { title: collection_type.title } }, session: valid_session
           expect(response).to be_success
         end
@@ -270,7 +270,7 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
         let(:existing_collection_type) { create(:collection_type) }
         let(:invalid_attributes) { { title: existing_collection_type.title } }
 
-        it 'returns a success response (i.e. to display the 'edit' template)' do
+        it 'returns a success response (i.e. to display the edit template)' do
           put :update, params: { id: collection_type.to_param, collection_type: invalid_attributes }, session: valid_session
           expect(response).to have_http_status(:success)
         end
