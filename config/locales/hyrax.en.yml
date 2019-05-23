@@ -27,7 +27,7 @@ en:
           editor_label_sim: Editor
           illustrator_label_sim: Illustrator
           interviewee_label_sim: Interviewee
-          interviewer_label_sim: Imterviewer
+          interviewer_label_sim: Interviewer
           lyricist_label_sim: Lyricist
           patron_label_sim: Patron
           photographer_label_sim: Photographer
@@ -87,7 +87,7 @@ en:
           editor_label_tesim: Editor
           illustrator_label_tesim: Illustrator
           interviewee_label_tesim: Interviewee
-          interviewer_label_tesim: Imterviewer
+          interviewer_label_tesim: Interviewer
           lyricist_label_tesim: Lyricist
           patron_label_tesim: Patron
           photographer_label_tesim: Photographer
@@ -165,7 +165,7 @@ en:
           editor_label_tesim: Editor
           illustrator_label_tesim: Illustrator
           interviewee_label_tesim: Interviewee
-          interviewer_label_tesim: Imterviewer
+          interviewer_label_tesim: Interviewer
           lyricist_label_tesim: Lyricist
           patron_label_tesim: Patron
           photographer_label_tesim: Photographer
