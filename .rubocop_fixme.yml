@@ -2,7 +2,6 @@ Metrics/AbcSize:
   Exclude:
     - 'app/indexers/oregon_digital/deep_indexing_service.rb'
     - 'app/controllers/hyrax/contact_form_controller.rb'
-    - 'app/controllers/hyrax/admin/collection_types_controller.rb'
     - 'app/indexers/generic_indexer.rb'
     - 'lib/oregon_digital/triplestore.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
@@ -35,7 +34,6 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Exclude:
-    - 'app/controllers/hyrax/admin/collection_types_controller.rb'
     - 'lib/oregon_digital/controlled_vocabularies/subject.rb'
     - 'lib/oregon_digital/triple_powered_properties/inputs/triple_powered_property_input.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
@@ -56,14 +54,11 @@ Style/SymbolArray:
 RSpec/ExampleLength:
   Exclude:
     - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
-    - 'spec/controllers/hyrax/admin/collection_types_controller_spec.rb'
 
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
-    - 'spec/controllers/hyrax/admin/collection_types_controller_spec.rb'
 
 RSpec/NestedGroups:
   Exclude:
-    - 'spec/controllers/hyrax/admin/collection_types_controller_spec.rb'
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
