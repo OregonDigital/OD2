@@ -4,8 +4,6 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
   let(:collection_type) { build(:collection_type) }
   let(:form) { described_class.new }
 
-  subject { form }
-
   it { is_expected.to delegate_method(:title).to(:collection_type) }
   it { is_expected.to delegate_method(:description).to(:collection_type) }
   it { is_expected.to delegate_method(:nestable).to(:collection_type) }
@@ -34,7 +32,7 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
       end
 
       it 'returns true' do
-        expect(subject.all_settings_disabled?).to be true
+        expect(form.all_settings_disabled?).to be true
       end
     end
 
@@ -44,7 +42,7 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
       end
 
       it 'returns true' do
-        expect(subject.all_settings_disabled?).to be true
+        expect(form.all_settings_disabled?).to be true
       end
     end
 
@@ -54,7 +52,7 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
       end
 
       it 'returns true' do
-        expect(subject.all_settings_disabled?).to be true
+        expect(form.all_settings_disabled?).to be true
       end
     end
 
@@ -66,7 +64,7 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
       end
 
       it 'returns false' do
-        expect(subject.all_settings_disabled?).to be false
+        expect(form.all_settings_disabled?).to be false
       end
     end
   end
@@ -82,7 +80,7 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
       end
 
       it 'returns true' do
-        expect(subject.share_options_disabled?).to be true
+        expect(form.share_options_disabled?).to be true
       end
     end
 
@@ -92,7 +90,7 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
       end
 
       it 'returns true' do
-        expect(subject.share_options_disabled?).to be true
+        expect(form.share_options_disabled?).to be true
       end
     end
 
@@ -103,7 +101,7 @@ RSpec.describe Hyrax::Forms::Admin::CollectionTypeForm do
       end
 
       it 'returns false' do
-        expect(subject.share_options_disabled?).to be false
+        expect(form.share_options_disabled?).to be false
       end
     end
   end

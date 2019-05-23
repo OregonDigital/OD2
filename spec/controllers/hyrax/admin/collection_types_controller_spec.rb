@@ -1,51 +1,51 @@
 # frozen_string_literal: true
 
 RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean_repo: true do
-  context "anonymous user" do
-    describe "#index" do
-      it "returns http redirect" do
+  context 'when anonymous user' do
+    describe '#index' do
+      it 'returns http redirect' do
         get :index
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#create" do
-      it "returns http redirect" do
+    describe '#create' do
+      it 'returns http redirect' do
         post :create
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#new" do
-      it "returns http redirect" do
+    describe '#new' do
+      it 'returns http redirect' do
         get :new
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#edit" do
-      it "returns http redirect" do
+    describe '#edit' do
+      it 'returns http redirect' do
         get :edit, params: { id: :id }
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#update" do
-      it "returns http redirect" do
+    describe '#update' do
+      it 'returns http redirect' do
         put :update, params: { id: :id }
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#destroy" do
-      it "returns http redirect" do
+    describe '#destroy' do
+      it 'returns http redirect' do
         delete :destroy, params: { id: :id }
         expect(response).to have_http_status(:redirect)
       end
     end
   end
 
-  context "unauthorized user" do
+  context 'when unauthorized user' do
     let(:user) { create(:user) }
 
     before do
@@ -53,50 +53,50 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
       sign_in user
     end
 
-    describe "#index" do
-      it "returns http redirect" do
+    describe '#index' do
+      it 'returns http redirect' do
         get :index
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#create" do
-      it "returns http redirect" do
+    describe '#create' do
+      it 'returns http redirect' do
         post :create
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#new" do
-      it "returns http redirect" do
+    describe '#new' do
+      it 'returns http redirect' do
         get :new
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#edit" do
-      it "returns http redirect" do
+    describe '#edit' do
+      it 'returns http redirect' do
         get :edit, params: { id: :id }
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#update" do
-      it "returns http redirect" do
+    describe '#update' do
+      it 'returns http redirect' do
         put :update, params: { id: :id }
         expect(response).to have_http_status(:redirect)
       end
     end
 
-    describe "#destroy" do
-      it "returns http redirect" do
+    describe '#destroy' do
+      it 'returns http redirect' do
         delete :destroy, params: { id: :id }
         expect(response).to have_http_status(:redirect)
       end
     end
   end
 
-  context "authorized user" do
+  context 'when authorized user' do
     let(:valid_attributes) do
       {
         title: 'Collection type title',
@@ -122,8 +122,8 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
       sign_in user
     end
 
-    describe "#index" do
-      it "returns http success" do
+    describe '#index' do
+      it 'returns http success' do
         get :index
         expect(response).to have_http_status(:success)
       end
@@ -135,37 +135,37 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
         expect(controller).to receive(:add_breadcrumb).with(I18n.t('hyrax.admin.collection_types.index.breadcrumb'), admin_collection_types_path)
         get :index
         expect(response).to be_success
-        expect(response).to render_template "layouts/hyrax/dashboard"
+        expect(response).to render_template 'layouts/hyrax/dashboard'
       end
     end
 
-    describe "#create", :clean_repo do
-      context "with valid params" do
-        it "creates a new CollectionType" do
+    describe '#create', :clean_repo do
+      context 'with valid params' do
+        it 'creates a new CollectionType' do
           expect do
             post :create, params: { collection_type: valid_attributes }, session: valid_session
           end.to change(Hyrax::CollectionType, :count).by(1)
         end
 
-        it "redirects to the created collection_type" do
+        it 'redirects to the created collection_type' do
           post :create, params: { collection_type: valid_attributes }, session: valid_session
           expect(response).to redirect_to(edit_admin_collection_type_path(Hyrax::CollectionType.last))
         end
 
-        it "assigns all attributes" do
+        it 'assigns all attributes' do
           post :create, params: { collection_type: valid_attributes }, session: valid_session
           expect(assigns[:collection_type].attributes.symbolize_keys).to include(valid_attributes)
         end
 
-        it "assigns default participants" do
+        it 'assigns default participants' do
           expect do
             post :create, params: { collection_type: valid_attributes }, session: valid_session
           end.to change(Hyrax::CollectionTypeParticipant, :count).by(2)
         end
       end
 
-      context "with invalid params" do
-        it "returns a success response (i.e. to display the 'new' template)" do
+      context 'with invalid params' do
+        it 'returns a success response (i.e. to display the 'new' template)' do
           post :create, params: { collection_type: { title: collection_type.title } }, session: valid_session
           expect(response).to be_success
         end
@@ -178,7 +178,7 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
           expect(controller).to receive(:add_breadcrumb).with(I18n.t('hyrax.admin.collection_types.new.header'), new_admin_collection_type_path)
           post :create, params: { collection_type: { title: collection_type.title } }, session: valid_session
           expect(response).to be_success
-          expect(response).to render_template "layouts/hyrax/dashboard"
+          expect(response).to render_template 'layouts/hyrax/dashboard'
         end
 
         it 'defines a form' do
@@ -189,8 +189,8 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
       end
     end
 
-    describe "#new" do
-      it "returns http success" do
+    describe '#new' do
+      it 'returns http success' do
         get :new
         expect(response).to have_http_status(:success)
       end
@@ -203,7 +203,7 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
         expect(controller).to receive(:add_breadcrumb).with(I18n.t('hyrax.admin.collection_types.new.header'), new_admin_collection_type_path)
         get :new
         expect(response).to be_success
-        expect(response).to render_template "layouts/hyrax/dashboard"
+        expect(response).to render_template 'layouts/hyrax/dashboard'
       end
 
       it 'defines a form' do
@@ -213,8 +213,8 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
       end
     end
 
-    describe "#edit" do
-      it "returns http success" do
+    describe '#edit' do
+      it 'returns http success' do
         get :edit, params: { id: collection_type.to_param }
         expect(response).to have_http_status(:success)
       end
@@ -227,7 +227,7 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
         expect(controller).to receive(:add_breadcrumb).with(I18n.t('hyrax.admin.collection_types.edit.header'), edit_admin_collection_type_path(collection_type.to_param))
         get :edit, params: { id: collection_type.to_param }
         expect(response).to be_success
-        expect(response).to render_template "layouts/hyrax/dashboard"
+        expect(response).to render_template 'layouts/hyrax/dashboard'
       end
 
       it 'defines a form' do
@@ -237,7 +237,7 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
       end
     end
 
-    describe "#update", :clean_repo do
+    describe '#update', :clean_repo do
       let(:new_attributes) do
         {
           title: 'Improved title',
@@ -253,24 +253,24 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
         }
       end
 
-      context "with valid params" do
+      context 'with valid params' do
         it 'updates a record' do
           put :update, params: { id: collection_type.to_param, collection_type: new_attributes }, session: valid_session
           collection_type.reload
           expect(assigns[:collection_type].attributes.symbolize_keys).to include(new_attributes)
         end
 
-        it "redirects to the collection_type" do
+        it 'redirects to the collection_type' do
           put :update, params: { id: collection_type.to_param, collection_type: valid_attributes }, session: valid_session
           expect(response).to redirect_to(edit_admin_collection_type_path(collection_type))
         end
       end
 
-      context "with invalid params" do
+      context 'with invalid params' do
         let(:existing_collection_type) { create(:collection_type) }
         let(:invalid_attributes) { { title: existing_collection_type.title } }
 
-        it "returns a success response (i.e. to display the 'edit' template)" do
+        it 'returns a success response (i.e. to display the 'edit' template)' do
           put :update, params: { id: collection_type.to_param, collection_type: invalid_attributes }, session: valid_session
           expect(response).to have_http_status(:success)
         end
@@ -283,7 +283,7 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
           expect(controller).to receive(:add_breadcrumb).with(I18n.t('hyrax.admin.collection_types.edit.header'), edit_admin_collection_type_path(collection_type.to_param))
           put :update, params: { id: collection_type.to_param, collection_type: invalid_attributes }, session: valid_session
           expect(response).to be_success
-          expect(response).to render_template "layouts/hyrax/dashboard"
+          expect(response).to render_template 'layouts/hyrax/dashboard'
         end
 
         it 'defines a form' do
@@ -294,11 +294,11 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
       end
     end
 
-    describe "#destroy" do
+    describe '#destroy' do
       let!(:collection_type_to_destroy) { create(:collection_type) }
 
-      context "when no collections of this type" do
-        it "deletes the collection_type" do
+      context 'when no collections of this type' do
+        it 'deletes the collection_type' do
           delete :destroy, params: { id: collection_type_to_destroy }
           expect(response).to have_http_status(:found)
           expect(response).to redirect_to(admin_collection_types_path)
@@ -307,14 +307,14 @@ RSpec.describe Hyrax::Admin::CollectionTypesController, type: :controller, clean
         end
       end
 
-      context "when collections exist of this type" do
+      context 'when collections exist of this type' do
         let!(:collection) { create(:collection_lw, collection_type_gid: collection_type_to_destroy.gid) }
 
-        it "doesn't delete the collection type or collection" do
+        it 'doesnt delete the collection type or collection' do
           delete :destroy, params: { id: collection_type_to_destroy }
           expect(response).to have_http_status(:found)
           expect(response).to redirect_to(admin_collection_types_path)
-          expect(flash[:alert]).to eq "Collection type cannot be altered as it has collections"
+          expect(flash[:alert]).to eq 'Collection type cannot be altered as it has collections'
           expect(Hyrax::CollectionType.exists?(collection_type_to_destroy.id)).to be true
           expect(Collection.exists?(collection.id)).to be true
         end

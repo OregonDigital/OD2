@@ -30,15 +30,18 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
     allow(form).to receive(:object).and_return(collection_type_form)
   end
 
-  context 'for non-special collection types' do
-    context "when collection_type.collections? is false" do
+  context 'when non-special collection types' do
+    context 'when collection_type.collections? is false' do
       before do
         allow(collection_type).to receive(:collections?).and_return(false)
         render
       end
 
-      it "renders the intructions and warning" do
+      it 'renders the intructions and warning' do
         expect(rendered).to match(I18n.t("hyrax.admin.collection_types.form_settings.instructions"))
+      end
+
+      it 'renders the intructions and warning' do
         expect(rendered).to match(I18n.t("hyrax.admin.collection_types.form_settings.warning"))
       end
 
@@ -51,7 +54,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
       end
     end
 
-    context "when collection_type.collections? is true" do
+    context 'when collection_type.collections? is true' do
       before do
         collection_type_form.collection_type = collection_type
         allow(collection_type).to receive(:collections?).and_return(true)
@@ -63,8 +66,12 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
       INPUT_IDS.each do |id|
         it "renders the #{id} checkbox to be disabled" do
           match = rendered.match(/(<input.*id="#{id}".*)/)
-          expect(match).not_to be_nil
           expect(match[1].index('disabled="disabled"')).not_to be_nil
+        end
+
+        it "renders the #{id} checkbox to be disabled" do
+          match = rendered.match(/(<input.*id="#{id}".*)/)
+          expect(match).not_to be_nil
         end
       end
     end
@@ -80,8 +87,12 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
     INPUT_IDS.each do |id|
       it "renders the disabled #{id} checkbox " do
         match = rendered.match(/(<input.*id="#{id}".*)/)
-        expect(match).not_to be_nil
         expect(match[1].index('disabled="disabled"')).not_to be_nil
+      end
+
+      it "renders the disabled #{id} checkbox " do
+        match = rendered.match(/(<input.*id="#{id}".*)/)
+        expect(match).not_to be_nil
       end
     end
   end

@@ -60,6 +60,7 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
+    - 'spec/controllers/hyrax/admin/collection_types_controller_spec.rb'
 
 RSpec/NestedGroups:
   Exclude:
