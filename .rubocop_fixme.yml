@@ -56,6 +56,7 @@ Style/SymbolArray:
 RSpec/ExampleLength:
   Exclude:
     - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
+    - 'spec/controllers/hyrax/admin/collection_types_controller_spec.rb'
 
 RSpec/MultipleExpectations:
   Exclude:
@@ -64,4 +65,5 @@ RSpec/MultipleExpectations:
 
 RSpec/NestedGroups:
   Exclude:
+    - 'spec/controllers/hyrax/admin/collection_types_controller_spec.rb'
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
