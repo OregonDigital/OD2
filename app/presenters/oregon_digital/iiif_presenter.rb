@@ -13,7 +13,7 @@ module OregonDigital
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
-        urls = OregonDigital::FileSetDerivativesService.new(fs).sorted_derivative_urls('jp2')
+        urls = file_set_derivatives_service(fs).sorted_derivative_urls('jp2')
 
         urls.each_with_index do |derivative, i|
           label = urls.length > 1 ? page_label(fs.label, i) : fs.label
@@ -25,6 +25,10 @@ module OregonDigital
     end
 
     private
+
+    def file_set_derivatives_service(file_set)
+      OregonDigital::FileSetDerivativesService.new(file_set)
+    end
 
     def page_label(label, page_index)
       addendum = "Page #{page_index + 1}"
