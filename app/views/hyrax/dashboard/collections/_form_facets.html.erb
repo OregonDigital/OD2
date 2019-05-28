@@ -1,0 +1,9 @@
+<%= hidden_field_tag :facet_configuration %>
+
+<ul id='sortable_facets'>
+  <% @collection.available_facets.each_with_index do |(key,facet),index| %>
+    <li id="facet_<%= key %>">
+      <%= key %>
+    </li>
+  <% end %>
+</ul>

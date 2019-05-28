@@ -19,6 +19,7 @@
 //= require blacklight/blacklight
 
 //= require_directory .
+//= require_tree ./oregon_digital
 //= require hyrax
 
 // Required for Hyrax override in assets/javascripts/hyrax/editor/controlled_vocabulary.es6
