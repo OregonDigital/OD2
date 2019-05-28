@@ -234,30 +234,6 @@ Hyrax.config do |config|
   #
   # config.whitelisted_ingest_dirs = []
 
-  # IIIF Server
-  # Default is false
-  config.iiif_image_server = !Rails.env.test?
-
-  # Returns a URL that resolves to an image provided by a IIIF image server
-  config.iiif_image_url_builder = lambda do |file_id, base_url, size|
-    id = file_id.split('/').first
-    file_set = FileSet.find(id)
-    "#{file_set.iiif_url(base_url)}/full/#{size}/0/default.jpg"
-  end
-
-  # Returns a URL that resolves to an info.json file provided by a IIIF image server
-  config.iiif_info_url_builder = lambda do |file_id, base_url|
-    id = file_id.split('/').first
-    file_set = FileSet.find(id)
-    file_set.iiif_url(base_url)
-  end
-
-  # Returns a URL that indicates your IIIF image server compliance level
-  config.iiif_image_compliance_level_uri = 'http://iiif.io/api/image/2/level2.json'
-
-  # Returns a IIIF image size default
-  config.iiif_image_size_default = '600,'
-
   # Fields to display in the IIIF metadata section; default is the required fields
   config.iiif_metadata_fields = Hyrax::Forms::WorkForm.required_fields
 
