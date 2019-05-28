@@ -769,6 +769,10 @@ GEM
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
+    rspec-activemodel-mocks (1.1.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.1)
@@ -977,6 +981,7 @@ DEPENDENCIES
   recaptcha
   rsolr (>= 1.0)
   rspec
+  rspec-activemodel-mocks
   rspec-mocks
   rspec-rails
   rspec_junit_formatter

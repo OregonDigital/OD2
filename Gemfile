@@ -81,6 +81,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rspec'
   gem 'rspec-mocks'
+  gem 'rspec-activemodel-mocks'
   gem 'rspec_junit_formatter'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem 'simplecov', '>= 0.9'

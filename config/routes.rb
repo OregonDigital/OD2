@@ -1,6 +1,9 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
+  namespace :admin do 
+    resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
+  end
   mount BrowseEverything::Engine => '/browse'
   mount Blacklight::Oembed::Engine, at: 'oembed'
   mount Blacklight::Engine => '/'
@@ -44,6 +47,5 @@ Rails.application.routes.draw do
   end
 
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
