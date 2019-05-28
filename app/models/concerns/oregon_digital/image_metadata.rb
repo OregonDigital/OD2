@@ -9,29 +9,21 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
-      property :color_content, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/e/P20224') do |index|
-        index.as :stored_searchable
-      end
+      property :color_content, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/e/P20224')
 
-      property :color_space, predicate: ::RDF::Vocab::EXIF.colorSpace do |index|
-        index.as :stored_searchable
-      end
+      property :color_space, predicate: ::RDF::Vocab::EXIF.colorSpace
 
       property :height, predicate: ::RDF::Vocab::EXIF.height, multiple: false
 
-      property :orientation, predicate: ::RDF::Vocab::EXIF.orientation do |index|
+      property :orientation, predicate: ::RDF::Vocab::EXIF.orientation
+
+      property :photograph_orientation, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false do |index|
         index.as :stored_searchable
       end
 
-      property :photograph_orientation, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false do |index|
-        index.as :stored_searchable
-      end
+      property :resolution, predicate: ::RDF::Vocab::EXIF.resolution, multiple: false
 
-      property :resolution, predicate: ::RDF::Vocab::EXIF.resolution, multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :view, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription') do |index|
+      property :view, advance_search: true, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription') do |index|
         index.as :stored_searchable
       end
 

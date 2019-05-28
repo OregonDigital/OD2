@@ -8,7 +8,7 @@ module OregonDigital
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
     included do
       initial_properties = properties.keys
-      property :contained_in_journal, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal') do |index|
+      property :contained_in_journal, advance_search: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal') do |index|
         index.as :stored_searchable
       end
 
@@ -20,25 +20,21 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :has_number, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasNumber') do |index|
+      property :has_number, advance_search: true, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasNumber') do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :instrumentation, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_instrumentation') do |index|
+      property :instrumentation, advance_search: false, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_instrumentation') do |index|
         index.as :stored_searchable
       end
 
-      property :is_volume, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasVolume') do |index|
+      property :is_volume, advance_search: true, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasVolume') do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :larger_work, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_largerWork') do |index|
-        index.as :stored_searchable
-      end
+      property :larger_work, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_largerWork')
 
-      property :number_of_pages, predicate: ::RDF::Vocab::SCHEMA.numberOfPages do |index|
-        index.as :stored_searchable
-      end
+      property :number_of_pages, predicate: ::RDF::Vocab::SCHEMA.numberOfPages
 
       property :table_of_contents, predicate: ::RDF::Vocab::DC.tableOfContents do |index|
         index.as :stored_searchable
