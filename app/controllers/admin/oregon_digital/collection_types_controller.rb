@@ -4,7 +4,7 @@ module Admin
   module OregonDigital
     # Extension of Hyrax CollectionTypesController to add facet_configurable to strong params
     class CollectionTypesController < Hyrax::Admin::CollectionTypesController
-      self.form_class = OregonDigital::Forms::Admin::CollectionTypeForm
+      self.form_class = ::OregonDigital::Forms::Admin::CollectionTypeForm
 
       private
 
