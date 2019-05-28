@@ -26,9 +26,9 @@ RSpec.describe Admin::OregonDigital::CollectionTypesController, type: :controlle
     sign_in user
   end
 
-  describe "#create" do
-    context "with valid params" do
-      it "creates a new CollectionType" do
+  describe '#create' do
+    context 'with valid params' do
+      it 'creates a new CollectionType' do
         expect do
           post :create, params: { collection_type: valid_attributes }, session: valid_session
         end.to change(Hyrax::CollectionType, :count).by(1)
