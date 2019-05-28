@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ScholarsArchive
+module OregonDigital
   module Forms
     module Admin
       # Collection Type Form Object

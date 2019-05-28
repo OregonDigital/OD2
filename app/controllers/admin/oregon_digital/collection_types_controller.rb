@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Admin
-  module ScholarsArchive
+  module OregonDigital
     # Extension of Hyrax CollectionTypesController to add facet_configurable to strong params
     class CollectionTypesController < Hyrax::Admin::CollectionTypesController
-      self.form_class = ScholarsArchive::Forms::Admin::CollectionTypeForm
+      self.form_class = OregonDigital::Forms::Admin::CollectionTypeForm
 
       private
 

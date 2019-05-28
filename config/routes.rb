@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   namespace :admin do 
-    resources :collection_types, except: :show, controller: 'scholars_archive/collection_types'
+    resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
   end
   mount BrowseEverything::Engine => '/browse'
   mount Blacklight::Oembed::Engine, at: 'oembed'
@@ -47,6 +47,5 @@ Rails.application.routes.draw do
   end
 
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
-  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
