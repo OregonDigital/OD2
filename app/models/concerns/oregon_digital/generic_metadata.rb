@@ -268,20 +268,8 @@ module OregonDigital
 
       property :gps_longitude, predicate: ::RDF::Vocab::EXIF.gpsLongitude, multiple: false
 
-      property :location, predicate: ::RDF::Vocab::DC.spatial do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :street_address, predicate: ::RDF::Vocab::MADS.streetAddress do |index|
         index.as :stored_searchable
-      end
-
-      property :ranger_district, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/rangerDistrict') do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :water_basin, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/waterBasin') do |index|
-        index.as :stored_searchable, :facetable
       end
 
       property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate') do |index|
@@ -440,7 +428,17 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :based_near, predicate: ::RDF::Vocab::FOAF.based_near, class_name: Hyrax::ControlledVocabularies::Location do |index|
+      property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :ranger_district, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/rangerDistrict'),
+                                 class_name: Hyrax::ControlledVocabularies::Location do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :water_basin, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/waterBasin'),
+                             class_name: Hyrax::ControlledVocabularies::Location do |index|
         index.as :stored_searchable, :facetable
       end
 
