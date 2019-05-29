@@ -1,14 +1,14 @@
 <%= hidden_field_tag :facet_configuration %>
 
 <ul id='sortable_facets'>
-  <% @collection.available_facets.each_with_index do |(key,facet),index| %>
-    <li id="facet_<%= key %>">
+  <% @collection.available_facets.each_with_index do |facet,index| %>
+    <li id="facet_<%= facet.id %>">
       <%= label_tag do %>
-        <%= key %>
-        <%= text_field_tag "facet_label_#{key}", nil, class: "form-control" %>
+        <%= facet.property_name %>
+        <%= text_field_tag "facet_label_#{facet.id}", facet.label, class: "form-control" %>
       <% end %>
       <%= label_tag do %>
-        <%= check_box_tag "facet_enabled_#{key}" %>
+        <%= check_box_tag "facet_enabled_#{facet.id}", nil, facet.enabled %>
         Enable
       <% end %>
     </li>
