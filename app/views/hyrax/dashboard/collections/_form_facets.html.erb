@@ -3,7 +3,14 @@
 <ul id='sortable_facets'>
   <% @collection.available_facets.each_with_index do |(key,facet),index| %>
     <li id="facet_<%= key %>">
-      <%= key %>
+      <%= label_tag do %>
+        <%= key %>
+        <%= text_field_tag "facet_label_#{key}", nil, class: "form-control" %>
+      <% end %>
+      <%= label_tag do %>
+        <%= check_box_tag "facet_enabled_#{key}" %>
+        Enable
+      <% end %>
     </li>
   <% end %>
 </ul>
