@@ -18,7 +18,12 @@ class Collection < ActiveFedora::Base
     properties = properties.merge(Image.properties)
     properties = properties.merge(Video.properties)
     properties.select { |_k, prop| prop.behaviors && prop.behaviors.include?(:facetable) }.each do |_k, prop|
-      facet = Facet.new({label: prop.term.to_s, solr_name: Solrizer.solr_name(prop.term, :facetable), collection_id: self.id, property_name: prop.term})
+      facet = Facet.new({
+        label: I18n.translate("simple_form.labels.defaults.#{prop.term}"),
+        solr_name: Solrizer.solr_name(prop.term, :facetable),
+        collection_id: self.id,
+        property_name: prop.term
+      })
       facets += [facet] if facets.select { |f| f.property_name == facet.property_name }.empty? && facet.save
     end
     facets.sort_by { |f| f.order}
