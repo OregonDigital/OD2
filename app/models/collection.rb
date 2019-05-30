@@ -12,27 +12,37 @@ class Collection < ActiveFedora::Base
   delegate(:facet_configurable?, to: :collection_type)
 
   def available_facets
-    facets = Facet.where({collection_id: self.id})
-    properties = Document.properties
-    properties = properties.merge(Generic.properties)
-    properties = properties.merge(Image.properties)
-    properties = properties.merge(Video.properties)
-    properties.select { |_k, prop| prop.behaviors && prop.behaviors.include?(:facetable) }.each do |_k, prop|
-      facet = Facet.new({
-        label: I18n.translate("simple_form.labels.defaults.#{prop.term}"),
-        solr_name: Solrizer.solr_name(prop.term, :facetable),
-        collection_id: self.id,
-        property_name: prop.term
-      })
-      facets += [facet] if facets.select { |f| f.property_name == facet.property_name }.empty? && facet.save
-    end
-    facets.sort_by { |f| f.order}
+    generate_default_facets
+    facets = Facet.where(collection_id: id)
+    facets.sort_by(&:order)
   end
 
   private
 
-    def destroy_facets
-      facets = Facet.where({collection_id: self.id})
-      facets.each { |f| f.destroy }
+  def generate_default_facets
+    properties_to_facet.each do |_k, prop|
+      next unless Facet.where(property_name: prop.term).empty?
+
+      facet = Facet.new(
+        label: I18n.translate("simple_form.labels.defaults.#{prop.term}"),
+        solr_name: Solrizer.solr_name(prop.term, :facetable),
+        collection_id: id,
+        property_name: prop.term
+      )
+      facet.save
     end
+  end
+
+  def properties_to_facet
+    properties = Document.properties
+    properties = properties.merge(Generic.properties)
+    properties = properties.merge(Image.properties)
+    properties = properties.merge(Video.properties)
+    properties.select { |_k, prop| prop&.behaviors&.include?(:facetable) }
+  end
+
+  def destroy_facets
+    facets = Facet.where(collection_id: id)
+    facets.each(&:destroy)
+  end
 end
