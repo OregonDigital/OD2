@@ -1,7 +1,9 @@
 $('#sortable_facets').ready(function () {
   $('#sortable_facets').sortable({
-    containment: '#sortable_facets',
+    revert: 100,
     axis: 'y',
+    containment: '#sortable_facets',
+    handle: '.handle',
     tolerance: 'touch',
     update: function (e, ui) {
       console.log($('#sortable_facets').sortable('serialize'));
