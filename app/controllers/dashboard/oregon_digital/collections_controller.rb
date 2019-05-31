@@ -12,6 +12,7 @@ module Dashboard
 
       private
 
+      # Turn form params into Facet objects
       def process_facets
         Rack::Utils.parse_nested_query(params[:facet_configuration])['facet'].each_with_index do |id, index|
           facet = Facet.find id

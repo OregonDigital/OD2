@@ -9,8 +9,9 @@ class Collection < ActiveFedora::Base
   include Hyrax::BasicMetadata
   self.indexer = Hyrax::CollectionWithBasicMetadataIndexer
 
-  delegate(:facet_configurable?, to: :collection_type)
+  delegate :facet_configurable?, to: :collection_type
 
+  # Identify facets available to configure
   def available_facets
     generate_default_facets
     facets = Facet.where(collection_id: id)
@@ -19,6 +20,7 @@ class Collection < ActiveFedora::Base
 
   private
 
+  # Build new Facet objects that might not exist
   def generate_default_facets
     properties_to_facet.each do |_k, prop|
       next unless Facet.where(property_name: prop.term).empty?
@@ -33,6 +35,7 @@ class Collection < ActiveFedora::Base
     end
   end
 
+  # Find properties with :facetable behavior
   def properties_to_facet
     properties = Document.properties
     properties = properties.merge(Generic.properties)
