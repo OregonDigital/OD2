@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :facet do
     label { 'MyString' }
     solr_name { 'MyString' }
-    collection { nil }
+    collection_id { nil }
   end
 end
