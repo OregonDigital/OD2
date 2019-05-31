@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 # Sets the expected behaviors for an image work
-class Image < ActiveFedora::Base
+class Image < Generic
   include ::Hyrax::WorkBehavior
 
   self.indexer = ImageIndexer

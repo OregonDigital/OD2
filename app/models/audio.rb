@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 # Sets the expected attributes and other important values for an audio work
-class Audio < ActiveFedora::Base
+class Audio < Generic
   include ::Hyrax::WorkBehavior
 
   self.indexer = AudioIndexer
