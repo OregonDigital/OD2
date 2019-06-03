@@ -5,7 +5,7 @@ class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   attr_writer :graph_fetch_failures
 
-  # before_create :prefetch_graphs
+  after_save :enqueue_fetch_failures
   before_save :resolve_oembed_errors
 
   self.indexer = GenericIndexer
@@ -23,9 +23,7 @@ class Generic < ActiveFedora::Base
 
   private
 
-  def prefetch_graphs
-    indexer = indexing_service.rdf_service.new(self, self.class.index_config)
-    indexer.add_assertions(nil)
+  def enqueue_fetch_failures
     graph_fetch_failures.uniq.each do |rdf_subject|
       enqueue_fetch_failure(rdf_subject)
     end
