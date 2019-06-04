@@ -16,25 +16,41 @@ en:
           arranger_label_sim: Arranger
           artist_label_sim: Artist
           author_label_sim: Author
+          box_number_sim: Archival Box Number
           cartographer_label_sim: Cartographer
           collector_label_sim: Collector
           composer_label_sim: Composer
           creator_label_sim: Creator
+          creator_display_sim: Creator
           contributor_label_sim: Contributor
           dedicatee_label_sim: Dedicatee
           donor_label_sim: Donor
           designer_label_sim: Designer
           editor_label_sim: Editor
+          exhibit_sim: Exhibit
+          former_owner_sim: Former Owner
+          folder_name_sim: Archival Folder Name
+          folder_number_sim: Archival Folder Number
+          human_readable_type_sim: Type
           illustrator_label_sim: Illustrator
           interviewee_label_sim: Interviewee
           interviewer_label_sim: Interviewer
+          location_label_sim: Location
           lyricist_label_sim: Lyricist
+          member_of_collections_ssim: Collections
+          mode_of_issuance_sim: Mode of Issuance
           patron_label_sim: Patron
           photographer_label_sim: Photographer
           print_maker_label_sim: Print Maker
+          ranger_district_label_sim: Ranger District
           recipient_label_sim: Recipient
+          relation_sim: Relations
+          rights_statement_label_sim: Rights
+          series_name_sim: Series Name
+          series_number_sim: Series Number
           transcriber_label_sim: Transcriber
           translator_label_sim: Translator
+          water_basin_label_sim: Water Basin
           based_near_label_sim: Location
           cultural_context_label_sim: Cultural Context
           ethnographic_term_label_sim: Ethnographic Term
@@ -42,8 +58,11 @@ en:
           form_of_work_label_sim: Form of Work
           format_label_sim: Format
           institution_label_sim: Institution
+          language_label_sim: Language
+          license_label_sim: License
           local_collection_name_label_sim: Local Collection Name
           tgn_label_sim: Geographic Name
+          type_label_sim: Type
           repository_label_sim: Repository
           publisher_label_sim: Publisher
           taxon_class_label_sim: Taxon Class

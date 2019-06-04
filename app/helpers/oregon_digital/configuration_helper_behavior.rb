@@ -6,7 +6,8 @@ module OregonDigital::ConfigurationHelperBehavior
   # OVERRIDE FROM BLACKLIGHT to reorder defaults
   def facet_field_label field
     field_config = blacklight_config.facet_fields[field]
-    defaults = [field_config.label] if field_config
+    defaults = []
+    defaults << field_config.label if field_config
     defaults << :"blacklight.search.fields.facet.#{field}"
     defaults << :"blacklight.search.fields.#{field}"
     defaults << field.to_s.humanize

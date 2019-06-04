@@ -22,14 +22,14 @@ class Collection < ActiveFedora::Base
 
   # Build new Facet objects that might not exist
   def generate_default_facets
-    properties_to_facet.each do |_k, prop|
-      next unless Facet.where(property_name: prop.term).empty?
-
+    CatalogController.blacklight_config.facet_fields.each do |_k, facet|
+      next unless facet.if
+      next unless Facet.where(property_name: facet.field, collection_id: id).empty?
       facet = Facet.new(
-        label: I18n.translate("simple_form.labels.defaults.#{prop.term}"),
-        solr_name: Solrizer.solr_name(prop.term, :facetable),
+        label: facet.label,
+        solr_name: facet.field,
         collection_id: id,
-        property_name: prop.term
+        property_name: facet.field
       )
       facet.save
     end
