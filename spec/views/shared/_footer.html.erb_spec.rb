@@ -1,4 +1,5 @@
 # frozen_string_literal:true
+include Warden::Test::Helpers
 
 RSpec.describe 'shared/_footer', type: :view do
   it 'renders the application version' do

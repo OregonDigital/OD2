@@ -1,7 +1,10 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
     <div class="navbar-text text-left">
-        <p><%= t('hyrax.footer.service_html') %></p>
+      <p><%= t('hyrax.footer.service_html') %></p>
+      <% if can? :read, :admin_dashboard %>
+        <p><a href="https://oregondigital.github.io/oregon-digital-style-guide/">Style Guide</a></p>
+      <% end %>
     </div>
     <div class="navbar-right">
       <div class="navbar-text text-right">
