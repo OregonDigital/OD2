@@ -35,15 +35,6 @@ class Collection < ActiveFedora::Base
     end
   end
 
-  # Find properties with :facetable behavior
-  def properties_to_facet
-    properties = Document.properties
-    properties = properties.merge(Generic.properties)
-    properties = properties.merge(Image.properties)
-    properties = properties.merge(Video.properties)
-    properties.select { |_k, prop| prop&.behaviors&.include?(:facetable) }
-  end
-
   def destroy_facets
     facets = Facet.where(collection_id: id)
     facets.each(&:destroy)
