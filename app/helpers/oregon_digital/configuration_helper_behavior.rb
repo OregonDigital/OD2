@@ -1,10 +1,11 @@
 # frozen_string_literal:true
 
+# Behaviors to add to Blacklight's CatalogHelper
 module OregonDigital::ConfigurationHelperBehavior
   ##
   # Look up the label for the facet field
   # OVERRIDE FROM BLACKLIGHT to reorder defaults
-  def facet_field_label field
+  def facet_field_label(field)
     field_config = blacklight_config.facet_fields[field]
     defaults = []
     defaults << field_config.label if field_config
@@ -28,10 +29,10 @@ module OregonDigital::ConfigurationHelperBehavior
   #   @param [Symbol] any number of additional keys
   #   @param [Symbol] ...
   # OVERRIDE FROM BLACKLIGHT to display first if it's a string, otherwise i18n it
-  def field_label *i18n_keys
+  def field_label(*i18n_keys)
     first, *rest = i18n_keys.compact
 
-    if first.kind_of?(Symbol)
+    if first.is_a?(Symbol)
       t(first, default: rest)
     else
       first

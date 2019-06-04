@@ -23,8 +23,8 @@ class Collection < ActiveFedora::Base
   # Build new Facet objects that might not exist
   def generate_default_facets
     CatalogController.blacklight_config.facet_fields.each do |_k, facet|
-      next unless facet.if
-      next unless Facet.where(property_name: facet.field, collection_id: id).empty?
+      next unless Facet.where(property_name: facet.field, collection_id: id).empty? && facet.if
+
       facet = Facet.new(
         label: facet.label,
         solr_name: facet.field,
