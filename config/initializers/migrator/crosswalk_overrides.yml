@@ -6,9 +6,9 @@ overrides:
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/full
     function: return_nil
-  - property: rightsHolder
+  - property: rights_holder
     predicate: http://opaquenamespace.org/right/rightsHolder
     multiple: true
-  - property: rightsHolder
+  - property: rights_holder
     predicate: http://opaquenamespace.org/rights/rightsHolder
     multiple: true
