@@ -11,9 +11,9 @@ Hyrax::CollectionsControllerBehavior.module_eval do
   def show
     @curation_concern ||= ActiveFedora::Base.find(params[:id])
     # Set list of configured facets for the view to display
-    configured_facets
     presenter
     query_collection_members
+    configured_facets
   end
 
   private
@@ -25,6 +25,9 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     end
 
     def configured_facets
-      @configured_facets ||= []
+      @configured_facets ||= Facet.where(collection_id: collection.id, enabled: true).order(:order)
+      @configured_facets.each do |facet|
+        blacklight_config.facet_configuration_for_field(facet.solr_name).label = facet.label
+      end
     end
 end
