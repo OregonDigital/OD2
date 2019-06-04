@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-Blacklight::ConfigurationHelperBehavior.module_eval do
+module OregonDigital::ConfigurationHelperBehavior
   ##
   # Look up the label for the facet field
   # OVERRIDE FROM BLACKLIGHT to reorder defaults
