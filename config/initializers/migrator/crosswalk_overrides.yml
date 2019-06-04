@@ -9,3 +9,6 @@ overrides:
   - property: rightsHolder
     predicate: http://opaquenamespace.org/right/rightsHolder
     multiple: true
+  - property: rightsHolder
+    predicate: http://opaquenamespace.org/rights/rightsHolder
+    multiple: true
