@@ -1,0 +1,469 @@
+collections:
+  - id: willis-dunagan
+    title: >-
+      Willis Dunagan diaries and legal papers, 1858-1897
+    visibility: open
+  - id: western-waters
+    title: >-
+      Western Waters Digital Library
+    visibility: open
+  - id: walter-bowman
+    title: >-
+      Walter S. Bowman (1865-1938) photographs, 1880s-1920s
+    visibility: open
+  - id: uo-veterans
+    title: >-
+      UO Veterans
+    visibility: open
+  - id: uo-stock-photos
+    title: >-
+      UO Stock Photos
+    visibility: open
+  - id: uo-president
+    title: >-
+      UO Office of the President
+    visibility: open
+  - id: uo-design-library
+    title: >-
+      UO Design Library Special Collections
+    visibility: open
+  - id: uo-athletics
+    title: >-
+      UO Athletics
+    visibility: open
+  - id: uo-arch-photos
+    title: >-
+      UO Archives Photographs
+    visibility: open
+  - id: the-manuscript
+    title: >-
+      The Manuscript
+    visibility: open
+  - id: texts-data
+    title: >-
+      Texts and Data
+    visibility: open
+  - id: textile-and-apparel
+    title: >-
+      Historic and Cultural Textile and Apparel Collection
+    visibility: open
+  - id: streamsurvey
+    title: >-
+      Pacific Northwest Stream Survey
+    visibility: open
+  - id: siuslaw
+    title: >-
+      The Siuslaw National Forest Collection
+    visibility: open
+  - id: sheetmusic
+    title: >-
+      Historic Sheet Music Collection
+    visibility: open
+  - id: schnitzer-nitrate
+    title: >-
+      Gertrude Bass Warner and the Early Photography Archive of the University Art Museum/Jordan Schnitzer Museum of Art
+    visibility: open
+  - id: schnitzer-mofa
+    title: >-
+      Jordan Schnitzer Museum of Art
+    visibility: open
+  - id: rv-mills
+    title: >-
+      Randall V. Mills Transportation Collection (1907-1952) photographs, ca. 1937-1952
+    visibility: open
+  - id: roy-c-andrews
+    title: >-
+      Roy C. Andrews photographs, 1902-1955
+    visibility: open
+  - id: rockyshore93
+    title: >-
+      1993 ODFW Oregon Rocky Shore Aerial Photography Survey
+    visibility: open
+  - id: quincy-scott
+    title: >-
+      Quincy Scott Political Cartoons, 1904-1949
+    visibility: open
+  - id: petrarch
+    title: >-
+      Petrarch Canzionere
+    visibility: open
+  - id: percent-for-art
+    title: >-
+      Oregon Percent for Art
+    visibility: open
+  - id: osu-yearbooks
+    title: >-
+      Oregon State University Yearbooks
+    visibility: open
+  - id: osu-wwii-japanese-american-students
+    title: >-
+      OSU's WWII Era Japanese American Students
+    visibility: open
+  - id: osu-student-protest-underground-pubs
+    title: >-
+      Oregon State University Student Protest and Underground Publications
+    visibility: open
+  - id: osu-sports-media-guides
+    title: >-
+      Oregon State University Sports Media Guides
+    visibility: open
+  - id: osu-scarc
+    title: >-
+      OSU Special Collections & Archives Research Center
+    visibility: open
+  - id: osu-historical-publications
+    title: >-
+      Historical Publications of Oregon State University
+    visibility: open
+  - id: osu-historical-maps
+    title: >-
+      Historical Maps of Oregon State University
+    visibility: open
+  - id: osu-historical-images
+    title: >-
+      Historical Images of Oregon State University
+    visibility: open
+  - id: osu-fact-book
+    title: >-
+      Oregon State University Fact Books
+    visibility: open
+  - id: osu-department-histories
+    title: >-
+      Oregon State University College and Department Histories
+    visibility: open
+  - id: osu-commencement-programs
+    title: >-
+      Oregon State University Commencement Programs
+    visibility: open
+  - id: osu-baseball
+    title: >-
+      OSU Baseball Centennial
+    visibility: open
+  - id: osu-athletics
+    title: >-
+      Oregon State University Athletics
+    visibility: open
+  - id: osu-alumni-magazine
+    title: >-
+      Oregon State University Alumni Magazine
+    visibility: open
+  - id: ormaps
+    title: >-
+      Oregon Maps
+    visibility: open
+  - id: oregons-agricultural-progress
+    title: >-
+      Oregon's Agricultural Progress
+    visibility: open
+  - id: oregon-state-yank
+    title: >-
+      Oregon State Yank
+    visibility: open
+  - id: oregon-multicultural-archives
+    title: >-
+      Oregon Multicultural Archives
+    visibility: open
+  - id: oregon-explorer
+    title: >-
+      Oregon Explorer
+    visibility: open
+  - id: orange-owl
+    title: >-
+      Orange Owl
+    visibility: open
+  - id: or-latino-herit
+    title: >-
+      Oregon Latino Heritage
+    visibility: open
+  - id: or-chinese-disinterment
+    title: >-
+      Oregon Chinese Disinterment Documents
+    visibility: open
+  - id: opal-whiteley
+    title: >-
+      Opal S. Whiteley (1897-1992) photographs
+    visibility: open
+  - id: oiss
+    title: >-
+      Oregon International Sculpture Symposium
+    visibility: open
+  - id: oimb
+    title: >-
+      Oregon Institute of Marine Biology Slides and Photographs
+    visibility: open
+  - id: ohba
+    title: >-
+      Oregon Hops & Brewing Archives
+    visibility: open
+  - id: ocfrp
+    title: >-
+      Oregon Century Farm and Ranch Program
+    visibility: open
+  - id: nw-folklife
+    title: >-
+      Northwest Folklife Digital Collection
+    visibility: open
+  - id: ncu
+    title: >-
+      Northwest Christian University
+    visibility: open
+  - id: mss-rb
+    title: >-
+      University of Oregon Special Collections Manuscripts and Rare Books
+    visibility: open
+  - id: mountaingrove
+    title: >-
+      Lesbian Intentional Community: Ruth Mountaingrove (b. 1923) photographs
+    visibility: open
+  - id: moorhouse
+    title: >-
+      Picturing the Cayuse, Walla Walla, and Umatilla Tribes
+    visibility: open
+  - id: minorities-lgbtq-barometer
+    title: >-
+      Minorities and LGBTQ+ Histories in the Barometer
+    visibility: open
+  - id: middle-east-water
+    title: >-
+      The Middle East Water Collection
+    visibility: open
+  - id: mayo-methot-bogart
+    title: >-
+      Mayo Methot Bogart (1904-1951) photographs
+    visibility: open
+  - id: marketing-photos
+    title: >-
+      Marketing Communications Photo Archive
+    visibility: open
+  - id: maic
+    title: >-
+      Mongolian Altai Inventory Collection
+    visibility: open
+  - id: lowenstam
+    title: >-
+      Lowenstam Collection of Ancient Western Art and Archaeology
+    visibility: open
+  - id: lichens-pnw
+    title: >-
+      Lichens of the Pacific Northwest
+    visibility: open
+  - id: lee-moorhouse
+    title: >-
+      Lee Moorhouse (1850-1926) photographs, 1888-1916
+    visibility: open
+  - id: lee-drake
+    title: >-
+      Lee D. Drake (1882-1957) photographs, ca. 1910-1957
+    visibility: open
+  - id: lchsa
+    title: >-
+      Lincoln County Historical Society Archive
+    visibility: open
+  - id: ken-gray
+    title: >-
+      Ken Gray Insect Image Collection
+    visibility: open
+  - id: johnyeonarchdrawings
+    title: >-
+      John Yeon architectural drawings, 1934-1976
+    visibility: open
+  - id: john-bauguess
+    title: >-
+      John Bauguess photographs, 1970s
+    visibility: open
+  - id: joel-palmer
+    title: >-
+      Joel Palmer Papers
+    visibility: open
+  - id: joanna-russ
+    title: >-
+      Joanna Russ papers, 1968-1989
+    visibility: open
+  - id: jasr
+    title: >-
+      National Japanese American Student Relocation Council records, 1942-1946
+    visibility: open
+  - id: james-cloutier
+    title: >-
+      James Cloutier photographs, 1977
+    visibility: open
+  - id: j-f-ford-photographs
+    title: >-
+      J.F. Ford Photographs
+    visibility: open
+  - id: illustrated-booklets
+    title: >-
+      Illustrated Booklets
+    visibility: open
+  - id: herbarium
+    title: >-
+      The OSU Herbarium Type Specimens Collection
+    visibility: open
+  - id: gwilliams
+    title: >-
+      Gerald W. Williams Collection
+    visibility: open
+  - id: grayson-mathews
+    title: >-
+      Grayson Mathews (1948-2007) photographs, 1970s-1990s
+    visibility: open
+  - id: gifford
+    title: >-
+      Gifford Photographic Collection
+    visibility: open
+  - id: general-catalogs
+    title: >-
+      Oregon State University General Catalogs
+    visibility: open
+  - id: gbwarnerpapers
+    title: >-
+      Gertrude Bass Warner papers, 1909-1923
+    visibility: open
+  - id: gb-warner-papers-ua022
+    title: >-
+      Gertrude Bass Warner papers, 1879-1954
+    visibility: open
+  - id: gb-warner-nosatsu
+    title: >-
+      The Gertrude Bass Warner Collection of Japanese Votive Slips (nōsatsu), 1850s to 1930s
+    visibility: open
+  - id: gb-warner
+    title: >-
+      Gertrude Bass Warner (1863-1951) photographs
+    visibility: open
+  - id: frazier-boutelle
+    title: >-
+      Frazier A. Boutelle photographs, c. 1865-1924
+    visibility: open
+  - id: frank-patterson
+    title: >-
+      Frank Patterson Photographs
+    visibility: open
+  - id: florence-hartshorn
+    title: >-
+      Florence M. Hartshorn photographs, 1899-1900
+    visibility: open
+  - id: finley-bohlman
+    title: >-
+      Reuniting Finley and Bohlman
+    visibility: open
+  - id: fairbanks
+    title: >-
+      The Fairbanks Fine Arts Print Collection
+    visibility: open
+  - id: extension-oral-histories
+    title: >-
+      OSU Extension Faculty and Staff Oral Histories
+    visibility: open
+  - id: ellmaker-family
+    title: >-
+      Ellmaker family papers, 1768-2005
+    visibility: open
+  - id: ellis-fuller-lawrence
+    title: >-
+      Ellis Fuller Lawrence papers, 1909-1929
+    visibility: open
+  - id: electric-studio
+    title: >-
+      The Electric Studio/O.G. Allen photographs, ca. 1911-1913
+    visibility: open
+  - id: easia
+    title: >-
+      e-Asia Digital Library
+    visibility: open
+  - id: doris-ulmann
+    title: >-
+      Doris Ulmann (1882-1934) photographs, 1920s-1934
+    visibility: open
+  - id: dissociation
+    title: >-
+      Dissociation and Trauma Archives
+    visibility: open
+  - id: dan-powell
+    title: >-
+      Dan Powell photographs, 1970s-2000s
+    visibility: open
+  - id: daily-emerald
+    title: >-
+      Oregon Daily Emerald Archives
+    visibility: open
+  - id: daily-barometer
+    title: >-
+      The Daily Barometer
+    visibility: open
+  - id: cw-furlong
+    title: >-
+      Charles W. Furlong (1874-1967) photographs, 1895-1965
+    visibility: open
+  - id: corvallis-images
+    title: >-
+      Corvallis Historical Images
+    visibility: open
+  - id: corvallis-flood
+    title: >-
+      Rising Flood Waters: 1964 Corvallis
+    visibility: open
+  - id: corazon-de-dixie
+    title: >-
+      Corazón de Dixie: Mexicanos in the U.S. South since 1910
+    visibility: open
+  - id: colver-family
+    title: >-
+      Colver family papers, circa 1860-1888
+    visibility: open
+  - id: columbia-gorge
+    title: >-
+      Columbia Gorge Discovery Center Photo Archive
+    visibility: open
+  - id: clarence-andrews
+    title: >-
+      C. L. Andrews photographs, 1880s-1948
+    visibility: open
+  - id: chinavine
+    title: >-
+      ChinaVine
+    visibility: open
+  - id: building-or
+    title: >-
+      Building Oregon
+    visibility: open
+  - id: braceros
+    title: >-
+      Braceros in Oregon Photograph Collection
+    visibility: open
+  - id: artists-books
+    title: >-
+      Artistsʼ Books at the University of Oregon Libraries
+    visibility: open
+  - id: art-architecture-design
+    title: >-
+      Art, Architecture and Design
+    visibility: open
+  - id: arch-entourage
+    title: >-
+      Architectural Entourage
+    visibility: open
+  - id: annual-cruise
+    title: >-
+      Annual Cruise
+    visibility: open
+  - id: angelus-studio
+    title: >-
+      Angelus Studio photographs, 1880s-1940s
+    visibility: open
+  - id: alice-b-sheldon
+    title: >-
+      Alice B. Sheldon, pen name James Tiptree, Jr., papers, 1920-1999
+    visibility: open
+  - id: album-collection
+    title: >-
+      The Album Collection
+    visibility: open
+  - id: african-ephemera
+    title: >-
+      African Political Ephemera and Realia Project
+    visibility: open
+  - id: aa-images
+    title: >-
+      Art and Architecture Images Collection
+    visibility: open
