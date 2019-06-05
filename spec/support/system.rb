@@ -28,7 +28,7 @@ RSpec.configure do |config|
         options = Selenium::WebDriver::Chrome::Options.new
         options.add_option('w3c', false)
         %w[headless window-size=1280x1280 disable-gpu].each { |arg| options.add_argument(arg) }
-        Capybara::Selenium::Driver.new(app, browser: :chrome, options: options, desired_capabilities: capabilities)
+        Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
       end
 
       driven_by :headless_chrome
