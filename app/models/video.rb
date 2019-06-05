@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 # Sets basic behaviors for a video work
-class Video < ActiveFedora::Base
+class Video < Generic
   include ::Hyrax::WorkBehavior
 
   self.indexer = VideoIndexer

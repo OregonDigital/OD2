@@ -54,7 +54,7 @@ jQuery.fn.extend({
         itemLabel = $($(elem).children('label')[0]).text();
         listCount = $(elem).parent().children('li').length;
         listIndex = $(elem).parent().children('li').index(elem) + 1;
-        $('#facets-live').text(`${itemLabel} grabbed. Position in list: ${listIndex} of ${listCount}`);
+        $('#facets-live').text(itemLabel +' grabbed. Position in list: ' + 'listIndex' + ' of ' + listCount);
       }
     });
   }
