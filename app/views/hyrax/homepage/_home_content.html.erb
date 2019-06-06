@@ -19,8 +19,9 @@
 <div class="row">
   <h2>Latest Collections</h2>
   <%= render 'explore_collections', collections: @presenter.collections %>
-    <!-- @TODO: Set All Collections link -->
-  <a class="btn btn-primary btn-lg pull-right">All Collections</a>
+  <%= link_to t('hyrax.homepage.admin_sets.link'),
+              main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}),
+              class: 'btn btn-primary btn-lg pull-right' %>
 </div>
 
 <div class="row">
