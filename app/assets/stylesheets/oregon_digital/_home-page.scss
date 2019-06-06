@@ -6,6 +6,10 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   border-bottom-right-radius: 0;
 }
 
+.btn,
+#search-field-header {
+  border-radius: 2px !important;
+}
 .image-masthead {
   // Remove controls background color
   .navbar {
@@ -31,10 +35,6 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
       }
     }
   }
-  .input-group-btn > .btn,
-  #search-field-header {
-    border-radius: 2px;
-  }
 }
 
 #preface {
@@ -43,7 +43,6 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
     a {
       width: 75%;
       margin-bottom: 0.5em;
-      border-radius: 2px;
     }
   }
   padding: 5em 0;
