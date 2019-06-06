@@ -1,6 +1,6 @@
 <div id="preface" class="row">
   <div class="col-sm-3">
-    <!-- Add university badges -->
+    <!-- @TODO: Add university badges -->
   </div>
   <div class="col-sm-6">
     <p>
@@ -10,7 +10,7 @@
     </p>
   </div>
   <div class="col-sm-3">
-    <!-- Add educators and researchers buttons -->
+    <!-- @TODO: Set educators and researchers link -->
     <a class="btn btn-primary btn-lg pull-right">For Educators</a>
     <a class="btn btn-primary btn-lg pull-right">For Researchers</a>
   </div>
@@ -19,11 +19,13 @@
 <div class="row">
   <h2>Latest Collections</h2>
   <%= render 'explore_collections', collections: @presenter.collections %>
+    <!-- @TODO: Set All Collections link -->
   <a class="btn btn-primary btn-lg pull-right">All Collections</a>
 </div>
 
 <div class="row">
   <h2>Latest Items</h2>
   <%= render 'recently_uploaded', recent_documents: @recent_documents %>
+    <!-- @TODO: Set All Latest Items link -->
   <a class="btn btn-primary btn-lg pull-right">All Latest Items</a>
 </div>
