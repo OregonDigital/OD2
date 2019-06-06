@@ -17,12 +17,12 @@ class SingleValueControlledVocabularyInput < ControlledVocabularyInput
   def outer_wrapper
     <<-HTML
         #{yield}
-      HTML
+    HTML
   end
 
   def inner_wrapper
     <<-HTML
         #{yield}
-      HTML
+    HTML
   end
 end
