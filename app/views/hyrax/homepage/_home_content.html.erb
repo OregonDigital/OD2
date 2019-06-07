@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<div class="row">
+<div id="collections" class="row">
   <h2>Latest Collections</h2>
   <%= render 'explore_collections', collections: @presenter.collections %>
   <%= link_to t('hyrax.homepage.admin_sets.link'),
@@ -24,9 +24,10 @@
               class: 'btn btn-primary btn-lg pull-right' %>
 </div>
 
-<div class="row">
+<div id="items" class="row">
   <h2>Latest Items</h2>
   <%= render 'recently_uploaded', recent_documents: @recent_documents %>
-    <!-- @TODO: Set All Latest Items link -->
-  <a class="btn btn-primary btn-lg pull-right">All Latest Items</a>
+  <%= link_to t('oregon_digital.homepage.works.link'),
+              main_app.search_catalog_path(sort: 'system_create_dtsi desc'),
+              class: 'btn btn-primary btn-lg pull-right' %>
 </div>

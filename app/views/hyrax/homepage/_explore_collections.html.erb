@@ -1,6 +1,6 @@
 <ol class="collection-highlights">
     <% collections.each do |collection| %>
-      <li class="recent-item col-md-2">
+      <li class="recent-item col-xs-4 col-sm-2">
         <h3>
           <%= link_to [hyrax, collection] do %>
             <%= render_thumbnail_tag(collection, {}, { suppress_link: true }) %>

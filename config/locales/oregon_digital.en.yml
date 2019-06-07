@@ -1,5 +1,8 @@
 en:
   oregon_digital:
+    homepage:
+      works:
+        link: 'All Latest Items'
     oembeds:
       edit:
         header:

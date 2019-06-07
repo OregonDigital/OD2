@@ -1,4 +1,10 @@
-// Fix bug in Bootstrap where dropdowns before buttons always have rounded edges
+@media (min-width: 768px) {
+   #content-wrapper {
+    width: 90%;
+  }
+}
+
+/ Fix bug in Bootstrap where dropdowns before buttons always have rounded edges
 .input-group-btn:last-child > .btn:not(:last-child),
 .input-group-btn:last-child > .facets-toggle:not(:last-child),
 td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
@@ -6,10 +12,6 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   border-bottom-right-radius: 0;
 }
 
-.btn,
-#search-field-header {
-  border-radius: 2px !important;
-}
 .image-masthead {
   // Remove controls background color
   .navbar {
@@ -25,13 +27,13 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
       width: 55%;
 
       button:first-child {
-        width: 75%;
+        width: 55%;
       }
       button:last-child {
         width: 25%;
       }
       .caret {
-        margin-left: 85%;
+        margin-left: 75%;
       }
     }
   }
@@ -41,11 +43,16 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   div:last-child {
     text-align: center;
     a {
-      width: 75%;
+      width: 100%;
       margin-bottom: 0.5em;
     }
   }
   padding: 5em 0;
+}
+#preface,
+#collections,
+#items {
+  padding-bottom: 5em;
 }
 
 body {
