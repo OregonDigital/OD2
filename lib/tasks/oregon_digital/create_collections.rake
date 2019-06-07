@@ -8,7 +8,7 @@ namespace :oregon_digital do
     coll_type_gid = "gid://od2/hyrax-collectiontype/#{prep_collection_type}"
     collections.each do |coll|
       id = coll['id']
-      if collection_exists?(id)
+      if Collection.exists?(id)
         puts "Collection #{id} already exists."
         next
       end
@@ -19,13 +19,9 @@ namespace :oregon_digital do
     rescue StandardError => e
       puts "Unable to create collection #{id}"
       puts "Error: #{e.message}"
+      puts e.backtrace
     end
   end
-end
-
-def collection_exists?(id)
-  c = Collection.where(id: id).first
-  c.present?
 end
 
 def prep_collection_type
