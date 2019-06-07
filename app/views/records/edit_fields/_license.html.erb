@@ -1,6 +1,6 @@
 <!-- OVERRIDE switch to include blank false to use our blank license configuration -->
 <% license_service = Hyrax.config.license_service_class.new %>
-<%= f.input :license, as: :multi_value_select,
+<%= f.input :license, as: :single_value_select,
     collection: license_service.select_active_options,
     include_blank: false,
     item_helper: license_service.method(:include_current_value),
