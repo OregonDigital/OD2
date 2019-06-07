@@ -108,7 +108,7 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
     context 'with collections' do
       let(:presenter) { double }
       let(:repository) { double }
-      let(:collection_results) { double(documents: ['collection results']) }
+      let(:collection_results) { instance_double('Blacklight::Solr::Response', documents: ['collection results']) }
 
       before do
         allow(controller).to receive(:repository).and_return(repository)
@@ -130,8 +130,8 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
       end
       it 'assigns the presenter' do
         allow(Hyrax::HomepagePresenter).to receive(:new).with(Ability,
-                                                               ['collection results'])
-                                                         .and_return(presenter)
+                                                              ['collection results'])
+                                                        .and_return(presenter)
         get :index
         expect(assigns(:presenter)).to eq presenter
       end
