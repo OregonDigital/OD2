@@ -4,7 +4,7 @@
   }
 }
 
-/ Fix bug in Bootstrap where dropdowns before buttons always have rounded edges
+// Fix bug in Bootstrap where dropdowns before buttons always have rounded edges
 .input-group-btn:last-child > .btn:not(:last-child),
 .input-group-btn:last-child > .facets-toggle:not(:last-child),
 td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
