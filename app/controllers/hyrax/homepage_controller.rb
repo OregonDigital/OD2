@@ -1,3 +1,6 @@
+# frozen_string_literal:true
+
+# Controller for homepage
 class Hyrax::HomepageController < ApplicationController
   # Adds Hydra behaviors into the application controller
   include Blacklight::SearchContext
@@ -26,26 +29,26 @@ class Hyrax::HomepageController < ApplicationController
 
   private
 
-    # OVERRIDE FROM HYRAX to increase number of collections rows
-    # Return 6 collections
-    def collections(rows: 6)
-      builder = Hyrax::CollectionSearchBuilder.new(self)
-                                              .rows(rows)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
-    end
+  # OVERRIDE FROM HYRAX to increase number of collections rows
+  # Return 6 collections
+  def collections(rows: 6)
+    builder = Hyrax::CollectionSearchBuilder.new(self)
+                                            .rows(rows)
+    response = repository.search(builder)
+    response.documents
+  rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
+    []
+  end
 
-    def recent
-      # OVERRIDE FROM HYRAX to increase number of recent document rows
-      # grab any recent documents
-      (_, @recent_documents) = search_results(q: '', sort: sort_field, rows: 6)
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      @recent_documents = []
-    end
+  def recent
+    # OVERRIDE FROM HYRAX to increase number of recent document rows
+    # grab any recent documents
+    (_, @recent_documents) = search_results(q: '', sort: sort_field, rows: 6)
+  rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
+    @recent_documents = []
+  end
 
-    def sort_field
-      "#{Solrizer.solr_name('date_uploaded', :stored_sortable, type: :date)} desc"
-    end
+  def sort_field
+    "#{Solrizer.solr_name('date_uploaded', :stored_sortable, type: :date)} desc"
+  end
 end
