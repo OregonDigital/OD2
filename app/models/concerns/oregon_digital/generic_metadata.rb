@@ -320,7 +320,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, advance_search: false, predicate: ::RDF::Vocab::CC.License, multiple: false do |index|
+      property :license, advance_search: false, predicate: ::RDF::Vocab::CC.License do |index|
         index.as :stored_searchable, :facetable
       end
 
