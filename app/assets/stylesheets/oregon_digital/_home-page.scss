@@ -70,6 +70,10 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
 #items {
   padding-bottom: 5em;
 }
+#collections,
+#items {
+  font-size: 1.5em;
+}
 
 body {
   background-color: #f9f3f1;

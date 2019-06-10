@@ -2,7 +2,7 @@
   <h3>
     <%= link_to [main_app, recent_document] do %>
       <%= render_thumbnail_tag(recent_document, {}, {suppress_link: true}) %>
-      <p><%= recent_document.to_s %></p>
+      <%= recent_document.to_s %>
     <% end %>
   </h3>
 </li>
