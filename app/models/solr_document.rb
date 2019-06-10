@@ -11,6 +11,8 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
   use_extension(Hydra::ContentNegotiation)
 
+  attribute :resource_type, Solr::String, solr_name('resource_type')
+
   def self.solrized_methods(property_names, model)
     property_names.each do |property_name|
       define_method property_name.to_sym do
@@ -18,6 +20,11 @@ class SolrDocument
         valid_solr_doc_values(values, model, property_name)
       end
     end
+  end
+
+  def itemtype
+    types = resource_type || ''
+    ResourceTypesService.microdata_type(types)
   end
 
   private
