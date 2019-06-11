@@ -3,7 +3,7 @@
 RSpec.describe GenericIndexer do
   let(:indexer) { described_class.new(work) }
   let(:solr_doc) { indexer.generate_solr_document }
-  let(:work) { create(:generic, license: ['MyLicense'], rights_statement: ['MyRights'], language: ['MyLanguage']) }
+  let(:work) { Generic.new(resource_type: 'MyType') }
 
   it { expect(solr_doc.type_label).to eq 'MyType' }
   it { expect(solr_doc['license_tesim']).to eq ['MyLicense'] }
