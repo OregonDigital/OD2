@@ -5,5 +5,5 @@ RSpec.describe DocumentIndexer do
   let(:solr_doc) { indexer.generate_solr_document }
   let(:work) { build(:document, resource_type: 'MyType') }
 
-  it { expect(solr_doc['type_label_tesim']).to eq 'MyType' }
+  it { expect(solr_doc['type_label_ssim']).to eq 'MyType' }
 end
