@@ -8,8 +8,6 @@ module OregonDigital
     end
 
     def all_labels(values)
-      Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
-      Rails.logger.info values
       @authority.all.select { |r| values.include?(r[:id]) }.map { |hash| hash['label'] }.first
     end
 
