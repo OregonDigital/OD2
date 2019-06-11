@@ -27,6 +27,10 @@ class SolrDocument
     ResourceTypesService.microdata_type(types)
   end
 
+  def resource_type
+    self[Solrizer.solr_name('resource_type', :stored_searchable)]
+  end
+
   private
 
   def valid_solr_doc_values(values, model, property_name)
