@@ -8,7 +8,9 @@ module OregonDigital
     end
 
     def all_labels(values)
-      @authority.all.select { |r| values.include?(r[:id]) }.map { |hash| hash['label'] }
+      Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
+      Rails.logger.info values
+      @authority.all.select { |r| values.include?(r[:id]) }.map { |hash| hash['label'] }.first
     end
 
     def select_sorted_all_options
