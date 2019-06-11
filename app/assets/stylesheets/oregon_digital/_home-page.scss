@@ -1,0 +1,80 @@
+@media (min-width: 768px) {
+   #content-wrapper {
+    width: 90%;
+  }
+}
+
+// Fix bug in Bootstrap where dropdowns before buttons always have rounded edges
+.input-group-btn:last-child > .btn:not(:last-child),
+.input-group-btn:last-child > .facets-toggle:not(:last-child),
+td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.image-masthead {
+  // Remove controls background color
+  .navbar {
+    background: none;
+    padding-bottom: 5em;
+  }
+  .input-group {
+    width: 100%;
+    input {
+      width: 100%;
+    }
+    .input-group-btn {
+      width: 55%;
+
+      button:first-child {
+        width: 55%;
+      }
+      button:last-child {
+        width: 25%;
+      }
+      .caret {
+        margin-left: 75%;
+      }
+    }
+  }
+}
+#masthead {
+  background-color: #f9f3f1;
+  font-size: 1.25em;
+  li {
+    min-width: 55px;
+    a .login-icon-only {
+      color: white;
+    }
+  }
+  .osu-login {
+    background-color: #d93c02;
+  }
+  .uo-login {
+    background-color: #0d4530;
+  }
+}
+
+#preface {
+  div:last-child {
+    text-align: center;
+    a {
+      width: 165px;
+      margin-bottom: 0.5em;
+    }
+  }
+  padding: 5em 0;
+}
+#preface,
+#collections,
+#items {
+  padding-bottom: 5em;
+}
+#collections,
+#items {
+  font-size: 1.5em;
+}
+
+body {
+  background-color: #f9f3f1;
+}
