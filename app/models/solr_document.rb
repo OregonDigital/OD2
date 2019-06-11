@@ -34,6 +34,7 @@ class SolrDocument
   private
 
   def valid_solr_doc_values(values, model, property_name)
+    Rails.logger.info values
     if values.respond_to?(:each)
       values.reject(&:blank?)
     elsif values.blank?
