@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :document do
     sequence(:title) { |n| ["title-#{n}"] }
-    resource_type { "MyType" }
+    resource_type { 'MyType' }
   end
 end
