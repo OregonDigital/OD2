@@ -74,19 +74,18 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  #config.before(:suite) do
-  #  DatabaseCleaner.strategy = :transaction
-  #  DatabaseCleaner.clean_with(:truncation)
-  #end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
   config.around do |example|
     if example.metadata[:type] == :system
       example.run
     else
-      example.run
-      #DatabaseCleaner.cleaning do
-      #  example.run
-      #end
+      DatabaseCleaner.cleaning do
+        example.run
+      end
     end
   end
 

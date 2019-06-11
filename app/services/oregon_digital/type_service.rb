@@ -8,8 +8,6 @@ module OregonDigital
     end
 
     def all_labels(values)
-      puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-      puts @authority.all.select { |r| puts r['id'] == values }
       @authority.all.select { |r| r['id'] == values }.map { |hash| hash['label'] }.first
     end
 
