@@ -15,7 +15,11 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_rights_statement_label(solr_doc, rights_statement_labels)
       index_license_label(solr_doc, license_labels)
       index_language_label(solr_doc, language_labels)
-      index_type_label(solr_doc, type_label)
+      solr_doc['type_label_sim'] = type_label
+      solr_doc['type_label_ssim'] = type_label
+      solr_doc['type_label_tesim'] = type_label
+
+      Rails.logger.info solr_doc['type_label_tesim']
     end
   end
 
@@ -38,8 +42,6 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_type_label(solr_doc, type_label)
-    solr_doc['type_label_sim'] = type_label
-    solr_doc['type_label_ssim'] = type_label
-    solr_doc['type_label_tesim'] = type_label
+    
   end
 end
