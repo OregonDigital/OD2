@@ -3,7 +3,7 @@
 RSpec.describe ImageIndexer do
   let(:indexer) { described_class.new(work) }
   let(:solr_doc) { indexer.generate_solr_document }
-  let(:work) { build(:image, resource_type: 'MyType') }
+  let(:work) { create(:image) }
 
-  it { expect(solr_doc['type_label_ssim']).to eq 'MyType' }
+  it { expect(solr_doc['type_label_tesim']).to eq 'MyType' }
 end
