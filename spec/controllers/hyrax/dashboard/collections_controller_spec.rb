@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Dashboard::OregonDigital::CollectionsController, type: :controller do
+RSpec.describe Hyrax::Dashboard::CollectionsController, type: :controller do
   let(:valid_params) do
     {
       facet_configuration: 'facet[]=1&facet[]=0',
