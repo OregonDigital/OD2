@@ -15,9 +15,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_rights_statement_label(solr_doc, rights_statement_labels)
       index_license_label(solr_doc, license_labels)
       index_language_label(solr_doc, language_labels)
-      solr_doc['type_label_sim'] = type_label
-      solr_doc['type_label_ssim'] = type_label
-      solr_doc['type_label_tesim'] = type_label
+      index_type_label(solr_doc, type_label)
     end
   end
 
@@ -37,5 +35,11 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['language_label_sim'] = language_labels
     solr_doc['language_label_ssim'] = language_labels
     solr_doc['language_label_tesim'] = language_labels
+  end
+
+  def index_type_label(solr_doc, type_label)
+    solr_doc['type_label_sim'] = type_label
+    solr_doc['type_label_ssim'] = type_label
+    solr_doc['type_label_tesim'] = type_label
   end
 end
