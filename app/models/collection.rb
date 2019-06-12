@@ -6,8 +6,9 @@ class Collection < ActiveFedora::Base
 
   include ::Hyrax::CollectionBehavior
   # You can replace these metadata if they're not suitable
-  include Hyrax::BasicMetadata
+  include OregonDigital::CollectionMetadata
   self.indexer = Hyrax::CollectionWithBasicMetadataIndexer
+
 
   delegate :facet_configurable?, to: :collection_type
 
