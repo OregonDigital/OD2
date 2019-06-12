@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :image do
     sequence(:title) { |n| ["title-#{n}"] }
+    resource_type { 'MyType' }
     color_content { ['Color'] }
     color_space { ['RGB'] }
     height { '100' }
