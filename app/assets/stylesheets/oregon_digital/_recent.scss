@@ -1,0 +1,30 @@
+.collection-highlights {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+  img {
+    border: none;
+    height: 100%;
+    margin-right: 15px;
+    margin-top: 3px;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+.recent-item {
+  border-top: none;
+  display: inline-block;
+  font-size: 0.9em;
+  padding: 8px 0;
+
+  img {
+    width: 100%;
+    float: none;
+    // padding-right: 1em;
+  }
+  a p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

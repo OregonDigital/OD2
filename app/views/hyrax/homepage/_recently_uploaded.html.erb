@@ -1,0 +1,9 @@
+<% if recent_documents.blank? %>
+  <p><%= t('.no_public') %></p>
+<% else %>
+  <div id="recent_docs">
+    <ol class="recent_uploads">
+      <%= render partial: "recent_document", collection: recent_documents %>
+    </ol>
+  </div>
+<% end %>

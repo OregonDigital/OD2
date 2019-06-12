@@ -1,0 +1,33 @@
+<div id="preface" class="row">
+  <div class="col-sm-3">
+    <!-- @TODO: Add university badges -->
+  </div>
+  <div class="col-sm-6">
+    <p>
+      The collections of Oregon Digital are primarily created to support the teaching and research missions of the University of Oregon and Oregon State University.
+      The collections are comprised of unique digitized and born-digital materials including photographs, articles, sheet music, manuscripts, ephemera, and more.
+      Oregon Digitial is collaboratively managed by the Digital Scholarhsip Services of the University of Oregon Libraries and by Oregon State University Libraries.
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <!-- @TODO: Set educators and researchers link -->
+    <a class="btn btn-primary btn-lg">For Educators</a>
+    <a class="btn btn-primary btn-lg">For Researchers</a>
+  </div>
+</div>
+
+<div id="collections" class="row">
+  <h2>Latest Collections</h2>
+  <%= render 'explore_collections', collections: @presenter.collections %>
+  <%= link_to t('hyrax.homepage.admin_sets.link'),
+              main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}),
+              class: 'btn btn-primary btn-lg pull-right' %>
+</div>
+
+<div id="items" class="row">
+  <h2>Latest Items</h2>
+  <%= render 'recently_uploaded', recent_documents: @recent_documents %>
+  <%= link_to t('oregon_digital.homepage.works.link'),
+              main_app.search_catalog_path(sort: 'system_create_dtsi desc'),
+              class: 'btn btn-primary btn-lg pull-right' %>
+</div>
