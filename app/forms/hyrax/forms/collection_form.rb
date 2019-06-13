@@ -21,7 +21,7 @@ module Hyrax
       delegate :blacklight_config, to: Hyrax::CollectionsController
 
       self.terms = [:alternative, :resource_type, :title, :creator, :contributor, :description,
-                    :keyword, :license, :publisher, :date_created, :subject, :language,
+                    :license, :publisher, :date_created, :subject, :language,
                     :representative_id, :thumbnail_id, :identifier,
                     :related_url, :visibility, :collection_type_gid]
 
@@ -65,8 +65,8 @@ module Hyrax
             @attributes["alternative"] << value
           end
           @attributes["alternative"].delete(@attributes["alternative"].sort.first) unless @attributes["alternative"].empty?
-          return @attributes["title"].sort.first unless @attributes["title"].empty?
-          return ""
+          return @attributes["title"].sort unless @attributes["title"].empty?
+          return [""]
         end
         super
       end
@@ -85,15 +85,9 @@ module Hyrax
 
       # Terms that appear above the accordion
       def primary_terms
-        [:title, :description]
-      end
-
-      # Terms that appear within the accordion
-      def secondary_terms
-        [:alternative,
+        [:title, :description, :alternative,
          :creator,
          :contributor,
-         :keyword,
          :license,
          :publisher,
          :date_created,
@@ -102,6 +96,11 @@ module Hyrax
          :identifier,
          :related_url,
          :resource_type]
+      end
+
+      # Terms that appear within the accordion
+      def secondary_terms
+        []
       end
 
       def banner_info
