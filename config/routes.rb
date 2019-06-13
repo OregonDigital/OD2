@@ -34,19 +34,6 @@ Rails.application.routes.draw do
   root 'hyrax/homepage#index'
   curation_concerns_basic_routes
   concern :exportable, Blacklight::Routes::Exportable.new
-  namespace :dashboard do
-    resources :collections, controller: 'oregon_digital/collections' do # Dashboard -> All Collections and CRUD
-      member do
-        get 'page/:page', action: :index
-        get 'facet/:id', action: :facet, as: :dashboard_facet
-        get :files
-      end
-      collection do
-        put '', action: :update
-        put :remove_member
-      end
-    end
-  end
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
