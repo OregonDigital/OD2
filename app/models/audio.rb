@@ -1,8 +1,9 @@
 # frozen_string_literal:true
 
 # Sets the expected attributes and other important values for an audio work
-class Audio < Generic
+class Audio < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ::OregonDigital::WorkBehavior
 
   self.indexer = AudioIndexer
   # Change this to restrict which works can be added as a child.
