@@ -10,7 +10,6 @@ class ControlledVocabularyInput < MultiValueInput
   private
 
     def build_field(value, index)
-      slee
       options = input_html_options.dup
       value = value.resource if value.is_a? ActiveFedora::Base
 
