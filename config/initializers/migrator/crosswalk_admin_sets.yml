@@ -153,7 +153,7 @@ crosswalk:
     admin_set_id: osu-scarc-admin
   - primary_set: osu-historical-publications
     admin_set_id: osu-scarc-admin
-  - primary_set: osu-scarc-admin
+  - primary_set: osu-scarc
     admin_set_id: osu-scarc-admin
   - primary_set: osu-sports-media-guides
     admin_set_id: osu-scarc-admin
