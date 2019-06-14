@@ -41,6 +41,18 @@ module Hyrax
         @scope = ProxyScope.new(current_ability, repository, blacklight_config)
       end
 
+      def initialize_field(key)
+        return if [:embargo_release_date, :lease_expiration_date].include?(key)
+        # rubocop:disable Lint/AssignmentInCondition
+        if class_name = model_class.properties[key.to_s].try(:class_name)
+          # Initialize linked properties such as based_near
+          self[key] += [class_name.new]
+        else
+          super
+        end
+        # rubocop:enable Lint/AssignmentInCondition
+      end
+
       # Cast back to multi-value when saving
       # Reads from form
       def self.model_attributes(attributes)
