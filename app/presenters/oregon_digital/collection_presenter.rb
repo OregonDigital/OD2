@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OregonDigital
   class CollectionPresenter > Hyrax::CollectionPresenter
     delegate :title, :description, :creator, :contributor, :subject, :publisher, :language, :embargo_release_date,
@@ -8,8 +10,8 @@ module OregonDigital
     # Terms is the list of fields displayed by
     # app/views/collections/_show_descriptions.html.erb
     def self.terms
-      [:total_items, :size, :resource_type, :creator, :contributor, :license, :publisher, :date_created, :subject,
-       :language, :identifier, :related_url, :institution, :date, :repository]
+      %i[total_items size resource_type creator contributor license publisher date_created 
+         subject language identifier related_url institution date repository]
     end
   end
 end
