@@ -26,9 +26,9 @@ module OregonDigital
 
         if key == :title
           @attributes['title'].each do |value|
-            @attributes['alternative'] << value
+            @attributes['alt_title'] << value
           end
-          @attributes['alternative'].delete(@attributes['alternative'].sort.first) unless @attributes['alternative'].empty?
+          @attributes['alt_title'].delete(@attributes['alt_title'].sort.first) unless @attributes['alt_title'].empty?
           return @attributes['title'].sort unless @attributes['title'].empty?
 
           return ['']
