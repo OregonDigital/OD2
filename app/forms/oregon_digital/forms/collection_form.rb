@@ -21,6 +21,22 @@ module OregonDigital
         # rubocop:enable Lint/AssignmentInCondition
       end
 
+      def [](key)
+        return model.member_of_collection_ids if key == :member_of_collection_ids
+
+        if key == :title
+          @attributes['title'].each do |value|
+            @attributes['alternative'] << value
+          end
+          @attributes['alternative'].delete(@attributes['alternative'].sort.first) unless @attributes['alternative'].empty?
+          return @attributes['title'].sort unless @attributes['title'].empty?
+
+          return ['']
+
+        end
+        super
+      end
+
       def primary_terms
         %i[title description
            creator contributor
