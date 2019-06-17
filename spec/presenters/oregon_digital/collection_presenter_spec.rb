@@ -6,7 +6,7 @@ RSpec.describe OregonDigital::CollectionPresenter do
           id: 'adc12v',
           description: ['a nice collection'],
           title: ['A clever title'],
-          resource_type: ['Collection'],
+          resource_type: 'Collection',
           related_url: ['http://example.com/'],
           date_created: ['some date'])
   end
