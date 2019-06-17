@@ -1,0 +1,66 @@
+RSpec.describe OregonDigital::Forms::CollectionForm do
+  let(:collection) { build(:collection) }
+  let(:ability) { Ability.new(create(:user)) }
+  let(:repository) { double }
+  let(:form) { described_class.new(collection, ability, repository) }
+
+  describe "#terms" do
+    let(:terms) { described_class.terms }
+
+    it do
+      terms.to eq [:resource_type, 
+                   :title, 
+                   :creator, 
+                   :contributor, 
+                   :description, 
+                   :license, 
+                   :publisher,
+                   :date_created, 
+                   :subject, 
+                   :language, 
+                   :representative_id, 
+                   :thumbnail_id, 
+                   :identifier,
+                   :related_url, 
+                   :visibility, 
+                   :collection_type_gid, 
+                   :institution, 
+                   :date, 
+                   :repository]
+    end
+  end
+
+  describe "#primary_terms" do
+    let(:primary_terms) { form.primary_terms }
+
+    it { expect(primary_terms).to eq([:title, :description,
+                            :creator, :contributor,
+                            :license, :publisher,
+                            :date_created, :subject,
+                            :language, :identifier,
+                            :related_url, :resource_type,
+                            :institution, :date,
+                            :repository, :description]) }
+  end
+
+  describe "#secondary_terms" do
+    let(:secondary_terms) { form.secondary_terms }
+
+    it { is_expected.to eq [] }
+    end
+  end
+
+  describe "#[]" do
+    it 'has one element' do
+      expect(form['description']).to eq ['']
+    end
+  end
+
+  describe "initialized fields" do
+    context "for :description" do
+      let(:description) { form[:description] }
+
+      it { description.to eq [''] }
+    end
+  end
+end
