@@ -9,7 +9,6 @@ class Collection < ActiveFedora::Base
   include OregonDigital::CollectionMetadata
   self.indexer = Hyrax::CollectionIndexer
 
-
   delegate :facet_configurable?, to: :collection_type
 
   # Identify facets available to configure
