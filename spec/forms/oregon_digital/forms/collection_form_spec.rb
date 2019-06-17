@@ -43,7 +43,7 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
                                      language identifier
                                      related_url resource_type
                                      institution date
-                                     repository description])
+                                     repository])
     }
   end
 

@@ -2,7 +2,7 @@
 
 RSpec.describe OregonDigital::CollectionPresenter do
   let(:collection) do
-    build(:collection_lw,
+    build(:collection,
           id: 'adc12v',
           description: ['a nice collection'],
           title: ['A clever title'],
