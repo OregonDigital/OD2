@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module OregonDigital
   module Forms
+    # Collection Form Override
     class CollectionForm < Hyrax::Forms::CollectionForm
       self.terms = %i[resource_type title creator contributor description license publisher
                       date_created subject language representative_id thumbnail_id identifier
@@ -7,6 +10,7 @@ module OregonDigital
 
       def initialize_field(key)
         return if %i[embargo_release_date lease_expiration_date].include?(key)
+
         # rubocop:disable Lint/AssignmentInCondition
         if class_name = model_class.properties[key.to_s].try(:class_name)
           # Initialize linked properties such as based_near
@@ -18,20 +22,13 @@ module OregonDigital
       end
 
       def primary_terms
-        %i[title
-           description
-           creator
-           contributor
-           license
-           publisher
-           date_created
-           subject
-           language
-           identifier
-           related_url
-           resource_type
-           institution
-           date
+        %i[title description
+           creator contributor
+           license publisher
+           date_created subject
+           language identifier
+           related_url resource_type
+           institution date
            repository]
       end
 
