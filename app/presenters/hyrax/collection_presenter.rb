@@ -36,7 +36,7 @@ module Hyrax
     delegate :title, :description, :creator, :contributor, :subject, :publisher, :language, :embargo_release_date,
              :lease_expiration_date, :license, :date_created, :resource_type, :related_url, :identifier, :thumbnail_path,
              :title_or_label, :collection_type_gid, :create_date, :modified_date, :visibility, :edit_groups, :edit_people,
-             to: :solr_document
+             :institution, :date, :repository, to: :solr_document
 
     # Terms is the list of fields displayed by
     # app/views/collections/_show_descriptions.html.erb

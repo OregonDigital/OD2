@@ -23,7 +23,7 @@ module Hyrax
       self.terms = [:alternative, :resource_type, :title, :creator, :contributor, :description,
                     :license, :publisher, :date_created, :subject, :language,
                     :representative_id, :thumbnail_id, :identifier,
-                    :related_url, :visibility, :collection_type_gid]
+                    :related_url, :visibility, :collection_type_gid, :institution, :date, :repository]
 
       self.required_fields = [:title]
 
@@ -107,7 +107,10 @@ module Hyrax
          :language,
          :identifier,
          :related_url,
-         :resource_type]
+         :resource_type, 
+         :institution, 
+         :date, 
+         :repository]
       end
 
       # Terms that appear within the accordion
