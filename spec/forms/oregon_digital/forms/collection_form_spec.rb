@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe OregonDigital::Forms::CollectionForm do
   let(:collection) { build(:collection) }
   let(:ability) { Ability.new(create(:user)) }
@@ -8,7 +10,7 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
     let(:terms) { described_class.terms }
 
     it do
-      expect(terms).to eq %i[resource_type 
+      expect(terms).to eq %i[resource_type
                              title
                              creator
                              contributor
@@ -33,14 +35,16 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
   describe '#primary_terms' do
     let(:primary_terms) { form.primary_terms }
 
-    it { expect(primary_terms).to eq(%i[title description
-                                        creator contributor
-                                        license publisher
-                                        date_created subject
-                                        language identifier
-                                        related_url resource_type
-                                        institution date
-                                        repository description]) }
+    it { 
+      expect(primary_terms).to eq(%i[title description
+                                     creator contributor
+                                     license publisher
+                                     date_created subject
+                                     language identifier
+                                     related_url resource_type
+                                     institution date
+                                     repository description]) 
+    }
   end
 
   describe '#secondary_terms' do
@@ -56,7 +60,7 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
   end
 
   describe 'initialized fields' do
-    context 'for :description' do
+    context 'with :description' do
       let(:description) { form[:description] }
 
       it { expect(description).to eq [''] }
