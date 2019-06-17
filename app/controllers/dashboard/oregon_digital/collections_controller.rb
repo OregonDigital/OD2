@@ -6,6 +6,7 @@ module Dashboard
     class CollectionsController < Hyrax::Dashboard::CollectionsController
 
       self.form_class = OregonDigital::Forms::CollectionForm
+      self.presenter_class = OregonDigital::CollectionPresenter
 
       # Override update to add facet processing
       def update
