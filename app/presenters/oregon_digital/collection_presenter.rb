@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module OregonDigital
-  class CollectionPresenter > Hyrax::CollectionPresenter
+  class CollectionPresenter < Hyrax::CollectionPresenter
     delegate :title, :description, :creator, :contributor, :subject, :publisher, :language, :embargo_release_date,
              :lease_expiration_date, :license, :date_created, :resource_type, :related_url, :identifier, :thumbnail_path,
              :title_or_label, :collection_type_gid, :create_date, :modified_date, :visibility, :edit_groups, :edit_people,
