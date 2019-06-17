@@ -10,12 +10,12 @@ class GenericIndexer < Hyrax::WorkIndexer
       rights_statement_labels = OregonDigital::RightsStatementService.new.all_labels(object.rights_statement)
       license_labels = OregonDigital::LicenseService.new.all_labels(object.license)
       language_labels = OregonDigital::LanguageService.new.all_labels(object.language)
-      type_labels = OregonDigital::TypeService.new.all_labels(object.resource_type)
+      type_label = OregonDigital::TypeService.new.all_labels(object.resource_type)
 
       index_rights_statement_label(solr_doc, rights_statement_labels)
       index_license_label(solr_doc, license_labels)
       index_language_label(solr_doc, language_labels)
-      index_type_label(solr_doc, type_labels)
+      index_type_label(solr_doc, type_label)
     end
   end
 
@@ -37,9 +37,9 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['language_label_tesim'] = language_labels
   end
 
-  def index_type_label(solr_doc, type_labels)
-    solr_doc['type_label_sim'] = type_labels
-    solr_doc['type_label_ssim'] = type_labels
-    solr_doc['type_label_tesim'] = type_labels
+  def index_type_label(solr_doc, type_label)
+    solr_doc['type_label_sim'] = type_label
+    solr_doc['type_label_ssim'] = type_label
+    solr_doc['type_label_tesim'] = type_label
   end
 end

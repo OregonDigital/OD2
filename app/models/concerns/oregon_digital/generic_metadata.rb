@@ -12,7 +12,7 @@ module OregonDigital
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
       property :import_url, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#importUrl'), multiple: false
-      property :resource_type, predicate: ::RDF::Vocab::DC.type do |index|
+      property :resource_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
       property :date_created, predicate: ::RDF::Vocab::DC.created do |index|

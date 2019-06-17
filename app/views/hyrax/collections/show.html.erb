@@ -115,7 +115,7 @@
       </div>
 
       <%# OVERRIDE FROM HYRAX to add search sidebar from Blacklight %>
-      <div class="hyc-blacklight hyc-bl-results col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
+      <div class="hyc-blacklight hyc-bl-results <%= 'col-md-9 col-md-push-3 col-sm-8 col-sm-push-4' unless @configured_facets.empty? %>">
         <%= render_document_index @member_docs %>
       </div>
 

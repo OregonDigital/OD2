@@ -213,6 +213,9 @@ en:
           military_branch_label_tesim: Military Branch
           subject_label_tesim: Subject
   hyrax:
+    search:
+      button:
+        html: 'Go'
     product_name: 'Hyrax'
     product_twitter_handle: '@SamveraRepo'
     institution_name: 'Institution'
@@ -228,3 +231,10 @@ en:
         login: 'OSU Login'
       uo:
         login: 'UO Login'
+  simple_form:
+    hints:
+      collection_type:
+        facet_configurable: Allow users to configure facet availability, order, and labels
+    labels:
+      collection_type:
+        facet_configurable: FACET CONFIGURABLE
