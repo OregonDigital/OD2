@@ -35,7 +35,7 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
   describe '#primary_terms' do
     let(:primary_terms) { form.primary_terms }
 
-    it { 
+    it {
       expect(primary_terms).to eq(%i[title description
                                      creator contributor
                                      license publisher
@@ -43,7 +43,7 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
                                      language identifier
                                      related_url resource_type
                                      institution date
-                                     repository description]) 
+                                     repository description])
     }
   end
 
