@@ -47,7 +47,6 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
     let(:secondary_terms) { form.secondary_terms }
 
     it { expect(secondary_terms).to eq [] }
-    end
   end
 
   describe '#[]' do
