@@ -3,10 +3,15 @@ Metrics/AbcSize:
     - 'app/indexers/oregon_digital/deep_indexing_service.rb'
     - 'app/controllers/hyrax/contact_form_controller.rb'
     - 'app/indexers/generic_indexer.rb'
+    - 'app/forms/oregon_digital/forms/collection_form.rb'
     - 'lib/oregon_digital/triplestore.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
     - 'spec/support/helpers/session_helpers.rb'
+
+Style/UnneededSort:
+  Exclude:
+    - 'app/forms/oregon_digital/forms/collection_form.rb'
 
 Style/Documentation:
   Exclude:
@@ -54,6 +59,7 @@ Style/SymbolArray:
 RSpec/ExampleLength:
   Exclude:
     - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
+    - 'spec/forms/oregon_digital/forms/collection_form_spec.rb'
 
 RSpec/MultipleExpectations:
   Exclude:
