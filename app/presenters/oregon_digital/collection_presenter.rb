@@ -11,8 +11,8 @@ module OregonDigital
     # Terms is the list of fields displayed by
     # app/views/collections/_show_descriptions.html.erb
     def self.terms
-      %i[total_items size resource_type creator contributor license publisher date_created
-         subject language identifier related_url institution date repository]
+      %i[total_items size resource_type creator_label contributor_label license publisher_label date_created
+         subject_label language identifier related_url institution_label date repository_label]
     end
   end
 end
