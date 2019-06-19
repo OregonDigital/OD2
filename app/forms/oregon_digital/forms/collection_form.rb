@@ -54,7 +54,7 @@ module OregonDigital
 
       def self.build_permitted_params
         params = super
-        ['creator', 'contributor', 'institution', 'repository', 'publisher', 'subject'].each do |prop|
+        %w[creator contributor institution repository publisher subject].each do |prop|
           params << { "#{prop}_attributes" => %i[id _destroy] }
         end
         params << :license
