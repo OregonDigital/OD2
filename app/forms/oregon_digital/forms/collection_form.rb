@@ -51,6 +51,15 @@ module OregonDigital
       def secondary_terms
         []
       end
+
+      def self.build_permitted_params
+        params = super
+        %w[creator contributor institution repository publisher subject].each do |prop|
+          params << { "#{prop}_attributes" => %i[id _destroy] }
+        end
+        params << :license
+        params
+      end
     end
   end
 end
