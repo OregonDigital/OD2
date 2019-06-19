@@ -18,8 +18,8 @@ RSpec.describe OregonDigital::CollectionPresenter do
     let(:terms) { described_class.terms }
 
     it do
-      expect(terms).to eq %i[total_items size resource_type creator contributor license publisher
-                             date_created subject language identifier related_url institution date repository]
+      expect(terms).to eq %i[total_items size resource_type creator_label contributor_label license publisher_label
+                             date_created subject_label language identifier related_url institution_label date repository_label]
     end
   end
 
