@@ -23,6 +23,7 @@ export default class LinkedData {
 
   // Store the uri in the associated hidden id field
   setIdentifier(uri) {
+    alert("YOOOOOOOOOOO")
     this.element.closest('.field-wrapper').find('[data-id]').val(uri);
   }
 
