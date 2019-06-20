@@ -1,0 +1,43 @@
+# frozen_string_literal: true
+
+RSpec.describe OregonDigital::CollectionPresenter do
+  let(:collection) do
+    build(:collection,
+          id: 'adc12v',
+          description: ['a nice collection'],
+          title: ['A clever title'],
+          resource_type: 'Collection',
+          related_url: ['http://example.com/'],
+          date_created: ['some date'])
+  end
+  let(:ability) { double }
+  let(:presenter) { described_class.new(solr_doc, ability) }
+  let(:solr_doc) { SolrDocument.new(collection.to_solr) }
+
+  describe '.terms' do
+    let(:terms) { described_class.terms }
+
+    it do
+      expect(terms).to eq %i[total_items size resource_type creator_label contributor_label license publisher_label
+                             date_created subject_label language identifier related_url institution_label date repository_label]
+    end
+  end
+
+  # Mock bytes so collection does not have to be saved.
+  before { allow(collection).to receive(:bytes).and_return(0) }
+
+  describe 'collection type methods' do
+    let(:props) do
+      %i[title description creator contributor subject publisher language embargo_release_date
+         lease_expiration_date license date_created resource_type related_url identifier thumbnail_path
+         title_or_label collection_type_gid create_date modified_date visibility edit_groups edit_people
+         institution date repository]
+    end
+
+    it do
+      props.each do |prop|
+        expect(presenter).to delegate_method(prop).to(:solr_document)
+      end
+    end
+  end
+end

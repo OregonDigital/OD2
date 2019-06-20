@@ -22,7 +22,9 @@ class SingleValueControlledVocabularyInput < ControlledVocabularyInput
 
   def inner_wrapper
     <<-HTML
-        #{yield}
+        <li class="field-wrapper">
+          #{yield}
+        </li>
     HTML
   end
 end

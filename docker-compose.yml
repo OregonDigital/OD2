@@ -39,9 +39,11 @@ services:
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
       - AWS_S3_APP_KEY=awss3key
       - AWS_S3_APP_SECRET=awsappsecret
-      - AWS_S3_BUCKET=awss3bucket
+      - AWS_S3_BUCKET=awss3uploadbucket
+      - AWS_S3_INGEST_BUCKET=awss3ingestbucket
       - AWS_S3_REGION=awss3region
-      - BROWSEEVERYTHING_FILESYSTEM_PATH=/tmp
+      - BROWSEEVERYTHING_FILESYSTEM_PATH=/data/tmp
+      - INGEST_LOCAL_PATH=/data/tmp
       - FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
       - GEONAMES_USERNAME=etsdev
@@ -104,9 +106,11 @@ services:
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
       - AWS_S3_APP_KEY=awss3key
       - AWS_S3_APP_SECRET=awsappsecret
-      - AWS_S3_BUCKET=awss3bucket
+      - AWS_S3_BUCKET=awss3uploadbucket
+      - AWS_S3_INGEST_BUCKET=awss3ingestbucket
       - AWS_S3_REGION=awss3region
-      - BROWSEEVERYTHING_FILESYSTEM_PATH=/tmp
+      - BROWSEEVERYTHING_FILESYSTEM_PATH=/data/tmp
+      - INGEST_LOCAL_PATH=/data/tmp
       - CAPYBARA_APP_HOST=http://test:3001
       - CAS_HOST=login.oregonstate.edu
       - CAS_URL=https://login.oregonstate.edu/cas

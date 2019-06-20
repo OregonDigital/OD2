@@ -8,6 +8,7 @@ Hyrax::Migrator::Middleware.config do |config|
     Hyrax::Migrator::Actors::ModelLookupActor,
     Hyrax::Migrator::Actors::AdminSetMembershipActor,
     Hyrax::Migrator::Actors::VisibilityLookupActor,
+    Hyrax::Migrator::Actors::FileIdentityActor,
     Hyrax::Migrator::Actors::FileUploadActor,
     Hyrax::Migrator::Actors::PersistWorkActor
   ]
@@ -55,8 +56,21 @@ Hyrax::Migrator.config do |config|
   #                                   :file_system
   #                                 end
 
-  # The destination file system path used mainly for :file_system service. It defaults to environment BROWSEEVERYTHING_FILESYSTEM_PATH.
+  # The destination file system path used mainly for :file_system storage during file uploads. It defaults to environment BROWSEEVERYTHING_FILESYSTEM_PATH.
   # config.file_system_path = ENV['BROWSEEVERYTHING_FILESYSTEM_PATH']
+
+  # The service used to ingest bags during migration. It defaults to file_system for test and development. On production, it defaults to aws_s3
+  # config.ingest_storage_service = if Rails.env.production?
+  #                                   :aws_s3
+  #                                 else
+  #                                   :file_system
+  #                                 end
+
+  # The file system path used mainly for :file_system storage during mass ingest. It defaults to environment INGEST_LOCAL_PATH.
+  # config.ingest_local_path = ENV['INGEST_LOCAL_PATH']
+
+  # The AWS S3 bucket used for :aws_s3 storage during mass ingest. It defaults to environment AWS_S3_INGEST_BUCKET.
+  # config.aws_s3_ingest_bucket = ENV['AWS_S3_INGEST_BUCKET']
 
   # The AWS S3 app key used for :aws_s3 service. It defaults to environment AWS_S3_APP_KEY.
   # config.aws_s3_app_key = ENV['AWS_S3_APP_KEY']
@@ -64,7 +78,7 @@ Hyrax::Migrator.config do |config|
   # The AWS S3 app key used for :aws_s3 service. It defaults to environment AWS_S3_APP_SECRET.
   # config.aws_s3_app_secret = ENV['AWS_S3_APP_SECRET']
 
-  # The AWS S3 bucket (destination) used for :aws_s3 service. It defaults to environment AWS_S3_BUCKET
+  # The AWS S3 bucket (destination) used for :aws_s3 storage service during file uploads. It defaults to environment AWS_S3_BUCKET
   # config.aws_s3_bucket = ENV['AWS_S3_BUCKET']
 
   # The AWS S3 region (destination) used for :aws_s3 service. It defaults to environment AWS_S3_REGION

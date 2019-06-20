@@ -2,6 +2,9 @@
 
 require Hyrax::Engine.root.join('lib', 'hyrax', 'search_state.rb')
 Hyrax::Dashboard::CollectionsController.class_eval do
+  self.form_class = OregonDigital::Forms::CollectionForm
+  self.presenter_class = OregonDigital::CollectionPresenter
+
   # Override update to add facet processing
   def update
     unless params[:update_collection].nil?
