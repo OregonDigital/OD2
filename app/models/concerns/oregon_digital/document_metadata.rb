@@ -32,7 +32,9 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :larger_work, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_largerWork')
+      property :larger_work, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_largerWork') do |index|
+        index.as :stored_searchable
+      end
 
       property :number_of_pages, predicate: ::RDF::Vocab::SCHEMA.numberOfPages do |index|
         index.as :stored_searchable
