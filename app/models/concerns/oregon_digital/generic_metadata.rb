@@ -120,7 +120,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :source_condition, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/sourceCondition') do
+      property :source_condition, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/sourceCondition') do |index|
         index.as :stored_searchable
       end
 
