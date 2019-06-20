@@ -108,7 +108,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :object_orientation, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/objectOrientation'), multiple: false do
+      property :object_orientation, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/objectOrientation'), multiple: false do |index|
         index.as :stored_searchable
       end
 
@@ -124,7 +124,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :specimen_type, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/specimenType'), multiple: false do
+      property :specimen_type, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/specimenType'), multiple: false do |index|
         index.as :stored_searchable
       end
 
