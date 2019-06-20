@@ -150,7 +150,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable)
     end
-    Video.video_properties.reject { |attr| rejected_fields.include? attr }.reject{ |attr| %w[width height].include? attr }.each do |prop|
+    Video.video_properties.reject { |attr| rejected_fields.include? attr }.reject { |attr| %w[width height].include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Video.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
