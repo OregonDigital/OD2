@@ -27,7 +27,7 @@
     <% end %>
   </ul>
 
-  <%= simple_form_for @form, url: [hyrax, :dashboard, @form], html: { class: 'editor' } do |f| %>
+  <%= simple_form_for @form, url: [hyrax, :dashboard, @form], html: { data: { behavior: 'work-form'}, class: 'editor' } do |f| %>
     <div class="tab-content">
       <div id="description" class="tab-pane active">
         <div class="panel panel-default labels">
