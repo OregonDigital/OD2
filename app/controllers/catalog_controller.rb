@@ -227,7 +227,7 @@ class CatalogController < ApplicationController
       all_names = config.show_fields.values.map(&:field).join(' ')
       title_name = solr_name('title', :stored_searchable)
       field.solr_parameters = {
-        qf: "#{all_names} #{title_name} abstract_tesim license_label_tesim file_format_tesim all_text_timv",
+        qf: "#{all_names} #{title_name} abstract_tesim license_label_tesim file_format_tesim form_of_work_label_tesim all_text_timv",
         pf: title_name.to_s
       }
     end

@@ -198,17 +198,13 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :place_of_production, advance_search: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60161') do |index|
-        index.as :stored_searchable
-      end
+      
 
       property :provenance, advance_search: false, predicate: ::RDF::Vocab::DC.provenance do |index|
         index.as :stored_searchable
       end
 
-      property :publication_place, advance_search: false, predicate: ::RDF::Vocab::MARCRelators.pup do |index|
-        index.as :stored_searchable
-      end
+      
 
       property :source, advance_search: false, predicate: ::RDF::Vocab::DC.source do |index|
         index.as :stored_searchable
@@ -472,6 +468,14 @@ module OregonDigital
 
       property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location do |index|
         index.as :stored_searchable, :facetable
+      end
+
+      property :place_of_production, advance_search: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60161'), class_name: Hyrax::ControlledVocabularies::Location do |index|
+        index.as :stored_searchable
+      end
+
+      property :publication_place, advance_search: false, predicate: ::RDF::Vocab::MARCRelators.pup, class_name: Hyrax::ControlledVocabularies::Location do |index|
+        index.as :stored_searchable
       end
 
       property :ranger_district, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/rangerDistrict'),
