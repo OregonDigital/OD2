@@ -198,13 +198,9 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      
-
       property :provenance, advance_search: false, predicate: ::RDF::Vocab::DC.provenance do |index|
         index.as :stored_searchable
       end
-
-      
 
       property :source, advance_search: false, predicate: ::RDF::Vocab::DC.source do |index|
         index.as :stored_searchable
