@@ -368,6 +368,10 @@ module OregonDigital
         index.as :facetable
       end
 
+      property :original_filename, predicate: ::RDF::URI.new('http://www.loc.gov/premis/rdf/v3/originalName'), multiple: false do |index|
+        index.as :stored_searchable
+      end
+
       # End of normal properties
       # Controlled vocabulary terms
       property :arranger, predicate: ::RDF::Vocab::MARCRelators.arr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
