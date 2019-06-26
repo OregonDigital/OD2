@@ -424,7 +424,7 @@ crosswalk:
     multiple: true
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
-    multiple: true
+    multiple: false
   - property: workType
     predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
     multiple: true
