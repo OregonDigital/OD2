@@ -34,8 +34,6 @@ module OregonDigital
       end
 
       def solrize
-        Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        Rails.logger.info rdf_label.select { |label| label.language == :en } 
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label.first.to_s == rdf_subject.to_s
         [rdf_subject.to_s, { label: "#{rdf_label.select { |label| label.language == :en }.first }$#{rdf_subject}" }]
       end
