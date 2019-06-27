@@ -6,6 +6,10 @@ overrides:
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/full
     function: return_nil
-  - property: rightsHolder
+  - predicate: http://opaquenamespace.org/ns/primarySet
+    function: return_nil
+  - predicate: http://opaquenamespace.org/ns/set
+    function: return_nil
+  - property: rights_holder
     predicate: http://opaquenamespace.org/right/rightsHolder
     multiple: true
