@@ -58,6 +58,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'axe-matchers'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.17'
   gem 'debase'
