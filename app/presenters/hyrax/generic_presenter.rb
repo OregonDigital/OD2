@@ -16,5 +16,9 @@ module Hyrax
         (presenter.image? || presenter.pdf?) && current_ability.can?(:read, presenter.id)
       end
     end
+
+    def page_title
+      "#{title.first} | #{I18n.t('hyrax.product_name')}"
+    end
   end
 end
