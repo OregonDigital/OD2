@@ -55,7 +55,7 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       click_on 'Save'
       expect(page).to have_content('Test Title')
       expect(page).to have_content 'Your files are being processed by Hyrax in the background.'
-      expect(page).to be_accessible.excluding '#masthead', '.breadcrumb', '.label-success'
+      expect(page).to be_accessible.excluding '.breadcrumb', '.label-success'
 
       # save a successful screenshot if running in CI for build artifacts
       # rubocop:disable Lint/Debugger
