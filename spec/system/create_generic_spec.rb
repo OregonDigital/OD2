@@ -17,7 +17,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
     end
 
     # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
-    it do
+    it 'Creates an Generic' do
       visit new_hyrax_generic_path
 
       expect(page).to have_content 'Add New Generic'
@@ -56,7 +56,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
       click_on 'Save'
       expect(page).to have_content('Test Title')
       expect(page).to have_content 'Your files are being processed by Hyrax in the background.'
-      expect(page).to be_accessible.excluding '#masthead', '.breadcrumb', '.label-success', '.resp-sharing-button__link'
+      expect(page).to be_accessible.excluding '#masthead', '.breadcrumb', '.label-success'
 
       # save a successful screenshot if running in CI for build artifacts
       # rubocop:disable Lint/Debugger

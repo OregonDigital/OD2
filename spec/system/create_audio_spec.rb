@@ -17,7 +17,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
     end
 
     # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
-    it do
+    it 'Creates an Audio' do
       visit new_hyrax_audio_path
 
       expect(page).to have_content 'Add New Audio'
@@ -58,7 +58,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
       click_on 'Save'
       expect(page).to have_content('Test Title')
       expect(page).to have_content 'Your files are being processed by Hyrax in the background.'
-      expect(page).to be_accessible.excluding '#masthead', '.breadcrumb', '.label-success', '.resp-sharing-button__link'
+      expect(page).to be_accessible.excluding '#masthead', '.breadcrumb', '.label-success'
 
       # save a successful screenshot if running in CI for build artifacts
       # rubocop:disable Lint/Debugger
