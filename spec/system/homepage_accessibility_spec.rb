@@ -2,7 +2,7 @@
 
 RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
   before do
-    create(:content_block, name: 'marketing_text', value: '<p>Title</p>')
+    create(:content_block, name: 'marketing_text', value: '<h1>Title</h1>')
   end
   context 'with an annonymous user' do
     it 'is accessible' do
