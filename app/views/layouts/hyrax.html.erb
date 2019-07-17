@@ -10,10 +10,12 @@
     <div class="skip-to-content">
       <%= link_to "Skip to Content", "#skip-to-content" %>
     </div>
-    <%= render '/masthead' %>
-    <%= content_for(:navbar) %>
-    <%= content_for(:precontainer_content) %>
+    <header>
+      <%= render '/masthead' %>
+      <%= content_for(:navbar) %>
+    </header>
     <div id="content-wrapper" class="container" role="main">
+      <%= content_for(:precontainer_content) %>
       <%= render '/flash_msg' %>
       <%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>
       <% if content_for?(:page_header) %>

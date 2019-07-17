@@ -17,7 +17,7 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
     end
 
     # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
-    it do
+    it 'Creates an Document' do
       visit new_hyrax_document_path
 
       expect(page).to have_content 'Add New Document'
@@ -55,6 +55,7 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       click_on 'Save'
       expect(page).to have_content('Test Title')
       expect(page).to have_content 'Your files are being processed by Hyrax in the background.'
+      expect(page).to be_accessible.skipping('aria-allowed-role').excluding('.label-success')
 
       # save a successful screenshot if running in CI for build artifacts
       # rubocop:disable Lint/Debugger
