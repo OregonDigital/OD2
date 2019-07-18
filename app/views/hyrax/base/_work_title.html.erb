@@ -3,7 +3,9 @@
     <div class="col-sm-8">
       <% if index == 0 %>
         <h1><%= title %>
-          <small class="text-muted"><%= presenter.permission_badge %> <%= presenter.workflow.badge %></small>
+          <% if !current_user.nil? && current_user.admin? %>
+            <small class="text-muted"><%= presenter.permission_badge %> <%= presenter.workflow.badge %></small>
+          <% end %>
         </h1>
       <% else %>
         <h1><%= title %></h1>
