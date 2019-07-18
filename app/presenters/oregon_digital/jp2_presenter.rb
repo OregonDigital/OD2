@@ -47,7 +47,8 @@ module OregonDigital
       fake_fs = OpenStruct.new(id: 'id')
       fake_ds = OregonDigital::FileSetDerivativesService.new(fake_fs)
 
-      # This should end up looking very much like "file:///data/tmp/shared/derivatives/"
+      # This should end up looking very much like "s3:///data/tmp/shared/derivatives/"
+      # TODO: use the new derivate path stuff to get at the base path
       base_path = fake_ds.derivative_url('jp2').sub('id-jp2.jp2', '')
 
       # ...which should make *this* look like "qb%wF98%2Fmf%2F44%2F9-jp2-0005.jp2"

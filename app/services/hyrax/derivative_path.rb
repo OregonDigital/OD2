@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Hyrax
-  # OVERRIDDEN: we need to customize how derivative paths are generated for
-  # PDFs which can have dozens of derivatives (one JP2 per page)
+  # OVERRIDDEN: we need to send everything related to derivative paths in to
+  # our S3-based (and reusable, not Hyrax-only) derivative path class.
   class DerivativePath
     attr_reader :id, :destination_name
 
@@ -29,44 +29,18 @@ module Hyrax
     end
 
     def derivative_path
-      "#{path_prefix}-#{file_name}"
+      path_factory.url(label: destination_name)
     end
 
+    # Returns all known derivatives' paths for the object
     def all_paths
-      Dir.glob(root_path.join('*')).select do |path|
-        path.start_with?(path_prefix.to_s)
-      end
+      path_factory.all_urls
     end
 
     private
 
-    # @return [String] Returns the root path where derivatives will be generated into.
-    def root_path
-      Pathname.new(derivative_path).dirname
-    end
-
-    # @return <Pathname> Full prefix of the path for object.
-    def path_prefix
-      Pathname.new(Hyrax.config.derivatives_path).join(pair_path)
-    end
-
-    def pair_path
-      id.split('').each_slice(2).map(&:join).join('/')
-    end
-
-    def file_name
-      return unless destination_name
-
-      destination_name + extension
-    end
-
-    def extension
-      case destination_name
-      when 'thumbnail'
-        ".#{MIME::Types.type_for('jpg').first.extensions.first}"
-      else
-        ".#{destination_name}"
-      end
+    def path_factory
+      OregonDigital::DerivativePath.new(bucket: ENV['AWS_S3_DERIVATIVES_BUCKET'], id: id)
     end
   end
 end

@@ -144,10 +144,6 @@ Hyrax.config do |config|
   config.upload_path = -> { Rails.root.join('tmp', 'shared', 'uploads') }
   config.cache_path = -> { Rails.root.join('tmp', 'shared', 'uploads', 'cache') }
 
-  # Location on local file system where derivatives will be stored
-  # If you use a multi-server architecture, this MUST be a shared volume
-  config.derivatives_path = Rails.root.join('tmp', 'shared', 'derivatives')
-
   # Should schema.org microdata be displayed?
   # config.display_microdata = true
 
@@ -256,5 +252,3 @@ Date::DATE_FORMATS[:standard] = '%m/%d/%Y'
 
 Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local::TableBasedAuthority')
 Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::TableBasedAuthority')
-
-Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
