@@ -2,18 +2,9 @@
 <%  array_of_ids = presenter.list_of_item_ids_to_display %>
 <%  members = presenter.member_presenters_for(array_of_ids) %>
 <% if members.present? %>
-  <table class="table table-striped related-files">
-    <thead>
-      <tr>
-        <th><%= t('.thumbnail') %></th>
-        <th><%= t('.title') %></th>
-        <th><%= t('.actions') %></th>
-      </tr>
-    </thead>
-    <tbody>
+  <div class="related-files">
       <%= render partial: 'member', collection: members %>
-    </tbody>
-  </table>
+  </div>
   <div class="row">
     <% if presenter.total_pages > 1 %>
         <div class="row record-padding col-md-9">

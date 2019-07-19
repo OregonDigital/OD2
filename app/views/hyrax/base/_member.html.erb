@@ -1,9 +1,6 @@
-<tr class="<%= dom_class(member) %> attributes">
-  <td class="thumbnail">
-    <%= render_thumbnail_tag member %>
-  </td>
-  <td class="attribute attribute-filename"><%= link_to(member.link_name, contextual_path(member, @presenter)) %></td>
-  <td>
-    <%= render 'actions', member: member %>
-  </td>
-</tr>
+<div class="thumbnail <%= dom_class(member) %> attributes">
+  <%= render_thumbnail_tag member %>
+  <%= link_to(member.link_name, contextual_path(member, @presenter)) %>
+  <br>
+  <%= render 'actions', member: member %>
+</div>
