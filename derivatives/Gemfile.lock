@@ -1,0 +1,34 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    aws-eventstream (1.0.3)
+    aws-sdk (2.11.316)
+      aws-sdk-resources (= 2.11.316)
+    aws-sdk-core (2.11.316)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.11.316)
+      aws-sdk-core (= 2.11.316)
+    aws-sigv4 (1.1.0)
+      aws-eventstream (~> 1.0, >= 1.0.2)
+    connection_pool (2.2.2)
+    jmespath (1.4.0)
+    rack (2.0.7)
+    rack-protection (2.0.5)
+      rack
+    redis (4.1.2)
+    sidekiq (5.2.7)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack (>= 1.5.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aws-sdk (~> 2)
+  sidekiq
+
+BUNDLED WITH
+   1.16.6
