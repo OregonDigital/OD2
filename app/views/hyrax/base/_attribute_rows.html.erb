@@ -1,3 +1,4 @@
+<%= presenter.attribute_to_html(:description, html_dl: true, label: t("simple_form.labels.defaults.description")) %>
 <% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:description, :language, :license, :oembed_url, :resource_type, :rights_statement].include? attr }.each do |attr| %>
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
