@@ -20,5 +20,11 @@ module Hyrax
     def page_title
       "#{title.first} | #{I18n.t('hyrax.product_name')}"
     end
+
+    # Link to add to shelf functionality
+    def add_shelf_path
+      # Links to item stats page until we have shelves
+      Hyrax::Engine.routes.url_helpers.stats_work_path(self, locale: I18n.locale)
+    end
   end
 end
