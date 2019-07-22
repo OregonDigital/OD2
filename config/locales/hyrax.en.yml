@@ -213,6 +213,9 @@ en:
           military_branch_label_tesim: Military Branch
           subject_label_tesim: Subject
   hyrax:
+    base:
+      relationships:
+        header: 'Collection Information'
     search:
       button:
         html: 'Go'
