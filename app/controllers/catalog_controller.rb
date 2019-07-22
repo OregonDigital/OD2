@@ -150,28 +150,10 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable)
     end
-    Video.video_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
-      # Skip if this property isn't indexed
-      next if Video.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
-
-      # Add property as searchable all fields box and individually
-      if Video.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) unless Video.properties[prop]['advance_search']
-
-        if Video.properties[prop]['advance_search'] || Video.properties[prop]['advance_search'].nil?
-          config.add_search_field(prop) do |field|
-            solr_name = solr_name(prop, :stored_searchable)
-            field.solr_local_parameters = {
-              qf: solr_name,
-              pf: solr_name
-            }
-          end
-        end
-      end
-
-      # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Video.properties[prop].behaviors.include?(:facetable)
-    end
+    # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
+    #
+    #
+    ##########################################################################
     Generic.controlled_property_labels.each do |prop|
       label = prop.gsub('_label', '')
 
