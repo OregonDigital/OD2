@@ -16,13 +16,13 @@ class SingleValueControlledVocabularyInput < ControlledVocabularyInput
 
   def outer_wrapper
     <<-HTML
-        #{yield}
+      #{yield}
     HTML
   end
 
   def inner_wrapper
     <<-HTML
-        <li class="field-wrapper">
+        <li class="single-value-input field-wrapper">
           #{yield}
         </li>
     HTML

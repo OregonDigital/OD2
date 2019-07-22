@@ -31,7 +31,7 @@ en:
           former_owner_sim: Former Owner
           folder_name_sim: Archival Folder Name
           folder_number_sim: Archival Folder Number
-          human_readable_type_sim: Type
+          human_readable_type_sim: Object Type
           illustrator_label_sim: Illustrator
           interviewee_label_sim: Interviewee
           interviewer_label_sim: Interviewer
@@ -213,10 +213,13 @@ en:
           military_branch_label_tesim: Military Branch
           subject_label_tesim: Subject
   hyrax:
+    base:
+      relationships:
+        header: 'Collection Information'
     search:
       button:
         html: 'Go'
-    product_name: 'Hyrax'
+    product_name: 'Oregon Digital (Development)'
     product_twitter_handle: '@SamveraRepo'
     institution_name: 'Institution'
     institution_name_full: 'The Institution Name'
