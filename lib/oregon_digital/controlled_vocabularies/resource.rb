@@ -40,7 +40,7 @@ module OregonDigital
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
         language = get_language_label(rdf_label)
-        label = language.empty? ? rdf_label.first : language
+        label = language.blank? ? rdf_label.first : language
         [rdf_subject.to_s, { label: "#{label}$#{rdf_subject}" }]
       end
 
