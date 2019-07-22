@@ -28,8 +28,9 @@ pg_upgrade_*.log
 
 coverage/*
 
-# Ignore local overrides
+# Ignore local overrides and environment settings
 /docker-compose.override.yml
+/.env
 
 /public/system
 /public/branding
