@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 module Hyrax
+  # Helper module provides citation export methods
   module CitationsBehavior
     include Hyrax::CitationsBehaviors::CommonBehavior
     include Hyrax::CitationsBehaviors::Formatters

@@ -2,6 +2,7 @@
 
 module OregonDigital
   module CitationsBehaviors
+    # Behavior to format authors and their names
     module NameBehavior
       include Hyrax::CitationsBehaviors::CommonBehavior
       include Hyrax::CitationsBehaviors::NameBehavior

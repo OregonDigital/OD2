@@ -3,6 +3,7 @@
 module OregonDigital
   module CitationsBehaviors
     module Formatters
+      # MLA Citation Formatter
       class MlaFormatter < Hyrax::CitationsBehaviors::Formatters::MlaFormatter
         include OregonDigital::CitationsBehaviors::NameBehavior
         include OregonDigital::CitationsBehaviors::PublicationBehavior
@@ -10,7 +11,7 @@ module OregonDigital
 
         def format(work)
           text = super
-          text << " " + persistent_url(work)
+          text << ' ' + persistent_url(work)
           text.html_safe
         end
       end
