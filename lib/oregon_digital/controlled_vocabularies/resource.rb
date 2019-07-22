@@ -36,10 +36,11 @@ module OregonDigital
       end
 
       # Return a tuple of url & label
-      def solrize
-        return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label.first.to_s == rdf_subject.to_s
+        return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
-        [rdf_subject.to_s, { label: "#{rdf_label.select { |label| label.language == :en }.first}$#{rdf_subject}" }]
+        language = rdf_label.select { |label| label.language == :en if label.respond_to?(:language) }.first 
+
+        [rdf_subject.to_s, { label: "#{language.empty? rdf_label.first || language }$#{rdf_subject}" }]
       end
 
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
