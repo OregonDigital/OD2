@@ -150,7 +150,7 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable)
     end
-    Video.video_properties.reject { |attr| rejected_fields.include? attr }.reject { |attr| %w[width height].include? attr }.each do |prop|
+    Video.video_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Video.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
@@ -227,7 +227,7 @@ class CatalogController < ApplicationController
       all_names = config.show_fields.values.map(&:field).join(' ')
       title_name = solr_name('title', :stored_searchable)
       field.solr_parameters = {
-        qf: "#{all_names} #{title_name} abstract_tesim license_label_tesim file_format_tesim form_of_work_label_tesim all_text_timv",
+        qf: "#{all_names} #{title_name} license_label_tesim file_format_tesim all_text_timv",
         pf: title_name.to_s
       }
     end
