@@ -11,7 +11,9 @@ The details provided assume that the official Docker daemon is running in the ba
 
 **Suggested:** If using ohmyzsh (http://ohmyz.sh/), add the docker-compose plugin to the .zshrc for better command-line aliases and integration.
 
-**Important:** _By default, using the included `.env` file, docker will run the services in the context of `RAILS_ENV=development`_.
+**Important:** _By default, docker will run the services in the context of
+`RAILS_ENV=development`_, and there is no valid AWS configuration.  You can
+copy the included `.env.example` to `.env` and override these things if desired.
 
 ## Docker notes
 
