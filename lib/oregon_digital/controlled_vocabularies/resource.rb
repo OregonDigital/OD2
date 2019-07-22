@@ -36,6 +36,7 @@ module OregonDigital
       end
 
       # Return a tuple of url & label
+      def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
         language = rdf_label.select { |label| label.language == :en if label.respond_to?(:language) }.first 
