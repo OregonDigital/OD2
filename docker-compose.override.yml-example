@@ -44,3 +44,15 @@ services:
   rais-dev:
     ports:
       - 8080:8080
+
+  derivative_workers:
+    volumes:
+      # Put the derivative workers' code in the container
+      - ./derivatives:/usr/local/workers
+      # File uploads have to be available to the workers
+      - ./tmp:/data/tmp
+
+  # Expose the minio Web UI
+  minio:
+    ports:
+      - 9000:9000
