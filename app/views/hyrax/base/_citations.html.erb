@@ -1,0 +1,6 @@
+<div class="citations">
+    <% if Hyrax.config.citations? %>
+      <h2><%= t('.header') %></h2>
+      <%= export_as_mla_citation(@presenter) %>
+    <% end %>
+</div>
