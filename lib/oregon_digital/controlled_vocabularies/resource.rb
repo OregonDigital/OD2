@@ -39,7 +39,9 @@ module OregonDigital
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
-        [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
+        language = get_language_label(rdf_label)
+        label = language.blank? ? rdf_label.first : language
+        [rdf_subject.to_s, { label: "#{label}$#{rdf_subject}" }]
       end
 
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
@@ -80,6 +82,10 @@ module OregonDigital
 
       def uri_in_vocab?(uri)
         self.class.respond_to?(:in_vocab?) && self.class.in_vocab?(uri)
+      end
+
+      def get_language_label(rdf_label)
+        rdf_label.select { |label| label.language == :en if label.respond_to?(:language) }.first
       end
     end
     class ControlledVocabularyError < StandardError; end
