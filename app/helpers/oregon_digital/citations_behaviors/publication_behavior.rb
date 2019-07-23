@@ -10,7 +10,9 @@ module OregonDigital
       # OVERRIDE HYRAX to default to access date if no published date present
       def setup_pub_date(work)
         date_value = super(work)
-        clean_end_punctuation(Time.now.strftime('%d %b %Y')) unless date_value
+        return date_value unless date_value.nil?
+
+        clean_end_punctuation(Time.now.strftime('%d %b %Y'))
       end
 
       # OVERRIDE HYRAX to set Oregon Digital as publisher
