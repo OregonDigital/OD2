@@ -4,6 +4,8 @@
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::WorkBehavior
+
+  self.indexer = DocumentIndexer
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
