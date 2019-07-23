@@ -28,6 +28,7 @@
             <%= render 'relationships', presenter: @presenter %>
             <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
             <%# OVERRIDE FROM HYRAX remove work citations %>
+            <%= render 'print' %>
             <%= render 'social_media' %>
             <%= render 'items', presenter: @presenter %>
           </div>

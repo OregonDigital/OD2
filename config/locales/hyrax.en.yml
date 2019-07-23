@@ -218,6 +218,8 @@ en:
         header: 'Collection Information'
       citations:
         header: 'MLA Citation'
+      print:
+        header: 'Print'
     search:
       button:
         html: 'Go'
