@@ -216,6 +216,8 @@ en:
     base:
       relationships:
         header: 'Collection Information'
+      citations:
+        header: 'MLA Citation'
     search:
       button:
         html: 'Go'

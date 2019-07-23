@@ -19,17 +19,22 @@
             </div>
           <% end %>
         </div>
-        <div class="row">
-          <div class="col-md-8 col-sm-6">
+        <div class='row'>
+          <div class='col-md-8 col-sm-6'>
             <%# OVERRIDE FROM HYRAX remove work description %>
             <%= render 'metadata', presenter: @presenter %>
           </div>
-          <div class="col-md-4 col-sm-6 text-center">
+          <div class='col-md-4 col-sm-6 text-center'>
             <%= render 'relationships', presenter: @presenter %>
             <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
             <%# OVERRIDE FROM HYRAX remove work citations %>
             <%= render 'social_media' %>
             <%= render 'items', presenter: @presenter %>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-8 col-sm-6'>
+            <%= render 'citations', presenter: @presenter %>
           </div>
         </div>
       </div>
