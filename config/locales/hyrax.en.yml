@@ -135,83 +135,83 @@ en:
           military_branch_label_tesim: Military Branch
           subject_label_tesim: Subject
         show:
-          based_near_label_tesim: Location
+          based_near_label: Location
           contributor: Contributor
-          contributor_tesim: Contributor
-          creator_tesim: Creator
-          date_created_tesim: Date Created
+          contributor: Contributor
+          creator: Creator
+          date_created: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
-          file_format_tesim: File Format
-          identifier_tesim: Identifier
-          keyword_tesim: Keyword
-          language_label_tesim: Language
-          license_tesim: License
-          publisher_tesim: Publisher
-          rights_statement_tesim: Rights Statement
-          subject_tesim: Subject
-          title_tesim: Title
+          description: Description
+          file_format: File Format
+          identifier: Identifier
+          keyword: Keyword
+          language_label: Language
+          license: License
+          publisher: Publisher
+          rights_statement: Rights Statement
+          subject: Subject
+          title: Title
           oembed_url: oEmbed
-          based_near_label_tesim: Location
-          contributor_tesim: Contributor
-          creator_tesim: Creator
-          date_created_tesim: Date Created
+          based_near_label: Location
+          contributor: Contributor
+          creator: Creator
+          date_created: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
-          description_tesim: Description
-          file_format_tesim: File Format
-          identifier_tesim: Identifier
-          keyword_tesim: Keyword
-          language_label_tesim: Language
-          license_tesim: License
-          publisher_label_tesim: Publisher
-          rights_statement_tesim: Rights Statement
-          subject_tesim: Subject
-          owner_label_tesim: Owner
-          workType_label_tesim: Work Type
-          arranger_label_tesim: Arranger
-          artist_label_tesim: Artist
-          author_label_tesim: Author
-          cartographer_label_tesim: Cartographer
-          collector_label_tesim: Collector
-          composer_label_tesim: Composer
-          creator_label_tesim: Creator
-          contributor_label_tesim: Contributor
-          dedicatee_label_tesim: Dedicatee
-          donor_label_tesim: Donor
-          designer_label_tesim: Designer
-          editor_label_tesim: Editor
-          illustrator_label_tesim: Illustrator
-          interviewee_label_tesim: Interviewee
-          interviewer_label_tesim: Interviewer
-          lyricist_label_tesim: Lyricist
-          patron_label_tesim: Patron
-          photographer_label_tesim: Photographer
-          print_maker_label_tesim: Print Maker
-          recipient_label_tesim: Recipient
-          transcriber_label_tesim: Transcriber
-          translator_label_tesim: Translator
-          based_near_label_tesim: Location
-          cultural_context_label_tesim: Cultural Context
-          ethnographic_term_label_tesim: Ethnographic Term
-          style_or_period_label_tesim: Style or Period
-          form_of_work_label_tesim: Form of Work
-          format_label_tesim: Format
-          institution_label_tesim: Institution
-          local_collection_name_label_tesim: Local Collection Name
-          tgn_label_tesim: Geographic Name
-          repository_label_tesim: Repository
-          publisher_label_tesim: Publisher
-          taxon_class_label_tesim: Taxon Class
-          family_label_tesim: Family
-          genus_label_tesim: Genus
-          order_label_tesim: Order
-          species_label_tesim: Species
-          phylum_or_division_label_tesim: Phylum or Division
-          common_name_label_tesim: Common Name
-          military_branch_label_tesim: Military Branch
-          subject_label_tesim: Subject
+          description: Description
+          file_format: File Format
+          identifier: Identifier
+          keyword: Keyword
+          language_label: Language
+          license: License
+          publisher_label: Publisher
+          rights_statement: Rights Statement
+          subject: Subject
+          owner_label: Owner
+          workType_label: Work Type
+          arranger_label: Arranger
+          artist_label: Artist
+          author_label: Author
+          cartographer_label: Cartographer
+          collector_label: Collector
+          composer_label: Composer
+          creator_label: Creator
+          contributor_label: Contributor
+          dedicatee_label: Dedicatee
+          donor_label: Donor
+          designer_label: Designer
+          editor_label: Editor
+          illustrator_label: Illustrator
+          interviewee_label: Interviewee
+          interviewer_label: Interviewer
+          lyricist_label: Lyricist
+          patron_label: Patron
+          photographer_label: Photographer
+          print_maker_label: Print Maker
+          recipient_label: Recipient
+          transcriber_label: Transcriber
+          translator_label: Translator
+          based_near_label: Location
+          cultural_context_label: Cultural Context
+          ethnographic_term_label: Ethnographic Term
+          style_or_period_label: Style or Period
+          form_of_work_label: Form of Work
+          format_label: Format
+          institution_label: Institution
+          local_collection_name_label: Local Collection Name
+          tgn_label: Geographic Name
+          repository_label: Repository
+          publisher_label: Publisher
+          taxon_class_label: Taxon Class
+          family_label: Family
+          genus_label: Genus
+          order_label: Order
+          species_label: Species
+          phylum_or_division_label: Phylum or Division
+          common_name_label: Common Name
+          military_branch_label: Military Branch
+          subject_label: Subject
   hyrax:
     base:
       relationships:
