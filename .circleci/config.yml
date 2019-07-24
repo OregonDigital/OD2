@@ -198,7 +198,7 @@ workflows:
       - build_and_push:
           name: Build and push application image to docker image repository
           requires:
-            - test
+            - lint
           filters:
             branches:
               only: master
