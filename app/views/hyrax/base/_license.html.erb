@@ -1,0 +1,9 @@
+<div class="license">
+  <h2><%= t('.header') %></h2>
+  <% license=@presenter.attribute_to_html(:license, render_as: :license) %>
+  <% unless license.blank? %>
+    <%= license %>
+  <% else %>
+    <%= @presenter.attribute_to_html(:rights_statement, render_as: :rights_statement) %>
+  <% end %>
+</div>
