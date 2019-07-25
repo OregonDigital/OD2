@@ -1,8 +1,6 @@
 <div class="show-actions">
   <%# OVERRIDE FROM HYRAX to add 'add to my shelf' button %>
-  <% unless current_user.nil? %>
-    <%= link_to "Add to my Shelf", presenter.add_shelf_path, id: 'add-shelf', class: 'btn btn-default' %>
-  <% end %>
+  <%= link_to "Add to my Shelf", presenter.add_shelf_path, id: 'add-shelf', class: 'btn btn-default' %>
   <%# END OVERRIDE %>
   <% if Hyrax.config.analytics? %>
     <%= link_to "Analytics", presenter.stats_path, id: 'stats', class: 'btn btn-default' %>
