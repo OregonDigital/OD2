@@ -24,15 +24,15 @@
             </li>
             <li>
               <%= link_to t("hyrax.search.form.option.osu.label_long", application_name: application_name), "#",
-                  data: { "search-option" => main_app.search_catalog_path(f: { intitution_label_sim: ["Oregon State University"]}), "search-label" => t("hyrax.search.form.option.osu.label_short") } %>
+                  data: { "search-option" => main_app.search_catalog_path, "search-facet" => 'institution_label_sim', "search-facet-value" => 'Oregon State University', "search-label" => t("hyrax.search.form.option.osu.label_short") } %>
             </li>
             <li>
               <%= link_to t("hyrax.search.form.option.uo.label_long", application_name: application_name), "#",
-                  data: { "search-option" => main_app.search_catalog_path(f: { intitution_label_sim: ["University Of Oregon"]}), "search-label" => t("hyrax.search.form.option.uo.label_short") } %>
+                  data: { "search-option" => main_app.search_catalog_path, "search-facet" => 'institution_label_sim', "search-facet-value" => 'University Of Oregon', "search-label" => t("hyrax.search.form.option.uo.label_short") } %>
             </li>
             <li>
               <%= link_to t("hyrax.search.form.option.pd.label_long", application_name: application_name), "#",
-                  data: { "search-option" => main_app.search_catalog_path(f: { license_label_sim: ["Creative Commons CC0 1.0 Universal"]}), "search-label" => t("hyrax.search.form.option.pd.label_short") } %>
+                  data: { "search-option" => main_app.search_catalog_path, "search-facet" => 'license_label_sim', "search-facet-value" => 'Creative Commons CC0 1.0 Universal', "search-label" => t("hyrax.search.form.option.pd.label_short") } %>
             </li>
             <% if current_user %>
             <li>
