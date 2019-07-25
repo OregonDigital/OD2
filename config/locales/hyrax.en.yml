@@ -222,6 +222,8 @@ en:
         header: 'Print'
       license:
         header: 'Can I use it?'
+      items:
+        header: "Downloads"
     search:
       button:
         html: 'Go'

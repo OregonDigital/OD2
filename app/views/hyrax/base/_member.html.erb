@@ -3,5 +3,9 @@
   <%= render_thumbnail_tag member %>
   <%= link_to(member.link_name, contextual_path(member, @presenter)) %>
   <br>
-  <%= render 'actions', member: member %>
+  <ul>
+    <li><%= link_to "Download Image", download_path(member.id) %></li>
+    <li>High Resolution</li>
+    <li>Metadata Only (CSV)</li>
+  </ul>
 </div>
