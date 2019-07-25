@@ -11,7 +11,7 @@ module OregonDigital
 
         def format(work)
           text = super
-          text << ' ' + persistent_url(work)
+          text << ' ' + view_context.controller.request.original_url
           text.html_safe
         end
       end
