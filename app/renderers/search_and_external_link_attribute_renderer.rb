@@ -5,11 +5,10 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
   private
 
   def li_value(value)
-    return super(value) unless (uris = options[:links])
+    external_link = options[:links][value] unless options[:links].nil?
 
-    links = []
-    links << link_to(value, search_path(value))
-    links << link_to('<span class="glyphicon glyphicon-new-window"></span>'.html_safe, uris[value], 'aria-label' => 'Open link in new window', class: 'btn', target: '_blank')
+    links = Array(super(value))
+    links << link_to('<span class="glyphicon glyphicon-new-window"></span>'.html_safe, external_link, 'aria-label' => 'Open link in new window', class: 'btn', target: '_blank') unless external_link.nil?
     links.join('')
   end
 end
