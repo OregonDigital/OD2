@@ -11,19 +11,30 @@
       <%= text_field_tag :q, current_search_parameters , class: "q form-control", id: "search-field-header", placeholder: t("hyrax.search.form.q.placeholder") %>
 
       <div class="input-group-btn">
-        <% if current_user %>
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 
-            <span class="sr-only" data-search-element="label"><%= t("hyrax.search.form.option.all.label_long", application_name: application_name) %></span>
-            <span aria-hidden="true"><%= t("hyrax.search.form.option.all.label_short") %></span>
+            <span data-search-element="label"><%= t("hyrax.search.form.option.all.label_long", application_name: application_name) %></span>
             <span class="caret"></span>
           </button>
 
-          <ul class="dropdown-menu pull-right">
+          <ul class="dropdown-menu">
             <li>
               <%= link_to t("hyrax.search.form.option.all.label_long", application_name: application_name), "#",
                   data: { "search-option" => main_app.search_catalog_path, "search-label" => t("hyrax.search.form.option.all.label_short") } %>
             </li>
+            <li>
+              <%= link_to t("hyrax.search.form.option.osu.label_long", application_name: application_name), "#",
+                  data: { "search-option" => main_app.search_catalog_path(f: { intitution_label_sim: ["Oregon State University"]}), "search-label" => t("hyrax.search.form.option.osu.label_short") } %>
+            </li>
+            <li>
+              <%= link_to t("hyrax.search.form.option.uo.label_long", application_name: application_name), "#",
+                  data: { "search-option" => main_app.search_catalog_path(f: { intitution_label_sim: ["University Of Oregon"]}), "search-label" => t("hyrax.search.form.option.uo.label_short") } %>
+            </li>
+            <li>
+              <%= link_to t("hyrax.search.form.option.pd.label_long", application_name: application_name), "#",
+                  data: { "search-option" => main_app.search_catalog_path(f: { license_label_sim: ["Creative Commons CC0 1.0 Universal"]}), "search-label" => t("hyrax.search.form.option.pd.label_short") } %>
+            </li>
+            <% if current_user %>
             <li>
               <%= link_to t("hyrax.search.form.option.my_works.label_long"), "#",
                   data: { "search-option" => hyrax.my_works_path, "search-label" => t("hyrax.search.form.option.my_works.label_short") } %>
@@ -32,8 +43,8 @@
               <%= link_to t("hyrax.search.form.option.my_collections.label_long"), "#",
                   data: { "search-option" => hyrax.my_collections_path, "search-label" => t("hyrax.search.form.option.my_collections.label_short") } %>
             </li>
+            <% end %>
           </ul>
-        <% end %>
         <button type="submit" class="btn btn-primary" id="search-submit-header">
           <%= t('hyrax.search.button.html') %>
         </button>
