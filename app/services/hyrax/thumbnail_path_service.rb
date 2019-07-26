@@ -12,7 +12,7 @@ module Hyrax
         return default_image unless object.thumbnail_id
 
         thumb = fetch_thumbnail(object)
-        return unless thumb
+        return default_image unless thumb
 
         return call(thumb) unless thumb.is_a?(::FileSet)
 
