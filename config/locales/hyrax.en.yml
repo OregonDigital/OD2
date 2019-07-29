@@ -222,7 +222,20 @@ en:
         header: 'Print'
       license:
         header: 'Can I use it?'
+      items:
+        header: "Downloads"
     search:
+      form:
+        option:
+          osu:
+            label_long: OSU Content Only
+            label_short: OSU
+          uo:
+            label_long: UO Content Only
+            label_short: UO
+          pd:
+            label_long: Public Domain Content Only
+            label_short: Public Domain
       button:
         html: 'Go'
     product_name: 'Oregon Digital (Development)'
