@@ -4,7 +4,7 @@
 # processing the various jobs so all our dependencies can live here instead of
 # scattered throughout the code
 
-require 'aws-sdk'
+require 'aws-sdk-s3'
 require 'fileutils'
 require 'open3'
 require 'shellwords'
