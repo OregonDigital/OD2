@@ -39,7 +39,7 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   }
 }
 #masthead {
-  background-color: #f9f3f1;
+  background-color: white;
   font-size: 1.25em;
   li {
     min-width: 55px;
@@ -69,14 +69,14 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
 #collections,
 #items {
   padding-bottom: 5em;
-}
+}:where
 #collections,
 #items {
   font-size: 1.5em;
 }
 
 body {
-  background-color: #f9f3f1;
+  background-color: white;
 }
 
 .advanced-search-button {
