@@ -69,6 +69,11 @@ module OregonDigital
         query_to_vocabulary(uri).present?
       end
 
+      # Return the URI as a string
+      def to_s
+        respond_to?(:rdf_subject) ? rdf_subject.to_s : super
+      end
+
       private
 
       def store_statement(statement)

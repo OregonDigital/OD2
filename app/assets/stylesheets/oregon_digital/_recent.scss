@@ -14,17 +14,27 @@
 
 .recent-item {
   border-top: none;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   font-size: 0.9em;
   padding: 8px 0;
 
+  h3 {
+    font-size: 24px;
+  }
   img {
+    height: 196px;
     width: 100%;
-    float: none;
-    // padding-right: 1em;
+    object-fit: cover;
+    padding-right: 0;
   }
   a p {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+.box-row {
+  display: flex;
+  flex-wrap: wrap;
 }

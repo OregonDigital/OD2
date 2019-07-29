@@ -260,3 +260,16 @@ en:
     labels:
       collection_type:
         facet_configurable: FACET CONFIGURABLE
+  howto:
+    researchers:
+      title: 'Researchers'
+      description: 'BLAH BLAH BLAH'
+    students:
+      title: 'Students'
+      description: 'BLAH BLAH BLAH'
+    teachers:
+      title: 'Teachers'
+      description: 'BLAH BLAH BLAH'
+    lifelong:
+      title: 'Lifelong Learners'
+      description: 'BLAH BLAH BLAH'

@@ -5,6 +5,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
     let(:user) { create(:user) }
     let!(:ability) { ::Ability.new(user) }
     let(:upload_file_path) { "#{Rails.root}/spec/fixtures/test.jpg" }
+    let(:repository) { OregonDigital::ControlledVocabularies::Repository.new('http://opaquenamespace.org/ns/repository/my/repo') }
 
     before do
       create(:permission_template_access,
@@ -38,6 +39,9 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
       end
       within('div.audio_resource_type') do
         select('Dataset', from: 'Type')
+      end
+      within('div.select2-container.audio_repository') do
+        page.execute_script("$('#audio_repository_attributes_0_id').val('http://opaquenamespace.org/ns/repository/my/repo')")
       end
       select('In Copyright', from: 'Rights')
       # TODO: Rights statement list is missing from generic model, uncomment/resolve

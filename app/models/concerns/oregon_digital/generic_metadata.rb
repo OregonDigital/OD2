@@ -528,6 +528,7 @@ module OregonDigital
       end
 
       property :repository, predicate: ::RDF::Vocab::MARCRelators.rps,
+                            multiple: false,
                             class_name: OregonDigital::ControlledVocabularies::Repository do |index|
         index.as :stored_searchable, :facetable
       end

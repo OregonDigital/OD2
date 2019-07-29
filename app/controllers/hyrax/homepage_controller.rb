@@ -30,8 +30,9 @@ class Hyrax::HomepageController < ApplicationController
   private
 
   # OVERRIDE FROM HYRAX to increase number of collections rows
-  # Return 6 collections
-  def collections(rows: 6)
+  # Return 8 collections
+  def collections(rows: 8)
+    # TODO: set CollectionSearchBuilder to retrieve collections from a curated list, instead of newest collections
     builder = Hyrax::CollectionSearchBuilder.new(self)
                                             .rows(rows)
     response = repository.search(builder)
