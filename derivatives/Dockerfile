@@ -11,7 +11,7 @@ RUN bundle
 COPY ./derivatives /usr/local/workers
 
 RUN mkdir -p /usr/local/oddeps/lib/oregon_digital
-COPY ./lib/oregon_digital/derivative_path.rb /usr/local/oddeps/lib/oregon_digital/derivative_path.rb
+COPY ./lib /usr/local/oddeps/lib
 
 ENTRYPOINT ["bundle", "exec", "sidekiq", "-r", "/usr/local/workers/jobs.rb"]
 CMD ["-q", "derivatives"]

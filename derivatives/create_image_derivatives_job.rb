@@ -38,7 +38,7 @@ class CreateImageDerivativesJob
   private
 
   def derivative_path_factory(id)
-    OregonDigital::DerivativePath.new(bucket: ENV['AWS_S3_DERIVATIVES_BUCKET'], id: id)
+    OregonDigital::DerivativePath.new(bucket: S3Bucket, id: id)
   end
 
   # Pre-processes the given file to generate a BMP based on its mime type:

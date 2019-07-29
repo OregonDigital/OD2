@@ -20,9 +20,22 @@ module OregonDigital
     end
 
     # Returns all URLs with the same prefix, effectively returning a full list
-    # of derivatives for the fileset id.  This hits S3's GET Bucket service.
+    # of derivatives for the fileset id
+    #
+    # Note: This hits S3's GET Bucket service with the fileset id's prefix
     def all_urls
-      raise NotImplementedError
+      s3_factory.keys(bucket, pathify_id.join('/')).collect {|key| [url_base, key].join('/')}
+    end
+
+    def sorted_derivative_urls(label)
+      all_urls.select {|url| File.extname(url) == ext_for(label)}
+    end
+
+    # Returns true if the given asset exists in our data store
+    #
+    # Note: This hits S3's GET Bucket service with the fileset id's prefix
+    def exist?(label:, sequence: 0)
+      s3_factory.object_exists?(url(label: label, sequence: sequence))
     end
 
     private
@@ -51,6 +64,15 @@ module OregonDigital
       when 'zoomable'  then 'jp2'
       else                  label
       end
+    end
+
+    def s3_factory
+      OregonDigital::S3.new(
+        endpoint:          ENV['S3_URL'],
+        region:            ENV['AWS_S3_REGION'],
+        access_key_id:     ENV['AWS_S3_APP_KEY'],
+        secret_access_key: ENV['AWS_S3_APP_SECRET']
+      )
     end
   end
 end

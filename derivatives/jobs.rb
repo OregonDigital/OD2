@@ -15,3 +15,13 @@ require_relative('./shell.rb')
 require_relative('./create_images.rb')
 require_relative('./create_image_derivatives_job.rb')
 require '/usr/local/oddeps/lib/oregon_digital/derivative_path.rb'
+require '/usr/local/oddeps/lib/oregon_digital/s3.rb'
+
+S3 = OregonDigital::S3.new(
+  endpoint:          ENV['S3_URL'],
+  region:            ENV['AWS_S3_REGION'],
+  access_key_id:     ENV['AWS_S3_APP_KEY'],
+  secret_access_key: ENV['AWS_S3_APP_SECRET']
+)
+
+S3Bucket = ENV['AWS_S3_DERIVATIVES_BUCKET']

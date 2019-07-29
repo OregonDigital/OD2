@@ -47,8 +47,9 @@ services:
 
   derivative_workers:
     volumes:
-      # Put the derivative workers' code in the container
+      # Put derivatives code and OD libs into the container
       - ./derivatives:/usr/local/workers
+      - ./lib:/usr/local/oddeps/lib
       # File uploads have to be available to the workers
       - ./tmp:/data/tmp
 
