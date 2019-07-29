@@ -52,12 +52,11 @@ module Hyrax
       # @return true if there a file on disk for this object, otherwise false
       # @param [FileSet] thumb - the object that is the thumbnail
       def thumbnail?(thumb)
-        File.exist?(thumbnail_filepath(thumb))
+        path_factory(thumb.id).exist?(label: 'thumbnail')
       end
 
-      # @param [FileSet] thumb - the object that is the thumbnail
-      def thumbnail_filepath(thumb)
-        Hyrax::DerivativePath.derivative_path_for_reference(thumb, 'thumbnail')
+      def path_factory(id)
+        OregonDigital::DerivativePath.new(bucket: ENV['AWS_S3_DERIVATIVES_BUCKET'], id: id)
       end
     end
   end
