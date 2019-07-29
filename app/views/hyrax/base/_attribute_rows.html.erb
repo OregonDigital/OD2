@@ -15,7 +15,11 @@
   <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <% Generic.controlled_property_labels.map(&:to_sym).each do |attr| %>
-  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
+  <% labels=Array(presenter.send(attr)) %>
+  <% links=Array(presenter.send(attr.to_s.gsub('_label', ''))) %>
+  <% zipped=labels.zip(links) %>
+  <% zipped=Hash[zipped] %>
+  <%= presenter.attribute_to_html(attr, render_as: :search_and_external_link, links: zipped, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
 <% end %>
 <%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>
 <%= presenter.attribute_to_html(:date_modified, html_dl: true, label: t("simple_form.labels.defaults.date_modified")) %>
