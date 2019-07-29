@@ -11,7 +11,7 @@ module OregonDigital
 
         def format(work)
           text = super
-          text << ' ' + persistent_url(work)
+          text << ' ' + view_context.controller.request.original_url.split('?').first if view_context.respond_to?(:controller)
           text.html_safe
         end
       end
