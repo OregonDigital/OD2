@@ -16,11 +16,3 @@
   <%= render 'fixed_showcases', collections: @presenter.collections %>
   <%= render 'curated_showcases', collections: @presenter.collections %>
 </div>
-
-<div id="items" class="row">
-  <h2>Latest Items</h2>
-  <%= render 'recently_uploaded', recent_documents: @recent_documents %>
-  <%= link_to t('oregon_digital.homepage.works.link'),
-              main_app.search_catalog_path(sort: 'system_create_dtsi desc'),
-              class: 'btn btn-primary btn-lg pull-right' %>
-</div>
