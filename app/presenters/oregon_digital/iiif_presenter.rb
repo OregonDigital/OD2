@@ -13,7 +13,7 @@ module OregonDigital
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
-        urls = file_set_derivatives_service(fs).sorted_derivative_urls('jp2')
+        urls = path_factory(fs).sorted_derivative_urls('zoomable')
 
         urls.each_with_index do |derivative, i|
           label = urls.length > 1 ? page_label(fs.label, i) : fs.label
@@ -26,8 +26,8 @@ module OregonDigital
 
     private
 
-    def file_set_derivatives_service(file_set)
-      OregonDigital::FileSetDerivativesService.new(file_set)
+    def path_factory(file_set)
+      OregonDigital::DerivativePath.new(bucket: ENV['AWS_S3_DERIVATIVES_BUCKET'], id: file_set.id)
     end
 
     def page_label(label, page_index)
