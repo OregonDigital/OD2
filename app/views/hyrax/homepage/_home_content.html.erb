@@ -11,12 +11,10 @@
   </div>
 </div>
 
-<div id="collections" class="row">
+<div id="showcase" class="row">
   <h2>Latest Collections</h2>
-  <%= render 'explore_collections', collections: @presenter.collections %>
-  <%= link_to t('hyrax.homepage.admin_sets.link'),
-              main_app.search_catalog_path(f: { human_readable_type_sim: ["Collection"]}),
-              class: 'btn btn-primary btn-lg pull-right' %>
+  <%= render 'fixed_showcases', collections: @presenter.collections %>
+  <%= render 'curated_showcases', collections: @presenter.collections %>
 </div>
 
 <div id="items" class="row">

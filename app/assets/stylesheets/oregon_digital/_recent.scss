@@ -19,9 +19,9 @@
   padding: 8px 0;
 
   img {
+    height: 196px;
     width: 100%;
-    float: none;
-    // padding-right: 1em;
+    object-fit: cover;
   }
   a p {
     overflow: hidden;
