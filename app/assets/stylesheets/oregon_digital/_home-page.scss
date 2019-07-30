@@ -33,7 +33,9 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
         width: 25%;
       }
       .caret {
-        margin-left: 75%;
+        position: absolute;
+        right: 5%;
+        top: 45%;
       }
     }
   }
@@ -43,7 +45,7 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   font-size: 1.25em;
   li {
     min-width: 55px;
-    a .login-icon-only {
+    a .university-login {
       color: white;
     }
   }
