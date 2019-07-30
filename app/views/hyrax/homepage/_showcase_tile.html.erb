@@ -1,7 +1,11 @@
 <div class="homepage-box">
   <%= link_to(link) do %>
-    <img class="fit-to-box" src="<%= image %>">
+    <% if local_assigns[:img] %>
+      <%= img %>
+    <% elsif local_assigns[:img_url] %>
+      <img class="fit-to-box" src="<%= img_url %>">
+    <% end %>
     <h3> <%= title %> </h3>
   <%end%>
-  <%= content %>
+  <%= content unless content.empty? %>
 </div>

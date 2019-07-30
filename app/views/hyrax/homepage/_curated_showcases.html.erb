@@ -1,12 +1,12 @@
 <ol class="curated-showcases-highlights">
     <% collections.each do |collection| %>
-      <li class="recent-item col-xs-4 col-sm-2">
-        <h3>
-          <%= link_to [hyrax, collection] do %>
-            <%= render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
-            <%= collection.title_or_label %>
-          <% end %>
-        </h3>
+      <li class="recent-item col-xs-6 col-sm-3">
+        <%= render 'showcase_tile',
+              title: collection.title_or_label,
+              content: collection.description,
+              link: [hyrax, collection],
+              img: render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
+
       </li>
     <% end %>
 </ol>
