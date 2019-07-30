@@ -16,7 +16,7 @@ module OregonDigital
     def url(label:, sequence: 0)
       parts = [prefix, label]
       parts.push(format('%04d', sequence)) if sequence.positive?
-      URI(parts.join('-') + '.' + ext_for(label))
+      URI(parts.join('-') + ext_for(label))
     end
 
     # Returns all URLs with the same prefix, effectively returning a full list
@@ -60,8 +60,8 @@ module OregonDigital
     # 'thumbnail' always being a JPG.
     def ext_for(label)
       case label
-      when 'thumbnail' then 'jpg'
-      when 'zoomable'  then 'jp2'
+      when 'thumbnail' then '.jpg'
+      when 'zoomable'  then '.jp2'
       else                  label
       end
     end
