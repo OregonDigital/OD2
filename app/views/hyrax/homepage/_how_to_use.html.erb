@@ -1,13 +1,45 @@
 <div class="col-md-2"></div>
-<div class="col-md-2">
-  Students
-</div>
-<div class="col-md-2">
-  Teachers
-</div>
-<div class="col-md-2">
-  Researchers
-</div>
-<div class="col-md-2">
-  Lifelong Learners
-</div>
+<a href="<%= Hyrax::Engine.routes.url_helpers.help_path %>">
+  <div class="col-md-2 how-to-use-box">
+    <div class="row">
+      <img class="fit-to-box" src="<%= image_url('students.png') %>">
+    </div>
+    <div class="row">
+      <h3><%= t('howto.students.title') %></h3>
+    </div>
+    <%= t('howto.students.description') %>
+  </div>
+</a>
+<a href="<%= Hyrax::Engine.routes.url_helpers.help_path %>">
+  <div class="col-md-2 how-to-use-box">
+    <div class="row">
+      <img class="fit-to-box" src="<%= image_url('teachers.png') %>">
+    </div>
+    <div class="row">
+      <h3><%= t('howto.teachers.title') %></h3>
+    </div>
+    <%= t('howto.teachers.description') %>
+  </div>
+</a>
+<a href="<%= Hyrax::Engine.routes.url_helpers.help_path %>">
+  <div class="col-md-2 how-to-use-box">
+    <div class="row">
+      <img class="fit-to-box" src="<%= image_url('researchers.png') %>">
+    </div>
+    <div class="row">
+      <h3><%= t('howto.researchers.title') %></h3>
+    </div>
+    <%= t('howto.researchers.description') %>
+  </div>
+</a>
+<a href="<%= Hyrax::Engine.routes.url_helpers.help_path %>">
+  <div class="col-md-2 how-to-use-box">
+    <div class="row">
+      <img class="fit-to-box" src="<%= image_url('lifetime.png') %>">
+    </div>
+    <div class="row">
+      <h3><%= t('howto.lifelong.title') %></h3>
+    </div>
+    <%= t('howto.lifelong.description') %>
+  </div>
+</a>
