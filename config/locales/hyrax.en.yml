@@ -234,8 +234,8 @@ en:
             label_long: UO Content Only
             label_short: UO
           pd:
-            label_long: Public Domain Content Only
-            label_short: Public Domain
+            label_long: Open Content Only
+            label_short: Open Content
       button:
         html: 'Go'
     product_name: 'Oregon Digital (Development)'
