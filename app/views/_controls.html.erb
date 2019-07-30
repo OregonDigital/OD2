@@ -6,4 +6,13 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-1">
+      <%= button_to "Advanced Search", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "btn btn-primary push-left advanced-search-button" %>
+    </div>
+    <div class="col-md-1">
+      <%= button_to "New? Start Here", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "btn btn-primary new-here-button" %>
+    </div>
+  </div>
 </nav><!-- /.navbar -->
