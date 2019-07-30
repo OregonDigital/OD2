@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: c9af1faa4edae4fdd8918b14c2cd64012b4cb4dc
+  revision: 1b1be806c07e41cb731dd69a73ef71b593c28764
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -183,17 +183,17 @@ GEM
     awesome_nested_set (3.1.4)
       activerecord (>= 4.0.0, < 5.3)
     aws-eventstream (1.0.3)
-    aws-partitions (1.176.0)
-    aws-sdk-core (3.56.0)
+    aws-partitions (1.194.0)
+    aws-sdk-core (3.61.2)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.22.0)
-      aws-sdk-core (~> 3, >= 3.56.0)
+    aws-sdk-kms (1.24.0)
+      aws-sdk-core (~> 3, >= 3.61.1)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.43.0)
-      aws-sdk-core (~> 3, >= 3.56.0)
+    aws-sdk-s3 (1.46.0)
+      aws-sdk-core (~> 3, >= 3.61.1)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.1.0)
@@ -596,7 +596,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0331)
     mini_magick (4.9.3)
-    mini_mime (1.0.1)
+    mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
@@ -605,7 +605,7 @@ GEM
     nest (3.1.2)
       redic
     net-http-persistent (2.9.4)
-    nio4r (2.3.1)
+    nio4r (2.4.0)
     noid (0.9.0)
     noid-rails (3.0.1)
       actionpack (>= 5.0.0, < 6)
@@ -701,7 +701,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
-    rake (12.3.2)
+    rake (12.3.3)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
