@@ -1,4 +1,4 @@
-<ol class="curated-showcases-highlights row">
+<ol id="curated-showcases" class="row">
     <% collections.each_with_index do |collection, i| %>
       <li class="recent-item col-xs-4 col-sm-2 <%= 'col-sm-offset-2' if i==0 %>">
         <%= render 'showcase_tile',
@@ -6,7 +6,6 @@
               content: collection.description,
               link: [hyrax, collection],
               img: render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
-
       </li>
     <% end %>
 </ol>
