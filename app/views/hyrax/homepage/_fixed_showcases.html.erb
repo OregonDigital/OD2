@@ -1,0 +1,31 @@
+<ol id="fixed-showcases">
+  <li class="recent-item col-xs-4 col-sm-2 col-sm-offset-2">
+    <%= render 'showcase_tile',
+          title: t("oregon_digital.homepage.showcase.fixed.osu.title"),
+          content: t("oregon_digital.homepage.showcase.fixed.osu.content"),
+          link: main_app.search_catalog_path( f: { :institution_label_sim => ['Oregon State University'] } ),
+          img_url: image_url('teachers.png') %>
+
+  </li>
+  <li class="recent-item col-xs-4 col-sm-2">
+    <%= render 'showcase_tile',
+          title: t("oregon_digital.homepage.showcase.fixed.uo.title"),
+          content: t("oregon_digital.homepage.showcase.fixed.uo.content"),
+          link: main_app.search_catalog_path( f: { :institution_label_sim => ['University of Oregon'] } ),
+          img_url: image_url('teachers.png') %>
+  </li>
+  <li class="recent-item col-xs-4 col-sm-2">
+    <%= render 'showcase_tile',
+          title: t("oregon_digital.homepage.showcase.fixed.free.title"),
+          content: t("oregon_digital.homepage.showcase.fixed.free.content"),
+          link: main_app.search_catalog_path( f: { :license_label_sim => ['Creative Commons CC0 1.0 Universal'] } ),
+          img_url: image_url('researchers.png') %>
+  </li>
+  <li class="recent-item col-xs-4 col-sm-2">
+    <%= render 'showcase_tile',
+          title: t("oregon_digital.homepage.showcase.fixed.all.title"),
+          content: t("oregon_digital.homepage.showcase.fixed.all.content"),
+          link: main_app.search_catalog_path,
+          img_url: image_url('students.png') %>
+  </li>
+</ol>

@@ -3,6 +3,20 @@ en:
     homepage:
       works:
         link: 'All Latest Items'
+      showcase:
+        fixed:
+          uo:
+            title: UO Items
+            content: BLAH BLAH BLAH BLAH
+          osu:
+            title: OSU Items
+            content: BLAH BLAH BLAH BLAH
+          free:
+            title: Free to Use
+            content: BLAH BLAH BLAH BLAH
+          all:
+            title: All Items
+            content: BLAH BLAH BLAH BLAH
     oembeds:
       edit:
         header:
