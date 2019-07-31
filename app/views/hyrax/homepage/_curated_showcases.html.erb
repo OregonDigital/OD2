@@ -1,6 +1,6 @@
-<ol class="curated-showcases-highlights">
-    <% collections.each do |collection| %>
-      <li class="recent-item col-xs-6 col-sm-3">
+<ol class="curated-showcases-highlights row">
+    <% collections.each_with_index do |collection, i| %>
+      <li class="recent-item col-xs-4 col-sm-2 <%= 'col-sm-offset-2' if i==0 %>">
         <%= render 'showcase_tile',
               title: collection.title_or_label,
               content: collection.description,
