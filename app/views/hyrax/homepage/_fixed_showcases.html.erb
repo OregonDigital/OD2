@@ -1,10 +1,10 @@
-<ol id="fixed-showcases" class="row">
+<ol id="fixed-showcases">
   <li class="recent-item col-xs-4 col-sm-2 col-sm-offset-2">
     <%= render 'showcase_tile',
           title: t("oregon_digital.homepage.showcase.fixed.osu.title"),
           content: t("oregon_digital.homepage.showcase.fixed.osu.content"),
           link: main_app.search_catalog_path( f: { :institution_label_sim => ['Oregon State University'] } ),
-          img_url: image_url('researchers.png') %>
+          img_url: image_url('teachers.png') %>
 
   </li>
   <li class="recent-item col-xs-4 col-sm-2">
@@ -26,6 +26,6 @@
           title: t("oregon_digital.homepage.showcase.fixed.all.title"),
           content: t("oregon_digital.homepage.showcase.fixed.all.content"),
           link: main_app.search_catalog_path,
-          img_url: image_url('researchers.png') %>
+          img_url: image_url('students.png') %>
   </li>
 </ol>
