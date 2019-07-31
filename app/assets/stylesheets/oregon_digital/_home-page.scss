@@ -83,10 +83,16 @@ body {
 
 .advanced-search-button {
   margin-left: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
 }
 
 .new-here-button {
   margin-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
 }
 
 .homepage-box {
