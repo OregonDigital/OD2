@@ -3,7 +3,7 @@
       <li class="recent-item col-xs-6 col-sm-3">
         <%= render 'showcase_tile',
               title: collection.title_or_label,
-              content: collection.description,
+              content: collection.description.first.to_s.gsub("\n", "</p><p>").html_safe,
               link: [hyrax, collection],
               img: render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
       </li>
@@ -14,7 +14,7 @@
       <li class="recent-item col-xs-6 col-sm-3">
         <%= render 'showcase_tile',
               title: collection.title_or_label,
-              content: collection.description,
+              content: collection.description.first.to_s.gsub("\n", "</p><p>").html_safe,
               link: [hyrax, collection],
               img: render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
       </li>
