@@ -18,5 +18,5 @@
               link: [hyrax, collection],
               img: render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
       </li>
-    <% end %>
+    <% end if collections.length > 4 %>
 </ol>
