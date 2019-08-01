@@ -41,16 +41,16 @@ gem 'omniauth-cas'
 gem 'omniauth-saml'
 
 # Honeycomb
-gem 'sequel'
-gem 'honeycomb-beeline'
-gem 'rack-honeycomb', '~> 0.5.0'
+#gem 'sequel'
+#gem 'rack-honeycomb', '~> 0.5.0'
+gem 'honeycomb-beeline', '>= 1.0.0'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
 
-group :production do
-  gem 'clamav', git: 'https://github.com/eagleas/clamav', branch: 'master'
-end
+#group :production do
+#  gem 'clamav', git: 'https://github.com/eagleas/clamav', branch: 'master'
+#end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
