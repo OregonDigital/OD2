@@ -1,5 +1,5 @@
-<ol>
-  <li class="recent-item col-xs-4 col-sm-2 col-sm-offset-2">
+<ol class="row  box-row">
+  <li class="recent-item col-xs-6 col-sm-3">
     <%= render 'showcase_tile',
           title: t('howto.students.title'),
           content: t('howto.students.description'),
@@ -7,21 +7,21 @@
           img_url: image_url('students.png') %>
 
   </li>
-  <li class="recent-item col-xs-4 col-sm-2">
+  <li class="recent-item col-xs-6 col-sm-3">
     <%= render 'showcase_tile',
           title: t('howto.teachers.title'),
           content: t('howto.teachers.description'),
           link: Hyrax::Engine.routes.url_helpers.help_path,
           img_url: image_url('teachers.png') %>
   </li>
-  <li class="recent-item col-xs-4 col-sm-2">
+  <li class="recent-item col-xs-6 col-sm-3">
     <%= render 'showcase_tile',
           title: t('howto.researchers.title'),
           content: t('howto.researchers.description'),
           link: Hyrax::Engine.routes.url_helpers.help_path,
           img_url: image_url('researchers.png') %>
   </li>
-  <li class="recent-item col-xs-4 col-sm-2">
+  <li class="recent-item col-xs-6 col-sm-3">
     <%= render 'showcase_tile',
           title: t('howto.lifelong.title'),
           content: t('howto.lifelong.description'),

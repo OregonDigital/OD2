@@ -1,9 +1,3 @@
-@media (min-width: 768px) {
-   #content-wrapper {
-    width: 90%;
-  }
-}
-
 // Fix bug in Bootstrap where dropdowns before buttons always have rounded edges
 .input-group-btn:last-child > .btn:not(:last-child),
 .input-group-btn:last-child > .facets-toggle:not(:last-child),
@@ -93,6 +87,7 @@ body {
   background-color: #f6f5ff;
   margin-right: 10px;
   text-align: center;
+  height: 100%;
 }
 
 .fit-to-box {
