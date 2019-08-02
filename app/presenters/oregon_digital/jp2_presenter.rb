@@ -8,12 +8,12 @@ module OregonDigital
   # Hyrax::DisplaysImage.
   class JP2Presenter
     delegate :id, to: :file_set
-    attr_reader :readable, :file_set, :jp2_path, :label, :request
+    attr_reader :readable, :file_set, :iiif_id, :label, :request
 
-    def initialize(file_set, jp2_path, label, current_ability, request)
+    def initialize(file_set, iiif_id, label, current_ability, request)
       @readable = current_ability.can?(:read, file_set)
       @file_set = file_set
-      @jp2_path = jp2_path
+      @iiif_id = iiif_id
       @label = label
       @request = request
     end
@@ -40,24 +40,9 @@ module OregonDigital
 
     private
 
-    # Calculates the IIIF ID for this JP2 by faking a fileset (again) becuase
-    # the Hyrax derivative path magic doesn't actually give us any easy way to
-    # just ask for the relative path to a derivative.
-    def iiif_id
-      fake_fs = OpenStruct.new(id: 'id')
-      fake_ds = OregonDigital::FileSetDerivativesService.new(fake_fs)
-
-      # This should end up looking very much like "s3:///data/tmp/shared/derivatives/"
-      # TODO: use the new derivate path stuff to get at the base path
-      base_path = fake_ds.derivative_url('jp2').sub('id-jp2.jp2', '')
-
-      # ...which should make *this* look like "qb%wF98%2Fmf%2F44%2F9-jp2-0005.jp2"
-      jp2_path.sub(base_path, '').gsub('/', '%2F')
-    end
-
     # Calculates the base URL for IIIF requests against this JP2
     def iiif_url
-      [ENV.fetch('IIIF_SERVER_BASE_URL', request.base_url), iiif_id].join('/')
+      [ENV.fetch('IIIF_SERVER_BASE_URL', request.base_url), CGI.escape(iiif_id)].join('/')
     end
 
     def default_image_path
