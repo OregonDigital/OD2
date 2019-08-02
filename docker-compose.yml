@@ -37,13 +37,13 @@ services:
     <<: *app
     environment:
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
-      - AWS_S3_APP_KEY=accesskey
-      - AWS_S3_APP_SECRET=secretkey
-      - AWS_S3_BUCKET=awss3uploadbucket
-      - AWS_S3_INGEST_BUCKET=awss3ingestbucket
-      - AWS_S3_DERIVATIVES_BUCKET=derivatives
-      - AWS_S3_REGION=awss3region
-      - S3_URL=http://minio:9000
+      - AWS_S3_APP_KEY=${AWS_S3_APP_KEY:-accesskey}
+      - AWS_S3_APP_SECRET=${AWS_S3_APP_SECRET:-secretkey}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET:-awss3uploadbucket}
+      - AWS_S3_INGEST_BUCKET=${AWS_S3_INGEST_BUCKET:-awss3ingestbucket}
+      - AWS_S3_DERIVATIVES_BUCKET=${AWS_S3_DERIVATIVES_BUCKET:-derivatives}
+      - AWS_S3_REGION=${AWS_S3_REGION:-awss3region}
+      - S3_URL=${S3_URL:-http://minio:9000}
       - BROWSEEVERYTHING_FILESYSTEM_PATH=/data/tmp
       - INGEST_LOCAL_PATH=/data/tmp
       - FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
