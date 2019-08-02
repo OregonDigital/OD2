@@ -295,12 +295,16 @@ services:
   ##
   # RAIS IIIF server
   rais: &rais
-    image: uolibraries/rais
+    image: uolibraries/rais:4-alpha
     environment:
-      - RAIS_ADDRESS=:8080
-      - RAIS_IIIFURL=http://localhost:8080/iiif
-      - RAIS_IIIFINFOCACHESIZE=10000
-      - RAIS_TILEPATH=/var/local/images
+      - RAIS_ADDRESS=${RAIS_ADDRESS:-:8080}
+      - RAIS_IIIFURL=${RAIS_IIIFURL:-http://localhost:8080/iiif}
+      - RAIS_S3CACHE=/var/tmp/rais/s3
+      - RAIS_S3ZONE=${AWS_S3_REGION:-us-west-2}
+      - RAIS_S3ENDPOINT=${S3_URL:-http://minio:9000}
+      - RAIS_PLUGINS=s3-images.so,json-tracer.so
+      - AWS_ACCESS_KEY_ID=${AWS_S3_APP_KEY:-accesskey}
+      - AWS_SECRET_ACCESS_KEY=${AWS_S3_APP_SECRET:-secretkey}
     expose:
       - 8080
     networks:
