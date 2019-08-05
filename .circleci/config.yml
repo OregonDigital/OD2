@@ -172,7 +172,7 @@ jobs:
             export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
             export DATETIME=$(date "+%Y%m%d%H%M%S")
             echo export TAG="$DATETIME-$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
-            echo export DEPLOYED_VERSION="$GIT_SHORT_HASH-$DATETIME" >> $BASH_ENV
+            echo export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
       - aws-ecr/build-and-push-image:
           attach-workspace: false
           checkout: false
