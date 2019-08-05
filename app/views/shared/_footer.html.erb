@@ -1,18 +1,23 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
-    <div class="navbar-text text-left">
-      <p><%= t('hyrax.footer.service_html') %></p>
-      <% if can? :read, :admin_dashboard %>
-        <p><a href="https://oregondigital.github.io/oregon-digital-style-guide/">Style Guide</a></p>
-      <% end %>
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4 white-text">
+        About Oregon Digital | Policies | Copyright | Contact Us | Donate
+      </div>
     </div>
-    <div class="navbar-right">
-      <div class="navbar-text text-right">
-        <p class='deployed-version'>
-          Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
-        </p>
-        <p>Powered by Hyrax <%= Hyrax::VERSION %></p>
-        <p><%= t('hyrax.footer.copyright_html') %></p>
+    <div class="row" style="height: 86%">
+      <div class="navbar-text text-left col-sm-4 col-xs-6">
+        <img class='osu-logo' src='<%= image_url('osu-logo.png')%>'>
+        <img class='uo-logo' src='<%= image_url('uologo.png')%>'>
+      </div>
+      <div class="navbar-right col-sm-3 col-xs-4">
+        <div class="navbar-text text-right">
+          <p class='deployed-version'>
+            Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
+          </p>
+          <p>Powered by Hyrax <%= Hyrax::VERSION %></p>
+          <p><%= t('hyrax.footer.copyright_html') %></p>
+        </div>
       </div>
     </div>
   </div>
