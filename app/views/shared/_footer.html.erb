@@ -11,15 +11,15 @@
     </div>
     <div class="row footer-row">
       <div class="navbar-text text-left col-sm-4 col-xs-6">
-        <img class='osu-logo' src='<%= image_url('osu-logo.png')%>'>
-        <img class='uo-logo' src='<%= image_url('uologo.png')%>'>
+        <img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="">
+        <img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="">
       </div>
       <div class="navbar-right col-sm-3 col-xs-4">
         <div class="navbar-text text-right">
           <p>
-            <img class='social-logo' src='<%= image_url('insta.png')%>'>
-            <img class='social-logo' src='<%= image_url('facebook.png')%>'>
-            <img class='social-logo' src='<%= image_url('twitter.jpg')%>'>
+            <img class='social-logo' src='<%= image_url('insta.png')%>' alt="">
+            <img class='social-logo' src='<%= image_url('facebook.png')%>' alt="">
+            <img class='social-logo' src='<%= image_url('twitter.jpg')%>' alt="">
           </p>
           <p class='deployed-version'>
             Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
