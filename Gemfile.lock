@@ -15,13 +15,6 @@ GIT
       sidekiq
 
 GIT
-  remote: https://github.com/eagleas/clamav
-  revision: adac6261cbe8f24c1fc9e8044e7ae9d280641921
-  branch: master
-  specs:
-    clamav (0.4.1)
-
-GIT
   remote: https://github.com/osulp/triplestore-adapter
   revision: ab2b7bd31c0666c39be2a1ca96d53de0c6bde3f0
   specs:
@@ -163,8 +156,6 @@ GEM
       activemodel (= 5.1.7)
       activesupport (= 5.1.7)
       arel (~> 8.0)
-    activerecord-honeycomb (0.3.0)
-      libhoney
     activerecord-import (1.0.1)
       activerecord (>= 3.2)
     activesupport (5.1.7)
@@ -389,8 +380,6 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.4)
       faraday
-    faraday-honeycomb (0.3.0)
-      libhoney (>= 1.5.0)
     faraday_middleware (0.10.1)
       faraday (>= 0.7.4, < 1.0)
     ffi (1.10.0)
@@ -429,12 +418,8 @@ GEM
     hashdiff (0.3.7)
     hashie (3.5.7)
     hiredis (0.6.3)
-    honeycomb-beeline (0.5.0)
-      activerecord-honeycomb (>= 0.3.0)
-      faraday-honeycomb (>= 0.2.1)
-      libhoney (>= 1.8.1)
-      rack-honeycomb (>= 0.3.0)
-      sequel-honeycomb (>= 0.2.1)
+    honeycomb-beeline (1.0.0)
+      libhoney (~> 1.8)
     htmlentities (4.3.4)
     http (3.3.0)
       addressable (~> 2.3)
@@ -850,9 +835,6 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
-    sequel (5.14.0)
-    sequel-honeycomb (0.3.3)
-      libhoney
     shex (0.5.2)
       ebnf (~> 1.1)
       json-ld (>= 2.2, < 4.0)
@@ -965,7 +947,6 @@ DEPENDENCIES
   browse-everything
   byebug
   capybara (~> 2.17)
-  clamav!
   coffee-rails (~> 4.2)
   coveralls (~> 0.8)
   database_cleaner
@@ -977,7 +958,7 @@ DEPENDENCIES
   factory_bot_rails
   faraday_middleware (~> 0.10.0)
   haml
-  honeycomb-beeline
+  honeycomb-beeline (>= 1.0.0)
   hydra-derivatives!
   hydra-role-management
   hyrax!
@@ -1011,7 +992,6 @@ DEPENDENCIES
   rubyzip (>= 1.2.2)
   sass-rails (~> 5.0)
   selenium-webdriver
-  sequel
   shoulda-matchers!
   sidekiq
   simplecov (>= 0.9)
@@ -1022,4 +1002,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

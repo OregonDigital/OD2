@@ -1,4 +1,4 @@
-FROM ruby:2.5.1 as builder
+FROM ruby:2.5.5 as builder
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -13,17 +13,8 @@ RUN gem install bundler
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
-  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip ghostscript vim \
-  ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-8-jre libopenjp2-tools --fix-missing --allow-unauthenticated
-
-# install clamav for antivirus
-# fetch clamav local database
-RUN apt-get install -y clamav-freshclam clamav-daemon libclamav-dev
-RUN mkdir -p /var/lib/clamav && \
-  wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd && \
-  wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd && \
-  wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd && \
-  chown clamav:clamav /var/lib/clamav/*.cvd
+  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip ghostscript vim postgresql-11\
+  ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-11-jre libopenjp2-tools --fix-missing --allow-unauthenticated
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
