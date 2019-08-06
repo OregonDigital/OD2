@@ -16,6 +16,22 @@ module OregonDigital
       @graph_fetch_failures ||= []
     end
 
+    # creates a temporary file in tmp/works/metadata
+    def csv_metadata
+      dir = Rails.root.join('tmp', 'works', 'metadata')
+      FileUtils.mkdir_p dir
+      Tempfile.open(id, dir) do |f|
+        all_props, all_values = properties_to_s
+
+        csv_string = CSV.generate do |csv|
+          csv << all_props
+          csv << all_values
+        end
+
+        f << csv_string
+      end
+    end
+
     private
 
     def enqueue_fetch_failures
@@ -41,6 +57,21 @@ module OregonDigital
     def resolve_oembed_errors
       errors = OembedError.find_by(document_id: id)
       errors.delete if oembed_url_changed? && !errors.blank?
+    end
+
+    def properties_to_s
+      all_props = []
+      all_values = []
+      rejected_fields = %w[head tail]
+
+      properties.map do |label, _field|
+        values = send(label)
+        next if values.blank? || rejected_fields.include?(label)
+
+        all_props << label
+        all_values << (values.respond_to?(:to_a) ? values.map(&:to_s).join('|') : values)
+      end
+      [all_props, all_values]
     end
   end
 end
