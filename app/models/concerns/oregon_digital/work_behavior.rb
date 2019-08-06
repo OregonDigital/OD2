@@ -19,11 +19,11 @@ module OregonDigital
     # Generate a temporary CSV export and return file pointer
     def csv_metadata
       # Build a CSV of label headers and metadata value data
-      all_props, all_values = properties_to_s
+      props = properties_to_s.merge(controlled_properties_to_s)
 
       csv_string = CSV.generate do |csv|
-        csv << all_props
-        csv << all_values
+        csv << props.keys
+        csv << props.values
       end
 
       # Creates a temporary file in tmp/works/metadata
@@ -62,18 +62,37 @@ module OregonDigital
     end
 
     def properties_to_s
-      all_props = []
-      all_values = []
+      props = {}
       rejected_fields = %w[head tail]
 
       properties.map do |label, _field|
         values = send(label)
-        next if values.blank? || rejected_fields.include?(label)
+        next if values.blank? || rejected_fields.include?(label) || controlled_properties.include?(label.to_sym)
 
-        all_props << label
-        all_values << (values.respond_to?(:to_a) ? values.map(&:to_s).join('|') : values)
+        props[label] = (values.respond_to?(:to_a) ? values.map(&:to_s).join('|') : values)
       end
-      [all_props, all_values]
+      props
+    end
+
+    def controlled_properties_to_s
+      props = {}
+
+      controlled_properties.map do |label, _field|
+        values = send(label)
+        next if values.blank?
+
+        values = values.map { |prop| controlled_property_to_s(prop) }
+
+        props[label] = values.map(&:to_s).join('|')
+      end
+      props
+    end
+
+    def controlled_property_to_s(prop)
+      prop.fetch
+      prop = prop.solrize[1][:label].split('$')
+      prop[1] = '[' + prop[1] + ']'
+      prop.join(' ')
     end
   end
 end
