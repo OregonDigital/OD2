@@ -8,6 +8,7 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
 
 .image-masthead {
   // Remove controls background color
+  background-color: black;
   .navbar {
     background: none;
     padding-bottom: 5em;
@@ -77,10 +78,16 @@ body {
 
 .advanced-search-button {
   margin-left: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
 }
 
 .new-here-button {
   margin-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
 }
 
 .homepage-box {
@@ -121,4 +128,8 @@ body {
 .shrink-picture {
   height: 85%;
   width: 85%;
+}
+
+.no-background {
+  background: none;
 }
