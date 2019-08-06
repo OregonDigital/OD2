@@ -16,18 +16,20 @@ module OregonDigital
       @graph_fetch_failures ||= []
     end
 
-    # creates a temporary file in tmp/works/metadata
+    # Generate a temporary CSV export and return file pointer
     def csv_metadata
+      # Build a CSV of label headers and metadata value data
+      all_props, all_values = properties_to_s
+
+      csv_string = CSV.generate do |csv|
+        csv << all_props
+        csv << all_values
+      end
+
+      # Creates a temporary file in tmp/works/metadata
       dir = Rails.root.join('tmp', 'works', 'metadata')
       FileUtils.mkdir_p dir
       Tempfile.open(id, dir) do |f|
-        all_props, all_values = properties_to_s
-
-        csv_string = CSV.generate do |csv|
-          csv << all_props
-          csv << all_values
-        end
-
         f << csv_string
       end
     end
