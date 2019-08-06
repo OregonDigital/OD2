@@ -1,7 +1,7 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-offset-4 col-md-6 col-sm-8 col-sm-offset-4 white-text">
+      <div class="col-md-offset-4 col-md-6 col-sm-8 white-text">
         <%= link_to "About Oregon Digital", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text right-border" %>
         <%= link_to "Policies", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text right-border" %>
         <%= link_to "Copyright", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text right-border" %>
@@ -11,15 +11,15 @@
     </div>
     <div class="row footer-row">
       <div class="navbar-text text-left col-sm-4 col-xs-6">
-        <img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="">
-        <img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="">
+        <img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="Oregon State University">
+        <img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="University of Oregon">
       </div>
-      <div class="navbar-right col-sm-3 col-xs-6">
+      <div class="navbar-right footer-right col-md-3 col-xs-6">
         <div class="navbar-text text-right">
           <p>
-            <img class='social-logo' src='<%= image_url('insta.png')%>' alt="">
-            <img class='social-logo' src='<%= image_url('facebook.png')%>' alt="">
-            <img class='social-logo' src='<%= image_url('twitter.jpg')%>' alt="">
+            <img class='social-logo' src='<%= image_url('insta.png')%>' alt="Instagram">
+            <img class='social-logo' src='<%= image_url('facebook.png')%>' alt="Facebook">
+            <img class='social-logo' src='<%= image_url('twitter.jpg')%>' alt="Twitter">
           </p>
           <p class='deployed-version'>
             Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
