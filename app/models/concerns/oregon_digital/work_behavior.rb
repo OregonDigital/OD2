@@ -34,6 +34,42 @@ module OregonDigital
       end
     end
 
+    # Gather work files and convert them to a hash of byte strings
+    def work_files_byte_string
+      work_files = {}
+      dir = Rails.root.join('tmp', 'works', 'metadata')
+      file_sets.each do |fs|
+        file = fs.files.first
+
+        file_string = ''
+        file.stream.each do |s|
+          file_string += s
+        end
+        work_files[file.file_name.first] = file_string
+      end
+      work_files
+    end
+
+    # Gather work files and csv metadata and return it zipped together
+    def zip_files
+      work_files = work_files_byte_string
+      csv_file = csv_metadata
+
+      # Create zip file as StringIO object
+      stringio = Zip::OutputStream.write_buffer do |zio|
+        work_files.each do |file_name, file|
+          zio.put_next_entry(file_name)
+          zio.write file
+        end
+      end
+
+      # Write StringIO to temp file for debugging
+      dir = Rails.root.join('tmp', 'works', 'metadata')
+      Tempfile.open([id, '.zip'], dir) do |f|
+        f << stringio.string
+      end
+    end
+
     private
 
     def enqueue_fetch_failures
