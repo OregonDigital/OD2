@@ -19,7 +19,7 @@ module OregonDigital
     # Generate a temporary CSV export and return file pointer
     def csv_metadata
       # Build a CSV of label headers and metadata value data
-      props = properties_to_s.merge(controlled_properties_to_s)
+      props = properties_as_s.merge(controlled_properties_as_s)
 
       csv_string = CSV.generate do |csv|
         csv << props.keys
@@ -61,7 +61,8 @@ module OregonDigital
       errors.delete if oembed_url_changed? && !errors.blank?
     end
 
-    def properties_to_s
+    # Convert work properties to hash of machine_label=>human_value
+    def properties_as_s
       props = {}
       rejected_fields = %w[head tail]
 
@@ -74,21 +75,23 @@ module OregonDigital
       props
     end
 
-    def controlled_properties_to_s
+    # Convert work controlled vocabulary properties to hash of machine_label=>human_value
+    def controlled_properties_as_s
       props = {}
 
       controlled_properties.map do |label, _field|
         values = send(label)
         next if values.blank?
 
-        values = values.map { |prop| controlled_property_to_s(prop) }
+        values = values.map { |prop| controlled_property_to_csv_value(prop) }
 
         props[label] = values.map(&:to_s).join('|')
       end
       props
     end
 
-    def controlled_property_to_s(prop)
+    # Convert work controlled property value to '<label> [<uri>]' format
+    def controlled_property_to_csv_value(prop)
       prop.fetch
       prop = prop.solrize[1][:label].split('$')
       prop[1] = '[' + prop[1] + ']'
