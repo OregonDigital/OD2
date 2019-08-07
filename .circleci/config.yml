@@ -108,7 +108,7 @@ jobs:
           command: |
             sudo apt-get update -qq
             sudo apt-get upgrade -qq
-            sudo apt-get install -y -f software-properties-common build-essential stretch-backports nodejs make apt-utils ffmpeg
+            sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg
             sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
             sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
             sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools
