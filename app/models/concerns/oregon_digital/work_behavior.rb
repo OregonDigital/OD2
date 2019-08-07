@@ -16,6 +16,24 @@ module OregonDigital
       @graph_fetch_failures ||= []
     end
 
+    # Generate a temporary CSV export and return file pointer
+    def csv_metadata
+      # Build a CSV of label headers and metadata value data
+      props = properties_as_s.merge(controlled_properties_as_s)
+
+      csv_string = CSV.generate do |csv|
+        csv << props.keys
+        csv << props.values
+      end
+
+      # Creates a temporary file in tmp/works/metadata
+      dir = Rails.root.join('tmp', 'works', 'metadata')
+      FileUtils.mkdir_p dir
+      Tempfile.open(id, dir) do |f|
+        f << csv_string
+      end
+    end
+
     private
 
     def enqueue_fetch_failures
@@ -41,6 +59,43 @@ module OregonDigital
     def resolve_oembed_errors
       errors = OembedError.find_by(document_id: id)
       errors.delete if oembed_url_changed? && !errors.blank?
+    end
+
+    # Convert work properties to hash of machine_label=>human_value
+    def properties_as_s
+      props = {}
+      rejected_fields = %w[head tail]
+
+      properties.map do |label, _field|
+        values = send(label)
+        next if values.blank? || rejected_fields.include?(label) || controlled_properties.include?(label.to_sym)
+
+        props[label] = (values.respond_to?(:to_a) ? values.map(&:to_s).join('|') : values)
+      end
+      props
+    end
+
+    # Convert work controlled vocabulary properties to hash of machine_label=>human_value
+    def controlled_properties_as_s
+      props = {}
+
+      controlled_properties.map do |label, _field|
+        values = send(label)
+        next if values.blank?
+
+        values = values.map { |prop| controlled_property_to_csv_value(prop) }
+
+        props[label] = values.map(&:to_s).join('|')
+      end
+      props
+    end
+
+    # Convert work controlled property value to '<label> [<uri>]' format
+    def controlled_property_to_csv_value(prop)
+      prop.fetch
+      prop = prop.solrize[1][:label].split('$')
+      prop[1] = "[#{prop[1]}]"
+      prop.join(' ')
     end
   end
 end
