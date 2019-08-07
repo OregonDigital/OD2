@@ -94,7 +94,7 @@ module OregonDigital
     def controlled_property_to_csv_value(prop)
       prop.fetch
       prop = prop.solrize[1][:label].split('$')
-      prop[1] = '[' + prop[1] + ']'
+      prop[1] = "[#{prop[1]}]"
       prop.join(' ')
     end
   end
