@@ -11,9 +11,11 @@ RSpec.describe Qa::Authorities::Format do
       allow(format_instance).to receive(:json).with(anything).and_return(response)
       allow(format_instance).to receive(:find_term).and_return(response)
     end
+
     context 'with a uri in the vocabulary' do
       it { expect(format_instance.search('https://w3id.org/spar/mediatype/term/id')).to eq [{ id: 'my_id', label: 'mylabel' }.with_indifferent_access] }
     end
+
     context 'with a uri not in the vocabulary' do
       it { expect(format_instance.search('http://my.queryuri.com')).to eq [] }
     end

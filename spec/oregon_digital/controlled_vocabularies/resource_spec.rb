@@ -15,20 +15,25 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
         allow(resource).to receive(:rdf_label).and_return(['RDF_Label'])
         allow(resource).to receive(:rdf_subject).and_return('RDF.Subject.Org')
       end
+
       it { expect(resource.solrize).to eq ['RDF.Subject.Org', { label: 'RDF_Label$RDF.Subject.Org' }] }
     end
+
     context 'without a label' do
       before do
         allow(resource).to receive(:rdf_label).and_return([''])
         allow(resource).to receive(:rdf_subject).and_return('RDF.Subject.Org')
       end
+
       it { expect(resource.solrize).to eq ['RDF.Subject.Org'] }
     end
+
     context 'when label and uri are the same' do
       before do
         allow(resource).to receive(:rdf_label).and_return(['RDF.Subject.Org'])
         allow(resource).to receive(:rdf_subject).and_return('RDF.Subject.Org')
       end
+
       it { expect(resource.solrize).to eq ['RDF.Subject.Org'] }
     end
   end
@@ -38,13 +43,16 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
       before do
         allow(resource).to receive(:rdf_subject).and_return('')
       end
+
       it { expect(resource.triplestore_fetch).to eq new_rdf_graph }
     end
+
     context 'when an rdf_subject is returned' do
       before do
         allow(resource).to receive(:rdf_subject).and_return('http://www.blah.com')
         allow(resource.triplestore).to receive(:fetch).with('http://www.blah.com').and_return(bg_graph)
       end
+
       it { expect(resource.triplestore_fetch).to eq bg_graph }
     end
   end
@@ -54,12 +62,15 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
       before do
         allow(resource).to receive(:uri_in_vocab?).and_return(true)
       end
+
       it { expect { resource.set_subject!('http://my.queryuri.com') }.not_to raise_error(OregonDigital::ControlledVocabularies::ControlledVocabularyError) }
     end
+
     context 'with a term not in the vocabulary' do
       before do
         allow(resource).to receive(:uri_in_vocab?).and_return(false)
       end
+
       it { expect { resource.set_subject!('http://my.queryuri.com') }.to raise_error(OregonDigital::ControlledVocabularies::ControlledVocabularyError) }
     end
   end

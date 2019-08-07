@@ -14,6 +14,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
     before do
       worker.triplestore = double
     end
+
     it 'attempts a local and remote fetch' do
       expect(worker.triplestore).to receive(:fetch).twice
       worker.perform(:uri, :user)

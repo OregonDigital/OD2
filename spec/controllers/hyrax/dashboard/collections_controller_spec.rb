@@ -20,6 +20,7 @@ RSpec.describe Hyrax::Dashboard::CollectionsController, type: :controller do
       facet1.save
       controller.send(:process_facets)
     end
+
     let(:facet) { Facet.find(0) }
 
     it 'creates the right number of facets' do

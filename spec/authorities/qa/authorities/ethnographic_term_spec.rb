@@ -9,9 +9,11 @@ RSpec.describe Qa::Authorities::EthnographicTerm do
     before do
       allow(ethnograph_term_instance).to receive(:json).with(anything).and_return(response)
     end
+
     context 'with a uri in the vocabulary' do
       it { expect(ethnograph_term_instance.search('http://id.loc.gov/vocabulary/ethnographicTerms/my_id')).to eq [{ id: 'http://id.loc.gov/vocabulary/ethnographicTerms/my_id', label: 'mylabel' }.with_indifferent_access] }
     end
+
     context 'with a uri not in the vocabulary' do
       it { expect(ethnograph_term_instance.search('http://my.queryuri.com')).to eq [] }
     end

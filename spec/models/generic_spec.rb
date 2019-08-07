@@ -32,6 +32,7 @@ RSpec.describe Generic do
         .to_return(status: 200, body: '', headers: {})
       # model.depositor = user.email
     end
+
     it 'emails the user' do
       expect(Hyrax.config.callback).to receive(:run).with(:ld_fetch_error, user, uri)
       model.send(:enqueue_fetch_failure, uri)
