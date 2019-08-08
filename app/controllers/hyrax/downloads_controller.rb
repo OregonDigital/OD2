@@ -2,6 +2,7 @@ module Hyrax
   class DownloadsController < ApplicationController
     include Hydra::Controller::DownloadBehavior
     include Hyrax::LocalFileDownloadsControllerBehavior
+    include OregonDigital::S3FileDownloadsControllerBehavior
 
     def self.default_content_path
       :original_file
@@ -12,17 +13,21 @@ module Hyrax
     def show
       case file
       when ActiveFedora::File
-        # For original files that are stored in fedora
         super
       when String
-        # For derivatives stored on the local file system
         send_local_content
+      when URI::Generic
+        send_s3_content
       else
         raise ActiveFedora::ObjectNotFoundError
       end
     end
 
     private
+
+      def s3_object
+        @s3_object ||= OregonDigital::S3.instance.object(file)
+      end
 
       # Override the Hydra::Controller::DownloadBehavior#content_options so that
       # we have an attachement rather than 'inline'
@@ -64,9 +69,7 @@ module Hyrax
       def load_file
         file_reference = params[:file]
         return default_file unless file_reference
-
-        file_path = Hyrax::DerivativePath.derivative_path_for_reference(params[asset_param_key], file_reference)
-        File.exist?(file_path) ? file_path : nil
+        Hyrax::DerivativePath.derivative_path_for_reference(params[asset_param_key], file_reference)
       end
 
       def default_file
