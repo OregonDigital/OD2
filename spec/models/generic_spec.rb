@@ -72,12 +72,24 @@ RSpec.describe Generic do
   end
 
   describe '#csv_metadata' do
-    it 'provides a file' do
-      expect(model.csv_metadata).to be_kind_of(File)
+    it 'provides a string' do
+      expect(model.csv_metadata).to be_kind_of(String)
     end
     it 'provides correct data' do
-      csv = CSV.read(model.csv_metadata, headers: true)
+      csv = CSV.parse(model.csv_metadata, headers: true)
       expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo')
+    end
+  end
+
+  describe '#work_files_byte_string' do
+    it 'provides a hash' do
+      expect(model.work_files_byte_string).to be_kind_of(Hash)
+    end
+  end
+
+  describe '#zip_files' do
+    it 'provides a StringIO' do
+      expect(model.zip_files).to be_kind_of(StringIO)
     end
   end
 end
