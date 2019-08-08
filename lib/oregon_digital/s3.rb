@@ -4,6 +4,17 @@ module OregonDigital
   class S3
     attr_reader :endpoint, :region, :access_key_id, :secret_access_key
 
+    # Returns an instance of OregonDigital::S3 using the environment for all
+    # necessary configuration
+    def self.instance
+      OregonDigital::S3.new(
+        endpoint:          ENV['S3_URL'],
+        region:            ENV['AWS_S3_REGION'],
+        access_key_id:     ENV['AWS_S3_APP_KEY'],
+        secret_access_key: ENV['AWS_S3_APP_SECRET']
+      )
+    end
+
     def initialize(endpoint: nil, region:, access_key_id:, secret_access_key:)
       @endpoint = endpoint
       @region = region

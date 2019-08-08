@@ -67,12 +67,7 @@ module OregonDigital
     end
 
     def s3_factory
-      OregonDigital::S3.new(
-        endpoint:          ENV['S3_URL'],
-        region:            ENV['AWS_S3_REGION'],
-        access_key_id:     ENV['AWS_S3_APP_KEY'],
-        secret_access_key: ENV['AWS_S3_APP_SECRET']
-      )
+      OregonDigital::S3.instance
     end
   end
 end
