@@ -92,9 +92,9 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Document.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) unless Document.properties[prop]['advance_search']
+        config.add_show_field solr_name(prop, :stored_searchable) unless Document.properties[prop]['showable']
 
-        if Document.properties[prop]['advance_search'] || Document.properties[prop]['advance_search'].nil?
+        if Document.properties[prop]['basic_searchable'] || Document.properties[prop]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
             field.solr_local_parameters = {
@@ -114,9 +114,9 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Generic.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) unless Generic.properties[prop]['advance_search']
+        config.add_show_field solr_name(prop, :stored_searchable) unless Generic.properties[prop]['showable']
 
-        if Generic.properties[prop]['advance_search'] || Generic.properties[prop]['advance_search'].nil?
+        if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
             field.solr_local_parameters = {
@@ -136,9 +136,9 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Image.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) unless Image.properties[prop]['advance_search']
+        config.add_show_field solr_name(prop, :stored_searchable) unless Image.properties[prop]['showable']
 
-        if Image.properties[prop]['advance_search'] || Image.properties[prop]['advance_search'].nil?
+        if Image.properties[prop]['basic_searchable'] || Image.properties[prop]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
             field.solr_local_parameters = {
@@ -164,9 +164,9 @@ class CatalogController < ApplicationController
 
       # Add property as searchable all fields box and individually
       if Generic.properties[label].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) unless Generic.properties[label]['advance_search']
+        config.add_show_field solr_name(prop, :stored_searchable) unless Generic.properties[label]['showable']
 
-        if Generic.properties[label]['advance_search'] || Generic.properties[label]['advance_search'].nil?
+        if Generic.properties[label]['basic_searchable'] || Generic.properties[label]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
             field.solr_local_parameters = {
