@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OregonDigital
   # S3 houses all our common AWS S3 logic / setup in a framework-agnostic way
   # so we can include this code in the derivatives services and the main OD app
@@ -8,9 +10,9 @@ module OregonDigital
     # necessary configuration
     def self.instance
       OregonDigital::S3.new(
-        endpoint:          ENV['S3_URL'],
-        region:            ENV['AWS_S3_REGION'],
-        access_key_id:     ENV['AWS_S3_APP_KEY'],
+        endpoint: ENV['S3_URL'],
+        region: ENV['AWS_S3_REGION'],
+        access_key_id: ENV['AWS_S3_APP_KEY'],
         secret_access_key: ENV['AWS_S3_APP_SECRET']
       )
     end
@@ -20,7 +22,7 @@ module OregonDigital
       @region = region
       @access_key_id = access_key_id
       @secret_access_key = secret_access_key
-      @bucket_exists = Hash.new
+      @bucket_exists = {}
     end
 
     # Returns a preconfigured S3 client
@@ -38,7 +40,7 @@ module OregonDigital
     # Returns a list of all keys in the given bucket with an optional prefix
     #
     # Note: This always hits the S3 GET Bucket API - no data is cached
-    def keys(bucket, prefix = "")
+    def keys(bucket, prefix = '')
       make_bucket(bucket)
       client.list_objects_v2(
         bucket: bucket,
@@ -50,6 +52,7 @@ module OregonDigital
     def make_bucket(bucket)
       # Don't spam S3 unless this is the first time checking this bucket
       return if @bucket_exists[bucket]
+
       @bucket_exists[bucket] = true
 
       client.head_bucket(bucket: bucket)
@@ -75,7 +78,6 @@ module OregonDigital
 
     def object_exists?(url)
       make_bucket(url.host)
-      s3 = Aws::S3::Resource.new(client: client)
       client.head_object(bucket: url.host, key: url_to_key(url))
       true
     rescue Aws::S3::Errors::NotFound

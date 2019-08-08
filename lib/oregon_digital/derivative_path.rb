@@ -24,11 +24,11 @@ module OregonDigital
     #
     # Note: This hits S3's GET Bucket service with the fileset id's prefix
     def all_urls
-      s3_factory.keys(bucket, pathify_id.join('/')).collect {|key| [url_base, key].join('/')}
+      s3_factory.keys(bucket, pathify_id.join('/')).collect { |key| [url_base, key].join('/') }
     end
 
     def sorted_derivative_urls(label)
-      all_urls.select {|url| File.extname(url) == ext_for(label)}
+      all_urls.select { |url| File.extname(url) == ext_for(label) }
     end
 
     # Returns true if the given asset exists in our data store
