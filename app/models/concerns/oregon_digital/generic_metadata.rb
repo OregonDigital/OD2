@@ -349,7 +349,7 @@ module OregonDigital
       property :copyright_claimant, predicate: ::RDF::Vocab::MARCRelators.cpc do |index|
         index.as :stored_searchable
       end
-, basic_searchable: false
+
       property :rights_holder, predicate: ::RDF::Vocab::DC.rightsHolder do |index|
         index.as :stored_searchable
       end
