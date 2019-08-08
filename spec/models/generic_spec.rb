@@ -8,6 +8,8 @@ RSpec.describe Generic do
   let(:user) { create(:user) }
   let(:uri) { RDF::URI.new('http://opaquenamespace.org/ns/TestVocabulary/TestTerm') }
   let(:term) { OregonDigital::ControlledVocabularies::Resource.new }
+  let(:file) { instance_double('file', stream: ["\x00"], file_name: ['name']) }
+  let(:file_set) { instance_double('file_set', files: [file]) }
 
   it { is_expected.to have_attributes(title: ['foo']) }
   it { expect(described_class.generic_properties.include?('tribal_title')).to eq true }
@@ -82,14 +84,30 @@ RSpec.describe Generic do
   end
 
   describe '#work_files_byte_string' do
+    before do
+      allow(model).to receive(:file_sets).and_return([file_set])
+    end
     it 'provides a hash' do
       expect(model.work_files_byte_string).to be_kind_of(Hash)
+    end
+    it 'provides correct data' do
+      expect(model.work_files_byte_string).to eq('name' => "\x00")
     end
   end
 
   describe '#zip_files' do
+    before do
+      allow(model).to receive(:file_sets).and_return([file_set])
+    end
     it 'provides a StringIO' do
       expect(model.zip_files).to be_kind_of(StringIO)
+    end
+    it 'writes the right number of files' do
+      file_count = 0
+      Zip::File.open_buffer(model.zip_files).each do
+        file_count += 1
+      end
+      expect(file_count).to eq(2)
     end
   end
 end
