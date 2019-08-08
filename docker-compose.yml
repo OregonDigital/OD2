@@ -259,7 +259,7 @@ services:
   ##
   # Postgres database server
   db: &db
-    image: postgres:11-alpine
+    image: postgres:10-alpine
     networks:
       internal:
   db-dev: &db-dev
