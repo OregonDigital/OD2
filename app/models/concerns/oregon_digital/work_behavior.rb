@@ -16,21 +16,45 @@ module OregonDigital
       @graph_fetch_failures ||= []
     end
 
-    # Generate a temporary CSV export and return file pointer
+    # Export work metadata as CSV string
     def csv_metadata
       # Build a CSV of label headers and metadata value data
       props = properties_as_s.merge(controlled_properties_as_s)
 
-      csv_string = CSV.generate do |csv|
+      CSV.generate do |csv|
         csv << props.keys
         csv << props.values
       end
+    end
 
-      # Creates a temporary file in tmp/works/metadata
-      dir = Rails.root.join('tmp', 'works', 'metadata')
-      FileUtils.mkdir_p dir
-      Tempfile.open(id, dir) do |f|
-        f << csv_string
+    # Gather work files and convert them to a hash of byte strings
+    def work_files_byte_string
+      work_files = {}
+      file_sets.each do |fs|
+        file = fs.files.first
+
+        file_string = ''
+        file.stream.each do |s|
+          file_string += s
+        end
+        work_files[file.file_name.first] = file_string
+      end
+      work_files
+    end
+
+    # Gather work files and csv metadata and return it zipped together
+    def zip_files
+      work_files = work_files_byte_string
+      csv_string = csv_metadata
+
+      # Create zip file as StringIO object
+      Zip::OutputStream.write_buffer do |zio|
+        work_files.each do |file_name, file|
+          zio.put_next_entry(file_name)
+          zio.write file
+        end
+        zio.put_next_entry('metadata.csv')
+        zio.write csv_string
       end
     end
 
