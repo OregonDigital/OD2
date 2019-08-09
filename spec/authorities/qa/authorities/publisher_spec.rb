@@ -22,12 +22,14 @@ RSpec.describe Qa::Authorities::Publisher do
       allow(publisher_instance).to receive(:json).with(ulan_request).and_return(ulan_response)
       allow(publisher_instance).to receive(:json).with(loc_names_request).and_return(loc_names_response)
     end
+
     context 'with a uri in the vocabulary' do
       it { expect(publisher_instance.search('http://opaquenamespace.org/ns/publisher/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/publisher/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(publisher_instance.search('http://vocab.getty.edu/ulan/my_id')).to eq [{ id: 'http://vocab.getty.edu/ulan/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(publisher_instance.search('http://id.loc.gov/authorities/names/my_id')).to eq [{ id: 'http://id.loc.gov/authorities/names/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(publisher_instance.search('http://opaquenamespace.org/ns/creator/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/creator/my_id', label: 'mylabel' }.with_indifferent_access] }
     end
+
     context 'with a uri not in the vocabulary' do
       it { expect(publisher_instance.search('http://my.queryuri.com')).to eq [] }
     end

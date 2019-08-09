@@ -27,7 +27,7 @@ RSpec.describe Qa::Authorities::Subject do
   let(:ons_people_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/people/my_id' }.with_indifferent_access }
   let(:ons_subject_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/subject/my_id' }.with_indifferent_access }
   let(:ulan_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
-  let(:wd_entity_response) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale.to_s}": { 'value': 'mylabel' } } } }, '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
+  let(:wd_entity_response) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale}": { 'value': 'mylabel' } } } }, '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
 
   it { expect(repository_instance.label.call(getty_response, OregonDigital::ControlledVocabularies::Vocabularies::GettyAat)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_genre_forms_response, OregonDigital::ControlledVocabularies::Vocabularies::LocGenreForms)).to eq 'mylabel' }
@@ -58,6 +58,7 @@ RSpec.describe Qa::Authorities::Subject do
       allow(repository_instance).to receive(:json).with(ulan_request).and_return(ulan_response)
       allow(repository_instance).to receive(:json).with(wd_entity_request).and_return(wd_entity_response)
     end
+
     context 'with a uri in the vocabulary' do
       it { expect(repository_instance.search('http://vocab.getty.edu/aat/my_id')).to eq [{ id: 'http://vocab.getty.edu/aat/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://id.loc.gov/authorities/genreForms/my_id')).to eq [{ id: 'http://id.loc.gov/authorities/genreForms/my_id', label: 'mylabel' }.with_indifferent_access] }
@@ -73,6 +74,7 @@ RSpec.describe Qa::Authorities::Subject do
       it { expect(repository_instance.search('http://vocab.getty.edu/ulan/my_id')).to eq [{ id: 'http://vocab.getty.edu/ulan/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://www.wikidata.org/entity/my_id')).to eq [{ id: 'http://www.wikidata.org/entity/my_id', label: 'mylabel' }.with_indifferent_access] }
     end
+
     context 'with a uri not in the vocabulary' do
       it { expect(repository_instance.search('http://my.queryuri.com')).to eq [] }
     end

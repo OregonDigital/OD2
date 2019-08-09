@@ -262,7 +262,7 @@ services:
     image: postgres:10-alpine
     networks:
       internal:
-  db-dev:
+  db-dev: &db-dev
     <<: *db
     environment:
       - POSTGRES_DB=development
