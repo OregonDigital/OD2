@@ -6,15 +6,16 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
   # collection_type_require_membership
   # collection_type_assigns_visibility
 
-  let(:input_ids) { %w[
-    collection_type_nestable
-    collection_type_brandable
-    collection_type_discoverable
-    collection_type_sharable
-    collection_type_share_applies_to_new_works
-    collection_type_allow_multiple_membership
-    collection_type_facet_configurable
-  ].freeze }
+  let(:input_ids) do 
+    %w[collection_type_nestable
+       collection_type_brandable
+       collection_type_discoverable
+       collection_type_sharable
+       collection_type_share_applies_to_new_works
+       collection_type_allow_multiple_membership
+       collection_type_facet_configurable
+    ].freeze
+  end
   let(:collection_type_form) { OregonDigital::Forms::Admin::CollectionTypeForm.new }
   let(:collection_type) { stub_model(Hyrax::CollectionType) }
 

@@ -48,6 +48,7 @@ RSpec.describe Generic do
       allow(term).to receive(:fetch)
       allow(term).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/TestVocabulary/TestTerm', { label: 'TestTerm$http://opaquenamespace.org/ns/TestVocabulary/TestTerm' }])
     end
+
     it 'formats a controlled property' do
       expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm [http://opaquenamespace.org/ns/TestVocabulary/TestTerm]')
     end
@@ -88,6 +89,7 @@ RSpec.describe Generic do
     before do
       allow(model).to receive(:file_sets).and_return([file_set])
     end
+
     it 'provides a hash' do
       expect(model.work_files_byte_string).to be_kind_of(Hash)
     end
@@ -100,6 +102,7 @@ RSpec.describe Generic do
     before do
       allow(model).to receive(:file_sets).and_return([file_set])
     end
+
     it 'provides a StringIO' do
       expect(model.zip_files).to be_kind_of(StringIO)
     end
