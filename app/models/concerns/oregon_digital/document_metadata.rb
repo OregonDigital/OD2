@@ -8,6 +8,11 @@ module OregonDigital
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
     included do
       initial_properties = properties.keys
+
+      # property :box_number, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/boxNumber') do |index|
+      #   index.as :stored_searchable, :facetable
+      # end
+
       property :contained_in_journal, advance_search: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal') do |index|
         index.as :stored_searchable
       end

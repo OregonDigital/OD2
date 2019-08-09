@@ -10,6 +10,11 @@ overrides:
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/set
     function: return_nil
+  - predicate: http://opaquenamespace.org/ns/boxName
+    function: return_nil
   - property: rights_holder
     predicate: http://opaquenamespace.org/right/rightsHolder
+    multiple: true
+  - property: material
+    predicate: http://opaquenamespace.org/ns/vra/material
     multiple: true
