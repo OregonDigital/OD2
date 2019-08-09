@@ -7,6 +7,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::MediaType do
     context 'when in vocab' do
       it { expect(vocab.in_vocab?('https://w3id.org/spar/mediatype/term/id')).to be true }
     end
+
     context 'when not in vocab' do
       it { expect(vocab.in_vocab?('http://my.queryuri.com')).to be false }
     end

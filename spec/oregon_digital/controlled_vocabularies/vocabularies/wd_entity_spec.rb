@@ -2,7 +2,7 @@
 
 RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::WdEntity do
   let(:vocab) { described_class }
-  let(:data) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale.to_s}": { 'value': 'blah' } } } } }.with_indifferent_access] }
+  let(:data) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale}": { 'value': 'blah' } } } } }.with_indifferent_access] }
   let(:query) { 'www.blah.com/blah' }
 
   it { expect(vocab.expression).to be_kind_of(Regexp) }

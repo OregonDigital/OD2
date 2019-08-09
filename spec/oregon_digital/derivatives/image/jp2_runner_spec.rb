@@ -11,6 +11,20 @@ RSpec.describe OregonDigital::Derivatives::Image::JP2Runner do
   end
 
   describe '#create' do
+    subject do
+      outfile = '/tmp/foo.jp2'
+      described_class.create(source,
+                             outputs: [
+                               { label: :jp2,
+                                 mime_type: 'image/jpeg',
+                                 tile_size: 1024,
+                                 compression: 1,
+                                 url: URI("file://#{outfile}"),
+                                 layer: 0 }
+                             ])
+      MiniMagick::Image.open(outfile)
+    end
+
     before do
       # GraphicsMagick can't read the JP2.  ImageMagick can't deal with huge
       # images, which is why we use GM by default, but in the case of this
@@ -25,20 +39,6 @@ RSpec.describe OregonDigital::Derivatives::Image::JP2Runner do
       # opj_decompress doesn't do jpg directly, and we don't really want to add
       # a 500k file just for this one test
       MiniMagick::Image.open(fixture).format('bmp').write(source)
-    end
-
-    subject do
-      outfile = '/tmp/foo.jp2'
-      described_class.create(source,
-                             outputs: [
-                               { label: :jp2,
-                                 mime_type: 'image/jpeg',
-                                 tile_size: 1024,
-                                 compression: 1,
-                                 url: URI("file://#{outfile}"),
-                                 layer: 0 }
-                             ])
-      MiniMagick::Image.open(outfile)
     end
 
     it { is_expected.to have_attributes(type: 'JP2') }
