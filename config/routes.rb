@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     concerns_to_route.each do |curation_concern_name|
       namespaced_resources curation_concern_name, only: [] do
         member do
-          get :download
+          get :download, :metadata
         end
       end
     end
