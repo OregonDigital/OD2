@@ -16,7 +16,6 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
     it 'Creates an Video' do
       visit new_hyrax_video_path
 
@@ -62,6 +61,5 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       save_screenshot if ENV.fetch('CI', nil)
       # rubocop:enable Lint/Debugger
     end
-    # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
   end
 end
