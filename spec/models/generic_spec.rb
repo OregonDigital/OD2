@@ -8,6 +8,8 @@ RSpec.describe Generic do
   let(:user) { create(:user) }
   let(:uri) { RDF::URI.new('http://opaquenamespace.org/ns/TestVocabulary/TestTerm') }
   let(:term) { OregonDigital::ControlledVocabularies::Resource.new }
+  let(:file) { instance_double('file', stream: ["\x00"], file_name: ['name']) }
+  let(:file_set) { instance_double('file_set', files: [file]) }
 
   it { is_expected.to have_attributes(title: ['foo']) }
   it { expect(described_class.generic_properties.include?('tribal_title')).to eq true }
@@ -30,6 +32,7 @@ RSpec.describe Generic do
         .to_return(status: 200, body: '', headers: {})
       # model.depositor = user.email
     end
+
     it 'emails the user' do
       expect(Hyrax.config.callback).to receive(:run).with(:ld_fetch_error, user, uri)
       model.send(:enqueue_fetch_failure, uri)
@@ -45,6 +48,7 @@ RSpec.describe Generic do
       allow(term).to receive(:fetch)
       allow(term).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/TestVocabulary/TestTerm', { label: 'TestTerm$http://opaquenamespace.org/ns/TestVocabulary/TestTerm' }])
     end
+
     it 'formats a controlled property' do
       expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm [http://opaquenamespace.org/ns/TestVocabulary/TestTerm]')
     end
@@ -72,12 +76,42 @@ RSpec.describe Generic do
   end
 
   describe '#csv_metadata' do
-    it 'provides a file' do
-      expect(model.csv_metadata).to be_kind_of(File)
+    it 'provides a string' do
+      expect(model.csv_metadata).to be_kind_of(String)
     end
     it 'provides correct data' do
-      csv = CSV.read(model.csv_metadata, headers: true)
+      csv = CSV.parse(model.csv_metadata, headers: true)
       expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo')
+    end
+  end
+
+  describe '#work_files_byte_string' do
+    before do
+      allow(model).to receive(:file_sets).and_return([file_set])
+    end
+
+    it 'provides a hash' do
+      expect(model.work_files_byte_string).to be_kind_of(Hash)
+    end
+    it 'provides correct data' do
+      expect(model.work_files_byte_string).to eq('name' => "\x00")
+    end
+  end
+
+  describe '#zip_files' do
+    before do
+      allow(model).to receive(:file_sets).and_return([file_set])
+    end
+
+    it 'provides a StringIO' do
+      expect(model.zip_files).to be_kind_of(StringIO)
+    end
+    it 'writes the right number of files' do
+      file_count = 0
+      Zip::File.open_buffer(model.zip_files).each do
+        file_count += 1
+      end
+      expect(file_count).to eq(2)
     end
   end
 end

@@ -7,6 +7,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::HistoricPlace do
     context 'when in vocab' do
       it { expect(vocab.in_vocab?('http://vocab.getty.edu/tgn/term_id')).to be true }
     end
+
     context 'when not in vocab' do
       it { expect(vocab.in_vocab?('http://my.queryuri.com')).to be false }
     end

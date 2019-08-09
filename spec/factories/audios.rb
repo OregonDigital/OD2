@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :audio do
     sequence(:title) { |n| ["title-#{n}"] }
     resource_type { 'MyType' }
+    repository { OregonDigital::ControlledVocabularies::Repository.new('http://opaquenamespace.org/ns/repository/my/repo') }
   end
 end

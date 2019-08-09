@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Update Debian Packages for ClamAV
           command: |
-            sudo apt-get install -y software-properties-common build-essential make apt-utils clamav-freshclam clamav-daemon libclamav-dev
+            sudo apt-get install -y software-properties-common build-essential make apt-utils
       - restore_cache:
           name: Restore bundle from cache
           keys:
@@ -109,17 +109,9 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get upgrade -qq
             sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg
-            sudo apt-get install -y clamav-freshclam clamav-daemon libclamav-dev
             sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
             sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
             sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools
-      - run:
-          name: Fetch clamav databases
-          command: |
-            sudo wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd
-            sudo wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd
-            sudo wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd
-            sudo chown clamav:clamav /var/lib/clamav/*.cvd
       - run:
           name: Load config into SolrCloud
           command: |
