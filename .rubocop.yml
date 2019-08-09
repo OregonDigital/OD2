@@ -63,6 +63,9 @@ RSpec/LetSetup:
 RSpec/MessageSpies:
   Enabled: false
 
+RSpec/MultipleExpectations:
+  Enabled: false
+
 # FactoryBot 5 will require dynamic definition, so we should allow it.
 FactoryBot/StaticAttributeDefinedDynamically:
   Enabled: false
