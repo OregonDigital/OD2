@@ -26,6 +26,22 @@ module Hyrax
       []
     end
 
+    # OVERRIDE: update initialize_field to initialize linked key property when blank
+    # See https://github.com/samvera/hyrax/blob/v2.5.0/app/forms/hyrax/forms/work_form.rb#L38-L43
+    def initialize_field(key)
+      return if %i[embargo_release_date lease_expiration_date].include?(key)
+
+      # rubocop:disable Lint/AssignmentInCondition
+      if class_name = model_class.properties[key.to_s].try(:class_name)
+        # Initialize linked properties such as based_near
+        self[key] = [] if self[key].blank?
+        self[key] += [class_name.new]
+      else
+        super
+      end
+      # rubocop:enable Lint/AssignmentInCondition
+    end
+
     def self.build_permitted_params
       params = super
       Generic.controlled_property_labels.each do |prop|

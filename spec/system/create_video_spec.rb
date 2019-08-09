@@ -35,6 +35,9 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       within('div.video_identifier') do
         fill_in('Identifier', with: 'Test ID')
       end
+      within('div.select2-container.video_repository') do
+        page.execute_script("$('#video_repository_attributes_0_id').val('http://opaquenamespace.org/ns/repository/my/repo')")
+      end
       select('In Copyright', from: 'Rights')
       within('div.video_resource_type') do
         select('Dataset', from: 'Type')
