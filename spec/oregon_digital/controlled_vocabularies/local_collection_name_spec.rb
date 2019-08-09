@@ -7,6 +7,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::LocalCollectionName do
     context 'when in vocab' do
       it { expect(vocab.in_vocab?('http://opaquenamespace.org/ns/localCollectionName/term_id')).to be true }
     end
+
     context 'when not in vocab' do
       it { expect(vocab.in_vocab?('http://my.queryuri.com')).to be false }
     end
