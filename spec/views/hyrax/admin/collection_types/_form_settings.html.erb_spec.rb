@@ -44,7 +44,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
         expect(rendered).to match(I18n.t('hyrax.admin.collection_types.form_settings.warning'))
       end
 
-      INPUT_IDS.each do |id|
+      input_ids.each do |id|
         it "renders the #{id} checkbox to be enabled" do
           match = rendered.match(/(<input.*id="#{id}".*)/)
           expect(match[1].index('disabled="disabled"')).to be_nil
