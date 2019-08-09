@@ -6,16 +6,15 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
   # collection_type_require_membership
   # collection_type_assigns_visibility
 
-  INPUT_IDS = %w[
-    collection_type_nestable
-    collection_type_brandable
-    collection_type_discoverable
-    collection_type_sharable
-    collection_type_share_applies_to_new_works
-    collection_type_allow_multiple_membership
-    collection_type_facet_configurable
-  ].freeze
-
+  let(:input_ids) do
+    %w[collection_type_nestable
+       collection_type_brandable
+       collection_type_discoverable
+       collection_type_sharable
+       collection_type_share_applies_to_new_works
+       collection_type_allow_multiple_membership
+       collection_type_facet_configurable].freeze
+  end
   let(:collection_type_form) { OregonDigital::Forms::Admin::CollectionTypeForm.new }
   let(:collection_type) { stub_model(Hyrax::CollectionType) }
 
@@ -45,13 +44,15 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
         expect(rendered).to match(I18n.t('hyrax.admin.collection_types.form_settings.warning'))
       end
 
-      INPUT_IDS.each do |id|
-        it "renders the #{id} checkbox to be enabled" do
+      it 'renders the checkbox to be enabled' do
+        input_ids.each do |id|
           match = rendered.match(/(<input.*id="#{id}".*)/)
           expect(match[1].index('disabled="disabled"')).to be_nil
         end
+      end
 
-        it "renders the #{id} checkbox to be enabled 2" do
+      it 'renders the checkbox to be enabled 2' do
+        input_ids.each do |id|
           match = rendered.match(/(<input.*id="#{id}".*)/)
           expect(match).not_to be_nil
         end
@@ -66,13 +67,15 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
         render partial: 'hyrax/admin/collection_types/form_settings', locals: { f: form }
       end
 
-      INPUT_IDS.each do |id|
-        it "renders the #{id} checkbox to be disabled" do
+      it 'renders the checkbox to be disabled' do
+        input_ids.each do |id|
           match = rendered.match(/(<input.*id="#{id}".*)/)
           expect(match[1].index('disabled="disabled"')).not_to be_nil
         end
+      end
 
-        it "renders the #{id} checkbox to be disabled 2" do
+      it 'renders the checkbox to be disabled 2' do
+        input_ids.each do |id|
           match = rendered.match(/(<input.*id="#{id}".*)/)
           expect(match).not_to be_nil
         end
@@ -87,13 +90,15 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
       render partial: 'hyrax/admin/collection_types/form_settings', locals: { f: form }
     end
 
-    INPUT_IDS.each do |id|
-      it "renders the disabled #{id} checkbox " do
+    it 'renders the disabled checkbox' do
+      input_ids.each do |id|
         match = rendered.match(/(<input.*id="#{id}".*)/)
         expect(match[1].index('disabled="disabled"')).not_to be_nil
       end
+    end
 
-      it "renders the disabled #{id} checkbox 2" do
+    it 'renders the disabled checkbox 2' do
+      input_ids.each do |id|
         match = rendered.match(/(<input.*id="#{id}".*)/)
         expect(match).not_to be_nil
       end

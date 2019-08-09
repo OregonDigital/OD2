@@ -10,9 +10,11 @@ RSpec.describe Qa::Authorities::Scientific do
     before do
       allow(repository_instance).to receive(:json).with(ons_request).and_return(ons_response)
     end
+
     context 'with a uri in the vocabulary' do
       it { expect(repository_instance.search('http://opaquenamespace.org/ns/class/my_id')).to eq [{ id: 'http://opaquenamespace.org/ns/class/my_id', label: 'mylabel' }.with_indifferent_access] }
     end
+
     context 'with a uri not in the vocabulary' do
       it { expect(repository_instance.search('http://my.queryuri.com')).to eq [] }
     end
