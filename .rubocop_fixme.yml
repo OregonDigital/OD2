@@ -71,3 +71,11 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Exclude:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/system/create_audio_spec.rb'
+    - 'spec/system/create_generic_spec.rb'
+    - 'spec/system/create_video_spec.rb'
+    - 'spec/system/create_document_spec.rb'
+    - 'spec/system/create_image_spec.rb'
