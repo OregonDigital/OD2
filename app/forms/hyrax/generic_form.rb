@@ -27,6 +27,7 @@ module Hyrax
     end
 
     # OVERRIDE: update initialize_field to initialize linked key property when blank
+    # See https://github.com/samvera/hyrax/blob/v2.5.0/app/forms/hyrax/forms/work_form.rb#L38-L43
     def initialize_field(key)
       return if %i[embargo_release_date lease_expiration_date].include?(key)
 
