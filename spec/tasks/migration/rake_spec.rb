@@ -11,6 +11,7 @@ RSpec.describe 'Rake tasks' do
     let(:state) { ::RDF::URI('http://fedora.info/definitions/1/0/access/ObjState#inactive') }
     let(:work1) { create(:work, user: other_user, state: state) }
     let(:work2) { create(:work, user: migration_user, state: state) }
+    let(:work3) { create(:work, user: migration_user) }
     let(:workflow) do
       w = create(:workflow)
       w.workflow_states << create(:workflow_state, name: 'pending_review')
@@ -34,17 +35,36 @@ RSpec.describe 'Rake tasks' do
                              workflow: workflow)
     end
 
-    it 'finds all pending assets from the migration_user and approves them' do
-      run_rake_task
-      work2.reload
-      expect(work2.suppressed?).to eq(false)
-      expect(work2.to_sipity_entity.workflow_state_name).to eq('deposited')
+    context 'when there are migrated assets with state pending_review' do
+      before do
+        run_rake_task
+        work2.reload
+      end
+
+      it 'approves them' do
+        expect(work2.suppressed?).to eq(false)
+        expect(work2.to_sipity_entity.workflow_state_name).to eq('deposited')
+      end
+      it 'changes the values in solr' do
+        work2.reload
+        solr = work2.to_solr
+        expect(solr['workflow_state_name_ssim']).to eq('deposited')
+        expect(solr['suppressed_bsi']).to eq(false)
+      end
     end
-    it 'ignores assets from other users' do
-      run_rake_task
-      work1.reload
-      expect(work1.suppressed?).to eq(true)
-      expect(work1.to_sipity_entity.workflow_state_name).to eq('pending_review')
+
+    context 'when there are assets from other users' do
+      it 'does not get processed' do
+        expect(Hyrax::Workflow::ActivateObject).not_to receive(:call).with(target: work1)
+        run_rake_task
+      end
+    end
+
+    context 'when there is an asset that has not gone through the workflow' do
+      it 'does not get processed' do
+        expect(Hyrax::Workflow::ActivateObject).not_to receive(:call).with(target: work3)
+        run_rake_task
+      end
     end
   end
 end
