@@ -6,7 +6,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
   # collection_type_require_membership
   # collection_type_assigns_visibility
 
-  INPUT_IDS = %w[
+  let(:input_ids) { %w[
     collection_type_nestable
     collection_type_brandable
     collection_type_discoverable
@@ -14,8 +14,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
     collection_type_share_applies_to_new_works
     collection_type_allow_multiple_membership
     collection_type_facet_configurable
-  ].freeze
-
+  ].freeze }
   let(:collection_type_form) { OregonDigital::Forms::Admin::CollectionTypeForm.new }
   let(:collection_type) { stub_model(Hyrax::CollectionType) }
 
@@ -66,7 +65,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
         render partial: 'hyrax/admin/collection_types/form_settings', locals: { f: form }
       end
 
-      INPUT_IDS.each do |id|
+      input_ids.each do |id|
         it "renders the #{id} checkbox to be disabled" do
           match = rendered.match(/(<input.*id="#{id}".*)/)
           expect(match[1].index('disabled="disabled"')).not_to be_nil
@@ -87,7 +86,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
       render partial: 'hyrax/admin/collection_types/form_settings', locals: { f: form }
     end
 
-    INPUT_IDS.each do |id|
+    input_ids.each do |id|
       it "renders the disabled #{id} checkbox " do
         match = rendered.match(/(<input.*id="#{id}".*)/)
         expect(match[1].index('disabled="disabled"')).not_to be_nil

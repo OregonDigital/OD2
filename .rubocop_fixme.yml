@@ -71,11 +71,3 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Exclude:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
-
-RSpec/LeakyConstantDeclaration:
-  Exclude:
-    - 'spec/views/hyrax/admin/collection_types/_form_settings.html.erb_spec.rb'
-
-RSpec/EmptyLineAfterHook:
-  Exclude:
-    - 'spec/models/generic_spec.rb'
