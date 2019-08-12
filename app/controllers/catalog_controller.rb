@@ -20,7 +20,9 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     config.view.gallery.partials = %i[index_header index]
     config.view.masonry.partials = %i[index]
+    config.view.masonry.if = false
     config.view.slideshow.partials = %i[index]
+    config.view.slideshow.if = false
 
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
