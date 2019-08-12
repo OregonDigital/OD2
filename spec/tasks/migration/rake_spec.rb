@@ -6,11 +6,11 @@ require 'pry'
 
 RSpec.describe 'Rake tasks' do
   describe 'migration:bulk_approve' do
+    let(:work1) { create(:work, user: other_user, state: state) }
     let(:migration_user) { User.new(email: 'migrator@example.org') }
+    let(:work2) { create(:work, user: migration_user, state: state) }
     let(:other_user) { User.new(email: 'other@example.org') }
     let(:state) { ::RDF::URI('http://fedora.info/definitions/1/0/access/ObjState#inactive') }
-    let(:work1) { create(:work, user: other_user, state: state) }
-    let(:work2) { create(:work, user: migration_user, state: state) }
     let(:work3) { create(:work, user: migration_user) }
     let(:workflow) do
       w = create(:workflow)
