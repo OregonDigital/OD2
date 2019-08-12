@@ -12,6 +12,28 @@ module OregonDigital
 
     private
 
+    # OVERRIDEN FROM HYRAX to allow for single value CVs
+    # Grab the labels for controlled properties from the remote sources
+    def fetch_external
+      object.controlled_properties.each do |property|
+        if object.respond_to?(:each)
+          object[property].each do |value|
+            fetch_external_labels(value)
+          end
+        else
+          fetch_external_labels(object[property])
+        end
+      end
+    end
+
+    def fetch_external_labels(value)
+      resource = value.respond_to?(:resource) ? value.resource : value
+      return unless resource.is_a?(ActiveTriples::Resource)
+      return if value.is_a?(ActiveFedora::Base)
+
+      fetch_with_persistence(resource)
+    end
+
     # OVERRIDEN FROM HYRAX TO ADD GRAPH FETCH RETRY QUEUE
     def fetch_value(value)
       Rails.logger.info "Fetching #{value.rdf_subject} from the authorative source. (this is slow)"
