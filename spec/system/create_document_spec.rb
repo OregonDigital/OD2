@@ -38,9 +38,6 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       within('div.document_resource_type') do
         select('Dataset', from: 'Type')
       end
-      within('div.select2-container.document_repository') do
-        page.execute_script("$('#document_repository_attributes_0_id').val('http://opaquenamespace.org/ns/repository/my/repo')")
-      end
       select('In Copyright', from: 'Rights')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('body').click
