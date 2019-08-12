@@ -33,8 +33,8 @@ RSpec.describe 'Rake tasks' do
       before do
         work2.save!
         Sipity::Entity.create!(proxy_for_global_id: work2.to_global_id.to_s,
-                             workflow_state: workflow.workflow_states.first,
-                             workflow: workflow)
+                               workflow_state: workflow.workflow_states.first,
+                               workflow: workflow)
         run_rake_task
       end
 
@@ -52,8 +52,8 @@ RSpec.describe 'Rake tasks' do
       before do
         work1.save!
         Sipity::Entity.create!(proxy_for_global_id: work1.to_global_id.to_s,
-                             workflow_state: workflow.workflow_states.first,
-                             workflow: workflow)
+                               workflow_state: workflow.workflow_states.first,
+                               workflow: workflow)
       end
 
       it 'does not get processed' do
