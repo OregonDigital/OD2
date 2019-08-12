@@ -1,12 +1,12 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-offset-4 col-md-6 col-sm-8 white-text">
-        <%= link_to "About Oregon Digital", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text right-border" %>
-        <%= link_to "Policies", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text right-border" %>
-        <%= link_to "Copyright", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text right-border" %>
-        <%= link_to "Contact Us", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text right-border" %>
-        <%= link_to "Donate", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "white-text" %>
+      <div class="col-md-offset-4 col-md-6 col-sm-8 footer-link-text">
+        <u><%= link_to "About Oregon Digital", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %></u>
+        <u><%= link_to "Policies", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %></u>
+        <u><%= link_to "Copyright", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %></u>
+        <u><%= link_to "Contact Us", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %></u>
+        <u><%= link_to "Donate", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text" %></u>
       </div>
     </div>
     <div class="row footer-row">
@@ -24,7 +24,7 @@
           <p class='deployed-version'>
             Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
           </p>
-          <p>Powered by <a class="white-text" href="samvera.org">Samvera</a> Hyrax <%= Hyrax::VERSION %></p>
+          <p>Powered by <a class="footer-link-text" href="samvera.org"><u>Samvera</u></a> Hyrax <%= Hyrax::VERSION %></p>
         </div>
       </div>
     </div>

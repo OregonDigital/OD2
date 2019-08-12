@@ -20,8 +20,11 @@
   margin-top: -31px;
 }
 
-.white-text {
+.footer-link-text {
   color: white;
+  :hover {
+    color: lightblue;
+  }
 }
 
 .social-logo {
