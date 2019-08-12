@@ -62,7 +62,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :contents, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents')
+      property :contents, basic_searchable: false, showable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents')
 
       property :cover_description, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/coverDescription') do |index|
         index.as :stored_searchable
@@ -280,7 +280,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :replaces_url, basic_searchable: false, predicate: ::RDF::Vocab::DC.replaces, multiple: false
+      property :replaces_url, basic_searchable: false, showable: false, predicate: ::RDF::Vocab::DC.replaces, multiple: false
 
       property :rights_note, predicate: ::RDF::Vocab::EBUCore.rightsExpression do |index|
         index.as :stored_searchable
@@ -368,7 +368,7 @@ module OregonDigital
         index.as :facetable
       end
 
-      property :original_filename, basic_searchable: false, predicate: ::RDF::URI.new('http://www.loc.gov/premis/rdf/v3/originalName'), multiple: false do |index|
+      property :original_filename, basic_searchable: false, showable: false, predicate: ::RDF::URI.new('http://www.loc.gov/premis/rdf/v3/originalName'), multiple: false do |index|
         index.as :stored_searchable
       end
 
