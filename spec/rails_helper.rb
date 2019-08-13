@@ -84,6 +84,7 @@ RSpec.configure do |config|
       example.run
     else
       DatabaseCleaner.cleaning do
+        [::Noid::Rails::Service.new.minter.mint, ::Noid::Rails::Service.new.minter.mint]
         example.run
       end
     end
