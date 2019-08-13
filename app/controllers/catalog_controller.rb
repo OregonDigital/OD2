@@ -160,20 +160,20 @@ class CatalogController < ApplicationController
     #
     #
     ##########################################################################
-    Generic.controlled_property_labels.each do |prop|
-      label = prop.gsub('_label', '')
+    Generic.controlled_property_labels.each do |label|
+      prop = label.gsub('_label', '')
 
       # Skip if this property isn't indexed
-      next if Generic.properties[label].behaviors.nil?
+      next if Generic.properties[prop].behaviors.nil?
 
       # Add property as searchable all fields box and individually
-      if Generic.properties[label].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) if Generic.properties[label]['showable'] || Generic.properties[label]['showable'].nil?
+      if Generic.properties[prop].behaviors.include?(:stored_searchable)
+        config.add_show_field solr_name(label, :stored_searchable) if Generic.properties[prop]['showable'] || Generic.properties[prop]['showable'].nil?
 
-        if Generic.properties[label]['basic_searchable'] || Generic.properties[label]['basic_searchable'].nil?
-          config.add_search_field(prop) do |field|
-            solr_name = solr_name(prop, :stored_searchable)
-            search_fields << solr_name(label, :stored_searchable)
+        if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
+          config.add_search_field(label) do |field|
+            solr_name = solr_name(label, :stored_searchable)
+            search_fields << solr_name(prop, :stored_searchable)
             field.solr_local_parameters = {
               qf: solr_name,
               pf: solr_name
@@ -183,7 +183,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{label}"), limit: 5 if Generic.properties[label].behaviors.include?(:facetable)
+      config.add_facet_field solr_name(label, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable)
     end
     config.add_show_field solr_name('language_label', :stored_searchable)
     config.add_show_field solr_name('type_label', :stored_searchable)
