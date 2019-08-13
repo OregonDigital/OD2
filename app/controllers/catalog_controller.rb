@@ -173,7 +173,7 @@ class CatalogController < ApplicationController
         if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
           config.add_search_field(label) do |field|
             solr_name = solr_name(label, :stored_searchable)
-            search_fields << solr_name(prop, :stored_searchable)
+            search_fields << solr_name(label, :stored_searchable)
             field.solr_local_parameters = {
               qf: solr_name,
               pf: solr_name
