@@ -9,10 +9,10 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
-      property :height, advance_search: true, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
+      property :height, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
         index.as :stored_searchable
       end
-      property :width, advance_search: true, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
+      property :width, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
         index.as :stored_searchable
       end
       define_singleton_method :video_properties do
