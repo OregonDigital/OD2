@@ -9,33 +9,33 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
-      property :color_content, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/e/P20224') do |index|
+      property :color_content, basic_searchable: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/e/P20224') do |index|
         index.as :stored_searchable
       end
 
-      property :color_space, predicate: ::RDF::Vocab::EXIF.colorSpace do |index|
+      property :color_space, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.colorSpace do |index|
         index.as :stored_searchable
       end
 
-      property :height, advance_search: true, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
+      property :height, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
         index.as :stored_searchable
       end
 
-      property :orientation, predicate: ::RDF::Vocab::EXIF.orientation
+      property :orientation, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.orientation
 
-      property :photograph_orientation, advance_search: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false do |index|
+      property :photograph_orientation, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false do |index|
         index.as :stored_searchable
       end
 
-      property :resolution, predicate: ::RDF::Vocab::EXIF.resolution, multiple: false do |index|
+      property :resolution, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.resolution, multiple: false do |index|
         index.as :stored_searchable
       end
 
-      property :view, advance_search: true, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription') do |index|
+      property :view, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription') do |index|
         index.as :stored_searchable
       end
 
-      property :width, advance_search: true, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
+      property :width, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
         index.as :stored_searchable
       end
 
