@@ -18,6 +18,7 @@ class CatalogController < ApplicationController
   end
 
   configure_blacklight do |config|
+    config.view.list.partials = %i[thumbnail index_header index]
     config.view.gallery.partials = %i[index_header index]
     config.view.masonry.partials = %i[index]
     config.view.masonry.if = false
