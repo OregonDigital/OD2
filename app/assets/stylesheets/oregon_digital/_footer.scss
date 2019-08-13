@@ -23,9 +23,9 @@
 .footer-link-text {
   color: white;
   text-decoration: underline;
-}
-.footer-link-text:hover {
-  color: lightblue;
+  &:hover {
+    color: lightblue;
+  }
 }
 
 .social-logo {
