@@ -84,7 +84,9 @@ RSpec.configure do |config|
       example.run
     else
       DatabaseCleaner.cleaning do
+        # rubocop:disable Lint/Void
         [::Noid::Rails::Service.new.minter.mint, ::Noid::Rails::Service.new.minter.mint]
+        # rubocop:enable Lint/Void
         example.run
       end
     end
