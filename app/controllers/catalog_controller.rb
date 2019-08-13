@@ -35,6 +35,7 @@ class CatalogController < ApplicationController
       rows: 10,
       qf: 'title_tesim description_tesim creator_tesim keyword_tesim'
     }
+    
 
     # solr field configuration for document/show views
     config.index.title_field = solr_name('title', :stored_searchable)
@@ -85,6 +86,7 @@ class CatalogController < ApplicationController
     rejected_fields = Generic.controlled_property_labels.map { |field| field.gsub('_label', '') }
     rejected_fields += %w[rights_statement resource_type license language oembed_url]
 
+    search_fields = []
     # Add all fields as searchable, reject the non-searchable fields
     Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -97,6 +99,7 @@ class CatalogController < ApplicationController
         if Document.properties[prop]['basic_searchable'] || Document.properties[prop]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
+            search_fields << solr_name
             field.solr_local_parameters = {
               qf: solr_name,
               pf: solr_name
@@ -119,6 +122,7 @@ class CatalogController < ApplicationController
         if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
+            search_fields << solr_name
             field.solr_local_parameters = {
               qf: solr_name,
               pf: solr_name
@@ -141,6 +145,7 @@ class CatalogController < ApplicationController
         if Image.properties[prop]['basic_searchable'] || Image.properties[prop]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
+            search_fields << solr_name
             field.solr_local_parameters = {
               qf: solr_name,
               pf: solr_name
@@ -169,6 +174,7 @@ class CatalogController < ApplicationController
         if Generic.properties[label]['basic_searchable'] || Generic.properties[label]['basic_searchable'].nil?
           config.add_search_field(prop) do |field|
             solr_name = solr_name(prop, :stored_searchable)
+            search_fields << solr_name(label, :stored_searchable)
             field.solr_local_parameters = {
               qf: solr_name,
               pf: solr_name
@@ -207,8 +213,10 @@ class CatalogController < ApplicationController
     # This one uses all the defaults set by the solr request handler. Which
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
+
+    
     config.add_search_field('all_fields', label: 'All Fields') do |field|
-      all_names = config.show_fields.values.map(&:field).join(' ')
+      all_names = search_fields.join(' ')
       title_name = solr_name('title', :stored_searchable)
       field.solr_parameters = {
         qf: "#{all_names} #{title_name} license_label_tesim file_format_tesim all_text_timv",
