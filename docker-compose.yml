@@ -50,6 +50,7 @@ services:
       - HONEYCOMB_DATASET=od2-rails
       - HONEYCOMB_SERVICE=od2
       - HONEYCOMB_WRITEKEY=buzzzzzzzzzzzzzzzz
+      - HONEYCOMB_DEBUG=true
       - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
       - RAILS_CACHE_STORE_URL=memcache
       - RAILS_ENV=development
@@ -117,6 +118,7 @@ services:
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
       - GEONAMES_USERNAME=etsdev
       - HONEYCOMB_DATASET=od2-rails
+      - HONEYCOMB_DEBUG=true
       - HONEYCOMB_SERVICE=od2
       - HONEYCOMB_WRITEKEY=buzzzzzzzzzzzzzzzz
       - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
