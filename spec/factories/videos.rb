@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :video do
     sequence(:title) { |n| ["title-#{n}"] }
-    sequence(:id) { |n| ["id#{n}"] }
+    id { ::Noid::Rails::Service.new.minter.mint }
     resource_type { 'MyType' }
     height { '100' }
     width { '200' }
