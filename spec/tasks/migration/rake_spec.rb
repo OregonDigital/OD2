@@ -47,6 +47,7 @@ RSpec.describe 'Rake tasks' do
       end
     end
 
+    # Skipping the next test until LDP::Conflict error (see issue 717) is resolved
     context 'when there are assets from other users' do
       before do
         work1.save!
@@ -61,6 +62,7 @@ RSpec.describe 'Rake tasks' do
       end
     end
 
+    # Skipping the next test until LDP::Conflict error (see issue 717) is resolved
     context 'when there is an asset that has not gone through the workflow' do
       xit 'does not get processed' do
         work3.save!
