@@ -75,21 +75,15 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.clean_with(:deletion)
   end
 
   config.around do |example|
     if example.metadata[:type] == :system
-      # rubocop:disable Lint/Void
-      [::Noid::Rails::Service.new.minter.mint, ::Noid::Rails::Service.new.minter.mint]
-      # rubocop:enable Lint/Void
       example.run
     else
       DatabaseCleaner.cleaning do
-        # rubocop:disable Lint/Void
-        [::Noid::Rails::Service.new.minter.mint, ::Noid::Rails::Service.new.minter.mint]
-        # rubocop:enable Lint/Void
         example.run
       end
     end
@@ -98,9 +92,6 @@ RSpec.configure do |config|
   config.before do |example|
     if example.metadata[:clean_repo]
       ActiveFedora::Cleaner.clean!
-      # rubocop:disable Lint/Void
-      [::Noid::Rails::Service.new.minter.mint, ::Noid::Rails::Service.new.minter.mint]
-      # rubocop:enable Lint/Void
       # The JS is executed in a different thread, so that other thread
       # may think the root path has already been created:
       ActiveFedora.fedora.connection.send(:init_base_path) if example.metadata[:js]
