@@ -80,13 +80,8 @@ RSpec.configure do |config|
   end
 
   config.around do |example|
-    if example.metadata[:type] == :system
-      ActiveFedora::Cleaner.clean!
-      example.run
-    else
-      ActiveFedora::Cleaner.clean!
-      example.run
-    end
+    ActiveFedora::Cleaner.clean!
+    example.run
   end
 
   config.before do |example|
