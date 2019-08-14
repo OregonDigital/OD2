@@ -80,8 +80,13 @@ RSpec.configure do |config|
   end
 
   config.around do |example|
-    ActiveFedora::Cleaner.clean!
-    example.run
+    if example.metadata[:type] == :system
+      example.run
+    else
+      DatabaseCleaner.cleaning do
+        example.run
+      end
+    end
   end
 
   config.before do |example|
