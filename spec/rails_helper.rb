@@ -75,8 +75,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.clean_with(:deletion)
   end
 
   config.around do |example|

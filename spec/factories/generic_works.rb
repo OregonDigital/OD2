@@ -25,6 +25,7 @@ FactoryBot.define do
     end
 
     title { ['Test title'] }
+    id { ::Noid::Rails::Service.new.minter.mint }
     visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE }
 
     after(:build) do |work, evaluator|
