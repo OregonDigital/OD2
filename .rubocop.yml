@@ -53,6 +53,7 @@ RSpec/DescribeClass:
     - 'spec/system/**/*'
     - 'spec/views/**/*'
     - 'spec/config/initializers/**/*'
+    - 'spec/tasks/**/*'
 
 RSpec/LetSetup:
   Enabled: false
