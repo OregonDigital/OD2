@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :oembed_error do
-    document_id { ::Noid::Rails::Service.new.minter.mint }
+    document_id { create(:work).id }
     oembed_errors { ['MyText'] }
   end
 end
