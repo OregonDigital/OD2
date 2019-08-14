@@ -38,9 +38,6 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
       within('div.generic_resource_type') do
         select('Dataset', from: 'Type')
       end
-      within('div.select2-container.generic_repository') do
-        page.execute_script("$('#generic_repository_attributes_0_id').val('http://opaquenamespace.org/ns/repository/my/repo')")
-      end
       select('In Copyright', from: 'Rights')
 
       # Selenium/chrome on CircleCI requires the focus to change after the previous method

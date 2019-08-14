@@ -75,10 +75,8 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
     end
 
     context 'with a document not created this second', clean_repo: true do
-      let(:repository) { OregonDigital::ControlledVocabularies::Repository.new('http://opaquenamespace.org/ns/repository/my/repo') }
-
       before do
-        gw3 = Generic.new(title: ['Test 3 Document'], read_groups: ['public'], repository: repository)
+        gw3 = Generic.new(title: ['Test 3 Document'], read_groups: ['public'])
         gw3.apply_depositor_metadata('mjg36')
         # stubbing to_solr so we know we have something that didn't create in the current second
         old_to_solr = gw3.method(:to_solr)

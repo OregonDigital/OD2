@@ -4,8 +4,7 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::MlaFormatter do
   subject(:formatter) { described_class.new(:no_context) }
 
   let(:presenter) { Hyrax::GenericPresenter.new(SolrDocument.new(work.to_solr), :no_ability) }
-  let(:repository) { OregonDigital::ControlledVocabularies::Repository.new('http://opaquenamespace.org/ns/repository/my/repo') }
-  let(:work) { build(:work, title: ['My Title'], repository: repository) }
+  let(:work) { build(:work, title: ['My Title']) }
 
   before do
     allow(presenter).to receive(:creator_label).and_return(['last name, first name'])
