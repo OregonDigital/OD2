@@ -12,5 +12,5 @@ Honeycomb.configure do |config|
     deliver.action_mailer
   ].freeze
 
-  config.client = Libhoney::NullClient.new if ENV.fetch('HONEYCOMB_DEBUG', false)
+  config.client = Libhoney::NullClient.new if Rails.env.development? || ENV.key?("HONEYCOMB_DEBUG")
 end
