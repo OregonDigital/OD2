@@ -1,0 +1,13 @@
+// Horizontal description lists
+//
+// Defaults to being stacked without any of the below styles applied, until the
+// grid breakpoint is reached (default of ~768px).
+
+.dl-horizontal {
+  // OVERRIDE FROM BOOTSTRAP-SASS to left align metadata
+  @media (min-width: 768px) {
+    dt {
+      text-align: left;
+    }
+  }
+}
