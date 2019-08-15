@@ -16,15 +16,15 @@
   </div>
 </div>
 <% if document.collection? %>
-<% collection_presenter = Hyrax::CollectionPresenter.new(document, current_ability) %>
-<div class="col-md-3">
-  <div class="collection-counts-wrapper">
-    <div class="collection-counts-item">
-      <span><%= collection_presenter.total_viewable_collections %></span>Collections
-    </div>
-    <div class="collection-counts-item">
-      <span><%= collection_presenter.total_viewable_works %></span>Works
+  <% collection_presenter = Hyrax::CollectionPresenter.new(document, current_ability) %>
+  <div class="col-md-3">
+    <div class="collection-counts-wrapper">
+      <div class="collection-counts-item">
+        <span><%= collection_presenter.total_viewable_collections %></span>Collections
+      </div>
+      <div class="collection-counts-item">
+        <span><%= collection_presenter.total_viewable_works %></span>Works
+      </div>
     </div>
   </div>
-</div>
 <% end %>
