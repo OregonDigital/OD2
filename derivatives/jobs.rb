@@ -14,6 +14,7 @@ require 'tempfile'
 require_relative('./shell.rb')
 require_relative('./create_images.rb')
 require_relative('./create_image_derivatives_job.rb')
+require_relative('./destroy_s3_derivative.rb')
 require '/usr/local/oddeps/lib/oregon_digital/derivative_path.rb'
 require '/usr/local/oddeps/lib/oregon_digital/s3.rb'
 
