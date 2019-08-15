@@ -10,7 +10,7 @@
     <% end %>
     </dl>
     <div class="resource-type">
-      <%= render 'index_list_type_icon', type: document.type_label.first %>
+      <%= render 'index_type_icon', document: document %>
       <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
     </div>
   </div>
