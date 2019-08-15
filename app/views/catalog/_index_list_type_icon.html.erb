@@ -1,0 +1,19 @@
+<% case type.downcase %>
+<% when '' %>
+<% when 'complex object' %>
+  <i class="fa fa-cubes" aria-hidden="true"></i>
+<% when 'dataset' %>
+  <i class="fa fa-database" aria-hidden="true"></i>
+<% when 'image' %>
+  <i class="fa fa-picture-o" aria-hidden="true"></i>
+<% when 'moving image' %>
+  <i class="fa fa-video-camera" aria-hidden="true"></i>
+<% when 'physical object' %>
+  <i class="fa fa-archive" aria-hidden="true"></i>
+<% when 'audio' %>
+  <i class="fa fa-music" aria-hidden="true"></i>
+<% when 'text' %>
+  <i class="fa fa-file-text" aria-hidden="true"></i>
+<% else %>
+  <i class="fa fa-cube" aria-hidden="true"></i>
+<% end %>

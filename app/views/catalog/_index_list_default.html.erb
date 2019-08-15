@@ -9,7 +9,10 @@
       <% end %>
     <% end %>
     </dl>
-    <div class="resource-type"><%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %></div>
+    <div class="resource-type">
+      <%= render 'index_list_type_icon', type: document.type_label.first %>
+      <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
+    </div>
   </div>
 </div>
 <% if document.collection? %>
