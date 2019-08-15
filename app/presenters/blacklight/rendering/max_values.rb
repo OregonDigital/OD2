@@ -6,9 +6,18 @@ module Blacklight
     class MaxValues < AbstractStep
       def render
         return next_step(values) unless config.max_values
-        max_values = (config.max_values.is_a? Integer) ? config.max_values : 5
-        max_values_label = config.max_values_label || 'more'
-        next_step(values.take(max_values).push(max_values_label))
+
+        next_step(values.take(max_value).push(max_value_label))
+      end
+
+      private
+
+      def max_value
+        config.max_values.is_a?(Integer) ? config.max_values : 5
+      end
+
+      def max_value_label
+        config.max_values_label || 'more'
       end
     end
   end
