@@ -1,19 +1,21 @@
-<% doc_presenter = index_presenter(document) %>
-<% is_collection = doc_presenter.field_value('has_model_ssim') == 'Collection'%>
-
-<div class="col-md-<%= is_collection ? 7 : 10 %>">
+<div class="col-md-<%= document.collection? ? 7 : 10 %>">
   <div class="metadata">
     <dl class="dl-horizontal">
+    <% doc_presenter = index_presenter(document) %>
     <% index_fields(document).each do |field_name, field| -%>
       <% if should_render_index_field? document, field %>
           <dt><%= render_index_field_label document, field: field_name %></dt>
-          <dd><%= doc_presenter.field_value field_name %></dd>
+          <dd><%= doc_presenter.field_value field %></dd>
       <% end %>
     <% end %>
     </dl>
+    <div class="resource-type">
+      <%= render 'index_type_icon', document: document unless document.type_label.first.empty? %>
+      <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
+    </div>
   </div>
 </div>
-<% if(is_collection) %>
+<% if document.collection? %>
   <% collection_presenter = Hyrax::CollectionPresenter.new(document, current_ability) %>
   <div class="col-md-3">
     <div class="collection-counts-wrapper">
