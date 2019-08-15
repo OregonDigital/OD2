@@ -10,6 +10,27 @@ overrides:
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/set
     function: return_nil
+  - predicate: http://opaquenamespace.org/ns/boxName
+    function: return_nil
   - property: rights_holder
     predicate: http://opaquenamespace.org/right/rightsHolder
     multiple: true
+  - property: material
+    predicate: http://opaquenamespace.org/ns/vra/material
+    multiple: true
+  - property: repository_attributes
+    predicate: http://id.loc.gov/vocabulary/relators/rps
+    multiple: true
+    function: attributes_data
+  - property: creator_attributes
+    predicate: http://purl.org/dc/elements/1.1/creator
+    multiple: true
+    function: attributes_data
+  - property: local_collection_name_attributes
+    predicate: http://opaquenamespace.org/ns/localCollectionName
+    multiple: true
+    function: attributes_data
+  - property: subject_attributes
+    predicate: http://purl.org/dc/terms/subject
+    multiple: true
+    function: attributes_data
