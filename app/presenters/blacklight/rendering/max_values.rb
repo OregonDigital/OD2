@@ -13,7 +13,14 @@ module Blacklight
       private
 
       def max_value
-        config.max_values.is_a?(Integer) ? config.max_values : 5
+        default = 5
+        if config.max_value.is_a?(Hash)
+          config.max_value[context.document_index_view_type] || default
+        elsif config.max_values.is_a?(Integer)
+          config.max_values
+        else
+          default
+        end
       end
 
       def max_value_label
