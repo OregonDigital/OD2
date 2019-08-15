@@ -20,6 +20,21 @@ class SolrDocument
     end
   end
 
+  # Turn document type into FontAwesome icon class
+  # See app\views\catalog\_index_list_type_icon.html.erb
+  def type_to_fa_class(type)
+    fa_classes = {
+      'complex object': 'cubes',
+      'dataset': 'database',
+      'image': 'picture-o',
+      'moving image': 'video-camera',
+      'physical object': 'archive',
+      'audio': 'music',
+      'text': 'file-text'
+    }.with_indifferent_access
+    fa_classes[type.downcase] || 'cube'
+  end
+
   private
 
   def valid_solr_doc_values(values, model, property_name)
