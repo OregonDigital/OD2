@@ -13,17 +13,24 @@
   position:absolute;
   bottom:0;
   width:100%;
-  height:150px;
+  height:140px;
 }
 
 .footer-right {
   margin-top: -31px;
 }
 
+.homepage-info-text {
+  color: white;
+}
+
 .footer-link-text {
   color: white;
   text-decoration: underline;
-  &:hover &:focus{
+  &:hover{
+    color: lightblue;
+  }
+  &:focus {
     color: lightblue;
   }
 }
@@ -41,4 +48,8 @@
   border-right: 2px solid white;
   margin-right: 3px;
   padding-right: 6px;
+}
+
+.center-text {
+  margin-left: 36%;
 }
