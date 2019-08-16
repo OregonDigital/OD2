@@ -1,31 +1,30 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-offset-4 col-md-6 col-sm-8 center-text">
+      <div class="col-md-12 center-text">
         <%= link_to "About Oregon Digital", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
         <%= link_to "Policies", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
         <%= link_to "Copyright", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
         <%= link_to "Contact Us", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
         <%= link_to "Donate", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text #{'right-border' if can? :read, :admin_dashboard}" %>
         <% if can? :read, :admin_dashboard %>
-          <p><a href="https://oregondigital.github.io/oregon-digital-style-guide/">Style Guide</a></p>
+          <a href="https://oregondigital.github.io/oregon-digital-style-guide/" class="footer-link-text">Style Guide</a>
         <% end %>
       </div>
     </div>
-    <div class="row footer-row">
-      
-      <div class="navbar-text text-left col-sm-4 col-xs-5">
+    <div class="row navbar-text footer-row">
+
+      <div class="col-md-4 col-xs-12">
         <img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="Oregon State University">
         <img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="University of Oregon">
-        
       </div>
-      <div class="navbar-text col-md-4 col-sm-3 col-xs-3">
+      <div class="text-center col-md-4 col-xs-7">
         <p class="homepage-info-text" >Oregon Digitial is collaboratively managed by the Digital Scholarship Services</p>
-        <p class="homepage-info-text">of the <a class="footer-link-text" href='https://library.uoregon.edu/'>University of Oregon Libraries</a> and by 
+        <p class="homepage-info-text">of the <a class="footer-link-text" href='https://library.uoregon.edu/'>University of Oregon Libraries</a> and by
         <a class="footer-link-text" href='https://osulibrary.oregonstate.edu/'>Oregon State University Libraries</a>.</p>
       </div>
-      <div class="navbar-right footer-right col-md-3 col-xs-4">
-        <div class="navbar-text text-right">
+      <div class="col-md-4 col-xs-5">
+        <div class="text-right">
           <p>
             <img class='social-logo' src='<%= image_url('insta.png')%>' alt="Instagram">
             <img class='social-logo' src='<%= image_url('facebook.png')%>' alt="Facebook">

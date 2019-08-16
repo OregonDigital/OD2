@@ -10,14 +10,10 @@
 }
 
 .site-footer {
-  position:absolute;
+  position:relative;
   bottom:0;
   width:100%;
-  height:140px;
-}
-
-.footer-right {
-  margin-top: -31px;
+  height:100%;
 }
 
 .homepage-info-text {
@@ -27,10 +23,7 @@
 .footer-link-text {
   color: white;
   text-decoration: underline;
-  &:hover{
-    color: lightblue;
-  }
-  &:focus {
+  &:hover, &:focus {
     color: lightblue;
   }
 }
@@ -40,10 +33,6 @@
   max-width: 10%;
 }
 
-.footer-row {
-  height: 86%;
-}
-
 .right-border {
   border-right: 2px solid white;
   margin-right: 3px;
@@ -51,5 +40,9 @@
 }
 
 .center-text {
-  margin-left: 36%;
+  text-align: center;
+}
+
+body {
+  margin-bottom: 0;
 }
