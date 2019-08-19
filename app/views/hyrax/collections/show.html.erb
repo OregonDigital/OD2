@@ -115,15 +115,16 @@
       </div>
 
       <%# OVERRIDE FROM HYRAX to add search sidebar from Blacklight %>
-      <div class="hyc-blacklight hyc-bl-results <%= 'col-md-9 col-md-push-3 col-sm-8 col-sm-push-4' unless @configured_facets.empty? %>">
-        <%= render_document_index @member_docs %>
-      </div>
-
+      <%# and swap facet and results render order %>
       <% unless @configured_facets.empty? %>
-      <div class="hyc-blacklight hyc-bl-facets col-md-3 col-md-pull-9 col-sm-4 col-sm-pull-8">
+      <div class="hyc-blacklight hyc-bl-facets col-md-3 col-sm-4">
         <%= render 'search_sidebar' %>
       </div>
       <% end %>
+
+      <div class="hyc-blacklight hyc-bl-results <%= 'col-md-9 col-sm-8' unless @configured_facets.empty? %>">
+        <%= render_document_index @member_docs %>
+      </div>
 
       <div class="hyc-blacklight hyc-bl-pager">
         <%= render 'paginate' %>
