@@ -7,7 +7,7 @@ module Blacklight
       def render
         return next_step(values) unless config.max_values
 
-        next_step(values.take(max_value).push(max_value_label))
+        next_step(values.take(max_value))
       end
 
       private
@@ -21,10 +21,6 @@ module Blacklight
         else
           default
         end
-      end
-
-      def max_value_label
-        config.max_values_label || 'more'
       end
     end
   end
