@@ -1,4 +1,4 @@
 <div class="search-results-title-row">
   <h4 class="search-result-title"><%= link_to document.title_or_label.truncate_words(5), document %></h4>
-  <%= check_box_tag "my_shelf", "my_shelf" %> Add to My Shelf
+  <%= label_tag "Add to My Shelf", raw("#{check_box_tag "my_shelf"} Add to My Shelf") %>
 </div>
