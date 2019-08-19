@@ -22,7 +22,6 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
                              language
                              representative_id
                              thumbnail_id
-                             identifier
                              related_url
                              visibility
                              collection_type_gid
@@ -40,7 +39,7 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
                                      creator contributor
                                      license publisher
                                      date_created subject
-                                     language identifier
+                                     language
                                      related_url resource_type
                                      institution date
                                      repository])
