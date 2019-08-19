@@ -13,10 +13,9 @@
       </div>
     </div>
     <div class="row navbar-text footer-row">
-
       <div class="col-md-4 col-xs-12">
-        <img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="Oregon State University">
-        <img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="University of Oregon">
+        <a href="https://oregonstate.edu"><img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="Oregon State University"></a>
+        <a href="https://www.uoregon.edu"><img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="University of Oregon"></a>
       </div>
       <div class="text-center col-md-4 col-xs-7">
         <p class="homepage-info-text" >
@@ -29,14 +28,13 @@
       <div class="col-md-4 col-xs-5">
         <div class="text-right">
           <p>
-            <img class='social-logo' src='<%= image_url('insta.png')%>' alt="Instagram">
-            <img class='social-logo' src='<%= image_url('facebook.png')%>' alt="Facebook">
-            <img class='social-logo' src='<%= image_url('twitter.jpg')%>' alt="Twitter">
+            <a class="footer-link-text" href="https://twitter.com/oregondigcol"><img class='social-logo' src='<%= image_url('twitter.jpg')%>' alt="">
+            @oregondigcol</a>
           </p>
           <p class='deployed-version'>
             Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
           </p>
-          <p>Powered by <a class="footer-link-text" href="samvera.org">Samvera</a> Hyrax <%= Hyrax::VERSION %></p>
+          <p>Powered by <a class="footer-link-text" href="https://www.samvera.org">Samvera</a> Hyrax <%= Hyrax::VERSION %></p>
         </div>
       </div>
     </div>
