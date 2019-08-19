@@ -1,5 +1,7 @@
 <div class="search-results-title-row">
   <h4 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), [hyrax, document] %></h4>
-  <%= label_tag "Add to My Shelf", raw("#{check_box_tag "my_shelf"} Add to My Shelf") %>
+  <%= label_tag "" do %>
+    <% raw("#{check_box_tag document.id} Add to My Shelf") %>
+  <% end %>
   <%= Hyrax::CollectionPresenter.new(document, current_ability).collection_type_badge %>
 </div>
