@@ -5,7 +5,7 @@ module OregonDigital
     # Collection Form Override
     class CollectionForm < Hyrax::Forms::CollectionForm
       self.terms = %i[resource_type title creator contributor description license publisher
-                      date_created subject language representative_id thumbnail_id identifier
+                      date_created subject language representative_id thumbnail_id
                       related_url visibility collection_type_gid institution date repository]
 
       def initialize_field(key)
@@ -42,7 +42,7 @@ module OregonDigital
            creator contributor
            license publisher
            date_created subject
-           language identifier
+           language
            related_url resource_type
            institution date
            repository]

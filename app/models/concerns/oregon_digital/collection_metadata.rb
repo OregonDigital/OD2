@@ -23,10 +23,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :identifier, advance_search: false, predicate: ::RDF::Vocab::DC.identifier do |index|
-        index.as :stored_searchable
-      end
-
       property :language, advance_search: false, predicate: ::RDF::Vocab::DC.language do |index|
         index.as :stored_searchable, :facetable
       end
