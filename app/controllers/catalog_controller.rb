@@ -59,25 +59,11 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
-    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link, truncate: { list: 20, gallery: 10 }
-    config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keywords', link_to_search: solr_name('keyword', :facetable)
-    config.add_index_field solr_name('subject_label', :stored_searchable), itemprop: 'about', link_to_search: solr_name('subject', :facetable)
     config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable), max_values: 3, max_values_label: 'others'
-    config.add_index_field solr_name('contributor_label', :stored_searchable), itemprop: 'contributor', link_to_search: solr_name('contributor', :facetable)
-    config.add_index_field solr_name('proxy_depositor', :symbol), label: 'Depositor', helper_method: :link_to_profile
-    config.add_index_field solr_name('depositor'), label: 'Owner', helper_method: :link_to_profile
-    config.add_index_field solr_name('publisher_label', :stored_searchable), itemprop: 'publisher', link_to_search: solr_name('publisher', :facetable)
-    config.add_index_field solr_name('location_label', :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name('location_label', :facetable)
-    config.add_index_field solr_name('language_label', :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name('language_label', :facetable)
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
-    config.add_index_field solr_name('rights_statement_label', :stored_searchable), label: 'Rights Statement', link_to_search: solr_name('rights_statement_label', :facetable)
-    config.add_index_field solr_name('license_label', :stored_searchable), label: 'License', link_to_search: solr_name('license_label', :facetable)
-    config.add_index_field solr_name('file_format', :stored_searchable), link_to_search: solr_name('file_format', :facetable)
-    config.add_index_field solr_name('identifier', :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
-    config.add_index_field solr_name('embargo_release_date', :stored_sortable, type: :date), label: 'Embargo release date', helper_method: :human_readable_date
-    config.add_index_field solr_name('lease_expiration_date', :stored_sortable, type: :date), label: 'Lease expiration date', helper_method: :human_readable_date
+    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link, truncate: { list: 20, gallery: 10 }, max_values: 1
     config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable), if: false
 
     # solr fields to be displayed in the show (single result) view
