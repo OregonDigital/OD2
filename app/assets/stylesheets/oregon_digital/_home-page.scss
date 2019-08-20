@@ -13,27 +13,6 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
     background: none;
     padding-bottom: 5em;
   }
-  .input-group {
-    width: 100%;
-    input {
-      width: 100%;
-    }
-    .input-group-btn {
-      width: 55%;
-
-      button:first-child {
-        width: 55%;
-      }
-      button:last-child {
-        width: 25%;
-      }
-      .caret {
-        position: absolute;
-        right: 5%;
-        top: 45%;
-      }
-    }
-  }
 }
 #masthead {
   background-color: white;
@@ -83,6 +62,10 @@ body {
   }
   white-space: nowrap;
   overflow: hidden;
+}
+
+.my-shelf {
+  margin-right: 30px;
 }
 
 .text-shadow {
