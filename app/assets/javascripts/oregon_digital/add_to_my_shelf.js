@@ -1,5 +1,6 @@
 $( document ).ready(function() {
   $('#Select_all_on_page').click(function() {
-    $('.my_shelf_result_checkbox').each(function () { this.checked = !this.checked; });
+    var select_object = this.checked;
+    $('.my_shelf_result_checkbox').each(function () { this.checked = select_object; });
   });
 });
