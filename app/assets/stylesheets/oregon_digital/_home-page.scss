@@ -76,18 +76,17 @@ body {
   background-color: white;
 }
 
-.advanced-search-button {
-  margin-left: 6px;
+.searchbar-buttons {
+  a {
+    color: black;
+    margin-left: 10px;
+  }
   white-space: nowrap;
   overflow: hidden;
-  color: white;
 }
 
-.new-here-button {
-  margin-left: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  color: white;
+.text-shadow {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 .homepage-box {
