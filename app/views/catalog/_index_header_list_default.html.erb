@@ -1,6 +1,6 @@
 <div class="search-results-title-row">
   <h4 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), document %></h4>
-  <%= label_tag "" do %>
-    <% raw("#{check_box_tag document.id} Add to My Shelf") %>
+  <%= label_tag "", class: 'shift-right' do %>
+    <% raw("#{check_box_tag "my_shelf_#{document.id}", document.id, false, class: 'my_shelf_result_checkbox'} Add to My Shelf") %>
   <% end %>
 </div>
