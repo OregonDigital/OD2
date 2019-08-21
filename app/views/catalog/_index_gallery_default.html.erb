@@ -13,3 +13,8 @@
 <%# OVERRIDE FROM BLACKLIGHT to add resource type icon %>
 <%= render 'index_type_icon', document: document unless document.type_label.first.empty? %>
 <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
+<p>
+  <%= label_tag "" do %>
+    <% raw("#{check_box_tag "my_shelf_#{document.id}", document.id, false, class: 'my_shelf_result_checkbox'} Add to My Shelf") %>
+  <% end %>
+</p>

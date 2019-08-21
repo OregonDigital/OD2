@@ -5,9 +5,9 @@
         <%= render partial: 'catalog/search_form' %>
       </div>
       <div class="col-md-offset-10">
-        <%= button_to "Add results to My Shelf", root_path, class: 'btn btn-primary my-shelf-button' %>
-        <%= label_tag "Add All on page to My Shelf" do %>
-          <% raw("#{check_box_tag 'Add All on page to My Shelf'} Add All on page to My Shelf") %>
+        <%= button_to "Add to My Shelf", root_path, class: 'btn btn-primary my-shelf-button' %>
+        <%= label_tag "" do %>
+          <% raw("#{check_box_tag 'Select all on page'} Select all on page") %>
         <% end %>
       </div>
     </div>
