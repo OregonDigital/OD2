@@ -1,4 +1,9 @@
-crosswalk:
+institution_crosswalk:
+  - institution_uri: http://dbpedia.org/resource/University_of_Oregon
+    admin_set_id: uo
+  - institution_uri: http://dbpedia.org/resource/Oregon_State_University
+    admin_set_id: osu
+primary_set_crosswalk:
   - primary_set: aa-images
     admin_set_id: uo
   - primary_set: african-ephemera
