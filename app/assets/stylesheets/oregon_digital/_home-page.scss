@@ -13,27 +13,6 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
     background: none;
     padding-bottom: 5em;
   }
-  .input-group {
-    width: 100%;
-    input {
-      width: 100%;
-    }
-    .input-group-btn {
-      width: 55%;
-
-      button:first-child {
-        width: 55%;
-      }
-      button:last-child {
-        width: 25%;
-      }
-      .caret {
-        position: absolute;
-        right: 5%;
-        top: 45%;
-      }
-    }
-  }
 }
 #masthead {
   background-color: white;
@@ -50,6 +29,9 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   .uo-login {
     background-color: #0d4530;
   }
+}
+.background-container-overlay {
+  background: rgba(255, 255, 255, .3);
 }
 
 #preface {
@@ -76,18 +58,17 @@ body {
   background-color: white;
 }
 
-.advanced-search-button {
-  margin-left: 6px;
+.searchbar-buttons {
+  a {
+    color: black;
+    margin-left: 10px;
+  }
   white-space: nowrap;
   overflow: hidden;
-  color: white;
 }
 
-.new-here-button {
-  margin-left: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  color: white;
+.text-shadow {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 .homepage-box {
