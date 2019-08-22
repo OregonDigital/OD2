@@ -943,6 +943,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk-s3
   axe-matchers
   blacklight-oembed
   browse-everything
