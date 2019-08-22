@@ -44,3 +44,8 @@ services:
   rais-dev:
     ports:
       - 8080:8080
+
+  # Expose the minio Web UI
+  minio:
+    ports:
+      - 9000:9000

@@ -41,7 +41,9 @@ services:
       - AWS_S3_APP_SECRET=awsappsecret
       - AWS_S3_BUCKET=awss3uploadbucket
       - AWS_S3_INGEST_BUCKET=awss3ingestbucket
+      - AWS_S3_DERIVATIVES_BUCKET=derivatives
       - AWS_S3_REGION=awss3region
+      - S3_URL=http://minio:9000
       - BROWSEEVERYTHING_FILESYSTEM_PATH=/data/tmp
       - INGEST_LOCAL_PATH=/data/tmp
       - FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
@@ -77,6 +79,7 @@ services:
       - rais-dev
       - redis-dev
       - memcache
+      - minio
       - workers
     expose:
       - 3000
@@ -96,6 +99,7 @@ services:
       - fcrepo-dev
       - redis-dev
       - memcache
+      - minio
 
   ##
   # Test environment for application
@@ -316,3 +320,19 @@ services:
     image: memcached
     networks:
       internal:
+
+  # minio for dev against a local S3-compatible API
+  minio:
+    image: minio/minio
+    command: minio server /data
+    expose:
+      - 9000
+    environment:
+      - MINIO_ACCESS_KEY=awss3key
+      - MINIO_SECRET_KEY=awsappsecret
+    volumes:
+      - ./tmp/minio/data:/data
+      - ./tmp/minio/config:/root/.minio
+    networks:
+      internal:
+      external:
