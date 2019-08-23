@@ -109,9 +109,11 @@ services:
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
       - AWS_S3_APP_KEY=awss3key
       - AWS_S3_APP_SECRET=awsappsecret
-      - AWS_S3_BUCKET=awss3uploadbucket
+      - AWS_S3_BUCKET=test-awss3uploadbucket
       - AWS_S3_INGEST_BUCKET=awss3ingestbucket
+      - AWS_S3_DERIVATIVES_BUCKET=derivatives
       - AWS_S3_REGION=awss3region
+      - S3_URL=http://minio-test:9000
       - BROWSEEVERYTHING_FILESYSTEM_PATH=/data/tmp
       - INGEST_LOCAL_PATH=/data/tmp
       - CAPYBARA_APP_HOST=http://test:3001
@@ -157,6 +159,7 @@ services:
       - redis-test
       - rais-test
       - memcache
+      - minio-test
     volumes:
       - .:/data # mount current directory into the image
       - ./tmp:/tmp
@@ -337,6 +340,17 @@ services:
     volumes:
       - ./tmp/minio/data:/data
       - ./tmp/minio/config:/root/.minio
+    networks:
+      internal:
+      external:
+
+  # Test minio is self-contained - data dies on container exit
+  minio-test:
+    image: minio/minio
+    command: minio server /data
+    environment:
+      - MINIO_ACCESS_KEY=awss3key
+      - MINIO_SECRET_KEY=awsappsecret
     networks:
       internal:
       external:
