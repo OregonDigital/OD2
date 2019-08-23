@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: aa4f77dcc5d42f9e4f45baff8ef56f84e88a4037
+  revision: f94786b72bf372eaf0fe46bf7de523a644f94355
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -174,8 +174,8 @@ GEM
     awesome_nested_set (3.1.4)
       activerecord (>= 4.0.0, < 5.3)
     aws-eventstream (1.0.3)
-    aws-partitions (1.203.0)
-    aws-sdk-core (3.63.0)
+    aws-partitions (1.205.0)
+    aws-sdk-core (3.64.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.1)
@@ -652,7 +652,7 @@ GEM
     rack (2.0.7)
     rack-honeycomb (0.5.0)
       libhoney (>= 1.5.0)
-    rack-protection (2.0.5)
+    rack-protection (2.0.7)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
