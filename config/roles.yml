@@ -1,0 +1,9 @@
+roles:
+  - admin
+  - collection_curator
+  - depositor
+  - osu_affiliate
+  - osu_user
+  - uo_affiliate
+  - uo_user
+  - community_affiliate
