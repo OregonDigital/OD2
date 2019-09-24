@@ -196,12 +196,17 @@ jobs:
             export DATETIME=$(date "+%Y%m%d%H%M%S")
             echo export TAG="$DATETIME-$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
-      - docker-publish/publish:
-          image: registry.library.oregonstate.edu/od2_web
+
+      - docker-publish/check:
           registry: registry.library.oregonstate.edu
+      - docker-publish/build:
+          registry: registry.library.oregonstate.edu
+          image: registry.library.oregonstate.edu/od2_web
           tag: $TAG
           extra-build-args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
-       
+      - docker-publish/deploy:
+          registry: registry.library.oregonstate.edu
+          image: registry.library.oregonstate.edu/od2_web
 workflows:
   ci:
     jobs:
