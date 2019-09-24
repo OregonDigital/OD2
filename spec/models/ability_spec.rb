@@ -26,6 +26,7 @@ describe Ability do
     before do
       role.users << user
       r.save
+      r
     end
 
     it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
