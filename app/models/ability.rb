@@ -25,7 +25,7 @@ class Ability
 
     # Apply works edit permissions
     cannot(%i[edit update], all_work_types)
-    can(%i[edit update], all_work_types) if current_user.admin? || current_user.role?('collection_curator')
+    can(%i[edit update], all_work_types) if current_user.role?(['admin', 'collection_curator'])
     can(%i[edit update], all_work_types, depositor: current_user.email) if current_user.role?('depositor')
   end
 

@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   # T/F whether user is a part of a role
   def role?(role)
-    roles.where(name: role).exists?
+    !(roles.map(&:name) & Array(role)).empty?
   end
 
   # method needed for messaging
