@@ -29,11 +29,11 @@ class Ability
     can(%i[edit update], all_work_types, depositor: current_user.email) if current_user.role?(edit_my_work_permissions)
   end
 
-  private
-
   def all_work_types
     [SolrDocument, FileSet] + Hyrax.config.curation_concerns
   end
+
+  private
 
   def edit_any_work_permissions
     %w[admin collection_curator]
