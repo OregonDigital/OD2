@@ -13,7 +13,7 @@ Dir[File.join(Rails.root, 'spec/support/**/*.rb')].each { |f| require f }
 
 require 'shoulda/matchers'
 require 'triplestore_adapter'
-require "cancan/matchers"
+require 'cancan/matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
