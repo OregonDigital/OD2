@@ -19,7 +19,7 @@ describe Ability do
     end
   end
 
-  context "as an admin"
+  context "as an admin" do
     let(:ability) { Ability.new(user) }
     let(:user){ create(:user, :admin) }
 
