@@ -184,6 +184,9 @@ jobs:
         default: 'production'
     executor:
       name: 'docker-publish/docker'
+    environment:
+      DOCKER_LOGIN: admin
+      DOCKER_PASSWORD: admin
     working_directory: ~/app
     steps:
       - attach_workspace:
