@@ -22,5 +22,14 @@ class Ability
     # end
 
     can(%i[create show add_user remove_user index edit update destroy], Role) if current_user.admin?
+
+    # Apply works edit permissions
+    cannot(%i[edit update], all_work_types)
+    can(%i[edit update], all_work_types) if current_user.admin? || current_user.role?('collection_curator')
+    can(%i[edit update], all_work_types, depositor: current_user.email) if current_user.role?('depositor')
+  end
+
+  def all_work_types
+    [SolrDocument, FileSet] + Hyrax.config.curation_concerns
   end
 end

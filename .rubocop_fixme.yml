@@ -4,6 +4,7 @@ Metrics/AbcSize:
     - 'app/controllers/hyrax/contact_form_controller.rb'
     - 'app/indexers/generic_indexer.rb'
     - 'app/forms/oregon_digital/forms/collection_form.rb'
+    - 'app/models/ability.rb'
     - 'lib/oregon_digital/triplestore.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/oregon_digital/controlled_vocabularies/subject.rb'

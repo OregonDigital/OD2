@@ -14,6 +14,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :omniauthable, omniauth_providers: [:cas, :saml]
 
+  # T/F whether user is a part of a role
+  def role?(role)
+    roles.where(name: role).exists?
+  end
+
   # method needed for messaging
   def mailboxer_email(_obj = nil)
     email
