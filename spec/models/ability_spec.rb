@@ -23,6 +23,10 @@ describe Ability do
     let(:ability) { Ability.new(user) }
     let(:user){ create(:user, :admin) }
 
+    before do
+      role.users << user
+      r.save
+    end
     it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
   end
 
