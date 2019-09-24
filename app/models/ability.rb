@@ -23,7 +23,7 @@ class Ability
     end
   end
 
-  def self.create_permissions
+  def create_permissions
     %w[admin collection_curator depositor]
   end
 end
