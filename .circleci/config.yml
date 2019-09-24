@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@3.1.0
-  docker-publish: circleci/docker-publish@1.0.0
+  docker-publish: circleci/docker-publish@0.1.7
 jobs:
   checkout_code:
     docker:
