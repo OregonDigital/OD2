@@ -199,6 +199,7 @@ jobs:
             export DATETIME=$(date "+%Y%m%d%H%M%S")
             echo export TAG="$DATETIME-$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
+      - setup_remote_docker
       - docker-publish/check:
           registry: registry.library.oregonstate.edu
       - docker-publish/build:
