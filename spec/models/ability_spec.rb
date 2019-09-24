@@ -3,14 +3,16 @@
 describe Ability do
   let(:ability) { described_class.new(user) }
 
-  context 'when a user is an admin' do
-    let(:user) { create(:user) }
-    let(:role) { Role.create(name: 'admin') }
-
-    before do
-      user.roles << role
-      user.save
+  context 'when a user as an admin' do
+    let(:ability) { described_class.new(user) }
+    let(:user) do
+      u = create(:user)
+      r = role
+      r.users << u
+      r.save
+      u
     end
+    let(:role) { Role.create(name: 'admin') }
 
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
