@@ -14,7 +14,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable,
          :omniauthable, omniauth_providers: [:cas, :saml]
 
-  # T/F whether user is a part of a role
+  # T/F whether user has at least one role
   def role?(role)
     !(roles.map(&:name) & Array(role)).empty?
   end
