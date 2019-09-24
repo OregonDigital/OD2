@@ -18,7 +18,9 @@ class Ability
     [SolrDocument, ActiveFedora::Base]
     # TODO: THIS WILL BE REMOVED ONCE WE NAIL DOWN THE ROLES AND PERMISSIONS MORE
     can(%i[show add_user remove_user index edit update destroy], Role) if current_user.admin?
-    can(:create, ActiveFedora::Base) if current_user.roles.map(&:name).include?(create_permissions)
+    create_permissions.each do |perm|
+      can(:create, ActiveFedora::Base) if current_user.roles.map(&:name).include?(perm)
+    end
   end
 
   def self.create_permissions
