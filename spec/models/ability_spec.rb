@@ -19,6 +19,13 @@ describe Ability do
     end
   end
 
+  context "as an admin"
+    let(:ability) { Ability.new(user) }
+    let(:user){ create(:user, :admin) }
+
+    it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
+  end
+
   context 'when a user is a collection_curator' do
     let(:user) { create(:user) }
     let(:role) { Role.create(name: 'collection_curator') }
@@ -51,3 +58,4 @@ describe Ability do
     end
   end
 end
+  

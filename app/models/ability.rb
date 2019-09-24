@@ -30,5 +30,13 @@ class Ability
 
   def work_classes
     [SolrDocument, ActiveFedora::Base]
+    # TODO: THIS WILL BE REMOVED ONCE WE NAIL DOWN THE ROLES AND PERMISSIONS MORE
+   can(:create, ActiveFedora::Base) if current_user.role.name.include?(create_permissions)
+  end
+
+  private
+
+  def self.create_permissions
+    %w[admin collection_curator depositor]
   end
 end
