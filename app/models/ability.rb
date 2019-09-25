@@ -4,6 +4,7 @@
 class Ability
   include Hydra::Ability
   include Hyrax::Ability
+  include OregonDigital::Ability::WorkCreateAbility
 
   include OregonDigital::Ability::WorkEditAbility
 
@@ -18,12 +19,14 @@ class Ability
     [SolrDocument, ActiveFedora::Base]
     # TODO: THIS WILL BE REMOVED ONCE WE NAIL DOWN THE ROLES AND PERMISSIONS MORE
     can(%i[show add_user remove_user index edit update destroy], Role) if current_user.admin?
-    create_permissions.each do |perm|
-      can(:create, ActiveFedora::Base) if current_user.roles.map(&:name).include?(perm)
-    end
+    work_create_ability 
   end
 
-  def create_permissions
-    %w[admin collection_curator depositor]
+  def admin_permission_roles
+    %w[admin collection_curator]
+  end
+
+  def manager_permission_roles
+    admin_permission_roles << 'depositor'
   end
 end

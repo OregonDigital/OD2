@@ -31,6 +31,10 @@ class User < ApplicationRecord
     email
   end
 
+  def role?(role)
+    !(roles.map(&:name) & Array(role)).empty?
+  end
+
   def self.from_omniauth(access_token)
     email = case access_token.provider.to_s
             when 'cas' then access_token.extra.osuprimarymail.to_s
