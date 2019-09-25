@@ -20,7 +20,7 @@ module OregonDigital
         end
 
         def edit_my_work_permissions
-          %w[admin collection_curator depositor]
+          edit_any_work_permissions << 'depositor'
         end
       end
     end
