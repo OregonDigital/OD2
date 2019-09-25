@@ -5,7 +5,6 @@ class Ability
   include Hydra::Ability
   include Hyrax::Ability
   include OregonDigital::Ability::WorkCreateAbility
-
   include OregonDigital::Ability::WorkEditAbility
 
   def custom_permissions
@@ -13,12 +12,11 @@ class Ability
 
     # Apply works edit permissions
     work_edit_ability
-    work_create_ability 
+    work_create_ability
   end
 
   def work_classes
     [SolrDocument, ActiveFedora::Base]
-    # TODO: THIS WILL BE REMOVED ONCE WE NAIL DOWN THE ROLES AND PERMISSIONS MORE
   end
 
   def admin_permission_roles
