@@ -5,7 +5,6 @@ class Ability
   include Hydra::Ability
 
   include Hyrax::Ability
-  self.ability_logic += %i[everyone_can_create_curation_concerns]
 
   include OregonDigital::Ability::WorkEditAbility
 
