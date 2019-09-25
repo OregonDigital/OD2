@@ -2,10 +2,15 @@
 
 RSpec.describe OregonDigital::OembedsController do
   let(:user) { create(:user) }
+  let(:role) { Role.create(name: 'depositor') }
   let(:a_work) { create(:work, user: user) }
   let(:not_my_work) { create(:work) }
 
-  before { sign_in user }
+  before do
+    user.roles << role
+    user.save
+    sign_in user
+  end
 
   describe '#index' do
     it 'renders the dashboard' do

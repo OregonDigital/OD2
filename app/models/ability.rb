@@ -5,7 +5,8 @@ class Ability
   include Hydra::Ability
 
   include Hyrax::Ability
-  self.ability_logic += %i[everyone_can_create_curation_concerns]
+
+  include OregonDigital::Ability::WorkEditAbility
 
   # Define any customized permissions here.
   def custom_permissions
@@ -22,5 +23,12 @@ class Ability
     # end
 
     can(%i[create show add_user remove_user index edit update destroy], Role) if current_user.admin?
+
+    # Apply works edit permissions
+    work_edit_ability
+  end
+
+  def work_classes
+    [SolrDocument, ActiveFedora::Base]
   end
 end

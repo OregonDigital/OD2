@@ -2,7 +2,12 @@
 
 RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
   context 'with a logged in user' do
-    let(:user) { create(:user) }
+    let(:user) do
+      u = create(:user)
+      u.roles << role
+      u
+    end
+    let(:role) { Role.create(name: 'admin') }
     let!(:ability) { ::Ability.new(user) }
     let(:upload_file_path) { "#{Rails.root}/spec/fixtures/test.jpg" }
 
