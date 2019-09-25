@@ -14,6 +14,8 @@ describe Ability do
     end
     let(:role) { Role.create(name: 'admin') }
 
+    it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
+
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
         expect(user).to be_able_to(:edit, type)

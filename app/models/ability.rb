@@ -13,13 +13,12 @@ class Ability
 
     # Apply works edit permissions
     work_edit_ability
+    work_create_ability 
   end
 
   def work_classes
     [SolrDocument, ActiveFedora::Base]
     # TODO: THIS WILL BE REMOVED ONCE WE NAIL DOWN THE ROLES AND PERMISSIONS MORE
-    can(%i[show add_user remove_user index edit update destroy], Role) if current_user.admin?
-    work_create_ability 
   end
 
   def admin_permission_roles
