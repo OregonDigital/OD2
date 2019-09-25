@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@3.1.0
+  docker-publish: circleci/docker-publish@0.1.7
 jobs:
   checkout_code:
     docker:
@@ -173,7 +174,42 @@ jobs:
           # in the repository sorted by the images tag, so YYYYMMDDHHMMSS makes is so.
           tag: '$TAG'
           extra-build-args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
-
+  build_and_push_beavernetes:
+    parameters:
+      repo:
+        type: string
+        default: ''
+      environment:
+        type: string
+        default: 'production'
+    executor:
+      name: 'docker-publish/docker'
+    environment:
+      DOCKER_LOGIN: admin
+      DOCKER_PASSWORD: admin
+    working_directory: ~/app
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Generate deployed version
+          command: |
+            export APP_VERSION=$(cat lib/oregon_digital/version.rb | grep VERSION | cut -d "=" -f 2 | sed "s/['\" ]//g")
+            export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
+            export DATETIME=$(date "+%Y%m%d%H%M%S")
+            echo export TAG="$DATETIME-$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
+            echo export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
+      - setup_remote_docker
+      - docker-publish/check:
+          registry: registry.library.oregonstate.edu
+      - docker-publish/build:
+          registry: registry.library.oregonstate.edu
+          image: od2_web
+          tag: $TAG
+          extra_build_args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
+      - docker-publish/deploy:
+          registry: registry.library.oregonstate.edu
+          image: od2_web
 workflows:
   ci:
     jobs:
@@ -198,3 +234,11 @@ workflows:
             branches:
               only: master
           repo: web
+      - build_and_push_beavernetes:
+          name: Build and push application image to Beavernetes image repository
+          requires:
+            - lint
+          filters:
+            branches:
+              only: master
+          repo: od2_web
