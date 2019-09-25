@@ -4,7 +4,9 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
   context 'with a logged in user' do
     let(:user) do
       u = create(:user)
-      u.roles << role
+      r = role
+      r.users << u
+      r.save
       u
     end
     let(:role) { Role.create(name: 'admin') }
