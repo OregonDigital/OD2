@@ -7,6 +7,8 @@ class Ability
   include Hyrax::Ability
   self.ability_logic += %i[everyone_can_create_curation_concerns]
 
+  include OregonDigital::Ability::WorkEditAbility
+
   # Define any customized permissions here.
   def custom_permissions
     # Limits deleting objects to a the admin user
@@ -24,18 +26,10 @@ class Ability
     can(%i[create show add_user remove_user index edit update destroy], Role) if current_user.admin?
 
     # Apply works edit permissions
-    cannot(%i[edit update], ActiveFedora::Base)
-    can(%i[edit update], ActiveFedora::Base) if current_user.role?(edit_any_work_permissions)
-    can(%i[edit update], ActiveFedora::Base, depositor: current_user.email) if current_user.role?(edit_my_work_permissions)
+    work_edit_ability
   end
 
-  private
-
-  def edit_any_work_permissions
-    %w[admin collection_curator]
-  end
-
-  def edit_my_work_permissions
-    %w[admin collection_curator depositor]
+  def work_classes
+    [SolrDocument, ActiveFedora::Base]
   end
 end
