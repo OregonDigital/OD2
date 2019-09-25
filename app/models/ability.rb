@@ -13,6 +13,7 @@ class Ability
     # Apply works edit permissions
     work_edit_ability
     work_create_ability
+    work_delete_ability
   end
 
   def work_classes
