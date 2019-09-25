@@ -24,13 +24,9 @@ class Ability
     can(%i[create show add_user remove_user index edit update destroy], Role) if current_user.admin?
 
     # Apply works edit permissions
-    cannot(%i[edit update], all_work_types)
-    can(%i[edit update], all_work_types) if current_user.role?(edit_any_work_permissions)
-    can(%i[edit update], all_work_types, depositor: current_user.email) if current_user.role?(edit_my_work_permissions)
-  end
-
-  def all_work_types
-    [SolrDocument, FileSet] + Hyrax.config.curation_concerns
+    cannot(%i[edit update], ActiveFedora::Base)
+    can(%i[edit update], ActiveFedora::Base) if current_user.role?(edit_any_work_permissions)
+    can(%i[edit update], ActiveFedora::Base, depositor: current_user.email) if current_user.role?(edit_my_work_permissions)
   end
 
   private
