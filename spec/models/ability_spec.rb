@@ -50,14 +50,4 @@ describe Ability do
       end
     end
   end
-
-  context 'when a user does not have any roles' do
-    let(:user) { create(:user) }
-
-    it 'can not edit works' do
-      Hyrax.config.curation_concerns.each do |type|
-        expect(user).not_to be_able_to(:edit, type)
-      end
-    end
-  end
 end
