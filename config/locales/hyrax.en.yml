@@ -253,6 +253,11 @@ en:
         login: 'OSU Login'
       uo:
         login: 'UO Login'
+    visbility:
+      osu:
+        text: 'Oregon State University'
+      uo:
+        text: 'University of Oregon'
   simple_form:
     hints:
       collection_type:
