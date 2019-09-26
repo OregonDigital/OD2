@@ -234,7 +234,7 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    bootstrap_form (4.2.0)
+    bootstrap_form (4.3.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     breadcrumbs_on_rails (3.0.1)
@@ -463,10 +463,12 @@ GEM
     hydra-pcdm (1.0.1)
       active-fedora (>= 10, < 13)
       mime-types (>= 1)
-    hydra-role-management (1.0.0)
+    hydra-role-management (1.0.2)
       blacklight
       bootstrap_form
+      bundler (>= 1.5)
       cancancan
+      json (>= 1.8)
     hydra-works (1.2.0)
       activesupport (>= 4.2.10, < 6.0)
       hydra-derivatives (~> 3.0)
@@ -961,7 +963,7 @@ DEPENDENCIES
   haml
   honeycomb-beeline (>= 1.0.0)
   hydra-derivatives!
-  hydra-role-management
+  hydra-role-management (~> 1.0.2)
   hyrax!
   hyrax-migrator!
   jbuilder (~> 2.5)
