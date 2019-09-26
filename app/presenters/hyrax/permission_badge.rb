@@ -14,8 +14,6 @@ module Hyrax
 
     # @param visibility [String] the current visibility
     def initialize(visibility)
-      Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      Rails.logger.info visibility
       @visibility = visibility
     end
 
@@ -34,8 +32,6 @@ module Hyrax
         if registered?
           Institution.name
         else
-          Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-          Rails.logger.info @visibility
           I18n.t("hyrax.visibility.#{@visibility}.text")
         end
       end
