@@ -9,7 +9,7 @@ class Ability
   include OregonDigital::Ability::WorkDeleteAbility
 
   def custom_permissions
-    can(%i[show add_user remove_user index edit update destroy], Role) if current_user.admin?
+    can(%i[show add_user remove_user index edit update destroy], Role)
 
     # Apply works edit permissions
     work_edit_ability
