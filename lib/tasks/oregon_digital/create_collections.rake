@@ -12,15 +12,7 @@ namespace :oregon_digital do
         puts "Collection #{id} already exists."
         next
       end
-      title = coll['title']
-      visibility = coll['visibility']
-      collection = Collection.new(id: id, title: [title], visibility: visibility, collection_type_gid: coll_type_gid)
-      Hyrax::PermissionTemplate.create!(source_id: id)
-      puts "Successfully created collection #{id}" if collection.save
-    rescue StandardError => e
-      puts "Unable to create collection #{id}"
-      puts "Error: #{e.message}"
-      puts e.backtrace
+      CreateCollectionJob.perform_later(id: coll['id'], title: coll['title'], visibility: coll['visibility'], collection_type_gid: coll_type_gid)
     end
   end
 end
