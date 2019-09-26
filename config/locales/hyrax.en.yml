@@ -253,7 +253,7 @@ en:
         login: 'OSU Login'
       uo:
         login: 'UO Login'
-    visbility:
+    visibility:
       osu:
         text: 'Oregon State University'
       uo:
