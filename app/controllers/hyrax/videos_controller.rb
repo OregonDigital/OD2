@@ -3,6 +3,8 @@
 module Hyrax
   # Generated controller for Video
   class VideosController < ApplicationController
+    load_and_authorize_resource
+
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks

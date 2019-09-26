@@ -8,19 +8,11 @@ module OregonDigital
 
       included do
         def work_show_ability
-          # TODO: Configure UO & OSU rules based on how we determine work restriction
-          cannot(%i[show], ActiveFedora::Base) if osu_only
-          cannot(%i[show], ActiveFedora::Base) if uo_only
+          # TODO: Fix visibility string for UO and OSU specific visibility settings
+          cannot(%i[show], ActiveFedora::Base, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED) unless current_user.role?(osu_roles)
+          cannot(%i[show], ActiveFedora::Base, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED) unless current_user.role?(uo_roles)
 
           can(%i[show], ActiveFedora::Base) if current_user.role?(manager_permission_roles)
-        end
-
-        def osu_only
-          !current_user.role?(osu_roles)
-        end
-
-        def uo_only
-          !current_user.role?(uo_roles)
         end
       end
     end
