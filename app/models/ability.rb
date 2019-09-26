@@ -6,6 +6,7 @@ class Ability
   include Hyrax::Ability
   include OregonDigital::Ability::WorkCreateAbility
   include OregonDigital::Ability::WorkEditAbility
+  include OregonDigital::Ability::WorkDeleteAbility
 
   def custom_permissions
     can(%i[show add_user remove_user index edit update destroy], Role)
@@ -13,6 +14,7 @@ class Ability
     # Apply works edit permissions
     work_edit_ability
     work_create_ability
+    work_delete_ability
   end
 
   def work_classes

@@ -15,6 +15,7 @@ describe Ability do
     let(:role) { Role.create(name: 'admin') }
 
     it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
+    it { expect(ability).to be_able_to(:delete, ActiveFedora::Base) }
 
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
@@ -32,6 +33,9 @@ describe Ability do
       user.save
     end
 
+    it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
+    it { expect(ability).to be_able_to(:delete, ActiveFedora::Base) }
+
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
         expect(user).to be_able_to(:edit, type)
@@ -47,6 +51,8 @@ describe Ability do
       user.roles << role
       user.save
     end
+
+    it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
 
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
