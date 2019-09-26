@@ -8,18 +8,19 @@ module OregonDigital
 
       included do
         def work_show_ability
-          can(%i[show], ActiveFedora::Base)
           # TODO: Configure UO & OSU rules based on how we determine work restriction
-          cannot(%i[show], ActiveFedora::Base) if !current_user.role?(osu_roles) && osu_only
-          cannot(%i[show], ActiveFedora::Base) if !current_user.role?(uo_roles) && uo_only
+          cannot(%i[show], ActiveFedora::Base) if osu_only
+          cannot(%i[show], ActiveFedora::Base) if uo_only
+
+          can(%i[show], ActiveFedora::Base) if current_user.role?(manager_permission_roles)
         end
 
         def osu_only
-          true
+          !current_user.role?(osu_roles)
         end
 
         def uo_only
-          true
+          !current_user.role?(uo_roles)
         end
       end
     end
