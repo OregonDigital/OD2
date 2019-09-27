@@ -242,7 +242,8 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :workType, predicate: ::RDF::URI.new('https://www.w3.org/1999/02/22-rdf-syntax-ns#type') do |index|
+      property :workType, predicate: ::RDF::URI.new('https://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+                          class_name: OregonDigital::ControlledVocabularies::WorkType do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -534,11 +535,6 @@ module OregonDigital
 
       property :publisher, predicate: ::RDF::Vocab::DC.publisher,
                            class_name: OregonDigital::ControlledVocabularies::Publisher do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :workType, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/workType'),
-                          class_name: OregonDigital::ControlledVocabularies::WorkType do |index|
         index.as :stored_searchable, :facetable
       end
 
