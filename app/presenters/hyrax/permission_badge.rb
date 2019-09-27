@@ -2,6 +2,7 @@ module Hyrax
   class PermissionBadge
     include ActionView::Helpers::TagHelper
 
+    # OVERRIDE FROM HYRAX: to add OSU & UO visbility label classes
     VISIBILITY_LABEL_CLASS = {
       authenticated: "label-info",
       embargo: "label-warning",

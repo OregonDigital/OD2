@@ -2,6 +2,7 @@ module Hydra::AccessControls
   module Visibility
     extend ActiveSupport::Concern
 
+    # OVERRIDE FROM HYRAX: to add OSU & UO visbility setter options
     def visibility=(value)
       return if value.nil?
       # only set explicit permissions
@@ -21,6 +22,7 @@ module Hydra::AccessControls
       end
     end
 
+    # OVERRIDE FROM HYRAX: to add OSU & UO visbility getter options
     def visibility
       if read_groups.include? AccessRight::PERMISSION_TEXT_VALUE_PUBLIC
         AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
@@ -67,12 +69,14 @@ module Hydra::AccessControls
         set_read_groups([AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED], remove_groups)
       end
 
+      # OVERRIDE FROM HYRAX: to add OSU visbility setter method
       def osu_visibility!
         visibility_will_change! unless visibility == "osu"
         remove_groups = represented_visibility - ["osu"]
         set_read_groups(["osu"], remove_groups)
       end
 
+      # OVERRIDE FROM HYRAX: to add UO visbility setter method
       def uo_visibility!
         visibility_will_change! unless visibility == "uo"
         remove_groups = represented_visibility - ["uo"]
