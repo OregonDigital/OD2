@@ -16,6 +16,7 @@ describe Ability do
 
     it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
     it { expect(ability).to be_able_to(:delete, ActiveFedora::Base) }
+    it { expect(ability).to be_able_to(:show, ActiveFedora::Base) }
 
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
@@ -35,6 +36,7 @@ describe Ability do
 
     it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
     it { expect(ability).to be_able_to(:delete, ActiveFedora::Base) }
+    it { expect(ability).to be_able_to(:show, ActiveFedora::Base) }
 
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
@@ -53,6 +55,7 @@ describe Ability do
     end
 
     it { expect(ability).to be_able_to(:create, ActiveFedora::Base) }
+    it { expect(ability).to be_able_to(:show, ActiveFedora::Base) }
 
     it 'can edit works' do
       Hyrax.config.curation_concerns.each do |type|
