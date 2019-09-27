@@ -8,6 +8,7 @@ class Ability
   include OregonDigital::Ability::WorkEditAbility
   include OregonDigital::Ability::WorkDeleteAbility
   include OregonDigital::Ability::WorkShowAbility
+  include OregonDigital::Ability::WorkReviewAbility
 
   def custom_permissions
     can(%i[show add_user remove_user index edit update destroy], Role)
@@ -17,6 +18,7 @@ class Ability
     work_create_ability
     work_delete_ability
     work_show_ability
+    work_review_ability
   end
 
   def work_classes
