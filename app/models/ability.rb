@@ -25,6 +25,10 @@ class Ability
     [SolrDocument, ActiveFedora::Base]
   end
 
+  def presenter_classes
+    [Hyrax::GenericPresenter, Hyrax::ImagePresenter, Hyrax::DocumentPresenter, Hyrax::AudioPresenter, Hyrax::VideoPresenter]
+  end
+
   def admin_permission_roles
     %w[admin collection_curator]
   end

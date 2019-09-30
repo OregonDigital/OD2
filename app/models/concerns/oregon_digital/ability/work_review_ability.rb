@@ -8,15 +8,15 @@ module OregonDigital
 
       included do
         def work_review_ability
-          Rails.logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-          Rails.logger.info current_user.email 
-          can(%i[review], Depositor) do |depositor|
-            #  if (current_user.role?(%w[admin])) || current_user.username == params[:depositor]
-            current_user.email == depositor
+          can :review, SolrDocument do |solr_doc|
+            can_review_solr_doc?(solr_doc.depositor) && can_review_submissions?
           end
+        end
+
+        def can_review_solr_doc?(depositor)
+          depositor != current_user.email
         end
       end
     end
   end
 end
-

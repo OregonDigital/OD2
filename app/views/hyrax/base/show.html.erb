@@ -12,8 +12,7 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <% %>
-          <% if can?(:review, @presenter.depositor) %>
+          <% if can?(:review, @presenter.solr_document) %>
            <%= render 'workflow_actions_widget', presenter: @presenter %>
           <% end %>
           <% if @presenter.iiif_viewer? %>
