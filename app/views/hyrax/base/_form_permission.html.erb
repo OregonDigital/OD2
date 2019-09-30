@@ -14,10 +14,7 @@
         <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
         <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC) %>
       </label>
-      <label class="radio">
-        <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED %>
-        <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED) %>
-      </label>
+      <%# OVRERIDE FROM HYRAX: to add UO and OSU visibility options and remove default institution option %>
       <label class="radio">
         <%= f.radio_button :visibility, 'uo' %>
         <%= "UO" %>
