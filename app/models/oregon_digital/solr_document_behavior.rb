@@ -1,4 +1,7 @@
+# frozen_string_literal:true
+
 module OregonDigital
+  # Custom SolrDocument behaviors
   module SolrDocumentBehavior
     extend ActiveSupport::Concern
 

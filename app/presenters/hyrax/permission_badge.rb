@@ -1,16 +1,19 @@
+# frozen_string_literal:true
+
 module Hyrax
+  # PermissionBadge Presenter
   class PermissionBadge
     include ActionView::Helpers::TagHelper
 
     # OVERRIDE FROM HYRAX: to add OSU & UO visbility label classes
     VISIBILITY_LABEL_CLASS = {
-      authenticated: "label-info",
-      embargo: "label-warning",
-      osu: "label-warning",
-      uo: "label-warning",
-      lease: "label-warning",
-      open: "label-success",
-      restricted: "label-danger"
+      authenticated: 'label-info',
+      embargo: 'label-warning',
+      osu: 'label-warning',
+      uo: 'label-warning',
+      lease: 'label-warning',
+      open: 'label-success',
+      restricted: 'label-danger'
     }.freeze
 
     # @param visibility [String] the current visibility
@@ -25,20 +28,20 @@ module Hyrax
 
     private
 
-      def dom_label_class
-        VISIBILITY_LABEL_CLASS.fetch(@visibility.to_sym)
-      end
+    def dom_label_class
+      VISIBILITY_LABEL_CLASS.fetch(@visibility.to_sym)
+    end
 
-      def text
-        if registered?
-          Institution.name
-        else
-          I18n.t("hyrax.visibility.#{@visibility}.text")
-        end
+    def text
+      if registered?
+        Institution.name
+      else
+        I18n.t("hyrax.visibility.#{@visibility}.text")
       end
+    end
 
-      def registered?
-        @visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
-      end
+    def registered?
+      @visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
+    end
   end
 end
