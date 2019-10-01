@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 3f5647fa1603cea691c8ad1d25e101f99ee2f827
+  revision: c0a1197e0d47c6a261dd59049af6a4c95dc8dfe0
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -174,7 +174,7 @@ GEM
     awesome_nested_set (3.1.4)
       activerecord (>= 4.0.0, < 5.3)
     aws-eventstream (1.0.3)
-    aws-partitions (1.218.0)
+    aws-partitions (1.219.0)
     aws-sdk-core (3.68.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
@@ -570,7 +570,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.2.3)
+    loofah (2.3.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -586,7 +586,7 @@ GEM
     mini_magick (4.9.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.12.0)
+    minitest (5.12.2)
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
