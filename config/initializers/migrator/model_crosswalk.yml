@@ -4,3 +4,4 @@
 'info:fedora/afmodel:Document': Document
 'info:fedora/afmodel:Audio': Audio
 'info:fedora/afmodel:Generic': Generic
+'info:fedora/afmodel:GenericAsset': Generic
