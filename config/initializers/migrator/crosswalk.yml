@@ -635,10 +635,10 @@ crosswalk:
     predicate: http://www.w3.org/2003/12/exif/ns/height
     multiple: false
     function:
-  - property: institution
+  - property: institution_attributes
     predicate: http://opaquenamespace.org/ns/contributingInstitution
     multiple: true
-    function:
+    function: attributes_data
   - property: date_modified
     predicate: http://purl.org/dc/terms/modified
     multiple: false
