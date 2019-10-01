@@ -45,8 +45,8 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_blacklight_permissions(solr_doc)
-    solr_doc['edit_access_group_ssim'] = ['collection_curator']
-    solr_doc['read_access_group_ssim'] = ['collection_curator', 'depositor']
-    solr_doc['discover_access_group_ssim'] = ['collection_curator', 'depositor']
+    solr_doc['edit_access_group_ssim'] = %w[collection_curator]
+    solr_doc['read_access_group_ssim'] = %w[collection_curator depositor]
+    solr_doc['discover_access_group_ssim'] = %w[collection_curator depositor]
   end
 end
