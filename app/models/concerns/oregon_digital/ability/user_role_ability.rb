@@ -16,8 +16,8 @@ module OregonDigital
           can(%i[show index], User) if current_user.role?(admin_permission_roles)
           # admin can edit and delete users
           can(%i[delete edit update], User) if current_user.admin?
-          #community_affiliate can edit profile
-          can(%i[edit update], user) if current_user.role?(%[community_affiliate])
+          # community_affiliate can edit profile
+          can(%i[edit update], User) if current_user.role?(%w[community_affiliate])
         end
       end
     end
