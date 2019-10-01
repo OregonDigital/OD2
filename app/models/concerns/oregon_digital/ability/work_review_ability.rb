@@ -14,7 +14,7 @@ module OregonDigital
         end
 
         def can_review_solr_doc?(depositor)
-          depositor != current_user.email
+          current_user.admin? || depositor != current_user.email
         end
       end
     end
