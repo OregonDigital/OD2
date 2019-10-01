@@ -16,6 +16,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_license_label(solr_doc, license_labels)
       index_language_label(solr_doc, language_labels)
       index_type_label(solr_doc, type_label)
+      index_blacklight_permissions(solr_doc)
     end
   end
 
@@ -41,5 +42,11 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['type_label_sim'] = type_label
     solr_doc['type_label_ssim'] = type_label
     solr_doc['type_label_tesim'] = type_label
+  end
+
+  def index_blacklight_permissions(solr_doc)
+    solr_doc['edit_access_group_ssim'] = ['collection_curator']
+    solr_doc['read_access_group_ssim'] = ['collection_curator', 'depositor']
+    solr_doc['discover_access_group_ssim'] = ['collection_curator', 'depositor']
   end
 end
