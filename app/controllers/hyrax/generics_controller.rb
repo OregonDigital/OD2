@@ -19,7 +19,8 @@ module Hyrax
 
     def document_not_found!
       doc = ::SolrDocument.find(params[:id])
-      raise WorkflowAuthorizationException unless current_ability.can?(:read, doc) 
+      raise WorkflowAuthorizationException unless current_ability.can?(:read, doc)
+
       doc
     end
 
