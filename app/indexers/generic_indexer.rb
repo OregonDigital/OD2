@@ -45,8 +45,10 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_blacklight_permissions
-    object.edit_groups = object.edit_groups + %w[admin collection_curator]
-    object.read_groups = object.read_groups + %w[admin collection_curator depositor]
-    object.discover_groups = object.discover_groups + %w[admin collection_curator depositor]
+    object.edit_groups = (object.edit_groups + %w[admin collection_curator]).uniq
+    # Edit implies read
+    object.read_groups = (object.edit_groups + object.read_groups + %w[admin collection_curator depositor]).uniq
+    # Edit and Read implies discover
+    object.discover_groups = (object.edit_groups + object.read_groups + object.discover_groups + %w[admin collection_curator depositor]).uniq
   end
 end
