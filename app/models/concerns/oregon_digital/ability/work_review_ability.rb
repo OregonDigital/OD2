@@ -9,7 +9,7 @@ module OregonDigital
       included do
         def work_review_ability
           can :review, SolrDocument do |solr_doc|
-            can_review_solr_doc?(solr_doc.depositor) && can_review_submissions?
+            can_review_solr_doc?(solr_doc.depositor) && can_review_submissions? && is_in_depositors_collection?(solr_doc["edit_access_person_ssim"])
           end
         end
 

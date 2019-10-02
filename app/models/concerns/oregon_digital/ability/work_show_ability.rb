@@ -12,8 +12,20 @@ module OregonDigital
           cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(osu_roles)
           cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
 
-          can(%i[show], ActiveFedora::Base) if current_user.role?(manager_permission_roles)
-          can(%i[read], SolrDocument) if current_user.role?(admin_permission_roles)
+          can :show, ActiveFedora::Base do |record|
+            if record.suppressed?
+              current_user.role?(admin_permission_roles) && is_in_depositors_collection?(record.to_solr["edit_access_person_ssim"])
+            else
+              current_user.role?(manager_permission_roles)
+            end
+          end
+          can :read, SolrDocument do |solr_doc|
+            if solr_doc.suppressed?
+              current_user.role?(admin_permission_roles) && is_in_depositors_collection?(solr_doc["edit_access_person_ssim"])
+            else
+              current_user.role?(admin_permission_roles)
+            end
+          end
         end
       end
     end
