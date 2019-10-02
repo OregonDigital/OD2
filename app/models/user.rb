@@ -23,8 +23,8 @@ class User < ApplicationRecord
   # https://github.com/samvera/hydra-head/blob/v10.6.2/hydra-access-controls/lib/hydra/user.rb
   def groups
     groups = super
-    groups << 'osu' unless (groups & %w[osu_affiliate osu_user]).empty?
-    groups << 'uo' unless (groups & %w[uo_affiliate uo_user]).empty?
+    groups << 'osu' unless (groups & %w[osu_affiliate osu_user community_affiliate]).empty?
+    groups << 'uo' unless (groups & %w[uo_affiliate uo_user community_affiliate]).empty?
     groups
   end
   # END OVERRIDE
