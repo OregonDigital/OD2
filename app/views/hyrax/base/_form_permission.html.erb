@@ -1,0 +1,40 @@
+<% # This is used by works and by FileSet and the layout (col-6 vs col-12) is different for both %>
+<% if f.object.embargo_release_date %>
+  <%= render 'form_permission_under_embargo', f: f %>
+<% elsif f.object.lease_expiration_date %>
+  <%= render 'form_permission_under_lease', f: f %>
+<% else %>
+  <fieldset class="set-access-controls">
+    <legend>
+      <%= raw(t('.visibility')) %>
+    </legend>
+
+    <div class="form-group">
+      <label class="radio">
+        <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
+        <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC) %>
+      </label>
+      <%# OVRERIDE FROM HYRAX: to add UO and OSU visibility options and remove default institution option %>
+      <label class="radio">
+        <%= f.radio_button :visibility, 'uo' %>
+        <%= "UO" %>
+      </label>
+      <label class="radio">
+        <%= f.radio_button :visibility, 'osu' %>
+        <%= "OSU" %>
+      </label>
+      <label class="radio">
+        <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_EMBARGO %>
+        <%= render "form_permission_embargo", f: f %>
+      </label>
+      <label class="radio">
+        <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_LEASE %>
+        <%= render "form_permission_lease", f: f %>
+      </label>
+      <label class="radio">
+        <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>
+        <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE) %>
+      </label>
+    </div>
+  </fieldset>
+<% end %>

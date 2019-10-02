@@ -11,6 +11,10 @@ Metrics/AbcSize:
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
     - 'spec/support/helpers/session_helpers.rb'
 
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'app/models/concerns/hydra/access_controls/visibility.rb'
+
 Style/UnneededSort:
   Exclude:
     - 'app/forms/oregon_digital/forms/collection_form.rb'
@@ -18,6 +22,10 @@ Style/UnneededSort:
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
+
+Style/DoubleNegation:
+  Exclude:
+    - 'app/models/concerns/hydra/access_controls/visibility.rb'
 
 Style/TernaryParentheses:
   Exclude:
@@ -46,6 +54,8 @@ Metrics/MethodLength:
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
     - 'app/renderers/hyrax/renderers/rights_statement_attribute_renderer.rb'
+    - 'app/models/concerns/hydra/access_controls/visibility.rb'
+    - 'app/helpers/hyrax/ability_helper.rb'
 
 Naming/AccessorMethodName:
   Exclude:
