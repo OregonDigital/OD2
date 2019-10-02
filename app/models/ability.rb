@@ -36,10 +36,10 @@ class Ability
   end
 
   def osu_roles
-    %w[osu_affiliate osu_user]
+    %w[osu_affiliate osu_user community_affiliate]
   end
 
   def uo_roles
-    %w[uo_affiliate uo_user]
+    %w[uo_affiliate uo_user community_affiliate]
   end
 end
