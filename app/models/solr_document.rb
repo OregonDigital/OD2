@@ -5,6 +5,7 @@ class SolrDocument
   include Blacklight::Solr::Document
   include Blacklight::Gallery::OpenseadragonSolrDocument
   include Hyrax::SolrDocumentBehavior
+  include OregonDigital::SolrDocumentBehavior
 
   SolrDocument.use_extension(Blacklight::Document::Email)
   SolrDocument.use_extension(Blacklight::Document::Sms)
