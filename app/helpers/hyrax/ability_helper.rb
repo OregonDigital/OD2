@@ -4,6 +4,7 @@ module Hyrax
   # Ability Helper
   module AbilityHelper
     # OVERRIDE FROM HYRAX: to change institution visibility for embargo/lease
+    # https://github.com/samvera/hyrax/blob/v2.5.0/app/helpers/hyrax/ability_helper.rb
     def visibility_options(variant)
       options = [
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC,

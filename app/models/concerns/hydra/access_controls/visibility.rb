@@ -6,6 +6,7 @@ module Hydra::AccessControls
     extend ActiveSupport::Concern
 
     # OVERRIDE FROM HYRAX: to add OSU & UO visbility setter options
+    # https://github.com/samvera/hydra-head/blob/master/hydra-access-controls/app/models/concerns/hydra/access_controls/visibility.rb
     def visibility=(value)
       return if value.nil?
 
@@ -27,6 +28,7 @@ module Hydra::AccessControls
     end
 
     # OVERRIDE FROM HYRAX: to add OSU & UO visbility getter options
+    # https://github.com/samvera/hydra-head/blob/master/hydra-access-controls/app/models/concerns/hydra/access_controls/visibility.rb
     def visibility
       if read_groups.include? AccessRight::PERMISSION_TEXT_VALUE_PUBLIC
         AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC

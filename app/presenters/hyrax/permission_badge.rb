@@ -6,6 +6,7 @@ module Hyrax
     include ActionView::Helpers::TagHelper
 
     # OVERRIDE FROM HYRAX: to add OSU & UO visbility label classes
+    # https://github.com/samvera/hyrax/blob/master/app/presenters/hyrax/permission_badge.rb
     VISIBILITY_LABEL_CLASS = {
       authenticated: 'label-info',
       embargo: 'label-warning',
