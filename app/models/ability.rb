@@ -25,7 +25,7 @@ class Ability
     [SolrDocument, ActiveFedora::Base]
   end
 
-  def is_in_depositors_collection?(edit_access_person)
+  def in_depositors_collection?(edit_access_person)
     edit_access_person.include?(current_user.email)
   end
 

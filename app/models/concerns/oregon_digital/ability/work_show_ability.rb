@@ -13,7 +13,7 @@ module OregonDigital
           cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
 
           can :show, ActiveFedora::Base do |record|
-            show_record?(record)   
+            show_record?(record)
           end
           can :read, SolrDocument do |solr_doc|
             read_doc?(solr_doc)
