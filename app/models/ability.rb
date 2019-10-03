@@ -8,6 +8,7 @@ class Ability
   include OregonDigital::Ability::WorkEditAbility
   include OregonDigital::Ability::WorkDeleteAbility
   include OregonDigital::Ability::WorkShowAbility
+  include OregonDigital::Ability::WorkReviewAbility
 
   def custom_permissions
     can(%i[show add_user remove_user index edit update destroy], Role)
@@ -17,10 +18,15 @@ class Ability
     work_create_ability
     work_delete_ability
     work_show_ability
+    work_review_ability
   end
 
   def work_classes
     [SolrDocument, ActiveFedora::Base]
+  end
+
+  def in_depositors_collection?(edit_access_person)
+    edit_access_person.include?(current_user.email)
   end
 
   def admin_permission_roles
