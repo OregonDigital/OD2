@@ -22,7 +22,7 @@ module OregonDigital
 
         def show_record?(record)
           if record.suppressed?
-            current_user.role?(admin_permission_roles) && in_depositors_collection?(record.to_solr['edit_access_person_ssim'])
+            current_user.role?(admin_permission_roles) && in_depositors_collection?(record.edit_users)
           else
             current_user.role?(manager_permission_roles)
           end
@@ -30,7 +30,7 @@ module OregonDigital
 
         def read_doc?(solr_doc)
           if solr_doc.suppressed?
-            current_user.role?(admin_permission_roles) && in_depositors_collection?(solr_doc['edit_access_person_ssim'])
+            current_user.role?(admin_permission_roles) && in_depositors_collection?(solr_doc.edit_people)
           else
             current_user.role?(admin_permission_roles)
           end
