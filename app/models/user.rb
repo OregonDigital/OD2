@@ -19,6 +19,16 @@ class User < ApplicationRecord
     !(roles.map(&:name) & Array(role)).empty?
   end
 
+  # OVERRIDE FROM HYRAX: to map osu and uo roles to group & visibility
+  # https://github.com/samvera/hydra-head/blob/v10.6.2/hydra-access-controls/lib/hydra/user.rb
+  def groups
+    groups = super
+    groups << 'osu' unless (groups & %w[osu_affiliate osu_user community_affiliate]).empty?
+    groups << 'uo' unless (groups & %w[uo_affiliate uo_user community_affiliate]).empty?
+    groups
+  end
+  # END OVERRIDE
+
   # method needed for messaging
   def mailboxer_email(_obj = nil)
     email

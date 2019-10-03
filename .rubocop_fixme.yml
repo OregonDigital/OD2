@@ -54,6 +54,7 @@ Metrics/MethodLength:
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
     - 'app/renderers/hyrax/renderers/rights_statement_attribute_renderer.rb'
+    - 'app/indexers/generic_indexer.rb'
     - 'app/models/concerns/hydra/access_controls/visibility.rb'
     - 'app/helpers/hyrax/ability_helper.rb'
 
