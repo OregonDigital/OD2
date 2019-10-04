@@ -195,14 +195,6 @@ workflows:
           filters:
             branches:
               ignore: master
-      - build_and_push:
-          name: Build and push application image to docker image repository
-          requires:
-            - lint
-          filters:
-            branches:
-              only: master
-          repo: web
       - build_and_push_beavernetes:
           name: Build and push application image to Beavernetes image repository
           requires:
