@@ -42,22 +42,26 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(access_token)
-    email = case access_token.provider.to_s
-            when 'cas' then access_token.extra.osuprimarymail.to_s
-            when 'saml' then "#{access_token.uid}@uoregon.edu"
-            else access_token.uid
-            end
+    email = email_from_omniauth(access_token)
+    role = role_from_omniauth(access_token.provider.to_s)
     User.where(email: email).first_or_create do |user|
       user.email = email
-      user.roles << user_role(access_token.provider.to_s)
+      user.roles << role unless role.nil?
     end
   end
 
-  def user_role(provider)
+  def self.email_from_omniauth(access_token)
+    case access_token.provider.to_s
+    when 'cas' then access_token.extra.osuprimarymail.to_s
+    when 'saml' then "#{access_token.uid}@uoregon.edu"
+    else access_token.uid
+    end
+  end
+
+  def self.role_from_omniauth(provider)
     case provider
     when 'cas' then Role.find_by_name('osu_user')
     when 'saml' then Role.find_by_name('uo_user')
-    else ''
     end
   end
 end
