@@ -49,6 +49,11 @@ class User < ApplicationRecord
             end
     User.where(email: email).first_or_create do |user|
       user.email = email
+      user.roles << case access_token.provider.to_s
+                    when 'cas' then Role.find_by_name('osu_user')
+                    when 'saml' then Role.find_by_name('uo_user')
+                    else ''
+                    end
     end
   end
 end
