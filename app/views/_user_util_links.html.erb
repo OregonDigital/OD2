@@ -27,13 +27,13 @@
       <% end %>
     </li>
     <li class="osu-login">
-      <%= link_to main_app.new_osu_session_path do %>
+      <%= link_to main_app.new_osu_session_path, method: :post do %>
         <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
         <span class="university-login"><%= t("hyrax.toolbar.osu.login") %></span>
       <% end %>
     </li>
     <li class="uo-login">
-      <%= link_to main_app.new_uo_session_path do %>
+      <%= link_to main_app.new_uo_session_path, method: :post do %>
         <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
         <span class="university-login"><%= t("hyrax.toolbar.uo.login") %></span>
       <% end %>

@@ -37,6 +37,7 @@ gem 'loofah', '>= 2.2.3'
 gem 'rubyzip', '>= 1.2.2'
 
 # Login gems
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem 'omniauth-cas'
 gem 'omniauth-saml'
 
