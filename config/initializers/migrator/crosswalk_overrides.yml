@@ -34,3 +34,16 @@ overrides:
     predicate: http://purl.org/dc/terms/subject
     multiple: true
     function: attributes_data
+  - property: rights_statement
+    predicate: http://purl.org/dc/terms/rights
+    multiple: false
+    function: attributes_replaces_data
+  - property: language
+    predicate: http://purl.org/dc/terms/language
+    multiple: true
+  - property: resource_type
+    predicate: http://purl.org/dc/terms/type
+    multiple: false
+  - property: format
+    predicate: http://purl.org/dc/terms/format
+    function: return_nil
