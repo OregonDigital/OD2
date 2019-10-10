@@ -5,7 +5,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
   let!(:ability) { ::Ability.new(user) }
   let(:upload_file_path) { "#{Rails.root}/spec/fixtures/test.jpg" }
 
-  context 'Without any roles' do
+  context 'without any roles' do
     before do
       create(:permission_template_access,
              :deposit,
@@ -28,7 +28,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
     end
   end
 
-  context 'With community affiliate role' do
+  context 'with community affiliate role' do
     let(:role) { Role.new(name: 'community_affiliate') }
 
     before do
@@ -39,7 +39,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
 
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -56,7 +56,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
     end
   end
 
-  context 'With osu role' do
+  context 'with osu role' do
     let(:role) { Role.new(name: 'osu_user') }
 
     before do
@@ -67,7 +67,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
 
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -84,7 +84,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
     end
   end
 
-  context 'With uo role' do
+  context 'with uo role' do
     let(:role) { Role.new(name: 'uo_user') }
 
     before do
@@ -95,7 +95,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
 
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -112,7 +112,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
     end
   end
 
-  context 'With depositor role' do
+  context 'with depositor role' do
     let(:role) { Role.new(name: 'depositor') }
 
     before do
@@ -123,7 +123,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
 
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -176,7 +176,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
     end
   end
 
-  context 'With curation curator role' do
+  context 'with curation curator role' do
     let(:role) { Role.new(name: 'collection_curator') }
 
     before do
@@ -187,7 +187,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
 
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -240,7 +240,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
     end
   end
 
-  context 'With admin role' do
+  context 'with admin role' do
     let(:role) { Role.new(name: 'admin') }
 
     before do
@@ -251,7 +251,7 @@ RSpec.describe 'Create a work', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
 
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end

@@ -15,14 +15,6 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
   let!(:ability) { ::Ability.new(user) }
   let(:out_set) { create(:admin_set) }
   let(:in_set) { create(:admin_set) }
-  let(:out_permission_template_access) { create(:permission_template_access,
-                                                :manage,
-                                                permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
-                                                agent_type: 'user') }
-  let(:in_permission_template_access) { create(:permission_template_access,
-                                               :manage,
-                                               permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
-                                               agent_type: 'user') }
 
   before do
     public_reviewed.save!
@@ -33,9 +25,17 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     uo_unreviewed.save!
     private_reviewed.save!
     private_unreviewed.save!
+    create(:permission_template_access,
+           :manage,
+           permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
+           agent_type: 'user')
+    create(:permission_template_access,
+           :manage,
+           permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
+           agent_type: 'user')
   end
 
-  context 'As an unauthenticated user' do
+  context 'with an unauthenticated user' do
     it 'Shows reviewed public works' do
       visit hyrax_generic_path public_reviewed.id
 
@@ -69,7 +69,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
   end
 
-  context 'Without any roles' do
+  context 'without any roles' do
     before do
       sign_in_as user
     end
@@ -107,11 +107,11 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
   end
 
-  context 'With community affiliate role' do
+  context 'with community affiliate role' do
     let(:role) { Role.new(name: 'community_affiliate') }
 
     before do
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -153,11 +153,11 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
   end
 
-  context 'With osu role' do
+  context 'with osu role' do
     let(:role) { Role.new(name: 'osu_user') }
 
     before do
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -201,11 +201,11 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
   end
 
-  context 'With uo role' do
+  context 'with uo role' do
     let(:role) { Role.new(name: 'uo_user') }
 
     before do
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -249,11 +249,11 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
   end
 
-  context 'With depositor role' do
+  context 'with depositor role' do
     let(:role) { Role.new(name: 'depositor') }
 
     before do
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -283,11 +283,11 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
   end
 
-  context 'With curation curator role' do
+  context 'with curation curator role' do
     let(:role) { Role.new(name: 'depositor') }
 
     before do
-      user.roles = [ role ]
+      user.roles = [role]
       user.save
       sign_in_as user
     end
@@ -307,9 +307,13 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
 
     it 'Shows unreviewed works I can manage' do
+      visit hyrax_generic_path in_adminset.id
+      expect(page).to have_content 'in_adminset'
     end
 
     it 'Blocks unreviewed works I cannot manage' do
+      visit hyrax_generic_path out_adminset.id
+      expect(page).to have_content 'not currently available'
     end
   end
 end
