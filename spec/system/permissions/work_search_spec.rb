@@ -27,14 +27,6 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
     private_unreviewed.save!
     out_adminset.save!
     in_adminset.save!
-    create(:permission_template_access,
-           :manage,
-           permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
-           agent_type: 'user')
-    create(:permission_template_access,
-           :manage,
-           permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
-           agent_type: 'user')
   end
 
   context 'with an unauthenticated user' do
@@ -199,6 +191,14 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
     let(:role) { Role.new(name: 'depositor') }
 
     before do
+      create(:permission_template_access,
+             :deposit,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
+             agent_type: 'user')
+      create(:permission_template_access,
+             :deposit,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
+             agent_type: 'user')
       user.roles = [role]
       user.save
       sign_in_as user
@@ -223,10 +223,18 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
     end
   end
 
-  context 'with curation curator role' do
-    let(:role) { Role.new(name: 'depositor') }
+  context 'with collection curator role' do
+    let(:role) { Role.new(name: 'collection') }
 
     before do
+      create(:permission_template_access,
+             :manage,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
+             agent_type: 'user')
+      create(:permission_template_access,
+             :manage,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
+             agent_type: 'user')
       user.roles = [role]
       user.save
       sign_in_as user
@@ -248,6 +256,30 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
     it 'Does not search unreviewed works I cannot manage' do
       visit search_catalog_path
       expect(page).not_to have_content 'out_adminset'
+    end
+  end
+
+  context 'with admin role' do
+    let(:role) { Role.new(name: 'admin') }
+
+    before do
+      user.roles = [role]
+      user.save
+      sign_in_as user
+    end
+
+    it 'Searches all works' do
+      visit search_catalog_path
+      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'public_unreviewed'
+      expect(page).to have_content 'osu_reviewed'
+      expect(page).to have_content 'osu_unreviewed'
+      expect(page).to have_content 'uo_reviewed'
+      expect(page).to have_content 'uo_unreviewed'
+      expect(page).to have_content 'private_reviewed'
+      expect(page).to have_content 'private_unreviewed'
+      expect(page).to have_content 'in_adminset'
+      expect(page).to have_content 'out_adminset'
     end
   end
 end

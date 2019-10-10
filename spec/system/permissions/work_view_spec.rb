@@ -27,14 +27,6 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     private_unreviewed.save!
     out_adminset.save!
     in_adminset.save!
-    create(:permission_template_access,
-           :manage,
-           permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
-           agent_type: 'user')
-    create(:permission_template_access,
-           :manage,
-           permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
-           agent_type: 'user')
   end
 
   context 'with an unauthenticated user' do
@@ -255,6 +247,14 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     let(:role) { Role.new(name: 'depositor') }
 
     before do
+      create(:permission_template_access,
+             :deposit,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
+             agent_type: 'user')
+      create(:permission_template_access,
+             :deposit,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
+             agent_type: 'user')
       user.roles = [role]
       user.save
       sign_in_as user
@@ -285,10 +285,18 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     end
   end
 
-  context 'with curation curator role' do
-    let(:role) { Role.new(name: 'depositor') }
+  context 'with collection curator role' do
+    let(:role) { Role.new(name: 'collection_curator') }
 
     before do
+      create(:permission_template_access,
+             :manage,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
+             agent_type: 'user')
+      create(:permission_template_access,
+             :manage,
+             permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
+             agent_type: 'user')
       user.roles = [role]
       user.save
       sign_in_as user
@@ -316,6 +324,42 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     it 'Blocks unreviewed works I cannot manage' do
       visit hyrax_generic_path out_adminset.id
       expect(page).to have_content 'not currently available'
+    end
+  end
+
+  context 'with admin role' do
+    let(:role) { Role.new(name: 'admin') }
+
+    before do
+      user.roles = [role]
+      user.save
+      sign_in_as user
+    end
+
+    it 'Shows all works' do
+      visit hyrax_generic_path public_reviewed.id
+      expect(page).to have_content 'public_reviewed'
+
+      visit hyrax_generic_path public_unreviewed.id
+      expect(page).to have_content 'public_unreviewed'
+
+      visit hyrax_generic_path osu_reviewed.id
+      expect(page).to have_content 'osu_reviewed'
+
+      visit hyrax_generic_path osu_unreviewed.id
+      expect(page).to have_content 'osu_unreviewed'
+
+      visit hyrax_generic_path uo_reviewed.id
+      expect(page).to have_content 'uo_reviewed'
+
+      visit hyrax_generic_path uo_unreviewed.id
+      expect(page).to have_content 'uo_unreviewed'
+
+      visit hyrax_generic_path private_reviewed.id
+      expect(page).to have_content 'private_reviewed'
+
+      visit hyrax_generic_path private_unreviewed.id
+      expect(page).to have_content 'private_unreviewed'
     end
   end
 end
