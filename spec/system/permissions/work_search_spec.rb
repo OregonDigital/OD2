@@ -9,12 +9,8 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
   let(:uo_unreviewed) { create(:work, title: ['uo_unreviewed'], depositor: 'foo@bar.baz', id: 6, visibility: 'uo', state: Vocab::FedoraResourceStatus.inactive) }
   let(:private_reviewed) { create(:work, title: ['private_reviewed'], depositor: 'foo@bar.baz', id: 7, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, state: Vocab::FedoraResourceStatus.active) }
   let(:private_unreviewed) { create(:work, title: ['private_unreviewed'], depositor: 'foo@bar.baz', id: 8, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, state: Vocab::FedoraResourceStatus.inactive) }
-  let(:out_adminset) { create(:work, title: ['out_adminset'], depositor: 'foo@bar.baz', id: 9, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, state: Vocab::FedoraResourceStatus.inactive, admin_set_id: out_set.id) }
-  let(:in_adminset) { create(:work, title: ['in_adminset'], depositor: 'foo@bar.baz', id: 10, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, state: Vocab::FedoraResourceStatus.inactive, admin_set_id: in_set.id) }
   let(:user) { create(:user) }
   let!(:ability) { ::Ability.new(user) }
-  let(:out_set) { create(:admin_set) }
-  let(:in_set) { create(:admin_set) }
 
   before do
     public_reviewed.save!
@@ -25,8 +21,6 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
     uo_unreviewed.save!
     private_reviewed.save!
     private_unreviewed.save!
-    out_adminset.save!
-    in_adminset.save!
   end
 
   context 'with an unauthenticated user' do
@@ -191,14 +185,6 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
     let(:role) { Role.new(name: 'depositor') }
 
     before do
-      create(:permission_template_access,
-             :deposit,
-             permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
-             agent_type: 'user')
-      create(:permission_template_access,
-             :deposit,
-             permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
-             agent_type: 'user')
       user.roles = [role]
       user.save
       sign_in_as user
@@ -212,29 +198,19 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
       expect(page).to have_content 'private_reviewed'
     end
 
-    it 'Searches unreviewed works I can deposit into' do
+    it 'Does not search unreviewed works' do
       visit search_catalog_path
-      expect(page).to have_content 'in_adminset'
-    end
-
-    it 'Does not search unreviewed works I cannot deposit into' do
-      visit search_catalog_path
-      expect(page).not_to have_content 'out_adminset'
+      expect(page).not_to have_content 'public_unreviewed'
+      expect(page).not_to have_content 'osu_unreviewed'
+      expect(page).not_to have_content 'uo_unreviewed'
+      expect(page).not_to have_content 'private_unreviewed'
     end
   end
 
   context 'with collection curator role' do
-    let(:role) { Role.new(name: 'collection') }
+    let(:role) { Role.new(name: 'collection_curator') }
 
     before do
-      create(:permission_template_access,
-             :manage,
-             permission_template: create(:permission_template, with_admin_set: true, source_id: out_set.id, with_active_workflow: true),
-             agent_type: 'user')
-      create(:permission_template_access,
-             :manage,
-             permission_template: create(:permission_template, with_admin_set: true, source_id: in_set.id, with_active_workflow: true),
-             agent_type: 'user')
       user.roles = [role]
       user.save
       sign_in_as user
@@ -248,14 +224,12 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
       expect(page).to have_content 'private_reviewed'
     end
 
-    it 'Searches unreviewed works I can manage' do
+    it 'Does not search unreviewed works' do
       visit search_catalog_path
-      expect(page).to have_content 'in_adminset'
-    end
-
-    it 'Does not search unreviewed works I cannot manage' do
-      visit search_catalog_path
-      expect(page).not_to have_content 'out_adminset'
+      expect(page).not_to have_content 'public_unreviewed'
+      expect(page).not_to have_content 'osu_unreviewed'
+      expect(page).not_to have_content 'uo_unreviewed'
+      expect(page).not_to have_content 'private_unreviewed'
     end
   end
 
@@ -268,18 +242,20 @@ RSpec.describe 'Search various works', js: true, type: :system, clean_repo: true
       sign_in_as user
     end
 
-    it 'Searches all works' do
+    it 'Searches reviewed works' do
       visit search_catalog_path
       expect(page).to have_content 'public_reviewed'
-      expect(page).to have_content 'public_unreviewed'
       expect(page).to have_content 'osu_reviewed'
-      expect(page).to have_content 'osu_unreviewed'
       expect(page).to have_content 'uo_reviewed'
-      expect(page).to have_content 'uo_unreviewed'
       expect(page).to have_content 'private_reviewed'
-      expect(page).to have_content 'private_unreviewed'
-      expect(page).to have_content 'in_adminset'
-      expect(page).to have_content 'out_adminset'
+    end
+
+    it 'Does not search unreviewed works' do
+      visit search_catalog_path
+      expect(page).not_to have_content 'public_unreviewed'
+      expect(page).not_to have_content 'osu_unreviewed'
+      expect(page).not_to have_content 'uo_unreviewed'
+      expect(page).not_to have_content 'private_unreviewed'
     end
   end
 end
