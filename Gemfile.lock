@@ -854,6 +854,8 @@ GEM
       rack (>= 2.0.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
+    sidekiq-limit_fetch (3.4.0)
+      sidekiq (>= 4)
     signet (0.11.0)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -1001,6 +1003,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers!
   sidekiq
+  sidekiq-limit_fetch
   simplecov (>= 0.9)
   triplestore-adapter!
   tzinfo-data

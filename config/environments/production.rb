@@ -112,4 +112,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Sidekiq queue with limited workers not needed for production
+  config.slow_queue: = :default
 end

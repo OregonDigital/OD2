@@ -68,6 +68,7 @@ group :development, :test do
   gem 'rubocop-rspec'
   gem 'ruby-debug-ide'
   gem 'selenium-webdriver'
+  gem 'sidekiq-limit_fetch'
   gem 'webmock'
 end
 

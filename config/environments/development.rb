@@ -67,4 +67,7 @@ Rails.application.configure do
 
   # Whitelist docker containers for webconsole during development
   config.web_console.whitelisted_ips = ['172.0.0.0/8', '192.0.0.0/8']
+
+  # Sidekiq queue with limited workers
+  config.slow_queue = :slow_queue
 end

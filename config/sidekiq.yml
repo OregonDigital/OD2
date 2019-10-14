@@ -7,3 +7,8 @@ production:
 :queues:
   - default
   - hyrax_migrator
+  - slow_queue
+:limits:
+  default: 5
+  hyrax_migrator: 5
+  slow_queue: 1
