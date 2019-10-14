@@ -1,0 +1,29 @@
+<h2><%= t('role-management.edit.title') %></h2>
+<%= bootstrap_form_for @role, :url=>role_management.role_path(@role) do |f| %>
+  <%= f.text_field :name, :label=> t('role-management.edit.field_name') %>
+  <%= f.submit t('role-management.edit.update'), class: 'btn btn-primary' %>
+<% end %>
+<h3><%= t('role-management.edit.accounts') %></h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th> User </th>
+      <th> Action </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @role.users.each do |user| %>
+    <tr>
+      <td><%= user.user_key %></td>
+      <% if can? :remove_user, Role %>
+        <td><%= button_to t('role-management.edit.remove'), role_management.role_user_path(@role, user.id), :method=>:delete, :class=>'btn btn-danger' %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<h3><%= t('role-management.edit.add_new_account') %></h3>
+<%= bootstrap_form_tag :url=> role_management.role_users_path(@role) do |f| %>
+  <%= f.text_field 'user_key', :label=>t('role-management.edit.user') %>
+  <%= f.submit t('role-management.edit.add') %>
+  <%= link_to t('role-management.edit.cancel'), role_management.roles_path, :class => 'btn btn-default' %>
+<% end %>
