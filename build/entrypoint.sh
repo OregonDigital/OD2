@@ -5,13 +5,13 @@ echo "Building ${RAILS_ENV}"
 rm -f tmp/pids/puma.pid
 ./build/install_gems.sh
 
-# Create default roles
-bundle exec rails oregon_digital:create_roles
-
 # Do not auto-migrate for production environment
 if [ "${RAILS_ENV}" != 'production' ]; then
   ./build/validate_migrated.sh
 fi
+
+# Create default roles
+bundle exec rails oregon_digital:create_roles
 
 # Submit a marker to honeycomb marking the time the application starts booting
 if [ "${RAILS_ENV}" = 'production' ]; then
