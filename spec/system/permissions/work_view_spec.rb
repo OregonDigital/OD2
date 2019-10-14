@@ -33,7 +33,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     it 'Shows reviewed public works' do
       visit hyrax_generic_path public_reviewed.id
 
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Blocks unreviewed public works' do
@@ -71,7 +71,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     it 'Shows reviewed public works' do
       visit hyrax_generic_path public_reviewed.id
 
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'blocks unreviewed public works' do
@@ -113,7 +113,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     it 'Shows reviewed public works' do
       visit hyrax_generic_path public_reviewed.id
 
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'blocks unreviewed public works' do
@@ -124,10 +124,10 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
 
     it 'Shows reviewed OSU and UO works' do
       visit hyrax_generic_path osu_reviewed.id
-      expect(page).to have_content 'osu_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path uo_reviewed.id
-      expect(page).to have_content 'uo_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Blocks unreviewed works' do
@@ -159,7 +159,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     it 'Shows reviewed public works' do
       visit hyrax_generic_path public_reviewed.id
 
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'blocks unreviewed public works' do
@@ -170,7 +170,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
 
     it 'Shows reviewed OSU works' do
       visit hyrax_generic_path osu_reviewed.id
-      expect(page).to have_content 'osu_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Blocks UO works' do
@@ -207,7 +207,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
     it 'Shows reviewed public works' do
       visit hyrax_generic_path public_reviewed.id
 
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'blocks unreviewed public works' do
@@ -218,7 +218,7 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
 
     it 'Shows reviewed UO works' do
       visit hyrax_generic_path uo_reviewed.id
-      expect(page).to have_content 'uo_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Blocks OSU works' do
@@ -262,21 +262,21 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
 
     it 'Shows reviewed works' do
       visit hyrax_generic_path public_reviewed.id
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path osu_reviewed.id
-      expect(page).to have_content 'osu_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path uo_reviewed.id
-      expect(page).to have_content 'uo_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path private_reviewed.id
-      expect(page).to have_content 'private_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Shows unreviewed works I can deposit into' do
       visit hyrax_generic_path in_adminset.id
-      expect(page).to have_content 'in_adminset'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Blocks unreviewed works I cannot deposit into' do
@@ -304,21 +304,21 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
 
     it 'Shows reviewed works' do
       visit hyrax_generic_path public_reviewed.id
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path osu_reviewed.id
-      expect(page).to have_content 'osu_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path uo_reviewed.id
-      expect(page).to have_content 'uo_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path private_reviewed.id
-      expect(page).to have_content 'private_reviewed'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Shows unreviewed works I can manage' do
       visit hyrax_generic_path in_adminset.id
-      expect(page).to have_content 'in_adminset'
+      expect(page).to have_content 'MLA Citation'
     end
 
     it 'Blocks unreviewed works I cannot manage' do
@@ -338,28 +338,28 @@ RSpec.describe 'View various works', js: true, type: :system, clean_repo: true d
 
     it 'Shows all works' do
       visit hyrax_generic_path public_reviewed.id
-      expect(page).to have_content 'public_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path public_unreviewed.id
-      expect(page).to have_content 'public_unreviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path osu_reviewed.id
-      expect(page).to have_content 'osu_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path osu_unreviewed.id
-      expect(page).to have_content 'osu_unreviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path uo_reviewed.id
-      expect(page).to have_content 'uo_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path uo_unreviewed.id
-      expect(page).to have_content 'uo_unreviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path private_reviewed.id
-      expect(page).to have_content 'private_reviewed'
+      expect(page).to have_content 'MLA Citation'
 
       visit hyrax_generic_path private_unreviewed.id
-      expect(page).to have_content 'private_unreviewed'
+      expect(page).to have_content 'MLA Citation'
     end
   end
 end
