@@ -114,5 +114,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Sidekiq queue with limited workers not needed for production
-  config.slow_queue: = :default
+  config.slow_queue = :default
 end
