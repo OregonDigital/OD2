@@ -13,12 +13,8 @@ echo "Loading workflow stuff..."
 bundle exec rails hyrax:workflow:load
 
 echo
-echo "Creating the admin role"
-bundle exec rails runner "Role.create(name: 'admin')"
-
-echo
 echo "Creating a default admin user"
-bundle exec rails runner 'User.create(email: "admin@example.org", encrypted_password: "$2a$11$AzzYy9sCWJh6JCKu0qjvdeiSDp0e6DS2rdTOtDEHV2UZw/cQ0ltnG", preferred_locale: "en", roles: [Role.last])'
+bundle exec rails runner 'User.create(email: "admin@example.org", encrypted_password: "$2a$11$AzzYy9sCWJh6JCKu0qjvdeiSDp0e6DS2rdTOtDEHV2UZw/cQ0ltnG", preferred_locale: "en", roles: [Role.find_by_name("admin")])'
 
 echo
 echo "Creating Oregon Digital admin sets"
