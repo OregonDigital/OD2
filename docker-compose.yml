@@ -193,7 +193,7 @@ services:
   ##
   # SOLR Index server
   solr: &solr
-    image: solr:6-alpine
+    image: solr:8.3-slim
     expose:
       - 8983
     networks:
@@ -202,7 +202,7 @@ services:
     <<: *solr
     volumes:
       - ./config/solr/config:/opt/solr/od2_conf
-      - solr:/opt/solr/server/solr/mycores
+      - solr:/var/solr/data
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
