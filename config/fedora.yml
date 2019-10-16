@@ -1,7 +1,7 @@
 default: &default
   user: fedoraAdmin
   password: fedoraAdmin
-  url: <%= ENV['FEDORA_URL'] %>
+  url: <%= ENV.fetch('FEDORA_URL') %>
 test:
   <<: *default
   base_path: /test
