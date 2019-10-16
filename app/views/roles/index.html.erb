@@ -1,0 +1,21 @@
+<h1><%= t('role-management.index.title') %></h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"> Role </th>
+      <th scope="col"> Action </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <th scope="row"><%= role.name %></td>
+        <td><%= link_to "Manage", role_management.role_path(role), class: 'btn btn-primary' %></td>
+      </tr>
+    <% end %>
+  <tbody>
+</table>
+
+<% if can? :create, Role %>
+  <%= button_to t('role-management.index.create'), role_management.new_role_path, method: :get, class: 'btn btn-primary' %>
+<% end %>
