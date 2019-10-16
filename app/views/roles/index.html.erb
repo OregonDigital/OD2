@@ -1,16 +1,16 @@
-<h2><%= t('role-management.index.title') %></h2>
+<h1><%= t('role-management.index.title') %></h1>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th> Role </th>
-      <th> Action </th>
+      <th scope="col"> Role </th>
+      <th scope="col"> Action </th>
     </tr>
   </thead>
   <tbody>
     <% @roles.each do |role| %>
       <tr>
-        <td><%= role.name %></td>
-        <td><%= link_to "Manage #{role.name.gsub("_"," ").capitalize} Role", role_management.role_path(role), class: 'btn btn-primary' %></td>
+        <th scope="row"><%= role.name %></td>
+        <td><%= link_to "Manage", role_management.role_path(role), class: 'btn btn-primary' %></td>
       </tr>
     <% end %>
   <tbody>
