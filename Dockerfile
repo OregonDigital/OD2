@@ -43,6 +43,7 @@ FROM builder
 
 ARG DEPLOYED_VERSION=development
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
+USER 8083:8083
 
 RUN if [ "${RAILS_ENV}" = "production" ]; then \
   echo "Precompiling assets with $RAILS_ENV environment"; \
