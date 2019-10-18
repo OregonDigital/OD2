@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 75ab66ce89cafe6796207ae9168ddfdcda171a47
+  revision: 3bf6479f04c70ef9b88c6b53cf924c42984bf7b8
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -174,8 +174,8 @@ GEM
     awesome_nested_set (3.1.4)
       activerecord (>= 4.0.0, < 5.3)
     aws-eventstream (1.0.3)
-    aws-partitions (1.221.0)
-    aws-sdk-core (3.68.1)
+    aws-partitions (1.225.0)
+    aws-sdk-core (3.69.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.1)
@@ -183,7 +183,7 @@ GEM
     aws-sdk-kms (1.24.0)
       aws-sdk-core (~> 3, >= 3.61.1)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.48.0)
+    aws-sdk-s3 (1.50.0)
       aws-sdk-core (~> 3, >= 3.61.1)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -289,7 +289,7 @@ GEM
       tins (~> 1.6)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    crass (1.0.4)
+    crass (1.0.5)
     database_cleaner (1.7.0)
     debase (0.2.3)
       debase-ruby_core_source (>= 0.10.2)
@@ -849,7 +849,7 @@ GEM
       rdf-xsd (>= 2.2, < 4.0)
       sparql (>= 2.2, < 4.0)
       sxp (~> 1.0)
-    sidekiq (6.0.1)
+    sidekiq (6.0.2)
       connection_pool (>= 2.2.2)
       rack (>= 2.0.0)
       rack-protection (>= 2.0.0)
