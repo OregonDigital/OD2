@@ -63,6 +63,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
+    config.add_index_field solr_name('location_label', :stored_searchable), itemprop: 'location'
     config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link, truncate: { list: 20, gallery: 10 }, max_values: 1
     config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable), if: false
 
@@ -200,6 +201,23 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
 
+    # Type and Language is an edge case that is controlled by not as a typical ControlledVocabulary
+    config.add_search_field('type_label') do |field|
+      solr_name = solr_name('type_label', :stored_searchable)
+      search_fields << solr_name('type_label', :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+    config.add_search_field('language_label') do |field|
+      solr_name = solr_name('language_label', :stored_searchable)
+      search_fields << solr_name('language_label', :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       all_names = search_fields.join(' ')
       title_name = solr_name('title', :stored_searchable)

@@ -62,7 +62,9 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :contents, basic_searchable: false, showable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents')
+      property :contents, basic_searchable: false, showable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents') do |index|
+        index.as :stored_searchable
+      end
 
       property :cover_description, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/coverDescription') do |index|
         index.as :stored_searchable
@@ -144,7 +146,9 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :state_or_edition, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_stateEdition')
+      property :state_or_edition, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_stateEdition') do |index|
+        index.as :stored_searchable
+      end
 
       property :tribal_classes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalClasses') do |index|
         index.as :stored_searchable
@@ -247,15 +251,21 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :extent, basic_searchable: false, predicate: ::RDF::Vocab::DC.extent
+      property :extent, basic_searchable: false, predicate: ::RDF::Vocab::DC.extent do |index|
+        index.as :stored_searchable
+      end
 
       property :material, predicate: ::RDF::URI.new('http://purl.org/vra/material') do |index|
         index.as :stored_searchable
       end
 
-      property :measurements, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_measurements')
+      property :measurements, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/vra_measurements') do |index|
+        index.as :stored_searchable
+      end
 
-      property :physical_extent, basic_searchable: false, predicate: ::RDF::Vocab::MODS.physicalExtent
+      property :physical_extent, basic_searchable: false, predicate: ::RDF::Vocab::MODS.physicalExtent do |index|
+        index.as :stored_searchable
+      end
 
       property :technique, predicate: ::RDF::URI.new('http://purl.org/vra/hasTechnique') do |index|
         index.as :stored_searchable
@@ -359,7 +369,9 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :use_restrictions, basic_searchable: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60497')
+      property :use_restrictions, basic_searchable: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/u/P60497') do |index|
+        index.as :stored_searchable
+      end
 
       property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: false do |index|
         index.as :stored_searchable
