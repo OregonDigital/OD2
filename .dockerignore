@@ -8,6 +8,8 @@ node_modules/*
 coverage/*
 Dockerfile
 README.rdoc
+backup/*
+/seeddata
 
 fits.log
 .byebug_history
