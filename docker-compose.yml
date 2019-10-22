@@ -120,6 +120,7 @@ services:
       - HONEYCOMB_SERVICE=od2
       - HONEYCOMB_WRITEKEY=buzzzzzzzzzzzzzzzz
       - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
+      - HOME=/data
       - RAILS_CACHE_STORE_URL=memcache
       - RAILS_ENV=test
       - RAILS_LOG_TO_STDOUT=true

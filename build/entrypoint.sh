@@ -1,6 +1,8 @@
 #!/bin/sh
 
 echo "Building ${RAILS_ENV}"
+sudo chown -R app:app /data/log
+sudo chown -R app:app /usr/local/bundle
 
 rm -f tmp/pids/puma.pid
 ./build/install_gems.sh
