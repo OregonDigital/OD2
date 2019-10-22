@@ -20,4 +20,3 @@ fi
 
 mkdir -p /data/tmp/pids
 bundle exec puma --pidfile /data/tmp/pids/puma.pid
-tail -f log/development.log
