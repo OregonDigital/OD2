@@ -7,6 +7,7 @@ class Ability
   include OregonDigital::Ability::WorkCreateAbility
   include OregonDigital::Ability::WorkEditAbility
   include OregonDigital::Ability::WorkDeleteAbility
+  include OregonDigital::Ability::WorkDownloadAbility
   include OregonDigital::Ability::WorkShowAbility
   include OregonDigital::Ability::WorkReviewAbility
   include OregonDigital::Ability::CollectionAbility
@@ -18,6 +19,7 @@ class Ability
     work_edit_ability
     work_create_ability
     work_delete_ability
+    work_download_ability
     work_show_ability
     work_review_ability
     collection_ability
