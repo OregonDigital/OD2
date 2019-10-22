@@ -17,3 +17,7 @@ bundle exec rails oregon_digital:create_roles
 if [ "${RAILS_ENV}" = 'production' ]; then
   curl https://api.honeycomb.io/1/markers/od2-rails-${RAILS_ENV} -X POST -H "X-Honeycomb-Team: ${HONEYCOMB_WRITEKEY}" -d "{\"message\":\"${RAILS_ENV} - ${DEPLOYED_VERSION} - booting\", \"type\":\"deploy\"}"
 fi
+
+mkdir -p /data/tmp/pids
+bundle exec puma --pidfile /data/tmp/pids/puma.pid
+tail -f log/development.log

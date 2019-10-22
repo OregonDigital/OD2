@@ -21,23 +21,36 @@ RUN mkdir -p /opt/fits && \
   curl -fSL -o /opt/fits-1.0.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip && \
   cd /opt && unzip fits-1.0.5.zip && chmod +X fits-1.0.5/fits.sh
 
-RUN mkdir /data
-WORKDIR /data
+ARG UID=8083
+ARG GID=8083
+
+# Create an app user so our program doesn't run as root.
+RUN groupadd -r --gid "$GID" app && useradd -d /data -r --gid "$GID" --uid "$UID" app
+
+# Make sure the new user has complete control over all code, including
+# bundler's installed assets
+RUN mkdir -p /usr/local/bundle
+RUN chown -R app:app /usr/local/bundle
 
 # Pre-install gems so we aren't reinstalling all the gems when literally any
 # filesystem change happens
-ADD Gemfile /data
-ADD Gemfile.lock /data
-RUN mkdir /data/build
+RUN mkdir -p /data/build
+RUN chown -R app:app /data
+WORKDIR /data
+COPY --chown=app:app Gemfile /data
+COPY --chown=app:app Gemfile.lock /data
+COPY --chown=app:app build/install_gems.sh /data/build
+USER app
+RUN /data/build/install_gems.sh
+
+# Create an app user so our program doesn't run as root.
+
+# Add the rest of the code
+COPY --chown=app:app . /data
 
 ARG RAILS_ENV=development
 ENV RAILS_ENV=${RAILS_ENV}
 
-ADD ./build/install_gems.sh /data/build
-RUN ./build/install_gems.sh
-
-# Add the application code
-ADD . /data
 
 FROM builder
 
@@ -51,8 +64,3 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
   cp public/assets/404-*.html public/404.html; \
   cp public/assets/500-*.html public/500.html; \
   fi
-
-ARG UID=8083
-ARG GID=8083
-
-USER $UID:$GID

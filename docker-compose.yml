@@ -82,10 +82,7 @@ services:
       - 3000
   server:
     <<: *dev
-    command: >
-      bash -c "./build/entrypoint.sh &&
-      bundle exec puma -C config/puma/development.rb --dir /data --pidfile /data/tmp/pids/puma.pid -b tcp://0.0.0.0:3000 &&
-      tail -f log/development.log"
+    entrypoint: /data/build/entrypoint.sh
   workers:
     <<: *dev
     command: bash -c "./build/install_gems.sh && bundle exec sidekiq"
