@@ -3,11 +3,11 @@
 echo "Building ${RAILS_ENV}"
 
 rm -f tmp/pids/puma.pid
-./build/install_gems.sh
 
-# Do not auto-migrate for production environment
+# Do not auto-migrate or reinstall gems for production environment
 if [ "${RAILS_ENV}" != 'production' ]; then
   ./build/validate_migrated.sh
+  ./build/install_gems.sh
 fi
 
 # Create default roles
