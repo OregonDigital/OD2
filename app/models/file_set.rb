@@ -3,4 +3,5 @@
 # Sets the expected behaviors for file sets
 class FileSet < ActiveFedora::Base
   include ::Hyrax::FileSetBehavior
+  include OregonDigital::AccessControls::Visibility
 end
