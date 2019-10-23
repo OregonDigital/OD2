@@ -9,15 +9,15 @@ module OregonDigital::AccessControls
       return if value.nil?
 
       case value
-      when AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+      when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
         public_visibility!
-      when AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
+      when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
         registered_visibility!
       when 'osu'
         osu_visibility!
       when 'uo'
         uo_visibility!
-      when AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
+      when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
         private_visibility!
       else
         raise ArgumentError, "Invalid visibility: #{value.inspect}"
@@ -25,16 +25,16 @@ module OregonDigital::AccessControls
     end
 
     def visibility
-      if read_groups.include? AccessRight::PERMISSION_TEXT_VALUE_PUBLIC
-        AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
-      elsif read_groups.include? AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED
-        AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
+      if read_groups.include? Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_PUBLIC
+        Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
+      elsif read_groups.include? Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED
+        Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
       elsif read_groups.include? 'osu'
         'osu'
       elsif read_groups.include? 'uo'
         'uo'
       else
-        AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
+        Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
       end
     end
 
@@ -45,8 +45,8 @@ module OregonDigital::AccessControls
     private
 
     def represented_visibility
-      [AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED,
-       AccessRight::PERMISSION_TEXT_VALUE_PUBLIC,
+      [Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED,
+       Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_PUBLIC,
        'osu',
        'uo']
     end

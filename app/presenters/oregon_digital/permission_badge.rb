@@ -14,5 +14,11 @@ module OregonDigital
       open: 'label-success',
       restricted: 'label-danger'
     }.freeze
+
+    private
+
+      def dom_label_class
+        VISIBILITY_LABEL_CLASS.fetch(@visibility.to_sym)
+      end
   end
 end
