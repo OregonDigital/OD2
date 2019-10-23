@@ -43,8 +43,6 @@ COPY --chown=app:app build/install_gems.sh /data/build
 USER app
 RUN /data/build/install_gems.sh
 
-# Create an app user so our program doesn't run as root.
-
 # Add the rest of the code
 COPY --chown=app:app . /data
 
