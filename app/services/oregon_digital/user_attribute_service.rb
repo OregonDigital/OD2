@@ -17,9 +17,9 @@ module OregonDigital
 
     def domain_hash
       {
-        oregonstate: @rails_paths.new_osu_session_path.to_s,
-        orst: @rails_paths.new_osu_session_path.to_s,
-        uoregon: @rails_paths.new_uo_session_path.to_s
+        oregonstate: @rails_paths.new_user_registration_path.to_s,
+        orst: @rails_paths.new_user_registration_path.to_s,
+        uoregon: @rails_paths.new_user_registration_path.to_s
       }.with_indifferent_access
     end
   end

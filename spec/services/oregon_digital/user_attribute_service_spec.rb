@@ -13,12 +13,12 @@ RSpec.describe OregonDigital::UserAttributeService do
   context 'when osu email' do
     let(:email) { 'blah@oregonstate.edu' }
 
-    it { expect(service.email_redirect_path).to eq router.new_osu_session_path.to_s }
+    it { expect(service.email_redirect_path).to eq router.new_user_registration_path.to_s }
   end
 
   context 'when uo email' do
     let(:email) { 'blah@uoregon.edu' }
 
-    it { expect(service.email_redirect_path).to eq router.new_uo_session_path.to_s }
+    it { expect(service.email_redirect_path).to eq router.new_user_registration_path.to_s }
   end
 end
