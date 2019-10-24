@@ -1,3 +1,4 @@
+# frozen_string_literal:true
 
 Hyrax::AbilityHelper.module_eval do
   # OVERRIDE for adding visibility options for badges
