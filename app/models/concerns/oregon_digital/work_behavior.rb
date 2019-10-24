@@ -4,6 +4,7 @@ module OregonDigital
   # Sets base behaviors for all works
   module WorkBehavior
     extend ActiveSupport::Concern
+    include OregonDigital::AccessControls::Visibility
 
     included do
       attr_writer :graph_fetch_failures

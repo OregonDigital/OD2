@@ -19,6 +19,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      # These values are invalid on purpose so devs are forced to set their uid and gid
+      args:
+        UID: 0
+        GID: 0
     volumes:
       - .:/data # mount current directory into the image
       - bundled:/usr/local/bundle
