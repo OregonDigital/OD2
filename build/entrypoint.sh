@@ -3,11 +3,11 @@
 echo "Building ${RAILS_ENV}"
 
 rm -f tmp/pids/puma.pid
-./build/install_gems.sh
 
-# Do not auto-migrate for production environment
+# Do not auto-migrate or reinstall gems for production environment
 if [ "${RAILS_ENV}" != 'production' ]; then
   ./build/validate_migrated.sh
+  ./build/install_gems.sh
 fi
 
 # Create default roles
@@ -17,3 +17,6 @@ bundle exec rails oregon_digital:create_roles
 if [ "${RAILS_ENV}" = 'production' ]; then
   curl https://api.honeycomb.io/1/markers/od2-rails-${RAILS_ENV} -X POST -H "X-Honeycomb-Team: ${HONEYCOMB_WRITEKEY}" -d "{\"message\":\"${RAILS_ENV} - ${DEPLOYED_VERSION} - booting\", \"type\":\"deploy\"}"
 fi
+
+mkdir -p /data/tmp/pids
+bundle exec puma --pidfile /data/tmp/pids/puma.pid
