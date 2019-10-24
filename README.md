@@ -23,11 +23,17 @@ copy the included `.env.example` to `.env` and override these things if desired.
 
 ## Docker Compose basics
 
-### Build the base application container
+### Build the base application image
 
-**Important:** Rebuilding the docker container is required whenever Gemfile or Dockerfile updates affect the application.
+Build the app image *with your user id*, otherwise permissions will not work
+for development!  1000 is *my* id, but may not be yours.
 
-`$ docker-compose build`
+```bash
+docker-compose build --build-arg UID=1000 --build-arg GID=1000 server workers app test dev
+```
+
+Rebuilding the image should (usually) not be necessary unless you're changing
+the `Dockerfile` or suspect a bad cached build.
 
 # Getting Started
 
@@ -69,7 +75,7 @@ Manual
 
 Or to run the commands manually:
 
-    docker-compose run server bash
+    docker-compose run --entrypoint=bash server
     # ... wait for a shell session to start ...
     bundle exec rails hyrax:default_admin_set:create
     bundle exec rails hyrax:default_collection_types:create
