@@ -41,15 +41,11 @@ class Ability
     admin_permission_roles << 'depositor'
   end
 
-  def community_roles
-    %w[community_affiliate]
-  end
-
   def osu_roles
-    %w[osu_affiliate osu_user community_affiliate]
+    %w[osu_affiliate osu_user]
   end
 
   def uo_roles
-    %w[uo_affiliate uo_user community_affiliate]
+    %w[uo_affiliate uo_user]
   end
 end
