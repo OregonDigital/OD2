@@ -38,10 +38,6 @@ module OregonDigital::AccessControls
       end
     end
 
-    def visibility_changed?
-      !!@visibility_will_change
-    end
-
     private
 
     def represented_visibility

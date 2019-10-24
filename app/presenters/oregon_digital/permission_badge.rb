@@ -17,8 +17,8 @@ module OregonDigital
 
     private
 
-      def dom_label_class
-        VISIBILITY_LABEL_CLASS.fetch(@visibility.to_sym)
-      end
+    def dom_label_class
+      VISIBILITY_LABEL_CLASS.fetch(@visibility.to_sym)
+    end
   end
 end
