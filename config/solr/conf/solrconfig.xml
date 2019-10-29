@@ -20,6 +20,12 @@
      For more details about configurations options that may appear in
      this file, see http://wiki.apache.org/solr/SolrConfigXml.
 -->
+
+<!--
+  This is OD's Solr 8.2 configuration.  It was built by going line-by-line
+  looking at the default 8.2 configuration and figuring out what base Hyrax
+  configs were needed.
+-->
 <config>
   <!-- In all configuration below, a prefix of "solr." for class names
        is an alias that causes solr to search appropriate packages,
@@ -72,18 +78,12 @@
        The examples below can be used to load some solr-contribs along
        with their external dependencies.
     -->
+
+  <!-- Grab all the solr-contribs we need for OD -->
+  <lib dir="${solr.install.dir:../../../..}/contrib/analysis-extras/lib" />
+  <lib dir="${solr.install.dir:../../../..}/contrib/analysis-extras/lucene-libs" />
   <lib dir="${solr.install.dir:../../../..}/contrib/extraction/lib" regex=".*\.jar" />
   <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-cell-\d.*\.jar" />
-
-  <lib dir="${solr.install.dir:../../../..}/contrib/clustering/lib/" regex=".*\.jar" />
-  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-clustering-\d.*\.jar" />
-
-  <lib dir="${solr.install.dir:../../../..}/contrib/langid/lib/" regex=".*\.jar" />
-  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-langid-\d.*\.jar" />
-
-  <lib dir="${solr.install.dir:../../../..}/contrib/velocity/lib" regex=".*\.jar" />
-  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-velocity-\d.*\.jar" />
-  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-ltr-\d.*\.jar" />
 
   <!-- an exact 'path' can be used instead of a 'dir' to specify a
        specific jar file.  This will cause a serious error to be logged
@@ -258,24 +258,6 @@
     <!-- <infoStream file="INFOSTREAM.txt">false</infoStream> -->
   </indexConfig>
 
-
-  <!-- JMX
-
-       This example enables JMX if and only if an existing MBeanServer
-       is found, use this if you want to configure JMX through JVM
-       parameters. Remove this to disable exposing Solr configuration
-       and statistics to JMX.
-
-       For more details see http://wiki.apache.org/solr/SolrJmx
-    -->
-  <jmx />
-  <!-- If you want to connect to a particular server, specify the
-       agentId
-    -->
-  <!-- <jmx agentId="myAgent" /> -->
-  <!-- If you want to start a new MBeanServer, specify the serviceUrl -->
-  <!-- <jmx serviceUrl="service:jmx:rmi:///jndi/rmi://localhost:9999/solr"/>
-    -->
 
   <!-- The default high-performance update handler -->
   <updateHandler class="solr.DirectUpdateHandler2">
@@ -592,7 +574,10 @@
        should behave when processing requests for this SolrCore.
 
     -->
-  <requestDispatcher>
+
+  <!-- We need handleSelect here to work with the legacy Solr feature which
+       Hyrax relies on -->
+  <requestDispatcher handleSelect="true">
     <!-- Request Parsing
 
          These settings indicate how Solr Requests may be parsed, and
@@ -626,6 +611,10 @@
                     formdataUploadLimitInKB="-1"
                     addHttpRequestToContext="false"/>
       -->
+
+    <!-- From Hyrax config: we need to allow huge uploads (perhaps this is for
+         processing things like huge PDFs?) -->
+    <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048000" />
 
     <!-- HTTP Caching
 
@@ -681,6 +670,153 @@
        </httpCaching>
       -->
   </requestDispatcher>
+
+  <!-- Request Handlers: all default / example handlers have been removed so
+       that we're only exposing precisely what we need for OD / Hyrax
+
+       http://wiki.apache.org/solr/SolrRequestHandler
+
+       Incoming queries will be dispatched to a specific handler by name
+       based on the path specified in the request.
+
+       If a Request Handler is declared with startup="lazy", then it will
+       not be initialized until the first request that uses it.
+
+    -->
+
+  <!-- From Hyrax config, expose the field analyzer -->
+  <requestHandler name="/analysis/field" startup="lazy" class="solr.FieldAnalysisRequestHandler" />
+
+  <!-- Default config uses very old legacy magic.  Named handlers like this
+       can be reached by using the "qt" parameter in a request, and this one
+       in particular is the default behavior when hitting /select.
+
+       We can't easily get rid of these without fixing Hyrax in *many* places,
+       so these have to live on for now.
+       -->
+  <requestHandler name="search" class="solr.SearchHandler" default="true">
+     <lst name="defaults">
+       <str name="defType">edismax</str>
+       <str name="echoParams">explicit</str>
+       <str name="q.alt">*:*</str>
+       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+       <int name="qs">1</int>
+       <int name="ps">2</int>
+       <float name="tie">0.01</float>
+       <!-- this qf and pf are used by default, if not otherwise specified by
+            client. The default blacklight_config will use these for the
+            "keywords" search. See the author_qf/author_pf, title_qf, etc
+            below, which the default blacklight_config will specify for
+            those searches. You may also be interested in:
+            http://wiki.apache.org/solr/LocalParams
+       -->
+        <str name="qf">
+          id
+          title_tesim
+          author_tesim
+          subject_tesim
+        </str>
+        <str name="pf">
+          all_text_timv^10
+        </str>
+
+       <str name="author_qf">
+          author_tesim
+       </str>
+       <str name="author_pf">
+       </str>
+       <str name="title_qf">
+          title_tesim
+       </str>
+       <str name="title_pf">
+       </str>
+       <str name="subject_qf">
+          subject_tesim
+       </str>
+       <str name="subject_pf">
+       </str>
+
+       <str name="fl">
+         *,
+         score
+       </str>
+
+       <str name="facet">true</str>
+       <str name="facet.mincount">1</str>
+
+       <str name="spellcheck">true</str>
+       <str name="spellcheck.dictionary">default</str>
+       <str name="spellcheck.onlyMorePopular">true</str>
+       <str name="spellcheck.extendedResults">true</str>
+       <str name="spellcheck.collate">false</str>
+       <str name="spellcheck.count">5</str>
+
+     </lst>
+
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
+  </requestHandler>
+
+  <!-- Another legacy handler, used when qt=permissions: for queries that
+       have default permissions fields -->
+  <requestHandler name="permissions" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="facet">off</str>
+      <str name="echoParams">all</str>
+      <str name="rows">1</str>
+      <str name="q">{!raw f=id v=$id}</str> <!-- use id=666 instead of q=id:666 -->
+      <str name="fl">
+        id,
+        access_ssim,
+        discover_access_group_ssim,discover_access_person_ssim,
+        read_access_group_ssim,read_access_person_ssim,
+        edit_access_group_ssim,edit_access_person_ssim,
+        depositor_ti,
+        embargo_release_date_dtsi
+        inheritable_access_ssim,
+        inheritable_discover_access_group_ssim,inheritable_discover_access_person_ssim,
+        inheritable_read_access_group_ssim,inheritable_read_access_person_ssim,
+        inheritable_edit_access_group_ssim,inheritable_edit_access_person_ssim,
+        inheritable_embargo_release_date_dtsi
+      </str>
+    </lst>
+  </requestHandler>
+
+  <!-- Another legacy handler, used when qt=standard -->
+  <requestHandler name="standard" class="solr.SearchHandler">
+     <lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="defType">lucene</str>
+     </lst>
+  </requestHandler>
+
+  <!-- Another legacy handler, for requests to get a single document; use
+       id=666 instead of q=id:666 -->
+  <requestHandler name="document" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="echoParams">all</str>
+      <str name="fl">*</str>
+      <str name="rows">1</str>
+      <str name="q">{!term f=id v=$id}</str> <!-- use id=666 instead of q=id:666 -->
+    </lst>
+  </requestHandler>
+
+  <!-- Solr Cell Update Request Handler
+
+  http://wiki.apache.org/solr/ExtractingRequestHandler
+
+  -->
+  <requestHandler name="/update/extract"
+                  startup="lazy"
+                  class="solr.extraction.ExtractingRequestHandler" >
+    <lst name="defaults">
+      <str name="lowernames">true</str>
+      <str name="fmap.content">_text_</str>
+      <str name="fmap.Last-Modified">last_modified</str>
+      <str name="uprefix">ignored_</str>
+    </lst>
+  </requestHandler>
 
   <!-- Search Components
 
