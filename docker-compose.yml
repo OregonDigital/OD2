@@ -201,7 +201,7 @@ services:
   solr-dev:
     <<: *solr
     volumes:
-      - ./config/solr/config:/opt/solr/od2_conf
+      - ./config/solr/conf:/opt/solr/od2_conf
       - solr:/var/solr/data
     environment:
       - OOM=crash
@@ -214,7 +214,7 @@ services:
   solr-test:
     <<: *solr
     volumes:
-      - ./config/solr/config:/opt/solr/od2_conf
+      - ./config/solr/conf:/opt/solr/od2_conf
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
