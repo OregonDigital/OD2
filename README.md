@@ -135,3 +135,4 @@ It may behoove you to create an alias for this kind of thing:
     alias dwork='docker-compose exec -u 1000 workers'
     dwork rake -T
     dwork rails generate ...
+
