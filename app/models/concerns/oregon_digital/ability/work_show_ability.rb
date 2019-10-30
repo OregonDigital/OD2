@@ -8,16 +8,15 @@ module OregonDigital
 
       included do
         def work_show_ability
-          # TODO: Fix visibility string for UO and OSU specific visibility settings
-          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(osu_roles)
-          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
-
           can :show, ActiveFedora::Base do |record|
             show_record?(record)
           end
           can :read, SolrDocument do |solr_doc|
             read_doc?(solr_doc)
           end
+
+          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(osu_roles)
+          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
         end
 
         def show_record?(record)
