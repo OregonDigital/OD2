@@ -27,6 +27,12 @@
   configs were needed.
 -->
 <config>
+  <!-- We really don't want schemaless mode or the managed schema.  Schema
+       changes in a Hyrax app need to be extremely deliberate and carefully
+       considered, because the stack makes a lot of assumptions that aren't
+       necessarily obvious or well-documented -->
+  <schemaFactory class="ClassicIndexSchemaFactory"/>
+
   <!-- In all configuration below, a prefix of "solr." for class names
        is an alias that causes solr to search appropriate packages,
        including org.apache.solr.(search|update|request|core|analysis)
@@ -1124,7 +1130,7 @@
   </updateProcessor>
 
   <!-- The update.autoCreateFields property can be turned to false to disable schemaless mode -->
-  <updateRequestProcessorChain name="add-unknown-fields-to-the-schema" default="${update.autoCreateFields:true}"
+  <updateRequestProcessorChain name="add-unknown-fields-to-the-schema" default="${update.autoCreateFields:false}"
            processor="uuid,remove-blank,field-name-mutating,parse-boolean,parse-long,parse-double,parse-date,add-schema-fields">
     <processor class="solr.LogUpdateProcessorFactory"/>
     <processor class="solr.DistributedUpdateProcessorFactory"/>
