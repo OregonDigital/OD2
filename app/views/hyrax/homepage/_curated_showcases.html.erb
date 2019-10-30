@@ -5,7 +5,7 @@
               title: collection.title_or_label,
               content: collection.description.first.to_s.gsub("\n", "</p><p>").html_safe,
               link: [hyrax, collection],
-              img: render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
+              img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) %>
       </li>
     <% end %>
 </ol>
@@ -16,7 +16,7 @@
               title: collection.title_or_label,
               content: collection.description.first.to_s.gsub("\n", "</p><p>").html_safe,
               link: [hyrax, collection],
-              img: render_thumbnail_tag(collection, {}, { suppress_link: true }) %>
+              img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) %>
       </li>
     <% end if collections.length > 4 %>
 </ol>
