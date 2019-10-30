@@ -47,8 +47,8 @@ Hyrax::Migrator.config do |config|
   # The crosswalk file for associating primary sets in OD1 with admin sets in OD2
   config.crosswalk_admin_sets_file = File.join(Rails.root, 'config/initializers/migrator/crosswalk_admin_sets.yml')
 
-  config.upload_storage_service = :aws_s3
-
+  config.upload_storage_service = :file_system
+  config.ingest_storage_service = :file_system
   # The service used to upload files ready for migration. It defaults to file_system for test and development. On production, it defaults to aws_s3
   # config.upload_storage_service = if Rails.env.production?
   #                                   :aws_s3
