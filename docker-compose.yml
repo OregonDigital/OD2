@@ -206,8 +206,7 @@ services:
     environment:
       - OOM=crash
       - SOLR_HEAP=2g
-    entrypoint:
-      - docker-entrypoint.sh
+    command:
       - solr-precreate
       - development
       - /opt/solr/od2_conf
@@ -215,8 +214,7 @@ services:
     <<: *solr
     volumes:
       - ./config/solr/conf:/opt/solr/od2_conf
-    entrypoint:
-      - docker-entrypoint.sh
+    command:
       - solr-precreate
       - test
       - /opt/solr/od2_conf
