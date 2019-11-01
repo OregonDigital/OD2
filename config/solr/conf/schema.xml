@@ -38,7 +38,9 @@
     catchall "text" field, and use that for searching.
 -->
 
-<schema name="default-config" version="1.6">
+<!-- This is OD's schema, based on the Solr 8.2 defaults and customized to add
+     the schema elements which Hyrax requires to function -->
+<schema name="OregonDigital" version="1.6">
     <!-- attribute "name" is the name of this schema and is only used for display purposes.
        version="x.y" is Solr's version number for the schema syntax and 
        semantics.  It should not normally be changed by applications.
@@ -114,54 +116,180 @@
     <!-- docValues are enabled by default for long type so we don't need to index the version field  -->
     <field name="_version_" type="plong" indexed="false" stored="false"/>
 
-    <!-- If you don't use child/nested documents, then you should remove the next two fields:  -->
-    <!-- for nested documents (minimal; points to root document) -->
-    <field name="_root_" type="string" indexed="true" stored="false" docValues="false" />
-    <!-- for nested documents (relationship tracking) -->
-    <field name="_nest_path_" type="_nest_path_" /><fieldType name="_nest_path_" class="solr.NestPathField" />
-
     <field name="_text_" type="text_general" indexed="true" stored="false" multiValued="true"/>
 
-    <!-- This can be enabled, in case the client does not know what fields may be searched. It isn't enabled by default
-         because it's very expensive to index everything twice. -->
-    <!-- <copyField source="*" dest="_text_"/> -->
+    <!-- Field types for Hyrax -->
 
-    <!-- Dynamic field definitions allow using convention over configuration
-       for fields via the specification of patterns to match field names.
-       EXAMPLE:  name="*_i" will match any field ending in _i (like myid_i, z_i)
-       RESTRICTION: the glob-like pattern in the name attribute must have a "*" only at the start or the end.  -->
-   
-    <dynamicField name="*_i"  type="pint"    indexed="true"  stored="true"/>
-    <dynamicField name="*_is" type="pints"    indexed="true"  stored="true"/>
-    <dynamicField name="*_s"  type="string"  indexed="true"  stored="true" />
-    <dynamicField name="*_ss" type="strings"  indexed="true"  stored="true"/>
-    <dynamicField name="*_l"  type="plong"   indexed="true"  stored="true"/>
-    <dynamicField name="*_ls" type="plongs"   indexed="true"  stored="true"/>
-    <dynamicField name="*_t" type="text_general" indexed="true" stored="true" multiValued="false"/>
-    <dynamicField name="*_txt" type="text_general" indexed="true" stored="true"/>
-    <dynamicField name="*_b"  type="boolean" indexed="true" stored="true"/>
-    <dynamicField name="*_bs" type="booleans" indexed="true" stored="true"/>
-    <dynamicField name="*_f"  type="pfloat"  indexed="true"  stored="true"/>
-    <dynamicField name="*_fs" type="pfloats"  indexed="true"  stored="true"/>
-    <dynamicField name="*_d"  type="pdouble" indexed="true"  stored="true"/>
-    <dynamicField name="*_ds" type="pdoubles" indexed="true"  stored="true"/>
-    <dynamicField name="random_*" type="random"/>
-    <dynamicField name="ignored_*" type="ignored"/>
+    <!-- general text field -->
+    <fieldType name="text" class="solr.TextField" omitNorms="false">
+      <analyzer>
+        <tokenizer class="solr.ICUTokenizerFactory"/>
+        <filter class="solr.ICUFoldingFilterFactory"/>  <!-- NFKC, case folding, diacritics removed -->
+        <filter class="solr.TrimFilterFactory"/>
+      </analyzer>
+    </fieldType>
 
-    <!-- Type used for data-driven schema, to add a string copy for each text field -->
-    <dynamicField name="*_str" type="strings" stored="false" docValues="true" indexed="false" useDocValuesAsStored="false"/>
+    <!-- single token analyzed text, for sorting.  Punctuation is significant. -->
+    <fieldtype name="alphaSort" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+        <filter class="solr.ICUFoldingFilterFactory"/>
+        <filter class="solr.TrimFilterFactory" />
+      </analyzer>
+    </fieldtype>
 
-    <dynamicField name="*_dt"  type="pdate"    indexed="true"  stored="true"/>
-    <dynamicField name="*_dts" type="pdate"    indexed="true"  stored="true" multiValued="true"/>
-    <dynamicField name="*_p"  type="location" indexed="true" stored="true"/>
-    <dynamicField name="*_srpt"  type="location_rpt" indexed="true" stored="true"/>
+    <!-- A DateRange based date field for truly faster date range queries. -->
+    <fieldType name="dateRange" class="solr.DateRangeField"/>
 
-    <!-- payloaded dynamic fields -->
-    <dynamicField name="*_dpf" type="delimited_payloads_float" indexed="true"  stored="true"/>
-    <dynamicField name="*_dpi" type="delimited_payloads_int" indexed="true"  stored="true"/>
-    <dynamicField name="*_dps" type="delimited_payloads_string" indexed="true"  stored="true"/>
+    <!-- Hyrax named fields -->
 
-    <dynamicField name="attr_*" type="text_general" indexed="true" stored="true" multiValued="true"/>
+    <field name="timestamp" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
+    <field name="lat" type="pdouble" stored="true" indexed="true" multiValued="false"/>
+    <field name="lng" type="pdouble" stored="true" indexed="true" multiValued="false"/>
+    <field name="all_text_timv" type="text" stored="false" indexed="true" multiValued="true" termVectors="true" termPositions="true" termOffsets="true"/>
+
+    <!-- Dynamic fields for Hyrax -->
+    <!-- Note 1: Many of these are unnecessary and have been configured to use
+         duplicated field types for years, likely stemming from a time when
+         trie fields were used separately from their counterparts.
+         Unfortunately it's not easy to tell in Hyrax what suffixes are still
+         in use, so we would rather just know we're likely configuring too many
+         suffixes - the alternative is potential runtime failures. -->
+    <!-- Note 2: Many multivalue fields could just use the new solr fields like
+         "strings", "pints", etc.  That may be worth doing at some point, but
+         this is a lot more explicit and may make it easier to dig through the
+         schema in the future. -->
+
+    <!-- text (_t...) -->
+    <dynamicField name="*_ti" type="text" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_tim" type="text" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_ts" type="text" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_tsm" type="text" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_tsi" type="text" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_tsim" type="text" stored="true" indexed="true" multiValued="true"/>
+    <dynamicField name="*_tiv" type="text" stored="false" indexed="true" multiValued="false" termVectors="true" termPositions="true" termOffsets="true"/>
+    <dynamicField name="*_timv" type="text" stored="false" indexed="true" multiValued="true" termVectors="true" termPositions="true" termOffsets="true"/>
+    <dynamicField name="*_tsiv" type="text" stored="true" indexed="true" multiValued="false" termVectors="true" termPositions="true" termOffsets="true"/>
+    <dynamicField name="*_tsimv" type="text" stored="true" indexed="true" multiValued="true" termVectors="true" termPositions="true" termOffsets="true"/>
+
+    <!-- English text (_te...) -->
+    <dynamicField name="*_tei" type="text_en" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_teim" type="text_en" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_tes" type="text_en" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_tesm" type="text_en" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_tesi" type="text_en" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_tesim" type="text_en" stored="true" indexed="true" multiValued="true"/>
+    <dynamicField name="*_teiv" type="text_en" stored="false" indexed="true" multiValued="false" termVectors="true" termPositions="true" termOffsets="true"/>
+    <dynamicField name="*_teimv" type="text_en" stored="false" indexed="true" multiValued="true" termVectors="true" termPositions="true" termOffsets="true"/>
+    <dynamicField name="*_tesiv" type="text_en" stored="true" indexed="true" multiValued="false" termVectors="true" termPositions="true" termOffsets="true"/>
+    <dynamicField name="*_tesimv" type="text_en" stored="true" indexed="true" multiValued="true" termVectors="true" termPositions="true" termOffsets="true"/>
+
+    <!-- string (_s...) -->
+    <dynamicField name="*_si" type="string" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_sim" type="string" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_ss" type="string" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_ssm" type="string" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_ssi" type="string" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_ssim" type="string" stored="true" indexed="true" multiValued="true"/>
+    <dynamicField name="*_ssort" type="alphaSort" stored="false" indexed="true" multiValued="false"/>
+
+    <!-- integer (_i...) -->
+    <dynamicField name="*_ii" type="pint" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_iim" type="pint" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_is" type="pint" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_ism" type="pint" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_isi" type="pint" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_isim" type="pint" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- IntegerPointField (_it...) (for faster range queries) -->
+    <dynamicField name="*_iti" type="pint" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_itim" type="pint" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_its" type="pint" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_itsm" type="pint" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_itsi" type="pint" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_itsim" type="pint" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- date (_dt...) -->
+    <!-- The format for this date field is of the form 1995-12-31T23:59:59Z
+         Optional fractional seconds are allowed: 1995-12-31T23:59:59.999Z -->
+    <dynamicField name="*_dti" type="pdate" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dtim" type="pdate" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_dts" type="pdate" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_dtsm" type="pdate" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_dtsi" type="pdate" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dtsim" type="pdate" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- DatePointField (_dtt...) (for faster range queries) -->
+    <dynamicField name="*_dtti" type="pdate" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dttim" type="pdate" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_dtts" type="pdate" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_dttsm" type="pdate" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_dttsi" type="pdate" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dttsim" type="pdate" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- date range (_dr...) (for faster AND better range queries) -->
+    <dynamicField name="*_dri" type="dateRange" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_drim" type="dateRange" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_drs" type="dateRange" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_drsm" type="dateRange" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_drsi" type="dateRange" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_drsim" type="dateRange" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- long (_l...) -->
+    <dynamicField name="*_li" type="plong" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_lim" type="plong" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_ls" type="plong" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_lsm" type="plong" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_lsi" type="plong" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_lsim" type="plong" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- LongPointField (_lt...) (for faster range queries) -->
+    <dynamicField name="*_lti" type="plong" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_ltim" type="plong" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_lts" type="plong" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_ltsm" type="plong" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_ltsi" type="plong" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_ltsim" type="plong" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- double (_db...) -->
+    <dynamicField name="*_dbi" type="pdouble" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dbim" type="pdouble" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_dbs" type="pdouble" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_dbsm" type="pdouble" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_dbsi" type="pdouble" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dbsim" type="pdouble" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- DoublePointField (_dbt...) (for faster range queries) -->
+    <dynamicField name="*_dbti" type="pdouble" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dbtim" type="pdouble" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_dbts" type="pdouble" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_dbtsm" type="pdouble" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_dbtsi" type="pdouble" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_dbtsim" type="pdouble" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- float (_f...) -->
+    <dynamicField name="*_fi" type="pfloat" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_fim" type="pfloat" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_fs" type="pfloat" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_fsm" type="pfloat" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_fsi" type="pfloat" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_fsim" type="pfloat" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- FloatPointField (_ft...) (for faster range queries) -->
+    <dynamicField name="*_fti" type="pfloat" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_ftim" type="pfloat" stored="false" indexed="true" multiValued="true"/>
+    <dynamicField name="*_fts" type="pfloat" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_ftsm" type="pfloat" stored="true" indexed="false" multiValued="true"/>
+    <dynamicField name="*_ftsi" type="pfloat" stored="true" indexed="true" multiValued="false"/>
+    <dynamicField name="*_ftsim" type="pfloat" stored="true" indexed="true" multiValued="true"/>
+
+    <!-- boolean (_b...) -->
+    <dynamicField name="*_bi" type="boolean" stored="false" indexed="true" multiValued="false"/>
+    <dynamicField name="*_bs" type="boolean" stored="true" indexed="false" multiValued="false"/>
+    <dynamicField name="*_bsi" type="boolean" stored="true" indexed="true" multiValued="false"/>
+
+    <!-- Type used to index the lat and lon components for the "location" FieldType -->
+    <dynamicField name="*_coordinate" type="pdouble" indexed="true"  stored="false" />
 
     <!-- Field to use to determine and enforce document uniqueness.
       Unless this field is marked with required="false", it will be a required field
