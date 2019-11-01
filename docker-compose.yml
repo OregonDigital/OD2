@@ -201,7 +201,9 @@ services:
     <<: *solr
     volumes:
       - ./config/solr/conf:/opt/solr/od2_conf
-      - solr:/var/solr/data
+      # We have to mount the entire /var/solr dir because otherwise permissions
+      # get messed up by docker
+      - solr:/var/solr
     environment:
       - OOM=crash
       - SOLR_HEAP=2g
