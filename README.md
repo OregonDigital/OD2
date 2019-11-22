@@ -48,9 +48,20 @@ really weird.
 docker-compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g) server workers app test dev
 ```
 
+**Note**: This will take a *very* long time the first time you do it.
+Potentially 30 minutes or longer.  I'm not kidding, I'm timing it right now and
+it's ... well, kind of amazing but in a terrible way.  I'm at 20 minutes and
+still waiting on the "fits" download.  So go take a break.  Get a coffee.  Do
+whatever cliched things people do when waiting for a slow thing to occur.  You
+might have time for a short vacation.  Not like... a trip to Cabo, but maybe a
+local bed and breakfast.  That could be nice, right?
+
 Once built, you shouldn't need to rebuild the image unless you're changing the
 `Dockerfile`, suspect a bad cached build, or can't get gems to install via
-in-container runs of `bundler`.
+in-container runs of `bundler`.  And subsequent builds will be a bit faster
+(usually) than the initial build, because you won't have to download things
+like the base Ruby image, and you typically won't have to reinstall core
+dependencies like libreoffice.
 
 **Important**: Setup a `docker-compose.override.yml` before starting
 development or testing:
