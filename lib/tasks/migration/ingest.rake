@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 namespace :migration do
-  # usage: bundle exec rake migration:ingest collection="batch_baseball"
   desc 'ingest migration'
   task ingest: :environment do
     collection = ENV['collection']
@@ -24,14 +23,7 @@ namespace :migration do
       cleanup(pid)
 
       w = Hyrax::Migrator::Work.create(pid: pid, file_path: file_path)
-
-      n = Hyrax::Migrator::Middleware::Configuration.new
-      n.actor_stack.delete_at(7) # remove ListChildrenActor
-      n.actor_stack.delete_at(7) # remove ChildrenAuditActor
-      n.actor_stack.delete_at(8) # remove AddRelationshipsActor
-
-      m = Hyrax::Migrator::Middleware::DefaultMiddleware.new(n.actor_stack)
-
+      m = Hyrax::Migrator::Middleware.default
       m.start(w)
     end
   end
