@@ -1,0 +1,46 @@
+# frozen_string_literal: true
+
+namespace :migration do
+  # usage: bundle exec rake migration:ingest collection="batch_baseball"
+  desc 'ingest migration'
+  task ingest: :environment do
+    collection = ENV['collection']
+
+    batch_path = File.join('/data/tmp', collection)
+
+    pids = Dir.entries(batch_path)
+      .select{ |e| File.file?(File.join(batch_path, e)) && File.extname(e) == '.zip' }
+      .map{|zip_file| File.basename(zip_file, File.extname(zip_file)) }
+
+    pids.each do |pid|
+      Hyrax::Migrator.config.skip_field_mode = true
+      Hyrax::Migrator.config.upload_storage_service = :file_system
+      Hyrax::Migrator.config.ingest_storage_service = :file_system
+      Hyrax::Migrator.config.file_system_path = "/data/tmp"
+      Hyrax::Migrator.config.ingest_local_path = "/data/tmp"
+
+      file_path = "/data/tmp/#{collection}/#{pid}.zip"
+
+      cleanup(pid)
+
+      w = Hyrax::Migrator::Work.create(pid: pid, file_path: file_path)
+
+      n = Hyrax::Migrator::Middleware::Configuration.new
+      n.actor_stack.delete_at(7) # remove ListChildrenActor
+      n.actor_stack.delete_at(7) # remove ChildrenAuditActor
+      n.actor_stack.delete_at(8) # remove AddRelationshipsActor
+
+      m = Hyrax::Migrator::Middleware::DefaultMiddleware.new(n.actor_stack)
+
+      m.start(w)
+    end
+  end
+end
+
+def cleanup(pid)
+  gid = ActiveFedora::Base.find(pid).to_global_id.to_s if ActiveFedora::Base.exists?(pid)
+  Sipity::Entity.find_by(proxy_for_global_id: gid).delete if Sipity::Entity.find_by(proxy_for_global_id: gid).present?
+  ActiveFedora::Base.find(pid).delete if ActiveFedora::Base.exists?(pid)
+  ActiveFedora::Base.eradicate(pid)
+  Hyrax::Migrator::Work.find_by_pid(pid).delete if Hyrax::Migrator::Work.find_by_pid(pid).present?
+end
