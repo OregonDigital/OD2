@@ -13,7 +13,7 @@ RUN gem install bundler
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
-  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip ghostscript vim\
+  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip zip ghostscript vim\
   ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-11-jre libopenjp2-tools --fix-missing --allow-unauthenticated
 
 # install FITS for file characterization
