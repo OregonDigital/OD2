@@ -42,13 +42,16 @@ Hyrax::Migrator.config do |config|
   config.crosswalk_metadata_file = File.join(Rails.root, 'config/initializers/migrator/crosswalk.yml')
 
   # The crosswalk overrides metadata file for properties and predicates that need special handling
-  config.crosswalk_overrides_file = File.join(Rails.root, 'config/initializers/migrator/crosswalk_overrides.yml')
+  config.crosswalk_overrides_file = ENV['CROSSWALK_OVERRIDES_FILE']
 
   # The crosswalk file for associating primary sets in OD1 with admin sets in OD2
   config.crosswalk_admin_sets_file = File.join(Rails.root, 'config/initializers/migrator/crosswalk_admin_sets.yml')
 
-  config.upload_storage_service = :aws_s3
+  # Set to true for debugging
+  config.skip_field_mode = ENV['SKIP_FIELD_MODE']
 
+  config.upload_storage_service = :file_system
+  config.ingest_storage_service = :file_system
   # The service used to upload files ready for migration. It defaults to file_system for test and development. On production, it defaults to aws_s3
   # config.upload_storage_service = if Rails.env.production?
   #                                   :aws_s3
@@ -57,7 +60,7 @@ Hyrax::Migrator.config do |config|
   #                                 end
 
   # The destination file system path used mainly for :file_system storage during file uploads. It defaults to environment BROWSEEVERYTHING_FILESYSTEM_PATH.
-  # config.file_system_path = ENV['BROWSEEVERYTHING_FILESYSTEM_PATH']
+  config.file_system_path = ENV['BROWSEEVERYTHING_FILESYSTEM_PATH']
 
   # The service used to ingest bags during migration. It defaults to file_system for test and development. On production, it defaults to aws_s3
   # config.ingest_storage_service = if Rails.env.production?
@@ -67,7 +70,7 @@ Hyrax::Migrator.config do |config|
   #                                 end
 
   # The file system path used mainly for :file_system storage during mass ingest. It defaults to environment INGEST_LOCAL_PATH.
-  # config.ingest_local_path = ENV['INGEST_LOCAL_PATH']
+  config.ingest_local_path = ENV['INGEST_LOCAL_PATH']
 
   # The AWS S3 bucket used for :aws_s3 storage during mass ingest. It defaults to environment AWS_S3_INGEST_BUCKET.
   # config.aws_s3_ingest_bucket = ENV['AWS_S3_INGEST_BUCKET']

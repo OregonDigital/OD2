@@ -1,8 +1,5 @@
 <h1><%= t('role-management.edit.title') %></h1>
-<%= bootstrap_form_for @role, :url=>role_management.role_path(@role) do |f| %>
-  <%= f.text_field :name, :label=> t('role-management.edit.field_name') %>
-  <%= f.submit t('role-management.edit.update'), class: 'btn btn-primary' %>
-<% end %>
+  <%= @role.name %>
 <h2><%= t('role-management.edit.accounts') %></h2>
 <table class="table table-striped">
   <thead>
