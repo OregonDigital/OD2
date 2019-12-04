@@ -29,11 +29,6 @@ services:
     networks:
       external:
       internal:
-    # use tmpfs for tmp and log for performance and to allow
-    # multiple builds in parallel. Both directories are mounted
-    # into the image AFTER the working directory is mounted.
-    tmpfs:
-      - /data/log
 
   ##
   # Development environment for application
