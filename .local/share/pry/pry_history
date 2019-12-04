@@ -1,0 +1,5 @@
+r = Role.where(name: 'admin').first
+u = User.all.last
+r.users << u
+r.save
+exit
