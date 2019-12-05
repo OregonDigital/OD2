@@ -74,6 +74,6 @@ group :test do
   gem 'rspec-mocks'
   gem 'rspec-activemodel-mocks'
   gem 'rspec_junit_formatter'
-  gem 'shoulda-matchers', '>= 4'
+  gem 'shoulda-matchers', '~> 4'
   gem 'simplecov', '>= 0.9'
 end
