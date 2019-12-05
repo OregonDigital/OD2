@@ -3,7 +3,7 @@
 module Hyrax
   # Generated controller for Generic
   class GenericsController < ApplicationController
-    load_and_authorize_resource
+    load_and_authorize_resource except: [:manifest]
 
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
