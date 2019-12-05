@@ -1,26 +1,11 @@
-<%= presenter.attribute_to_html(:description, html_dl: true, label: t("simple_form.labels.defaults.description")) %>
-<% (Generic.generic_properties.map(&:to_sym)).reject{ |attr| [:description, :language, :license, :oembed_url, :resource_type, :rights_statement].include? attr }.each do |attr| %>
-  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
+<% Generic::ORDERED_PROPERTIES.each do |prop| %>
+  <% if prop[:is_controlled] %>
+    <% labels=Array(presenter.send(prop[:name].to_sym)) %>
+    <% links=Array(presenter.send(prop[:name].to_s.gsub('_label', ''))) %>
+    <% @zipped=labels.zip(links) %>
+    <% @zipped=Hash[@zipped] %>
+    <%= presenter.attribute_to_html(prop[:name].to_sym, render_as: :search_and_external_link, links: @zipped, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name]}")) %>
+  <% else %>
+    <%= presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}")) %>
+  <% end %>
 <% end %>
-<%= presenter.attribute_to_html(:language_label, html_dl: true, label: t("simple_form.labels.defaults.language")) %>
-<%= presenter.attribute_to_html(:type_label, html_dl: true, label: t("simple_form.labels.defaults.resource_type")) %>
-<%= presenter.attribute_to_html(:rights_statement_label, html_dl: true, label: t("simple_form.labels.defaults.rights_statement")) %>
-<% Video.video_properties.map(&:to_sym).each do |attr| %>
-  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
-<% end %>
-<% Document.document_properties.map(&:to_sym).each do |attr| %>
-  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
-<% end %>
-<% Image.image_properties.map(&:to_sym).each do |attr| %>
-  <%= presenter.attribute_to_html(attr, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
-<% end %>
-<% Generic.controlled_property_labels.map(&:to_sym).each do |attr| %>
-  <% labels=Array(presenter.send(attr)) %>
-  <% links=Array(presenter.send(attr.to_s.gsub('_label', ''))) %>
-  <% zipped=labels.zip(links) %>
-  <% zipped=Hash[zipped] %>
-  <%= presenter.attribute_to_html(attr, render_as: :search_and_external_link, links: zipped, html_dl: true, label: t("simple_form.labels.defaults.#{attr}")) %>
-<% end %>
-<%= presenter.attribute_to_html(:oembed_url, html_dl: true, render_as: :oembed) %>
-<%= presenter.attribute_to_html(:date_modified, html_dl: true, label: t("simple_form.labels.defaults.date_modified")) %>
-<%= presenter.attribute_to_html(:date_uploaded, html_dl: true, label: t("simple_form.labels.defaults.date_uploaded")) %>
