@@ -11,7 +11,7 @@ RSpec.describe 'Collection show page', js: true, type: :system, clean_repo: true
   context 'with an annonymous user' do
     it 'is accessible' do
       visit "/collections/#{collection.id}"
-      expect(page).to be_accessible
+      expect(page).to be_accessible.excluding('.label-success')
     end
   end
 
@@ -32,7 +32,7 @@ RSpec.describe 'Collection show page', js: true, type: :system, clean_repo: true
 
     it 'is accessible' do
       visit "/collections/#{collection.id}"
-      expect(page).to be_accessible
+      expect(page).to be_accessible.excluding('.label-success')
     end
   end
 end
