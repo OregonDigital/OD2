@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 3691e154eec63ad6d48e7dc5a81acac2396dade6
+  revision: 36e1a61409f3941c7aeccc075bafb144d107b615
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -166,17 +166,17 @@ GEM
     awesome_nested_set (3.2.0)
       activerecord (>= 4.0.0, < 7.0)
     aws-eventstream (1.0.3)
-    aws-partitions (1.230.0)
-    aws-sdk-core (3.72.0)
+    aws-partitions (1.251.0)
+    aws-sdk-core (3.84.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
-      aws-partitions (~> 1, >= 1.228.0)
+      aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.25.0)
+    aws-sdk-kms (1.26.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.52.0)
-      aws-sdk-core (~> 3, >= 3.71.0)
+    aws-sdk-s3 (1.59.0)
+      aws-sdk-core (~> 3, >= 3.83.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.1.0)
@@ -558,7 +558,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.3.1)
+    loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -586,7 +586,7 @@ GEM
     noid-rails (3.0.1)
       actionpack (>= 5.0.0, < 6)
       noid (~> 0.9)
-    nokogiri (1.10.4)
+    nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri
@@ -683,7 +683,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    rdf (3.0.12)
+    rdf (3.0.13)
       hamster (~> 3.0)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (2.2.1)
