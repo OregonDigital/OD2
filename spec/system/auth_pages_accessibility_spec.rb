@@ -1,10 +1,6 @@
 # frozen_string_literal:true
 
 RSpec.describe 'Authentication pages', js: true, type: :system, clean_repo: true do
-  before do
-    create(:content_block, name: 'marketing_text', value: '<h1>Title</h1>')
-  end
-
   context 'when at the registration page' do
     it 'is accessible' do
       visit '/users/sign_up'

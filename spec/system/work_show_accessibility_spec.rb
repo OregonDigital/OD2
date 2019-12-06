@@ -3,10 +3,6 @@
 RSpec.describe 'Work show page', js: true, type: :system, clean_repo: true do
   let(:work) { create(:work, with_admin_set: true, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, rights_statement: ['http://rightsstatements.org/vocab/InC/1.0/'], creator: ['http://opaquenamespace.org/ns/creator/my_id'], description: ['description']) }
 
-  before do
-    create(:content_block, name: 'marketing_text', value: '<h1>Title</h1>')
-  end
-
   context 'with an annonymous user' do
     it 'is accessible' do
       visit "/concern/generics/#{work.id}"

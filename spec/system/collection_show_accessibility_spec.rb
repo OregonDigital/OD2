@@ -4,10 +4,6 @@ RSpec.describe 'Collection show page', js: true, type: :system, clean_repo: true
   let(:collection_type) { create(:collection_type) }
   let(:collection) { create(:collection, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, collection_type_gid: "gid://od2/hyrax-collectiontype/#{collection_type.id}") }
 
-  before do
-    create(:content_block, name: 'marketing_text', value: '<h1>Title</h1>')
-  end
-
   context 'with an annonymous user' do
     it 'is accessible' do
       visit "/collections/#{collection.id}"
