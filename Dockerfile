@@ -18,8 +18,8 @@ RUN apt-get update && apt-get upgrade -y && \
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
-  curl -fSL -o /opt/fits-1.0.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip && \
-  cd /opt && unzip fits-1.0.5.zip && chmod +X fits-1.0.5/fits.sh
+  curl -fSL -o /opt/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
+  cd /opt && unzip fits.zip -d fits/ && chmod +X fits/fits.sh
 
 ARG UID=8083
 ARG GID=8083
