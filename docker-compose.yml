@@ -185,7 +185,7 @@ services:
   ##
   # SOLR Index server
   solr: &solr
-    image: solr:6-alpine
+    image: solr:8.3-slim
     expose:
       - 8983
     networks:
@@ -193,19 +193,22 @@ services:
   solr-dev:
     <<: *solr
     volumes:
-      - ./config/solr/config:/opt/solr/od2_conf
-      - solr:/opt/solr/server/solr/mycores
-    entrypoint:
-      - docker-entrypoint.sh
+      - ./config/solr/conf:/opt/solr/od2_conf
+      # We have to mount the entire /var/solr dir because otherwise permissions
+      # get messed up by docker
+      - solr:/var/solr
+    environment:
+      - OOM=crash
+      - SOLR_HEAP=2g
+    command:
       - solr-precreate
       - development
       - /opt/solr/od2_conf
   solr-test:
     <<: *solr
     volumes:
-      - ./config/solr/config:/opt/solr/od2_conf
-    entrypoint:
-      - docker-entrypoint.sh
+      - ./config/solr/conf:/opt/solr/od2_conf
+    command:
       - solr-precreate
       - test
       - /opt/solr/od2_conf
