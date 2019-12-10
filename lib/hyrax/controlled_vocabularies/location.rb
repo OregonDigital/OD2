@@ -66,7 +66,7 @@ module Hyrax
       end
 
       def label_or_blank
-        (parentFeature.first.is_a? ActiveTriples::Resource) ? parentFeature.first.rdf_label.first : []
+        parentFeature.first.is_a? ActiveTriples::Resource ? parentFeature.first.rdf_label.first : []
       end
 
       def build_label(parent_label, fc_label)
