@@ -42,6 +42,8 @@ services:
       - AWS_S3_INGEST_BUCKET=awss3ingestbucket
       - AWS_S3_REGION=awss3region
       - BROWSEEVERYTHING_FILESYSTEM_PATH=/data/tmp/shared
+      - CONTENT_FILE_CAN_BE_NIL=false
+      - CROSSWALK_OVERRIDES_FILE=/data/config/initializers/migrator/crosswalk_overrides.yml
       - INGEST_LOCAL_PATH=/data/tmp/shared
       - FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
       - FITS_PATH=/opt/fits/fits.sh
@@ -185,7 +187,7 @@ services:
   ##
   # SOLR Index server
   solr: &solr
-    image: solr:6-alpine
+    image: solr:8.3-slim
     expose:
       - 8983
     networks:
@@ -193,19 +195,22 @@ services:
   solr-dev:
     <<: *solr
     volumes:
-      - ./config/solr/config:/opt/solr/od2_conf
-      - solr:/opt/solr/server/solr/mycores
-    entrypoint:
-      - docker-entrypoint.sh
+      - ./config/solr/conf:/opt/solr/od2_conf
+      # We have to mount the entire /var/solr dir because otherwise permissions
+      # get messed up by docker
+      - solr:/var/solr
+    environment:
+      - OOM=crash
+      - SOLR_HEAP=2g
+    command:
       - solr-precreate
       - development
       - /opt/solr/od2_conf
   solr-test:
     <<: *solr
     volumes:
-      - ./config/solr/config:/opt/solr/od2_conf
-    entrypoint:
-      - docker-entrypoint.sh
+      - ./config/solr/conf:/opt/solr/od2_conf
+    command:
       - solr-precreate
       - test
       - /opt/solr/od2_conf
