@@ -65,8 +65,9 @@ module Hyrax
         parentFeature.empty? || RDF::URI(@label.first).valid?
       end
 
+      # THIS NEEDS THE PARENTHESES OTHERWISE IT HITS A RECURSION ERROR
       def label_or_blank
-        parentFeature.first.is_a? ActiveTriples::Resource ? parentFeature.first.rdf_label.first : []
+        (parentFeature.first.is_a? ActiveTriples::Resource) ? parentFeature.first.rdf_label.first : []
       end
 
       def build_label(parent_label, fc_label)

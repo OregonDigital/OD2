@@ -17,6 +17,10 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/models/concerns/oregon_digital/access_controls/visibility.rb'
 
+Style/TernaryParentheses:
+  Exclude:
+    - 'lib/hyrax/controlled_vocabularies/location.rb'
+
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
