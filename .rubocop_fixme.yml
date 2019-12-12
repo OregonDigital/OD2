@@ -47,6 +47,7 @@ Metrics/MethodLength:
     - 'app/indexers/generic_indexer.rb'
     - 'app/models/concerns/oregon_digital/access_controls/visibility.rb'
     - 'app/helpers/hyrax/ability_helper.rb'
+    - 'lib/tasks/oregon_digital/create_full_metadata_work.rake'
 
 Naming/AccessorMethodName:
   Exclude:
