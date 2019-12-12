@@ -1,9 +1,11 @@
 # frozen_string_literal:true
 
-RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
+RSpec.describe 'Work show page', js: true, type: :system, clean_repo: true do
+  let(:work) { create(:work, with_admin_set: true, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, rights_statement: ['http://rightsstatements.org/vocab/InC/1.0/'], creator: ['http://opaquenamespace.org/ns/creator/my_id'], description: ['description']) }
+
   context 'with an annonymous user' do
     it 'is accessible' do
-      visit '/'
+      visit "/concern/generics/#{work.id}"
       expect(page).to be_accessible
     end
   end
@@ -24,7 +26,7 @@ RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
     end
 
     it 'is accessible' do
-      visit '/'
+      visit "/concern/generics/#{work.id}"
       expect(page).to be_accessible
     end
   end

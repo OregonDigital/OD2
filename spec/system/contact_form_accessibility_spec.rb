@@ -1,9 +1,9 @@
 # frozen_string_literal:true
 
-RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
+RSpec.describe 'Contact form', js: true, type: :system, clean_repo: true do
   context 'with an annonymous user' do
     it 'is accessible' do
-      visit '/'
+      visit '/contact'
       expect(page).to be_accessible
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
     end
 
     it 'is accessible' do
-      visit '/'
+      visit '/contact'
       expect(page).to be_accessible
     end
   end
