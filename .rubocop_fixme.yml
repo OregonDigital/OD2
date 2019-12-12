@@ -17,21 +17,9 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/models/concerns/oregon_digital/access_controls/visibility.rb'
 
-Style/UnneededSort:
-  Exclude:
-    - 'app/forms/oregon_digital/forms/collection_form.rb'
-
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
-
-Style/DoubleNegation:
-  Exclude:
-    - 'app/models/concerns/hydra/access_controls/visibility.rb'
-
-Style/TernaryParentheses:
-  Exclude:
-    - 'lib/hyrax/controlled_vocabularies/location.rb'
 
 Metrics/ModuleLength:
   Exclude:
