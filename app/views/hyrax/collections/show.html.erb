@@ -4,9 +4,9 @@
     <div class="col-md-12">
 
       <% unless @presenter.banner_file.blank? %>
-          <header class="hyc-banner" style="background-image:url(<%= @presenter.banner_file %>)">
+          <div class="hyc-banner" style="background-image:url(<%= @presenter.banner_file %>)">
       <% else %>
-          <header class="hyc-generic">
+          <div class="hyc-generic">
       <% end %>
 
       <div class="hyc-title">
@@ -47,7 +47,7 @@
           </div>
       <% end %>
 
-      </header>
+      </div>
 
     </div>
   </div>

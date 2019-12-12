@@ -28,7 +28,7 @@ module OregonDigital
           @attributes['title'].each do |value|
             @attributes['alt_title'] << value
           end
-          @attributes['alt_title'].delete(@attributes['alt_title'].sort.first) unless @attributes['alt_title'].empty?
+          @attributes['alt_title'].delete(@attributes['alt_title'].min) unless @attributes['alt_title'].empty?
           return @attributes['title'].sort unless @attributes['title'].empty?
 
           return ['']

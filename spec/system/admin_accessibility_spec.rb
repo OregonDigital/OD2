@@ -1,13 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
-  context 'with an annonymous user' do
-    it 'is accessible' do
-      visit '/'
-      expect(page).to be_accessible
-    end
-  end
-
+RSpec.describe 'Admin pages', js: true, type: :system, clean_repo: true do
   context 'with a logged in user' do
     let(:user) { create(:user) }
     let!(:ability) { ::Ability.new(user) }
@@ -23,8 +16,18 @@ RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    it 'is accessible' do
-      visit '/'
+    it 'has an accessible dashboard' do
+      visit '/dashboard'
+      expect(page).to be_accessible
+    end
+
+    it 'has an accessible roles dashboard' do
+      visit '/roles'
+      expect(page).to be_accessible
+    end
+
+    it 'has an accessible user dashboard' do
+      visit '/users'
       expect(page).to be_accessible
     end
   end
