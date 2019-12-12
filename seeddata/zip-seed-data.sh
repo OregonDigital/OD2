@@ -45,7 +45,7 @@ code "config.upload_storage_service = :file_system"
 code "config.skip_field_mode = true"
 echo
 
-dest=$(realpath ../tmp/batch_$batch)
+dest=$(realpath ../tmp/shared/batch_$batch)
 echo "${WARN}Creating batch in $dest$RESET"
 rm -rf $dest
 mkdir -p $dest
