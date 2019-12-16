@@ -3,3 +3,12 @@ u = User.all.last
 r.users << u
 r.save
 exit
+r = Role.all.first
+r.destroy
+r
+Role.all
+r = Role.create(name: 'admin')
+u = User.all.last
+r.users << u
+r.save
+exit
