@@ -1,10 +1,6 @@
 # frozen_string_literal:true
 
 RSpec.describe 'Search Results', js: true, type: :system, clean_repo: true do
-  before do
-    create(:content_block, name: 'marketing_text', value: '<h1>Title</h1>')
-  end
-
   context 'with an annonymous user' do
     it 'is accessible as a list view' do
       visit '/catalog?view=list'

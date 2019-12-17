@@ -12,7 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def redirect_if_university
     service = OregonDigital::UserAttributeService.new(params[:user])
     redirect_path = service.email_redirect_path
+    return if redirect_path.nil?
+
     flash[:error] = 'Please sign in through your university below.'
-    redirect_to redirect_path unless redirect_path.nil?
+    redirect_to redirect_path
   end
 end

@@ -10,8 +10,13 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   // Remove controls background color
   background-color: black;
   .navbar {
+    color: black;
     background: none;
     padding-bottom: 5em;
+  }
+
+  .site-title {
+    min-height: 0;
   }
 }
 #masthead {

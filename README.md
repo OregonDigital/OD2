@@ -140,12 +140,15 @@ _Open another terminal window (unless you run the previous command `detached`)_
 
 Start a session, and run `rspec` on the test (application) container. _(This method offers a more developer/TDD friendly experience)_
 
-    docker-compose run test bash
+    docker-compose exec test bash
     root@8675309jenny:/data# bundle exec rspec
 
 **OR** run `rspec` on the test (application) container directly:
 
-    docker-compose run test rspec
+    docker-compose exec test rspec
+
+Do *not* use `docker-compose run` - it will fire up the entrypoint script,
+which starts up Puma for the capybara tests.
 
 Additional Notes
 ---
