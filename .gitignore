@@ -37,6 +37,7 @@ coverage/*
 
 /vendor/bundle
 .byebug_history
+.bash_history
 
 config/local_env.yml
 
