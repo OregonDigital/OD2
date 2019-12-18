@@ -247,7 +247,7 @@ terms:
       term: "Choctaw [cho]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/chu
-      term: "Church Slavic |  Old Slavonic |  Church Slavonic |  Old Bulgarian |  Old Church | Slavonic [chu]"
+      term: "Church Slavic |  Old Slavonic |  Church Slavonic |  Old Bulgarian |  Old Church Slavonic [chu]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/chk
       term: "Chuukese [chk]"
@@ -640,7 +640,7 @@ terms:
       term: "Kirghiz |  Kyrgyz [kir]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/tlh
-      term: "Klingon |  Ingan-Hol [tlh]"
+      term: "Klingon |  tlhIngan-Hol [tlh]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/kom
       term: "Komi [kom]"
