@@ -8,6 +8,7 @@ end
 # TODO: make this a version specification once we get a new release cut
 gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
 
+gem 'lograge'
 gem 'browse-everything'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
