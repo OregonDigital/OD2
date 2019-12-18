@@ -49,6 +49,8 @@ Hyrax::Migrator.config do |config|
 
   # Set to true for debugging
   config.skip_field_mode = ENV['SKIP_FIELD_MODE']
+  # Skip content if not found
+  config.content_file_can_be_nil = ENV['CONTENT_FILE_CAN_BE_NIL']
 
   config.upload_storage_service = :file_system
   config.ingest_storage_service = :file_system

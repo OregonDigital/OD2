@@ -1,0 +1,29 @@
+<div class="panel-heading">
+  <%# OVERRIDE FROM HYRAX to make header not skip a level %>
+  <h2 class="panel-title"><%= t('.title') %></h2>
+  <div><%= t('.subtitle') %></div>
+</div>
+<div class="panel-body text-center">
+  <% repository_objects = @presenter.repository_objects.to_json %>
+  <div id="dashboard-repository-objects" aria-hidden="true" style="height: 200px"><script>
+//<![CDATA[
+Hyrax.statistics.repositoryObjects = <%== repository_objects %>
+//]]>
+</script></div>
+  <table aria-label="<%= t('.title') %>, <%= t('.subtitle') %>" class="table table-striped sr-only text-left">
+    <thead>
+      <tr>
+        <th><%= t('.status') %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% JSON.parse(repository_objects).each do |row| %>
+        <tr>
+          <td><%= row["label"] %></td>
+          <td><%= row["value"] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

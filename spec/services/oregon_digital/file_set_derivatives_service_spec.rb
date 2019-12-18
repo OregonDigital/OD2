@@ -130,6 +130,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
         before do
           allow(MiniMagick::Image).to receive(:open).with(source).and_return(minimagick)
           allow(minimagick).to receive(:format).with('bmp').and_return(minimagick)
+          allow(minimagick).to receive(:depth).with(8).and_return(minimagick)
           allow(minimagick).to receive(:write).with(tmp_bmp)
         end
 
@@ -223,11 +224,12 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
   describe '#manual_convert' do
     # This seems awful, but I want the free behaviors of an array, and rspec
-    # won't let me just add :density to an array as an expectation unless the
-    # method is already there
+    # won't let me just add :density / :depth to an array as an expectation
+    # unless the method is already there
     let(:convert) do
       c = []
       c.define_singleton_method(:density) { |_| nil }
+      c.define_singleton_method(:depth) { |_| nil }
       c
     end
 
@@ -242,6 +244,11 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
     it 'uses minimagick to generate a convert command' do
       expect(MiniMagick::Tool::Convert).to receive(:new).once
+      func.call
+    end
+
+    it "sets the output BMP's depth to 8 bpc" do
+      expect(convert).to receive(:depth).with(8)
       func.call
     end
 

@@ -1,10 +1,13 @@
 # frozen_string_literal:true
 
-RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
+RSpec.describe 'Collection show page', js: true, type: :system, clean_repo: true do
+  let(:collection_type) { create(:collection_type) }
+  let(:collection) { create(:collection, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, collection_type_gid: "gid://od2/hyrax-collectiontype/#{collection_type.id}") }
+
   context 'with an annonymous user' do
     it 'is accessible' do
-      visit '/'
-      expect(page).to be_accessible
+      visit "/collections/#{collection.id}"
+      expect(page).to be_accessible.excluding('.label-success')
     end
   end
 
@@ -24,8 +27,8 @@ RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
     end
 
     it 'is accessible' do
-      visit '/'
-      expect(page).to be_accessible
+      visit "/collections/#{collection.id}"
+      expect(page).to be_accessible.excluding('.label-success')
     end
   end
 end

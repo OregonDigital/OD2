@@ -38,7 +38,8 @@ coverage/*
 /vendor/bundle
 .byebug_history
 .bash_history
-.local/share/pry/pry_history
+.cache/
+.local/
 
 config/local_env.yml
 

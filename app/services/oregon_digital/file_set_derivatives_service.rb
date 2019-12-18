@@ -123,7 +123,7 @@ module OregonDigital
       case mime_type
       when 'image/jp2' then jp2_to_bmp(source_file, temp_bmp_path)
       when 'image/bmp' then bmp_to_bmp(source_file, temp_bmp_path)
-      else                  MiniMagick::Image.open(source_file).format('bmp').write(temp_bmp_path)
+      else                  other_to_bmp(source_file, temp_bmp_path)
       end
     end
 
@@ -139,10 +139,15 @@ module OregonDigital
       FileUtils.ln_s(source, dest)
     end
 
+    def other_to_bmp(source, dest)
+      MiniMagick::Image.open(source).depth(8).format('bmp').write(dest)
+    end
+
     def manual_convert(filename, pagenum, out_path)
       MiniMagick::Tool::Convert.new do |cmd|
         cmd.density(300)
         cmd << format('%<filename>s[%<page>d]', filename: filename, page: pagenum)
+        cmd.depth(8)
         cmd << out_path
       end
     end
