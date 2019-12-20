@@ -21,4 +21,14 @@ namespace :migration do
       puts e.backtrace
     end
   end
+
+  desc 'Bulk approve job'
+  task bulk_approve_job: :environment do
+    collection_id = ENV['collection_id']
+    if collection_id.present?
+      BulkApproveJob.perform_later(collection_id: collection_id)
+    else
+      BulkApproveJob.perform_later(collection_id: nil)
+    end
+  end
 end
