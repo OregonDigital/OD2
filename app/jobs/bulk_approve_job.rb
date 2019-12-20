@@ -37,7 +37,7 @@ class BulkApproveJob < OregonDigital::ApplicationJob
 
       activate_asset(item, entity)
     rescue StandardError => e
-      puts "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
+      Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
     end
   end
 
