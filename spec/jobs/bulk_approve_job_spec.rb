@@ -3,8 +3,9 @@
 RSpec.describe BulkApproveJob, type: :job do
   include ActiveJob::TestHelper
 
-  let!(:job) { described_class.perform_later(collection_id: col_id) }
+  let!(:job) { described_class.perform_later(collection_id: col_id, user: user) }
   let(:col_id) { 'baseball' }
+  let(:user) { User.new(email: 'other@example.org') }
 
   after do
     clear_enqueued_jobs
@@ -16,7 +17,7 @@ RSpec.describe BulkApproveJob, type: :job do
   end
 
   context 'with approve_everything' do
-    let!(:job) { described_class.perform_later(collection_id: nil) }
+    let!(:job) { described_class.perform_later(collection_id: nil, user: user) }
 
     it { expect(ActiveJob::Base.queue_adapter.enqueued_jobs.count).to eq 1 }
   end

@@ -11,21 +11,20 @@ class BulkApproveJob < OregonDigital::ApplicationJob
 
   def bulk_approve(args)
     collection_id = args[:collection_id]
+    user = args[:user]
 
-    return approve_collection(collection_id) if collection_id.present?
+    return approve_collection(collection_id, user) if collection_id.present?
 
-    approve_everything
+    approve_everything(user)
   end
 
-  def approve_everything
-    migration_user = Hyrax::Migrator.config.migration_user
-    solr_query = deposited_by_admin_query(migration_user)
+  def approve_everything(user)
+    solr_query = deposited_by_admin_query(user)
     approve(solr_query)
   end
 
-  def approve_collection(collection_id)
-    migration_user = Hyrax::Migrator.config.migration_user
-    solr_query = deposited_by_admin_in_collection_query(migration_user, collection_id)
+  def approve_collection(collection_id, user)
+    solr_query = deposited_by_admin_in_collection_query(user, collection_id)
     approve(solr_query)
   end
 
@@ -49,11 +48,11 @@ class BulkApproveJob < OregonDigital::ApplicationJob
     item.save!
   end
 
-  def deposited_by_admin_query(migration_user)
-    "suppressed_bsi:true AND depositor_ssim:#{migration_user}"
+  def deposited_by_admin_query(user)
+    "suppressed_bsi:true AND depositor_ssim:#{user}"
   end
 
-  def deposited_by_admin_in_collection_query(migration_user, collection_id)
-    "suppressed_bsi:true AND depositor_ssim:#{migration_user} AND member_of_collection_ids_ssim:#{collection_id}"
+  def deposited_by_admin_in_collection_query(user, collection_id)
+    "suppressed_bsi:true AND depositor_ssim:#{user} AND member_of_collection_ids_ssim:#{collection_id}"
   end
 end
