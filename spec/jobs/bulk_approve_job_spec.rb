@@ -5,7 +5,7 @@ RSpec.describe BulkApproveJob, type: :job do
 
   let!(:job) { described_class.perform_later(collection_id: col_id, user: user) }
   let(:col_id) { 'baseball' }
-  let(:user) { User.new(email: 'other@example.org') }
+  let(:user) { User.new(email: 'other@example.org').save! }
 
   after do
     clear_enqueued_jobs
