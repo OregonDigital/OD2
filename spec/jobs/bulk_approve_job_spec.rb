@@ -3,7 +3,7 @@
 RSpec.describe BulkApproveJob, type: :job do
   include ActiveJob::TestHelper
 
-  let!(:job) { described_class.perform_later(collection_id: col_id, user: user) }
+  let!(:job) { described_class.perform_later(collection_id: col_id, user: user.email) }
   let(:col_id) { 'baseball' }
   let(:user) { User.new(email: 'other@example.org').save! }
 
