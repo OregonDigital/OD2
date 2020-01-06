@@ -642,7 +642,7 @@ GEM
       nokogiri (~> 1.6)
       rails (~> 5.0)
       rdf
-    rack (2.0.7)
+    rack (2.0.8)
     rack-honeycomb (0.5.0)
       libhoney (>= 1.5.0)
     rack-protection (2.0.7)
@@ -949,7 +949,6 @@ DEPENDENCIES
   equivalent-xml
   factory_bot_rails
   faraday_middleware (~> 0.10.0)
-  haml
   honeycomb-beeline (>= 1.0.0)
   hydra-derivatives!
   hydra-role-management (~> 1.0.2)
