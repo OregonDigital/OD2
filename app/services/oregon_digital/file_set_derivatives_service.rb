@@ -77,13 +77,7 @@ module OregonDigital
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
-
-      # Open the PDF - this creates a tempfile because of how MiniMagick works,
-      # so we immediately destroy the object after retrieving the page count
-      pdf = MiniMagick::Image.open(filename)
-      page_count = pdf.pages.length
-      pdf.destroy!
-
+      page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       0.upto(page_count - 1) do |pagenum|
         OregonDigital::Derivatives::Image::Utils.tmp_file('bmp') do |out_path|
           manual_convert(filename, pagenum, out_path)
@@ -93,12 +87,11 @@ module OregonDigital
     end
 
     def create_thumbnail(filename)
-      OregonDigital::Derivatives::Image::GMRunner.create(filename,
-                                                         outputs: [{ label: :thumbnail,
-                                                                     size: '120x120>',
-                                                                     format: 'jpg',
-                                                                     url: derivative_url('thumbnail'),
-                                                                     layer: 0 }])
+      OregonDigital::Derivatives::Image::GMRunner.create(
+        filename,
+        outputs: [{ label: :thumbnail, size: '120x120>',
+                    format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+      )
     end
 
     def create_zoomable(filename)

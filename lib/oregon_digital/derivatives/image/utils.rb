@@ -15,6 +15,15 @@ module OregonDigital::Derivatives::Image
           f.unlink
         end
       end
+
+      # Opens the file with minimagick to count pages, destroys the temp files,
+      # then returns page count
+      def page_count(filename)
+        obj = MiniMagick::Image.open(filename)
+        page_count = obj.pages.length
+        obj.destroy!
+        page_count
+      end
     end
   end
 end
