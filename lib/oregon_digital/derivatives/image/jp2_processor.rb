@@ -59,6 +59,8 @@ module OregonDigital::Derivatives::Image
         self.class.encode(source_path, recipe, out_path)
         output_file_service.call(File.open(out_path, 'rb'), directives)
       end
+
+      image.destroy!
     end
   end
 end
