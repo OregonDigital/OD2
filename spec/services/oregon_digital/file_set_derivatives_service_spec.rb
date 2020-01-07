@@ -132,6 +132,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
           allow(minimagick).to receive(:format).with('bmp').and_return(minimagick)
           allow(minimagick).to receive(:depth).with(8).and_return(minimagick)
           allow(minimagick).to receive(:write).with(tmp_bmp)
+          allow(minimagick).to receive(:destroy!)
         end
 
         it 'runs minimagick to generate a bmp' do
@@ -194,6 +195,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
       allow(MiniMagick::Image).to receive(:open).with(bogus_pdf).and_return(minimagick)
       allow(minimagick).to receive(:pages).and_return(pages)
+      allow(minimagick).to receive(:destroy!)
     end
 
     it 'creates a thumbnail' do
