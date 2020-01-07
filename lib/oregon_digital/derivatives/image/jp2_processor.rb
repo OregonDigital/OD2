@@ -51,14 +51,27 @@ module OregonDigital::Derivatives::Image
       [image[:width], image[:height]].max
     end
 
-    def process
-      image = MiniMagick::Image.open(source_path)
-      recipe = self.class.opj_compress_recipe(directives, calc_long_dim(image))
+    def image
+      @image ||= MiniMagick::Image.open(source_path)
+    end
 
+    def image_recipe
+      self.class.opj_compress_recipe(directives, calc_long_dim(image))
+    end
+
+    def free_image
+      return if @image.nil?
+
+      @image.destroy!
+    end
+
+    def process
       OregonDigital::Derivatives::Image::Utils.tmp_file('jp2') do |out_path|
-        self.class.encode(source_path, recipe, out_path)
+        self.class.encode(source_path, image_recipe, out_path)
         output_file_service.call(File.open(out_path, 'rb'), directives)
       end
+
+      free_image
     end
   end
 end
