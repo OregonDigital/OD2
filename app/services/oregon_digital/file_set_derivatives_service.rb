@@ -4,7 +4,7 @@ module OregonDigital
   # Overrides the Hyrax derivative generation for our JP2 setup
   #
   # This builds JP2 derivatives in stages.  The openjpeg tools can't convert
-  # many formats to JP2 directly, so we make sure we have a BMP, and then
+  # many formats to JP2 directly, so we make sure we have a PNG, and then
   # convert that to JP2.  It's a bit messy and definitely inelegant, but it
   # does the job.
   #
@@ -67,7 +67,7 @@ module OregonDigital
 
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
     def create_image_derivatives(filename)
-      OregonDigital::Derivatives::Image::Utils.tmp_file('bmp') do |out_path|
+      OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
         preprocess_image(filename, out_path)
         create_thumbnail(out_path)
         create_zoomable(out_path)
@@ -79,7 +79,7 @@ module OregonDigital
       extract_full_text(filename, uri)
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       0.upto(page_count - 1) do |pagenum|
-        OregonDigital::Derivatives::Image::Utils.tmp_file('bmp') do |out_path|
+        OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
           create_zoomable_page(out_path, pagenum)
         end
@@ -108,38 +108,38 @@ module OregonDigital
                                                                       layer: 0 }])
     end
 
-    # Pre-processes the given file to generate a BMP based on its mime type:
+    # Pre-processes the given file to generate a PNG based on its mime type:
     #
     # - JP2s need to be decoded and then re-encoded by opj tools:
     #   GraphicsMagick can't read them, and opj_compress won't re-encode an
     #   existing JP2....
-    # - BMPs don't need an intermediate step, so they don't need any
-    #   preprocessing to happen; we fake it by hard-linking the existing BMP
+    # - PNGs don't need an intermediate step, so they don't need any
+    #   preprocessing to happen; we fake it by hard-linking the existing PNG
     #   so the rest of the logic works consistently
-    # - All other images need to be converted to BMP via graphicsmagick
-    def preprocess_image(source_file, temp_bmp_path)
+    # - All other images need to be converted to PNG via graphicsmagick
+    def preprocess_image(source_file, temp_png_path)
       case mime_type
-      when 'image/jp2' then jp2_to_bmp(source_file, temp_bmp_path)
-      when 'image/bmp' then bmp_to_bmp(source_file, temp_bmp_path)
-      else                  other_to_bmp(source_file, temp_bmp_path)
+      when 'image/jp2'  then jp2_to_png(source_file, temp_png_path)
+      when 'image/png' then png_to_png(source_file, temp_png_path)
+      else                   other_to_png(source_file, temp_png_path)
       end
     end
 
-    def jp2_to_bmp(source, dest)
+    def jp2_to_png(source, dest)
       source = Shellwords.escape(source)
       dest = Shellwords.escape(dest)
       bin = jp2_processor.opj_decompress
       jp2_processor.execute "#{bin} -i #{source} -o #{dest}"
     end
 
-    def bmp_to_bmp(source, dest)
+    def png_to_png(source, dest)
       File.unlink(dest)
       FileUtils.ln_s(source, dest)
     end
 
-    def other_to_bmp(source, dest)
+    def other_to_png(source, dest)
       image = MiniMagick::Image.open(source)
-      image.depth(8).format('bmp').write(dest)
+      image.depth(8).format('png').write(dest)
 
       # The above code generates a temp file which we don't need beyond the
       # .write() call, so we explicitly destroy the image object
