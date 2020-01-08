@@ -8,26 +8,44 @@ class FetchGraphWorker
   attr_writer :triplestore
   attr_accessor :uri, :user
 
-  def perform(uri, user)
-    @uri = uri
-    @user = User.find_by_user_key(user)
+  def perform(pid)
+    # Fetch Work and SolrDoc
+    work = ActiveFedora::Base.find(pid)
+    solr_doc = SolrDocument.find(pid)
 
-    # Exit early and skip notifying user if graph is already local
-    return if triplestore.fetch(@uri)
+    # Use 0 for version to tell Solr that the document just needs to exist to be updated
+    # Versions dont need to match
+    solr_doc.response['response']['docs'].first['_version_'] = 0
+    solr_doc['_version_'] = 0
 
-    # Attempt fresh fetch and raise exception if failed again
-    triplestore.fetch(@uri, from_remote: true)
+    # Iterate over Controller Props values
+    work.controlled_properties.each do |controlled_prop|
+      work.attributes[controlled_prop.to_s].each do |val|
+        # Fetch labels
+        if val.respond_to?(:fetch)
+          val.fetch(headers: { 'Accept' => default_accept_header })
+          val.persist!
+        end
 
-    # Email user on success
-    Hyrax.config.callback.run(:ld_fetch_success, @user, @uri)
+        # For each behavior
+        work.class.index_config[controlled_prop].behaviors.each do |behavior|
+          # Insert into SolrDocument
+          if val.is_a?(String)
+            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
+          else
+            extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
+            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
+          end
+        end
+      end
+    end
+
+    # Commit Changes
+    ActiveFedora::SolrService.add(solr_doc)
+    ActiveFedora::SolrService.commit
   end
 
-  def triplestore
-    @triplestore ||= TriplestoreAdapter::Triplestore.new(OregonDigital::Triplestore.triplestore_client)
-  end
-
-  sidekiq_retries_exhausted do
-    # Email user about exhaustion of retries
-    Hyrax.config.callback.run(:ld_fetch_exhaust, @user, @uri)
+  def default_accept_header
+    RDF::Util::File::HttpAdapter.default_accept_header.sub(%r{, \*\/\*;q=0\.1\Z}, '')
   end
 end

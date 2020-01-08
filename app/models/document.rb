@@ -14,4 +14,9 @@ class Document < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::DocumentMetadata
   include ::OregonDigital::GenericMetadata
+
+  def update_index
+    super
+    FetchGraphWorker.perform_async(id)
+  end
 end

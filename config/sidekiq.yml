@@ -1,5 +1,6 @@
 ---
 :concurrency: 5
+:logfile: log/development.log
 staging:
   :concurrency: 5
 production:
