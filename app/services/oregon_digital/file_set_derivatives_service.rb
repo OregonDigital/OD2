@@ -119,9 +119,9 @@ module OregonDigital
     # - All other images need to be converted to PNG via graphicsmagick
     def preprocess_image(source_file, temp_png_path)
       case mime_type
-      when 'image/jp2'  then jp2_to_png(source_file, temp_png_path)
+      when 'image/jp2' then jp2_to_png(source_file, temp_png_path)
       when 'image/png' then png_to_png(source_file, temp_png_path)
-      else                   other_to_png(source_file, temp_png_path)
+      else other_to_png(source_file, temp_png_path)
       end
     end
 
