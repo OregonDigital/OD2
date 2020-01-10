@@ -5,6 +5,7 @@ require 'rake'
 require 'pry'
 
 RSpec.describe 'Rake tasks' do
+  include ActiveJob::TestHelper
   describe 'migration:bulk_approve' do
     let(:work1) { build(:work, user: other_user, state: state) }
     let(:migration_user) { User.new(email: 'migrator@example.org') }
@@ -68,6 +69,38 @@ RSpec.describe 'Rake tasks' do
         work3.save!
         expect(Hyrax::Workflow::ActivateObject).not_to receive(:call).with(target: work3)
         run_rake_task
+      end
+    end
+  end
+
+  describe 'migration:fixes:retry_file_attach' do
+    context 'when there is a batch of persisted assets with no files' do
+      let(:migration_user) { User.new(email: 'admin@example.org') }
+      let(:work1) { build(:work, user: migration_user, id: 'abcde1234') }
+      let(:work2) { build(:work, user: migration_user, id: 'abcde5678') }
+      let(:run_rake_task) do
+        ENV['batch'] = 'batch1'
+        Rake.application.invoke_task 'migration:fixes:retry_file_attach'
+      end
+
+      before do
+        work1.save
+        work2.save
+        migration_user.save
+        Hyrax::Migrator.config.ingest_local_path = Rails.root.join 'spec/fixtures'
+        Hyrax::Migrator.config.file_system_path = Rails.root.join 'spec/fixtures'
+        Rake.application.rake_require 'tasks/migration/fixes'
+        Rake::Task.define_task(:environment)
+        run_rake_task
+      end
+
+      after do
+        clear_enqueued_jobs
+        clear_performed_jobs
+      end
+
+      it 'enqueues jobs' do
+        expect(ActiveJob::Base.queue_adapter.enqueued_jobs.size).to eq 2
       end
     end
   end
