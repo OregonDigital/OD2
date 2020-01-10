@@ -27,26 +27,30 @@ end
 
 def process(pid)
   af_object = ActiveFedora::Base.exists?(pid) ? ActiveFedora::Base.find(pid) : nil
-  if !af_object.nil? && af_object.representative_id.nil?
-    attach_file(af_object)
-  end
+  attach_file(af_object) if !af_object.nil? && af_object.representative_id.nil?
 end
 
 # Looks for the content file in the file_system_path
 # TODO Enable retrieving content file from the zip?
 def attach_file(af_object)
-  user = User.find_by_user_key(Hyrax::Migrator.config.migration_user)
-  files = Dir.entries(Hyrax::Migrator.config.file_system_path)
+  filename = files.find { |f| f.downcase.start_with? af_object.id }
+  puts "Unable to find content file for #{af_object.id}" && return if filename.nil?
 
-  filename = files.find { |f| f.downcase.start_with? (af_object.id) }
-  if filename.nil?
-    puts "Unable to find content file for #{af_object.id}"
-    return
-  end
+  puts "Enqueueing job for #{af_object.id}"
+  AttachFilesToWorkJob.perform_later(af_object, [upload_file(user, filename)])
+end
+
+def user
+  @user ||= User.find_by_user_key(Hyrax::Migrator.config.migration_user)
+end
+
+def files
+  @files ||= Dir.entries(Hyrax::Migrator.config.file_system_path)
+end
+
+def upload_file(user, filename)
   file = File.open(File.join(Hyrax::Migrator.config.file_system_path, filename))
   uploaded_file = Hyrax::UploadedFile.new(user: user, file: file)
   uploaded_file.save
-  puts "Enqueueing job for #{af_object.id}"
-  AttachFilesToWorkJob.perform_later(af_object, [uploaded_file])
+  uploaded_file
 end
-
