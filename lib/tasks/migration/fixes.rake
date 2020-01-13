@@ -37,20 +37,20 @@ def attach_file(af_object)
   puts "Unable to find content file for #{af_object.id}" && return if filename.nil?
 
   puts "Enqueueing job for #{af_object.id}"
-  AttachFilesToWorkJob.perform_later(af_object, [upload_file(user, filename)])
+  AttachFilesToWorkJob.perform_later(af_object, [upload_file(migration_user, filename)])
 end
 
-def user
-  @user ||= User.where(email: Hyrax::Migrator.config.migration_user).first
+def migration_user
+  @migration_user ||= User.where(email: Hyrax::Migrator.config.migration_user).first
 end
 
 def files
   @files ||= Dir.entries(Hyrax::Migrator.config.file_system_path)
 end
 
-def upload_file(user, filename)
+def upload_file(migration_user, filename)
   file = File.open(File.join(Hyrax::Migrator.config.file_system_path, filename))
-  uploaded_file = Hyrax::UploadedFile.new(user: user, file: file)
+  uploaded_file = Hyrax::UploadedFile.new(user: migration_user, file: file)
   uploaded_file.save
   uploaded_file
 end
