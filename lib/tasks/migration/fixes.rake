@@ -41,7 +41,7 @@ def attach_file(af_object)
 end
 
 def user
-  @user ||= User.find_by_user_key(Hyrax::Migrator.config.migration_user)
+  @user ||= User.where(email: Hyrax::Migrator.config.migration_user).first
 end
 
 def files
