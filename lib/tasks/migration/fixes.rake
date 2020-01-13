@@ -13,19 +13,19 @@ namespace :migration do
                 .map { |zip_file| File.basename(zip_file, File.extname(zip_file)) }
 
       pids.each do |pid|
-        process(pid)
+        assess(pid)
       end
     end
 
     desc 'Fix one asset by retrying file attach'
     task retry_single_file_attach: :environment do
       pid = ENV['pid']
-      process(pid)
+      assess(pid)
     end
   end
 end
 
-def process(pid)
+def assess(pid)
   af_object = ActiveFedora::Base.exists?(pid) ? ActiveFedora::Base.find(pid) : nil
   attach_file(af_object) if !af_object.nil? && af_object.representative_id.nil?
 end
