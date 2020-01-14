@@ -81,7 +81,7 @@ module OregonDigital
       extract_full_text(filename, uri)
       OregonDigital::Derivatives::Document::Runner.create(
         filename,
-        outputs: [{ label: :thumbnail, size: '120x120>',
+        outputs: [{ label: :thumbnail, size: '200x150>',
                     format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
       )
     end
