@@ -78,6 +78,9 @@ RSpec.describe 'Rake tasks' do
       let(:migration_user) { User.new(email: 'admin@example.org') }
       let(:work1) { build(:work, user: migration_user, id: 'abcde1234') }
       let(:work2) { build(:work, user: migration_user, id: 'abcde5678') }
+      let(:path) { Rails.root.join 'spec/fixtures' }
+      let(:upload_file) { Hyrax::Migrator::UploadedFile.new(user: migration_user, file: file) }
+      let(:file) { File.open(File.join(path, 'abcde1234_content.txt')) }
       let(:run_rake_task) do
         ENV['batch'] = 'batch1'
         Rake.application.invoke_task 'migration:fixes:retry_file_attach'
@@ -87,10 +90,12 @@ RSpec.describe 'Rake tasks' do
         work1.save
         work2.save
         migration_user.save
-        Hyrax::Migrator.config.ingest_local_path = Rails.root.join 'spec/fixtures'
-        Hyrax::Migrator.config.file_system_path = Rails.root.join 'spec/fixtures'
+        upload_file.save
+        Hyrax::Migrator.config.ingest_local_path = path
+        Hyrax::Migrator.config.file_system_path = path
         Rake.application.rake_require 'tasks/migration/fixes'
         Rake::Task.define_task(:environment)
+        allow(Hyrax::UploadedFile).to receive(:new).and_return(upload_file)
         run_rake_task
       end
 
