@@ -1,6 +1,6 @@
-module Hydra::Derivatives::Processors
-  class Document < Processor
-    include ShellBasedProcessor
+module OregonDigital::Derivatives::Document
+  class Processor < Hydra::Derivatives::Processors::Processor
+    include Hydra::Derivatives::Processors::ShellBasedProcessor
 
     def self.encode(path, format, outdir)
       execute "#{Hydra::Derivatives.libreoffice_path} --invisible --headless --convert-to #{format} --outdir #{outdir} #{Shellwords.escape(path)}"
