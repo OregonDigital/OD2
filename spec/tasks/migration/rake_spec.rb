@@ -79,7 +79,7 @@ RSpec.describe 'Rake tasks' do
       let(:work1) { build(:work, user: migration_user, id: 'abcde1234') }
       let(:work2) { build(:work, user: migration_user, id: 'abcde5678') }
       let(:path) { Rails.root.join 'spec/fixtures' }
-      let(:upload_file) { Hyrax::Migrator::UploadedFile.new(user: migration_user, file: file) }
+      let(:upload_file) { Hyrax::UploadedFile.new(user: migration_user, file: file) }
       let(:file) { File.open(File.join(path, 'abcde1234_content.txt')) }
       let(:run_rake_task) do
         ENV['batch'] = 'batch1'
