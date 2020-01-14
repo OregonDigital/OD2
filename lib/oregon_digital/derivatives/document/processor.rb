@@ -21,7 +21,7 @@ module OregonDigital::Derivatives::Document
       # so we can get a better conversion with resizing options. Otherwise, the ::encode method is used.
       def convert_to_format
         if directives.fetch(:format) == "jpg"
-          Hydra::Derivatives::Processors::Image.new(converted_file, directives).process
+          OregonDigital::Derivatives::Image::GMProcessor.new(converted_file, directives).process
         else
           output_file_service.call(File.read(converted_file), directives)
         end
