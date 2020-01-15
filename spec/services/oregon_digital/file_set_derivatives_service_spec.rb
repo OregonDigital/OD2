@@ -75,74 +75,75 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
   describe '#create_image_derivatives' do
     let(:bogus_jpg) { '/bogus/path/to/file.jpg' }
-    let(:tmp_bmp) { '/tmp/path/to/file.bmp' }
+    let(:tmp_png) { '/tmp/path/to/file.png' }
 
     before do
-      allow(OregonDigital::Derivatives::Image::Utils).to receive(:tmp_file).with('bmp').and_yield(tmp_bmp)
+      allow(OregonDigital::Derivatives::Image::Utils).to receive(:tmp_file).with('png').and_yield(tmp_png)
       allow(service).to receive(:preprocess_image)
       allow(service).to receive(:create_thumbnail)
       allow(service).to receive(:create_zoomable)
     end
 
     it 'preprocesses the image' do
-      expect(service).to receive(:preprocess_image).with(bogus_jpg, tmp_bmp)
+      expect(service).to receive(:preprocess_image).with(bogus_jpg, tmp_png)
       service.create_image_derivatives(bogus_jpg)
     end
 
     it 'creates a thumbnail from the bitmap' do
-      expect(service).to receive(:create_thumbnail).with(tmp_bmp)
+      expect(service).to receive(:create_thumbnail).with(tmp_png)
       service.create_image_derivatives(bogus_jpg)
     end
 
     it 'creates a zoomable image from the bitmap' do
-      expect(service).to receive(:create_zoomable).with(tmp_bmp)
+      expect(service).to receive(:create_zoomable).with(tmp_png)
       service.create_image_derivatives(bogus_jpg)
     end
   end
 
   describe '#preprocess_image' do
     let(:source) { '/bogus/path/to/file.xyzzy' }
-    let(:tmp_bmp) { '/tmp/path/to/file.bmp' }
+    let(:tmp_png) { '/tmp/path/to/file.png' }
 
     context 'with a JP2' do
       let(:mime_type) { 'image/jp2' }
 
-      it 'runs the jp2 preprocessor to generate the bmp' do
-        expect(service).to receive(:jp2_to_bmp).with(source, tmp_bmp)
-        service.preprocess_image(source, tmp_bmp)
+      it 'runs the jp2 preprocessor to generate the png' do
+        expect(service).to receive(:jp2_to_png).with(source, tmp_png)
+        service.preprocess_image(source, tmp_png)
       end
     end
 
-    context 'with a BMP' do
-      let(:mime_type) { 'image/bmp' }
+    context 'with a PNG' do
+      let(:mime_type) { 'image/png' }
 
-      it 'runs the bmp preprocessor to generate the bmp' do
-        expect(service).to receive(:bmp_to_bmp).with(source, tmp_bmp)
-        service.preprocess_image(source, tmp_bmp)
+      it 'runs the png preprocessor to generate the png' do
+        expect(service).to receive(:png_to_png).with(source, tmp_png)
+        service.preprocess_image(source, tmp_png)
       end
     end
 
-    (FileSet.image_mime_types - ['image/jp2', 'image/bmp']).each do |mime|
+    (FileSet.image_mime_types - ['image/jp2', 'image/png']).each do |mime|
       context "with a #{mime}" do
         let(:mime_type) { mime }
         let(:minimagick) { double }
 
         before do
           allow(MiniMagick::Image).to receive(:open).with(source).and_return(minimagick)
-          allow(minimagick).to receive(:format).with('bmp').and_return(minimagick)
+          allow(minimagick).to receive(:format).with('png').and_return(minimagick)
           allow(minimagick).to receive(:depth).with(8).and_return(minimagick)
-          allow(minimagick).to receive(:write).with(tmp_bmp)
+          allow(minimagick).to receive(:write).with(tmp_png)
+          allow(minimagick).to receive(:destroy!)
         end
 
-        it 'runs minimagick to generate a bmp' do
-          expect(minimagick).to receive(:write).with(tmp_bmp)
-          service.preprocess_image(source, tmp_bmp)
+        it 'runs minimagick to generate a png' do
+          expect(minimagick).to receive(:write).with(tmp_png)
+          service.preprocess_image(source, tmp_png)
         end
       end
     end
   end
 
-  describe '#jp2_to_bmp' do
+  describe '#jp2_to_png' do
     let(:processor) { double }
 
     before do
@@ -151,42 +152,42 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
     end
 
     it "runs the processor's execute method" do
-      expect(processor).to receive(:execute).with('tool -i foo.jp2 -o bar.bmp')
-      service.jp2_to_bmp('foo.jp2', 'bar.bmp')
+      expect(processor).to receive(:execute).with('tool -i foo.jp2 -o bar.png')
+      service.jp2_to_png('foo.jp2', 'bar.png')
     end
 
     it 'escapes shell-dangerous source and destinations' do
       expect(processor).to receive(:execute).with('tool -i foo\"bar -o baz\ \|\|\ exit\ 1')
-      service.jp2_to_bmp('foo"bar', 'baz || exit 1')
+      service.jp2_to_png('foo"bar', 'baz || exit 1')
     end
   end
 
-  describe '#bmp_to_bmp' do
+  describe '#png_to_png' do
     before do
-      allow(File).to receive(:unlink).with('tmp.bmp')
-      allow(FileUtils).to receive(:ln_s).with('orig.bmp', 'tmp.bmp')
+      allow(File).to receive(:unlink).with('tmp.png')
+      allow(FileUtils).to receive(:ln_s).with('orig.png', 'tmp.png')
     end
 
     it 'removes the temp file' do
-      expect(File).to receive(:unlink).with('tmp.bmp')
-      service.bmp_to_bmp('orig.bmp', 'tmp.bmp')
+      expect(File).to receive(:unlink).with('tmp.png')
+      service.png_to_png('orig.png', 'tmp.png')
     end
 
-    it 'symlinks the source bmp' do
-      expect(FileUtils).to receive(:ln_s).with('orig.bmp', 'tmp.bmp')
-      service.bmp_to_bmp('orig.bmp', 'tmp.bmp')
+    it 'symlinks the source png' do
+      expect(FileUtils).to receive(:ln_s).with('orig.png', 'tmp.png')
+      service.png_to_png('orig.png', 'tmp.png')
     end
   end
 
   describe '#create_pdf_derivatives' do
     let(:bogus_pdf) { '/bogus/path/to/file.pdf' }
-    let(:tmp_bmp) { '/tmp/path/to/file.bmp' }
+    let(:tmp_png) { '/tmp/path/to/file.png' }
     let(:mime_type) { 'application/pdf' }
     let(:minimagick) { double }
     let(:pages) { [double, double, double, double, double] }
 
     before do
-      allow(OregonDigital::Derivatives::Image::Utils).to receive(:tmp_file).with('bmp').and_yield(tmp_bmp)
+      allow(OregonDigital::Derivatives::Image::Utils).to receive(:tmp_file).with('png').and_yield(tmp_png)
       allow(service).to receive(:create_thumbnail)
       allow(service).to receive(:extract_full_text)
       allow(service).to receive(:manual_convert)
@@ -194,6 +195,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
       allow(MiniMagick::Image).to receive(:open).with(bogus_pdf).and_return(minimagick)
       allow(minimagick).to receive(:pages).and_return(pages)
+      allow(minimagick).to receive(:destroy!)
     end
 
     it 'creates a thumbnail' do
@@ -208,7 +210,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
     it 'converts each page to a bitmap' do
       pages.each_with_index do |_, i|
-        expect(service).to receive(:manual_convert).with(bogus_pdf, i, tmp_bmp)
+        expect(service).to receive(:manual_convert).with(bogus_pdf, i, tmp_png)
       end
 
       service.create_pdf_derivatives(bogus_pdf)
@@ -216,7 +218,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
     it "creates a zoomable image from each page's bitmap" do
       pages.each_with_index do |_, i|
-        expect(service).to receive(:create_zoomable_page).with(tmp_bmp, i)
+        expect(service).to receive(:create_zoomable_page).with(tmp_png, i)
       end
       service.create_pdf_derivatives(bogus_pdf)
     end
@@ -247,7 +249,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       func.call
     end
 
-    it "sets the output BMP's depth to 8 bpc" do
+    it "sets the output PNG's depth to 8 bpc" do
       expect(convert).to receive(:depth).with(8)
       func.call
     end

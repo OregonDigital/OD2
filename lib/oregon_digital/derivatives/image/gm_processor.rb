@@ -24,10 +24,12 @@ module OregonDigital::Derivatives::Image
         convert(image, out_path)
         output_file_service.call(File.open(out_path, 'rb'), directives)
       end
+      @tmp_image.destroy!
     end
 
     def load_image(path)
-      selected_layers(MiniMagick::Image.open(path))
+      @tmp_image = MiniMagick::Image.open(path)
+      selected_layers(@tmp_image)
     end
 
     def convert(image, outfile)

@@ -10,6 +10,8 @@ gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
 
 gem 'lograge'
 gem 'browse-everything'
+# coffee-rails is a requirement for Hyrax or one of its dependencies but hasn't
+# been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'hydra-role-management', '~> 1.0.2'
@@ -28,7 +30,6 @@ gem 'ruby-oembed'
 gem 'blacklight-oembed'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
-gem 'haml'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
@@ -47,6 +48,7 @@ gem 'rack-honeycomb', '~> 0.5.0'
 gem "recaptcha", require: "recaptcha/rails"
 
 group :development do
+  # listen is a requirement of puma but isn't part of its gemspec
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
 end
