@@ -20,9 +20,9 @@ admin_sets:
   - id: uo-mc
     title: Marketing Communications, University of Oregon
     description: 'Works created, managed and administered by Marketing Communications, University of Oregon.'
-  - id: ncu
+  - id: nwcu
     title: Northwest Christian College
     description: 'Works created, managed and administered by Northwest Christian College and the University of Oregon Libraries.'
-    - id: oac
+  - id: oac
     title: Oregon Arts Commission
     description: 'Works created, managed and administered by the Oregon Arts Commission.'
