@@ -29,6 +29,7 @@ Metrics/ClassLength:
   Exclude:
     - 'app/controllers/catalog_controller.rb'
     - 'lib/oregon_digital/triple_powered_properties/inputs/triple_powered_property_input.rb'
+    - 'app/services/oregon_digital/file_set_derivatives_service.rb'
 
 Metrics/BlockLength:
   Exclude:

@@ -74,6 +74,18 @@ module OregonDigital
       end
     end
 
+    # Overridden: Office documents' needs are very similar to base Hyrax, but
+    # we can't use `mogrify` with a `flatten` switch in GraphicsMagick-land, so
+    # we have a slightly modified copy of the core processor
+    def create_office_document_derivatives(filename)
+      extract_full_text(filename, uri)
+      OregonDigital::Derivatives::Document::Runner.create(
+        filename,
+        outputs: [{ label: :thumbnail, size: '200x150>',
+                    format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+      )
+    end
+
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
