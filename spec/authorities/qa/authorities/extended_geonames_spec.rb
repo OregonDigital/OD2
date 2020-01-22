@@ -13,6 +13,6 @@ RSpec.describe Qa::Authorities::ExtendedGeonames do
       allow(geonames_instance).to receive(:build_query_url).with('http://my.queryuri.com').and_return(response)
     end
 
-    it { expect(geonames_instance.search('http://my.queryuri.com')).to eq [{ 'id': 'http://sws.geonames.org/myId/', 'label': 'myName, adminName1, countryName, (Administrative Boundary)' }.with_indifferent_access] }
+    it { expect(geonames_instance.search('http://my.queryuri.com')).to eq [{ 'id': 'https://sws.geonames.org/myId/', 'label': 'myName, adminName1, countryName, (Administrative Boundary)' }.with_indifferent_access] }
   end
 end
