@@ -768,7 +768,7 @@ module OregonDigital
         { name: 'institution_label', is_controlled: true },
         { name: 'conversion', is_controlled: false },
         { name: 'date_digitized', is_controlled: false },
-        { name: 'submission_date', is_controlled: false },
+        { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false },
         { name: 'original_file_name', is_controlled: false },
         { name: 'file_size', is_controlled: false },
@@ -776,9 +776,7 @@ module OregonDigital
         { name: 'width', is_controlled: false },
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
-        { name: 'color_space', is_controlled: false },
-        { name: 'date_modified', is_controlled: false },
-        { name: 'date_uploaded', is_controlled: false }
+        { name: 'color_space', is_controlled: false }
       ].freeze
     end
   end

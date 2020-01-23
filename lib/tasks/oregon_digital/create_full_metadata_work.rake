@@ -24,6 +24,8 @@ def build_attributes
       generic_attributes["#{key}_attributes"] = nested_attributes(value.first)
     elsif value.is_a?(Array) && value.empty?
       generic_attributes[key] = ['bacon']
+    else
+      generic_attributes[key] = value
     end
   end
   generic_attributes
@@ -38,7 +40,7 @@ def attrs
   {
     'depositor' => nil,
     'title' => [],
-    'date_uploaded' => nil,
+    'date_uploaded' => Hyrax::TimeService.time_in_utc,
     'date_modified' => nil,
     'proxy_depositor' => nil,
     'on_behalf_of' => nil,
