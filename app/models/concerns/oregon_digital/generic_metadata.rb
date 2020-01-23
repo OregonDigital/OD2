@@ -647,7 +647,7 @@ module OregonDigital
         { name: 'date_issued', is_controlled: false },
         { name: 'award_date', is_controlled: false },
         { name: 'acquisition_date', is_controlled: false },
-        { name: 'date_collected', is_controlled: false },
+        { name: 'collected_date', is_controlled: false },
         { name: 'description', is_controlled: false },
         { name: 'tribal_notes', is_controlled: false },
         { name: 'abstract', is_controlled: false },
