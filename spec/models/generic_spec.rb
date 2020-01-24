@@ -71,7 +71,7 @@ RSpec.describe Generic do
       model.send(:properties_as_s)
     end
     it 'returns a hash with no controlled properties' do
-      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo')
+      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe Generic do
     end
     it 'provides correct data' do
       csv = CSV.parse(model.csv_metadata, headers: true)
-      expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo')
+      expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
     end
   end
 
