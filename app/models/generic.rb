@@ -15,7 +15,6 @@ class Generic < ActiveFedora::Base
   include ::OregonDigital::GenericMetadata
   validates_presence_of Hyrax::GenericForm.required_fields
 
-
   def update_index
     super
     FetchGraphWorker.perform_async(id)
