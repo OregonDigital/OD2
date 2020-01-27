@@ -8,7 +8,7 @@ class FetchGraphWorker
   attr_writer :triplestore
   attr_accessor :uri, :user
 
-  def perform(pid)
+  def perform(pid, user)
     # Fetch Work and SolrDoc
     work = ActiveFedora::Base.find(pid)
     solr_doc = SolrDocument.find(pid)
@@ -23,7 +23,12 @@ class FetchGraphWorker
       work.attributes[controlled_prop.to_s].each do |val|
         # Fetch labels
         if val.respond_to?(:fetch)
-          val.fetch(headers: { 'Accept' => default_accept_header })
+          begin
+            val.fetch(headers: { 'Accept' => default_accept_header })
+          rescue TimeoutError
+            FetchFailedGraphWorker.perform_async(pid, user)
+          end
+
           val.persist!
         end
 

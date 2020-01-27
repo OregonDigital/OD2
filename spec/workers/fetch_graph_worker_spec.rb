@@ -19,7 +19,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
     end
 
     it 'fetches a work and indexes its linked data labels' do
-      worker.perform(work.id)
+      worker.perform(work.id, user.email)
       expect(SolrDocument.find(work.id)['creator_label_tesim'].first).to eq 'Chabre, Wayne'
     end
   end
