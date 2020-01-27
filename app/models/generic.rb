@@ -9,11 +9,12 @@ class Generic < ActiveFedora::Base
   # Change this to restrict which works can be added as a child.
   # self.valid_child_concerns = []
   validates :title, presence: { message: 'Your work must have a title.' }
-  validates_presence_of Hyrax::GenericForm.required_fields
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::GenericMetadata
+  validates_presence_of Hyrax::GenericForm.required_fields
+
 
   def update_index
     super
