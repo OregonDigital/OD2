@@ -4,15 +4,15 @@ module OregonDigital
   # Translate feature class
   class FeatureClassUriToLabel
     def uri_to_label(uri)
-      { 'http://www.geonames.org/ontology#A' => 'Administrative Boundary',
-        'http://www.geonames.org/ontology#H' => 'Hydrographic',
-        'http://www.geonames.org/ontology#L' => 'Area',
-        'http://www.geonames.org/ontology#P' => 'Populated Place',
-        'http://www.geonames.org/ontology#R' => 'Road / Railroad',
-        'http://www.geonames.org/ontology#S' => 'Spot',
-        'http://www.geonames.org/ontology#T' => 'Hypsographic',
-        'http://www.geonames.org/ontology#U' => 'Undersea',
-        'http://www.geonames.org/ontology#V' => 'Vegetation' }[uri]
+      { 'https://www.geonames.org/ontology#A' => 'Administrative Boundary',
+        'https://www.geonames.org/ontology#H' => 'Hydrographic',
+        'https://www.geonames.org/ontology#L' => 'Area',
+        'https://www.geonames.org/ontology#P' => 'Populated Place',
+        'https://www.geonames.org/ontology#R' => 'Road / Railroad',
+        'https://www.geonames.org/ontology#S' => 'Spot',
+        'https://www.geonames.org/ontology#T' => 'Hypsographic',
+        'https://www.geonames.org/ontology#U' => 'Undersea',
+        'https://www.geonames.org/ontology#V' => 'Vegetation' }[uri]
     end
   end
 end
