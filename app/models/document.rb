@@ -14,6 +14,7 @@ class Document < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::DocumentMetadata
   include ::OregonDigital::GenericMetadata
+  validates_presence_of Hyrax::GenericForm.required_fields
 
   def update_index
     super
