@@ -6,6 +6,7 @@ Metrics/AbcSize:
     - 'app/forms/oregon_digital/forms/collection_form.rb'
     - 'app/models/concerns/oregon_digital/ability/work_show_ability.rb'
     - 'app/models/concerns/oregon_digital/ability/collection_ability.rb'
+    - 'app/workers/fetch_graph_worker.rb'
     - 'lib/oregon_digital/triplestore.rb'
     - 'lib/oregon_digital/triple_powered_properties/work_behavior.rb'
     - 'lib/oregon_digital/controlled_vocabularies/subject.rb'
@@ -49,6 +50,7 @@ Metrics/MethodLength:
     - 'app/indexers/generic_indexer.rb'
     - 'app/models/concerns/oregon_digital/access_controls/visibility.rb'
     - 'app/helpers/hyrax/ability_helper.rb'
+    - 'app/workers/fetch_graph_worker.rb'
     - 'lib/tasks/oregon_digital/create_full_metadata_work.rake'
 
 Naming/AccessorMethodName:
@@ -75,3 +77,7 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Exclude:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
+
+RSpec/AnyInstance:
+  Exclude:
+    - 'spec/workers/fetch_graph_worker_spec.rb'

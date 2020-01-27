@@ -15,17 +15,16 @@ module OregonDigital
 
       begin
         @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
-        # Temporary code for benchmarking and cache verification
+        Rails.logger.info "Attempting to fetch #{uri} from local graph cache."
+        graph = @triplestore.fetch(uri, from_remote: false)
         Rails.logger.info 'Fetched From Cache'
-        Rails.logger.info Benchmark.measure { @triplestore.fetch(uri, from_remote: false) }.to_a
-        @triplestore.fetch(uri, from_remote: false)
       rescue TriplestoreAdapter::TriplestoreException
         @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
-        # Temporary code for benchmarking and cache verification
+        Rails.logger.info "Fetching #{uri} from the authorative source. (this is slow)"
+        graph = @triplestore.fetch(uri, from_remote: true)
         Rails.logger.info 'Fetched From Source'
-        Rails.logger.info Benchmark.measure { @triplestore.fetch(uri, from_remote: true) }.to_a
-        @triplestore.fetch(uri, from_remote: true)
       end
+      graph
     end
 
     def self.triplestore_client
