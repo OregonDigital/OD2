@@ -4,7 +4,7 @@ namespace :migration do
   desc 'update location'
   task update_location: :environment do
     puts 'update location'
-    ActiveFedora::SolrService.query("location_tesim:[* TO *]", fl: 'id', rows: 10_000).map { |x| x['id'] }.each do |pid|
+    ActiveFedora::SolrService.query('location_tesim:[* TO *]', fl: 'id', rows: 10_000).map { |x| x['id'] }.each do |pid|
       item = ActiveFedora::Base.find(pid)
       new_locations = item.location.map do |loc|
         s = URI(loc.id)
