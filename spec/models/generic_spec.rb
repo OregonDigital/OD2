@@ -48,7 +48,7 @@ RSpec.describe Generic do
       model.send(:enqueue_fetch_failure, uri)
     end
     it 'enqueues a retry job' do
-      expect(FetchGraphWorker).to receive(:perform_in).with(15.minutes, uri, user)
+      expect(FetchFailedGraphWorker).to receive(:perform_in).with(15.minutes, uri, user)
       model.send(:enqueue_fetch_failure, uri)
     end
   end

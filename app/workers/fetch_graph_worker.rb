@@ -25,8 +25,8 @@ class FetchGraphWorker
         if val.respond_to?(:fetch)
           begin
             val.fetch(headers: { 'Accept' => default_accept_header })
-          rescue TimeoutError
-            FetchFailedGraphWorker.perform_async(pid, user)
+          rescue TriplestoreAdapter::TriplestoreException
+            fetch_failed_graph(pid, user)
           end
 
           val.persist!
@@ -48,6 +48,10 @@ class FetchGraphWorker
     # Commit Changes
     ActiveFedora::SolrService.add(solr_doc)
     ActiveFedora::SolrService.commit
+  end
+
+  def fetch_failed_graph(pid, user)
+    FetchFailedGraphWorker.perform_async(pid, user)
   end
 
   def default_accept_header

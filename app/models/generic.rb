@@ -17,6 +17,6 @@ class Generic < ActiveFedora::Base
 
   def update_index
     super
-    FetchGraphWorker.perform_async(id, current_user.username)
+    FetchGraphWorker.perform_async(id, depositor)
   end
 end

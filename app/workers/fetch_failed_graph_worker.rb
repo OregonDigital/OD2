@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Sidekiq Worker for fetching linked data labels
-class FetchGraphWorker
+class FetchFailedGraphWorker
   include Sidekiq::Worker
   sidekiq_options retry: 11 # Around 2.5 days of retries
 

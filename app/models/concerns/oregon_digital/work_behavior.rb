@@ -8,10 +8,9 @@ module OregonDigital
 
     attr_writer :graph_fetch_failures
 
-    after_save :enqueue_fetch_failures
-
     included do
       before_save :resolve_oembed_errors
+      after_save :enqueue_fetch_failures
     end
 
     def graph_fetch_failures
