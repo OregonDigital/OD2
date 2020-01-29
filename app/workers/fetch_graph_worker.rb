@@ -5,13 +5,11 @@ class FetchGraphWorker
   include Sidekiq::Worker
   sidekiq_options retry: 11 # Around 2.5 days of retries
 
-  attr_writer :triplestore
-  attr_accessor :uri, :user
-
-  def perform(pid)
+  def perform(pid, user_key)
     # Fetch Work and SolrDoc
     work = ActiveFedora::Base.find(pid)
     solr_doc = SolrDocument.find(pid)
+    user = User.where(email: user_key).first
 
     # Use 0 for version to tell Solr that the document just needs to exist to be updated
     # Versions dont need to match
@@ -23,7 +21,14 @@ class FetchGraphWorker
       work.attributes[controlled_prop.to_s].each do |val|
         # Fetch labels
         if val.respond_to?(:fetch)
-          val.fetch(headers: { 'Accept' => default_accept_header })
+          begin
+            val.fetch(headers: { 'Accept' => default_accept_header })
+          rescue TriplestoreAdapter::TriplestoreException
+            fetch_failed_callback(user, val)
+            fetch_failed_graph(pid, user, val, controlled_prop)
+            next
+          end
+
           val.persist!
         end
 
@@ -43,6 +48,14 @@ class FetchGraphWorker
     # Commit Changes
     ActiveFedora::SolrService.add(solr_doc)
     ActiveFedora::SolrService.commit
+  end
+
+  def fetch_failed_callback(user, val)
+    Hyrax.config.callback.run(:ld_fetch_failure, user, val.rdf_subject.value)
+  end
+
+  def fetch_failed_graph(pid, user, val, controlled_prop)
+    FetchFailedGraphWorker.perform_async(pid, user, val, controlled_prop)
   end
 
   def default_accept_header
