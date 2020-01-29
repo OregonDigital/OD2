@@ -14,6 +14,7 @@ class Video < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::VideoMetadata
   include ::OregonDigital::GenericMetadata
+  validates_presence_of Hyrax::GenericForm.required_fields
 
   def update_index
     super
