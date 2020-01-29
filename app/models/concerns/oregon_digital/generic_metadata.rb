@@ -373,7 +373,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: false do |index|
+      property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), class_name: OregonDigital::ControlledVocabularies::AccessRestrictions do |index|
         index.as :stored_searchable
       end
 
@@ -719,7 +719,7 @@ module OregonDigital
         { name: 'rights_note', is_controlled: false },
         { name: 'rights_holder', is_controlled: false },
         { name: 'copyright_claimant', is_controlled: false },
-        { name: 'access_restrictions', is_controlled: false },
+        { name: 'access_restrictions_label', is_controlled: true },
         { name: 'identifier', is_controlled: false },
         { name: 'item_locator', is_controlled: false },
         { name: 'accession_number', is_controlled: false },
