@@ -10,7 +10,6 @@ RSpec.describe Generic do
   let(:term) { OregonDigital::ControlledVocabularies::Resource.new }
   let(:file) { instance_double('file', stream: ["\x00"], file_name: ['name']) }
   let(:file_set) { instance_double('file_set', files: [file]) }
-  let(:displayed_controlled_fields) { Generic::ORDERED_PROPERTIES.select { |prop| Generic.controlled_property_labels.include?(prop[:name]) } }
 
   it { is_expected.to have_attributes(title: ['foo']) }
   it { expect(described_class.generic_properties.include?('tribal_title')).to eq true }
