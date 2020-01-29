@@ -26,12 +26,12 @@ RSpec.describe Generic do
 
   describe 'ORDERED_PROPERTIES' do
     it 'has the name set to *_label' do
-      Generic.controlled_properties.each do |controlled_prop|
+      described_class.controlled_properties.each do |controlled_prop|
         expect(Generic::ORDERED_PROPERTIES.select { |prop| prop[:name] == "#{controlled_prop}_label" }).not_to be_nil
       end
     end
     it 'is_controlled is set to a truthy value' do
-      Generic.controlled_properties.each do |controlled_prop|
+      described_class.controlled_properties.each do |controlled_prop|
         expect(Generic::ORDERED_PROPERTIES.select { |prop| prop[:name] == "#{controlled_prop}_label" }.first[:is_controlled]).to be_truthy
       end
     end
