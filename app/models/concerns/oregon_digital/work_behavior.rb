@@ -8,6 +8,7 @@ module OregonDigital
 
     included do
       before_save :resolve_oembed_errors
+      validates_presence_of %i[title resource_type rights_statement identifier]
     end
 
     def graph_fetch_failures
