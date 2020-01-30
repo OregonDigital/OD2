@@ -18,6 +18,6 @@ class Image < ActiveFedora::Base
 
   def update_index
     super
-    FetchGraphWorker.perform_async(id)
+    FetchGraphWorker.perform_async(id, depositor)
   end
 end
