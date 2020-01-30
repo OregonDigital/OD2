@@ -13,7 +13,6 @@ class Generic < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::GenericMetadata
-  validates_presence_of Hyrax::GenericForm.required_fields
 
   def update_index
     super
