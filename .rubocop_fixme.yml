@@ -19,6 +19,10 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/models/concerns/oregon_digital/access_controls/visibility.rb'
 
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'app/workers/fetch_graph_worker.rb'
+
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
