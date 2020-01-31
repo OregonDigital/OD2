@@ -24,7 +24,6 @@ class FetchGraphWorker
           begin
             val.fetch(headers: { 'Accept' => default_accept_header })
           rescue TriplestoreAdapter::TriplestoreException
-            fetch_failed_callback(user, val)
             fetch_failed_graph(pid, user, val, controlled_prop)
             next
           end

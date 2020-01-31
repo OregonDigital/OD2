@@ -5,14 +5,13 @@ class FetchFailedGraphWorker
   include Sidekiq::Worker
   sidekiq_options retry: 11 # Around 2.5 days of retries
 
-  def perform(pid, user, val, controlled_prop)
+  def perform(pid, _user, val, controlled_prop)
     # Fetch the work and the solr_doc
     work = ActiveFedora::Base.find(pid)
     solr_doc = SolrDocument.find(pid)
 
     if val.respond_to?(:fetch)
       val.fetch(headers: { 'Accept' => default_accept_header })
-      run_success_callback(user, val)
       val.persist!
     end
 
