@@ -12,7 +12,6 @@ class FetchFailedGraphWorker
 
     if val.respond_to?(:fetch)
       val.fetch(headers: { 'Accept' => default_accept_header })
-      run_success_callback(user, val)
       val.persist!
     end
 
