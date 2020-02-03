@@ -63,7 +63,7 @@ overrides:
   - property: description_of_manifestation
     predicate: http://www.rdaregistry.info/Elements/m/#descriptionOfManifestation.en
     multiple: true
-  - property: form_of_work
+  - property: form_of_work_attributes
     predicate: http://www.rdaregistry.info/Elements/w/#formOfWork.en
     multiple: true
     function: attributes_data
@@ -82,7 +82,7 @@ overrides:
   - property: cultural_context
     predicate: http://opaquenamespace.org/ns/vra_culturalContext
     multiple: true
-  - property: tgn
+  - property: tgn_attributes
     predicate: http://opaquenamespace.org/ns/tgn
     multiple: true
     function: attributes_data
@@ -92,7 +92,7 @@ overrides:
   - property: contained_in_journal
     predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
     multiple: true
-  - property: place_of_production
+  - property: place_of_production_attributes
     predicate: http://www.rdaregistry.info/Elements/m/#placeOfProduction.en
     multiple: true
     function: attributes_data
