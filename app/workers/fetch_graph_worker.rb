@@ -60,7 +60,7 @@ class FetchGraphWorker
         end
       end
     end
-    Rails.logger.info solr_doc
+    Rails.logger.info solr_doc.to_s
 
     # Commit Changes
     ActiveFedora::SolrService.add(solr_doc)
