@@ -22,31 +22,45 @@ class FetchGraphWorker
         # Fetch labels
         if val.respond_to?(:fetch)
           begin
+            Rails.logger.info "????????????????????????????????????????????????????????????????????"
+            Rails.logger.info "FETCHING #{controlled_prop} and #{val}"
             val.fetch(headers: { 'Accept' => default_accept_header })
           rescue TriplestoreAdapter::TriplestoreException
+            Rails.logger.info "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+            Rails.logger.info "ERROR STATE"
             fetch_failed_graph(pid, user, val, controlled_prop)
             next
           end
-
+          Rails.logger.info "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+          Rails.logger.info "PERSISTING"
           val.persist!
         end
 
         # For each behavior
         work.class.index_config[controlled_prop].behaviors.each do |behavior|
+          Rails.logger.info "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+          Rails.logger.info "BEHAVIORS SECTION"
           # Insert into SolrDocument
           if val.is_a?(String)
+            Rails.logger.info "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+            Rails.logger.info "STRING STATE"
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
           else
             extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
-            if controlled_prop == :based_near
+            if controlled_prop == :location
+              Rails.logger.info "************************************************************************************"
+              Rails.logger.info "BASED NEAR STATE"
               Solrizer.insert_field(solr_doc, 'location_label', [extractred_val], behavior)
             else
+              Rails.logger.info "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+              Rails.logger.info "NOT BASED NEAR"
               Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
             end
           end
         end
       end
     end
+    Rails.logger.info solr_doc
 
     # Commit Changes
     ActiveFedora::SolrService.add(solr_doc)
