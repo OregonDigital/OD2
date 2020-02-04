@@ -11,7 +11,7 @@ class User < ApplicationRecord
   attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
 
   # Include default devise modules. Others available are:
-  devise :database_authenticatable, :registerable, :recoverable, :confirmable,
+  devise :database_authenticatable, :registerable, :recoverable, #:confirmable,
          :omniauthable, omniauth_providers: [:cas, :saml]
 
   # T/F whether user has at least one role
