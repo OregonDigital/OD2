@@ -14,9 +14,4 @@ class Image < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::ImageMetadata
   include ::OregonDigital::GenericMetadata
-
-  def update_index
-    super
-    FetchGraphWorker.perform_async(id, depositor)
-  end
 end
