@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 8a64c5238c31e889182bf855f1c85b0fb1eb733d
+  revision: ab660e18c9b8af197d9b26f3e667f4be84bbfd99
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -166,13 +166,13 @@ GEM
     awesome_nested_set (3.2.0)
       activerecord (>= 4.0.0, < 7.0)
     aws-eventstream (1.0.3)
-    aws-partitions (1.262.0)
-    aws-sdk-core (3.87.0)
+    aws-partitions (1.269.0)
+    aws-sdk-core (3.89.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.27.0)
+    aws-sdk-kms (1.28.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.60.1)
@@ -280,7 +280,7 @@ GEM
       tins (~> 1.6)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    crass (1.0.5)
+    crass (1.0.6)
     database_cleaner (1.7.0)
     declarative (0.0.10)
     declarative-option (0.1.0)
@@ -462,7 +462,7 @@ GEM
       hydra-derivatives (~> 3.0)
       hydra-file_characterization (~> 1.0)
       hydra-pcdm (>= 0.9)
-    i18n (1.8.1)
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     iiif_manifest (0.5.0)
@@ -574,7 +574,7 @@ GEM
     mini_magick (4.9.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.13.0)
+    minitest (5.14.0)
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -642,7 +642,7 @@ GEM
       nokogiri (~> 1.6)
       rails (~> 5.0)
       rdf
-    rack (2.0.8)
+    rack (2.1.2)
     rack-honeycomb (0.5.0)
       libhoney (>= 1.5.0)
     rack-protection (2.0.8.1)

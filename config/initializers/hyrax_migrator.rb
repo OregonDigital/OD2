@@ -47,6 +47,8 @@ Hyrax::Migrator.config do |config|
   #                                   :file_system
   #                                 end
 
+  config.fields_map = "config/initializers/migrator/fields_map.yml"
+
   # The destination file system path used mainly for :file_system storage during file uploads. It defaults to environment BROWSEEVERYTHING_FILESYSTEM_PATH.
   config.file_system_path = ENV['BROWSEEVERYTHING_FILESYSTEM_PATH']
 
