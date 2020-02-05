@@ -108,3 +108,6 @@ overrides:
   - property: original_filename
     predicate: http://opaquenamespace.org/ns/full
     multiple: false
+  - property: contents
+    predicate: http://opaquenamespace.org/ns/contents
+    function: return_nil
