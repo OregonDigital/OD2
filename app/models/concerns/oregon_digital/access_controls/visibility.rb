@@ -13,9 +13,9 @@ module OregonDigital::AccessControls
         public_visibility!
       when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
         registered_visibility!
-      when 'osu'
+      when OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU
         osu_visibility!
-      when 'uo'
+      when OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO
         uo_visibility!
       when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
         private_visibility!
@@ -29,10 +29,10 @@ module OregonDigital::AccessControls
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
       elsif read_groups.include? Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED
-      elsif read_groups.include? 'osu'
-        'osu'
-      elsif read_groups.include? 'uo'
-        'uo'
+      elsif read_groups.include? OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU
+        OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU
+      elsif read_groups.include? OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO
+        OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO
       else
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
       end
@@ -43,8 +43,8 @@ module OregonDigital::AccessControls
     def represented_visibility
       [Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED,
        Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_PUBLIC,
-       'osu',
-       'uo']
+       OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU,
+       OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO]
     end
 
     def osu_visibility!
