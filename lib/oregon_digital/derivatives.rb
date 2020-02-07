@@ -6,5 +6,6 @@ module OregonDigital::Derivatives
 
   eager_autoload do
     autoload :Image
+    autoload :Document
   end
 end
