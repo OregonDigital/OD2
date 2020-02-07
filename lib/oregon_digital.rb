@@ -16,5 +16,6 @@ module OregonDigital
     autoload :Derivatives
     autoload :Triplestore
     autoload :FeatureClassUriToLabel
+    autoload :AccessControls
   end
 end
