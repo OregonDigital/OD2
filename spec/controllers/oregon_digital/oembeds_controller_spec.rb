@@ -14,12 +14,13 @@ RSpec.describe OregonDigital::OembedsController do
 
   describe '#index' do
     it 'renders the dashboard' do
-      expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)
-      expect(controller).to receive(:add_breadcrumb).with('Dashboard', controller.hyrax.dashboard_path)
-      expect(controller).to receive(:add_breadcrumb).with('Manage oEmbeds', Rails.application.routes.url_helpers.oembeds_path)
       get :index
-      expect(response).to be_success
       expect(response).to render_template('dashboard')
+    end
+
+    it 'sets all breadcrumbs' do
+      expect(controller).to receive(:add_breadcrumb).exactly(3).times
+      get :index
     end
   end
 
@@ -27,20 +28,19 @@ RSpec.describe OregonDigital::OembedsController do
     context 'when I do not have edit permissions for the object' do
       it 'redirects' do
         get :edit, params: { id: not_my_work }
-        expect(response.status).to eq 302
         expect(flash[:alert]).to eq 'You are not authorized to access this page.'
       end
     end
 
     context 'when I have permission to edit the object' do
-      it 'shows me the page' do
-        expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)
-        expect(controller).to receive(:add_breadcrumb).with('Dashboard', controller.hyrax.dashboard_path)
-        expect(controller).to receive(:add_breadcrumb).with('Manage oEmbeds', Rails.application.routes.url_helpers.oembeds_path)
-        expect(controller).to receive(:add_breadcrumb).with('Update oEmbed', '#')
+      it 'renders the dashboard' do
         get :edit, params: { id: a_work }
-        expect(response).to be_success
         expect(response).to render_template('dashboard')
+      end
+
+      it 'sets all breadcrumbs' do
+        expect(controller).to receive(:add_breadcrumb).exactly(4).times
+        get :edit, params: { id: a_work }
       end
     end
   end
