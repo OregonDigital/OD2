@@ -13,9 +13,4 @@ class Generic < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::GenericMetadata
-
-  def update_index
-    super
-    FetchGraphWorker.perform_async(id, depositor)
-  end
 end

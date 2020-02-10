@@ -27,7 +27,6 @@ class FetchGraphWorker
             fetch_failed_graph(pid, user, val, controlled_prop)
             next
           end
-
           val.persist!
         end
 
@@ -38,11 +37,7 @@ class FetchGraphWorker
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
           else
             extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
-            if controlled_prop == :based_near
-              Solrizer.insert_field(solr_doc, 'location_label', [extractred_val], behavior)
-            else
-              Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
-            end
+            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
           end
         end
       end
