@@ -22,7 +22,7 @@ module OregonDigital
   # processing to replace the standard processor, while still holding onto the
   # built-in Hyrax processors for derivative types we don't need to customize.
   class FileSetDerivativesService < Hyrax::FileSetDerivativesService
-    include OregonDigital::CreateDerivativesBehavior
+    include ::OregonDigital::ServiceBehaviors::CreateDerivativesBehavior
     def create_derivatives(filename)
       # This is really stupid, but rubocop actually sees this alias as being
       # significantly simpler than just having "file_set.class" in the lines
