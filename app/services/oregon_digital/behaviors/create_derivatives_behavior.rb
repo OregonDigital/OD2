@@ -4,6 +4,7 @@ module OregonDigital
   # This is an extraction which keeps all the create derivative methods together. This lowers the amount of lines in the included class
   # and also keeps like functionality together.
   module CreateDerivativesBehavior
+    extend ActiveSupport::Concern
     included do
       # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
       def create_image_derivatives(filename)
