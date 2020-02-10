@@ -66,8 +66,6 @@ module OregonDigital
       paths.collect { |pth| URI("file://#{pth}").to_s }.sort
     end
 
-    
-
     # Pre-processes the given file to generate a PNG based on its mime type:
     #
     # - JP2s need to be decoded and then re-encoded by opj tools:

@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 module OregonDigital
+  # This is an extraction which keeps all the create derivative methods together. This lowers the amount of lines in the included class
+  # and also keeps like functionality together. 
   module CreateDerivativesBehavior
     included do
       # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
