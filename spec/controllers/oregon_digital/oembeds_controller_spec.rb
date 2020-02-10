@@ -18,17 +18,17 @@ RSpec.describe OregonDigital::OembedsController do
       expect(response).to render_template('dashboard')
     end
 
-    it "sets up home breadcrumbs" do
+    it 'sets up home breadcrumbs' do
       expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)
       get :index
     end
 
-    it "sets up dashboard breadcrumbs" do
+    it 'sets up dashboard breadcrumbs' do
       expect(controller).to receive(:add_breadcrumb).with('Dashboard', controller.hyrax.dashboard_path)
       get :index
-    end 
+    end
 
-    it "sets up manage oembeds breadcrumbs" do
+    it 'sets up manage oembeds breadcrumbs' do
       expect(controller).to receive(:add_breadcrumb).with('Manage oEmbeds', Rails.application.routes.url_helpers.oembeds_path)
       get :index
     end
@@ -48,22 +48,22 @@ RSpec.describe OregonDigital::OembedsController do
         expect(response).to render_template('dashboard')
       end
 
-      it "sets up home breadcrumbs" do
+      it 'sets up home breadcrumbs' do
         expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)
         get :edit, params: { id: a_work }
       end
 
-      it "sets up dashboard breadcrumbs" do
+      it 'sets up dashboard breadcrumbs' do
         expect(controller).to receive(:add_breadcrumb).with('Dashboard', controller.hyrax.dashboard_path)
         get :edit, params: { id: a_work }
-      end 
+      end
 
-      it "sets up manage oembeds breadcrumbs" do
+      it 'sets up manage oembeds breadcrumbs' do
         expect(controller).to receive(:add_breadcrumb).with('Manage oEmbeds', Rails.application.routes.url_helpers.oembeds_path)
         get :edit, params: { id: a_work }
       end
 
-      it "sets up update oembeds breadcrumbs" do
+      it 'sets up update oembeds breadcrumbs' do
         expect(controller).to receive(:add_breadcrumb).with('Update oEmbed', '#')
         get :edit, params: { id: a_work }
       end
