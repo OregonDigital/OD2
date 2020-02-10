@@ -73,7 +73,6 @@ Style/SymbolArray:
 
 RSpec/ExampleLength:
   Exclude:
-    - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
     - 'spec/forms/oregon_digital/forms/collection_form_spec.rb'
 
 RSpec/NestedGroups:
