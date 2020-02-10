@@ -76,10 +76,6 @@ RSpec/ExampleLength:
     - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
     - 'spec/forms/oregon_digital/forms/collection_form_spec.rb'
 
-RSpec/MultipleExpectations:
-  Exclude:
-    - 'spec/controllers/oregon_digital/oembeds_controller_spec.rb'
-
 RSpec/NestedGroups:
   Exclude:
     - 'spec/controllers/hyrax/contact_form_controller_spec.rb'
