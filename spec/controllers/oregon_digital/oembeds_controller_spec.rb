@@ -14,12 +14,23 @@ RSpec.describe OregonDigital::OembedsController do
 
   describe '#index' do
     it 'renders the dashboard' do
+      get :index
+      expect(response).to render_template('dashboard')
+    end
+
+    it "sets up home breadcrumbs" do
       expect(controller).to receive(:add_breadcrumb).with('Home', controller.root_path)
+      get :index
+    end
+
+    it "sets up dashboard breadcrumbs" do
       expect(controller).to receive(:add_breadcrumb).with('Dashboard', controller.hyrax.dashboard_path)
+      get :index
+    end 
+
+    it "sets up manage oembeds breadcrumbs" do
       expect(controller).to receive(:add_breadcrumb).with('Manage oEmbeds', Rails.application.routes.url_helpers.oembeds_path)
       get :index
-      expect(response).to be_success
-      expect(response).to render_template('dashboard')
     end
   end
 
