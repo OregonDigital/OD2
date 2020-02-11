@@ -17,7 +17,7 @@ module OregonDigital
       begin
         graph = fetch_from_cache(uri, @triplestore)
       rescue TriplestoreAdapter::TriplestoreException
-        graph = fetch_from_store(uri, @triplestore)
+        graph = fetch_from_source(uri, @triplestore)
       end
       graph
     end
