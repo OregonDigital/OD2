@@ -5,6 +5,8 @@ class FetchGraphWorker
   include Sidekiq::Worker
   sidekiq_options retry: 11 # Around 2.5 days of retries
 
+  # JOBS TEND TOWARD BEING LARGE. DISABLED BECAUSE FETCHING IS HEAVY HANDED.
+  # rubocop:disable Metrics/MethodLength
   def perform(pid, _user_key)
     # Fetch Work and SolrDoc
     work = ActiveFedora::Base.find(pid)
@@ -48,6 +50,7 @@ class FetchGraphWorker
     ActiveFedora::SolrService.add(solr_doc)
     ActiveFedora::SolrService.commit
   end
+  # rubocop:enable Metrics/MethodLength
 
   # TODO: WILL INTEGRATE THIS WHEN REDOING EMAILING FOR THESE JOBS
   # def fetch_failed_callback(user, val)

@@ -5,6 +5,8 @@ module OregonDigital::AccessControls
   module Visibility
     extend ActiveSupport::Concern
 
+    # THIS IS DISABLED DUE TO THE NEED OF ALL THE DIFFERENT POSSIBLE PERMISSION NEEDS
+    # rubocop:disable Metrics/MethodLength
     def visibility=(value)
       case value
       when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
@@ -35,6 +37,7 @@ module OregonDigital::AccessControls
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     private
 
