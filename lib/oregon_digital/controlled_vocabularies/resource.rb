@@ -27,6 +27,8 @@ module OregonDigital
         persistence_strategy.graph = triplestore_fetch
       end
 
+      # DISABLES RUBOCOP BECAUSE SET_SUBJECT! IS AN OVERRIDE FROM AT::RESOURCE
+      # rubocop:disable AccessorMethodName
       # Override ActiveTriples::Resource.set_subject! to throw exception if term isn't in vocab
       def set_subject!(uri_or_str)
         raise ControlledVocabularyError, "Term not in controlled vocabulary: #{uri_or_str}" unless
@@ -34,6 +36,7 @@ module OregonDigital
 
         super
       end
+      # rubocop:enable AccessorMethodName
 
       # Return a tuple of url & label
       def solrize

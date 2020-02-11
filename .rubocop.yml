@@ -48,6 +48,21 @@ Rails/ApplicationRecord:
 Metrics/LineLength:
   Enabled: false
 
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/tasks/**/*'
+    - 'spec/**/*.rb'
+    - 'config/**/*'
+    - 'app/controllers/catalog_controller.rb'
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/models/concerns/oregon_digital/generic_metadata.rb'
+
 RSpec/DescribeClass:
   Exclude:
     - 'spec/system/**/*'

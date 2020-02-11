@@ -23,25 +23,8 @@ Metrics/PerceivedComplexity:
   Exclude:
     - 'app/workers/fetch_graph_worker.rb'
 
-Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-
-# This is where our definitions for metadata exist. Until we extract these definitions to a yaml, this will continue
-Metrics/ModuleLength:
-  Exclude:
-    - 'app/models/concerns/oregon_digital/generic_metadata.rb'
-
-# This is quite typical of hyrax applications. A lot of the configuration for the property displays happens here.
 Metrics/ClassLength:
   Exclude:
-    - 'app/controllers/catalog_controller.rb'
-
-Metrics/BlockLength:
-  Exclude:
-    - 'lib/tasks/**/*'
-    - 'spec/**/*.rb'
-    - 'config/**/*'
     - 'app/controllers/catalog_controller.rb'
 
 Metrics/MethodLength:
@@ -58,15 +41,6 @@ Metrics/MethodLength:
     - 'app/workers/fetch_graph_worker.rb'
     - 'app/workers/fetch_failed_graph_worker.rb'
     - 'lib/tasks/oregon_digital/create_full_metadata_work.rake'
-
-# This has to stay since the method that is the offender is an override from ActiveTriples::Resource.set_subject!
-Naming/AccessorMethodName:
-  Exclude:
-    - 'lib/oregon_digital/controlled_vocabularies/resource.rb'
-
-Style/SymbolArray:
-  Exclude:
-    - 'app/models/user.rb'
 
 RSpec/ExampleLength:
   Exclude:
