@@ -15,10 +15,6 @@ Metrics/AbcSize:
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
     - 'spec/support/helpers/session_helpers.rb'
 
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'app/workers/fetch_graph_worker.rb'
-
 Metrics/MethodLength:
   Exclude:
     - 'lib/oregon_digital/triplestore.rb'
