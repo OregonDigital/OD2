@@ -57,14 +57,14 @@ module OregonDigital
 
     private
 
-    def fetch_from_cache(uri, triplestore)
+    def self.fetch_from_cache(uri, triplestore)
       Rails.logger.info "Attempting to fetch #{uri} from local graph cache."
       graph = triplestore.fetch(uri, from_remote: false)
       Rails.logger.info 'Fetched From Cache'
       graph
     end
 
-    def fetch_from_source(uri, triplestore)
+    def self.fetch_from_source(uri, triplestore)
       Rails.logger.info "Fetching #{uri} from the authorative source. (this is slow)"
       graph = triplestore.fetch(uri, from_remote: true)
       Rails.logger.info 'Fetched From Source'
