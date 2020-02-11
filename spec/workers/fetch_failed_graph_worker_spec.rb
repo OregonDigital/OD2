@@ -22,7 +22,7 @@ RSpec.describe FetchFailedGraphWorker, type: :worker do
       end
 
       it 'fetches a work and indexes its linked data labels' do
-        worker.perform(work.id, user, controlled_val, controlled_prop)
+        worker.perform(work.id, controlled_val, controlled_prop)
         expect(SolrDocument.find(work.id)['creator_label_tesim'].first).to eq 'Chabre, Wayne'
       end
     end
@@ -37,7 +37,7 @@ RSpec.describe FetchFailedGraphWorker, type: :worker do
       end
 
       it 'raises an exception' do
-        expect { worker.perform(work.id, user, controlled_val, controlled_prop) }.to raise_error TriplestoreAdapter::TriplestoreException
+        expect { worker.perform(work.id, controlled_val, controlled_prop) }.to raise_error TriplestoreAdapter::TriplestoreException
       end
     end
   end

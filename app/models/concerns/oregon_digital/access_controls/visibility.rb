@@ -6,8 +6,6 @@ module OregonDigital::AccessControls
     extend ActiveSupport::Concern
 
     def visibility=(value)
-      return if value.nil?
-
       case value
       when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
         public_visibility!
