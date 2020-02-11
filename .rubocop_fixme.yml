@@ -27,15 +27,15 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
 
+# This is where our definitions for metadata exist. Until we extract these definitions to a yaml, this will continue
 Metrics/ModuleLength:
   Exclude:
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'
 
+# This is quite typical of hyrax applications. A lot of the configuration for the property displays happens here.
 Metrics/ClassLength:
   Exclude:
     - 'app/controllers/catalog_controller.rb'
-    - 'lib/oregon_digital/triple_powered_properties/inputs/triple_powered_property_input.rb'
-    - 'app/services/oregon_digital/file_set_derivatives_service.rb'
 
 Metrics/BlockLength:
   Exclude:
