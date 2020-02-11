@@ -55,8 +55,6 @@ module OregonDigital
       labels
     end
 
-    private
-
     def self.fetch_from_cache(uri, triplestore)
       Rails.logger.info "Attempting to fetch #{uri} from local graph cache."
       graph = triplestore.fetch(uri, from_remote: false)
