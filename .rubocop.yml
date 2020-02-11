@@ -54,6 +54,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'config/**/*'
     - 'app/controllers/catalog_controller.rb'
+    - 'app/models/concerns/oregon_digital/*.rb'
 
 Style/Documentation:
   Exclude:
