@@ -29,7 +29,3 @@ Metrics/MethodLength:
     - 'app/workers/fetch_graph_worker.rb'
     - 'app/workers/fetch_failed_graph_worker.rb'
     - 'lib/tasks/oregon_digital/create_full_metadata_work.rake'
-
-RSpec/AnyInstance:
-  Exclude:
-    - 'spec/workers/fetch_graph_worker_spec.rb'

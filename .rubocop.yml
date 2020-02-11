@@ -72,6 +72,9 @@ RSpec/DescribeClass:
     - 'spec/config/initializers/**/*'
     - 'spec/tasks/**/*'
 
+RSpec/AnyInstance:
+  Enabled: false
+
 RSpec/LetSetup:
   Enabled: false
 
