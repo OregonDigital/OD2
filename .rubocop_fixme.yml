@@ -15,10 +15,6 @@ Metrics/AbcSize:
     - 'lib/tasks/oregon_digital/csv_ingest.rake'
     - 'spec/support/helpers/session_helpers.rb'
 
-Metrics/CyclomaticComplexity:
-  Exclude:
-    - 'app/models/concerns/oregon_digital/access_controls/visibility.rb'
-
 Metrics/PerceivedComplexity:
   Exclude:
     - 'app/workers/fetch_graph_worker.rb'
