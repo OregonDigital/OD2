@@ -23,10 +23,6 @@ Metrics/PerceivedComplexity:
   Exclude:
     - 'app/workers/fetch_graph_worker.rb'
 
-Metrics/ClassLength:
-  Exclude:
-    - 'app/controllers/catalog_controller.rb'
-
 Metrics/MethodLength:
   Exclude:
     - 'lib/oregon_digital/triplestore.rb'
