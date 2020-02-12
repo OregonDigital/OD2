@@ -15,6 +15,7 @@ AllCops:
     - 'Rakefile'
     - 'config/**/*'
     - 'tmp/**/*'
+    - 'lib/tasks/**/*'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']

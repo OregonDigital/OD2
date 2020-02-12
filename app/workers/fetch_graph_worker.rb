@@ -5,10 +5,13 @@ class FetchGraphWorker
   include Sidekiq::Worker
   sidekiq_options retry: 11 # Around 2.5 days of retries
 
+  # JOBS TEND TOWARD BEING LARGE. DISABLED BECAUSE FETCHING IS HEAVY HANDED.
+  # rubocop:disable Metrics/MethodLength
   def perform(pid, _user_key)
     # Fetch Work and SolrDoc
     work = ActiveFedora::Base.find(pid)
     solr_doc = SolrDocument.find(pid)
+    # TODO: ADD BACK IN WHEN SETTING UP EMAIL
     # user = User.where(email: user_key).first
 
     # Use 0 for version to tell Solr that the document just needs to exist to be updated
@@ -47,7 +50,9 @@ class FetchGraphWorker
     ActiveFedora::SolrService.add(solr_doc)
     ActiveFedora::SolrService.commit
   end
+  # rubocop:enable Metrics/MethodLength
 
+  # TODO: WILL INTEGRATE THIS WHEN REDOING EMAILING FOR THESE JOBS
   # def fetch_failed_callback(user, val)
   #   Hyrax.config.callback.run(:ld_fetch_failure, user, val.rdf_subject.value)
   # end
