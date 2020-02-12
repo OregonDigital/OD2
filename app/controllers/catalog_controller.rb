@@ -34,7 +34,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: 'search',
       rows: 10,
-      qf: 'title_tesim description_tesim creator_tesim keyword_tesim'
+      qf: "title_tesim description_tesim #{Generic.controlled_property_labels.map { |term| "#{term}_tesim" }.join(' ')} keyword_tesim"
     }
 
     # solr field configuration for document/show views
@@ -59,7 +59,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
-    config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable), max_values: 3, max_values_label: 'others'
+    config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator_label', :facetable), max_values: 3, max_values_label: 'others'
     config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
@@ -222,7 +222,7 @@ class CatalogController < ApplicationController
       all_names = search_fields.join(' ')
       title_name = solr_name('title', :stored_searchable)
       field.solr_parameters = {
-        qf: "#{all_names} #{title_name} license_label_tesim file_format_tesim all_text_timv",
+        qf: "#{all_names} #{title_name} license_label_tesim file_format_tesim creator_label_tesim all_text_timv",
         pf: title_name.to_s
       }
     end
