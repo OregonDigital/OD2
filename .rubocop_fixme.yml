@@ -1,5 +1,0 @@
-Metrics/AbcSize:
-  Exclude:
-    - 'lib/oregon_digital/controlled_vocabularies/resource.rb'
-    - 'lib/tasks/oregon_digital/csv_ingest.rake'
-    - 'spec/support/helpers/session_helpers.rb'
