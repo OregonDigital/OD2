@@ -4,6 +4,8 @@ module OregonDigital
   module ControlledVocabularies
     # Subject object for storing labels and uris
     class Subject < Resource
+      # DISABLED DUE TO SUBJECT HAVING MANY ENDPOINTS
+      # rubocop:disable Metrics/MethodLength
       def self.all_endpoints
         [
           OregonDigital::ControlledVocabularies::Vocabularies::GettyAat,
@@ -23,6 +25,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::WdEntity
         ]
       end
+      # rubocop:enable Metrics/MethodLength
 
       def fetch(*_args, &_block)
         vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
