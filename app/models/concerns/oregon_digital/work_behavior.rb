@@ -1,4 +1,5 @@
 # frozen_string_literal:true
+require 'csv'
 
 module OregonDigital
   # Sets base behaviors for all works
@@ -20,7 +21,7 @@ module OregonDigital
       # Build a CSV of label headers and metadata value data
       props = properties_as_s.merge(controlled_properties_as_s)
 
-      CSV.generate do |csv|
+      ::CSV.generate do |csv|
         csv << props.keys
         csv << props.values
       end
