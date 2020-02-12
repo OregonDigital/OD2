@@ -5,6 +5,8 @@ class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::IndexesBasicMetadata
   include OregonDigital::IndexesLinkedMetadata
 
+  # THIS IS DISABLED BECAUSE OF OUR INDEXING NEEDS NEED TO EXIST IN THE INDEXER.
+  # rubocop:disable Metrics/MethodLength
   def generate_solr_document
     super.tap do |solr_doc|
       rights_statement_labels = OregonDigital::RightsStatementService.new.all_labels(object.rights_statement)
@@ -19,6 +21,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_blacklight_permissions
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def index_rights_statement_label(solr_doc, rights_statement_labels)
     solr_doc['rights_statement_label_sim'] = rights_statement_labels
