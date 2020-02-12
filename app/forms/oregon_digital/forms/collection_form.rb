@@ -3,6 +3,8 @@
 module OregonDigital
   module Forms
     # Collection Form Override
+    # Disabling because trying to fix Hyrax's broken code isn't worth the time.
+    # rubocop:disable Metrics/AbcSize
     class CollectionForm < Hyrax::Forms::CollectionForm
       self.terms = %i[resource_type title creator contributor description license publisher
                       date_created subject language representative_id thumbnail_id
@@ -61,5 +63,6 @@ module OregonDigital
         params
       end
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end
