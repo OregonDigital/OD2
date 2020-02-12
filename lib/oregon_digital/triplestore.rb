@@ -53,7 +53,7 @@ module OregonDigital
       labels
     end
 
-    def self.fetched_graph
+    def self.fetched_graph(predicate)
       graph.query(predicate: predicate).reject { |statement| statement.is_a?(Array) }.map { |statement| statement.object.to_s }
     end
 
