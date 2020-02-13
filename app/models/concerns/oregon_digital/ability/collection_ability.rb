@@ -12,9 +12,13 @@ module OregonDigital
           can(%i[delete], Collection) if current_user.admin?
           can(%i[index show new create], Collection) if current_user.role?(admin_permission_roles)
           can %i[edit update], Collection do |collection|
-            current_user.role?(admin_permission_roles) && in_depositors_collection?(collection.edit_users)
+            admin_or_in_depositor?(collection)
           end
           # TODO: SHOW AND SEARCH FOR UO AND OSU
+        end
+
+        def admin_or_in_depositor?(collection)
+          current_user.role?(admin_permission_roles) && in_depositors_collection?(collection.edit_users)
         end
       end
     end
