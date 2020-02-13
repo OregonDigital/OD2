@@ -44,6 +44,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Capybara::RSpecMatchers, type: :view
   config.include Capybara::RSpecMatchers, type: :input
+  config.include Helpers::SessionHelpers
   config.include Warden::Test::Helpers, type: :request
   config.include FactoryBot::Syntax::Methods
 

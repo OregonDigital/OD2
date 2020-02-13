@@ -47,13 +47,13 @@ module OregonDigital
 
       rdf_label_predicates.each do |predicate|
         labels[predicate.to_s] = []
-        labels[predicate.to_s] << fetched_graph(predicate)
+        labels[predicate.to_s] << fetched_graph(predicate, graph)
         labels[predicate.to_s].flatten!.compact!
       end
       labels
     end
 
-    def self.fetched_graph(predicate)
+    def self.fetched_graph(predicate, graph)
       graph.query(predicate: predicate).reject { |statement| statement.is_a?(Array) }.map { |statement| statement.object.to_s }
     end
 
