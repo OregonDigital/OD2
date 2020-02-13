@@ -22,6 +22,7 @@ class FetchGraphWorker
     # Iterate over Controller Props values
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
+        val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
         # Fetch labels
         if val.respond_to?(:fetch)
           begin
