@@ -7,6 +7,7 @@ class FetchFailedGraphWorker
 
   # JOBS TEND TOWARD BEING LARGE. DISABLED BECAUSE FETCHING IS HEAVY HANDED.
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def perform(pid, val, controlled_prop)
     # Fetch the work and the solr_doc
     work = ActiveFedora::Base.find(pid)
@@ -36,6 +37,7 @@ class FetchFailedGraphWorker
     ActiveFedora::SolrService.commit
   end
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def default_accept_header
     RDF::Util::File::HttpAdapter.default_accept_header.sub(%r{, \*\/\*;q=0\.1\Z}, '')
