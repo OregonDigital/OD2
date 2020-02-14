@@ -96,10 +96,11 @@ module OregonDigital
 
     # Convert work controlled property value to '<label> [<uri>]' format
     def controlled_property_to_csv_value(prop)
-      prop.fetch
-      prop = prop.solrize[1][:label].split('$')
-      prop[1] = "[#{prop[1]}]"
-      prop.join(' ')
+      if prop.respond_to?(:fetch)
+        prop = prop.solrize.second.nil? ? [prop.solrize.first, "No label found"] : prop.solrize[1][:label].split('$')
+        prop[1] = "[#{prop[1]}]"
+        prop.join(' ')
+      end
     end
   end
 end
