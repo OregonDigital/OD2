@@ -10,9 +10,12 @@ class User < ApplicationRecord
 
   attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
 
+  # DISABLE RUBOCOP BECAUSE DEVISE REQUIRES A PARTICULAR FORMAT
+  # rubocop:disable Style/SymbolArray
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :recoverable, :confirmable,
          :omniauthable, omniauth_providers: [:cas, :saml]
+  # rubocop:enable Style/SymbolArray
 
   # T/F whether user has at least one role
   def role?(role)

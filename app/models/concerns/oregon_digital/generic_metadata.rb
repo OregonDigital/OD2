@@ -373,7 +373,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: false do |index|
+      property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), class_name: OregonDigital::ControlledVocabularies::AccessRestrictions do |index|
         index.as :stored_searchable
       end
 
@@ -647,7 +647,7 @@ module OregonDigital
         { name: 'date_issued', is_controlled: false },
         { name: 'award_date', is_controlled: false },
         { name: 'acquisition_date', is_controlled: false },
-        { name: 'date_collected', is_controlled: false },
+        { name: 'collected_date', is_controlled: false },
         { name: 'description', is_controlled: false },
         { name: 'tribal_notes', is_controlled: false },
         { name: 'abstract', is_controlled: false },
@@ -661,14 +661,14 @@ module OregonDigital
         { name: 'source_condition', is_controlled: false },
         { name: 'description_of_manifestation', is_controlled: false },
         { name: 'mode_of_issuance', is_controlled: false },
-        { name: 'form_of_work', is_controlled: true },
+        { name: 'form_of_work_label', is_controlled: true },
         { name: 'layout', is_controlled: false },
         { name: 'biographical_information', is_controlled: false },
         { name: 'cover_description', is_controlled: false },
         { name: 'first_line', is_controlled: false },
         { name: 'first_line_chorus', is_controlled: false },
         { name: 'instrumentation', is_controlled: false },
-        { name: 'military_branch', is_controlled: true },
+        { name: 'military_branch_label', is_controlled: true },
         { name: 'military_highest_rank', is_controlled: false },
         { name: 'military_occupation', is_controlled: false },
         { name: 'military_service_location', is_controlled: false },
@@ -719,7 +719,7 @@ module OregonDigital
         { name: 'rights_note', is_controlled: false },
         { name: 'rights_holder', is_controlled: false },
         { name: 'copyright_claimant', is_controlled: false },
-        { name: 'access_restrictions', is_controlled: false },
+        { name: 'access_restrictions_label', is_controlled: true },
         { name: 'identifier', is_controlled: false },
         { name: 'item_locator', is_controlled: false },
         { name: 'accession_number', is_controlled: false },
@@ -729,7 +729,7 @@ module OregonDigital
         { name: 'language_label', is_controlled: false, name_label: 'language' },
         { name: 'source', is_controlled: false },
         { name: 'provenance', is_controlled: false },
-        { name: 'repository', is_controlled: false },
+        { name: 'repository_label', is_controlled: true },
         { name: 'current_repository_id', is_controlled: false },
         { name: 'shelf_location', is_controlled: false },
         { name: 'copy_location', is_controlled: false },
@@ -742,7 +742,7 @@ module OregonDigital
         { name: 'folder_number', is_controlled: false },
         { name: 'publisher_label', is_controlled: true },
         { name: 'publication_place_label', is_controlled: true },
-        { name: 'place_of_production', is_controlled: false },
+        { name: 'place_of_production_label', is_controlled: true },
         { name: 'contained_in_journal', is_controlled: false },
         { name: 'is_volume', is_controlled: false },
         { name: 'has_number', is_controlled: false },
@@ -757,18 +757,13 @@ module OregonDigital
         { name: 'art_series', is_controlled: false },
         { name: 'type_label', is_controlled: false, name_label: 'type' },
         { name: 'format', is_controlled: false },
-        { name: 'extent', is_controlled: false },
-        { name: 'material', is_controlled: false },
-        { name: 'measurements', is_controlled: false },
         { name: 'orientation', is_controlled: false },
-        { name: 'physical_extent', is_controlled: false },
-        { name: 'technique', is_controlled: false },
         { name: 'set', is_controlled: false },
         { name: 'exhibit', is_controlled: false },
         { name: 'institution_label', is_controlled: true },
         { name: 'conversion', is_controlled: false },
         { name: 'date_digitized', is_controlled: false },
-        { name: 'submission_date', is_controlled: false },
+        { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false },
         { name: 'original_file_name', is_controlled: false },
         { name: 'file_size', is_controlled: false },
@@ -776,9 +771,7 @@ module OregonDigital
         { name: 'width', is_controlled: false },
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
-        { name: 'color_space', is_controlled: false },
-        { name: 'date_modified', is_controlled: false },
-        { name: 'date_uploaded', is_controlled: false }
+        { name: 'color_space', is_controlled: false }
       ].freeze
     end
   end

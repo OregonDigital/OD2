@@ -1,5 +1,6 @@
 # frozen_string_literal:true
 
+# rubocop:disable Metrics/ClassLength
 module OregonDigital
   # Overrides the Hyrax derivative generation for our JP2 setup
   #
@@ -37,34 +38,6 @@ module OregonDigital
       end
     end
 
-    # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
-    def sequence_path(path, sequence = nil)
-      return path unless sequence
-
-      ext = File.extname(path)
-      dirname = File.dirname(path)
-      path_no_ext = File.join(dirname, File.basename(path, ext))
-      format('%<noext>s-%<sequence>04d%<ext>s', noext: path_no_ext, sequence: sequence, ext: ext)
-    end
-
-    # The destination_name parameter has to match up with the file parameter
-    # passed to the DownloadsController
-    def derivative_url(destination_name, sequence = nil)
-      path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
-      seq_path = sequence_path(path, sequence)
-      URI("file://#{seq_path}").to_s
-    end
-
-    # Returns a sorted list of all derivatives of the given name (typically a sequence)
-    def sorted_derivative_urls(destination_name)
-      path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
-      ext = File.extname(path)
-      paths = derivative_path_factory.derivatives_for_reference(file_set).select do |derivative|
-        File.extname(derivative) == ext
-      end
-      paths.collect { |pth| URI("file://#{pth}").to_s }.sort
-    end
-
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
     def create_image_derivatives(filename)
       OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
@@ -72,6 +45,18 @@ module OregonDigital
         create_thumbnail(out_path)
         create_zoomable(out_path)
       end
+    end
+
+    # Overridden: Office documents' needs are very similar to base Hyrax, but
+    # we can't use `mogrify` with a `flatten` switch in GraphicsMagick-land, so
+    # we have a slightly modified copy of the core processor
+    def create_office_document_derivatives(filename)
+      extract_full_text(filename, uri)
+      OregonDigital::Derivatives::Document::Runner.create(
+        filename,
+        outputs: [{ label: :thumbnail, size: '200x150>',
+                    format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+      )
     end
 
     def create_pdf_derivatives(filename)
@@ -106,6 +91,34 @@ module OregonDigital
                                                                       tile_size: '1024',
                                                                       compression: '20',
                                                                       layer: 0 }])
+    end
+
+    # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
+    def sequence_path(path, sequence = nil)
+      return path unless sequence
+
+      ext = File.extname(path)
+      dirname = File.dirname(path)
+      path_no_ext = File.join(dirname, File.basename(path, ext))
+      format('%<noext>s-%<sequence>04d%<ext>s', noext: path_no_ext, sequence: sequence, ext: ext)
+    end
+
+    # The destination_name parameter has to match up with the file parameter
+    # passed to the DownloadsController
+    def derivative_url(destination_name, sequence = nil)
+      path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
+      seq_path = sequence_path(path, sequence)
+      URI("file://#{seq_path}").to_s
+    end
+
+    # Returns a sorted list of all derivatives of the given name (typically a sequence)
+    def sorted_derivative_urls(destination_name)
+      path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
+      ext = File.extname(path)
+      paths = derivative_path_factory.derivatives_for_reference(file_set).select do |derivative|
+        File.extname(derivative) == ext
+      end
+      paths.collect { |pth| URI("file://#{pth}").to_s }.sort
     end
 
     # Pre-processes the given file to generate a PNG based on its mime type:
@@ -161,3 +174,4 @@ module OregonDigital
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

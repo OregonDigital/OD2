@@ -24,25 +24,6 @@ RSpec.describe Generic do
     end
   end
 
-  describe '#enqueue_fetch_failure' do
-    before do
-      allow(Hyrax.config.callback).to receive(:run)
-      allow(FetchGraphWorker).to receive(:perform_in)
-      stub_request(:post, 'http://ci-test:8080/bigdata/namespace/rw/sparql')
-        .to_return(status: 200, body: '', headers: {})
-      # model.depositor = user.email
-    end
-
-    it 'emails the user' do
-      expect(Hyrax.config.callback).to receive(:run).with(:ld_fetch_error, user, uri)
-      model.send(:enqueue_fetch_failure, uri)
-    end
-    it 'enqueues a retry job' do
-      expect(FetchGraphWorker).to receive(:perform_in).with(15.minutes, uri, user)
-      model.send(:enqueue_fetch_failure, uri)
-    end
-  end
-
   describe '#controlled_property_to_csv_value' do
     before do
       allow(term).to receive(:fetch)
@@ -71,7 +52,7 @@ RSpec.describe Generic do
       model.send(:properties_as_s)
     end
     it 'returns a hash with no controlled properties' do
-      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo')
+      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
     end
   end
 
@@ -81,7 +62,7 @@ RSpec.describe Generic do
     end
     it 'provides correct data' do
       csv = CSV.parse(model.csv_metadata, headers: true)
-      expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo')
+      expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
     end
   end
 

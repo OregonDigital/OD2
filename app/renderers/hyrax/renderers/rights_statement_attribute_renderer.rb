@@ -19,9 +19,9 @@ module Hyrax
         if parsed_uri.nil?
           ERB::Util.h(value)
         else
-          label = Hyrax.config.rights_statement_service_class.new.label(value) { value }
           # OVERRIDE FROM HYRAX to remove open-in-new-tab functionality
-          %(<a href=#{ERB::Util.h(value)}>#{label}</a>)
+          # Hyrax.config.rights_statement_service_class.new.label(value) { value } Generates a label for a specific value
+          %(<a href=#{ERB::Util.h(value)}>#{Hyrax.config.rights_statement_service_class.new.label(value) { value }}</a>)
         end
       end
     end
