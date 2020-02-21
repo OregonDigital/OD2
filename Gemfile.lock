@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: ab660e18c9b8af197d9b26f3e667f4be84bbfd99
+  revision: d51edcc71f38ba1d14582b7594d3d46f6ff7168e
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -166,16 +166,16 @@ GEM
     awesome_nested_set (3.2.0)
       activerecord (>= 4.0.0, < 7.0)
     aws-eventstream (1.0.3)
-    aws-partitions (1.269.0)
-    aws-sdk-core (3.89.1)
+    aws-partitions (1.273.0)
+    aws-sdk-core (3.90.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.28.0)
+    aws-sdk-kms (1.29.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.60.1)
+    aws-sdk-s3 (1.60.2)
       aws-sdk-core (~> 3, >= 3.83.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -270,7 +270,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.5)
+    concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
@@ -586,7 +586,7 @@ GEM
     noid-rails (3.0.1)
       actionpack (>= 5.0.0, < 6)
       noid (~> 0.9)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri
@@ -642,7 +642,7 @@ GEM
       nokogiri (~> 1.6)
       rails (~> 5.0)
       rdf
-    rack (2.1.2)
+    rack (2.2.2)
     rack-honeycomb (0.5.0)
       libhoney (>= 1.5.0)
     rack-protection (2.0.8.1)
@@ -836,9 +836,9 @@ GEM
       sxp (~> 1.0)
     shoulda-matchers (4.1.2)
       activesupport (>= 4.2.0)
-    sidekiq (6.0.4)
+    sidekiq (6.0.5)
       connection_pool (>= 2.2.2)
-      rack (>= 2.0.0)
+      rack (~> 2.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
     signet (0.12.0)
