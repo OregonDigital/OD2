@@ -9,9 +9,9 @@ primary_set_crosswalk:
   - primary_set: african-ephemera
     admin_set_id: uo
   - primary_set: alice-b-sheldon
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: angelus-studio
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: annual-cruise
     admin_set_id: osu-scarc-admin
   - primary_set: arch-entourage
@@ -25,55 +25,55 @@ primary_set_crosswalk:
   - primary_set: chinavine
     admin_set_id: uo
   - primary_set: clarence-andrews
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: columbia-gorge
     admin_set_id: osu
   - primary_set: colver-family
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: corvallis-flood
     admin_set_id: osu-scarc-admin
   - primary_set: corvallis-images
     admin_set_id: osu-scarc-admin
   - primary_set: cw-furlong
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: daily-barometer
     admin_set_id: osu-scarc-admin
   - primary_set: daily-emerald
     admin_set_id: uo
   - primary_set: dan-powell
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: dissociation
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: doris-ulmann
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: electric-studio
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: ellis-fuller-lawrence
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: ellmaker-family
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: fairbanks
     admin_set_id: osu
   - primary_set: finley-bohlman
     admin_set_id: osu-scarc-admin
   - primary_set: florence-hartshorn
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: frazier-boutelle
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: gb-warner
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: gb-warner-nosatsu
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: gb-warner-papers-ua022
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: gbwarnerpapers
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: general-catalogs
     admin_set_id: osu-scarc-admin
   - primary_set: gifford
     admin_set_id: osu-scarc-admin
   - primary_set: grayson-mathews
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: gwilliams
     admin_set_id: osu-scarc-admin
   - primary_set: herbarium
@@ -81,41 +81,45 @@ primary_set_crosswalk:
   - primary_set: illustrated-booklets
     admin_set_id: osu-scarc-admin
   - primary_set: james-cloutier
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: jasr
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: joanna-russ
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: joel-palmer
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: john-bauguess
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: johnyeonarchdrawings
-    admin_set_id: uo
+    admin_set_id: uo-scua
+  - primary_set: schnitzer-mofa
+    admin_set_id: uo-jsma
   - primary_set: ken-gray
     admin_set_id: osu-scarc-admin
   - primary_set: lchsa
     admin_set_id: osu
   - primary_set: lee-drake
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: lee-moorhouse
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: lichens-pnw
     admin_set_id: osu
   - primary_set: lowenstam
     admin_set_id: uo
   - primary_set: maic
     admin_set_id: uo
+  - primary_set: marketing-photos
+    admin_set_id: uo-mc
   - primary_set: mayo-methot-bogart
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: middle-east-water
     admin_set_id: osu
   - primary_set: mountaingrove
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: mss-rb
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: ncu
-    admin_set_id: uo
+    admin_set_id: nwcu
   - primary_set: nw-folklife
     admin_set_id: uo
   - primary_set: ocfrp
@@ -125,7 +129,7 @@ primary_set_crosswalk:
   - primary_set: oimb
     admin_set_id: uo
   - primary_set: opal-whiteley
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: or-chinese-disinterment
     admin_set_id: osu-scarc-admin
   - primary_set: or-latino-herit
@@ -169,19 +173,19 @@ primary_set_crosswalk:
   - primary_set: osu-yearbooks
     admin_set_id: osu-scarc-admin
   - primary_set: percent-for-art
-    admin_set_id: uo
+    admin_set_id: oac
   - primary_set: petrarch
     admin_set_id: uo
   - primary_set: quincy-scott
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: rockyshore93
     admin_set_id: osu
   - primary_set: roy-c-andrews
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: rv-mills
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: schnitzer-nitrate
-    admin_set_id: uo
+    admin_set_id: uo-jsma
   - primary_set: sheetmusic
     admin_set_id: uo
   - primary_set: siuslaw
@@ -195,18 +199,18 @@ primary_set_crosswalk:
   - primary_set: the-manuscript
     admin_set_id: osu-scarc-admin
   - primary_set: uo-arch-photos
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: uo-athletics
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: uo-president
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: uo-stock-photos
     admin_set_id: uo
   - primary_set: uo-veterans
     admin_set_id: uo
   - primary_set: walter-bowman
-    admin_set_id: uo
+    admin_set_id: uo-scua
   - primary_set: western-waters
     admin_set_id: uo
   - primary_set: willis-dunagan
-    admin_set_id: uo
+    admin_set_id: uo-scua

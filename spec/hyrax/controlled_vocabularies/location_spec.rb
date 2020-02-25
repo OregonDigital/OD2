@@ -116,7 +116,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
         allow(location).to receive(:valid_label_without_parent).and_return(false)
         allow(location).to receive(:label_or_blank).and_return('Parent Label')
         allow(location).to receive(:top_level_parent).with('Parent Label').and_return(false)
-        allow(location).to receive(:featureClass).and_return([described_class.new('http://www.geonames.org/ontology#A')])
+        allow(location).to receive(:featureClass).and_return([described_class.new('https://www.geonames.org/ontology#A')])
       end
 
       it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University , Parent Label, (Administrative Boundary) '] }

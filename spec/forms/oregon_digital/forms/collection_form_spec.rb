@@ -5,29 +5,13 @@ RSpec.describe OregonDigital::Forms::CollectionForm do
   let(:ability) { Ability.new(create(:user)) }
   let(:repository) { double }
   let(:form) { described_class.new(collection, ability, repository) }
+  let(:expected_terms) { %i[resource_type title creator contributor description license publisher date_created subject language representative_id thumbnail_id related_url visibility collection_type_gid institution date repository] }
 
   describe '#terms' do
     let(:terms) { described_class.terms }
 
     it do
-      expect(terms).to eq %i[resource_type
-                             title
-                             creator
-                             contributor
-                             description
-                             license
-                             publisher
-                             date_created
-                             subject
-                             language
-                             representative_id
-                             thumbnail_id
-                             related_url
-                             visibility
-                             collection_type_gid
-                             institution
-                             date
-                             repository]
+      expect(terms).to eq expected_terms
     end
   end
 

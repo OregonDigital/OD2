@@ -5,7 +5,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:user_ob) { User }
   let(:provider) { instance_double('Provider') }
   let(:merged_env) { request.env.merge('omniauth.auth' => provider) }
-  let(:req) { @request }
+  let(:req) { request }
 
   context 'when #cas' do
     before do
