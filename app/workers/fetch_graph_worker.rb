@@ -7,6 +7,7 @@ class FetchGraphWorker
 
   # JOBS TEND TOWARD BEING LARGE. DISABLED BECAUSE FETCHING IS HEAVY HANDED.
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def perform(pid, _user_key)
     # Fetch Work and SolrDoc
     work = ActiveFedora::Base.find(pid)
@@ -22,6 +23,7 @@ class FetchGraphWorker
     # Iterate over Controller Props values
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
+        val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
         # Fetch labels
         if val.respond_to?(:fetch)
           begin
@@ -51,6 +53,7 @@ class FetchGraphWorker
     ActiveFedora::SolrService.commit
   end
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   # TODO: WILL INTEGRATE THIS WHEN REDOING EMAILING FOR THESE JOBS
   # def fetch_failed_callback(user, val)

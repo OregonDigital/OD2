@@ -42,15 +42,17 @@ module OregonDigital
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
-        language = get_language_label(rdf_label)
-        label = language.blank? ? rdf_label.first : language
-        [rdf_subject.to_s, { label: "#{label}$#{rdf_subject}" }]
+        [rdf_subject.to_s, { label: "#{language_label(get_language_label(rdf_label))}$#{rdf_subject}" }]
       end
 
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
       # it should return an empty graph.
       def triplestore_fetch
         URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
+      end
+
+      def language_label(language)
+        language.blank? ? rdf_label.first : language
       end
 
       def triplestore

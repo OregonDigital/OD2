@@ -9,7 +9,6 @@ module Helpers
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
       click_button 'Log in'
-      expect(page).not_to have_text 'Invalid Email or password.'
     end
   end
 end

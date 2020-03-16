@@ -1,5 +1,7 @@
 # frozen_string_literal:true
 
+require 'csv'
+
 module OregonDigital
   # Sets base behaviors for all works
   module WorkBehavior
@@ -20,7 +22,7 @@ module OregonDigital
       # Build a CSV of label headers and metadata value data
       props = properties_as_s.merge(controlled_properties_as_s)
 
-      CSV.generate do |csv|
+      ::CSV.generate do |csv|
         csv << props.keys
         csv << props.values
       end
@@ -97,7 +99,7 @@ module OregonDigital
     # Convert work controlled property value to '<label> [<uri>]' format
     def controlled_property_to_csv_value(prop)
       prop.fetch
-      prop = prop.solrize[1][:label].split('$')
+      prop = prop.solrize.second.nil? ? [prop.solrize.first, 'No label found'] : prop.solrize[1][:label].split('$')
       prop[1] = "[#{prop[1]}]"
       prop.join(' ')
     end
