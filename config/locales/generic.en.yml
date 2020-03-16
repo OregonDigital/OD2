@@ -255,7 +255,7 @@ en:
         tgn: "Historic Place"
         water_basin: "Water Basin"
         award_date: "Award Date"
-        created: "Creation Date"
+        date_created: "Creation Date"
         collected_date: "Collected Date"
         date: "Date"
         issued: "Date Issued"
