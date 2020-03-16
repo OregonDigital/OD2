@@ -94,7 +94,7 @@ en:
         tgn: "Locations from Getty Thesaurus of Geographic Names."
         water_basin: "Use Geonames to locate river basins."
         award_date: "Dates associated with competition award dates including grants, fellowships, and recognition awards. Use EDTF format (YYYY-MM-DD)."
-        created: "Use EDTF format (YYYY-MM-DD)."
+        date_created: "Use EDTF format (YYYY-MM-DD)."
         collected_date: "Date the original resource was collected. Use EDTF format (YYYY-MM-DD)."
         date: "Use EDTF format (YYYY-MM-DD). For date ranges, use format YYYY/YYYY. For circa dates, place the circa behind the year."
         issued: "Publication date. Use EDTF format (YYYY-MM-DD)."
