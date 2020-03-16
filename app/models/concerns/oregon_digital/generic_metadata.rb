@@ -19,7 +19,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :description, basic_searchable: false, predicate: ::RDF::Vocab::DC.description do |index|
+      property :description, predicate: ::RDF::Vocab::DC.description do |index|
         index.as :stored_searchable
       end
 
@@ -98,7 +98,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :military_service_location, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
+      property :military_service_location, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
         index.as :stored_searchable
       end
 
@@ -118,7 +118,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :tribal_notes, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes') do |index|
+      property :tribal_notes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes') do |index|
         index.as :stored_searchable
       end
 
