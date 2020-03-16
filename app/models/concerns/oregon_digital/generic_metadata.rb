@@ -616,7 +616,8 @@ module OregonDigital
       end
 
       ORDERED_PROPERTIES = [
-        { name: 'trible_title', is_controlled: false },
+        { name: 'alternative', is_controlled: false },
+        { name: 'tribal_title', is_controlled: false },
         { name: 'creator_display', is_controlled: false },
         { name: 'creator_label', is_controlled: true },
         { name: 'contributor_label', is_controlled: true },
