@@ -263,12 +263,14 @@ services:
     <<: *db
     environment:
       - POSTGRES_DB=development
+      - POSTGRES_PASSWORD=postgres
     volumes:
       - db-dev:/var/lib/postgresql/data
   db-test:
     <<: *db
     environment:
       - POSTGRES_DB=test
+      - POSTGRES_PASSWORD=postgres
     tmpfs: /var/lib/postgresql/data
 
   ##
