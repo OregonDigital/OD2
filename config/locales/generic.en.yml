@@ -106,6 +106,7 @@ en:
         identifier: "Applied to images, the identifier includes the collection and image ID."
         item_locator: "Call numbers, shelf marks or similar labels for an item."
         longitude_latitude_identification: "The LLID was developed for Oregon Department of Environmental Quality staff and the public to obtain geographic information about locations of interest."
+        location_copyshelf_location: "Shelfmark or other shelving designation that indicates the location identifier for a copy."
         copyright_claimant: "Original copyright holder or registrant."
         rights_statement: "Apply 1 standardized rights statement. Explanations of the statements can be found at https://rightsstatements.org/en/"
         rights_note: "Include explanation of copyright status."
