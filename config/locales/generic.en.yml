@@ -299,7 +299,7 @@ en:
         has_version: "Version"
         isPartOf: "Is Part Of"
         is_version_of: "Is Version Of"
-        relation: "Relation"
+        relation: "Relations"
         type: "Type"
         workType: "Work Type"
         extent: "Extent"
