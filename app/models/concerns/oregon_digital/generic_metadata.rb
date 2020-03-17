@@ -19,7 +19,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :description, basic_searchable: false, predicate: ::RDF::Vocab::DC.description do |index|
+      property :description, predicate: ::RDF::Vocab::DC.description do |index|
         index.as :stored_searchable
       end
 
@@ -98,7 +98,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :military_service_location, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
+      property :military_service_location, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
         index.as :stored_searchable
       end
 
@@ -118,7 +118,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :tribal_notes, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes') do |index|
+      property :tribal_notes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes') do |index|
         index.as :stored_searchable
       end
 
@@ -616,7 +616,8 @@ module OregonDigital
       end
 
       ORDERED_PROPERTIES = [
-        { name: 'trible_title', is_controlled: false },
+        { name: 'alternative', is_controlled: false },
+        { name: 'tribal_title', is_controlled: false },
         { name: 'creator_display', is_controlled: false },
         { name: 'creator_label', is_controlled: true },
         { name: 'contributor_label', is_controlled: true },
@@ -644,7 +645,7 @@ module OregonDigital
         { name: 'translator_label', is_controlled: true },
         { name: 'date', is_controlled: false },
         { name: 'date_created', is_controlled: false },
-        { name: 'date_issued', is_controlled: false },
+        { name: 'issued', is_controlled: false },
         { name: 'award_date', is_controlled: false },
         { name: 'acquisition_date', is_controlled: false },
         { name: 'collected_date', is_controlled: false },
@@ -688,7 +689,7 @@ module OregonDigital
         { name: 'event', is_controlled: false },
         { name: 'sports_team', is_controlled: false },
         { name: 'award', is_controlled: false },
-        { name: 'work_type', is_controlled: false },
+        { name: 'workType', is_controlled: false },
         { name: 'cultural_context_label', is_controlled: true },
         { name: 'style_or_period_label', is_controlled: true },
         { name: 'state_or_edition', is_controlled: false },
@@ -724,14 +725,14 @@ module OregonDigital
         { name: 'item_locator', is_controlled: false },
         { name: 'accession_number', is_controlled: false },
         { name: 'barcode', is_controlled: false },
-        { name: 'hydrological_unit_code', is_controlled: false },
+        { name: 'hydrologic_unit_code', is_controlled: false },
         { name: 'longitude_latitude_identification', is_controlled: false },
         { name: 'language_label', is_controlled: false, name_label: 'language' },
         { name: 'source', is_controlled: false },
         { name: 'provenance', is_controlled: false },
         { name: 'repository_label', is_controlled: true },
         { name: 'current_repository_id', is_controlled: false },
-        { name: 'shelf_location', is_controlled: false },
+        { name: 'location_copyshelf_location', is_controlled: false },
         { name: 'copy_location', is_controlled: false },
         { name: 'local_collection_name_label', is_controlled: true },
         { name: 'local_collection_id', is_controlled: false },
@@ -751,7 +752,7 @@ module OregonDigital
         { name: 'relation', is_controlled: false },
         { name: 'is_version_of', is_controlled: false },
         { name: 'has_version', is_controlled: false },
-        { name: 'is_part_of', is_controlled: false },
+        { name: 'isPartOf', is_controlled: false },
         { name: 'has_part', is_controlled: false },
         { name: 'larger_work', is_controlled: false },
         { name: 'art_series', is_controlled: false },
@@ -765,7 +766,7 @@ module OregonDigital
         { name: 'date_digitized', is_controlled: false },
         { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false },
-        { name: 'original_file_name', is_controlled: false },
+        { name: 'original_filename', is_controlled: false },
         { name: 'file_size', is_controlled: false },
         { name: 'height', is_controlled: false },
         { name: 'width', is_controlled: false },
