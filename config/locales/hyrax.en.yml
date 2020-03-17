@@ -202,6 +202,8 @@ en:
           ethnographic_term_label: Ethnographic Term
           style_or_period_label: Style / Period
           form_of_work_label: Form of Work
+          access_restrictions_label: Access Restrictions
+          publication_place_label: Publication Place
           format_label: Format
           institution_label: Institution
           local_collection_name_label: Local Collection Name
@@ -217,6 +219,7 @@ en:
           common_name_label: Common Name
           military_branch_label: Military Branch
           subject_label: Subject
+          date_modified: Modified
   hyrax:
     base:
       relationships:
