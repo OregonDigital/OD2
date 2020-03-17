@@ -288,7 +288,7 @@ en:
         local_collection_name: "Local Collection Name"
         location_copyshelf_location: "Shelf Location"
         publisher: "Publisher"
-        place_of_production: "Place of Production"
+        place_of_production_label: "Place of Production"
         provenance: "Provenance"
         publication_place: "Publication Place"
         repository: "Repository"
