@@ -79,3 +79,5 @@ group :test do
   gem 'shoulda-matchers', '~> 4'
   gem 'simplecov', '>= 0.9'
 end
+
+gem "vcr", "~> 5.1"
