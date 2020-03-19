@@ -97,7 +97,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Document.properties[prop].behaviors.include?(:facetable)
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Document.properties[prop].behaviors.include?(:facetable) && (Document.properties[prop]['facet'] || Document.properties[prop]['facet'].nil?)
     end
     Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -120,7 +120,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable)
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable) && (Generic.properties[prop]['facet'] || Generic.properties[prop]['facet'].nil?)
     end
     Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -143,7 +143,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable)
+      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable) && (Image.properties[prop]['facet'] || Image.properties[prop]['facet'].nil?)
     end
     # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
     #
@@ -172,7 +172,7 @@ class CatalogController < ApplicationController
       end
 
       # Add property as facetable
-      config.add_facet_field solr_name(label, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable)
+      config.add_facet_field solr_name(label, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable) && (Generic.properties[prop]['facet'] || Generic.properties[prop]['facet'].nil?)
     end
     config.add_show_field solr_name('language_label', :stored_searchable)
     config.add_show_field solr_name('type_label', :stored_searchable)
