@@ -1,16 +1,35 @@
 # frozen_string_literal: true
+require 'vcr'
 
 namespace :oregon_digital do
   desc 'Create jobs to reindex every asset in Fedora'
   task reindex_all: :environment do
     base_url = ENV.fetch('REINDEX_ALL_FEDORA_URI', ActiveFedora.fedora.base_uri)
     debug = ENV.fetch('REINDEX_ALL_DEBUG', false) == '1'
+    record = ENV.fetch('REINDEX_ALL_VCR', false) == '1'
 
     puts 'Starting reindex...'
     puts '** DEBUG **' if debug
 
-    # Find *all* objects in Fedora
+    if record
+      puts '*** Recording Fedora API hits with VCR ***'
+      puts "    If you're recording in dev, you'll need to change URLs to make the "
+      puts "    recording work in test, e.g.:"
+      puts
+      puts "        sed -i 's|/rest/dev|/rest/test|g' spec/cassettes/fedora-fetch.yml"
+      puts "        sed -i 's|fcrepo-dev|fcrepo-test|g' spec/cassettes/fedora-fetch.yml"
+
+      VCR.configure do |c|
+        c.hook_into :faraday
+        c.cassette_library_dir = 'spec/cassettes'
+        c.allow_http_connections_when_no_cassette = true
+      end
+    end
+
+    # Find *all* objects in Fedora, optionally recording them with VCR
+    VCR.insert_cassette('fedora-fetch', :record => :all) if record
     objects = OregonDigital::FedoraFinder.new(base_url).fetch_all
+    VCR.eject_cassette if record
 
     # by_pid organizes objects and metadata by their Fedora pid
     by_pid = {}
