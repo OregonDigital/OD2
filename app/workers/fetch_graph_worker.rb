@@ -42,11 +42,11 @@ class FetchGraphWorker
           # Insert into SolrDocument
           if val.is_a?(String)
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_field?(controlled_prop)
+            Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
           else
             extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', [extractred_val], behavior) if creator_combined_field?(controlled_prop)
+            Solrizer.insert_field(solr_doc, 'creator_combined_label', [extractred_val], behavior) if creator_combined_facet?(controlled_prop)
           end
         end
       end
@@ -74,7 +74,7 @@ class FetchGraphWorker
     RDF::Util::File::HttpAdapter.default_accept_header.sub(%r{, \*\/\*;q=0\.1\Z}, '')
   end
 
-  def creator_combined_field?(controlled_prop)
+  def creator_combined_facet?(controlled_prop)
     %i[arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer lyricist owner patron photographer print_maker recipient transcriber translator].include? controlled_prop
   end
 end
