@@ -40,6 +40,11 @@ RSpec.describe FetchGraphWorker, type: :worker do
         expect(worker).to receive(:fetch_failed_graph).once
         worker.perform(work.id, work.depositor)
       end
+
+      it 'indexes data into the location_combined_facet field' do
+        worker.perform(work.id, work.depositor)
+        expect(SolrDocument.find(work.id)['location_combined_facet_tesim'].first).to eq 'Chabre, Wayne'
+      end
     end
   end
 end
