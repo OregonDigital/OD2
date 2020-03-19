@@ -40,9 +40,11 @@ class FetchGraphWorker
           # Insert into SolrDocument
           if val.is_a?(String)
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
+            Solrizer.insert_field(solr_doc, "location_combined_facet", val, behavior) if location_combined_facet?(controlled_prop)
           else
             extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
+            Solrizer.insert_field(solr_doc, "location_combined_facet", [extractred_val], behavior) if location_combined_facet?(controlled_prop)
           end
         end
       end
@@ -66,5 +68,9 @@ class FetchGraphWorker
 
   def default_accept_header
     RDF::Util::File::HttpAdapter.default_accept_header.sub(%r{, \*\/\*;q=0\.1\Z}, '')
+  end
+
+  def location_combined_facet?(controlled_prop)
+    [:ranger_district, :water_basin, :location].include? controlled_prop
   end
 end
