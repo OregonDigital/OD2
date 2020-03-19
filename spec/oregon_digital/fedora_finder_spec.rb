@@ -11,24 +11,24 @@ RSpec.describe OregonDigital::FedoraFinder do
 
   let(:objects) do
     o = nil
-    VCR.use_cassette('fedora-fetch', :record => :none) do
-      o = OregonDigital::FedoraFinder.new(ActiveFedora.fedora.base_uri).fetch_all
+    VCR.use_cassette('fedora-fetch', record: :none) do
+      o = described_class.new(ActiveFedora.fedora.base_uri).fetch_all
     end
 
     o
   end
 
   describe '.fetch_all' do
-    let(:collections) { objects.select {|o| o.model == 'Collection'} }
-    let(:images) { objects.select {|o| o.model == 'Image'} }
-    let(:admin_sets) { objects.select {|o| o.model == 'AdminSet'} }
+    let(:collections) { objects.select { |o| o.model == 'Collection' } }
+    let(:images) { objects.select { |o| o.model == 'Image' } }
+    let(:admin_sets) { objects.select { |o| o.model == 'AdminSet' } }
 
     it 'has two collections' do
       expect(collections.length).to eq(2)
     end
 
     it 'has the Gifford and OSU SCARC collections' do
-      expect(collections.collect {|c| c.pid}.sort.join(' ')).to eq('gifford osu-scarc')
+      expect(collections.collect { |c| c.pid }.sort.join(' ')).to eq('gifford osu-scarc')
     end
 
     it 'returns nine images' do
@@ -37,7 +37,7 @@ RSpec.describe OregonDigital::FedoraFinder do
 
     it 'returns all our admin sets' do
       expected = 'admin_set/default nwcu oac ohs osu osu-scarc-admin uo uo-jsma uo-mc uo-scua'
-      expect(admin_sets.collect {|as| as.pid}.sort.join(' ')).to eq(expected)
+      expect(admin_sets.collect { |as| as.pid }.sort.join(' ')).to eq(expected)
     end
 
     # This may need some explanation: basically the Finder code deliberately
@@ -47,7 +47,7 @@ RSpec.describe OregonDigital::FedoraFinder do
     # These objects are still part of the request/response cycle when querying
     # Fedora, so it's worth testing for them so it's clear what's going on.
     it 'returns one model-free asset per TIFF' do
-      files = objects.select {|o| o.model == ''}
+      files = objects.select { |o| o.model == '' }
       expect(files.length).to eq(images.length)
     end
   end
