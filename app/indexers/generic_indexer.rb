@@ -48,7 +48,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_topic_combined_label(solr_doc, topic_labels)
-    solr_doc['topic_combined_label_tesim'] = topic_labels
+    solr_doc[Solrizer.solr_name('topic_combined_label', :facetable)] = topic_labels
   end
 
   def index_edit_groups
