@@ -5,8 +5,9 @@ RSpec.describe FetchGraphWorker, type: :worker do
   let(:worker) { described_class.new }
   let(:uri) { 'http://my.queryuri.com' }
   let(:user) { build(:user) }
-  let(:model) { create(:generic, title: ['foo'], creator: [controlled_val], ranger_district: [controlled_val], depositor: user.email, id: 123) }
+  let(:model) { create(:generic, title: ['foo'], creator: [controlled_val], ranger_district: [controlled_val_2], depositor: user.email, id: 123) }
   let(:controlled_val) { OregonDigital::ControlledVocabularies::Creator.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
+  let(:controlled_val_2) { OregonDigital::ControlledVocabularies::Creator.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
   let(:work) { model }
 
   describe '#perform' do
