@@ -23,6 +23,11 @@ RSpec.describe FetchGraphWorker, type: :worker do
         worker.perform(work.id, work.depositor)
         expect(SolrDocument.find(work.id)['creator_label_tesim'].first).to eq 'Chabre, Wayne'
       end
+
+      it 'indexes data into the creator_combined_label field' do
+        worker.perform(work.id, work.depositor)
+        expect(SolrDocument.find(work.id)['creator_combined_label_tesim'].first).to eq 'Chabre, Wayne'
+      end
     end
 
     context 'when the request fails' do

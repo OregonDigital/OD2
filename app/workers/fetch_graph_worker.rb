@@ -8,6 +8,8 @@ class FetchGraphWorker
   # JOBS TEND TOWARD BEING LARGE. DISABLED BECAUSE FETCHING IS HEAVY HANDED.
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def perform(pid, _user_key)
     # Fetch Work and SolrDoc
     work = ActiveFedora::Base.find(pid)
@@ -40,9 +42,11 @@ class FetchGraphWorker
           # Insert into SolrDocument
           if val.is_a?(String)
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
+            Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
           else
             extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
+            Solrizer.insert_field(solr_doc, 'creator_combined_label', [extractred_val], behavior) if creator_combined_facet?(controlled_prop)
           end
         end
       end
@@ -54,6 +58,8 @@ class FetchGraphWorker
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 
   # TODO: WILL INTEGRATE THIS WHEN REDOING EMAILING FOR THESE JOBS
   # def fetch_failed_callback(user, val)
@@ -66,5 +72,9 @@ class FetchGraphWorker
 
   def default_accept_header
     RDF::Util::File::HttpAdapter.default_accept_header.sub(%r{, \*\/\*;q=0\.1\Z}, '')
+  end
+
+  def creator_combined_facet?(controlled_prop)
+    %i[arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer lyricist owner patron photographer print_maker recipient transcriber translator].include? controlled_prop
   end
 end
