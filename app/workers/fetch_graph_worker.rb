@@ -23,6 +23,7 @@ class FetchGraphWorker
     solr_doc['_version_'] = 0
 
     # Iterate over Controller Props values
+    # rubocop:disable Metrics/BlockLength
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
         val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
@@ -55,6 +56,7 @@ class FetchGraphWorker
         end
       end
     end
+    # rubocop:enable Metrics/BlockLength
 
     # Commit Changes
     ActiveFedora::SolrService.add(solr_doc)
