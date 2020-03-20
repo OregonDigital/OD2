@@ -40,14 +40,8 @@ RSpec.describe OregonDigital::FedoraFinder do
       expect(admin_sets.collect { |as| as.pid }.sort.join(' ')).to eq(expected)
     end
 
-    # This may need some explanation: basically the Finder code deliberately
-    # skips trying to parse anything with a 406 return, because those objects
-    # don't have any JSON.  The only time this happens is when the requested
-    # object is some kind of bitstream, which happens for an object's files.
-    # These objects are still part of the request/response cycle when querying
-    # Fedora, so it's worth testing for them so it's clear what's going on.
-    it 'returns one model-free asset per TIFF' do
-      files = objects.select { |o| o.model == '' }
+    it 'returns one file per TIFF' do
+      files = objects.select { |o| o.model == '<blob>' }
       expect(files.length).to eq(images.length)
     end
   end

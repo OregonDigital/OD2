@@ -1,11 +1,30 @@
 # frozen_string_literal: true
 
+# This is a list of models which are "fake" (root, <blob>) or else contained
+# within / otherwise tied to their assets, so they aren't stored in the
+# FedoraFinder's assets / containers lists.  We explicitly list these so we can
+# easily see if a model is present which we haven't accounted for.
+IGNORED_MODELS = [
+  'root',
+  '<blob>',
+  'Hydra::AccessControls::Permission',
+  'Hydra::AccessControls::Embargo',
+  'Hydra::AccessControl',
+  'ActiveFedora::Aggregation::Proxy',
+  'ActiveFedora::Aggregation::ListSource',
+  'ActiveFedora::IndirectContainer',
+  'ActiveFedora::DirectContainer'
+].freeze
+COLLECTION_MODELS = ['Collection', 'AdminSet'].freeze
+ASSET_MODELS = ['Document', 'Image', 'Audio', 'Generic', 'Video', 'FileSet'].freeze
+ALL_MODELS = [IGNORED_MODELS + COLLECTION_MODELS + ASSET_MODELS].flatten.freeze
+
 module OregonDigital
   # FedoraObject holds some basic data pulled / parsed from Fedora's raw data
   class FedoraObject
     attr_accessor :pid, :path, :parent, :raw, :model, :contains,
                   :contains_pids, :access_control, :access_control_pids, :proxy_for,
-                  :proxy_for_pids
+                  :proxy_for_pids, :proxies, :proxy_pids
 
     def initialize(parent:, path:)
       set_defaults
@@ -47,6 +66,8 @@ module OregonDigital
       self.contains_pids = []
       self.access_control = []
       self.access_control_pids = []
+      self.proxies = []
+      self.proxy_pids = []
       self.raw = ''
       self.model = ''
     end
@@ -79,9 +100,14 @@ module OregonDigital
   # FedoraFinder finds all Fedora objects starting at a given Base URL
   # (typically the root URL of the Fedora service) and stores them in memory
   class FedoraFinder
+    attr_reader :all_objects, :by_pid, :collections, :assets
+
     def initialize(base_url)
       @base_url = base_url
-      @objects = []
+      @all_objects = []
+      @collections = []
+      @assets = []
+      @by_pid = {}
     end
 
     # fetch_all returns all objects fetched from Fedora which are meaningful
@@ -89,7 +115,7 @@ module OregonDigital
     # will not)
     def fetch_all
       request_objects(url: @base_url)
-      @objects
+      setup_proxies
     end
 
     private
@@ -98,9 +124,23 @@ module OregonDigital
       object = FedoraObject.new(parent: parent, path: url.sub(@base_url, ''))
       object.parse(get(url)[0])
 
-      @objects << object
-
+      categorize(object)
       crawl(object)
+    end
+
+    # Stores the object data in our full object list as well as any other lists
+    # where it makes sense, and keys it by its pid
+    def categorize(object)
+      by_pid[object.pid] = object
+      all_objects << object
+
+      m = object.model
+      return if IGNORED_MODELS.include?(m)
+
+      collections << object if COLLECTION_MODELS.include?(m)
+      assets << object if ASSET_MODELS.include?(m)
+
+      raise "object #{object.pid} has unknown model (#{m})" unless ALL_MODELS.include?(m)
     end
 
     def crawl(object)
@@ -116,11 +156,27 @@ module OregonDigital
       # A 200 means all's well, but we also have to check 406 responses,
       # because that means the requested content type (JSON) is not available.
       # That seems to be the response for things like binary blobs, where we
-      # wouldn't have any metadata to parse anyway, so we just skip those.
+      # wouldn't have any metadata to parse anyway, so we just give those a
+      # fake model and nothing else.
       case resp.status
       when 200 then return JSON.parse resp.body
-      when 406 then return [nil]
+      when 406 then return [{'info:fedora/fedora-system:def/model#hasModel' => [{'@value' => '<blob>'}]}]
       else          raise "Unable to fetch #{url.inspect}: #{resp.inspect}"
+      end
+    end
+
+    # Sets up objects to know about anything which acts as their proxy.  Proxy
+    # objects need to be indexed after the object for which they are a proxy.
+    # Proxies seem to have multiple meanings, such as relating an object to its
+    # fileset(s) or very indirectly relating a collection to its assets.
+    def setup_proxies
+      all_objects.each do |obj|
+        if obj.model == 'ActiveFedora::Aggregation::Proxy'
+          obj.proxy_for_pids.each do |pid|
+            by_pid[pid].proxies << obj
+            by_pid[pid].proxy_pids << obj.pid
+          end
+        end
       end
     end
   end
