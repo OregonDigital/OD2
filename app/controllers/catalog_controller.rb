@@ -176,6 +176,7 @@ class CatalogController < ApplicationController
     end
     config.add_show_field solr_name('type_label', :stored_searchable)
     config.add_show_field solr_name('rights_statement_label', :stored_searchable)
+    config.add_show_field solr_name('language_label', :stored_searchable)
 
     config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.resource_type'), limit: 5
