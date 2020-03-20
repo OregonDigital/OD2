@@ -15,8 +15,8 @@ IGNORED_MODELS = [
   'ActiveFedora::IndirectContainer',
   'ActiveFedora::DirectContainer'
 ].freeze
-COLLECTION_MODELS = ['Collection', 'AdminSet'].freeze
-ASSET_MODELS = ['Document', 'Image', 'Audio', 'Generic', 'Video', 'FileSet'].freeze
+COLLECTION_MODELS = %w[Collection AdminSet].freeze
+ASSET_MODELS = %w[Document Image Audio Generic Video FileSet].freeze
 ALL_MODELS = [IGNORED_MODELS + COLLECTION_MODELS + ASSET_MODELS].flatten.freeze
 
 module OregonDigital
@@ -130,6 +130,8 @@ module OregonDigital
 
     # Stores the object data in our full object list as well as any other lists
     # where it makes sense, and keys it by its pid
+    #
+    # rubocop:disable Metrics/AbcSize
     def categorize(object)
       by_pid[object.pid] = object
       all_objects << object
@@ -142,6 +144,7 @@ module OregonDigital
 
       raise "object #{object.pid} has unknown model (#{m})" unless ALL_MODELS.include?(m)
     end
+    # rubocop:enable Metrics/AbcSize
 
     def crawl(object)
       object.contains.each do |child|
@@ -160,7 +163,7 @@ module OregonDigital
       # fake model and nothing else.
       case resp.status
       when 200 then return JSON.parse resp.body
-      when 406 then return [{'info:fedora/fedora-system:def/model#hasModel' => [{'@value' => '<blob>'}]}]
+      when 406 then return [{ 'info:fedora/fedora-system:def/model#hasModel' => [{ '@value' => '<blob>' }] }]
       else          raise "Unable to fetch #{url.inspect}: #{resp.inspect}"
       end
     end
@@ -171,11 +174,11 @@ module OregonDigital
     # fileset(s) or very indirectly relating a collection to its assets.
     def setup_proxies
       all_objects.each do |obj|
-        if obj.model == 'ActiveFedora::Aggregation::Proxy'
-          obj.proxy_for_pids.each do |pid|
-            by_pid[pid].proxies << obj
-            by_pid[pid].proxy_pids << obj.pid
-          end
+        next unless obj.model == 'ActiveFedora::Aggregation::Proxy'
+
+        obj.proxy_for_pids.each do |pid|
+          by_pid[pid].proxies << obj
+          by_pid[pid].proxy_pids << obj.pid
         end
       end
     end

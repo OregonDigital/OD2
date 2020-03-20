@@ -23,7 +23,7 @@ RSpec.describe OregonDigital::FedoraFinder do
     let(:raw_admin_sets) { finder.all_objects.select { |o| o.model == 'AdminSet' } }
 
     it 'has the Gifford and OSU SCARC collections' do
-      expect(raw_collections.collect { |c| c.pid }.sort.join(' ')).to eq('gifford osu-scarc')
+      expect(raw_collections.collect(&:pid).sort.join(' ')).to eq('gifford osu-scarc')
     end
 
     it 'returns nine images' do
@@ -32,7 +32,7 @@ RSpec.describe OregonDigital::FedoraFinder do
 
     it 'returns all our admin sets' do
       expected = 'admin_set/default nwcu oac ohs osu osu-scarc-admin uo uo-jsma uo-mc uo-scua'
-      expect(raw_admin_sets.collect { |as| as.pid }.sort.join(' ')).to eq(expected)
+      expect(raw_admin_sets.collect(&:pid).sort.join(' ')).to eq(expected)
     end
 
     it 'returns one file per TIFF' do
@@ -41,16 +41,16 @@ RSpec.describe OregonDigital::FedoraFinder do
     end
 
     it 'categorizes assets properly' do
-      pids = finder.assets.collect {|o| o.pid }.sort.join(' ')
+      pids = finder.assets.collect(&:pid).sort.join(' ')
       assets = raw_images + raw_filesets
-      raw_asset_pids = assets.collect {|o| o.pid }.sort.join(' ')
+      raw_asset_pids = assets.collect(&:pid).sort.join(' ')
       expect(pids).to eq(raw_asset_pids)
     end
 
     it 'categorizes all admin sets and collections as "collections"' do
-      pids = finder.collections.collect {|c| c.pid}.sort.join(' ')
+      pids = finder.collections.collect(&:pid).sort.join(' ')
       colls = raw_admin_sets + raw_collections
-      raw_pids = colls.collect {|c| c.pid}.sort.join(' ')
+      raw_pids = colls.collect(&:pid).sort.join(' ')
       expect(pids).to eq(raw_pids)
     end
   end
