@@ -320,4 +320,5 @@ en:
         institution: "Institution"
         modified: "Modified"
         replaces_url: "Replaces URL"
-        creator_combined: Creator
+        creator_combined: "Creator"
+        topic_combined: "Topic"

@@ -183,6 +183,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('rights_statement_label', :facetable), label: I18n.translate('simple_form.labels.defaults.rights_statement'), limit: 5
     config.add_facet_field solr_name('license_label', :facetable), label: I18n.translate('simple_form.labels.defaults.license'), limit: 5
     config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
+    config.add_facet_field solr_name('topic_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
