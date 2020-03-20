@@ -479,7 +479,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location do |index|
+      property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -492,12 +492,12 @@ module OregonDigital
       end
 
       property :ranger_district, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/rangerDistrict'),
-                                 class_name: Hyrax::ControlledVocabularies::Location do |index|
+                                 class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
       property :water_basin, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/waterBasin'),
-                             class_name: Hyrax::ControlledVocabularies::Location do |index|
+                             class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
