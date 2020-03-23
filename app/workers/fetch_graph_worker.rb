@@ -26,16 +26,16 @@ class FetchGraphWorker
     # rubocop:disable Metrics/BlockLength
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
-        val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
-        # Fetch labels
-        if val.respond_to?(:fetch)
-          begin
+        begin
+          val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
+          # Fetch labels
+          if val.respond_to?(:fetch)
             val.fetch(headers: { 'Accept' => default_accept_header })
-          rescue TriplestoreAdapter::TriplestoreException
-            fetch_failed_graph(pid, val, controlled_prop)
-            next
+            val.persist!
           end
-          val.persist!
+        rescue TriplestoreAdapter::TriplestoreException, IOError
+          fetch_failed_graph(pid, val, controlled_prop)
+          next
         end
 
         # For each behavior
