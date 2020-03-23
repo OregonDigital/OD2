@@ -17,6 +17,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
+      index_topic_combined_label(solr_doc, object.keyword)
       index_edit_groups
       index_read_groups
       index_discover_groups
@@ -51,6 +52,10 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['type_label_sim'] = type_label
     solr_doc['type_label_ssim'] = type_label
     solr_doc['type_label_tesim'] = type_label
+  end
+
+  def index_topic_combined_label(solr_doc, topic_labels)
+    solr_doc[Solrizer.solr_name('topic_combined_label', :facetable)] = topic_labels
   end
 
   def index_edit_groups
