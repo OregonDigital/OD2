@@ -180,12 +180,11 @@ class CatalogController < ApplicationController
 
     config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.resource_type'), limit: 5
-    config.add_facet_field solr_name('rights_statement_label', :facetable), label: I18n.translate('simple_form.labels.defaults.rights_statement'), limit: 5
-    config.add_facet_field solr_name('license_label', :facetable), label: I18n.translate('simple_form.labels.defaults.license'), limit: 5
     config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
     config.add_facet_field solr_name('topic_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
     config.add_facet_field solr_name('location_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
     config.add_facet_field solr_name('scientific_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.scientific_combined'), limit: 5
+    config.add_facet_field solr_name('copyright_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.

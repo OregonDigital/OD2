@@ -23,7 +23,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights do |index|
+      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
       property :identifier, predicate: ::RDF::Vocab::DC.identifier do |index|
@@ -365,7 +365,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, predicate: ::RDF::Vocab::CC.License do |index|
+      property :license, predicate: ::RDF::Vocab::CC.License, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
