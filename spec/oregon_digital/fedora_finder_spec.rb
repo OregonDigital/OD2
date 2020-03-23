@@ -13,7 +13,7 @@ VCR.configure do |c|
   c.allow_http_connections_when_no_cassette = true
 end
 finder = OregonDigital::FedoraFinder.new(ActiveFedora.fedora.base_uri)
-VCR.use_cassette('fedora-fetch', record: :none) do
+VCR.use_cassette('fedora-fetch', record: :none, erb: { fedora_uri: ActiveFedora.fedora.base_uri }) do
   finder.fetch_all
 end
 

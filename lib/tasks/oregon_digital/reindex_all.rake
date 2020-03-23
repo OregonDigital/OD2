@@ -16,8 +16,7 @@ namespace :oregon_digital do
       puts "    If you're recording in dev, you'll need to change URLs to make the "
       puts "    recording work in test, e.g.:"
       puts
-      puts "        sed -i 's|/rest/dev|/rest/test|g' spec/cassettes/fedora-fetch.yml"
-      puts "        sed -i 's|fcrepo-dev|fcrepo-test|g' spec/cassettes/fedora-fetch.yml"
+      puts "        sed -i 's|http://fcrepo-test:8080/fcrepo/rest/test|<%= fedora_uri %>|g' spec/cassettes/fedora-fetch.yml"
 
       VCR.configure do |c|
         c.hook_into :faraday
