@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: d51edcc71f38ba1d14582b7594d3d46f6ff7168e
+  revision: 54b13f0c2343940f3805cb428ff9715ea57cd2ce
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -96,7 +96,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.0.6)
+    aasm (5.0.8)
       concurrent-ruby (~> 1.0)
     actioncable (5.1.7)
       actionpack (= 5.1.7)
@@ -166,20 +166,20 @@ GEM
     awesome_nested_set (3.2.0)
       activerecord (>= 4.0.0, < 7.0)
     aws-eventstream (1.0.3)
-    aws-partitions (1.273.0)
-    aws-sdk-core (3.90.0)
+    aws-partitions (1.285.0)
+    aws-sdk-core (3.91.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.29.0)
+    aws-sdk-kms (1.30.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.60.2)
+    aws-sdk-s3 (1.61.1)
       aws-sdk-core (~> 3, >= 3.83.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.1.0)
+    aws-sigv4 (1.1.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
     axe-matchers (2.4.1)
       dumb_delegator (~> 0.8)
@@ -586,7 +586,7 @@ GEM
     noid-rails (3.0.1)
       actionpack (>= 5.0.0, < 6)
       noid (~> 0.9)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri

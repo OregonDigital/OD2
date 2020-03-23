@@ -174,9 +174,9 @@ class CatalogController < ApplicationController
       # Add property as facetable
       config.add_facet_field solr_name(label, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable) && (Generic.properties[prop]['facet'] || Generic.properties[prop]['facet'].nil?)
     end
-    config.add_show_field solr_name('language_label', :stored_searchable)
     config.add_show_field solr_name('type_label', :stored_searchable)
     config.add_show_field solr_name('rights_statement_label', :stored_searchable)
+    config.add_show_field solr_name('language_label', :stored_searchable)
 
     config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.resource_type'), limit: 5
@@ -184,6 +184,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('license_label', :facetable), label: I18n.translate('simple_form.labels.defaults.license'), limit: 5
     config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
     config.add_facet_field solr_name('topic_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
+    config.add_facet_field solr_name('location_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
