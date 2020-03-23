@@ -30,6 +30,10 @@ RSpec.describe OregonDigital::FedoraFinder do
       expect(raw_images.length).to eq(9)
     end
 
+    it 'returns nine filesets' do
+      expect(raw_filesets.length).to eq(9)
+    end
+
     it 'returns all our admin sets' do
       expected = 'admin_set/default nwcu oac ohs osu osu-scarc-admin uo uo-jsma uo-mc uo-scua'
       expect(raw_admin_sets.collect(&:pid).sort.join(' ')).to eq(expected)
@@ -52,6 +56,54 @@ RSpec.describe OregonDigital::FedoraFinder do
       colls = raw_admin_sets + raw_collections
       raw_pids = colls.collect(&:pid).sort.join(' ')
       expect(pids).to eq(raw_pids)
+    end
+
+    1.upto(9) do |i|
+      describe "image #{i}" do
+        let(:image) { raw_images[i - 1] }
+        let(:access_control) { finder.by_pid[image.access_control_pids[0]] }
+
+        it 'has one access control pid' do
+          expect(image.access_control_pids.length).to eq(1)
+        end
+
+        it "'s access control object is Hydra::AccessControl" do
+          expect(access_control.model).to eq('Hydra::AccessControl')
+        end
+
+        it "'s access control object has 11 child permissions objects" do
+          expect(access_control.contains.length).to eq(11)
+        end
+      end
+    end
+
+    1.upto(9) do |i|
+      describe "fileset #{i}" do
+        let(:fileset) { raw_filesets[i - 1] }
+        let(:access_control) { finder.by_pid[fileset.access_control_pids[0]] }
+
+        it 'has one child' do
+          expect(fileset.contains_pids.length).to eq(1)
+        end
+
+        it 'has a child that contains a blob' do
+          child = finder.by_pid[fileset.contains_pids[0]]
+          c2 = finder.by_pid[child.contains_pids[0]]
+          expect(c2.model).to eq('<blob>')
+        end
+
+        it 'has one access control pid' do
+          expect(fileset.access_control_pids.length).to eq(1)
+        end
+
+        it "'s access control object is Hydra::AccessControl" do
+          expect(access_control.model).to eq('Hydra::AccessControl')
+        end
+
+        it "'s access control object has 11 child permissions objects" do
+          expect(access_control.contains.length).to eq(11)
+        end
+      end
     end
   end
 end
