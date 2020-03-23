@@ -74,17 +74,21 @@ module OregonDigital
 
     def parse_contains
       self.contains = raw['http://www.w3.org/ns/ldp#contains'] || []
-      self.contains_pids = contains.collect { |data| ActiveFedora::Base.uri_to_id(data['@id']) }
+      self.contains_pids = array_to_pids(contains)
     end
 
     def parse_access_control
       self.access_control = raw['http://www.w3.org/ns/auth/acl#accessControl'] || []
-      self.access_control_pids = access_control.collect { |data| ActiveFedora::Base.uri_to_id(data['@id']) }
+      self.access_control_pids = array_to_pids(access_control)
     end
 
     def parse_proxy_for
       self.proxy_for = raw['http://www.openarchives.org/ore/terms/proxyFor'] || []
-      self.proxy_for_pids = proxy_for.collect { |data| ActiveFedora::Base.uri_to_id(data['@id']) }
+      self.proxy_for_pids = array_to_pids(proxy_for)
+    end
+
+    def array_to_pids(a)
+      a.collect { |data| ActiveFedora::Base.uri_to_id(data['@id']) }
     end
 
     def parse_model
