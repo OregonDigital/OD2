@@ -138,7 +138,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :keyword, predicate: ::RDF::Vocab::DC11.subject do |index|
+      property :keyword, predicate: ::RDF::Vocab::DC11.subject, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -590,7 +590,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
+      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
