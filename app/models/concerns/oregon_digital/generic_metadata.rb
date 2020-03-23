@@ -23,7 +23,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights do |index|
+      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
       property :identifier, predicate: ::RDF::Vocab::DC.identifier do |index|
@@ -365,7 +365,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, predicate: ::RDF::Vocab::CC.License do |index|
+      property :license, predicate: ::RDF::Vocab::CC.License, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -550,32 +550,32 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :taxon_class, predicate: ::RDF::Vocab::DWC.class,
+      property :taxon_class, predicate: ::RDF::Vocab::DWC.class, facet: false,
                              class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :family, predicate: ::RDF::Vocab::DWC.family,
+      property :family, predicate: ::RDF::Vocab::DWC.family, facet: false,
                         class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :genus, predicate: ::RDF::Vocab::DWC.genus,
+      property :genus, predicate: ::RDF::Vocab::DWC.genus, facet: false,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :order, predicate: ::RDF::Vocab::DWC.order,
+      property :order, predicate: ::RDF::Vocab::DWC.order, facet: false,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet,
+      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet, facet: false,
                          class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum,
+      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum, facet: false,
                                     class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
