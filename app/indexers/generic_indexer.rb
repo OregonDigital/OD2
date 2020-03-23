@@ -26,9 +26,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   # rubocop:enable Metrics/MethodLength
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
-    solr_doc['copyright_combined_label_sim'] = license_labels + rights_labels
-    solr_doc['copyright_combined_label_ssim'] = license_labels + rights_labels
-    solr_doc['copyright_combined_label_tesim'] = license_labels + rights_labels
+    solr_doc[Solrizer.solr_name('copyright_combined_label', :facetable)] = license_labels + rights_labels
   end
 
   def index_rights_statement_label(solr_doc, rights_statement_labels)
