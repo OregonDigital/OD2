@@ -9,7 +9,6 @@ class GenericIndexer < Hyrax::WorkIndexer
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
   # propogate downwards.
   # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   def generate_solr_document
     super.tap do |solr_doc|
       index_rights_statement_label(solr_doc, OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
@@ -23,7 +22,6 @@ class GenericIndexer < Hyrax::WorkIndexer
     end
   end
   # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
     solr_doc['copyright_combined_label_sim'] = license_labels + rights_labels
