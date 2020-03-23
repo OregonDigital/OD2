@@ -61,28 +61,8 @@ RSpec.describe OregonDigital::FedoraFinder do
     end
 
     1.upto(9) do |i|
-      describe "image #{i}" do
-        let(:image) { raw_images[i - 1] }
-        let(:access_control) { finder.by_pid[image.access_control_pids[0]] }
-
-        it 'has one access control pid' do
-          expect(image.access_control_pids.length).to eq(1)
-        end
-
-        it "'s access control object is Hydra::AccessControl" do
-          expect(access_control.model).to eq('Hydra::AccessControl')
-        end
-
-        it "'s access control object has 11 child permissions objects" do
-          expect(access_control.contains.length).to eq(11)
-        end
-      end
-    end
-
-    1.upto(9) do |i|
       describe "fileset #{i}" do
         let(:fileset) { raw_filesets[i - 1] }
-        let(:access_control) { finder.by_pid[fileset.access_control_pids[0]] }
 
         it 'has one child' do
           expect(fileset.contains_pids.length).to eq(1)
@@ -93,17 +73,30 @@ RSpec.describe OregonDigital::FedoraFinder do
           c2 = finder.by_pid[child.contains_pids[0]]
           expect(c2.model).to eq('<blob>')
         end
+      end
+    end
+
+    1.upto(18) do |i|
+      describe "asset #{i}" do
+        let(:asset) { finder.assets[i - 1] }
+        let(:access_control) { finder.by_pid[asset.access_control_pids[0]] }
+
+        it 'is a FileSet or an Image' do
+          expect(asset.model).to eq('Image').or eq('FileSet')
+        end
 
         it 'has one access control pid' do
-          expect(fileset.access_control_pids.length).to eq(1)
+          expect(asset.access_control_pids.length).to eq(1)
         end
 
         it "'s access control object is Hydra::AccessControl" do
           expect(access_control.model).to eq('Hydra::AccessControl')
         end
 
-        it "'s access control object has 11 child permissions objects" do
-          expect(access_control.contains.length).to eq(11)
+        it "'s access control object has 11 child permissions" do
+          children = access_control.contains_pids.collect { |pid| finder.by_pid[pid] }
+          perms = children.select { |child| child.model == 'Hydra::AccessControls::Permission' }
+          expect(perms.length).to eq(11)
         end
       end
     end
