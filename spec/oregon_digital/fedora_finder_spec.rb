@@ -1,22 +1,24 @@
 # frozen_string_literal:true
 
+# This is pretty awful, but this suite now exceeds one minute despite using
+# VCR, because of how every rspec example reloads all setup data.  Though VCR
+# records the HTTP traffic, it can't reduce the system's innate inefficiencies:
+# reading the data for just 9 images across two collections requires ~350
+# requests and responses, which turn into ActiveFedora object instantiations.
+#
+# After this hack, the suite runs in about five seconds.
+VCR.configure do |c|
+  c.hook_into :faraday
+  c.cassette_library_dir = 'spec/cassettes'
+  c.allow_http_connections_when_no_cassette = true
+end
+finder = OregonDigital::FedoraFinder.new(ActiveFedora.fedora.base_uri)
+VCR.use_cassette('fedora-fetch', record: :none) do
+  finder.fetch_all
+end
+
 RSpec.describe OregonDigital::FedoraFinder do
-  before do
-    VCR.configure do |c|
-      c.hook_into :faraday
-      c.cassette_library_dir = 'spec/cassettes'
-      c.allow_http_connections_when_no_cassette = true
-    end
-  end
-
   describe '.fetch_all' do
-    before do
-      VCR.use_cassette('fedora-fetch', record: :none) do
-        finder.fetch_all
-      end
-    end
-
-    let(:finder) { described_class.new(ActiveFedora.fedora.base_uri) }
     let(:raw_collections) { finder.all_objects.select { |o| o.model == 'Collection' } }
     let(:raw_images) { finder.all_objects.select { |o| o.model == 'Image' } }
     let(:raw_filesets) { finder.all_objects.select { |o| o.model == 'FileSet' } }
