@@ -18,7 +18,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       index_topic_combined_label(solr_doc, object.keyword)
-      index_date_combined_label(solr_doc, object.award_date, object.date_created, object.collected_date, object.date, object.issued, object.view_date, object.acquisition_date)
+      index_date_combined_label(solr_doc)
       index_edit_groups
       index_read_groups
       index_discover_groups
@@ -59,8 +59,12 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc[Solrizer.solr_name('topic_combined_label', :facetable)] = topic_labels
   end
 
-  def index_date_combined_label(solr_doc, award_date, date_created, collected_date, date, issued, view_date, acquisition_date)
-    solr_doc[Solrizer.solr_name('date_combined_label', :facetable)] = award_date.to_a + date_created.to_a + collected_date.to_a + date.to_a + issued.to_a + view_date.to_a + acquisition_date.to_a
+  def index_date_combined_label(solr_doc)
+    dates = %i[award_date date_created collected_date date issued view_date acquisition_date]
+    solr_doc[Solrizer.solr_name('date_combined_label', :facetable)] = []
+    dates.each do |date|
+      solr_doc[Solrizer.solr_name('date_combined_label', :facetable)] += object[date].to_a
+    end
   end
 
   def index_edit_groups
