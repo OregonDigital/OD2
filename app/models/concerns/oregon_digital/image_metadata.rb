@@ -21,7 +21,9 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :orientation, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.orientation
+      property :orientation, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.orientation do |index|
+        index.as :stored_searchable
+      end
 
       property :photograph_orientation, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false do |index|
         index.as :stored_searchable
