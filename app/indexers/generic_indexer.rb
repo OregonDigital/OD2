@@ -9,19 +9,27 @@ class GenericIndexer < Hyrax::WorkIndexer
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
   # propogate downwards.
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def generate_solr_document
     super.tap do |solr_doc|
       index_rights_statement_label(solr_doc, OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_license_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license))
+      index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       index_topic_combined_label(solr_doc, object.keyword)
+      index_date_combined_label(solr_doc)
       index_edit_groups
       index_read_groups
       index_discover_groups
     end
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
+
+  def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
+    solr_doc[Solrizer.solr_name('copyright_combined_label', :facetable)] = license_labels + rights_labels
+  end
 
   def index_rights_statement_label(solr_doc, rights_statement_labels)
     solr_doc['rights_statement_label_sim'] = rights_statement_labels
@@ -49,6 +57,14 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def index_topic_combined_label(solr_doc, topic_labels)
     solr_doc[Solrizer.solr_name('topic_combined_label', :facetable)] = topic_labels
+  end
+
+  def index_date_combined_label(solr_doc)
+    dates = %i[award_date date_created collected_date date issued view_date acquisition_date]
+    solr_doc[Solrizer.solr_name('date_combined_label', :facetable)] = []
+    dates.each do |date|
+      solr_doc[Solrizer.solr_name('date_combined_label', :facetable)] += object[date].to_a
+    end
   end
 
   def index_edit_groups

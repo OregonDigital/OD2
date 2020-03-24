@@ -15,7 +15,7 @@ module OregonDigital
       property :resource_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
-      property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
+      property :date_created, predicate: ::RDF::Vocab::DC.created, facet: false do |index|
         index.as :stored_searchable
       end
 
@@ -23,7 +23,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights do |index|
+      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
       property :identifier, predicate: ::RDF::Vocab::DC.identifier do |index|
@@ -138,7 +138,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :keyword, predicate: ::RDF::Vocab::DC11.subject do |index|
+      property :keyword, predicate: ::RDF::Vocab::DC11.subject, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -313,27 +313,27 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate') do |index|
+      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate') do |index|
+      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :date, predicate: ::RDF::Vocab::DC.date do |index|
+      property :date, predicate: ::RDF::Vocab::DC.date, facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :issued, predicate: ::RDF::Vocab::DC.issued do |index|
+      property :issued, predicate: ::RDF::Vocab::DC.issued, facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate') do |index|
+      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate') do |index|
+      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
@@ -365,7 +365,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, predicate: ::RDF::Vocab::CC.License do |index|
+      property :license, predicate: ::RDF::Vocab::CC.License, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -550,32 +550,32 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :taxon_class, predicate: ::RDF::Vocab::DWC.class,
+      property :taxon_class, predicate: ::RDF::Vocab::DWC.class, facet: false,
                              class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :family, predicate: ::RDF::Vocab::DWC.family,
+      property :family, predicate: ::RDF::Vocab::DWC.family, facet: false,
                         class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :genus, predicate: ::RDF::Vocab::DWC.genus,
+      property :genus, predicate: ::RDF::Vocab::DWC.genus, facet: false,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :order, predicate: ::RDF::Vocab::DWC.order,
+      property :order, predicate: ::RDF::Vocab::DWC.order, facet: false,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet,
+      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet, facet: false,
                          class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum,
+      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum, facet: false,
                                     class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
@@ -590,7 +590,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
+      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 

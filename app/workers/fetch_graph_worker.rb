@@ -26,16 +26,16 @@ class FetchGraphWorker
     # rubocop:disable Metrics/BlockLength
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
-        val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
-        # Fetch labels
-        if val.respond_to?(:fetch)
-          begin
+        begin
+          val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
+          # Fetch labels
+          if val.respond_to?(:fetch)
             val.fetch(headers: { 'Accept' => default_accept_header })
-          rescue TriplestoreAdapter::TriplestoreException
-            fetch_failed_graph(pid, val, controlled_prop)
-            next
+            val.persist!
           end
-          val.persist!
+        rescue TriplestoreAdapter::TriplestoreException, IOError
+          fetch_failed_graph(pid, val, controlled_prop)
+          next
         end
 
         # For each behavior
@@ -46,12 +46,14 @@ class FetchGraphWorker
             Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
             Solrizer.insert_field(solr_doc, 'location_combined_label', val, behavior) if location_combined_facet?(controlled_prop)
             Solrizer.insert_field(solr_doc, 'topic_combined_label', val, behavior) if topic_combined_facet?(controlled_prop)
+            Solrizer.insert_field(solr_doc, 'scientific_combined_label', val, behavior) if scientific_combined_facet?(controlled_prop)
           else
             extracted_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
             Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extracted_val], behavior)
             Solrizer.insert_field(solr_doc, 'location_combined_label', [extracted_val], behavior) if location_combined_facet?(controlled_prop)
             Solrizer.insert_field(solr_doc, 'creator_combined_label', [extracted_val], behavior) if creator_combined_facet?(controlled_prop)
             Solrizer.insert_field(solr_doc, 'topic_combined_label', [extracted_val], behavior) if topic_combined_facet?(controlled_prop)
+            Solrizer.insert_field(solr_doc, 'scientific_combined_label', [extracted_val], behavior) if scientific_combined_facet?(controlled_prop)
           end
         end
       end
@@ -90,5 +92,9 @@ class FetchGraphWorker
 
   def topic_combined_facet?(controlled_prop)
     %i[keyword subject].include? controlled_prop
+  end
+
+  def scientific_combined_facet?(controlled_prop)
+    %i[taxon_class family genus order species phylum_or_division].include? controlled_prop
   end
 end
