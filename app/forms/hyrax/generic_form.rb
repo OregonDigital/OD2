@@ -4,7 +4,7 @@ module Hyrax
   # Generated form for Generic
   class GenericForm < Hyrax::Forms::WorkForm
     self.model_class = ::Generic
-    self.terms += (Generic.generic_properties.map(&:to_sym) + Generic.controlled_properties).sort
+    self.terms += (Generic.generic_properties.map(&:to_sym) + Generic.controlled_properties).sort + [:date_uploaded, :date_modified]
     self.terms -= %i[based_near]
     self.terms = self.terms.uniq
 

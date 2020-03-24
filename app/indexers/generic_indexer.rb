@@ -15,6 +15,8 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_license_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
+      index_topic_combined_label(solr_doc, object.keyword)
+      index_date_combined_label(solr_doc)
       index_edit_groups
       index_read_groups
       index_discover_groups
