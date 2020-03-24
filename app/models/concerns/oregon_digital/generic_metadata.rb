@@ -15,7 +15,7 @@ module OregonDigital
       property :resource_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
-      property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
+      property :date_created, predicate: ::RDF::Vocab::DC.created, facet: false do |index|
         index.as :stored_searchable
       end
 
@@ -313,27 +313,27 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate') do |index|
+      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate') do |index|
+      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :date, predicate: ::RDF::Vocab::DC.date do |index|
+      property :date, predicate: ::RDF::Vocab::DC.date, facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :issued, predicate: ::RDF::Vocab::DC.issued do |index|
+      property :issued, predicate: ::RDF::Vocab::DC.issued, facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate') do |index|
+      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate') do |index|
+      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate'), facet: false do |index|
         index.as :stored_searchable
       end
 

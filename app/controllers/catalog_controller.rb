@@ -185,6 +185,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('location_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
     config.add_facet_field solr_name('scientific_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.scientific_combined'), limit: 5
     config.add_facet_field solr_name('copyright_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
+    config.add_facet_field solr_name('date_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
