@@ -42,15 +42,10 @@ class CatalogController < ApplicationController
     config.index.display_type_field = solr_name('has_model', :symbol)
     config.index.thumbnail_field = 'thumbnail_path_ss'
 
-    # solr fields that will be treated as facets by the blacklight application
-    #   The ordering of the field names is the order of the display
-    config.add_facet_field solr_name('human_readable_type', :facetable), label: 'Object Type', limit: 5
-    config.add_facet_field solr_name('file_format', :facetable), limit: 5
-    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
+    
 
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
-    config.add_facet_field solr_name('generic_type', :facetable), if: false
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -95,9 +90,6 @@ class CatalogController < ApplicationController
           end
         end
       end
-
-      # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Document.properties[prop].behaviors.include?(:facetable) && (Document.properties[prop]['facet'] || Document.properties[prop]['facet'].nil?)
     end
     Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -118,9 +110,6 @@ class CatalogController < ApplicationController
           end
         end
       end
-
-      # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable) && (Generic.properties[prop]['facet'] || Generic.properties[prop]['facet'].nil?)
     end
     Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
@@ -141,9 +130,6 @@ class CatalogController < ApplicationController
           end
         end
       end
-
-      # Add property as facetable
-      config.add_facet_field solr_name(prop, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Image.properties[prop].behaviors.include?(:facetable) && (Image.properties[prop]['facet'] || Image.properties[prop]['facet'].nil?)
     end
     # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
     #
@@ -170,22 +156,22 @@ class CatalogController < ApplicationController
           end
         end
       end
-
-      # Add property as facetable
-      config.add_facet_field solr_name(label, :facetable), label: I18n.translate("simple_form.labels.defaults.#{prop}"), limit: 5 if Generic.properties[prop].behaviors.include?(:facetable) && (Generic.properties[prop]['facet'] || Generic.properties[prop]['facet'].nil?)
     end
     config.add_show_field solr_name('type_label', :stored_searchable)
     config.add_show_field solr_name('rights_statement_label', :stored_searchable)
     config.add_show_field solr_name('language_label', :stored_searchable)
 
-    config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
+    config.add_facet_field solr_name('copyright_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
     config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.resource_type'), limit: 5
-    config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
     config.add_facet_field solr_name('topic_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
+    config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
+    config.add_facet_field solr_name('date_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
     config.add_facet_field solr_name('location_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
     config.add_facet_field solr_name('scientific_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.scientific_combined'), limit: 5
-    config.add_facet_field solr_name('copyright_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
-    config.add_facet_field solr_name('date_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
+    config.add_facet_field solr_name('work_type', :facetable), label: I18n.translate('simple_form.labels.defaults.work_type'), limit: 5
+    config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
+    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collection'
+    config.add_facet_field solr_name('institution', :facetable), limit: 5
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
