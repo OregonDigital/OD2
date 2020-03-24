@@ -74,7 +74,7 @@ class CatalogController < ApplicationController
       next if Document.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
       # Add property as searchable all fields box and individually
-      if Document.properties[prop].behaviors.include?(:stored_searchable)
+      next unless Document.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable) if Document.properties[prop]['showable'] || Document.properties[prop]['showable'].nil?
 
         if Document.properties[prop]['basic_searchable'] || Document.properties[prop]['basic_searchable'].nil?
@@ -94,7 +94,7 @@ class CatalogController < ApplicationController
       next if Generic.properties[prop].behaviors.nil?
 
       # Add property as searchable all fields box and individually
-      if Generic.properties[prop].behaviors.include?(:stored_searchable)
+      next unless Generic.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable) if Generic.properties[prop]['showable'] || Generic.properties[prop]['showable'].nil?
 
         if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
@@ -114,7 +114,7 @@ class CatalogController < ApplicationController
       next if Image.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
       # Add property as searchable all fields box and individually
-      if Image.properties[prop].behaviors.include?(:stored_searchable)
+      next unless Image.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(prop, :stored_searchable) if Image.properties[prop]['showable'] || Image.properties[prop]['showable'].nil?
 
         if Image.properties[prop]['basic_searchable'] || Image.properties[prop]['basic_searchable'].nil?
@@ -140,7 +140,7 @@ class CatalogController < ApplicationController
       next if Generic.properties[prop].behaviors.nil?
 
       # Add property as searchable all fields box and individually
-      if Generic.properties[prop].behaviors.include?(:stored_searchable)
+      next unless Generic.properties[prop].behaviors.include?(:stored_searchable)
         config.add_show_field solr_name(label, :stored_searchable) if Generic.properties[prop]['showable'] || Generic.properties[prop]['showable'].nil?
 
         if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
