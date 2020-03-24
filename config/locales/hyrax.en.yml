@@ -62,7 +62,7 @@ en:
           license_label_sim: License
           local_collection_name_label_sim: Local Collection Name
           tgn_label_sim: Historic Place
-          type_label_sim: Type
+          type_label_sim: Media
           repository_label_sim: Repository
           publisher_label_sim: Publisher
           taxon_class_label_sim: Taxon Class
