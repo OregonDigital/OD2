@@ -654,7 +654,7 @@ module OregonDigital
         { name: 'abstract', is_controlled: false },
         { name: 'table_of_contents', is_controlled: false },
         { name: 'view', is_controlled: false },
-        { name: 'view_data', is_controlled: false },
+        { name: 'view_date', is_controlled: false },
         { name: 'temporal', is_controlled: false },
         { name: 'coverage', is_controlled: false },
         { name: 'number_of_pages', is_controlled: false },
