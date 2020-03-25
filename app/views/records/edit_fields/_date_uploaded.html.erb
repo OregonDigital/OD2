@@ -1,1 +1,1 @@
-<%= f.input :date_uploaded, disabled: true, input_html: { class: 'form-group string optional' } %>
+<%= f.input :date_uploaded, disabled: true, input_html: { class: 'form-group string optional' }, value: f.object.date_uploaded.blank? ? Time.now : f.object.date_uploaded %>
