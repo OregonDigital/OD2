@@ -4,7 +4,7 @@
 module OregonDigital::HyraxHelperBehavior
   # This helper is based on ifonify_auto_link in hyrax:
   # see hyrax/app/helpers/hyrax/hyrax_helper_behavior.rb
-  # This extends iconify_auto_link to include highlight tokes given in em tags and
+  # This extends iconify_auto_link to include highlight tokens given in em tags and
   # combines them with links. If hits are not found, it just returns the
   # linked text as usual.
   def iconify_auto_link_with_highlight(field, show_link = true)
@@ -19,10 +19,12 @@ module OregonDigital::HyraxHelperBehavior
     # parse html to retrieve em tags (used for highlighed hits)
     html_content = Nokogiri::HTML.parse text
 
-    sanitize combine_hits_with_links(html_content)
+    sanitize combine_hits_with_links(html_content, show_link)
   end
 
-  def combine_hits_with_links(html_content)
+  private
+
+  def combine_hits_with_links(html_content, show_link)
     # add links if any
     linked_text = auto_link(html_escape(html_content.text)) do |value|
       "<span class='glyphicon glyphicon-new-window'></span>#{('&nbsp;' + value) if show_link}"
