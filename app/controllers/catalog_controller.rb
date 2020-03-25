@@ -58,9 +58,8 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
     config.add_index_field solr_name('location_label', :stored_searchable), itemprop: 'location'
-    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true
+    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true
     config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable), if: false
-    config.add_index_field solr_name('all_text', 'timv'), label: 'Full Text', highlight: true
 
     config.add_field_configuration_to_solr_request!
 
