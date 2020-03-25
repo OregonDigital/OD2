@@ -73,60 +73,58 @@ class CatalogController < ApplicationController
       # Skip if this property isn't indexed
       next if Document.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
-      # Add property as searchable all fields box and individually
+      # Skip if the property isnt stored searchable
       next unless Document.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) if Document.properties[prop]['showable'] || Document.properties[prop]['showable'].nil?
 
-        if Document.properties[prop]['basic_searchable'] || Document.properties[prop]['basic_searchable'].nil?
-          config.add_search_field(prop) do |field|
-            solr_name = solr_name(prop, :stored_searchable)
-            search_fields << solr_name
-            field.solr_local_parameters = {
-              qf: solr_name,
-              pf: solr_name
-            }
-          end
-        end
+      # Add property as searchable all fields box and individually
+      config.add_show_field solr_name(prop, :stored_searchable) if Document.properties[prop]['showable'] || Document.properties[prop]['showable'].nil?
+      next unless Document.properties[prop]['basic_searchable'] || Document.properties[prop]['basic_searchable'].nil?
+
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        search_fields << solr_name
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
       end
     end
     Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Generic.properties[prop].behaviors.nil?
 
-      # Add property as searchable all fields box and individually
+      # Skip if the property isnt stored searchable
       next unless Generic.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) if Generic.properties[prop]['showable'] || Generic.properties[prop]['showable'].nil?
 
-        if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
-          config.add_search_field(prop) do |field|
-            solr_name = solr_name(prop, :stored_searchable)
-            search_fields << solr_name
-            field.solr_local_parameters = {
-              qf: solr_name,
-              pf: solr_name
-            }
-          end
-        end
+      config.add_show_field solr_name(prop, :stored_searchable) if Generic.properties[prop]['showable'] || Generic.properties[prop]['showable'].nil?
+      next unless Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
+
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        search_fields << solr_name
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
       end
     end
     Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
       # Skip if this property isn't indexed
       next if Image.properties[prop].behaviors.nil? || Generic.properties.key?(prop)
 
-      # Add property as searchable all fields box and individually
+      # Skip if the property isnt stored searchable
       next unless Image.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(prop, :stored_searchable) if Image.properties[prop]['showable'] || Image.properties[prop]['showable'].nil?
 
-        if Image.properties[prop]['basic_searchable'] || Image.properties[prop]['basic_searchable'].nil?
-          config.add_search_field(prop) do |field|
-            solr_name = solr_name(prop, :stored_searchable)
-            search_fields << solr_name
-            field.solr_local_parameters = {
-              qf: solr_name,
-              pf: solr_name
-            }
-          end
-        end
+      config.add_show_field solr_name(prop, :stored_searchable) if Image.properties[prop]['showable'] || Image.properties[prop]['showable'].nil?
+      next unless Image.properties[prop]['basic_searchable'] || Image.properties[prop]['basic_searchable'].nil?
+
+      config.add_search_field(prop) do |field|
+        solr_name = solr_name(prop, :stored_searchable)
+        search_fields << solr_name
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
       end
     end
     # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
@@ -139,20 +137,19 @@ class CatalogController < ApplicationController
       # Skip if this property isn't indexed
       next if Generic.properties[prop].behaviors.nil?
 
-      # Add property as searchable all fields box and individually
+      # Skip if the property isnt stored searchable
       next unless Generic.properties[prop].behaviors.include?(:stored_searchable)
-        config.add_show_field solr_name(label, :stored_searchable) if Generic.properties[prop]['showable'] || Generic.properties[prop]['showable'].nil?
 
-        if Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
-          config.add_search_field(label) do |field|
-            solr_name = solr_name(label, :stored_searchable)
-            search_fields << solr_name(label, :stored_searchable)
-            field.solr_local_parameters = {
-              qf: solr_name,
-              pf: solr_name
-            }
-          end
-        end
+      config.add_show_field solr_name(label, :stored_searchable) if Generic.properties[prop]['showable'] || Generic.properties[prop]['showable'].nil?
+      next unless Generic.properties[prop]['basic_searchable'] || Generic.properties[prop]['basic_searchable'].nil?
+
+      config.add_search_field(label) do |field|
+        solr_name = solr_name(label, :stored_searchable)
+        search_fields << solr_name(label, :stored_searchable)
+        field.solr_local_parameters = {
+          qf: solr_name,
+          pf: solr_name
+        }
       end
     end
     config.add_show_field solr_name('type_label', :stored_searchable)
