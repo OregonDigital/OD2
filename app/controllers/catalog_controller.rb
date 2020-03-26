@@ -51,22 +51,22 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false
+    config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false, highlight: true
     config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable), max_values: 3, max_values_label: 'others'
     config.add_index_field solr_name('photographer_label', :stored_searchable), itemprop: 'photographer', link_to_search: solr_name('photographer', :facetable), max_values: 3, max_values_label: 'others'
     config.add_index_field solr_name('date', :stored_searchable), itemprop: 'date'
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
     config.add_index_field solr_name('location_label', :stored_searchable), itemprop: 'location'
-    # TODO: Replace keyword with full text once full text extraction is in place.
-    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
+    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
       document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
     }
-    config.add_index_field solr_name('keyword', :stored_searchable), itemprop: 'keyword', truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
+    config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
       document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
     }, if:  lambda { |_context, _field_config, document|
-      document.response['highlighting'][document.id].keys.include?(solr_name('keyword', :stored_searchable))
+      document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
     }
     config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable), if: false
+
     config.add_field_configuration_to_solr_request!
 
     # solr fields to be displayed in the show (single result) view
@@ -171,7 +171,6 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
     config.add_facet_field solr_name('date_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
     config.add_facet_field solr_name('location_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
-    config.add_facet_field solr_name('scientific_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.scientific_combined'), limit: 5
     config.add_facet_field solr_name('workType', :facetable), label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
     config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collection'

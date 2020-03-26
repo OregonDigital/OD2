@@ -158,6 +158,8 @@ en:
         modified: "Include date when the resource was modified (ex. Scanned missing pages and replaced file in Oregon Digital; Redacted signatures). Use EDTF format (YYYY-MM-DD)."
         replaces_url: "URL for location of object in a former system / repository."
         date_uploaded: "Include date when object was submitted to Oregon Digital. Use EDTF format (YYYY-MM-DD)."
+        original_filename: "Use to retain the original filename of media file."
+        date_modified: "Include date when the resource was modified (ex. Scanned missing pages and replaced file in Oregon Digital; Redacted signatures). Use EDTF format (YYYY-MM-DD)."
     labels:
       defaults:
         first_line: "First Line"
@@ -302,7 +304,7 @@ en:
         isPartOf: "Is Part Of"
         is_version_of: "Is Version Of"
         relation: "Relations"
-        type: "Type"
+        type: "Media"
         workType: "Work Type"
         extent: "Extent"
         format: "Format"
@@ -324,5 +326,7 @@ en:
         topic_combined: "Topic"
         location_combined: "Location"
         scientific_combined: "Scientific Name"
-        copyright_combined: "Copyrights"
+        copyright_combined: "Copyright"
         date_combined: "Date"
+        original_filename: "Original Filename"
+        date_modified: "Modified"
