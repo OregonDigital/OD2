@@ -58,11 +58,14 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
     config.add_index_field solr_name('location_label', :stored_searchable), itemprop: 'location'
     config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
+      # Only display description if a highlight is hit
       document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
     }
     config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
+      # Don't display full text if description has a highlight hit
       document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
     }, if:  lambda { |_context, _field_config, document|
+      # Only try to display full text if a highlight is hit
       document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
     }
     config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable), if: false
