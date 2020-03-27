@@ -20,6 +20,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_topic_combined_label(solr_doc, object.keyword)
       index_date_combined_label(solr_doc)
       solr_doc['date_uploaded_dtsi'] = object.date_uploaded.to_time unless object.date_uploaded.blank?
+      solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| file_set.extracted_text.content unless file_set.extracted_text.nil? }
       index_edit_groups
       index_read_groups
       index_discover_groups

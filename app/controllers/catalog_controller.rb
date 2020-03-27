@@ -53,12 +53,18 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false, highlight: true
     config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable), max_values: 3, max_values_label: 'others'
-    config.add_index_field solr_name('photographer_label', :stored_searchable), itemprop: 'photographer', link_to_search: solr_name('photographer', :facetable), max_values: 3, max_values_label: 'others'
-    config.add_index_field solr_name('date_uploaded', :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
-    config.add_index_field solr_name('date_modified', :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
-    config.add_index_field solr_name('date_created', :stored_searchable), itemprop: 'dateCreated'
-    config.add_index_field solr_name('location_label', :stored_searchable), itemprop: 'location'
-    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true
+    config.add_index_field solr_name('date', :stored_searchable), itemprop: 'date'
+    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
+      # Only display description if a highlight is hit
+      document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
+    }
+    config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
+      # Don't display full text if description has a highlight hit
+      document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
+    }, if:  lambda { |_context, _field_config, document|
+      # Only try to display full text if a highlight is hit
+      document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
+    }
     config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable), if: false
 
     config.add_field_configuration_to_solr_request!
