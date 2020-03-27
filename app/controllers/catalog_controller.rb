@@ -160,7 +160,7 @@ class CatalogController < ApplicationController
 
     config.add_facet_field solr_name('generic_type', :facetable), if: false
     config.add_facet_field solr_name('copyright_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
-    config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.resource_type'), limit: 5
+    config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
     config.add_facet_field solr_name('topic_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
     config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
     config.add_facet_field solr_name('date_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
