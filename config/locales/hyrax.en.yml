@@ -75,9 +75,11 @@ en:
           military_branch_label_sim: Military Branch
           subject_label_sim: Subject
         index:
+          all_text_tsimv: Full Text
           based_near_label_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
+          date_tesim: Date
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
