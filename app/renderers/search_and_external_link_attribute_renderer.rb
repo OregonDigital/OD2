@@ -15,11 +15,11 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
   def search_field
     search_link_field = if creator_fields.include? field.to_sym
                           :creator_combined_label
-                        elsif scientific_fields.include? field.to_sym 
+                        elsif scientific_fields.include? field.to_sym
                           :scientific_combined_label
-                        elsif topic_fields.include? field.to_sym 
+                        elsif topic_fields.include? field.to_sym
                           :topic_combined_label
-                        elsif location_fields.include? field.to_sym 
+                        elsif location_fields.include? field.to_sym
                           :location_combined_label
                         else
                           options.fetch(:search_field, field)
