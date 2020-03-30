@@ -24,7 +24,6 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
                         else
                           options.fetch(:search_field, field)
                         end
-    search_link_field
   end
 
   def creator_fields
@@ -36,7 +35,7 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
   end
 
   def location_fields
-    %i[ranger_district_label water_basin_label location_label] 
+    %i[ranger_district_label water_basin_label location_label]
   end
 
   def scientific_fields
