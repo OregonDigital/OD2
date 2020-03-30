@@ -13,7 +13,6 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
   end
 
   def search_field
-    search_link_field = :blank
     search_link_field = if creator_fields.include? field.to_sym
                           :creator_combined_label
                         elsif scientific_fields.include? field.to_sym 
