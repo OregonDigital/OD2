@@ -12,19 +12,23 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
     links.join('')
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def search_field
-    search_link_field = if creator_fields.include? field.to_sym
-                          :creator_combined_label
-                        elsif scientific_fields.include? field.to_sym
-                          :scientific_combined_label
-                        elsif topic_fields.include? field.to_sym
-                          :topic_combined_label
-                        elsif location_fields.include? field.to_sym
-                          :location_combined_label
-                        else
-                          options.fetch(:search_field, field)
-                        end
+    if creator_fields.include? field.to_sym
+      :creator_combined_label
+    elsif scientific_fields.include? field.to_sym
+      :scientific_combined_label
+    elsif topic_fields.include? field.to_sym
+      :topic_combined_label
+    elsif location_fields.include? field.to_sym
+      :location_combined_label
+    else
+      options.fetch(:search_field, field)
+    end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def creator_fields
     %i[arranger_label artist_label author_label cartographer_label collector_label composer_label creator_label contributor_label dedicatee_label donor_label designer_label editor_label illustrator_label interviewee_label interviewer_label lyricist_label owner_label patron_label photographer_label print_maker_label recipient_label transcriber_label translator_label]
