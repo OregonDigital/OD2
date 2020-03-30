@@ -14,17 +14,17 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
 
   def search_field
     search_link_field = :blank
-    if creator_fields.include? field.to_sym
-      search_link_field = :creator_combined_label
-    elsif scientific_fields.include? field.to_sym 
-      search_link_field = :scientific_combined_label
-    elsif topic_fields.include? field.to_sym 
-      search_link_field = :topic_combined_label
-    elsif location_fields.include? field.to_sym 
-      search_link_field = :location_combined_label
-    else
-      search_link_field = options.fetch(:search_field, field)
-    end
+    search_link_field = if creator_fields.include? field.to_sym
+                          :creator_combined_label
+                        elsif scientific_fields.include? field.to_sym 
+                          :scientific_combined_label
+                        elsif topic_fields.include? field.to_sym 
+                          :topic_combined_label
+                        elsif location_fields.include? field.to_sym 
+                          :location_combined_label
+                        else
+                          options.fetch(:search_field, field)
+                        end
     search_link_field
   end
 
