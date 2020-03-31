@@ -26,7 +26,7 @@ module Hyrax
     end
 
     def self.build_permitted_params
-      params = super
+      params = super - [:date_uploaded]
       Generic.controlled_property_labels.each do |prop|
         params << { prop.gsub('_label', '_attributes') => %i[id _destroy] }
       end
