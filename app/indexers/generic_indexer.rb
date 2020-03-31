@@ -84,10 +84,10 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def converted_date(date_string)
-    if date_string.include?("/")
+    if date_string.include?('/')
       Date.strptime(date_string, '%m/%d/%Y')
     else
-      object.date_uploaded.to_time
+      date_string.to_time
     end
   end
 end
