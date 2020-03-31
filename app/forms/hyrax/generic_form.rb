@@ -31,6 +31,8 @@ module Hyrax
         params << { prop.gsub('_label', '_attributes') => %i[id _destroy] }
       end
       params << :license
+      params.delete(:date_uploaded)
+      params.delete(:date_modified)
       params
     end
   end

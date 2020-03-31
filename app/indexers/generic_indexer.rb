@@ -22,7 +22,6 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_edit_groups
       index_read_groups
       index_discover_groups
-      solr_doc['date_uploaded_dtsi'] = object.date_uploaded.to_time unless object.date_uploaded.blank?
       solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| file_set.extracted_text.content unless file_set.extracted_text.nil? }
       # Index file formats from file sets for faceting
       solr_doc[Solrizer.solr_name('file_format', :facetable)] = object.file_sets.map { |file_set| file_set.to_solr[Solrizer.solr_name('file_format', :facetable)] }
