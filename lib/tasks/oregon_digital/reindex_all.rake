@@ -36,12 +36,12 @@ namespace :oregon_digital do
 
     # Iterate over the collections, index their access controls and then the object itself
     finder.collections.each do |obj|
-      ReindexWorker.new.perform(obj.access_control_pids, obj.pid, obj.contains_pids + object.proxy_pids)
+      ReindexWorker.new.perform(obj.access_control_pids, obj.pid, obj.contains_pids + obj.proxy_pids)
     end
 
     # Now just pile on jobs for the assets
     finder.assets.each do |obj|
-      ReindexWorker.perform_async(obj.access_control_pids, obj.pid, obj.contains_pids + object.proxy_pids)
+      ReindexWorker.perform_async(obj.access_control_pids, obj.pid, obj.contains_pids + obj.proxy_pids)
     end
   end
 end
