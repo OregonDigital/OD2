@@ -23,6 +23,8 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
       :topic_combined_label
     elsif location_fields.include? field.to_sym
       :location_combined_label
+    elsif non_label_fields.include? field.to_sym
+      field.to_s.gsub('_label', '').to_sym
     else
       options.fetch(:search_field, field)
     end
@@ -44,5 +46,9 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
 
   def scientific_fields
     %i[taxon_class_label family_label genus_label order_label species_label phylum_or_division_label]
+  end
+
+  def non_label_fields
+    %i[local_collection_name_label institution_label repository_label]
   end
 end
