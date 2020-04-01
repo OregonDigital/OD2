@@ -7,8 +7,8 @@ module OregonDigital
 
     attr_reader :work
 
-    def initialize(parent:)
-      @parent = work
+    def initialize(work:)
+      @work = work
       super
     end
 

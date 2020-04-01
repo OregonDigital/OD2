@@ -40,7 +40,7 @@ class SolrDocument
   def parents
     config = ::CatalogController.new
     repository = config.repository
-    search_builder = OregonDigital::ParentsOfWorkSearchBuilder.new(parent: ActiveFedora::Base.find(self['id']))
+    search_builder = OregonDigital::ParentsOfWorkSearchBuilder.new(work: ActiveFedora::Base.find(self['id']))
     @parents ||= repository.search(search_builder).docs
   end
 
