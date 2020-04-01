@@ -36,6 +36,18 @@ class SolrDocument
     fa_classes[type.downcase] || 'cube'
   end
 
+  # Find and return parent works
+  def parents
+    config = ::CatalogController.new
+    repository = config.repository
+    search_builder = OregonDigital::ParentsOfWorkSearchBuilder.new(parent: ActiveFedora::Base.find(self['id']))
+    @parents ||= repository.search(search_builder).docs
+  end
+
+  def parents?
+    !parents.empty?
+  end
+
   private
 
   def valid_solr_doc_values(values, model, property_name)
