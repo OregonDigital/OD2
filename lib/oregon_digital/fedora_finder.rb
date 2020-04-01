@@ -136,6 +136,7 @@ module OregonDigital
     # where it makes sense, and keys it by its pid
     #
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def categorize(object)
       by_pid[object.pid] = object
       all_objects << object
@@ -143,11 +144,19 @@ module OregonDigital
       m = object.model
       return if IGNORED_MODELS.include?(m)
 
-      collections << object if COLLECTION_MODELS.include?(m)
-      assets << object if ASSET_MODELS.include?(m)
+      if COLLECTION_MODELS.include?(m)
+        puts "Read collection #{object.pid}"
+        collections << object
+      end
+
+      if ASSET_MODELS.include?(m)
+        puts "Read asset #{object.pid}"
+        assets << object
+      end
 
       raise "object #{object.pid} has unknown model (#{m})" unless ALL_MODELS.include?(m)
     end
+    # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
 
     def crawl(object)

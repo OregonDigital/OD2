@@ -36,12 +36,18 @@ namespace :oregon_digital do
 
     # Iterate over the collections, index their access controls and then the object itself
     finder.collections.each do |obj|
+      puts "Immediately running reindex job for collection #{obj.pid}"
       ReindexWorker.new.perform(obj.access_control_pids, obj.pid, obj.contains_pids + obj.proxy_pids)
     end
 
     # Now just pile on jobs for the assets
-    finder.assets.each do |obj|
+    total = finder.assets.length
+    finder.assets.each_with_index do |obj, index|
+      human_index = index+1
+      puts "Creating ReindexWorker job for asset #{human_index} out of #{total}" if human_index % 100 == 0
       ReindexWorker.perform_async(obj.access_control_pids, obj.pid, obj.contains_pids + obj.proxy_pids)
     end
+
+    puts "Reindex task completed - #{total} jobs sent to sidekiq"
   end
 end
