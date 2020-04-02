@@ -49,6 +49,6 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
   end
 
   def non_label_fields
-    %i[local_collection_name_label institution_label repository_label]
+    %i[local_collection_name_label institution_label repository_label form_of_work_label military_branch_label]
   end
 end
