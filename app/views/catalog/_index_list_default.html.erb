@@ -31,9 +31,9 @@
   </div>
   <% if document.parents? %>
     <div class="col-md-4">
-      Parent works:
+      <%= t('hyrax.search.list.parents.header') %>
       <ul>
-        <% document.parents[0..3].each do |parent| %>
+        <% document.parents.each do |parent| %>
           <li> <%= link_to parent, parent %> </li>
         <% end %>
       </ul>
