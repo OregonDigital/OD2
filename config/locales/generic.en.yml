@@ -2,6 +2,10 @@ en:
   hyrax:
     icons:
       generic:     'fa fa-file-text-o'
+    search:
+      list:
+        parents:
+          header: 'Parent works:'
     select_type:
       generic:
         description:        "Generic works"
