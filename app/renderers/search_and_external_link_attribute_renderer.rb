@@ -12,43 +12,11 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
     links.join('')
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   def search_field
-    if creator_fields.include? field.to_sym
-      :creator_combined_label
-    elsif scientific_fields.include? field.to_sym
-      :scientific_combined_label
-    elsif topic_fields.include? field.to_sym
-      :topic_combined_label
-    elsif location_fields.include? field.to_sym
-      :location_combined_label
-    elsif non_label_fields.include? field.to_sym
+    if Generic.controlled_property_labels.to_s.include? field.to_s
       field.to_s.gsub('_label', '').to_sym
     else
       options.fetch(:search_field, field)
     end
-  end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
-
-  def creator_fields
-    %i[arranger_label artist_label author_label cartographer_label collector_label composer_label creator_label contributor_label dedicatee_label donor_label designer_label editor_label illustrator_label interviewee_label interviewer_label lyricist_label owner_label patron_label photographer_label print_maker_label recipient_label transcriber_label translator_label]
-  end
-
-  def topic_fields
-    %i[keyword_label subject_label]
-  end
-
-  def location_fields
-    %i[ranger_district_label water_basin_label location_label]
-  end
-
-  def scientific_fields
-    %i[taxon_class_label family_label genus_label order_label species_label phylum_or_division_label]
-  end
-
-  def non_label_fields
-    %i[local_collection_name_label institution_label repository_label form_of_work_label military_branch_label]
   end
 end
