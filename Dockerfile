@@ -1,4 +1,4 @@
-FROM ruby:2.5.5 as builder
+FROM ruby:2.5.5 as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -10,6 +10,8 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 RUN gem install bundler
+
+FROM bundler as dependencies
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
@@ -27,6 +29,8 @@ ARG GID=8083
 # Create an app user so our program doesn't run as root.
 RUN groupadd -r --gid "$GID" app && useradd -d /data -r --gid "$GID" --uid "$UID" app
 
+FROM dependencies as gems
+
 # Make sure the new user has complete control over all code, including
 # bundler's installed assets
 RUN mkdir -p /usr/local/bundle
@@ -43,6 +47,8 @@ COPY --chown=app:app build/install_gems.sh /data/build
 USER app
 RUN /data/build/install_gems.sh
 
+FROM gems as code
+
 # Add the rest of the code
 COPY --chown=app:app . /data
 
@@ -50,7 +56,7 @@ ARG RAILS_ENV=development
 ENV RAILS_ENV=${RAILS_ENV}
 
 
-FROM builder
+FROM code
 
 ARG DEPLOYED_VERSION=development
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
