@@ -165,6 +165,17 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('language_label', :stored_searchable)
 
     config.add_facet_field solr_name('generic_type', :facetable), if: false
+    config.add_facet_field 'open_access', limit: 5, label: 'Open Access', show: false, query: {
+      open: { label: 'Open', fq: 'license_sim:(
+        https\://creativecommons.org/licenses/by/4.0/ OR
+        https\://creativecommons.org/licenses/by-sa/4.0/ OR
+        https\://creativecommons.org/licenses/by-nd/4.0/ OR
+        https\://creativecommons.org/licenses/by-nc/4.0/ OR
+        https\://creativecommons.org/licenses/by-nc-nd/4.0/ OR
+        https\://creativecommons.org/licenses/by-nc-sa/4.0/ OR
+        http\://creativecommons.org/publicdomain/zero/1.0/ OR
+        http\://creativecommons.org/publicdomain/mark/1.0/)' }
+    }
     config.add_facet_field solr_name('copyright_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
     config.add_facet_field solr_name('file_format', :facetable), label: I18n.translate('simple_form.labels.defaults.file_format'), limit: 5
     config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
