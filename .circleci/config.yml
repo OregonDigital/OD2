@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  docker-publish: circleci/docker-publish@0.1.7
+  docker: circleci/docker@1.0.0
 jobs:
   checkout_code:
     docker:
@@ -152,7 +152,7 @@ jobs:
         type: string
         default: 'production'
     executor:
-      name: 'docker-publish/docker'
+      name: 'docker/docker'
     environment:
       DOCKER_LOGIN: admin
       DOCKER_PASSWORD: admin
@@ -169,16 +169,17 @@ jobs:
             echo export TAG="$DATETIME-$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
       - setup_remote_docker
-      - docker-publish/check:
+      - docker/check:
           registry: registry.library.oregonstate.edu
-      - docker-publish/build:
+      - docker/build:
           registry: registry.library.oregonstate.edu
           image: od2_web
           tag: $TAG
           extra_build_args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
-      - docker-publish/deploy:
+      - docker/push:
           registry: registry.library.oregonstate.edu
           image: od2_web
+          tag: $TAG
 workflows:
   ci:
     jobs:
@@ -199,7 +200,4 @@ workflows:
           name: Build and push application image to Beavernetes image repository
           requires:
             - lint
-          filters:
-            branches:
-              only: master
           repo: od2_web
