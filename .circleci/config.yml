@@ -216,4 +216,7 @@ workflows:
           name: Build and push application image to Beavernetes image repository
           requires:
             - lint
+          filters:
+            branches:
+              only: master
           repo: od2_web
