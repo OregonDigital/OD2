@@ -50,6 +50,7 @@ group :development do
   # listen is a requirement of puma but isn't part of its gemspec
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
+  gem "stackprof", "~> 0.2.15"
 end
 
 group :development, :test do
