@@ -16,7 +16,24 @@ class ReindexWorker
     end
 
     a = ActiveFedora::Base.find(asset_pid)
-    a.update_index
+
+    pout =  "/data/tmp/reindex-#{a.class}-#{asset_pid.gsub('/', '__')}-#{"%06d" % rand(999999)}.dump"
+    start = Time.now
+    profile = StackProf.run(mode: :cpu, raw: true) do
+      a.update_index
+    end
+    duration = Time.now - start
+    File.open(pout+"-time", "w") do |f|
+      f.puts "#{duration} seconds"
+    end
+
+    report = StackProf::Report.new(profile)
+    File.open(pout, "w") do |f|
+      report.print_text(false, nil, nil, nil, nil, nil, f)
+    end
+    File.open(pout+"-viz", "w") do |f|
+      report.print_graphviz({}, f)
+    end
 
     contains_pids.each { |pid| ActiveFedora::Base.find(pid).update_index }
 
