@@ -119,7 +119,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
         allow(location).to receive(:featureClass).and_return([described_class.new('https://www.geonames.org/ontology#A')])
       end
 
-      it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University , Parent Label, (Administrative Boundary) '] }
+      it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University, Parent Label, (Administrative Boundary)'] }
     end
   end
 end
