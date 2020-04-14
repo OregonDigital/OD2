@@ -78,7 +78,7 @@ module Hyrax
       end
 
       def set_location_label(label, parent_label, fc_label)
-        @label = "#{label.first} , #{parent_label}, (#{fc_label}) "
+        @label = "#{label.first}, #{parent_label}, (#{fc_label})"
       end
 
       def valid_or_blank_parent?(parent_label)
@@ -87,7 +87,7 @@ module Hyrax
 
       def top_level_element?
         feature_code = featureCode.first
-        top_level_codes = [RDF::URI('http://www.geonames.org/ontology#A.PCLI')]
+        top_level_codes = [RDF::URI('http://www.geonames.org/ontology#A.PCLI'), RDF::URI('https://www.geonames.org/ontology#A.PCLI')]
         feature_code.respond_to?(:rdf_subject) && top_level_codes.include?(feature_code.rdf_subject)
       end
     end
