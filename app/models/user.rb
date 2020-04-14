@@ -54,7 +54,7 @@ class User < ApplicationRecord
   def self.from_omniauth(access_token)
     email = email_from_omniauth(access_token)
     role = role_from_omniauth(access_token.provider.to_s)
-    user = User.where(email: email).first_or_create do |u|
+    User.where(email: email).first_or_create do |u|
       u.email = email
       u.roles << role unless role.nil?
       u.skip_confirmation!
