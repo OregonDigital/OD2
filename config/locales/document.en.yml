@@ -18,6 +18,7 @@ en:
         is_volume: "List the volume number, without Vol. in front of it."
         larger_work: "Use when the item being cataloged is part of a larger work with a known title."
         number_of_pages: "List the number of pages without pgs or pages following number."
+        on_pages: "List the pages the article or document appears on. One or more page numbers or range of numbers, such as 42-111 or 7,41,73-97."
         table_of_contents: "List of subunits of resource."
     labels:
       defaults:
@@ -29,6 +30,7 @@ en:
         is_volume: "Volume"
         larger_work: "Larger Work"
         number_of_pages: "Number of Pages"
+        on_pages: "On Pages"
         table_of_contents: "Table of Contents"
   blacklight:
     search:
