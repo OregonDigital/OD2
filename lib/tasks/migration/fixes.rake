@@ -24,7 +24,7 @@ namespace :migration do
     end
 
     desc 'Create workflow entity if it does not exist'
-    task create_workflow_entity do
+    task create_workflow_entity: :environment do
       pid = ENV['pid']
       work = ActiveFedora::Base.find(pid)
       work_global_id = work.to_global_id.to_s
