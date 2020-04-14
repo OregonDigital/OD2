@@ -35,6 +35,17 @@ namespace :migration do
         se = Sipity::Entity.new(proxy_for_global_id: work_global_id, workflow_id: workflow_id, workflow_state_id: workflow_state_id)
         se.save
       end
+      # set to public after setting workflow state to deposited
+    end
+    
+    desc 'Manually publish private work if it is expected to be open'
+    task publish_work: :environment do
+      pid = ENV['pid']
+      work = ActiveFedora::Base.find(pid)
+      if work.visibility == 'private'
+        work.visibility = 'open'
+        work.save
+      end
     end
   end
 end
