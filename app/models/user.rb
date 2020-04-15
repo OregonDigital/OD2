@@ -58,7 +58,6 @@ class User < ApplicationRecord
       u.email = email
       u.roles << role unless role.nil?
       u.skip_confirmation!
-      u.skip_confirmation_notification!
     end
   end
 
