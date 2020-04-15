@@ -39,9 +39,7 @@ class User < ApplicationRecord
 
   # Override from devise to make a determination of whether to send email notification or not
   def send_confirmation_notification?
-    return false if email.include?('uoregon') || email.include?('oregonstate')
-
-    true
+    super && !email.include?('uoregon') && !email.include?('oregonstate')
   end
 
   # Method added by Blacklight; Blacklight uses #to_s on your
