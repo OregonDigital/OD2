@@ -747,6 +747,7 @@ module OregonDigital
         { name: 'contained_in_journal', is_controlled: false },
         { name: 'is_volume', is_controlled: false },
         { name: 'has_number', is_controlled: false },
+        { name: 'on_pages', is_controlled: false },
         { name: 'citation', is_controlled: false },
         { name: 'has_finding_aid', is_controlled: false },
         { name: 'relation', is_controlled: false },

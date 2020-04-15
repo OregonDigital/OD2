@@ -170,6 +170,7 @@ en:
         first_line_chorus: "First Line Chorus"
         instrumentation: "Instrumentation"
         number_of_pages: "Number of Pages"
+        on_pages: "On Pages"
         table_of_contents: "Table of Contents"
         contained_in_journal: "Contained in Journal"
         has_number: "Number"
