@@ -79,10 +79,10 @@ module Hyrax
       # Administrative hierarchy values
       def parent_hierarchy
         [
-          parentADM1,
-          parentADM2,
-          parentADM3,
           parentADM4,
+          parentADM3,
+          parentADM2,
+          parentADM1,
           parentCountry
         ].reject(&:empty?)
       end
