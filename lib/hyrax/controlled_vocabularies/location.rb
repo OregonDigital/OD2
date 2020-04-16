@@ -69,7 +69,7 @@ module Hyrax
         parent_country = parentCountry.first
         sec_adm_level_code = 'www.geonames.org/ontology#A.ADM2'
         us_country_code = 'sws.geonames.org/6252001/'
-        feature_code.responds_to?(:rdf_subject) && feature_code.rdf_subject.to_s.include?(sec_adm_level_code) && parent_country.responds_to?(:rdf_subject) && parent_country.rdf_subject.to_s.include?(us_country_code)
+        feature_code.respond_to?(:rdf_subject) && feature_code.rdf_subject.to_s.include?(sec_adm_level_code) && parent_country.respond_to?(:rdf_subject) && parent_country.rdf_subject.to_s.include?(us_country_code)
       end
 
       def no_county_label
