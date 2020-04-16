@@ -26,7 +26,7 @@ module Hyrax
         @label = super
 
         unless valid_label
-          return Array("#{@label.first} County") if county_without_name
+          return Array("#{@label.first} County") if us_county? && no_county_label
           return @label if top_level_element?
 
           @label = @label.first
@@ -49,26 +49,6 @@ module Hyrax
         resource
       end
 
-      # Administrative hierarchy values
-      def parent_hierarchy
-        [
-          parentADM1,
-          parentADM2,
-          parentADM3,
-          parentADM4,
-          parentCountry
-        ].reject(&:empty?)
-      end
-
-      # Identify if this is a county in the USA without 'county' in the name already
-      def county_without_name
-        feature_code = featureCode.first
-        parent_country = parentCountry.first
-        sec_adm_level_code = 'www.geonames.org/ontology#A.ADM2'
-        us_country_code = 'sws.geonames.org/6252001/'
-        feature_code.rdf_subject.to_s.include?(sec_adm_level_code) && parent_country.rdf_subject.to_s.include?(us_country_code) && !@label.first.downcase.include?('county')
-      end
-
       # Persist parent features.
       def persist!
         result = super
@@ -82,6 +62,30 @@ module Hyrax
       end
 
       private
+
+      # Identify if this is a county in the USA
+      def us_county?
+        feature_code = featureCode.first
+        parent_country = parentCountry.first
+        sec_adm_level_code = 'www.geonames.org/ontology#A.ADM2'
+        us_country_code = 'sws.geonames.org/6252001/'
+        feature_code.responds_to?(:rdf_subject) && feature_code.rdf_subject.to_s.include?(sec_adm_level_code) && parent_country.responds_to?(:rdf_subject) && parent_country.rdf_subject.to_s.include?(us_country_code)
+      end
+
+      def no_county_label
+        !@label.first.downcase.include?('county')
+      end
+
+      # Administrative hierarchy values
+      def parent_hierarchy
+        [
+          parentADM1,
+          parentADM2,
+          parentADM3,
+          parentADM4,
+          parentCountry
+        ].reject(&:empty?)
+      end
 
       def rdf_label_uri_same?
         rdf_label.first.to_s == rdf_subject.to_s
