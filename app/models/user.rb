@@ -37,6 +37,11 @@ class User < ApplicationRecord
     email
   end
 
+  # Override from devise to make a determination of whether to send email notification or not
+  def send_confirmation_notification?
+    super && !email.include?('uoregon') && !email.include?('oregonstate')
+  end
+
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
@@ -47,14 +52,11 @@ class User < ApplicationRecord
   def self.from_omniauth(access_token)
     email = email_from_omniauth(access_token)
     role = role_from_omniauth(access_token.provider.to_s)
-    user = User.where(email: email).first_or_create do |u|
+    User.where(email: email).first_or_create do |u|
       u.email = email
       u.roles << role unless role.nil?
+      u.skip_confirmation!
     end
-    user.skip_confirmation!
-    user.skip_confirmation_notification!
-    user.save
-    user
   end
 
   def self.email_from_omniauth(access_token)
