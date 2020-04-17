@@ -21,15 +21,15 @@
         <li class="radio">
           <label>
             <%= f.radio_button :visibility, OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU %>
-            <%#= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU) %>
+            <%= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU) %>
             <br />
             <%= t('hyrax.visibility.authenticated.note_html', institution: institution_name) %>
           </label>
         </li>
         <li class="radio">
           <label>
-            <%#= f.radio_button :visibility, OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO %>
-            <%#= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO) %>
+            <%= f.radio_button :visibility, OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO %>
+            <%= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO) %>
             <br />
             <%= t('hyrax.visibility.authenticated.note_html', institution: institution_name) %>
           </label>
