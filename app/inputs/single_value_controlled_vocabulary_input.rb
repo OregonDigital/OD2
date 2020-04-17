@@ -13,18 +13,4 @@ class SingleValueControlledVocabularyInput < LabelAndUriControlledVocabularyInpu
   def multiple?
     false
   end
-
-  def outer_wrapper
-    <<-HTML
-      #{yield}
-    HTML
-  end
-
-  def inner_wrapper
-    <<-HTML
-        <li class="single-value-input field-wrapper">
-          #{yield}
-        </li>
-    HTML
-  end
 end
