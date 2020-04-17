@@ -25,6 +25,10 @@ module Hyrax
       []
     end
 
+    def solr_document
+      @solr_document ||= ::SolrDocument.find(model.id)
+    end
+
     def self.build_permitted_params
       params = super - %i[date_uploaded date_modified]
       Generic.controlled_property_labels.each do |prop|
