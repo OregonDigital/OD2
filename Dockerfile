@@ -13,6 +13,8 @@ RUN gem install bundler
 
 FROM bundler as dependencies
 
+RUN apt-key adv --refresh-keys --keyserver ha.pool.sks-keyservers.net
+
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
   build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip \
@@ -29,7 +31,7 @@ ARG UID=8083
 ARG GID=8083
 
 # Create an app user so our program doesn't run as root.
-RUN groupadd -r --gid "$GID" app && useradd -d /data -r --gid "$GID" --uid "$UID" app
+RUN groupadd -r --gid 8083 app && useradd -d /data -r --gid 8083 --uid 8083 app
 
 FROM dependencies as gems
 
