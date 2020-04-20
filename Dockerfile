@@ -27,8 +27,8 @@ RUN mkdir -p /opt/fits && \
   curl -fSL -o /opt/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
   cd /opt && unzip fits.zip -d fits/ && chmod +X fits/fits.sh
 
-ARG UID=8082
-ARG GID=8082
+ARG UID=8083
+ARG GID=8083
 
 # Create an app user so our program doesn't run as root.
 RUN groupadd -r --gid "$GID" app && useradd -d /data -r --gid "$GID" --uid "$UID" app
