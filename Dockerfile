@@ -6,7 +6,6 @@ ENV LC_ALL C.UTF-8
 
 # add nodejs and yarn dependencies for the frontend
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
-  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && apt-get update && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
