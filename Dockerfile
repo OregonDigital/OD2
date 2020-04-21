@@ -4,16 +4,15 @@ FROM ruby:2.5.5 as bundler
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
-# add nodejs and yarn dependencies for the frontend
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
-  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
 RUN gem install bundler
 
 FROM bundler as dependencies
 
-RUN apt-get update && apt-get upgrade -y && \
+# add nodejs, yarn, and other dependencies
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
   build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip \
   zip ghostscript vim tesseract-ocr libopenjp2-tools \
