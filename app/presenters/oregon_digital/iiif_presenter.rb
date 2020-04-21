@@ -24,6 +24,10 @@ module OregonDigital
       presenters
     end
 
+    def search_service
+      'http://test.library.oregonstate.edu:3000' + Rails.application.routes.url_helpers.solr_document_iiif_search_path(solr_document_id: id.to_s)
+    end
+
     private
 
     def file_set_derivatives_service(file_set)
