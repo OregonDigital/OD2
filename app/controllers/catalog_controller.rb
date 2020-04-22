@@ -21,7 +21,6 @@ class CatalogController < ApplicationController
   include BlacklightIiifSearch::Controller
 
   configure_blacklight do |config|
-
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
       full_text_field: 'all_text_tsimv',
