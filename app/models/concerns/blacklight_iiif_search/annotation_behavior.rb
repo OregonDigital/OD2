@@ -20,23 +20,6 @@ module BlacklightIiifSearch
         controller.manifest_hyrax_document_url( parent_document[:id]).gsub(/\?locale=.*/, '')
       end
 
-      def parent_manifest_node
-        @parent_manifest_node ||= ManifestBuilder::RootNode.for(
-          Valkyrie::MetadataAdapter.find(:index_solr).resource_factory.to_resource(
-            object: parent_document.to_h
-          )
-        )
-      end
-
-      def child_manifest_node
-        @child_manifest_node ||= ManifestBuilder::LeafNode.new(
-          Valkyrie::MetadataAdapter.find(:index_solr).resource_factory.to_resource(
-            object: document.to_h
-          ),
-          parent_manifest_node
-        )
-      end
-
       ##
       # return a string like "#xywh=100,100,250,20"
       # corresponding to coordinates of query term on image
@@ -45,6 +28,8 @@ module BlacklightIiifSearch
       def coordinates
         return "" unless query
         return "#xywh=0,0,0,0"
+
+        # TODO: Implement EVERYTHING below here to enable bounding box hit highlighting
         if (word = words[hl_index])
           "#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
         else

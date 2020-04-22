@@ -25,6 +25,7 @@ module OregonDigital
     end
 
     def search_service
+      # TODO: Fix solr_document_iiif_search_url keeps giving me error about not setting default_url_options even though it's set
       'http://test.library.oregonstate.edu:3000' + Rails.application.routes.url_helpers.solr_document_iiif_search_path(solr_document_id: id.to_s)
     end
 
