@@ -24,9 +24,9 @@ module Hyrax
       # Overrides rdf_label to add location disambiguation when available.
       def rdf_label
         @label = super
+        @label = Array("#{@label.first} County") if us_county? && no_county_label
 
         unless valid_label
-          return Array("#{@label.first} County") if us_county? && no_county_label
           return @label if top_level_element?
 
           @label = @label.first
