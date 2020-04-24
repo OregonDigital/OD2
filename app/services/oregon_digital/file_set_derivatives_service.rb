@@ -66,6 +66,7 @@ module OregonDigital
       0.upto(page_count - 1) do |pagenum|
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
+          hocr_derivative_service(out_path).create_derivatives
           create_zoomable_page(out_path, pagenum)
         end
       end
@@ -171,6 +172,10 @@ module OregonDigital
     # Returns the JP2Processor class of choice
     def jp2_processor
       OregonDigital::Derivatives::Image::JP2Processor
+    end
+
+    def hocr_derivative_service(filename, file_set: self.file_set)
+      HocrDerivativeService::Factory.new(file_set: file_set, filename: filename).new()
     end
   end
 end

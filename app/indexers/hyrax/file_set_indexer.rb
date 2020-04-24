@@ -22,6 +22,8 @@ module Hyrax
         solr_doc['all_text_timv'] = object.extracted_text.content if object.extracted_text.present?
         # OVERRIDE FROM HYRAX to store extracted text
         solr_doc['all_text_tsimv'] = object.extracted_text.content if object.extracted_text.present?
+        solr_doc['hocr_content_tsimv'] = object.hocr_content unless object.hocr_content.nil?
+        solr_doc['ocr_content_tsimv'] = object.ocr_content unless object.ocr_content.nil?
         solr_doc['height_is'] = Integer(object.height.first) if object.height.present?
         solr_doc['width_is']  = Integer(object.width.first) if object.width.present?
         solr_doc['visibility_ssi'] = object.visibility
