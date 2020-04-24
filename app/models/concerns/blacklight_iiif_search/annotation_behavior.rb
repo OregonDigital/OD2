@@ -29,20 +29,17 @@ module BlacklightIiifSearch
     def coordinates
       return '' unless query
 
-      '#xywh=0,0,0,0'
-
-      # TODO: Implement EVERYTHING below here to enable bounding box hit highlighting
-      # if (word = words[hl_index])
-      #   "#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
-      # else
-      #   '#xywh=0,0,0,0'
-      # end
+      if (word = words[hl_index])
+        "#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
+      else
+        '#xywh=0,0,0,0'
+      end
     end
 
     def words
       @words ||=
         begin
-          hocr = Nokogiri::HTML(document['hocr_content_tsim'][0])
+          hocr = Nokogiri::HTML(document['hocr_content_tsimv'][0])
           words = hocr.css('.ocrx_word')
           words = words.map { |x| Word.new(x) }
           words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }

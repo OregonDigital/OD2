@@ -21,9 +21,8 @@ class HocrDerivativeService
 
     def create_derivatives
       result = processor.run!
-      file_set.hocr_content = result.hocr_content
-      file_set.ocr_content = result.ocr_content
-      Rails.logger.info '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+      file_set.hocr_content << result.hocr_content
+      file_set.ocr_content << result.ocr_content
     end
 
     # No cleanup necessary - all this does is set a property on FileSet.

@@ -33,7 +33,7 @@ module BlacklightIiifSearch
     def solr_params
       return { q: 'nil:nil' } unless q
 
-      { q: "all_text_tsimv:#{q}", fq: ["{!join from=file_set_ids_ssim to=id}id:#{id}"], rows: rows, page: page }
+      { q: "#{q}", fq: ["{!join from=file_set_ids_ssim to=id}id:#{id}"], rows: rows, page: page }
     end
   end
 end
