@@ -37,7 +37,6 @@ overrides:
   - property: rights_statement
     predicate: http://purl.org/dc/terms/rights
     multiple: false
-    function: attributes_replaces_data
   - property: language
     predicate: http://purl.org/dc/terms/language
     multiple: true

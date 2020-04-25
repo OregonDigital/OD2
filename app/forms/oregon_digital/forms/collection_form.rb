@@ -50,6 +50,10 @@ module OregonDigital
            repository]
       end
 
+      def user_primary_terms
+        %i[title description]
+      end
+
       def secondary_terms
         []
       end
