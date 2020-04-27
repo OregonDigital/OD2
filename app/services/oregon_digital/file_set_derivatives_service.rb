@@ -175,9 +175,9 @@ module OregonDigital
     end
 
     def hocr_derivative_service(filename, pagenum, file_set: self.file_set)
-      file_set.ocr_content = [] if pagenum == 0
-      file_set.hocr_content = [] if pagenum == 0
-      HocrDerivativeService::Factory.new(file_set: file_set, filename: filename).new()
+      file_set.ocr_content = [] if pagenum.zero?
+      file_set.hocr_content = [] if pagenum.zero?
+      HocrDerivativeService::Factory.new(file_set: file_set, filename: filename).new
     end
   end
 end
