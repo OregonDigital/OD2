@@ -13,13 +13,13 @@ RUN gem install bundler
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
-  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip ghostscript vim\
+  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip zip ghostscript vim\
   ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-11-jre libopenjp2-tools --fix-missing --allow-unauthenticated
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
-  curl -fSL -o /opt/fits-1.0.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip && \
-  cd /opt && unzip fits-1.0.5.zip && chmod +X fits-1.0.5/fits.sh
+  curl -fSL -o /opt/fits.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
+  cd /opt && unzip fits.zip -d fits/ && chmod +X fits/fits.sh
 
 ARG UID=8083
 ARG GID=8083
@@ -39,6 +39,8 @@ RUN chown -R app:app /data
 WORKDIR /data
 COPY --chown=app:app Gemfile /data
 COPY --chown=app:app Gemfile.lock /data
+# @todo N8 specific - add bulkrax for development; remove for PR back to OD2
+# COPY --chown=app:app vendor/engines/bulkrax /data/vendor/engines/bulkrax
 COPY --chown=app:app build/install_gems.sh /data/build
 USER app
 RUN /data/build/install_gems.sh
@@ -49,12 +51,10 @@ COPY --chown=app:app . /data
 ARG RAILS_ENV=development
 ENV RAILS_ENV=${RAILS_ENV}
 
-
 FROM builder
 
 ARG DEPLOYED_VERSION=development
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
-
 
 RUN if [ "${RAILS_ENV}" = "production" ]; then \
   echo "Precompiling assets with $RAILS_ENV environment"; \
