@@ -49,3 +49,6 @@ fits.log
 rules.log
 log/rules.log
 blazegraph.jnl
+
+# Ignore local engines
+vendor/engines/*

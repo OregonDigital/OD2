@@ -11,6 +11,10 @@ services:
     expose:
       - 3000
       - 1234
+    # @todo N8 specific - remove for PR back to OD2
+    environment:
+      - VIRTUAL_HOST=od.docker
+      - VIRTUAL_PORT=3000
 
   # Map the application port to localhost, but on port 3001 to avoid conflicts
   test:

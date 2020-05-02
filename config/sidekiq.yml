@@ -1,6 +1,7 @@
 ---
 :concurrency: 5
 :logfile: log/development.log
+:max_retries: 5
 staging:
   :concurrency: 5
 production:
@@ -8,3 +9,5 @@ production:
 :queues:
   - default
   - hyrax_migrator
+  - import
+  - export

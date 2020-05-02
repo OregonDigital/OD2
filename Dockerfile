@@ -14,7 +14,7 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
-  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip \
+  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip zip ghostscript vim\
   zip ghostscript vim tesseract-ocr libopenjp2-tools \
   ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-11-jre \
   --fix-missing --allow-unauthenticated
@@ -44,6 +44,8 @@ RUN chown -R app:app /data
 WORKDIR /data
 COPY --chown=app:app Gemfile /data
 COPY --chown=app:app Gemfile.lock /data
+# @todo N8 specific - add bulkrax for development; remove for PR back to OD2
+# COPY --chown=app:app vendor/engines/bulkrax /data/vendor/engines/bulkrax
 COPY --chown=app:app build/install_gems.sh /data/build
 USER app
 RUN /data/build/install_gems.sh
@@ -56,12 +58,10 @@ COPY --chown=app:app . /data
 ARG RAILS_ENV=development
 ENV RAILS_ENV=${RAILS_ENV}
 
-
 FROM code
 
 ARG DEPLOYED_VERSION=development
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
-
 
 RUN if [ "${RAILS_ENV}" = "production" ]; then \
   echo "Precompiling assets with $RAILS_ENV environment"; \

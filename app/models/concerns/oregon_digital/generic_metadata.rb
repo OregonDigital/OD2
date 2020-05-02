@@ -759,7 +759,12 @@ module OregonDigital
         { name: 'art_series', is_controlled: false },
         { name: 'type_label', is_controlled: false, name_label: 'type' },
         { name: 'format', is_controlled: false },
+        { name: 'extent', is_controlled: false },
+        { name: 'material', is_controlled: false },
+        { name: 'measurements', is_controlled: false },
         { name: 'orientation', is_controlled: false },
+        { name: 'physical_extent', is_controlled: false },
+        { name: 'technique', is_controlled: false },
         { name: 'set', is_controlled: false },
         { name: 'exhibit', is_controlled: false },
         { name: 'institution_label', is_controlled: true },
@@ -774,6 +779,8 @@ module OregonDigital
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
         { name: 'color_space', is_controlled: false }
+        { name: 'date_modified', is_controlled: false },
+        { name: 'date_uploaded', is_controlled: false }
       ].freeze
     end
   end

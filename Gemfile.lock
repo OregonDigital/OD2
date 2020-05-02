@@ -15,6 +15,15 @@ GIT
       sidekiq
 
 GIT
+  remote: https://github.com/notch8/willow_sword.git
+  revision: 0a669d78617c6003e4aa1a46a10447be92be27d5
+  specs:
+    willow_sword (0.2.0)
+      bagit (~> 0.4.1)
+      rails (>= 5.1.6)
+      rubyzip (>= 1.0.0)
+
+GIT
   remote: https://github.com/osulp/triplestore-adapter
   revision: 5b05379d91ca18c405e29513c27bb110365e4af2
   specs:
@@ -25,6 +34,22 @@ GIT
       rdf-rdfxml
       rdf-vocab
       sparql-client
+
+GIT
+  remote: https://github.com/samvera-labs/bulkrax.git
+  revision: 996223d4efccf25888e62b5e519d9fbd0184fdc0
+  specs:
+    bulkrax (0.1.0)
+      bagit (~> 0.4)
+      iso8601 (~> 0.9.0)
+      language_list (~> 1.2, >= 1.2.1)
+      libxml-ruby (~> 3.1.0)
+      loofah (>= 2.2.3)
+      oai (>= 0.4, < 2.x)
+      rack (>= 2.0.6)
+      rails (>= 5.1.6)
+      rdf (>= 2.0.2, < 4.0)
+      simple_form
 
 GIT
   remote: https://github.com/samvera/hydra-derivatives.git
@@ -467,6 +492,7 @@ GEM
     ice_nine (0.11.2)
     iiif_manifest (0.5.0)
       activesupport (>= 4)
+    iso8601 (0.9.1)
     jaro_winkler (1.5.3)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
@@ -507,6 +533,7 @@ GEM
     kaminari-core (1.1.1)
     kaminari_route_prefix (0.1.1)
       kaminari (~> 1.0)
+    language_list (1.2.1)
     ld-patch (0.3.3)
       ebnf (~> 1.1)
       rdf (>= 2.2, < 4.0)
@@ -528,6 +555,7 @@ GEM
     libhoney (1.13.0)
       addressable (~> 2.0)
       http (>= 2.0, < 5.0)
+    libxml-ruby (3.1.0)
     link_header (0.0.8)
     linkeddata (3.0.1)
       equivalent-xml (~> 0.6)
@@ -590,6 +618,10 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.5.0)
       nokogiri
+    oai (1.1.0)
+      builder (>= 3.1.0)
+      faraday
+      faraday_middleware
     oauth (0.5.4)
     oauth2 (1.4.2)
       faraday (>= 0.8, < 2.0)
@@ -846,7 +878,7 @@ GEM
       faraday (~> 0.9)
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
-    simple_form (5.0.1)
+    simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     simplecov (0.16.1)
@@ -941,6 +973,7 @@ DEPENDENCIES
   axe-matchers
   blacklight-oembed
   browse-everything
+  bulkrax!
   byebug
   capybara (~> 2.17)
   coffee-rails (~> 4.2)
@@ -991,6 +1024,7 @@ DEPENDENCIES
   vcr (~> 5.1)
   web-console (>= 3.3.0)
   webmock
+  willow_sword!
 
 BUNDLED WITH
    1.17.3

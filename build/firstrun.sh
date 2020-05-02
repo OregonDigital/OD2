@@ -1,6 +1,21 @@
 #!/bin/sh
 
 echo
+echo 'Checking firstrun status'
+count=$( bundle exec rails runner 'puts "ADMINSETCOUNT#{AdminSet.count}"' )
+delimiter=ADMINSETCOUNT
+realcount=${count#*$delimiter}
+if [ $realcount -gt 0 ]
+then
+  echo
+  echo "$realcount AdminSet exist, assuming firstrun is complete. Exiting"
+  exit 0
+fi
+
+echo
+echo 'Executing firstrun'
+
+echo
 echo "Creating default admin set..."
 bundle exec rails hyrax:default_admin_set:create
 

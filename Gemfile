@@ -46,6 +46,11 @@ gem 'rack-honeycomb', '~> 0.5.0'
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
 
+# Bulk Import / Export
+# @todo N8 specific - use local for dev; use github for test/staging
+# gem 'bulkrax', path: 'vendor/engines/bulkrax'
+gem 'bulkrax', github: 'samvera-labs/bulkrax'
+
 group :development do
   # listen is a requirement of puma but isn't part of its gemspec
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -81,3 +86,4 @@ group :test do
 end
 
 gem "vcr", "~> 5.1"
+gem 'willow_sword', github: 'notch8/willow_sword'

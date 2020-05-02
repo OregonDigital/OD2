@@ -136,6 +136,7 @@ def attrs
     'rights_holder' => [],
     'use_restrictions' => [],
     'oembed_url' => 'http://bacon',
+    'oembed_url' => nil,
     'original_filename' => nil,
     'access_restrictions' => ['http://opaquenamespace.org/ns/accessRestrictions/OSUrestricted'],
     'arranger' => ['http://id.loc.gov/authorities/names/no2010022998'],
