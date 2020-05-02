@@ -64,6 +64,11 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      # @todo N8 specific - remove for PR back to OD2 once a new shared system_identifier field has been agreed on
+      property :source, predicate: ::RDF::Vocab::DC.source do |index|
+        index.as :stored_searchable
+      end
+
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties

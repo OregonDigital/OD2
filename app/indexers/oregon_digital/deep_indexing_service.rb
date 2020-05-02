@@ -15,7 +15,10 @@ module OregonDigital
     # OVERRIDEN FROM HYRAX TO ADD GRAPH FETCH RETRY QUEUE
     def fetch_value(value)
       Rails.logger.info "Fetching #{value.rdf_subject} from the authorative source. (this is slow)"
-      value.fetch(headers: { 'Accept' => default_accept_header })
+      # @todo - discuss with Brandon, this gets called repeatedly, which seems inefficient
+      #    plus, failing urls (eg. https://w3id.org/spar/mediatype/image/tiff) cause ImportWorkJob (and subsequent jobs eg AttachFilesToWorkJob) to take ages
+      # @note temporarily skipping https://w3id.org/spar/mediatype/ as this is confirmed a broken link
+      value.fetch(headers: { 'Accept' => default_accept_header }) unless value.is_a?(OregonDigital::ControlledVocabularies::MediaType) && value.id.include?('https://w3id.org/spar/mediatype/')
     rescue Net::ReadTimeout, IOError, SocketError, TriplestoreAdapter::TriplestoreException => e
       # IOError could result from a 500 error on the remote server
       # SocketError results if there is no server to connect to
