@@ -106,3 +106,18 @@ Bulkrax.setup do |config|
     'primary_set' => { from: ['primaryset'] }
   }
 end
+
+## override model mapping - map collection to Generic for now
+Bulkrax::ApplicationMatcher.class_eval do
+  def extract_model(src)
+    if src&.match('http://purl.org/dc/dcmitype/Collection')
+      'Generic'
+    elsif src&.match(URI::ABS_URI)
+      src.split('/').last
+    else
+      src
+    end
+  rescue StandardError
+    nil
+  end
+end
