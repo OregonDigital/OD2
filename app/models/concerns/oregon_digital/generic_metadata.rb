@@ -778,7 +778,7 @@ module OregonDigital
         { name: 'width', is_controlled: false },
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
-        { name: 'color_space', is_controlled: false }
+        { name: 'color_space', is_controlled: false },
         { name: 'date_modified', is_controlled: false },
         { name: 'date_uploaded', is_controlled: false }
       ].freeze
