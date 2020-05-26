@@ -43,7 +43,7 @@ Style/SingleLineBlockParams:
 Rails/ApplicationJob:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Enabled: false
 
 Rails/ApplicationRecord:
