@@ -40,7 +40,13 @@ Style/ClassAndModuleChildren:
 Style/SingleLineBlockParams:
   Enabled: false
 
-Naming/MethodParameterName:
+Rails/ApplicationJob:
+  Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
+Rails/ApplicationRecord:
   Enabled: false
 
 Metrics/LineLength:
@@ -81,4 +87,8 @@ RSpec/MultipleExpectations:
   Enabled: false
 
 RSpec/ExampleLength:
+  Enabled: false
+
+# FactoryBot 5 will require dynamic definition, so we should allow it.
+FactoryBot/StaticAttributeDefinedDynamically:
   Enabled: false
