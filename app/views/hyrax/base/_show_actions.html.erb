@@ -1,7 +1,4 @@
 <div class="show-actions">
-  <%# OVERRIDE FROM HYRAX to add 'add to my shelf' button %>
-  <%= link_to "Add to my Shelf", presenter.add_shelf_path, id: 'add-shelf', class: 'btn btn-default' %>
-  <%# END OVERRIDE %>
   <% if Hyrax.config.analytics? %>
     <%= link_to "Analytics", presenter.stats_path, id: 'stats', class: 'btn btn-default' %>
   <% end %>
@@ -25,12 +22,12 @@
         </div>
       <% end %>
   <% end %>
-  <% if presenter.show_deposit_for?(collections: @user_collections) %>
-      <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector" checked="checked" />
-      <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
-                     class: 'btn btn-default submits-batches submits-batches-add',
-                     data: { toggle: "modal", target: "#collection-list-container" } %>
-  <% end %>
+  <%# OVERRIDE FROM HYRAX to remove restritctions from add to collection button #%>
+  <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector" checked="checked" />
+  <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
+                  class: 'btn btn-default submits-batches submits-batches-add',
+                  data: { toggle: "modal", target: "#collection-list-container" } %>
+  <%# END OVERRIDE #%>
   <% if presenter.work_featurable? %>
       <%= link_to "Feature", hyrax.featured_work_path(presenter, format: :json),
           data: { behavior: 'feature' },
