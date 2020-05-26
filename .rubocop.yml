@@ -40,16 +40,10 @@ Style/ClassAndModuleChildren:
 Style/SingleLineBlockParams:
   Enabled: false
 
-Rails/ApplicationJob:
+Naming/MethodParameterName:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
-
-Rails/ApplicationRecord:
-  Enabled: false
-
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Style/Documentation:
@@ -89,6 +83,50 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Enabled: false
 
-# FactoryBot 5 will require dynamic definition, so we should allow it.
-FactoryBot/StaticAttributeDefinedDynamically:
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: false
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/SlicingWithRange:
+  Enabled: false
+
+RSpec/EmptyLineAfterExample:
+  Enabled: false
+
+Lint/NonDeterministicRequireOrder:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+FactoryBot/FactoryClassName:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Migration/DepartmentName:
   Enabled: false
