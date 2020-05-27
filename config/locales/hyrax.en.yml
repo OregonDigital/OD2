@@ -234,6 +234,16 @@ en:
         header: 'Can I use it?'
       items:
         header: "Downloads"
+    collection:
+      select_form:
+        select_heading: 'My Collections'
+        title: 'Save this item'
+        update: 'Save'
+        create_new: 'create a new collection'
+    dashboard:
+      my:
+        action:
+          add_to_collection: 'Save to...'
     search:
       form:
         option:
