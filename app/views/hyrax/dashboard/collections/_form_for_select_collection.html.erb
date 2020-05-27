@@ -6,7 +6,8 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <span class="modal-title" id="col_add_title"><%= t("hyrax.collection.select_form.title") %></span>
         </div>
-        <div class="modal-body">
+        <% unless current_user.nil? %>
+          <div class="modal-body">
             <div class="collection-list">
               <fieldset>
                 <legend><%= t("hyrax.collection.select_form.select_heading") %></legend>
@@ -29,10 +30,15 @@
             </div><!-- collection-list -->
             <%# @TODO: Hook up this link to modal/transition & have new collection add work to the collection #%>
             Or, <%= link_to t("hyrax.collection.select_form.create_new"), hyrax.new_dashboard_collection_path(collection_type_id: Hyrax::CollectionType.find_by(machine_id: :user_collection).id) %>
-        <div class="modal-footer text-center">
-          <%# @TODO: Send this link to new My Collections page %>
-          <%= link_to 'View My Collections', hyrax.my_collections_path %>
-        </div>
-      </div><!-- /.modal-content -->
+          </div><!-- /.modal-content -->
+          <div class="modal-footer text-center">
+            <%# @TODO: Send this link to new My Collections page %>
+            <%= link_to 'View My Collections', hyrax.my_collections_path %>
+          </div>
+        <% else %>
+          <div class="modal-body">
+            Please login to access your collections.
+          </div>
+        <% end %>
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
