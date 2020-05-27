@@ -9,15 +9,10 @@ module OregonDigital
       included do
         def collection_ability
           can(%i[index show new create edit update delete], Hyrax::CollectionType) do collection_type
-            if collection_type.title == "User Collection"
-              true
-            else
-              current_user.admin?
-            end
+            true if collection_type.title == 'User Collection'
+            current_user.admin?
           end 
-          can(%i[create new], Collection) do |collection|
-            current_user
-          end
+          can(%i[create new], Collection) if current_user
           can(%i[delete], Collection) if current_user.admin?
           can(%i[index show], Collection) if current_user.role?(admin_permission_roles)
           can %i[edit update], Collection do |collection|
