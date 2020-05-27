@@ -53,8 +53,10 @@
                       'aria-expanded'=> "false",
                       'aria-controls'=> "extended-terms" %>
               <div id="extended-terms" class='collapse'>
-                <% f.object.secondary_terms.each do |term| %>
-                  <%= render_edit_field_partial(term, f: f) %>
+                <% if current_user.admin? %>
+                  <% f.object.secondary_terms.each do |term| %>
+                    <%= render_edit_field_partial(term, f: f) %>
+                  <% end %>
                 <% end %>
               </div>
             <% end %>
