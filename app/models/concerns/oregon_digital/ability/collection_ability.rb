@@ -7,10 +7,11 @@ module OregonDigital
       extend ActiveSupport::Concern
 
       included do
+        # rubocop:disable Metrics/AbcSize
         def collection_ability
-          can(%i[index show new create edit update delete], Hyrax::CollectionType) do collection_type
+          can(%i[index show new create edit update delete], Hyrax::CollectionType) do |collection_type|
             collection_type.machine_id == 'user_collection' || current_user.admin?
-          end 
+          end
           can(%i[create new], Collection) if current_user
           can(%i[delete], Collection) if current_user.admin?
           can(%i[index show], Collection) if current_user.role?(admin_permission_roles)
@@ -19,6 +20,7 @@ module OregonDigital
           end
           # TODO: SHOW AND SEARCH FOR UO AND OSU
         end
+        # rubocop:enable Metrics/AbcSize
 
         def admin_or_in_depositor?(collection)
           current_user.role?(admin_permission_roles) && in_depositors_collection?(collection.edit_users)
