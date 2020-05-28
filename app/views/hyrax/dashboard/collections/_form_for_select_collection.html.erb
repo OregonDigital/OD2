@@ -30,9 +30,8 @@
             </div><!-- collection-list -->
             <%# @TODO: Hook up this link to modal/transition & have new collection add work to the collection #%>
             <% unless Hyrax::CollectionType.find_by(machine_id: :user_collection).nil? %>
-              Or, <%= link_to t("hyrax.collection.select_form.create_new"),
-                        hyrax.new_dashboard_collection_path(collection_type_id: Hyrax::CollectionType.find_by(machine_id: :user_collection).id),
-                        class: 'submits-batches submits-batches-add',
+              Or, <%= button_tag t("hyrax.collection.select_form.create_new"),
+                        class: 'btn btn-default submits-batches submits-batches-add',
                         data: { toggle: "modal", target: "#collection-create-container" } %>
             <% end %>
           </div><!-- /.modal-body -->
