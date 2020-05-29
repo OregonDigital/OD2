@@ -32,7 +32,7 @@
             <% unless Hyrax::CollectionType.find_by(machine_id: :user_collection).nil? %>
               Or, <%= button_tag t("hyrax.collection.select_form.create_new"),
                         class: 'btn btn-default submits-batches submits-batches-add',
-                        data: { toggle: "modal", target: "#collection-create-container" } %>
+                        data: { toggle: "modal", dismiss: "modal", target: "#collection-create-container" } %>
             <% end %>
           </div><!-- /.modal-body -->
           <div class="modal-footer text-center">
