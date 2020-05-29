@@ -24,6 +24,27 @@ Hyrax::Dashboard::CollectionsController.class_eval do
     end
   end
 
+  # Override after create method to redirect users back to where they created the collection from
+  def after_create
+    form
+    set_default_permissions
+    # if we are creating the new collection as a subcollection (via the nested collections controller),
+    # we pass the parent_id through a hidden field in the form and link the two after the create.
+    link_parent_collection(params[:parent_id]) unless params[:parent_id].nil?
+    respond_to do |format|
+      ActiveFedora::SolrService.instance.conn.commit
+      format.html do
+        case URI(request.referer).path.split('/')[1]
+        when '/dashboard'
+          redirect_to edit_dashboard_collection_path(@collection), notice: t('hyrax.dashboard.my.action.collection_create_success')
+        else
+          redirect_back fallback_location: '/'
+        end
+      end
+      format.json { render json: @collection, status: :created, location: dashboard_collection_path(@collection) }
+    end
+  end
+
   private
 
   # Turn form params into Facet objects
