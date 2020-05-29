@@ -1,5 +1,8 @@
 en:
   oregon_digital:
+    collection:
+      create_form:
+        title: 'Create new collection'
     homepage:
       works:
         link: 'All Latest Items'
