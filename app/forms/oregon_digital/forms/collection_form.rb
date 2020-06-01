@@ -40,8 +40,7 @@ module OregonDigital
       end
 
       def primary_terms
-         current_user.admin? ? admin_terms : user_terms
-        
+        current_user.admin? ? admin_terms : user_terms
       end
 
       def secondary_terms
