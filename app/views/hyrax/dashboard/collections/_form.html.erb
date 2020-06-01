@@ -34,10 +34,15 @@
           <div class="panel-body">
 
             <div id="base-terms">
-              <% f.object.primary_terms.each do |term| %>
-                <%= render_edit_field_partial(term, f: f) %>
+              <% if current_user.admin? %>
+                <% f.object.primary_terms.each do |term| %>
+                  <%= render_edit_field_partial(term, f: f) %>
+                <% end %>
+              <% else %>
+                <% f.object.user_primary_terms.each do |term| %>
+                  <%= render_edit_field_partial(term, f: f) %>
+                <% end %>
               <% end %>
-
               <% if f.object.persisted? %>
                 <%# we're loading these values dynamically to speed page load %>
                 <%= f.input :thumbnail_id,
