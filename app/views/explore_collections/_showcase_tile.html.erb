@@ -1,0 +1,9 @@
+<div class="thumbnail">
+    <% if local_assigns[:img] %>
+      <%= img %>
+    <% elsif local_assigns[:img_url] %>
+      <img class="fit-to-box" src="<%= img_url %>" alt="">
+    <% end %>
+    <h3> <%= title %> </h3>
+  <p><%= content unless content.empty? %></p>
+</div>
