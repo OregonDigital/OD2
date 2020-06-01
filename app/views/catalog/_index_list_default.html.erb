@@ -39,7 +39,12 @@
       </ul>
     </div>
   <% end %>
-  <%= label_tag "", class: 'pull-right' do %>
-    <% raw("#{check_box_tag "my_shelf_#{document.id}", document.id, false, class: 'my_shelf_result_checkbox'} Add to My Shelf") %>
-  <% end %>
+  <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
+  <%= button_tag t('hyrax.dashboard.my.action.save'),
+                  class: 'btn btn-default submits-batches submits-batches-add pull-right',
+                  data: { toggle: "modal", target: "#collection-list-container" } %>
 </div>
+
+<%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
+
+<!-- END OVERRIDE -->
