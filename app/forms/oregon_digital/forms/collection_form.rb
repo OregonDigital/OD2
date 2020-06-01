@@ -40,6 +40,15 @@ module OregonDigital
       end
 
       def primary_terms
+         current_user.admin? ? admin_terms : user_terms
+        
+      end
+
+      def secondary_terms
+        []
+      end
+
+      def admin_terms
         %i[title description
            creator contributor
            license publisher
@@ -50,8 +59,8 @@ module OregonDigital
            repository]
       end
 
-      def secondary_terms
-        []
+      def user_terms
+        %i[title description]
       end
 
       def self.build_permitted_params
