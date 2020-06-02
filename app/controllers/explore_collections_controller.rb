@@ -7,7 +7,7 @@ class ExploreCollectionsController < ApplicationController
   end
 
   # Return all collections
-  def collections()
+  def collections
     builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)
     response = repository.search(builder)
     response.documents
@@ -16,7 +16,7 @@ class ExploreCollectionsController < ApplicationController
   end
 
   # Return OSU collections
-  def osu_collections()
+  def osu_collections
     builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)
     response = repository.search(builder)
     response.documents
@@ -25,7 +25,7 @@ class ExploreCollectionsController < ApplicationController
   end
 
   # Return UO collections
-  def uo_collections()
+  def uo_collections
     builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)
     response = repository.search(builder)
     response.documents
@@ -34,11 +34,15 @@ class ExploreCollectionsController < ApplicationController
   end
 
   # Return My collections
-  def my_collections()
+  def my_collections
     builder = OregonDigital::MyCollectionsSearchBuilder.new(self)
     response = repository.search(builder)
     response.documents
   rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
     []
+  end
+
+  def total_viewable_items(id)
+    ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id}").accessible_by(current_ability).count
   end
 end

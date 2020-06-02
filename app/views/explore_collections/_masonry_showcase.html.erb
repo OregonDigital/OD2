@@ -2,7 +2,7 @@
   <div class="masonry document col-xs-6 col-md-3">
     <%= render 'showcase_tile',
           title: collection.title_or_label,
-          content: collection.description.first.to_s.gsub("\n", "</p><p>").html_safe,
+          count: controller.total_viewable_items(collection.id),
           link: [hyrax, collection],
           img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) %>
   </div>
