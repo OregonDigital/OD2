@@ -7,7 +7,7 @@
           <span class="modal-title" id="col_create_title"><%= t("oregon_digital.collection.create_form.title") %></span>
         </div>
           <div class="modal-body">
-            <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: [hyrax, :dashboard, @form] do |f| %>
+            <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: Hyrax::Engine.routes.url_helpers.dashboard_collections_path do |f| %>
               <% unless Hyrax::CollectionType.find_by(machine_id: :user_collection).nil? %>
                 <%= hidden_field_tag :type, Hyrax::CollectionType.find_by(machine_id: :user_collection).id %>
                 <%= hidden_field_tag :collection_type_gid, Hyrax::CollectionType.find_by(machine_id: :user_collection).gid %>
