@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <td> <%= t('oregon_digital.explore_collections.list.header.collection_name') %> </td>
+      <td> <%= t('oregon_digital.explore_collections.list.header.institution') %> </td>
+      <td> <%= t('oregon_digital.explore_collections.list.header.count') %> </td>
+    </tr>
+  </thead>
+  <tbody>
+    <% collections.each_with_index do |collection, i| %>
+      <tr>
+        <td> <%= collection.title_or_label %> </td>
+        <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
+        <td> <%= controller.total_viewable_items(collection.id) %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

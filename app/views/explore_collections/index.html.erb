@@ -10,28 +10,8 @@
 </div>
 
 <div class="tab-content">
-  <div id="all" class="tab-pane fade in active">
-    <h3 class='sr-only'>All collections</h3>
-    <div data-behavior="masonry-gallery">
-      <%= render 'masonry_showcase', collections: controller.collections %>
-    </div>
-  </div>
-  <div id="osu" class="tab-pane fade">
-    <h3 class='sr-only'>Oregon State University collections</h3>
-    <div class="masonry-gallery">
-      <%= render 'masonry_showcase', collections: controller.osu_collections %>
-    </div>
-  </div>
-  <div id="uo" class="tab-pane fade">
-    <h3 class='sr-only'>University of Oregon collections</h3>
-    <div class="masonry-gallery">
-      <%= render 'masonry_showcase', collections: controller.uo_collections %>
-    </div>
-  </div>
-  <div id="my" class="tab-pane fade">
-    <h3 class='sr-only'>My collections</h3>
-    <div data-behavior="masonry-gallery">
-      <%= render 'masonry_showcase', collections: controller.my_collections %>
-    </div>
-  </div>
+  <%= render 'collection_tab', tab: 'all', collections: controller.collections, header: 'All collections' %>
+  <%= render 'collection_tab', tab: 'osu', collections: controller.osu_collections, header: 'Oregon State University collections' %>
+  <%= render 'collection_tab', tab: 'uo', collections: controller.uo_collections, header: 'University of Oregon collections' %>
+  <%= render 'collection_tab', tab: 'my', collections: controller.my_collections, header: 'My collections' %>
 </div>

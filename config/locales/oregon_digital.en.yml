@@ -3,6 +3,15 @@ en:
     collection:
       create_form:
         title: 'Create new collection'
+    explore_collections:
+      list:
+        header:
+          collection_name: ' Collection Name'
+          institution: 'Institution'
+          count: 'Items'
+        row:
+          institution:
+            default: 'Multiple'
     homepage:
       works:
         link: 'All Latest Items'
