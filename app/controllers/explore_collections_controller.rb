@@ -1,10 +1,10 @@
+# frozen_string_literal:true
+
+# Controller for explore collections interface
 class ExploreCollectionsController < ApplicationController
   include Blacklight::SearchContext
   include Blacklight::SearchHelper
   include Blacklight::AccessControls::Catalog
-
-  def index
-  end
 
   # Return all collections
   def collections
