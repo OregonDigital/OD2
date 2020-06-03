@@ -9,7 +9,7 @@
   <tbody>
     <% collections.each_with_index do |collection, i| %>
       <tr>
-        <td> <%= collection.title_or_label %> </td>
+        <td> <%= link_to collection.title_or_label, [hyrax, collection] %> </td>
         <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
         <td> <%= controller.total_viewable_items(collection.id) %> </td>
       </tr>
