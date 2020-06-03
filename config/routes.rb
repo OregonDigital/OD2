@@ -1,6 +1,8 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
+  get 'explore_collections', to: 'oregon_digital/explore_collections#index'
+
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
   end

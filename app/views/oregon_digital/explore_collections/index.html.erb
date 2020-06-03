@@ -1,0 +1,17 @@
+<h2 class='sr-only'>ExploreCollections</h2>
+
+<div class='text-center'>
+  <ul class='nav nav-pills visible-all-inline-block'>
+    <li class="active"><a data-toggle="pill" href="#all">All</a></li>
+    <li><a data-toggle="pill" href="#osu">Oregon State University</a></li>
+    <li><a data-toggle="pill" href="#uo">University of Oregon</a></li>
+    <li><a data-toggle="pill" href="#my">My Collections</a></li>
+  </ul>
+</div>
+
+<div class="tab-content">
+  <%= render 'collection_tab', tab: 'all', collections: controller.collections, header: 'All collections' %>
+  <%= render 'collection_tab', tab: 'osu', collections: controller.osu_collections, header: 'Oregon State University collections' %>
+  <%= render 'collection_tab', tab: 'uo', collections: controller.uo_collections, header: 'University of Oregon collections' %>
+  <%= render 'collection_tab', tab: 'my', collections: controller.my_collections, header: 'My collections' %>
+</div>
