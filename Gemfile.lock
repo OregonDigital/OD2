@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 810c453e441e78378df3dfff828789df887e63e2
+  revision: bacaa2d4748083e4cd6081ec39794752127490a3
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -167,20 +167,20 @@ GEM
     awesome_nested_set (3.2.0)
       activerecord (>= 4.0.0, < 7.0)
     aws-eventstream (1.1.0)
-    aws-partitions (1.321.0)
-    aws-sdk-core (3.96.1)
+    aws-partitions (1.323.0)
+    aws-sdk-core (3.97.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.31.0)
+    aws-sdk-kms (1.33.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.66.0)
+    aws-sdk-s3 (1.67.1)
       aws-sdk-core (~> 3, >= 3.96.1)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.1.3)
+    aws-sigv4 (1.1.4)
       aws-eventstream (~> 1.0, >= 1.0.2)
     axe-matchers (2.6.1)
       dumb_delegator (~> 0.8)
@@ -273,7 +273,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
-    connection_pool (2.2.2)
+    connection_pool (2.2.3)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
       simplecov (~> 0.16.1)
@@ -693,7 +693,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rdf (3.1.1)
+    rdf (3.1.2)
       hamster (~> 3.0)
       link_header (~> 0.0, >= 0.0.8)
     rdf-aggregate-repo (3.1.0)
@@ -945,7 +945,7 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     xml-simple (1.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
