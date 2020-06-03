@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 3a54106a7f537bf1fcd5c4a4057ac3f09e3e62f6
+  revision: bacaa2d4748083e4cd6081ec39794752127490a3
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -273,7 +273,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
-    connection_pool (2.2.2)
+    connection_pool (2.2.3)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
       simplecov (~> 0.16.1)
