@@ -16,19 +16,24 @@
                     <%= text_field_tag 'member_of_collection_label', @add_works_to_collection_label, disabled: true %>
                     <%= hidden_field_tag 'member_of_collection_ids', @add_works_to_collection %>
                   <% else %>
-                    <%= text_field_tag 'member_of_collection_ids', nil,
+                    <%= simple_form_for Collection.new, url: Hyrax::Engine.routes.url_helpers.dashboard_collection_path('collection_replace_id') do |f| %>
+                      <%= f.text_field 'member_of_collection_ids',
+                                id: 'member_of_collection_ids',
+                                required: true,
                                 prompt: :translate,
                                 data: {
                                   placeholder: t('simple_form.placeholders.defaults.member_of_collection_ids'),
                                   autocomplete: 'collection',
                                   'autocomplete-url' => Rails.application.routes.url_helpers.qa_path + '/search/collections?access=deposit'
-                                } %>
+                                }%>
+                      <%= f.submit  t("hyrax.collection.select_form.update"),
+                                    class: 'btn btn-primary submits-batches',
+                                    data: { behavior: 'updates-collection' } %>
+                    <% end %>
                   <% end %>
-                  <%= render 'hyrax/dashboard/collections/button_for_update_collection', label: t("hyrax.collection.select_form.update"), collection_id: 'collection_replace_id' %>
                 </div>
               </fieldset>
             </div><!-- collection-list -->
-            <%# @TODO: Hook up this link to modal/transition & have new collection add work to the collection #%>
             <% unless Hyrax::CollectionType.find_by(machine_id: :user_collection).nil? %>
               Or, <%= button_tag t("hyrax.collection.select_form.create_new"),
                         class: 'btn btn-default submits-batches submits-batches-add',
