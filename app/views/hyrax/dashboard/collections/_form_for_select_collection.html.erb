@@ -16,7 +16,9 @@
                     <%= text_field_tag 'member_of_collection_label', @add_works_to_collection_label, disabled: true %>
                     <%= hidden_field_tag 'member_of_collection_ids', @add_works_to_collection %>
                   <% else %>
-                    <%= simple_form_for Collection.new, url: Hyrax::Engine.routes.url_helpers.dashboard_collection_path('collection_replace_id') do |f| %>
+                    <%= simple_form_for Collection.new,
+                                        url: Hyrax::Engine.routes.url_helpers.dashboard_collection_path('collection_replace_id'),
+                                        html: { id: 'update_collection' } do |f| %>
                       <%= f.text_field 'member_of_collection_ids',
                                 id: 'member_of_collection_ids',
                                 required: true,
