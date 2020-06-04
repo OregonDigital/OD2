@@ -99,7 +99,7 @@ Bulkrax.setup do |config|
     'resource_type' => { from: ['type'] },
     'model' => { from: ['type'], parsed: true },
     'format' => { from: ['format'] },
-    'rights' => { from: ['rights'] },
+    'rights_statement' => { from: ['rights'] },
     'rights_holder' => { from: ['rightholder'] },
     'set' => { from: ['set'] },
     'institution' => { from: ['contributinginstitution'] },
@@ -119,5 +119,13 @@ Bulkrax::ApplicationMatcher.class_eval do
     end
   rescue StandardError
     nil
+  end
+end
+
+## override CsvEntry#required_elements to include OD-specific required_fields
+Bulkrax::CsvEntry.class_eval do
+  def required_elements
+    # added resource_type, identifier, and rights_statement
+    %w[title source_identifier resource_type identifier rights_statement]
   end
 end
