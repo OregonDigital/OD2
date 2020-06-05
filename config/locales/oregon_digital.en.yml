@@ -4,6 +4,8 @@ en:
       create_form:
         title: 'Create new collection'
     explore_collections:
+      display_mode:
+        create: 'Create new collection'
       list:
         header:
           collection_name: ' Collection Name'
