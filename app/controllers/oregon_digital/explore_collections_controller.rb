@@ -48,5 +48,12 @@ module OregonDigital
     def total_viewable_items(id)
       ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id}").accessible_by(current_ability).count
     end
+
+    TABS = {
+      :all => 'all',
+      :osu => 'osu',
+      :uo => 'uo',
+      :my => 'my',
+    }.freeze
   end
 end
