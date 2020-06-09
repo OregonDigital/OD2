@@ -9,6 +9,10 @@ module OregonDigital
 
     def index; end
 
+    def edit
+      @collection = ::Collection.find(params[:id])
+    end
+
     # Return all collections
     def collections
       builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)

@@ -1,9 +1,24 @@
 <% collections.each_with_index do |collection, i| %>
-  <div class="masonry document col-xs-6 col-md-3">
+  <div class="masonry document text-center col-xs-6 col-md-3">
     <%= render 'showcase_tile',
           title: collection.title_or_label,
           count: controller.total_viewable_items(collection.id),
           link: [hyrax, collection],
           img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) %>
+
+    <% if tab == controller.class::TABS[:my] %>
+      <div id='my-actions-<%= i %>' class='collapse'>
+        <div class="collapsable-actions">
+          <a data-toggle="modal" data-target="#collection-edit-container" onClick="
+            $('#collection-edit-container .modal-content .modal-body .form').load('/explore_collections/<%= collection.id %>/edit #edit_collection_<%= collection.id %>', function() {
+              $('.multi_value.form-group').manage_fields();
+              $('#collection-edit-container .loading').hide();
+              $('#collection-edit-container .form').show();
+            });"
+            class="btn btn-primary">edit</a>
+          </div>
+      </div>
+      <%= button_tag '...', type: 'button', data: { toggle: 'collapse', target: "#my-actions-#{i}" }, aria: { expanded: 'false', controls: "#my-actions-#{i}" } %>
+    <% end %>
   </div>
 <% end %>
