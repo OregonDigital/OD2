@@ -4,6 +4,9 @@
       <td> <%= t('oregon_digital.explore_collections.list.header.collection_name') %> </td>
       <td> <%= t('oregon_digital.explore_collections.list.header.institution') %> </td>
       <td> <%= t('oregon_digital.explore_collections.list.header.count') %> </td>
+      <% if tab == controller.class::TABS[:my] %>
+        <td> <%= t('oregon_digital.explore_collections.list.header.action') %> </td>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -12,6 +15,16 @@
         <td> <%= link_to collection.title_or_label, [hyrax, collection] %> </td>
         <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
         <td> <%= controller.total_viewable_items(collection.id) %> </td>
+        <% if tab == controller.class::TABS[:my] %>
+          <td>
+            <div id='list-actions-<%= i %>' class='collapse'>
+              <div class="collapsable-actions">
+                <a data-toggle="modal" data-target="#collection-edit-container" onClick="open_edit_modal('<%= collection.id %>')" class="btn btn-primary"><%= t('oregon_digital.explore_collections.actions.edit') %></a>
+                </div>
+            </div>
+            <%= button_tag t('oregon_digital.explore_collections.actions.expand'), type: 'button', data: { toggle: 'collapse', target: "#list-actions-#{i}" }, aria: { expanded: 'false', controls: "#list-actions-#{i}" } %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

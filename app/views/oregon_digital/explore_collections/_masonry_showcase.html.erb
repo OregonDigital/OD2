@@ -9,16 +9,10 @@
     <% if tab == controller.class::TABS[:my] %>
       <div id='my-actions-<%= i %>' class='collapse'>
         <div class="collapsable-actions">
-          <a data-toggle="modal" data-target="#collection-edit-container" onClick="
-            $('#collection-edit-container .modal-content .modal-body .form').load('/explore_collections/<%= collection.id %>/edit #edit_collection_<%= collection.id %>', function() {
-              $('.multi_value.form-group').manage_fields();
-              $('#collection-edit-container .loading').hide();
-              $('#collection-edit-container .form').show();
-            });"
-            class="btn btn-primary">edit</a>
+            <a data-toggle="modal" data-target="#collection-edit-container" onClick="open_edit_modal('<%= collection.id %>')" class="btn btn-primary"><%= t('oregon_digital.explore_collections.actions.edit') %></a>
           </div>
       </div>
-      <%= button_tag '...', type: 'button', data: { toggle: 'collapse', target: "#my-actions-#{i}" }, aria: { expanded: 'false', controls: "#my-actions-#{i}" } %>
+      <%= button_tag t('oregon_digital.explore_collections.actions.expand'), type: 'button', data: { toggle: 'collapse', target: "#my-actions-#{i}" }, aria: { expanded: 'false', controls: "#my-actions-#{i}" } %>
     <% end %>
   </div>
 <% end %>

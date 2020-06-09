@@ -4,6 +4,9 @@ en:
       create_form:
         title: 'Create new collection'
     explore_collections:
+      actions:
+        edit: 'Edit'
+        expand: '...'
       display_mode:
         create: 'Create new collection'
       list:
@@ -11,6 +14,7 @@ en:
           collection_name: ' Collection Name'
           institution: 'Institution'
           count: 'Items'
+          action: 'Actions'
         row:
           institution:
             default: 'Multiple'

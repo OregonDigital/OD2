@@ -17,3 +17,11 @@ $(document).ready(function() {
     });
   });
 });
+
+function open_edit_modal(collection_id) {
+  $('#collection-edit-container .modal-content .modal-body .form').load(`/explore_collections/${collection_id}/edit #edit_collection_${collection_id}`, function() {
+    $('.multi_value.form-group').manage_fields();
+    $('#collection-edit-container .loading').hide();
+    $('#collection-edit-container .form').show();
+  });
+}
