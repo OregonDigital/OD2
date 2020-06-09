@@ -54,10 +54,10 @@ module OregonDigital
     end
 
     TABS = {
-      :all => 'all',
-      :osu => 'osu',
-      :uo => 'uo',
-      :my => 'my',
+      all: 'all',
+      osu: 'osu',
+      uo: 'uo',
+      my: 'my'
     }.freeze
   end
 end
