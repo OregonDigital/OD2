@@ -1,6 +1,8 @@
 en:
   oregon_digital:
     collection:
+      edit_form:
+        title: 'Edit collection'
       create_form:
         title: 'Create new collection'
     explore_collections:
