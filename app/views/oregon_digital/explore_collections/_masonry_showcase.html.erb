@@ -7,12 +7,7 @@
           img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) %>
 
     <% if tab == controller.class::TABS[:my] %>
-      <div id='my-actions-<%= i %>' class='collapse'>
-        <div class="collapsable-actions">
-            <a data-toggle="modal" data-target="#collection-edit-container" onClick="open_edit_modal('<%= collection.id %>')" class="btn btn-primary"><%= t('oregon_digital.explore_collections.actions.edit') %></a>
-          </div>
-      </div>
-      <%= button_tag t('oregon_digital.explore_collections.actions.expand'), type: 'button', data: { toggle: 'collapse', target: "#my-actions-#{i}" }, aria: { expanded: 'false', controls: "#my-actions-#{i}" } %>
+      <%= render 'oregon_digital/explore_collections/actions_list', collection: collection, i: i, view: 'masonry' %>
     <% end %>
   </div>
 <% end %>
