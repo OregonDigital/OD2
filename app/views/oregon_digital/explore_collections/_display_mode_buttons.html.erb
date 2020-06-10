@@ -1,5 +1,5 @@
 <ul class='nav nav-pills visible-all-inline-block'>
   <li class="active"><a data-toggle="pill" href="#<%= tab %>-masonry">masonry</a></li>
   <li><a data-toggle="pill" href="#<%= tab %>-list">list</a></li>
-  <li><%= link_to '+', '#', title: t('oregon_digital.explore_collections.display_mode.create'), data: { toggle: "modal", dismiss: "modal", target: "#collection-create-container" } if tab == 'my' %></li>
+  <li><%= link_to '+', '#', title: t('oregon_digital.explore_collections.display_mode.create'), data: { toggle: "modal", dismiss: "modal", target: "#collection-create-container" } if tab == controller.class::TABS[:my] %></li>
 </ul>

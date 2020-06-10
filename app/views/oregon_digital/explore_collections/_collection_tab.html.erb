@@ -1,12 +1,12 @@
-<div id="<%= tab %>" class="tab-pane fade <%= 'in active' if tab == 'all' %>">
+<div id="<%= tab %>" class="tab-pane fade <%= 'in active' if tab == controller.class::TABS[:all] %>">
   <%= render 'display_mode_buttons', tab: tab %>
   <h3 class='sr-only'><%= header %> </h3>
   <div class="tab-content">
     <div id="<%= tab %>-masonry" class="tab-pane fade in active" data-behavior="masonry-gallery">
-      <%= render 'masonry_showcase', collections: collections %>
+      <%= render 'masonry_showcase', collections: collections, tab: tab %>
     </div>
     <div id="<%= tab %>-list" class="tab-pane fade">
-      <%= render 'list_showcase', collections: collections %>
+      <%= render 'list_showcase', collections: collections, tab: tab %>
     </div>
   </div>
 </div>

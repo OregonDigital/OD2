@@ -1,0 +1,8 @@
+<div id='<%= view %>-actions-<%= i %>' class='collapse collapsable-actions flex-list'>
+  <ul>
+    <li>
+      <a data-toggle="modal" data-target="#collection-edit-container" onClick="open_edit_modal('<%= collection.id %>')" class="btn btn-primary"><%= t('oregon_digital.explore_collections.actions.edit') %></a>
+    </li>
+  </ul>
+</div>
+<%= button_tag t('oregon_digital.explore_collections.actions.expand'), type: 'button', data: { toggle: 'collapse', target: "##{view}-actions-#{i}" }, aria: { expanded: 'false', controls: "##{view}-actions-#{i}" } %>

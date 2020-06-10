@@ -10,10 +10,11 @@
 </div>
 
 <div class="tab-content">
-  <%= render 'collection_tab', tab: 'all', collections: controller.collections, header: 'All collections' %>
-  <%= render 'collection_tab', tab: 'osu', collections: controller.osu_collections, header: 'Oregon State University collections' %>
-  <%= render 'collection_tab', tab: 'uo', collections: controller.uo_collections, header: 'University of Oregon collections' %>
-  <%= render 'collection_tab', tab: 'my', collections: controller.my_collections, header: 'My collections' %>
+  <%= render 'collection_tab', tab: controller.class::TABS[:all], collections: controller.collections, header: 'All collections' %>
+  <%= render 'collection_tab', tab: controller.class::TABS[:osu], collections: controller.osu_collections, header: 'Oregon State University collections' %>
+  <%= render 'collection_tab', tab: controller.class::TABS[:uo], collections: controller.uo_collections, header: 'University of Oregon collections' %>
+  <%= render 'collection_tab', tab: controller.class::TABS[:my], collections: controller.my_collections, header: 'My collections' %>
 </div>
 
 <%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
+<%= render 'oregon_digital/explore_collections/form_for_edit_collection' %>
