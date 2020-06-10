@@ -1,5 +1,0 @@
-<%= simple_form_for OregonDigital::Forms::CollectionForm.new(@collection, current_ability, controller.repository), url: Hyrax::Engine.routes.url_helpers.dashboard_collection_path(@collection) do |f| %>
-  <%= render_edit_field_partial(:title, f: f) %>
-  <%= render_edit_field_partial(:description, f: f) %>
-  <%= f.submit t(:'hyrax.collection.select_form.update'), class: 'btn btn-primary submits-batches submits-batches-add', onclick: "confirmation_needed = false;", id: "edit_submit", name: "edit_collection" %>
-<% end %>

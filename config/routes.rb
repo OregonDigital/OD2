@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
-  resources :explore_collections, controller: 'oregon_digital/explore_collections', only: %i[index edit]
+  resources :explore_collections, controller: 'oregon_digital/explore_collections', only: %i[index]
 
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'

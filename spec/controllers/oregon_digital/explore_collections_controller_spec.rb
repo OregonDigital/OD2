@@ -9,10 +9,4 @@ RSpec.describe OregonDigital::ExploreCollectionsController do
 
     it { is_expected.to render_template('index') }
   end
-
-  describe '#edit' do
-    subject { get :edit, params: { id: collection.id }, format: 'text/html' }
-
-    it { is_expected.to render_template('edit') }
-  end
 end
