@@ -19,12 +19,12 @@ $(document).ready(function() {
 });
 
 function open_edit_modal(collection_id) {
-  $('#collection-edit-container .modal-content .modal-body .form').load(`/dashboard/collections/${collection_id}/edit #edit_collection_${collection_id}`, function() {
+  $('#collection-edit-container .modal-content .modal-body .form').load('/dashboard/collections/' + collection_id + '/edit #edit_collection_' + collection_id, function() {
     // Move the terms and save button out of the tab panel
     var terms = $('#base-terms');
     var save = $('#update_submit');
-    $(`#edit_collection_${collection_id}`).append(terms).append(save);
-    $(`#edit_collection_${collection_id} .tab-content`).remove();
+    $('#edit_collection_' + collection_id).append(terms).append(save);
+    $('#edit_collection_' + collection_id + ' .tab-content').remove();
 
     // Turn the fields into mutli_value fields
     $('.multi_value.form-group').manage_fields();
