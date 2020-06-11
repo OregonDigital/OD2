@@ -42,7 +42,8 @@
   <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
   <%= button_tag t('hyrax.dashboard.my.action.save'),
                   class: 'btn btn-default submits-batches submits-batches-add pull-right',
-                  data: { toggle: "modal", target: "#collection-list-container" } %>
+                  data: { toggle: "modal", target: "#collection-list-container", id: document.id },
+                  :onclick => "javascript:updateSaveCheckboxes(this)" %>
 </div>
 
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
