@@ -1,0 +1,17 @@
+<%# Delete collection modal #%>
+<div role="dialog" class="modal collection-delete-modal fade" id="collection-delete-container" tabindex="-1" aria-labelledby="col_delete_title">
+  <div class="modal-dialog text-left">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-hidden="true">&times;</button>
+          <span class="modal-title" id="col_delete_title"><%= t("oregon_digital.collection.delete_form.title") %></span>
+        </div>
+        <div class="modal-body">
+          <p><%= t('hyrax.dashboard.my.action.collections_confirmation_no_items_html') %></p>
+          <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: '', method: :delete do |f| %>
+            <%= f.submit t(:'hyrax.collection.select_form.delete'), class: 'btn btn-danger', id: "delete_submit", name: "delete_collection" %>
+          <% end %>
+        </div><!-- /.modal-body -->
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -239,6 +239,7 @@ en:
         select_heading: 'My Collections'
         title: 'Save this item'
         update: 'Save'
+        delete: 'Delete'
         create_new: 'create a new collection'
     dashboard:
       my:

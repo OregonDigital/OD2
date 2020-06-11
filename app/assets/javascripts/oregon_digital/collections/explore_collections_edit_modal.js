@@ -34,3 +34,10 @@ function open_edit_modal(collection_id) {
     $('#collection-edit-container .form').show();
   });
 }
+
+function open_delete_my_collection_modal(element) {
+  $el = $(element);
+  url = $el.data('post-delete-url');
+
+  $('#collection-delete-container').find('form').attr('action', url);
+}
