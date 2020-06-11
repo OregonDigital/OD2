@@ -18,7 +18,7 @@ $(document).ready(function() {
   });
 });
 
-function open_edit_modal(collection_id) {
+function open_edit_my_collection_modal(collection_id) {
   $('#collection-edit-container .modal-content .modal-body .form').load(`/dashboard/collections/${collection_id}/edit #edit_collection_${collection_id}`, function() {
     // Move the terms and save button out of the tab panel
     var terms = $('#base-terms');
@@ -33,4 +33,11 @@ function open_edit_modal(collection_id) {
     $('#collection-edit-container .loading').hide();
     $('#collection-edit-container .form').show();
   });
+}
+
+function open_delete_my_collection_modal(element) {
+  $el = $(element);
+  url = $el.data('post-delete-url');
+
+  $('#collection-delete-container').find('form').attr('action', url);
 }

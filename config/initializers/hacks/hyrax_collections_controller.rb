@@ -60,6 +60,23 @@ Hyrax::Dashboard::CollectionsController.class_eval do
     end
   end
 
+  # Override after destroy method to redirect users back to where they destroyed the collection from
+  def after_destroy(_id)
+    # leaving id to avoid changing the method's parameters prior to release
+    respond_to do |format|
+      format.html do
+        case URI(request.referer).path.split('/')[1]
+          when 'dashboard'
+            redirect_to my_collections_path,
+                        notice: t('hyrax.dashboard.my.action.collection_delete_success')
+          else
+            redirect_back fallback_location: '/'
+          end
+      end
+      format.json { head :no_content, location: my_collections_path }
+    end
+  end
+
   private
 
   # Turn form params into Facet objects

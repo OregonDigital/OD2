@@ -5,6 +5,8 @@ en:
         title: 'Edit collection'
       create_form:
         title: 'Create new collection'
+      delete_form:
+        title: 'Delete collection'
     explore_collections:
       actions:
         edit: 'Edit'
