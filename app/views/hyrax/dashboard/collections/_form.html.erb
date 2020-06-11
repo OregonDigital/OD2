@@ -38,15 +38,15 @@
                 <% f.object.primary_terms.each do |term| %>
                   <%= render_edit_field_partial(term, f: f) %>
                 <% end %>
+                <% if f.object.persisted? %>
+                  <%# we're loading these values dynamically to speed page load %>
+                  <%= f.input :thumbnail_id,
+                              input_html: { data: { text: f.object.thumbnail_title } } %>
+                <% end %>
               <% else %>
                 <% f.object.user_primary_terms.each do |term| %>
                   <%= render_edit_field_partial(term, f: f) %>
                 <% end %>
-              <% end %>
-              <% if f.object.persisted? %>
-                <%# we're loading these values dynamically to speed page load %>
-                <%= f.input :thumbnail_id,
-                            input_html: { data: { text: f.object.thumbnail_title } } %>
               <% end %>
             </div>
             <%= hidden_field_tag :type, params[:type] %>
