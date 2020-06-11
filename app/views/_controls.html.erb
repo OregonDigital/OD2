@@ -11,14 +11,6 @@
       <div class="col-xs-12 col-sm-<%= search_page ? 7 : 10 %> col-sm-offset-1 col-md-5 col-md-offset-4">
         <%= render partial: 'catalog/search_form' %>
       </div>
-      <% if search_page %>
-        <div class="col-md-offset-10 col-sm-offset-9 col-xs-offset-1">
-          <%= button_to "Add to My Shelf", root_path, class: 'btn btn-primary my-shelf-button' %>
-          <%= label_tag "" do %>
-            <% raw("#{check_box_tag 'Select all on page'} Select all on page") %>
-          <% end %>
-        </div>
-      <% end %>
     </div>
     <div class="row">
       <div class="searchbar-buttons col-xs-12 col-sm-<%= search_page ? 7 : 10 %> col-sm-offset-1 col-md-5 col-md-offset-4">
