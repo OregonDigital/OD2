@@ -7,3 +7,15 @@ function updateSaveCheckboxes (button) {
     }
   });
 }
+
+function selectAllSearchResults() {
+  $('input[type=checkbox]').each(function() {
+    this.checked = true;
+  });
+}
+
+function deselectAllSearchResults() {
+  $('input[type=checkbox]').each(function() {
+    this.checked = false;
+  });
+}
