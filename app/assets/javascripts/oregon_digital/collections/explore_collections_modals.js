@@ -16,6 +16,17 @@ $(document).ready(function() {
       transitionDuration: '250ms'
     });
   });
+
+  // Javascript to enable link to tab
+  var hash = document.location.hash;
+  if (hash) {
+    $('.nav-pills a[href=\\'+hash+']').tab('show');
+  }
+
+  // Change hash for page-reload
+  $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash;
+  });
 });
 
 function open_edit_my_collection_modal(collection_id) {
