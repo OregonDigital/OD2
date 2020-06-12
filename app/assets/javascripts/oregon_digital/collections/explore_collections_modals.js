@@ -35,6 +35,14 @@ function open_edit_my_collection_modal(collection_id) {
   });
 }
 
+function open_share_my_collection_modal(element) {
+  $el = $(element);
+  url = $el.data('post-url');
+
+  // Set form submission URL on form
+  $($el.data('target')).find('form').attr('action', url);
+}
+
 function open_delete_my_collection_modal(element) {
   $el = $(element);
   url = $el.data('post-delete-url');
