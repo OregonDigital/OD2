@@ -8,6 +8,7 @@
         </div>
         <div class="modal-body">
           Would you like to share this collection? It will not be searchable or findable by the public. You may share it with the link below.
+          <p> <%= render 'share_link_clipboard', id: 'share' %> </p>
           <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: '', method: :patch, html: { id: 'share_collection' } do |f| %>
             <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
             <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'btn btn-success', id: "share_submit", name: "share_collection" %>

@@ -48,10 +48,14 @@ function open_edit_my_collection_modal(collection_id) {
 
 function open_share_my_collection_modal(element) {
   $el = $(element);
-  url = $el.data('post-url');
+  post_url = $el.data('post-url');
+  share_url = $el.data('share-url');
 
   // Set form submission URL on form
-  $($el.data('target')).find('form').attr('action', url);
+  $($el.data('target')).find('form').attr('action', post_url);
+  // Set clipboard text
+  $('#share-link').val(share_url);
+  $('#unshare-link').val(share_url);
 }
 
 function open_delete_my_collection_modal(element) {

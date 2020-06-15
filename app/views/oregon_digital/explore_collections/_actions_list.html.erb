@@ -9,7 +9,8 @@
             data: {
               toggle: 'modal',
               target: collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC ? '#collection-unshare-container' : '#collection-share-container',
-              post_url: hyrax.dashboard_collection_path(collection.id)
+              post_url: hyrax.dashboard_collection_path(collection.id),
+              share_url: hyrax.collection_url(collection.id)
             },
             onclick: 'javascript:open_share_my_collection_modal(this)'
       %>

@@ -8,6 +8,7 @@
         </div>
         <div class="modal-body">
           <p>This collection is visible to those that have the link. Copy the link below to share with anybody.</p>
+          <p> <%= render 'share_link_clipboard', id: 'unshare' %> </p>
           <p>Would you like to unshare this collection?</p>
           <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: '', method: :patch, html: { id: 'unshare_collection' } do |f| %>
             <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>
