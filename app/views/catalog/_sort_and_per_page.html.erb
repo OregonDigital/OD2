@@ -3,10 +3,10 @@
 <div id="sortAndPerPage" class="sort-pagination d-md-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
   <%= render partial: "paginate_compact", object: @response if show_pagination? %>
   <%= button_tag t('hyrax.dashboard.my.action.select_all'),
-                  class: 'btn btn-default',
+                  class: 'select-button',
                   onclick: 'javascript:selectAllSearchResults()' %>
   <%= button_tag t('hyrax.dashboard.my.action.none'),
-                  class: 'btn btn-default',
+                  class: 'deselect-button',
                   onclick: 'javascript:deselectAllSearchResults()' %>
   <%= button_tag t('hyrax.dashboard.my.action.save_selected_to'),
                   class: 'btn btn-default submits-batches submits-batches-add',
