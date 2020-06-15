@@ -9,3 +9,19 @@
 em {
     background-color: #e2edfe;
 }
+
+.select-button {
+  border-right: 1px solid grey;
+  border-top: 0px solid grey;
+  border-left: 0px solid grey;
+  border-bottom: 0px solid grey;
+  margin-left: -15px;
+
+}
+
+.deselect-button {
+  border-right: 0px solid grey;
+  border-top: 0px solid grey;
+  border-left: 0px solid grey;
+  border-bottom: 0px solid grey;
+}

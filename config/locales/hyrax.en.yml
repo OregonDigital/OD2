@@ -247,6 +247,7 @@ en:
       my:
         action:
           add_to_collection: 'Save to...'
+          select_all: 'Select All'
     search:
       form:
         option:
