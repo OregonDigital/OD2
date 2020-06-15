@@ -13,6 +13,8 @@ en:
       actions:
         edit: 'Edit'
         expand: '...'
+        share: 'Share'
+        delete: 'Delete'
       display_mode:
         create: 'Create new collection'
       list:

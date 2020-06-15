@@ -7,7 +7,7 @@
           <span class="modal-title" id="col_share_title"><%= t("oregon_digital.collection.share_form.title") %></span>
         </div>
         <div class="modal-body">
-          Would you like to share this collection? It will not be searchable or findable by the public. You may share it with the link below.
+          <p> Would you like to share this collection? It will not be searchable or findable by the public. You may share it with the link below. </p>
           <p> <%= render 'share_link_clipboard', id: 'share' %> </p>
           <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: '', method: :patch, html: { id: 'share_collection' } do |f| %>
             <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
