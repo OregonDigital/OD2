@@ -1,0 +1,20 @@
+<%# Unshare collection modal #%>
+<div role="dialog" class="modal collection-unshare-modal fade" id="collection-unshare-container" tabindex="-1" aria-labelledby="col_unshare_title">
+  <div class="modal-dialog text-left">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-hidden="true">&times;</button>
+          <span class="modal-title" id="col_unshare_title"><%= t("oregon_digital.collection.share_form.title") %></span>
+        </div>
+        <div class="modal-body">
+          <p>This collection is visible to those that have the link. Copy the link below to share with anybody.</p>
+          <p> <%= render 'share_link_clipboard', id: 'unshare' %> </p>
+          <p>Would you like to unshare this collection?</p>
+          <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: '', method: :patch, html: { id: 'unshare_collection' } do |f| %>
+            <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>
+            <%= f.submit t(:'hyrax.collection.select_form.unshare'), class: 'btn btn-danger', id: "unshare_submit", name: "unshare_collection" %>
+          <% end %>
+        </div><!-- /.modal-body -->
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

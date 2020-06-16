@@ -7,10 +7,14 @@ en:
         title: 'Create new collection'
       delete_form:
         title: 'Delete collection'
+      share_form:
+        title: 'Share collection'
     explore_collections:
       actions:
         edit: 'Edit'
         expand: '...'
+        share: 'Share'
+        delete: 'Delete'
       display_mode:
         create: 'Create new collection'
       list:

@@ -240,6 +240,8 @@ en:
         title: 'Save this item'
         update: 'Save'
         delete: 'Delete'
+        share: 'Share'
+        unshare: 'Unshare'
         create_new: 'create a new collection'
     dashboard:
       my:

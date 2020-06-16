@@ -1,0 +1,19 @@
+<%# Share collection modal #%>
+<div role="dialog" class="modal collection-share-modal fade" id="collection-share-container" tabindex="-1" aria-labelledby="col_share_title">
+  <div class="modal-dialog text-left">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-hidden="true">&times;</button>
+          <span class="modal-title" id="col_share_title"><%= t("oregon_digital.collection.share_form.title") %></span>
+        </div>
+        <div class="modal-body">
+          <p> Would you like to share this collection? It will not be searchable or findable by the public. You may share it with the link below. </p>
+          <p> <%= render 'share_link_clipboard', id: 'share' %> </p>
+          <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: '', method: :patch, html: { id: 'share_collection' } do |f| %>
+            <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
+            <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'btn btn-success', id: "share_submit", name: "share_collection" %>
+          <% end %>
+        </div><!-- /.modal-body -->
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

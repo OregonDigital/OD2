@@ -16,6 +16,17 @@ $(document).ready(function() {
       transitionDuration: '250ms'
     });
   });
+
+  // Javascript to enable link to tab
+  var hash = document.location.hash;
+  if (hash) {
+    $('.nav-pills a[href=\\'+hash+']').tab('show');
+  }
+
+  // Change hash for page-reload
+  $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash;
+  });
 });
 
 function open_edit_my_collection_modal(collection_id) {
@@ -33,6 +44,18 @@ function open_edit_my_collection_modal(collection_id) {
     $('#collection-edit-container .loading').hide();
     $('#collection-edit-container .form').show();
   });
+}
+
+function open_share_my_collection_modal(element) {
+  $el = $(element);
+  post_url = $el.data('post-url');
+  share_url = $el.data('share-url');
+
+  // Set form submission URL on form
+  $($el.data('target')).find('form').attr('action', post_url);
+  // Set clipboard text
+  $('#share-link').val(share_url);
+  $('#unshare-link').val(share_url);
 }
 
 function open_delete_my_collection_modal(element) {
