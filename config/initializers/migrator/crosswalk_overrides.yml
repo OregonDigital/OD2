@@ -110,3 +110,7 @@ overrides:
   - property: contents
     predicate: http://opaquenamespace.org/ns/contents
     function: return_nil
+  - property: license
+    predicate: http://creativecommons.org/ns#license
+  - property: view_date
+    predicate: http://opaquenamespace.org/ns/cco/viewDate
