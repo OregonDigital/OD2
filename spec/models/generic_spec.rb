@@ -66,19 +66,6 @@ RSpec.describe Generic do
     end
   end
 
-  describe '#work_files_byte_string' do
-    before do
-      allow(model).to receive(:file_sets).and_return([file_set])
-    end
-
-    it 'provides a hash' do
-      expect(model.work_files_byte_string).to be_kind_of(Hash)
-    end
-    it 'provides correct data' do
-      expect(model.work_files_byte_string).to eq('name' => "\x00")
-    end
-  end
-
   describe '#zip_files' do
     before do
       allow(model).to receive(:file_sets).and_return([file_set])

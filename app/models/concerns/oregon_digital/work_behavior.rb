@@ -28,34 +28,29 @@ module OregonDigital
       end
     end
 
-    # Gather work files and convert them to a hash of byte strings
-    def work_files_byte_string
-      work_files = {}
-      file_sets.each do |fs|
-        file = fs.files.first
-
-        file_string = ''
-        file.stream.each do |s|
-          file_string += s
-        end
-        work_files[file.file_name.first] = file_string
-      end
-      work_files
-    end
-
     # Gather work files and csv metadata and return it zipped together
     def zip_files
-      work_files = work_files_byte_string
       csv_string = csv_metadata
 
       # Create zip file as StringIO object
       Zip::OutputStream.write_buffer do |zio|
-        work_files.each do |file_name, file|
-          zio.put_next_entry(file_name)
-          zio.write file
-        end
+        # Add the metadata
         zio.put_next_entry('metadata.csv')
         zio.write csv_string
+
+        # Add each file
+        file_sets.each do |file_set|
+          file = file_set.files.first
+          file_name = file.file_name.first
+
+          url = file.uri.value
+
+          zio.put_next_entry(file_name)
+          # Copy file contents directly from Fedora HTTP response
+          open(url) do |io|
+            IO.copy_stream(io, zio)
+          end
+        end
       end
     end
 
