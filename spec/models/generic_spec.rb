@@ -8,7 +8,8 @@ RSpec.describe Generic do
   let(:user) { create(:user) }
   let(:uri) { RDF::URI.new('http://opaquenamespace.org/ns/TestVocabulary/TestTerm') }
   let(:term) { OregonDigital::ControlledVocabularies::Resource.new }
-  let(:file) { instance_double('file', stream: ["\x00"], file_name: ['name']) }
+  let(:file_uri) { 'https://uri' }
+  let(:file) { instance_double('file', stream: ["\x00"], file_name: ['name'], uri: OpenStruct.new(value: file_uri)) }
   let(:file_set) { instance_double('file_set', files: [file]) }
 
   it { is_expected.to have_attributes(title: ['foo']) }
@@ -69,6 +70,8 @@ RSpec.describe Generic do
   describe '#zip_files' do
     before do
       allow(model).to receive(:file_sets).and_return([file_set])
+      stub_request(:get, file_uri)
+        .to_return(status: 200, body: '', headers: {})
     end
 
     it 'provides a StringIO' do
