@@ -25,7 +25,7 @@ Hyrax::CollectionsControllerBehavior.module_eval do
       else
         member.member_of_collections << self
         member.save!
-        run_callbacks(:after_update_metadata, member)
+        run_fetch_callback(member)
       end
       member
     end
@@ -46,8 +46,8 @@ Hyrax::CollectionsControllerBehavior.module_eval do
       end
     end
 
-    def run_callbacks(hook, member)
-      Hyrax.config.callback.run(hook, member, current_user, warn: false)
+    def run_fetch_callback(member)
+      Hyrax.config.callback.run(:after_update_metadata, member, current_user, warn: false)
       true
     end
 end
