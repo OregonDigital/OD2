@@ -41,20 +41,24 @@ module OregonDigital
         # Add each file
         file_sets.each do |file_set|
           file = file_set.files.first
-          file_name = file.file_name.first
 
-          url = file.uri.value
-
-          zio.put_next_entry(file_name)
-          # Copy file contents directly from Fedora HTTP response
-          open(url) do |io|
-            IO.copy_stream(io, zio)
-          end
+          copy_file_to_zip(file, zio)
         end
       end
     end
 
     private
+
+    def copy_file_to_zip(file, zio)
+      file_name = file.file_name.first
+      url = file.uri.value
+
+      zio.put_next_entry(file_name)
+      # Copy file contents directly from Fedora HTTP response
+      URI.open(url) do |io|
+        IO.copy_stream(io, zio)
+      end
+    end
 
     # If the oembed_url changed all previous errors are invalid
     def resolve_oembed_errors
