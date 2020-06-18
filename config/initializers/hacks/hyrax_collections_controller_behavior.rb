@@ -25,7 +25,6 @@ Hyrax::CollectionsControllerBehavior.module_eval do
       else
         member.member_of_collections << self
         member.save!
-        run_fetch_callback(member)
       end
       member
     end
@@ -44,9 +43,5 @@ Hyrax::CollectionsControllerBehavior.module_eval do
       @configured_facets.each do |facet|
         blacklight_config.facet_configuration_for_field(facet.solr_name).label = facet.label
       end
-    end
-
-    def run_fetch_callback(member)
-      true
     end
 end
