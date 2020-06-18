@@ -16,20 +16,6 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     configured_facets
   end
 
-  def add_member_objects(new_member_ids)
-    Array(new_member_ids).collect do |member_id|
-      member = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: member_id, use_valkyrie: false)
-      message = Hyrax::MultipleMembershipChecker.new(item: member).check(collection_ids: id, include_current_members: true)
-      if message
-        member.errors.add(:collections, message)
-      else
-        member.member_of_collections << self
-        member.save!
-      end
-      member
-    end
-  end
-
   private
 
     # OVERRIDE FROM HYRAX
