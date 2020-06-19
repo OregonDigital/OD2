@@ -1,6 +1,9 @@
 <div id='<%= view %>-actions-<%= i %>' class='collapse collapsable-actions flex-list'>
   <ul>
     <li>
+      <%= link_to t('oregon_digital.explore_collections.actions.view'), hyrax.collection_path(collection.id), class: 'btn btn-primary' %>
+    </li>
+    <li>
       <a data-toggle="modal" data-target="#collection-edit-container" onClick="open_edit_my_collection_modal('<%= collection.id %>')" class="btn btn-primary"><%= t('oregon_digital.explore_collections.actions.edit') %></a>
     </li>
     <li>
