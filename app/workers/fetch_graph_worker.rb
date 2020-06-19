@@ -41,24 +41,15 @@ class FetchGraphWorker
         # For each behavior
         work.class.index_config[controlled_prop].behaviors.each do |behavior|
           # Insert into SolrDocument
-          if val.is_a?(String)
-            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'location_combined_label', val, behavior) if location_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'topic_combined_label', val, behavior) if topic_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'scientific_combined_label', val, behavior) if scientific_combined_facet?(controlled_prop)
-            ActiveFedora::SolrService.add(solr_doc)
-            ActiveFedora::SolrService.commit
-          else
-            extracted_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
-            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extracted_val], behavior)
-            Solrizer.insert_field(solr_doc, 'location_combined_label', [extracted_val], behavior) if location_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', [extracted_val], behavior) if creator_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'topic_combined_label', [extracted_val], behavior) if topic_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'scientific_combined_label', [extracted_val], behavior) if scientific_combined_facet?(controlled_prop)
-            ActiveFedora::SolrService.add(solr_doc)
-            ActiveFedora::SolrService.commit
-          end
+          val = (val.solrize.last.is_a?(String) ? [val.solrize.last] : [val.solrize.last[:label].split('$').first]) unless val.is_a?(String)
+          Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
+          Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
+          Solrizer.insert_field(solr_doc, 'location_combined_label', val, behavior) if location_combined_facet?(controlled_prop)
+          Solrizer.insert_field(solr_doc, 'topic_combined_label', val, behavior) if topic_combined_facet?(controlled_prop)
+          Solrizer.insert_field(solr_doc, 'scientific_combined_label', val, behavior) if scientific_combined_facet?(controlled_prop)
+          ActiveFedora::SolrService.add(solr_doc)
+          ActiveFedora::SolrService.commit
+
         end
       end
     end
