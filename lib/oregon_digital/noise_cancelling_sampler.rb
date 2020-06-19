@@ -1,4 +1,7 @@
+# frozen_string_literal:true
+
 module Honeycomb
+  # Honeycomb sampler for OD2
   class NoiseCancellingSampler
     extend Honeycomb::DeterministicSampler
 
@@ -17,16 +20,19 @@ module Honeycomb
       "GET views/shell",
     ].freeze
 
+    # Determine the sample rate based on the contents of the event
+    #   Noisy events and events with SQL queries
+    #   Redis BRPOP commands should get sampled into relative obscurity
+    #     since they are happening constantly and are almost entirely
+    #     uninteresting
+    #   Other redis commands 
     def self.sample(fields)
       if (NOISY_COMMANDS & [fields["redis.command"], fields["sql.active_record.sql"]]).any?
-        rate = 100
-        [should_sample(rate, fields["trace.trace_id"]), rate]
+        [should_sample(100, fields["trace.trace_id"]), 100]
       elsif fields["redis.command"]&.start_with?("BRPOP")
-        rate = 1000
-        [should_sample(rate, fields["trace.trace_id"]), rate]
+        [should_sample(1000, fields["trace.trace_id"]), 1000]
       elsif fields["redis.command"]&.start_with?(*NOISY_PREFIXES)
-        rate = 10
-        [should_sample(rate, fields["trace.trace_id"]), rate]
+        [should_sample(100, fields["trace.trace_id"]), 100]
       else
         [true, 1]
       end
