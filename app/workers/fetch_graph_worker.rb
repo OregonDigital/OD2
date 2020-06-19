@@ -23,7 +23,6 @@ class FetchGraphWorker
     solr_doc['_version_'] = 0
 
     # Iterate over Controller Props values
-    # rubocop:disable Metrics/BlockLength
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
         begin
@@ -49,11 +48,9 @@ class FetchGraphWorker
           Solrizer.insert_field(solr_doc, 'scientific_combined_label', val, behavior) if scientific_combined_facet?(controlled_prop)
           ActiveFedora::SolrService.add(solr_doc)
           ActiveFedora::SolrService.commit
-
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
