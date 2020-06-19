@@ -30,7 +30,7 @@ module Honeycomb
       if (NOISY_COMMANDS & [fields['redis.command'], fields['sql.active_record.sql']]).any?
         [should_sample(100, fields['trace.trace_id']), 100]
       elsif fields['redis.command']&.start_with?('BRPOP')
-        [should_sample(1000, fields["trace.trace_id"]), 1000]
+        [should_sample(1000, fields['trace.trace_id']), 1000]
       elsif fields['redis.command']&.start_with?(*NOISY_PREFIXES)
         [should_sample(100, fields['trace.trace_id']), 100]
       else
