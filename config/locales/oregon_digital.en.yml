@@ -13,8 +13,9 @@ en:
       actions:
         edit: 'Edit'
         expand: '...'
-        share: 'Share'
         delete: 'Delete'
+        share: 'Share'
+        view: 'View'
       display_mode:
         create: 'Create new collection'
       list:
