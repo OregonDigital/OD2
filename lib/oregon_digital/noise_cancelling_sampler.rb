@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-module Honeycomb
+module OregonDigital
   # Honeycomb sampler for OD2
   class NoiseCancellingSampler
     extend Honeycomb::DeterministicSampler
