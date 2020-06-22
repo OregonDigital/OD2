@@ -1,4 +1,7 @@
+# frozen_string_literal:true
+
 module OregonDigital
+  # Behavior for surpressing user collections
   module OnlyNonUserCollectionsBehavior
     extend ActiveSupport::Concern
 
