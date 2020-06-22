@@ -12,7 +12,7 @@ module OregonDigital
         ]
         solr_parameters[:fq] ||= []
         solr_parameters[:fq] += ["!(#{clauses.join(' OR ')})"]
-      end 
+      end
     end
   end
 end
