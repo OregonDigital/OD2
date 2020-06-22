@@ -23,7 +23,6 @@ class FetchGraphWorker
     solr_doc['_version_'] = 0
 
     # Iterate over Controller Props values
-    # rubocop:disable Metrics/BlockLength
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
         begin
@@ -41,28 +40,17 @@ class FetchGraphWorker
         # For each behavior
         work.class.index_config[controlled_prop].behaviors.each do |behavior|
           # Insert into SolrDocument
-          if val.is_a?(String)
-            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'location_combined_label', val, behavior) if location_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'topic_combined_label', val, behavior) if topic_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'scientific_combined_label', val, behavior) if scientific_combined_facet?(controlled_prop)
-          else
-            extracted_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
-            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extracted_val], behavior)
-            Solrizer.insert_field(solr_doc, 'location_combined_label', [extracted_val], behavior) if location_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', [extracted_val], behavior) if creator_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'topic_combined_label', [extracted_val], behavior) if topic_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'scientific_combined_label', [extracted_val], behavior) if scientific_combined_facet?(controlled_prop)
-          end
+          val = (val.solrize.last.is_a?(String) ? [val.solrize.last] : [val.solrize.last[:label].split('$').first]) unless val.first.is_a?(String)
+          Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
+          Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
+          Solrizer.insert_field(solr_doc, 'location_combined_label', val, behavior) if location_combined_facet?(controlled_prop)
+          Solrizer.insert_field(solr_doc, 'topic_combined_label', val, behavior) if topic_combined_facet?(controlled_prop)
+          Solrizer.insert_field(solr_doc, 'scientific_combined_label', val, behavior) if scientific_combined_facet?(controlled_prop)
+          ActiveFedora::SolrService.add(solr_doc)
+          ActiveFedora::SolrService.commit
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
-
-    # Commit Changes
-    ActiveFedora::SolrService.add(solr_doc)
-    ActiveFedora::SolrService.commit
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
