@@ -112,5 +112,7 @@ overrides:
     function: return_nil
   - property: license
     predicate: http://creativecommons.org/ns#license
+    multiple: false
   - property: view_date
     predicate: http://opaquenamespace.org/ns/cco/viewDate
+    multiple: true
