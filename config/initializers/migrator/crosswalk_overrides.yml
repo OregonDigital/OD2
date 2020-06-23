@@ -43,9 +43,6 @@ overrides:
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
     multiple: false
-  - property: format
-    predicate: http://purl.org/dc/terms/format
-    function: return_nil
   - property: access_restrictions_attributes
     predicate: http://data.archiveshub.ac.uk/def/accessRestrictions
     multiple: true
