@@ -58,6 +58,16 @@ function open_share_my_collection_modal(element) {
   $('#unshare-link').val(share_url);
 }
 
+function open_export_my_collection_modal(element) {
+  $el = $(element);
+  url = $el.data('export-url');
+  console.log(url);
+  console.log($('#collection-export-container').find('a.btn.btn-primary'));
+
+  // Set form submission URL on form
+  $('#collection-export-container').find('a').attr('href', url);
+}
+
 function open_delete_my_collection_modal(element) {
   $el = $(element);
   url = $el.data('post-delete-url');

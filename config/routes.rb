@@ -47,6 +47,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :collections, controller: 'hyrax/collections', only: [] do # public landing show page
+    member do
+      get :download
+    end
+  end
+
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
   end
