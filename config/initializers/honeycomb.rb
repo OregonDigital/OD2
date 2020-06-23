@@ -31,7 +31,7 @@ else
     end
     # Sample away highly redundant events
     config.sample_hook do |fields|
-      Honeycomb::NoiseCancellingSampler.sample(fields)
+      OregonDigital::NoiseCancellingSampler.sample(fields)
     end
   end
 end
