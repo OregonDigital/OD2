@@ -612,7 +612,7 @@ crosswalk:
     multiple: true
     function:
   - property: color_space
-    predicate: http://www.w3.org/2003/12/exif/ns/colorSpace
+    predicate: http://www.w3.org/2003/12/exif/ns#colorSpace
     multiple: true
     function:
   - property: conversion
@@ -652,7 +652,7 @@ crosswalk:
     multiple: false
     function:
   - property: resolution
-    predicate: http://www.w3.org/2003/12/exif/ns/resolution
+    predicate: http://www.w3.org/2003/12/exif/ns#resolution
     multiple: false
     function:
   - property: date_uploaded
