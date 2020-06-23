@@ -8,6 +8,7 @@ module Hyrax
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
+    include OregonDigital::DownloadControllerBehavior
     self.curation_concern_type = ::Audio
 
     # Override the way Hyrax's works present iiif manifests
