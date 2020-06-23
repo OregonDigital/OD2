@@ -26,6 +26,17 @@
       %>
     </li>
     <li>
+      <%= button_tag t('oregon_digital.explore_collections.actions.export'),
+            class: 'btn btn-primary',
+            data: {
+              toggle: 'modal',
+              target: '#collection-export-container',
+              export_url: download_collection_path(collection.id)
+            },
+            onclick: 'javascript:open_export_my_collection_modal(this)'
+      %>
+    </li>
+    <li>
       <%= button_tag t('oregon_digital.explore_collections.actions.delete'),
             class: 'btn btn-danger',
             data: {
