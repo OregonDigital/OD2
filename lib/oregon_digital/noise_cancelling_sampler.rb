@@ -12,6 +12,10 @@ module OregonDigital
       'COMMIT'
     ].freeze
 
+    NOISY_TYPES = [
+      'SCHEMA',
+    ].freeze
+
     NOISY_PREFIXES = [
       'INCRBY',
       'TTL',
@@ -25,6 +29,7 @@ module OregonDigital
     #   Redis BRPOP commands should get sampled into relative obscurity
     #     since they are happening constantly and are almost entirely
     #     uninteresting
+    #   Database operations named SCHEMA
     #   Other redis commands
     def self.sample(fields)
       if (NOISY_COMMANDS & [fields['redis.command'], fields['sql.active_record.sql']]).any?
@@ -33,6 +38,8 @@ module OregonDigital
         [should_sample(1000, fields['trace.trace_id']), 1000]
       elsif fields['redis.command']&.start_with?(*NOISY_PREFIXES)
         [should_sample(100, fields['trace.trace_id']), 100]
+      elsif fields['sql.active_record.name']&.start_with?(*NOISY_TYPES)
+        [should_sample(1000, fields['trace.trace_id']), 1000]
       else
         [true, 1]
       end
