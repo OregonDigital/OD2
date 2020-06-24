@@ -36,7 +36,7 @@ fields:
   compassDirection:	compass_direction
   objectOrientation:	object_orientation
   photographOrientation:	photograph_orientation
-  conditionOfSource:	condition_of_source
+  conditionOfSource:	source_condition
   instrumentation:	instrumentation
   od_content:	od_content
   militaryServiceLocation:	military_service_location
@@ -67,8 +67,8 @@ fields:
   award:	award
   legalName:	legal_name
   geobox:	geobox
-  latitude:	latitude
-  longitude:	longitude
+  latitude: gps_latitude
+  longitude:    gps_longitude
   location:	location
   streetAddress:	street_address
   rangerDistrict:	ranger_district
@@ -126,7 +126,7 @@ fields:
   isPartOf:	is_part_of
   hasVersion:	has_version
   isVersionOf:	is_version_of
-  findingAid:	finding_aid
+  findingAid:	has_finding_aid
   institution:	institution
   conversion:	conversion
   dateDigitized:	date_digitized
@@ -158,10 +158,10 @@ fields:
   note:	note
   culturalContext:	cultural_context
   idCurrentRepository:	id_current_repository
-  imageWidth:	image_width
-  imageHeight:	image_height
-  imageResolution:	image_resolution
-  imageOrientation:	image_orientation
+  imageWidth:	width
+  imageHeight:	height
+  imageResolution:	resolution
+  imageOrientation:	orientation
   colorSpace:	color_space
   formOfWork:	form_of_work
   fileSize:	file_size
