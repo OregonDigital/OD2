@@ -13,8 +13,8 @@ gem 'browse-everything'
 # been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
-gem 'hydra-role-management', '~> 1.0.2'
-gem 'hyrax', github: 'samvera/hyrax', tag: 'v2.7.0'
+gem 'hydra-role-management'
+gem 'hyrax', '3.0.0-rc1'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'pg'
@@ -29,6 +29,7 @@ gem 'ruby-oembed'
 gem 'blacklight-oembed'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
+gem 'rdf-vocab', '= 3.1.4'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'

@@ -12,14 +12,14 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
   use_extension(Hydra::ContentNegotiation)
 
-  def self.solrized_methods(property_names, model)
-    property_names.each do |property_name|
-      define_method property_name.to_sym do
-        values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
-        valid_solr_doc_values(values, model, property_name)
-      end
-    end
-  end
+  # def self.solrized_methods(property_names, model)
+  #   property_names.each do |property_name|
+  #     define_method property_name.to_sym do
+  #       values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
+  #       valid_solr_doc_values(values, model, property_name)
+  #     end
+  #   end
+  # end
 
   # Turn document type into FontAwesome icon class
   # See app\views\catalog\_index_list_type_icon.html.erb
@@ -60,11 +60,11 @@ class SolrDocument
     end
   end
 
-  solrized_methods Generic.generic_properties, Generic
-  solrized_methods Document.document_properties, Document
-  solrized_methods Image.image_properties, Image
-  solrized_methods Video.video_properties, Video
-  solrized_methods Generic.controlled_properties, Generic
-  solrized_methods Generic.controlled_property_labels, Generic
-  solrized_methods %w[type_label language_label rights_statement_label], Generic
+  # solrized_methods Generic.generic_properties, Generic
+  # solrized_methods Document.document_properties, Document
+  # solrized_methods Image.image_properties, Image
+  # solrized_methods Video.video_properties, Video
+  # solrized_methods Generic.controlled_properties, Generic
+  # solrized_methods Generic.controlled_property_labels, Generic
+  # solrized_methods %w[type_label language_label rights_statement_label], Generic
 end
