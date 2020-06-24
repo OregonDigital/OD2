@@ -12,6 +12,10 @@ module OregonDigital
           can(:download, ActiveFedora::Base) do |record|
             current_user.role?(osu_roles + uo_roles) && !uo_download_restricted?(record.admin_set) if record.respond_to?(:admin_set)
           end
+          # Cannot download a work or collection if they cannot show it
+          cannot(:download, ActiveFedora::Base) do |record|
+            current_user.cannot?(:show, record)
+          end
           can(:download_low, ActiveFedora::Base)
         end
 

@@ -28,6 +28,8 @@ Hyrax::CollectionsControllerBehavior.module_eval do
       # Add each file
       cms.available_member_works.documents.each do |solr_doc|
         work = ActiveFedora::Base.find(solr_doc.id)
+        # Skip adding works that the user can't download
+        next unless current_ability.can? :download, work
         zio.put_next_entry("#{work.id}.zip")
         zio.write work.zip_files.string
       end
