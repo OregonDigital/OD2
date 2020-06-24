@@ -10,7 +10,7 @@ module OregonDigital
         def work_download_ability
           can(:download, ActiveFedora::Base) if current_user.role?(manager_permission_roles)
           can(:download, ActiveFedora::Base) do |record|
-            current_user.role?(osu_roles + uo_roles) && !uo_download_restricted?(record.admin_set)
+            current_user.role?(osu_roles + uo_roles) && !uo_download_restricted?(record.admin_set) if record.respond_to?(:admin_set)
           end
           can(:download_low, ActiveFedora::Base)
         end

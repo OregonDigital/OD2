@@ -18,6 +18,9 @@ module OregonDigital
           can %i[edit update], Collection do |collection|
             admin_or_in_depositor?(collection)
           end
+          can(%i[download], Collection) do |collection|
+            collection.collection_type.machine_id == 'user_collection'
+          end
           # TODO: SHOW AND SEARCH FOR UO AND OSU
         end
         # rubocop:enable Metrics/AbcSize
