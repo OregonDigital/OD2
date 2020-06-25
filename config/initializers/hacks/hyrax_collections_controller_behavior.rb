@@ -18,21 +18,7 @@ Hyrax::CollectionsControllerBehavior.module_eval do
 
   # Zip up all works in collection into one collection zip
   def download
-    cms = collection_member_service
-
-    zip = Zip::OutputStream.write_buffer do |zio|
-      # Add the metadata
-      zio.put_next_entry('metadata.csv')
-      zio.write collection.csv_metadata
-
-      # Add each file
-      cms.available_member_works.documents.each do |solr_doc|
-        work = ActiveFedora::Base.find(solr_doc.id)
-        zio.put_next_entry("#{work.id}.zip")
-        zio.write work.zip_files.string
-      end
-    end
-    send_data zip.string, filename: "#{collection.id}.zip"
+    send_data collection.zip_files(current_ability).string, filename: "#{collection.id}.zip"
   end
 
   private

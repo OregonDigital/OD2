@@ -8,6 +8,7 @@ module OregonDigital
 
       included do
         # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/MethodLength
         def collection_ability
           can(%i[index show new create edit update delete], Hyrax::CollectionType) do |collection_type|
             collection_type.machine_id == 'user_collection' || current_user.admin?
@@ -18,9 +19,13 @@ module OregonDigital
           can %i[edit update], Collection do |collection|
             admin_or_in_depositor?(collection)
           end
+          can(%i[download], Collection) do |collection|
+            collection.collection_type.machine_id == 'user_collection'
+          end
           # TODO: SHOW AND SEARCH FOR UO AND OSU
         end
         # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/MethodLength
 
         def admin_or_in_depositor?(collection)
           current_user.role?(admin_permission_roles) && in_depositors_collection?(collection.edit_users)
