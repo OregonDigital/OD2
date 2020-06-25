@@ -7,6 +7,7 @@ module OregonDigital
       extend ActiveSupport::Concern
 
       included do
+        # rubocop:disable Metrics/AbcSize
         def work_download_ability
           can(:download, ActiveFedora::Base) if current_user.role?(manager_permission_roles)
           can(:download, ActiveFedora::Base) do |record|
@@ -18,6 +19,7 @@ module OregonDigital
           end
           can(:download_low, ActiveFedora::Base)
         end
+        # rubocop:enable Metrics/AbcSize
 
         def uo_download_restricted?(admin_set)
           admin_sets = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']

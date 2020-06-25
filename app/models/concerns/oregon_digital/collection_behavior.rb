@@ -7,29 +7,17 @@ module OregonDigital
   module CollectionBehavior
     extend ActiveSupport::Concern
 
+    # Zip up all works in collection into one collection zip
+    def zip_files(current_ability)
+      Zip::OutputStream.write_buffer do |zio|
+        # Add the metadata
+        zio.put_next_entry('metadata.csv')
+        zio.write csv_metadata
 
-  # Zip up all works in collection into one collection zip
-  def zip_files(current_ability)
-    zip = Zip::OutputStream.write_buffer do |zio|
-      # Add the metadata
-      zio.put_next_entry('metadata.csv')
-      zio.write csv_metadata
-
-      # Add each child work
-      child_works.each do |work|
-        # Skip adding works that the user can't download
-        next unless current_ability.can? :download, work
-        zio.put_next_entry("#{work.id}.zip")
-        zio.write work.zip_files.string
-      end
-      child_collections.each do |collection|
-        # Skip adding collections that the user can't see
-        next unless current_ability.can? :show, collection
-        zio.put_next_entry("#{collection.id}.zip")
-        zio.write collection.zip_files(current_ability).string
+        copy_works_to_zip(child_works, zio)
+        copy_collections_to_zip(child_collections, current_ability, zio)
       end
     end
-  end
 
     # Export work metadata as CSV string
     def csv_metadata
@@ -43,6 +31,26 @@ module OregonDigital
     end
 
     private
+
+    def copy_works_to_zip(works, zio)
+      works.each do |work|
+        # Skip adding works that the user can't download
+        next unless current_ability.can? :download, work
+
+        zio.put_next_entry("#{work.id}.zip")
+        zio.write work.zip_files.string
+      end
+    end
+
+    def copy_collections_to_zip(collections, current_ability, zio)
+      collections.each do |collection|
+        # Skip adding collections that the user can't see
+        next unless current_ability.can? :show, collection
+
+        zio.put_next_entry("#{collection.id}.zip")
+        zio.write collection.zip_files(current_ability).string
+      end
+    end
 
     # Convert work properties to hash of machine_label=>human_value
     def properties_as_s
