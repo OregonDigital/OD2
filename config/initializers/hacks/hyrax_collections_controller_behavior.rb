@@ -16,6 +16,11 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     configured_facets
   end
 
+  # Zip up all works in collection into one collection zip
+  def download
+    send_data collection.zip_files(current_ability).string, filename: "#{collection.id}.zip"
+  end
+
   private
 
     # OVERRIDE FROM HYRAX

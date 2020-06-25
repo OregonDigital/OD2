@@ -1,20 +1,24 @@
 en:
   oregon_digital:
     collection:
-      edit_form:
-        title: 'Edit collection'
       create_form:
         title: 'Create new collection'
       delete_form:
         title: 'Delete collection'
+      edit_form:
+        title: 'Edit collection'
+      export_form:
+        title: 'Export collection'
       share_form:
         title: 'Share collection'
     explore_collections:
       actions:
         edit: 'Edit'
         expand: '...'
-        share: 'Share'
+        export: 'Export'
         delete: 'Delete'
+        share: 'Share'
+        view: 'View'
       display_mode:
         create: 'Create new collection'
       list:

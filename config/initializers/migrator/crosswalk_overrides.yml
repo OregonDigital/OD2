@@ -43,9 +43,6 @@ overrides:
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
     multiple: false
-  - property: format
-    predicate: http://purl.org/dc/terms/format
-    function: return_nil
   - property: access_restrictions_attributes
     predicate: http://data.archiveshub.ac.uk/def/accessRestrictions
     multiple: true
@@ -110,3 +107,9 @@ overrides:
   - property: contents
     predicate: http://opaquenamespace.org/ns/contents
     function: return_nil
+  - property: license
+    predicate: http://creativecommons.org/ns#license
+    multiple: false
+  - property: view_date
+    predicate: http://opaquenamespace.org/ns/cco/viewDate
+    multiple: true

@@ -30,7 +30,7 @@ Hyrax::Dashboard::CollectionMembersController.class_eval do
       flash[:error] = messages.uniq.join(', ')
       after_update
     else
-      members.each { |member| Hyrax.config.callback.run(:after_update_metadata, member, current_user, warn: false) }
+      members.each { |member| Hyrax.config.callback.run(:after_update_metadata, member, current_user, warn: false) unless member.instance_of? Collection }
       after_update
     end
   end
