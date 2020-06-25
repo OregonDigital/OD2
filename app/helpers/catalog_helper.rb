@@ -5,4 +5,5 @@ module CatalogHelper
   include Blacklight::CatalogHelperBehavior
   # OVERRIDE FROM BLACKLIGHT to add custom configuration helper behaviors
   include OregonDigital::ConfigurationHelperBehavior
+  include OregonDigital::FacetHelperBehavior
 end
