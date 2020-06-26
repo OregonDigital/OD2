@@ -31,7 +31,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   # rubocop:enable Metrics/MethodLength
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
-    solr_doc['copyright_combined_label_sim'] = license_labels + rights_labels
+    solr_doc['copyright_combined_label_tesim'] = license_labels + rights_labels
   end
 
   def index_rights_statement_label(solr_doc, rights_statement_labels)
@@ -59,14 +59,14 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_topic_combined_label(solr_doc, topic_labels)
-    solr_doc['topic_combined_label_sim'] = topic_labels
+    solr_doc['topic_combined_label_tesim'] = topic_labels
   end
 
   def index_date_combined_label(solr_doc)
     dates = %i[award_date date_created collected_date date issued view_date acquisition_date]
-    solr_doc['date_combined_label_sim'] = []
+    solr_doc['date_combined_label_tesim'] = []
     dates.each do |date|
-      solr_doc['date_combined_label_sim'] += object[date].to_a
+      solr_doc['date_combined_label_tesim'] += object[date].to_a
     end
   end
 
