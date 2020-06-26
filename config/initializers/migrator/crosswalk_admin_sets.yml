@@ -3,6 +3,10 @@ institution_crosswalk:
     admin_set_id: uo
   - institution_uri: http://dbpedia.org/resource/Oregon_State_University
     admin_set_id: osu
+  - institution_uri: http://id.loc.gov/authorities/names/n80017721
+    admin_set_id: osu
+  - institution_uri: http://id.loc.gov/authorities/names/n80126183
+    admin_set_id: uo
 primary_set_crosswalk:
   - primary_set: aa-images
     admin_set_id: uo
