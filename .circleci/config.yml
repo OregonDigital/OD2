@@ -41,7 +41,7 @@ jobs:
             - v2-bundle-{{ checksum "Gemfile.lock" }}
       - run:
           name: Update bundler
-          command: gem install bundler -v 1.17.2
+          command: gem install bundler -v 2.1.4
       - run:
           name: Install dependencies
           command: bundle check || bundle install
