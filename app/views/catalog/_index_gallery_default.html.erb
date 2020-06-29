@@ -15,9 +15,11 @@
 <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
 <p>
 <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
-<%= button_tag t('hyrax.dashboard.my.action.save'),
-                  class: 'btn btn-default submits-batches submits-batches-add pull-right',
-                  data: { toggle: "modal", target: "#collection-list-container" } %>
+<% unless document.collection? %>
+  <%= button_tag t('hyrax.dashboard.my.action.save'),
+                    class: 'btn btn-default submits-batches submits-batches-add pull-right',
+                    data: { toggle: "modal", target: "#collection-list-container" } %>
+<% end %>
 </p>
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
 <%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
