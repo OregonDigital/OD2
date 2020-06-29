@@ -1020,7 +1020,6 @@ DEPENDENCIES
   rack-honeycomb (~> 0.5.0)
   rails (~> 5.1.6)
   rails-controller-testing
-  rdf-vocab (= 3.1.4)
   recaptcha
   rsolr (>= 1.0)
   rspec

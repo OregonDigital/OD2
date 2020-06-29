@@ -29,7 +29,6 @@ gem 'ruby-oembed'
 gem 'blacklight-oembed'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
-gem 'rdf-vocab', '= 3.1.4'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
