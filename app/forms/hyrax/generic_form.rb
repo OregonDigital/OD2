@@ -28,6 +28,7 @@ module Hyrax
 
     def [](key)
       return model.member_of_collection_ids if key == :member_of_collection_ids
+
       @attributes[key.to_s]
     end
 

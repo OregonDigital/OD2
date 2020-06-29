@@ -31,6 +31,7 @@ module OregonDigital
       @jp2_work_presenter
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def sanitize_manifest(hash)
       hash['label'] = sanitize_value(hash['label']) if hash.key?('label')
       hash['description'] = hash['description']&.collect { |elem| sanitize_value(elem) } if hash.key?('description')
@@ -42,6 +43,7 @@ module OregonDigital
       end
       hash
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def sanitize_value(text)
       Loofah.fragment(text.to_s).scrub!(:prune).to_s

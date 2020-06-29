@@ -50,6 +50,6 @@ class Hyrax::HomepageController < ApplicationController
   end
 
   def sort_field
-    "date_uploaded_dtsi desc"
+    'date_uploaded_dtsi desc'
   end
 end
