@@ -33,7 +33,7 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       within('div#add-files') do
         page.execute_script("$('input[type=file]').css('opacity','1')")
         page.execute_script("$('input[type=file]').css('position','inherit')")
-        attach_file('files[]', upload_file_path)
+        attach_file('files[]', upload_file_path, visible: false)
       end
       click_link 'Descriptions' # switch tab
       within('div.document_title') do
