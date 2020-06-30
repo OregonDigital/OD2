@@ -17,6 +17,10 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
+      solr_doc['non_user_collections_ssim'] = []
+      object.member_of_collections.each do |collection|
+        solr_doc['non_user_collections_ssim'] << collection.first_title unless collection.collection_type.machine_id == 'user_collection'
+      end
       index_topic_combined_label(solr_doc, object.keyword)
       index_date_combined_label(solr_doc)
       index_edit_groups

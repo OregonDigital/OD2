@@ -185,7 +185,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name('location_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
     config.add_facet_field solr_name('workType', :facetable), label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
     config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
-    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collection'
+    config.add_facet_field solr_name('non_user_collections', :symbol), limit: 5, label: 'Collection'
     config.add_facet_field solr_name('institution_label', :facetable), limit: 5, label: 'Institution'
     config.add_facet_fields_to_solr_request!
 

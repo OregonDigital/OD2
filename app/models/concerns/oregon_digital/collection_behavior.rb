@@ -14,7 +14,7 @@ module OregonDigital
         zio.put_next_entry('metadata.csv')
         zio.write csv_metadata
 
-        copy_works_to_zip(child_works, zio)
+        copy_works_to_zip(child_works, current_ability, zio)
         copy_collections_to_zip(child_collections, current_ability, zio)
       end
     end
@@ -32,7 +32,7 @@ module OregonDigital
 
     private
 
-    def copy_works_to_zip(works, zio)
+    def copy_works_to_zip(works, current_ability, zio)
       works.each do |work|
         # Skip adding works that the user can't download
         next unless current_ability.can? :download, work
