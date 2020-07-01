@@ -8,6 +8,8 @@ rm -f tmp/pids/puma.pid
 if [ "${RAILS_ENV}" != 'production' ]; then
   ./build/validate_migrated.sh
   ./build/install_gems.sh
+  # Install latest UniversalViewer package
+  yarn install
 fi
 
 # Create default roles

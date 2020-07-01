@@ -7,7 +7,7 @@ module OregonDigital
 
     # OVERRIDE FROM HYRAX: to simplify visibility getter
     def visibility
-      @visibility ||= self[Solrizer.solr_name(:visibility, :stored_sortable)]
+      @visibility ||= self['visibility_ssi']
       @visibility ||= 'restricted'
     end
   end

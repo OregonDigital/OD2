@@ -70,7 +70,7 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
     it 'includes only Generic objects in recent documents' do
       get :index
       assigns(:recent_documents).each do |doc|
-        expect(doc[Solrizer.solr_name('has_model', :symbol)]).to eql ['Generic']
+        expect(doc['has_model_ssim']).to eql ['Generic']
       end
     end
 
@@ -82,8 +82,8 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
         old_to_solr = gw3.method(:to_solr)
         allow(gw3).to receive(:to_solr) do
           old_to_solr.call.merge(
-            Solrizer.solr_name('system_create', :stored_sortable, type: :date) => 1.day.ago.iso8601,
-            Solrizer.solr_name('date_uploaded', :stored_sortable, type: :date) => 1.day.ago.iso8601
+            'system_create_dtsi' => 1.day.ago.iso8601,
+            'date_uploaded_dtsi' => 1.day.ago.iso8601
           )
         end
         gw3.save

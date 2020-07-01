@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191206174050) do
+ActiveRecord::Schema.define(version: 20200629155107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -340,9 +340,9 @@ ActiveRecord::Schema.define(version: 20191206174050) do
   end
 
   create_table "single_use_links", id: :serial, force: :cascade do |t|
-    t.string "downloadKey"
+    t.string "download_key"
     t.string "path"
-    t.string "itemId"
+    t.string "item_id"
     t.datetime "expires"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
