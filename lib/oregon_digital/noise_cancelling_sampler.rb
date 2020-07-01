@@ -31,6 +31,7 @@ module OregonDigital
     #     uninteresting
     #   Database operations named SCHEMA
     #   Other redis commands
+    # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
     def self.sample(fields)
@@ -46,6 +47,7 @@ module OregonDigital
         [true, 1]
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
   end

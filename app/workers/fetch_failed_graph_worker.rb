@@ -9,8 +9,7 @@ class FetchFailedGraphWorker
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def perform(pid, val, controlled_prop)
-    # Fetch the work and the solr_doc
-    work = ActiveFedora::Base.find(pid)
+    # Fetch the solr_doc
     solr_doc = SolrDocument.find(pid)
 
     if val.respond_to?(:fetch)
@@ -18,18 +17,15 @@ class FetchFailedGraphWorker
       val.persist!
     end
 
-    # For each behavior
-    work.class.index_config[controlled_prop.to_sym].behaviors.each do |behavior|
-      # Insert into SolrDocument
-      if val.is_a?(String)
-        Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
+    # Insert into SolrDocument
+    if val.is_a?(String)
+      solr_doc["#{controlled_prop}_label_tesim"] = val
+    else
+      extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
+      if controlled_prop.to_sym == :based_near
+        solr_doc['location_label'] = [extractred_val]
       else
-        extractred_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
-        if controlled_prop.to_sym == :based_near
-          Solrizer.insert_field(solr_doc, 'location_label', [extractred_val], behavior)
-        else
-          Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extractred_val], behavior)
-        end
+        solr_doc["#{controlled_prop}_label_tesim"] = [extractred_val]
       end
     end
 

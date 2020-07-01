@@ -1,4 +1,4 @@
-FROM ruby:2.5.5 as bundler
+FROM ruby:2.5.8 as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8

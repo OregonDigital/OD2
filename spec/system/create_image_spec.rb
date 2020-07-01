@@ -30,10 +30,10 @@ RSpec.describe 'Create a Image',  js: true, type: :system, clean_repo: true do
       click_link 'Files' # switch tab
       expect(page).to have_content 'Add files'
       expect(page).to have_content 'Add folder'
-      within('span#addfiles') do
+      within('div#add-files') do
         page.execute_script("$('input[type=file]').css('opacity','1')")
         page.execute_script("$('input[type=file]').css('position','inherit')")
-        attach_file('files[]', upload_file_path)
+        attach_file('files[]', upload_file_path, visible: false)
       end
       click_link 'Descriptions' # switch tab
       within('div.image_title') do
