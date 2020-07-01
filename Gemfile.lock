@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: aac90717c56afe41e5080e2f8d9894bcbf49e1e8
+  revision: 6a77da6f6054c517c2913ca3e058bb3fdcec6cb0
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -667,8 +667,6 @@ GEM
     rack (2.2.3)
     rack-honeycomb (0.5.0)
       libhoney (>= 1.5.0)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.7)
@@ -873,11 +871,10 @@ GEM
       sxp (~> 1.0)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
-    sidekiq (6.0.7)
+    sidekiq (6.1.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      rack-protection (>= 2.0.0)
-      redis (>= 4.1.0)
+      redis (>= 4.2.0)
     signet (0.14.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
