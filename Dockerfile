@@ -55,7 +55,8 @@ COPY --chown=app:app . /data
 
 ARG RAILS_ENV=development
 ENV RAILS_ENV=${RAILS_ENV}
-
+ARG FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
+ENV FEDORA_URL=${FEDORA_URL}
 
 FROM code
 
