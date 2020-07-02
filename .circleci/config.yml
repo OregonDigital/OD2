@@ -157,6 +157,9 @@ jobs:
       environment:
         type: string
         default: 'production'
+      fedora_url:
+        type: string
+        default: 'http://fcrepo:8080/fcrepo/rest'
     executor:
       name: 'docker/docker'
     environment:
@@ -184,7 +187,7 @@ jobs:
           registry: registry.library.oregonstate.edu
           image: od2_web
           tag: $TAG
-          extra_build_args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
+          extra_build_args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg FEDORA_URL=<< parameters.fedora_url >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
           cache_from: registry.library.oregonstate.edu/od2_web_cache:latest
       - docker/push:
           registry: registry.library.oregonstate.edu
