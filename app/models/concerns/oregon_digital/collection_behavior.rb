@@ -34,11 +34,9 @@ module OregonDigital
 
     def copy_works_to_zip(works, current_ability, zio)
       works.each do |work|
-        # Skip adding works that the user can't download
-        next unless current_ability.can? :download, work
-
         zio.put_next_entry("#{work.id}.zip")
-        zio.write work.zip_files.string
+        # Add high- or low-res zips depending on which user can download
+        zio.write current_ability.can?(:download, work) ? work.zip_files.string : work.zip_files_low.string
       end
     end
 
