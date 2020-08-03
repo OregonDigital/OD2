@@ -1,0 +1,17 @@
+<div class="document col">
+  <p class="pull-left">
+    <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector">
+  </p>
+  <div class="thumbnail">
+    <%= render_thumbnail_tag(
+          document,
+          { class: 'img-thumbnail', alt: '' },
+          counter: document_counter_with_offset(document_counter),
+          'aria-hidden': true,
+          tabindex: -1
+        ) %>
+    <div class="caption">
+      <%= render_document_partials document, blacklight_config.view_config(:gallery).partials, :document_counter => document_counter %>
+    </div>
+  </div>
+</div>
