@@ -29,8 +29,8 @@ class FetchFailedGraphWorker
       end
     end
 
-    ActiveFedora::SolrService.add(solr_doc)
-    ActiveFedora::SolrService.commit
+    Hyrax::SolrService.add(solr_doc)
+    Hyrax::SolrService.commit
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize

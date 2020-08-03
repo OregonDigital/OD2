@@ -29,7 +29,7 @@ class BulkApproveJob < OregonDigital::ApplicationJob
   end
 
   def approve(solr_query)
-    ActiveFedora::SolrService.query(solr_query, fl: 'id', rows: 10_000).map { |x| x['id'] }.each do |pid|
+    Hyrax::SolrService.query(solr_query, fl: 'id', rows: 10_000).map { |x| x['id'] }.each do |pid|
       item = ActiveFedora::Base.find(pid)
       entity = item.to_sipity_entity
       next if entity.nil? || entity.workflow_state_name != 'pending_review'
