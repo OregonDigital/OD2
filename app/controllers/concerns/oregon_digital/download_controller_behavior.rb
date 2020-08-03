@@ -8,7 +8,7 @@ module OregonDigital
     end
 
     def download
-      send_data curation_concern.zip_files.string, filename: "#{curation_concern.id}.zip"
+      send_data curation_concern.zip_files_low.string, filename: "#{curation_concern.id}.zip"
     end
 
     def metadata
