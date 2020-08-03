@@ -25,3 +25,13 @@ em {
   border-left: 0px solid grey;
   border-bottom: 0px solid grey;
 }
+
+.thumbnail > a > .img-thumbnail {
+  border: none;
+}
+
+.document.col {
+  .thumbnail {
+    padding-bottom: 20px;
+  }
+}
