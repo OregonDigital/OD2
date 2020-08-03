@@ -42,10 +42,10 @@ class FetchGraphWorker
         solr_doc["#{controlled_prop}_label_tesim"] = val
         solr_doc['creator_combined_label_tesim'] = val if creator_combined_facet?(controlled_prop)
         solr_doc['location_combined_label_tesim'] = val if location_combined_facet?(controlled_prop)
-        solr_doc['topic_combined_label_tesim'] = val + solr_doc['keyword_tesim'] if topic_combined_facet?(controlled_prop)
+        solr_doc['topic_combined_label_tesim'] = val + solr_doc['keyword_tesim'].to_a if topic_combined_facet?(controlled_prop)
         solr_doc['scientific_combined_label_tesim'] = val if scientific_combined_facet?(controlled_prop)
-        ActiveFedora::SolrService.add(solr_doc)
-        ActiveFedora::SolrService.commit
+        Hyrax::SolrService.add(solr_doc)
+        Hyrax::SolrService.commit
       end
     end
   end
