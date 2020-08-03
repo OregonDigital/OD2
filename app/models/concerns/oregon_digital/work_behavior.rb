@@ -47,6 +47,11 @@ module OregonDigital
       end
     end
 
+    # TODO: Implement low resolution download
+    def zip_files_low
+      zip_files
+    end
+
     private
 
     def copy_file_to_zip(file, zio)
