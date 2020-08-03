@@ -32,7 +32,7 @@ Hyrax::Dashboard::CollectionsController.class_eval do
     # we pass the parent_id through a hidden field in the form and link the two after the create.
     link_parent_collection(params[:parent_id]) unless params[:parent_id].nil?
     respond_to do |format|
-      ActiveFedora::SolrService.instance.conn.commit
+      Hyrax::SolrService.instance.conn.commit
       format.html do
         case URI(request.referer).path.split('/')[1]
         when 'dashboard'
