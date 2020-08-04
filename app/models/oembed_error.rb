@@ -11,8 +11,8 @@ class OembedError < ApplicationRecord
   after_save :alert_depositor
 
   # Make sure oembed_errors initializes as an array
-  def initialize(attributes = {})
-    super
+  def initialize(document_id, oembed_errors=nil)
+    super()
     @document_id ||= attributes[:document_id]
     @oembed_errors ||= [attributes[:oembed_error]]
   end
