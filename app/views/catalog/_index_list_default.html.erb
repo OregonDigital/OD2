@@ -26,7 +26,7 @@
 <% end %>
 <div class="resource-type col-md-offset-2 col-md-10">
   <div class="col-md-4">
-    <%= render 'index_type_icon', document: document unless document.type_label.first.empty? %>
+    <%= render 'index_type_icon', document: document unless document.type_label.empty? %>
     <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
   </div>
   <% if document.parents? %>

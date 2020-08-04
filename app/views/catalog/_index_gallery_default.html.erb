@@ -11,7 +11,7 @@
 
 </dl>
 <%# OVERRIDE FROM BLACKLIGHT to add resource type icon %>
-<%= render 'index_type_icon', document: document unless document.type_label.first.empty? %>
+<%= render 'index_type_icon', document: document unless document.type_label.empty? %>
 <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
 <p>
 <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
