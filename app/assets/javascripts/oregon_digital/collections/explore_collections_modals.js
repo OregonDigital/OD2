@@ -70,7 +70,7 @@ function open_export_my_collection_modal(element) {
 
 function open_delete_my_collection_modal(element) {
   $el = $(element);
-  url = $el.data('post-delete-url');
+  url = $el.data('delete-url');
 
   // Set form submission URL on form
   $('#collection-delete-container').find('form').attr('action', url);
