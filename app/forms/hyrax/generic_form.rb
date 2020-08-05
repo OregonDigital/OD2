@@ -14,7 +14,7 @@ module Hyrax
       # Push the required fields to the top of the form
       # Then make sure they arent rendered again lower in the form
       required_fields + (self.terms - required_fields) -
-        %i[alt_title access_right rights_notes
+        %i[alternative_title access_right rights_notes
            files visibility_during_embargo embargo_release_date
            visibility_after_embargo visibility_during_lease
            lease_expiration_date visibility_after_lease visibility
