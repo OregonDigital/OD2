@@ -94,7 +94,7 @@ Bulkrax.setup do |config|
     'local_collection_id' => { from: ['localcollctionid'] },
     'photographer' => { from: ['photographer'] },
     'date' => { from: ['date'] },
-    'subject' => { from: ['lcsubject'], split: '\|' },
+    'subject' => { from: ['lcsubject'], split: /\s*[;|]\s*/ },
     'location' => { from: ['location'] },
     'resource_type' => { from: ['type'] },
     'model' => { from: ['type'], parsed: true },
