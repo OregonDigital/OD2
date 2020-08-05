@@ -28,9 +28,7 @@
                                   autocomplete: 'collection',
                                   'autocomplete-url' => Rails.application.routes.url_helpers.qa_path + '/search/collections?access=deposit'
                                 }%>
-                      <%= f.submit  t("hyrax.collection.select_form.update"),
-                                    class: 'btn btn-primary submits-batches',
-                                    data: { behavior: 'updates-collection' } %>
+                      <button class='btn btn-primary submits-batches' onclick="post_collection_update()">Save</button>
                     <% end %>
                   <% end %>
                 </div>
