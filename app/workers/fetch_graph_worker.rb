@@ -40,10 +40,10 @@ class FetchGraphWorker
         # Insert into SolrDocument
         val = (val.solrize.last.is_a?(String) ? [val.solrize.last] : [val.solrize.last[:label].split('$').first]) unless val.first.is_a?(String)
         solr_doc["#{controlled_prop}_label_tesim"] = val
-        solr_doc['creator_combined_label_tesim'] = val if creator_combined_facet?(controlled_prop)
-        solr_doc['location_combined_label_tesim'] = val if location_combined_facet?(controlled_prop)
-        solr_doc['topic_combined_label_tesim'] = val + solr_doc['keyword_tesim'].to_a if topic_combined_facet?(controlled_prop)
-        solr_doc['scientific_combined_label_tesim'] = val if scientific_combined_facet?(controlled_prop)
+        solr_doc['creator_combined_label_sim'] = val if creator_combined_facet?(controlled_prop)
+        solr_doc['location_combined_label_sim'] = val if location_combined_facet?(controlled_prop)
+        solr_doc['topic_combined_label_sim'] = val + solr_doc['keyword_tesim'].to_a if topic_combined_facet?(controlled_prop)
+        solr_doc['scientific_combined_label_sim'] = val if scientific_combined_facet?(controlled_prop)
         Hyrax::SolrService.add(solr_doc)
         Hyrax::SolrService.commit
       end

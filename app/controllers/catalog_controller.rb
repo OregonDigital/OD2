@@ -176,17 +176,17 @@ class CatalogController < ApplicationController
         http\://creativecommons.org/publicdomain/zero/1.0/ OR
         http\://creativecommons.org/publicdomain/mark/1.0/)' }
     }
-    config.add_facet_field 'copyright_combined_label_tesim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
+    config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
     config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), limit: 5
-    config.add_facet_field 'type_label_tesim', label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
-    config.add_facet_field 'topic_combined_label_tesim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
-    config.add_facet_field 'creator_combined_label_tesim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
-    config.add_facet_field 'date_combined_label_tesim', label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
-    config.add_facet_field 'location_combined_label_tesim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
-    config.add_facet_field 'workType_label_tesim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
-    config.add_facet_field 'language_label_tesim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
+    config.add_facet_field 'type_label_sim', label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
+    config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
+    config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
+    config.add_facet_field 'date_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
+    config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
+    config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
+    config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
-    config.add_facet_field 'institution_label_tesim', limit: 5, label: 'Institution'
+    config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
