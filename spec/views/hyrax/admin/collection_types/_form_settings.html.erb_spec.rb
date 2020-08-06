@@ -62,7 +62,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
     context 'when collection_type.collections? is true' do
       before do
         collection_type_form.collection_type = collection_type
-        allow(collection_type).to receive(:collections?).and_return(true)
+        allow(collection_type_form).to receive(:collections?).and_return(true)
         assign(:form, collection_type_form)
         render partial: 'hyrax/admin/collection_types/form_settings', locals: { f: form }
       end
