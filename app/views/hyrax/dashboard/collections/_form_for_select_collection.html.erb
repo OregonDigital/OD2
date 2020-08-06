@@ -18,7 +18,8 @@
                   <% else %>
                     <%= simple_form_for Collection.new,
                                         url: Hyrax::Engine.routes.url_helpers.dashboard_collection_path('collection_replace_id'),
-                                        html: { id: 'update_collection' } do |f| %>
+                                        html: { id: 'update_collection',
+                                        onsubmit: 'return post_collection_update(event)' } do |f| %>
                       <%= f.text_field 'member_of_collection_ids',
                                 id: 'member_of_collection_ids',
                                 required: true,
@@ -28,7 +29,14 @@
                                   autocomplete: 'collection',
                                   'autocomplete-url' => Rails.application.routes.url_helpers.qa_path + '/search/collections?access=deposit'
                                 }%>
-                      <button class='btn btn-primary submits-batches' onclick="post_collection_update()">Save</button>
+                      <%= f.submit  t("hyrax.collection.select_form.update"),
+                                    class: 'btn btn-primary submits-batches',
+                                    data: {
+                                      behavior: 'updates-collection',
+                                      disable_with: false,
+                                      toggle: 'modal',
+                                      target: '#collection-list-container'
+                                    } %>
                     <% end %>
                   <% end %>
                 </div>
