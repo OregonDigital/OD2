@@ -1,15 +1,11 @@
 function post_collection_update(event) {
   event.preventDefault();
-  console.log(event);
-  console.log(event.target.elements.member_of_collection_ids.value);
 
   let collection_id = event.target.elements.member_of_collection_ids.value
-  // let batch_ids = []
-  // $('input[type=checkbox]').each(function() {
-  //   if (this.checked) {
-  //     batch_ids.push(this.id.split("_")[2])
-  //   }
-  // });
+  let batch_ids = []
+  $(event.target.elements['batch_document_ids[]']).each(function() {
+    batch_ids.push(this.value)
+  });
 
   $.ajax({
     method: "POST",
