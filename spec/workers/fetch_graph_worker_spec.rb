@@ -39,32 +39,32 @@ RSpec.describe FetchGraphWorker, type: :worker do
 
       it 'indexes creator data into the creator_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['creator_combined_label_tesim'].first).to eq 'Chabre, Wayne'
+        expect(SolrDocument.find(work.id)['creator_combined_label_sim'].first).to eq 'Chabre, Wayne'
       end
 
       it 'indexes data into the location_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['location_combined_label_tesim'].first).to eq 'Chabre, Wayne'
+        expect(SolrDocument.find(work.id)['location_combined_label_sim'].first).to eq 'Chabre, Wayne'
       end
 
       it 'indexes non-linked topic data into the creator_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['topic_combined_label_tesim']).to include 'bar'
+        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include 'bar'
       end
 
       it 'indexes linked topic data into the topic_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['topic_combined_label_tesim']).to include 'Chabre, Wayne'
+        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include 'Chabre, Wayne'
       end
 
       it 'indexes data into the scientific_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['scientific_combined_label_tesim'].first).to eq 'Acnanthes'
+        expect(SolrDocument.find(work.id)['scientific_combined_label_sim'].first).to eq 'Acnanthes'
       end
 
       it 'indexes data into the date_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['date_combined_label_tesim'].first).to eq 'baz'
+        expect(SolrDocument.find(work.id)['date_combined_label_sim'].first).to eq 'baz'
       end
     end
 
