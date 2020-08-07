@@ -68,10 +68,27 @@ function open_export_my_collection_modal(element) {
   $('#collection-export-container').find('a').attr('href', url);
 }
 
+// Delete modal open callback
 function open_delete_my_collection_modal(element) {
   $el = $(element);
   url = $el.data('delete-url');
 
   // Set form submission URL on form
   $('#collection-delete-container').find('form').attr('action', url);
+}
+// Delete modal submission callback
+function submit_delete_my_collection_modal(event) {
+  // Prevent regular submission
+  event.preventDefault();
+
+  // Perform async call and alert user this may take some time
+  $.ajax({
+    method: "DELETE",
+    async: true,
+    timeout: 100,
+    url: event.target.action,
+    complete: function(jqXHR, status) {
+      alert('Your collection is being deleted. Please give us time to process this request');
+    }
+  });
 }
