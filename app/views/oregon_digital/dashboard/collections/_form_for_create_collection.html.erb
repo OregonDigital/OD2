@@ -13,7 +13,7 @@
                 <%= hidden_field_tag :collection_type_gid, Hyrax::CollectionType.find_by(machine_id: :user_collection).gid %>
               <% end %>
               <%= render_edit_field_partial(:title, f: f) %>
-              <%= render_edit_field_partial(:description, f: f) %>
+              <%= render_edit_field_partial(:description, f: f, modal_form: true) %>
               <%= f.submit t(:'hyrax.collection.select_form.create'), class: 'btn btn-primary submits-batches submits-batches-add', onclick: "confirmation_needed = false;", id: "create_submit", name: "create_collection" %>
             <% end %>
           </div><!-- /.modal-body -->
