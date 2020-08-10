@@ -1,7 +1,7 @@
 <%# OVERRIDE FROM HYRAX change item table to flexbox %>
 <div class="thumbnail <%= dom_class(member) %> attributes">
-  <div class="thumbnail-block"
-    <%= render_thumbnail_tag member %>
+  <div class="thumbnail-block">
+    <%= render_thumbnail_tag member, alt: "Fileset #{member.id}" %>
     <br>
     <%= link_to(member.link_name, contextual_path(member, @presenter)) %>
   </div>

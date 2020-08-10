@@ -26,7 +26,8 @@ Hyrax.config do |config|
   # Which RDF term should be used to relate objects to an admin set?
   # If this is a new repository, you may want to set a custom predicate term here to
   # avoid clashes if you plan to use the default (dct:isPartOf) for other relations.
-  config.admin_set_predicate = ::RDF::URI.new('http://opaquenamespace.org/ns/primarySet')
+  RDF::VOCABS << :ons
+  config.admin_set_predicate = RDF::Vocabulary.new("http://opaquenamespace.org/ns/").primarySet
 
   # Email recipient of messages sent via the contact form
   config.contact_email = ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')

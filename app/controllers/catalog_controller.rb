@@ -10,11 +10,11 @@ class CatalogController < ApplicationController
   before_action :enforce_show_permissions, only: :show
 
   def self.uploaded_field
-    solr_name('system_create', :stored_sortable, type: :date)
+    'system_create_dtsi'
   end
 
   def self.modified_field
-    solr_name('system_modified', :stored_sortable, type: :date)
+    'system_modified_dtsi'
   end
 
   configure_blacklight do |config|
@@ -38,8 +38,8 @@ class CatalogController < ApplicationController
     }
 
     # solr field configuration for document/show views
-    config.index.title_field = solr_name('title', :stored_searchable)
-    config.index.display_type_field = solr_name('has_model', :symbol)
+    config.index.title_field = 'title_tesim'
+    config.index.display_type_field = 'has_model_ssim'
     config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # The generic_type isn't displayed on the facet list
@@ -51,21 +51,21 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field solr_name('title', :stored_searchable), label: 'Title', itemprop: 'name', if: false, highlight: true
-    config.add_index_field solr_name('creator_label', :stored_searchable), itemprop: 'creator', link_to_search: solr_name('creator', :facetable), max_values: 3, max_values_label: 'others'
-    config.add_index_field solr_name('date', :stored_searchable), itemprop: 'date'
-    config.add_index_field solr_name('description', :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
+    config.add_index_field 'title_tesim', label: 'Title', itemprop: 'name', if: false, highlight: true
+    config.add_index_field 'creator_label_tesim', itemprop: 'creator', link_to_search: 'creator_label_tesim', max_values: 3, max_values_label: 'others'
+    config.add_index_field 'date_tesim', itemprop: 'date'
+    config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
       # Only display description if a highlight is hit
-      document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
+      document.response['highlighting'][document.id].keys.include?('description_tesim')
     }
     config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
       # Don't display full text if description has a highlight hit
-      document.response['highlighting'][document.id].keys.include?(solr_name('description', :stored_searchable))
+      document.response['highlighting'][document.id].keys.include?('description_tesim')
     }, if:  lambda { |_context, _field_config, document|
       # Only try to display full text if a highlight is hit
       document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
     }
-    config.add_index_field solr_name('type_label', :stored_searchable), label: 'Resource Type', link_to_search: solr_name('type_label', :facetable), if: false
+    config.add_index_field 'type_label_tesim', label: 'Resource Type', link_to_search: 'type_label_tesim', if: false
 
     config.add_field_configuration_to_solr_request!
 
@@ -160,11 +160,11 @@ class CatalogController < ApplicationController
         }
       end
     end
-    config.add_show_field solr_name('type_label', :stored_searchable)
-    config.add_show_field solr_name('rights_statement_label', :stored_searchable)
-    config.add_show_field solr_name('language_label', :stored_searchable)
+    config.add_show_field 'type_label_tesim'
+    config.add_show_field 'rights_statement_label_tesim'
+    config.add_show_field 'language_label_tesim'
 
-    config.add_facet_field solr_name('generic_type', :facetable), if: false
+    config.add_facet_field 'generic_type_sim', if: false
     config.add_facet_field 'open_access', limit: 5, label: 'Open Access', show: false, query: {
       open: { label: 'Open', fq: 'license_sim:(
         https\://creativecommons.org/licenses/by/4.0/ OR
@@ -176,17 +176,17 @@ class CatalogController < ApplicationController
         http\://creativecommons.org/publicdomain/zero/1.0/ OR
         http\://creativecommons.org/publicdomain/mark/1.0/)' }
     }
-    config.add_facet_field solr_name('copyright_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
-    config.add_facet_field solr_name('file_format', :facetable), label: I18n.translate('simple_form.labels.defaults.file_format'), limit: 5
-    config.add_facet_field solr_name('type_label', :facetable), label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
-    config.add_facet_field solr_name('topic_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
-    config.add_facet_field solr_name('creator_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
-    config.add_facet_field solr_name('date_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
-    config.add_facet_field solr_name('location_combined_label', :facetable), label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
-    config.add_facet_field solr_name('workType', :facetable), label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
-    config.add_facet_field solr_name('language_label', :facetable), label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
-    config.add_facet_field solr_name('non_user_collections', :symbol), limit: 5, label: 'Collection'
-    config.add_facet_field solr_name('institution_label', :facetable), limit: 5, label: 'Institution'
+    config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
+    config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), limit: 5
+    config.add_facet_field 'type_label_sim', label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
+    config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
+    config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
+    config.add_facet_field 'date_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
+    config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
+    config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
+    config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
+    config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
+    config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
@@ -209,16 +209,16 @@ class CatalogController < ApplicationController
 
     # Type and Language is an edge case that is controlled by not as a typical ControlledVocabulary
     config.add_search_field('type_label') do |field|
-      solr_name = solr_name('type_label', :stored_searchable)
-      search_fields << solr_name('type_label', :stored_searchable)
+      solr_name = 'type_label_tesim'
+      search_fields << 'type_label_tesim'
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
       }
     end
     config.add_search_field('language_label') do |field|
-      solr_name = solr_name('language_label', :stored_searchable)
-      search_fields << solr_name('language_label', :stored_searchable)
+      solr_name = 'language_label_tesim'
+      search_fields << 'language_label_tesim'
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
@@ -226,9 +226,9 @@ class CatalogController < ApplicationController
     end
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       all_names = search_fields.join(' ')
-      title_name = solr_name('title', :stored_searchable)
+      title_name = 'title_tesim'
       field.solr_parameters = {
-        qf: "#{all_names} #{title_name} license_label_tesim file_format_tesim all_text_timv",
+        qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_timv",
         pf: title_name.to_s
       }
     end
