@@ -7,14 +7,25 @@
           <span class="modal-title" id="col_create_title"><%= t("oregon_digital.collection.create_form.title") %></span>
         </div>
           <div class="modal-body">
-            <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: Hyrax::Engine.routes.url_helpers.dashboard_collections_path do |f| %>
+            <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository),
+                                url: Hyrax::Engine.routes.url_helpers.dashboard_collections_path,
+                                html: { onsubmit: 'return submit_create_my_collection_modal(event)' } do |f| %>
               <% unless Hyrax::CollectionType.find_by(machine_id: :user_collection).nil? %>
                 <%= hidden_field_tag :type, Hyrax::CollectionType.find_by(machine_id: :user_collection).id %>
                 <%= hidden_field_tag :collection_type_gid, Hyrax::CollectionType.find_by(machine_id: :user_collection).gid %>
               <% end %>
               <%= render_edit_field_partial(:title, f: f) %>
               <%= render_edit_field_partial(:description, f: f) %>
-              <%= f.submit t(:'hyrax.collection.select_form.create'), class: 'btn btn-primary submits-batches submits-batches-add', onclick: "confirmation_needed = false;", id: "create_submit", name: "create_collection" %>
+              <%= f.submit t(:'hyrax.collection.select_form.create'),
+                           class: 'btn btn-primary submits-batches submits-batches-add',
+                           onclick: "confirmation_needed = false;",
+                           id: "create_submit",
+                           name: "create_collection",
+                           data: {
+                             disable_with: false,
+                             toggle: 'modal',
+                             target: '#collection-create-container'
+                           } %>
             <% end %>
           </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->
