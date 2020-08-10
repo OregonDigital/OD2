@@ -97,7 +97,6 @@ function submit_delete_my_collection_modal(event) {
 function submit_create_my_collection_modal(event) {
   // Prevent regular submission
   event.preventDefault();
-  console.log(event);
 
   let type = event.target.elements['type'].value;
   let collection_type_gid = event.target.elements['collection_type_gid'].value;
