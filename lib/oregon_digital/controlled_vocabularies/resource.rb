@@ -51,6 +51,11 @@ module OregonDigital
         URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
       end
 
+      def in_triplestore?
+        # Nil return from triplestore signifies that the term isnt in the cache
+        !triplestore.fetch_from_cache(rdf_subject).nil?
+      end
+
       def language_label(language)
         language.blank? ? rdf_label.first : language
       end

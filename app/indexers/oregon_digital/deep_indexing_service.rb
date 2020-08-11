@@ -13,6 +13,16 @@ module OregonDigital
     private
 
     # OVERRIDEN FROM HYRAX TO BYPASS THE FETCHING OF CONTROLLED VOCABULARIES
-    def fetch_value(value); end
+    def fetch_value(value)
+      object.controlled_properties.each do |property|
+        object[property].each do |value|
+          resource = value.respond_to?(:resource) ? value.resource : value
+          next unless resource.is_a?(ActiveTriples::Resource)
+          next if value.is_a?(ActiveFedora::Base)
+          # Fetch if the vocab is cached since this is fast and can be displayed quicker.
+          fetch_with_persistence(resource) if resource.in_triplestore?
+        end
+      end
+    end
   end
 end
