@@ -31,7 +31,7 @@ module OregonDigital
 
       @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
       # Returns nil if it doesn't exist in triplestore
-      @triplestore.fetch_cached_graph(rdf_url)
+      @triplestore.fetch_cached_graph(uri)
     end
 
     ##
