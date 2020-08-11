@@ -26,7 +26,7 @@ module OregonDigital
       TriplestoreAdapter::Client.new(ENV['TRIPLESTORE_ADAPTER_TYPE'], ENV['TRIPLESTORE_ADAPTER_URL'])
     end
 
-    def self.fetch_from_cache(uri)
+    def self.fetch_cached_term(uri)
       return if uri.blank?
 
       @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)

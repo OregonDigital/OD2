@@ -53,7 +53,7 @@ module OregonDigital
 
       def in_triplestore?
         # Nil return from triplestore signifies that the term isnt in the cache
-        !triplestore.fetch_from_cache(rdf_subject).nil?
+        !triplestore.fetch_cached_term(rdf_subject).nil?
       end
 
       def language_label(language)
