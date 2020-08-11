@@ -37,6 +37,8 @@ Hyrax::Dashboard::CollectionsController.class_eval do
         case URI(request.referer).path.split('/')[1]
         when 'dashboard'
           redirect_to edit_dashboard_collection_path(@collection), notice: t('hyrax.dashboard.my.action.collection_create_success')
+        when 'explore_collections'
+          redirect_to Rails.application.routes.url_helpers.explore_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my])
         else
           redirect_back fallback_location: '/'
         end
@@ -52,6 +54,8 @@ Hyrax::Dashboard::CollectionsController.class_eval do
         case URI(request.referer).path.split('/')[1]
           when 'dashboard'
             redirect_to update_referer, notice: t('hyrax.dashboard.my.action.collection_update_success')
+          when 'explore_collections'
+            redirect_to Rails.application.routes.url_helpers.explore_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my])
           else
             redirect_back fallback_location: '/'
           end
