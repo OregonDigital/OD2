@@ -24,7 +24,7 @@ module OregonDigital
     def jp2_work_presenter
       return @jp2_work_presenter if @jp2_work_presenter
 
-      solrdoc = curation_concern_from_search_results
+      solrdoc = search_result_document(params)
       @jp2_work_presenter = OregonDigital::IIIFPresenter.new(solrdoc, current_ability, request)
       work = solrdoc.hydra_model.find(solrdoc.id)
       @jp2_work_presenter.file_sets = work.file_sets
