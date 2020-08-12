@@ -26,6 +26,14 @@ module OregonDigital
       TriplestoreAdapter::Client.new(ENV['TRIPLESTORE_ADAPTER_TYPE'], ENV['TRIPLESTORE_ADAPTER_URL'])
     end
 
+    def self.fetch_cached_term(uri)
+      return if uri.blank?
+
+      @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
+      # Returns nil if it doesn't exist in triplestore
+      @triplestore.fetch_cached_graph(uri)
+    end
+
     ##
     # Common predicates which represent labels in a graph
     def self.rdf_label_predicates
