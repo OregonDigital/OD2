@@ -20,6 +20,7 @@
           <%= f.submit t(:'hyrax.collection.select_form.unshare'), class: 'btn btn-primary', id: "#{collection.id}_unshare_submit", name: "unshare_collection" %>
         <% else %>
           <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
+          <%= hidden_field_tag 'sharing', true %>
           <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'btn btn-primary', id: "#{collection.id}_share_submit", name: "share_collection" %>
         <% end %>
       <% end %>

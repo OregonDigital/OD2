@@ -30,6 +30,8 @@ en:
         row:
           institution:
             default: 'Multiple'
+      messages:
+        shared: '%{collection_title} has been shared. See your collection below for the sharable link'
     homepage:
       works:
         link: 'All Latest Items'
