@@ -12,6 +12,8 @@ module OregonDigital
 
     private
 
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/AbcSize
     # OVERRIDEN FROM HYRAX TO BYPASS THE FETCHING OF CONTROLLED VOCABULARIES
     def fetch_external
       object.controlled_properties.each do |property|
@@ -22,9 +24,11 @@ module OregonDigital
           next if value.is_a?(ActiveFedora::Base)
 
           # Fetch if the vocab is cached since this is fast and can be displayed quicker.
-          fetch_with_persistence(resource) if (!resource.class.include?(Location) && resource.in_triplestore?)
+          fetch_with_persistence(resource) if !resource.class.include?(Location) && resource.in_triplestore?
         end
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/AbcSize
   end
 end
