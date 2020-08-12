@@ -98,6 +98,7 @@ Hyrax::Dashboard::CollectionsController.class_eval do
   # Generate alert messages depending on hidden form data
   def messages_from_params
     return t('oregon_digital.explore_collections.messages.shared', collection_title: collection.title.first) if params['sharing']
+    return t('oregon_digital.explore_collections.messages.unshared', collection_title: collection.title.first) if params['unsharing']
     nil
   end
 end
