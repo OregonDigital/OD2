@@ -3,7 +3,7 @@
 module Hyrax
   module ControlledVocabularies
     # Location object
-    class Location < ActiveTriples::Resource
+    class Location < OregonDigital::ControlledVocabularies::Resource
       configure rdf_label: ::RDF::Vocab::GEONAMES.name
 
       attr_accessor :top_level_element
