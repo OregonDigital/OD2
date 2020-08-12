@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/osulp/triplestore-adapter
-  revision: 5b05379d91ca18c405e29513c27bb110365e4af2
+  revision: ae58b56a6d0ca35a0c6feec2a5b70f0c554b0689
   specs:
     triplestore-adapter (0.1.1)
       json-ld
@@ -226,7 +226,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
