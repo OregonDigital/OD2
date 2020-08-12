@@ -22,25 +22,9 @@ overrides:
     predicate: http://opaquenamespace.org/rights/rightsHolder
     multiple: true
 
-  #multiple must be true? (is false on map)
+  #multiple must be true (is false on map)
   - property: repository_attributes
     predicate: http://id.loc.gov/vocabulary/relators/rps
-    multiple: true
-    function: attributes_data
-
-  #duplicates the main entry?
-  - property: creator_attributes
-    predicate: http://purl.org/dc/elements/1.1/creator
-    multiple: true
-    function: attributes_data
-  #duplicates main entry?
-  - property: local_collection_name_attributes
-    predicate: http://opaquenamespace.org/ns/localCollectionName
-    multiple: true
-    function: attributes_data
-  #duplicates main entry?
-  - property: subject_attributes
-    predicate: http://purl.org/dc/terms/subject
     multiple: true
     function: attributes_data
 
@@ -56,11 +40,11 @@ overrides:
     predicate: http://creativecommons.org/ns#license
     multiple: false
 
-  #does not use _attributes?
+  #does not use _attributes
   - property: language
     predicate: http://purl.org/dc/terms/language
     multiple: true
-  #does not use _attributes?
+  #does not use _attributes
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
     multiple: false
