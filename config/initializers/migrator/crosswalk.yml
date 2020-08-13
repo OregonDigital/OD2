@@ -196,7 +196,7 @@ crosswalk:
     multiple: true
     function:
   - property: mods_note
-    predicate: http://www.loc.gov/mods/rdf/v1#note
+    predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#note
     multiple: true
     function:
   - property: number_of_pages
@@ -488,7 +488,7 @@ crosswalk:
     multiple: true
     function: attributes_data
   - property: location_copyshelf_location
-    predicate: http://www.loc.gov/mods/rdf/v1#locationCopyShelfLocator
+    predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#locationCopyShelfLocator
     multiple: true
     function:
   - property: publisher_attributes
@@ -588,7 +588,7 @@ crosswalk:
     multiple: true
     function:
   - property: physical_extent
-    predicate: http://www.loc.gov/mods/rdf/v1#physicalExtent
+    predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#physicalExtent
     multiple: true
     function:
   - property: technique
@@ -620,7 +620,7 @@ crosswalk:
     multiple: true
     function:
   - property: copy_location
-    predicate: http://www.loc.gov/mods/rdf/v1#locationCopySublocation
+    predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#locationCopySublocation
     multiple: true
     function:
   - property: date_digitized
