@@ -37,6 +37,8 @@ Hyrax::Dashboard::CollectionsController.class_eval do
         case URI(request.referer).path.split('/')[1]
         when 'dashboard'
           redirect_to edit_dashboard_collection_path(@collection), notice: t('hyrax.dashboard.my.action.collection_create_success')
+        when 'explore_collections'
+          redirect_to Rails.application.routes.url_helpers.explore_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my])
         else
           redirect_back fallback_location: '/'
         end
@@ -52,6 +54,9 @@ Hyrax::Dashboard::CollectionsController.class_eval do
         case URI(request.referer).path.split('/')[1]
           when 'dashboard'
             redirect_to update_referer, notice: t('hyrax.dashboard.my.action.collection_update_success')
+          when 'explore_collections'
+            alert_message = messages_from_params
+            redirect_to Rails.application.routes.url_helpers.explore_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my]), alert: alert_message
           else
             redirect_back fallback_location: '/'
           end
@@ -88,5 +93,12 @@ Hyrax::Dashboard::CollectionsController.class_eval do
       facet.order = index
       facet.save
     end
+  end
+
+  # Generate alert messages depending on hidden form data
+  def messages_from_params
+    return t('oregon_digital.explore_collections.messages.shared', collection_title: collection.title.first) if params['sharing']
+    return t('oregon_digital.explore_collections.messages.unshared', collection_title: collection.title.first) if params['unsharing']
+    nil
   end
 end
