@@ -29,6 +29,18 @@ class GenericIndexer < Hyrax::WorkIndexer
       solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| file_set.extracted_text.content unless file_set.extracted_text.nil? }
       # Index file formats from file sets for faceting
       solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] }
+
+      # Checks to see if a controlled value is in the triplestore. 
+      # If not, skip indexing the URI into the *_sim field
+      object.controlled_properties.each do |controlled_vocab|
+        cv = []
+        object.attributes[controlled_vocab.to_s].each do |controlled_value|
+          if controlled_value.is_a?(ActiveTriples::Resource) && controlled_value.in_triplestore?
+            cv << controlled_value.value
+          end
+        end
+        solr_doc["#{controlled_vocab}_sim"] = cv
+      end
     end
   end
   # rubocop:enable Metrics/AbcSize
