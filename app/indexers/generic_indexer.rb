@@ -33,13 +33,16 @@ class GenericIndexer < Hyrax::WorkIndexer
       # Checks to see if a controlled value is in the triplestore. 
       # If not, skip indexing the URI into the *_sim field
       object.controlled_properties.each do |controlled_vocab|
-        cv = []
+        cv_uri = []
+        cv_label = []
         object.attributes[controlled_vocab.to_s].each do |controlled_value|
-          if controlled_value.is_a?(ActiveTriples::Resource) && controlled_value.in_triplestore?
-            cv << controlled_value.value
+          if controlled_value.is_a?(ActiveTriples::Resource) && controlled_value.solrize.last.is_a?(Hash)
+            cv_label << controlled_value.solrize.last[:label].split('$').first
+            cv_uri << controlled_value.solrize.last[:label].split('$').last
           end
         end
-        solr_doc["#{controlled_vocab}_sim"] = cv
+        solr_doc["#{controlled_vocab}_label_tesim"] = cv_label
+        solr_doc["#{controlled_vocab}_sim"] = cv_uri
       end
     end
   end
