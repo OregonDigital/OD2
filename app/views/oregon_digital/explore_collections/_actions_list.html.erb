@@ -1,4 +1,4 @@
-<div id='<%= view %>-actions-<%= i %>' class='collapse collapsable-actions flex-list'>
+<div id='<%= view %>-actions-<%= i %>' class='flex-list'>
   <ul>
     <li>
       <%= link_to t('oregon_digital.explore_collections.actions.view'), hyrax.collection_path(collection.id), class: 'btn btn-primary' %>
@@ -18,11 +18,11 @@
         <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
           <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>
           <%= hidden_field_tag 'unsharing', true %>
-          <%= f.submit t(:'hyrax.collection.select_form.unshare'), class: 'btn btn-primary', id: "#{collection.id}_unshare_submit", name: "unshare_collection" %>
+          <%= f.submit t(:'hyrax.collection.select_form.unshare'), class: 'btn btn-primary', name: "unshare_collection" %>
         <% else %>
           <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
           <%= hidden_field_tag 'sharing', true %>
-          <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'btn btn-primary', id: "#{collection.id}_share_submit", name: "share_collection" %>
+          <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'btn btn-primary', name: "share_collection" %>
         <% end %>
       <% end %>
     </li>
@@ -50,10 +50,11 @@
     </li>
   </ul>
   <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
-    <input id="<%= collection.id %>-share-link" value="<%= hyrax.collection_url(collection.id) %>">
-    <button class="copy-single-use-link btn btn-success" data-clipboard-target="#<%= collection.id %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!">
-      Copy
-    </button>
+    <div class="center-text">
+      <input id="<%= view %>-<%= collection.id %>-share-link" value="<%= hyrax.collection_url(collection.id) %>">
+      <button class="copy-single-use-link btn btn-success" data-clipboard-target="#<%= view %>-<%= collection.id %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!">
+        Copy
+      </button>
+    </div>
   <%end%>
 </div>
-<%= button_tag t('oregon_digital.explore_collections.actions.expand'), type: 'button', data: { toggle: 'collapse', target: "##{view}-actions-#{i}" }, aria: { expanded: 'false', controls: "##{view}-actions-#{i}" } %>
