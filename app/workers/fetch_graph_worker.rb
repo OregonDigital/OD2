@@ -23,7 +23,7 @@ class FetchGraphWorker
     solr_doc['_version_'] = 0
     solr_doc['creator_combined_label_sim'] = []
     solr_doc['location_combined_label_sim'] = []
-    solr_doc['topic_combined_label_sim'] = []
+    solr_doc['topic_combined_label_sim'] = [solr_doc['keyword_tesim'].to_a]
     solr_doc['scientific_combined_label_sim'] = []
     # Iterate over Controller Props values
     work.controlled_properties.each do |controlled_prop|
@@ -47,7 +47,7 @@ class FetchGraphWorker
         solr_doc["#{controlled_prop}_label_tesim"] << val
         solr_doc['creator_combined_label_sim'] << val if creator_combined_facet?(controlled_prop)
         solr_doc['location_combined_label_sim'] << val if location_combined_facet?(controlled_prop)
-        solr_doc['topic_combined_label_sim'] << val + solr_doc['keyword_tesim'].to_a if topic_combined_facet?(controlled_prop)
+        solr_doc['topic_combined_label_sim'] << val if topic_combined_facet?(controlled_prop)
         solr_doc['scientific_combined_label_sim'] << val if scientific_combined_facet?(controlled_prop)
         Hyrax::SolrService.add(solr_doc)
         Hyrax::SolrService.commit
