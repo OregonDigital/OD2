@@ -30,6 +30,9 @@ en:
         row:
           institution:
             default: 'Multiple'
+      messages:
+        shared: '%{collection_title} has been shared. See your collection below for the sharable link'
+        unshared: '%{collection_title} is no longer shared and not visible to other people'
     homepage:
       works:
         link: 'All Latest Items'

@@ -1,58 +1,60 @@
 overrides:
-  - property: source
-    predicate: http://purl.org/dc/elements/1.1/source
-    multiple: true
+  #remediate
+  #  predicate: http://purl.org/dc/elements/1.1/source
+  #  predicate: http://sw-portal.deri.org/ontologies/swportal#isVolume
+  #  predicate: http://sw-portal.deri.org/ontologies/swportal#hasNumber
+  #  predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
+
+  #not used in OD2
   - predicate: http://opaquenamespace.org/ns/fullText
     function: return_nil
-  - predicate: http://opaquenamespace.org/ns/full
-    function: return_nil
+  #set and primarySet handled separately, do not map
   - predicate: http://opaquenamespace.org/ns/primarySet
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/set
     function: return_nil
+  #not used in OD2
   - predicate: http://opaquenamespace.org/ns/boxName
     function: return_nil
+
+  #flip predicate, remediate any variants
   - property: rights_holder
-    predicate: http://opaquenamespace.org/right/rightsHolder
+    predicate: http://opaquenamespace.org/rights/rightsHolder
     multiple: true
-  - property: material
-    predicate: http://opaquenamespace.org/ns/vra/material
-    multiple: true
+
+  #multiple must be true (is false on map)
   - property: repository_attributes
     predicate: http://id.loc.gov/vocabulary/relators/rps
     multiple: true
     function: attributes_data
-  - property: creator_attributes
-    predicate: http://purl.org/dc/elements/1.1/creator
-    multiple: true
-    function: attributes_data
-  - property: local_collection_name_attributes
-    predicate: http://opaquenamespace.org/ns/localCollectionName
-    multiple: true
-    function: attributes_data
-  - property: subject_attributes
-    predicate: http://purl.org/dc/terms/subject
-    multiple: true
-    function: attributes_data
+
+  #NOTE: license and rights explanation-
+  #map states that license in OD2 uses dct/rights so this is in main entry
+  #however actually needs to be mapped to rights_statement
+  #does not use _attributes
   - property: rights_statement
     predicate: http://purl.org/dc/terms/rights
     multiple: false
+   #OD1 predicate for license must be flipped
+  - property: license
+    predicate: http://creativecommons.org/ns#license
+    multiple: false
+
+  #does not use _attributes
   - property: language
     predicate: http://purl.org/dc/terms/language
     multiple: true
+  #does not use _attributes
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
     multiple: false
+  #flips predicate
   - property: access_restrictions_attributes
     predicate: http://data.archiveshub.ac.uk/def/accessRestrictions
     multiple: true
     function: attributes_data
-  - property: is_volume
-    predicate: http://sw-portal.deri.org/ontologies/swportal#isVolume
-    multiple: true
-  - property: has_number
-    predicate: http://sw-portal.deri.org/ontologies/swportal#hasNumber
-    multiple: true
+
+  #flip rdaregistry predicates from labels to id version
   - property: biographical_information
     predicate: http://www.rdaregistry.info/Elements/a/#biographicalInformation.en
     multiple: true
@@ -63,53 +65,86 @@ overrides:
     predicate: http://www.rdaregistry.info/Elements/w/#formOfWork.en
     multiple: true
     function: attributes_data
-  - property: inscription
-    predicate: http://opaquenamespace.org/ns/vra_inscription
-    multiple: true
   - property: layout
     predicate: http://www.rdaregistry.info/Elements/m/#layout.en
     multiple: true
   - property: mode_of_issuance
     predicate: http://www.rdaregistry.info/Elements/m/#modeOfIssuance.en
     multiple: true
-  - property: style_or_period
-    predicate: http://opaquenamespace.org/ns/vra_hasStylePeriod
-    multiple: true
-  - property: cultural_context
-    predicate: http://opaquenamespace.org/ns/vra_culturalContext
-    multiple: true
-  - property: tgn_attributes
-    predicate: http://opaquenamespace.org/ns/tgn
-    multiple: true
-    function: attributes_data
-  - property: use_restrictions
-    predicate: http://data.archiveshub.ac.uk/def/useRestrictions
-    multiple: true
-  - property: contained_in_journal
-    predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
-    multiple: true
   - property: place_of_production_attributes
     predicate: http://www.rdaregistry.info/Elements/m/#placeOfProduction.en
     multiple: true
     function: attributes_data
-  - property: material
-    predicate: http://opaquenamespace.org/ns/vra_material
-    multiple: true
-  - property: technique
-    predicate: http://opaquenamespace.org/ns/vra_hasTechnique
-    multiple: true
   - property: color_content
     predicate: http://www.rdaregistry.info/Elements/e/#colourContent.en
     multiple: true
+
+  #flip vra/ predicates, remediate any other version
+  - property: material
+    predicate: http://opaquenamespace.org/ns/vra/material
+    multiple: true
+  - property: inscription
+    predicate: http://opaquenamespace.org/ns/vra/inscription
+    multiple: true
+  - property: style_or_period
+    predicate: http://opaquenamespace.org/ns/vra/hasStylePeriod
+    multiple: true
+  - property: cultural_context
+    predicate: http://opaquenamespace.org/ns/vra/culturalContext
+    multiple: true
+  - property: technique
+    predicate: http://opaquenamespace.org/ns/vra/hasTechnique
+    multiple: true
+  - property: state_or_edition
+    predicate: http://opaquenamespace.org/ns/vra/stateEdition
+    multiple: true
+  - property: current_repository_id
+    predicate: http://opaquenamespace.org/ns/vra/idCurrentRepository
+    multiple: true
+  - property: measurements
+    predicate: http://opaquenamespace.org/ns/vra/measurements
+    multiple: true
+
+  #flip predicate
+  - property: tgn_attributes
+    predicate: http://opaquenamespace.org/ns/tgn
+    multiple: true
+    function: attributes_data
+
+  #flip predicate
+  - property: use_restrictions
+    predicate: http://data.archiveshub.ac.uk/def/useRestrictions
+    multiple: true
+
+  #add property and change predicate (was not actually mapped in OD1)
   - property: original_filename
     predicate: http://opaquenamespace.org/ns/full
     multiple: false
+  #not used in OD2
   - property: contents
     predicate: http://opaquenamespace.org/ns/contents
     function: return_nil
-  - property: license
-    predicate: http://creativecommons.org/ns#license
-    multiple: false
+
+  #flip cco/ predicates, remediate any other version
   - property: view_date
     predicate: http://opaquenamespace.org/ns/cco/viewDate
     multiple: true
+  - property: creator_display
+    predicate: http://opaquenamespace.org/ns/cco/creatorDisplay
+    multiple: true
+  - property: view_date
+    predicate: http://opaquenamespace.org/ns/cco/viewDescription
+    multiple: true
+  - property: accession_number
+    predicate: http://opaquenamespace.org/ns/cco/accessionNumber
+    multiple: true
+
+  #in cpds, not used in OD2
+  - predicate: http://www.openarchives.org/ore/1.0/datamodel#proxyFor
+    function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/next
+    function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/first
+    function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/last
+    function: return_nil

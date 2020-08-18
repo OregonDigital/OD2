@@ -69,4 +69,5 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
   RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
   cp public/assets/404-*.html public/404.html; \
   cp public/assets/500-*.html public/500.html; \
+  yarn install; \
   fi
