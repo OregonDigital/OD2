@@ -49,12 +49,12 @@ RSpec.describe FetchGraphWorker, type: :worker do
 
       it 'indexes non-linked topic data into the creator_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['topic_combined_label_sim'].flatten).to include "[bar]"
+        expect(SolrDocument.find(work.id)['topic_combined_label_sim'].flatten).to include '[bar]'
       end
 
       it 'indexes linked topic data into the topic_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include "[Chabre, Wayne]"
+        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include '[Chabre, Wayne]'
       end
 
       it 'indexes data into the scientific_combined_label field' do
