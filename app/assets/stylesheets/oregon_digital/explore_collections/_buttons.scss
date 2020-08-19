@@ -5,3 +5,13 @@
     justify-content: space-evenly;
   }
 }
+
+#explore-panes {
+  ul {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin: 5px 5px 15px;
+  }
+}

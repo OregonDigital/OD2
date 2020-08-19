@@ -9,7 +9,7 @@
   </ul>
 </div>
 
-<div class="tab-content">
+<div id="explore-panes" class="tab-content">
   <%= render 'collection_tab', tab: controller.class::TABS[:all], collections: controller.collections, header: 'All collections' %>
   <%= render 'collection_tab', tab: controller.class::TABS[:osu], collections: controller.osu_collections, header: 'Oregon State University collections' %>
   <%= render 'collection_tab', tab: controller.class::TABS[:uo], collections: controller.uo_collections, header: 'University of Oregon collections' %>
