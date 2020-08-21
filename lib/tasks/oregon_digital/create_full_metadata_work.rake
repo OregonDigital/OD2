@@ -62,6 +62,7 @@ def attrs
     'cover_description' => [],
     'coverage' => [],
     'description_of_manifestation' => [],
+    'designer_label' => [],
     'identification_verification_status' => nil,
     'inscription' => [],
     'layout' => [],
