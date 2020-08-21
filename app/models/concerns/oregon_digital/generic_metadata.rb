@@ -110,6 +110,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :motif, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/motif') do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :object_orientation, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/objectOrientation'), multiple: false do |index|
         index.as :stored_searchable
       end
@@ -757,6 +761,7 @@ module OregonDigital
         { name: 'has_part', is_controlled: false },
         { name: 'larger_work', is_controlled: false },
         { name: 'art_series', is_controlled: false },
+        { name: 'motif', is_controlled: false },
         { name: 'type_label', is_controlled: false, name_label: 'type' },
         { name: 'format', is_controlled: false },
         { name: 'orientation', is_controlled: false },

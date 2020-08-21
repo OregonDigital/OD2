@@ -70,6 +70,7 @@ def attrs
     'military_service_location' => [],
     'mode_of_issuance' => [],
     'mods_note' => [],
+    'motif' => [],
     'object_orientation' => nil,
     'original_name_usage' => [],
     'tribal_notes' => [],
