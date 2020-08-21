@@ -78,6 +78,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :designer_inscription, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cdwa/InscriptionTranscription') do |index|
+        index.as :stored_searchable
+      end
+
       property :identification_verification_status, basic_searchable: false, predicate: ::RDF::Vocab::DWC.identificationVerificationStatus, multiple: false do |index|
         index.as :stored_searchable
       end
@@ -108,6 +112,10 @@ module OregonDigital
 
       property :mods_note, basic_searchable: false, predicate: ::RDF::Vocab::MODS.note do |index|
         index.as :stored_searchable
+      end
+
+      property :motif, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/motif') do |index|
+        index.as :stored_searchable, :facetable
       end
 
       property :object_orientation, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/objectOrientation'), multiple: false do |index|
@@ -756,7 +764,9 @@ module OregonDigital
         { name: 'isPartOf', is_controlled: false },
         { name: 'has_part', is_controlled: false },
         { name: 'larger_work', is_controlled: false },
+        { name: 'designer_inscription', is_controlled: false },
         { name: 'art_series', is_controlled: false },
+        { name: 'motif', is_controlled: false },
         { name: 'type_label', is_controlled: false, name_label: 'type' },
         { name: 'format', is_controlled: false },
         { name: 'orientation', is_controlled: false },
