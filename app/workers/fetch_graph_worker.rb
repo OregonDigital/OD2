@@ -23,7 +23,7 @@ class FetchGraphWorker
     solr_doc['_version_'] = 0
     solr_doc['creator_combined_label_sim'] = []
     solr_doc['location_combined_label_sim'] = []
-    solr_doc['topic_combined_label_sim'] = [solr_doc['keyword_tesim'].first]
+    solr_doc['topic_combined_label_sim'] = solr_doc['keyword_tesim'].to_a
     solr_doc['scientific_combined_label_sim'] = []
     # Iterate over Controller Props values
     work.controlled_properties.each do |controlled_prop|
