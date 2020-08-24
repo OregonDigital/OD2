@@ -47,16 +47,16 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       end
       select('In Copyright', from: 'Rights')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
-      find('body').click
+      find('#required-metadata').click
 
       choose('document_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
-      find('body').click
+      find('#required-metadata').click
 
       check('agreement', visible: false)
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
-      find('body').click
+      find('#required-metadata').click
 
       click_on 'Save'
       expect(page).to have_content('Test Title')
