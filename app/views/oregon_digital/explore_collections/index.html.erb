@@ -13,7 +13,7 @@
   <%= render 'collection_tab', tab: controller.class::TABS[:all], collections: controller.collections, header: 'All collections' %>
   <%= render 'collection_tab', tab: controller.class::TABS[:osu], collections: controller.osu_collections, header: 'Oregon State University collections' %>
   <%= render 'collection_tab', tab: controller.class::TABS[:uo], collections: controller.uo_collections, header: 'University of Oregon collections' %>
-  <%= render 'collection_tab', tab: controller.class::TABS[:my], collections: controller.my_collections, header: 'My collections' %>
+  <%= render 'collection_tab', tab: controller.class::TABS[:my], collections: current_user.nil? ? nil : controller.my_collections, header: 'My collections' %>
 </div>
 
 <%= render 'oregon_digital/explore_collections/form_for_edit_collection' %>
