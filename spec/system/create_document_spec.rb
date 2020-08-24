@@ -21,10 +21,11 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
       sign_in_as user
-      visit new_hyrax_document_path
     end
 
     it 'Creates an Document' do
+      visit new_hyrax_document_path
+
       expect(page).to have_content 'Add New Document'
       click_link 'Files' # switch tab
       expect(page).to have_content 'Add files'

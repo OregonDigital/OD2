@@ -21,10 +21,11 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       allow(CharacterizeJob).to receive(:perform_later)
       sign_in_as user
-      visit new_hyrax_video_path
     end
 
     it 'Creates an Video' do
+      visit new_hyrax_video_path
+
       expect(page).to have_content 'Add New Video'
       click_link 'Files' # switch tab
       expect(page).to have_content 'Add files'
