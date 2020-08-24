@@ -11,5 +11,6 @@ class Users::SessionsController < Devise::SessionsController
     service = OregonDigital::UserAttributeService.new(params[:user])
     redirect_path = service.email_redirect_path
     redirect_to redirect_path unless redirect_path.nil?
+    redirect_to '/'
   end
 end
