@@ -14,6 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
+  # rubocop:disable Metrics/AbcSize
   def find_user_and_redirect
     @user = User.from_omniauth(request.env['omniauth.auth'])
     prov = request.env['omniauth.auth'].provider.to_s
@@ -26,4 +27,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to root_path
     end
   end
+  # rubocop:enable Metrics/AbcSize
 end
