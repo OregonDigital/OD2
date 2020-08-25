@@ -1,5 +1,14 @@
-<ul class='nav nav-pills visible-all-inline-block'>
-  <li class="active"><a data-toggle="pill" href="#<%= tab %>-masonry">masonry</a></li>
-  <li><a data-toggle="pill" href="#<%= tab %>-list">list</a></li>
-  <li><%= link_to '+', '#', title: t('oregon_digital.explore_collections.display_mode.create'), data: { toggle: "modal", dismiss: "modal", target: "#collection-create-container" } if tab == controller.class::TABS[:my] %></li>
+<ul class='nav nav-pills visible-all-inline-block view-type'>
+  <li>
+    <a class="btn" data-toggle="pill" href="#<%= tab %>-list">
+      <span class="glyphicon glyphicon-list view-icon-list"></span>
+      <span class="caption">List</span>
+    </a>
+  </li>
+  <li class="active">
+    <a class="btn" data-toggle="pill" href="#<%= tab %>-masonry">
+      <span class="glyphicon glyphicon-gallery view-icon-gallery"></span>
+      <span class="caption">Gallery</span>
+    </a>
+  </li>
 </ul>

@@ -1,22 +1,21 @@
 <h2 class='sr-only'>ExploreCollections</h2>
 
-<div class='text-center'>
+<div id="explore-tabs" class='text-center'>
   <ul class='nav nav-pills visible-all-inline-block'>
-    <li class="active"><a data-toggle="pill" href="#all">All</a></li>
-    <li><a data-toggle="pill" href="#osu">Oregon State University</a></li>
-    <li><a data-toggle="pill" href="#uo">University of Oregon</a></li>
-    <li><a data-toggle="pill" href="#my">My Collections</a></li>
+    <li class="active"><a class="button btn-outline" data-toggle="pill" href="#all">All</a></li>
+    <li><a class="button btn-outline" data-toggle="pill" href="#osu">Oregon State University</a></li>
+    <li><a class="button btn-outline" data-toggle="pill" href="#uo">University of Oregon</a></li>
+    <li><a class="button btn-outline" data-toggle="pill" href="#my">My<br>Collections</a></li>
   </ul>
 </div>
 
-<div class="tab-content">
+<div id="explore-panes" class="tab-content">
   <%= render 'collection_tab', tab: controller.class::TABS[:all], collections: controller.collections, header: 'All collections' %>
   <%= render 'collection_tab', tab: controller.class::TABS[:osu], collections: controller.osu_collections, header: 'Oregon State University collections' %>
   <%= render 'collection_tab', tab: controller.class::TABS[:uo], collections: controller.uo_collections, header: 'University of Oregon collections' %>
-  <%= render 'collection_tab', tab: controller.class::TABS[:my], collections: controller.my_collections, header: 'My collections' %>
+  <%= render 'collection_tab', tab: controller.class::TABS[:my], collections: current_user.nil? ? nil : controller.my_collections, header: 'My collections' %>
 </div>
 
-<%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
 <%= render 'oregon_digital/explore_collections/form_for_edit_collection' %>
 <%= render 'oregon_digital/explore_collections/form_for_export_collection' %>
 <%= render 'oregon_digital/explore_collections/form_for_delete_collection' %>
