@@ -20,12 +20,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     prov = request.env['omniauth.auth'].provider.to_s
     if @user.role?('admin') || @user.role?('depositor') || @user.role?('collection_manager')
       sign_in_and_redirect @user, event: :authentication
-      set_flash_message(:notice, :success, kind: prov) if is_navigational_format?
     else
       sign_in(resource_name, resource)
-      set_flash_message(:notice, :success, kind: prov) if is_navigational_format?
       redirect_to root_path
     end
+    set_flash_message(:notice, :success, kind: prov) if is_navigational_format?
   end
   # rubocop:enable Metrics/AbcSize
 end
