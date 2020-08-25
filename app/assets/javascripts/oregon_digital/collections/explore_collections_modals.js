@@ -5,18 +5,6 @@ $(document).ready(function() {
     $('.form', this).hide();
   });
 
-  // Reorganize masonry after collapsable actions exapand or collapse
-  $("[data-behavior='masonry-gallery']").on('shown.bs.collapse', function(e) {
-    $(this).masonry({
-      transitionDuration: '250ms'
-    });
-  });
-  $("[data-behavior='masonry-gallery']").on('hidden.bs.collapse', function(e) {
-    $(this).masonry({
-      transitionDuration: '250ms'
-    });
-  });
-
   // Javascript to enable link to tab
   var hash = document.location.hash;
   if (hash) {

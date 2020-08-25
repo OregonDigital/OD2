@@ -1,4 +1,7 @@
 <ul id="user_utility_links" class="nav navbar-nav navbar-right">
+  <li>
+    <%= link_to "Explore Collections", Rails.application.routes.url_helpers.explore_collections_path %>
+  </li>
   <%= render 'shared/locale_picker' if available_translations.size > 1 %>
   <% if user_signed_in? %>
     <li>

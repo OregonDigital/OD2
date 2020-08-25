@@ -1,0 +1,13 @@
+.button {
+  padding: 10px 35px !important;
+  max-width: 250px;
+  min-width: 125px;
+}
+
+.btn-outline {
+  border-radius: 0 !important;
+  border: 3px solid $brand-primary;
+  font-size: 1.25em;
+  text-transform: uppercase;
+  margin: 0 5px;
+}
