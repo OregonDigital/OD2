@@ -14,14 +14,19 @@
             <%= link_to 'View all', Rails.application.routes.url_helpers.search_catalog_path %>
           </span>
         </div>
-        <div class="hyc-desc">
+        <div class="hyc-desc mw-lg">
           <%= render 'collection_description', presenter: @presenter %>
         </div>
       </div>
-      <%# Institution and social media %>
-      <div class="col-md-4">
+      <%# Institutional image %>
+      <div class="col-md-4 text-right">
         <%= image_tag controller.institution_image_path %>
-        <%= render 'social_media' %>
+      </div>
+      <%# Social media share icons %>
+      <div class="col-md-12 text-right share-links">
+        <div class=" lg-border-bottom">
+        <%= render 'hyrax/base/social_media' %>
+        </div>
       </div>
     </div>
   </div>
