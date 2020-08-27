@@ -25,7 +25,6 @@ module OregonDigital
 
           # Fetch if the vocab is cached since this is fast and can be displayed quicker.
           fetch_with_persistence(resource) if !resource.class.to_s.include?('Location') && resource.in_triplestore?
-          resource.fetch if resource.class.to_s.include?('Location')
         end
       end
     end
