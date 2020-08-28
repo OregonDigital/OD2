@@ -90,7 +90,11 @@
       <% end %>
 
       <div class="hyc-blacklight hyc-bl-results <%= 'col-md-9 col-sm-8' unless @configured_facets.nil? || @configured_facets.empty? %>">
-        <%= render_document_index @member_docs %>
+        <div class="">
+        <% @member_docs.each do |doc| %>
+          <%= render_thumbnail_tag doc, { class: "hidden-xs file_listing_thumbnail" }, { suppress_link: true } %>
+        <% end %>
+        <%# render 'masonry_showcase', locale: {member_docs: @member_docs} %>
       </div>
 
       <div class="hyc-blacklight hyc-bl-pager">
