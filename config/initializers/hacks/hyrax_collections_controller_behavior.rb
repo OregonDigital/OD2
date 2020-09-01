@@ -21,6 +21,20 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     send_data collection.zip_files(current_ability).string, filename: "#{collection.id}.zip"
   end
 
+  # Get the path to institutional branding imag
+  def institution_image_path
+    image = 'no-institution-collection.png'
+
+    case @curation_concern.institution.first.label
+    when 'Oregon State University' then
+      image = 'osu-collection.png'
+    when 'University of Oregon'
+      image = 'uo-collection.png'
+    end unless @curation_concern.institution.first.nil?
+
+    ApplicationController.helpers.asset_path(image)
+  end
+
   private
 
     # OVERRIDE FROM HYRAX

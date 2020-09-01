@@ -1,8 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,400;1,700&display=swap');
 
 body {
   font-family: Lato;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+// Merriweather fonts
+.mw-sm {
+  font-family: Merriweather;
+  font-weight: bold;
+  font-size: 16px;
+
+  a {
+    text-decoration: underline 1px $light-orange;
+  }
+}
+.mw-lg {
+  font-family: Merriweather;
+  font-style: normal;
+  font-size: 18px;
+
+  a {
+    text-decoration: underline 1px $light-orange;
+  }
+}
+.mw-lg-b {
+  font-family: Merriweather;
+  font-style: bold;
+  font-size: 18px;
+
+  a {
+    text-decoration: underline 2px $light-orange;
+  }
 }
