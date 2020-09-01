@@ -32,8 +32,6 @@
   </div>
 </div>
 
-
-
 <div class="hyc-container" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row">
     <div class="hyc-blacklight hyc-bl-results">
@@ -51,13 +49,8 @@
       </div>
     </div>
   </div>
-  <div class='row'>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-4"><hr class="apple-green-hr"></div>
-    <div class="col-sm-2" ><button class='btn btn-primary collection-landing-button'>View All</button></div>
-    <div class="col-sm-4"><hr class="apple-green-hr"></div>
-    <div class="col-sm-1"></div>
-  </div>
+
+  <%= render 'lime_green_divider', buttonText: 'View All' %>
 
   <div class="row">
     <div class="col-sm-5"></div>
@@ -73,13 +66,7 @@
     <div class="col-sm-4"></div>
   </div>
 
-  <div class='row'>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-4"><hr class="apple-green-hr"></div>
-    <div class="col-sm-2" ><button class='collection-landing-button btn btn-primary'>Search</button></div>
-    <div class="col-sm-4"><hr class="apple-green-hr"></div>
-    <div class="col-sm-1"></div>
-  </div>
+  <%= render 'lime_green_divider', buttonText: 'Search' %>
 
   <!-- collection info 
 
