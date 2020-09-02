@@ -1,0 +1,53 @@
+<%# OVERRIDE FROM HYRAX to restructure add to collection modal #%>
+<div role="dialog" class="modal collection-list-modal fade" id="collection-list-container" tabindex="-1" aria-labelledby="col_add_title" data-backdrop="false">
+  <div class="modal-dialog text-left">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <span class="modal-title" id="col_add_title">LOGIN TO YOUR ACCOUNT</span>
+        </div>
+        <div class="modal-body login-modal">
+          <ul>
+            <div class="row">
+              <div class="col-md-4">
+                <li>
+                  <!--OVERRIDE HERE TO ADD MORE LINKS TO NAVBAR-->
+                  <input type="radio" onclick="toggleFooter('OSU-footer')"> <%#= image_tag  %>OSU
+                  <!--
+                  <%= link_to main_app.new_user_session_path do %>
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> <%= t("hyrax.toolbar.profile.login") %>
+                  <% end %>
+                  -->
+                </li>
+              </div>
+              <div class="col-md-4">
+                <li class="osu-login">
+                  <input type="radio" onclick="toggleFooter('UO-footer')"> <%#= image_tag  %>UO
+                  <!--
+                  <%= link_to main_app.new_osu_session_path, method: :post do %>
+                    <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
+                    <span class="university-login"><%= t("hyrax.toolbar.osu.login") %></span>
+                  <% end %>
+                  -->
+                </li>
+              </div>
+              <div class="col-md-4">
+                <li class="uo-login">
+                  <input type="radio" onclick="toggleFooter('local-footer')"> <%#= image_tag  %>Other Affiliation
+                  <!--
+                  <%= link_to main_app.new_uo_session_path, method: :post do %>
+                    <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
+                    <span class="university-login"><%= t("hyrax.toolbar.uo.login") %></span>
+                  <% end %>
+                  -->
+                </li>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="modal-footer text-center" style='display: none;'>
+        <hr class="lime-green-hr">
+        </div>
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

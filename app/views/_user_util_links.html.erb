@@ -25,27 +25,19 @@
       </ul>
     </li><!-- /.btn-group -->
   <% else %>
-    <li>
-    <!-- OVERRIDE HERE TO ADD MORE LINKS TO NAVBAR -->
-      <%= link_to main_app.new_user_session_path do %>
-        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> <%= t("hyrax.toolbar.profile.login") %>
-      <% end %>
-    </li>
-    <li class="osu-login">
-      <%= link_to main_app.new_osu_session_path, method: :post do %>
-        <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
-        <span class="university-login"><%= t("hyrax.toolbar.osu.login") %></span>
-      <% end %>
-    </li>
-    <li class="uo-login">
-      <%= link_to main_app.new_uo_session_path, method: :post do %>
-        <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
-        <span class="university-login"><%= t("hyrax.toolbar.uo.login") %></span>
-      <% end %>
-    </li>
+
+    <%= button_tag t('hyrax.dashboard.my.action.save_selected_to'),
+                   class: 'btn btn-default submits-batches submits-batches-add',
+                   data: { toggle: "modal", target: "#collection-list-container" } %>
+
+    <!--
+    
     <li>
       <%= link_to "Help", Hyrax::Engine.routes.url_helpers.help_path %>
     </li>
+    -->
 
   <% end %>
 </ul>
+
+<%= render 'hyrax/homepage/login_modal' %>
