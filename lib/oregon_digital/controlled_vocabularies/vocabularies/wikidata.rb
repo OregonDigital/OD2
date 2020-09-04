@@ -3,7 +3,7 @@
 module OregonDigital
   module ControlledVocabularies::Vocabularies
     # Receives information pulled from the endpoint and can parse and generate queries
-    class WdEntity
+    class Wikidata
       def self.expression
         %r{^http[s]?:\/\/(www.)?wikidata.org\/entity\/.*}
       end
