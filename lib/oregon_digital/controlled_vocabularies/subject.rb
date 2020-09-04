@@ -22,7 +22,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsSubject,
           OregonDigital::ControlledVocabularies::Vocabularies::Ubio,
           OregonDigital::ControlledVocabularies::Vocabularies::Ulan,
-          OregonDigital::ControlledVocabularies::Vocabularies::WdEntity
+          OregonDigital::ControlledVocabularies::Vocabularies::Wikidata
         ]
       end
       # rubocop:enable Metrics/MethodLength
