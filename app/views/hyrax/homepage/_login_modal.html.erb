@@ -11,42 +11,51 @@
             <div class="row">
               <div class="col-md-4">
                 <li>
-                  <!--OVERRIDE HERE TO ADD MORE LINKS TO NAVBAR-->
-                  <input type="radio" onclick="toggleFooter('OSU-footer')"> <%#= image_tag  %>OSU
-                  <!--
-                  <%= link_to main_app.new_user_session_path do %>
-                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> <%= t("hyrax.toolbar.profile.login") %>
-                  <% end %>
-                  -->
+                  <input type="radio" name="login-select" onclick="toggleFooter('OSU-footer')"> <%= image_tag('osu_logo.png', height: '50', width: '50') %>OSU
                 </li>
               </div>
               <div class="col-md-4">
                 <li class="osu-login">
-                  <input type="radio" onclick="toggleFooter('UO-footer')"> <%#= image_tag  %>UO
-                  <!--
-                  <%= link_to main_app.new_osu_session_path, method: :post do %>
-                    <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
-                    <span class="university-login"><%= t("hyrax.toolbar.osu.login") %></span>
-                  <% end %>
-                  -->
+                  <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')"> <%= image_tag('uo.png', height: '50', width: '50') %>UO
                 </li>
               </div>
               <div class="col-md-4">
                 <li class="uo-login">
-                  <input type="radio" onclick="toggleFooter('local-footer')"> <%#= image_tag  %>Other Affiliation
-                  <!--
-                  <%= link_to main_app.new_uo_session_path, method: :post do %>
-                    <span class="glyphicon glyphicon-log-in university-login" aria-hidden="true"></span>
-                    <span class="university-login"><%= t("hyrax.toolbar.uo.login") %></span>
-                  <% end %>
-                  -->
+                  <input type="radio" name="login-select" onclick="toggleFooter('local-footer')">Other Affiliation
                 </li>
               </div>
             </div>
           </ul>
         </div>
-        <div class="modal-footer text-center" style='display: none;'>
-        <hr class="lime-green-hr">
+        <div id="login-modal-footer-OSU-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
+          <div class='row'>
+            <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
+              <span class="university-login">CONTINUE TO LOG IN</span>
+            <% end %>
+          </div>
+          <div class='row'>
+            Questions about logging in? <%= link_to contact_path do %> Contact us <% end %>.
+          </div>
+        </div>
+        <div id="login-modal-footer-UO-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
+          <div class='row'>
+            <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
+              <span class="university-login">CONTINUE TO LOG IN</span>
+            <% end %>
+          </div>
+          <div class='row'>
+            Questions about logging in? <%= link_to contact_path do %> Contact us <% end %>.
+          </div>
+        </div>
+        <div id="login-modal-footer-local-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
+          <div class='row'>
+            <%= button_to main_app.new_user_session_path, class: 'btn btn-primary' do %>
+              <span class="university-login">CONTINUE TO LOG IN</span>
+            <% end %>
+          </div>
+          <div class='row'>
+            Questions about logging in? <%= link_to contact_path do %> Contact us <% end %>.
+          </div>
         </div>
       </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
