@@ -9,17 +9,17 @@
         <div class="modal-body login-modal">
           <div class="row">
             <ul>
-              <li>
+              <li class="osu-login">
                 <div class="col-md-4">
                   <input type="radio" name="login-select" onclick="toggleFooter('OSU-footer')"> <%= image_tag('osu_logo.png', height: '50', width: '50', alt: '') %>OSU
                 </div>
               </li>
-              <li class="osu-login">
+              <li class="uo-login">
                 <div class="col-md-4">
                   <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')"> <%= image_tag('uo.png', height: '50', width: '50', alt: '') %>UO
                 </div>
               </li>
-              <li class="uo-login">
+              <li>
                 <div class="col-md-4">
                   <input type="radio" name="login-select" onclick="toggleFooter('local-footer')">Other Affiliation
                 </div>
@@ -34,7 +34,7 @@
             <% end %>
           </div>
           <div class='row'>
-            Questions about logging in? <%= link_to contact_path() do %> Contact us <% end %>.
+            Questions about logging in? Contact us.
           </div>
         </div>
         <div id="login-modal-footer-UO-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
@@ -44,7 +44,7 @@
             <% end %>
           </div>
           <div class='row'>
-            Questions about logging in? <%= link_to contact_path() do %> Contact us <% end %>.
+            Questions about logging in? Contact us.
           </div>
         </div>
         <div id="login-modal-footer-local-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
@@ -54,7 +54,7 @@
             <% end %>
           </div>
           <div class='row'>
-            Questions about logging in? <%= link_to contact_path() do %> Contact us <% end %>.
+            Questions about logging in? Contact us.
           </div>
         </div>
       </div><!-- /.modal-content -->
