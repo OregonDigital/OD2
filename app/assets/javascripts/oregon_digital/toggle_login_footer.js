@@ -1,10 +1,6 @@
 function toggleFooter (footer) {
-  if ($('#login-modal-footer-OSU-footer').is(':visible')) {
-    $('#login-modal-footer-OSU-footer').toggle();
-  } else if ($('#login-modal-footer-UO-footer').is(':visible')){
-    $('#login-modal-footer-UO-footer').toggle();
-  } else if ($('#login-modal-footer-local-footer').is(':visible')){
-    $('#login-modal-footer-local-footer').toggle();
-  }
+  $('#login-modal-footer-OSU-footer').hide();
+  $('#login-modal-footer-UO-footer').hide();
+  $('#login-modal-footer-local-footer').hide();
   $('#login-modal-footer-' + footer).toggle();
 }

@@ -1,5 +1,5 @@
 <%# OVERRIDE FROM HYRAX to restructure add to collection modal #%>
-<div role="dialog" class="modal collection-list-modal fade" id="collection-list-container" tabindex="-1" aria-labelledby="col_add_title" data-backdrop="false">
+<div role="dialog" class="modal fade" id="user-login-modal" tabindex="-1" aria-labelledby="col_add_title" data-backdrop="false">
   <div class="modal-dialog text-left">
       <div class="modal-content">
         <div class="modal-header">
@@ -7,25 +7,25 @@
           <span class="modal-title" id="col_add_title">LOGIN TO YOUR ACCOUNT</span>
         </div>
         <div class="modal-body login-modal">
-          <ul>
-            <div class="row">
-              <div class="col-md-4">
-                <li>
-                  <input type="radio" name="login-select" onclick="toggleFooter('OSU-footer')"> <%= image_tag('osu_logo.png', height: '50', width: '50') %>OSU
-                </li>
-              </div>
-              <div class="col-md-4">
-                <li class="osu-login">
-                  <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')"> <%= image_tag('uo.png', height: '50', width: '50') %>UO
-                </li>
-              </div>
-              <div class="col-md-4">
-                <li class="uo-login">
+          <div class="row">
+            <ul>
+              <li>
+                <div class="col-md-4">
+                  <input type="radio" name="login-select" onclick="toggleFooter('OSU-footer')"> <%= image_tag('osu_logo.png', height: '50', width: '50', alt: '') %>OSU
+                </div>
+              </li>
+              <li class="osu-login">
+                <div class="col-md-4">
+                  <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')"> <%= image_tag('uo.png', height: '50', width: '50', alt: '') %>UO
+                </div>
+              </li>
+              <li class="uo-login">
+                <div class="col-md-4">
                   <input type="radio" name="login-select" onclick="toggleFooter('local-footer')">Other Affiliation
-                </li>
-              </div>
-            </div>
-          </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         <div id="login-modal-footer-OSU-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
           <div class='row'>
@@ -34,7 +34,7 @@
             <% end %>
           </div>
           <div class='row'>
-            Questions about logging in? <%= link_to contact_path do %> Contact us <% end %>.
+            Questions about logging in? <%= link_to contact_path() do %> Contact us <% end %>.
           </div>
         </div>
         <div id="login-modal-footer-UO-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
@@ -44,7 +44,7 @@
             <% end %>
           </div>
           <div class='row'>
-            Questions about logging in? <%= link_to contact_path do %> Contact us <% end %>.
+            Questions about logging in? <%= link_to contact_path() do %> Contact us <% end %>.
           </div>
         </div>
         <div id="login-modal-footer-local-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
@@ -54,7 +54,7 @@
             <% end %>
           </div>
           <div class='row'>
-            Questions about logging in? <%= link_to contact_path do %> Contact us <% end %>.
+            Questions about logging in? <%= link_to contact_path() do %> Contact us <% end %>.
           </div>
         </div>
       </div><!-- /.modal-content -->
