@@ -14,7 +14,7 @@ RSpec.describe Qa::Authorities::Subject do
   let(:ons_people_request) { 'http://opaquenamespace.org/ns/people/my_id.jsonld' }
   let(:ons_subject_request) { 'http://opaquenamespace.org/ns/subject/my_id.jsonld' }
   let(:ulan_request) { 'http://vocab.getty.edu/ulan/my_id.jsonld' }
-  let(:wd_entity_request) { 'http://www.wikidata.org/entity/my_id' }
+  let(:wikidata_request) { 'http://www.wikidata.org/entity/my_id' }
   let(:getty_response) { [{ 'http://www.w3.org/2000/01/rdf-schema#label': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
   let(:loc_genre_forms_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/genreForms/my_id' }.with_indifferent_access] }
   let(:loc_graphic_materials_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/vocabulary/graphicMaterials/my_id' }.with_indifferent_access] }
@@ -27,7 +27,7 @@ RSpec.describe Qa::Authorities::Subject do
   let(:ons_people_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/people/my_id' }.with_indifferent_access }
   let(:ons_subject_response) { { 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/subject/my_id' }.with_indifferent_access }
   let(:ulan_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
-  let(:wd_entity_response) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale}": { 'value': 'mylabel' } } } }, '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
+  let(:wikidata_response) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale}": { 'value': 'mylabel' } } } }, '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
 
   it { expect(repository_instance.label.call(getty_response, OregonDigital::ControlledVocabularies::Vocabularies::GettyAat)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_genre_forms_response, OregonDigital::ControlledVocabularies::Vocabularies::LocGenreForms)).to eq 'mylabel' }
@@ -41,7 +41,7 @@ RSpec.describe Qa::Authorities::Subject do
   it { expect(repository_instance.label.call([ons_people_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople)).to eq 'mylabel' }
   it { expect(repository_instance.label.call([ons_subject_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsSubject)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::Ulan)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(wd_entity_response, OregonDigital::ControlledVocabularies::Vocabularies::WdEntity)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call(wikidata_response, OregonDigital::ControlledVocabularies::Vocabularies::Wikidata)).to eq 'mylabel' }
   describe '#search' do
     before do
       allow(repository_instance).to receive(:json).with(getty_request).and_return(getty_response)
@@ -56,7 +56,7 @@ RSpec.describe Qa::Authorities::Subject do
       allow(repository_instance).to receive(:json).with(ons_people_request).and_return([ons_people_response])
       allow(repository_instance).to receive(:json).with(ons_subject_request).and_return([ons_subject_response])
       allow(repository_instance).to receive(:json).with(ulan_request).and_return(ulan_response)
-      allow(repository_instance).to receive(:json).with(wd_entity_request).and_return(wd_entity_response)
+      allow(repository_instance).to receive(:json).with(wikidata_request).and_return(wikidata_response)
     end
 
     context 'with a uri in the vocabulary' do

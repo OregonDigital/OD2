@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::WdEntity do
+RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::Wikidata do
   let(:vocab) { described_class }
   let(:data) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale}": { 'value': 'blah' } } } } }.with_indifferent_access] }
   let(:query) { 'www.blah.com/blah' }
