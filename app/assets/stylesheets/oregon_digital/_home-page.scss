@@ -5,7 +5,12 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-
+.login-modal-footer-border {
+  border-top: 3px solid $lime-green;
+}
+.login-button {
+  margin-top: 8px;
+}
 .image-masthead {
   // Remove controls background color
   background-color: black;
@@ -22,18 +27,14 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
 #masthead {
   background-color: white;
   font-size: 1.25em;
+}
+.login-modal > .row > ul {
+  list-style-type: none;
   li {
     min-width: 55px;
-    a .university-login {
-      color: white;
-    }
   }
-  .osu-login {
-    background-color: #d93c02;
-  }
-  .uo-login {
-    background-color: #0d4530;
-  }
+
+  
 }
 .background-container-overlay {
   background: rgba(255, 255, 255, .3);
