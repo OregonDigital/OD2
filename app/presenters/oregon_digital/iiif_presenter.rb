@@ -24,6 +24,10 @@ module OregonDigital
       presenters
     end
 
+    def viewing_hint
+      'paged'
+    end
+
     private
 
     def file_set_derivatives_service(file_set)
