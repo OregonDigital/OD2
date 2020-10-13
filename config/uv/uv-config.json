@@ -1,4 +1,7 @@
 {
+  "options": {
+    "limitLocales": true
+  },
   "modules": {
     "footerPanel": {
       "options": {
