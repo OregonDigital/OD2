@@ -1,3 +1,21 @@
 {
-  
+  "modules": {
+    "footerPanel": {
+      "options": {
+        "bookmarkEnabled": false,
+        "downloadEnabled": false,
+        "embedEnabled": false,
+        "feedbackEnabled": false,
+        "minimiseButtons": false,
+        "openEnabled": false,
+        "shareEnabled": false
+      }
+    },
+    "pagingHeaderPanel": {
+      "options": {
+        "pageModeEnabled": true,
+        "pagingToggleEnabled": true
+      }
+    }
+  }
 }
