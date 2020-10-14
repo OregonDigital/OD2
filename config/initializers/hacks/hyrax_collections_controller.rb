@@ -101,4 +101,15 @@ Hyrax::Dashboard::CollectionsController.class_eval do
     return t('oregon_digital.explore_collections.messages.unshared', collection_title: collection.title.first) if params['unsharing']
     nil
   end
+
+  # Override to chunk batch into groups of 5 to cut down on factorial saves.
+  # Compact removes nil from array, which gets autofilled by #in_groups_of
+  # when chunking the array. i.e [1, 2, 3, 4 ,5].in_groups_of(2) becomes
+  # [[1, 2], [3, 4], [5, nil]]
+  def add_members_to_collection(collection = nil)
+    collection ||= @collection
+    batch.in_groups_of(5).each do |group|
+      collection.add_member_objects group.compact
+    end
+  end
 end
