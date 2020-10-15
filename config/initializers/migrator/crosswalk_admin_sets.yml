@@ -34,6 +34,8 @@ primary_set_crosswalk:
     admin_set_id: osu
   - primary_set: colver-family
     admin_set_id: uo-scua
+  - primary_set: corazon-de-dixie
+    admin_set_id: uo
   - primary_set: corvallis-flood
     admin_set_id: osu-scarc-admin
   - primary_set: corvallis-images
