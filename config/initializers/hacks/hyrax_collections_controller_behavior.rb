@@ -1,6 +1,8 @@
 # frozen_string_literal:true
 
+Hyrax::CollectionsController.class_eval { include ActionController::Live }
 Hyrax::CollectionsControllerBehavior.module_eval do
+
   # OVERRIDE FROM HYRAX
   # Remove :f (facets) from single item search to allow collection to verify user access
   def single_item_search_builder
@@ -18,7 +20,21 @@ Hyrax::CollectionsControllerBehavior.module_eval do
 
   # Zip up all works in collection into one collection zip
   def download
-    send_data collection.zip_files(current_ability).string, filename: "#{collection.id}.zip"
+    zipname = "#{collection.id}.zip"
+
+    send_file_headers!(
+      type: "application/zip",
+      disposition: "attachment",
+      filename: zipname
+    )
+    response.headers["Last-Modified"] = Time.now.httpdate.to_s
+    response.headers["X-Accel-Buffering"] = "no"
+
+    OregonDigital::CollectionStreamer.stream(collection) do |chunk|
+      response.stream.write(chunk)
+    end
+  ensure
+    response.stream.close
   end
 
   # Get the path to institutional branding imag
