@@ -23,12 +23,12 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     zipname = "#{collection.id}.zip"
 
     send_file_headers!(
-      type: "application/zip",
-      disposition: "attachment",
+      type: 'application/zip',
+      disposition: 'attachment',
       filename: zipname
     )
-    response.headers["Last-Modified"] = Time.now.httpdate.to_s
-    response.headers["X-Accel-Buffering"] = "no"
+    response.headers['Last-Modified'] = Time.now.httpdate.to_s
+    response.headers['X-Accel-Buffering'] = 'no'
 
     OregonDigital::CollectionStreamer.stream(collection) do |chunk|
       response.stream.write(chunk)

@@ -10,23 +10,28 @@ module OregonDigital
       download
     end
 
+    # Use OregonDigital::FileSetSreamer service to find all file sets and split the response into a stream of chunks
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def download
       zipname = "#{curation_concern.id}.zip"
 
       send_file_headers!(
-        type: "application/zip",
-        disposition: "attachment",
+        type: 'application/zip',
+        disposition: 'attachment',
         filename: zipname
       )
-      response.headers["Last-Modified"] = Time.now.httpdate.to_s
-      response.headers["X-Accel-Buffering"] = "no"
+      response.headers['Last-Modified'] = Time.now.httpdate.to_s
+      response.headers['X-Accel-Buffering'] = 'no'
 
-      OregonDigital::FileSetStreamer.stream(curation_concern.file_sets) do |chunk|
+      OregonDigital::FileSetStreamer.stream(curation_concern) do |chunk|
         response.stream.write(chunk)
       end
     ensure
       response.stream.close
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def metadata
       send_data curation_concern.csv_metadata, filename: "#{curation_concern.id}.csv"

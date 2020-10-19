@@ -1,4 +1,7 @@
+# frozen_string_literal:true
+
 module OregonDigital
+  # Service for streaming a works filesets into a zip file
   class FileSetStreamer
     include Enumerable
 
@@ -21,14 +24,20 @@ module OregonDigital
           file_writer << work.csv_metadata
         end
 
-        work.file_sets.each do |file_set|
-          file = file_set.files.first
-          file_name = file.file_name.first
+        stream_works(work, zip)
+      end
+    end
 
-          zip.write_deflated_file(file_name) do |file_writer|
-            file.stream.each do |chunk|
-              file_writer << chunk
-            end
+    private
+
+    def stream_works(work, zip)
+      work.file_sets.each do |file_set|
+        file = file_set.files.first
+        file_name = file.file_name.first
+
+        zip.write_deflated_file(file_name) do |file_writer|
+          file.stream.each do |chunk|
+            file_writer << chunk
           end
         end
       end
