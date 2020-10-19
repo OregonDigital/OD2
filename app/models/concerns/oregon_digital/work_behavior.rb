@@ -28,42 +28,7 @@ module OregonDigital
       end
     end
 
-    # Gather work files and csv metadata and return it zipped together
-    def zip_files
-      csv_string = csv_metadata
-
-      # Create zip file as StringIO object
-      Zip::OutputStream.write_buffer do |zio|
-        # Add the metadata
-        zio.put_next_entry('metadata.csv')
-        zio.write csv_string
-
-        # Add each file
-        file_sets.each do |file_set|
-          file = file_set.files.first
-
-          copy_file_to_zip(file, zio)
-        end
-      end
-    end
-
-    # TODO: Implement low resolution download
-    def zip_files_low
-      zip_files
-    end
-
     private
-
-    def copy_file_to_zip(file, zio)
-      file_name = file.file_name.first
-      url = file.uri.value
-
-      zio.put_next_entry(file_name)
-      # Copy file contents directly from Fedora HTTP response
-      URI.open(url) do |io|
-        IO.copy_stream(io, zio)
-      end
-    end
 
     # If the oembed_url changed all previous errors are invalid
     def resolve_oembed_errors
