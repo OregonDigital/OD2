@@ -1,7 +1,7 @@
 <%# OVERRIDE FROM HYRAX change work title to h1 %>
 <% presenter.title.each_with_index do |title, index| %>
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-6">
       <% if index == 0 %>
         <h1><%= title %>
           <% if !current_user.nil? && current_user.admin? %>
@@ -12,7 +12,10 @@
         <h1><%= title %></h1>
       <% end %>
     </div>
-    <div class="col-sm-4 text-right">
+    <div class="col-sm-3">
+      <%= presenter.rights_statement %>
+    </div>
+    <div class="col-sm-3 text-right">
       <% if index == 0 %>
         <%= render "show_actions", presenter: presenter %>
       <% end %>
