@@ -22,19 +22,24 @@ module OregonDigital
     end
 
     def stream_collection(collection, folder, zip_streamer)
+      # Recursively drill down into sub-collections
       collection.child_collections.each do |collection|
         stream_collection(collection, "#{folder}#{collection.id}/", zip_streamer)
       end
 
+      # Add collection metadata
+      zip_streamer.write_deflated_file("#{folder}metadata.csv") do |file_writer|
+        file_writer << collection.csv_metadata
+      end
+
+      # Add files from works in this collection
       collection.child_works.each do |work|
         work.file_sets.each do |file_set|
-          file = file_set.files.first
-          file_name = "#{folder}#{file.file_name.first}"
+          file_name = "#{folder}#{file_set.title.first}"
 
           zip_streamer.write_deflated_file(file_name) do |file_writer|
-            file.stream.each do |chunk|
+            file_set.files.first.stream.each do |chunk|
               file_writer << chunk
-              Rails.logger.info 'chunk'
             end
           end
         end

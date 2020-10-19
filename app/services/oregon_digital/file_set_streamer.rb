@@ -28,7 +28,6 @@ module OregonDigital
           zip.write_deflated_file(file_name) do |file_writer|
             file.stream.each do |chunk|
               file_writer << chunk
-              Rails.logger.info 'chunk'
             end
           end
         end
