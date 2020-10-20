@@ -13,7 +13,9 @@
       <% end %>
     </div>
     <div class="col-sm-3">
-      <%= presenter.rights_statement %>
+      <div id="copyright-work-show" class="copyright-header">
+        <%= %(<a href=#{ERB::Util.h(presenter.rights_statement.first)}>#{Hyrax.config.rights_statement_service_class.new.label(presenter.rights_statement.first) { presenter.rights_statement.first }}</a>).html_safe %>
+      </div>
     </div>
     <div class="col-sm-3 text-right">
       <% if index == 0 %>
