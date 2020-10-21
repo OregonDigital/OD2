@@ -29,10 +29,11 @@ gem 'ruby-oembed'
 gem 'blacklight-oembed'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
+gem 'rubyzip', '>= 1.2.2'
+gem 'zip_tricks', '~> 5.3'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
-gem 'rubyzip', '>= 1.2.2'
 
 # Login gems
 gem 'omniauth-rails_csrf_protection', '~> 0.1'

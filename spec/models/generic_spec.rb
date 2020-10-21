@@ -66,23 +66,4 @@ RSpec.describe Generic do
       expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
     end
   end
-
-  describe '#zip_files' do
-    before do
-      allow(model).to receive(:file_sets).and_return([file_set])
-      stub_request(:get, file_uri)
-        .to_return(status: 200, body: '', headers: {})
-    end
-
-    it 'provides a StringIO' do
-      expect(model.zip_files).to be_kind_of(StringIO)
-    end
-    it 'writes the right number of files' do
-      file_count = 0
-      Zip::File.open_buffer(model.zip_files).each do
-        file_count += 1
-      end
-      expect(file_count).to eq(2)
-    end
-  end
 end
