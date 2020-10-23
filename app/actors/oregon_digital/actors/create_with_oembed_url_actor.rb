@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 module OregonDigital
   module Actors
-    # If there is a key `:remote_files' in the attributes, it attaches the files at the specified URIs
-    # to the work. e.g.:
-    #     attributes[:remote_files] = filenames.map do |name|
-    #       { url: "https://example.com/file/#{name}", file_name: name }
-    #     end
-    #
-    # Browse everything may also return a local file. And although it's in the
-    # url property, it may have spaces, and not be a valid URI.
+    # If there is a key `:oembed_urls' in the attributes, it extracts the URLs, creates a fileset, addes the URL as metadata, and attaches a dummy image
+    # to the work.
     class CreateWithOembedUrlActor < Hyrax::Actors::AbstractActor
       # @param [Hyrax::Actors::Environment] env
       # @return [Boolean] true if create was successful
@@ -26,11 +20,11 @@ module OregonDigital
 
       private
 
-      # @param [HashWithIndifferentAccess] remote_files
+      # @param [HashWithIndifferentAccess] oembed_urls
       # @return [TrueClass]
-      def attach_files(env, remote_files)
-        return true unless remote_files
-        remote_files.each do |url|
+      def attach_files(env, oembed_urls)
+        return true unless oembed_urls
+        oembed_urls.each do |url|
           next if url.blank?
           # Escape any space characters, so that this is a legal URI
           uri = URI.parse(Addressable::URI.escape(url))
@@ -39,8 +33,8 @@ module OregonDigital
         true
       end
 
-      # Generic utility for creating FileSet from a URL
-      # Used in to import files using URLs from a file picker like browse_everything
+      # Utility for creating FileSet from an oEmbed URL
+      # Used to create a FileSet with a dummy image and store the url into a metadata field
       def create_file_from_url(env, uri)
         import_url = URI.decode_www_form_component(uri.to_s)
         resource = OEmbed::Providers.get(import_url)
@@ -49,15 +43,9 @@ module OregonDigital
           actor = Hyrax::Actors::FileSetActor.new(fs, env.user)
           actor.create_metadata(visibility: env.curation_concern.visibility)
           actor.attach_to_work(env.curation_concern)
-          Rails.logger.info '!!!FS SAVING!!!'
           fs.save!
           IngestLocalFileJob.perform_later(fs, '/data/app/assets/images/dummy.png', env.user)
         end
-      end
-
-      def operation_for(user:)
-        Hyrax::Operation.create!(user: user,
-                                 operation_type: "Attach Remote File")
       end
     end
   end
