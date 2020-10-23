@@ -3,7 +3,6 @@
 module OregonDigital
   # Behavior for each work type controller
   module WorksControllerBehavior
-
     # We can use Hyrax::WorksControllerBehavior definition and add on additional params we want
     def attributes_for_actor
       attributes = super

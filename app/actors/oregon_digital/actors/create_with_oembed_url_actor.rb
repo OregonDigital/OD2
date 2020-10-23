@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module OregonDigital
   module Actors
     # If there is a key `:oembed_urls' in the attributes, it extracts the URLs, creates a fileset, addes the URL as metadata, and attaches a dummy image
@@ -24,8 +25,10 @@ module OregonDigital
       # @return [TrueClass]
       def attach_files(env, oembed_urls)
         return true unless oembed_urls
+
         oembed_urls.each do |url|
           next if url.blank?
+
           # Escape any space characters, so that this is a legal URI
           uri = URI.parse(Addressable::URI.escape(url))
           create_file_from_url(env, uri)
@@ -35,6 +38,7 @@ module OregonDigital
 
       # Utility for creating FileSet from an oEmbed URL
       # Used to create a FileSet with a dummy image and store the url into a metadata field
+      # rubocop:disable Metrics/AbcSize
       def create_file_from_url(env, uri)
         import_url = URI.decode_www_form_component(uri.to_s)
         resource = OEmbed::Providers.get(import_url)
@@ -47,6 +51,7 @@ module OregonDigital
           IngestLocalFileJob.perform_later(fs, '/data/app/assets/images/dummy.png', env.user)
         end
       end
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end
