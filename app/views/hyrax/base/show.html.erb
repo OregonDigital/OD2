@@ -15,7 +15,11 @@
           <% if can?(:review, @presenter.solr_document) %>
            <%= render 'workflow_actions_widget', presenter: @presenter %>
           <% end %>
-          <% if @presenter.iiif_viewer? %>
+          <% if @presenter.oembed_viewer? %>
+            <% @presenter.file_set_presenters.each do |presenter| %>
+              <%= render 'oembed_media', presenter: presenter %>
+            <% end %>
+          <% elsif @presenter.iiif_viewer? %>
             <div class="col-sm-12">
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
@@ -28,7 +32,7 @@
           </div>
           <div class='col-md-4 col-sm-6 text-center'>
             <%= render 'relationships', presenter: @presenter %>
-            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
+            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? || @presenter.oembed? %>
             <%# OVERRIDE FROM HYRAX remove work citations %>
             <%= render 'license' %>
             <%= render 'print' %>
