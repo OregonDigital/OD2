@@ -48,7 +48,7 @@ module Hyrax
     end
 
     def oembed?(presenter)
-      ::FileSet.find(presenter.id).oembed?
+      ::FileSet.find(presenter.id).oembed? && current_ability.can?(:read, presenter.id)
     end
   end
 end

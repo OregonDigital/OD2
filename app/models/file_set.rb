@@ -8,6 +8,6 @@ class FileSet < ActiveFedora::Base
   include OregonDigital::AccessControls::Visibility
 
   def oembed?
-    !oembed_url.empty?
+    !oembed_url.nil? && !oembed_url.empty?
   end
 end
