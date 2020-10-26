@@ -7,6 +7,7 @@ RSpec.describe Hyrax::GenericPresenter do
   let(:ability) { instance_double('Ability') }
   let(:solr_document) { SolrDocument.new(model.attributes) }
   let(:props) { Generic.generic_properties.map(&:to_sym) }
+  let(:file_set) { create(:file_set) }
 
   before do
     allow(presenter).to receive(:file_set_presenters).and_return(presenters)
@@ -88,42 +89,43 @@ RSpec.describe Hyrax::GenericPresenter do
   describe '#oembed_viewer?' do
     let(:presenters) do
       [
-        instance_double('FileSetPresenter'),
-        instance_double('FileSetPresenter'),
         instance_double('FileSetPresenter')
       ]
     end
 
     before do
       presenters.each do |p|
-        allow(p).to receive(:oembed?).and_return false
+        allow(p).to receive(:id).and_return file_set.id
       end
+      allow(file_set).to receive(:oembed?).and_return false
+      allow(::FileSet).to receive(:find).with(file_set.id).and_return file_set
     end
 
     context 'when an oembed presenter exists' do
       before do
-        allow(presenters[1]).to receive(:oembed?).and_return true
-        allow(presenters[1]).to receive(:id).and_return :oembed
+        allow(file_set).to receive(:oembed?).and_return true
+        allow(ability).to receive(:can?).with(:read, file_set.id).and_return true
       end
 
       it 'checks if the oembed can be read' do
-        expect(ability).to receive(:can?).with(:read, :oembed)
+        expect(ability).to receive(:can?).with(:read, file_set.id)
         presenter.oembed_viewer?
       end
 
       it 'returns true if the oembed is readable' do
-        allow(ability).to receive(:can?).with(:read, :oembed).and_return true
+        allow(ability).to receive(:can?).with(:read, file_set.id).and_return true
         expect(presenter.oembed_viewer?).to eq(true)
       end
 
       it 'returns false if the oembed is not readable' do
-        allow(ability).to receive(:can?).with(:read, :oembed).and_return false
+        allow(ability).to receive(:can?).with(:read, file_set.id).and_return false
         expect(presenter.oembed_viewer?).to eq(false)
       end
     end
 
     context 'when none are oembeds' do
       it 'returns false' do
+        allow(ability).to receive(:can?).with(:read, file_set.id).and_return true
         expect(presenter.oembed_viewer?).to eq(false)
       end
     end
