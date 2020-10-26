@@ -6,11 +6,8 @@
   <%# OVERRIDE FROM HYRAX remove work type heading %>
   <div class="col-xs-12">&nbsp;</div>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <%= render 'work_title', presenter: @presenter %>
-      </div>
-      <div class="panel-body">
+      <%= render 'work_title', presenter: @presenter %>
+      <hr style='border-width: 3px;'>
         <div class="row">
           <% if can?(:review, @presenter.solr_document) %>
            <%= render 'workflow_actions_widget', presenter: @presenter %>
@@ -25,27 +22,54 @@
             </div>
           <% end %>
         </div>
+        <div class="col-sm-9">
+        </div>
+        <div class="col-sm-3">
+          <%= render 'social_media' %>
+        </div>
         <div class='row'>
           <div class='col-md-8 col-sm-6'>
             <%# OVERRIDE FROM HYRAX remove work description %>
-            <%= render 'metadata', presenter: @presenter %>
-          </div>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#metadata" aria-controls="metadata" role="tab" data-toggle="tab">
+                  <%= t("hyrax.works.form.tab.metadata") %>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#citations" aria-controls="citations" role="tab" data-toggle="tab">
+                  <%= t("hyrax.works.form.tab.how_to_cite") %>
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="metadata">
+                <div class="form-tab-content">
+                  <% # metadata_tab is sometimes provided %>
+                  <%= render 'metadata', presenter: @presenter %>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="citations">
+                <div class="form-tab-content">
+                  <% # metadata_tab is sometimes provided %>
+                  <%= render 'citations', presenter: @presenter %>
+                </div>
+              </div>
+            </div>
           <div class='col-md-4 col-sm-6 text-center'>
-            <%= render 'relationships', presenter: @presenter %>
-            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? || @presenter.oembed? %>
+            <%#= render 'relationships', presenter: @presenter %>
+            <%#= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? || @presenter.oembed? %>
             <%# OVERRIDE FROM HYRAX remove work citations %>
-            <%= render 'license' %>
-            <%= render 'print' %>
-            <%= render 'social_media' %>
-            <%= render 'items', presenter: @presenter %>
+            <%#= render 'license' %>
+            <%#= render 'print' %>
+            <%#= render 'items', presenter: @presenter %>
           </div>
         </div>
         <div class='row'>
           <div class='col-md-8 col-sm-6'>
-            <%= render 'citations', presenter: @presenter %>
+            <%#= render 'citations', presenter: @presenter %>
           </div>
         </div>
       </div>
-    </div>
   </div>
 </div>
