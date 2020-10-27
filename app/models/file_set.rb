@@ -7,6 +7,8 @@ class FileSet < ActiveFedora::Base
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
 
+  self.indexer = OregonDigital::FileSetIndexer
+
   def oembed?
     !oembed_url.nil? && !oembed_url.empty?
   end
