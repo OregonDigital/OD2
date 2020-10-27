@@ -4,8 +4,14 @@
     <% links=Array(presenter.send(prop[:name].to_s.gsub('_label', ''))) %>
     <% @zipped=labels.zip(links) %>
     <% @zipped=Hash[@zipped] %>
-    <%= presenter.attribute_to_html(prop[:name].to_sym, render_as: :search_and_external_link, links: @zipped, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name]}")) %>
+    <% @presenter_value = presenter.attribute_to_html(prop[:name].to_sym, render_as: :search_and_external_link, links: @zipped, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name]}"))%>
+    <% unless @presenter_value.nil? || @presenter_value.empty? %>
+      <%= @presenter_value %>
+    <% end %>
   <% else %>
-    <%= presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}")) %>
+    <% @presenter_value = presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}")) %>
+    <% unless @presenter_value.nil? || @presenter_value.empty? %>
+      <%= @presenter_value %>
+    <% end %>
   <% end %>
 <% end %>
