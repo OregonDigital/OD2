@@ -259,3 +259,5 @@ Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local
 Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::TableBasedAuthority')
 
 Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
+
+Hyrax::CurationConcern.actor_factory.insert_before Hyrax::Actors::CreateWithRemoteFilesActor, OregonDigital::Actors::CreateWithOembedUrlActor
