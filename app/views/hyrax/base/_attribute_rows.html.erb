@@ -1,4 +1,3 @@
-<ul class='metadata-2-column'>
 <% Generic::ORDERED_PROPERTIES.each do |prop| %>
   <% if prop[:is_controlled] %>
     <% labels=Array(presenter.send(prop[:name].to_sym)) %>
@@ -7,13 +6,12 @@
     <% @zipped=Hash[@zipped] %>
     <% @presenter_value = presenter.attribute_to_html(prop[:name].to_sym, render_as: :search_and_external_link, links: @zipped, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name]}"))%>
     <% unless @presenter_value.nil? || @presenter_value.empty? %>
-      <li><dl><%= presenter.attribute_to_html(prop[:name].to_sym, render_as: :search_and_external_link, links: @zipped, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name]}")) %></dl></li>
+      <%= @presenter_value %>
     <% end %>
   <% else %>
     <% @presenter_value = presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}")) %>
     <% unless @presenter_value.nil? || @presenter_value.empty? %>
-      <li><dl><%= presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}")) %></dl></li>
+      <%= @presenter_value %>
     <% end %>
   <% end %>
 <% end %>
-</ul>

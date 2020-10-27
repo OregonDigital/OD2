@@ -14,9 +14,26 @@
   margin-top: 25px;
 }
 
-ul.metadata-2-column {
-  margin: 0;
-  column-fill: auto;
+dl.work-show {
+	display: grid;
+	grid-template: auto / 10em 1fr;
+}
+
+dl.work-show > dt {
+  grid-column: 1;
+}
+
+dl.work-show > dd, .field {
+  grid-column: 2;
+}
+
+dl.work-show > dt, dd, .field {
+	padding: 1em;
+  line-height: 1.5;
+}
+
+.columns {
   column-count: 2;
-  list-style-type: none;
+  column-gap: 2em;
+  margin-bottom: 20px;
 }
