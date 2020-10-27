@@ -25,6 +25,12 @@ module Hyrax
       fileset_viewable || work_viewable
     end
 
+    def oembed_viewer?
+      file_set_presenters.any? do |presenter|
+        oembed?(presenter)
+      end
+    end
+
     def page_title
       "#{title.first} | #{I18n.t('hyrax.product_name')}"
     end
@@ -39,6 +45,10 @@ module Hyrax
 
     def presentable?(presenter)
       (presenter.image? || presenter.pdf?) && current_ability.can?(:read, presenter.id)
+    end
+
+    def oembed?(presenter)
+      ::FileSet.find(presenter.id).oembed? && current_ability.can?(:read, presenter.id)
     end
   end
 end

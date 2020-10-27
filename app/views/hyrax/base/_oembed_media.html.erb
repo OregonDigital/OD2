@@ -1,0 +1,9 @@
+<div class='oembed-widget'>
+  <%= content_tag(:div, '',
+      data: {
+        embed_url:
+          Blacklight::Oembed::Engine.routes.url_helpers.embed_path(url: FileSet.find(presenter.id).oembed_url)
+      }
+    )
+  %>
+</div>
