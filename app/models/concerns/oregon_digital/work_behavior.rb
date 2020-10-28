@@ -9,7 +9,6 @@ module OregonDigital
     include OregonDigital::AccessControls::Visibility
 
     included do
-      before_save :resolve_oembed_errors
       validates_presence_of %i[title resource_type rights_statement identifier]
     end
 
@@ -29,12 +28,6 @@ module OregonDigital
     end
 
     private
-
-    # If the oembed_url changed all previous errors are invalid
-    def resolve_oembed_errors
-      errors = OembedError.find_by(document_id: id)
-      errors.delete if oembed_url_changed? && !errors.blank?
-    end
 
     # Convert work properties to hash of machine_label=>human_value
     def properties_as_s
