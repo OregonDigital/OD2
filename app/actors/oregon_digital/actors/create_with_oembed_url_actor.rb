@@ -38,7 +38,6 @@ module OregonDigital
 
       # Utility for creating FileSet from an oEmbed URL
       # Used to create a FileSet with a dummy image and store the url into a metadata field
-      # rubocop:disable Metrics/AbcSize
       def create_file_from_url(env, uri)
         import_url = URI.decode_www_form_component(uri.to_s)
         resource = OEmbed::Providers.get(import_url)
@@ -51,7 +50,6 @@ module OregonDigital
           IngestLocalFileJob.perform_later(fs, '/data/app/assets/images/dummy.png', env.user)
         end
       end
-      # rubocop:enable Metrics/AbcSize
     end
   end
 end
