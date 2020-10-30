@@ -34,7 +34,7 @@ module OregonDigital
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/PerceivedComplexity 
+    # rubocop:disable Metrics/PerceivedComplexity
     def self.sample(fields)
       if (NOISY_COMMANDS & [fields['redis.command'], fields['sql.active_record.sql']]).any?
         [should_sample(100, fields['trace.trace_id']), 100]
@@ -51,6 +51,6 @@ module OregonDigital
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/PerceivedComplexity 
+    # rubocop:enable Metrics/PerceivedComplexity
   end
 end

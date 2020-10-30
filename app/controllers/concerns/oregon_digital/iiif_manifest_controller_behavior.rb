@@ -47,7 +47,7 @@ module OregonDigital
     end
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/PerceivedComplexity 
+    # rubocop:enable Metrics/PerceivedComplexity
 
     def sanitize_value(text)
       Loofah.fragment(text.to_s).scrub!(:prune).to_s
