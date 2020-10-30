@@ -80,7 +80,7 @@ RSpec/MessageSpies:
 RSpec/MultipleExpectations:
   Enabled: false
 
-  RSpec/MultipleMemoizedHelpers:
+RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
 RSpec/ExampleLength:
