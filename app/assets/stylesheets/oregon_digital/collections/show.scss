@@ -14,3 +14,35 @@
     }
   }
 }
+
+.hyc-bl-results {
+  .masonry.document {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
+    background: transparent;
+
+    a:hover {
+      img {
+        border: 5px solid black;
+      }
+      .hover-over-collection-text {
+        display: block;
+      }
+    }
+    a {
+      img {
+        border: 5px solid transparent;
+        width: 100%;
+      }
+      .hover-over-collection-text {
+        color: white;
+        display: none;
+        position: relative;
+        bottom: 2.5em;
+        text-align: left;
+        left: 1.5em;
+      }
+    }
+  }
+}
