@@ -22,9 +22,15 @@
     margin: 0;
     background: transparent;
 
+    div.thumbnail {
+      background: black;
+    }
     a:hover {
       img {
-        border: 5px solid black;
+        outline: 10px solid black;
+        outline-offset:  -10px;
+        mask-image: linear-gradient(to top, rgba(0, 0, 0, .35) 0%, rgb(0, 0, 0), rgb(0, 0, 0) 100%);
+        -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, .35) 0%, rgb(0, 0, 0), rgb(0, 0, 0) 100%);
       }
       .hover-over-collection-text {
         display: block;
@@ -32,16 +38,19 @@
     }
     a {
       img {
-        border: 5px solid transparent;
         width: 100%;
       }
       .hover-over-collection-text {
         color: white;
         display: none;
-        position: relative;
-        bottom: 2.5em;
+        position: absolute;
+        bottom: .5em;
         text-align: left;
         left: 1.5em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 80%;
       }
     }
   }
