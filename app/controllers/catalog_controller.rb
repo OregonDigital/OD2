@@ -3,6 +3,7 @@
 # This controller drives the configuration of the applications searching
 # indexing, displays, and other various discovery methods
 class CatalogController < ApplicationController
+  include BlacklightAdvancedSearch::Controller
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
 
@@ -18,6 +19,13 @@ class CatalogController < ApplicationController
   end
 
   configure_blacklight do |config|
+    # default advanced config values
+    config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
+    # config.advanced_search[:qt] ||= 'advanced'
+    config.advanced_search[:url_key] ||= 'advanced'
+    config.advanced_search[:query_parser] ||= 'dismax'
+    config.advanced_search[:form_solr_parameters] ||= {}
+
     config.view.list.partials = %i[thumbnail index_header index]
     config.view.gallery.partials = %i[index_header index]
     config.view.masonry.partials = %i[index]
@@ -95,6 +103,7 @@ class CatalogController < ApplicationController
           qf: solr_name,
           pf: solr_name
         }
+        field.include_in_advanced_search = false
       end
     end
     Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -114,6 +123,7 @@ class CatalogController < ApplicationController
           qf: solr_name,
           pf: solr_name
         }
+        field.include_in_advanced_search = false
       end
     end
     Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -133,6 +143,7 @@ class CatalogController < ApplicationController
           qf: solr_name,
           pf: solr_name
         }
+        field.include_in_advanced_search = false
       end
     end
     # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
@@ -158,6 +169,7 @@ class CatalogController < ApplicationController
           qf: solr_name,
           pf: solr_name
         }
+        field.include_in_advanced_search = false
       end
     end
     config.add_show_field 'type_label_tesim'
@@ -215,6 +227,7 @@ class CatalogController < ApplicationController
         qf: solr_name,
         pf: solr_name
       }
+      field.include_in_advanced_search = false
     end
     config.add_search_field('language_label') do |field|
       solr_name = 'language_label_tesim'
@@ -223,6 +236,7 @@ class CatalogController < ApplicationController
         qf: solr_name,
         pf: solr_name
       }
+      field.include_in_advanced_search = false
     end
     config.add_search_field('all_fields', label: 'All Fields') do |field|
       all_names = search_fields.join(' ')
@@ -230,6 +244,23 @@ class CatalogController < ApplicationController
       field.solr_parameters = {
         qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_timv",
         pf: title_name.to_s
+      }
+      field.include_in_advanced_search = false
+    end
+    # Advanced search fields
+    config.add_search_field('title_desc_field', label: 'Title / Description') do |field|
+      title_name = 'title_tesim'
+      field.solr_parameters = {
+        qf: "#{title_name} description_tesim",
+        pf: title_name.to_s
+      }
+    end
+    config.add_search_field('creator_field', label: 'Creator') do |field|
+      solr_name = 'creator_combined_label_sim'
+      search_fields << solr_name
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
       }
     end
 
