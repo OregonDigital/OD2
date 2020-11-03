@@ -7,7 +7,21 @@
 .btn-outline {
   border-radius: 0 !important;
   border: 3px solid $brand-primary;
-  font-size: 1.25em;
-  text-transform: uppercase;
   margin: 0 5px;
+}
+
+.btn {
+  border-radius: 0 !important;
+  font-size: 1.25em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.btn-lg {
+  padding: 16px 24px;
+}
+
+/* Reset input-group button size so text shows */
+.input-group-btn > .btn {
+  font-size: 14px;
 }

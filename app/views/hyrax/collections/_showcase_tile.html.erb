@@ -1,9 +1,11 @@
 <div class="thumbnail">
-    <div id="image-<%= index %>" onmouseover='toggleTitleOn("<%= index %>")' onmouseout='toggleTitleOff("<%= index %>")'>
-      <%= img %>
-      <div class=<%= "hover-over-collection-text show-me#{index}" %>>
-        <%= title %>
-      </div> 
+    <div id="image-<%= index %>">
+      <%= link_to link do |body| %>
+        <%= img %>
+        <h3 class="hover-over-collection-text show-me<%= index %>" >
+          <%= title %>
+        </h3>
+      <% end %>
     </div>
   </div>
 </div>
