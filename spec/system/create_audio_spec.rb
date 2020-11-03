@@ -29,7 +29,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
       expect(page).to have_content 'Add New Audio'
       click_link 'Files' # switch tab
       expect(page).to have_content 'Add files'
-      expect(page).to have_content 'Add folder'
+      expect(page).to have_content 'ADD FOLDER'
       within('div#add-files') do
         page.execute_script("$('input[type=file]').css('opacity','1')")
         page.execute_script("$('input[type=file]').css('position','inherit')")

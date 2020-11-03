@@ -1,4 +1,6 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
+<% view_all_url = "#{search_form_action}&f[non_user_collections_ssim][]=#{@presenter.to_s}" %>
+
 <div class="hyc-container collection-show" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
     <%# Title, view, and description %>
@@ -11,7 +13,7 @@
             <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
           </span>
           <span>
-            <%= link_to 'View all', Rails.application.routes.url_helpers.search_catalog_path %>
+            <%= link_to 'View all', view_all_url %>
           </span>
         </div>
         <div class="hyc-desc mw-lg">
@@ -36,39 +38,41 @@
   <div class="row">
     <div class="hyc-blacklight hyc-bl-results">
       <div class="row">
-      <div class="col-md-2"></div>
       <% @member_docs[0,4].each_with_index do |doc, i| %>
-        <div class="masonry document text-center col-xs-3 col-md-2">
+        <div class="masonry document text-center col-xs-3 col-md-3">
           <%= render 'showcase_tile',
               title: doc.title_or_label,
               index: i,
               count: @member_docs.length,
-              link: [hyrax, doc],
+              link: [main_app, doc],
               img: render_thumbnail_tag(doc, {alt: ''}, { suppress_link: true }) %>
       <% end %>
       </div>
     </div>
   </div>
 
-  <%= render 'lime_green_divider', buttonText: 'View All' %>
+  <%= render 'lime_green_divider' do %>
+    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button'>View All</a>
+  <% end %>
 
   <div class="row">
-    <div class="col-sm-5"></div>
-      OR, SEARCH THIS COLLECTION
+    <span class="text-center"><h2 class="collection-search-header">OR, SEARCH THIS COLLECTION</h2></span>
   </div>
 
   <!-- Search bar -->
   <div class="hyc-blacklight hyc-bl-search hyc-body row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-      <%= render 'search_form', presenter: @presenter, url: hyrax.collection_path(@presenter.id) %>
+      <%= render 'search_form', presenter: @presenter %>
     </div>
     <div class="col-sm-4"></div>
   </div>
 
-  <%= render 'lime_green_divider', buttonText: 'Search' %>
+  <%= render 'lime_green_divider' do %>
+    <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button'><i class='glyphicon glyphicon-search'></i> Search</button>
+  <% end %>
 
-  <!-- collection info 
+  <!-- collection info
 
   <div class="row hyc-body">
     <div class="col-md-4 hyc-metadata">
@@ -91,8 +95,8 @@
       </h2>
     </div>
   <% end %>
-  --> 
-  
+  -->
+
 
   <!-- Subcollections
   <% if @presenter.collection_type_is_nestable? && @subcollection_count > 0 %>
@@ -123,7 +127,7 @@
       </div>
       <% end %>
 
-      
+
 
       <div class="hyc-blacklight hyc-bl-pager">
         <%= render 'paginate' %>
