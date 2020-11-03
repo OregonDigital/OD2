@@ -2,13 +2,26 @@
   <% if Hyrax.config.analytics? %>
     <%= link_to "Analytics", presenter.stats_path, id: 'stats', class: 'btn btn-default' %>
   <% end %>
-  <% if presenter.editor? %>
+  
+  <%# OVERRIDE FROM HYRAX to remove restritctions from add to collection button #%>
 
 
 
-      <!-- >
+
+  <div class="col-sm-4 edit-button-sections">
+    <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector edit-group" checked="checked" />
+    <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
+                  class: 'btn btn-default submits-batches submits-batches-add',
+                  data: { toggle: "modal", target: "#collection-list-container" } %>
+
+    <% if presenter.editor? %>
+      <div class='row'>
+      <div class='col-sm-4 edit-button-sections'>
       <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
-      <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
+      </div>
+      <div class='col-sm-4 edit-button-sections'>
+      <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger delete-button-show-page', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
+      </div>
       <% if presenter.member_presenters.size > 1 %>
           <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, presenter]), class: 'btn btn-default' %>
       <% end %>
@@ -25,22 +38,8 @@
             </ul>
         </div>
       <% end %>
-      <-->
-
-
-
-
-  <% end %>
-  <%# OVERRIDE FROM HYRAX to remove restritctions from add to collection button #%>
-
-
-
-
-  <div class="col-sm-4 edit-button-sections">
-    <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector edit-group" checked="checked" />
-    <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
-                  class: 'btn btn-default submits-batches submits-batches-add',
-                  data: { toggle: "modal", target: "#collection-list-container" } %>
+      </div>
+    <% end %>
   </div>
   <div class="col-sm-4 edit-button-sections">
     <div class="dropdown">
