@@ -1,4 +1,6 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
+<% view_all_url = "#{search_form_action}&f[non_user_collections_ssim][]=#{@presenter.to_s}" %>
+
 <div class="hyc-container collection-show" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
     <%# Title, view, and description %>
@@ -11,7 +13,7 @@
             <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
           </span>
           <span>
-            <%= link_to 'View all', Rails.application.routes.url_helpers.search_catalog_path %>
+            <%= link_to 'View all', view_all_url %>
           </span>
         </div>
         <div class="hyc-desc mw-lg">
@@ -49,7 +51,9 @@
     </div>
   </div>
 
-  <%= render 'lime_green_divider', buttonText: 'View All', buttonLink: hyrax.collection_path(@presenter.id) %>
+  <%= render 'lime_green_divider' do %>
+    <a href="<%= view_all_url %>" class='btn btn-primary collection-landing-button'>View All</a>
+  <% end %>
 
   <div class="row">
     <div class="col-sm-5"></div>
@@ -60,12 +64,14 @@
   <div class="hyc-blacklight hyc-bl-search hyc-body row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-      <%= render 'search_form', presenter: @presenter, url: hyrax.collection_path(@presenter.id) %>
+      <%= render 'search_form', presenter: @presenter %>
     </div>
     <div class="col-sm-4"></div>
   </div>
 
-  <%= render 'lime_green_divider', buttonText: 'Search', buttonLink: '#' %>
+  <%= render 'lime_green_divider' do %>
+    <input type="submit" form="collection-search" class='btn btn-primary collection-landing-button' value="Search" />
+  <% end %>
 
   <!-- collection info
 
