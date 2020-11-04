@@ -72,9 +72,11 @@
             <%#= render 'citations', presenter: @presenter %>
           </div>
         </div>
-        Related Items <%= @presenter.member_presenters.length %>
-        <hr style='border-width: 3px;'>
-        <%= render 'paginated_works', works: @presenter.member_presenters %>
+        <% if @presenter.member_presenters.length > 0 %>
+          Contained In This Object: &nbsp; <%= @presenter.member_presenters.length %> items
+          <hr style='border-width: 3px;'>
+          <%= render 'paginated_works', works: @presenter.member_presenters %>
+        <% end %>
       </div>
   </div>
 </div>
