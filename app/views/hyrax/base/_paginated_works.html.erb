@@ -1,0 +1,15 @@
+<% works.each do |work| %>
+  <div class='col-md-2'>
+    <% unless work.class.to_s.include?('FileSet') %>
+      <%= render 'representative_media', presenter: work, viewer: false %>
+      <div style='text-align: center;'>
+        <div class='row'>
+          <%= work.title.first %>
+        </div>
+        <div class='row'>
+          <%= work.description %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

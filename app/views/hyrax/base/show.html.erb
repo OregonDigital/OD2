@@ -72,8 +72,9 @@
             <%#= render 'citations', presenter: @presenter %>
           </div>
         </div>
-        Explore More
+        Related Items <%= @presenter.member_presenters.length %>
         <hr style='border-width: 3px;'>
+        <%= render 'paginated_works', works: @presenter.member_presenters %>
       </div>
   </div>
 </div>
