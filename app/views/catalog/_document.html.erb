@@ -6,7 +6,6 @@
         <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector">
       </p>
     <% end %>
-    <% BREAK %>
     <%= render_document_partials document, blacklight_config.view_config(document_index_view_type).partials, document_counter: document_counter %>
   </div>
 </li>
