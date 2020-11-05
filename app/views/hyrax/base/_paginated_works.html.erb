@@ -1,19 +1,16 @@
-<% work_list = [] %>
-<% 18.times { work_list << works.first } %>
-
-<table id="show-page-table" class="display" style="width:100%">
+<table id="show-page-table" class="display" style="width:50%">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Position</th>
-      <th>Office</th>
-      <th>Age</th>
-      <th>Start date</th>
-      <th>Salary</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-      <% work_list.in_groups_of(6, false).each do |work_group| %>
+      <% works.in_groups_of(6, false).each do |work_group| %>
         <tr>
           <% work_group.each do |work| %>
             <td>
