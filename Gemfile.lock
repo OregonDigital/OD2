@@ -178,6 +178,9 @@ GEM
       bootstrap-sass (~> 3.0)
       rails
       ruby-oembed
+    blacklight_advanced_search (6.4.1)
+      blacklight (~> 6.0, >= 6.0.1)
+      parslet
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -654,6 +657,7 @@ GEM
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
+    parslet (2.0.0)
     pg (1.2.3)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
@@ -1005,6 +1009,7 @@ PLATFORMS
 DEPENDENCIES
   axe-matchers
   blacklight-oembed
+  blacklight_advanced_search (~> 6.4)
   browse-everything
   byebug
   capybara (~> 2.17)

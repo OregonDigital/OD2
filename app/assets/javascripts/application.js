@@ -12,6 +12,9 @@
 //
 // Required by Blacklight
 //= require jquery
+//= require 'blacklight_advanced_search'
+
+
 //= require browse_everything
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
