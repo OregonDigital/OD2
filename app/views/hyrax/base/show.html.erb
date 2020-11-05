@@ -72,10 +72,11 @@
             <%#= render 'citations', presenter: @presenter %>
           </div>
         </div>
-        <% if @presenter.member_presenters.length > 0 %>
-          Contained In This Object: &nbsp; <%= @presenter.member_presenters.length %> items
+        <% children = @presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') } %>
+        <% if children.length > 0 %>
+          Contained In This Object: &nbsp; <%= children.length %> items
           <hr style='border-width: 3px;'>
-          <%= render 'paginated_works', works: @presenter.member_presenters %>
+          <%= render 'paginated_works', works: children %>
         <% end %>
       </div>
   </div>

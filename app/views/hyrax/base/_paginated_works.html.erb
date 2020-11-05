@@ -1,15 +1,34 @@
-<% works.each do |work| %>
-  <div class='col-md-2'>
-    <% unless work.class.to_s.include?('FileSet') %>
-      <%= render 'representative_media', presenter: work, viewer: false %>
-      <div style='text-align: center;'>
-        <div class='row'>
-          <%= work.title.first %>
-        </div>
-        <div class='row'>
-          <%= work.description %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<% work_list = [] %>
+<% 18.times { work_list << works.first } %>
+
+<table id="show-page-table" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Office</th>
+      <th>Age</th>
+      <th>Start date</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% work_list.in_groups_of(6, false).each do |work_group| %>
+        <tr>
+          <% work_group.each do |work| %>
+            <td>
+              <%= render 'representative_media', presenter: work, viewer: false %>
+              <div style='text-align: center;'>
+                <div class='row'>
+                  <%= work.title.first %>
+                </div>
+                <div class='row'>
+                  <%= work.description %>
+                </div>
+              </div> 
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
