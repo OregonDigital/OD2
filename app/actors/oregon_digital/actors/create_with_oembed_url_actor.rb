@@ -47,7 +47,6 @@ module OregonDigital
           actor.create_metadata(visibility: env.curation_concern.visibility)
           actor.attach_to_work(env.curation_concern)
           fs.save!
-          IngestLocalFileJob.perform_later(fs, '/data/app/assets/images/dummy.png', env.user)
         end
       end
     end
