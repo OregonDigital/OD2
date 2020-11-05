@@ -1,4 +1,7 @@
-<table id="show-page-table" class="display" style="width:50%">
+<% work_list = [] %>
+<% 18.times { work_list << works.first } %>
+
+<table id="show-page-table" class="display" style="width:50%" role="presentation">
   <thead>
     <tr>
       <th></th>
@@ -10,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-      <% works.in_groups_of(6, false).each do |work_group| %>
+      <% work_list.in_groups_of(6, false).each do |work_group| %>
         <tr>
           <% work_group.each do |work| %>
             <td>
