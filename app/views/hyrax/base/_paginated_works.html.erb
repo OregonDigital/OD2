@@ -1,0 +1,31 @@
+<table id="show-page-table" class="display" style="width:50%" role="presentation">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      <% works.in_groups_of(6, false).each do |work_group| %>
+        <tr>
+          <% work_group.each do |work| %>
+            <td>
+              <%= render 'representative_media', presenter: work, viewer: false %>
+              <div style='text-align: center;'>
+                <div class='row'>
+                  <%= work.title.first %>
+                </div>
+                <div class='row'>
+                  <%= work.description %>
+                </div>
+              </div> 
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
