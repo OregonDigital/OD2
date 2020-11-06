@@ -38,9 +38,12 @@ module OregonDigital
 
       # Utility for creating FileSet from an oEmbed URL
       # Used to create a FileSet with a dummy image and store the url into a metadata field
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength
       def create_file_from_url(env, uri)
         oembed_url = URI.decode_www_form_component(uri.to_s)
         ::FileSet.new(oembed_url: oembed_url) do |fs|
+          title = 'oEmbed Media'
           begin
             resource = OEmbed::Providers.get(oembed_url)
             title = resource.respond_to?(:title) ? resource.title : "oEmbed Media from #{resource.provider_name}"
@@ -48,7 +51,6 @@ module OregonDigital
             OembedError.find_or_create_by(document_id: fs.id) do |error|
               error.document_id = fs.id
             end.add_error(e)
-            title = "oEmbed Media"
           end
           fs.title = Array(title)
           actor = Hyrax::Actors::FileSetActor.new(fs, env.user)
@@ -57,6 +59,8 @@ module OregonDigital
           fs.save!
         end
       end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
