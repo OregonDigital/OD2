@@ -5,6 +5,26 @@ header {
     margin-top: 0;
   }
 
+  a#logo {
+    display: grid;
+    .logo {
+      grid-column: 1;
+      transform: translateY(-30%);
+    }
+    .institution_name {
+      grid-column: 2;
+      font-size: 2em;
+      line-height: 1em;
+    }
+    .tagline {
+      font-size: .5em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $dark-grey;
+      font-weight: 600;
+    }
+  }
+
   .navbar .btn {
     padding: 10px 24px;
     margin-right: 16px;
