@@ -78,6 +78,14 @@
           <hr style='border-width: 3px;'>
           <%= render 'paginated_works', works: children %>
         <% end %>
+        
+        <% parent = ActiveFedora::Base.find(ActiveFedora::Base.find(@presenter.id).in_work_ids.first) %>
+        <% solr_doc = SolrDocument.find(parent.id)%>
+        <% parent_presenter = Hyrax::WorkShowPresenter.new(solr_doc, current_ability) %>
+        Contained In:
+        <hr style='border-width: 3px;'>
+        <%= render 'paginated_works', works: [parent_presenter] %>
+      </div>
       </div>
   </div>
 </div>
