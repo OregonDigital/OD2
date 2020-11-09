@@ -72,6 +72,8 @@
             <%#= render 'citations', presenter: @presenter %>
           </div>
         </div>
+
+        <!-- Renders children of a parent work -->
         <% children = @presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') } %>
         <% if children.length > 0 %>
           Contained In This Object: &nbsp; <%= children.length %> items
@@ -79,9 +81,9 @@
           <%= render 'paginated_works', works: children %>
         <% end %>
         
+        <!-- Renders siblings of a work. These are works that are contained in the same parent work as this one. -->
         <% parent = ActiveFedora::Base.find(ActiveFedora::Base.find(@presenter.id).in_work_ids.first) %>
-        <% solr_doc = SolrDocument.find(parent.id)%>
-        <% parent_presenter = Hyrax::WorkShowPresenter.new(solr_doc, current_ability) %>
+        <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %> 
         Contained In:
         <hr style='border-width: 3px;'>
         <%= render 'paginated_works', works: [parent_presenter] %>
