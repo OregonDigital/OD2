@@ -4,21 +4,24 @@
   min-width: 125px;
 }
 
-.btn-outline {
-  border-radius: 0 !important;
-  border: 3px solid $brand-primary;
-  margin: 0 5px;
-}
-
 .btn {
   border-radius: 0 !important;
-  font-size: 1.25em;
+  border: 3px solid transparent;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 .btn-lg {
   padding: 16px 24px;
+  font-size: 18px;
+  line-height: 1.3333333 !important;
+}
+.btn-outline {
+  border-radius: 0 !important;
+  border: 3px solid $brand-primary;
+  margin: 0 5px;
+  color: $brand-primary;
+  background: unset;
 }
 
 /* Reset input-group button size so text shows */

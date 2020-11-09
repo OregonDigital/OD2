@@ -9,7 +9,7 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   border-top: 3px solid $lime-green;
 }
 .login-button {
-  margin-top: 8px;
+  margin-top: auto;
 }
 .image-masthead {
   // Remove controls background color
@@ -34,7 +34,7 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
     min-width: 55px;
   }
 
-  
+
 }
 .background-container-overlay {
   background: rgba(255, 255, 255, .3);
