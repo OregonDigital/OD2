@@ -1,8 +1,10 @@
 <ul id="user_utility_links" class="nav navbar-nav navbar-right">
   <li>
-    <%= link_to "Explore Collections", Rails.application.routes.url_helpers.explore_collections_path %>
+    <%= link_to "Explore Collections", Rails.application.routes.url_helpers.explore_collections_path, class: 'explore-collections' %>
   </li>
-  <%= render 'shared/locale_picker' if available_translations.size > 1 %>
+  <li>
+    <%= render 'shared/header_search' %>
+  </li>
   <% if user_signed_in? %>
     <li>
       <%= render_notifications(user: current_user) %>
@@ -26,13 +28,16 @@
     </li><!-- /.btn-group -->
   <% else %>
     <li>
-      <%= button_tag t('hyrax.dashboard.my.action.sign up'),
-                   class: 'btn btn-primary login-button',
+      <%= button_tag "<i class='fa fa-lock' aria-hidden='true'></i> #{t('hyrax.dashboard.my.action.log_in')}".html_safe,
+                   class: 'btn btn-primary btn-lg btn-outline login-button',
                    data: { toggle: "modal", target: "#user-login-modal" } %>
-
+    </li>
+    <li>
+      <%= link_to t('hyrax.dashboard.my.action.sign_up'), main_app.new_user_session_path,
+                   class: 'btn btn-primary btn-lg login-button' %>
     </li>
     <!--
-    
+
     <li>
       <%= link_to "Help", Hyrax::Engine.routes.url_helpers.help_path %>
     </li>
