@@ -30,7 +30,7 @@ module OregonDigital
           next if url.blank?
 
           # Escape any space characters, so that this is a legal URI
-          uri = URI.parse(Addressable::URI.escape(url))
+          uri = URI.parse(Addressable::URI.escape(url.strip))
           create_file_from_url(env, uri)
         end
         true
