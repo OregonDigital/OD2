@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 44b6f31e862bd3d5629773566d4710796551ea54
+  revision: 21972b9ad67ebcfd91b65a4c721eb273e5ed497b
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -121,8 +121,8 @@ GEM
     awesome_nested_set (3.2.1)
       activerecord (>= 4.0.0, < 7.0)
     aws-eventstream (1.1.0)
-    aws-partitions (1.388.0)
-    aws-sdk-core (3.109.1)
+    aws-partitions (1.390.0)
+    aws-sdk-core (3.109.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
@@ -178,6 +178,9 @@ GEM
       bootstrap-sass (~> 3.0)
       rails
       ruby-oembed
+    blacklight_advanced_search (6.4.1)
+      blacklight (~> 6.0, >= 6.0.1)
+      parslet
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -654,6 +657,7 @@ GEM
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
+    parslet (2.0.0)
     pg (1.2.3)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
@@ -1005,6 +1009,7 @@ PLATFORMS
 DEPENDENCIES
   axe-matchers
   blacklight-oembed
+  blacklight_advanced_search (~> 6.4)
   browse-everything
   byebug
   capybara (~> 2.17)
