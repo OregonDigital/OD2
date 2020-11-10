@@ -3,7 +3,6 @@
 module OregonDigital
   # Converts a work to a work type presenter
   class WorkToPresenterConverter
-
     # rubocop:disable Metrics/MethodLength
     def self.convert_to_presenter(work, current_ability)
       work_type = work.class
