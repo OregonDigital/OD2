@@ -72,12 +72,38 @@
             <%#= render 'citations', presenter: @presenter %>
           </div>
         </div>
+
+        <!-- Renders children of a parent work -->
         <% children = @presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') } %>
         <% if children.length > 0 %>
           Contained In This Object: &nbsp; <%= children.length %> items
           <hr style='border-width: 3px;'>
           <%= render 'paginated_works', works: children %>
         <% end %>
+        
+        <!-- Renders parent of a work. -->
+        <% in_work_ids = ActiveFedora::Base.find(@presenter.id).in_work_ids %>
+        <% unless in_work_ids.empty? %>
+          <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
+          <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %> 
+          Contained In:
+          <hr style='border-width: 3px;'>
+          <%= render 'paginated_works', works: [parent_presenter] %>
+        <% end %>
+
+        <!-- Renders siblings of a work -->
+        <% in_work_ids = ActiveFedora::Base.find(@presenter.id).in_work_ids %>
+        <% unless in_work_ids.empty? %>
+          <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
+          <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %> 
+          <% children = parent_presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') || work.title.first == @presenter.title.first } %>
+          <% if children.length > 0 %>
+            Related Items: &nbsp; <%= children.length %> items
+            <hr style='border-width: 3px;'>
+            <%= render 'paginated_works', works: children %>
+          <% end %>
+        <% end %>
+      </div>
       </div>
   </div>
 </div>
