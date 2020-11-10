@@ -4,7 +4,7 @@ module OregonDigital
   # Converts a work to a work type presenter
   class WorkToPresenterConverter
 
-    #rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength
     def self.convert_to_presenter(work, current_ability)
       work_type = work.class
       solr_doc = SolrDocument.find(work.id)
@@ -23,6 +23,6 @@ module OregonDigital
       end
       return @work_presenter
     end
-    #rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength
   end
 end
