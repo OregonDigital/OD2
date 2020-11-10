@@ -1,5 +1,93 @@
-.navbar + .navbar,
-.navbar + .image-masthead {
-  // Move searchbar back down
-  margin-top: 0;
+header {
+  .navbar + .navbar,
+  .navbar + .image-masthead {
+    // Move searchbar back down
+    margin-top: 0;
+  }
+
+  a#logo {
+    display: grid;
+    .logo {
+      grid-column: 1;
+      transform: translateY(-30%);
+    }
+    .institution_name {
+      grid-column: 2;
+      font-size: 2em;
+      line-height: 1em;
+      font-weight: 600;
+      padding-left: .25em;
+    }
+    .tagline {
+      font-size: .5em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $dark-grey;
+    }
+  }
+
+  .navbar .btn {
+    padding: 10px 24px;
+    margin-right: 16px;
+  }
+
+  ul.nav {
+    text-transform: uppercase;
+
+    a.explore-collections {
+      font-weight: 700;
+    }
+    li {
+      padding-left: 2em;
+    }
+    li:last-child {
+      padding-left: .5em;
+    }
+    form {
+      a.advanced-link {
+        position: relative;
+        font-size: .75em;
+        font-weight: 700;
+        padding: 0;
+        float: right;
+        top: -.75em;
+      }
+      .input-group {
+        button {
+          position: absolute;
+          left: 0;
+          z-index: 10;
+          background: unset;
+          border: unset;
+          width: 2.25em;
+          height: calc(100% - 16px);
+          margin-top: 8px;
+          margin-bottom: 8px;
+          border-right: 1px solid $light-grey;
+        }
+        input {
+          background-color: $very-light-grey;
+          border-radius: 0;
+          padding-left: 2.5em;
+          font-size: 1.25em;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  #masthead {
+    .container-fluid {
+      padding: 2em 3em;
+      padding-left: 4em;
+    }
+  }
+}
+
+body.dashboard {
+  padding: 0;
+
+  header #masthead {
+    position: relative;
+  }
 }

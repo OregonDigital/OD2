@@ -247,6 +247,8 @@ en:
     dashboard:
       my:
         action:
+          sign_up: 'Sign Up'
+          log_in: 'Log In'
           add_to_collection: 'Save to...'
           select_all: 'Select All'
     search:
