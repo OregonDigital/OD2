@@ -120,3 +120,49 @@ body {
 .no-background {
   background: none;
 }
+
+
+ul.nav.homepage-nav {
+  text-transform: uppercase;
+
+  a.explore-collections {
+    font-weight: 700;
+  }
+  li {
+    padding-left: 2em;
+  }
+  li:last-child {
+    padding-left: .5em;
+  }
+  form {
+    a.advanced-link {
+      position: relative;
+      font-size: .75em;
+      font-weight: 700;
+      padding: 0;
+      float: right;
+      top: -.75em;
+    }
+    .input-group {
+      button {
+        position: absolute;
+        left: 0;
+        z-index: 10;
+        background: unset;
+        border: unset;
+        width: 2.25em;
+        height: calc(100% - 16px);
+        margin-top: 8px;
+        margin-bottom: 8px;
+        border-right: 1px solid $light-grey;
+      }
+      input {
+        background-color: $very-light-grey;
+        border-radius: 0;
+        padding-left: 2.5em;
+        font-size: 1.25em;
+        height: 100%;
+      }
+    }
+  }
+}
