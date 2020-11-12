@@ -18,6 +18,7 @@ module OregonDigital
             current_user.cannot?(:show, record)
           end
           can(:download_low, ActiveFedora::Base)
+          can(:metadata, ActiveFedora::Base)
         end
         # rubocop:enable Metrics/AbcSize
 
