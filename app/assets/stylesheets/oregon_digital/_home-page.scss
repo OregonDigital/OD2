@@ -124,17 +124,20 @@ body {
 
 ul.nav.homepage-nav {
   text-transform: uppercase;
+  width: 100%;
 
   a.explore-collections {
     font-weight: 700;
   }
   li {
     padding-left: 2em;
+    width: 100%;
   }
   li:last-child {
     padding-left: .5em;
   }
   form {
+    width: 100%;
     a.advanced-link {
       position: relative;
       font-size: .75em;
@@ -144,6 +147,7 @@ ul.nav.homepage-nav {
       top: -.75em;
     }
     .input-group {
+      width: 100%;
       button {
         position: absolute;
         left: 0;
@@ -162,6 +166,7 @@ ul.nav.homepage-nav {
         padding-left: 2.5em;
         font-size: 1.25em;
         height: 100%;
+        width: 100%;
       }
     }
   }
