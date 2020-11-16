@@ -17,7 +17,7 @@
               <%= render 'representative_media', presenter: work, viewer: false %>
               <div style='margin-left: 60px;'>
                 <div class='row'>
-                  <%= work.title.first %>
+                  <%= link_to_document work.solr_document, work.solr_document.title.first %>
                 </div>
                 <div class='row'>
                   <%= work.description %>
