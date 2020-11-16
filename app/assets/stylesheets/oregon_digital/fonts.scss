@@ -65,3 +65,14 @@ h2, h4, h6 {
     text-decoration: underline 2px $light-orange;
   }
 }
+
+dl.work-show > dt {
+  font-family: Lato;
+  font-style: bold;
+  font-size: 18px;
+}
+
+dl.work-show > dd {
+  font-family: Lato;
+  font-size: 18px;
+}
