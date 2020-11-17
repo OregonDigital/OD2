@@ -147,6 +147,10 @@ crosswalk:
     predicate: http://rdaregistry.info/Elements/w/P10265
     multiple: true
     function:
+  - property: designer_inscription
+    predicate: http://opaquenamespace.org/ns/cdwa/InscriptionTranscription
+    multiple: true
+    function:
   - property: first_line
     predicate: http://opaquenamespace.org/ns/sheetmusic_firstLine
     multiple: false
@@ -199,6 +203,10 @@ crosswalk:
     predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#note
     multiple: true
     function:
+  - property: motif
+    predicate: http://opaquenamespace.org/ns/motif
+    multiple: true
+    function: 
   - property: number_of_pages
     predicate: http://schema.org/numberOfPages
     multiple: true

@@ -138,6 +138,12 @@ overrides:
   - property: accession_number
     predicate: http://opaquenamespace.org/ns/cco/accessionNumber
     multiple: true
+    
+  #flip editor predicate, from schema to marcrel
+  - property: editor_attributes
+    predicate: http://schema.org/editor
+    multiple: true
+    function: attributes_data
 
   #in cpds, not used in OD2
   - predicate: http://www.openarchives.org/ore/1.0/datamodel#proxyFor
