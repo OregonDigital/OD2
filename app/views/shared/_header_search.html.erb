@@ -16,5 +16,7 @@
     </div><!-- /.input-group -->
 
   </div><!-- /.form-group -->
-  <%= link_to 'Advanced', BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link' %>
+  <%= link_to BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link' do %>
+    Advanced <span class="hidden visible-xs-inline-block">Search</span>
+  <% end %>
 <% end %>
