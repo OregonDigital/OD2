@@ -1,0 +1,8 @@
+<div class="col-sm-2">
+  <%= render_thumbnail_tag(
+        SolrDocument.find(work_id),
+        { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
+        'aria-hidden': true,
+        tabindex: -1
+      ) %>
+</div>
