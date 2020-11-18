@@ -1,6 +1,13 @@
 .collection-show {
   .hyc-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
     margin-bottom: 2em;
+
+    span {
+      flex: 0 0 auto;
+    }
   }
   .item-count {
     padding-right: 0.5em;
