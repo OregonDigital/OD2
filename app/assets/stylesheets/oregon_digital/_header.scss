@@ -4,22 +4,36 @@ header {
     // Move searchbar back down
     margin-top: 0;
   }
+  .navbar-toggle .icon-bar {
+    background-color: $navy-blue;
+  }
+  .navbar-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .navbar-header:before {
+    display: unset;
+    content: unset;
+  }
 
   a#logo {
     display: grid;
+    grid-template-columns: 100px 1fr;
+    height: 100%;
+    padding: 0;
+
     .logo {
       grid-column: 1;
-      transform: translateY(-30%);
     }
     .institution_name {
       grid-column: 2;
-      font-size: 2em;
       line-height: 1em;
       font-weight: 600;
       padding-left: .25em;
+      margin-bottom: 0;
     }
     .tagline {
-      font-size: .5em;
+      font-size: 16px;
       text-transform: uppercase;
       letter-spacing: 2px;
       color: $dark-grey;
@@ -37,22 +51,24 @@ header {
     a.explore-collections {
       font-weight: 700;
     }
-    li {
-      padding-left: 2em;
-    }
-    li:last-child {
+    & > li {
       padding-left: .5em;
     }
     form {
       a.advanced-link {
-        position: relative;
         font-size: .75em;
         font-weight: 700;
         padding: 0;
-        float: right;
-        top: -.75em;
+
+        @media (min-width: $screen-sm-min) {
+          & {
+            float: right;
+          }
+        }
       }
       .input-group {
+        margin: auto;
+
         button {
           position: absolute;
           left: 0;
@@ -78,8 +94,7 @@ header {
 
   #masthead {
     .container-fluid {
-      padding: 2em 3em;
-      padding-left: 4em;
+      padding: 1em 3em;
     }
   }
 }
