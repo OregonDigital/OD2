@@ -1,4 +1,7 @@
 .collection-show {
+  .hyc-header {
+    margin-bottom: 0;
+  }
   .hyc-title {
     display: flex;
     align-items: baseline;
@@ -27,6 +30,9 @@
 }
 
 .hyc-bl-results {
+  margin: 0;
+  margin-bottom: 2em;
+
   .masonry.document {
     padding-left: 20px;
     padding-right: 20px;
