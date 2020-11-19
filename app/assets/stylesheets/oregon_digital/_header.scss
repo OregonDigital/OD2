@@ -51,8 +51,8 @@ header {
     a.explore-collections {
       font-weight: 700;
     }
-    & > li {
-      padding-left: .5em;
+    & > li:nth-child(2) {
+      padding: 0 2em;
     }
     form {
       a.advanced-link {
