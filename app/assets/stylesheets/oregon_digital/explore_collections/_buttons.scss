@@ -1,6 +1,7 @@
 #explore-tabs {
   ul.nav, ul.nav li {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
   }
 }
