@@ -21,6 +21,7 @@ span {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: bold;
+  text-decoration: inherit;
 }
 h1,
 .h1 {
@@ -105,6 +106,9 @@ h2, h4, h6,
   }
 }
 
+.navy-blue {
+  color: $navy-blue;
+}
 .very-light-grey {
   color: $very-light-grey;
 }

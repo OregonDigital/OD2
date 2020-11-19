@@ -12,7 +12,7 @@
   <tbody>
     <% collections.each_with_index do |collection, i| %>
       <tr>
-        <td> <%= link_to collection.title_or_label, [hyrax, collection] %> </td>
+        <td> <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %> </td>
         <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
         <td> <%= controller.total_viewable_items(collection.id) %> </td>
         <% if tab == controller.class::TABS[:my] %>
