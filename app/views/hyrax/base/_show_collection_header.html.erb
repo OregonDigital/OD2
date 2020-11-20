@@ -1,8 +1,11 @@
 <div class="col-sm-6">
   <% @collection = Collection.find(@presenter.member_of_collection_ids.first) %>
-  <% @member_work_1 = @collection.member_works[0, 3].first.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.first.nil? %>
-  <% @member_work_2 = @collection.member_works[0, 3].second.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.second.nil? %>
-  <% @member_work_3 = @collection.member_works[0, 3].third.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.third.nil? %>
+  <% @member_work_1 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).first['id'] %>
+  <% @member_work_2 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).second['id'] %>
+  <% @member_work_3 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).third['id'] %>
+  <% @member_work_1 = @member_work_1.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_1.nil? %>
+  <% @member_work_2 = @member_work_2.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_2.nil? %>
+  <% @member_work_3 = @member_work_2.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_3.nil? %>
   <% @collection_solr_doc = SolrDocument.find(@collection.id) %>
   <% if @member_work_1 %>
     <%= render 'show_page_collection_image', work_id: @member_work_1.id %>
@@ -16,7 +19,7 @@
   <div class="col-sm-6">
     <p class='collection-title'><%= @collection.title.first %></p>
     <p>
-      <%= @collection.member_works.length %> items
+      <%= Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 10000).length %> items
       &nbsp;
       <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
     </p>
