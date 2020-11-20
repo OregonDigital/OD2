@@ -17,5 +17,6 @@ module OregonDigital
     autoload :Triplestore
     autoload :FeatureClassUriToLabel
     autoload :AccessControls
+    autoload :WorkToPresenterConverter
   end
 end
