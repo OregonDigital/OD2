@@ -1,6 +1,7 @@
 header {
   &.header {
     padding-bottom: 3em;
+    letter-spacing: 1px;
   }
   .navbar + .navbar,
   .navbar + .image-masthead {
@@ -101,6 +102,10 @@ header {
     .container-fluid {
       padding: 1em 3em;
     }
+  }
+
+  #top-navbar-collapse {
+    letter-spacing: 2px;
   }
 }
 
