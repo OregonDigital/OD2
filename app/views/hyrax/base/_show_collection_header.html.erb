@@ -1,8 +1,8 @@
 <div class="col-sm-6">
   <% @collection = Collection.find(@presenter.member_of_collection_ids.first) %>
-  <% @member_work_1 = @collection.member_works.first.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.first.nil? %>
-  <% @member_work_2 = @collection.member_works.second.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.second.nil? %>
-  <% @member_work_3 = @collection.member_works.third.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.third.nil? %>
+  <% @member_work_1 = @collection.member_works[0, 3].first.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.first.nil? %>
+  <% @member_work_2 = @collection.member_works[0, 3].second.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.second.nil? %>
+  <% @member_work_3 = @collection.member_works[0, 3].third.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @collection.member_works.third.nil? %>
   <% @collection_solr_doc = SolrDocument.find(@collection.id) %>
   <% if @member_work_1 %>
     <%= render 'show_page_collection_image', work_id: @member_work_1.id %>
