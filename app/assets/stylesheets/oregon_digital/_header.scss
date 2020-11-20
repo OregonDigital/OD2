@@ -1,4 +1,7 @@
 header {
+  &.header {
+    padding-bottom: 3em;
+  }
   .navbar + .navbar,
   .navbar + .image-masthead {
     // Move searchbar back down
@@ -93,6 +96,8 @@ header {
   }
 
   #masthead {
+    box-shadow: 0 0 5px $light-grey;
+
     .container-fluid {
       padding: 1em 3em;
     }
