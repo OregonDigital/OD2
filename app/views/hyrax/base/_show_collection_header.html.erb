@@ -3,9 +3,9 @@
   <% @member_work_1 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).first['id'] %>
   <% @member_work_2 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).second['id'] %>
   <% @member_work_3 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).third['id'] %>
-  <% @member_work_1 = @member_work_1.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_1.nil? %>
-  <% @member_work_2 = @member_work_2.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_2.nil? %>
-  <% @member_work_3 = @member_work_2.members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_3.nil? %>
+  <% @member_work_1 = ActiveFedora::Base.find(@member_work_1).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_1.nil? %>
+  <% @member_work_2 = ActiveFedora::Base.find(@member_work_2).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_2.nil? %>
+  <% @member_work_3 = ActiveFedora::Base.find(@member_work_3).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_3.nil? %>
   <% @collection_solr_doc = SolrDocument.find(@collection.id) %>
   <% if @member_work_1 %>
     <%= render 'show_page_collection_image', work_id: @member_work_1.id %>
