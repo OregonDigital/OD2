@@ -1,4 +1,8 @@
 header {
+  &.header {
+    padding-bottom: 3em;
+    letter-spacing: 1px;
+  }
   .navbar + .navbar,
   .navbar + .image-masthead {
     // Move searchbar back down
@@ -51,8 +55,8 @@ header {
     a.explore-collections {
       font-weight: 700;
     }
-    & > li {
-      padding-left: .5em;
+    & > li:nth-child(2) {
+      padding: 0 2em;
     }
     form {
       a.advanced-link {
@@ -93,9 +97,15 @@ header {
   }
 
   #masthead {
+    box-shadow: 0 0 5px $light-grey;
+
     .container-fluid {
       padding: 1em 3em;
     }
+  }
+
+  #top-navbar-collapse {
+    letter-spacing: 2px;
   }
 }
 
