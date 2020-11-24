@@ -37,11 +37,13 @@ GIT
 
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: 7791267f58e55385e7019fd5e991cc7a4b38e27f
+  revision: 1f51be1c5245afc753e834d79d25df384ef0861d
   specs:
     bulkrax (0.1.0)
       bagit (~> 0.4)
+      coderay
       iso8601 (~> 0.9.0)
+      kaminari
       language_list (~> 1.2, >= 1.2.1)
       libxml-ruby (~> 3.1.0)
       loofah (>= 2.2.3)
