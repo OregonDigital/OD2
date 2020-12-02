@@ -1,11 +1,10 @@
 <%# OVERRIDE FROM HYRAX change item table to flexbox %>
 <div class="thumbnail <%= dom_class(member) %> attributes">
-  <%= render_thumbnail_tag member %>
-  <%= link_to(member.link_name, contextual_path(member, @presenter)) %>
+  <div class="thumbnail-block"
+    <%= render_thumbnail_tag member %>
+    <br>
+    <%= link_to(member.link_name, contextual_path(member, @presenter)) %>
+  </div>
   <br>
-  <ul>
-    <li><%= link_to "Download Image", download_path(member.id) %></li>
-    <li>High Resolution</li>
-    <li>Metadata Only (CSV)</li>
-  </ul>
+  <%= render 'actions', member: member %>
 </div>

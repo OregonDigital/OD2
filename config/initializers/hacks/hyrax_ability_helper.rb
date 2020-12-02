@@ -5,8 +5,8 @@ Hyrax::AbilityHelper.module_eval do
   def visibility_options(variant)
     options = [
       Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC,
-      'osu',
-      'uo',
+      OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU,
+      OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO,
       Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
     ]
     case variant

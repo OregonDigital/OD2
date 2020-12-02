@@ -9,10 +9,12 @@ end
 gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
 
 gem 'browse-everything'
+# coffee-rails is a requirement for Hyrax or one of its dependencies but hasn't
+# been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'hydra-role-management', '~> 1.0.2'
-gem 'hyrax', github: 'samvera/hyrax', tag: 'v2.6.0'
+gem 'hyrax', github: 'samvera/hyrax', tag: 'v2.7.0'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'pg'
@@ -27,7 +29,6 @@ gem 'ruby-oembed'
 gem 'blacklight-oembed'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
-gem 'haml'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
@@ -51,6 +52,7 @@ gem "recaptcha", require: "recaptcha/rails"
 gem 'bulkrax', github: 'samvera-labs/bulkrax'
 
 group :development do
+  # listen is a requirement of puma but isn't part of its gemspec
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
 end
@@ -83,4 +85,5 @@ group :test do
   gem 'simplecov', '>= 0.9'
 end
 
+gem "vcr", "~> 5.1"
 gem 'willow_sword', github: 'notch8/willow_sword'

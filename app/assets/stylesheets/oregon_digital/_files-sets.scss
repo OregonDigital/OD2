@@ -1,0 +1,16 @@
+.file-sets {
+    height: auto;
+    overflow-x: visible;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .thumbnail-block {
+        width: 140px;
+        img {
+            height: 70px;
+        }
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+    }
+}

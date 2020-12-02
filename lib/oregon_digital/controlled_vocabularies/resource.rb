@@ -27,6 +27,8 @@ module OregonDigital
         persistence_strategy.graph = triplestore_fetch
       end
 
+      # DISABLES RUBOCOP BECAUSE SET_SUBJECT! IS AN OVERRIDE FROM AT::RESOURCE
+      # rubocop:disable AccessorMethodName
       # Override ActiveTriples::Resource.set_subject! to throw exception if term isn't in vocab
       def set_subject!(uri_or_str)
         raise ControlledVocabularyError, "Term not in controlled vocabulary: #{uri_or_str}" unless
@@ -34,20 +36,23 @@ module OregonDigital
 
         super
       end
+      # rubocop:enable AccessorMethodName
 
       # Return a tuple of url & label
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
-        language = get_language_label(rdf_label)
-        label = language.blank? ? rdf_label.first : language
-        [rdf_subject.to_s, { label: "#{label}$#{rdf_subject}" }]
+        [rdf_subject.to_s, { label: "#{language_label(get_language_label(rdf_label))}$#{rdf_subject}" }]
       end
 
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
       # it should return an empty graph.
       def triplestore_fetch
         URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
+      end
+
+      def language_label(language)
+        language.blank? ? rdf_label.first : language
       end
 
       def triplestore

@@ -25,8 +25,20 @@
   </div>
 <% end %>
 <div class="resource-type col-md-offset-2 col-md-10">
-  <%= render 'index_type_icon', document: document unless document.type_label.first.empty? %>
-  <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
+  <div class="col-md-4">
+    <%= render 'index_type_icon', document: document unless document.type_label.first.empty? %>
+    <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
+  </div>
+  <% if document.parents? %>
+    <div class="col-md-4">
+      <%= t('hyrax.search.list.parents.header') %>
+      <ul>
+        <% document.parents.each do |parent| %>
+          <li> <%= link_to parent, parent %> </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= label_tag "", class: 'pull-right' do %>
     <% raw("#{check_box_tag "my_shelf_#{document.id}", document.id, false, class: 'my_shelf_result_checkbox'} Add to My Shelf") %>
   <% end %>

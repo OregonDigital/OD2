@@ -40,6 +40,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :on_pages, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasPages') do |index|
+        index.as :stored_searchable
+      end
+
       property :table_of_contents, predicate: ::RDF::Vocab::DC.tableOfContents do |index|
         index.as :stored_searchable
       end

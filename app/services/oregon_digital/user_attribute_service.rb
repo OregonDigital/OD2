@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mail'
+
 module OregonDigital
   # This object is used to inspect specific attributes of a user
   class UserAttributeService
@@ -11,6 +13,10 @@ module OregonDigital
 
     def email_redirect_path
       domain_hash[@parsed_domain]
+    end
+
+    def institutional_user?
+      !domain_hash[@parsed_domain].nil?
     end
 
     private

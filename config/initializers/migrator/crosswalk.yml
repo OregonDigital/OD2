@@ -658,7 +658,7 @@ crosswalk:
   - property: date_uploaded
     predicate: http://purl.org/dc/terms/dateSubmitted
     multiple: false
-    function:
+    function: datetime_data
   - property: width
     predicate: http://www.w3.org/2003/12/exif/ns/width
     multiple: false
