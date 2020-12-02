@@ -1,3 +1,7 @@
 <div class="search-results-title-row">
-  <h4 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), document %></h4>
+  <% if document.has_highlight_field?(Solrizer.solr_name('title', :stored_searchable)) %>
+    <h4 class="search-result-title"><%= link_to document.highlight_field(Solrizer.solr_name('title', :stored_searchable)).first, document %></h4>
+  <% else %>
+    <h4 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), document %></h4>
+  <% end %>
 </div>

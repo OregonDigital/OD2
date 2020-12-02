@@ -5,7 +5,7 @@ describe OregonDigital::LanguageService do
 
   describe '#all_labels' do
     it 'returns active terms' do
-      expect(service.all_labels('http://id.loc.gov/vocabulary/iso639-2/eng')).to eq ['English']
+      expect(service.all_labels('http://id.loc.gov/vocabulary/iso639-2/eng')).to eq ['English [eng]']
     end
   end
 end

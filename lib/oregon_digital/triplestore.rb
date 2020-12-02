@@ -13,12 +13,13 @@ module OregonDigital
     def self.fetch(uri)
       return if uri.blank?
 
+      @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
       begin
-        @triplestore ||= TriplestoreAdapter::Triplestore.new(triplestore_client)
-        @triplestore.fetch(uri, from_remote: true)
-      rescue TriplestoreAdapter::TriplestoreException => e
-        raise e
+        graph = fetch_from_cache(uri, @triplestore)
+      rescue TriplestoreAdapter::TriplestoreException
+        graph = fetch_from_source(uri, @triplestore)
       end
+      graph
     end
 
     def self.triplestore_client
@@ -46,12 +47,28 @@ module OregonDigital
 
       rdf_label_predicates.each do |predicate|
         labels[predicate.to_s] = []
-        labels[predicate.to_s] << graph.query(predicate: predicate)
-                                       .reject { |statement| statement.is_a?(Array) }
-                                       .map { |statement| statement.object.to_s }
+        labels[predicate.to_s] << fetched_graph(predicate, graph)
         labels[predicate.to_s].flatten!.compact!
       end
       labels
+    end
+
+    def self.fetched_graph(predicate, graph)
+      graph.query(predicate: predicate).reject { |statement| statement.is_a?(Array) }.map { |statement| statement.object.to_s }
+    end
+
+    def self.fetch_from_cache(uri, triplestore)
+      Rails.logger.info "Attempting to fetch #{uri} from local graph cache."
+      graph = triplestore.fetch(uri, from_remote: false)
+      Rails.logger.info 'Fetched From Cache'
+      graph
+    end
+
+    def self.fetch_from_source(uri, triplestore)
+      Rails.logger.info "Fetching #{uri} from the authorative source. (this is slow)"
+      graph = triplestore.fetch(uri, from_remote: true)
+      Rails.logger.info 'Fetched From Source'
+      graph
     end
   end
 end

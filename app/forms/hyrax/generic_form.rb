@@ -4,8 +4,7 @@ module Hyrax
   # Generated form for Generic
   class GenericForm < Hyrax::Forms::WorkForm
     self.model_class = ::Generic
-    self.terms += (Generic.generic_properties.map(&:to_sym) + Generic.controlled_properties).sort
-    self.terms += %i[date_uploaded]
+    self.terms += (Generic.generic_properties.map(&:to_sym) + Generic.controlled_properties).sort + %i[date_uploaded date_modified]
     self.terms -= %i[based_near]
     self.terms = self.terms.uniq
 
@@ -26,8 +25,12 @@ module Hyrax
       []
     end
 
+    def solr_document
+      @solr_document ||= ::SolrDocument.find(model.id)
+    end
+
     def self.build_permitted_params
-      params = super
+      params = super - %i[date_uploaded date_modified]
       Generic.controlled_property_labels.each do |prop|
         params << { prop.gsub('_label', '_attributes') => %i[id _destroy] }
       end

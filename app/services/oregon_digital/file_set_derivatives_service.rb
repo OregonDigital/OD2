@@ -1,10 +1,11 @@
 # frozen_string_literal:true
 
+# rubocop:disable Metrics/ClassLength
 module OregonDigital
   # Overrides the Hyrax derivative generation for our JP2 setup
   #
   # This builds JP2 derivatives in stages.  The openjpeg tools can't convert
-  # many formats to JP2 directly, so we make sure we have a BMP, and then
+  # many formats to JP2 directly, so we make sure we have a PNG, and then
   # convert that to JP2.  It's a bit messy and definitely inelegant, but it
   # does the job.
   #
@@ -37,6 +38,61 @@ module OregonDigital
       end
     end
 
+    # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
+    def create_image_derivatives(filename)
+      OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
+        preprocess_image(filename, out_path)
+        create_thumbnail(out_path)
+        create_zoomable(out_path)
+      end
+    end
+
+    # Overridden: Office documents' needs are very similar to base Hyrax, but
+    # we can't use `mogrify` with a `flatten` switch in GraphicsMagick-land, so
+    # we have a slightly modified copy of the core processor
+    def create_office_document_derivatives(filename)
+      extract_full_text(filename, uri)
+      OregonDigital::Derivatives::Document::Runner.create(
+        filename,
+        outputs: [{ label: :thumbnail, size: '200x150>',
+                    format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+      )
+    end
+
+    def create_pdf_derivatives(filename)
+      create_thumbnail(filename)
+      extract_full_text(filename, uri)
+      page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
+      0.upto(page_count - 1) do |pagenum|
+        OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
+          manual_convert(filename, pagenum, out_path)
+          create_zoomable_page(out_path, pagenum)
+        end
+      end
+    end
+
+    def create_thumbnail(filename)
+      OregonDigital::Derivatives::Image::GMRunner.create(
+        filename,
+        outputs: [{ label: :thumbnail, size: '120x120>',
+                    format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+      )
+    end
+
+    def create_zoomable(filename)
+      create_zoomable_page(filename, nil)
+    end
+
+    def create_zoomable_page(filename, pagenum)
+      OregonDigital::Derivatives::Image::JP2Runner.create(filename,
+                                                          outputs: [{ label: :jp2,
+                                                                      mime_type: mime_type,
+                                                                      url: derivative_url('jp2', pagenum),
+                                                                      tile_size: '1024',
+                                                                      compression: '20',
+                                                                      layer: 0 }])
+    end
+
     # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
     def sequence_path(path, sequence = nil)
       return path unless sequence
@@ -65,84 +121,49 @@ module OregonDigital
       paths.collect { |pth| URI("file://#{pth}").to_s }.sort
     end
 
-    # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
-    def create_image_derivatives(filename)
-      OregonDigital::Derivatives::Image::Utils.tmp_file('bmp') do |out_path|
-        preprocess_image(filename, out_path)
-        create_thumbnail(out_path)
-        create_zoomable(out_path)
-      end
-    end
-
-    def create_pdf_derivatives(filename)
-      create_thumbnail(filename)
-      extract_full_text(filename, uri)
-
-      pdf = MiniMagick::Image.open(filename)
-      0.upto(pdf.pages.length - 1) do |pagenum|
-        OregonDigital::Derivatives::Image::Utils.tmp_file('bmp') do |out_path|
-          manual_convert(filename, pagenum, out_path)
-          create_zoomable_page(out_path, pagenum)
-        end
-      end
-    end
-
-    def create_thumbnail(filename)
-      OregonDigital::Derivatives::Image::GMRunner.create(filename,
-                                                         outputs: [{ label: :thumbnail,
-                                                                     size: '120x120>',
-                                                                     format: 'jpg',
-                                                                     url: derivative_url('thumbnail'),
-                                                                     layer: 0 }])
-    end
-
-    def create_zoomable(filename)
-      create_zoomable_page(filename, nil)
-    end
-
-    def create_zoomable_page(filename, pagenum)
-      OregonDigital::Derivatives::Image::JP2Runner.create(filename,
-                                                          outputs: [{ label: :jp2,
-                                                                      mime_type: mime_type,
-                                                                      url: derivative_url('jp2', pagenum),
-                                                                      tile_size: '1024',
-                                                                      compression: '20',
-                                                                      layer: 0 }])
-    end
-
-    # Pre-processes the given file to generate a BMP based on its mime type:
+    # Pre-processes the given file to generate a PNG based on its mime type:
     #
     # - JP2s need to be decoded and then re-encoded by opj tools:
     #   GraphicsMagick can't read them, and opj_compress won't re-encode an
     #   existing JP2....
-    # - BMPs don't need an intermediate step, so they don't need any
-    #   preprocessing to happen; we fake it by hard-linking the existing BMP
+    # - PNGs don't need an intermediate step, so they don't need any
+    #   preprocessing to happen; we fake it by hard-linking the existing PNG
     #   so the rest of the logic works consistently
-    # - All other images need to be converted to BMP via graphicsmagick
-    def preprocess_image(source_file, temp_bmp_path)
+    # - All other images need to be converted to PNG via graphicsmagick
+    def preprocess_image(source_file, temp_png_path)
       case mime_type
-      when 'image/jp2' then jp2_to_bmp(source_file, temp_bmp_path)
-      when 'image/bmp' then bmp_to_bmp(source_file, temp_bmp_path)
-      else                  MiniMagick::Image.open(source_file).format('bmp').write(temp_bmp_path)
+      when 'image/jp2' then jp2_to_png(source_file, temp_png_path)
+      when 'image/png' then png_to_png(source_file, temp_png_path)
+      else other_to_png(source_file, temp_png_path)
       end
     end
 
-    def jp2_to_bmp(source, dest)
+    def jp2_to_png(source, dest)
       source = Shellwords.escape(source)
       dest = Shellwords.escape(dest)
       bin = jp2_processor.opj_decompress
       jp2_processor.execute "#{bin} -i #{source} -o #{dest}"
     end
 
-    def bmp_to_bmp(source, dest)
+    def png_to_png(source, dest)
       File.unlink(dest)
       FileUtils.ln_s(source, dest)
+    end
+
+    def other_to_png(source, dest)
+      image = MiniMagick::Image.open(source)
+      image.depth(8).format('png').write(dest)
+
+      # The above code generates a temp file which we don't need beyond the
+      # .write() call, so we explicitly destroy the image object
+      image.destroy!
     end
 
     def manual_convert(filename, pagenum, out_path)
       MiniMagick::Tool::Convert.new do |cmd|
         cmd.density(300)
         cmd << format('%<filename>s[%<page>d]', filename: filename, page: pagenum)
+        cmd.depth(8)
         cmd << out_path
       end
     end
@@ -153,3 +174,4 @@ module OregonDigital
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

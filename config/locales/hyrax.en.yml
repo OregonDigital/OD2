@@ -21,7 +21,7 @@ en:
           collector_label_sim: Collector
           composer_label_sim: Composer
           creator_label_sim: Creator
-          creator_display_sim: Creator
+          creator_display_sim: Creator Display
           contributor_label_sim: Contributor
           dedicatee_label_sim: Dedicatee
           donor_label_sim: Donor
@@ -54,7 +54,7 @@ en:
           based_near_label_sim: Location
           cultural_context_label_sim: Cultural Context
           ethnographic_term_label_sim: Ethnographic Term
-          style_or_period_label_sim: Style or Period
+          style_or_period_label_sim: Style / Period
           form_of_work_label_sim: Form of Work
           format_label_sim: Format
           institution_label_sim: Institution
@@ -62,7 +62,7 @@ en:
           license_label_sim: License
           local_collection_name_label_sim: Local Collection Name
           tgn_label_sim: Historic Place
-          type_label_sim: Type
+          type_label_sim: Media
           repository_label_sim: Repository
           publisher_label_sim: Publisher
           taxon_class_label_sim: Taxon Class
@@ -70,14 +70,16 @@ en:
           genus_label_sim: Genus
           order_label_sim: Order
           species_label_sim: Species
-          phylum_or_division_label_sim: Phylum or Division
+          phylum_or_division_label_sim: Phylum / Division
           common_name_label_sim: Common Name
           military_branch_label_sim: Military Branch
           subject_label_sim: Subject
         index:
+          all_text_tsimv: Full Text
           based_near_label_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
+          date_tesim: Date
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
@@ -111,13 +113,15 @@ en:
           patron_label_tesim: Patron
           photographer_label_tesim: Photographer
           print_maker_label_tesim: Print Maker
+          ranger_district_label_tesim: Ranger District
           recipient_label_tesim: Recipient
           transcriber_label_tesim: Transcriber
           translator_label_tesim: Translator
+          water_basin_label_tesim: Water Basin
           based_near_label_tesim: Location
           cultural_context_label_tesim: Cultural Context
           ethnographic_term_label_tesim: Ethnographic Term
-          style_or_period_label_tesim: Style or Period
+          style_or_period_label_tesim: Style / Period
           form_of_work_label_tesim: Form of Work
           format_label_tesim: Format
           institution_label_tesim: Institution
@@ -131,7 +135,7 @@ en:
           genus_label_tesim: Genus
           order_label_tesim: Order
           species_label_tesim: Species
-          phylum_or_division_label_tesim: Phylum or Division
+          phylum_or_division_label_tesim: Phylum / Division
           common_name_label_tesim: Common Name
           military_branch_label_tesim: Military Branch
           subject_label_tesim: Subject
@@ -190,14 +194,18 @@ en:
           patron_label: Patron
           photographer_label: Photographer
           print_maker_label: Print Maker
+          ranger_district_label: Ranger District
           recipient_label: Recipient
           transcriber_label: Transcriber
           translator_label: Translator
+          water_basin_label: Water Basin
           based_near_label: Location
           cultural_context_label: Cultural Context
           ethnographic_term_label: Ethnographic Term
-          style_or_period_label: Style or Period
+          style_or_period_label: Style / Period
           form_of_work_label: Form of Work
+          access_restrictions_label: Access Restrictions
+          publication_place_label: Publication Place
           format_label: Format
           institution_label: Institution
           local_collection_name_label: Local Collection Name
@@ -209,10 +217,11 @@ en:
           genus_label: Genus
           order_label: Order
           species_label: Species
-          phylum_or_division_label: Phylum or Division
+          phylum_or_division_label: Phylum / Division
           common_name_label: Common Name
           military_branch_label: Military Branch
           subject_label: Subject
+          date_modified: Modified
   hyrax:
     base:
       relationships:

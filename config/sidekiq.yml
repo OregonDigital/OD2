@@ -1,5 +1,6 @@
 ---
 :concurrency: 5
+:logfile: log/development.log
 :max_retries: 5
 staging:
   :concurrency: 5

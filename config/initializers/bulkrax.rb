@@ -94,15 +94,38 @@ Bulkrax.setup do |config|
     'local_collection_id' => { from: ['localcollctionid'] },
     'photographer' => { from: ['photographer'] },
     'date' => { from: ['date'] },
-    'subject' => { from: ['lcsubject'], split: '\|' },
+    'subject' => { from: ['lcsubject'], split: /\s*[;|]\s*/ },
     'location' => { from: ['location'] },
     'resource_type' => { from: ['type'] },
     'model' => { from: ['type'], parsed: true },
     'format' => { from: ['format'] },
-    'rights' => { from: ['rights'] },
+    'rights_statement' => { from: ['rights'] },
     'rights_holder' => { from: ['rightholder'] },
     'set' => { from: ['set'] },
     'institution' => { from: ['contributinginstitution'] },
     'primary_set' => { from: ['primaryset'] }
   }
+end
+
+## override model mapping - map collection to Generic for now
+Bulkrax::ApplicationMatcher.class_eval do
+  def extract_model(src)
+    if src&.match('http://purl.org/dc/dcmitype/Collection')
+      'Generic'
+    elsif src&.match(URI::ABS_URI)
+      src.split('/').last
+    else
+      src
+    end
+  rescue StandardError
+    nil
+  end
+end
+
+## override CsvEntry#required_elements to include OD-specific required_fields
+Bulkrax::CsvEntry.class_eval do
+  def required_elements
+    # added resource_type, identifier, and rights_statement
+    %w[title source_identifier resource_type identifier rights_statement]
+  end
 end

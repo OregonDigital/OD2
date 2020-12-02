@@ -1,0 +1,14 @@
+<%= f.input key,
+            as: :single_value_controlled_vocabulary,
+            placeholder: 'Search for Access Restrictions using a valid URI',
+            input_html: {
+              class: 'form-control',
+              data: { 'autocomplete-url' => "/authorities/search/access_restrictions",
+                      'autocomplete' => key,
+                      'field-type' => 'linked_data' }
+            },
+            ### Required for the ControlledVocabulary javascript:
+            wrapper_html: { data: { 'autocomplete-url' => "/authorities/search/access_restrictions",
+                                    'field-name' => key,
+                                    'field-type' => 'linked_data' }},
+            required: f.object.required?(key) %>

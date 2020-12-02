@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'mail'
-
 # This class processes users who are trying to login.
 # It redirects if it receives an university email
 class Users::SessionsController < Devise::SessionsController

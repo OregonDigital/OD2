@@ -119,6 +119,16 @@ export default class ControlledVocabulary extends FieldManager {
   removeFromList( event ) {
       event.preventDefault()
       let field = $(event.target).parents(this.fieldWrapperClass)
+      // OVERRIDE FROM HYRAX to prevent accidentally deleting original data if this is a duplicate
+      let value = field.find('[id$=id]').val()
+
+      // If there's more than one field with this value
+      if (field.parents('ul').find('[id$=id]').filter(`[value='${value}']`).length > 1) {
+        // Remove the value from the form as usual
+        super.removeFromList(event);
+        return;
+      }
+      // END OVERRIDE
       field.find('[data-destroy]').val('true')
       field.hide()
       this.element.trigger("managed_field:remove", field)

@@ -15,15 +15,15 @@ module OregonDigital
       property :resource_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
-      property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
+      property :date_created, predicate: ::RDF::Vocab::DC.created, facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :description, basic_searchable: false, predicate: ::RDF::Vocab::DC.description do |index|
+      property :description, predicate: ::RDF::Vocab::DC.description do |index|
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights do |index|
+      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
       property :identifier, predicate: ::RDF::Vocab::DC.identifier do |index|
@@ -98,7 +98,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :military_service_location, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
+      property :military_service_location, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/militaryServiceLocation') do |index|
         index.as :stored_searchable
       end
 
@@ -118,7 +118,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :tribal_notes, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes') do |index|
+      property :tribal_notes, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/tribalNotes') do |index|
         index.as :stored_searchable
       end
 
@@ -138,7 +138,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :keyword, predicate: ::RDF::Vocab::DC11.subject do |index|
+      property :keyword, predicate: ::RDF::Vocab::DC11.subject, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -313,27 +313,27 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate') do |index|
+      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate') do |index|
+      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :date, predicate: ::RDF::Vocab::DC.date do |index|
+      property :date, predicate: ::RDF::Vocab::DC.date, facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :issued, predicate: ::RDF::Vocab::DC.issued do |index|
+      property :issued, predicate: ::RDF::Vocab::DC.issued, facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate') do |index|
+      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
-      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate') do |index|
+      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate'), facet: false do |index|
         index.as :stored_searchable
       end
 
@@ -365,7 +365,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, predicate: ::RDF::Vocab::CC.License do |index|
+      property :license, predicate: ::RDF::Vocab::CC.License, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -373,7 +373,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: false do |index|
+      property :access_restrictions, predicate: ::RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), class_name: OregonDigital::ControlledVocabularies::AccessRestrictions do |index|
         index.as :stored_searchable
       end
 
@@ -387,99 +387,99 @@ module OregonDigital
 
       # End of normal properties
       # Controlled vocabulary terms
-      property :arranger, predicate: ::RDF::Vocab::MARCRelators.arr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :arranger, predicate: ::RDF::Vocab::MARCRelators.arr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :artist, predicate: ::RDF::Vocab::MARCRelators.art, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :artist, predicate: ::RDF::Vocab::MARCRelators.art, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :author, predicate: ::RDF::Vocab::MARCRelators.aut, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :author, predicate: ::RDF::Vocab::MARCRelators.aut, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :cartographer, predicate: ::RDF::Vocab::MARCRelators.ctg, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :cartographer, predicate: ::RDF::Vocab::MARCRelators.ctg, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :collector, predicate: ::RDF::Vocab::MARCRelators.col, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :collector, predicate: ::RDF::Vocab::MARCRelators.col, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :composer, predicate: ::RDF::Vocab::MARCRelators.cmp, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :composer, predicate: ::RDF::Vocab::MARCRelators.cmp, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :creator, predicate: ::RDF::Vocab::DC11.creator, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :creator, predicate: ::RDF::Vocab::DC11.creator, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :contributor, predicate: ::RDF::Vocab::DC11.contributor, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :contributor, predicate: ::RDF::Vocab::DC11.contributor, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :dedicatee, predicate: ::RDF::Vocab::MARCRelators.dte, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :dedicatee, predicate: ::RDF::Vocab::MARCRelators.dte, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :donor, predicate: ::RDF::Vocab::MARCRelators.dnr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :donor, predicate: ::RDF::Vocab::MARCRelators.dnr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :editor, predicate: ::RDF::Vocab::MARCRelators.edt, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :editor, predicate: ::RDF::Vocab::MARCRelators.edt, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :illustrator, predicate: ::RDF::Vocab::MARCRelators.ill, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :illustrator, predicate: ::RDF::Vocab::MARCRelators.ill, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :interviewee, predicate: ::RDF::Vocab::MARCRelators.ive, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :interviewee, predicate: ::RDF::Vocab::MARCRelators.ive, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :interviewer, predicate: ::RDF::Vocab::MARCRelators.ivr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :interviewer, predicate: ::RDF::Vocab::MARCRelators.ivr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :lyricist, predicate: ::RDF::Vocab::MARCRelators.lyr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :lyricist, predicate: ::RDF::Vocab::MARCRelators.lyr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :owner, predicate: ::RDF::Vocab::MARCRelators.own, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :owner, predicate: ::RDF::Vocab::MARCRelators.own, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :patron, predicate: ::RDF::Vocab::MARCRelators.pat, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :patron, predicate: ::RDF::Vocab::MARCRelators.pat, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :photographer, predicate: ::RDF::Vocab::MARCRelators.pht, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :photographer, predicate: ::RDF::Vocab::MARCRelators.pht, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :print_maker, predicate: ::RDF::Vocab::MARCRelators.prm, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :print_maker, predicate: ::RDF::Vocab::MARCRelators.prm, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :recipient, predicate: ::RDF::Vocab::MARCRelators.rcp, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :recipient, predicate: ::RDF::Vocab::MARCRelators.rcp, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :transcriber, predicate: ::RDF::Vocab::MARCRelators.trc, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :transcriber, predicate: ::RDF::Vocab::MARCRelators.trc, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :translator, predicate: ::RDF::Vocab::MARCRelators.trl, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+      property :translator, predicate: ::RDF::Vocab::MARCRelators.trl, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location do |index|
+      property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -492,12 +492,12 @@ module OregonDigital
       end
 
       property :ranger_district, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/rangerDistrict'),
-                                 class_name: Hyrax::ControlledVocabularies::Location do |index|
+                                 class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
       property :water_basin, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/waterBasin'),
-                             class_name: Hyrax::ControlledVocabularies::Location do |index|
+                             class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -550,32 +550,32 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :taxon_class, predicate: ::RDF::Vocab::DWC.class,
+      property :taxon_class, predicate: ::RDF::Vocab::DWC.class, facet: false,
                              class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :family, predicate: ::RDF::Vocab::DWC.family,
+      property :family, predicate: ::RDF::Vocab::DWC.family, facet: false,
                         class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :genus, predicate: ::RDF::Vocab::DWC.genus,
+      property :genus, predicate: ::RDF::Vocab::DWC.genus, facet: false,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :order, predicate: ::RDF::Vocab::DWC.order,
+      property :order, predicate: ::RDF::Vocab::DWC.order, facet: false,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet,
+      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet, facet: false,
                          class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum,
+      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum, facet: false,
                                     class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
@@ -590,7 +590,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
+      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -616,7 +616,8 @@ module OregonDigital
       end
 
       ORDERED_PROPERTIES = [
-        { name: 'trible_title', is_controlled: false },
+        { name: 'alternative', is_controlled: false },
+        { name: 'tribal_title', is_controlled: false },
         { name: 'creator_display', is_controlled: false },
         { name: 'creator_label', is_controlled: true },
         { name: 'contributor_label', is_controlled: true },
@@ -644,16 +645,16 @@ module OregonDigital
         { name: 'translator_label', is_controlled: true },
         { name: 'date', is_controlled: false },
         { name: 'date_created', is_controlled: false },
-        { name: 'date_issued', is_controlled: false },
+        { name: 'issued', is_controlled: false },
         { name: 'award_date', is_controlled: false },
         { name: 'acquisition_date', is_controlled: false },
-        { name: 'date_collected', is_controlled: false },
+        { name: 'collected_date', is_controlled: false },
         { name: 'description', is_controlled: false },
         { name: 'tribal_notes', is_controlled: false },
         { name: 'abstract', is_controlled: false },
         { name: 'table_of_contents', is_controlled: false },
         { name: 'view', is_controlled: false },
-        { name: 'view_data', is_controlled: false },
+        { name: 'view_date', is_controlled: false },
         { name: 'temporal', is_controlled: false },
         { name: 'coverage', is_controlled: false },
         { name: 'number_of_pages', is_controlled: false },
@@ -661,14 +662,14 @@ module OregonDigital
         { name: 'source_condition', is_controlled: false },
         { name: 'description_of_manifestation', is_controlled: false },
         { name: 'mode_of_issuance', is_controlled: false },
-        { name: 'form_of_work', is_controlled: true },
+        { name: 'form_of_work_label', is_controlled: true },
         { name: 'layout', is_controlled: false },
         { name: 'biographical_information', is_controlled: false },
         { name: 'cover_description', is_controlled: false },
         { name: 'first_line', is_controlled: false },
         { name: 'first_line_chorus', is_controlled: false },
         { name: 'instrumentation', is_controlled: false },
-        { name: 'military_branch', is_controlled: true },
+        { name: 'military_branch_label', is_controlled: true },
         { name: 'military_highest_rank', is_controlled: false },
         { name: 'military_occupation', is_controlled: false },
         { name: 'military_service_location', is_controlled: false },
@@ -688,7 +689,7 @@ module OregonDigital
         { name: 'event', is_controlled: false },
         { name: 'sports_team', is_controlled: false },
         { name: 'award', is_controlled: false },
-        { name: 'work_type', is_controlled: false },
+        { name: 'workType', is_controlled: false },
         { name: 'cultural_context_label', is_controlled: true },
         { name: 'style_or_period_label', is_controlled: true },
         { name: 'state_or_edition', is_controlled: false },
@@ -719,19 +720,19 @@ module OregonDigital
         { name: 'rights_note', is_controlled: false },
         { name: 'rights_holder', is_controlled: false },
         { name: 'copyright_claimant', is_controlled: false },
-        { name: 'access_restrictions', is_controlled: false },
+        { name: 'access_restrictions_label', is_controlled: true },
         { name: 'identifier', is_controlled: false },
         { name: 'item_locator', is_controlled: false },
         { name: 'accession_number', is_controlled: false },
         { name: 'barcode', is_controlled: false },
-        { name: 'hydrological_unit_code', is_controlled: false },
+        { name: 'hydrologic_unit_code', is_controlled: false },
         { name: 'longitude_latitude_identification', is_controlled: false },
         { name: 'language_label', is_controlled: false, name_label: 'language' },
         { name: 'source', is_controlled: false },
         { name: 'provenance', is_controlled: false },
-        { name: 'repository', is_controlled: false },
+        { name: 'repository_label', is_controlled: true },
         { name: 'current_repository_id', is_controlled: false },
-        { name: 'shelf_location', is_controlled: false },
+        { name: 'location_copyshelf_location', is_controlled: false },
         { name: 'copy_location', is_controlled: false },
         { name: 'local_collection_name_label', is_controlled: true },
         { name: 'local_collection_id', is_controlled: false },
@@ -742,16 +743,17 @@ module OregonDigital
         { name: 'folder_number', is_controlled: false },
         { name: 'publisher_label', is_controlled: true },
         { name: 'publication_place_label', is_controlled: true },
-        { name: 'place_of_production', is_controlled: false },
+        { name: 'place_of_production_label', is_controlled: true },
         { name: 'contained_in_journal', is_controlled: false },
         { name: 'is_volume', is_controlled: false },
         { name: 'has_number', is_controlled: false },
+        { name: 'on_pages', is_controlled: false },
         { name: 'citation', is_controlled: false },
         { name: 'has_finding_aid', is_controlled: false },
         { name: 'relation', is_controlled: false },
         { name: 'is_version_of', is_controlled: false },
         { name: 'has_version', is_controlled: false },
-        { name: 'is_part_of', is_controlled: false },
+        { name: 'isPartOf', is_controlled: false },
         { name: 'has_part', is_controlled: false },
         { name: 'larger_work', is_controlled: false },
         { name: 'art_series', is_controlled: false },
@@ -768,9 +770,9 @@ module OregonDigital
         { name: 'institution_label', is_controlled: true },
         { name: 'conversion', is_controlled: false },
         { name: 'date_digitized', is_controlled: false },
-        { name: 'submission_date', is_controlled: false },
+        { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false },
-        { name: 'original_file_name', is_controlled: false },
+        { name: 'original_filename', is_controlled: false },
         { name: 'file_size', is_controlled: false },
         { name: 'height', is_controlled: false },
         { name: 'width', is_controlled: false },

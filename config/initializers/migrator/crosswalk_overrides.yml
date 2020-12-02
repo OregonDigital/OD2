@@ -47,3 +47,67 @@ overrides:
   - property: format
     predicate: http://purl.org/dc/terms/format
     function: return_nil
+  - property: access_restrictions_attributes
+    predicate: http://data.archiveshub.ac.uk/def/accessRestrictions
+    multiple: true
+    function: attributes_data
+  - property: is_volume
+    predicate: http://sw-portal.deri.org/ontologies/swportal#isVolume
+    multiple: true
+  - property: has_number
+    predicate: http://sw-portal.deri.org/ontologies/swportal#hasNumber
+    multiple: true
+  - property: biographical_information
+    predicate: http://www.rdaregistry.info/Elements/a/#biographicalInformation.en
+    multiple: true
+  - property: description_of_manifestation
+    predicate: http://www.rdaregistry.info/Elements/m/#descriptionOfManifestation.en
+    multiple: true
+  - property: form_of_work_attributes
+    predicate: http://www.rdaregistry.info/Elements/w/#formOfWork.en
+    multiple: true
+    function: attributes_data
+  - property: inscription
+    predicate: http://opaquenamespace.org/ns/vra_inscription
+    multiple: true
+  - property: layout
+    predicate: http://www.rdaregistry.info/Elements/m/#layout.en
+    multiple: true
+  - property: mode_of_issuance
+    predicate: http://www.rdaregistry.info/Elements/m/#modeOfIssuance.en
+    multiple: true
+  - property: style_or_period
+    predicate: http://opaquenamespace.org/ns/vra_hasStylePeriod
+    multiple: true
+  - property: cultural_context
+    predicate: http://opaquenamespace.org/ns/vra_culturalContext
+    multiple: true
+  - property: tgn_attributes
+    predicate: http://opaquenamespace.org/ns/tgn
+    multiple: true
+    function: attributes_data
+  - property: use_restrictions
+    predicate: http://data.archiveshub.ac.uk/def/useRestrictions
+    multiple: true
+  - property: contained_in_journal
+    predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
+    multiple: true
+  - property: place_of_production_attributes
+    predicate: http://www.rdaregistry.info/Elements/m/#placeOfProduction.en
+    multiple: true
+    function: attributes_data
+  - property: material
+    predicate: http://opaquenamespace.org/ns/vra_material
+    multiple: true
+  - property: technique
+    predicate: http://opaquenamespace.org/ns/vra_hasTechnique
+    multiple: true
+  - property: color_content
+    predicate: http://www.rdaregistry.info/Elements/e/#colourContent.en
+    multiple: true
+  - property: original_filename
+    predicate: http://opaquenamespace.org/ns/full
+    multiple: false
+  - property: contents
+    predicate: http://opaquenamespace.org/ns/contents
+    function: return_nil

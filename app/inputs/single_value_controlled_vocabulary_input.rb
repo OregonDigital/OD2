@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Override for multiple call for Controlled Vocabulary Input
-class SingleValueControlledVocabularyInput < ControlledVocabularyInput
+class SingleValueControlledVocabularyInput < LabelAndUriControlledVocabularyInput
   # # Overriding so that the class is correct and the javascript for will activate for this element.
   # # See https://github.com/samvera/hydra-editor/blob/4da9c0ea542f7fde512a306ec3cc90380691138b/app/assets/javascripts/hydra-editor/field_manager.es6#L61
   # def input_type

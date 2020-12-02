@@ -10,9 +10,12 @@ class User < ApplicationRecord
 
   attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
 
+  # DISABLE RUBOCOP BECAUSE DEVISE REQUIRES A PARTICULAR FORMAT
+  # rubocop:disable Style/SymbolArray
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :recoverable, :confirmable,
          :omniauthable, omniauth_providers: [:cas, :saml]
+  # rubocop:enable Style/SymbolArray
 
   # T/F whether user has at least one role
   def role?(role)
@@ -34,6 +37,11 @@ class User < ApplicationRecord
     email
   end
 
+  # Override from devise to make a determination of whether to send email notification or not
+  def send_confirmation_notification?
+    super && !email.include?('uoregon') && !email.include?('oregonstate')
+  end
+
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for
   # the account.
@@ -44,9 +52,10 @@ class User < ApplicationRecord
   def self.from_omniauth(access_token)
     email = email_from_omniauth(access_token)
     role = role_from_omniauth(access_token.provider.to_s)
-    User.where(email: email).first_or_create do |user|
-      user.email = email
-      user.roles << role unless role.nil?
+    User.where(email: email).first_or_create do |u|
+      u.email = email
+      u.roles << role unless role.nil?
+      u.skip_confirmation!
     end
   end
 

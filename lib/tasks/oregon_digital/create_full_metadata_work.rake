@@ -24,6 +24,8 @@ def build_attributes
       generic_attributes["#{key}_attributes"] = nested_attributes(value.first)
     elsif value.is_a?(Array) && value.empty?
       generic_attributes[key] = ['bacon']
+    else
+      generic_attributes[key] = value
     end
   end
   generic_attributes
@@ -38,7 +40,7 @@ def attrs
   {
     'depositor' => nil,
     'title' => [],
-    'date_uploaded' => nil,
+    'date_uploaded' => Hyrax::TimeService.time_in_utc,
     'date_modified' => nil,
     'proxy_depositor' => nil,
     'on_behalf_of' => nil,
@@ -113,7 +115,7 @@ def attrs
     'copy_location' => [],
     'date_digitized' => nil,
     'file_size' => nil,
-    'replaces_url' => nil,
+    'replaces_url' => 'http://bacon',
     'rights_note' => [],
     'box' => [],
     'gps_latitude' => nil,
@@ -133,9 +135,9 @@ def attrs
     'copyright_claimant' => [],
     'rights_holder' => [],
     'use_restrictions' => [],
-    'access_restrictions' => nil,
-    'oembed_url' => nil,
+    'oembed_url' => 'http://bacon',
     'original_filename' => nil,
+    'access_restrictions' => ['http://opaquenamespace.org/ns/accessRestrictions/OSUrestricted'],
     'arranger' => ['http://id.loc.gov/authorities/names/no2010022998'],
     'artist' => ['http://vocab.getty.edu/ulan/500121373'],
     'author' => ['http://opaquenamespace.org/ns/creator/ClarkeRuthJohnson'],
@@ -158,11 +160,11 @@ def attrs
     'recipient' => ['http://id.loc.gov/authorities/names/nr98004301'],
     'transcriber' => ['http://opaquenamespace.org/ns/people/RanseenSusanne'],
     'translator' => ['http://opaquenamespace.org/ns/creator/HedgeLaurenC'],
-    'location' => ['http://sws.geonames.org/5725846/'],
-    'place_of_production' => ['http://sws.geonames.org/4929022/'],
-    'publication_place' => ['http://sws.geonames.org/4929022/'],
-    'ranger_district' => ['http://sws.geonames.org/5711134/'],
-    'water_basin' => ['http://sws.geonames.org/294624/'],
+    'location' => ['https://sws.geonames.org/5725846/'],
+    'place_of_production' => ['https://sws.geonames.org/4929022/'],
+    'publication_place' => ['https://sws.geonames.org/4929022/'],
+    'ranger_district' => ['https://sws.geonames.org/5711134/'],
+    'water_basin' => ['https://sws.geonames.org/294624/'],
     'cultural_context' => ['http://vocab.getty.edu/aat/300073715'],
     'ethnographic_term' => ['http://id.loc.gov/vocabulary/ethnographicTerms/afset011049'],
     'style_or_period' => ['http://vocab.getty.edu/aat/300021712'],
