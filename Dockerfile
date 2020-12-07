@@ -1,4 +1,4 @@
-FROM ruby:2.5.5 as bundler
+FROM ruby:2.5.8 as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -55,7 +55,8 @@ COPY --chown=app:app . /data
 
 ARG RAILS_ENV=development
 ENV RAILS_ENV=${RAILS_ENV}
-
+ARG FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
+ENV FEDORA_URL=${FEDORA_URL}
 
 FROM code
 
@@ -68,4 +69,5 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
   RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
   cp public/assets/404-*.html public/404.html; \
   cp public/assets/500-*.html public/500.html; \
+  yarn install; \
   fi

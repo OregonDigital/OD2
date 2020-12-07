@@ -14,7 +14,8 @@ module Hyrax
       # Push the required fields to the top of the form
       # Then make sure they arent rendered again lower in the form
       required_fields + (self.terms - required_fields) -
-        %i[files visibility_during_embargo embargo_release_date
+        %i[alternative_title access_right rights_notes
+           files visibility_during_embargo embargo_release_date
            visibility_after_embargo visibility_during_lease
            lease_expiration_date visibility_after_lease visibility
            thumbnail_id related_url representative_id rendering_ids ordered_member_ids
@@ -23,6 +24,12 @@ module Hyrax
 
     def secondary_terms
       []
+    end
+
+    def [](key)
+      return model.member_of_collection_ids if key == :member_of_collection_ids
+
+      @attributes[key.to_s]
     end
 
     def solr_document

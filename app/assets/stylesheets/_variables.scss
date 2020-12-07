@@ -1,2 +1,24 @@
 
-$brand-primary: #834e52; // #337ab7
+$navy-blue: #073C5C;
+$apple-green: #89BC41;
+$lime-green: #D0DD28;
+$dark-orange: #E28A25;
+$light-orange: #FDBB49;
+
+$black: #000000;
+$dark-grey: #757575;
+$medium-grey: #999999;
+$light-grey: #CCCCCC;
+$very-light-grey: #ECECEC;
+
+$brand-primary: $navy-blue;
+// $brand-primary: $apple-green;
+
+// Change bootstrap grid breakpoints
+$grid-gutter-width: 30px;
+$container-tablet: (720px + $grid-gutter-width);
+$container-desktop: (1140px + $grid-gutter-width);
+$container-large-desktop: (1520px + $grid-gutter-width);
+
+$screen-lg: 1580px;
+$screen-md: 1200px;

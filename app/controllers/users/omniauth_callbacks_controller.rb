@@ -14,10 +14,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
+  # rubocop:disable Metrics/AbcSize
   def find_user_and_redirect
     @user = User.from_omniauth(request.env['omniauth.auth'])
     prov = request.env['omniauth.auth'].provider.to_s
-    sign_in_and_redirect @user, event: :authentication
+    if @user.role?('admin') || @user.role?('depositor') || @user.role?('collection_manager')
+      sign_in_and_redirect @user, event: :authentication
+    else
+      sign_in(resource_name, resource)
+      redirect_to root_path
+    end
     set_flash_message(:notice, :success, kind: prov) if is_navigational_format?
   end
+  # rubocop:enable Metrics/AbcSize
 end

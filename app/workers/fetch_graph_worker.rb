@@ -18,16 +18,19 @@ class FetchGraphWorker
     # user = User.where(email: user_key).first
 
     # Use 0 for version to tell Solr that the document just needs to exist to be updated
-    # Versions dont need to match
+    # Versions dont need to match and set defaults
     solr_doc.response['response']['docs'].first['_version_'] = 0
     solr_doc['_version_'] = 0
-
+    solr_doc['creator_combined_label_sim'] = []
+    solr_doc['location_combined_label_sim'] = []
+    solr_doc['topic_combined_label_sim'] = solr_doc['keyword_tesim'].to_a
+    solr_doc['scientific_combined_label_sim'] = []
     # Iterate over Controller Props values
-    # rubocop:disable Metrics/BlockLength
     work.controlled_properties.each do |controlled_prop|
+      # Set to empty array for cleanliness
+      solr_doc["#{controlled_prop}_label_sim"] = []
       work.attributes[controlled_prop.to_s].each do |val|
         begin
-          val = Hyrax::ControlledVocabularies::Location.new(val) if val.include? 'sws.geonames.org'
           # Fetch labels
           if val.respond_to?(:fetch)
             val.fetch(headers: { 'Accept' => default_accept_header })
@@ -38,31 +41,17 @@ class FetchGraphWorker
           next
         end
 
-        # For each behavior
-        work.class.index_config[controlled_prop].behaviors.each do |behavior|
-          # Insert into SolrDocument
-          if val.is_a?(String)
-            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", val, behavior)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', val, behavior) if creator_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'location_combined_label', val, behavior) if location_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'topic_combined_label', val, behavior) if topic_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'scientific_combined_label', val, behavior) if scientific_combined_facet?(controlled_prop)
-          else
-            extracted_val = val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
-            Solrizer.insert_field(solr_doc, "#{controlled_prop}_label", [extracted_val], behavior)
-            Solrizer.insert_field(solr_doc, 'location_combined_label', [extracted_val], behavior) if location_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'creator_combined_label', [extracted_val], behavior) if creator_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'topic_combined_label', [extracted_val], behavior) if topic_combined_facet?(controlled_prop)
-            Solrizer.insert_field(solr_doc, 'scientific_combined_label', [extracted_val], behavior) if scientific_combined_facet?(controlled_prop)
-          end
-        end
+        # Insert into SolrDocument
+        val = (val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first) unless val.first.is_a?(String)
+        solr_doc["#{controlled_prop}_label_sim"] << val
+        solr_doc['creator_combined_label_sim'] << val if creator_combined_facet?(controlled_prop)
+        solr_doc['location_combined_label_sim'] << val if location_combined_facet?(controlled_prop)
+        solr_doc['topic_combined_label_sim'] << val if topic_combined_facet?(controlled_prop)
+        solr_doc['scientific_combined_label_sim'] << val if scientific_combined_facet?(controlled_prop)
+        Hyrax::SolrService.add(solr_doc)
+        Hyrax::SolrService.commit
       end
     end
-    # rubocop:enable Metrics/BlockLength
-
-    # Commit Changes
-    ActiveFedora::SolrService.add(solr_doc)
-    ActiveFedora::SolrService.commit
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize

@@ -11,7 +11,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuAcademicUnits,
-          OregonDigital::ControlledVocabularies::Vocabularies::WdEntity
+          OregonDigital::ControlledVocabularies::Vocabularies::Wikidata
         ]
       end
     end

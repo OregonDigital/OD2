@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
 
   concern :iiif_search, BlacklightIiifSearch::Routes.new
+  resources :explore_collections, controller: 'oregon_digital/explore_collections', only: %i[index]
+
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
   end
@@ -10,6 +12,8 @@ Rails.application.routes.draw do
   mount BrowseEverything::Engine => '/browse'
   mount Blacklight::Oembed::Engine, at: 'oembed'
   mount Blacklight::Engine => '/'
+  mount BlacklightAdvancedSearch::Engine => '/'
+
   concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
@@ -44,6 +48,12 @@ Rails.application.routes.draw do
           get :download_low, :download, :metadata
         end
       end
+    end
+  end
+
+  resources :collections, controller: 'hyrax/collections', only: [] do # public landing show page
+    member do
+      get :download
     end
   end
 

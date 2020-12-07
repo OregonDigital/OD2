@@ -1,0 +1,41 @@
+#explore-tabs {
+  ul.nav, ul.nav li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+#explore-panes {
+  ul.nav {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin: 5px 5px 5em;
+    padding-bottom: 2em;
+  }
+
+  .nav-pills > li > a {
+    border-radius: 5px !important;
+    padding: 2px 10px;
+    font-size: 16px;
+  }
+
+  .actions {
+    margin: 0;
+    margin-top: 16px;
+    padding: 16px;
+    background-color: $very-light-grey;
+  }
+}
+
+#explore-tabs,
+#explore-panes {
+  .nav-pills > li.active > a,
+  .nav-pills > li.active > a:hover,
+  .nav-pills > li.active > a:focus {
+    background-color: $dark-orange;
+    border: 3px solid $dark-orange;
+  }
+}

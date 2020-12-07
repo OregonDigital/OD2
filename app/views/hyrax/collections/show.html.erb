@@ -1,73 +1,80 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
-<div class="hyc-container" itemscope itemtype="http://schema.org/CollectionPage">
+<% view_all_url = "#{search_form_action}&f[non_user_collections_ssim][]=#{@presenter.to_s}" %>
+
+<div class="hyc-container collection-show" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
-    <div class="col-md-12">
-
-      <% unless @presenter.banner_file.blank? %>
-          <div class="hyc-banner" style="background-image:url(<%= @presenter.banner_file %>)">
-      <% else %>
-          <div class="hyc-generic">
-      <% end %>
-
-      <div class="hyc-title">
-        <h1><%= @presenter.title.first %></h1>
-        <%= @presenter.collection_type_badge %>
-        <%= @presenter.permission_badge %>
+    <%# Title, view, and description %>
+    <div class="hyc-generic">
+      <div class="col-md-8">
+        <div class="hyc-title">
+          <h1><%= @presenter.title.first %></h1>
+          <span class="lg-border-right item-count">
+            <%= @presenter.total_viewable_items %>
+            <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
+          </span>
+          <span>
+            <%= link_to 'View all', view_all_url %>
+          </span>
+        </div>
+        <div class="hyc-desc mw-lg">
+          <%= render 'collection_description', presenter: @presenter %>
+        </div>
       </div>
-
-      <% unless @presenter.logo_record.blank? %>
-          <div class="hyc-logos">
-            <% @presenter.logo_record.each_with_index  do |lr, i| %>
-
-                <% if lr[:linkurl].blank? %>
-                    <img alt="<%= lr[:alttext] %>" src="<%= lr[:file_location] %>" />
-                <% else %>
-                    <a href="<%= lr[:linkurl] %>">
-                      <img alt="<%= lr[:alttext] %>" src="<%= lr[:file_location] %>" />
-                    </a>
-                <% end %>
-
-            <% end %>
-          </div>
-      <% end %>
-
-      <% unless @presenter.total_viewable_items.blank? %>
-          <div class="hyc-bugs">
-            <div class="hyc-item-count">
-              <b><%= @presenter.total_viewable_items %></b>
-              <%= 'Item'.pluralize(@presenter.total_viewable_items) %></div>
-
-            <% unless @presenter.creator.blank? %>
-                <div class="hyc-created-by">Created by: <%= @presenter.creator.first %></div>
-            <% end %>
-
-            <% unless @presenter.modified_date.blank? %>
-                <div class="hyc-last-updated">Last Updated: <%= @presenter.modified_date %></div>
-            <% end %>
-          </div>
-      <% end %>
-
+      <%# Institutional image %>
+      <div class="col-md-4 text-right">
+        <%= image_tag controller.institution_image_path, alt: '' %>
       </div>
+      <%# Social media share icons %>
+      <div class="col-md-12 text-right share-links">
+        <div class=" lg-border-bottom">
+        <%= render 'hyrax/base/social_media' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="hyc-container" itemscope itemtype="http://schema.org/CollectionPage">
+  <div class="row">
+    <div class="hyc-blacklight hyc-bl-results">
+      <div class="row">
+      <% @member_docs[0,4].each_with_index do |doc, i| %>
+        <div class="masonry document text-center col-xs-3 col-md-3">
+          <%= render 'showcase_tile',
+              title: doc.title_or_label,
+              index: i,
+              count: @member_docs.length,
+              link: [main_app, doc],
+              img: render_thumbnail_tag(doc, {alt: ''}, { suppress_link: true }) %>
+      <% end %>
+      </div>
     </div>
   </div>
 
-  <div class="row hyc-body">
-    <div class="col-md-8 hyc-description">
-      <%= render 'collection_description', presenter: @presenter %>
+  <%= render 'lime_green_divider' do %>
+    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button'>View All</a>
+  <% end %>
 
-      <% if @presenter.collection_type_is_nestable? && @presenter.total_parent_collections > 0 %>
-          <div class="hyc-blacklight hyc-bl-title">
-            <h2>
-              <%= t('.parent_collection_header') %> (<%= @presenter.total_parent_collections %>)
-            </h2>
-          </div>
-          <div class="hyc-blacklight hyc-bl-results">
-            <%= render 'show_parent_collections', presenter: @presenter %>
-          </div>
-      <% end %>
+  <div class="row">
+    <span class="text-center"><h2 class="collection-search-header">OR, SEARCH THIS COLLECTION</h2></span>
+  </div>
 
+  <!-- Search bar -->
+  <div class="hyc-blacklight hyc-bl-search hyc-body row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <%= render 'search_form', presenter: @presenter %>
     </div>
+    <div class="col-sm-4"></div>
+  </div>
+
+  <%= render 'lime_green_divider' do %>
+    <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button'><i class='glyphicon glyphicon-search'></i> Search</button>
+  <% end %>
+
+  <!-- collection info
+
+  <div class="row hyc-body">
     <div class="col-md-4 hyc-metadata">
       <% unless has_collection_search_parameters? %>
           <h2><%= t('hyrax.dashboard.collections.show.metadata_header') %></h2>
@@ -76,7 +83,9 @@
     </div>
   </div>
 
-  <!-- Search results label -->
+  -->
+
+  <!-- Search results label
   <% if @members_count > 0 || @presenter.subcollection_count > 0 %>
     <div class="hyc-blacklight hyc-bl-title">
       <h2>
@@ -86,15 +95,10 @@
       </h2>
     </div>
   <% end %>
+  -->
 
-  <!-- Search bar -->
-  <div class="hyc-blacklight hyc-bl-search hyc-body row">
-    <div class="col-sm-8">
-      <%= render 'search_form', presenter: @presenter, url: hyrax.collection_path(@presenter.id) %>
-    </div>
-  </div>
 
-  <!-- Subcollections -->
+  <!-- Subcollections
   <% if @presenter.collection_type_is_nestable? && @subcollection_count > 0 %>
       <div class="hyc-blacklight hyc-bl-title">
         <h4><%= t('.subcollection_count') %> (<%= @subcollection_count %>)</h4>
@@ -103,8 +107,9 @@
         <%= render 'subcollection_list', collection: @subcollection_docs %>
       </div>
   <% end %>
+  -->
 
-  <!-- Works -->
+  <!-- Works
   <% if @members_count > 0 %>
       <div class="hyc-blacklight hyc-bl-title">
         <h4><%= t('.works_in_collection') %> (<%= @members_count %>)</h4>
@@ -122,12 +127,11 @@
       </div>
       <% end %>
 
-      <div class="hyc-blacklight hyc-bl-results <%= 'col-md-9 col-sm-8' unless @configured_facets.nil? || @configured_facets.empty? %>">
-        <%= render_document_index @member_docs %>
-      </div>
+
 
       <div class="hyc-blacklight hyc-bl-pager">
         <%= render 'paginate' %>
       </div>
   <% end # if @members_count > 0 %>
+  -->
 </div>

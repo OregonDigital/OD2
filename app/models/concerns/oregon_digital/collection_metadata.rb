@@ -9,7 +9,7 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
-      property :alt_title, predicate: ::RDF::Vocab::DC.alternative
+      property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
       property :related_url, predicate: ::RDF::RDFS.seeAlso
       property :resource_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
         index.as :stored_searchable, :facetable
@@ -31,7 +31,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, advance_search: false, predicate: ::RDF::Vocab::CC.License do |index|
+      property :license, advance_search: false, predicate: ::RDF::Vocab::CC.License, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
 

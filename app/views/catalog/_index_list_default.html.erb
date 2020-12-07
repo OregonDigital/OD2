@@ -26,7 +26,7 @@
 <% end %>
 <div class="resource-type col-md-offset-2 col-md-10">
   <div class="col-md-4">
-    <%= render 'index_type_icon', document: document unless document.type_label.first.empty? %>
+    <%= render 'index_type_icon', document: document unless document.type_label.first.nil? || document.type_label.first.empty? %>
     <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
   </div>
   <% if document.parents? %>
@@ -39,7 +39,16 @@
       </ul>
     </div>
   <% end %>
-  <%= label_tag "", class: 'pull-right' do %>
-    <% raw("#{check_box_tag "my_shelf_#{document.id}", document.id, false, class: 'my_shelf_result_checkbox'} Add to My Shelf") %>
+  <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
+  <% unless document.collection? %>
+    <%= button_tag t('hyrax.dashboard.my.action.save'),
+                    class: 'btn btn-default submits-batches submits-batches-add pull-right',
+                    data: { toggle: "modal", target: "#collection-list-container", id: document.id },
+                    :onclick => "javascript:updateSaveCheckboxes(this)" %>
   <% end %>
 </div>
+
+<%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
+<%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
+
+<!-- END OVERRIDE -->

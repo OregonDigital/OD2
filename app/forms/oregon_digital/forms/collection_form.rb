@@ -28,9 +28,9 @@ module OregonDigital
 
         if key == :title
           @attributes['title'].each do |value|
-            @attributes['alt_title'] << value
+            @attributes['alternative_title'] << value
           end
-          @attributes['alt_title'].delete(@attributes['alt_title'].min) unless @attributes['alt_title'].empty?
+          @attributes['alternative_title'].delete(@attributes['alternative_title'].min) unless @attributes['alternative_title'].empty?
           return @attributes['title'].sort unless @attributes['title'].empty?
 
           return ['']
@@ -48,6 +48,10 @@ module OregonDigital
            related_url resource_type
            institution date
            repository]
+      end
+
+      def user_primary_terms
+        %i[title description]
       end
 
       def secondary_terms

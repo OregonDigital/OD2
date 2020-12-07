@@ -8,7 +8,8 @@ RSpec.describe Generic do
   let(:user) { create(:user) }
   let(:uri) { RDF::URI.new('http://opaquenamespace.org/ns/TestVocabulary/TestTerm') }
   let(:term) { OregonDigital::ControlledVocabularies::Resource.new }
-  let(:file) { instance_double('file', stream: ["\x00"], file_name: ['name']) }
+  let(:file_uri) { 'https://uri' }
+  let(:file) { instance_double('file', stream: ["\x00"], file_name: ['name'], uri: OpenStruct.new(value: file_uri)) }
   let(:file_set) { instance_double('file_set', files: [file]) }
 
   it { is_expected.to have_attributes(title: ['foo']) }
@@ -63,36 +64,6 @@ RSpec.describe Generic do
     it 'provides correct data' do
       csv = CSV.parse(model.csv_metadata, headers: true)
       expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
-    end
-  end
-
-  describe '#work_files_byte_string' do
-    before do
-      allow(model).to receive(:file_sets).and_return([file_set])
-    end
-
-    it 'provides a hash' do
-      expect(model.work_files_byte_string).to be_kind_of(Hash)
-    end
-    it 'provides correct data' do
-      expect(model.work_files_byte_string).to eq('name' => "\x00")
-    end
-  end
-
-  describe '#zip_files' do
-    before do
-      allow(model).to receive(:file_sets).and_return([file_set])
-    end
-
-    it 'provides a StringIO' do
-      expect(model.zip_files).to be_kind_of(StringIO)
-    end
-    it 'writes the right number of files' do
-      file_count = 0
-      Zip::File.open_buffer(model.zip_files).each do
-        file_count += 1
-      end
-      expect(file_count).to eq(2)
     end
   end
 end

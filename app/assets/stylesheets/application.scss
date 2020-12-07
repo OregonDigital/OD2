@@ -10,7 +10,14 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require openseadragon/openseadragon
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require jquery-ui
+ *= require select2
  *= require_self
- */
+ *= require blacklight_advanced_search
+
+*/
+
+@import "*";
+@import "**/*";

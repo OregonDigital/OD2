@@ -41,7 +41,7 @@ jobs:
             - v2-bundle-{{ checksum "Gemfile.lock" }}
       - run:
           name: Update bundler
-          command: gem install bundler -v 1.17.2
+          command: gem install bundler -v 2.1.4
       - run:
           name: Install dependencies
           command: bundle check || bundle install
@@ -64,6 +64,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      - run:
+          name: Update bundler
+          command: gem install bundler -v 2.1.4
       - run: bundle exec rubocop
   test:
     docker:
@@ -120,6 +123,9 @@ jobs:
             curl -H "Content-type:application/octet-stream" --data-binary @solr_hyrax_config.zip "http://localhost:8985/solr/admin/configs?action=UPLOAD&name=hyrax"
             curl -H 'Content-type: application/json' http://localhost:8985/api/collections/ -d '{create: {name: hydra-test, config: hyrax, numShards: 1}}'
       - run:
+          name: Update bundler
+          command: gem install bundler -v 2.1.4
+      - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
@@ -151,6 +157,9 @@ jobs:
       environment:
         type: string
         default: 'production'
+      fedora_url:
+        type: string
+        default: 'http://fcrepo:8080/fcrepo/rest'
     executor:
       name: 'docker/docker'
     environment:
@@ -178,7 +187,7 @@ jobs:
           registry: registry.library.oregonstate.edu
           image: od2_web
           tag: $TAG
-          extra_build_args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
+          extra_build_args: --build-arg RAILS_ENV=<< parameters.environment >> --build-arg FEDORA_URL=<< parameters.fedora_url >> --build-arg DEPLOYED_VERSION=$DEPLOYED_VERSION
           cache_from: registry.library.oregonstate.edu/od2_web_cache:latest
       - docker/push:
           registry: registry.library.oregonstate.edu

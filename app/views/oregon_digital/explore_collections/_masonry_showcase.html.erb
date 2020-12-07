@@ -1,0 +1,13 @@
+<% collections.each_with_index do |collection, i| %>
+  <div class="masonry document text-center col-xs-6 col-md-3">
+    <%= render 'showcase_tile',
+          title: collection.title_or_label,
+          count: controller.total_viewable_items(collection.id),
+          link: [hyrax, collection],
+          img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) %>
+
+    <% if tab == controller.class::TABS[:my] %>
+      <%= render 'oregon_digital/explore_collections/actions_list', collection: collection, i: i, view: 'masonry' %>
+    <% end %>
+  </div>
+<% end %>
