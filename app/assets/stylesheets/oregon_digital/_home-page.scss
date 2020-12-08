@@ -171,3 +171,22 @@ ul.nav.homepage-nav {
     }
   }
 }
+
+.image-masthead > .background-container {
+  background-image: linear-gradient(to right, #122d40 , #2b6479);
+  opacity: 75%;
+  margin-top: 425px;
+  height: 250px;
+}
+
+#homepage-image.navbar-background-image {
+  height: 0px;
+}
+
+nav.navbar-default {
+  margin-top: 400px;
+}
+
+.image-masthead {
+  height: 675px;
+}
