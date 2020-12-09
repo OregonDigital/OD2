@@ -1,6 +1,20 @@
 .collection-show {
+  .hyc-header {
+    margin-bottom: 0;
+  }
   .hyc-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
     margin-bottom: 2em;
+
+    span {
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
   }
   .item-count {
     padding-right: 0.5em;
@@ -16,6 +30,9 @@
 }
 
 .hyc-bl-results {
+  margin: 0;
+  margin-bottom: 2em;
+
   .masonry.document {
     padding-left: 20px;
     padding-right: 20px;

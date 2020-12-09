@@ -1,8 +1,10 @@
 <table class="table">
   <thead>
-    <tr>
+    <tr class="h2">
       <td> <%= t('oregon_digital.explore_collections.list.header.collection_name') %> </td>
-      <td> <%= t('oregon_digital.explore_collections.list.header.institution') %> </td>
+      <% unless tab == controller.class::TABS[:my] %>
+        <td> <%= t('oregon_digital.explore_collections.list.header.institution') %> </td>
+      <% end %>
       <td> <%= t('oregon_digital.explore_collections.list.header.count') %> </td>
       <% if tab == controller.class::TABS[:my] %>
         <td> <%= t('oregon_digital.explore_collections.list.header.action') %> </td>
@@ -12,8 +14,10 @@
   <tbody>
     <% collections.each_with_index do |collection, i| %>
       <tr>
-        <td> <%= link_to collection.title_or_label, [hyrax, collection] %> </td>
-        <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
+        <td> <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %> </td>
+        <% unless tab == controller.class::TABS[:my] %>
+          <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
+        <% end %>
         <td> <%= controller.total_viewable_items(collection.id) %> </td>
         <% if tab == controller.class::TABS[:my] %>
           <td>

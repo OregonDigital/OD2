@@ -6,7 +6,9 @@
   <%# OVERRIDE FROM HYRAX remove work type heading %>
   <div class="col-xs-12">&nbsp;</div>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
-      Collection and University Logo
+    <div class='row'>
+      <%= render 'show_collection_header', presenter: @presenter unless @presenter.member_of_collection_ids.empty? %>
+    </div>
       <hr style='border-width: 15px;'>
       <%= render 'work_title', presenter: @presenter %>
       <hr style='border-width: 3px;'>
@@ -35,7 +37,7 @@
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active">
                 <a href="#metadata" aria-controls="metadata" role="tab" data-toggle="tab">
-                  <%= t("hyrax.works.form.tab.metadata") %>
+                  <%= t("hyrax.works.form.tab.details") %>
                 </a>
               </li>
               <li role="presentation">
@@ -104,6 +106,6 @@
           <% end %>
         <% end %>
       </div>
-      </div>
+    </div>
   </div>
 </div>

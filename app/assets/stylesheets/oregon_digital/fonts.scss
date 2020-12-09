@@ -7,32 +7,57 @@ body {
   font-weight: 400;
   font-size: 16px;
 }
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
+span {
+  text-decoration: inherit;
 }
-h1 {
+
+.collection-title {
+  font-family: Lato;
+  font-style: bold;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: bold;
+  text-decoration: inherit;
+}
+h1,
+.h1 {
+  color: $black;
   font-size: 30px;
 }
-h2 {
+h2,
+.h2 {
+  color: $dark-grey;
   font-size: 22px;
   letter-spacing: 3.5px;
 }
-h3 {
+h3,
+.h3 {
+  color: $black;
   font-size: 20px;
 }
-h4 {
+h4,
+.h4 {
+  color: $dark-grey;
   font-size: 16px;
   letter-spacing: 2.5px;
 }
-h5 {
+h5,
+.h5 {
+  color: $black;
   font-size: 18px;
 }
-h6 {
+h6,
+.h6 {
+  color: $dark-grey;
   font-size: 14px;
   letter-spacing: 2px;
 }
-h2, h4, h6 {
+h2, h4, h6,
+.h2, .h4, .h6 {
   color: $dark-grey;
   text-transform: uppercase;
 }
@@ -64,4 +89,58 @@ h2, h4, h6 {
   a {
     text-decoration: underline 2px $light-orange;
   }
+}
+
+.lato-p {
+  font-size: 16px;
+
+  a {
+    text-decoration: underline 1px $light-orange;
+  }
+}
+.lato-b {
+  font-style: bold;
+
+  a {
+    text-decoration: underline 2px $light-orange;
+  }
+}
+
+.navy-blue {
+  color: $navy-blue;
+}
+.very-light-grey {
+  color: $very-light-grey;
+}
+.light-grey {
+  color: $light-grey;
+}
+.medium-grey {
+  color: $medium-grey;
+}
+.dark-grey {
+  color: $dark-grey;
+}
+
+a {
+  &.mw-sm,
+  &.mw-lg,
+  &.lato-p {
+    text-decoration: underline 1px $light-orange;
+  }
+  &.mw-lg-b,
+  &.lato-b {
+    text-decoration: underline 2px $light-orange;
+  }
+}
+
+dl.work-show > dt {
+  font-family: Lato;
+  font-style: bold;
+  font-size: 18px;
+}
+
+dl.work-show > dd {
+  font-family: Lato;
+  font-size: 18px;
 }
