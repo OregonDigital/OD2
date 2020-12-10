@@ -15,7 +15,7 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
   apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
   build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip \
-  zip ghostscript vim tesseract-ocr libopenjp2-tools \
+  zip ghostscript vim tesseract-ocr poppler-utils libopenjp2-tools \
   ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-11-jre \
   --fix-missing --allow-unauthenticated
 
