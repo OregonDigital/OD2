@@ -1,20 +1,9 @@
-<div id="preface" class="row">
-  <div class="col-sm-3">
-    <!-- @TODO: Add university badges -->
-  </div>
-  <div class="col-sm-6">
-    <p>
-      The collections of Oregon Digital are primarily created to support the teaching and research missions of the University of Oregon and Oregon State University.
-      The collections are comprised of unique digitized and born-digital materials including photographs, articles, sheet music, manuscripts, ephemera, and more.
-      Oregon Digital is collaboratively managed by the Digital Scholarship Services of the University of Oregon Libraries and by Oregon State University Libraries.
-    </p>
-  </div>
-</div>
-
 <div id="showcase" class="row">
-  <div class="col-md-6">
+  <div class="col-md-1" >
+  </div>
+  <div class="col-md-5">
     <% @collections = Collection.all[0..4] %>
-    
+    <h2>FEATURED COLLECTIONS</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
         <% @member_work_1 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 3).first['id'] %>
@@ -24,7 +13,7 @@
         <% @member_work_2 = ActiveFedora::Base.find(@member_work_2).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_2.nil? %>
         <% @member_work_3 = ActiveFedora::Base.find(@member_work_3).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_3.nil? %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
-        <div class="row">
+        <div class="row featured-collection-row">
         <% if @member_work_1 %>
           <div class="col-sm-2">
             <%= render_thumbnail_tag(
@@ -56,15 +45,26 @@
           </div>
         <% end %>
         <div class="col-sm-6">
-          <p class='collection-title'><%= collection.title.first %></p>
+          <p class='collection-title'><h3><%= collection.title.first %></h3></p>
           <p>
-            <%= Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000).length %> items
+            <h4><%= Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000).length %> items
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %></h4>
           </p>
         </div>
         </div>
       <% end %>
     <% end %>
+    <div class="row">
+      <div class="col-md-4 featured-collection-border">
+      </div>
+      <div class="col-md-4">
+        <button type="button" class="btn btn-primary all-collections-homepage">
+          View All Collections
+        </button>
+      </div>
+      <div class="col-md-4 featured-collection-border">
+      </div>
+    </div>
   </div>
 </div>
