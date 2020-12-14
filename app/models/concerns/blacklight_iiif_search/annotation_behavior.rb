@@ -14,7 +14,7 @@ module BlacklightIiifSearch
     # Create a URL for the canvas that the annotation refers to
     # @return [String]
     def canvas_uri_for_annotation
-      "#{parent_url}/canvas/#{document[:id]}#{coordinates}"
+      "#{parent_url}/canvas/#{document[:id]}/#{coordinates}"
     end
 
     def parent_url
@@ -30,27 +30,32 @@ module BlacklightIiifSearch
       return '' unless query
 
       if (word = words[hl_index])
-        "#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
+        "#{word.page}#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
       else
-        '#xywh=0,0,0,0'
+        '0#xywh=0,0,0,0'
       end
     end
 
     def words
       @words ||=
         begin
-          hocr = Nokogiri::HTML(document['hocr_content_tsimv'][0])
-          words = hocr.css('.ocrx_word')
-          words = words.map { |x| Word.new(x) }
-          words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }
+          found_words = []
+          document['hocr_content_tsimv'].each_with_index do |hocr, page|
+            hocr = Nokogiri::HTML(hocr)
+            words = hocr.css('.ocrx_word')
+            words = words.map { |x| Word.new(x, page) }
+            found_words += words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }
+          end
+          found_words
         end
     end
 
     # A single search result word and bounding box
     class Word
-      attr_reader :nokogiri_element
-      def initialize(nokogiri_element)
+      attr_reader :nokogiri_element, :page
+      def initialize(nokogiri_element, page)
         @nokogiri_element = nokogiri_element
+        @page = page
       end
 
       def bbox
