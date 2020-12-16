@@ -191,3 +191,23 @@ nav.navbar-default {
 .image-masthead {
   height: 675px;
 }
+
+.featured-collection-row {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid grey;
+  
+}
+
+.featured-collection-row:last-child {
+  border-bottom: none;
+}
+
+.featured-collection-border {
+  border-bottom: 3px solid $lime-green;
+}
+
+.all-collections-homepage {
+  margin-left: -14px;
+  margin-top: -20px;
+}
