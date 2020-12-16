@@ -6,38 +6,37 @@
     <h2>FEATURED COLLECTIONS</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
-        <% @member_work_1 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 3).first['id'] %>
-        <% @member_work_2 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 3).first['id'] %>
-        <% @member_work_3 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 3).first['id'] %>
-        <% @member_work_1 = ActiveFedora::Base.find(@member_work_1).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_1.nil? %>
-        <% @member_work_2 = ActiveFedora::Base.find(@member_work_2).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_2.nil? %>
-        <% @member_work_3 = ActiveFedora::Base.find(@member_work_3).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_3.nil? %>
+        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000)%>
+        <% @member_works = @member_docs[0..2].each do |doc| %>
+          <% ActiveFedora::Base.find(doc['id']).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first %>
+        <% end %>
+        <% @member_count = @member_docs.length %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <div class="row featured-collection-row">
-        <% if @member_work_1 %>
+        <% if @member_works[0] %>
           <div class="col-sm-2">
             <%= render_thumbnail_tag(
-                SolrDocument.find(@member_work_1.id),
+                SolrDocument.find(@member_works[0].id),
                 { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
                 'aria-hidden': true,
                 tabindex: -1
               ) %>
           </div>
         <% end %>
-        <% if @member_work_2 %>
+        <% if @member_works[1] %>
           <div class="col-sm-2">
             <%= render_thumbnail_tag(
-                SolrDocument.find(@member_work_2.id),
+                SolrDocument.find(@member_works[1].id),
                 { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
                 'aria-hidden': true,
                 tabindex: -1
               ) %>
           </div>
         <% end %>
-        <% if @member_work_3 %>
+        <% if @member_works[2] %>
           <div class="col-sm-2">
             <%= render_thumbnail_tag(
-                SolrDocument.find(@member_work_3.id),
+                SolrDocument.find(@member_works[2].id),
                 { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
                 'aria-hidden': true,
                 tabindex: -1
@@ -47,7 +46,7 @@
         <div class="col-sm-6">
           <p class='collection-title'><h3><%= collection.title.first %></h3></p>
           <p>
-            <h4><%= Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000).length %> items
+            <h4><%= @member_count %> items
             &nbsp;
             <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %></h4>
           </p>
