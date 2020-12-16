@@ -349,7 +349,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :barcode, predicate: ::RDF::Vocab::Bibframe.barcode do |index|
+      property :barcode, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/barcode') do |index|
         index.as :stored_searchable
       end
 

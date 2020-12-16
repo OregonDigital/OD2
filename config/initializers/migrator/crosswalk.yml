@@ -400,7 +400,7 @@ crosswalk:
     multiple: true
     function:
   - property: barcode
-    predicate: http://id.loc.gov/ontologies/bibframe/barcode
+    predicate: http://opaquenamespace.org/ns/barcode
     multiple: true
     function:
   - property: hydrologic_unit_code
