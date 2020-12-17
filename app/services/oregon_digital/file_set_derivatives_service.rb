@@ -62,6 +62,7 @@ module OregonDigital
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
+      extract_text_bbox_derivative_service(filename).create_derivatives
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       0.upto(page_count - 1) do |pagenum|
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
@@ -177,7 +178,11 @@ module OregonDigital
     def hocr_derivative_service(filename, pagenum, file_set: self.file_set)
       file_set.ocr_content = [] if pagenum.zero?
       file_set.hocr_content = [] if pagenum.zero?
-      HocrDerivativeService::Factory.new(file_set: file_set, filename: filename).new
+      ::HocrDerivativeService::Factory.new(file_set: file_set, filename: filename).new
+    end
+
+    def extract_text_bbox_derivative_service(filename, file_set: self.file_set)
+      ::ExtractedTextDerivativeService::Factory.new(file_set: file_set, filename: filename).new
     end
   end
 end

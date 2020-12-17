@@ -18,7 +18,7 @@ module BlacklightIiifSearch
     end
 
     def parent_url
-      controller.manifest_hyrax_document_url(parent_document[:id]).gsub(/\?locale=.*/, '')
+      controller.manifest_hyrax_document_url(parent_document[:id]).gsub(/\?locale=.*/, '').gsub(/document/, parent_document['has_model_ssim'][0].downcase)
     end
 
     ##
@@ -29,41 +29,40 @@ module BlacklightIiifSearch
     def coordinates
       return '' unless query
 
-      if (word = words[hl_index])
+      if (document['all_text_bbox_tsimv'] && word = extracted_words[hl_index])
+        "#{word.page}#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
+      elsif (word = hocr_words[hl_index])
         "#{word.page}#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
       else
         '0#xywh=0,0,0,0'
       end
     end
 
-    def words
-      @words ||=
+    def extracted_words
+      @extracted_words ||=
         begin
-          found_words = []
-          document['hocr_content_tsimv'].each_with_index do |hocr, page|
-            hocr = Nokogiri::HTML(hocr)
-            words = hocr.css('.ocrx_word')
-            words = words.map { |x| Word.new(x, page) }
-            found_words += words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }
-          end
-          found_words
+          text = Nokogiri::HTML(document['all_text_bbox_tsimv'][0])
+          words = text.css('word')
+          words = words.map { |x| ExtractedWord.new(x) }
+          words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }
+        end
+    end
+
+    def hocr_words
+      @hocr_words ||=
+        begin
+          hocr = Nokogiri::HTML(document['hocr_content_tsimv'][0])
+          words = hocr.css('.ocrx_word')
+          words = words.map { |x| HocrWord.new(x) }
+          words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }
         end
     end
 
     # A single search result word and bounding box
     class Word
-      attr_reader :nokogiri_element, :page
-      def initialize(nokogiri_element, page)
+      attr_reader :nokogiri_element
+      def initialize(nokogiri_element)
         @nokogiri_element = nokogiri_element
-        @page = page
-      end
-
-      def bbox
-        @bbox ||= BoundingBox.new(nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' '))
-      end
-
-      def text
-        @text ||= nokogiri_element.text
       end
 
       # Bounding box to a word
@@ -75,6 +74,38 @@ module BlacklightIiifSearch
           @w = box_array[2].to_i - @x
           @h = box_array[3].to_i - @y
         end
+      end
+    end
+
+    class HocrWord < Word
+      def bbox
+        @bbox ||= BoundingBox.new(nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' '))
+      end
+
+      def text
+        @text ||= nokogiri_element.text
+      end
+
+      def page
+        @page ||= nokogiri_element.ancestors('.ocr_page').attribute('id').value.split('_')[1].to_i - 1
+      end
+    end
+
+    class ExtractedWord < Word
+      def bbox
+        x = nokogiri_element.attributes['xmin'].value.to_i * 4.185
+        y = nokogiri_element.attributes['ymin'].value.to_i * 4.185
+        x2 = nokogiri_element.attributes['xmax'].value.to_i * 4.185
+        y2 = nokogiri_element.attributes['ymax'].value.to_i * 4.185
+        @bbox ||= BoundingBox.new([x, y, x2, y2])
+      end
+
+      def text
+        @text ||= nokogiri_element.text
+      end
+
+      def page
+        @page ||= nokogiri_element.ancestors('page').xpath('preceding-sibling::page').count
       end
     end
   end

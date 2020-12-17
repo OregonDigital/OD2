@@ -8,7 +8,7 @@ class FileSet < ActiveFedora::Base
 
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
-  attr_accessor :ocr_content, :hocr_content
+  attr_accessor :ocr_content, :hocr_content, :bbox_content
 
   self.indexer = OregonDigital::FileSetIndexer
 
