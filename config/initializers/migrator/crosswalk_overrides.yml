@@ -145,6 +145,11 @@ overrides:
     multiple: true
     function: attributes_data
 
+  #flip barcode predicate, from old bibframe to ons
+  - property: barcode
+    predicate: http://bibframe.org/vocab/barcode
+    multiple: true
+
   #in cpds, not used in OD2
   - predicate: http://www.openarchives.org/ore/1.0/datamodel#proxyFor
     function: return_nil

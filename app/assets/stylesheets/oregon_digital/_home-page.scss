@@ -120,3 +120,99 @@ body {
 .no-background {
   background: none;
 }
+
+
+ul.nav.homepage-nav {
+  text-transform: uppercase;
+  width: 100%;
+
+  a.explore-collections {
+    font-weight: 700;
+  }
+  li {
+    padding-left: 2em;
+    width: 100%;
+  }
+  li:last-child {
+    padding-left: .5em;
+  }
+  form {
+    width: 100%;
+    a.advanced-link {
+      position: relative;
+      font-size: .75em;
+      font-weight: 700;
+      padding: 0;
+      float: right;
+      top: -.75em;
+    }
+    .input-group {
+      width: 100%;
+      button {
+        position: absolute;
+        left: 0;
+        z-index: 10;
+        background: unset;
+        border: unset;
+        width: 2.25em;
+        height: calc(100% - 16px);
+        margin-top: 8px;
+        margin-bottom: 8px;
+        border-right: 1px solid $light-grey;
+      }
+      input {
+        background-color: $very-light-grey;
+        border-radius: 0;
+        padding-left: 2.5em;
+        font-size: 1.25em;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.image-masthead > .background-container {
+  background-image: linear-gradient(to right, #122d40 , #2b6479);
+  opacity: 75%;
+  margin-top: 420px;
+  height: 240px;
+  background-color: black;
+}
+
+#homepage-image.navbar-background-image {
+  height: 0px;
+}
+
+nav.navbar-default {
+  margin-top: 400px;
+}
+
+.image-masthead {
+  height: 660px;
+}
+
+.featured-collection-row {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid grey;
+  
+}
+
+.featured-collection-row:last-child {
+  border-bottom: none;
+}
+
+.featured-collection-border {
+  border-bottom: 3px solid $lime-green;
+}
+
+.all-collections-homepage {
+  margin-left: -14px;
+  margin-top: -20px;
+}
+
+.about-oregondigital-container {
+  margin-left: 100px;
+  padding-right: 140px;
+}
