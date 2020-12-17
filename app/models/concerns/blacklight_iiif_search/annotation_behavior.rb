@@ -26,10 +26,11 @@ module BlacklightIiifSearch
     # corresponding to coordinates of query term on image
     # local implementation expected, value returned below is just a placeholder
     # @return [String]
+    # rubocop:disable Metrics/AbcSize
     def coordinates
       return '' unless query
 
-      if (document['all_text_bbox_tsimv'] && word = extracted_words[hl_index])
+      if document['all_text_bbox_tsimv'] && (word = extracted_words[hl_index])
         "#{word.page}#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
       elsif (word = hocr_words[hl_index])
         "#{word.page}#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
@@ -37,6 +38,7 @@ module BlacklightIiifSearch
         '0#xywh=0,0,0,0'
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def extracted_words
       @extracted_words ||=
@@ -77,6 +79,7 @@ module BlacklightIiifSearch
       end
     end
 
+    # Implementation of Word for hOCR data
     class HocrWord < Word
       def bbox
         @bbox ||= BoundingBox.new(nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' '))
@@ -91,14 +94,21 @@ module BlacklightIiifSearch
       end
     end
 
+    # Implementation of Word for extracted text
     class ExtractedWord < Word
+      # rubocop:disable Metrics/AbcSize
       def bbox
-        x = nokogiri_element.attributes['xmin'].value.to_i * 4.185
-        y = nokogiri_element.attributes['ymin'].value.to_i * 4.185
-        x2 = nokogiri_element.attributes['xmax'].value.to_i * 4.185
-        y2 = nokogiri_element.attributes['ymax'].value.to_i * 4.185
-        @bbox ||= BoundingBox.new([x, y, x2, y2])
+        scale_factor = 4.185
+        x = nokogiri_element.attributes['xmin'].value.to_i
+        y = nokogiri_element.attributes['ymin'].value.to_i
+        x2 = nokogiri_element.attributes['xmax'].value.to_i
+        y2 = nokogiri_element.attributes['ymax'].value.to_i
+
+        coords = [x, y, x2, y2].map { |coord| coord * scale_factor }
+
+        @bbox ||= BoundingBox.new(coords)
       end
+      # rubocop:enable Metrics/AbcSize
 
       def text
         @text ||= nokogiri_element.text

@@ -59,6 +59,7 @@ module OregonDigital
       )
     end
 
+    # rubocop:disable Metrics/MethodLength
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
@@ -72,6 +73,7 @@ module OregonDigital
         end
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     def create_thumbnail(filename)
       OregonDigital::Derivatives::Image::GMRunner.create(
