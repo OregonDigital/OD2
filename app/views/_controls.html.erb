@@ -3,14 +3,14 @@
 <nav class="navbar navbar-default navbar-static-top text-shadow" role="navigation" title="Search Bar">
   <div class="container site-title-container">
     <div class="site-title h1" style="text-align: center;">
-      <h1><%= t('hyrax.product_name') %></h1>
+      <h1 style="color: white;"><%= t('hyrax.product_name') %></h1>
     </div>
   </div>
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 col-sm-<%= search_page ? 7 : 10 %> col-sm-offset-1 col-md-5 col-md-offset-4">
         <ul class="nav navbar-nav homepage-nav">
-          <li>
+          <li style="background: none;">
               <%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "masthead-search-form-header", role: "search" do %>
                 <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
                   <%= hidden_field_tag :search_field, 'all_fields', id: 'masthead_search_field' %>
