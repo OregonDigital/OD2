@@ -18,6 +18,8 @@ RSpec.describe OregonDigital::HocrDerivativeService do
       before do
         processor = processor_factory.new(ocr_language: 'eng', file_path: file_path)
         allow(processor_factory).to receive(:new).and_return(processor)
+        result = OregonDigital::HocrDerivativeService::TesseractProcessor::Result.new(hocr_content: hocr_content)
+        allow(processor).to receive(:run!).and_return(result)
 
         service.create_derivatives
       end

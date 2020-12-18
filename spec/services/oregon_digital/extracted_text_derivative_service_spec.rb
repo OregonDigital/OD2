@@ -17,6 +17,8 @@ RSpec.describe OregonDigital::ExtractedTextDerivativeService do
       before do
         processor = processor_factory.new(file_path: file_path)
         allow(processor_factory).to receive(:new).and_return(processor)
+        result = OregonDigital::ExtractedTextDerivativeService::PDFToTextProcessor::Result.new(bbox_content: bbox_content)
+        allow(processor).to receive(:run!).and_return(result)
 
         service.create_derivatives
       end
