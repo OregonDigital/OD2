@@ -18,7 +18,18 @@ class CatalogController < ApplicationController
     'system_modified_dtsi'
   end
 
+  # CatalogController-scope behavior and configuration for BlacklightIiifSearch
+  include BlacklightIiifSearch::Controller
+
   configure_blacklight do |config|
+    # configuration for Blacklight IIIF Content Search
+    config.iiif_search = {
+      full_text_field: 'all_text_tsimv',
+      object_relation_field: 'file_set_ids_ssim',
+      supported_params: %w[q page],
+      autocomplete_handler: 'iiif_suggest',
+      suggester_name: 'iiifSuggester'
+    }
     # default advanced config values
     config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
     # config.advanced_search[:qt] ||= 'advanced'
@@ -242,7 +253,7 @@ class CatalogController < ApplicationController
       all_names = search_fields.join(' ')
       title_name = 'title_tesim'
       field.solr_parameters = {
-        qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_timv",
+        qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv",
         pf: title_name.to_s
       }
       field.include_in_advanced_search = false

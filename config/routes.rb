@@ -1,6 +1,8 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
+
+  concern :iiif_search, BlacklightIiifSearch::Routes.new
   resources :explore_collections, controller: 'oregon_digital/explore_collections', only: %i[index]
 
   namespace :admin do
@@ -57,6 +59,7 @@ Rails.application.routes.draw do
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
+    concerns :iiif_search
   end
 
   resources :bookmarks do

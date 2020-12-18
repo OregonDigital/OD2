@@ -181,6 +181,10 @@ GEM
     blacklight_advanced_search (6.4.1)
       blacklight (~> 6.0, >= 6.0.1)
       parslet
+    blacklight_iiif_search (1.0.0)
+      blacklight (~> 6.0)
+      iiif-presentation
+      rails (>= 4.2, < 6)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -502,6 +506,10 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    iiif-presentation (1.0.0)
+      activesupport (>= 3.2.18)
+      faraday (>= 0.9)
+      json
     iiif_manifest (1.0.1)
       activesupport (>= 4)
     jbuilder (2.10.1)
@@ -1010,6 +1018,7 @@ DEPENDENCIES
   axe-matchers
   blacklight-oembed
   blacklight_advanced_search (~> 6.4)
+  blacklight_iiif_search (~> 1.0)
   browse-everything
   byebug
   capybara (~> 2.17)

@@ -30,6 +30,7 @@ gem 'blacklight_advanced_search', '~> 6.4'
 gem 'blacklight-oembed'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
+gem 'blacklight_iiif_search', '~> 1.0'
 gem 'rubyzip', '>= 1.2.2'
 gem 'zip_tricks', '~> 5.3'
 

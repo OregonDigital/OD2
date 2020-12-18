@@ -24,6 +24,10 @@ module OregonDigital
       presenters
     end
 
+    def search_service
+      Rails.application.routes.url_helpers.solr_document_iiif_search_url(solr_document_id: id.to_s)
+    end
+
     def viewing_hint
       'paged'
     end
