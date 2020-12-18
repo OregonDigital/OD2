@@ -259,6 +259,7 @@ Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local
 Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::TableBasedAuthority')
 
 Hyrax::Engine.routes.default_url_options = Rails.application.config.action_mailer.default_url_options
+Rails.application.routes.default_url_options = Rails.application.config.action_mailer.default_url_options
 
 Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
 
