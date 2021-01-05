@@ -1,6 +1,17 @@
 .resource-type {
   margin-bottom: 20px;
 }
+.parent-child-list {
+  display: inline;
+  vertical-align: top;
+  ul {
+    display: inline-block;
+  }
+}
+
+.search-result-wrapper .search-results-title-row .search-result-title {
+  margin: 0;
+}
 
 .my-shelf-button {
   margin-top: 15px;

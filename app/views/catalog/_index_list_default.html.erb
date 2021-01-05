@@ -1,5 +1,5 @@
-<div class="col-md-<%= document.collection? ? 7 : 10 %>">
-  <div class="metadata">
+<div class="col-md-<%= document.collection? ? 7 : 9 %>">
+  <div class="metadata row">
     <dl class="dl-horizontal">
     <% doc_presenter = index_presenter(document) %>
     <% index_fields(document).each do |field_name, field| -%>
@@ -10,28 +10,22 @@
     <% end %>
     </dl>
   </div>
-</div>
-<% if document.collection? %>
-  <% collection_presenter = Hyrax::CollectionPresenter.new(document, current_ability) %>
-  <div class="col-md-3">
-    <div class="collection-counts-wrapper">
-      <div class="collection-counts-item">
-        <span><%= collection_presenter.total_viewable_collections %></span>Collections
-      </div>
-      <div class="collection-counts-item">
-        <span><%= collection_presenter.total_viewable_works %></span>Works
+  <% if document.collection? %>
+    <% collection_presenter = Hyrax::CollectionPresenter.new(document, current_ability) %>
+    <div class="col-md-3">
+      <div class="collection-counts-wrapper">
+        <div class="collection-counts-item">
+          <span><%= collection_presenter.total_viewable_collections %></span>Collections
+        </div>
+        <div class="collection-counts-item">
+          <span><%= collection_presenter.total_viewable_works %></span>Works
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
-<div class="resource-type col-md-offset-2 col-md-10">
-  <div class="col-md-4">
-    <%= render 'index_type_icon', document: document unless document.type_label.first.nil? || document.type_label.first.empty? %>
-    <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
-  </div>
+  <% end %>
   <% if document.parents? %>
-    <div class="col-md-4">
-      <%= t('hyrax.search.list.parents.header') %>
+    <div class="resource-type row">
+      <div class="parent-child-list dark-grey"> <%= t('hyrax.search.list.parents.header') %> </div>
       <ul>
         <% document.parents.each do |parent| %>
           <li> <%= link_to parent, parent %> </li>
@@ -39,14 +33,21 @@
       </ul>
     </div>
   <% end %>
-  <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
-  <% unless document.collection? %>
-    <%= button_tag t('hyrax.dashboard.my.action.save'),
-                    class: 'btn btn-default submits-batches submits-batches-add pull-right',
-                    data: { toggle: "modal", target: "#collection-list-container", id: document.id },
-                    :onclick => "javascript:updateSaveCheckboxes(this)" %>
-  <% end %>
+  <div class="resource-type row">
+    <%= render 'index_type_icon', document: document unless document.type_label.first.nil? || document.type_label.first.empty? %>
+    <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
+    <% if document.children? %>
+      (<%= document.children.count %> Items)
+    <% end %>
+  </div>
 </div>
+    <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
+<% unless document.collection? %>
+  <%= button_tag t('hyrax.dashboard.my.action.save'),
+                  class: 'btn btn-default submits-batches submits-batches-add pull-right',
+                  data: { toggle: "modal", target: "#collection-list-container", id: document.id },
+                  :onclick => "javascript:updateSaveCheckboxes(this)" %>
+<% end %>
 
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
 <%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
