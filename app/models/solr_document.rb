@@ -33,6 +33,24 @@ class SolrDocument
     fa_classes[type.downcase] || 'cube'
   end
 
+  def rights_statement_to_fa_class(rights_statement)
+    fa_classes = {
+      'http://rightsstatements.org/vocab/InC/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-OW-EU/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-EDU/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-NC/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-RUU/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/NoC-CR/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-NC/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-OKLR/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-US/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/CNE/1.0/': 'question-circle',
+      'http://rightsstatements.org/vocab/UND/1.0/': 'question-circle',
+      'http://rightsstatements.org/vocab/NKC/1.0/': 'question-circle'
+    }.with_indifferent_access
+    fa_classes[rights_statement] || 'question-circle'
+  end
+
   # Find and return parent works
   def parents
     config = ::CatalogController.new

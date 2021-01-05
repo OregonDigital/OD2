@@ -1,4 +1,5 @@
-<div class="col-md-<%= document.collection? ? 7 : 9 %>">
+<!-- OVERRIDE FROM HYRAX -->
+<div class="col-md-<%= document.collection? ? 7 : 8 %>">
   <div class="metadata row">
     <dl class="dl-horizontal">
     <% doc_presenter = index_presenter(document) %>
@@ -24,7 +25,7 @@
     </div>
   <% end %>
   <% if document.parents? %>
-    <div class="resource-type row">
+    <div class="metadata-row row">
       <div class="parent-child-list dark-grey"> <%= t('hyrax.search.list.parents.header') %> </div>
       <ul>
         <% document.parents.each do |parent| %>
@@ -33,7 +34,13 @@
       </ul>
     </div>
   <% end %>
-  <div class="resource-type row">
+  <div class="metadata-row row">
+    <% document['rights_statement_tesim'].each_with_index do |rights_statement, i| %>
+      <i class="large-icon fa fa-<%= document.rights_statement_to_fa_class(rights_statement) %>" aria-hidden="true"></i>
+      <a href="<%= rights_statement %>"><%= document['rights_statement_label_tesim'][i] %></a>
+    <% end %>
+  </div>
+  <div class="metadata-row row">
     <%= render 'index_type_icon', document: document unless document.type_label.first.nil? || document.type_label.first.empty? %>
     <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
     <% if document.children? %>
@@ -41,7 +48,7 @@
     <% end %>
   </div>
 </div>
-    <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
+<!-- ADD SAVE BUTTON AND MODAL -->
 <% unless document.collection? %>
   <%= button_tag t('hyrax.dashboard.my.action.save'),
                   class: 'btn btn-default submits-batches submits-batches-add pull-right',
@@ -51,5 +58,3 @@
 
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
 <%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
-
-<!-- END OVERRIDE -->
