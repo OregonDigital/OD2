@@ -33,6 +33,9 @@ class SolrDocument
     fa_classes[type.downcase] || 'cube'
   end
 
+  # Turn rights statement into FontAwesome icon class
+  # See app\views\catalog\_index_list_default.html.erb
+  # rubocop:disable Metrics/MethodLength
   def rights_statement_to_fa_class(rights_statement)
     fa_classes = {
       'http://rightsstatements.org/vocab/InC/1.0/': 'copyright',
@@ -50,6 +53,7 @@ class SolrDocument
     }.with_indifferent_access
     fa_classes[rights_statement] || 'question-circle'
   end
+  # rubocop:enable Metrics/MethodLength
 
   # Find and return parent works
   def parents
