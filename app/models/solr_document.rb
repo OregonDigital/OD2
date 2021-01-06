@@ -70,8 +70,8 @@ class SolrDocument
   # Find and return child works (excluding FileSets)
   def children
     @children ||= member_ids.map do |member_id|
-      sd = SolrDocument.find(member_id)
-      sd['has_model_ssim'].first == 'FileSet' ? nil : sd
+      document = SolrDocument.find(member_id)
+      document['has_model_ssim'].first == 'FileSet' ? nil : document
     end.compact
   end
 
