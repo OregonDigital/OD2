@@ -5,7 +5,7 @@ en:
     search:
       list:
         parents:
-          header: 'Parent works:'
+          header: 'Is Part of:'
     select_type:
       generic:
         description:        "Generic works"

@@ -85,6 +85,7 @@ class CatalogController < ApplicationController
       document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
     }
     config.add_index_field 'type_label_tesim', label: 'Resource Type', link_to_search: 'type_label_tesim', if: false
+    config.add_index_field 'rights_statement_label_tesim', label: 'Rights Statement', link_to_search: 'rights_statement_label_tesim', if: false
 
     config.add_field_configuration_to_solr_request!
 
