@@ -1,11 +1,19 @@
-.metadata-row {
-  margin-bottom: 5px;
+#appliedParams{
+  background-color: unset;
+  border-bottom: 1em solid $very-light-grey;
+  margin-bottom: 2em;
 }
-.parent-child-list {
-  display: inline;
-  vertical-align: top;
-  ul {
-    display: inline-block;
+
+.appliedFilter {
+  background-color: $very-light-grey;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  .constraint-value,
+  .constraint-value:hover,
+  .constraint-value:active {
+    background-color: unset;
+    padding-right: 1em;
   }
 }
 
@@ -30,6 +38,17 @@
   }
 }
 
+.metadata-row {
+  margin-bottom: 5px;
+}
+.parent-child-list {
+  display: inline;
+  vertical-align: top;
+  ul {
+    display: inline-block;
+  }
+}
+
 .my-shelf-button {
   margin-top: 15px;
 }
@@ -39,19 +58,19 @@ em {
 }
 
 .select-button {
-  border-right: 1px solid grey;
-  border-top: 0px solid grey;
-  border-left: 0px solid grey;
-  border-bottom: 0px solid grey;
+  border-right: 1px solid $very-light-grey;
+  border-top: 0px solid $very-light-grey;
+  border-left: 0px solid $very-light-grey;
+  border-bottom: 0px solid $very-light-grey;
   margin-left: -15px;
 
 }
 
 .deselect-button {
-  border-right: 0px solid grey;
-  border-top: 0px solid grey;
-  border-left: 0px solid grey;
-  border-bottom: 0px solid grey;
+  border-right: 0px solid $very-light-grey;
+  border-top: 0px solid $very-light-grey;
+  border-left: 0px solid $very-light-grey;
+  border-bottom: 0px solid $very-light-grey;
 }
 
 .thumbnail > a > .img-thumbnail {
