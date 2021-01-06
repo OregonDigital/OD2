@@ -61,6 +61,9 @@ class CatalogController < ApplicationController
     config.index.display_type_field = 'has_model_ssim'
     config.index.thumbnail_field = 'thumbnail_path_ss'
 
+    # Remove the view type selector (masonry, grid, list, etc) from the sort/show section so we can add it somewhere else
+    config.index.collection_actions.delete_field 'view_type_group'
+
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
 

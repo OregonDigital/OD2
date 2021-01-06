@@ -13,6 +13,12 @@
   display: inline-block;
 }
 
+#sort-dropdown,
+#per_page-dropdown {
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
 .search-result-wrapper {
   .metadata-row .fa {
     filter: contrast(0%);
