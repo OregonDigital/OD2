@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital
-  # Behavior for surpressing user collections
+  # Behavior for surpressing UO Collections
   module OnlyOsuCollectionsBehavior
     extend ActiveSupport::Concern
 
