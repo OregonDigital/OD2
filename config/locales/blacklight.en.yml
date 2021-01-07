@@ -1,3 +1,14 @@
 en:
   blacklight:
     application_name: 'Blacklight'
+
+    search:
+      filters:
+        title: ''
+      per_page:
+        label: '%{count}'
+        button_label: '%{count}'
+        title: 'Show: '
+      sort:
+        button_label: '%{field}'
+        title: 'Sort: '
