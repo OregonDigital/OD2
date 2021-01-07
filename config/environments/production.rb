@@ -50,9 +50,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     authentication: :login,
     address: ENV.fetch('SMTP_HOST', 'smtp.gmail.com'),
-    port: ENV.fetch('SMTP_PORT', 25),
-    user_name: ENV.fetch('SMTP_USER', 'bogus'),
-    password: ENV.fetch('SMTP_PASSWD', 'bogus')
+    port: ENV.fetch('SMTP_PORT', 25)
   }
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
