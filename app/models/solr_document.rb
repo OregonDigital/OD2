@@ -33,6 +33,28 @@ class SolrDocument
     fa_classes[type.downcase] || 'cube'
   end
 
+  # Turn rights statement into FontAwesome icon class
+  # See app\views\catalog\_index_list_default.html.erb
+  # rubocop:disable Metrics/MethodLength
+  def rights_statement_to_fa_class(rights_statement)
+    fa_classes = {
+      'http://rightsstatements.org/vocab/InC/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-OW-EU/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-EDU/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-NC/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/InC-RUU/1.0/': 'copyright',
+      'http://rightsstatements.org/vocab/NoC-CR/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-NC/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-OKLR/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-US/1.0/': 'creative-commons-pd',
+      'http://rightsstatements.org/vocab/CNE/1.0/': 'question-circle',
+      'http://rightsstatements.org/vocab/UND/1.0/': 'question-circle',
+      'http://rightsstatements.org/vocab/NKC/1.0/': 'question-circle'
+    }.with_indifferent_access
+    fa_classes[rights_statement] || 'question-circle'
+  end
+  # rubocop:enable Metrics/MethodLength
+
   # Find and return parent works
   def parents
     config = ::CatalogController.new
@@ -43,6 +65,18 @@ class SolrDocument
 
   def parents?
     !parents.empty?
+  end
+
+  # Find and return child works (excluding FileSets)
+  def children
+    @children ||= member_ids.map do |member_id|
+      document = SolrDocument.find(member_id)
+      document['has_model_ssim'].first == 'FileSet' ? nil : document
+    end.compact
+  end
+
+  def children?
+    !children.empty?
   end
 
   solrized_methods Generic.generic_properties
