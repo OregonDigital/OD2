@@ -38,7 +38,7 @@
     <% document['rights_statement_tesim'].each_with_index do |rights_statement, i| %>
       <i class="large-icon fa fa-<%= document.rights_statement_to_fa_class(rights_statement) %>" aria-hidden="true"></i>
       <a href="<%= rights_statement %>"><%= document['rights_statement_label_tesim'][i] %></a>
-    <% end %>
+    <% end unless document['rights_statement_tesim'].nil? %>
   </div>
   <div class="metadata-row row">
     <%= render 'index_type_icon', document: document unless document.type_label.first.nil? || document.type_label.first.empty? %>
