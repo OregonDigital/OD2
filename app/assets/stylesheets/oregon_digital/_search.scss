@@ -1,5 +1,23 @@
-.resource-type {
-  margin-bottom: 20px;
+.metadata-row {
+  margin-bottom: 5px;
+}
+.parent-child-list {
+  display: inline;
+  vertical-align: top;
+  ul {
+    display: inline-block;
+  }
+}
+
+.search-result-wrapper {
+  .metadata-row .fa {
+    filter: contrast(0%);
+    width: 1.5em;
+  }
+
+  .search-results-title-row .search-result-title {
+    margin: 0;
+  }
 }
 
 .my-shelf-button {
