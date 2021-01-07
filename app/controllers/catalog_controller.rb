@@ -61,6 +61,9 @@ class CatalogController < ApplicationController
     config.index.display_type_field = 'has_model_ssim'
     config.index.thumbnail_field = 'thumbnail_path_ss'
 
+    # Remove the view type selector (masonry, grid, list, etc) from the sort/show section so we can add it somewhere else
+    config.index.collection_actions.delete_field 'view_type_group'
+
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
 
@@ -85,6 +88,7 @@ class CatalogController < ApplicationController
       document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
     }
     config.add_index_field 'type_label_tesim', label: 'Resource Type', link_to_search: 'type_label_tesim', if: false
+    config.add_index_field 'rights_statement_label_tesim', label: 'Rights Statement', link_to_search: 'rights_statement_label_tesim', if: false
 
     config.add_field_configuration_to_solr_request!
 
@@ -281,10 +285,10 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     # label is key, solr field is value
     config.add_sort_field "score desc, #{uploaded_field} desc", label: 'relevance'
-    config.add_sort_field "#{uploaded_field} desc", label: "date uploaded \u25BC"
-    config.add_sort_field "#{uploaded_field} asc", label: "date uploaded \u25B2"
-    config.add_sort_field "#{modified_field} desc", label: "date modified \u25BC"
-    config.add_sort_field "#{modified_field} asc", label: "date modified \u25B2"
+    config.add_sort_field "#{uploaded_field} desc", label: 'date uploaded (desc)'
+    config.add_sort_field "#{uploaded_field} asc", label: 'date uploaded (asc)'
+    config.add_sort_field "#{modified_field} desc", label: 'date modified (desc)'
+    config.add_sort_field "#{modified_field} asc", label: 'date modified (asc)'
 
     # If there are more than this many search results, no spelling ('did you
     # mean') suggestion is offered.

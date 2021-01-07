@@ -1,17 +1,21 @@
 <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
 
 <div id="sortAndPerPage" class="sort-pagination d-md-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
-  <%= render partial: "paginate_compact", object: @response if show_pagination? %>
-  <%= button_tag t('hyrax.dashboard.my.action.select_all'),
-                  class: 'select-button',
-                  onclick: 'javascript:selectAllSearchResults()' %>
-  <%= button_tag t('hyrax.dashboard.my.action.none'),
-                  class: 'deselect-button',
-                  onclick: 'javascript:deselectAllSearchResults()' %>
-  <%= button_tag t('hyrax.dashboard.my.action.save_selected_to'),
-                  class: 'btn btn-default submits-batches submits-batches-add',
-                  data: { toggle: "modal", target: "#collection-list-container" } %>
-  <%= render_results_collection_tools wrapping_class: "search-widgets pull-right" %>
+  <%= render_results_collection_tools wrapping_class: "search-widgets" %>
+
+  <%#= render partial: "paginate_compact", object: @response if show_pagination? %>
+
+  <div class="save-widgets pull-right">
+    <%= button_tag t('hyrax.dashboard.my.action.select_all'),
+                    class: 'select-button',
+                    onclick: 'javascript:selectAllSearchResults()' %>
+    <%= button_tag t('hyrax.dashboard.my.action.none'),
+                    class: 'deselect-button',
+                    onclick: 'javascript:deselectAllSearchResults()' %>
+    <%= button_tag t('hyrax.dashboard.my.action.save_selected_to'),
+                    class: 'btn btn-default submits-batches submits-batches-add',
+                    data: { toggle: "modal", target: "#collection-list-container" } %>
+  </div>
 </div>
 
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>

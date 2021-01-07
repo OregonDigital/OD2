@@ -1,0 +1,12 @@
+<% if query_has_constraints? %>
+<div id="appliedParams" class="clearfix constraints-container">
+  <div class="pull-right">
+    <%# OVERRIDE FROM BLACKLIGHT to remove start over link and replace with view type widget %>
+    <% tool_config = Blacklight::Configuration::ToolConfig.new %>
+    <% tool_config.name = :view_type_group %>
+    <%= render_filtered_partials(view_type_group: tool_config) %>
+  </div>
+  <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
+  <%= render_constraints(params) %>
+</div>
+<% end %>
