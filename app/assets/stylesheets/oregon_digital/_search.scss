@@ -4,6 +4,16 @@
   margin-bottom: 2em;
 }
 
+.view-type .btn-default {
+  border-radius: 5px !important;
+  border: none;
+  box-shadow: none;
+  &.active {
+    color: white;
+    background-color: $dark-orange;
+  }
+}
+
 .appliedFilter {
   background-color: $very-light-grey;
   padding-left: 1em;
