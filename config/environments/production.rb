@@ -48,7 +48,6 @@ Rails.application.configure do
   end
 
   config.action_mailer.smtp_settings = {
-    authentication: :login,
     address: ENV.fetch('SMTP_HOST', 'smtp.gmail.com'),
     port: ENV.fetch('SMTP_PORT', 25)
   }
