@@ -48,11 +48,11 @@ Rails.application.configure do
   end
 
   config.action_mailer.smtp_settings = {
-    authentication: :login,
     address: ENV.fetch('SMTP_HOST', 'smtp.gmail.com'),
     port: ENV.fetch('SMTP_PORT', 25),
-    user_name: ENV.fetch('SMTP_USER', 'bogus'),
-    password: ENV.fetch('SMTP_PASSWD', 'bogus')
+    enable_starttls_auto: false,
+    tls: false,
+    openssl_verify_mode: 'none'
   }
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
