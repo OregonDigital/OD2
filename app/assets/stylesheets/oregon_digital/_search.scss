@@ -38,6 +38,8 @@
 }
 
 .search-result-wrapper {
+  border-bottom: 1px solid $very-light-grey;
+
   .metadata-row .fa {
     filter: contrast(0%);
     width: 1.5em;
@@ -90,5 +92,30 @@ em {
 .document.col {
   .thumbnail {
     padding-bottom: 20px;
+  }
+}
+
+div.pagination {
+  display: flex;
+  justify-content: center;
+}
+ul.pagination li {
+  &.active span {
+    background-color: $dark-orange;
+    border: none;
+  }
+  &.next span,
+  &.next a,
+  &.previous span,
+  &.previous a {
+    background: none;
+  }
+
+  a,
+  span {
+    background-color: $very-light-grey;
+    border: none;
+    margin-left: .5em;
+    margin-right: .5em;
   }
 }
