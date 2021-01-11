@@ -51,12 +51,12 @@ h6,
 }
 h2, h4, h6,
 .h2, .h4, .h6 {
-  color: $black;
+  color: $dark-grey;
   text-transform: uppercase;
 }
 h1, h3, h5,
 .h1, .h3, .h5 {
-  color: $dark-grey;
+  color: $black;
   text-transform: unset;
   letter-spacing: unset;
 }
