@@ -3,6 +3,8 @@ en:
     application_name: 'Blacklight'
 
     search:
+      facets:
+        title: '<i class="fa fa-2x fa-filter"></i> Filters'
       filters:
         title: ''
       pagination:
