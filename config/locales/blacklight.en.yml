@@ -5,6 +5,9 @@ en:
     search:
       filters:
         title: ''
+      pagination:
+        next: 'Next <i class="fa fa-chevron-circle-right"></i>'
+        previous: '<i class="fa fa-chevron-circle-left"></i> Prev'
       per_page:
         label: '%{count}'
         button_label: '%{count}'

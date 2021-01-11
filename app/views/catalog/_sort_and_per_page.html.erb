@@ -3,8 +3,6 @@
 <div id="sortAndPerPage" class="sort-pagination d-md-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
   <%= render_results_collection_tools wrapping_class: "search-widgets" %>
 
-  <%#= render partial: "paginate_compact", object: @response if show_pagination? %>
-
   <div class="save-widgets pull-right">
     <%= button_tag t('hyrax.dashboard.my.action.select_all'),
                     class: 'select-button',
