@@ -60,6 +60,9 @@
     .panel-heading {
       background: none;;
     }
+    .panel-body {
+      background-color: white;
+    }
   }
 
   .facets-heading {
@@ -68,13 +71,11 @@
     letter-spacing: unset;
     text-transform: unset;
     i.fa-filter {
-      color: $dark-grey;
       font-size: 1.25em;
       padding-right: .25em;
     }
   }
   h3 {
-    color: $dark-grey;
     font-size: 16px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
