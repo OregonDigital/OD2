@@ -37,6 +37,40 @@
   margin-left: 1em;
 }
 
+#facets {
+  background-color: $very-light-grey;
+
+  .panel.facet_limit {
+    margin-left: 1em;
+    margin-right: 1em;
+    background: none;
+    border: 2px solid $navy-blue;
+    border-radius: 0;
+
+    .panel-heading {
+      background: none;;
+    }
+  }
+
+  .facets-heading {
+    color: $black;
+    font-size: 22px;
+    letter-spacing: unset;
+    text-transform: unset;
+    i.fa-filter {
+      color: $dark-grey;
+      font-size: 1.25em;
+      padding-right: .25em;
+    }
+  }
+  h3 {
+    color: $dark-grey;
+    font-size: 16px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+}
+
 .search-result-wrapper {
   border-bottom: 1px solid $very-light-grey;
 
@@ -77,7 +111,6 @@ em {
   margin-left: -15px;
 
 }
-
 .deselect-button {
   border-right: 0px solid $very-light-grey;
   border-top: 0px solid $very-light-grey;
