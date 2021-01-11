@@ -11,7 +11,7 @@ module OregonDigital
           ActiveFedora::SolrQueryBuilder.construct_query_for_rel(institution_label: 'Oregon State University')
         ]
         solr_parameters[:fq] ||= []
-        solr_parameters[:fq] += ["!(#{clauses.join(' OR ')})"]
+        solr_parameters[:fq] += ["(#{clauses.join(' AND ')})"]
       end
     end
   end
