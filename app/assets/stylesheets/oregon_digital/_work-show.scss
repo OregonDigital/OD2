@@ -24,29 +24,25 @@
 
 dl.work-show {
 	display: grid;
-	grid-template: auto / 10em 1fr;
-}
+  grid-template: auto / 10em 1fr;
 
-dl.work-show > dt {
-  grid-column: 1;
-}
-
-dl.work-show > dd, .field {
-  grid-column: 2;
-}
-
-dl.work-show > dt, dd, .field {
-	padding: 1em;
-  line-height: 1.5;
+  dt {
+    grid-column: 1;
+  }
+  dd {
+    grid-column: 2;
+    ul {
+      padding: 0;
+    }
+  }
+  dt, dd {
+    padding: 0;
+    line-height: 1.5;
+  }
 }
 
 .columns {
   column-count: 2;
   column-gap: 2em;
   margin-bottom: 20px;
-}
-
-dl.work-show > dd > ul > li {
-  padding-top: 15px;
-  margin-left: -50px;
 }
