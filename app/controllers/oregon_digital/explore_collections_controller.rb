@@ -12,6 +12,7 @@ module OregonDigital
     # Return all collections
     def collections
       builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)
+      builder.rows = 1000
       response = repository.search(builder)
       response.documents
     rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
@@ -21,6 +22,7 @@ module OregonDigital
     # Return OSU collections
     def osu_collections
       builder = OregonDigital::OsuCollectionsSearchBuilder.new(self)
+      builder.rows = 1000
       response = repository.search(builder)
       response.documents
     rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
@@ -30,6 +32,7 @@ module OregonDigital
     # Return UO collections
     def uo_collections
       builder = OregonDigital::UoCollectionsSearchBuilder.new(self)
+      builder.rows = 1000
       response = repository.search(builder)
       response.documents
     rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
@@ -39,6 +42,7 @@ module OregonDigital
     # Return My collections
     def my_collections
       builder = OregonDigital::MyCollectionsSearchBuilder.new(self)
+      builder.rows = 1000
       response = repository.search(builder)
       response.documents
     rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
