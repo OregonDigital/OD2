@@ -29,6 +29,10 @@
 
 .search-widgets {
   display: inline-block;
+
+  .btn {
+    background-color: $very-light-grey;
+  }
 }
 
 #sort-dropdown,
@@ -37,7 +41,50 @@
   margin-left: 1em;
 }
 
+.result-count {
+  font-size: 18px;
+  font-style: italic;
+  height: 54px;
+}
+
+#facets {
+  background-color: $very-light-grey;
+
+  .panel.facet_limit {
+    margin-left: 1em;
+    margin-right: 1em;
+    background: none;
+    border: 2px solid $navy-blue;
+    border-radius: 0;
+
+    .panel-heading {
+      background: none;;
+    }
+    .panel-body {
+      background-color: white;
+    }
+  }
+
+  .facets-heading {
+    color: $black;
+    font-size: 22px;
+    letter-spacing: unset;
+    text-transform: unset;
+    i.fa-filter {
+      font-size: 1.25em;
+      padding-right: .25em;
+    }
+  }
+  h3 {
+    font-size: 16px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+}
+
 .search-result-wrapper {
+  border-bottom: 1px solid $very-light-grey;
+
   .metadata-row .fa {
     filter: contrast(0%);
     width: 1.5em;
@@ -68,6 +115,7 @@ em {
 }
 
 .select-button {
+  background: none;
   border-right: 1px solid $very-light-grey;
   border-top: 0px solid $very-light-grey;
   border-left: 0px solid $very-light-grey;
@@ -75,8 +123,8 @@ em {
   margin-left: -15px;
 
 }
-
 .deselect-button {
+  background: none;
   border-right: 0px solid $very-light-grey;
   border-top: 0px solid $very-light-grey;
   border-left: 0px solid $very-light-grey;
@@ -90,5 +138,30 @@ em {
 .document.col {
   .thumbnail {
     padding-bottom: 20px;
+  }
+}
+
+div.pagination {
+  display: flex;
+  justify-content: center;
+}
+ul.pagination li {
+  &.active span {
+    background-color: $dark-orange;
+    border: none;
+  }
+  &.next span,
+  &.next a,
+  &.previous span,
+  &.previous a {
+    background: none;
+  }
+
+  a,
+  span {
+    background-color: $very-light-grey;
+    border: none;
+    margin-left: .5em;
+    margin-right: .5em;
   }
 }

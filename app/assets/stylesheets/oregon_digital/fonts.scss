@@ -24,34 +24,28 @@ h1, h2, h3, h4, h5, h6,
 }
 h1,
 .h1 {
-  color: $black;
   font-size: 30px;
 }
 h2,
 .h2 {
-  color: $dark-grey;
   font-size: 22px;
   letter-spacing: 3.5px;
 }
 h3,
 .h3 {
-  color: $black;
   font-size: 20px;
 }
 h4,
 .h4 {
-  color: $dark-grey;
   font-size: 16px;
   letter-spacing: 2.5px;
 }
 h5,
 .h5 {
-  color: $black;
   font-size: 18px;
 }
 h6,
 .h6 {
-  color: $dark-grey;
   font-size: 14px;
   letter-spacing: 2px;
 }
@@ -59,6 +53,12 @@ h2, h4, h6,
 .h2, .h4, .h6 {
   color: $dark-grey;
   text-transform: uppercase;
+}
+h1, h3, h5,
+.h1, .h3, .h5 {
+  color: $black;
+  text-transform: unset;
+  letter-spacing: unset;
 }
 
 // Merriweather fonts

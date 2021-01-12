@@ -3,8 +3,13 @@ en:
     application_name: 'Blacklight'
 
     search:
+      facets:
+        title: '<i class="fa fa-2x fa-filter"></i> Filters'
       filters:
         title: ''
+      pagination:
+        next: 'Next <i class="fa fa-chevron-circle-right"></i>'
+        previous: '<i class="fa fa-chevron-circle-left"></i> Prev'
       per_page:
         label: '%{count}'
         button_label: '%{count}'
