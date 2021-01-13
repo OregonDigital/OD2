@@ -1,0 +1,15 @@
+.breadcrumb li::before {
+  border: none;
+  content: '<';
+  height: 1em;
+  margin: 0 0.5em;
+  transform: unset;
+}
+.breadcrumb li + ::before {
+  margin-left: 2em;
+}
+
+.breadcrumb{
+  background: none;
+  border: none;
+}

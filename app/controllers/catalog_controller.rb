@@ -7,6 +7,8 @@ class CatalogController < ApplicationController
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
 
+  add_breadcrumb 'Home'.html_safe, :root_path
+
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
 
