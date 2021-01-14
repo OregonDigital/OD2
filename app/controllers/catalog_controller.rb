@@ -42,7 +42,7 @@ class CatalogController < ApplicationController
     config.view.list.partials = %i[thumbnail index_header index]
     config.view.gallery.partials = %i[index_header index]
     config.view.gallery.if = false
-    config.view.masonry.partials = %i[index]
+    config.view.masonry.partials = %i[metadata]
     config.view.slideshow.partials = %i[index]
     config.view.slideshow.if = false
 

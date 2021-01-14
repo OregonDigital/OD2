@@ -178,3 +178,19 @@ ul.pagination li {
     margin-right: .5em;
   }
 }
+
+/* Masonry specific */
+.hyc-bl-results.hyc-bl-search {
+  .masonry.document {
+    div.thumbnail {
+      background: none;
+    }
+    a {
+      text-align: left;
+      h3 {
+        color: $navy-blue;
+        margin-top: .5em;
+      }
+    }
+  }
+}
