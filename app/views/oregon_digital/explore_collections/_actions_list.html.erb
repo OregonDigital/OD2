@@ -14,14 +14,14 @@
       %>
     </li>
     <li>
-      <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: hyrax.dashboard_collection_path(collection.id), method: :patch do |f| %>
+      <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: hyrax.dashboard_collection_path(collection.id), method: :patch, html: { id: "new-collection-#{collection.id}"} do |f| %>
         <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
-          <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>
-          <%= hidden_field_tag 'unsharing', true %>
+          <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, id: "collection-visibility-#{collection.id}" %>
+          <%= hidden_field_tag 'unsharing', true, id: "unsharing-#{collection.id}" %>
           <%= f.submit t(:'hyrax.collection.select_form.unshare'), class: 'btn btn-primary', name: "unshare_collection" %>
         <% else %>
-          <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
-          <%= hidden_field_tag 'sharing', true %>
+          <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, id: "collection-visibility-#{collection.id}" %>
+          <%= hidden_field_tag 'sharing', true, id: "sharing-#{collection.id}" %>
           <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'btn btn-primary', name: "share_collection" %>
         <% end %>
       <% end %>

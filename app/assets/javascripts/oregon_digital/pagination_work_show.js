@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#explore-collection-table').DataTable({
+  $('#show-page-table').DataTable({
     pageLength: 2,
     lengthMenu: [[ 2 ],[ "2" ]]
   });
