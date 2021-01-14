@@ -91,13 +91,21 @@
 .search-result-wrapper {
   border-bottom: 1px solid $very-light-grey;
 
+  img {
+    max-width: 120px; // Set to longest side of thumbnails
+  }
+
   .metadata-row .fa {
     filter: contrast(0%);
     width: 1.5em;
   }
 
   .search-results-title-row .search-result-title {
+    display: inline-block;
     margin: 0;
+  }
+  .search-results-title-row .label {
+    margin-left: 15px;
   }
 }
 

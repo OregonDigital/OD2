@@ -1,4 +1,4 @@
-<div class="search-results-title-row">
+<div class="search-results-title-row col-xs-12">
   <h3 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), [hyrax, document] %></h3>
   <%= Hyrax::CollectionPresenter.new(document, current_ability).collection_type_badge %>
 </div>

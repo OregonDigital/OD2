@@ -32,3 +32,8 @@
 .btn-default {
   border: 3px solid $brand-primary;
 }
+
+/* increase checkbox size */
+input[type=checkbox] {
+  transform: scale(1.5);
+}
