@@ -1,7 +1,0 @@
-<div class="search-results-title-row">
-  <% if document.has_highlight_field?('title_tesim') %>
-    <h3 class="search-result-title"><%= link_to_document document, document.highlight_field('title_tesim').first %></h3>
-  <% else %>
-    <h3 class="search-result-title"><%= link_to_document document, document.title_or_label.truncate_words(5) %></h3>
-  <% end %>
-</div>

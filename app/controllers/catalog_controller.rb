@@ -41,8 +41,8 @@ class CatalogController < ApplicationController
 
     config.view.list.partials = %i[thumbnail index_header index]
     config.view.gallery.partials = %i[index_header index]
+    config.view.gallery.if = false
     config.view.masonry.partials = %i[index]
-    config.view.masonry.if = false
     config.view.slideshow.partials = %i[index]
     config.view.slideshow.if = false
 
@@ -78,11 +78,11 @@ class CatalogController < ApplicationController
     config.add_index_field 'title_tesim', label: 'Title', itemprop: 'name', if: false, highlight: true
     config.add_index_field 'creator_label_sim', itemprop: 'creator', link_to_search: 'creator_label_sim', max_values: 3, max_values_label: 'others'
     config.add_index_field 'date_tesim', itemprop: 'date'
-    config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
+    config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
       # Only display description if a highlight is hit
       document.response['highlighting'][document.id].keys.include?('description_tesim')
     }
-    config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, gallery: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
+    config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
       # Don't display full text if description has a highlight hit
       document.response['highlighting'][document.id].keys.include?('description_tesim')
     }, if:  lambda { |_context, _field_config, document|
