@@ -1,19 +1,19 @@
 <!-- OVERRIDE FROM HYRAX -->
-<div class="col-md-<%= document.collection? ? 7 : 8 %>">
+<div class="col-xs-9 col-sm-7 col-md-7">
   <div class="metadata row">
-    <dl class="dl-horizontal">
+    <dl class="row">
     <% doc_presenter = index_presenter(document) %>
     <% index_fields(document).each do |field_name, field| -%>
       <% if should_render_index_field? document, field %>
-          <dt><%= render_index_field_label document, field: field_name %></dt>
-          <dd><%= doc_presenter.field_value field %></dd>
+          <dt class="col-sm-3"><%= render_index_field_label document, field: field_name %></dt>
+          <dd class="col-sm-9"><%= doc_presenter.field_value field %></dd>
       <% end %>
     <% end %>
     </dl>
   </div>
   <% if document.collection? %>
     <% collection_presenter = Hyrax::CollectionPresenter.new(document, current_ability) %>
-    <div class="collection-counts-wrapper">
+    <div class="collection-counts-wrapper row">
       <div class="collection-counts-item">
         <span><%= collection_presenter.total_viewable_collections %></span>Collections
       </div>
