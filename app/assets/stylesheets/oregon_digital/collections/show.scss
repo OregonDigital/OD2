@@ -42,7 +42,8 @@
     div.thumbnail {
       background: black;
     }
-    a:hover {
+    a:hover,
+    a:focus {
       img {
         outline: 10px solid black;
         outline-offset:  -10px;

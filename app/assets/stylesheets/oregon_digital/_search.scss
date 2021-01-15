@@ -184,12 +184,49 @@ ul.pagination li {
   .masonry.document {
     div.thumbnail {
       background: none;
-    }
-    a {
-      text-align: left;
-      h3 {
-        color: $navy-blue;
-        margin-top: .5em;
+      a {
+        text-align: left;
+        h3 {
+          color: $navy-blue;
+          margin-top: .5em;
+        }
+      }
+      a:hover,
+      a:focus {
+        img {
+          mask-image: none;
+          -webkit-mask-image: none;
+        }
+        .hover-over-collection-text {
+          display: block;
+        }
+
+        & + p {
+          background: black;
+          z-index: 100;
+        }
+      }
+      p {
+        background: white;
+        z-index: -100;
+        height: 36px;
+        width: 36px;
+        position: absolute;
+        top: 6px;
+        input[type="checkbox"] {
+          position: absolute;
+          margin: 0;
+          top: 10px;
+          left: 10px;
+        }
+      }
+      p:hover,
+      p:focus {
+        background: black;
+        z-index: 100;
+      }
+      p.checked {
+        z-index: 100;
       }
     }
   }
