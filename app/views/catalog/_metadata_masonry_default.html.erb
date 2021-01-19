@@ -12,7 +12,6 @@
 </div>
 
 <div class="metadata-row">
-  <%#= doc_presenter.field_value index_fields(document)['type_label_tesim'] do |block| %>
   <% if document.children? %>
     <%= render 'index_type_icon', document: document unless document.type_label.first.nil? || document.type_label.first.empty? %>
     <span class="sr-only"><%= document.type_label.first %></span>
