@@ -25,12 +25,3 @@
     </p>
   </div>
 </div>
-<div class="col-sm-4">
-  <p class="pull-right">
-    <% if @collection.institution.first.to_s.include?("http://id.loc.gov/authorities/names/n80017721") %>
-      <%= image_tag('osu_logo.png', height: 75, width: 75) %>
-    <% elsif @collection.institution.first.to_s.include?("http://id.loc.gov/authorities/names/n80126183") %>
-      <%= image_tag('uo.png', height: 75, width: 75) %>
-    <% end %>
-  </p>
-</div>
