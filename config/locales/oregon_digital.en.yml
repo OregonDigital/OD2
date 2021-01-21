@@ -83,3 +83,8 @@ en:
       ld_fetch_exhaust:
         message: 'The source endpoint for your requested resource at %{uri} is not responding. Oregon Digital has given up retrieving data from the source endpoint. Please contact an Oregon Digital system administrator about this issue.'
         subject: '%{uri} exhausted retries'
+    works:
+      form:
+        tab:
+          details: Details
+          how_to_cite: How to Cite

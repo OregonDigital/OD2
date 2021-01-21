@@ -54,5 +54,9 @@ dl.work-show {
 .work-type {
   ul.nav-tabs {
     padding: 0 2em;
+
+    li a {
+      border-radius: 0;
+    }
   }
 }
