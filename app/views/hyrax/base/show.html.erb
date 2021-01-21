@@ -8,6 +8,7 @@
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
     <div class='row'>
       <%= render 'show_collection_header', presenter: @presenter unless @presenter.member_of_collection_ids.empty? %>
+      <%= render 'show_institution_header', presenter: @presenter unless @presenter.institution.empty? %>
     </div>
       <hr style='border-width: 15px;'>
       <%= render 'work_title', presenter: @presenter %>
