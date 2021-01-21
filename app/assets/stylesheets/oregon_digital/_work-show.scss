@@ -39,6 +39,11 @@ dl.work-show {
     padding: 0;
     line-height: 1.5;
   }
+  li a.btn {
+    border-bottom: none;
+    position: relative;
+    top: -.5em;
+  }
 }
 
 .columns {
