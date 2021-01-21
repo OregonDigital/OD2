@@ -51,6 +51,16 @@ dl.work-show {
   column-count: 2;
   column-gap: 2em;
   margin-bottom: 20px;
+
+  @media (max-width: $screen-sm-min) {
+    & {
+      display: block;
+      column-count: 1;
+    }
+    dd {
+      margin-left: 0;
+    }
+  }
 }
 
 .social-media {
