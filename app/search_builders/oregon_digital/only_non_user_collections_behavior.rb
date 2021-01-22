@@ -12,7 +12,6 @@ module OregonDigital
         ]
         solr_parameters[:fq] ||= []
         solr_parameters[:fq] += ["!(#{clauses.join(' OR ')})"]
-        solr_parameters[:rows] = 1000
       end
     end
   end
