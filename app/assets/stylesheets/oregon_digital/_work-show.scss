@@ -39,10 +39,40 @@ dl.work-show {
     padding: 0;
     line-height: 1.5;
   }
+  li a.btn {
+    border-bottom: none;
+    font-size: 1em;
+    position: relative;
+    top: -.25em;
+  }
 }
 
 .columns {
   column-count: 2;
   column-gap: 2em;
   margin-bottom: 20px;
+
+  @media (max-width: $screen-sm-min) {
+    & {
+      display: block;
+      column-count: 1;
+    }
+    dd {
+      margin-left: 0;
+    }
+  }
+}
+
+.social-media {
+  padding: 1em 0;
+}
+
+.work-type {
+  ul.nav-tabs {
+    padding: 0 2em;
+
+    li a {
+      border-radius: 0;
+    }
+  }
 }
