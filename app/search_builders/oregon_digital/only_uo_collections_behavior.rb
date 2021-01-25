@@ -8,7 +8,7 @@ module OregonDigital
     included do
       def show_only_uo_collections(solr_parameters)
         clauses = [
-          ActiveFedora::SolrQueryBuilder.construct_query_for_rel(institution_label: 'University of Oregon')
+          '(_query_:"{!raw f=institution_sim}http://id.loc.gov/authorities/names/n80126183")'
         ]
         solr_parameters[:fq] ||= []
         solr_parameters[:fq] += ["(#{clauses.join(' AND ')})"]

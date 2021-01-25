@@ -8,7 +8,7 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
     external_link = options[:links][value] unless options[:links].nil?
 
     links = Array(super(value))
-    links << link_to('<span class="glyphicon glyphicon-new-window"></span>'.html_safe, external_link, 'aria-label' => 'Open link in new window', class: 'btn', target: '_blank') unless external_link.nil?
+    links << link_to('<i class="fa fa-info-circle"></i><span class="sr-only">learn more</span>'.html_safe, external_link, 'aria-label' => 'Open link in new window', class: 'btn', target: '_blank', title: 'learn more') unless external_link.nil?
     links.join('')
   end
 
