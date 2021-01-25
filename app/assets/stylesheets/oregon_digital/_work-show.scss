@@ -18,8 +18,15 @@
   margin-left: 30px;
 }
 
-.edit-button-sections {
-  margin-top: 25px;
+.show-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  .edit-button-sections {
+    margin-top: 25px;
+    margin-left: 1.5em;
+  }
 }
 
 dl.work-show {

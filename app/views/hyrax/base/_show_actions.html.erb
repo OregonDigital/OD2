@@ -8,16 +8,16 @@
 
 
 
-  <div class="col-sm-4 edit-button-sections">
+  <div class="edit-button-sections">
     <%= link_to 'Print <i class="fa fa-print" aria-hidden="true"></i>'.html_safe, '#', class: 'btn btn-default', onclick: 'window.print();return false;'%>
   </div>
-  <div class="col-sm-4 edit-button-sections">
+  <div class="edit-button-sections">
     <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector edit-group" checked="checked" />
     <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
                   class: 'btn btn-default submits-batches submits-batches-add',
                   data: { toggle: "modal", target: "#collection-list-container" } %>
   </div>
-  <div class="col-sm-4 edit-button-sections">
+  <div class="edit-button-sections">
     <div class="dropdown">
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Download
       <span class="caret"></span></button>
@@ -29,11 +29,10 @@
   </div>
 
   <% if presenter.editor? %>
-  <div class='row'>
-    <div class='col-sm-4 edit-button-sections'>
+    <div class='edit-button-sections'>
     <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
     </div>
-    <div class='col-sm-4 edit-button-sections'>
+    <div class='edit-button-sections'>
     <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger delete-button-show-page', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
     </div>
     <% if presenter.member_presenters.size > 1 %>
@@ -52,7 +51,6 @@
           </ul>
       </div>
     <% end %>
-  </div>
   <% end %>
   <%# END OVERRIDE #%>
   <!-- >
@@ -68,10 +66,6 @@
 
 
   <-->
-
-
-
-
 </div>
 
 <!-- COinS hook for Zotero -->
