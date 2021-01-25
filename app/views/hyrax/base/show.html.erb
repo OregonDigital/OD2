@@ -4,7 +4,6 @@
 
 <div class="row work-type">
   <%# OVERRIDE FROM HYRAX remove work type heading %>
-  <div class="col-xs-12">&nbsp;</div>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
     <div class='row'>
       <%= render 'show_collection_header', presenter: @presenter unless @presenter.member_of_collection_ids.empty? %>
@@ -13,104 +12,93 @@
       <hr style='border-width: 15px;'>
       <%= render 'work_title', presenter: @presenter %>
       <hr style='border-width: 3px;'>
-        <div class="row">
-          <% if can?(:review, @presenter.solr_document) %>
-           <%= render 'workflow_actions_widget', presenter: @presenter %>
+      <div class="row">
+        <% if can?(:review, @presenter.solr_document) %>
+          <%= render 'workflow_actions_widget', presenter: @presenter %>
+        <% end %>
+        <% if @presenter.oembed_viewer? %>
+          <% @presenter.file_set_presenters.each do |presenter| %>
+            <%= render 'oembed_media', presenter: presenter %>
           <% end %>
-          <% if @presenter.oembed_viewer? %>
-            <% @presenter.file_set_presenters.each do |presenter| %>
-              <%= render 'oembed_media', presenter: presenter %>
-            <% end %>
-          <% elsif @presenter.iiif_viewer? %>
-            <div class="col-sm-12">
-              <%= render 'representative_media', presenter: @presenter, viewer: true %>
+        <% elsif @presenter.iiif_viewer? %>
+          <div class="col-sm-12">
+            <%= render 'representative_media', presenter: @presenter, viewer: true %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-xs-12">
+      </div>
+      <div class="row">
+        <%= render 'social_media' %>
+      </div>
+      <div class='row'>
+        <%# OVERRIDE FROM HYRAX remove work description %>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#metadata" aria-controls="metadata" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.details") %></h2>
+            </a>
+          </li>
+          <li role="presentation">
+            <a href="#citations" aria-controls="citations" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.how_to_cite") %></h2>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="metadata">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'metadata', presenter: @presenter %>
             </div>
-          <% end %>
-        </div>
-        <div class="col-sm-9">
-        </div>
-        <div class="col-sm-3">
-          <%= render 'social_media' %>
-        </div>
-        <div class='row'>
-          <div class='col-sm-12'>
-            <%# OVERRIDE FROM HYRAX remove work description %>
-            <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active">
-                <a href="#metadata" aria-controls="metadata" role="tab" data-toggle="tab">
-                  <%= t("hyrax.works.form.tab.details") %>
-                </a>
-              </li>
-              <li role="presentation">
-                <a href="#citations" aria-controls="citations" role="tab" data-toggle="tab">
-                  <%= t("hyrax.works.form.tab.how_to_cite") %>
-                </a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="metadata">
-                <div class="form-tab-content">
-                  <% # metadata_tab is sometimes provided %>
-                  <%= render 'metadata', presenter: @presenter %>
-                </div>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="citations">
-                <div class="form-tab-content">
-                  <% # metadata_tab is sometimes provided %>
-                  <%= render 'citations', presenter: @presenter %>
-                </div>
-              </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="citations">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'citations', presenter: @presenter %>
             </div>
-          <div class='col-md-4 col-sm-6 text-center'>
-            <%#= render 'relationships', presenter: @presenter %>
-            <%#= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? || @presenter.oembed? %>
-            <%# OVERRIDE FROM HYRAX remove work citations %>
-            <%#= render 'license' %>
-            <%#= render 'print' %>
-            <%#= render 'items', presenter: @presenter %>
           </div>
         </div>
-        <div class='row'>
-          <div class='col-sm-12'>
-            <!-- Renders children of a parent work -->
-            <% children = @presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') } %>
+      </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <!-- Renders children of a parent work -->
+          <% children = @presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') } %>
+          <% if children.length > 0 %>
+            Contained In This Object: &nbsp; <%= children.length %> items
+            <hr style='border-width: 3px;'>
+            <%= render 'paginated_works', works: children %>
+          <% end %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <!-- Renders parent of a work. -->
+          <% in_work_ids = ActiveFedora::Base.find(@presenter.id).in_work_ids %>
+          <% unless in_work_ids.empty? %>
+            <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
+            <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %>
+            Contained In:
+            <hr style='border-width: 3px;'>
+            <%= render 'paginated_works', works: [parent_presenter] %>
+          <% end %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <!-- Renders siblings of a work -->
+          <% in_work_ids = ActiveFedora::Base.find(@presenter.id).in_work_ids %>
+          <% unless in_work_ids.empty? %>
+            <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
+            <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %>
+            <% children = parent_presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') || work.title.first == @presenter.title.first } %>
             <% if children.length > 0 %>
-              Contained In This Object: &nbsp; <%= children.length %> items
+              Related Items: &nbsp; <%= children.length %> items
               <hr style='border-width: 3px;'>
               <%= render 'paginated_works', works: children %>
             <% end %>
-          </div>
+          <% end %>
         </div>
-        <div class='row'>
-          <div class='col-sm-12'>
-            <!-- Renders parent of a work. -->
-            <% in_work_ids = ActiveFedora::Base.find(@presenter.id).in_work_ids %>
-            <% unless in_work_ids.empty? %>
-              <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
-              <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %>
-              Contained In:
-              <hr style='border-width: 3px;'>
-              <%= render 'paginated_works', works: [parent_presenter] %>
-            <% end %>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-sm-12'>
-            <!-- Renders siblings of a work -->
-            <% in_work_ids = ActiveFedora::Base.find(@presenter.id).in_work_ids %>
-            <% unless in_work_ids.empty? %>
-              <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
-              <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %>
-              <% children = parent_presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') || work.title.first == @presenter.title.first } %>
-              <% if children.length > 0 %>
-                Related Items: &nbsp; <%= children.length %> items
-                <hr style='border-width: 3px;'>
-                <%= render 'paginated_works', works: children %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
