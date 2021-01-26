@@ -100,6 +100,7 @@ en:
           cartographer_label_tesim: Cartographer
           collector_label_tesim: Collector
           composer_label_tesim: Composer
+          creator_label_sim: Creator
           creator_label_tesim: Creator
           contributor_label_tesim: Contributor
           dedicatee_label_tesim: Dedicatee
