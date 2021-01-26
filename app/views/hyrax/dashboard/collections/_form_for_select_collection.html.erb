@@ -10,7 +10,7 @@
           <div class="modal-body">
             <div class="collection-list">
               <fieldset>
-                <legend><%= t("hyrax.collection.select_form.select_heading") %></legend>
+                <legend class="h4"><%= t("hyrax.collection.select_form.select_heading") %></legend>
                 <div>
                   <% if @add_works_to_collection.present? %>
                     <%= text_field_tag 'member_of_collection_label', @add_works_to_collection_label, disabled: true %>
