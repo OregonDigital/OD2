@@ -18,8 +18,29 @@
   margin-left: 30px;
 }
 
-.edit-button-sections {
-  margin-top: 25px;
+.show-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  .edit-button-sections {
+    margin-top: 25px;
+    margin-left: 1.5em;
+  }
+}
+
+.collection-info {
+  font-size: 18px;
+
+  .collection-title {
+    margin: 0 0 10px;
+  }
+  .collection-data a:last-child {
+    border-left: 3px solid $light-grey;
+    padding-left: 1em;
+    margin-left: 1em;
+    font-weight: bold;
+  }
 }
 
 dl.work-show {
