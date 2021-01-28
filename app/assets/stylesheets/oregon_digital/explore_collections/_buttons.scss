@@ -76,6 +76,11 @@
   }
 }
 
+#all_button{
+  height:57px;
+  width: 150px;
+}
+
 .triangle_down_all {
   width: 0; 
   height: 0; 
@@ -83,7 +88,7 @@
   border-right: 20px solid transparent;
   border-top: 20px solid $dark-orange;
   position: relative;
-  margin-left: 12px;
+  margin-left: 55px;
   visibility: hidden;
 }
 .triangle_down_osu {
