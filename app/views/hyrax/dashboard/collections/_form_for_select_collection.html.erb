@@ -10,7 +10,7 @@
           <div class="modal-body">
             <div class="collection-list">
               <fieldset>
-                <legend><%= t("hyrax.collection.select_form.select_heading") %></legend>
+                <legend class="h4"><%= t("hyrax.collection.select_form.select_heading") %></legend>
                 <div>
                   <% if @add_works_to_collection.present? %>
                     <%= text_field_tag 'member_of_collection_label', @add_works_to_collection_label, disabled: true %>
@@ -48,7 +48,7 @@
                         data: { toggle: "modal", dismiss: "modal", target: "#collection-create-container" } %>
             <% end %>
           </div><!-- /.modal-body -->
-          <div class="modal-footer text-center">
+          <div class="modal-footer text-center lato-b">
             <%# @TODO: Send this link to new My Collections page %>
             <%= link_to 'View My Collections', Rails.application.routes.url_helpers.explore_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my]) %>
           </div>
