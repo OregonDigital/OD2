@@ -43,34 +43,8 @@
 #explore-tabs,
 #explore-panes {
   .nav-pills > li.active > div > .triangle_down_all,
-  .nav-pills > li.active > div > .triangle_down_all,
-  .nav-pills > li.active > div > .triangle_down_all {
-    visibility: visible;
-  }
-}
-
-#explore-tabs,
-#explore-panes {
   .nav-pills > li.active > div > .triangle_down_osu,
-  .nav-pills > li.active > div > .triangle_down_osu,
-  .nav-pills > li.active > div > .triangle_down_osu {
-    visibility: visible;
-  }
-}
-
-#explore-tabs,
-#explore-panes {
   .nav-pills > li.active > div > .triangle_down_uo,
-  .nav-pills > li.active > div > .triangle_down_uo,
-  .nav-pills > li.active > div > .triangle_down_uo {
-    visibility: visible;
-  }
-}
-
-#explore-tabs,
-#explore-panes {
-  .nav-pills > li.active > div > .triangle_down_my,
-  .nav-pills > li.active > div > .triangle_down_my,
   .nav-pills > li.active > div > .triangle_down_my {
     visibility: visible;
   }
@@ -81,36 +55,9 @@
   width: 150px;
 }
 
-.triangle_down_all {
-  width: 0; 
-  height: 0; 
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid $dark-orange;
-  position: relative;
-  margin-left: 55px;
-  visibility: hidden;
-}
-.triangle_down_osu {
-  width: 0; 
-  height: 0; 
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid $dark-orange;
-  position: relative;
-  margin-left: 55px;
-  visibility: hidden;
-}
-.triangle_down_uo {
-  width: 0; 
-  height: 0; 
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid $dark-orange;
-  position: relative;
-  margin-left: 55px;
-  visibility: hidden;
-}
+.triangle_down_all,
+.triangle_down_osu,
+.triangle_down_uo,
 .triangle_down_my {
   width: 0; 
   height: 0; 
@@ -118,6 +65,6 @@
   border-right: 20px solid transparent;
   border-top: 20px solid $dark-orange;
   position: relative;
-  margin-left: 50px;
+  margin-left: 55px;
   visibility: hidden;
 }
