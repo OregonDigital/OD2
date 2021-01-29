@@ -16,7 +16,7 @@
     padding-bottom: 2em;
   }
 
-  .nav-pills > li > a {
+  .nav-pills > li > div > a {
     border-radius: 5px !important;
     padding: 2px 10px;
     font-size: 16px;
@@ -32,10 +32,39 @@
 
 #explore-tabs,
 #explore-panes {
-  .nav-pills > li.active > a,
-  .nav-pills > li.active > a:hover,
-  .nav-pills > li.active > a:focus {
+  .nav-pills > li.active > div > a,
+  .nav-pills > li.active > div > a:hover,
+  .nav-pills > li.active > div > a:focus {
     background-color: $dark-orange;
     border: 3px solid $dark-orange;
   }
+}
+
+#explore-tabs,
+#explore-panes {
+  .nav-pills > li.active > div > .triangle_down_all,
+  .nav-pills > li.active > div > .triangle_down_osu,
+  .nav-pills > li.active > div > .triangle_down_uo,
+  .nav-pills > li.active > div > .triangle_down_my {
+    visibility: visible;
+  }
+}
+
+#all_button{
+  height:57px;
+  width: 150px;
+}
+
+.triangle_down_all,
+.triangle_down_osu,
+.triangle_down_uo,
+.triangle_down_my {
+  width: 0; 
+  height: 0; 
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid $dark-orange;
+  position: relative;
+  margin-left: 55px;
+  visibility: hidden;
 }
