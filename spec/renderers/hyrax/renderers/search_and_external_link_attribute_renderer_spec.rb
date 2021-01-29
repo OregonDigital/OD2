@@ -15,8 +15,8 @@ RSpec.describe Hyrax::Renderers::SearchAndExternalLinkAttributeRenderer do
       let(:content) do
         '<a href="/catalog?locale=en&amp;q=Last%2C+First&amp;search_field=creator">' \
         'Last, First' \
-        '</a><a aria-label="Open link in new window" class="btn" target="_blank" href="https://google.com">' \
-        '<span class="glyphicon glyphicon-new-window"></span></a>'
+        '</a><a aria-label="Open link in new window" class="btn" target="_blank" title="learn more" href="https://google.com">' \
+        '<i class="fa fa-info-circle"></i><span class="sr-only">learn more</span></a>'
       end
 
       it { is_expected.to be_equivalent_to(expected) }

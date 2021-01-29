@@ -1,6 +1,6 @@
 <!-- OVERRIDE FROM HYRAX -->
 <div class="col-xs-9 col-sm-7 col-md-7">
-  <div class="metadata row">
+  <div class="metadata-row row">
     <dl class="row">
     <% doc_presenter = index_presenter(document) %>
     <% index_fields(document).each do |field_name, field| -%>
@@ -24,12 +24,16 @@
   <% end %>
   <% if document.parents? %>
     <div class="metadata-row row">
-      <div class="parent-child-list dark-grey"> <%= t('hyrax.search.list.parents.header') %> </div>
-      <ul>
-        <% document.parents.each do |parent| %>
-          <li> <%= link_to parent, parent %> </li>
-        <% end %>
-      </ul>
+      <dl class="row">
+        <dt class="col-sm-3"> <%= t('hyrax.search.list.parents.header') %> </dt>
+        <dd class="col-sm-9">
+          <ul class="tabular">
+          <% document.parents.each do |parent| %>
+            <li><%= link_to parent, parent %></li>
+          <% end %>
+          </ul>
+        </dd>
+      </dl>
     </div>
   <% end %>
   <div class="metadata-row row">

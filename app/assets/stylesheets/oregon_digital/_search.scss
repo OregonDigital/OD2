@@ -37,11 +37,11 @@
   #sort-dropdown,
   #per_page-dropdown {
     display: inline-block;
-    margin-right: 1em;
+    margin-right: 3em;
     margin-bottom: 1em;
 
     .btn-group {
-      margin-left: 1em;
+      margin-left: .5em;
     }
   }
 }
@@ -89,7 +89,7 @@
 }
 
 .search-result-wrapper {
-  border-bottom: 1px solid $very-light-grey;
+  border-bottom: 2px solid $very-light-grey;
 
   img {
     max-width: 120px; // Set to longest side of thumbnails
@@ -106,6 +106,10 @@
   }
   .search-results-title-row .label {
     margin-left: 15px;
+  }
+
+  dl dd ul {
+    padding-left: 0;
   }
 }
 
