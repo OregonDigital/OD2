@@ -24,6 +24,27 @@ module OregonDigital
       presenters
     end
 
+    def work_presenters
+      presenters = []
+
+      (ordered_ids - file_sets.map(&:id)).each do |work_id|
+        work = ActiveFedora::Base.find(work_id)
+        doc = SolrDocument.find(work_id)
+        work.file_sets.each do |fs|
+          urls = file_set_derivatives_service(fs).sorted_derivative_urls('jp2')
+
+          urls.each_with_index do |derivative, i|
+            label = urls.length > 1 ? page_label(fs.label, i) : fs.label
+            presenter = IIIFPresenter.new(doc, current_ability, request)
+            presenter.file_sets = work.file_sets
+            presenters << presenter
+          end
+        end
+      end
+
+      presenters
+    end
+
     def search_service
       Rails.application.routes.url_helpers.solr_document_iiif_search_url(solr_document_id: id.to_s)
     end
