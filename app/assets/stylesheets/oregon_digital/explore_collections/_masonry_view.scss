@@ -1,7 +1,11 @@
-td > .masonry.document {
-  border-top: none;
+td > div.masonry.document {
+  border-top: none !important;
 }
 
 #explore-collection-table > thead {
   visibility: hidden;
+}
+
+#all-masonry {
+  margin-bottom: 150px;
 }
