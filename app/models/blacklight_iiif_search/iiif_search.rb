@@ -33,8 +33,10 @@ module BlacklightIiifSearch
     def solr_params
       return { q: 'nil:nil' } unless q
 
+      ids = parent_document.member_ids
+      ids << id
       # OVERRIDE FROM BLACKLIGHT_IIIF_SEARCH to make the solr query join work with fileset documents
-      { q: q, fq: ["{!join from=file_set_ids_ssim to=id}id:#{id}"], rows: rows, page: page }
+      { q: q, fq: ["{!join from=file_set_ids_ssim to=id}id:#{ids.join ' OR id:'}"], rows: rows, page: page }
     end
   end
 end
