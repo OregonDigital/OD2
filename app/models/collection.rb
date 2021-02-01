@@ -20,6 +20,12 @@ class Collection < ActiveFedora::Base
     facets.sort_by(&:order)
   end
 
+  def is_insitution_restricted?(current_ability)
+    return true
+    return false if current_ability.can?(:read, self)
+    true
+  end
+
   private
 
   # Build new Facet objects that might not exist

@@ -14,7 +14,12 @@
   <tbody>
     <% collections.each_with_index do |collection, i| %>
       <tr>
-        <td> <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %> </td>
+        <td> 
+          <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %>
+          <% if Collection.find(collection.id).is_insitution_restricted?(current_ability) %>
+            <div title="OSU Affiliates Only" data-toggle="tooltip" data-placement="right" class="glyphicon glyphicon-lock"></span>
+          <% end %>
+        </td>
         <% unless tab == controller.class::TABS[:my] %>
           <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
         <% end %>
