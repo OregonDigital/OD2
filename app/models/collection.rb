@@ -20,6 +20,13 @@ class Collection < ActiveFedora::Base
     facets.sort_by(&:order)
   end
 
+  def has_restricted_items?(current_user)
+    member_of_collection_ids.each do |id|
+      return true if ActiveFedora::Base.find(id).is_restricted?
+    end
+    false
+  end
+
   private
 
   # Build new Facet objects that might not exist

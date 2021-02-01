@@ -13,4 +13,10 @@ class Generic < ActiveFedora::Base
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::GenericMetadata
+
+  def is_restricted?(current_ability)
+    return false if current_ability.can?(:read, self)
+    true
+  end
+
 end

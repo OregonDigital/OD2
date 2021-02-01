@@ -19,6 +19,7 @@
                   <%= render 'showcase_tile',
                       title: collection.title_or_label,
                       count: controller.total_viewable_items(collection.id),
+                      locked: Collection.find(collection.id).has_restricted_items?(current_user), 
                       link: [hyrax, collection],
                       img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) unless collection.is_a?(String) %>
                 </div>
