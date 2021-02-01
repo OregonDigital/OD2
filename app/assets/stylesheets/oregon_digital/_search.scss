@@ -77,6 +77,7 @@
     letter-spacing: unset;
     text-transform: unset;
     i.fa-filter {
+      color: $dark-grey;
       font-size: 1.25em;
       padding-right: .25em;
     }
@@ -85,6 +86,36 @@
     font-size: 16px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
+  }
+
+
+  form {
+    .input-group {
+      margin: 1em;
+      margin-bottom: 6em;
+      display: block;
+
+      button {
+        position: absolute;
+        left: 0;
+        z-index: 10;
+        background: unset;
+        border: unset;
+        width: 2.25em;
+        height: calc(100% - 16px);
+        margin-top: 8px;
+        margin-bottom: 8px;
+        border-right: 1px solid $light-grey;
+      }
+      input {
+        background-color: white;
+        border: 2px solid $navy-blue;
+        border-radius: 0;
+        padding-left: 1.75em;
+        font-size: 1.25em;
+        height: 100%;
+      }
+    }
   }
 }
 
