@@ -69,3 +69,11 @@
   margin-left: 55px;
   visibility: hidden;
 }
+
+.hide {
+  display: none;
+}
+
+.hover-hide:hover > td > div > .hide {
+  display: inline !important;
+}
