@@ -254,6 +254,8 @@ en:
           select_all: 'Select All'
     search:
       form:
+        facet:
+          label: Search by keyword
         option:
           osu:
             label_long: OSU Content Only
