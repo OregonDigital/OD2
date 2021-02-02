@@ -13,17 +13,18 @@
   </thead>
   <tbody>
     <% collections.each_with_index do |collection, i| %>
-      <% institution = collection.institution.first == "http://id.loc.gov/authorities/names/n80017721" ? "OSU" : "UO" %>
+      <% institution = collection.institution.first == "http://id.loc.gov/authorities/names/n80017721" ? "OSU " : "UO " %>
       <% institution = "" if collection.institution.empty? %>
-      <% if Collection.find(collection.id).insitution_restricted?(current_ability) %>
-      <tr class="hover-hide"> 
+      <% restricted = Collection.find(collection.id).insitution_restricted?(current_ability) %>
+      <% if restricted %>
+        <tr class="hover-hide"> 
       <% else %>
-      <tr>
+        <tr>
       <% end %>
         <td>
           <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %>
-          <% if Collection.find(collection.id).insitution_restricted?(current_ability) %>
-            <div class="glyphicon glyphicon-lock"></span><div class='h5 hide'><%= "#{institution} Affiliates Only"%></div>
+          <% if restricted %>
+            <div class="glyphicon glyphicon-lock"></span><div class='h5 hidden'><%= "#{institution}Affiliates Only"%></div>
           <% end %>
         </td>
         <% unless tab == controller.class::TABS[:my] %>

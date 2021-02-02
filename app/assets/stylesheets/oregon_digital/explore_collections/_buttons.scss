@@ -70,10 +70,9 @@
   visibility: hidden;
 }
 
-.hide {
-  display: none;
-}
-
-.hover-hide:hover > td > div > .hide {
-  display: inline !important;
+.hover-hide:hover {
+  background-color: lightgrey;
+  td > div > .hidden {
+    display: inline !important;
+  }
 }
