@@ -70,7 +70,7 @@
   visibility: hidden;
 }
 
-.hover-hide:hover {
+.hover-hide:hover, .hover-hide:focus {
   background-color: lightgrey;
   td > div > .hidden {
     display: inline !important;
