@@ -15,14 +15,14 @@
     <% collections.each_with_index do |collection, i| %>
       <% institution = collection.institution.first == "http://id.loc.gov/authorities/names/n80017721" ? "OSU" : "UO" %>
       <% institution = "" if collection.institution.empty? %>
-      <% if Collection.find(collection.id).is_insitution_restricted?(current_ability) %>
+      <% if Collection.find(collection.id).insitution_restricted?(current_ability) %>
       <tr class="hover-hide"> 
       <% else %>
       <tr>
       <% end %>
         <td>
           <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %>
-          <% if Collection.find(collection.id).is_insitution_restricted?(current_ability) %>
+          <% if Collection.find(collection.id).insitution_restricted?(current_ability) %>
             <div class="glyphicon glyphicon-lock"></span><div class='h5 hide'><%= "#{institution} Affiliates Only"%></div>
           <% end %>
         </td>

@@ -20,8 +20,9 @@ class Collection < ActiveFedora::Base
     facets.sort_by(&:order)
   end
 
-  def is_insitution_restricted?(current_ability)
+  def insitution_restricted?(current_ability)
     return false if current_ability.can?(:read, self)
+
     true
   end
 
