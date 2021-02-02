@@ -21,7 +21,6 @@ class Collection < ActiveFedora::Base
   end
 
   def is_insitution_restricted?(current_ability)
-    return true
     return false if current_ability.can?(:read, self)
     true
   end
