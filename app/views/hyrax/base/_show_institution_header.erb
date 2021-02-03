@@ -1,8 +1,8 @@
 <div class="col-sm-4 pull-right">
   <p class="pull-right">
-    <% if @presenter.institution.first.to_s.include?("http://id.loc.gov/authorities/names/n80017721") %>
+    <% if OregonDigital::InstitutionPicker.institution_acronym(@presenter) == "OSU" %>
       <%= image_tag('osu-collection.png', height: 100, alt: "Oregon State University") %>
-    <% elsif @presenter.institution.first.to_s.include?("http://id.loc.gov/authorities/names/n80126183") %>
+    <% elsif OregonDigital::InstitutionPicker.institution_acronym(@presenter) == "UO" %>
       <%= image_tag('uo-collection.png', height: 55, alt: "University of Oregon") %>
     <% end %>
   </p>
