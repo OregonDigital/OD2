@@ -212,7 +212,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'type_label_sim', label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
     config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
     config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
-    config.add_facet_field 'date_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5, range: true
+    config.add_facet_field 'date_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.date_combined'), limit: 5
     config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
     config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
     config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
