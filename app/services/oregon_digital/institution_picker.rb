@@ -3,12 +3,14 @@ module OregonDigital
   class InstitutionPicker
     def self.institution_acronym(collection)
       return "" unless contains_university?(collection)
+
       institution = selected_institution(collection) 
       translate_institution(institution, :acronym)
     end
 
     def self.institution_full_name(collection)
       return "" unless contains_university?(collection)
+
       institution = selected_institution(collection) 
       translate_institution(institution, :full)
     end
@@ -25,11 +27,11 @@ module OregonDigital
     def self.translate_institution(institution, translation_type)
       case translation_type
       when :acronym
-        return institution == osu ? "OSU" : "UO"
+        institution == osu ? "OSU" : "UO"
       when :full
-        return institution == osu ? "Oregon State University" : "University of Oregon"
+        institution == osu ? "Oregon State University" : "University of Oregon"
       else
-        return ""
+        ""
       end
     end
 
