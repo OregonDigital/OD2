@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
+//= require tether
 // Required by Blacklight
 //= require jquery
 //= require 'blacklight_advanced_search'
@@ -27,3 +29,9 @@
 
 // Required for Hyrax override in assets/javascripts/hyrax/editor/controlled_vocabulary.es6
 //= require handlebars-v4.0.5
+
+
+// For blacklight_range_limit built-in JS, if you don't want it you don't need
+// this:
+//= require 'blacklight_range_limit'
+

@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
 
+  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
   resources :explore_collections, controller: 'oregon_digital/explore_collections', only: %i[index]
 
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+    concerns :range_searchable
   end
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
