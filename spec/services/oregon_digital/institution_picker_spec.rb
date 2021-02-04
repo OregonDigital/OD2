@@ -9,7 +9,6 @@ RSpec.describe OregonDigital::InstitutionPicker do
   let(:both_array) { ['http://id.loc.gov/authorities/names/n80126183', 'http://id.loc.gov/authorities/names/n80017721'] }
 
   describe '#institution_acronym' do
-
     context 'when osu array is present' do
       before do
         allow(collection).to receive(:institution).and_return(osu_array)
@@ -51,8 +50,7 @@ RSpec.describe OregonDigital::InstitutionPicker do
     end
   end
 
-  describe "#institution_full_name" do
-
+  describe '#institution_full_name' do
     context 'when osu array is present' do
       before do
         allow(collection).to receive(:institution).and_return(osu_array)
