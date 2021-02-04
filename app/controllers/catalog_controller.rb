@@ -3,7 +3,6 @@
 # This controller drives the configuration of the applications searching
 # indexing, displays, and other various discovery methods
 class CatalogController < ApplicationController
-
   include BlacklightRangeLimit::ControllerOverride
   include BlacklightAdvancedSearch::Controller
   include Hydra::Catalog
