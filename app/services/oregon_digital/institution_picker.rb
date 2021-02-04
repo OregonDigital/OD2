@@ -18,32 +18,30 @@ module OregonDigital
     end
 
     def self.selected_institution(collection)
-      institution = collection.institution.select { |val| val == osu }.first
-      institution = collection.institution.select { |val| val == uo }.first if institution.blank?
-      institution
+      collection.institution.&(osu + uo).first
     end
 
     def self.translate_institution(institution, translation_type)
       case translation_type
       when :acronym
-        institution == osu ? 'OSU' : 'UO'
+        osu.include?(institution) ? 'OSU' : 'UO'
       when :full
-        institution == osu ? 'Oregon State University' : 'University of Oregon'
+        osu.include?(institution) ? 'Oregon State University' : 'University of Oregon'
       else
         ''
       end
     end
 
     def self.contains_university?(collection)
-      collection.institution.include?(uo) || collection.institution.include?(osu)
+     !collection.institution.&(osu + uo).empty? 
     end
 
     def self.osu
-      'http://id.loc.gov/authorities/names/n80017721'
+      ['http://id.loc.gov/authorities/names/n80017721']
     end
 
     def self.uo
-      'http://id.loc.gov/authorities/names/n80126183'
+      ['http://id.loc.gov/authorities/names/n80126183']
     end
   end
 end
