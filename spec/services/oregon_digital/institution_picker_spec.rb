@@ -2,7 +2,7 @@
 
 RSpec.describe OregonDigital::InstitutionPicker do
   let(:picker) { described_class }
-  let(:collection) { double('Hyrax::Collection') }
+  let(:collection) { ::Collection.new }
   let(:osu_array) { ['http://id.loc.gov/authorities/names/n80017721'] }
   let(:uo_array) { ['http://id.loc.gov/authorities/names/n80126183'] }
   let(:junk_array) { ['blah', 1] }
