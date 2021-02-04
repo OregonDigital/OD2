@@ -33,7 +33,7 @@ module OregonDigital
     end
 
     def self.contains_university?(collection)
-     !collection.institution.&(osu + uo).empty? 
+      !collection.institution.&(osu + uo).empty?
     end
 
     def self.osu
