@@ -57,7 +57,7 @@ RSpec.describe OregonDigital::InstitutionPicker do
       end
 
       it 'returns Oregon State University' do
-        expect(picker.institution_acronym(collection)).to eq 'Oregon State University'
+        expect(picker.institution_full_name(collection)).to eq 'Oregon State University'
       end
     end
 
@@ -67,7 +67,7 @@ RSpec.describe OregonDigital::InstitutionPicker do
       end
 
       it 'returns University of Oregon' do
-        expect(picker.institution_acronym(collection)).to eq 'University of Oregon'
+        expect(picker.institution_full_name(collection)).to eq 'University of Oregon'
       end
     end
 
@@ -77,7 +77,7 @@ RSpec.describe OregonDigital::InstitutionPicker do
       end
 
       it 'returns the first one' do
-        expect(picker.institution_acronym(collection)).to eq 'University of Oregon'
+        expect(picker.institution_full_name(collection)).to eq 'University of Oregon'
       end
     end
 
@@ -87,7 +87,7 @@ RSpec.describe OregonDigital::InstitutionPicker do
       end
 
       it 'returns an empty string' do
-        expect(picker.institution_acronym(collection)).to eq ''
+        expect(picker.institution_full_name(collection)).to eq ''
       end
     end
   end
