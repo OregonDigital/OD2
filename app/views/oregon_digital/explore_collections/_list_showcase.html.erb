@@ -13,13 +13,9 @@
   </thead>
   <tbody>
     <% collections.each_with_index do |collection, i| %>
-      <% institution = OregonDigital::InstitutionPicker.institution_acronym(collection) %>%
+      <% institution = OregonDigital::InstitutionPicker.institution_acronym(collection) %>
       <% restricted = Collection.find(collection.id).insitution_restricted?(current_ability) %>
-      <% if restricted %>
-        <tr class="hover-hide"> 
-      <% else %>
-        <tr>
-      <% end %>
+      <tr class="hover-hide"> 
         <td>
           <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %>
           <% if restricted %>
