@@ -13,8 +13,7 @@
   </thead>
   <tbody>
     <% collections.each_with_index do |collection, i| %>
-      <% institution = collection.institution.first == "http://id.loc.gov/authorities/names/n80017721" ? "OSU " : "UO " %>
-      <% institution = "" if collection.institution.empty? %>
+      <% institution = OregonDigital::InstitutionPicker.institution_acronym(collection) %>%
       <% restricted = Collection.find(collection.id).insitution_restricted?(current_ability) %>
       <% if restricted %>
         <tr class="hover-hide"> 
@@ -28,7 +27,7 @@
           <% end %>
         </td>
         <% unless tab == controller.class::TABS[:my] %>
-          <td> <%= collection.institution.first ? collection.institution.first : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
+          <td> <%= !institution.empty? ? institution : t('oregon_digital.explore_collections.list.row.institution.default') %> </td>
         <% end %>
         <td> <%= controller.total_viewable_items(collection.id) %> </td>
         <% if tab == controller.class::TABS[:my] %>
