@@ -16,101 +16,108 @@ RSpec.describe GenericIndexer do
     context 'when given date is empty' do
       before { work.date_created = [] }
 
-      it 'should be empty array' do
+      it 'returns an empty array' do
         expect(field).to eq []
       end
     end
+
     context 'when given an invalid date' do
       before { work.date_created = ['typo2011-01-01'] }
-      before { work.date_created = ['typo2011-01-01'] }
 
-      it 'should be empty array' do
+      it 'returns an empty array' do
         expect(field).to eq []
       end
     end
+
     context 'when given a date' do
       before { work.date_created = ['2022-01-01'] }
 
-      it 'should be that year' do
+      it 'returns an that year' do
         expect(field).to eq [2022]
       end
     end
+
     context 'when given just a year' do
       before { work.date_created = ['2011'] }
 
-      it 'should pull the year' do
+      it 'returns the year' do
         expect(field).to eq [2011]
       end
     end
-    context 'when given a date range' do
-      context 'when is a range of dates YYYY-mm-dd/YYY-mm-dd' do
-        before { work.date_created = ['1925-12-01/1927-01-01'] }
 
-        it 'should have years in that range' do
-          expect(field).to eq [1925, 1926, 1927]
-        end
+    context 'when given a range of dates YYYY-mm-dd/YYY-mm-dd' do
+      before { work.date_created = ['1925-12-01/1927-01-01'] }
+
+      it 'returns years in that range' do
+        expect(field).to eq [1925, 1926, 1927]
       end
-      context 'when is a range of years only YYYY/YYYY' do
-        before { work.date_created = ['2014/2017'] }
+    end
 
-        it 'should have years in that range' do
-          expect(field).to eq [2014, 2015, 2016, 2017]
-        end
+    context 'when given a range of years only YYYY/YYYY' do
+      before { work.date_created = ['2014/2017'] }
+
+      it 'returns years in that range' do
+        expect(field).to eq [2014, 2015, 2016, 2017]
       end
-      context 'when is a range of year and month only YYYY-mm/YYY-mm' do
-        before { work.date_created = ['2017-12/2018-01'] }
+    end
 
-        it 'should have years in that range' do
-          expect(field).to eq [2017, 2018]
-        end
+    context 'when given a range of year and month only YYYY-mm/YYY-mm' do
+      before { work.date_created = ['2017-12/2018-01'] }
+
+      it 'returns years in that range' do
+        expect(field).to eq [2017, 2018]
       end
     end
   end
+
   describe 'decade facets' do
     let(:field) { solr_doc['date_combined_decade_label_ssim'] }
 
     context 'when given date is empty' do
       before { work.date_created = [] }
 
-      it 'should be empty array' do
+      it 'returns an empty array' do
         expect(field).to eq []
       end
     end
+
     context 'when given a date' do
       before { work.date_created = ['2022-01-01'] }
 
-      it 'should be that decade' do
+      it 'returns that decade' do
         expect(field).to eq ['2020-2029']
       end
     end
+
     context 'when given just a year' do
       before { work.date_created = ['2011'] }
 
-      it 'should pull the date' do
+      it 'returns that decade' do
         expect(field).to eq ['2010-2019']
       end
     end
-    context 'when given a date range' do
-      context 'when is in a single decade' do
-        before { work.date_created = ['1910-1915'] }
 
-        it 'should have only one entry' do
-          expect(field).to eq ['1910-1919']
-        end
+    context 'when given a date range in a single decade' do
+      before { work.date_created = ['1910-1915'] }
+
+      it 'returns only one entry' do
+        expect(field).to eq ['1910-1919']
       end
-      context 'which spans decades' do
-        before { work.date_created = ['1910-1920'] }
+    end
 
-        it 'should have two entries' do
-          expect(field).to eq %w[1910-1919 1920-1929]
-        end
-        context 'which is more than 30 years' do
-          before { work.date_created = ['1900-1940'] }
+    context 'when given a date range which spans decades' do
+      before { work.date_created = ['1910-1920'] }
 
-          it 'should be empty array' do
-            expect(field).to eq []
-          end
-        end
+      it 'returns two entries' do
+        expect(field).to eq %w[1910-1919 1920-1929]
+      end
+    end
+
+    context 'when given a date range which spans more than 30 years' do
+      before { work.date_created = ['1900-1940'] }
+
+      it 'returns an empty array' do
+        expect(field).to eq []
       end
     end
   end

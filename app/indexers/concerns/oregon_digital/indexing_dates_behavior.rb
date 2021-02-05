@@ -11,17 +11,30 @@ module OregonDigital
       end
     end
 
+    private
+
+    # Parse all the data metadata in EDTF format and coalesce into two solr fields to be used
+    # as a year range facet and decade facet
+    # rubocop:disable Metrics/AbcSize
     def index_date_combined_label(solr_doc)
-      dates = %i[award_date date_created collected_date date issued view_date acquisition_date]
       solr_doc['date_combined_year_label_ssim'] = []
       solr_doc['date_combined_decade_label_ssim'] = []
-      dates.each do |date|
-        next unless object.respond_to? date
-        solr_doc['date_combined_year_label_ssim'] += date_facet_yearly(object[date])
-        solr_doc['date_combined_decade_label_ssim'] += decades(object[date])
+
+      date_combined_fields.each do |date_field|
+        next unless object.respond_to? date_field
+
+        solr_doc['date_combined_year_label_ssim'] += date_facet_yearly(object[date_field])
+        solr_doc['date_combined_decade_label_ssim'] += decades(object[date_field])
       end
+
       solr_doc['date_combined_year_label_ssim'].uniq!
       solr_doc['date_combined_decade_label_ssim'].uniq!
+    end
+    # rubocop:enable Metrics/AbcSize
+
+    # The metadata fields to be combined into one date/decade facet
+    def date_combined_fields
+      %i[award_date date_created collected_date date issued view_date acquisition_date]
     end
 
     # date_facet_yearly is intended to be used for date_facet_yearly_ssim, which is used by the facet provided
@@ -65,7 +78,7 @@ module OregonDigital
     #  e) given date_value = "2017-12/2019-12", we will get [2017, 2018, 2019]
     #  f) given date_value = "2017/2019", we will get [2017, 2018, 2019]
     def yearly_dates(date_values)
-      (date_values) ? clean_years(date_values) : []
+      date_values ? clean_years(date_values) : []
     end
 
     def clean_years(date_values)
@@ -94,13 +107,13 @@ module OregonDigital
     end
 
     def parsed_year(date_value)
-      clean_datetime(date_value).year if clean_datetime(date_value)
+      clean_datetime(date_value)&.year
     end
 
     def clean_datetime(date_value)
       if date_value =~ /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/ # YYYY-MM-DD
         DateTime.strptime(date_value, '%Y-%m-%d')
-      elsif date_value  =~ /^[0-9]{4}-[0-9]{2}$/ # YYYY-MM
+      elsif date_value =~ /^[0-9]{4}-[0-9]{2}$/ # YYYY-MM
         DateTime.strptime(date_value, '%Y-%m')
       elsif date_value =~ /^[0-9]{4}/ # YYYY
         DateTime.strptime(date_value.split('-').first, '%Y')
@@ -124,11 +137,11 @@ module OregonDigital
       private
 
       def first_year
-        year - year%10
+        year - year % 10
       end
 
       def last_year
-        year + 10 - (year+10)%10 - 1
+        year + 10 - (year + 10) % 10 - 1
       end
     end
 
@@ -144,14 +157,14 @@ module OregonDigital
         return nil unless valid_date_range?
 
         decades.times.map do |decade|
-          DecadeDecorator.new(earliest_date + 10*decade)
+          DecadeDecorator.new(earliest_date + 10 * decade)
         end
       end
 
       private
 
       def earliest_date
-        @earliest_date ||= dates.first - dates.first%10
+        @earliest_date ||= dates.first - dates.first % 10
       end
 
       def valid_decade_size?
@@ -167,7 +180,7 @@ module OregonDigital
       end
 
       def decades
-        calculated_decades = (dates.last - dates.first)/10 + 1
+        calculated_decades = (dates.last - dates.first) / 10 + 1
         calculated_decades <= 3 ? calculated_decades : 0
       end
     end
