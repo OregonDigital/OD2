@@ -16,6 +16,7 @@ module OregonDigital
       solr_doc['date_combined_year_label_ssim'] = []
       solr_doc['date_combined_decade_label_ssim'] = []
       dates.each do |date|
+        next unless object.respond_to? date
         solr_doc['date_combined_year_label_ssim'] += date_facet_yearly(object[date])
         solr_doc['date_combined_decade_label_ssim'] += decades(object[date])
       end
