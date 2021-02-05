@@ -41,10 +41,10 @@ Hyrax::CollectionsControllerBehavior.module_eval do
   def institution_image_path
     image = 'no-institution-collection.png'
 
-    case @curation_concern.institution.first.to_s
-    when 'http://id.loc.gov/authorities/names/n80017721' then
+    case OregonDigital::InstitutionPicker.institution_acronym(@curation_concern)
+    when 'OSU' then
       image = 'osu-collection.png'
-    when 'http://id.loc.gov/authorities/names/n80126183'
+    when 'UO'
       image = 'uo-collection.png'
     end unless @curation_concern.institution.first.nil?
 
