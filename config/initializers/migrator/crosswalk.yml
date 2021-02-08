@@ -340,11 +340,11 @@ crosswalk:
     multiple: true
     function:
   - property: gps_latitude
-    predicate: http://www.w3.org/2003/12/exif/ns/gpsLatitude
+    predicate: http://www.w3.org/2003/12/exif/ns#gpsLatitude
     multiple: false
     function:
   - property: gps_longitude
-    predicate: http://www.w3.org/2003/12/exif/ns/gpsLongitude
+    predicate: http://www.w3.org/2003/12/exif/ns#gpsLongitude
     multiple: false
     function:
   - property: location_attributes
@@ -592,7 +592,7 @@ crosswalk:
     multiple: true
     function:
   - property: orientation
-    predicate: http://www.w3.org/2003/12/exif/ns/orientation
+    predicate: http://www.w3.org/2003/12/exif/ns#orientation
     multiple: true
     function:
   - property: physical_extent
@@ -640,7 +640,7 @@ crosswalk:
     multiple: false
     function:
   - property: height
-    predicate: http://www.w3.org/2003/12/exif/ns/height
+    predicate: http://www.w3.org/2003/12/exif/ns#height
     multiple: false
     function:
   - property: institution_attributes
@@ -668,7 +668,7 @@ crosswalk:
     multiple: false
     function: datetime_data
   - property: width
-    predicate: http://www.w3.org/2003/12/exif/ns/width
+    predicate: http://www.w3.org/2003/12/exif/ns#width
     multiple: false
     function:
   - property: oembed_url
