@@ -20,7 +20,7 @@
                       title: collection.title_or_label,
                       count: controller.total_viewable_items(collection.id),
                       link: [hyrax, collection],
-                      restricted: Collection.find(collection.id).insitution_restricted?(current_ability),
+                      restricted: current_ability.admin? ? false : controller.institution_restricted?(collection.id),
                       img: render_thumbnail_tag(collection, {alt: ''}, { suppress_link: true }) unless collection.is_a?(String) %>
                 </div>
                 <% if tab == controller.class::TABS[:my] %>
