@@ -2,7 +2,7 @@
   <div class="col-md-1" >
   </div>
   <div class="col-md-5">
-    <% @collections = Collection.all[0..4] %>
+    <% @collections = Collection.limit 5 %>
     <h2>FEATURED COLLECTIONS</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
@@ -74,8 +74,8 @@
     </div>
     <div class="row">
       <p class='mw-lg'>
-        A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press, 
-        Oregon Digital comprises more than 100,000 digitized works including historic and modern photographs, 
+        A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press,
+        Oregon Digital comprises more than 100,000 digitized works including historic and modern photographs,
         manuscripts, and publications.
       </p>
     </div>
