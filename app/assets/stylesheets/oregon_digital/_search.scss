@@ -218,8 +218,13 @@ ul.pagination li {
 /* Gallery specific */
 .hyc-bl-results.hyc-bl-search {
   .masonry.document {
+    border: none;
+
     div.thumbnail {
       background: none;
+      border-top: $very-light-grey solid 3px;
+      border-radius: 0;
+      padding-top: 1em;
       a {
         text-align: left;
         h3 {
@@ -248,7 +253,7 @@ ul.pagination li {
         height: 36px;
         width: 36px;
         position: absolute;
-        top: 6px;
+        top: calc(1em + 8px);
         input[type="checkbox"] {
           position: absolute;
           margin: 0;
