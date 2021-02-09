@@ -33,6 +33,9 @@
       background-color: $very-light-grey;
     }
   }
+  .save-widgets {
+    color: $navy-blue;
+  }
 
   #sort-dropdown,
   #per_page-dropdown {
@@ -48,7 +51,7 @@
 
 
 .result-count {
-  font-size: 18px;
+  font-size: 22px;
   font-style: italic;
   height: 54px;
 }
