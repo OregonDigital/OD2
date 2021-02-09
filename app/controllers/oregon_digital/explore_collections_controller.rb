@@ -46,7 +46,27 @@ module OregonDigital
     end
 
     def total_viewable_items(id)
-      ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id}").accessible_by(current_ability).count
+      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id}").length
+    end
+
+    def osu_items(id)
+      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id} AND visibility_ssi:osu")
+    end
+
+    def uo_items(id)
+      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id} AND visibility_ssi:uo")
+    end
+
+    def osu_restricted?(id)
+      !osu_items(id).empty? && current_ability.cannot?(:show, osu_items(id), visibility: 'osu')
+    end
+
+    def uo_restricted?(id)
+      !uo_items(id).empty? && current_ability.cannot?(:show, uo_items(id), visibility: 'uo')
+    end
+
+    def institution_restricted?(id)
+      osu_restricted?(id) || uo_restricted?(id)
     end
 
     TABS = {
