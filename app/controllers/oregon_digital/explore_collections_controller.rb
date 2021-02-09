@@ -58,17 +58,17 @@ module OregonDigital
     end
 
     def osu_restricted?(id)
-      !osu_items(id).empty? && current_ability.cannot?(:show, osu_items(id).first, visibility: 'osu')
+      !osu_items(id).empty? && current_ability.cannot?(:show, osu_items(id), visibility: 'osu')
     end
 
     def uo_restricted?(id)
-      !uo_items(id).empty? && current_ability.cannot?(:show, uo_items(id).first, visibility: 'uo')
+      !uo_items(id).empty? && current_ability.cannot?(:show, uo_items(id), visibility: 'uo')
     end
 
     def institution_restricted?(id)
       osu_restricted?(id) || uo_restricted?(id)
     end
-    
+
     TABS = {
       all: 'all',
       osu: 'osu',
