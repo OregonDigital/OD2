@@ -14,12 +14,14 @@
   <tbody>
     <% collections.each_with_index do |collection, i| %>
       <% institution = OregonDigital::InstitutionPicker.institution_acronym(collection) %>
-      <% restricted = Collection.find(collection.id).insitution_restricted?(current_ability) %>
       <tr class="hover-hide"> 
         <td>
           <%= link_to collection.title_or_label, [hyrax, collection], class: ['h3', 'navy-blue'] %>
-          <% if restricted %>
-            <div class="glyphicon glyphicon-lock"></span><div class='h5 hidden'><%= "#{institution}Affiliates Only"%></div>
+          <% if controller.uo_restricted?(collection.id) && !current_ability.admin? %>
+            <div class="glyphicon glyphicon-lock"></span><div class='h5 hidden'><%= "UO Affiliates Only"%></div>
+          <% end %>
+          <% if controller.osu_restricted?(collection.id) && !current_ability.admin?  %>
+            <div class="glyphicon glyphicon-lock"></span><div class='h5 hidden'><%= "OSU Affiliates Only"%></div>
           <% end %>
         </td>
         <% unless tab == controller.class::TABS[:my] %>
