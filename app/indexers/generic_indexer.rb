@@ -4,6 +4,7 @@
 class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::IndexesBasicMetadata
   include OregonDigital::IndexesLinkedMetadata
+  include OregonDigital::IndexingDatesBehavior
 
   # ABC Size is hard to avoid here because there are many types of fields we need to index.
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
@@ -22,7 +23,6 @@ class GenericIndexer < Hyrax::WorkIndexer
         solr_doc['non_user_collections_ssim'] << collection.first_title unless collection.collection_type.machine_id == 'user_collection'
       end
       index_topic_combined_label(solr_doc, object.keyword)
-      index_date_combined_label(solr_doc)
       index_edit_groups
       index_read_groups
       index_discover_groups
@@ -64,14 +64,6 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def index_topic_combined_label(solr_doc, topic_labels)
     solr_doc['topic_combined_label_sim'] = topic_labels
-  end
-
-  def index_date_combined_label(solr_doc)
-    dates = %i[award_date date_created collected_date date issued view_date acquisition_date]
-    solr_doc['date_combined_label_sim'] = []
-    dates.each do |date|
-      solr_doc['date_combined_label_sim'] += object[date].to_a
-    end
   end
 
   def index_edit_groups
