@@ -14,6 +14,7 @@ gem 'browse-everything'
 # been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
 gem 'hyrax', '3.0.0-rc2'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
