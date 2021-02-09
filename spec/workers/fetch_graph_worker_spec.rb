@@ -61,11 +61,6 @@ RSpec.describe FetchGraphWorker, type: :worker do
         worker.perform(work.id, work.depositor)
         expect(SolrDocument.find(work.id)['scientific_combined_label_sim'].first).to eq 'Acnanthes'
       end
-
-      it 'indexes data into the date_combined_label field' do
-        worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['date_combined_label_sim'].first).to eq 'baz'
-      end
     end
 
     context 'when the request fails' do
