@@ -374,6 +374,8 @@ GEM
       jquery-rails
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
+    font-awesome-sass (5.15.1)
+      sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     google-api-client (0.47.0)
@@ -1044,6 +1046,7 @@ DEPENDENCIES
   equivalent-xml
   factory_bot_rails
   faraday_middleware (~> 0.10.0)
+  font-awesome-sass (~> 5.15)
   honeycomb-beeline (>= 2.0.0)
   hydra-derivatives!
   hydra-role-management

@@ -60,7 +60,7 @@
 
 #facets {
   background-color: $very-light-grey;
-  margin-top: 3.5em;
+  margin-top: 2em;
 
   .panel.facet_limit {
     margin-left: 1em;
@@ -223,7 +223,7 @@ ul.pagination li {
 /* Gallery specific */
 .hyc-bl-results.hyc-bl-search {
   .masonry.document {
-    border: none;
+    border: none !important;
 
     div.thumbnail {
       background: none;
