@@ -20,7 +20,7 @@
     <div class="col-sm-3 pull-right text-right">
       <div id="copyright-work-show" class="copyright-header">
         <a href="<%= ERB::Util.h(presenter.rights_statement.first) %>">
-          <i class="large-icon fa fa-<%= presenter.solr_document.rights_statement_to_fa_class(presenter.rights_statement.first) %>" aria-hidden="true"></i>
+          <i class="large-icon <%= presenter.solr_document.rights_statement_to_fa_class(presenter.rights_statement.first) %>" aria-hidden="true"></i>
           <%= Hyrax.config.rights_statement_service_class.new.label(presenter.rights_statement.first) { presenter.rights_statement.first } %>
         </a>
       </div>
