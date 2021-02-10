@@ -10,7 +10,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::LocNames,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPublisher,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator,
-          OregonDigital::ControlledVocabularies::Vocabularies::Wikidata
+          OregonDigital::ControlledVocabularies::Vocabularies::Wikidata,
           OregonDigital::ControlledVocabularies::Vocabularies::LocOrgs,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuAcademicUnits
         ]
