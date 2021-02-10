@@ -87,3 +87,5 @@ group :test do
 end
 
 gem "vcr", "~> 5.1"
+
+gem "font-awesome-sass", "~> 5.15"

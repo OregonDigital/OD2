@@ -38,20 +38,20 @@ class SolrDocument
   # rubocop:disable Metrics/MethodLength
   def rights_statement_to_fa_class(rights_statement)
     fa_classes = {
-      'http://rightsstatements.org/vocab/InC/1.0/': 'copyright',
-      'http://rightsstatements.org/vocab/InC-OW-EU/1.0/': 'copyright',
-      'http://rightsstatements.org/vocab/InC-EDU/1.0/': 'copyright',
-      'http://rightsstatements.org/vocab/InC-NC/1.0/': 'copyright',
-      'http://rightsstatements.org/vocab/InC-RUU/1.0/': 'copyright',
-      'http://rightsstatements.org/vocab/NoC-CR/1.0/': 'creative-commons-pd',
-      'http://rightsstatements.org/vocab/NoC-NC/1.0/': 'creative-commons-pd',
-      'http://rightsstatements.org/vocab/NoC-OKLR/1.0/': 'creative-commons-pd',
-      'http://rightsstatements.org/vocab/NoC-US/1.0/': 'creative-commons-pd',
-      'http://rightsstatements.org/vocab/CNE/1.0/': 'question-circle',
-      'http://rightsstatements.org/vocab/UND/1.0/': 'question-circle',
-      'http://rightsstatements.org/vocab/NKC/1.0/': 'question-circle'
+      'http://rightsstatements.org/vocab/InC/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-OW-EU/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-EDU/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-NC/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-RUU/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/NoC-CR/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-NC/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-OKLR/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-US/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/CNE/1.0/': 'far fa-question-circle',
+      'http://rightsstatements.org/vocab/UND/1.0/': 'far fa-question-circle',
+      'http://rightsstatements.org/vocab/NKC/1.0/': 'far fa-question-circle'
     }.with_indifferent_access
-    fa_classes[rights_statement] || 'question-circle'
+    fa_classes[rights_statement] || 'far fa-question-circle'
   end
   # rubocop:enable Metrics/MethodLength
 
