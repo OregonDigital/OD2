@@ -41,9 +41,8 @@ class CatalogController < ApplicationController
     config.advanced_search[:form_solr_parameters] ||= {}
 
     config.view.list.partials = %i[thumbnail index_header index]
-    config.view.gallery.partials = %i[index_header index]
-    config.view.gallery.if = false
-    config.view.masonry.partials = %i[metadata]
+    config.view.gallery.partials = %i[metadata]
+    config.view.gallery.if = true
     config.view.slideshow.partials = %i[index]
     config.view.slideshow.if = false
 

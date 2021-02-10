@@ -21,7 +21,7 @@ module OregonDigital
       private
 
       def selected_institution(collection)
-        collection.institution.&(osu + uo).first
+        collection.institution.map(&:to_s).&(osu + uo).first
       end
 
       def translate_institution(institution, translation_type)
@@ -36,7 +36,7 @@ module OregonDigital
       end
 
       def contains_university?(collection)
-        !collection.institution.&(osu + uo).empty?
+        !collection.institution.map(&:to_s).&(osu + uo).empty?
       end
 
       def osu

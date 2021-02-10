@@ -7,7 +7,7 @@ $(document).ready(function() {
 } );
 
 // Recalculate the checkbox display state
-function setMasonryCheckbox(checkbox) {
+function setGalleryCheckbox(checkbox) {
   box = $(checkbox);
   wrapper = box.parent();
   wrapper.removeClass('checked');

@@ -9,9 +9,9 @@
 
     <% unless document.collection? %>
       <p class="pull-left">
-        <input type="checkbox" onfocus="setMasonryCheckbox(this)" onblur="setMasonryCheckbox(this)" onchange="setMasonryCheckbox(this)" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector">
+        <input type="checkbox" onfocus="setGalleryCheckbox(this)" onblur="setGalleryCheckbox(this)" onchange="setGalleryCheckbox(this)" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector">
       </p>
     <% end %>
   </div>
-  <%= render_document_partials document, blacklight_config.view_config(:masonry).partials, :document_counter => document_counter %>
+  <%= render_document_partials document, blacklight_config.view_config(:gallery).partials, :document_counter => document_counter %>
 </div>
