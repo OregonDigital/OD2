@@ -29,8 +29,11 @@
 
 #sortAndPerPage {
   border: none;
+  margin-bottom: 2em;
 
   .search-widgets {
+    margin-bottom: .5em;
+
     .btn {
       background-color: $very-light-grey;
     }
@@ -42,8 +45,8 @@
   #sort-dropdown,
   #per_page-dropdown {
     display: inline-block;
-    margin-right: 3em;
-    margin-bottom: 1em;
+    margin-right: 1.5em;
+    margin-bottom: 0;
 
     .btn-group {
       margin-left: .5em;
