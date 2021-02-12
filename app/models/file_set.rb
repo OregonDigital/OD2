@@ -16,6 +16,23 @@ class FileSet < ActiveFedora::Base
     !oembed_url.nil? && !oembed_url.empty?
   end
 
+  def ocr_content
+    @ocr_content ||= SolrDocument.find(id).to_h.dig('all_text_tsimv')
+  rescue
+    nil
+  end
+
+  def bbox_content
+    @bbox_content ||= SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
+  rescue
+    nil
+  end
+
+  def hocr_content
+    @hocr_content ||= SolrDocument.find(id).to_h.dig('hocr_content_tsimv')
+  rescue
+    nil
+  end
   private
 
   # If the oembed_url changed all previous errors are invalid
