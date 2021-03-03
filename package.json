@@ -5,6 +5,7 @@
   "dependencies": {
     "jquery": "3.5.0",
     "node-fetch": "2.6.1",
+    "three": "0.125.0",
     "universalviewer": "^3.0.16"
   },
   "scripts": {
