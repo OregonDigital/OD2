@@ -14,7 +14,12 @@ module OregonDigital
 
       # Return a tuple of url & label
       def solrize
-        label = rdf_label.select { |lang_label| lang_label.try(:language) == I18n.locale }.first
+        # DBPedia doesn't seem to find its rdf_label very well, so we go looking in the statements for it
+        labels = statements.select { |statement| default_labels.include?(statement.predicate) }
+        label = labels.select { |lang_label| lang_label.object.try(:language) == I18n.locale }.first&.object.to_s
+        # If we don't find label that way, we're either not DBPedia or fetched
+        # Either way we can go forward with #rdf_label
+        label = rdf_label.first if label.empty?
         return [rdf_subject.to_s] if label.to_s.blank? || rdf_label_uri_same?
 
         [rdf_subject.to_s, { label: "#{label}$#{rdf_subject}" }]
