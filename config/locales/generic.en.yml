@@ -13,10 +13,10 @@ en:
   simple_form:
     hints:
       defaults:
-        alternative: "Alternative titles or names."
-        tribal_title: "Title given by the members of Native American tribal authorities."
-        title: "Use titles on published works. For images and documents without a title, create a brief title that describes the focus of the item (further information should be placed in the Description field). Titles for images can include dates and location. For a series of publications with identical titles, include the year of publication. Do not include periods in the titles. Capitalize the first word and any proper nouns."
-        arranger: "Format for names according to RDA guidelines: Last Name, First Name Middle Name/Initial, yyyy-yyyy (include middle name/initial and years of life span if known)."
+        alternative: "Use for alternative titles or names."
+        tribal_title: "Use for title(s) given by the members of Native American tribal authorities."
+        title: "Use for primary title or name of work. For works without a title, create a descriptive title consulting institutional standards."
+        arranger: "Use for a person, family, or organization contributing to a musical work by rewriting the composition for a medium of performance different from that for which the work was originally intended, or modifying the work for the same medium of performance, etc., such that the musical substance of the original composition remains essentially unchanged. For extensive modification that effectively results in the creation of a new musical work, see composer. URI required."
         artist: "Format for names according to RDA guidelines: Last Name, First Name Middle Name/Initial, yyyy-yyyy (include middle name/initial and years of life span if known)."
         author: "Format for names according to RDA guidelines: Last Name, First Name Middle Name/Initial, yyyy-yyyy (include middle name/initial and years of life span if known)."
         cartographer: "Format for names according to RDA guidelines: Last Name, First Name Middle Name/Initial, yyyy-yyyy (include middle name/initial and years of life span if known)."
