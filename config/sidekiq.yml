@@ -1,10 +1,10 @@
 ---
-:concurrency: 5
-:logfile: log/development.log
+:concurrency: ENV.fetch('SIDEKIQ_THREADS') { 4 }
+:logfile: ENV.fetch('SIDEKIQ_LOG') { '/proc/self/fd/1' }
 staging:
-  :concurrency: 5
+  :concurrency: ENV.fetch('SIDEKIQ_THREADS') { 4 }
 production:
-  :concurrency: 20
+  :concurrency: ENV.fetch('SIDEKIQ_THREADS') { 6 }
 :queues:
   - default
   - hyrax_migrator
