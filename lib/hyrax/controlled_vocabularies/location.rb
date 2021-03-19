@@ -19,7 +19,7 @@ module Hyrax
       # Initialize as normal and then force-update the uri scheme to https
       def initialize(*args, &block)
         super
-        @rdf_subject.scheme = 'https' if @rdf_subject.scheme != 'https'
+        @rdf_subject.scheme = 'https' if @rdf_subject.uri? && @rdf_subject.scheme != 'https'
       end
 
       def solrize
