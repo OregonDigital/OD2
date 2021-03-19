@@ -15,6 +15,13 @@ module Hyrax
       property :parentCountry, predicate: RDF::URI('http://www.geonames.org/ontology#parentCountry'), class_name: Hyrax::ControlledVocabularies::Location
       property :featureCode, predicate: RDF::URI('http://www.geonames.org/ontology#featureCode')
 
+      # GeoNames seems to only like https.
+      # Initialize as normal and then force-update the uri scheme to https
+      def initialize(*args, &block)
+        super
+        @rdf_subject.scheme = 'https' if @rdf_subject.uri? && @rdf_subject.scheme != 'https'
+      end
+
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
