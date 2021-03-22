@@ -172,7 +172,7 @@ def attrs
     'style_or_period' => ['http://vocab.getty.edu/aat/300021712'],
     'form_of_work' => ['http://id.loc.gov/authorities/subjects/sh85005966'],
     'format' => ['https://w3id.org/spar/mediatype/image/tiff'],
-    'institution' => ['http://dbpedia.org/resource/University_of_Oregon'],
+    'institution' => ['http://id.loc.gov/authorities/names/n80126183'],
     'local_collection_name' => ['http://opaquenamespace.org/ns/localCollectionName/p_040'],
     'tgn' => ['http://vocab.getty.edu/tgn/7003712'],
     'repository' => ['http://id.loc.gov/authorities/names/n00020491'],
