@@ -48,6 +48,12 @@ class FetchGraphWorker
         solr_doc['location_combined_label_sim'] << val if location_combined_facet?(controlled_prop)
         solr_doc['topic_combined_label_sim'] << val if topic_combined_facet?(controlled_prop)
         solr_doc['scientific_combined_label_sim'] << val if scientific_combined_facet?(controlled_prop)
+
+        solr_doc["#{controlled_prop}_label_tesim"] = solr_doc["#{controlled_prop}_label_sim"]
+        solr_doc['creator_combined_label_tesim'] = solr_doc['creator_combined_label_sim']
+        solr_doc['location_combined_label_tesim'] = solr_doc['location_combined_label_sim']
+        solr_doc['topic_combined_label_tesim'] = solr_doc['topic_combined_label_sim']
+        solr_doc['scientific_combined_label_tesim'] = solr_doc['scientific_combined_label_sim']
         Hyrax::SolrService.add(solr_doc)
         Hyrax::SolrService.commit
       end
