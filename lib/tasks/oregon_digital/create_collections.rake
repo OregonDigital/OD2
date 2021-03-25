@@ -29,7 +29,7 @@ def prep_collection_type
   c = Hyrax::CollectionType.where(title: 'Digital Collection').first
   return c.id if c.present?
 
-  c = Hyrax::CollectionType.new(title: 'Digital Collection')
+  c = Hyrax::CollectionType.new(title: 'Digital Collection', facet_configurable: true)
   c.save
   c.id
 end
