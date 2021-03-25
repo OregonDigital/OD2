@@ -616,7 +616,9 @@ module OregonDigital
 
       # defines a method for Generic to be able to grab a list of properties
       define_singleton_method :controlled_property_labels do
-        controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }.freeze
+        remote_controlled_props = controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }
+        file_controlled_props = %w[license_label]
+        (remote_controlled_props + file_controlled_props).freeze
       end
 
       define_singleton_method :generic_properties do
@@ -697,7 +699,7 @@ module OregonDigital
         { name: 'event', is_controlled: false },
         { name: 'sports_team', is_controlled: false },
         { name: 'award', is_controlled: false },
-        { name: 'workType', is_controlled: false },
+        { name: 'workType_label', is_controlled: true },
         { name: 'cultural_context_label', is_controlled: true },
         { name: 'style_or_period_label', is_controlled: true },
         { name: 'state_or_edition', is_controlled: false },
@@ -723,7 +725,7 @@ module OregonDigital
         { name: 'physical_extent', is_controlled: false },
         { name: 'extent', is_controlled: false },
         { name: 'rights_statement_label', is_controlled: false, name_label: 'rights_statement' },
-        { name: 'license', is_controlled: false },
+        { name: 'license_label', is_controlled: true },
         { name: 'use_restrictions', is_controlled: false },
         { name: 'rights_note', is_controlled: false },
         { name: 'rights_holder', is_controlled: false },
@@ -768,7 +770,7 @@ module OregonDigital
         { name: 'art_series', is_controlled: false },
         { name: 'motif', is_controlled: false },
         { name: 'type_label', is_controlled: false, name_label: 'type' },
-        { name: 'format', is_controlled: false },
+        { name: 'format_label', is_controlled: true },
         { name: 'orientation', is_controlled: false },
         { name: 'set', is_controlled: false },
         { name: 'exhibit', is_controlled: false },

@@ -304,6 +304,7 @@ en:
         rights_note: "Rights Note"
         rights_holder: "Rights Holder"
         license: "License"
+        license_label: "License"
         use_restrictions: "Use Restrictions"
         access_restrictions: "Access Restrictions"
         box_name: "Archival Box Name"
