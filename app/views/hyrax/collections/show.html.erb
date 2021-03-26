@@ -49,6 +49,15 @@
               img: render_thumbnail_tag(doc, {alt: ''}, { suppress_link: true }) %>
       <% end %>
       </div>
+      <div class="col-md-12 lg-border-bottom"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns col-md-12">
+      <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
+        <%= render 'attribute_rows', presenter: @presenter %>
+      </dl>
     </div>
   </div>
 
@@ -72,67 +81,4 @@
   <%= render 'lime_green_divider' do %>
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
-
-  <!-- collection info
-
-  <div class="row hyc-body">
-    <div class="col-md-4 hyc-metadata">
-      <% unless has_collection_search_parameters? %>
-          <h2><%= t('hyrax.dashboard.collections.show.metadata_header') %></h2>
-          <%= render 'show_descriptions' %>
-      <% end %>
-    </div>
-  </div>
-
-  -->
-
-  <!-- Search results label
-  <% if @members_count > 0 || @presenter.subcollection_count > 0 %>
-    <div class="hyc-blacklight hyc-bl-title">
-      <h2>
-        <% if has_collection_search_parameters? %>
-            <%= t('hyrax.dashboard.collections.show.search_results') %>
-        <% end %>
-      </h2>
-    </div>
-  <% end %>
-  -->
-
-
-  <!-- Subcollections
-  <% if @presenter.collection_type_is_nestable? && @subcollection_count > 0 %>
-      <div class="hyc-blacklight hyc-bl-title">
-        <h4><%= t('.subcollection_count') %> (<%= @subcollection_count %>)</h4>
-      </div>
-      <div class="hyc-blacklight hyc-bl-results">
-        <%= render 'subcollection_list', collection: @subcollection_docs %>
-      </div>
-  <% end %>
-  -->
-
-  <!-- Works
-  <% if @members_count > 0 %>
-      <div class="hyc-blacklight hyc-bl-title">
-        <h4><%= t('.works_in_collection') %> (<%= @members_count %>)</h4>
-      </div>
-
-      <div class="hyc-blacklight hyc-bl-sort">
-        <%= render 'sort_and_per_page', collection: @presenter %>
-      </div>
-
-      <%# OVERRIDE FROM HYRAX to add search sidebar from Blacklight %>
-      <%# and swap facet and results render order %>
-      <% unless @configured_facets.nil? || @configured_facets.empty? %>
-      <div class="hyc-blacklight hyc-bl-facets col-md-3 col-sm-4">
-        <%= render 'search_sidebar' %>
-      </div>
-      <% end %>
-
-
-
-      <div class="hyc-blacklight hyc-bl-pager">
-        <%= render 'paginate' %>
-      </div>
-  <% end # if @members_count > 0 %>
-  -->
 </div>
