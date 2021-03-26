@@ -3,6 +3,7 @@
 # Sets the behaviors and other data for a collection
 class Collection < ActiveFedora::Base
   after_destroy :destroy_facets
+  after_save :fetch_graph
 
   include ::Hyrax::CollectionBehavior
   # You can replace these metadata if they're not suitable
@@ -46,5 +47,9 @@ class Collection < ActiveFedora::Base
   def destroy_facets
     facets = Facet.where(collection_id: id)
     facets.each(&:destroy)
+  end
+
+  def fetch_graph
+    FetchGraphWorker.perform_at(2.seconds, id, depositor)
   end
 end
