@@ -36,10 +36,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :number_of_pages, basic_searchable: false, predicate: ::RDF::Vocab::SCHEMA.numberOfPages do |index|
-        index.as :stored_searchable
-      end
-
       property :on_pages, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasPages') do |index|
         index.as :stored_searchable
       end

@@ -62,10 +62,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :contents, basic_searchable: false, showable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents') do |index|
-        index.as :stored_searchable
-      end
-
       property :cover_description, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/coverDescription') do |index|
         index.as :stored_searchable
       end
@@ -292,10 +288,6 @@ module OregonDigital
       end
 
       property :date_digitized, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/dateDigitized'), multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :file_size, basic_searchable: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30183'), multiple: false do |index|
         index.as :stored_searchable
       end
 
@@ -529,10 +521,6 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :institution, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'),
                              class_name: OregonDigital::ControlledVocabularies::Institution do |index|
         index.as :stored_searchable, :facetable
@@ -681,10 +669,6 @@ module OregonDigital
         { name: 'military_highest_rank', is_controlled: false },
         { name: 'military_occupation', is_controlled: false },
         { name: 'military_service_location', is_controlled: false },
-        { name: 'specimen_type', is_controlled: false },
-        { name: 'identification_verification_status', is_controlled: false },
-        { name: 'accepted_name_usage', is_controlled: false },
-        { name: 'original_name_usage', is_controlled: false },
         { name: 'compass_direction', is_controlled: false },
         { name: 'object_orientation', is_controlled: false },
         { name: 'photograph_orientation', is_controlled: false },
@@ -701,14 +685,18 @@ module OregonDigital
         { name: 'cultural_context_label', is_controlled: true },
         { name: 'style_or_period_label', is_controlled: true },
         { name: 'state_or_edition', is_controlled: false },
-        { name: 'common_name_label', is_controlled: true },
         { name: 'phylum_or_division_label', is_controlled: true },
         { name: 'taxon_class_label', is_controlled: true },
         { name: 'order_label', is_controlled: true },
         { name: 'family_label', is_controlled: true },
         { name: 'genus_label', is_controlled: true },
         { name: 'species_label', is_controlled: true },
+        { name: 'common_name_label', is_controlled: true },
+        { name: 'accepted_name_usage', is_controlled: false },
+        { name: 'original_name_usage', is_controlled: false },
         { name: 'scientific_name_authorship', is_controlled: false },
+        { name: 'specimen_type', is_controlled: false },
+        { name: 'identification_verification_status', is_controlled: false },
         { name: 'location_label', is_controlled: true },
         { name: 'tgn_label', is_controlled: true },
         { name: 'ranger_district_label', is_controlled: true },

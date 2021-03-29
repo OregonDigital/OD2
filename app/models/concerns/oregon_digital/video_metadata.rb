@@ -9,12 +9,6 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
-      property :height, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
-        index.as :stored_searchable
-      end
-      property :width, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
-        index.as :stored_searchable
-      end
       define_singleton_method :video_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - (Generic.generic_properties + initial_properties))
       end

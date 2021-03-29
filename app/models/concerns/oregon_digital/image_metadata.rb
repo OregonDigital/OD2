@@ -13,18 +13,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :color_space, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.colorSpace do |index|
-        index.as :stored_searchable
-      end
-
-      property :height, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.height, multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :orientation, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.orientation do |index|
-        index.as :stored_searchable
-      end
-
       property :photograph_orientation, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false do |index|
         index.as :stored_searchable
       end
@@ -34,10 +22,6 @@ module OregonDigital
       end
 
       property :view, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription') do |index|
-        index.as :stored_searchable
-      end
-
-      property :width, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.width, multiple: false do |index|
         index.as :stored_searchable
       end
 
