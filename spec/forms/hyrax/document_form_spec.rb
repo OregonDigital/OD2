@@ -5,7 +5,7 @@ RSpec.describe Hyrax::DocumentForm do
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
   let(:props) do
-    Generic::ORDERED_TERMS 
+    Generic::ORDERED_TERMS
   end
   let(:terms) { new_form.primary_terms + new_form.secondary_terms }
   let(:model) { create(:document) }
