@@ -910,6 +910,7 @@ module OregonDigital
         label
         relative_path
         import_url
+        date_created
       ].freeze
     end
   end
