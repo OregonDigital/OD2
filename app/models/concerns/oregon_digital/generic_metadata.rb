@@ -774,7 +774,7 @@ module OregonDigital
         { name: 'color_space', is_controlled: false }
       ].freeze
 
-      ORDERED_TERMS = %i(
+      ORDERED_TERMS = %i[
         alternative
         tribal_title
         title
@@ -907,7 +907,7 @@ module OregonDigital
         measurements
         physical_extent
         technique
-      ).freeze
+      ].freeze
     end
   end
 end
