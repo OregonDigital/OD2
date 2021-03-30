@@ -6,6 +6,6 @@ module Hyrax
   class DocumentForm < Hyrax::GenericForm
     self.model_class = ::Document
     self.terms += Document.document_properties.map(&:to_sym)
-    self.terms = self.terms.uniq
+    self.terms = Generic::ORDERED_TERMS
   end
 end

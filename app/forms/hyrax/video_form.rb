@@ -5,6 +5,6 @@ module Hyrax
   class VideoForm < Hyrax::GenericForm
     self.model_class = ::Video
     self.terms += Video.video_properties.map(&:to_sym)
-    self.terms = self.terms.uniq
+    self.terms = Generic::ORDERED_TERMS
   end
 end
