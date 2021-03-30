@@ -909,6 +909,7 @@ module OregonDigital
         technique
         label
         relative_path
+        import_url
       ].freeze
     end
   end
