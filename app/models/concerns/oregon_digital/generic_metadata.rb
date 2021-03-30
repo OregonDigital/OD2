@@ -907,10 +907,6 @@ module OregonDigital
         measurements
         physical_extent
         technique
-        label
-        relative_path
-        import_url
-        date_created
       ].freeze
     end
   end
