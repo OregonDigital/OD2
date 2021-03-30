@@ -12,7 +12,7 @@
     </dl>
   </div>
   <% if document.collection? %>
-    <% collection_presenter = Hyrax::CollectionPresenter.new(document, current_ability) %>
+    <% collection_presenter = OregonDigital::CollectionPresenter.new(document, current_ability) %>
     <div class="collection-counts-wrapper row">
       <div class="collection-counts-item">
         <span><%= collection_presenter.total_viewable_collections %></span>Collections

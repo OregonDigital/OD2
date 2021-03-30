@@ -4,5 +4,5 @@
   <% else %>
     <h3 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), [hyrax, document] %></h3>
   <% end %>
-  <%= Hyrax::CollectionPresenter.new(document, current_ability).collection_type_badge %>
+  <%= OregonDigital::CollectionPresenter.new(document, current_ability).collection_type_badge %>
 </div>
