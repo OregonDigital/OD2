@@ -907,6 +907,7 @@ module OregonDigital
         measurements
         physical_extent
         technique
+        label
       ].freeze
     end
   end
