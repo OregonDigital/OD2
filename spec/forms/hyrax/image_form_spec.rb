@@ -5,7 +5,7 @@ RSpec.describe Hyrax::ImageForm do
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
   let(:props) do
-    Generic.generic_properties.map(&:to_sym) + Image.image_properties.map(&:to_sym)
+    Generic::ORDERED_TERMS 
   end
   let(:terms) { new_form.primary_terms + new_form.secondary_terms }
   let(:model) { create(:image) }
