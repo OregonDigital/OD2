@@ -908,6 +908,7 @@ module OregonDigital
         physical_extent
         technique
         label
+        relative_path
       ].freeze
     end
   end
