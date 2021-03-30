@@ -71,11 +71,9 @@
 
   <!-- Search bar -->
   <div class="hyc-blacklight hyc-bl-search hyc-body row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-      <%= render 'search_form', presenter: @presenter %>
+    <div class="col-sm-12">
+      <%= render 'advanced_search_form', presenter: @presenter, search_catalog_path: main_app.search_catalog_path %>
     </div>
-    <div class="col-sm-4"></div>
   </div>
 
   <%= render 'lime_green_divider' do %>
