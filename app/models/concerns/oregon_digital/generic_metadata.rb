@@ -756,6 +756,7 @@ module OregonDigital
         { name: 'art_series', is_controlled: false },
         { name: 'motif', is_controlled: false },
         { name: 'type_label', is_controlled: false, name_label: 'type' },
+        { name: 'format_label', is_controlled: true },
         { name: 'format', is_controlled: false },
         { name: 'orientation', is_controlled: false },
         { name: 'set', is_controlled: false },
