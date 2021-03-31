@@ -234,6 +234,7 @@ en:
         compass_direction: "Compass Direction"
         contents: "Contents"
         cover_description: "Cover Description"
+        edited_full_text: "Edited Full Text"
         coverage: "Coverage"
         description: "Description"
         description_of_manifestation: "Description of Item"
