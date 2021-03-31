@@ -8,7 +8,6 @@ FactoryBot.define do
     identifier { ['MyIdentifier'] }
     resource_type { 'MyType' }
     color_content { ['Color'] }
-    orientation { ['Horizontal'] }
     photograph_orientation { 'west' }
     resolution { '72' }
     view { ['exterior'] }
