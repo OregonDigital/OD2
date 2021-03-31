@@ -150,7 +150,6 @@ module OregonDigital
         is_version_of
         larger_work
         relation
-        related_url
         resource_type
         workType
         material

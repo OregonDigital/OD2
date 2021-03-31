@@ -900,7 +900,6 @@ module OregonDigital
         isPartOf
         is_version_of
         relation
-        related_url
         resource_type
         workType
         material
