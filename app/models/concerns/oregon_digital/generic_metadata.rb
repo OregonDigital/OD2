@@ -62,10 +62,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :contents, basic_searchable: false, showable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contents') do |index|
-        index.as :stored_searchable
-      end
-
       property :cover_description, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/coverDescription') do |index|
         index.as :stored_searchable
       end
@@ -292,10 +288,6 @@ module OregonDigital
       end
 
       property :date_digitized, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/dateDigitized'), multiple: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :file_size, basic_searchable: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/m/P30183'), multiple: false do |index|
         index.as :stored_searchable
       end
 
@@ -683,10 +675,6 @@ module OregonDigital
         { name: 'military_highest_rank', is_controlled: false },
         { name: 'military_occupation', is_controlled: false },
         { name: 'military_service_location', is_controlled: false },
-        { name: 'specimen_type', is_controlled: false },
-        { name: 'identification_verification_status', is_controlled: false },
-        { name: 'accepted_name_usage', is_controlled: false },
-        { name: 'original_name_usage', is_controlled: false },
         { name: 'compass_direction', is_controlled: false },
         { name: 'object_orientation', is_controlled: false },
         { name: 'photograph_orientation', is_controlled: false },
@@ -703,14 +691,18 @@ module OregonDigital
         { name: 'cultural_context_label', is_controlled: true },
         { name: 'style_or_period_label', is_controlled: true },
         { name: 'state_or_edition', is_controlled: false },
-        { name: 'common_name_label', is_controlled: true },
         { name: 'phylum_or_division_label', is_controlled: true },
         { name: 'taxon_class_label', is_controlled: true },
         { name: 'order_label', is_controlled: true },
         { name: 'family_label', is_controlled: true },
         { name: 'genus_label', is_controlled: true },
         { name: 'species_label', is_controlled: true },
+        { name: 'common_name_label', is_controlled: true },
+        { name: 'accepted_name_usage', is_controlled: false },
+        { name: 'original_name_usage', is_controlled: false },
         { name: 'scientific_name_authorship', is_controlled: false },
+        { name: 'specimen_type', is_controlled: false },
+        { name: 'identification_verification_status', is_controlled: false },
         { name: 'location_label', is_controlled: true },
         { name: 'tgn_label', is_controlled: true },
         { name: 'ranger_district_label', is_controlled: true },
@@ -786,6 +778,140 @@ module OregonDigital
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
         { name: 'color_space', is_controlled: false }
+      ].freeze
+
+      ORDERED_TERMS = %i[
+        alternative
+        tribal_title
+        title
+        creator
+        photographer
+        arranger
+        artist
+        author
+        cartographer
+        collector
+        composer
+        creator_display
+        contributor
+        dedicatee
+        designer
+        donor
+        editor
+        illustrator
+        interviewee
+        interviewer
+        lyricist
+        owner
+        patron
+        print_maker
+        recipient
+        transcriber
+        translator
+        description
+        abstract
+        biographical_information
+        compass_direction
+        cover_description
+        coverage
+        description_of_manifestation
+        designer_inscription
+        form_of_work
+        former_owner
+        inscription
+        layout
+        military_highest_rank
+        military_occupation
+        military_service_location
+        mode_of_issuance
+        mods_note
+        motif
+        object_orientation
+        tribal_notes
+        source_condition
+        temporal
+        subject
+        award
+        cultural_context
+        ethnographic_term
+        event
+        keyword
+        legal_name
+        military_branch
+        sports_team
+        state_or_edition
+        style_or_period
+        tribal_classes
+        tribal_terms
+        phylum_or_division
+        taxon_class
+        order
+        family
+        genus
+        species
+        common_name
+        accepted_name_usage
+        original_name_usage
+        scientific_name_authorship
+        specimen_type
+        identification_verification_status
+        location
+        box
+        gps_latitude
+        gps_longitude
+        ranger_district
+        street_address
+        tgn
+        water_basin
+        date
+        acquisition_date
+        award_date
+        collected_date
+        issued
+        view_date
+        accession_number
+        barcode
+        hydrologic_unit_code
+        identifier
+        item_locator
+        longitude_latitude_identification
+        license
+        access_restrictions
+        copyright_claimant
+        rights_holder
+        rights_statement
+        use_restrictions
+        repository
+        copy_location
+        location_copyshelf_location
+        local_collection_name
+        box_number
+        citation
+        current_repository_id
+        folder_name
+        folder_number
+        language
+        local_collection_id
+        publisher
+        place_of_production
+        provenance
+        publication_place
+        series_name
+        series_number
+        source
+        art_series
+        has_finding_aid
+        has_part
+        has_version
+        isPartOf
+        is_version_of
+        relation
+        resource_type
+        workType
+        material
+        measurements
+        physical_extent
+        technique
       ].freeze
     end
   end

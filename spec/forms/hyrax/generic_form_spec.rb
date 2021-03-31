@@ -4,7 +4,7 @@ RSpec.describe Hyrax::GenericForm do
   let(:new_form) { described_class.new(Generic.new, nil, instance_double('Controller')) }
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
-  let(:props) { Generic.generic_properties.map(&:to_sym) + Generic.controlled_properties }
+  let(:props) { Generic::ORDERED_TERMS }
   let(:terms) { new_form.primary_terms + new_form.secondary_terms }
   let(:model) { create(:generic) }
 
