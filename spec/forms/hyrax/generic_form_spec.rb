@@ -13,13 +13,13 @@ RSpec.describe Hyrax::GenericForm do
     allow(ability).to receive(:current_user).and_return(user)
   end
 
-  xit 'responds to terms with the proper list of terms' do
+  it 'responds to terms with the proper list of terms' do
     props.each do |t|
       expect(terms).to include(t)
     end
   end
 
-  xit 'matches terms to model properties' do
+  it 'matches terms to model properties' do
     terms.each do |term|
       expect(model).to respond_to(term)
     end
