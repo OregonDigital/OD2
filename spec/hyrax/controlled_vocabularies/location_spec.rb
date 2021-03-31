@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Hyrax::ControlledVocabularies::Location do
-  let(:location) { described_class.new('http://dbpedia.org/resource/Oregon_State_University') }
-  let(:parent_adm1) { described_class.new('http://dbpedia.org/resource/Oregon_State_University') }
+  let(:location) { described_class.new('https://id.loc.gov/authorities/names/n80126183') }
+  let(:parent_adm1) { described_class.new('https://id.loc.gov/authorities/names/n80126183') }
 
   before do
-    stub_request(:get, 'http://dbpedia.org/resource/Oregon_State_University')
+    stub_request(:get, 'https://id.loc.gov/authorities/names/n80126183')
       .to_return(status: 200, body: '', headers: {})
   end
 
@@ -92,7 +92,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
         allow(location).to receive(:parent_hierarchy).and_return([])
       end
 
-      it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University'] }
+      it { expect(location.rdf_label).to eq ['https://id.loc.gov/authorities/names/n80126183'] }
     end
 
     context 'when a parent administrative hierarchy exists' do
@@ -101,7 +101,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
         allow(location).to receive(:top_level_element?).and_return(true)
       end
 
-      it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University'] }
+      it { expect(location.rdf_label).to eq ['https://id.loc.gov/authorities/names/n80126183'] }
     end
 
     context 'when a parent administrative hierarchy exists and isnt a top level element' do
@@ -110,7 +110,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
         allow(location).to receive(:top_level_element?).and_return(false)
       end
 
-      it { expect(location.rdf_label).to eq ['http://dbpedia.org/resource/Oregon_State_University'] }
+      it { expect(location.rdf_label).to eq ['https://id.loc.gov/authorities/names/n80126183'] }
     end
   end
 end

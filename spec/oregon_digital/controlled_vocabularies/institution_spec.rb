@@ -6,7 +6,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Institution do
 
   describe '#in_vocab?' do
     context 'when in vocab' do
-      it { expect(vocab.in_vocab?('http://dbpedia.org/resource/Washington')).to be true }
+      it { expect(vocab.in_vocab?('http://id.loc.gov/authorities/names/n80126183')).to be true }
     end
 
     context 'when not in vocab' do
@@ -16,7 +16,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Institution do
 
   describe '#query_to_vocabulary' do
     context 'when in vocab' do
-      it { expect(vocab.query_to_vocabulary('http://dbpedia.org/resource/Washington')).to be OregonDigital::ControlledVocabularies::Vocabularies::Dbpedia }
+      it { expect(vocab.query_to_vocabulary('http://id.loc.gov/authorities/names/n80126183')).to be OregonDigital::ControlledVocabularies::Vocabularies::LocNames }
     end
 
     context 'when not in vocab' do

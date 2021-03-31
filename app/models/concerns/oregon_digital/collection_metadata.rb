@@ -78,12 +78,30 @@ module OregonDigital
 
       # defines a method for Generic to be able to grab a list of properties
       define_singleton_method :controlled_property_labels do
-        controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }.freeze
+        remote_controlled_props = controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }
+        file_controlled_props = %w[license_label]
+        (remote_controlled_props + file_controlled_props).freeze
       end
 
       define_singleton_method :generic_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
+
+      ORDERED_PROPERTIES = [
+        { name: 'alternative_title', is_controlled: false },
+        { name: 'creator_label', is_controlled: true },
+        { name: 'contributor_label', is_controlled: true },
+        { name: 'date', is_controlled: false },
+        { name: 'date_created', is_controlled: false },
+        { name: 'subject_label', is_controlled: true },
+        { name: 'license_label', is_controlled: true },
+        { name: 'language_label', is_controlled: false, name_label: 'language' },
+        { name: 'repository_label', is_controlled: true },
+        { name: 'publisher_label', is_controlled: true },
+        { name: 'institution_label', is_controlled: true },
+        { name: 'date_uploaded', is_controlled: false },
+        { name: 'date_modified', is_controlled: false }
+      ].freeze
     end
   end
 end

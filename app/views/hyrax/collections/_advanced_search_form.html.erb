@@ -1,0 +1,40 @@
+
+  <% unless (search_context_str = render_search_to_s( advanced_search_context)).blank? %>
+    <div class="constraints well search_history">
+      <h4><%= t 'blacklight_advanced_search.form.search_context' %></h4>
+      <%= search_context_str %>
+    </div>
+  <% end %>
+<%= form_tag search_catalog_path, :id => 'collection-search', :class => 'advanced form-horizontal', :method => :get do  %>
+  <%= render_hash_as_hidden_fields(advanced_search_context) %>
+  <%= hidden_field_tag :search_field, 'all_fields', id: 'collection_search_field' %>
+  <%= hidden_field_tag 'f[non_user_collections_ssim][]', presenter.to_s %>
+
+  <div class="input-criteria row">
+
+      <div class="query-criteria col-md-8">
+        <h3 class="query-criteria-heading">
+          <label>
+            <%= t('blacklight_advanced_search.form.query_criteria_heading_html', :select_menu =>  select_menu_for_field_operator ) %>
+          </label>
+        </h3>
+
+        <div id="advanced_search">
+          <%= render 'advanced/advanced_search_fields' %>
+        </div>
+      </div>
+
+      <div class="limit-criteria col-md-4">
+        <h3 class="limit-criteria-heading"><%= t('blacklight_advanced_search.form.limit_criteria_heading_html')%></h3>
+
+        <div id="advanced_search_facets" class="limit_input">
+          <% if blacklight_config.try(:advanced_search).try {|h| h[:form_facet_partial] } %>
+            <%= render blacklight_config.advanced_search[:form_facet_partial] %>
+          <% else %>
+            <%= render 'advanced_search_facets' %>
+          <% end %>
+        </div>
+      </div>
+  </div>
+
+<% end %>
