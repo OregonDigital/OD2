@@ -157,7 +157,7 @@ module OregonDigital
         measurements
         physical_extent
         technique
-      ]
+      ].freeze
     end
   end
 end
