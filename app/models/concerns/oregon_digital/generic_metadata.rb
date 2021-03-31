@@ -521,6 +521,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :institution, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'),
                              class_name: OregonDigital::ControlledVocabularies::Institution do |index|
         index.as :stored_searchable, :facetable
