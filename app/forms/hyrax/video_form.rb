@@ -15,7 +15,7 @@ module Hyrax
            files visibility_during_embargo embargo_release_date
            visibility_after_embargo visibility_during_lease
            lease_expiration_date visibility_after_lease visibility
-           thumbnail_id related_url representative_id rendering_ids ordered_member_ids
+           thumbnail_id representative_id rendering_ids ordered_member_ids
            member_of_collection_ids in_works_ids admin_set_id]
     end
   end
