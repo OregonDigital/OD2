@@ -25,6 +25,8 @@ module Hyrax
       fileset_viewable || work_viewable
     end
 
+    def format_label;end
+
     def oembed_viewer?
       file_set_presenters.any? do |presenter|
         oembed?(presenter)
