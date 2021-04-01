@@ -427,6 +427,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :full_size_download_allowed, predicate: ::RDF::URI.new('https://opaquenamespace.org/review/fullSizeDownloadAllowed'), multiple: false, facet: true do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
@@ -781,6 +785,7 @@ module OregonDigital
       ].freeze
 
       ORDERED_TERMS = %i[
+        full_size_download_allowed
         alternative
         tribal_title
         title
