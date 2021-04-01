@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 module Hyrax
+  # Presents the metadata for a fileset
   class FileSetPresenter
     include ModelProxy
     include PresentsAttributes
@@ -79,6 +81,7 @@ module Hyrax
 
     def license
       return if solr_document.license.nil?
+
       solr_document.license.first
     end
 
