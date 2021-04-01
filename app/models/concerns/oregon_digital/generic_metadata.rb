@@ -777,7 +777,12 @@ module OregonDigital
         { name: 'width', is_controlled: false },
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
-        { name: 'color_space', is_controlled: false }
+        { name: 'color_space', is_controlled: false },
+        { name: 'ranger_district_label', is_controlled: true },
+        { name: 'water_basin_label', is_controlled: true },
+        { name: 'place_of_production_label', is_controlled: true },
+        { name: 'based_near_label', is_controlled: true }
+
       ].freeze
 
       ORDERED_TERMS = %i[
