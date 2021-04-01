@@ -785,7 +785,6 @@ module OregonDigital
       ].freeze
 
       ORDERED_TERMS = %i[
-        full_size_download_allowed
         alternative
         tribal_title
         title
@@ -917,6 +916,7 @@ module OregonDigital
         measurements
         physical_extent
         technique
+        full_size_download_allowed
       ].freeze
     end
   end
