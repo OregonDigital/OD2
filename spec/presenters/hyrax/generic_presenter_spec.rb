@@ -7,10 +7,11 @@ RSpec.describe Hyrax::GenericPresenter do
   let(:ability) { instance_double('Ability') }
   let(:solr_document) { SolrDocument.new(model.attributes) }
   let(:props) { Generic.generic_properties.map(&:to_sym) }
-  let(:file_set) { create(:file_set) }
+  let(:file_set) { instance_double('FileSet') }
 
   before do
     allow(presenter).to receive(:file_set_presenters).and_return(presenters)
+    allow(file_set).to receive(:id).and_return 'abcde1234'
   end
 
   it 'delegates the method to solr document' do
