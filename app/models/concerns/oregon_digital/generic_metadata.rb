@@ -777,7 +777,7 @@ module OregonDigital
         { name: 'width', is_controlled: false },
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
-        { name: 'color_space', is_controlled: false },
+        { name: 'color_space', is_controlled: false }
       ].freeze
 
       ORDERED_TERMS = %i[
@@ -912,7 +912,6 @@ module OregonDigital
         measurements
         physical_extent
         technique
-        format
       ].freeze
     end
   end
