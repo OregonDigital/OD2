@@ -65,9 +65,9 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_type_label(solr_doc, type_label)
-    solr_doc['type_label_sim'] = type_label
-    solr_doc['type_label_ssim'] = type_label
-    solr_doc['type_label_tesim'] = type_label
+    solr_doc['resource_type_label_sim'] = type_label
+    solr_doc['resource_type_label_ssim'] = type_label
+    solr_doc['resource_type_label_tesim'] = type_label
   end
 
   def index_topic_combined_label(solr_doc, topic_labels)

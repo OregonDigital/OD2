@@ -90,7 +90,7 @@ class CatalogController < ApplicationController
       # Only try to display full text if a highlight is hit
       document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
     }
-    config.add_index_field 'type_label_tesim', label: 'Resource Type', link_to_search: 'type_label_tesim', if: false
+    config.add_index_field 'resource_type_label_tesim', label: 'Resource Type', link_to_search: 'resource_type_label_tesim', if: false
     config.add_index_field 'rights_statement_label_tesim', label: 'Rights Statement', link_to_search: 'rights_statement_label_tesim', if: false
 
     config.add_field_configuration_to_solr_request!
@@ -190,7 +190,7 @@ class CatalogController < ApplicationController
         field.include_in_advanced_search = false
       end
     end
-    config.add_show_field 'type_label_tesim'
+    config.add_show_field 'resource_type_label_tesim'
     config.add_show_field 'rights_statement_label_tesim'
     config.add_show_field 'language_label_tesim'
 
@@ -208,7 +208,7 @@ class CatalogController < ApplicationController
     }
     config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
     config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), limit: 5
-    config.add_facet_field 'type_label_sim', label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
+    config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.type'), limit: 5
     config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
     config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
     config.add_facet_field 'date_combined_year_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_year_combined'), limit: 5, range: true
@@ -240,9 +240,9 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise.
 
     # Type and Language is an edge case that is controlled by not as a typical ControlledVocabulary
-    config.add_search_field('type_label') do |field|
-      solr_name = 'type_label_tesim'
-      search_fields << 'type_label_tesim'
+    config.add_search_field('resource_type_label') do |field|
+      solr_name = 'resource_type_label_tesim'
+      search_fields << 'resource_type_label_tesim'
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
