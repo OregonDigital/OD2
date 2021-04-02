@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: ba2a57e037288b14478f9144d1dc1dee4e016484
+  revision: ef66f647831633428f85cbf2e979cb695c33fb50
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -120,21 +120,21 @@ GEM
       execjs
     awesome_nested_set (3.2.1)
       activerecord (>= 4.0.0, < 7.0)
-    aws-eventstream (1.1.0)
-    aws-partitions (1.418.0)
-    aws-sdk-core (3.111.2)
+    aws-eventstream (1.1.1)
+    aws-partitions (1.440.0)
+    aws-sdk-core (3.113.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.41.0)
-      aws-sdk-core (~> 3, >= 3.109.0)
+    aws-sdk-kms (1.43.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.87.0)
-      aws-sdk-core (~> 3, >= 3.109.0)
+    aws-sdk-s3 (1.93.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.2.2)
+    aws-sigv4 (1.2.3)
       aws-eventstream (~> 1, >= 1.0.2)
     axe-matchers (2.6.1)
       dumb_delegator (~> 0.8)
@@ -620,7 +620,7 @@ GEM
     mailboxer (0.15.1)
       carrierwave (>= 0.5.8)
       rails (>= 5.0.0)
-    marcel (1.0.0)
+    marcel (1.0.1)
     memoist (0.16.2)
     method_source (1.0.0)
     mime-types (3.3.1)
