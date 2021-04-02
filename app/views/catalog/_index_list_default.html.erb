@@ -44,7 +44,7 @@
   </div>
   <div class="metadata-row row">
     <%= render 'index_type_icon', document: document unless document.resource_type_label.first.nil? || document.resource_type_label.first.empty? %>
-    <%= doc_presenter.field_value index_fields(document)['type_label_tesim'] %>
+    <%= doc_presenter.field_value index_fields(document)['resource_type_label_tesim'] %>
     <% if document.children? %>
       (<%= document.children.count %> Items)
     <% end %>
