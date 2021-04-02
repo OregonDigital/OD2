@@ -1,0 +1,10 @@
+terms:
+    - active: true
+      id: ""
+      term: ""
+    - id: https://opaquenamespace.org/ns/fullSizeDownloadAllowed/true
+      term: "True"
+      active: true
+    - id: https://opaquenamespace.org/ns/fullSizeDownloadAllowed/false
+      term: "False"
+      active: true

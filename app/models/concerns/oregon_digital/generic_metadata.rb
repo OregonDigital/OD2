@@ -427,6 +427,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :full_size_download_allowed, predicate: ::RDF::URI.new('https://opaquenamespace.org/review/fullSizeDownloadAllowed'), multiple: false, facet: true do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
         index.as :stored_searchable, :facetable
       end
@@ -912,6 +916,7 @@ module OregonDigital
         measurements
         physical_extent
         technique
+        full_size_download_allowed
       ].freeze
     end
   end

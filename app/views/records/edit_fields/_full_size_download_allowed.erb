@@ -1,0 +1,6 @@
+<% download_service = OregonDigital::DownloadService.new %>
+<%= f.input :full_size_download_allowed, as: :select,
+    collection: download_service.select_active_options,
+    include_blank: false,
+    item_helper: download_service.method(:include_current_value),
+    input_html: { class: 'form-control' } %>
