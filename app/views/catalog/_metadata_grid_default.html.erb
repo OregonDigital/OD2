@@ -13,8 +13,8 @@
 
 <div class="metadata-row">
   <% if document.children? %>
-    <%= render 'index_type_icon', document: document unless document.type_label.first.nil? || document.type_label.first.empty? %>
-    <span class="sr-only"><%= document.type_label.first %></span>
+    <%= render 'index_type_icon', document: document unless document.resource_type_label.first.nil? || document.resource_type_label.first.empty? %>
+    <span class="sr-only"><%= document.resource_type_label.first %></span>
     (<%= document.children.count %> Items)
   <% end %>
 </div>
