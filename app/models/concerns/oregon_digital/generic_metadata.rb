@@ -716,7 +716,7 @@ module OregonDigital
         { name: 'measurements', is_controlled: false },
         { name: 'physical_extent', is_controlled: false },
         { name: 'extent', is_controlled: false },
-        { name: 'rights_statement_label', is_controlled: false, name_label: 'rights_statement' },
+        { name: 'rights_statement_label', is_controlled: true, name_label: 'rights_statement' },
         { name: 'license_label', is_controlled: true },
         { name: 'use_restrictions', is_controlled: false },
         { name: 'rights_note', is_controlled: false },
@@ -729,7 +729,7 @@ module OregonDigital
         { name: 'barcode', is_controlled: false },
         { name: 'hydrologic_unit_code', is_controlled: false },
         { name: 'longitude_latitude_identification', is_controlled: false },
-        { name: 'language_label', is_controlled: false, name_label: 'language' },
+        { name: 'language_label', is_controlled: true, name_label: 'language' },
         { name: 'source', is_controlled: false },
         { name: 'provenance', is_controlled: false },
         { name: 'repository_label', is_controlled: true },
@@ -761,7 +761,7 @@ module OregonDigital
         { name: 'designer_inscription', is_controlled: false },
         { name: 'art_series', is_controlled: false },
         { name: 'motif', is_controlled: false },
-        { name: 'type_label', is_controlled: false, name_label: 'type' },
+        { name: 'resource_type_label', is_controlled: true, name_label: 'Media' },
         { name: 'format_label', is_controlled: true },
         { name: 'orientation', is_controlled: false },
         { name: 'set', is_controlled: false },
@@ -778,11 +778,6 @@ module OregonDigital
         { name: 'resolution', is_controlled: false },
         { name: 'color_content', is_controlled: false },
         { name: 'color_space', is_controlled: false },
-        { name: 'ranger_district_label', is_controlled: true },
-        { name: 'water_basin_label', is_controlled: true },
-        { name: 'place_of_production_label', is_controlled: true },
-        { name: 'based_near_label', is_controlled: true }
-
       ].freeze
 
       ORDERED_TERMS = %i[
@@ -917,6 +912,7 @@ module OregonDigital
         measurements
         physical_extent
         technique
+        format
       ].freeze
     end
   end
