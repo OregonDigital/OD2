@@ -194,7 +194,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'rights_statement_label_tesim'
     config.add_show_field 'language_label_tesim'
 
-    config.add_facet_field 'generic_type_sim', if: false
     config.add_facet_field 'open_access', limit: 5, label: 'Open Access', show: false, query: {
       open: { label: 'Open', fq: 'license_sim:(
         https\://creativecommons.org/licenses/by/4.0/ OR
@@ -219,6 +218,23 @@ class CatalogController < ApplicationController
     config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
     config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
     config.add_facet_field 'full_size_download_allowed_label_ssim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
+
+    Audio.properties.each do |label, prop|
+      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
+    end
+    Document.properties.each do |label, prop|
+      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
+    end
+    Generic.properties.each do |label, prop|
+      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
+    end
+    Image.properties.each do |label, prop|
+      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
+    end
+    Video.properties.each do |label, prop|
+      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
+    end
+
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
