@@ -217,22 +217,13 @@ class CatalogController < ApplicationController
     config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
     config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
-    config.add_facet_field 'full_size_download_allowed_label_ssim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
+    config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
 
-    Audio.properties.each do |label, prop|
-      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
-    end
-    Document.properties.each do |label, prop|
-      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
-    end
-    Generic.properties.each do |label, prop|
-      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
-    end
-    Image.properties.each do |label, prop|
-      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
-    end
-    Video.properties.each do |label, prop|
-      config.add_facet_field "#{label}_sim", show: false if prop['facet'] unless config.facet_fields.keys.include? "#{label}_sim"
+    # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
+    # Do not show these facets, they're for collection configurable facets
+    (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
+      label = prop[:name_label].nil? ? prop[:name].sub('_label', '') : prop[:name_label]
+      config.add_facet_field "#{prop[:name]}_sim", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] unless config.facet_fields.keys.include? "#{prop[:name]}_sim"
     end
 
     config.add_facet_fields_to_solr_request!
