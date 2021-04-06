@@ -20,7 +20,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :has_number, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasNumber'), facet: true do |index|
+      property :has_number, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasNumber') do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -28,7 +28,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :is_volume, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasVolume'), facet: true do |index|
+      property :is_volume, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasVolume') do |index|
         index.as :stored_searchable, :facetable
       end
 
