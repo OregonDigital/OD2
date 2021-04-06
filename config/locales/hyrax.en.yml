@@ -74,15 +74,6 @@ en:
           common_name_label_sim: Common Name
           military_branch_label_sim: Military Branch
           subject_label_sim: Subject
-          copyright_combined_label_sim: Copyright Combined Label
-          topic_combined_label_sim: Topic Combined Label
-          creator_combined_label_sim: Creator Combined Label
-          date_combined_year_label_ssim: Year Combined Label
-          date_combined_decade_label_ssim: Decade Combined Label
-          location_combined_label_sim: Location Combined Label
-          non_user_collections_ssim: Collection
-          full_size_download_allowed_label_sim: Full Size Download Allowed Label
-          full_size_download_allowed_sim: Full Size Download Allowed URI
         index:
           all_text_tsimv: Full Text
           based_near_label_tesim: Location
