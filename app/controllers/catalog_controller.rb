@@ -21,6 +21,12 @@ class CatalogController < ApplicationController
     'system_modified_dtsi'
   end
 
+  # Combine our search queries as they come in
+  def index
+    params[:q] = params[:q].join(' AND ') unless params[:q].nil?
+    super
+  end
+
   # CatalogController-scope behavior and configuration for BlacklightIiifSearch
   include BlacklightIiifSearch::Controller
 
