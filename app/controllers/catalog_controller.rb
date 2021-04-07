@@ -194,7 +194,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'rights_statement_label_tesim'
     config.add_show_field 'language_label_tesim'
 
-    config.add_facet_field 'generic_type_sim', if: false
     config.add_facet_field 'open_access', limit: 5, label: 'Open Access', show: false, query: {
       open: { label: 'Open', fq: 'license_sim:(
         https\://creativecommons.org/licenses/by/4.0/ OR
@@ -218,7 +217,15 @@ class CatalogController < ApplicationController
     config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
     config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
-    config.add_facet_field 'full_size_download_allowed_label_ssim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
+    config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
+
+    # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
+    # Do not show these facets, they're for collection configurable facets
+    (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
+      label = prop[:name_label].nil? ? prop[:name].sub('_label', '') : prop[:name_label]
+      config.add_facet_field "#{prop[:name]}_sim", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] && !config.facet_fields.keys.include?("#{prop[:name]}_sim")
+    end
+
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.
