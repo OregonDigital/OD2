@@ -116,7 +116,7 @@ GEM
       rails (>= 4.2)
     arel (9.0.0)
     ast (2.4.1)
-    autoprefixer-rails (10.0.1.0)
+    autoprefixer-rails (10.2.4.0)
       execjs
     awesome_nested_set (3.2.1)
       activerecord (>= 4.0.0, < 7.0)
@@ -154,7 +154,7 @@ GEM
       i18n
     bcrypt (3.1.16)
     bindex (0.8.1)
-    blacklight (6.23.0)
+    blacklight (6.24.0)
       bootstrap-sass (~> 3.2)
       deprecation
       globalid
@@ -185,11 +185,10 @@ GEM
       blacklight (~> 6.0)
       iiif-presentation
       rails (>= 4.2, < 6)
-    blacklight_range_limit (7.0.0)
-      blacklight
+    blacklight_range_limit (6.5.0)
+      blacklight (~> 6.10)
       jquery-rails
-      rails (>= 3.0)
-      tether-rails
+      rails (>= 4.2, < 6)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -252,7 +251,7 @@ GEM
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
-    deprecation (1.0.0)
+    deprecation (1.1.0)
       activesupport
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -358,13 +357,13 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
-    faraday (0.17.3)
+    faraday (0.17.4)
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.5)
       faraday
     faraday_middleware (0.10.1)
       faraday (>= 0.7.4, < 1.0)
-    ffi (1.13.1)
+    ffi (1.15.0)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -522,7 +521,7 @@ GEM
       json
     iiif_manifest (1.0.1)
       activesupport (>= 4)
-    jbuilder (2.10.1)
+    jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
     jquery-datatables-rails (3.4.0)
@@ -612,7 +611,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.9.0)
+    loofah (2.9.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -627,7 +626,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2020.1104)
     mini_magick (4.10.1)
-    mini_mime (1.0.3)
+    mini_mime (1.1.0)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
     multi_json (1.15.0)
@@ -642,7 +641,7 @@ GEM
     noid-rails (3.0.2)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     nokogumbo (2.0.2)
@@ -958,8 +957,6 @@ GEM
     temple (0.8.2)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
-    tether-rails (1.4.0)
-      rails (>= 3.1)
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -1032,7 +1029,7 @@ DEPENDENCIES
   blacklight-oembed
   blacklight_advanced_search (~> 6.4)
   blacklight_iiif_search (~> 1.0)
-  blacklight_range_limit (~> 7.0)
+  blacklight_range_limit (~> 6)
   browse-everything
   byebug
   capybara (~> 2.17)

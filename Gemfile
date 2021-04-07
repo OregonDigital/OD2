@@ -8,7 +8,7 @@ end
 # TODO: make this a version specification once we get a new release cut
 gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
 
-gem "blacklight_range_limit", "~> 7.0"
+gem "blacklight_range_limit", "~> 6"
 gem 'browse-everything'
 # coffee-rails is a requirement for Hyrax or one of its dependencies but hasn't
 # been added to either gemspecs
