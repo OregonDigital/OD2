@@ -584,11 +584,6 @@ collections:
       Historical Maps of Oregon State University
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80017721
-  - id: UA018
-    title: >-
-      Laura J. Bock papers, 1962-1969
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
   - id: ua018
     title: >-
       Laura J. Bock papers, 1962-1969
@@ -609,11 +604,6 @@ collections:
       Chuck Williams Photographs
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80017721
-  - id: coll569
-    title: >-
-      John Edward Tysell, Sr. papers
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
   - id: coll560
     title: >-
       John Edward Tysell, Sr. papers
