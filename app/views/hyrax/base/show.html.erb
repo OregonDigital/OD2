@@ -44,6 +44,11 @@
               <h2 class="h4"><%= t("oregon_digital.works.form.tab.how_to_cite") %></h2>
             </a>
           </li>
+          <li role="presentation">
+            <a href="#contact_us" aria-controls="contact_us" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.contact_us") %></h2>
+            </a>
+          </li>
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="metadata">
@@ -56,6 +61,12 @@
             <div class="form-tab-content">
               <% # metadata_tab is sometimes provided %>
               <%= render 'citations', presenter: @presenter %>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="contact_us">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'work_contact_form', presenter: @presenter %>
             </div>
           </div>
         </div>
