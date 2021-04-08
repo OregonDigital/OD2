@@ -98,12 +98,10 @@ module OregonDigital
         mods_note
         motif
         object_orientation
-        photograph_orientation
         tribal_notes
         source_condition
         table_of_contents
         temporal
-        view
         subject
         award
         cultural_context
@@ -141,7 +139,7 @@ module OregonDigital
         acquisition_date
         award_date
         collected_date
-        ate_created
+        date_created
         issued
         view_date
         accession_number
@@ -154,6 +152,7 @@ module OregonDigital
         access_restrictions
         copyright_claimant
         rights_holder
+        rights_note
         rights_statement
         use_restrictions
         repository
@@ -192,6 +191,14 @@ module OregonDigital
         measurements
         physical_extent
         technique
+        conversion
+        date_digitized
+        exhibit
+        institution
+        original_filename
+        full_size_download_allowed
+        date_modified
+        date_uploaded
       ].freeze
     end
   end
