@@ -65,12 +65,9 @@ module OregonDigital
         coverage
         description_of_manifestation
         designer_inscription
-        first_line
-        first_line_chorus
         form_of_work
         former_owner
         inscription
-        instrumentation
         layout
         military_highest_rank
         military_occupation
@@ -82,7 +79,6 @@ module OregonDigital
         photograph_orientation
         tribal_notes
         source_condition
-        table_of_contents
         temporal
         view
         subject
@@ -122,7 +118,7 @@ module OregonDigital
         acquisition_date
         award_date
         collected_date
-        ate_created
+        date_created
         issued
         view_date
         accession_number
@@ -135,6 +131,7 @@ module OregonDigital
         access_restrictions
         copyright_claimant
         rights_holder
+        rights_note
         rights_statement
         use_restrictions
         repository
@@ -143,15 +140,11 @@ module OregonDigital
         local_collection_name
         box_number
         citation
-        contained_in_journal
         current_repository_id
         folder_name
         folder_number
-        has_number
-        is_volume
         language
         local_collection_id
-        on_pages
         publisher
         place_of_production
         provenance
@@ -165,7 +158,6 @@ module OregonDigital
         has_version
         isPartOf
         is_version_of
-        larger_work
         relation
         resource_type
         workType
@@ -173,6 +165,16 @@ module OregonDigital
         measurements
         physical_extent
         technique
+        color_content
+        conversion
+        date_digitized
+        exhibit
+        institution
+        original_filename
+        resolution
+        full_size_download_allowed
+        date_modified
+        date_uploaded
       ].freeze
     end
   end
