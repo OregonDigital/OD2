@@ -746,7 +746,7 @@ module OregonDigital
         { name: 'date_modified', is_controlled: false, collection_facetable: false },
         { name: 'original_filename', is_controlled: false, collection_facetable: false },
         { name: 'resolution', is_controlled: false, collection_facetable: false },
-        { name: 'color_content', is_controlled: false, collection_facetable: false },
+        { name: 'color_content', is_controlled: false, collection_facetable: false }
       ].freeze
 
       UNORDERED_PROPERTIES = [
