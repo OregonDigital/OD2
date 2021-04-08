@@ -15,7 +15,7 @@ module OregonDigital
       property :resource_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
-      property :date_created, predicate: ::RDF::Vocab::DC.created, facet: false do |index|
+      property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
         index.as :stored_searchable
       end
 
@@ -23,7 +23,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights, facet: false do |index|
+      property :rights_statement, predicate: ::RDF::Vocab::EDM.rights do |index|
         index.as :stored_searchable, :facetable
       end
       property :identifier, predicate: ::RDF::Vocab::DC.identifier do |index|
@@ -142,7 +142,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :keyword, predicate: ::RDF::Vocab::DC11.subject, facet: false do |index|
+      property :keyword, predicate: ::RDF::Vocab::DC11.subject do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -313,27 +313,27 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate'), facet: false do |index|
+      property :award_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/awardDate') do |index|
         index.as :stored_searchable
       end
 
-      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate'), facet: false do |index|
+      property :collected_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/collectedDate') do |index|
         index.as :stored_searchable
       end
 
-      property :date, predicate: ::RDF::Vocab::DC.date, facet: false do |index|
+      property :date, predicate: ::RDF::Vocab::DC.date do |index|
         index.as :stored_searchable
       end
 
-      property :issued, predicate: ::RDF::Vocab::DC.issued, facet: false do |index|
+      property :issued, predicate: ::RDF::Vocab::DC.issued do |index|
         index.as :stored_searchable
       end
 
-      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate'), facet: false do |index|
+      property :view_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDate') do |index|
         index.as :stored_searchable
       end
 
-      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate'), facet: false do |index|
+      property :acquisition_date, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/acquisitionDate') do |index|
         index.as :stored_searchable
       end
 
@@ -365,7 +365,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, predicate: ::RDF::Vocab::CC.License, facet: false do |index|
+      property :license, predicate: ::RDF::Vocab::CC.License do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -387,103 +387,103 @@ module OregonDigital
 
       # End of normal properties
       # Controlled vocabulary terms
-      property :arranger, predicate: ::RDF::Vocab::MARCRelators.arr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :arranger, predicate: ::RDF::Vocab::MARCRelators.arr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :artist, predicate: ::RDF::Vocab::MARCRelators.art, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :artist, predicate: ::RDF::Vocab::MARCRelators.art, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :author, predicate: ::RDF::Vocab::MARCRelators.aut, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :author, predicate: ::RDF::Vocab::MARCRelators.aut, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :cartographer, predicate: ::RDF::Vocab::MARCRelators.ctg, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :cartographer, predicate: ::RDF::Vocab::MARCRelators.ctg, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :collector, predicate: ::RDF::Vocab::MARCRelators.col, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :collector, predicate: ::RDF::Vocab::MARCRelators.col, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :composer, predicate: ::RDF::Vocab::MARCRelators.cmp, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :composer, predicate: ::RDF::Vocab::MARCRelators.cmp, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :creator, predicate: ::RDF::Vocab::DC11.creator, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :creator, predicate: ::RDF::Vocab::DC11.creator, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :contributor, predicate: ::RDF::Vocab::DC11.contributor, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :contributor, predicate: ::RDF::Vocab::DC11.contributor, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :dedicatee, predicate: ::RDF::Vocab::MARCRelators.dte, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :dedicatee, predicate: ::RDF::Vocab::MARCRelators.dte, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :donor, predicate: ::RDF::Vocab::MARCRelators.dnr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :donor, predicate: ::RDF::Vocab::MARCRelators.dnr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :full_size_download_allowed, predicate: ::RDF::URI.new('https://opaquenamespace.org/review/fullSizeDownloadAllowed'), multiple: false, facet: true do |index|
+      property :full_size_download_allowed, predicate: ::RDF::URI.new('https://opaquenamespace.org/review/fullSizeDownloadAllowed'), multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :designer, predicate: ::RDF::Vocab::MARCRelators.dsr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :editor, predicate: ::RDF::Vocab::MARCRelators.edt, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :editor, predicate: ::RDF::Vocab::MARCRelators.edt, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :illustrator, predicate: ::RDF::Vocab::MARCRelators.ill, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :illustrator, predicate: ::RDF::Vocab::MARCRelators.ill, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :interviewee, predicate: ::RDF::Vocab::MARCRelators.ive, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :interviewee, predicate: ::RDF::Vocab::MARCRelators.ive, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :interviewer, predicate: ::RDF::Vocab::MARCRelators.ivr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :interviewer, predicate: ::RDF::Vocab::MARCRelators.ivr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :lyricist, predicate: ::RDF::Vocab::MARCRelators.lyr, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :lyricist, predicate: ::RDF::Vocab::MARCRelators.lyr, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :owner, predicate: ::RDF::Vocab::MARCRelators.own, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :owner, predicate: ::RDF::Vocab::MARCRelators.own, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :patron, predicate: ::RDF::Vocab::MARCRelators.pat, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :patron, predicate: ::RDF::Vocab::MARCRelators.pat, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :photographer, predicate: ::RDF::Vocab::MARCRelators.pht, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :photographer, predicate: ::RDF::Vocab::MARCRelators.pht, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :print_maker, predicate: ::RDF::Vocab::MARCRelators.prm, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :print_maker, predicate: ::RDF::Vocab::MARCRelators.prm, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :recipient, predicate: ::RDF::Vocab::MARCRelators.rcp, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :recipient, predicate: ::RDF::Vocab::MARCRelators.rcp, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :transcriber, predicate: ::RDF::Vocab::MARCRelators.trc, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :transcriber, predicate: ::RDF::Vocab::MARCRelators.trc, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :translator, predicate: ::RDF::Vocab::MARCRelators.trl, class_name: OregonDigital::ControlledVocabularies::Creator, facet: false do |index|
+      property :translator, predicate: ::RDF::Vocab::MARCRelators.trl, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
+      property :location, predicate: ::RDF::Vocab::DC.spatial, class_name: Hyrax::ControlledVocabularies::Location do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -496,12 +496,12 @@ module OregonDigital
       end
 
       property :ranger_district, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/rangerDistrict'),
-                                 class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
+                                 class_name: Hyrax::ControlledVocabularies::Location do |index|
         index.as :stored_searchable, :facetable
       end
 
       property :water_basin, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/waterBasin'),
-                             class_name: Hyrax::ControlledVocabularies::Location, facet: false do |index|
+                             class_name: Hyrax::ControlledVocabularies::Location do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -554,32 +554,32 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :taxon_class, predicate: ::RDF::Vocab::DWC.class, facet: false,
+      property :taxon_class, predicate: ::RDF::Vocab::DWC.class,
                              class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :family, predicate: ::RDF::Vocab::DWC.family, facet: false,
+      property :family, predicate: ::RDF::Vocab::DWC.family,
                         class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :genus, predicate: ::RDF::Vocab::DWC.genus, facet: false,
+      property :genus, predicate: ::RDF::Vocab::DWC.genus,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :order, predicate: ::RDF::Vocab::DWC.order, facet: false,
+      property :order, predicate: ::RDF::Vocab::DWC.order,
                        class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet, facet: false,
+      property :species, predicate: ::RDF::Vocab::DWC.specificEpithet,
                          class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum, facet: false,
+      property :phylum_or_division, predicate: ::RDF::Vocab::DWC.phylum,
                                     class_name: OregonDigital::ControlledVocabularies::Scientific do |index|
         index.as :stored_searchable, :facetable
       end
@@ -594,7 +594,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject, facet: false do |index|
+      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -622,166 +622,170 @@ module OregonDigital
       end
 
       ORDERED_PROPERTIES = [
-        { name: 'alternative', is_controlled: false },
-        { name: 'tribal_title', is_controlled: false },
-        { name: 'creator_display', is_controlled: false },
-        { name: 'creator_label', is_controlled: true },
-        { name: 'contributor_label', is_controlled: true },
-        { name: 'arranger_label', is_controlled: true },
-        { name: 'artist_label', is_controlled: true },
-        { name: 'author_label', is_controlled: true },
-        { name: 'cartographer_label', is_controlled: true },
-        { name: 'collector_label', is_controlled: true },
-        { name: 'composer_label', is_controlled: true },
-        { name: 'dedicatee_label', is_controlled: true },
-        { name: 'donor_label', is_controlled: true },
-        { name: 'designer_label', is_controlled: true },
-        { name: 'editor_label', is_controlled: true },
-        { name: 'former_owner', is_controlled: false },
-        { name: 'illustrator_label', is_controlled: true },
-        { name: 'interviewee_label', is_controlled: true },
-        { name: 'interviewer_label', is_controlled: true },
-        { name: 'lyricist_label', is_controlled: true },
-        { name: 'owner_label', is_controlled: true },
-        { name: 'patron_label', is_controlled: true },
-        { name: 'photographer_label', is_controlled: true },
-        { name: 'print_maker_label', is_controlled: true },
-        { name: 'recipient_label', is_controlled: true },
-        { name: 'transcriber_label', is_controlled: true },
-        { name: 'translator_label', is_controlled: true },
-        { name: 'date', is_controlled: false },
-        { name: 'date_created', is_controlled: false },
-        { name: 'issued', is_controlled: false },
-        { name: 'award_date', is_controlled: false },
-        { name: 'acquisition_date', is_controlled: false },
-        { name: 'collected_date', is_controlled: false },
-        { name: 'description', is_controlled: false },
-        { name: 'tribal_notes', is_controlled: false },
-        { name: 'abstract', is_controlled: false },
-        { name: 'table_of_contents', is_controlled: false },
-        { name: 'view', is_controlled: false },
-        { name: 'view_date', is_controlled: false },
-        { name: 'temporal', is_controlled: false },
-        { name: 'coverage', is_controlled: false },
-        { name: 'number_of_pages', is_controlled: false },
-        { name: 'inscription', is_controlled: false },
-        { name: 'source_condition', is_controlled: false },
-        { name: 'description_of_manifestation', is_controlled: false },
-        { name: 'mode_of_issuance', is_controlled: false },
-        { name: 'form_of_work_label', is_controlled: true },
-        { name: 'layout', is_controlled: false },
-        { name: 'biographical_information', is_controlled: false },
-        { name: 'cover_description', is_controlled: false },
-        { name: 'first_line', is_controlled: false },
-        { name: 'first_line_chorus', is_controlled: false },
-        { name: 'instrumentation', is_controlled: false },
-        { name: 'military_branch_label', is_controlled: true },
-        { name: 'military_highest_rank', is_controlled: false },
-        { name: 'military_occupation', is_controlled: false },
-        { name: 'military_service_location', is_controlled: false },
-        { name: 'compass_direction', is_controlled: false },
-        { name: 'object_orientation', is_controlled: false },
-        { name: 'photograph_orientation', is_controlled: false },
-        { name: 'subject_label', is_controlled: true },
-        { name: 'tribal_classes', is_controlled: false },
-        { name: 'tribal_terms', is_controlled: false },
-        { name: 'keyword', is_controlled: false },
-        { name: 'ethnographic_term_label', is_controlled: true },
-        { name: 'legal_name', is_controlled: false },
-        { name: 'event', is_controlled: false },
-        { name: 'sports_team', is_controlled: false },
-        { name: 'award', is_controlled: false },
-        { name: 'workType_label', is_controlled: true },
-        { name: 'cultural_context_label', is_controlled: true },
-        { name: 'style_or_period_label', is_controlled: true },
-        { name: 'state_or_edition', is_controlled: false },
-        { name: 'phylum_or_division_label', is_controlled: true },
-        { name: 'taxon_class_label', is_controlled: true },
-        { name: 'order_label', is_controlled: true },
-        { name: 'family_label', is_controlled: true },
-        { name: 'genus_label', is_controlled: true },
-        { name: 'species_label', is_controlled: true },
-        { name: 'common_name_label', is_controlled: true },
-        { name: 'accepted_name_usage', is_controlled: false },
-        { name: 'original_name_usage', is_controlled: false },
-        { name: 'scientific_name_authorship', is_controlled: false },
-        { name: 'specimen_type', is_controlled: false },
-        { name: 'identification_verification_status', is_controlled: false },
-        { name: 'location_label', is_controlled: true },
-        { name: 'tgn_label', is_controlled: true },
-        { name: 'ranger_district_label', is_controlled: true },
-        { name: 'water_basin_label', is_controlled: true },
-        { name: 'street_address', is_controlled: false },
-        { name: 'gps_latitude', is_controlled: false },
-        { name: 'gps_longitude', is_controlled: false },
-        { name: 'box', is_controlled: false },
-        { name: 'material', is_controlled: false },
-        { name: 'technique', is_controlled: false },
-        { name: 'measurements', is_controlled: false },
-        { name: 'physical_extent', is_controlled: false },
-        { name: 'extent', is_controlled: false },
-        { name: 'rights_statement_label', is_controlled: true, name_label: 'rights_statement' },
-        { name: 'license_label', is_controlled: true },
-        { name: 'use_restrictions', is_controlled: false },
-        { name: 'rights_note', is_controlled: false },
-        { name: 'rights_holder', is_controlled: false },
-        { name: 'copyright_claimant', is_controlled: false },
-        { name: 'access_restrictions_label', is_controlled: true },
-        { name: 'identifier', is_controlled: false },
-        { name: 'item_locator', is_controlled: false },
-        { name: 'accession_number', is_controlled: false },
-        { name: 'barcode', is_controlled: false },
-        { name: 'hydrologic_unit_code', is_controlled: false },
-        { name: 'longitude_latitude_identification', is_controlled: false },
-        { name: 'language_label', is_controlled: true, name_label: 'language' },
-        { name: 'source', is_controlled: false },
-        { name: 'provenance', is_controlled: false },
-        { name: 'repository_label', is_controlled: true },
-        { name: 'current_repository_id', is_controlled: false },
-        { name: 'location_copyshelf_location', is_controlled: false },
-        { name: 'copy_location', is_controlled: false },
-        { name: 'local_collection_name_label', is_controlled: true },
-        { name: 'local_collection_id', is_controlled: false },
-        { name: 'series_name', is_controlled: false },
-        { name: 'series_number', is_controlled: false },
-        { name: 'box_number', is_controlled: false },
-        { name: 'folder_name', is_controlled: false },
-        { name: 'folder_number', is_controlled: false },
-        { name: 'publisher_label', is_controlled: true },
-        { name: 'publication_place_label', is_controlled: true },
-        { name: 'place_of_production_label', is_controlled: true },
-        { name: 'contained_in_journal', is_controlled: false },
-        { name: 'is_volume', is_controlled: false },
-        { name: 'has_number', is_controlled: false },
-        { name: 'on_pages', is_controlled: false },
-        { name: 'citation', is_controlled: false },
-        { name: 'has_finding_aid', is_controlled: false },
-        { name: 'relation', is_controlled: false },
-        { name: 'is_version_of', is_controlled: false },
-        { name: 'has_version', is_controlled: false },
-        { name: 'isPartOf', is_controlled: false },
-        { name: 'has_part', is_controlled: false },
-        { name: 'larger_work', is_controlled: false },
-        { name: 'designer_inscription', is_controlled: false },
-        { name: 'art_series', is_controlled: false },
-        { name: 'motif', is_controlled: false },
-        { name: 'resource_type_label', is_controlled: true, name_label: 'Media' },
-        { name: 'format_label', is_controlled: true },
-        { name: 'orientation', is_controlled: false },
-        { name: 'set', is_controlled: false },
-        { name: 'exhibit', is_controlled: false },
-        { name: 'institution_label', is_controlled: true },
-        { name: 'conversion', is_controlled: false },
-        { name: 'date_digitized', is_controlled: false },
-        { name: 'date_uploaded', is_controlled: false },
-        { name: 'date_modified', is_controlled: false },
-        { name: 'original_filename', is_controlled: false },
-        { name: 'file_size', is_controlled: false },
-        { name: 'height', is_controlled: false },
-        { name: 'width', is_controlled: false },
-        { name: 'resolution', is_controlled: false },
-        { name: 'color_content', is_controlled: false },
-        { name: 'color_space', is_controlled: false }
+        { name: 'alternative', is_controlled: false, collection_facetable: false },
+        { name: 'tribal_title', is_controlled: false, collection_facetable: false },
+        { name: 'creator_display', is_controlled: false, collection_facetable: false },
+        { name: 'creator_label', is_controlled: true, collection_facetable: true },
+        { name: 'contributor_label', is_controlled: true, collection_facetable: true },
+        { name: 'arranger_label', is_controlled: true, collection_facetable: true },
+        { name: 'artist_label', is_controlled: true, collection_facetable: true },
+        { name: 'author_label', is_controlled: true, collection_facetable: true },
+        { name: 'cartographer_label', is_controlled: true, collection_facetable: true },
+        { name: 'collector_label', is_controlled: true, collection_facetable: true },
+        { name: 'composer_label', is_controlled: true, collection_facetable: true },
+        { name: 'dedicatee_label', is_controlled: true, collection_facetable: true },
+        { name: 'donor_label', is_controlled: true, collection_facetable: true },
+        { name: 'designer_label', is_controlled: true, collection_facetable: true },
+        { name: 'editor_label', is_controlled: true, collection_facetable: true },
+        { name: 'former_owner', is_controlled: false, collection_facetable: true },
+        { name: 'illustrator_label', is_controlled: true, collection_facetable: true },
+        { name: 'interviewee_label', is_controlled: true, collection_facetable: true },
+        { name: 'interviewer_label', is_controlled: true, collection_facetable: true },
+        { name: 'lyricist_label', is_controlled: true, collection_facetable: true },
+        { name: 'owner_label', is_controlled: true, collection_facetable: true },
+        { name: 'patron_label', is_controlled: true, collection_facetable: true },
+        { name: 'photographer_label', is_controlled: true, collection_facetable: true },
+        { name: 'print_maker_label', is_controlled: true, collection_facetable: true },
+        { name: 'recipient_label', is_controlled: true, collection_facetable: true },
+        { name: 'transcriber_label', is_controlled: true, collection_facetable: true },
+        { name: 'translator_label', is_controlled: true, collection_facetable: true },
+        { name: 'date', is_controlled: false, collection_facetable: false },
+        { name: 'date_created', is_controlled: false, collection_facetable: false },
+        { name: 'issued', is_controlled: false, collection_facetable: false },
+        { name: 'award_date', is_controlled: false, collection_facetable: false },
+        { name: 'acquisition_date', is_controlled: false, collection_facetable: false },
+        { name: 'collected_date', is_controlled: false, collection_facetable: false },
+        { name: 'description', is_controlled: false, collection_facetable: false },
+        { name: 'tribal_notes', is_controlled: false, collection_facetable: false },
+        { name: 'abstract', is_controlled: false, collection_facetable: false },
+        { name: 'table_of_contents', is_controlled: false, collection_facetable: false },
+        { name: 'view', is_controlled: false, collection_facetable: false },
+        { name: 'view_date', is_controlled: false, collection_facetable: false },
+        { name: 'temporal', is_controlled: false, collection_facetable: false },
+        { name: 'coverage', is_controlled: false, collection_facetable: false },
+        { name: 'number_of_pages', is_controlled: false, collection_facetable: false },
+        { name: 'inscription', is_controlled: false, collection_facetable: false },
+        { name: 'source_condition', is_controlled: false, collection_facetable: false },
+        { name: 'description_of_manifestation', is_controlled: false, collection_facetable: false },
+        { name: 'mode_of_issuance', is_controlled: false, collection_facetable: true },
+        { name: 'form_of_work_label', is_controlled: true, collection_facetable: true },
+        { name: 'layout', is_controlled: false, collection_facetable: false },
+        { name: 'biographical_information', is_controlled: false, collection_facetable: false },
+        { name: 'cover_description', is_controlled: false, collection_facetable: false },
+        { name: 'first_line', is_controlled: false, collection_facetable: false },
+        { name: 'first_line_chorus', is_controlled: false, collection_facetable: false },
+        { name: 'instrumentation', is_controlled: false, collection_facetable: false },
+        { name: 'military_branch_label', is_controlled: true, collection_facetable: true },
+        { name: 'military_highest_rank', is_controlled: false, collection_facetable: false },
+        { name: 'military_occupation', is_controlled: false, collection_facetable: false },
+        { name: 'military_service_location', is_controlled: false, collection_facetable: false },
+        { name: 'compass_direction', is_controlled: false, collection_facetable: false },
+        { name: 'object_orientation', is_controlled: false, collection_facetable: false },
+        { name: 'photograph_orientation', is_controlled: false, collection_facetable: false },
+        { name: 'subject_label', is_controlled: true, collection_facetable: true },
+        { name: 'tribal_classes', is_controlled: false, collection_facetable: false },
+        { name: 'tribal_terms', is_controlled: false, collection_facetable: false },
+        { name: 'keyword', is_controlled: false, collection_facetable: true },
+        { name: 'ethnographic_term_label', is_controlled: true, collection_facetable: true },
+        { name: 'legal_name', is_controlled: false, collection_facetable: false },
+        { name: 'event', is_controlled: false, collection_facetable: false },
+        { name: 'sports_team', is_controlled: false, collection_facetable: false },
+        { name: 'award', is_controlled: false, collection_facetable: false },
+        { name: 'workType_label', is_controlled: true, collection_facetable: true },
+        { name: 'cultural_context_label', is_controlled: true, collection_facetable: true },
+        { name: 'style_or_period_label', is_controlled: true, collection_facetable: true },
+        { name: 'state_or_edition', is_controlled: false, collection_facetable: false },
+        { name: 'phylum_or_division_label', is_controlled: true, collection_facetable: true },
+        { name: 'taxon_class_label', is_controlled: true, collection_facetable: true },
+        { name: 'order_label', is_controlled: true, collection_facetable: true },
+        { name: 'family_label', is_controlled: true, collection_facetable: true },
+        { name: 'genus_label', is_controlled: true, collection_facetable: true },
+        { name: 'species_label', is_controlled: true, collection_facetable: true },
+        { name: 'common_name_label', is_controlled: true, collection_facetable: false },
+        { name: 'accepted_name_usage', is_controlled: false, collection_facetable: false },
+        { name: 'original_name_usage', is_controlled: false, collection_facetable: false },
+        { name: 'scientific_name_authorship', is_controlled: false, collection_facetable: false },
+        { name: 'specimen_type', is_controlled: false, collection_facetable: false },
+        { name: 'identification_verification_status', is_controlled: false, collection_facetable: false },
+        { name: 'location_label', is_controlled: true, collection_facetable: true },
+        { name: 'tgn_label', is_controlled: true, collection_facetable: true },
+        { name: 'ranger_district_label', is_controlled: true, collection_facetable: true },
+        { name: 'water_basin_label', is_controlled: true, collection_facetable: true },
+        { name: 'street_address', is_controlled: false, collection_facetable: false },
+        { name: 'gps_latitude', is_controlled: false, collection_facetable: false },
+        { name: 'gps_longitude', is_controlled: false, collection_facetable: false },
+        { name: 'box', is_controlled: false, collection_facetable: false },
+        { name: 'material', is_controlled: false, collection_facetable: false },
+        { name: 'technique', is_controlled: false, collection_facetable: false },
+        { name: 'measurements', is_controlled: false, collection_facetable: false },
+        { name: 'physical_extent', is_controlled: false, collection_facetable: false },
+        { name: 'extent', is_controlled: false, collection_facetable: false },
+        { name: 'rights_statement_label', is_controlled: true, name_label: 'rights_statement', collection_facetable: true },
+        { name: 'license_label', is_controlled: true, collection_facetable: true },
+        { name: 'use_restrictions', is_controlled: false, collection_facetable: false },
+        { name: 'rights_note', is_controlled: false, collection_facetable: false },
+        { name: 'rights_holder', is_controlled: false, collection_facetable: false },
+        { name: 'copyright_claimant', is_controlled: false, collection_facetable: false },
+        { name: 'access_restrictions_label', is_controlled: true, collection_facetable: false },
+        { name: 'identifier', is_controlled: false, collection_facetable: false },
+        { name: 'item_locator', is_controlled: false, collection_facetable: false },
+        { name: 'accession_number', is_controlled: false, collection_facetable: false },
+        { name: 'barcode', is_controlled: false, collection_facetable: false },
+        { name: 'hydrologic_unit_code', is_controlled: false, collection_facetable: false },
+        { name: 'longitude_latitude_identification', is_controlled: false, collection_facetable: false },
+        { name: 'language_label', is_controlled: true, name_label: 'language', collection_facetable: true },
+        { name: 'source', is_controlled: false, collection_facetable: false },
+        { name: 'provenance', is_controlled: false, collection_facetable: false },
+        { name: 'repository_label', is_controlled: true, collection_facetable: true },
+        { name: 'current_repository_id', is_controlled: false, collection_facetable: false },
+        { name: 'location_copyshelf_location', is_controlled: false, collection_facetable: false },
+        { name: 'copy_location', is_controlled: false, collection_facetable: false },
+        { name: 'local_collection_name_label', is_controlled: true, collection_facetable: true },
+        { name: 'local_collection_id', is_controlled: false, collection_facetable: false },
+        { name: 'series_name', is_controlled: false, collection_facetable: true },
+        { name: 'series_number', is_controlled: false, collection_facetable: true },
+        { name: 'box_number', is_controlled: false, collection_facetable: true },
+        { name: 'folder_name', is_controlled: false, collection_facetable: true },
+        { name: 'folder_number', is_controlled: false, collection_facetable: true },
+        { name: 'publisher_label', is_controlled: true, collection_facetable: true },
+        { name: 'publication_place_label', is_controlled: true, collection_facetable: false },
+        { name: 'place_of_production_label', is_controlled: true, collection_facetable: false },
+        { name: 'contained_in_journal', is_controlled: false, collection_facetable: false },
+        { name: 'is_volume', is_controlled: false, collection_facetable: true },
+        { name: 'has_number', is_controlled: false, collection_facetable: true },
+        { name: 'on_pages', is_controlled: false, collection_facetable: false },
+        { name: 'citation', is_controlled: false, collection_facetable: false },
+        { name: 'has_finding_aid', is_controlled: false, collection_facetable: false },
+        { name: 'relation', is_controlled: false, collection_facetable: false },
+        { name: 'is_version_of', is_controlled: false, collection_facetable: false },
+        { name: 'has_version', is_controlled: false, collection_facetable: false },
+        { name: 'isPartOf', is_controlled: false, collection_facetable: false },
+        { name: 'has_part', is_controlled: false, collection_facetable: false },
+        { name: 'larger_work', is_controlled: false, collection_facetable: false },
+        { name: 'designer_inscription', is_controlled: false, collection_facetable: false },
+        { name: 'art_series', is_controlled: false, collection_facetable: false },
+        { name: 'motif', is_controlled: false, collection_facetable: false },
+        { name: 'resource_type_label', is_controlled: true, name_label: 'Media', collection_facetable: true },
+        { name: 'format_label', is_controlled: true, collection_facetable: false },
+        { name: 'orientation', is_controlled: false, collection_facetable: false },
+        { name: 'set', is_controlled: false, collection_facetable: false },
+        { name: 'exhibit', is_controlled: false, collection_facetable: true },
+        { name: 'institution_label', is_controlled: true, collection_facetable: true },
+        { name: 'conversion', is_controlled: false, collection_facetable: false },
+        { name: 'date_digitized', is_controlled: false, collection_facetable: false },
+        { name: 'date_uploaded', is_controlled: false, collection_facetable: false },
+        { name: 'date_modified', is_controlled: false, collection_facetable: false },
+        { name: 'original_filename', is_controlled: false, collection_facetable: false },
+        { name: 'file_size', is_controlled: false, collection_facetable: false },
+        { name: 'height', is_controlled: false, collection_facetable: false },
+        { name: 'width', is_controlled: false, collection_facetable: false },
+        { name: 'resolution', is_controlled: false, collection_facetable: false },
+        { name: 'color_content', is_controlled: false, collection_facetable: false },
+        { name: 'color_space', is_controlled: false, collection_facetable: false }
+      ].freeze
+
+      UNORDERED_PROPERTIES = [
+        { name: 'full_size_download_allowed_label', is_controlled: true, collection_facetable: true }
       ].freeze
 
       ORDERED_TERMS = %i[
