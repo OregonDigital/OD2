@@ -255,10 +255,6 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :extent, basic_searchable: false, predicate: ::RDF::Vocab::DC.extent do |index|
-        index.as :stored_searchable
-      end
-
       property :material, predicate: ::RDF::URI.new('http://purl.org/vra/material') do |index|
         index.as :stored_searchable
       end
@@ -525,10 +521,6 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :institution, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'),
                              class_name: OregonDigital::ControlledVocabularies::Institution do |index|
         index.as :stored_searchable, :facetable
@@ -644,7 +636,6 @@ module OregonDigital
         { name: 'view_date', is_controlled: false, collection_facetable: false },
         { name: 'temporal', is_controlled: false, collection_facetable: false },
         { name: 'coverage', is_controlled: false, collection_facetable: false },
-        { name: 'number_of_pages', is_controlled: false, collection_facetable: false },
         { name: 'inscription', is_controlled: false, collection_facetable: false },
         { name: 'source_condition', is_controlled: false, collection_facetable: false },
         { name: 'description_of_manifestation', is_controlled: false, collection_facetable: false },
@@ -700,7 +691,6 @@ module OregonDigital
         { name: 'technique', is_controlled: false, collection_facetable: false },
         { name: 'measurements', is_controlled: false, collection_facetable: false },
         { name: 'physical_extent', is_controlled: false, collection_facetable: false },
-        { name: 'extent', is_controlled: false, collection_facetable: false },
         { name: 'rights_statement_label', is_controlled: true, name_label: 'rights_statement', collection_facetable: true },
         { name: 'license_label', is_controlled: true, collection_facetable: true },
         { name: 'use_restrictions', is_controlled: false, collection_facetable: false },
@@ -747,8 +737,6 @@ module OregonDigital
         { name: 'art_series', is_controlled: false, collection_facetable: false },
         { name: 'motif', is_controlled: false, collection_facetable: false },
         { name: 'resource_type_label', is_controlled: true, name_label: 'Media', collection_facetable: true },
-        { name: 'format_label', is_controlled: true, collection_facetable: false },
-        { name: 'orientation', is_controlled: false, collection_facetable: false },
         { name: 'set', is_controlled: false, collection_facetable: false },
         { name: 'exhibit', is_controlled: false, collection_facetable: true },
         { name: 'institution_label', is_controlled: true, collection_facetable: true },
@@ -757,12 +745,8 @@ module OregonDigital
         { name: 'date_uploaded', is_controlled: false, collection_facetable: false },
         { name: 'date_modified', is_controlled: false, collection_facetable: false },
         { name: 'original_filename', is_controlled: false, collection_facetable: false },
-        { name: 'file_size', is_controlled: false, collection_facetable: false },
-        { name: 'height', is_controlled: false, collection_facetable: false },
-        { name: 'width', is_controlled: false, collection_facetable: false },
         { name: 'resolution', is_controlled: false, collection_facetable: false },
         { name: 'color_content', is_controlled: false, collection_facetable: false },
-        { name: 'color_space', is_controlled: false, collection_facetable: false }
       ].freeze
 
       UNORDERED_PROPERTIES = [
