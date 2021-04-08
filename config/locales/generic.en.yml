@@ -258,7 +258,7 @@ en:
         taxon_class: "Taxon Class"
         cultural_context: "Cultural Context"
         ethnographic_term: "Ethnographic Term"
-        resource_type_label: "Type"
+        resource_type_label: "Media"
         event: "Event"
         family: "Family"
         genus: "Genus"
