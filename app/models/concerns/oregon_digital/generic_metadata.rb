@@ -255,10 +255,6 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :extent, basic_searchable: false, predicate: ::RDF::Vocab::DC.extent do |index|
-        index.as :stored_searchable
-      end
-
       property :material, predicate: ::RDF::URI.new('http://purl.org/vra/material') do |index|
         index.as :stored_searchable
       end
@@ -525,10 +521,6 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :format, predicate: ::RDF::Vocab::DC.format, class_name: OregonDigital::ControlledVocabularies::MediaType do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :institution, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'),
                              class_name: OregonDigital::ControlledVocabularies::Institution do |index|
         index.as :stored_searchable, :facetable
@@ -598,25 +590,6 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      id_blank = proc { |attributes| attributes[:id].blank? }
-
-      class_attribute :controlled_properties
-
-      # Sets controlled values
-      self.controlled_properties = properties.select { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys.map(&:to_sym)
-
-      # Allows for the controlled properties to accept nested data
-      controlled_properties.each do |prop|
-        accepts_nested_attributes_for prop, reject_if: id_blank, allow_destroy: true
-      end
-
-      # defines a method for Generic to be able to grab a list of properties
-      define_singleton_method :controlled_property_labels do
-        remote_controlled_props = controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }
-        file_controlled_props = %w[license_label]
-        (remote_controlled_props + file_controlled_props).freeze
-      end
-
       define_singleton_method :generic_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
@@ -663,7 +636,6 @@ module OregonDigital
         { name: 'view_date', is_controlled: false, collection_facetable: false },
         { name: 'temporal', is_controlled: false, collection_facetable: false },
         { name: 'coverage', is_controlled: false, collection_facetable: false },
-        { name: 'number_of_pages', is_controlled: false, collection_facetable: false },
         { name: 'inscription', is_controlled: false, collection_facetable: false },
         { name: 'source_condition', is_controlled: false, collection_facetable: false },
         { name: 'description_of_manifestation', is_controlled: false, collection_facetable: false },
@@ -719,7 +691,6 @@ module OregonDigital
         { name: 'technique', is_controlled: false, collection_facetable: false },
         { name: 'measurements', is_controlled: false, collection_facetable: false },
         { name: 'physical_extent', is_controlled: false, collection_facetable: false },
-        { name: 'extent', is_controlled: false, collection_facetable: false },
         { name: 'rights_statement_label', is_controlled: true, name_label: 'rights_statement', collection_facetable: true },
         { name: 'license_label', is_controlled: true, collection_facetable: true },
         { name: 'use_restrictions', is_controlled: false, collection_facetable: false },
@@ -766,8 +737,6 @@ module OregonDigital
         { name: 'art_series', is_controlled: false, collection_facetable: false },
         { name: 'motif', is_controlled: false, collection_facetable: false },
         { name: 'resource_type_label', is_controlled: true, name_label: 'Media', collection_facetable: true },
-        { name: 'format_label', is_controlled: true, collection_facetable: false },
-        { name: 'orientation', is_controlled: false, collection_facetable: false },
         { name: 'set', is_controlled: false, collection_facetable: false },
         { name: 'exhibit', is_controlled: false, collection_facetable: true },
         { name: 'institution_label', is_controlled: true, collection_facetable: true },
@@ -776,12 +745,8 @@ module OregonDigital
         { name: 'date_uploaded', is_controlled: false, collection_facetable: false },
         { name: 'date_modified', is_controlled: false, collection_facetable: false },
         { name: 'original_filename', is_controlled: false, collection_facetable: false },
-        { name: 'file_size', is_controlled: false, collection_facetable: false },
-        { name: 'height', is_controlled: false, collection_facetable: false },
-        { name: 'width', is_controlled: false, collection_facetable: false },
         { name: 'resolution', is_controlled: false, collection_facetable: false },
-        { name: 'color_content', is_controlled: false, collection_facetable: false },
-        { name: 'color_space', is_controlled: false, collection_facetable: false }
+        { name: 'color_content', is_controlled: false, collection_facetable: false }
       ].freeze
 
       UNORDERED_PROPERTIES = [
@@ -875,6 +840,7 @@ module OregonDigital
         acquisition_date
         award_date
         collected_date
+        date_created
         issued
         view_date
         accession_number
@@ -887,6 +853,7 @@ module OregonDigital
         access_restrictions
         copyright_claimant
         rights_holder
+        rights_note
         rights_statement
         use_restrictions
         repository
@@ -920,7 +887,14 @@ module OregonDigital
         measurements
         physical_extent
         technique
+        conversion
+        date_digitized
+        exhibit
+        institution
+        original_filename
         full_size_download_allowed
+        date_modified
+        date_uploaded
       ].freeze
     end
   end
