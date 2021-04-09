@@ -13,11 +13,20 @@ with open('map.csv') as csvfile:
         facetable = ('', ', :facetable')[row[14] == 'yes']
         multiple = str(row[10] == '{0,n}' or row[10] == '{1,n}').lower()
         workType = row[9]
+        controlledClass = row[23]
+        skippedClasses = ['Hyrax Collection', 'Language', 'License', 'Types', 'RightsStatement']
 
 
         if len(prop) == 0 or len(predicate) <= 1:
             continue
         md = "property %s, predicate: %s, multiple: %s"%(prop, predicate, multiple)
+
+        if controlledClass in skippedClasses:
+          pass
+        elif controlledClass == 'Location':
+            md += ", class_name: Hyrax::ControlledVocabularies::%s"%(controlledClass)
+        elif not controlledClass == 'N/A':
+            md += ", class_name: OregonDigital::ControlledVocabularies::%s"%(controlledClass)
         md += " do |index|"
         md += "\n  index.as :stored_searchable%s"%(facetable)
         md += "\nend"
