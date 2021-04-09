@@ -15,7 +15,8 @@ with open('map.csv') as csvfile:
 
         searchable = str(row[16] == 'yes').lower()
 
-        multiple = str(row[10] == '{0,n}' or row[10] == '{1,n}').lower()
+        multipleExceptions = [':rights_statement', ':access_restrictions', ':repository']
+        multiple = str(row[10] == '{0,n}' or row[10] == '{1,n}' or prop in multipleExceptions).lower()
 
         workType = row[9]
 

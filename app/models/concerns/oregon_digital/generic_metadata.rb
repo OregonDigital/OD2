@@ -414,7 +414,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :rights_statement, predicate: RDF::Vocab::EDM.rights, multiple: false, basic_searchable: true do |index|
+      property :rights_statement, predicate: RDF::Vocab::EDM.rights, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable, :facetable
       end
 
