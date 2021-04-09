@@ -224,7 +224,7 @@ crosswalk:
     multiple: true
     function: attributes_data
   - property: award
-    predicate: https://schema.org/award
+    predicate: http://schema.org/award
     multiple: true
     function: 
   - property: cultural_context_attributes
@@ -236,7 +236,7 @@ crosswalk:
     multiple: true
     function: attributes_data
   - property: event
-    predicate: https://schema.org/Event
+    predicate: http://schema.org/Event
     multiple: true
     function: 
   - property: keyword
@@ -244,7 +244,7 @@ crosswalk:
     multiple: true
     function: 
   - property: legal_name
-    predicate: https://schema.org/legalName
+    predicate: http://schema.org/legalName
     multiple: true
     function: 
   - property: military_branch_attributes
@@ -560,7 +560,7 @@ crosswalk:
     multiple: false
     function: 
   - property: workType_attributes
-    predicate: https://www.w3.org/1999/02/22-rdf-syntax-ns#type
+    predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
     multiple: true
     function: attributes_data
   - property: material
@@ -578,10 +578,6 @@ crosswalk:
   - property: technique
     predicate: http://purl.org/vra/hasTechnique
     multiple: true
-    function: 
-  - property: 
-    predicate: 
-    multiple: false
     function: 
   - property: color_content
     predicate: http://www.rdaregistry.info/Elements/e/#P20224
@@ -607,10 +603,6 @@ crosswalk:
     predicate: http://opaquenamespace.org/ns/contributingInstitution
     multiple: true
     function: attributes_data
-  - property: primary_set_attributes
-    predicate: 
-    multiple: false
-    function: attributes_data
   - property: original_filename
     predicate: http://www.loc.gov/premis/rdf/v3/originalName
     multiple: false
@@ -623,10 +615,6 @@ crosswalk:
     predicate: http://www.w3.org/2003/12/exif/ns#resolution
     multiple: false
     function: 
-  - property: _attributes
-    predicate: 
-    multiple: true
-    function: attributes_data
   - property: fullSizeDownloadAllowed
     predicate: http://opaquenamespace.org/ns/fullSizeDownloadAllowed
     multiple: false
@@ -640,11 +628,11 @@ crosswalk:
     multiple: false
     function: 
   - property: format_label
-    predicate: https://id.loc.gov/ontologies/premis-1-0-0.html#p_hasFormat
+    predicate: http://id.loc.gov/ontologies/premis-1-0-0.html#p_hasFormat
     multiple: false
     function: 
   - property: file_size
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_fileSize.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_fileSize.html
     multiple: false
     function: 
   - property: well_formed
@@ -656,11 +644,11 @@ crosswalk:
     multiple: false
     function: 
   - property: date_created
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_dateCreated.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_dateCreated.html
     multiple: false
     function: 
   - property: hasCreatingApplicationVersion
-    predicate: https://id.loc.gov/ontologies/premis-1-0-0.html#p_hasCreatingApplicationVersion
+    predicate: http://id.loc.gov/ontologies/premis-1-0-0.html#p_hasCreatingApplicationVersion
     multiple: false
     function: 
   - property: exif_version
@@ -680,11 +668,11 @@ crosswalk:
     multiple: false
     function: 
   - property: height
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_height.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_height.html
     multiple: false
     function: 
   - property: width
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_width.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_width.html
     multiple: false
     function: 
   - property: color_space
@@ -792,7 +780,7 @@ crosswalk:
     multiple: false
     function: 
   - property: data_format
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_hasDataFormat.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_hasDataFormat.html
     multiple: false
     function: 
   - property: frame_rate
@@ -800,7 +788,7 @@ crosswalk:
     multiple: false
     function: 
   - property: bit_rate
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_bitRate.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_bitRate.html
     multiple: false
     function: 
   - property: duration
@@ -808,7 +796,7 @@ crosswalk:
     multiple: false
     function: 
   - property: sample_rate
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_sampleRate.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_sampleRate.html
     multiple: false
     function: 
   - property: offset
@@ -816,7 +804,7 @@ crosswalk:
     multiple: false
     function: 
   - property: aspect_ratio
-    predicate: https://www.ebu.ch/metadata/ontologies/ebucore/ebucore_aspectRatio.html
+    predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore_aspectRatio.html
     multiple: false
     function: 
   - property: oembed_url
