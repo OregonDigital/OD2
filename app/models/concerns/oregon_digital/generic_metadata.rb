@@ -423,7 +423,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :full_size_download_allowed, predicate: ::RDF::URI.new('https://opaquenamespace.org/review/fullSizeDownloadAllowed'), multiple: false do |index|
+      property :full_size_download_allowed, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/fullSizeDownloadAllowed'), multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
 
