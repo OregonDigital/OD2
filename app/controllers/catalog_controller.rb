@@ -3,8 +3,8 @@
 # This controller drives the configuration of the applications searching
 # indexing, displays, and other various discovery methods
 class CatalogController < ApplicationController
-  include BlacklightRangeLimit::ControllerOverride
   include BlacklightAdvancedSearch::Controller
+  include BlacklightRangeLimit::ControllerOverride
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
 
@@ -19,6 +19,12 @@ class CatalogController < ApplicationController
 
   def self.modified_field
     'system_modified_dtsi'
+  end
+
+  # Combine our search queries as they come in
+  def index
+    params[:q] = params[:q].join(' AND ') if params.respond_to?('join')
+    super
   end
 
   # CatalogController-scope behavior and configuration for BlacklightIiifSearch
@@ -194,7 +200,6 @@ class CatalogController < ApplicationController
     config.add_show_field 'rights_statement_label_tesim'
     config.add_show_field 'language_label_tesim'
 
-    config.add_facet_field 'generic_type_sim', if: false
     config.add_facet_field 'open_access', limit: 5, label: 'Open Access', show: false, query: {
       open: { label: 'Open', fq: 'license_sim:(
         https\://creativecommons.org/licenses/by/4.0/ OR
@@ -211,14 +216,22 @@ class CatalogController < ApplicationController
     config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), limit: 5
     config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
     config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
-    config.add_facet_field 'date_combined_year_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_year_combined'), limit: 5, range: true
+    config.add_facet_field 'date_combined_year_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_year_combined'), limit: 5, range: true, include_in_advanced_search: false
     config.add_facet_field 'date_combined_decade_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_decade_combined'), limit: 5
     config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
     config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
     config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
     config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
     config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
-    config.add_facet_field 'full_size_download_allowed_label_ssim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
+    config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
+
+    # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
+    # Do not show these facets, they're for collection configurable facets
+    (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
+      label = prop[:name_label].nil? ? prop[:name].sub('_label', '') : prop[:name_label]
+      config.add_facet_field "#{prop[:name]}_sim", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] && !config.facet_fields.keys.include?("#{prop[:name]}_sim")
+    end
+
     config.add_facet_fields_to_solr_request!
 
     # 'fielded' search configuration. Used by pulldown among other places.

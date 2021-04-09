@@ -11,7 +11,6 @@
 // about supported directives.
 //
 
-//= require tether
 // Required by Blacklight
 //= require jquery
 //= require 'blacklight_advanced_search'
