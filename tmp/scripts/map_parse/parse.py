@@ -13,6 +13,8 @@ with open('map.csv') as csvfile:
 
         facetable = ('', ', :facetable')[row[14] == 'yes']
 
+        searchable = str(row[16] == 'yes').lower()
+
         multiple = str(row[10] == '{0,n}' or row[10] == '{1,n}').lower()
 
         workType = row[9]
@@ -29,7 +31,7 @@ with open('map.csv') as csvfile:
         # property :prop_name, predicate: RDF::Vocab::Vocabulary.predicate, multiple: true/false, class_name: OregonDigtal::ControlledVocabularies::Vocab do |index|
         #   index.as :stored_searchable, :facetable
         # end
-        md = "property %s, predicate: %s, multiple: %s"%(prop, predicate, multiple)
+        md = "property %s, predicate: %s, multiple: %s, basic_searchable: %s"%(prop, predicate, multiple, searchable)
 
         # Add optional class_name if this is a controlled vocab
         if controlledClass in skippedClasses:
