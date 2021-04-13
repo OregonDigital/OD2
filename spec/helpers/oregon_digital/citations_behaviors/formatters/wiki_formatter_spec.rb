@@ -14,7 +14,7 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::WikiFormatter do
     allow(presenter).to receive(:creator_label).and_return(['last name, first name'])
     allow(formatter).to receive(:view_context).and_return(view_context)
     allow(view_context).to receive(:controller).and_return(context)
-    allow(controller).to receive(:request).and_return(controller_request)
+    allow(context).to receive(:request).and_return(controller_request)
     allow(controller_request).to receive(:original_url).and_return(original_url)
   end
 
