@@ -10,7 +10,7 @@ module OregonDigital
         include Hyrax::CitationsBehaviors::TitleBehavior
 
         def format(work)
-          "<ref name=Oregon Digital>{{cite web | url= #{view_context.controller.request.original_url.split('?').first if view_context.respond_to?(:controller)}| title= #{work.title.first} |author= #{work.author.first} |accessdate= #{Date.today} |publisher= #{work.publisher.first}}}</ref>".html_safe
+          "<ref name=Oregon Digital>{{cite web | url= #{view_context.controller.request.original_url.split('?').first if view_context.respond_to?(:controller)} | title= #{work.title.first} |author= #{work.author.first} |accessdate= #{Date.today} |publisher= #{work.publisher.first}}}</ref>".html_safe
         end
       end
     end
