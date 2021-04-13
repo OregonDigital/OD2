@@ -23,7 +23,7 @@ class CatalogController < ApplicationController
 
   # Combine our search queries as they come in
   def index
-    params[:q] = params[:q].join(' AND ') if params.respond_to?('join')
+    params[:q] = params[:q].join(' AND ') if params[:q].respond_to?('join')
     super
   end
 
