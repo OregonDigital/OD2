@@ -394,7 +394,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :license, predicate: RDF::Vocab::CC.License, multiple: false, basic_searchable: true do |index|
+      property :license, predicate: RDF::Vocab::CC.License, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable, :facetable
       end
 
