@@ -398,7 +398,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :access_restrictions, predicate: RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: false, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::AccessRestrictions do |index|
+      property :access_restrictions, predicate: RDF::URI.new('http://data.archiveshub.ac.uk/def/accessRestrictions'), multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::AccessRestrictions do |index|
         index.as :stored_searchable
       end
 
@@ -422,7 +422,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :repository, predicate: RDF::Vocab::MARCRelators.rps, multiple: false, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Repository do |index|
+      property :repository, predicate: RDF::Vocab::MARCRelators.rps, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Repository do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -554,11 +554,11 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :dateDigitized, predicate: RDF::URI.new('http://opaquenamespace.org/ns/dateDigitized'), multiple: false, basic_searchable: false do |index|
+      property :date_digitized, predicate: RDF::URI.new('http://opaquenamespace.org/ns/dateDigitized'), multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
-      property :fullText, predicate: RDF::URI.new('http://opaquenamespace.org/ns/fullText'), multiple: false, basic_searchable: false do |index|
+      property :full_text, predicate: RDF::URI.new('http://opaquenamespace.org/ns/fullText'), multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
@@ -578,7 +578,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :fullSizeDownloadAllowed, predicate: RDF::URI.new('http://opaquenamespace.org/ns/fullSizeDownloadAllowed'), multiple: false, basic_searchable: false do |index|
+      property :full_size_download_allowed, predicate: RDF::URI.new('http://opaquenamespace.org/ns/fullSizeDownloadAllowed'), multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable, :facetable
       end
 
