@@ -167,7 +167,6 @@ module OregonDigital
         technique
         color_content
         conversion
-        date_digitized
         exhibit
         institution
         original_filename

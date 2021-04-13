@@ -192,7 +192,6 @@ module OregonDigital
         physical_extent
         technique
         conversion
-        date_digitized
         exhibit
         institution
         original_filename

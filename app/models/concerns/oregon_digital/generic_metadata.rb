@@ -530,7 +530,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :workType, predicate: RDF.type, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::WorkType do |index|
+      property :workType, predicate: RDF::URI.new('http://www.rdaregistry.info/Elements/w/#P10004'), multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::WorkType do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -551,10 +551,6 @@ module OregonDigital
       end
 
       property :conversion, predicate: RDF::URI.new('http://opaquenamespace.org/ns/conversionSpecifications'), multiple: true, basic_searchable: false do |index|
-        index.as :stored_searchable
-      end
-
-      property :date_digitized, predicate: RDF::URI.new('http://opaquenamespace.org/ns/dateDigitized'), multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
@@ -580,6 +576,14 @@ module OregonDigital
 
       property :full_size_download_allowed, predicate: RDF::URI.new('http://opaquenamespace.org/ns/fullSizeDownloadAllowed'), multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable, :facetable
+      end
+
+      property :date_modified, predicate: RDF::Vocab::DC.modified, multiple: false, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
+      property :date_uploaded, predicate: RDF::Vocab::DC.dateSubmitted, multiple: false, basic_searchable: false do |index|
+        index.as :stored_searchable
       end
 
       define_singleton_method :generic_properties do
@@ -733,7 +737,6 @@ module OregonDigital
         { name: 'exhibit', is_controlled: false, collection_facetable: true },
         { name: 'institution_label', is_controlled: true, collection_facetable: true },
         { name: 'conversion', is_controlled: false, collection_facetable: false },
-        { name: 'date_digitized', is_controlled: false, collection_facetable: false },
         { name: 'date_uploaded', is_controlled: false, collection_facetable: false },
         { name: 'date_modified', is_controlled: false, collection_facetable: false },
         { name: 'original_filename', is_controlled: false, collection_facetable: false },
@@ -880,7 +883,6 @@ module OregonDigital
         physical_extent
         technique
         conversion
-        date_digitized
         exhibit
         institution
         original_filename
