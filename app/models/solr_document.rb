@@ -85,5 +85,5 @@ class SolrDocument
   solrized_methods Video.video_properties
   solrized_methods Generic.controlled_properties
   solrized_methods Generic.controlled_property_labels
-  solrized_methods %w[resource_type_label language_label rights_statement_label]
+  solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
 end
