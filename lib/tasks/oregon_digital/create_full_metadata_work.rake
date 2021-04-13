@@ -113,7 +113,6 @@ def attrs
     'exhibit' => [],
     'conversion' => [],
     'copy_location' => [],
-    'date_digitized' => nil,
     'replaces_url' => 'http://bacon',
     'rights_note' => [],
     'box' => [],

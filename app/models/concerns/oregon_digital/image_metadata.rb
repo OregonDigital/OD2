@@ -9,19 +9,19 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
-      property :color_content, basic_searchable: false, predicate: ::RDF::URI.new('http://rdaregistry.info/Elements/e/P20224') do |index|
+      property :photograph_orientation, predicate: RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
-      property :photograph_orientation, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/photographOrientation'), multiple: false do |index|
+      property :view, predicate: RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
-      property :resolution, basic_searchable: false, predicate: ::RDF::Vocab::EXIF.resolution, multiple: false do |index|
+      property :color_content, predicate: RDF::URI.new('http://rdaregistry.info/Elements/e/P20224'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
-      property :view, basic_searchable: false, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription') do |index|
+      property :resolution, predicate: RDF::Vocab::EXIF.resolution, multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
@@ -167,7 +167,6 @@ module OregonDigital
         technique
         color_content
         conversion
-        date_digitized
         exhibit
         institution
         original_filename
