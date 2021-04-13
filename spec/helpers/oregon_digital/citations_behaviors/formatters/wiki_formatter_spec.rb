@@ -6,14 +6,14 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::WikiFormatter do
   let(:presenter) { Hyrax::GenericPresenter.new(SolrDocument.new(work.to_solr), :no_ability) }
   let(:work) { build(:work, title: ['My Title'], author: ['My Author'], publisher: ['My Publisher']) }
   let(:view_context) { double('View Context') }
-  let(:controller) { double('view_context_controller') }
+  let(:context) { double('view_context') }
   let(:controller_request) { double('view_context_controller_request') }
   let(:original_url) { 'http://test.oregondigital.org/blah/blah/12345678?q=blah' }
 
   before do
     allow(presenter).to receive(:creator_label).and_return(['last name, first name'])
     allow(formatter).to receive(:view_context).and_return(view_context)
-    allow(view_context).to receive(:controller).and_return(controller)
+    allow(view_context).to receive(:controller).and_return(context)
     allow(controller).to receive(:request).and_return(controller_request)
     allow(controller_request).to receive(:original_url).and_return(original_url)
   end
