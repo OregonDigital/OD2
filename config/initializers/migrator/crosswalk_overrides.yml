@@ -161,7 +161,7 @@ overrides:
     function: return_nil
 
   #flip workType predicate
-  - property: workType
+  - property: workType_attributes
     predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
     multiple: true
     function: attributes_data
