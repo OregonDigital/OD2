@@ -159,3 +159,78 @@ overrides:
     function: return_nil
   - predicate: http://www.iana.org/assignments/relation/last
     function: return_nil
+
+  #flip workType predicate
+  - property: workType
+    predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+    multiple: true
+    function: attributes_data
+
+  #OD1 properties that will not be migrated
+  # captionTitle
+  - predicate: http://opaquenamespace.org/ns/captionTitle
+    function: return_nil
+  # scribe
+  - predicate: http://id.loc.gov/vocabulary/relators/scr
+    function: return_nil
+  # canzonierePoems
+  - predicate: http://opaquenamespace.org/ns/canzonierePoems
+    function: return_nil
+  # earliestDate
+  - predicate: http://opaquenamespace.org/ns/vra/earliestDate
+    function: return_nil
+  # latestDate
+  - predicate: http://opaquenamespace.org/ns/vra/latestDate
+    function: return_nil
+  # rights_statement
+  - predicate: http://purl.org/dc/elements/1.1/rights
+    function: return_nil
+  # rightsHolder
+  - predicate: http://opaquenamespace.org/rights/rightsHolder
+    function: return_nil
+  # format
+  - predicate: http://purl.org/dc/terms/format
+    function: return_nil
+  # extent
+  - predicate: http://purl.org/dc/terms/extent
+    function: return_nil
+  # support
+  - predicate: http://opaquenamespace.org/ns/vra/support
+    function: return_nil
+  # hostItem
+  - predicate: http://opaquenamespace.org/ns/sheetmusic_hostItem
+    function: return_nil
+  # tribalStatus
+  - predicate: http://opaquenamespace.org/ns/tribalStatus
+    function: return_nil
+  # numberOfPages
+  - predicate: http://schema.org/numberOfPages
+    function: return_nil
+  # higherClassification
+  - predicate: http://rs.tdwg.org/dwc/terms/higherClassification
+    function: return_nil
+  # preservation
+  - predicate: http://www.loc.gov/premis/rdf/v1#hasOriginalName
+    function: return_nil
+  # hasFixity
+  - predicate: http://www.loc.gov/premis/rdf/v1#hasFixity
+    function: return_nil
+  # imageWidth
+  - predicate: http://www.w3.org/2003/12/exif/ns#width
+    function: return_nil
+  # imageHeight
+  - predicate: http://www.w3.org/2003/12/exif/ns#height
+    function: return_nil
+  # imageOrientation
+  - predicate: http://www.w3.org/2003/12/exif/ns#orientation
+    function: return_nil
+  # colorSpace
+  - predicate: http://www.w3.org/2003/12/exif/ns#colorSpace
+    function: return_nil
+  # fileSize
+  - predicate: http://www.rdaregistry.info/Elements/m/#fileSize.en
+    function: return_nil
+  # containedInManifestation
+  - predicate: http://www.rdaregistry.info/Elements/m/#containedInManifestation.en
+    function: return_nil
+
