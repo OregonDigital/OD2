@@ -9,7 +9,7 @@ crosswalk:
     function: 
   - property: title
     predicate: http://purl.org/dc/terms/title
-    multiple: false
+    multiple: true
     function: 
   - property: creator_attributes
     predicate: http://purl.org/dc/elements/1.1/creator
@@ -393,7 +393,7 @@ crosswalk:
     function: 
   - property: identifier
     predicate: http://purl.org/dc/terms/identifier
-    multiple: false
+    multiple: true
     function: 
   - property: item_locator
     predicate: http://purl.org/ontology/holding#label
