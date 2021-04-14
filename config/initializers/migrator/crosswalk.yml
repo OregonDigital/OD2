@@ -9,7 +9,7 @@ crosswalk:
     function: 
   - property: title
     predicate: http://purl.org/dc/terms/title
-    multiple: true
+    multiple: false
     function: 
   - property: creator_attributes
     predicate: http://purl.org/dc/elements/1.1/creator
@@ -116,7 +116,7 @@ crosswalk:
     multiple: true
     function: 
   - property: biographical_information
-    predicate: http://www.rdaregistry.info/Elements/a/#P50113
+    predicate: http://rdaregistry.info/Elements/a/P50113
     multiple: true
     function: 
   - property: compass_direction
@@ -132,7 +132,7 @@ crosswalk:
     multiple: true
     function: 
   - property: description_of_manifestation
-    predicate: http://www.rdaregistry.info/Elements/w/#P10271
+    predicate: http://rdaregistry.info/Elements/w/P10271
     multiple: true
     function: 
   - property: designer_inscription
@@ -148,7 +148,7 @@ crosswalk:
     multiple: false
     function: 
   - property: form_of_work_attributes
-    predicate: http://www.rdaregistry.info/Elements/w/#P10004
+    predicate: http://rdaregistry.info/Elements/w/P10004
     multiple: true
     function: attributes_data
   - property: former_owner
@@ -164,7 +164,7 @@ crosswalk:
     multiple: true
     function: 
   - property: layout
-    predicate: http://www.rdaregistry.info/Elements/m/#P30155
+    predicate: http://rdaregistry.info/Elements/m/P30155
     multiple: true
     function: 
   - property: military_highest_rank
@@ -180,7 +180,7 @@ crosswalk:
     multiple: true
     function: 
   - property: mode_of_issuance
-    predicate: http://www.rdaregistry.info/Elements/m/#P30003
+    predicate: http://rdaregistry.info/Elements/m/P30003
     multiple: true
     function: 
   - property: mods_note
@@ -393,7 +393,7 @@ crosswalk:
     function: 
   - property: identifier
     predicate: http://purl.org/dc/terms/identifier
-    multiple: true
+    multiple: false
     function: 
   - property: item_locator
     predicate: http://purl.org/ontology/holding#label
@@ -428,7 +428,7 @@ crosswalk:
     multiple: false
     function: 
   - property: use_restrictions
-    predicate: http://www.rdaregistry.info/Elements/u/#P60497
+    predicate: http://rdaregistry.info/Elements/u/P60497
     multiple: true
     function: 
   - property: repository_attributes
@@ -496,7 +496,7 @@ crosswalk:
     multiple: true
     function: attributes_data
   - property: place_of_production_attributes
-    predicate: http://www.rdaregistry.info/Elements/u/#P60161
+    predicate: http://rdaregistry.info/Elements/u/P60161
     multiple: true
     function: attributes_data
   - property: provenance
@@ -580,18 +580,14 @@ crosswalk:
     multiple: true
     function: 
   - property: color_content
-    predicate: http://www.rdaregistry.info/Elements/e/#P20224
+    predicate: http://rdaregistry.info/Elements/e/P20224
     multiple: true
     function: 
   - property: conversion
     predicate: http://opaquenamespace.org/ns/conversionSpecifications
     multiple: true
     function: 
-  - property: dateDigitized
-    predicate: http://opaquenamespace.org/ns/dateDigitized
-    multiple: false
-    function: 
-  - property: fullText
+  - property: full_text
     predicate: http://opaquenamespace.org/ns/fullText
     multiple: false
     function: 
@@ -615,7 +611,7 @@ crosswalk:
     predicate: http://www.w3.org/2003/12/exif/ns#resolution
     multiple: false
     function: 
-  - property: fullSizeDownloadAllowed
+  - property: full_size_download_allowed
     predicate: http://opaquenamespace.org/ns/fullSizeDownloadAllowed
     multiple: false
     function: 
