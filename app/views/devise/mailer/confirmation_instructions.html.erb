@@ -1,0 +1,11 @@
+<p>Welcome <%= @email %>!</p>
+
+<p>We received a request to create an Oregon Digital account for this email address</p>
+
+<p>Visit <%= link_to 'Oregon Digital', confirmation_url(@resource, confirmation_token: @token) %> to get started with curating, building and sharing your own private digital collections from the tens of thousands of freely available digital items held in Oregon Digital.
+If you didn't request this, please ignore this email, or contact us at <a href="mailto:oregondigitalref@uoregon.edu">oregondigitalref@uoregon.edu</a></p>
+
+<p>If the link above does not work you can copy and paste this one in your browser of choice: <%= confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>Thank you,</p>
+<p>The Oregon Digital Team</p>

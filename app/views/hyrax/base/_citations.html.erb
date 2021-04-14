@@ -2,5 +2,7 @@
     <% if Hyrax.config.citations? %>
       <h3><%= t('.header') %></h3>
       <%= export_as_mla_citation(@presenter) %>
+      <h3>Wiki Citation</h3>
+      <%= export_as_wiki_citation(@presenter) %>
     <% end %>
 </div>
