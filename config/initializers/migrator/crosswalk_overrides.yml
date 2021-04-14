@@ -160,6 +160,12 @@ overrides:
   - predicate: http://www.iana.org/assignments/relation/last
     function: return_nil
 
+  #flip workType predicate
+  - property: workType
+    predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+    multiple: true
+    function: attributes_data
+
   #OD1 properties that will not be migrated
   # captionTitle
   - predicate: http://opaquenamespace.org/ns/captionTitle

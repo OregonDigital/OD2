@@ -560,7 +560,7 @@ crosswalk:
     multiple: false
     function: 
   - property: workType_attributes
-    predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+    predicate: http://rdaregistry.info/Elements/w/P10004
     multiple: true
     function: attributes_data
   - property: material
