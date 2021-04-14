@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::WikiFormatter do
   subject(:formatter) { described_class.new(:no_context) }
 
   let(:presenter) { Hyrax::GenericPresenter.new(SolrDocument.new(work.to_solr), :no_ability) }
-  let(:work) { build(:work, title: ['My Title'], author_label: ['My Author'], publisher_label: ['My Publisher']) }
+  let(:work) { build(:work, title: ['My Title'], author: ['My Author'], publisher: ['My Publisher']) }
   let(:view_context) { double('View Context') }
   let(:context) { double('view_context') }
   let(:controller_request) { double('view_context_controller_request') }
