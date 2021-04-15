@@ -17,14 +17,6 @@ module OregonDigital
       solr_params[:fq] << '-workflow_state_name_ssim:deposited'
     end
 
-    def with_pagination(solr_params)
-      solr_params[:rows] = 1000
-    end
-
-    def with_sorting(solr_params)
-      solr_params[:sort] = 'system_create_dtsi desc'
-    end
-
     # @return [Array<String>] the list of workflow-role combinations this user has
     def actionable_roles
       Sipity::Workflow.all.flat_map do |wf|
