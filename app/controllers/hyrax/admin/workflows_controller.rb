@@ -1,8 +1,11 @@
 # frozen_string_literal: true
+
 module Hyrax
   # Presents a list of works in workflow
   class Admin::WorkflowsController < ApplicationController
+    # OVERRIDE FROM HYRAX TO: add workflows catalog behavior to allow review queue to use catalog controller configuration
     include Hyrax::Admin::WorkflowsCatalogBehavior
+    # END OVERRIDE
 
     before_action :ensure_authorized!
     with_themed_layout 'dashboard'
@@ -12,6 +15,7 @@ module Hyrax
     # status list and display in the "Published" tab
     self.deposited_workflow_state_name = 'deposited'
 
+    # rubocop:disable Metrics/AbcSize
     def index
       add_breadcrumb t(:'hyrax.controls.home'), root_path
       add_breadcrumb t(:'hyrax.dashboard.breadcrumbs.admin'), hyrax.dashboard_path
@@ -21,6 +25,7 @@ module Hyrax
       @published_list = Hyrax::Workflow::StatusListService.new(self, "workflow_state_name_ssim:#{deposited_workflow_state_name}")
       super
     end
+    # rubocop:enable Metrics/AbcSize
 
     private
 

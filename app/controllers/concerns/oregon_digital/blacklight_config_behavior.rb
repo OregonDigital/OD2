@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module OregonDigital
+  # Behavior to give base configuration to catalog search interfaces
   module BlacklightConfigBehavior
     extend ActiveSupport::Concern
 
@@ -294,6 +297,5 @@ module OregonDigital
         config.spell_max = 5
       end
     end
-
   end
 end
