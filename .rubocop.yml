@@ -23,6 +23,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'config/**/*'
     - 'app/controllers/catalog_controller.rb'
+    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
 
 Style/AsciiComments:
   Enabled: false
@@ -57,6 +58,7 @@ Metrics/ModuleLength:
     - 'app/models/concerns/oregon_digital/video_metadata.rb'
     - 'app/models/concerns/oregon_digital/document_metadata.rb'
     - 'app/models/concerns/oregon_digital/image_metadata.rb'
+    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
 
 
 Metrics/ClassLength:
