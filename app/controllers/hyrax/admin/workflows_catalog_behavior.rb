@@ -13,6 +13,10 @@ module Hyrax
         def self.local_prefixes
           super + ['catalog']
         end
+
+        configure_blacklight do |config|
+          config.search_builder_class = OregonDigital::InReviewSearchBuilder
+        end
       end
     end
   end

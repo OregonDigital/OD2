@@ -68,14 +68,14 @@ module OregonDigital
         config.add_index_field 'date_tesim', itemprop: 'date'
         config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
           # Only display description if a highlight is hit
-          document.response['highlighting'][document.id].keys.include?('description_tesim')
+          document.response['highlighting'][document.id].keys.include?('description_tesim') unless document.response.dig(['highlighting', document.id]).nil?
         }
         config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
           # Don't display full text if description has a highlight hit
-          document.response['highlighting'][document.id].keys.include?('description_tesim')
+          document.response['highlighting'][document.id].keys.include?('description_tesim') unless document.response.dig(['highlighting', document.id]).nil?
         }, if:  lambda { |_context, _field_config, document|
           # Only try to display full text if a highlight is hit
-          document.response['highlighting'][document.id].keys.include?('all_text_tsimv')
+          document.response['highlighting'][document.id].keys.include?('all_text_tsimv') unless document.response.dig(['highlighting', document.id]).nil?
         }
         config.add_index_field 'resource_type_label_tesim', label: 'Resource Type', link_to_search: 'resource_type_label_tesim', if: false
         config.add_index_field 'rights_statement_label_tesim', label: 'Rights Statement', link_to_search: 'rights_statement_label_tesim', if: false
