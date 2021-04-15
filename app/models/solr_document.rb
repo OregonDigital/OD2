@@ -18,6 +18,10 @@ class SolrDocument
     end
   end
 
+  def copyright_combined
+    self['copyright_combined_label_sim']
+  end
+
   # Turn document type into FontAwesome icon class
   # See app\views\catalog\_index_list_type_icon.html.erb
   def type_to_fa_class(type)
@@ -85,5 +89,5 @@ class SolrDocument
   solrized_methods Video.video_properties
   solrized_methods Generic.controlled_properties
   solrized_methods Generic.controlled_property_labels
-  solrized_methods %w[resource_type_label language_label rights_statement_label]
+  solrized_methods %w[resource_type_label language_label rights_statement_label copyright_combined_label]
 end

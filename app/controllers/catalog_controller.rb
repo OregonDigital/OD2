@@ -296,7 +296,14 @@ class CatalogController < ApplicationController
         pf: solr_name
       }
     end
-
+    config.add_search_field('copyright_combined_label', label: 'Rights Statement') do |field|
+      solr_name = 'copyright_combined_label_sim'
+      search_fields << solr_name
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
     # 'sort results by' select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
