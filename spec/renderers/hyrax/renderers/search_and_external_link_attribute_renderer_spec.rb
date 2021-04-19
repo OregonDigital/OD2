@@ -28,7 +28,7 @@ RSpec.describe ::SearchAndExternalLinkAttributeRenderer do
       let(:value) { 'Last, First' }
       let(:link) { 'https://google.com' }
       let(:content) do
-        '<a href="/catalog?locale=en&amp;q=Last%2C+First&amp;search_field=creator">' \
+        '<a href="/catalog?f%5Bcreator_sim%5D%5B%5D=Last%2C+First&amp;locale=en">' \
         'Last, First'
       end
 
