@@ -21,6 +21,10 @@ module Hyrax
     def export_as_mla_citation(work)
       OregonDigital::CitationsBehaviors::Formatters::MlaFormatter.new(self).format(work)
     end
+
+    def export_as_wiki_citation(work)
+      OregonDigital::CitationsBehaviors::Formatters::WikiFormatter.new(self).format(work)
+    end
     # END OVERRIDE
 
     # MIME type: 'application/x-openurl-ctx-kev'

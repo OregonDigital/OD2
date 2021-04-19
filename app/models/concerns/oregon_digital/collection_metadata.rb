@@ -31,6 +31,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :has_finding_aid, predicate: RDF::URI.new('http://lod.xdams.org/reload/oad/has_findingAid'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
       property :license, advance_search: false, predicate: ::RDF::Vocab::CC.License, multiple: false do |index|
         index.as :stored_searchable, :facetable
       end
@@ -98,6 +102,7 @@ module OregonDigital
         { name: 'language_label', is_controlled: false, name_label: 'language' },
         { name: 'repository_label', is_controlled: true },
         { name: 'publisher_label', is_controlled: true },
+        { name: 'has_finding_aid', is_controlled: false },
         { name: 'institution_label', is_controlled: true },
         { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false }

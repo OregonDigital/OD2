@@ -1,0 +1,57 @@
+<!-- OVERRIDE FROM HYRAX -->
+<div class="col-xs-9 col-sm-7 col-md-7">
+  <div class="metadata-row row">
+    <dl class="row">
+    <% doc_presenter = index_presenter(document) %>
+    <% index_fields(document).each do |field_name, field| -%>
+      <% if should_render_index_field? document, field %>
+          <dt class="col-sm-3"><%= render_index_field_label document, field: field_name %></dt>
+          <dd class="col-sm-9"><%= doc_presenter.field_value field %></dd>
+      <% end %>
+    <% end %>
+    </dl>
+  </div>
+  <% if document.collection? %>
+    <% collection_presenter = OregonDigital::CollectionPresenter.new(document, current_ability) %>
+    <div class="collection-counts-wrapper row">
+      <div class="collection-counts-item">
+        <span><%= collection_presenter.total_viewable_collections %></span>Collections
+      </div>
+      <div class="collection-counts-item">
+        <span><%= collection_presenter.total_viewable_works %></span>Works
+      </div>
+    </div>
+  <% end %>
+  <% if document.parents? %>
+    <div class="metadata-row row">
+      <dl class="row">
+        <dt class="col-sm-3"> <%= t('hyrax.search.list.parents.header') %> </dt>
+        <dd class="col-sm-9">
+          <ul class="tabular">
+          <% document.parents.each do |parent| %>
+            <li><%= link_to parent, parent %></li>
+          <% end %>
+          </ul>
+        </dd>
+      </dl>
+    </div>
+  <% end %>
+  <div class="metadata-row row">
+    <% document['rights_statement_tesim'].each_with_index do |rights_statement, i| %>
+      <i class="large-icon <%= document.rights_statement_to_fa_class(rights_statement) %>" aria-hidden="true"></i>
+      <a href="<%= rights_statement %>"><%= document['rights_statement_label_tesim'][i] %></a>
+    <% end unless document['rights_statement_tesim'].nil? %>
+  </div>
+  <div class="metadata-row row">
+    <%= render 'index_type_icon', document: document unless document.resource_type_label.first.nil? || document.resource_type_label.first.empty? %>
+    <%= doc_presenter.field_value index_fields(document)['resource_type_label_tesim'] %>
+    <% if document.children? %>
+      (<%= document.children.count %> Items)
+    <% end %>
+  </div>
+</div>
+<!-- ADD SAVE BUTTON AND MODAL -->
+<%= form_tag main_app.hyrax_workflow_action_path(document), method: :put, class: 'col-xs-12 col-sm-5 col-md-1' do %>
+  <%= hidden_field_tag 'workflow_action[name]', 'approve' %>
+  <input class="btn btn-primary" type="submit" value="Approve" />
+<% end %>

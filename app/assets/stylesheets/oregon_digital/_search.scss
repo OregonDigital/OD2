@@ -65,9 +65,10 @@
   background-color: $very-light-grey;
   margin-top: 2em;
 
+  #facet-panel-collapse {
+    padding: 1em;
+  }
   .panel.facet_limit {
-    margin-left: 1em;
-    margin-right: 1em;
     background: none;
     border: 2px solid $navy-blue;
     border-radius: 0;
