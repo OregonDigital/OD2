@@ -876,6 +876,7 @@ module OregonDigital
         isPartOf
         is_version_of
         relation
+        related_url
         resource_type
         workType
         material
@@ -883,6 +884,7 @@ module OregonDigital
         physical_extent
         technique
         conversion
+        full_text
         exhibit
         institution
         original_filename

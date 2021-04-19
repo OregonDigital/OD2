@@ -3,13 +3,17 @@
 
 import csv
 
-generic, document, image, video, audio = ([] for i in range(5))
+generic, document, image, video, audio = ({'metadata': [], 'form': []} for i in range(5))
+
 with open('map.csv') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
         prop = row[1]
 
         predicate = row[4]
+
+        model = row[8]
+        formVisible = row[19].lower() == 'yes'
 
         facetable = ('', ', :facetable')[row[14] == 'yes']
 
@@ -23,7 +27,9 @@ with open('map.csv') as csvfile:
         controlledClass = row[23]
         skippedClasses = ['Hyrax Collection', 'Language', 'License', 'Types', 'RightsStatement']
 
-
+        # Skip this property if it's not meant to be on a Work
+        if 'work' not in model.lower():
+            continue
         # skip this property if prop or predicate isn't in MAP
         if len(prop) == 0 or len(predicate) <= 1:
             continue
@@ -48,30 +54,64 @@ with open('map.csv') as csvfile:
         md += "\nend"
 
         # Gather all these definitions up to write them out later
-        if workType == 'Generic':
-            generic.append(md)
-        elif workType == 'Document':
-            document.append(md)
+        toWriteTo = generic
+        if workType == 'Document':
+            toWriteTo = document
         elif workType == 'Image':
-            image.append(md)
+            toWriteTo = image
         elif workType == 'Video':
-            video.append(md)
+            toWriteTo = video
         elif workType == 'Audio':
-            audio.append(md)
+            toWriteTo = audio
+        toWriteTo['metadata'].append(md)
+        if formVisible:
+            if workType == 'Generic':
+                generic['form'].append(prop)
+                document['form'].append(prop)
+                image['form'].append(prop)
+                video['form'].append(prop)
+                audio['form'].append(prop)
+            else:
+                toWriteTo['form'].append(prop)
 
 # Write out our property definitions to separate files
-with open('generic', 'w') as f:
-    for g in generic:
+with open('generic_metadata', 'w') as f:
+    for g in generic['metadata']:
         f.write(g + "\n\n")
-with open('document', 'w') as f:
-    for d in document:
+with open('generic_form', 'w') as f:
+    f.write("ORDERED_TERMS = %i[\n")
+    for g in generic['form']:
+        f.write("  " + g[1:] + "\n")
+    f.write("].freeze")
+with open('document_metadata', 'w') as f:
+    for d in document['metadata']:
         f.write(d + "\n\n")
-with open('image', 'w') as f:
-    for i in image:
+with open('document_form', 'w') as f:
+    f.write("ORDERED_TERMS = %i[\n")
+    for d in document['form']:
+        f.write("  " + d[1:] + "\n")
+    f.write("].freeze")
+with open('image_metadata', 'w') as f:
+    for i in image['metadata']:
         f.write(i + "\n\n")
-with open('video', 'w') as f:
-    for v in video:
+with open('image_form', 'w') as f:
+    f.write("ORDERED_TERMS = %i[\n")
+    for i in image['form']:
+        f.write("  " + i[1:] + "\n")
+    f.write("].freeze")
+with open('video_metadata', 'w') as f:
+    for v in video['metadata']:
         f.write(v + "\n\n")
-with open('audio', 'w') as f:
-    for a in audio:
+with open('video_form', 'w') as f:
+    f.write("ORDERED_TERMS = %i[\n")
+    for v in video['form']:
+        f.write("  " + v[1:] + "\n")
+    f.write("].freeze")
+with open('audio_metadata', 'w') as f:
+    for a in audio['metadata']:
         f.write(a + "\n\n")
+with open('audio_form', 'w') as f:
+    f.write("ORDERED_TERMS = %i[\n")
+    for a in audio['form']:
+        f.write("  " + a[1:] + "\n")
+    f.write("].freeze")
