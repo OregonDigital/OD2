@@ -37,6 +37,7 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
     solr_doc['copyright_combined_label_sim'] = license_labels + rights_labels
+    solr_doc['copyright_combined_label_ssim'] = license_labels + rights_labels
     solr_doc['copyright_combined_label_tesim'] = license_labels + rights_labels
   end
 

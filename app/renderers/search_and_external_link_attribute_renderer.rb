@@ -15,8 +15,8 @@ class SearchAndExternalLinkAttributeRenderer < Hyrax::Renderers::LinkedAttribute
   def search_field
     if Generic.controlled_property_labels.to_s.include? field.to_s
       field.to_s.gsub('_label', '').to_sym
-    elsif field.to_s == 'copyright_combined_label'
-      'copyright_combined_label'.to_sym
+    elsif  field.to_s == 'rights_statement_label'
+      :rights_statement_label
     else
       options.fetch(:search_field, field)
     end

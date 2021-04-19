@@ -691,7 +691,7 @@ module OregonDigital
         { name: 'technique', is_controlled: false, collection_facetable: false },
         { name: 'measurements', is_controlled: false, collection_facetable: false },
         { name: 'physical_extent', is_controlled: false, collection_facetable: false },
-        { name: 'copyright_combined_label', is_controlled: true, name_label: 'rights_statement', collection_facetable: true },
+        { name: 'rights_statement_label', is_controlled: true, name_label: 'rights_statement', collection_facetable: true },
         { name: 'license_label', is_controlled: true, collection_facetable: true },
         { name: 'use_restrictions', is_controlled: false, collection_facetable: false },
         { name: 'rights_note', is_controlled: false, collection_facetable: false },

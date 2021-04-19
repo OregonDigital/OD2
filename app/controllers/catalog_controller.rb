@@ -62,7 +62,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: 'search',
       rows: 10,
-      qf: "title_tesim description_tesim #{Generic.controlled_property_labels.map { |term| "#{term}_tesim" }.join(' ')} keyword_tesim"
+      qf: "title_tesim description_tesim rights_statement_label_tesim #{Generic.controlled_property_labels.map { |term| "#{term}_tesim" }.join(' ')} keyword_tesim"
     }
 
     # solr field configuration for document/show views
@@ -105,7 +105,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     # Reject the non-label form of controlled vocabular terms from being searchable or indexable
     rejected_fields = Generic.controlled_property_labels.map { |field| field.gsub('_label', '') }
-    rejected_fields += %w[rights_statement resource_type license language oembed_url]
+    rejected_fields += %w[resource_type license language oembed_url]
 
     search_fields = []
     # Add all fields as searchable, reject the non-searchable fields
@@ -275,7 +275,7 @@ class CatalogController < ApplicationController
       all_names = search_fields.join(' ')
       title_name = 'title_tesim'
       field.solr_parameters = {
-        qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv",
+        qf: "#{all_names} #{title_name} license_label_tesim rights_statement_label_tesim file_format_sim all_text_tsimv",
         pf: title_name.to_s
       }
       field.include_in_advanced_search = false
@@ -296,8 +296,8 @@ class CatalogController < ApplicationController
         pf: solr_name
       }
     end
-    config.add_search_field('copyright_combined_label', label: 'Rights Statement') do |field|
-      solr_name = 'copyright_combined_label_sim'
+    config.add_search_field('rights_statement_label', label: 'Rights Statement') do |field|
+      solr_name = 'rights_statement_label_tesim'
       search_fields << solr_name
       field.solr_local_parameters = {
         qf: solr_name,
