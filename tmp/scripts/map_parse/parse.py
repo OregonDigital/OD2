@@ -3,7 +3,7 @@
 
 import csv
 
-generic, document, image, video, audio = ({'metadata': [], 'form': []} for i in range(5))
+generic, document, image, video, audio, collection = ({'metadata': [], 'form': []} for i in range(6))
 
 with open('map.csv') as csvfile:
     reader = csv.reader(csvfile)
@@ -27,9 +27,6 @@ with open('map.csv') as csvfile:
         controlledClass = row[23]
         skippedClasses = ['Hyrax Collection', 'Language', 'License', 'Types', 'RightsStatement']
 
-        # Skip this property if it's not meant to be on a Work
-        if 'work' not in model.lower():
-            continue
         # skip this property if prop or predicate isn't in MAP
         if len(prop) == 0 or len(predicate) <= 1:
             continue
@@ -73,6 +70,11 @@ with open('map.csv') as csvfile:
                 audio['form'].append(prop)
             else:
                 toWriteTo['form'].append(prop)
+        # Do it again for collections
+        if 'collection' in model.lower():
+            collection['metadata'].append(md)
+            if formVisible:
+                collection['form'].append(prop)
 
 # Write out our property definitions to separate files
 with open('generic_metadata', 'w') as f:
@@ -114,4 +116,12 @@ with open('audio_form', 'w') as f:
     f.write("ORDERED_TERMS = %i[\n")
     for a in audio['form']:
         f.write("  " + a[1:] + "\n")
+    f.write("].freeze")
+with open('collection_metadata', 'w') as f:
+    for c in collection['metadata']:
+        f.write(c + "\n\n")
+with open('collection_form', 'w') as f:
+    f.write("ORDERED_TERMS = %i[\n")
+    for c in collection['form']:
+        f.write("  " + c[1:] + "\n")
     f.write("].freeze")
