@@ -5,6 +5,8 @@ module Hyrax
     # Behavior to configure review queue catalog
     module WorkflowsCatalogBehavior
       extend ActiveSupport::Concern
+      include BlacklightAdvancedSearch::Controller
+      include BlacklightRangeLimit::ControllerOverride
       include Hydra::Catalog
       include Hydra::Controller::ControllerBehavior
       include OregonDigital::BlacklightConfigBehavior

@@ -264,3 +264,16 @@ Rails.application.routes.default_url_options = Rails.application.config.action_m
 Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
 
 Hyrax::CurationConcern.actor_factory.insert_before Hyrax::Actors::CreateWithRemoteFilesActor, OregonDigital::Actors::CreateWithOembedUrlActor
+
+# Add extra blacklight routes to Admin Workflows (Review Queue) controller
+Hyrax::Engine.routes.prepend do
+  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
+  concern :searchable, Blacklight::Routes::Searchable.new
+
+  namespace :admin do
+    resource :workflows, only: [:index], as: 'workflows', path: '/workflows', controller: 'workflows' do
+      concerns :searchable
+      concerns :range_searchable
+    end
+  end
+end
