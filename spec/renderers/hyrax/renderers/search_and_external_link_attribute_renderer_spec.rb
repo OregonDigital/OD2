@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe Hyrax::Renderers::SearchAndExternalLinkAttributeRenderer do
+RSpec.describe ::SearchAndExternalLinkAttributeRenderer do
   describe '#li_value' do
     subject { Nokogiri::HTML(rendered) }
 
