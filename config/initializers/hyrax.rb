@@ -267,13 +267,11 @@ Hyrax::CurationConcern.actor_factory.insert_before Hyrax::Actors::CreateWithRemo
 
 # Add extra blacklight routes to Admin Workflows (Review Queue) controller
 Hyrax::Engine.routes.prepend do
-  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :searchable, Blacklight::Routes::Searchable.new
 
   namespace :admin do
     resource :workflows, only: [:index], as: 'workflows', path: '/workflows', controller: 'workflows' do
       concerns :searchable
-      concerns :range_searchable
     end
   end
 end

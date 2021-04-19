@@ -52,6 +52,13 @@ Rails.application.routes.draw do
       end
     end
   end
+  scope module: 'hyrax' do
+    namespace :admin do
+      resource :workflows, only: [:index], as: 'workflows', path: '/workflows', controller: 'workflows' do
+        concerns :range_searchable
+      end
+    end
+  end
 
   resources :collections, controller: 'hyrax/collections', only: [] do # public landing show page
     member do
