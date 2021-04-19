@@ -8,7 +8,6 @@ module Hyrax
     delegate(*Generic.controlled_properties.map(&:to_sym), to: :solr_document)
     delegate(*Generic.controlled_property_labels.map(&:to_sym), to: :solr_document)
     delegate(:resource_type_label, to: :solr_document)
-    delegate(:rights_statement_label, to: :solr_document)
     delegate(:language_label, to: :solr_document)
     delegate(:copyright_combined_label, to: :solr_document)
     delegate(:copyright_combined, to: :solr_document)

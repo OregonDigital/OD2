@@ -591,7 +591,7 @@ module OregonDigital
       end
 
       define_singleton_method :generic_properties do
-        (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
+        (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties - [:rights_statement])
       end
 
       ORDERED_PROPERTIES = [

@@ -62,7 +62,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: 'search',
       rows: 10,
-      qf: "title_tesim description_tesim rights_statement_label_tesim #{Generic.controlled_property_labels.map { |term| "#{term}_tesim" }.join(' ')} keyword_tesim"
+      qf: "title_tesim description_tesim #{Generic.controlled_property_labels.map { |term| "#{term}_tesim" }.join(' ')} keyword_tesim"
     }
 
     # solr field configuration for document/show views
@@ -197,7 +197,6 @@ class CatalogController < ApplicationController
       end
     end
     config.add_show_field 'resource_type_label_tesim'
-    config.add_show_field 'rights_statement_label_tesim'
     config.add_show_field 'language_label_tesim'
 
     config.add_facet_field 'open_access', limit: 5, label: 'Open Access', show: false, query: {
@@ -290,14 +289,6 @@ class CatalogController < ApplicationController
     end
     config.add_search_field('creator_field', label: 'Creator') do |field|
       solr_name = 'creator_combined_label_sim'
-      search_fields << solr_name
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-    config.add_search_field('rights_statement_label', label: 'Rights Statement') do |field|
-      solr_name = 'rights_statement_label_tesim'
       search_fields << solr_name
       field.solr_local_parameters = {
         qf: solr_name,

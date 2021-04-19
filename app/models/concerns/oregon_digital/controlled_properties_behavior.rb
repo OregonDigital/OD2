@@ -21,6 +21,7 @@ module OregonDigital
       # defines a method to be able to grab a list of properties
       define_singleton_method :controlled_property_labels do
         remote_controlled_props = controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }
+        remote_controlled_props << 'rights_statement_label'
         file_controlled_props = %w[license_label]
         (remote_controlled_props + file_controlled_props).freeze
       end
