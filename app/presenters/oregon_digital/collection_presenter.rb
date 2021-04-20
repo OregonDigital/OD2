@@ -8,6 +8,7 @@ module OregonDigital
              :lease_expiration_date, :license, :date_created, :resource_type, :related_url, :thumbnail_path,
              :title_or_label, :collection_type_gid, :create_date, :modified_date, :visibility, :edit_groups, :edit_people,
              :institution, :date, :repository, to: :solr_document
+    delegate(*Collection.collection_properties.map(&:to_sym), to: :solr_document)
     delegate(*Collection.controlled_properties.map(&:to_sym), to: :solr_document)
     delegate(*Collection.controlled_property_labels.map(&:to_sym), to: :solr_document)
 
