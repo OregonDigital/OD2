@@ -7,6 +7,6 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::ApaFormatter do
   let(:work)      { build(:generic_work, title: ['Title'], creator: []) }
 
   it 'formats citations without creators' do
-    expect(formatter.format(presenter)).to eq("<i class=\"citation-title\">Title.</i> ")
+    expect(formatter.format(presenter)).to eq('<i class=\"citation-title\">Title.</i> ')
   end
 end
