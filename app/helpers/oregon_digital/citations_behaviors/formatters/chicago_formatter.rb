@@ -10,7 +10,7 @@ module OregonDigital
         include Hyrax::CitationsBehaviors::TitleBehavior
 
         def format(work)
-          text = ""
+          text = ''
 
           # setup formatted author list
           authors_list = all_authors(work)
