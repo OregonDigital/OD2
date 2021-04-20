@@ -9,9 +9,12 @@ module OregonDigital
 
     # Get all the ids for the works in review from Hyrax and pipe into this search builder
     def in_review_ids(solr_params)
-      solr_documents = Hyrax::Workflow::StatusListService.new(@scope, '-workflow_state_name_ssim:deposited').each
       solr_params[:fq] ||= []
       solr_params[:fq] << "id:(#{solr_documents.map(&:id).join(' OR ')})"
+    end
+
+    def solr_documents
+      Hyrax::Workflow::StatusListService.new(@scope, '-workflow_state_name_ssim:deposited').each
     end
   end
 end
