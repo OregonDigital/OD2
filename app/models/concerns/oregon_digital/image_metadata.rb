@@ -159,6 +159,7 @@ module OregonDigital
         isPartOf
         is_version_of
         relation
+        related_url
         resource_type
         workType
         material
@@ -167,6 +168,7 @@ module OregonDigital
         technique
         color_content
         conversion
+        full_text
         exhibit
         institution
         original_filename
