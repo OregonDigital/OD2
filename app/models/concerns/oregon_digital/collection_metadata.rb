@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital
-  # Sets metadata for a generic work
+  # Sets metadata for a collection
   module CollectionMetadata
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
@@ -82,14 +82,14 @@ module OregonDigital
         accepts_nested_attributes_for prop, reject_if: id_blank, allow_destroy: true
       end
 
-      # defines a method for Generic to be able to grab a list of properties
+      # defines a method for Collection to be able to grab a list of properties
       define_singleton_method :controlled_property_labels do
         remote_controlled_props = controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }
         file_controlled_props = %w[license_label]
         (remote_controlled_props + file_controlled_props).freeze
       end
 
-      define_singleton_method :generic_properties do
+      define_singleton_method :collection_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
 
