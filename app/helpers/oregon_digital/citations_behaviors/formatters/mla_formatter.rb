@@ -33,7 +33,7 @@ module OregonDigital
 
         private
 
-        def chicago_author_list(work)
+        def mla_author_list(work)
           work.author_label
         end
 

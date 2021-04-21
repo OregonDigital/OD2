@@ -14,7 +14,7 @@ module OregonDigital
         def format(work)
           text = ''
           # set authors
-          authors_list = chicago_author_list(work)
+          authors_list = apa_author_list(work)
           text += format_authors(authors_list)
           text = "<span class=\"citation-author\">#{text}</span>" if text.present?
           # set publish or access date
@@ -33,7 +33,7 @@ module OregonDigital
 
         private
 
-        def chicago_author_list(work)
+        def apa_author_list(work)
           work.author_label
         end
 
