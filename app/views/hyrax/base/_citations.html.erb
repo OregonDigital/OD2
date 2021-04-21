@@ -1,12 +1,12 @@
 <div class="citations">
     <% if Hyrax.config.citations? %>
-      <h3>APA</h3>
+      <h3><%= t('apa_header') %></h3>
       <%= export_as_apa_citation(@presenter) %>
-      <h3><%= t('.header') %></h3>
+      <h3><%= t('mla_header') %></h3>
       <%= export_as_mla_citation(@presenter) %>
-      <h3>Chicago</h3>
+      <h3><%= t('chicago_header') %></h3>
       <%= export_as_chicago_citation(@presenter) %>
-      <h3>Wiki Citation</h3>
+      <h3><%= t('wiki_header') %></h3>
       <%= export_as_wiki_citation(@presenter) %>
     <% end %>
 </div>
