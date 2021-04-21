@@ -19,7 +19,7 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::MlaFormatter do
   end
 
   it 'displays the creators name in the proper order' do
-    allow(presenter).to receive(:creator_label).and_return(['first last'])
+    allow(presenter).to receive(:author_label).and_return(['first last'])
     expect(formatter.format(presenter)).to include 'last, first'
   end
 

@@ -11,6 +11,6 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::ApaFormatter do
   end
 
   it 'formats citations without creators' do
-    expect(formatter.format(presenter)).to eq('(21 Apr 2021). <i class=\"citation-title\">Title.</i> Oregon Digital.')
+    expect(formatter.format(presenter)).to eq('<span class=\"citation-author\">last name, f.</span> (21 Apr 2021). <i class=\"citation-title\">Title.</i> Oregon Digital. ')
   end
 end
