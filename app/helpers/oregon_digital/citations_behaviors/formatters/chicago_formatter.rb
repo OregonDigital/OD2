@@ -14,7 +14,7 @@ module OregonDigital
         def format(work)
           text = ''
           # setup formatted author list
-          authors_list = chicago_author_list(work)
+          authors_list = all_authors(work)
           text += format_authors(authors_list)
           text = "<span class=\"citation-author\">#{text}</span>" if text.present?
           # set title
@@ -30,12 +30,6 @@ module OregonDigital
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
-
-        private
-
-        def chicago_author_list(work)
-          work.author_label
-        end
       end
     end
   end

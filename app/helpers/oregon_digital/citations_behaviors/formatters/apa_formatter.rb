@@ -14,7 +14,7 @@ module OregonDigital
         def format(work)
           text = ''
           # set authors
-          authors_list = apa_author_list(work)
+          authors_list = all_authors(work)
           text += format_authors(authors_list)
           text = "<span class=\"citation-author\">#{text}</span>" if text.present?
           # set publish or access date
@@ -30,16 +30,6 @@ module OregonDigital
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
-
-        private
-
-        def apa_author_list(work)
-          work.author_label
-        end
-
-        def whitewash(text)
-          Loofah.fragment(text.to_s).scrub!(:whitewash).to_s
-        end
       end
     end
   end
