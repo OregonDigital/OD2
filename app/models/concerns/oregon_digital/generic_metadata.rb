@@ -669,7 +669,7 @@ module OregonDigital
         { name: 'family_label', is_controlled: true, collection_facetable: true },
         { name: 'genus_label', is_controlled: true, collection_facetable: true },
         { name: 'species_label', is_controlled: true, collection_facetable: true },
-        { name: 'common_name_label', is_controlled: true, collection_facetable: false },
+        { name: 'common_name_label', is_controlled: false, collection_facetable: false },
         { name: 'accepted_name_usage', is_controlled: false, collection_facetable: false },
         { name: 'original_name_usage', is_controlled: false, collection_facetable: false },
         { name: 'scientific_name_authorship', is_controlled: false, collection_facetable: false },
@@ -693,7 +693,7 @@ module OregonDigital
         { name: 'rights_note', is_controlled: false, collection_facetable: false },
         { name: 'rights_holder', is_controlled: false, collection_facetable: false },
         { name: 'copyright_claimant', is_controlled: false, collection_facetable: false },
-        { name: 'access_restrictions_label', is_controlled: true, collection_facetable: false },
+        { name: 'access_restrictions_label', is_controlled: false, collection_facetable: false },
         { name: 'identifier', is_controlled: false, collection_facetable: false },
         { name: 'item_locator', is_controlled: false, collection_facetable: false },
         { name: 'accession_number', is_controlled: false, collection_facetable: false },
@@ -876,6 +876,7 @@ module OregonDigital
         isPartOf
         is_version_of
         relation
+        related_url
         resource_type
         workType
         material
@@ -883,6 +884,7 @@ module OregonDigital
         physical_extent
         technique
         conversion
+        full_text
         exhibit
         institution
         original_filename

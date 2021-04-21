@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 module OregonDigital
-  # Sets metadata for a generic work
+  # Sets metadata for a collection
   module CollectionMetadata
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
@@ -10,61 +10,63 @@ module OregonDigital
     included do
       initial_properties = properties.keys
       property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
-      property :related_url, predicate: ::RDF::RDFS.seeAlso
-      property :resource_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|
+      property :title, predicate: RDF::Vocab::DC.title, multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
+      property :creator, predicate: RDF::Vocab::DC11.creator, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :date_created, predicate: ::RDF::Vocab::DC.created do |index|
-        index.as :stored_searchable
-      end
-
-      property :description, advance_search: true, predicate: ::RDF::Vocab::DC.description do |index|
-        index.as :stored_searchable
-      end
-
-      property :language, advance_search: false, predicate: ::RDF::Vocab::DC.language do |index|
+      property :contributor, predicate: RDF::Vocab::DC11.contributor, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :date, predicate: ::RDF::Vocab::DC.date do |index|
+      property :description, predicate: RDF::Vocab::DC.description, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
+      end
+
+      property :subject, predicate: RDF::Vocab::DC.subject, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :date, predicate: RDF::Vocab::DC.date, multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
+      property :date_created, predicate: RDF::Vocab::DC.created, multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
+      property :license, predicate: RDF::Vocab::CC.License, multiple: false, basic_searchable: true do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :repository, predicate: RDF::Vocab::MARCRelators.rps, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Repository do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :language, predicate: RDF::Vocab::DC.language, multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable, :facetable
+      end
+
+      property :publisher, predicate: RDF::Vocab::DC.publisher, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Publisher do |index|
+        index.as :stored_searchable, :facetable
       end
 
       property :has_finding_aid, predicate: RDF::URI.new('http://lod.xdams.org/reload/oad/has_findingAid'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
-      property :license, advance_search: false, predicate: ::RDF::Vocab::CC.License, multiple: false do |index|
+      property :related_url, predicate: RDF::RDFS.seeAlso, multiple: true, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
+      property :resource_type, predicate: RDF::Vocab::DC.type, multiple: false, basic_searchable: true do |index|
         index.as :stored_searchable, :facetable
       end
 
-      # End of normal properties
-      # Controlled vocabulary terms
-      property :creator, predicate: ::RDF::Vocab::DC11.creator, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :contributor, predicate: ::RDF::Vocab::DC11.contributor, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :institution, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'),
-                             class_name: OregonDigital::ControlledVocabularies::Institution do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :repository, predicate: ::RDF::Vocab::MARCRelators.rps,
-                            class_name: OregonDigital::ControlledVocabularies::Repository do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :publisher, predicate: ::RDF::Vocab::DC.publisher,
-                           class_name: OregonDigital::ControlledVocabularies::Publisher do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-      property :subject, predicate: ::RDF::Vocab::DC.subject, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
+      property :institution, predicate: RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'), multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Institution do |index|
         index.as :stored_searchable, :facetable
       end
 
@@ -80,14 +82,14 @@ module OregonDigital
         accepts_nested_attributes_for prop, reject_if: id_blank, allow_destroy: true
       end
 
-      # defines a method for Generic to be able to grab a list of properties
+      # defines a method for Collection to be able to grab a list of properties
       define_singleton_method :controlled_property_labels do
         remote_controlled_props = controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }
         file_controlled_props = %w[license_label]
         (remote_controlled_props + file_controlled_props).freeze
       end
 
-      define_singleton_method :generic_properties do
+      define_singleton_method :collection_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
 
@@ -106,6 +108,24 @@ module OregonDigital
         { name: 'institution_label', is_controlled: true },
         { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false }
+      ].freeze
+
+      ORDERED_TERMS = %i[
+        title
+        creator
+        contributor
+        description
+        subject
+        date
+        date_created
+        license
+        repository
+        language
+        publisher
+        has_finding_aid
+        related_url
+        resource_type
+        institution
       ].freeze
     end
   end

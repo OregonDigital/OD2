@@ -9,26 +9,20 @@ RSpec.describe OregonDigital::InReviewSearchBuilder do
 
     let(:processor_chain) { search_builder.processor_chain }
 
-    it { is_expected.to include(:actionable, :not_deposited) }
+    it { is_expected.to include(:in_review_ids) }
+    it { is_expected.not_to include(:only_active_works) }
   end
 
-  describe '#actionable' do
+  describe '#in_review_ids' do
     subject { solr_params }
 
     let(:solr_params) { {} }
 
-    before { search_builder.actionable(solr_params) }
+    before do
+      allow(search_builder).to receive(:solr_documents).and_return([])
+      search_builder.in_review_ids(solr_params)
+    end
 
-    it { is_expected.to eq(fq: ['{!terms f=actionable_workflow_roles_ssim}']) }
-  end
-
-  describe '#not_deposited' do
-    subject { solr_params }
-
-    let(:solr_params) { {} }
-
-    before { search_builder.not_deposited(solr_params) }
-
-    it { is_expected.to eq(fq: ['-workflow_state_name_ssim:deposited']) }
+    it { is_expected.to eq(fq: ['id:()']) }
   end
 end
