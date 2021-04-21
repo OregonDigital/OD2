@@ -34,10 +34,6 @@ module OregonDigital
         def chicago_author_list(work)
           work.author_label
         end
-
-        def whitewash(text)
-          Loofah.fragment(text.to_s).scrub!(:whitewash).to_s
-        end
       end
     end
   end
