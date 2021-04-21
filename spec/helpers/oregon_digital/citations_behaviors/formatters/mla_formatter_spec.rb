@@ -7,7 +7,7 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::MlaFormatter do
   let(:work) { build(:work, title: ['My Title']) }
 
   before do
-    allow(presenter).to receive(:creator_label).and_return(['last name, first name'])
+    allow(presenter).to receive(:author_label).and_return(['last name, first name'])
   end
 
   it 'displays the work title' do
