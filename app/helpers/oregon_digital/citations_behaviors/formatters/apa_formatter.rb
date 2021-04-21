@@ -11,21 +11,19 @@ module OregonDigital
 
         def format(work)
           text = ''
+          # set authors
           authors_list = chicago_author_list(work)
           text += format_authors(authors_list)
           text = "<span class=\"citation-author\">#{text}</span>" if text.present?
-
+          # set publish or access date
           pub_date = setup_pub_date(work)
           text += " #{whitewash(pub_date)}." unless pub_date.nil?
-
+          # set title
           text += format_title(work.to_s)
-
-          text += add_publisher_text_for(work)
-
+          # set rest of publisher info and uri
           pub_info = setup_pub_info(work, false)
           text += " #{whitewash(pub_info)}." if pub_info.present?
           text += " #{view_context.controller.request.original_url.split('?').first if view_context.respond_to?(:controller)}"
-
           text.html_safe
         end
 
