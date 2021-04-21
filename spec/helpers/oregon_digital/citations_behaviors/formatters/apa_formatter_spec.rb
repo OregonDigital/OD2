@@ -11,6 +11,6 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::ApaFormatter do
   end
 
   it 'formats citations without creators' do
-    expect(formatter.format(presenter)).to include 'last name, f.' 
+    expect(formatter.format(presenter)).to include 'last name, f.'
   end
 end
