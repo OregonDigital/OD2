@@ -30,7 +30,6 @@ module OregonDigital
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
-        
       end
     end
   end
