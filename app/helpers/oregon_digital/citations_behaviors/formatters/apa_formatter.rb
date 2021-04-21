@@ -30,6 +30,7 @@ module OregonDigital
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
+
         private
 
         def chicago_author_list(work)
