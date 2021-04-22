@@ -1,4 +1,8 @@
 en:
+  mla_header: "MLA"
+  apa_header: "APA"
+  chicago_header: "Chicago"
+  wiki_header: "Wiki"
   hyrax:
     icons:
       generic:     'fa fa-file-text-o'
