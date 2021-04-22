@@ -11,7 +11,7 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::WikiFormatter do
   let(:original_url) { 'http://test.oregondigital.org/blah/blah/12345678?q=blah' }
 
   before do
-    allow(presenter).to receive(:creator_label).and_return(['last name, first name'])
+    allow(presenter).to receive(:author_label).and_return(['last name, first name'])
     allow(formatter).to receive(:view_context).and_return(view_context)
     allow(view_context).to receive(:controller).and_return(context)
     allow(context).to receive(:request).and_return(controller_request)
@@ -19,6 +19,6 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::WikiFormatter do
   end
 
   it 'displays the citation' do
-    expect(formatter.format(presenter)).to eq "<ref name=Oregon Digital>{{cite web | url= http://test.oregondigital.org/blah/blah/12345678 | title= My Title |author= My Author |accessdate= #{Date.today} |publisher= My Publisher}}</ref>"
+    expect(formatter.format(presenter)).to eq "<ref name=Oregon Digital>{{cite web | url= http://test.oregondigital.org/blah/blah/12345678 | title= My Title |author= last name, first name |accessdate= #{Date.today} |publisher= My Publisher}}</ref>"
   end
 end
