@@ -9,6 +9,11 @@ module OregonDigital
   class IIIFPresenter < Hyrax::WorkShowPresenter
     attr_accessor :file_sets
     delegate :id, to: :solr_document
+    delegate *Hyrax.config.iiif_metadata_fields, to: :solr_document
+
+    def manifest_metadata
+      super.select { |m| m['value'].present? }
+    end
 
     def file_set_presenters
       presenters = []
