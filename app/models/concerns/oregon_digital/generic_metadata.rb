@@ -727,6 +727,7 @@ module OregonDigital
         { name: 'is_version_of', is_controlled: false, collection_facetable: false },
         { name: 'has_version', is_controlled: false, collection_facetable: false },
         { name: 'isPartOf', is_controlled: false, collection_facetable: false },
+        { name: 'related_url', is_controlled: false, collection_facetable: false },
         { name: 'has_part', is_controlled: false, collection_facetable: false },
         { name: 'larger_work', is_controlled: false, collection_facetable: false },
         { name: 'designer_inscription', is_controlled: false, collection_facetable: false },
