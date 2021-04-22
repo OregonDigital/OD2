@@ -9,10 +9,11 @@ RUN gem install bundler
 FROM bundler as dependencies
 
 # add nodejs, yarn, and other dependencies
-RUN apk add --update nodejs npm yarn \
-  curl git g++ make libpq postgresql-client postgresql-dev libreoffice imagemagick graphicsmagick unzip \
+RUN apk add --update ca-certificates nodejs npm yarn curl git \
+  g++ make libpq libreoffice imagemagick graphicsmagick unzip \
   zip ghostscript vim tesseract-ocr poppler-utils openjpeg \
-  ffmpeg qt5-qtbase qt5-qtbase-dev xvfb xauth openjdk11-jre
+  ffmpeg qt5-qtbase qt5-qtbase-dev xvfb xauth openjdk11-jre \
+  postgresql-client postgresql-dev
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
