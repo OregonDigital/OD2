@@ -1,4 +1,4 @@
-FROM ruby:2.5.8 as bundler
+FROM ruby:2.7-alpine as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -9,15 +9,10 @@ RUN gem install bundler
 FROM bundler as dependencies
 
 # add nodejs, yarn, and other dependencies
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
-  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  apt-get update && apt-get upgrade -y && \
-  apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
-  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip \
-  zip ghostscript vim tesseract-ocr poppler-utils libopenjp2-tools \
-  ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-11-jre \
-  --fix-missing --allow-unauthenticated
+RUN apk add --update nodejs npm yarn \
+  curl git g++ make libpq postgresql-client postgresql-dev libreoffice imagemagick graphicsmagick unzip \
+  zip ghostscript vim tesseract-ocr poppler-utils openjpeg \
+  ffmpeg qt5-qtbase qt5-qtbase-dev xvfb xauth openjdk11-jre
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
@@ -28,7 +23,7 @@ ARG UID=8083
 ARG GID=8083
 
 # Create an app user so our program doesn't run as root.
-RUN groupadd -r --gid "$GID" app && useradd -d /data -r --gid "$GID" --uid "$UID" app
+RUN addgroup --system --gid "$GID" app && adduser -h /data -S -G app -u "$UID" app
 
 FROM dependencies as gems
 
