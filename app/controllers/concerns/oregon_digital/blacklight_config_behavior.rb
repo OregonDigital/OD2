@@ -80,7 +80,7 @@ module OregonDigital
           # Only try to display full text if a highlight is hit
           document.response['highlighting'][document.id].keys.include?('all_text_tsimv') unless document.response.dig(['highlighting', document.id]).nil?
         }
-        config.add_index_field 'resource_type_label_tesim', label: 'Resource Type', link_to_search: 'resource_type_label_tesim', if: false
+        config.add_index_field 'resource_type_label_tesim', label: 'Resource Type', link_to_search: 'resource_type_label_sim', if: false
         config.add_index_field 'rights_statement_label_tesim', label: 'Rights Statement', link_to_search: 'rights_statement_label_tesim', if: false
 
         config.add_field_configuration_to_solr_request!
