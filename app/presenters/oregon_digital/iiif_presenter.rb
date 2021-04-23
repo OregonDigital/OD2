@@ -9,7 +9,7 @@ module OregonDigital
   class IIIFPresenter < Hyrax::WorkShowPresenter
     attr_accessor :file_sets
     delegate :id, to: :solr_document
-    delegate *Hyrax.config.iiif_metadata_fields, to: :solr_document
+    delegate *(Hyrax.config.iiif_metadata_fields, to: :solr_document)
 
     # Select out the metadata that doesn't have a value
     def manifest_metadata
@@ -75,9 +75,7 @@ module OregonDigital
 
     # Get file set format labels for manifest metadata
     def format_label
-      solr_document.file_sets.map do |f|
-        f.format_label
-      end.compact
+      solr_document.file_sets.map(&:format_label).compact
     end
   end
 end
