@@ -79,6 +79,18 @@ class SolrDocument
     !children.empty?
   end
 
+  # Find and return file sets
+  def file_sets
+    @file_sets ||= member_ids.map do |member_id|
+      document = SolrDocument.find(member_id)
+      document['has_model_ssim'].first == 'FileSet' ? document : nil
+    end.compact
+  end
+
+  def file_sets?
+    !file_sets.empty?
+  end
+
   solrized_methods Generic.generic_properties
   solrized_methods Document.document_properties
   solrized_methods Image.image_properties

@@ -11,6 +11,7 @@ module OregonDigital
     delegate :id, to: :solr_document
     delegate *Hyrax.config.iiif_metadata_fields, to: :solr_document
 
+    # Select out the metadata that doesn't have a value
     def manifest_metadata
       super.select { |m| m['value'].present? }
     end
@@ -63,6 +64,20 @@ module OregonDigital
       return addendum unless page_index.zero?
 
       label + ": #{addendum}"
+    end
+
+    # Get collection titles for manifest metadata
+    def collections
+      solr_document.member_of_collection_ids.map do |c|
+        Collection.find(c).title.first
+      end.compact
+    end
+
+    # Get file set format labels for manifest metadata
+    def format_label
+      solr_document.file_sets.map do |f|
+        f.format_label
+      end.compact
     end
   end
 end

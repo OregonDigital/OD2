@@ -246,7 +246,7 @@ Hyrax.config do |config|
     common_name_label location_label gps_latitude gps_longitude ranger_district_label street_address tgn_label
     water_basin_label date date_created view_date license_label rights_holder rights_note rights_statement_label
     repository_label local_collection_name_label language_label publisher_label provenance source has_finding_aid
-    isPartOf resource_type_label workType_label material measurements physical_extent
+    isPartOf resource_type_label workType_label measurements physical_extent collections format_label
   ]
 
   # Enables the use of Google ReCaptcha on the contact form.
