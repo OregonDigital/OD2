@@ -39,7 +39,7 @@
   <div class="metadata-row row">
     <% document['rights_statement_tesim'].each_with_index do |rights_statement, i| %>
       <i class="large-icon <%= document.rights_statement_to_fa_class(rights_statement) %>" aria-hidden="true"></i>
-      <a href="<%= rights_statement %>"><%= document['rights_statement_label_tesim'][i] %></a>
+      <%= doc_presenter.field_value index_fields(document)["rights_statement_label_sim"]%>
     <% end unless document['rights_statement_tesim'].nil? %>
   </div>
   <div class="metadata-row row">
