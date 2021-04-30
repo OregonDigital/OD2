@@ -3,7 +3,7 @@ module Bulkrax
 
     # Override the factory to use a customized version
     def factory
-      @factory ||= Bulkrax::OregonDigitalObjectFactory.new(self.parsed_metadata, identifier, replace_files, user, factory_class)
+      @factory ||= Bulkrax::OregonDigitalObjectFactory.new(self.parsed_metadata, identifier, replace_files, user, factory_class, update_files)
     end
 
     # This method is called during build_metadata
@@ -24,7 +24,7 @@ module Bulkrax
 					end
 					self.parsed_metadata.delete(key)
 				end
-      end
+			end
     end
 
     # Return a hash of property : property_attibutes pairs
