@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
-gem 'hyrax', '~> 3.0'
+gem 'hyrax', '3.0.1'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'pg'

@@ -99,7 +99,7 @@ GEM
       activemodel (= 5.2.5)
       activesupport (= 5.2.5)
       arel (>= 9.0)
-    activerecord-import (1.0.8)
+    activerecord-import (1.1.0)
       activerecord (>= 3.2)
     activestorage (5.2.5)
       actionpack (= 5.2.5)
@@ -296,7 +296,7 @@ GEM
       dry-equalizer (~> 0.2)
     dry-inflector (0.2.0)
     dry-initializer (3.0.4)
-    dry-logic (1.1.0)
+    dry-logic (1.2.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.5, >= 0.5)
     dry-matcher (0.9.0)
@@ -305,7 +305,7 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.4, >= 0.4.4)
       dry-equalizer
-    dry-schema (1.6.1)
+    dry-schema (1.6.2)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.8, >= 0.8.3)
       dry-core (~> 0.5, >= 0.5)
@@ -372,7 +372,7 @@ GEM
       railties (>= 3.2, < 7)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
-    geocoder (1.6.6)
+    geocoder (1.6.7)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     google-api-client (0.47.0)
@@ -418,15 +418,15 @@ GEM
       ffi-compiler (>= 1.0, < 2.0)
     http_logger (0.6.0)
     httpclient (2.8.3)
-    hydra-access-controls (11.0.6)
+    hydra-access-controls (11.0.7)
       active-fedora (>= 10.0.0)
       activesupport (>= 4, < 6)
       blacklight (>= 5.16)
       blacklight-access_controls (~> 0.6.0)
       cancancan (~> 1.8)
       deprecation (~> 1.0)
-    hydra-core (11.0.6)
-      hydra-access-controls (= 11.0.6)
+    hydra-core (11.0.7)
+      hydra-access-controls (= 11.0.7)
       railties (>= 4.0.0, < 6)
     hydra-editor (5.0.4)
       active-fedora (>= 9.0.0)
@@ -439,9 +439,9 @@ GEM
       sprockets-es6
     hydra-file_characterization (1.1.2)
       activesupport (>= 3.0.0)
-    hydra-head (11.0.6)
-      hydra-access-controls (= 11.0.6)
-      hydra-core (= 11.0.6)
+    hydra-head (11.0.7)
+      hydra-access-controls (= 11.0.7)
+      hydra-core (= 11.0.7)
       rails (>= 5.2, < 6.1)
     hydra-pcdm (1.1.0)
       active-fedora (>= 10, < 14)
@@ -457,7 +457,7 @@ GEM
       hydra-derivatives (~> 3.0)
       hydra-file_characterization (~> 1.0)
       hydra-pcdm (>= 0.9)
-    hyrax (3.0.0)
+    hyrax (3.0.1)
       active-fedora (~> 13.1, >= 13.1.2)
       almond-rails (~> 0.1)
       awesome_nested_set (~> 3.1)
@@ -640,7 +640,7 @@ GEM
       connection_pool (~> 2.2)
     nio4r (2.5.7)
     noid (0.9.0)
-    noid-rails (3.0.2)
+    noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
     nokogiri (1.11.3)
@@ -809,6 +809,7 @@ GEM
       redis (>= 3.0.4)
     redlock (1.2.1)
       redis (>= 3.0.0, < 5.0)
+    reentrant_mutex (1.1.1)
     reform (2.5.0)
       disposable (>= 0.4.2, < 0.5.0)
       representable (>= 2.4.0, < 3.1.0)
@@ -964,14 +965,12 @@ GEM
     temple (0.8.2)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
-    tether-rails (1.4.0)
-      rails (>= 3.1)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
     tins (1.26.0)
       sync
-    tinymce-rails (5.7.1)
+    tinymce-rails (5.8.1)
       railties (>= 3.1.1)
     twitter-typeahead-rails (0.11.1.pre.corejavascript)
       actionpack (>= 3.1)
@@ -991,7 +990,7 @@ GEM
     unf_ext (0.0.7.7)
     unicode-display_width (1.7.0)
     validatable (1.6.7)
-    valkyrie (2.1.1)
+    valkyrie (2.2.0)
       activemodel
       activesupport
       disposable (~> 0.4.5)
@@ -1002,9 +1001,9 @@ GEM
       json
       json-ld
       railties
-      rdf (~> 3.0.10)
+      rdf (~> 3.0, >= 3.0.10)
       rdf-vocab
-      reform
+      reform (~> 2.2)
       reform-rails
     vcr (5.1.0)
     virtus (1.0.5)
@@ -1054,7 +1053,7 @@ DEPENDENCIES
   honeycomb-beeline (>= 2.0.0)
   hydra-derivatives!
   hydra-role-management
-  hyrax (~> 3.0)
+  hyrax (= 3.0.1)
   hyrax-migrator!
   jquery-rails
   libhoney (>= 1.14.2)
@@ -1097,4 +1096,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.1.4
+   2.2.15
