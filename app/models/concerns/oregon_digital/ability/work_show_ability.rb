@@ -14,6 +14,9 @@ module OregonDigital
           can :read, SolrDocument do |solr_doc|
             read_doc?(solr_doc)
           end
+          can :show, FileSet do |file_set|
+            view_file_set?(file_set)
+          end
 
           cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(osu_roles)
           cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
@@ -33,6 +36,10 @@ module OregonDigital
           else
             current_user.role?(admin_permission_roles)
           end
+        end
+
+        def view_file_set(file_set)
+          current_user.role?(manager_permission_roles)
         end
       end
     end

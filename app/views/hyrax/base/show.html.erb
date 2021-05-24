@@ -111,6 +111,25 @@
           <% end %>
         </div>
       </div>
+      <% if current_user.can?(:view, FileSet) %>
+        <!-- Renders file manager -->
+        <div class='row'>
+          <div class='col-sm-12'>
+            <div id='work-show-file-sets' class='flex-container'>
+              <div class='flex-item file-set-title'>
+              Works and Files
+              </div>
+              <% if @presenter.member_presenters.size > 1 %>
+                <div class='flex-item file-set-manager'>
+                  <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, @presenter]), class: 'btn btn-primary pull-right' %>
+                </div>
+              <% end %>
+            </div>
+              <hr style='border-width: 3px;'>
+              <%= render 'items', presenter: @presenter %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
