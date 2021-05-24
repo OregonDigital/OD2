@@ -76,7 +76,7 @@
           <!-- Renders children of a parent work -->
           <% children = @presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') } %>
           <% if children.length > 0 %>
-            Contained In This Object: &nbsp; <%= children.length %> items
+            <h2 class='h4'>Contained In This Object:</h2> &nbsp; <%= children.length %> items
             <hr style='border-width: 3px;'>
             <%= render 'paginated_works', works: children %>
           <% end %>
@@ -89,7 +89,7 @@
           <% unless in_work_ids.empty? %>
             <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
             <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %>
-            Contained In:
+            <h2 class='h4'>Contained In:</h2>
             <hr style='border-width: 3px;'>
             <%= render 'paginated_works', works: [parent_presenter] %>
           <% end %>
@@ -117,7 +117,7 @@
           <div class='col-sm-12'>
             <div id='work-show-file-sets' class='flex-container'>
               <div class='flex-item file-set-title'>
-              Works and Files
+                <h2 class='h4'>Works and Files</h2>
               </div>
               <% if @presenter.member_presenters.size > 1 %>
                 <div class='flex-item file-set-manager'>
