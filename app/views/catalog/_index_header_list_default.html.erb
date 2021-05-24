@@ -1,7 +1,7 @@
 <div class="search-results-title-row col-xs-9 col-sm-7 col-md-7">
   <% if document.has_highlight_field?('title_tesim') %>
-    <h3 class="search-result-title"><%= link_to document.highlight_field('title_tesim').first, document %></h3>
+    <h3 class="search-result-title"><%= link_to document.highlight_field('title_tesim').first, Rails.application.routes.url_helpers.polymorphic_path(document) %></h3>
   <% else %>
-    <h3 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), document %></h3>
+    <h3 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), Rails.application.routes.url_helpers.polymorphic_path(document) %></h3>
   <% end %>
 </div>

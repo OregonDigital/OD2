@@ -6,7 +6,7 @@
   <%# OVERRIDE FROM HYRAX remove work type heading %>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
     <div class='row'>
-      <%= render 'show_collection_header', presenter: @presenter unless @presenter.member_of_collection_ids.empty? %>
+      <%#= render 'show_collection_header', presenter: @presenter unless @presenter.member_of_collection_ids.empty? %>
       <%= render 'show_institution_header', presenter: @presenter unless @presenter.institution.empty? %>
     </div>
       <hr style='border-width: 15px;'>
@@ -44,6 +44,11 @@
               <h2 class="h4"><%= t("oregon_digital.works.form.tab.how_to_cite") %></h2>
             </a>
           </li>
+          <li role="presentation">
+            <a href="#contact_us" aria-controls="contact_us" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.contact_us") %></h2>
+            </a>
+          </li>
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="metadata">
@@ -56,6 +61,12 @@
             <div class="form-tab-content">
               <% # metadata_tab is sometimes provided %>
               <%= render 'citations', presenter: @presenter %>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="contact_us">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'work_contact_form', presenter: @presenter %>
             </div>
           </div>
         </div>

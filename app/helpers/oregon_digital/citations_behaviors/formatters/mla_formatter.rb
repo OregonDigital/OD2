@@ -10,7 +10,7 @@ module OregonDigital
         include Hyrax::CitationsBehaviors::TitleBehavior
 
         def format(work)
-          text = super
+          text = super(work)
           text << ' ' + view_context.controller.request.original_url.split('?').first if view_context.respond_to?(:controller)
           text.html_safe
         end

@@ -79,11 +79,23 @@ class SolrDocument
     !children.empty?
   end
 
+  # Find and return file sets
+  def file_sets
+    @file_sets ||= member_ids.map do |member_id|
+      document = SolrDocument.find(member_id)
+      document['has_model_ssim'].first == 'FileSet' ? document : nil
+    end.compact
+  end
+
+  def file_sets?
+    !file_sets.empty?
+  end
+
   solrized_methods Generic.generic_properties
   solrized_methods Document.document_properties
   solrized_methods Image.image_properties
   solrized_methods Video.video_properties
   solrized_methods Generic.controlled_properties
   solrized_methods Generic.controlled_property_labels
-  solrized_methods %w[type_label language_label rights_statement_label]
+  solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
 end

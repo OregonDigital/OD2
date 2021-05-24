@@ -10,16 +10,20 @@ module Hyrax
     include Hyrax::CitationsBehaviors::TitleBehavior
 
     def export_as_apa_citation(work)
-      Hyrax::CitationsBehaviors::Formatters::ApaFormatter.new(self).format(work)
+      OregonDigital::CitationsBehaviors::Formatters::ApaFormatter.new(self).format(work)
     end
 
     def export_as_chicago_citation(work)
-      Hyrax::CitationsBehaviors::Formatters::ChicagoFormatter.new(self).format(work)
+      OregonDigital::CitationsBehaviors::Formatters::ChicagoFormatter.new(self).format(work)
     end
 
     # OVERRIDE HYRAX to export MLA citations
     def export_as_mla_citation(work)
       OregonDigital::CitationsBehaviors::Formatters::MlaFormatter.new(self).format(work)
+    end
+
+    def export_as_wiki_citation(work)
+      OregonDigital::CitationsBehaviors::Formatters::WikiFormatter.new(self).format(work)
     end
     # END OVERRIDE
 

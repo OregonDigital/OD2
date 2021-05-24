@@ -8,39 +8,39 @@ module OregonDigital
     # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
     included do
       initial_properties = properties.keys
-      property :contained_in_journal, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal') do |index|
+      property :first_line, predicate: RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLine'), multiple: false, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
-      property :first_line, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLine'), multiple: false do |index|
+      property :first_line_chorus, predicate: RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLineChorus'), multiple: false, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
-      property :first_line_chorus, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLineChorus'), multiple: false do |index|
+      property :instrumentation, predicate: RDF::URI('http://opaquenamespace.org/ns/sheetmusic_instrumentation'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
-      property :has_number, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasNumber') do |index|
+      property :table_of_contents, predicate: RDF::Vocab::DC.tableOfContents, multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
+      property :contained_in_journal, predicate: RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasJournal'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
+      property :has_number, predicate: RDF::URI.new('http://opaquenamespace.org/ns/folderNumber'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :instrumentation, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_instrumentation') do |index|
-        index.as :stored_searchable
-      end
-
-      property :is_volume, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasVolume') do |index|
+      property :is_volume, predicate: RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasVolume'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable, :facetable
       end
 
-      property :larger_work, basic_searchable: false, predicate: ::RDF::URI('http://opaquenamespace.org/ns/sheetmusic_largerWork') do |index|
+      property :on_pages, predicate: RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasPages'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
-      property :on_pages, basic_searchable: false, predicate: ::RDF::URI('http://purl.org/net/nknouf/ns/bibtex/hasPages') do |index|
-        index.as :stored_searchable
-      end
-
-      property :table_of_contents, predicate: ::RDF::Vocab::DC.tableOfContents do |index|
+      property :larger_work, predicate: RDF::URI('http://opaquenamespace.org/ns/sheetmusic_largerWork'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
 
@@ -98,12 +98,10 @@ module OregonDigital
         mods_note
         motif
         object_orientation
-        photograph_orientation
         tribal_notes
         source_condition
         table_of_contents
         temporal
-        view
         subject
         award
         cultural_context
@@ -141,7 +139,7 @@ module OregonDigital
         acquisition_date
         award_date
         collected_date
-        ate_created
+        date_created
         issued
         view_date
         accession_number
@@ -154,6 +152,7 @@ module OregonDigital
         access_restrictions
         copyright_claimant
         rights_holder
+        rights_note
         rights_statement
         use_restrictions
         repository
@@ -186,12 +185,21 @@ module OregonDigital
         is_version_of
         larger_work
         relation
+        related_url
         resource_type
         workType
         material
         measurements
         physical_extent
         technique
+        conversion
+        full_text
+        exhibit
+        institution
+        original_filename
+        full_size_download_allowed
+        date_modified
+        date_uploaded
       ].freeze
     end
   end

@@ -12,6 +12,7 @@ class Video < ActiveFedora::Base
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
-  include ::OregonDigital::VideoMetadata
   include ::OregonDigital::GenericMetadata
+  include ::OregonDigital::VideoMetadata
+  include ::OregonDigital::ControlledPropertiesBehavior
 end

@@ -14,6 +14,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   def generate_solr_document
     super.tap do |solr_doc|
       index_rights_statement_label(solr_doc, OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
+      index_full_size_download_allowed_label(solr_doc, OregonDigital::DownloadService.new.all_labels(object.full_size_download_allowed))
       index_license_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license))
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
@@ -39,6 +40,12 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['copyright_combined_label_tesim'] = license_labels + rights_labels
   end
 
+  def index_full_size_download_allowed_label(solr_doc, full_size_download_allowed_labels)
+    solr_doc['full_size_download_allowed_label_sim'] = full_size_download_allowed_labels
+    solr_doc['full_size_download_allowed_label_ssim'] = full_size_download_allowed_labels
+    solr_doc['full_size_download_allowed_label_tesim'] = full_size_download_allowed_labels
+  end
+
   def index_rights_statement_label(solr_doc, rights_statement_labels)
     solr_doc['rights_statement_label_sim'] = rights_statement_labels
     solr_doc['rights_statement_label_ssim'] = rights_statement_labels
@@ -58,9 +65,9 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_type_label(solr_doc, type_label)
-    solr_doc['type_label_sim'] = type_label
-    solr_doc['type_label_ssim'] = type_label
-    solr_doc['type_label_tesim'] = type_label
+    solr_doc['resource_type_label_sim'] = type_label
+    solr_doc['resource_type_label_ssim'] = type_label
+    solr_doc['resource_type_label_tesim'] = type_label
   end
 
   def index_topic_combined_label(solr_doc, topic_labels)

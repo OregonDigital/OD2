@@ -7,7 +7,7 @@ module Hyrax
     delegate(*Generic.generic_properties.map(&:to_sym), to: :solr_document)
     delegate(*Generic.controlled_properties.map(&:to_sym), to: :solr_document)
     delegate(*Generic.controlled_property_labels.map(&:to_sym), to: :solr_document)
-    delegate(:type_label, to: :solr_document)
+    delegate(:resource_type_label, to: :solr_document)
     delegate(:rights_statement_label, to: :solr_document)
     delegate(:language_label, to: :solr_document)
 
@@ -33,6 +33,10 @@ module Hyrax
 
     def page_title
       "#{title.first} | #{I18n.t('hyrax.product_name')}"
+    end
+
+    def export_as_nt
+      ActiveFedora::Base.find(id).resource.dump(:ntriples)
     end
 
     # Link to add to shelf functionality

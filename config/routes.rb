@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
   resources :explore_collections, controller: 'oregon_digital/explore_collections', only: %i[index]
+  get 'work/:id/ntriples', to: 'oregon_digital/ntriples#show', as: 'ntriples'
 
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
     concerns :range_searchable
   end
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
+  devise_for :users, controllers: { confirmations: 'users/confirmations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
   devise_scope :user do
     get 'users/auth/cas', to: 'users/omniauth_authorize#passthru', defaults: { provider: :cas }, as: 'new_osu_session'
     get 'users/auth/saml', to: 'users/omniauth_authorize#passthru', defaults: { provider: :saml }, as: 'new_uo_session'
@@ -49,6 +50,13 @@ Rails.application.routes.draw do
         member do
           get :download_low, :download, :metadata
         end
+      end
+    end
+  end
+  scope module: 'hyrax' do
+    namespace :admin do
+      resource :workflows, only: [:index], as: 'workflows', path: '/workflows', controller: 'workflows' do
+        concerns :range_searchable
       end
     end
   end

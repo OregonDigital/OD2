@@ -14,6 +14,7 @@ AllCops:
     - 'config/**/*'
     - 'tmp/**/*'
     - 'lib/tasks/**/*'
+    - 'app/presenters/hyrax/file_set_presenter.rb'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']
@@ -22,6 +23,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'config/**/*'
     - 'app/controllers/catalog_controller.rb'
+    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
 
 Style/AsciiComments:
   Enabled: false
@@ -56,6 +58,7 @@ Metrics/ModuleLength:
     - 'app/models/concerns/oregon_digital/video_metadata.rb'
     - 'app/models/concerns/oregon_digital/document_metadata.rb'
     - 'app/models/concerns/oregon_digital/image_metadata.rb'
+    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
 
 
 Metrics/ClassLength:
@@ -137,3 +140,11 @@ Style/RedundantReturn:
 
 Migration/DepartmentName:
   Enabled: false
+
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb'
+
+RSpec/SubjectStub:
+  Exclude:
+    - 'spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb'
