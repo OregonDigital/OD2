@@ -35,10 +35,6 @@ module Hyrax
       "#{title.first} | #{I18n.t('hyrax.product_name')}"
     end
 
-    def export_as_nt
-      ActiveFedora::Base.find(id).resource.dump(:ntriples)
-    end
-
     # Link to add to shelf functionality
     def add_shelf_path
       # Links to item stats page until we have shelves

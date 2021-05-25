@@ -5,5 +5,4 @@
     <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
     <%# OVERRIDE FROM HYRAX: Removed license render. Fixed but not in any <3.0.0 releases https://github.com/samvera/hyrax/pull/3153 %>
   </dl>
-  <%= link_to "View N-Triples", Rails.application.routes.url_helpers.ntriples_path(presenter.id) %>
 </div>
