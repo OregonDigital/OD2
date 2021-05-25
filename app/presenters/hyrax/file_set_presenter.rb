@@ -33,7 +33,7 @@ module Hyrax
              :embargo_release_date, :lease_expiration_date,
              :depositor, :keyword, :title_or_label, :keyword,
              :date_created, :date_modified, :itemtype,
-             :original_file_id,
+             :original_file_id, :oembed_url,
              to: :solr_document
 
     def self.characterization_terms
