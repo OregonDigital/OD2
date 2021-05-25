@@ -108,7 +108,7 @@
           </div>
         <% end %>
       <% end %>
-      <% if current_user.can?(:view, FileSet) %>
+      <% if current_ability.can?(:view, FileSet) %>
         <!-- Renders file manager -->
         <div class='row'>
           <div class='col-sm-12'>
