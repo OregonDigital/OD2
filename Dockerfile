@@ -22,8 +22,8 @@ FROM bundler as dependencies
 # The alpine way
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs imagemagick unzip ghostscript vim yarn \
-  git sqlite sqlite-dev postgresql-dev libressl libressl-dev \
-  curl libc6-compat build-base tzdata zip autoconf automake libtool texinfo
+  git sqlite sqlite-dev postgresql-dev libressl libressl-dev java-common \
+  curl libc6-compat build-base tzdata zip autoconf automake libtool texinfo 
 
 # install libffi 3.2.1
 # https://github.com/libffi/libffi/archive/refs/tags/v3.2.1.tar.gz
@@ -38,9 +38,9 @@ RUN mkdir -p /tmp/ffi && \
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
-  curl -fSL -o /opt/fits-1.0.5.zip http://projects.iq.harvard.edu/files/fits/files/fits-1.0.5.zip && \
-  cd /opt && unzip fits-1.0.5.zip  && chmod +X fits-1.0.5/fits.sh && \
-  ln -s /opt/fits-1.0.5 /opt/fits
+  curl -fSL -o /opt/fits-1.5.0.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
+  cd /opt/fits && unzip fits-1.5.0.zip  && chmod +X fits.sh && \
+  rm -f /opt/fits-1.5.0.zip
 
 ARG UID=8083
 ARG GID=8083
