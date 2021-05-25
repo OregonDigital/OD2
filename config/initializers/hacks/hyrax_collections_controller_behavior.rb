@@ -16,6 +16,10 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     presenter
     query_collection_members
     configured_facets
+    respond_to do |wants|
+      wants.html {render :show, status: :ok}
+      wants.nt { render body: presenter.export_as_nt, mime_type: Mime[:nt] }
+    end
   end
 
   # Zip up all works in collection into one collection zip
