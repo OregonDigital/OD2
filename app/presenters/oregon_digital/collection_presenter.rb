@@ -18,5 +18,9 @@ module OregonDigital
       %i[total_items size resource_type creator_label contributor_label license publisher_label date_created
          subject_label language related_url institution_label date repository_label]
     end
+
+    def export_as_nt
+      ActiveFedora::Base.find(id).resource.dump(:ntriples)
+    end
   end
 end
