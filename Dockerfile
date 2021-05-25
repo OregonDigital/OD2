@@ -72,14 +72,16 @@ FROM gems as code
 # Add the rest of the code
 COPY --chown=app:app . /data
 
-ARG RAILS_ENV=development
+#ARG RAILS_ENV=development
+#ARG FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
+ARG RAILS_ENV=${RAILS_ENV}
 ENV RAILS_ENV=${RAILS_ENV}
-ARG FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
+ARG FEDORA_URL=${FEDORA_URL}
 ENV FEDORA_URL=${FEDORA_URL}
 
 FROM code
 
-ARG DEPLOYED_VERSION=development
+#ARG DEPLOYED_VERSION=development
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
 
 
