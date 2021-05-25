@@ -15,6 +15,7 @@ module OregonDigital
             read_doc?(solr_doc)
           end
 
+          cannot(%i[show], FileSet) unless current_user.role?(manager_permission_roles)
           cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(osu_roles)
           cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
         end
