@@ -22,7 +22,7 @@ FROM bundler as dependencies
 # The alpine way
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs imagemagick unzip ghostscript vim yarn \
-  git sqlite sqlite-dev mysql mysql-client mysql-dev libressl libressl-dev \
+  git sqlite sqlite-dev postgresql-dev libressl libressl-dev \
   curl libc6-compat build-base tzdata zip autoconf automake libtool texinfo
 
 # install libffi 3.2.1
