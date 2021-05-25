@@ -14,8 +14,16 @@ module OregonDigital
         # Set bounding box information for blacklight_iiif_search
         solr_doc['all_text_bbox_tsimv'] = object.bbox_content unless object.bbox_content.nil?
         solr_doc['hocr_content_tsimv'] = object.hocr_content unless object.hocr_content.nil?
+        index_additional_characterization_terms(solr_doc)
       end
     end
     # rubocop:enable Metrics/AbcSize
+
+    def index_additional_characterization_terms(solr_doc)
+      object.characterization_terms.each do |term|
+        value = object.send(term)
+        solr_doc["#{term}_tesim"] = value if value.present?
+      end
+    end
   end
 end
