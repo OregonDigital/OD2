@@ -96,4 +96,22 @@ dl.work-show {
       border-radius: 0;
     }
   }
+  .h4 {
+    margin: 0;
+  }
+  h2 {
+    display: inline;
+  }
+}
+
+#work-show-file-sets {
+  .file-set-title {
+    width: 80%;
+    align-items: center;
+  }
+  .file-set-manager {
+    justify-content: flex-end;
+    width: 20%;
+    text-align: start;
+  }
 }
