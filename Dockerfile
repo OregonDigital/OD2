@@ -1,4 +1,4 @@
-FROM ruby:2.5-alpine3.12 as bundler
+FROM ruby:2.7-alpine3.12 as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
