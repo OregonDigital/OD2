@@ -46,9 +46,12 @@ gem 'omniauth-cas'
 gem 'omniauth-saml'
 
 # Honeycomb
-gem 'honeycomb-beeline', '>= 2.0.0'
-gem 'libhoney', '>= 1.14.2'
+gem 'honeycomb-beeline', '>= 2.4.0'
+gem 'libhoney', '>= 1.18.0'
 gem 'rack-honeycomb', '~> 0.5.0'
+
+# OkComputer
+gem 'okcomputer'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
