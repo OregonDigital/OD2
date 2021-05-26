@@ -59,7 +59,7 @@ RUN chown -R app:app /usr/local/bundle
 # Pre-install gems so we aren't reinstalling all the gems when literally any
 # filesystem change happens
 RUN mkdir -p /data/build
-RUN chown -R app:app /data
+RUN chown -R app:app /data && rm -rf /data/.cache
 WORKDIR /data
 COPY --chown=app:app Gemfile /data
 COPY --chown=app:app Gemfile.lock /data
@@ -86,9 +86,10 @@ ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
 
 
 RUN if [ "${RAILS_ENV}" = "production" ]; then \
-  echo "Precompiling assets with $RAILS_ENV environment"; \
-  RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
-  cp public/assets/404-*.html public/404.html; \
-  cp public/assets/500-*.html public/500.html; \
-  yarn install; \
+    echo "Precompiling assets with $RAILS_ENV environment"; \
+    rm -rf /data/.cache; \
+    RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
+    cp public/assets/404-*.html public/404.html; \
+    cp public/assets/500-*.html public/500.html; \
+    #yarn install; \
   fi
