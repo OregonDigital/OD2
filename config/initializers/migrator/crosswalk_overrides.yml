@@ -5,9 +5,6 @@ overrides:
   #  predicate: http://sw-portal.deri.org/ontologies/swportal#hasNumber
   #  predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
 
-  #not used in OD2
-  - predicate: http://opaquenamespace.org/ns/fullText
-    function: return_nil
   #set and primarySet handled separately, do not map
   - predicate: http://opaquenamespace.org/ns/primarySet
     function: return_nil
@@ -17,10 +14,9 @@ overrides:
   - predicate: http://opaquenamespace.org/ns/boxName
     function: return_nil
 
-  #flip predicate, remediate any variants
-  - property: rights_holder
-    predicate: http://opaquenamespace.org/rights/rightsHolder
-    multiple: true
+  #not used in OD2
+  - predicate: http://opaquenamespace.org/rights/rightsHolder
+    function: return_nil
 
   #multiple must be true (is false on map)
   - property: repository_attributes

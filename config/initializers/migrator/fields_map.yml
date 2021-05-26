@@ -1,6 +1,5 @@
 fields:
   alternative: alternative
-  captionTitle: 
   tribalTitle: tribal_title
   title: title
   creator: creator
@@ -47,7 +46,6 @@ fields:
   modeOfIssuance: mode_of_issuance
   note: mods_note
   motif: motif
-  numberOfPages: 
   objectOrientation: object_orientation
   photographOrientation: photograph_orientation
   tribalNotes: tribal_notes
@@ -93,9 +91,7 @@ fields:
   awardDate: award_date
   collectedDate: collected_date
   created: date_created
-  earliestDate: 
   issued: issued
-  latestDate: 
   viewDate: view_date
   accessionNumber: accession_number
   barcode: barcode
@@ -107,7 +103,6 @@ fields:
   accessRestrictions: access_restrictions
   copyrightClaimant: copyright_claimant
   dcRightsHolder: rights_holder
-  rightsHolder: 
   rights: rights_statement
   useRestrictions: use_restrictions
   od_repository: repository
@@ -142,22 +137,17 @@ fields:
   relation: relation
   type: resource_type
   workType: workType
-  format: 
-  extent: 
   material: material
   measurements: measurements
-  imageOrientation: 
   physicalExtent: physical_extent
-  support: 
   technique: technique
   colourContent: color_content
   conversion: conversion
-  dateDigitized: dateDigitized
-  fullText: fullText
+  fullText: full_text
   exhibit: exhibit
   institution: institution
   primarySet: primary_set
   replacesUrl: replaces_url
   imageResolution: resolution
-  set:
-  tribalStatus:
+  modified: date_modified
+  submissionDate: date_uploaded
