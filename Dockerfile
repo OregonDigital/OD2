@@ -8,17 +8,6 @@ RUN gem install bundler
 
 FROM bundler as dependencies
 
-# add nodejs, yarn, and other dependencies
-#RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
-#  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-#  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-#  apt-get update && apt-get upgrade -y && \
-#  apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
-#  build-essential libpq-dev libreoffice imagemagick graphicsmagick unzip \
-#  zip ghostscript vim tesseract-ocr poppler-utils libopenjp2-tools \
-#  ffmpeg qt5-default libqt5webkit5-dev xvfb xauth openjdk-11-jre \
-#  --fix-missing --allow-unauthenticated
-
 # The alpine way
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs imagemagick unzip ghostscript vim yarn \
@@ -91,5 +80,5 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
     RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
     cp public/assets/404-*.html public/404.html; \
     cp public/assets/500-*.html public/500.html; \
-    #yarn install; \
+    yarn install; \
   fi
