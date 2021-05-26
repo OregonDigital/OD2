@@ -13,7 +13,8 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs imagemagick unzip ghostscript vim yarn \
   git sqlite sqlite-dev postgresql-dev libressl libressl-dev java-common \
   curl libc6-compat build-base tzdata zip autoconf automake libtool texinfo \
-  bash bash-completion java-common openjdk11-jre-headless
+  bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
+  poppler ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg
 
 # install libffi 3.2.1
 # https://github.com/libffi/libffi/archive/refs/tags/v3.2.1.tar.gz
