@@ -233,3 +233,4 @@ workflows:
             branches:
               only: master
           repo: od2_web
+          environment: production
