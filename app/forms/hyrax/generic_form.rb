@@ -7,13 +7,12 @@ module Hyrax
     self.terms += (Generic.generic_properties.map(&:to_sym) + Generic.controlled_properties).sort + %i[date_uploaded date_modified]
     self.terms -= %i[based_near]
     self.terms = self.terms.uniq
-
     self.required_fields = %i[title resource_type rights_statement identifier]
 
     def primary_terms
       # Push the required fields to the top of the form
       # Then make sure they arent rendered again lower in the form
-      required_fields + (Generic::ORDERED_TERMS - required_fields) -
+      required_fields -
         %i[alternative_title access_right rights_notes
            files visibility_during_embargo embargo_release_date
            visibility_after_embargo visibility_during_lease
