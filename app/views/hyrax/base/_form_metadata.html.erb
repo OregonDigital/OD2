@@ -2,7 +2,7 @@
   <% f.object.primary_terms.each do |term|%>
     <%= render_edit_field_partial(term, f: f) %>
   <% end %>
-  <% Generic::ORDERED_TERMS.each do |term|%>
+  <% f.object.model_class::ORDERED_TERMS.each do |term|%>
     <%= "<a id=\"#{term[:section_name].downcase}\"></a>".html_safe unless term[:section_name].blank? %>
     <%= render_edit_field_partial(term[:name], f: f) %>
   <% end %>
