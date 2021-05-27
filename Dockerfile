@@ -16,6 +16,10 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg
 
+# Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
+RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
+  echo 'America/Los_Angeles' > /etc/timezone && apk del tzdata --purge
+
 # install libffi 3.2.1
 # https://github.com/libffi/libffi/archive/refs/tags/v3.2.1.tar.gz
 # https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1
@@ -64,6 +68,7 @@ COPY --chown=app:app . /data
 
 #ARG RAILS_ENV=development
 #ARG FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
+#ARG DEPLOYED_VERSION=development
 ARG RAILS_ENV=${RAILS_ENV}
 ENV RAILS_ENV=${RAILS_ENV}
 ARG FEDORA_URL=${FEDORA_URL}
@@ -71,9 +76,10 @@ ENV FEDORA_URL=${FEDORA_URL}
 
 FROM code
 
-#ARG DEPLOYED_VERSION=development
-ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
+# Uninstall tools for compiling native code
+RUN apk --no-cache update && apk del gcc g++ autoconf automake binutils --purge
 
+ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
 
 RUN if [ "${RAILS_ENV}" = "production" ]; then \
     echo "Precompiling assets with $RAILS_ENV environment"; \
@@ -81,5 +87,4 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
     RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
     cp public/assets/404-*.html public/404.html; \
     cp public/assets/500-*.html public/500.html; \
-    #yarn install; \
   fi
