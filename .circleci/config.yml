@@ -180,7 +180,8 @@ jobs:
             echo export RAILS_ENV="$RAILS_ENV" >> $BASH_ENV
             echo export TAG="$DATETIME-$APP_VERSION-$GIT_SHORT_HASH" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH" >> $BASH_ENV
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.2
       - docker/check:
           registry: registry.library.oregonstate.edu
       - docker/pull:
