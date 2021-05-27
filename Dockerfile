@@ -77,7 +77,9 @@ ENV FEDORA_URL=${FEDORA_URL}
 FROM code
 
 # Uninstall tools for compiling native code
-RUN apk --no-cache update && apk del gcc g++ autoconf automake binutils --purge
+USER root
+RUN apk --no-cache update && apk del autoconf automake gcc g++ --purge
+USER app
 
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
 
