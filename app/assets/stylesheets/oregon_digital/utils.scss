@@ -22,3 +22,9 @@
 .float-none {
   float: none !important;
 }
+
+.flex-container,
+.flex-item {
+  display: flex;
+  flex-direction: row;
+}

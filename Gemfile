@@ -20,7 +20,7 @@ gem 'hyrax', '3.0.1'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'pg'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 gem 'rails', '~> 5.2.5'
 gem 'rsolr', '>= 1.0'
 gem 'sass-rails', '~> 5.0'
@@ -46,9 +46,12 @@ gem 'omniauth-cas'
 gem 'omniauth-saml'
 
 # Honeycomb
-gem 'honeycomb-beeline', '>= 2.0.0'
-gem 'libhoney', '>= 1.14.2'
+gem 'honeycomb-beeline', '>= 2.4.0'
+gem 'libhoney', '>= 1.18.0'
 gem 'rack-honeycomb', '~> 0.5.0'
+
+# OkComputer
+gem 'okcomputer'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
