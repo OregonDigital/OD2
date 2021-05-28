@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 588b89189874a3fd1a92ce68b80cedb3cbe2be49
+  revision: 281a37c02a149abf1d0ccdd77949dad96ba0e449
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -42,7 +42,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.1.1)
+    aasm (5.2.0)
       concurrent-ruby (~> 1.0)
     actioncable (5.2.5)
       actionpack (= 5.2.5)
