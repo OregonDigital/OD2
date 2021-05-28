@@ -176,7 +176,7 @@ jobs:
           command: |
             export APP_VERSION=$(cat lib/oregon_digital/version.rb | grep VERSION | cut -d "=" -f 2 | sed "s/['\" ]//g")
             export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
-            export DATETIME=$(date "+%Y%m%d")
+            export DATETIME=$(date "+%Y%m%d%H%M")
             export TAG="$DATETIME-$GIT_SHORT_HASH"
             export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH"
             echo export RAILS_ENV="$RAILS_ENV" >> $BASH_ENV
