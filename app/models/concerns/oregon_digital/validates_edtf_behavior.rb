@@ -10,6 +10,7 @@ module OregonDigital
     end
 
     private
+
     def dates_edtf_format
       edtf_fields.each do |field|
         send(field).each do |value|
@@ -22,7 +23,7 @@ module OregonDigital
     end
 
     def edtf_fields
-      %i[ date acquisition_date award_date collected_date issued view_date ]
+      %i[date acquisition_date award_date collected_date issued view_date]
     end
   end
 end
