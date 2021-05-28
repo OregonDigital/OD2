@@ -83,4 +83,12 @@ Hyrax::Migrator.config do |config|
   # The time a presigned_url is available after the upload in seconds (aws_s3 service). It defaults to 86400 seconds (24 hours).
   # config.aws_s3_url_availability = 86400
 
+  # VerifyWorkService uses this config as the default list of verifications to run
+  config.verify_services = [
+    Hyrax::Migrator::Services::VerifyMetadataService,
+    Hyrax::Migrator::Services::VerifyVisibilityService,
+    Hyrax::Migrator::Services::VerifyChecksumsService,
+    Hyrax::Migrator::Services::VerifyChildrenService,
+    Hyrax::Migrator::Services::VerifyDerivativesService
+  ]
 end
