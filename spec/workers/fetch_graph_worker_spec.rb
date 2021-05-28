@@ -5,7 +5,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
   let(:worker) { described_class.new }
   let(:uri) { 'http://my.queryuri.com' }
   let(:user) { build(:user) }
-  let(:model) { create(:generic, title: ['foo'], keyword: ['bar'], award_date: ['baz'], creator: [creator_controlled_val], subject: [subject_controlled_val], ranger_district: [location_controlled_val], taxon_class: [scientific_controlled_val], depositor: user.email, id: 123) }
+  let(:model) { create(:generic, title: ['foo'], keyword: ['bar'], award_date: ['1900-12-31'], creator: [creator_controlled_val], subject: [subject_controlled_val], ranger_district: [location_controlled_val], taxon_class: [scientific_controlled_val], depositor: user.email, id: 123) }
   let(:creator_controlled_val) { OregonDigital::ControlledVocabularies::Creator.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
   let(:subject_controlled_val) { OregonDigital::ControlledVocabularies::Subject.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
   let(:location_controlled_val) { Hyrax::ControlledVocabularies::Location.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
