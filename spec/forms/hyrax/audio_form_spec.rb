@@ -4,7 +4,7 @@ RSpec.describe Hyrax::AudioForm do
   let(:new_form) { described_class.new(Audio.new, nil, instance_double('Controller')) }
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
-  let(:props) { Generic::ORDERED_TERMS }
+  let(:props) { %i[title resource_type rights_statement identifier] }
   let(:terms) { new_form.primary_terms + new_form.secondary_terms }
   let(:model) { create(:audio) }
 

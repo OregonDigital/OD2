@@ -5,7 +5,7 @@ RSpec.describe Hyrax::ImageForm do
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
   let(:props) do
-    Image::ORDERED_TERMS
+    %i[title resource_type rights_statement identifier]
   end
   let(:terms) { new_form.primary_terms + new_form.secondary_terms }
   let(:model) { create(:image) }
