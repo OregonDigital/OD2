@@ -17,7 +17,7 @@ RSpec.describe Hyrax::ImageForm do
 
   it 'responds to terms with the proper list of terms' do
     props.each do |t|
-      expect(terms).to include(t[:name])
+      expect(terms).to include(t)
     end
   end
 
