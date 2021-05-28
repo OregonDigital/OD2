@@ -15,7 +15,7 @@ RSpec.describe Hyrax::AudioForm do
 
   it 'responds to terms with the proper list of terms' do
     props.each do |prop|
-      expect(terms).to include(prop)
+      expect(terms).to include(prop[:name])
     end
   end
 

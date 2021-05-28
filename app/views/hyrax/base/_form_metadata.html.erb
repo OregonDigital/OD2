@@ -3,8 +3,10 @@
     <%= render_edit_field_partial(term, f: f) %>
   <% end %>
   <% f.object.model_class::ORDERED_TERMS.each do |term|%>
-    <%= "<a id=\"#{term[:section_name].downcase}\"></a>".html_safe unless term[:section_name].blank? %>
-    <%= render_edit_field_partial(term[:name], f: f) %>
+    <% unless f.object.primary_terms.include? term[:name] %>
+      <%= "<a id=\"#{term[:section_name].downcase}\"></a>".html_safe unless term[:section_name].blank? %>
+      <%= render_edit_field_partial(term[:name], f: f) %>
+    <% end %>
   <% end %>
 </div>
 <% if f.object.display_additional_fields? %>
