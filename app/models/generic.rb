@@ -20,6 +20,7 @@ class Generic < ActiveFedora::Base
     def dates_edtf_format
       edtf_fields.each do |field|
         send(field).each do |value|
+          errors.add(:base, 'EDTF format error') unless EDTF.parse(value).present?
           errors.add(field, "'#{value}' is not in EDTF format") unless EDTF.parse(value).present?
         end
       end
