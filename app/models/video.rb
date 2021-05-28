@@ -4,6 +4,7 @@
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::WorkBehavior
+  include ::OregonDigital::ValidatesEDTFBehavior
 
   self.indexer = VideoIndexer
   # Change this to restrict which works can be added as a child.
