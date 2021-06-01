@@ -1,9 +1,10 @@
-<div class="base-terms">
+<div class="base-terms" data-spy="scroll" data-target="#toc">
   <% f.object.primary_terms.each do |term|%>
     <%= render_edit_field_partial(term, f: f) %>
   <% end %>
   <% f.object.model_class::ORDERED_TERMS.each do |term|%>
     <% unless f.object.primary_terms.include? term[:name] %>
+      <%= "<h1>#{term[:section_name]}</h1>".html_safe unless term[:section_name].blank? %>
       <%= "<a id=\"#{term[:section_name].downcase}\"></a>".html_safe unless term[:section_name].blank? %>
       <%= render_edit_field_partial(term[:name], f: f) %>
     <% end %>
