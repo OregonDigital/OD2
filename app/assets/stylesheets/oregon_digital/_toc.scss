@@ -1,52 +1,54 @@
-nav[data-toggle="toc"] .nav > li > a {
-  display: block !important;
-  padding: 4px 20px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  color: #767676 !important;
-}
-nav[data-toggle="toc"] .nav > li > a:hover,
-nav[data-toggle="toc"] .nav > li > a:focus {
-  padding-left: 19px !important;
-  color: #563d7c !important;
-  text-decoration: none !important;
-  background-color: transparent !important;
-  border-left: 1px solid #563d7c !important;
-}
-nav[data-toggle="toc"] .nav-link.active,
-nav[data-toggle="toc"] .nav-link.active:hover,
-nav[data-toggle="toc"] .nav-link.active:focus {
-  padding-left: 18px !important;
-  font-weight: bold !important;
-  color: #563d7c !important;
-  background-color: transparent !important;
-  border-left: 2px solid #563d7c !important;
+/* sidebar */
+.bs-docs-sidebar {
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-/* Nav: second level (shown on .active) */
-nav[data-toggle="toc"] .nav-link + ul {
-  display: none; /* Hide by default, but at >768px, show it */
-  padding-bottom: 10px;
+/* all links */
+.bs-docs-sidebar .nav>li>a {
+  color: #999;
+  border-left: 2px solid transparent;
+  padding: 4px 20px;
+  font-size: 13px;
+  font-weight: 400;
 }
 
-nav[data-toggle="toc"] .nav .nav > li > a {
+/* nested links */
+.bs-docs-sidebar .nav .nav>li>a {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 30px;
   font-size: 12px;
-  font-weight: normal;
 }
-nav[data-toggle="toc"] .nav .nav > li > a:hover,
-nav[data-toggle="toc"] .nav .nav > li > a:focus {
-  padding-left: 29px;
+
+/* active & hover links */
+.bs-docs-sidebar .nav>.active>a, 
+.bs-docs-sidebar .nav>li>a:hover, 
+.bs-docs-sidebar .nav>li>a:focus {
+  color: #563d7c;                 
+  text-decoration: none;          
+  background-color: transparent;  
+  border-left-color: #563d7c; 
 }
-nav[data-toggle="toc"] .nav .nav > li > .active,
-nav[data-toggle="toc"] .nav .nav > li > .active:hover,
-nav[data-toggle="toc"] .nav .nav > li > .active:focus {
-  padding-left: 28px;
+/* all active links */
+.bs-docs-sidebar .nav>.active>a, 
+.bs-docs-sidebar .nav>.active:hover>a,
+.bs-docs-sidebar .nav>.active:focus>a {
+  font-weight: 700;
+}
+/* nested active links */
+.bs-docs-sidebar .nav .nav>.active>a, 
+.bs-docs-sidebar .nav .nav>.active:hover>a,
+.bs-docs-sidebar .nav .nav>.active:focus>a {
   font-weight: 500;
 }
 
-nav[data-toggle="toc"] .nav-link.active + ul {
-  display: block;
+/* hide inactive nested list */
+.bs-docs-sidebar .nav ul.nav {
+  display: none;           
+}
+/* show active nested list */
+.bs-docs-sidebar .nav>.active>ul.nav {
+  display: block;           
 }
