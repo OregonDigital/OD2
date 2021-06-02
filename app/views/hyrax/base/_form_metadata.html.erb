@@ -1,4 +1,4 @@
-<div class="base-terms" data-spy="scroll" data-target="#toc">
+<div id="scrollspy-toc" class="base-terms" data-spy="scroll" data-target="#toc">
   <% f.object.primary_terms.each do |term|%>
     <%= render_edit_field_partial(term, f: f) %>
   <% end %>
