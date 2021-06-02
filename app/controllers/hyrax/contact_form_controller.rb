@@ -17,7 +17,7 @@ module Hyrax
       if @contact_form.valid? && check_recaptcha
         deliver_message
       else
-        flash.now[:error] = 'Sorry, this message was not sent successfully. ' +
+        flash[:error] = 'Sorry, this message was not sent successfully. ' +
                             @contact_form.errors.full_messages.map(&:to_s).join(", ")
       end
       redirect_back fallback_location: '/'
@@ -27,13 +27,13 @@ module Hyrax
 
     def handle_create_exception(exception)
       logger.error("Contact form failed to send: #{exception.inspect}")
-      flash.now[:error] = 'Sorry, this message was not delivered.'
+      flash[:error] = 'Sorry, this message was not delivered.'
       render :new
     end
 
     def deliver_message
       ContactMailer.contact(@contact_form).deliver_now
-      flash.now[:notice] = 'Thank you for your message!'
+      flash[:notice] = 'Thank you for your message!'
       after_deliver
       @contact_form = ContactForm.new
     end
