@@ -20,7 +20,7 @@ module Hyrax
         flash.now[:error] = 'Sorry, this message was not sent successfully. ' +
                             @contact_form.errors.full_messages.map(&:to_s).join(", ")
       end
-      render :new
+      redirect_back fallback_location: '/'
     rescue RuntimeError => exception
       handle_create_exception(exception)
     end
