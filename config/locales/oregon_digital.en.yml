@@ -11,6 +11,12 @@ en:
         title: 'Export collection'
       share_form:
         title: 'Share collection'
+    contact_form:
+      issue_types:
+        browsing: Browsing and searching
+        reporting: Reporting a problem
+        copyright: Using this/an item for something (copyright and permissions)
+        general: General inquiry or request
     explore_collections:
       actions:
         edit: 'Edit'
