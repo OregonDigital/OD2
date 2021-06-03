@@ -35,7 +35,6 @@ module Hyrax
       ContactMailer.contact(@contact_form).deliver_now
       flash[:notice] = 'Thank you for your message!'
       after_deliver
-      @contact_form = ContactForm.new
     end
 
     # Override this method if you want to perform additional operations
