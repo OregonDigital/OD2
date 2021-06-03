@@ -18,11 +18,11 @@ module Hyrax
         deliver_message
       else
         flash[:error] = 'Sorry, this message was not sent successfully. ' +
-                            @contact_form.errors.full_messages.map(&:to_s).join(", ")
+                        @contact_form.errors.full_messages.map(&:to_s).join(', ')
       end
       redirect_back fallback_location: '/'
-    rescue RuntimeError => exception
-      handle_create_exception(exception)
+    rescue RuntimeError => e
+      handle_create_exception(e)
     end
 
     def handle_create_exception(exception)
