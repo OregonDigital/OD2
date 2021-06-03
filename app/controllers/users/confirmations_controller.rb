@@ -17,4 +17,10 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     end
   end
   # rubocop:enable Metrics/AbcSize
+
+  private
+
+  def after_confirmation_path_for(_resource_name, _resource)
+    root_path || super
+  end
 end
