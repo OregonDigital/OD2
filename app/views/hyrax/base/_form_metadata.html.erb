@@ -4,11 +4,9 @@
   <% end %>
   <% f.object.model_class::ORDERED_TERMS.each do |term|%>
     <% unless f.object.primary_terms.include? term[:name] %>
-      <%= "<section id=\"#{term[:section_name]}\">".html_safe if term.key?(:begin_section) && term[:begin_section] %>
       <%= "<h1>#{term[:section_name]}</h1>".html_safe unless term[:section_name].blank? %>
       <%= "<a id=\"#{term[:section_name]}\"></a>".html_safe unless term[:section_name].blank? %>
       <%= render_edit_field_partial(term[:name], f: f) %>
-      <%= "</section>".html_safe if term.key?(:end_section) && term[:end_section] %>
     <% end %>
   <% end %>
 </div>
