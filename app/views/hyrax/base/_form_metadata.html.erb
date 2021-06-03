@@ -4,8 +4,7 @@
   <% end %>
   <% f.object.model_class::ORDERED_TERMS.each do |term|%>
     <% unless f.object.primary_terms.include? term[:name] %>
-      <%= "<h1>#{term[:section_name]}</h1>".html_safe unless term[:section_name].blank? %>
-      <%= "<a id=\"#{term[:section_name]}\"></a>".html_safe unless term[:section_name].blank? %>
+      <%= "<h2 id=\"#{term[:section_name]}\">#{term[:section_name]}</h2>".html_safe unless term[:section_name].blank? %>
       <%= render_edit_field_partial(term[:name], f: f) %>
     <% end %>
   <% end %>
