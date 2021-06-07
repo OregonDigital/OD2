@@ -8,7 +8,7 @@ RSpec.describe OregonDigital::ContactForm do
     context 'with form data' do
       it 'provides email headers' do
         expect(form.submitter_headers).to eq(
-          subject: 'Contact form: test subject',
+          subject: 'Oregon Digital Contact Request -  test subject',
           to: 'test@test.com',
           from: Hyrax.config.contact_email
         )
