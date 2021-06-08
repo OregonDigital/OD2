@@ -558,6 +558,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :digital_set, predicate: RDF::URI.new('http://opaquenamespace.org/ns/set'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
       property :exhibit, predicate: RDF::URI.new('http://opaquenamespace.org/ns/exhibit'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable, :facetable
       end
@@ -734,7 +738,7 @@ module OregonDigital
         { name: 'art_series', is_controlled: false, collection_facetable: false },
         { name: 'motif', is_controlled: false, collection_facetable: false },
         { name: 'resource_type_label', is_controlled: true, name_label: 'Media', collection_facetable: true },
-        { name: 'set', is_controlled: false, collection_facetable: false },
+        { name: 'digital_set', is_controlled: false, collection_facetable: false },
         { name: 'exhibit', is_controlled: false, collection_facetable: true },
         { name: 'institution_label', is_controlled: true, collection_facetable: true },
         { name: 'conversion', is_controlled: false, collection_facetable: false },
@@ -886,6 +890,7 @@ module OregonDigital
         { name: :technique, section_name: '' },
         { name: :conversion, section_name: 'Administratives' },
         { name: :full_text, section_name: '' },
+        { name: :digital_set, section_name: '' },
         { name: :exhibit, section_name: '' },
         { name: :institution, section_name: '' },
         { name: :original_filename, section_name: '' },
