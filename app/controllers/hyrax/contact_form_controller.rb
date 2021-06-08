@@ -7,6 +7,9 @@ module Hyrax
     before_action :build_contact_form
     layout 'homepage'
 
+    class_attribute :model_class
+    self.model_class = OregonDigital::ContactForm
+
     def new; end
 
     def create
@@ -14,24 +17,24 @@ module Hyrax
       if @contact_form.valid? && check_recaptcha
         deliver_message
       else
-        flash.now[:error] = 'Sorry, this message was not sent successfully. '
+        flash[:error] = 'Sorry, this message was not sent successfully. ' +
+                        @contact_form.errors.full_messages.map(&:to_s).join(', ')
       end
-      render :new
+      redirect_back fallback_location: '/'
     rescue RuntimeError => e
       handle_create_exception(e)
     end
 
     def handle_create_exception(exception)
       logger.error("Contact form failed to send: #{exception.inspect}")
-      flash.now[:error] = 'Sorry, this message was not delivered.'
+      flash[:error] = 'Sorry, this message was not delivered.'
       render :new
     end
 
     def deliver_message
       ContactMailer.contact(@contact_form).deliver_now
-      flash.now[:notice] = 'Thank you for your message!'
+      flash[:notice] = 'Thank you for your message!'
       after_deliver
-      @contact_form = ContactForm.new
     end
 
     # Override this method if you want to perform additional operations
@@ -44,7 +47,7 @@ module Hyrax
     private
 
     def build_contact_form
-      @contact_form = OregonDigital::ContactForm.new(contact_form_params)
+      @contact_form = model_class.new(contact_form_params)
     end
 
     def contact_form_params

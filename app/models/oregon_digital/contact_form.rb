@@ -12,5 +12,9 @@ module OregonDigital
         from: Hyrax.config.contact_email
       }
     end
+
+    def self.issue_types_for_locale
+      I18n.t('oregon_digital.contact_form.issue_types').values.select(&:present?)
+    end
   end
 end
