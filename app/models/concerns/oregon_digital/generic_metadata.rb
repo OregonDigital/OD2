@@ -558,10 +558,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :set, predicate: RDF::URI.new('http://opaquenamespace.org/ns/set'), multiple: true, basic_searchable: true do |index|
-        index.as :stored_searchable
-      end
-
       property :exhibit, predicate: RDF::URI.new('http://opaquenamespace.org/ns/exhibit'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable, :facetable
       end
