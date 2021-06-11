@@ -149,5 +149,4 @@ fields:
   primarySet: primary_set
   replacesUrl: replaces_url
   imageResolution: resolution
-  modified: date_modified
   submissionDate: date_uploaded
