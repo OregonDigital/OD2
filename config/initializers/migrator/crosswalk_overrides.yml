@@ -232,3 +232,7 @@ overrides:
   - predicate: http://www.rdaregistry.info/Elements/m/#containedInManifestation.en
     function: return_nil
 
+  # do not migrate
+  - predicate: http://purl.org/dc/terms/modified
+    function: return_nil
+

@@ -8,7 +8,7 @@ module Hyrax
         if verify_recaptcha(model: @contact_form)
           true
         else
-          flash.now[:error] = 'Captcha did not verify properly.'
+          flash[:error] = 'Captcha did not verify properly.'
           false
         end
       else

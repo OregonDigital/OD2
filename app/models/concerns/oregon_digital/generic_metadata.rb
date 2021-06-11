@@ -734,7 +734,6 @@ module OregonDigital
         { name: 'art_series', is_controlled: false, collection_facetable: false },
         { name: 'motif', is_controlled: false, collection_facetable: false },
         { name: 'resource_type_label', is_controlled: true, name_label: 'Media', collection_facetable: true },
-        { name: 'set', is_controlled: false, collection_facetable: false },
         { name: 'exhibit', is_controlled: false, collection_facetable: true },
         { name: 'institution_label', is_controlled: true, collection_facetable: true },
         { name: 'conversion', is_controlled: false, collection_facetable: false },

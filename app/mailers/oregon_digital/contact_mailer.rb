@@ -2,7 +2,7 @@
 
 module OregonDigital
   # Mailer for contacting the submitter
-  class ContactMailer < ActionMailer::Base
+  class ContactMailer < ApplicationMailer
     def contact(contact_form)
       @contact_form = contact_form
       # Check for spam

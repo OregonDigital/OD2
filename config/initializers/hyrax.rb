@@ -33,7 +33,7 @@ Hyrax.config do |config|
   config.contact_email = ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
 
   # Text prefacing the subject entered in the contact form
-  # config.subject_prefix = "Contact form:"
+  config.subject_prefix = "Oregon Digital Contact Request - "
 
   # How many notifications should be displayed on the dashboard
   # config.max_notifications_for_dashboard = 5
