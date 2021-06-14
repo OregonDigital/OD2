@@ -51,7 +51,7 @@
   }
 }
 
-#all_button{
+#explore-tabs a {
   height:57px;
   width: 150px;
 }
@@ -60,8 +60,8 @@
 .triangle_down_osu,
 .triangle_down_uo,
 .triangle_down_my {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid $dark-orange;

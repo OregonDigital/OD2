@@ -1,0 +1,28 @@
+<div id="explore-tabs" class='text-center'>
+  <ul class='nav nav-pills visible-all-inline-block'>
+    <li class="<%= 'active' if tab == controller.class::TABS[:all] %>">
+      <div class="stacker-container">
+        <%= link_to 'All', all_explore_collections_path, class: 'btn btn-outline', id: 'all_button' %>
+        <div class="triangle_down_all"></div>
+      </div>
+    </li>
+    <li class="<%= 'active' if tab == controller.class::TABS[:osu] %>">
+      <div class="stacker-container">
+        <%= link_to 'OSU', osu_explore_collections_path, class: 'btn btn-outline', id: 'osu_button' %>
+        <div class="triangle_down_osu"></div>
+      </div>
+    </li>
+    <li class="<%= 'active' if tab == controller.class::TABS[:uo] %>">
+      <div class="stacker-container">
+        <%= link_to 'UO', uo_explore_collections_path, class: 'btn btn-outline', id: 'uo_button' %>
+        <div class="triangle_down_osu"></div>
+      </div>
+    </li>
+    <li class="<%= 'active' if tab == controller.class::TABS[:my] %>">
+      <div class="stacker-container">
+        <%= link_to 'Saved', my_explore_collections_path, class: 'btn btn-outline', id: 'my_button' %>
+        <div class="triangle_down_osu"></div>
+      </div>
+    </li>
+  </ul>
+</div>

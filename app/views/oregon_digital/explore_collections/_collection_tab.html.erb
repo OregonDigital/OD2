@@ -1,4 +1,4 @@
-<div id="<%= tab %>" class="tab-pane fade <%= 'in active' if tab == controller.class::TABS[:all] %>">
+<div id="<%= tab %>" class="">
   <%= render 'display_mode_buttons', tab: tab %>
   <h3 class='sr-only'><%= header %> </h3>
   <% if collections.nil? %>

@@ -7,39 +7,32 @@ module OregonDigital
     include Blacklight::SearchHelper
     include Blacklight::AccessControls::Catalog
 
-    def index; end
+    attr_accessor :tab, :builder
+
+    def all;
+      @tab = TABS[:all]
+      @builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self).rows(1000)
+      render :index
+    end
+    def osu;
+      @tab = TABS[:osu]
+      @builder = OregonDigital::OsuCollectionsSearchBuilder.new(self).rows(1000)
+      render :index
+    end
+    def uo;
+      @tab = TABS[:uo]
+      @builder = OregonDigital::UoCollectionsSearchBuilder.new(self).rows(1000)
+      render :index
+    end
+    def my;
+      @tab = TABS[:my]
+      @builder = OregonDigital::MyCollectionsSearchBuilder.new(self).rows(1000)
+      render :index
+    end
 
     # Return all collections
     def collections
-      builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
-    end
-
-    # Return OSU collections
-    def osu_collections
-      builder = OregonDigital::OsuCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
-    end
-
-    # Return UO collections
-    def uo_collections
-      builder = OregonDigital::UoCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
-    end
-
-    # Return My collections
-    def my_collections
-      builder = OregonDigital::MyCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
+      response = repository.search(@builder)
       response.documents
     rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
       []
