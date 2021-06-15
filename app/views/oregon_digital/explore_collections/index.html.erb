@@ -2,8 +2,9 @@
 
 <%= render 'explore_tabs', tab: controller.tab %>
 
-<div id="explore-panes" class="tab-content">
-  <%= render 'collection_tab', tab: controller.tab, collections: controller.collections, header: 'Oregon State University collections' %>
+<div class="container">
+  <%= render 'constraints' %>
+  <%= render 'search_results' %>
 </div>
 
 <%= render 'oregon_digital/explore_collections/form_for_edit_collection' %>

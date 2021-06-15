@@ -3,30 +3,48 @@
 module OregonDigital
   # Controller for explore collections interface
   class ExploreCollectionsController < ApplicationController
-    include Blacklight::SearchContext
-    include Blacklight::SearchHelper
-    include Blacklight::AccessControls::Catalog
+    include BlacklightAdvancedSearch::Controller
+    include BlacklightRangeLimit::ControllerOverride
+    include Hydra::Catalog
+    include Hydra::Controller::ControllerBehavior
+    include OregonDigital::BlacklightConfigBehavior
 
     attr_accessor :tab, :builder
 
-    def all;
+    # Add the 'catalog' folder to where views are looked for
+    # This allows us to render blacklight/catalog views from the hyrax/admin/workflows folder
+    def self.local_prefixes
+      super + ['catalog']
+    end
+
+    configure_blacklight do |config|
+      # Set the search builder for this search interface so only in-review works show up
+      config.search_builder_class = @builder
+    end
+
+    # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
+    def all
       @tab = TABS[:all]
       @builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self).rows(1000)
+      index
       render :index
     end
-    def osu;
+    def osu
       @tab = TABS[:osu]
       @builder = OregonDigital::OsuCollectionsSearchBuilder.new(self).rows(1000)
+      index
       render :index
     end
-    def uo;
+    def uo
       @tab = TABS[:uo]
       @builder = OregonDigital::UoCollectionsSearchBuilder.new(self).rows(1000)
+      index
       render :index
     end
-    def my;
+    def my
       @tab = TABS[:my]
       @builder = OregonDigital::MyCollectionsSearchBuilder.new(self).rows(1000)
+      index
       render :index
     end
 
