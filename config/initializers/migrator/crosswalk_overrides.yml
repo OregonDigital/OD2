@@ -189,9 +189,6 @@ overrides:
   # format
   - predicate: http://purl.org/dc/terms/format
     function: return_nil
-  # extent
-  - predicate: http://purl.org/dc/terms/extent
-    function: return_nil
   # support
   - predicate: http://opaquenamespace.org/ns/vra/support
     function: return_nil
@@ -244,4 +241,9 @@ overrides:
     multiple: true
   - property: box
     predicate: https://schema.org/box
+    multiple: true
+
+  # flip extent
+  - property: measurements
+    predicate: http://purl.org/dc/terms/extent
     multiple: true
