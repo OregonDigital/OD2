@@ -146,7 +146,6 @@ fields:
   fullText: full_text
   exhibit: exhibit
   institution: institution
-  primarySet: primary_set
   replacesUrl: replaces_url
   imageResolution: resolution
   submissionDate: date_uploaded

@@ -235,4 +235,13 @@ overrides:
   # do not migrate
   - predicate: http://purl.org/dc/terms/modified
     function: return_nil
+  - predicate: http://opaquenamespace.org/ns/dateDigitized
+    function: return_nil
 
+  # predicate tweaks
+  - property: street_address
+    predicate: http://www.loc.gov/standards/mads/rdf/v1.html#streetAddress
+    multiple: true
+  - property: box
+    predicate: https://schema.org/box
+    multiple: true
