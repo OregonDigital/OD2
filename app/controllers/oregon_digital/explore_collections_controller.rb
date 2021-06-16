@@ -18,32 +18,31 @@ module OregonDigital
     end
 
     configure_blacklight do |config|
-      # Set the search builder for this search interface so only in-review works show up
-      config.search_builder_class = @builder
+      config.view.masonry.partials = [:index]
     end
 
     # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
     def all
       @tab = TABS[:all]
-      @builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self).rows(1000)
+      blacklight_config.search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
       index
       render :index
     end
     def osu
       @tab = TABS[:osu]
-      @builder = OregonDigital::OsuCollectionsSearchBuilder.new(self).rows(1000)
+      blacklight_config.search_builder_class = OregonDigital::OsuCollectionsSearchBuilder
       index
       render :index
     end
     def uo
       @tab = TABS[:uo]
-      @builder = OregonDigital::UoCollectionsSearchBuilder.new(self).rows(1000)
+      blacklight_config.search_builder_class = OregonDigital::UoCollectionsSearchBuilder
       index
       render :index
     end
     def my
       @tab = TABS[:my]
-      @builder = OregonDigital::MyCollectionsSearchBuilder.new(self).rows(1000)
+      blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
       index
       render :index
     end
