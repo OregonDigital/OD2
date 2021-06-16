@@ -139,6 +139,7 @@ fields:
   workType: workType
   material: material
   measurements: measurements
+  extent: measurements
   physicalExtent: physical_extent
   technique: technique
   colourContent: color_content
