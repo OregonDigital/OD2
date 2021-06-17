@@ -18,7 +18,8 @@ module OregonDigital
     end
 
     configure_blacklight do |config|
-      config.view.masonry.partials = [:index]
+      config.view.gallery.if = false
+      config.view.masonry.partials = %i[metadata]
     end
 
     # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
