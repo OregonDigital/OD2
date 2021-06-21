@@ -6,4 +6,5 @@ module HyraxHelper
   include Hyrax::BlacklightOverride
   include Hyrax::HyraxHelperBehavior
   include OregonDigital::HyraxHelperBehavior
+  include OregonDigital::ContactFormHelper
 end

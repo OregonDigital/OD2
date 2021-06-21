@@ -35,7 +35,9 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
         page.execute_script("$('input[type=file]').css('position','inherit')")
         attach_file('files[]', upload_file_path, visible: false)
       end
-      click_link 'Descriptions' # switch tab
+      within('ul.nav-tabs') do
+        click_link 'Descriptions' # switch tab
+      end
       within('div.video_title') do
         fill_in('Title', with: 'Test Title')
       end

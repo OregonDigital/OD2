@@ -14,7 +14,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   git sqlite sqlite-dev postgresql-dev libressl libressl-dev java-common \
   curl libc6-compat build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
-  poppler ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg
+  poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \

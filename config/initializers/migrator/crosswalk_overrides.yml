@@ -28,13 +28,14 @@ overrides:
   #map states that license in OD2 uses dct/rights so this is in main entry
   #however actually needs to be mapped to rights_statement
   #does not use _attributes
+  #must be multiple:true
   - property: rights_statement
     predicate: http://purl.org/dc/terms/rights
-    multiple: false
+    multiple: true
    #OD1 predicate for license must be flipped
   - property: license
     predicate: http://creativecommons.org/ns#license
-    multiple: false
+    multiple: true
 
   #does not use _attributes
   - property: language
@@ -45,6 +46,7 @@ overrides:
     predicate: http://purl.org/dc/terms/type
     multiple: false
   #flips predicate
+  #multiple is true
   - property: access_restrictions_attributes
     predicate: http://data.archiveshub.ac.uk/def/accessRestrictions
     multiple: true
@@ -187,9 +189,6 @@ overrides:
   # format
   - predicate: http://purl.org/dc/terms/format
     function: return_nil
-  # extent
-  - predicate: http://purl.org/dc/terms/extent
-    function: return_nil
   # support
   - predicate: http://opaquenamespace.org/ns/vra/support
     function: return_nil
@@ -230,3 +229,21 @@ overrides:
   - predicate: http://www.rdaregistry.info/Elements/m/#containedInManifestation.en
     function: return_nil
 
+  # do not migrate
+  - predicate: http://purl.org/dc/terms/modified
+    function: return_nil
+  - predicate: http://opaquenamespace.org/ns/dateDigitized
+    function: return_nil
+
+  # predicate tweaks
+  - property: street_address
+    predicate: http://www.loc.gov/standards/mads/rdf/v1.html#streetAddress
+    multiple: true
+  - property: box
+    predicate: https://schema.org/box
+    multiple: true
+
+  # flip extent
+  - property: measurements
+    predicate: http://purl.org/dc/terms/extent
+    multiple: true
