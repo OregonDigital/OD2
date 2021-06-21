@@ -21,7 +21,8 @@
                     </label>
 
                     <div class="input-group">
-                      <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control", id: "masthead-search-field-header", title: "Masthead search field" %>
+                      <label class="sr-only" for="masthead-search-field-header">Search Oregon Digital</label>
+                      <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control", id: "masthead-search-field-header", title: "Masthead search field", placeholder: "Search Oregon Digital" %>
                       <button type="submit" class="" id="masthead-search-submit-header">
                         <i class="fa fa-search"></i>
                         <span class="sr-only">Search</span>
