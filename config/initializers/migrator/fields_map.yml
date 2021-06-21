@@ -139,6 +139,7 @@ fields:
   workType: workType
   material: material
   measurements: measurements
+  extent: measurements
   physicalExtent: physical_extent
   technique: technique
   colourContent: color_content
@@ -146,7 +147,6 @@ fields:
   fullText: full_text
   exhibit: exhibit
   institution: institution
-  primarySet: primary_set
   replacesUrl: replaces_url
   imageResolution: resolution
   submissionDate: date_uploaded

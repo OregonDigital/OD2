@@ -189,9 +189,6 @@ overrides:
   # format
   - predicate: http://purl.org/dc/terms/format
     function: return_nil
-  # extent
-  - predicate: http://purl.org/dc/terms/extent
-    function: return_nil
   # support
   - predicate: http://opaquenamespace.org/ns/vra/support
     function: return_nil
@@ -235,4 +232,18 @@ overrides:
   # do not migrate
   - predicate: http://purl.org/dc/terms/modified
     function: return_nil
+  - predicate: http://opaquenamespace.org/ns/dateDigitized
+    function: return_nil
 
+  # predicate tweaks
+  - property: street_address
+    predicate: http://www.loc.gov/standards/mads/rdf/v1.html#streetAddress
+    multiple: true
+  - property: box
+    predicate: https://schema.org/box
+    multiple: true
+
+  # flip extent
+  - property: measurements
+    predicate: http://purl.org/dc/terms/extent
+    multiple: true
