@@ -19,6 +19,9 @@ module OregonDigital
 
     configure_blacklight do |config|
       config.view.gallery.if = false
+      config.view.list.if = false
+      config.view.table.partials = %i[index]
+      config.view.table.icon_class = 'glyphicon-th-list'
       config.view.masonry.partials = %i[metadata]
     end
 
@@ -57,7 +60,7 @@ module OregonDigital
     end
 
     def total_viewable_items(id)
-      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id}").length
+      Hyrax::SolrService.get("member_of_collection_ids_ssim:#{id}")['response']['numFound']
     end
 
     def osu_items(id)
