@@ -10,7 +10,6 @@ module OregonDigital
         include Hyrax::CitationsBehaviors::TitleBehavior
 
         # rubocop:disable Metrics/AbcSize
-        # rubocop:disable Metrics/MethodLength
         def format(work)
           text = ''
           # Collection the work is a part of.
@@ -32,7 +31,6 @@ module OregonDigital
           text.html_safe
         end
         # rubocop:enable Metrics/AbcSize
-        # rubocop:enable Metrics/MethodLength
 
         private
 

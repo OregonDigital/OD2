@@ -22,7 +22,7 @@ module OregonDigital
           text += "#{institution}." unless institution.blank?
 
           # Title
-          text += "\"#{work.to_s}\""
+          text += "\"#{work}\""
 
           text += ' Oregon Digital.'
 
