@@ -29,28 +29,28 @@ module OregonDigital
     def all
       @tab = TABS[:all]
       blacklight_config.search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
-      index
+      (@response, @document_list) = search_results(params)
       render :index
     end
 
     def osu
       @tab = TABS[:osu]
       blacklight_config.search_builder_class = OregonDigital::OsuCollectionsSearchBuilder
-      index
+      (@response, @document_list) = search_results(params)
       render :index
     end
 
     def uo
       @tab = TABS[:uo]
       blacklight_config.search_builder_class = OregonDigital::UoCollectionsSearchBuilder
-      index
+      (@response, @document_list) = search_results(params)
       render :index
     end
 
     def my
       @tab = TABS[:my]
       blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
-      index
+      (@response, @document_list) = search_results(params)
       render :index
     end
 
