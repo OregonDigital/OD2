@@ -43,23 +43,17 @@
 
 #explore-tabs,
 #explore-panes {
-  .nav-pills > li.active > div > .triangle_down_all,
-  .nav-pills > li.active > div > .triangle_down_osu,
-  .nav-pills > li.active > div > .triangle_down_uo,
-  .nav-pills > li.active > div > .triangle_down_my {
+  .nav-pills > li.active > div > .triangle_down {
     visibility: visible;
   }
 }
 
 #explore-tabs a {
   height:57px;
-  width: 150px;
+  width: 75px;
 }
 
-.triangle_down_all,
-.triangle_down_osu,
-.triangle_down_uo,
-.triangle_down_my {
+.triangle_down {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
@@ -67,7 +61,16 @@
   border-top: 20px solid $dark-orange;
   position: relative;
   margin-left: 55px;
+  margin-left: 22.5px;
   visibility: hidden;
+}
+@media (min-width: $screen-sm-min) {
+  .triangle_down {
+    margin-left: 55px;
+  }
+  #explore-tabs a {
+    width: 150px;
+  }
 }
 
 .hover-hide:hover, .hover-hide:focus {
