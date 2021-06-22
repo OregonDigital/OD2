@@ -30,6 +30,7 @@ module BlacklightIiifSearch
     # @return [String]
     # rubocop:disable Metrics/AbcSize
     def coordinates
+      query.delete_suffix!('*')
       return '' unless query
 
       # Attempt to read from extracted text first, if there's no bounding boxes or matching word move on
@@ -57,7 +58,7 @@ module BlacklightIiifSearch
           # Create ExtractedWord objects out of the words
           words = words.map { |x| ExtractedWord.new(x) }
           # Select only words that match the query and return an in-order array of ExtractedWords
-          words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }
+          words.select { |x| x.text.downcase.start_with? query }
         end
     end
 
@@ -73,7 +74,7 @@ module BlacklightIiifSearch
           # Create HocrWord objects out of the words
           words = words.map { |x| HocrWord.new(x) }
           # Select only words that match the query and return an in-order array of HocrWord
-          words.select { |x| x.text.downcase =~ /#{query.downcase}[,.! ]?$/ }
+          words.select { |x| x.text.downcase.start_with? query }
         end
     end
 

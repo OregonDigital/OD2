@@ -8,13 +8,17 @@ class IiifSearchBuilder < Blacklight::SearchBuilder
 
   # set params for ocr field searching
   def ocr_search_params(solr_parameters = {})
-    solr_parameters[:facet] = false
+    solr_parameters[:q] = "#{solr_parameters[:q].stem}*"
+    solr_parameters[:qf] = blacklight_config.iiif_search[:full_text_field]
+    # set the highlighting parameters
+    ocr_search_highlight_params(solr_parameters)
+    # catalog controller puts params here when you call search_results
+    solr_parameters[:fq] += blacklight_params[:fq]
+  end
+
+  def ocr_search_highlight_params(solr_parameters = {})
     solr_parameters[:hl] = true
     solr_parameters[:'hl.fl'] = blacklight_config.iiif_search[:full_text_field]
-    solr_parameters[:'hl.fragsize'] = 100
-    solr_parameters[:'hl.snippets'] = 10
-    solr_parameters[:qf] = blacklight_config.iiif_search[:full_text_field]
-    # # catalog controller puts params here when you call search_results
-    solr_parameters[:fq] += blacklight_params[:fq]
+    solr_parameters[:'hl.snippets'] = 10_000
   end
 end
