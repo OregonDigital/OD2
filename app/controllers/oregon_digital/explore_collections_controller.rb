@@ -32,18 +32,21 @@ module OregonDigital
       index
       render :index
     end
+
     def osu
       @tab = TABS[:osu]
       blacklight_config.search_builder_class = OregonDigital::OsuCollectionsSearchBuilder
       index
       render :index
     end
+
     def uo
       @tab = TABS[:uo]
       blacklight_config.search_builder_class = OregonDigital::UoCollectionsSearchBuilder
       index
       render :index
     end
+
     def my
       @tab = TABS[:my]
       blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
