@@ -9,6 +9,8 @@ module OregonDigital
         include OregonDigital::CitationsBehaviors::PublicationBehavior
         include Hyrax::CitationsBehaviors::TitleBehavior
 
+        # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/MethodLength
         def format(work)
           text = ''
           # Collection the work is a part of.
@@ -22,7 +24,7 @@ module OregonDigital
           # Title
           text += "\"#{work.to_s}\""
 
-          text += " Oregon Digital."
+          text += ' Oregon Digital.'
 
           # Published Date
           pub_date = setup_pub_date(work)

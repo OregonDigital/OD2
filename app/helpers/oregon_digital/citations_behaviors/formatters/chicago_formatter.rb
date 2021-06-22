@@ -9,6 +9,8 @@ module OregonDigital
         include OregonDigital::CitationsBehaviors::PublicationBehavior
         include Hyrax::CitationsBehaviors::TitleBehavior
 
+        # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/MethodLength
         def format(work)
           text = ''
           # Collection the work is a part of.
@@ -20,18 +22,20 @@ module OregonDigital
           text += "#{institution}." unless institution.blank?
 
           # Title
-          text += "\"#{work.to_s}\""
+          text += "\"#{work}\""
 
-          text += " Oregon Digital. "
+          text += ' Oregon Digital. '
 
           # Published Date
           pub_date = Date.today
-          text += "Accessed #{whitewash(pub_date)}." unless pub_date.nil?
+          text += " Accessed #{whitewash(pub_date)}." unless pub_date.nil?
 
           text += " #{view_context.controller.request.original_url.split('?').first if view_context.respond_to?(:controller)}"
 
           text.html_safe
         end
+        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/MethodLength
 
         private
 
