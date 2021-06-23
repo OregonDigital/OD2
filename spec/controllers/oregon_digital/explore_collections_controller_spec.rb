@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 RSpec.describe OregonDigital::ExploreCollectionsController do
+  let(:user) { create(:user) }
   let(:collection_type) { create(:collection_type, machine_id: :user_collection) }
   let(:collection) { create(:collection, collection_type_gid: "gid://od2/hyrax-collectiontype/#{collection_type.id}") }
 
@@ -27,6 +28,7 @@ RSpec.describe OregonDigital::ExploreCollectionsController do
   end
 
   describe '#my' do
+    before { sign_in user }
     subject { get :my, format: 'text/html' }
 
     it { is_expected.to render_template('index') }
