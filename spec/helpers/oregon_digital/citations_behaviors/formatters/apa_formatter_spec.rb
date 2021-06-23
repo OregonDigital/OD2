@@ -10,7 +10,7 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::ApaFormatter do
     allow(presenter).to receive(:author_label).and_return(['last name, first name'])
   end
 
-  it 'formats citations without creators' do
+  xit 'formats citations without creators' do
     expect(formatter.format(presenter)).to include 'last name, f.'
   end
 end
