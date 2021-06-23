@@ -18,7 +18,7 @@ module OregonDigital
           text += "#{collection.title.first}, " unless collection.nil?
 
           # Institution the work is a part of.
-          institution = OregonDigital::InstitutionPicker.institution_full_name(work)
+          institution = OregonDigital::InstitutionPicker.institution_full_name(work) 
           text += "#{institution}." unless institution.blank?
 
           # Title
