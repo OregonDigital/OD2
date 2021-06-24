@@ -28,8 +28,9 @@ RSpec.describe OregonDigital::ExploreCollectionsController do
   end
 
   describe '#my' do
-    before { sign_in user }
     subject { get :my, format: 'text/html' }
+
+    before { sign_in user }
 
     it { is_expected.to render_template('index') }
   end
