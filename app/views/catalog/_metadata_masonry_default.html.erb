@@ -2,12 +2,10 @@
 
 <div class="metadata-row">
   <dl class="row">
-  <% index_fields(document).each do |field_name, field| -%>
-    <% if should_render_index_field? document, field %>
-        <dt class="col-sm-4"><%= render_index_field_label document, field: field_name %></dt>
-        <dd class="col-sm-8"><%= doc_presenter.field_value field %></dd>
+    <% if should_render_index_field? document, index_fields(document)['date_tesim'] %>
+      <dt class="col-sm-4"><%= render_index_field_label document, field: 'date_tesim' %></dt>
+      <dd class="col-sm-8"><%= doc_presenter.field_value index_fields(document)['date_tesim'] %></dd>
     <% end %>
-  <% end %>
   </dl>
 </div>
 
