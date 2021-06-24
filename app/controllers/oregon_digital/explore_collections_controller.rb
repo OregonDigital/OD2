@@ -3,50 +3,57 @@
 module OregonDigital
   # Controller for explore collections interface
   class ExploreCollectionsController < ApplicationController
-    include Blacklight::SearchContext
-    include Blacklight::SearchHelper
-    include Blacklight::AccessControls::Catalog
+    include BlacklightAdvancedSearch::Controller
+    include BlacklightRangeLimit::ControllerOverride
+    include Hydra::Catalog
+    include Hydra::Controller::ControllerBehavior
+    include OregonDigital::BlacklightConfigBehavior
 
-    def index; end
-
-    # Return all collections
-    def collections
-      builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
+    # Add the 'catalog' folder to where views are looked for
+    # This allows us to render blacklight/catalog views from the hyrax/admin/workflows folder
+    def self.local_prefixes
+      super + ['catalog']
     end
 
-    # Return OSU collections
-    def osu_collections
-      builder = OregonDigital::OsuCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
+    configure_blacklight do |config|
+      config.view.gallery.if = false
+      config.view.list.if = false
+      config.view.table.partials = %i[index]
+      config.view.table.icon_class = 'glyphicon-th-list'
+      config.view.masonry.partials = %i[metadata]
     end
 
-    # Return UO collections
-    def uo_collections
-      builder = OregonDigital::UoCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
+    # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
+    def all
+      @tab = TABS[:all]
+      blacklight_config.search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
+      (@response, @document_list) = search_results(params)
+      render :index
     end
 
-    # Return My collections
-    def my_collections
-      builder = OregonDigital::MyCollectionsSearchBuilder.new(self).rows(1000)
-      response = repository.search(builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
+    def osu
+      @tab = TABS[:osu]
+      blacklight_config.search_builder_class = OregonDigital::OsuCollectionsSearchBuilder
+      (@response, @document_list) = search_results(params)
+      render :index
+    end
+
+    def uo
+      @tab = TABS[:uo]
+      blacklight_config.search_builder_class = OregonDigital::UoCollectionsSearchBuilder
+      (@response, @document_list) = search_results(params)
+      render :index
+    end
+
+    def my
+      @tab = TABS[:my]
+      blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
+      (@response, @document_list) = search_results(params)
+      render :index
     end
 
     def total_viewable_items(id)
-      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id}").length
+      Hyrax::SolrService.get("member_of_collection_ids_ssim:#{id}")['response']['numFound']
     end
 
     def osu_items(id)

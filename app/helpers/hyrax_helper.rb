@@ -7,4 +7,5 @@ module HyraxHelper
   include Hyrax::HyraxHelperBehavior
   include OregonDigital::HyraxHelperBehavior
   include OregonDigital::ContactFormHelper
+  include OregonDigital::RenderConstraintsHelperBehavior
 end
