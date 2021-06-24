@@ -9,6 +9,8 @@ module OregonDigital
     include Hydra::Controller::ControllerBehavior
     include OregonDigital::BlacklightConfigBehavior
 
+    attr_accessor :tab
+
     # Add the 'catalog' folder to where views are looked for
     # This allows us to render blacklight/catalog views from the hyrax/admin/workflows folder
     def self.local_prefixes
