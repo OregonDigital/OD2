@@ -9,8 +9,6 @@ module OregonDigital
     include Hydra::Controller::ControllerBehavior
     include OregonDigital::BlacklightConfigBehavior
 
-    attr_accessor :tab, :builder
-
     # Add the 'catalog' folder to where views are looked for
     # This allows us to render blacklight/catalog views from the hyrax/admin/workflows folder
     def self.local_prefixes
@@ -52,14 +50,6 @@ module OregonDigital
       blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
       (@response, @document_list) = search_results(params)
       render :index
-    end
-
-    # Return all collections
-    def collections
-      response = repository.search(@builder)
-      response.documents
-    rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
-      []
     end
 
     def total_viewable_items(id)
