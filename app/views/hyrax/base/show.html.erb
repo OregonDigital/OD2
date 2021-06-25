@@ -73,37 +73,38 @@
       </div>
 
       <!-- Renders children of a parent work -->
-      <% children = @presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') } %>
-      <% if children.length > 0 %>
+      <% @response = @child_response %>
+      <% @document_list = @child_doc_list %>
+      <% if @document_list.length > 0 %>
         <div class='row'>
           <div class='col-sm-12'>
-            <h2 class='h4'>Contained In This Object:</h2> &nbsp; <%= children.length %> items
+            <h2 class='h4'>Contained In This Object</h2> &nbsp; <%= @response['response']['numFound'] %> items
             <hr style='border-width: 3px;'>
-            <%= render 'paginated_works', works: children %>
+            <%= render 'search_results' %>
           </div>
         </div>
       <% end %>
 
-      <% in_work_ids = ActiveFedora::Base.find(@presenter.id).in_work_ids %>
-      <% unless in_work_ids.empty? %>
+      <% @response = @parent_response %>
+      <% @document_list = @parent_doc_list %>
+      <% if @document_list.length > 0 %>
         <!-- Renders parent of a work. -->
-        <% parent = ActiveFedora::Base.find(in_work_ids.first)%>
-        <% parent_presenter = OregonDigital::WorkToPresenterConverter.convert_to_presenter(parent, current_ability) %>
         <div class='row'>
           <div class='col-sm-12'>
-            <h2 class='h4'>Contained In:</h2>
+            <h2 class='h4'>Is Part Of</h2>
             <hr style='border-width: 3px;'>
-            <%= render 'paginated_works', works: [parent_presenter] %>
+            <%= render 'search_results' %>
           </div>
         </div>
+        <% @response = @sibling_response %>
+        <% @document_list = @sibling_doc_list %>
         <!-- Renders siblings of a work -->
-        <% siblings = parent_presenter.member_presenters.delete_if { |work| work.class.to_s.include?('FileSet') || work.title.first == @presenter.title.first } %>
-        <% if siblings.length > 0 %>
+        <% if @document_list.length > 0 %>
           <div class='row'>
             <div class='col-sm-12'>
-              <h2 class='h4'>Related Items:</h2> &nbsp; <%= siblings.length %> items
+              <h2 class='h4'>Related Items</h2> &nbsp; <%= @response['response']['numFound'] %> items
               <hr style='border-width: 3px;'>
-              <%= render 'paginated_works', works: siblings %>
+              <%= render 'search_results' %>
             </div>
           </div>
         <% end %>
