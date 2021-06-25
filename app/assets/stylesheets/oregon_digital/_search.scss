@@ -156,6 +156,11 @@
 
 .metadata-row {
   margin-bottom: 5px;
+
+  dl {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
 }
 .parent-child-list {
   display: inline;
