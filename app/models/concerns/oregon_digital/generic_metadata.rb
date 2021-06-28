@@ -878,7 +878,7 @@ module OregonDigital
         { name: :relation, section_name: '' },
         { name: :related_url, section_name: '' },
         { name: :resource_type, section_name: 'Types' },
-        { name: :workType, section_name: '' },
+        { name: :workType, section_name: 'Types' },
         { name: :material, section_name: 'Formats' },
         { name: :measurements, section_name: '' },
         { name: :physical_extent, section_name: '' },

@@ -1,4 +1,5 @@
 <div class="base-terms">
+  <%= "<h2 id=\"Required Fields\">Required Fields</h2>".html_safe %>
   <% f.object.primary_terms.each do |term|%>
     <%= render_edit_field_partial(term, f: f) %>
   <% end %>

@@ -9,6 +9,7 @@ module Hyrax
     self.terms = self.terms.uniq
     self.required_fields = %i[title resource_type rights_statement identifier]
 
+
     def primary_terms
       # Push the required fields to the top of the form
       # Then make sure they arent rendered again lower in the form
