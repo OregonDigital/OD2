@@ -5,7 +5,7 @@ module OregonDigital
   module ImageMetadata
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
-    # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
+    # https://docs.google.com/spreadsheets/d/1ien3djlZxcctuAE99XweyuNdMiN5YsrKoYBJcK3DjLQ/edit?usp=sharing
 
     included do
       initial_properties = properties.keys

@@ -1,5 +1,18 @@
-td > div.masonry.document {
-  border-top: none !important;
+#documents > div.masonry.document.collection {
+  background-color: unset;
+  border-bottom: none;
+  max-width: 15%;
+
+  .thumbnail {
+    text-align: left;
+    padding-bottom: 1em;
+  }
+  img {
+    border-top: 2px solid $very-light-grey;
+    margin: 0;
+    padding: 1em 0;
+    width: 100%;
+  }
 }
 
 #explore-collection-table > thead {
