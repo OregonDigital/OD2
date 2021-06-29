@@ -8,7 +8,7 @@
       <ul class="visibility">
         <div class="col-md-6">
           <li class="radio">
-            <label>
+            <label class="small-font-size">
               <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, data: { 'target': '#collapsePublic' } %>
               <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC) %>
               <br />
@@ -20,7 +20,7 @@
           </li>
         <%# OVRERIDE FROM HYRAX: to add UO and OSU visibility options and remove default institution option %>
           <li class="radio">
-            <label>
+            <label class="small-font-size">
               <%= f.radio_button :visibility, OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU %>
               <%= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU) %>
               <br />
@@ -28,7 +28,7 @@
             </label>
           </li>
           <li class="radio">
-            <label>
+            <label class="small-font-size">
               <%= f.radio_button :visibility, OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO %>
               <%= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO) %>
               <br />
@@ -38,7 +38,7 @@
         </div>
         <div class="col-md-6">
           <li class="radio">
-            <label>
+            <label class="small-font-size">
               <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_EMBARGO, data: { 'target': '#collapseEmbargo' } %>
               <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_EMBARGO) %>
               <br />
@@ -54,7 +54,7 @@
             </label>
           </li>
           <li class="radio">
-            <label>
+            <label class="small-font-size">
               <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_LEASE, data: { 'target': '#collapseLease' } %>
               <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_LEASE) %>
               <br />
@@ -70,7 +70,7 @@
             </label>
           </li>
           <li class="radio">
-            <label>
+            <label class="small-font-size">
               <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>
               <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE) %>
               <br />
