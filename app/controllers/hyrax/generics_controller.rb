@@ -32,6 +32,7 @@ module Hyrax
     # Finds a solr document matching the id and sets @presenter
     # @raise CanCan::AccessDenied if the document is not found or the user doesn't have access to it.
     def show
+      blacklight_config.per_page = [4]
       parent_results
       sibling_results
       child_results
@@ -40,8 +41,8 @@ module Hyrax
     end
 
     def search_builder
-      work ||= ActiveFedora::Base.find(params['id'])
-      search_builder_class == Hyrax::WorkSearchBuilder ? search_builder_class.new(self) : search_builder_class.new(work: work)
+      work ||= ::SolrDocument.find(params['id'])
+      search_builder_class == Hyrax::WorkSearchBuilder ? search_builder_class.new(self) : search_builder_class.new(self, work: work)
     end
 
     def parent_results
@@ -50,12 +51,12 @@ module Hyrax
     end
     #TODO: Implement and set OregonDigital::SiblingsOfWorkSearchBuilder
     def sibling_results
-      @search_builder_class = OregonDigital::ParentsOfWorkSearchBuilder
+      @search_builder_class = OregonDigital::SiblingsOfWorkSearchBuilder
       (@sibling_response, @sibling_doc_list) = search_results(params)
     end
     #TODO: Implement and set OregonDigital::ChildrenOfWorkSearchBuilder
     def child_results
-      @search_builder_class = OregonDigital::ParentsOfWorkSearchBuilder
+      @search_builder_class = OregonDigital::ChildrenOfWorkSearchBuilder
       (@child_response, @child_doc_list) = search_results(params)
     end
 

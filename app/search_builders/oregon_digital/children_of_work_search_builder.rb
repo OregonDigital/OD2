@@ -2,7 +2,7 @@
 
 module OregonDigital
   # Finds parent works
-  class ParentsOfWorkSearchBuilder < Hyrax::SearchBuilder
+  class ChildrenOfWorkSearchBuilder < Hyrax::SearchBuilder
     self.default_processor_chain += [:parent_works]
 
     attr_reader :work
@@ -13,8 +13,11 @@ module OregonDigital
     end
 
     def parent_works(solr_params)
+      ids = work['member_ids_ssim'] || []
+      ids << '""' if ids.empty?
       solr_params[:fq] ||= []
-      solr_params[:fq] << "member_ids_ssim:(#{work.id})"
+      solr_params[:fq] << "id:(#{ids.join(' OR ')})"
+      solr_params[:fq] << '-has_model_ssim:FileSet'
     end
   end
 end

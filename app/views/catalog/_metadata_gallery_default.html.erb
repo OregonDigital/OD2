@@ -9,7 +9,7 @@
   <% end %>
   <% document.parents.each do |parent| %>
     <dt class="col-sm-4"><span class="dark-grey">Is Part Of</span></dt>
-    <dd class="col-sm-8"><a href="<%= url_for(parent) %>"><%= parent.title_or_label %></a></dd>
+    <dd class="col-sm-8"><a href="<%= main_app.url_for(parent) %>"><%= parent.title_or_label %></a></dd>
   <% end %>
   </dl>
 </div>
