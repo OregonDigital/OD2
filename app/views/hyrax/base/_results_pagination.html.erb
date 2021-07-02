@@ -2,7 +2,7 @@
  <div class="row record-padding">
   <div class="col-md-12">
     <div class="pagination">
-      <%= paginate @response, :outer_window => 2, :theme => 'blacklight', :template => OregonDigital::TemplateRenderProxy.new(self) %>
+      <%= paginate @response, :outer_window => 2, :theme => 'blacklight', :template => OregonDigital::TemplateRenderProxy.new(self), :param_name => param_name %>
     </div>
   </div>
  </div>

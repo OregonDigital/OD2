@@ -47,16 +47,19 @@ module Hyrax
 
     def parent_results
       @search_builder_class = OregonDigital::ParentsOfWorkSearchBuilder
+      params[:page] = params[:parent_page]
       (@parent_response, @parent_doc_list) = search_results(params)
     end
     #TODO: Implement and set OregonDigital::SiblingsOfWorkSearchBuilder
     def sibling_results
       @search_builder_class = OregonDigital::SiblingsOfWorkSearchBuilder
+      params[:page] = params[:sibling_page]
       (@sibling_response, @sibling_doc_list) = search_results(params)
     end
     #TODO: Implement and set OregonDigital::ChildrenOfWorkSearchBuilder
     def child_results
       @search_builder_class = OregonDigital::ChildrenOfWorkSearchBuilder
+      params[:page] = params[:child_page]
       (@child_response, @child_doc_list) = search_results(params)
     end
 

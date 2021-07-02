@@ -80,7 +80,7 @@
           <div class='col-sm-12'>
             <h2 class='h4'>Contained In This Object</h2> &nbsp; <%= @response['response']['numFound'] %> items
             <hr style='border-width: 3px;'>
-            <%= render 'search_results' %>
+            <%= render 'search_results', param_name: :child_page %>
           </div>
         </div>
       <% end %>
@@ -93,7 +93,7 @@
           <div class='col-sm-12'>
             <h2 class='h4'>Is Part Of</h2>
             <hr style='border-width: 3px;'>
-            <%= render 'search_results' %>
+            <%= render 'search_results', param_name: :parent_page %>
           </div>
         </div>
       <% end %>
@@ -105,7 +105,7 @@
           <div class='col-sm-12'>
             <h2 class='h4'>Related Items</h2> &nbsp; <%= @response['response']['numFound'] %> items
             <hr style='border-width: 3px;'>
-            <%= render 'search_results' %>
+            <%= render 'search_results', param_name: :sibling_page %>
           </div>
         </div>
       <% end %>
