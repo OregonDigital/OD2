@@ -1,7 +1,4 @@
 <aside id="form-progress" class="form-progress panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= t("hyrax.works.progress.header") %></h3>
-  </div>
   <div class="list-group">
     <div class="list-group-item">
       <fieldset>
@@ -33,7 +30,7 @@
   <div class="panel-footer text-center">
     <% if ::Flipflop.show_deposit_agreement? %>
       <% if ::Flipflop.active_deposit_agreement_acceptance? %>
-        <label>
+        <label class="small-font-size">
           <%= check_box_tag 'agreement', 1, f.object.agreement_accepted, required: true %>
           <%= t('hyrax.active_consent_to_agreement') %><br />
           <%= link_to t('hyrax.pages.tabs.agreement_page'),
@@ -63,9 +60,12 @@
     </div>
   </div>
 </aside>
-<div class="col-xs-6">
+<div class="col-xs-6" style="margin-top: -40px;">
   <nav id="toc-left" class="nav bs-docs-sidebar">
     <ul id="sidebar-left" class="nav nav-stacked fixed">
+      <li>
+        <a href="#Required Fields">Required Fields</a>
+      </li>
       <li>
         <a href="#Titles">Titles</a>
       </li>
@@ -84,15 +84,15 @@
       <li>
         <a href="#Geographics">Geographics</a>
       </li>
-      <li>
-        <a href="#Dates">Dates</a>
-      </li>
     </ul>
   </nav>
 </div>
-<div class="col-xs-6">
+<div class="col-xs-6" style="margin-top: -40px;">
   <nav id="toc-right"class="nav bs-docs-sidebar">
     <ul id="sidebar-right" class="nav nav-stacked fixed">
+      <li>
+        <a href="#Dates">Dates</a>
+      </li>
       <li>
         <a href="#Identifiers">Identifiers</a>
       </li>

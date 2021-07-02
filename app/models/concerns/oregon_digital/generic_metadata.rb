@@ -5,7 +5,7 @@ module OregonDigital
   module GenericMetadata
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
-    # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit#gid=0
+    # https://docs.google.com/spreadsheets/d/1ien3djlZxcctuAE99XweyuNdMiN5YsrKoYBJcK3DjLQ/edit?usp=sharing
     # Also, check out tmp/scripts/map_parse for a script to generate properties from the MAP above
 
     included do
@@ -878,7 +878,7 @@ module OregonDigital
         { name: :relation, section_name: '' },
         { name: :related_url, section_name: '' },
         { name: :resource_type, section_name: 'Types' },
-        { name: :workType, section_name: '' },
+        { name: :workType, section_name: 'Types' },
         { name: :material, section_name: 'Formats' },
         { name: :measurements, section_name: '' },
         { name: :physical_extent, section_name: '' },

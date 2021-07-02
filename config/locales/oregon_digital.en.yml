@@ -39,6 +39,9 @@ en:
       messages:
         shared: '%{collection_title} has been shared. See your collection below for the sharable link'
         unshared: '%{collection_title} is no longer shared and not visible to other people'
+      search_form:
+        label: Find a collection
+        placeholder: Find a collection
     homepage:
       works:
         link: 'All Latest Items'

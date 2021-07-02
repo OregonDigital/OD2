@@ -5,7 +5,7 @@ module OregonDigital
   module DocumentMetadata
     extend ActiveSupport::Concern
     # Usage notes and expectations can be found in the Metadata Application Profile:
-    # https://docs.google.com/spreadsheets/d/16xBFjmeSsaN0xQrbOpQ_jIOeFZk3ZM9kmB8CU3IhP2c/edit?usp=sharing
+    # https://docs.google.com/spreadsheets/d/1ien3djlZxcctuAE99XweyuNdMiN5YsrKoYBJcK3DjLQ/edit?usp=sharing
     included do
       initial_properties = properties.keys
       property :first_line, predicate: RDF::URI('http://opaquenamespace.org/ns/sheetmusic_firstLine'), multiple: false, basic_searchable: true do |index|
@@ -187,7 +187,7 @@ module OregonDigital
         { name: :relation, section_name: '' },
         { name: :related_url, section_name: '' },
         { name: :resource_type, section_name: 'Types' },
-        { name: :workType, section_name: '' },
+        { name: :workType, section_name: 'Types' },
         { name: :material, section_name: 'Formats' },
         { name: :measurements, section_name: '' },
         { name: :physical_extent, section_name: '' },

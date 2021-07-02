@@ -14,15 +14,6 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::MlaFormatter do
     expect(formatter.format(presenter)).to include 'My Title'
   end
 
-  it 'displays the creators name' do
-    expect(formatter.format(presenter)).to include 'last name, first name'
-  end
-
-  it 'displays the creators name in the proper order' do
-    allow(presenter).to receive(:author_label).and_return(['first last'])
-    expect(formatter.format(presenter)).to include 'last, first'
-  end
-
   it 'displays the publisher' do
     expect(formatter.format(presenter)).to include 'Oregon Digital'
   end
