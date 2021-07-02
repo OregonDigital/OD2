@@ -3,7 +3,7 @@
 module OregonDigital
   # Finds parent works
   class SiblingsOfWorkSearchBuilder < Hyrax::SearchBuilder
-    self.default_processor_chain += [:parent_works]
+    self.default_processor_chain += [:sibling_works]
 
     attr_reader :work
 
@@ -13,7 +13,7 @@ module OregonDigital
       super(options.first)
     end
 
-    def parent_works(solr_params)
+    def sibling_works(solr_params)
       sibling_ids = @parents.map(&:member_ids).flatten
       sibling_ids << '""' if sibling_ids.empty?
       solr_params[:fq] ||= []

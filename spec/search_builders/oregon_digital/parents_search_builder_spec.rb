@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe OregonDigital::ParentsOfWorkSearchBuilder do
+RSpec.describe OregonDigital::ParentsSearchBuilder do
   let(:processor_chain) { search_builder.processor_chain }
   let(:solr_params) { {} }
   let(:child) { build(:generic, title: ['foo'], id: 123) }
