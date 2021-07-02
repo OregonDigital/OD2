@@ -12,7 +12,7 @@
 <div class="metadata-row">
   <% if document.children? %>
     <%= render 'index_type_icon', document: document unless document.resource_type_label.first.nil? || document.resource_type_label.first.empty? %>
-    <span class="sr-only"><%= document.resource_type_label.first %></span>
+    <%= doc_presenter.field_value index_fields(document)['resource_type_label_tesim'] %>
     (<%= document.children.count %> Items)
   <% end %>
 </div>
