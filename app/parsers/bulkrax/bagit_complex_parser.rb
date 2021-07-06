@@ -148,7 +148,6 @@ module Bulkrax
           file = Tempfile.new([file_name, File.extname(file_name)], binmode: true)
           file.write(io.read)
           file.close
-          byebug
           bag.add_file(file_name, file.path)
         end
         CSV.open(setup_metadata_export_file(e.identifier), "w", headers: export_headers, write_headers: true) do |csv|
