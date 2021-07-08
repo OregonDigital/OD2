@@ -25,6 +25,9 @@ Bulkrax.setup do |config|
   # Path to store exports before download
   config.export_path = '/data/tmp/shared/exports'
 
+  # Path to get the 'file removed' image from
+  # config.removed_image_path = '/path/to/removed/image'
+
   config.parent_child_field_mapping = { 
     'Bulkrax::RdfEntry'  => 'http://opaquenamespace.org/ns/contents'
   }
