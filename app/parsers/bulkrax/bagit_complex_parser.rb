@@ -150,9 +150,10 @@ module Bulkrax
           file.close
           bag.add_file(file_name, file.path)
         end
-        CSV.open(setup_metadata_export_file(e.identifier), "w", headers: export_headers, write_headers: true) do |csv|
+        CSV.open(setup_csv_metadata_export_file(e.identifier), "w", headers: export_headers, write_headers: true) do |csv|
           csv << e.parsed_metadata
         end
+        write_triples(e)
         bag.manifest!(algo: 'sha256')
       end
     end
@@ -183,8 +184,12 @@ module Bulkrax
     end
 
     # in the parser as it is specific to the format
-    def setup_metadata_export_file(id)
+    def setup_csv_metadata_export_file(id)
       File.join(importerexporter.exporter_export_path, id, 'metadata.csv')
+    end
+
+    def setup_triple_metadata_export_file(id)
+      File.join(importerexporter.exporter_export_path, id, 'metadata.nt')
     end
 
     def setup_bagit_folder(id)
@@ -205,6 +210,16 @@ module Bulkrax
       end
     end
 
+    def write_triples(e)
+      sd = SolrDocument.find(e.id)
+      return if sd.nil?
+
+      user = User.find user_id
+      wsp = Hyrax::WorkShowPresenter.new(sd, user.ability)
+      File.open(setup_triple_metadata_export_file(e.identifier), "w") do |triples|
+        triples.write(wsp.export_as_nt)
+      end
+    end
     # errored entries methods
 
     def write_errored_entries_file
