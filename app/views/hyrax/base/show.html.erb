@@ -4,44 +4,136 @@
 
 <div class="row work-type">
   <%# OVERRIDE FROM HYRAX remove work type heading %>
-  <div class="col-xs-12">&nbsp;</div>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <%= render 'work_title', presenter: @presenter %>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <% if can?(:review, @presenter.solr_document) %>
-           <%= render 'workflow_actions_widget', presenter: @presenter %>
+    <div class='row'>
+      <%#= render 'show_collection_header', presenter: @presenter unless @presenter.member_of_collection_ids.empty? %>
+      <%= render 'show_institution_header', presenter: @presenter unless @presenter.institution.empty? %>
+    </div>
+      <hr style='border-width: 15px;'>
+      <%= render 'work_title', presenter: @presenter %>
+      <hr style='border-width: 3px;'>
+      <div class="row">
+        <% if can?(:review, @presenter.solr_document) %>
+          <%= render 'workflow_actions_widget', presenter: @presenter %>
+        <% end %>
+        <% if @presenter.oembed_viewer? %>
+          <% @presenter.file_set_presenters.each do |presenter| %>
+            <%= render 'oembed_media', presenter: presenter %>
           <% end %>
-          <% if @presenter.iiif_viewer? %>
-            <div class="col-sm-12">
-              <%= render 'representative_media', presenter: @presenter, viewer: true %>
+        <% elsif @presenter.iiif_viewer? %>
+          <div class="col-sm-12">
+            <%= render 'representative_media', presenter: @presenter, viewer: true %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-xs-12">
+      </div>
+      <div class="row">
+        <%= render 'social_media' %>
+      </div>
+      <div class='row'>
+        <%# OVERRIDE FROM HYRAX remove work description %>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#metadata" aria-controls="metadata" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.details") %></h2>
+            </a>
+          </li>
+          <li role="presentation">
+            <a href="#citations" aria-controls="citations" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.how_to_cite") %></h2>
+            </a>
+          </li>
+          <li role="presentation">
+            <a href="#contact_us" aria-controls="contact_us" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.contact_us") %></h2>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="metadata">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'metadata', presenter: @presenter %>
             </div>
-          <% end %>
-        </div>
-        <div class='row'>
-          <div class='col-md-8 col-sm-6'>
-            <%# OVERRIDE FROM HYRAX remove work description %>
-            <%= render 'metadata', presenter: @presenter %>
           </div>
-          <div class='col-md-4 col-sm-6 text-center'>
-            <%= render 'relationships', presenter: @presenter %>
-            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
-            <%# OVERRIDE FROM HYRAX remove work citations %>
-            <%= render 'license' %>
-            <%= render 'print' %>
-            <%= render 'social_media' %>
-            <%= render 'items', presenter: @presenter %>
+          <div role="tabpanel" class="tab-pane" id="citations">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'citations', presenter: @presenter %>
+            </div>
           </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-8 col-sm-6'>
-            <%= render 'citations', presenter: @presenter %>
+          <div role="tabpanel" class="tab-pane" id="contact_us">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'work_contact_form', presenter: @presenter %>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Renders children of a parent work -->
+      <% @response = @child_response %>
+      <% @document_list = @child_doc_list %>
+      <% if @document_list.length > 0 %>
+        <div class='row'>
+          <div class='col-sm-12'>
+            <h2 class='h4'>Contained In This Object</h2> &nbsp; <%= @response['response']['numFound'] %> items
+            <hr style='border-width: 3px;'>
+            <%= render 'search_results', param_name: :child_page %>
+          </div>
+        </div>
+      <% end %>
+
+      <% @response = @parent_response %>
+      <% @document_list = @parent_doc_list %>
+      <% if @document_list.length > 0 %>
+        <!-- Renders parent of a work. -->
+        <div class='row'>
+          <div class='col-sm-12'>
+            <h2 class='h4'>Is Part Of</h2>
+            <hr style='border-width: 3px;'>
+            <%= render 'search_results', param_name: :parent_page %>
+          </div>
+        </div>
+      <% end %>
+      <% @response = @sibling_response %>
+      <% @document_list = @sibling_doc_list %>
+      <!-- Renders siblings of a work -->
+      <% if @document_list.length > 0 %>
+        <div class='row'>
+          <div class='col-sm-12'>
+            <h2 class='h4'>Related Items</h2> &nbsp; <%= @response['response']['numFound'] %> items
+            <hr style='border-width: 3px;'>
+            <%= render 'search_results', param_name: :sibling_page %>
+          </div>
+        </div>
+      <% end %>
+      <% if current_ability.can?(:view, FileSet) %>
+        <!-- Renders file manager -->
+        <div class='row'>
+          <div class='col-sm-12'>
+            <div id='work-show-file-sets' class='flex-container'>
+              <div class='flex-item file-set-title'>
+                <h2 class='h4'>Works and Files</h2>
+              </div>
+              <% if @presenter.member_presenters.size > 1 %>
+                <div class='flex-item file-set-manager'>
+                  <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, @presenter]), class: 'btn btn-primary pull-right' %>
+                </div>
+              <% end %>
+            </div>
+              <hr style='border-width: 3px;'>
+              <%= render 'items', presenter: @presenter %>
+          </div>
+        </div>
+        <!-- Renders user history -->
+        <div class='row'>
+          <div class='col-sm-12'>
+            <%= render 'hyrax/users/activity_log', events: @presenter.events %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

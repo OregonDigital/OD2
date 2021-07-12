@@ -12,12 +12,9 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
   use_extension(Hydra::ContentNegotiation)
 
-  def self.solrized_methods(property_names, model)
+  def self.solrized_methods(property_names)
     property_names.each do |property_name|
-      define_method property_name.to_sym do
-        values = self[Solrizer.solr_name(property_name.to_s, :stored_searchable)]
-        valid_solr_doc_values(values, model, property_name)
-      end
+      attribute property_name, Solr::Array, "#{property_name}_tesim"
     end
   end
 
@@ -36,11 +33,33 @@ class SolrDocument
     fa_classes[type.downcase] || 'cube'
   end
 
+  # Turn rights statement into FontAwesome icon class
+  # See app\views\catalog\_index_list_default.html.erb
+  # rubocop:disable Metrics/MethodLength
+  def rights_statement_to_fa_class(rights_statement)
+    fa_classes = {
+      'http://rightsstatements.org/vocab/InC/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-OW-EU/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-EDU/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-NC/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/InC-RUU/1.0/': 'far fa-copyright',
+      'http://rightsstatements.org/vocab/NoC-CR/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-NC/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-OKLR/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/NoC-US/1.0/': 'fab fa-creative-commons-pd',
+      'http://rightsstatements.org/vocab/CNE/1.0/': 'far fa-question-circle',
+      'http://rightsstatements.org/vocab/UND/1.0/': 'far fa-question-circle',
+      'http://rightsstatements.org/vocab/NKC/1.0/': 'far fa-question-circle'
+    }.with_indifferent_access
+    fa_classes[rights_statement] || 'far fa-question-circle'
+  end
+  # rubocop:enable Metrics/MethodLength
+
   # Find and return parent works
   def parents
     config = ::CatalogController.new
     repository = config.repository
-    search_builder = OregonDigital::ParentsOfWorkSearchBuilder.new(work: ActiveFedora::Base.find(self['id']))
+    search_builder = OregonDigital::ParentsSearchBuilder.new(work: ActiveFedora::Base.find(self['id']))
     @parents ||= repository.search(search_builder).docs
   end
 
@@ -48,23 +67,36 @@ class SolrDocument
     !parents.empty?
   end
 
-  private
-
-  def valid_solr_doc_values(values, model, property_name)
-    if values.respond_to?(:each)
-      values.reject(&:blank?)
-    elsif values.blank?
-      Hyrax::FormMetadataService.multiple?(model, property_name) ? [] : ''
-    else
-      values
-    end
+  # Find and return child works (excluding FileSets)
+  def children
+    @children ||= member_ids.map do |member_id|
+      document = SolrDocument.find(member_id)
+      document['has_model_ssim'].first == 'FileSet' ? nil : document
+    end.compact
   end
 
-  solrized_methods Generic.generic_properties, Generic
-  solrized_methods Document.document_properties, Document
-  solrized_methods Image.image_properties, Image
-  solrized_methods Video.video_properties, Video
-  solrized_methods Generic.controlled_properties, Generic
-  solrized_methods Generic.controlled_property_labels, Generic
-  solrized_methods %w[type_label language_label rights_statement_label], Generic
+  def children?
+    !children.empty?
+  end
+
+  # Find and return file sets
+  def file_sets
+    @file_sets ||= member_ids.map do |member_id|
+      document = SolrDocument.find(member_id)
+      document['has_model_ssim'].first == 'FileSet' ? document : nil
+    end.compact
+  end
+
+  def file_sets?
+    !file_sets.empty?
+  end
+
+  solrized_methods Generic.generic_properties
+  solrized_methods Document.document_properties
+  solrized_methods Image.image_properties
+  solrized_methods Video.video_properties
+  solrized_methods Generic.controlled_properties
+  solrized_methods Generic.controlled_property_labels
+  solrized_methods FileSet.characterization_terms
+  solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
 end

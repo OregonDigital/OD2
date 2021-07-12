@@ -1,13 +1,17 @@
 # frozen_string_literal:true
 
 RSpec.describe 'Search Results', js: true, type: :system, clean_repo: true do
+  before do
+    create(:user_collection_type)
+  end
+
   context 'with an annonymous user' do
     it 'is accessible as a list view' do
       visit '/catalog?view=list'
       expect(page).to be_accessible
     end
-    it 'is accessible as a gallery view' do
-      visit '/catalog?view=gallery'
+    it 'is accessible as a masonry view' do
+      visit '/catalog?view=masonry'
       expect(page).to be_accessible
     end
   end
@@ -31,8 +35,8 @@ RSpec.describe 'Search Results', js: true, type: :system, clean_repo: true do
       visit '/catalog?view=list'
       expect(page).to be_accessible
     end
-    it 'is accessible as a gallery view' do
-      visit '/catalog?view=gallery'
+    it 'is accessible as a masonry view' do
+      visit '/catalog?view=masonry'
       expect(page).to be_accessible
     end
   end

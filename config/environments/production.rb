@@ -26,7 +26,7 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor =  Uglifier.new(harmony: true) #:uglifier
+  config.assets.js_compressor = Uglifier.new(harmony: true)
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -34,7 +34,10 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL_OPTION', 'localhost:3000') }
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch('DEFAULT_URL_OPTION', 'localhost:3000'),
+    protocol: ENV.fetch('DEFAULT_URL_OPTION_PROTOCOL', 'https')
+  }
 
   config.action_mailer.perform_caching = false
 
@@ -45,11 +48,11 @@ Rails.application.configure do
   end
 
   config.action_mailer.smtp_settings = {
-    authentication: :login,
     address: ENV.fetch('SMTP_HOST', 'smtp.gmail.com'),
     port: ENV.fetch('SMTP_PORT', 25),
-    user_name: ENV.fetch('SMTP_USER', 'bogus'),
-    password: ENV.fetch('SMTP_PASSWD', 'bogus')
+    enable_starttls_auto: false,
+    tls: false,
+    openssl_verify_mode: 'none'
   }
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb

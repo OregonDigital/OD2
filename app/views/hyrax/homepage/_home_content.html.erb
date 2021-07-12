@@ -1,23 +1,85 @@
-<div id="preface" class="row">
-  <div class="col-sm-3">
-    <!-- @TODO: Add university badges -->
-  </div>
-  <div class="col-sm-6">
-    <p>
-      The collections of Oregon Digital are primarily created to support the teaching and research missions of the University of Oregon and Oregon State University.
-      The collections are comprised of unique digitized and born-digital materials including photographs, articles, sheet music, manuscripts, ephemera, and more.
-      Oregon Digital is collaboratively managed by the Digital Scholarship Services of the University of Oregon Libraries and by Oregon State University Libraries.
-    </p>
-  </div>
-</div>
-
 <div id="showcase" class="row">
-  <h2 class="text-center"><%= t('hyrax.product_name') %> Showcase</h2>
-  <%= render 'fixed_showcases', collections: @presenter.collections %>
-  <%= render 'curated_showcases', collections: @presenter.collections %>
-</div>
-
-<div id="how-to-use" class="row">
-  <h2 class="text-center">How Do I Use Oregon Digital?</h2>
-  <%= render 'how_to_use' %>
+  <div class="col-md-1" >
+  </div>
+  <div class="col-md-5">
+    <% @collections = Collection.limit 5 %>
+    <h2>FEATURED COLLECTIONS</h2>
+    <% unless @collections.to_a.empty? %>
+      <% @collections.each do |collection| %>
+        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000)%>
+        <% @member_works = @member_docs[0..2].each do |doc| %>
+          <% ActiveFedora::Base.find(doc['id']).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first %>
+        <% end %>
+        <% @member_count = @member_docs.length %>
+        <% @collection_solr_doc = SolrDocument.find(collection.id) %>
+        <div class="row featured-collection-row">
+        <% if @member_works[0] %>
+          <div class="col-sm-2">
+            <%= render_thumbnail_tag(
+                SolrDocument.find(@member_works[0].id),
+                { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
+                'aria-hidden': true,
+                tabindex: -1
+              ) %>
+          </div>
+        <% end %>
+        <% if @member_works[1] %>
+          <div class="col-sm-2">
+            <%= render_thumbnail_tag(
+                SolrDocument.find(@member_works[1].id),
+                { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
+                'aria-hidden': true,
+                tabindex: -1
+              ) %>
+          </div>
+        <% end %>
+        <% if @member_works[2] %>
+          <div class="col-sm-2">
+            <%= render_thumbnail_tag(
+                SolrDocument.find(@member_works[2].id),
+                { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
+                'aria-hidden': true,
+                tabindex: -1
+              ) %>
+          </div>
+        <% end %>
+        <div class="col-sm-6">
+          <p class='collection-title'><h3><%= collection.title.first %></h3></p>
+          <p>
+            <h4><%= @member_count %> items
+            &nbsp;
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %></h4>
+          </p>
+        </div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="row">
+      <div class="col-md-4 featured-collection-border">
+      </div>
+      <div class="col-md-4">
+        <button type="button" class="btn btn-primary all-collections-homepage">
+          View All Collections
+        </button>
+      </div>
+      <div class="col-md-4 featured-collection-border">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5 about-oregondigital-container">
+    <h2>ABOUT OREGON DIGITAL</h2>
+    <div class="row">
+      <%= image_tag('valley_lib.png', height: '250', width: '250', alt: '') %>
+      <%= image_tag('uo_lib.jpg', height: '250', width: '250', alt: '') %>
+    </div>
+    <div class="row">
+      <p class='mw-lg'>
+        A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press,
+        Oregon Digital comprises more than 100,000 digitized works including historic and modern photographs,
+        manuscripts, and publications.
+      </p>
+    </div>
+  </div>
+  <div class="col-md-2">
+  </div>
 </div>

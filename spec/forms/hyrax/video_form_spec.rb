@@ -5,7 +5,7 @@ RSpec.describe Hyrax::VideoForm do
   let(:user) { create(:user) }
   let(:ability) { instance_double('Ability') }
   let(:props) do
-    Generic.generic_properties.map(&:to_sym) + Video.video_properties.map(&:to_sym)
+    %i[title resource_type rights_statement identifier]
   end
   let(:terms) { new_form.primary_terms + new_form.secondary_terms }
   let(:model) { create(:video) }

@@ -1,19 +1,29 @@
-<%# OVERRIDE FROM HYRAX change item table to flexbox %>
-<h2><%= t('.header') %></h2>
+
 <%  array_of_ids = presenter.list_of_item_ids_to_display %>
 <%  members = presenter.member_presenters_for(array_of_ids) %>
 <% if members.present? %>
-  <div class="related-files">
-    <%= render partial: 'download' %>
-  </div>
-  <%# Temporary FileSets and Child Work section %>
-  <h2>Items</h2>
-  <div class="row file-sets">
-    <%= render partial: 'member', collection: members %>
+  <table class="table table-striped related-files">
+    <thead>
+      <tr>
+        <th><%= t('.thumbnail') %></th>
+        <th><%= t('.title') %></th>
+        <th><%= t('.date_uploaded') %></th>
+        <th><%= t('.visibility') %></th>
+        <th><%= t('.actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'member', collection: members %>
+    </tbody>
+  </table>
+  <div class="row">
     <% if presenter.total_pages > 1 %>
-        <div class="row record-padding col-md-9">
+        <%# OVERRIDE FROM HYRAX to offset pagination and add divider %>
+        <div class="row record-padding col-md-8 col-md-offset-2 text-center">
+          <hr style='border-width: 3px;'>
           <%= paginate array_of_ids, outer_window: 2, theme: 'blacklight', param_name: :page, route_set: main_app %>
         </div><!-- /pager -->
+        <%# END OVERRIDE %>
     <% end %>
   </div>
 <% elsif can? :edit, presenter.id %>

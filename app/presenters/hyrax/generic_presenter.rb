@@ -4,10 +4,11 @@ module Hyrax
   # Display config for generic object
   class GenericPresenter < Hyrax::WorkShowPresenter
     include OregonDigital::PresentsAttributes
+    include Hyrax::WithEvents
     delegate(*Generic.generic_properties.map(&:to_sym), to: :solr_document)
     delegate(*Generic.controlled_properties.map(&:to_sym), to: :solr_document)
     delegate(*Generic.controlled_property_labels.map(&:to_sym), to: :solr_document)
-    delegate(:type_label, to: :solr_document)
+    delegate(:resource_type_label, to: :solr_document)
     delegate(:rights_statement_label, to: :solr_document)
     delegate(:language_label, to: :solr_document)
 
@@ -25,6 +26,12 @@ module Hyrax
       fileset_viewable || work_viewable
     end
 
+    def oembed_viewer?
+      file_set_presenters.any? do |presenter|
+        oembed?(presenter)
+      end
+    end
+
     def page_title
       "#{title.first} | #{I18n.t('hyrax.product_name')}"
     end
@@ -39,6 +46,10 @@ module Hyrax
 
     def presentable?(presenter)
       (presenter.image? || presenter.pdf?) && current_ability.can?(:read, presenter.id)
+    end
+
+    def oembed?(presenter)
+      ::FileSet.find(presenter.id).oembed? && current_ability.can?(:read, presenter.id)
     end
   end
 end

@@ -1,54 +1,19 @@
-<%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "search-form-header", role: "search" do %>
-  <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
-  <%= hidden_field_tag :search_field, 'all_fields' %>
+<%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "facet-search-form-facet", role: "search" do %>
+  <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:search_field, :qt, :page, :utf8)) %>
+  <%= hidden_field_tag :search_field, 'all_fields', id: 'facet_search_field' %>
   <div class="form-group">
 
-    <label class="control-label sr-only" for="search-field-header">
-      <%= t("hyrax.search.form.q.label", application_name: application_name) %>
+    <label class="sr-only" for="facet-search-field-facet">
+      <%= t("hyrax.search.form.facet.label") %>
     </label>
 
-    <div class="input-group input-group-lg">
-      <%= text_field_tag :q, current_search_parameters , class: "q form-control", id: "search-field-header", placeholder: t("hyrax.search.form.q.placeholder") %>
-
-      <div class="input-group-btn">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Filter Results By">
-            <span data-search-element="label"><%= t("hyrax.search.form.option.all.label_long", application_name: application_name) %></span>
-            <span class="caret"></span>
-          </button>
-
-          <ul class="dropdown-menu">
-            <li>
-              <%= link_to t("hyrax.search.form.option.all.label_long", application_name: application_name), "#",
-                  data: { "search-option" => main_app.search_catalog_path, "search-label" => t("hyrax.search.form.option.all.label_short") } %>
-            </li>
-            <li>
-              <%= link_to t("hyrax.search.form.option.osu.label_long", application_name: application_name), "#",
-                  data: { "search-option" => main_app.search_catalog_path, "search-facet" => 'institution_label_sim', "search-facet-value" => 'Oregon State University', "search-label" => t("hyrax.search.form.option.osu.label_short") } %>
-            </li>
-            <li>
-              <%= link_to t("hyrax.search.form.option.uo.label_long", application_name: application_name), "#",
-                  data: { "search-option" => main_app.search_catalog_path, "search-facet" => 'institution_label_sim', "search-facet-value" => 'University Of Oregon', "search-label" => t("hyrax.search.form.option.uo.label_short") } %>
-            </li>
-            <li>
-              <%= link_to t("hyrax.search.form.option.pd.label_long", application_name: application_name), "#",
-                  data: { "search-option" => main_app.search_catalog_path, "search-facet" => 'open_access', "search-facet-value" => 'open', "search-label" => t("hyrax.search.form.option.pd.label_short") } %>
-            </li>
-            <% if current_user %>
-            <li>
-              <%= link_to t("hyrax.search.form.option.my_works.label_long"), "#",
-                  data: { "search-option" => hyrax.my_works_path, "search-label" => t("hyrax.search.form.option.my_works.label_short") } %>
-            </li>
-            <li>
-              <%= link_to t("hyrax.search.form.option.my_collections.label_long"), "#",
-                  data: { "search-option" => hyrax.my_collections_path, "search-label" => t("hyrax.search.form.option.my_collections.label_short") } %>
-            </li>
-            <% end %>
-          </ul>
-        <button type="submit" class="btn btn-primary" id="search-submit-header">
-          <%= t('hyrax.search.button.html') %>
-        </button>
-
-      </div><!-- /.input-group-btn -->
+    <div class="input-group">
+      <label class="sr-only" for="facet-search-field-facet">Search within the results</label>
+      <%= text_field_tag 'q[]', nil , class: "q form-control", id: "facet-search-field-facet", placeholder: "Search within the results" %>
+      <button type="submit" class="" id="facet-search-submit-facet">
+        <i class="fa fa-search"></i>
+        <span class="sr-only">Search</span>
+      </button>
     </div><!-- /.input-group -->
 
   </div><!-- /.form-group -->

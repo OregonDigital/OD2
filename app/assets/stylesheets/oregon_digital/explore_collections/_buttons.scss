@@ -1,0 +1,80 @@
+#explore-tabs {
+  ul.nav, ul.nav li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+#explore-panes {
+  ul.nav {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin: 5px 5px 5em;
+    padding-bottom: 2em;
+  }
+
+  .nav-pills > li > div > a {
+    border-radius: 5px !important;
+    padding: 2px 10px;
+    font-size: 16px;
+  }
+
+  .actions {
+    margin: 0;
+    margin-top: 16px;
+    padding: 16px;
+    background-color: $very-light-grey;
+  }
+}
+
+#explore-tabs,
+#explore-panes {
+  .nav-pills > li.active > div > a,
+  .nav-pills > li.active > div > a:hover,
+  .nav-pills > li.active > div > a:focus {
+    background-color: $dark-orange;
+    border: 3px solid $dark-orange;
+    color: white;
+  }
+}
+
+#explore-tabs,
+#explore-panes {
+  .nav-pills > li.active > div > .triangle_down {
+    visibility: visible;
+  }
+}
+
+#explore-tabs a {
+  height:57px;
+  width: 75px;
+}
+
+.triangle_down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid $dark-orange;
+  position: relative;
+  margin-left: 22.5px;
+  visibility: hidden;
+}
+@media (min-width: $screen-sm-min) {
+  .triangle_down {
+    margin-left: 55px;
+  }
+  #explore-tabs a {
+    width: 150px;
+  }
+}
+
+.hover-hide:hover, .hover-hide:focus {
+  background-color: lightgrey;
+  td > div > .hidden {
+    display: inline !important;
+  }
+}

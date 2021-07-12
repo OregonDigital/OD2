@@ -9,6 +9,8 @@ module Hyrax
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     include OregonDigital::DownloadControllerBehavior
+    prepend OregonDigital::WorksControllerBehavior
+    include OregonDigital::WorkRelationPaginationBehavior
     self.curation_concern_type = ::Video
 
     # Override the way Hyrax's works present iiif manifests

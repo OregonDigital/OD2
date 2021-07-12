@@ -3,10 +3,12 @@
 # Sets the behaviors and other data for a collection
 class Collection < ActiveFedora::Base
   after_destroy :destroy_facets
+  after_save :fetch_graph
 
   include ::Hyrax::CollectionBehavior
   # You can replace these metadata if they're not suitable
   include OregonDigital::CollectionMetadata
+  include OregonDigital::CollectionBehavior
   include OregonDigital::AccessControls::Visibility
   self.indexer = OregonDigital::CollectionIndexer
 
@@ -19,12 +21,18 @@ class Collection < ActiveFedora::Base
     facets.sort_by(&:order)
   end
 
+  def insitution_restricted?(current_ability)
+    return false if current_ability.can?(:read, self)
+
+    true
+  end
+
   private
 
   # Build new Facet objects that might not exist
   def generate_default_facets
     CatalogController.blacklight_config.facet_fields.each do |_k, facet|
-      next unless Facet.where(property_name: facet.field, collection_id: id).empty? && facet.if
+      next unless Facet.where(property_name: facet.field, collection_id: id).empty?
 
       facet = Facet.new(
         label: facet.label,
@@ -39,5 +47,9 @@ class Collection < ActiveFedora::Base
   def destroy_facets
     facets = Facet.where(collection_id: id)
     facets.each(&:destroy)
+  end
+
+  def fetch_graph
+    FetchGraphWorker.perform_at(2.seconds, id, depositor)
   end
 end

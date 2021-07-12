@@ -14,6 +14,7 @@ AllCops:
     - 'config/**/*'
     - 'tmp/**/*'
     - 'lib/tasks/**/*'
+    - 'app/presenters/hyrax/file_set_presenter.rb'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']
@@ -22,6 +23,7 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - 'config/**/*'
     - 'app/controllers/catalog_controller.rb'
+    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
 
 Style/AsciiComments:
   Enabled: false
@@ -40,16 +42,10 @@ Style/ClassAndModuleChildren:
 Style/SingleLineBlockParams:
   Enabled: false
 
-Rails/ApplicationJob:
+Naming/MethodParameterName:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
-
-Rails/ApplicationRecord:
-  Enabled: false
-
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Style/Documentation:
@@ -59,6 +55,11 @@ Style/Documentation:
 Metrics/ModuleLength:
   Exclude:
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'
+    - 'app/models/concerns/oregon_digital/video_metadata.rb'
+    - 'app/models/concerns/oregon_digital/document_metadata.rb'
+    - 'app/models/concerns/oregon_digital/image_metadata.rb'
+    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
+
 
 Metrics/ClassLength:
   Exclude:
@@ -86,9 +87,64 @@ RSpec/MessageSpies:
 RSpec/MultipleExpectations:
   Enabled: false
 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
 RSpec/ExampleLength:
   Enabled: false
 
-# FactoryBot 5 will require dynamic definition, so we should allow it.
-FactoryBot/StaticAttributeDefinedDynamically:
+Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: false
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/SlicingWithRange:
+  Enabled: false
+
+RSpec/EmptyLineAfterExample:
+  Enabled: false
+
+Lint/NonDeterministicRequireOrder:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+FactoryBot/FactoryClassName:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Migration/DepartmentName:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb'
+
+RSpec/SubjectStub:
+  Exclude:
+    - 'spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb'

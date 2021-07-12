@@ -1,0 +1,37 @@
+/* sidebar */
+.bs-docs-sidebar {
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* all links */
+.bs-docs-sidebar .nav>li>a {
+  display: block !important;
+  padding: 4px 20px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #767676 !important;
+  color: #999 !important;
+}
+
+/* active & hover links */
+.bs-docs-sidebar .nav>.active>a, 
+.bs-docs-sidebar .nav>li>a:hover, 
+.bs-docs-sidebar .nav>li>a:focus {
+  padding-left: 18px !important;
+  font-weight: bold !important;
+  color: #563d7c !important;
+  background-color: transparent !important;
+  border-left: 2px solid #563d7c !important;
+}
+/* all active links */
+.bs-docs-sidebar .nav>.active>a, 
+.bs-docs-sidebar .nav>.active:hover>a,
+.bs-docs-sidebar .nav>.active:focus>a {
+  padding-left: 18px !important;
+  font-weight: bold !important;
+  color: #563d7c !important;
+  background-color: transparent !important;
+  border-left: 2px solid #563d7c !important;
+}

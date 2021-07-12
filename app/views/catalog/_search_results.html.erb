@@ -1,3 +1,6 @@
+<% content_for(:navbar) do %>
+<% end %>
+
 <h2 class="sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></h2>
 
 <% @page_title = t('blacklight.search.page_title.title', :constraints => render_search_to_page_title(params), :application_name => application_name) %>
@@ -9,7 +12,7 @@
   <%= json_api_link_tag %>
 <% end %>
 
-<%= render 'search_header' %>
+<%= render 'sort_and_per_page' %>
 
 <%# OVERRIDE FROM HYRAX to add h1 to search results page %>
 <h1 class="sr-only"><%= t('blacklight.search.search_results') %></h1>
@@ -23,3 +26,4 @@
 <%- end %>
 
 <%= render 'results_pagination' %>
+

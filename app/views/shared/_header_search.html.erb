@@ -1,0 +1,22 @@
+<%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "header-search-form-header", role: "search" do %>
+  <%= hidden_field_tag :search_field, 'all_fields', id: 'header_search_field' %>
+  <div class="form-group">
+
+    <label class="sr-only" for="header-search-field-header">
+      <%= t("hyrax.search.form.q.label", application_name: application_name) %>
+    </label>
+
+    <div class="input-group">
+      <label class="sr-only" for="header-search-field-header">Search Oregon Digital</label>
+      <%= text_field_tag 'q[]', nil, class: "q form-control", id: "header-search-field-header", placeholder: "Search Oregon Digital" %>
+      <button type="submit" class="" id="header-search-submit-header">
+        <i class="fa fa-search"></i>
+        <span class="sr-only">Search</span>
+      </button>
+    </div><!-- /.input-group -->
+
+  </div><!-- /.form-group -->
+  <%= link_to BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link' do %>
+    Advanced <span class="hidden visible-xs-inline-block">Search</span>
+  <% end %>
+<% end %>

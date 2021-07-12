@@ -1,36 +1,56 @@
 <div class="show-actions">
-  <%# OVERRIDE FROM HYRAX to add 'add to my shelf' button %>
-  <%= link_to "Add to my Shelf", presenter.add_shelf_path, id: 'add-shelf', class: 'btn btn-default' %>
-  <%# END OVERRIDE %>
   <% if Hyrax.config.analytics? %>
     <%= link_to "Analytics", presenter.stats_path, id: 'stats', class: 'btn btn-default' %>
   <% end %>
+
+  <%# OVERRIDE FROM HYRAX to remove restritctions from add to collection button #%>
+
+
+
+
+  <div class="edit-button-sections">
+    <%= link_to 'Print <i class="fa fa-print" aria-hidden="true"></i>'.html_safe, '#', class: 'btn btn-default', onclick: 'window.print();return false;'%>
+  </div>
+  <div class="edit-button-sections">
+    <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector edit-group" checked="checked" />
+    <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
+                  class: 'btn btn-default submits-batches submits-batches-add',
+                  data: { toggle: "modal", target: "#collection-list-container" } %>
+  </div>
+  <div class="edit-button-sections">
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Download
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Files + Metadata (ZIP)", ((current_ability.can? :download, ActiveFedora::Base.find(presenter.id)) ? main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) : main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id)) %></li>
+        <li><%= link_to "Metadata Only (CSV)", main_app.send(:"metadata_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
+      </ul>
+    </div>
+  </div>
+
   <% if presenter.editor? %>
-      <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
-      <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
-      <% if presenter.member_presenters.size > 1 %>
-          <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, presenter]), class: 'btn btn-default' %>
-      <% end %>
-      <% if presenter.valid_child_concerns.length > 0 %>
-        <div class="btn-group">
-          <button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Attach Child <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <% presenter.valid_child_concerns.each do |concern| %>
-                <li>
-                  <%= link_to "Attach #{concern.human_readable_type}", polymorphic_path([main_app, :new, :hyrax, :parent, concern.model_name.singular], parent_id: presenter.id) %>
-                </li>
-              <% end %>
-            </ul>
-        </div>
-      <% end %>
+    <div class='edit-button-sections'>
+    <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
+    </div>
+    <div class='edit-button-sections'>
+    <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger delete-button-show-page', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
+    </div>
+    <% if presenter.valid_child_concerns.length > 0 %>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Attach Child <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% presenter.valid_child_concerns.each do |concern| %>
+              <li>
+                <%= link_to "Attach #{concern.human_readable_type}", polymorphic_path([main_app, :new, :hyrax, :parent, concern.model_name.singular], parent_id: presenter.id) %>
+              </li>
+            <% end %>
+          </ul>
+      </div>
+    <% end %>
   <% end %>
-  <% if presenter.show_deposit_for?(collections: @user_collections) %>
-      <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector" checked="checked" />
-      <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
-                     class: 'btn btn-default submits-batches submits-batches-add',
-                     data: { toggle: "modal", target: "#collection-list-container" } %>
-  <% end %>
+  <%# END OVERRIDE #%>
+  <!-- >
   <% if presenter.work_featurable? %>
       <%= link_to "Feature", hyrax.featured_work_path(presenter, format: :json),
           data: { behavior: 'feature' },
@@ -40,9 +60,13 @@
           data: { behavior: 'unfeature' },
           class: presenter.display_feature_link? ? 'btn btn-default collapse' : 'btn btn-default' %>
   <% end %>
+
+
+  <-->
 </div>
 
 <!-- COinS hook for Zotero -->
   <span class="Z3988" title="<%= export_as_openurl_ctx_kev(presenter) %>"></span>
 <!-- Render Modals -->
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
+<%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>

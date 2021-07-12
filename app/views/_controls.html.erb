@@ -1,29 +1,39 @@
 <% search_page = !@search_state.blank? %>
 
-<nav class="navbar navbar-default navbar-static-top text-shadow" role="navigation">
+<nav class="navbar navbar-default navbar-static-top text-shadow" role="navigation" title="Search Bar">
   <div class="container site-title-container">
     <div class="site-title h1" style="text-align: center;">
-      <h1><%= t('hyrax.product_name') %></h1>
+      <h1 style="color: white;"><%= t('hyrax.product_name') %></h1>
     </div>
   </div>
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 col-sm-<%= search_page ? 7 : 10 %> col-sm-offset-1 col-md-5 col-md-offset-4">
-        <%= render partial: 'catalog/search_form' %>
-      </div>
-      <% if search_page %>
-        <div class="col-md-offset-10 col-sm-offset-9 col-xs-offset-1">
-          <%= button_to "Add to My Shelf", root_path, class: 'btn btn-primary my-shelf-button' %>
-          <%= label_tag "" do %>
-            <% raw("#{check_box_tag 'Select all on page'} Select all on page") %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="searchbar-buttons col-xs-12 col-sm-<%= search_page ? 7 : 10 %> col-sm-offset-1 col-md-5 col-md-offset-4">
-        <%= link_to "Advanced Search", Hyrax::Engine.routes.url_helpers.help_path, method: :get %>
-        <%= link_to "New? Start Here", Hyrax::Engine.routes.url_helpers.help_path, method: :get %>
+        <ul class="nav navbar-nav homepage-nav">
+          <li style="background: none;">
+              <%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "masthead-search-form-header", role: "search" do %>
+                <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
+                  <%= hidden_field_tag :search_field, 'all_fields', id: 'masthead_search_field' %>
+                  <div class="form-group">
+
+                    <label class="sr-only" for="masthead-search-field-header">
+                      <%= t("hyrax.search.form.q.label", application_name: application_name) %>
+                    </label>
+
+                    <div class="input-group">
+                      <label class="sr-only" for="masthead-search-field-header">Search Oregon Digital</label>
+                      <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control", id: "masthead-search-field-header", title: "Masthead search field", placeholder: "Search Oregon Digital" %>
+                      <button type="submit" class="" id="masthead-search-submit-header">
+                        <i class="fa fa-search"></i>
+                        <span class="sr-only">Search</span>
+                      </button>
+                    </div><!-- /.input-group -->
+
+                  </div><!-- /.form-group -->
+                  <%= link_to 'Advanced', BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link' %>
+                <% end %>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

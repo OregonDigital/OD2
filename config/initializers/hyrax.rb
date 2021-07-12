@@ -26,13 +26,14 @@ Hyrax.config do |config|
   # Which RDF term should be used to relate objects to an admin set?
   # If this is a new repository, you may want to set a custom predicate term here to
   # avoid clashes if you plan to use the default (dct:isPartOf) for other relations.
-  config.admin_set_predicate = ::RDF::URI.new('http://opaquenamespace.org/ns/primarySet')
+  RDF::VOCABS << :ons
+  config.admin_set_predicate = RDF::Vocabulary.new("http://opaquenamespace.org/ns/").primarySet
 
   # Email recipient of messages sent via the contact form
   config.contact_email = ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
 
   # Text prefacing the subject entered in the contact form
-  # config.subject_prefix = "Contact form:"
+  config.subject_prefix = "Oregon Digital Contact Request - "
 
   # How many notifications should be displayed on the dashboard
   # config.max_notifications_for_dashboard = 5
@@ -235,7 +236,18 @@ Hyrax.config do |config|
   # config.whitelisted_ingest_dirs = []
 
   # Fields to display in the IIIF metadata section; default is the required fields
-  config.iiif_metadata_fields = Hyrax::Forms::WorkForm.required_fields
+  config.iiif_metadata_fields = %i[
+    title creator_label photographer_label arranger_label artist_label author_label
+    cartographer_label collector_label composer_label contributor_label designer_label donor_label editor_label
+    illustrator_label interviewee_label interviewer_label lyricist_label owner_label patron_label print_maker_label
+    recipient_label transcriber_label translator_label description abstract inscription view subject_label award
+    cultural_context_label ethnographic_term_label event keyword legal_name military_branch_label sports_team
+    style_or_period_label phylum_or_division_label taxon_class_label order_label family_label genus_label species_label
+    common_name_label location_label gps_latitude gps_longitude ranger_district_label street_address tgn_label
+    water_basin_label date date_created view_date license_label rights_holder rights_note rights_statement_label
+    repository_label local_collection_name_label language_label publisher_label provenance source has_finding_aid
+    isPartOf resource_type_label workType_label measurements physical_extent collections format_label
+  ]
 
   # Enables the use of Google ReCaptcha on the contact form.
   # A site key and secret key need to be supplied in order for google
@@ -257,8 +269,24 @@ Date::DATE_FORMATS[:standard] = '%m/%d/%Y'
 Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local::TableBasedAuthority')
 Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::TableBasedAuthority')
 
+Hyrax::Engine.routes.default_url_options = Rails.application.config.action_mailer.default_url_options
+Rails.application.routes.default_url_options = Rails.application.config.action_mailer.default_url_options
+
 Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
 # set bulkrax default work type to first curation_concern if it isn't already set
 if Bulkrax.default_work_type.blank?
   Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
+end
+
+Hyrax::CurationConcern.actor_factory.insert_before Hyrax::Actors::CreateWithRemoteFilesActor, OregonDigital::Actors::CreateWithOembedUrlActor
+
+# Add extra blacklight routes to Admin Workflows (Review Queue) controller
+Hyrax::Engine.routes.prepend do
+  concern :searchable, Blacklight::Routes::Searchable.new
+
+  namespace :admin do
+    resource :workflows, only: [:index], as: 'workflows', path: '/workflows', controller: 'workflows' do
+      concerns :searchable
+    end
+  end
 end

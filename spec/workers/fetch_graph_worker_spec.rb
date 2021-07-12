@@ -5,7 +5,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
   let(:worker) { described_class.new }
   let(:uri) { 'http://my.queryuri.com' }
   let(:user) { build(:user) }
-  let(:model) { create(:generic, title: ['foo'], keyword: ['bar'], award_date: ['baz'], creator: [creator_controlled_val], subject: [subject_controlled_val], ranger_district: [location_controlled_val], taxon_class: [scientific_controlled_val], depositor: user.email, id: 123) }
+  let(:model) { create(:generic, title: ['foo'], keyword: ['bar'], award_date: ['1900-12-31'], creator: [creator_controlled_val], subject: [subject_controlled_val], ranger_district: [location_controlled_val], taxon_class: [scientific_controlled_val], depositor: user.email, id: 123) }
   let(:creator_controlled_val) { OregonDigital::ControlledVocabularies::Creator.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
   let(:subject_controlled_val) { OregonDigital::ControlledVocabularies::Subject.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
   let(:location_controlled_val) { Hyrax::ControlledVocabularies::Location.new('http://opaquenamespace.org/ns/creator/ChabreWayne') }
@@ -29,6 +29,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/creator/ChabreWayne%3E').with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Connection' => 'keep-alive', 'Host' => 'ci-test:8080', 'Keep-Alive' => '30', 'User-Agent' => 'Ruby' }).to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/genus/Acnanthes%3E').to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 200, body: '', headers: {})
+        stub_request(:get, 'https://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/genus/Acnanthes').to_return(status: 200, body: '', headers: {})
       end
 
@@ -39,32 +40,27 @@ RSpec.describe FetchGraphWorker, type: :worker do
 
       it 'indexes creator data into the creator_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)[Solrizer.solr_name('creator_combined_label', :facetable)].first).to eq 'Chabre, Wayne'
+        expect(SolrDocument.find(work.id)['creator_combined_label_sim'].first).to eq 'Chabre, Wayne'
       end
 
       it 'indexes data into the location_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)[Solrizer.solr_name('location_combined_label', :facetable)].first).to eq 'Chabre, Wayne'
+        expect(SolrDocument.find(work.id)['location_combined_label_sim'].first).to eq 'Chabre, Wayne'
       end
 
       it 'indexes non-linked topic data into the creator_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)[Solrizer.solr_name('topic_combined_label', :facetable)]).to include 'bar'
+        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include 'bar'
       end
 
       it 'indexes linked topic data into the topic_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)[Solrizer.solr_name('topic_combined_label', :facetable)]).to include 'Chabre, Wayne'
+        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include 'Chabre, Wayne'
       end
 
       it 'indexes data into the scientific_combined_label field' do
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)[Solrizer.solr_name('scientific_combined_label', :facetable)].first).to eq 'Acnanthes'
-      end
-
-      it 'indexes data into the date_combined_label field' do
-        worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)[Solrizer.solr_name('date_combined_label', :facetable)].first).to eq 'baz'
+        expect(SolrDocument.find(work.id)['scientific_combined_label_sim'].first).to eq 'Acnanthes'
       end
     end
 
@@ -75,6 +71,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/creator/ChabreWayne%3E').with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Connection' => 'keep-alive', 'Host' => 'ci-test:8080', 'Keep-Alive' => '30', 'User-Agent' => 'Ruby' }).to_return(status: 500, body: '', headers: {})
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/genus/Acnanthes%3E').with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Connection' => 'keep-alive', 'Host' => 'ci-test:8080', 'Keep-Alive' => '30', 'User-Agent' => 'Ruby' }).to_return(status: 500, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 500, body: '', headers: {})
+        stub_request(:get, 'https://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 500, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/genus/Acnanthes').to_return(status: 500, body: '', headers: {})
       end
 

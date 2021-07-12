@@ -9,7 +9,10 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::Ulan,
           OregonDigital::ControlledVocabularies::Vocabularies::LocNames,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPublisher,
-          OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator
+          OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator,
+          OregonDigital::ControlledVocabularies::Vocabularies::Wikidata,
+          OregonDigital::ControlledVocabularies::Vocabularies::LocOrgs,
+          OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuAcademicUnits
         ]
       end
     end

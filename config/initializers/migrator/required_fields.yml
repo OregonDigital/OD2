@@ -1,0 +1,5 @@
+required:
+  - property: title
+  - property: rights_statement
+  - property: resource_type
+  - property: identifier

@@ -11,7 +11,7 @@ module Qa::Authorities
     # And parse the label as regular JSON
     def json(url)
       json = super
-      return json unless controlled_vocabulary.query_to_vocabulary(url) == OregonDigital::ControlledVocabularies::Vocabularies::WdEntity
+      return json unless controlled_vocabulary.query_to_vocabulary(url) == OregonDigital::ControlledVocabularies::Vocabularies::Wikidata
 
       json['@id'] = url
       json

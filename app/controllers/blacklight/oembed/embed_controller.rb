@@ -18,8 +18,10 @@ module Blacklight::Oembed
       end
     rescue OEmbed::Error => e
       # Create OembedError for oEmbed Errors dashboard
-      Generic.search_with_conditions(oembed_url: url).each do |work|
-        OembedError.find_or_create_by(document_id: work.id).add_error(e)
+      FileSet.search_with_conditions(oembed_url_sim: url).each do |file_set|
+        OembedError.find_or_create_by(document_id: file_set.id) do |error|
+          error.document_id = file_set.id
+        end.add_error(e)
       end
 
       "<dt>oEmbed encounted an error</dt><dd>#{e.message}</dd>".html_safe

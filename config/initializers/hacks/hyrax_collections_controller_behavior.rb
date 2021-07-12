@@ -1,6 +1,8 @@
 # frozen_string_literal:true
 
+Hyrax::CollectionsController.class_eval { include ActionController::Live }
 Hyrax::CollectionsControllerBehavior.module_eval do
+
   # OVERRIDE FROM HYRAX
   # Remove :f (facets) from single item search to allow collection to verify user access
   def single_item_search_builder
@@ -14,6 +16,43 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     presenter
     query_collection_members
     configured_facets
+    respond_to do |wants|
+      wants.html {render :show, status: :ok}
+      wants.nt { render body: presenter.export_as_nt, mime_type: Mime[:nt] }
+    end
+  end
+
+  # Zip up all works in collection into one collection zip
+  def download
+    zipname = "#{collection.id}.zip"
+
+    send_file_headers!(
+      type: 'application/zip',
+      disposition: 'attachment',
+      filename: zipname
+    )
+    response.headers['Last-Modified'] = Time.now.httpdate.to_s
+    response.headers['X-Accel-Buffering'] = 'no'
+
+    OregonDigital::CollectionStreamer.stream(collection) do |chunk|
+      response.stream.write(chunk)
+    end
+  ensure
+    response.stream.close
+  end
+
+  # Get the path to institutional branding imag
+  def institution_image_path
+    image = 'no-institution-collection.png'
+
+    case OregonDigital::InstitutionPicker.institution_acronym(@curation_concern)
+    when 'OSU' then
+      image = 'osu-collection.png'
+    when 'UO'
+      image = 'uo-collection.png'
+    end unless @curation_concern.institution.first.nil?
+
+    ApplicationController.helpers.asset_path(image)
   end
 
   private

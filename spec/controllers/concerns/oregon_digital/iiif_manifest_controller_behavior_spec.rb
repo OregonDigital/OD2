@@ -47,7 +47,7 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
       end
 
       it "doesn't fetch a solr doc" do
-        expect(controller).not_to receive(:curation_concern_from_search_results)
+        expect(controller).not_to receive(:search_result_document)
         controller.jp2_work_presenter
       end
 
@@ -71,7 +71,8 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
       let(:id) { 'i am an id' }
 
       before do
-        allow(controller).to receive(:curation_concern_from_search_results).and_return(solrdoc)
+        allow(controller).to receive(:params).and_return({})
+        allow(controller).to receive(:search_result_document).and_return(solrdoc)
         allow(controller).to receive(:current_ability).and_return(ability)
         allow(solrdoc).to receive(:hydra_model).and_return(hydra_model)
         allow(hydra_model).to receive(:find).with(id).and_return(asset)

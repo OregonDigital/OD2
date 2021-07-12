@@ -1,62 +1,58 @@
 overrides:
-  - property: source
-    predicate: http://purl.org/dc/elements/1.1/source
-    multiple: true
-  - predicate: http://opaquenamespace.org/ns/fullText
-    function: return_nil
-  - predicate: http://opaquenamespace.org/ns/full
-    function: return_nil
+  #remediate
+  #  predicate: http://purl.org/dc/elements/1.1/source
+  #  predicate: http://sw-portal.deri.org/ontologies/swportal#isVolume
+  #  predicate: http://sw-portal.deri.org/ontologies/swportal#hasNumber
+  #  predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
+
+  #set and primarySet handled separately, do not map
   - predicate: http://opaquenamespace.org/ns/primarySet
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/set
     function: return_nil
+  #not used in OD2
   - predicate: http://opaquenamespace.org/ns/boxName
     function: return_nil
-  - property: rights_holder
-    predicate: http://opaquenamespace.org/right/rightsHolder
-    multiple: true
-  - property: material
-    predicate: http://opaquenamespace.org/ns/vra/material
-    multiple: true
+
+  #not used in OD2
+  - predicate: http://opaquenamespace.org/rights/rightsHolder
+    function: return_nil
+
+  #multiple must be true (is false on map)
   - property: repository_attributes
     predicate: http://id.loc.gov/vocabulary/relators/rps
     multiple: true
     function: attributes_data
-  - property: creator_attributes
-    predicate: http://purl.org/dc/elements/1.1/creator
-    multiple: true
-    function: attributes_data
-  - property: local_collection_name_attributes
-    predicate: http://opaquenamespace.org/ns/localCollectionName
-    multiple: true
-    function: attributes_data
-  - property: subject_attributes
-    predicate: http://purl.org/dc/terms/subject
-    multiple: true
-    function: attributes_data
+
+  #NOTE: license and rights explanation-
+  #map states that license in OD2 uses dct/rights so this is in main entry
+  #however actually needs to be mapped to rights_statement
+  #does not use _attributes
+  #must be multiple:true
   - property: rights_statement
     predicate: http://purl.org/dc/terms/rights
-    multiple: false
-    function: attributes_replaces_data
+    multiple: true
+   #OD1 predicate for license must be flipped
+  - property: license
+    predicate: http://creativecommons.org/ns#license
+    multiple: true
+
+  #does not use _attributes
   - property: language
     predicate: http://purl.org/dc/terms/language
     multiple: true
+  #does not use _attributes
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
     multiple: false
-  - property: format
-    predicate: http://purl.org/dc/terms/format
-    function: return_nil
+  #flips predicate
+  #multiple is true
   - property: access_restrictions_attributes
     predicate: http://data.archiveshub.ac.uk/def/accessRestrictions
     multiple: true
     function: attributes_data
-  - property: is_volume
-    predicate: http://sw-portal.deri.org/ontologies/swportal#isVolume
-    multiple: true
-  - property: has_number
-    predicate: http://sw-portal.deri.org/ontologies/swportal#hasNumber
-    multiple: true
+
+  #flip rdaregistry predicates from labels to id version
   - property: biographical_information
     predicate: http://www.rdaregistry.info/Elements/a/#biographicalInformation.en
     multiple: true
@@ -67,47 +63,187 @@ overrides:
     predicate: http://www.rdaregistry.info/Elements/w/#formOfWork.en
     multiple: true
     function: attributes_data
-  - property: inscription
-    predicate: http://opaquenamespace.org/ns/vra_inscription
-    multiple: true
   - property: layout
     predicate: http://www.rdaregistry.info/Elements/m/#layout.en
     multiple: true
   - property: mode_of_issuance
     predicate: http://www.rdaregistry.info/Elements/m/#modeOfIssuance.en
     multiple: true
-  - property: style_or_period
-    predicate: http://opaquenamespace.org/ns/vra_hasStylePeriod
-    multiple: true
-  - property: cultural_context
-    predicate: http://opaquenamespace.org/ns/vra_culturalContext
-    multiple: true
-  - property: tgn_attributes
-    predicate: http://opaquenamespace.org/ns/tgn
-    multiple: true
-    function: attributes_data
-  - property: use_restrictions
-    predicate: http://data.archiveshub.ac.uk/def/useRestrictions
-    multiple: true
-  - property: contained_in_journal
-    predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
-    multiple: true
   - property: place_of_production_attributes
     predicate: http://www.rdaregistry.info/Elements/m/#placeOfProduction.en
     multiple: true
     function: attributes_data
-  - property: material
-    predicate: http://opaquenamespace.org/ns/vra_material
-    multiple: true
-  - property: technique
-    predicate: http://opaquenamespace.org/ns/vra_hasTechnique
-    multiple: true
   - property: color_content
     predicate: http://www.rdaregistry.info/Elements/e/#colourContent.en
     multiple: true
+
+  #flip vra/ predicates, remediate any other version
+  - property: material
+    predicate: http://opaquenamespace.org/ns/vra/material
+    multiple: true
+  - property: inscription
+    predicate: http://opaquenamespace.org/ns/vra/inscription
+    multiple: true
+  - property: style_or_period
+    predicate: http://opaquenamespace.org/ns/vra/hasStylePeriod
+    multiple: true
+  - property: cultural_context
+    predicate: http://opaquenamespace.org/ns/vra/culturalContext
+    multiple: true
+  - property: technique
+    predicate: http://opaquenamespace.org/ns/vra/hasTechnique
+    multiple: true
+  - property: state_or_edition
+    predicate: http://opaquenamespace.org/ns/vra/stateEdition
+    multiple: true
+  - property: current_repository_id
+    predicate: http://opaquenamespace.org/ns/vra/idCurrentRepository
+    multiple: true
+  - property: measurements
+    predicate: http://opaquenamespace.org/ns/vra/measurements
+    multiple: true
+
+  #flip predicate
+  - property: tgn_attributes
+    predicate: http://opaquenamespace.org/ns/tgn
+    multiple: true
+    function: attributes_data
+
+  #flip predicate
+  - property: use_restrictions
+    predicate: http://data.archiveshub.ac.uk/def/useRestrictions
+    multiple: true
+
+  #add property and change predicate (was not actually mapped in OD1)
   - property: original_filename
     predicate: http://opaquenamespace.org/ns/full
     multiple: false
+  #not used in OD2
   - property: contents
     predicate: http://opaquenamespace.org/ns/contents
     function: return_nil
+
+  #flip cco/ predicates, remediate any other version
+  - property: view_date
+    predicate: http://opaquenamespace.org/ns/cco/viewDate
+    multiple: true
+  - property: creator_display
+    predicate: http://opaquenamespace.org/ns/cco/creatorDisplay
+    multiple: true
+  - property: view_date
+    predicate: http://opaquenamespace.org/ns/cco/viewDescription
+    multiple: true
+  - property: accession_number
+    predicate: http://opaquenamespace.org/ns/cco/accessionNumber
+    multiple: true
+    
+  #flip editor predicate, from schema to marcrel
+  - property: editor_attributes
+    predicate: http://schema.org/editor
+    multiple: true
+    function: attributes_data
+
+  #flip barcode predicate, from old bibframe to ons
+  - property: barcode
+    predicate: http://bibframe.org/vocab/barcode
+    multiple: true
+
+  #in cpds, not used in OD2
+  - predicate: http://www.openarchives.org/ore/1.0/datamodel#proxyFor
+    function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/next
+    function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/first
+    function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/last
+    function: return_nil
+
+  #flip workType predicate
+  - property: workType_attributes
+    predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+    multiple: true
+    function: attributes_data
+
+  #OD1 properties that will not be migrated
+  # captionTitle
+  - predicate: http://opaquenamespace.org/ns/captionTitle
+    function: return_nil
+  # scribe
+  - predicate: http://id.loc.gov/vocabulary/relators/scr
+    function: return_nil
+  # canzonierePoems
+  - predicate: http://opaquenamespace.org/ns/canzonierePoems
+    function: return_nil
+  # earliestDate
+  - predicate: http://opaquenamespace.org/ns/vra/earliestDate
+    function: return_nil
+  # latestDate
+  - predicate: http://opaquenamespace.org/ns/vra/latestDate
+    function: return_nil
+  # rights_statement
+  - predicate: http://purl.org/dc/elements/1.1/rights
+    function: return_nil
+  # rightsHolder
+  - predicate: http://opaquenamespace.org/rights/rightsHolder
+    function: return_nil
+  # format
+  - predicate: http://purl.org/dc/terms/format
+    function: return_nil
+  # support
+  - predicate: http://opaquenamespace.org/ns/vra/support
+    function: return_nil
+  # hostItem
+  - predicate: http://opaquenamespace.org/ns/sheetmusic_hostItem
+    function: return_nil
+  # tribalStatus
+  - predicate: http://opaquenamespace.org/ns/tribalStatus
+    function: return_nil
+  # numberOfPages
+  - predicate: http://schema.org/numberOfPages
+    function: return_nil
+  # higherClassification
+  - predicate: http://rs.tdwg.org/dwc/terms/higherClassification
+    function: return_nil
+  # preservation
+  - predicate: http://www.loc.gov/premis/rdf/v1#hasOriginalName
+    function: return_nil
+  # hasFixity
+  - predicate: http://www.loc.gov/premis/rdf/v1#hasFixity
+    function: return_nil
+  # imageWidth
+  - predicate: http://www.w3.org/2003/12/exif/ns#width
+    function: return_nil
+  # imageHeight
+  - predicate: http://www.w3.org/2003/12/exif/ns#height
+    function: return_nil
+  # imageOrientation
+  - predicate: http://www.w3.org/2003/12/exif/ns#orientation
+    function: return_nil
+  # colorSpace
+  - predicate: http://www.w3.org/2003/12/exif/ns#colorSpace
+    function: return_nil
+  # fileSize
+  - predicate: http://www.rdaregistry.info/Elements/m/#fileSize.en
+    function: return_nil
+  # containedInManifestation
+  - predicate: http://www.rdaregistry.info/Elements/m/#containedInManifestation.en
+    function: return_nil
+
+  # do not migrate
+  - predicate: http://purl.org/dc/terms/modified
+    function: return_nil
+  - predicate: http://opaquenamespace.org/ns/dateDigitized
+    function: return_nil
+
+  # predicate tweaks
+  - property: street_address
+    predicate: http://www.loc.gov/standards/mads/rdf/v1.html#streetAddress
+    multiple: true
+  - property: box
+    predicate: https://schema.org/box
+    multiple: true
+
+  # flip extent
+  - property: measurements
+    predicate: http://purl.org/dc/terms/extent
+    multiple: true

@@ -1,0 +1,37 @@
+<div id="explore-tabs" class='text-center'>
+  <ul class='nav nav-pills visible-all-inline-block'>
+    <li class="<%= 'active' if tab == controller.class::TABS[:all] %>">
+      <div class="stacker-container">
+        <%= link_to 'All', all_explore_collections_path, class: 'btn btn-outline' %>
+        <div class="triangle_down"></div>
+      </div>
+    </li>
+    <li class="<%= 'active' if tab == controller.class::TABS[:osu] %>">
+      <div class="stacker-container">
+        <%= link_to osu_explore_collections_path, class: 'btn btn-outline hidden-xs' do %>
+          Oregon State <br> University
+        <% end %>
+        <%= link_to 'OSU', osu_explore_collections_path, class: 'btn btn-outline visible-xs' %>
+        <div class="triangle_down"></div>
+      </div>
+    </li>
+    <li class="<%= 'active' if tab == controller.class::TABS[:uo] %>">
+      <div class="stacker-container">
+        <%= link_to uo_explore_collections_path, class: 'btn btn-outline hidden-xs' do %>
+          University of <br> Oregon
+        <% end %>
+        <%= link_to 'UO', uo_explore_collections_path, class: 'btn btn-outline visible-xs' %>
+        <div class="triangle_down"></div>
+      </div>
+    </li>
+    <li class="<%= 'active' if tab == controller.class::TABS[:my] %>">
+      <div class="stacker-container">
+        <%= link_to my_explore_collections_path, class: 'btn btn-outline hidden-xs' do %>
+          My <br> Collections
+        <% end %>
+        <%= link_to 'My', my_explore_collections_path, class: 'btn btn-outline visible-xs hidden-sm' %>
+        <div class="triangle_down"></div>
+      </div>
+    </li>
+  </ul>
+</div>

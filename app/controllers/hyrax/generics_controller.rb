@@ -9,18 +9,21 @@ module Hyrax
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     include OregonDigital::DownloadControllerBehavior
+    prepend OregonDigital::WorksControllerBehavior
+    include OregonDigital::WorkRelationPaginationBehavior
     self.curation_concern_type = ::Generic
 
     # Override the way Hyrax's works present iiif manifests
     include OregonDigital::IIIFManifestControllerBehavior
 
+    def create
+      # Resetting :member_of_collection_ids to nil if we were given an empty string
+      # This helps failed form submissions to return to the form and display errors
+      params[hash_key_for_curation_concern][:member_of_collection_ids] = nil if params[hash_key_for_curation_concern][:member_of_collection_ids].empty?
+      super
+    end
+
     # Use this line if you want to use a custom presenter
     self.show_presenter = Hyrax::GenericPresenter
-
-    def add_oembed_error(error)
-      errors = OembedError.find_or_create_by(document_id: params['id'])
-      errors.oembed_errors << error unless errors.oembed_errors.include? error
-      errors.save
-    end
   end
 end

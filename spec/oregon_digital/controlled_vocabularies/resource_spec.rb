@@ -5,7 +5,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
   let(:new_rdf_graph) { RDF::Graph.new }
   let(:bg_graph) do
     graph = new_rdf_graph
-    graph.name = 'bg'
+    graph.name = RDF::URI('http://example/bg')
     graph
   end
 

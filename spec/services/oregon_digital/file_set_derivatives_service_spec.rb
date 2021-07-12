@@ -185,13 +185,18 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
     let(:mime_type) { 'application/pdf' }
     let(:minimagick) { double }
     let(:pages) { [double, double, double, double, double] }
+    let(:service_double) { double }
 
     before do
       allow(OregonDigital::Derivatives::Image::Utils).to receive(:tmp_file).with('png').and_yield(tmp_png)
       allow(service).to receive(:create_thumbnail)
       allow(service).to receive(:extract_full_text)
+      allow(service).to receive(:extract_text_bbox_derivative_service).and_return service_double
+      allow(service).to receive(:hocr_derivative_service).and_return service_double
       allow(service).to receive(:manual_convert)
       allow(service).to receive(:create_zoomable_page)
+
+      allow(service_double).to receive(:create_derivatives)
 
       allow(MiniMagick::Image).to receive(:open).with(bogus_pdf).and_return(minimagick)
       allow(minimagick).to receive(:pages).and_return(pages)
@@ -203,8 +208,13 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       service.create_pdf_derivatives(bogus_pdf)
     end
 
-    it 'generates OCR' do
+    it 'extracts text' do
       expect(service).to receive(:extract_full_text).with(bogus_pdf, uri)
+      service.create_pdf_derivatives(bogus_pdf)
+    end
+
+    it 'generates extracted text bounding box' do
+      expect(service).to receive(:extract_text_bbox_derivative_service).with(bogus_pdf)
       service.create_pdf_derivatives(bogus_pdf)
     end
 
@@ -212,6 +222,12 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       pages.each_with_index do |_, i|
         expect(service).to receive(:manual_convert).with(bogus_pdf, i, tmp_png)
       end
+
+      service.create_pdf_derivatives(bogus_pdf)
+    end
+
+    it 'generates OCR for each page' do
+      expect(service).to receive(:hocr_derivative_service).with(tmp_png).exactly(pages.count).times
 
       service.create_pdf_derivatives(bogus_pdf)
     end

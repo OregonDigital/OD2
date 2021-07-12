@@ -13,7 +13,7 @@ RSpec.describe OregonDigital::ErroredOembedSearchBuilder do
     it { is_expected.to eq %i[with_pagination with_sorting only_oembed with_errored_oembed] }
   end
 
-  describe 'with oember errors in the database' do
+  describe 'with oembed errors in the database' do
     let!(:oembed_error) { create(:oembed_error) }
 
     before { search_builder.with_errored_oembed(solr_params) }

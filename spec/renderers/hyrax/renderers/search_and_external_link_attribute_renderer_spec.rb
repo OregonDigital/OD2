@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-RSpec.describe Hyrax::Renderers::SearchAndExternalLinkAttributeRenderer do
+RSpec.describe ::SearchAndExternalLinkAttributeRenderer do
   describe '#li_value' do
     subject { Nokogiri::HTML(rendered) }
 
@@ -13,10 +13,10 @@ RSpec.describe Hyrax::Renderers::SearchAndExternalLinkAttributeRenderer do
       let(:value) { 'Last, First' }
       let(:link) { 'https://google.com' }
       let(:content) do
-        '<a href="/catalog?locale=en&amp;q=Last%2C+First&amp;search_field=creator">' \
+        '<a href="/catalog?f%5Bcreator_sim%5D%5B%5D=Last%2C+First&amp;locale=en">' \
         'Last, First' \
-        '</a><a aria-label="Open link in new window" class="btn" target="_blank" href="https://google.com">' \
-        '<span class="glyphicon glyphicon-new-window"></span></a>'
+        '</a><a aria-label="Open link in new window" class="btn" target="_blank" title="learn more" href="https://google.com">' \
+        '<i class="fa fa-info-circle"></i><span class="sr-only">learn more</span></a>'
       end
 
       it { is_expected.to be_equivalent_to(expected) }
@@ -28,7 +28,7 @@ RSpec.describe Hyrax::Renderers::SearchAndExternalLinkAttributeRenderer do
       let(:value) { 'Last, First' }
       let(:link) { 'https://google.com' }
       let(:content) do
-        '<a href="/catalog?locale=en&amp;q=Last%2C+First&amp;search_field=creator">' \
+        '<a href="/catalog?f%5Bcreator_sim%5D%5B%5D=Last%2C+First&amp;locale=en">' \
         'Last, First'
       end
 

@@ -62,7 +62,7 @@ en:
           license_label_sim: License
           local_collection_name_label_sim: Local Collection Name
           tgn_label_sim: Historic Place
-          type_label_sim: Media
+          resource_type_label_sim: Media
           repository_label_sim: Repository
           publisher_label_sim: Publisher
           taxon_class_label_sim: Taxon Class
@@ -100,6 +100,7 @@ en:
           cartographer_label_tesim: Cartographer
           collector_label_tesim: Collector
           composer_label_tesim: Composer
+          creator_label_sim: Creator
           creator_label_tesim: Creator
           contributor_label_tesim: Contributor
           dedicatee_label_tesim: Dedicatee
@@ -234,8 +235,27 @@ en:
         header: 'Can I use it?'
       items:
         header: "Downloads"
+    collection:
+      select_form:
+        select_heading: 'My Collections'
+        title: 'Save this item'
+        update: 'Save'
+        delete: 'Delete'
+        export: 'Export'
+        share: 'Share'
+        unshare: 'Unshare'
+        create_new: 'create a new collection'
+    dashboard:
+      my:
+        action:
+          sign_up: 'Sign Up'
+          log_in: 'Log In'
+          add_to_collection: 'Save to...'
+          select_all: 'Select All'
     search:
       form:
+        facet:
+          label: Search by keyword
         option:
           osu:
             label_long: OSU Content Only

@@ -1,0 +1,18 @@
+<% doc_presenter = index_presenter(document) %>
+
+<div class="metadata-row">
+  <dl class="row">
+    <% if should_render_index_field? document, index_fields(document)['date_tesim'] %>
+      <dt class="col-sm-4"><%= render_index_field_label document, field: 'date_tesim' %></dt>
+      <dd class="col-sm-8"><%= doc_presenter.field_value index_fields(document)['date_tesim'] %></dd>
+    <% end %>
+  </dl>
+</div>
+
+<div class="metadata-row">
+  <% if document.children? %>
+    <%= render 'index_type_icon', document: document unless document.resource_type_label.first.nil? || document.resource_type_label.first.empty? %>
+    <%= doc_presenter.field_value index_fields(document)['resource_type_label_tesim'] %>
+    (<%= document.children.count %> Items)
+  <% end %>
+</div>

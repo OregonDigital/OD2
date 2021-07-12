@@ -27,37 +27,28 @@
     <% end %>
   </ul>
 
-  <%= simple_form_for @form, url: [hyrax, :dashboard, @form], html: { data: { behavior: 'work-form'}, class: 'editor' } do |f| %>
+  <%= simple_form_for @form, url: [hyrax, :dashboard, @form], html: { data: { behavior: 'work-form', param_key: @form.model_name.param_key }, class: 'editor' } do |f| %>
     <div class="tab-content">
       <div id="description" class="tab-pane active">
         <div class="panel panel-default labels">
           <div class="panel-body">
 
             <div id="base-terms">
-              <% f.object.primary_terms.each do |term| %>
-                <%= render_edit_field_partial(term, f: f) %>
-              <% end %>
-
-              <% if f.object.persisted? %>
-                <%# we're loading these values dynamically to speed page load %>
-                <%= f.input :thumbnail_id,
-                            input_html: { data: { text: f.object.thumbnail_title } } %>
-              <% end %>
-            </div>
-            <% if f.object.display_additional_fields? %>
-              <%= link_to t('hyrax.collection.form.additional_fields'),
-                      '#extended-terms',
-                      class: 'btn btn-default additional-fields',
-                      data: { toggle: 'collapse' },
-                      role: "button",
-                      'aria-expanded'=> "false",
-                      'aria-controls'=> "extended-terms" %>
-              <div id="extended-terms" class='collapse'>
-                <% f.object.secondary_terms.each do |term| %>
+              <% unless current_user.roles.blank? %>
+                <% f.object.primary_terms.each do |term| %>
                   <%= render_edit_field_partial(term, f: f) %>
                 <% end %>
-              </div>
-            <% end %>
+                <% if f.object.persisted? %>
+                  <%# we're loading these values dynamically to speed page load %>
+                  <%= f.input :thumbnail_id,
+                              input_html: { data: { text: f.object.thumbnail_title } } %>
+                <% end %>
+              <% else %>
+                <% f.object.user_primary_terms.each do |term| %>
+                  <%= render_edit_field_partial(term, f: f) %>
+                <% end %>
+              <% end %>
+            </div>
             <%= hidden_field_tag :type, params[:type] %>
             <%= hidden_field_tag :stay_on_edit, true %>
             <%= hidden_field_tag :collection_type_gid, @collection.collection_type_gid %>

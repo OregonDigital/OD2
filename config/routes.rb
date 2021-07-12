@@ -1,6 +1,15 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
+
+  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
+  concern :iiif_search, BlacklightIiifSearch::Routes.new
+  resources :explore_collections, controller: 'oregon_digital/explore_collections', only: [] do
+    collection do
+      get :all, :osu, :uo, :my
+    end
+  end
+
   mount Bulkrax::Engine, at: '/'
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
@@ -9,13 +18,16 @@ Rails.application.routes.draw do
   mount BrowseEverything::Engine => '/browse'
   mount Blacklight::Oembed::Engine, at: 'oembed'
   mount Blacklight::Engine => '/'
+  mount BlacklightAdvancedSearch::Engine => '/'
+
   concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+    concerns :range_searchable
   end
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
+  devise_for :users, controllers: { confirmations: 'users/confirmations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
   devise_scope :user do
     get 'users/auth/cas', to: 'users/omniauth_authorize#passthru', defaults: { provider: :cas }, as: 'new_osu_session'
     get 'users/auth/saml', to: 'users/omniauth_authorize#passthru', defaults: { provider: :saml }, as: 'new_uo_session'
@@ -45,9 +57,23 @@ Rails.application.routes.draw do
       end
     end
   end
+  scope module: 'hyrax' do
+    namespace :admin do
+      resource :workflows, only: [:index], as: 'workflows', path: '/workflows', controller: 'workflows' do
+        concerns :range_searchable
+      end
+    end
+  end
+
+  resources :collections, controller: 'hyrax/collections', only: [] do # public landing show page
+    member do
+      get :download
+    end
+  end
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
+    concerns :iiif_search
   end
 
   resources :bookmarks do

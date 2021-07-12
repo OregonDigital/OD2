@@ -1,0 +1,34 @@
+.lg-border-right {
+  border-right: 3px solid $light-grey;
+}
+
+.lg-border-bottom {
+  border-bottom: 15px solid $very-light-grey;
+  margin-top: 1em;
+}
+
+.dropdown-menu-center {
+  right: unset !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+
+  @media (max-width: $screen-sm-min) {
+    & {
+      position: relative !important;
+    }
+  }
+}
+
+.float-none {
+  float: none !important;
+}
+
+.flex-container,
+.flex-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.visible-all-inline {
+  display: inline;
+}

@@ -1,10 +1,5 @@
-/* ...
- *= require jquery-ui
- *= require select2
- *= require_self
-*/
 
-@import '_variables';
+
 @import "bootstrap-sprockets";
 @import 'bootstrap';
 @import 'blacklight/blacklight';

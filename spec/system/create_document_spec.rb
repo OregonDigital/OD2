@@ -29,13 +29,15 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       expect(page).to have_content 'Add New Document'
       click_link 'Files' # switch tab
       expect(page).to have_content 'Add files'
-      expect(page).to have_content 'Add folder'
-      within('span#addfiles') do
+      expect(page).to have_content 'ADD FOLDER'
+      within('div#add-files') do
         page.execute_script("$('input[type=file]').css('opacity','1')")
         page.execute_script("$('input[type=file]').css('position','inherit')")
-        attach_file('files[]', upload_file_path)
+        attach_file('files[]', upload_file_path, visible: false)
       end
-      click_link 'Descriptions' # switch tab
+      within('ul.nav-tabs') do
+        click_link 'Descriptions' # switch tab
+      end
       within('div.document_title') do
         fill_in('Title', with: 'Test Title')
       end
@@ -43,20 +45,20 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
         fill_in('Identifier', with: 'Test ID')
       end
       within('div.document_resource_type') do
-        select('Dataset', from: 'Type')
+        select('Dataset', from: 'Resource type')
       end
       select('In Copyright', from: 'Rights')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
-      find('body').click
+      find('#required-metadata').click
 
       choose('document_visibility_open')
       expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
-      find('body').click
+      find('#required-metadata').click
 
       check('agreement', visible: false)
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
-      find('body').click
+      find('#required-metadata').click
 
       click_on 'Save'
       expect(page).to have_content('Test Title')

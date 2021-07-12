@@ -7,7 +7,7 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     class CollectionForm < Hyrax::Forms::CollectionForm
       self.terms = %i[resource_type title creator contributor description license publisher
-                      date_created subject language representative_id thumbnail_id
+                      date_created subject language has_finding_aid representative_id thumbnail_id
                       related_url visibility collection_type_gid institution date repository]
 
       def initialize_field(key)
@@ -28,9 +28,9 @@ module OregonDigital
 
         if key == :title
           @attributes['title'].each do |value|
-            @attributes['alt_title'] << value
+            @attributes['alternative_title'] << value
           end
-          @attributes['alt_title'].delete(@attributes['alt_title'].min) unless @attributes['alt_title'].empty?
+          @attributes['alternative_title'].delete(@attributes['alternative_title'].min) unless @attributes['alternative_title'].empty?
           return @attributes['title'].sort unless @attributes['title'].empty?
 
           return ['']
@@ -44,10 +44,14 @@ module OregonDigital
            creator contributor
            license publisher
            date_created subject
-           language
+           language has_finding_aid
            related_url resource_type
            institution date
            repository]
+      end
+
+      def user_primary_terms
+        %i[title description]
       end
 
       def secondary_terms

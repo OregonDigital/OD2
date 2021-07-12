@@ -1,5 +1,47 @@
 en:
   oregon_digital:
+    collection:
+      create_form:
+        title: 'Create new collection'
+      delete_form:
+        title: 'Delete collection'
+      edit_form:
+        title: 'Edit collection'
+      export_form:
+        title: 'Export collection'
+      share_form:
+        title: 'Share collection'
+    contact_form:
+      issue_types:
+        browsing: Browsing and searching
+        reporting: Reporting a problem
+        copyright: Using this/an item for something (copyright and permissions)
+        general: General inquiry or request
+    explore_collections:
+      actions:
+        edit: 'Edit'
+        expand: '...'
+        export: 'Export'
+        delete: 'Delete'
+        share: 'Share'
+        view: 'View'
+      display_mode:
+        create: 'Create new collection'
+      list:
+        header:
+          collection_name: ' Collection Name'
+          institution: 'Institution'
+          count: 'Items'
+          action: 'Actions'
+        row:
+          institution:
+            default: 'Multiple'
+      messages:
+        shared: '%{collection_title} has been shared. See your collection below for the sharable link'
+        unshared: '%{collection_title} is no longer shared and not visible to other people'
+      search_form:
+        label: Find a collection
+        placeholder: Find a collection
     homepage:
       works:
         link: 'All Latest Items'
@@ -50,3 +92,9 @@ en:
       ld_fetch_exhaust:
         message: 'The source endpoint for your requested resource at %{uri} is not responding. Oregon Digital has given up retrieving data from the source endpoint. Please contact an Oregon Digital system administrator about this issue.'
         subject: '%{uri} exhausted retries'
+    works:
+      form:
+        tab:
+          details: Details
+          how_to_cite: How to Cite
+          contact_us: Contact Us

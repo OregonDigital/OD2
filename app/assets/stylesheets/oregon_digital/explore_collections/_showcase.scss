@@ -1,0 +1,44 @@
+form#explore-collection-search {
+  margin-top: 10px;
+
+  .input-group {
+    button {
+      position: absolute;
+      right: 0;
+      z-index: 10;
+      background: unset;
+      border: unset;
+      width: 2.25em;
+      height: calc(100% - 16px);
+      margin-top: 8px;
+      margin-bottom: 8px;
+      border-left: 1px solid $light-grey;
+    }
+    input {
+      background-color: $very-light-grey;
+      border-radius: 0;
+      padding-right: 2.5em;
+      font-size: 1.25em;
+      height: 100%;
+    }
+  }
+}
+.explore-collections-result-count {
+  margin-top: 10px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.lime-green-hr {
+  border: 2px solid $lime-green;
+  color: $lime-green;
+}
+
+.collection-landing-button {
+  width: 100%;
+  margin-top: -8px;
+}
+
+.collection-search-header {
+  margin: 2.5em 0;
+}

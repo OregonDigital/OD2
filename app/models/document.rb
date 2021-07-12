@@ -4,6 +4,7 @@
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::WorkBehavior
+  include ::OregonDigital::ValidatesEDTFBehavior
 
   self.indexer = DocumentIndexer
   # Change this to restrict which works can be added as a child.
@@ -12,6 +13,7 @@ class Document < ActiveFedora::Base
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
-  include ::OregonDigital::DocumentMetadata
   include ::OregonDigital::GenericMetadata
+  include ::OregonDigital::DocumentMetadata
+  include ::OregonDigital::ControlledPropertiesBehavior
 end

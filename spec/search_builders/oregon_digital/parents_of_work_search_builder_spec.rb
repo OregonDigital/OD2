@@ -10,7 +10,7 @@ RSpec.describe OregonDigital::ParentsOfWorkSearchBuilder do
   describe '#processor_chain' do
     subject { processor_chain }
 
-    it { is_expected.to eq %i[parent_works] }
+    it { is_expected.to include :parent_works }
   end
 
   describe '#parent_works' do

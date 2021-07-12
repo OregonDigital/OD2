@@ -16,10 +16,11 @@ pg_upgrade_*.log
 # Ignore all logfiles and tempfiles.
 /tmp/pids/*
 /log/*
-/tmp/*
-!/tmp/pids/.keep
+/tmp/**
+!/tmp/**/
+!/tmp/**/.keep
+!/tmp/**/.gitignore
 !/log/.keep
-!/tmp/.keep
 
 /node_modules
 /yarn-error.log
@@ -34,6 +35,7 @@ coverage/*
 
 /public/system
 /public/branding
+/public/uv
 
 /vendor/bundle
 .byebug_history

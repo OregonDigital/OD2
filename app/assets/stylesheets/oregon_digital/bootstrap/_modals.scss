@@ -1,0 +1,43 @@
+.modal-content {
+  border-radius: 0;
+}
+
+.modal-header {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: none;
+  padding: 30px 30px 15px;
+
+  .close {
+    font-size: 64px;
+    margin-top: -32px;
+    font-weight: normal;
+  }
+}
+
+.modal-body {
+  padding: 15px 30px 45px;
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+}
+
+.modal-footer {
+  padding: 30px;
+  font-size: 1.4em;
+  font-weight: bold;
+  border-top-width: 3px;
+}
+
+
+/* My Collection modal */
+div.collection-list legend {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+div.collection-list fieldset {
+  margin-bottom: 15px;
+}

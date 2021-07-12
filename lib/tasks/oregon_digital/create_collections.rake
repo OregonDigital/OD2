@@ -14,7 +14,8 @@ namespace :oregon_digital do
       end
       title = coll['title']
       visibility = coll['visibility']
-      collection = Collection.new(id: id, title: [title], visibility: visibility, collection_type_gid: coll_type_gid)
+      institution = RDF::URI(coll['institution'])
+      collection = Collection.new(id: id, title: [title], visibility: visibility, institution: [institution], collection_type_gid: coll_type_gid)
       Hyrax::PermissionTemplate.create!(source_id: id)
       puts "Successfully created collection #{id}" if collection.save
     rescue StandardError => e
@@ -29,7 +30,7 @@ def prep_collection_type
   c = Hyrax::CollectionType.where(title: 'Digital Collection').first
   return c.id if c.present?
 
-  c = Hyrax::CollectionType.new(title: 'Digital Collection')
+  c = Hyrax::CollectionType.new(title: 'Digital Collection', facet_configurable: true)
   c.save
   c.id
 end

@@ -10,10 +10,10 @@
   <div class="panel-body">
     <div class="tab-content">
       <div class="tab-pane active" id="all">
-        <%= render "table", works: assets_with_oembed, show_error_list: false %>
+        <%= render "table", file_sets: assets_with_oembed, show_error_list: false %>
       </div>
       <div class="tab-pane" id="errors">
-        <%= render "table", works: assets_with_errored_oembed, show_error_list: true %>
+        <%= render "table", file_sets: assets_with_errored_oembed, show_error_list: true %>
       </div>
     </div>
   </div>

@@ -1,4 +1,8 @@
-<div class="search-results-title-row">
-  <h4 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), [hyrax, document] %></h4>
-  <%= Hyrax::CollectionPresenter.new(document, current_ability).collection_type_badge %>
+<div class="search-results-title-row col-xs-9 col-sm-7 col-md-7">
+  <% if document.has_highlight_field?('title_tesim') %>
+    <h3 class="search-result-title"><%= link_to document.highlight_field('title_tesim').first, [hyrax, document] %></h3>
+  <% else %>
+    <h3 class="search-result-title"><%= link_to document.title_or_label.truncate_words(10), [hyrax, document] %></h3>
+  <% end %>
+  <%= OregonDigital::CollectionPresenter.new(document, current_ability).collection_type_badge %>
 </div>

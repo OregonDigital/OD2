@@ -4,6 +4,7 @@
 class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::IndexesBasicMetadata
   include OregonDigital::IndexesLinkedMetadata
+  include OregonDigital::IndexingDatesBehavior
 
   # ABC Size is hard to avoid here because there are many types of fields we need to index.
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
@@ -13,25 +14,36 @@ class GenericIndexer < Hyrax::WorkIndexer
   def generate_solr_document
     super.tap do |solr_doc|
       index_rights_statement_label(solr_doc, OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
+      index_full_size_download_allowed_label(solr_doc, OregonDigital::DownloadService.new.all_labels(object.full_size_download_allowed))
       index_license_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license))
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
+      solr_doc['non_user_collections_ssim'] = []
+      object.member_of_collections.each do |collection|
+        solr_doc['non_user_collections_ssim'] << collection.first_title unless collection.collection_type.machine_id == 'user_collection'
+      end
       index_topic_combined_label(solr_doc, object.keyword)
-      index_date_combined_label(solr_doc)
       index_edit_groups
       index_read_groups
       index_discover_groups
-      solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| file_set.extracted_text.content unless file_set.extracted_text.nil? }
+      solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| file_set.to_solr['all_text_tsimv'] unless file_set.to_solr['all_text_tsimv'].nil? }
       # Index file formats from file sets for faceting
-      solr_doc[Solrizer.solr_name('file_format', :facetable)] = object.file_sets.map { |file_set| file_set.to_solr[Solrizer.solr_name('file_format', :facetable)] }
+      solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] }
     end
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
-    solr_doc[Solrizer.solr_name('copyright_combined_label', :facetable)] = license_labels + rights_labels
+    solr_doc['copyright_combined_label_sim'] = license_labels + rights_labels
+    solr_doc['copyright_combined_label_tesim'] = license_labels + rights_labels
+  end
+
+  def index_full_size_download_allowed_label(solr_doc, full_size_download_allowed_labels)
+    solr_doc['full_size_download_allowed_label_sim'] = full_size_download_allowed_labels
+    solr_doc['full_size_download_allowed_label_ssim'] = full_size_download_allowed_labels
+    solr_doc['full_size_download_allowed_label_tesim'] = full_size_download_allowed_labels
   end
 
   def index_rights_statement_label(solr_doc, rights_statement_labels)
@@ -53,21 +65,14 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_type_label(solr_doc, type_label)
-    solr_doc['type_label_sim'] = type_label
-    solr_doc['type_label_ssim'] = type_label
-    solr_doc['type_label_tesim'] = type_label
+    solr_doc['resource_type_label_sim'] = type_label
+    solr_doc['resource_type_label_ssim'] = type_label
+    solr_doc['resource_type_label_tesim'] = type_label
   end
 
   def index_topic_combined_label(solr_doc, topic_labels)
-    solr_doc[Solrizer.solr_name('topic_combined_label', :facetable)] = topic_labels
-  end
-
-  def index_date_combined_label(solr_doc)
-    dates = %i[award_date date_created collected_date date issued view_date acquisition_date]
-    solr_doc[Solrizer.solr_name('date_combined_label', :facetable)] = []
-    dates.each do |date|
-      solr_doc[Solrizer.solr_name('date_combined_label', :facetable)] += object[date].to_a
-    end
+    solr_doc['topic_combined_label_sim'] = topic_labels
+    solr_doc['topic_combined_label_tesim'] = topic_labels
   end
 
   def index_edit_groups

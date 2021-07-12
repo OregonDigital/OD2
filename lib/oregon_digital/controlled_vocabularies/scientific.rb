@@ -10,7 +10,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPhylum,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsCommonNames,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsClass,
-          OregonDigital::ControlledVocabularies::Vocabularies::WdEntity,
+          OregonDigital::ControlledVocabularies::Vocabularies::Wikidata,
           OregonDigital::ControlledVocabularies::Vocabularies::Itis,
           OregonDigital::ControlledVocabularies::Vocabularies::Ubio
         ]

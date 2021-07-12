@@ -33,6 +33,9 @@ Hyrax::Migrator.config do |config|
   # The crosswalk file for associating primary sets in OD1 with admin sets in OD2
   config.crosswalk_admin_sets_file = File.join(Rails.root, 'config/initializers/migrator/crosswalk_admin_sets.yml')
 
+  # The list of required fields
+  config.required_fields_file = "config/initializers/migrator/required_fields.yml"
+
   # Set to true for debugging
   config.skip_field_mode = ENV['SKIP_FIELD_MODE']
   # Skip content if not found
@@ -80,4 +83,12 @@ Hyrax::Migrator.config do |config|
   # The time a presigned_url is available after the upload in seconds (aws_s3 service). It defaults to 86400 seconds (24 hours).
   # config.aws_s3_url_availability = 86400
 
+  # VerifyWorkService uses this config as the default list of verifications to run
+  config.verify_services = [
+    Hyrax::Migrator::Services::VerifyMetadataService,
+    Hyrax::Migrator::Services::VerifyVisibilityService,
+    Hyrax::Migrator::Services::VerifyChecksumsService,
+    Hyrax::Migrator::Services::VerifyChildrenService,
+    Hyrax::Migrator::Services::VerifyDerivativesService
+  ]
 end

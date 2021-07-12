@@ -8,31 +8,38 @@ end
 # TODO: make this a version specification once we get a new release cut
 gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
 
+gem "blacklight_range_limit", "~> 6"
 gem 'browse-everything'
 # coffee-rails is a requirement for Hyrax or one of its dependencies but hasn't
 # been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
-gem 'hydra-role-management', '~> 1.0.2'
-gem 'hyrax', github: 'samvera/hyrax', tag: 'v2.7.0'
+gem "edtf", "~> 3.0"
+gem 'hydra-role-management'
+gem 'hyrax', '3.0.1'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'pg'
-gem 'puma', '~> 3.12'
-gem 'rails', '~> 5.1.6'
+gem 'puma', '~> 4.3'
+gem 'rails', '~> 5.2.5'
 gem 'rsolr', '>= 1.0'
 gem 'sass-rails', '~> 5.0'
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.2'
+gem 'sidekiq_queue_metrics'
+gem 'stemmify'
 gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
 gem 'ruby-oembed'
+gem 'blacklight_advanced_search', '~> 6.4'
 gem 'blacklight-oembed'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
+gem 'blacklight_iiif_search', '~> 1.0'
+gem 'rubyzip', '>= 1.2.2'
+gem 'zip_tricks', '~> 5.3'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
-gem 'rubyzip', '>= 1.2.2'
 
 # Login gems
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
@@ -40,8 +47,12 @@ gem 'omniauth-cas'
 gem 'omniauth-saml'
 
 # Honeycomb
-gem 'honeycomb-beeline', '>= 1.0.0'
+gem 'honeycomb-beeline', '>= 2.4.0'
+gem 'libhoney', '>= 1.18.0'
 gem 'rack-honeycomb', '~> 0.5.0'
+
+# OkComputer
+gem 'okcomputer'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
@@ -87,3 +98,5 @@ end
 
 gem "vcr", "~> 5.1"
 gem 'willow_sword', github: 'notch8/willow_sword'
+
+gem "font-awesome-sass", "~> 5.15"
