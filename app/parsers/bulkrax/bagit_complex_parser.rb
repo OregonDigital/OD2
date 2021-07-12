@@ -211,13 +211,13 @@ module Bulkrax
     end
 
     def write_triples(e)
-      sd = SolrDocument.find(e.id)
+      sd = SolrDocument.find(e.identifier)
       return if sd.nil?
 
-      user = User.find user_id
-      wsp = Hyrax::WorkShowPresenter.new(sd, user.ability)
+      req = ActionDispatch::Request.new({'HTTP_HOST' => app.root_url})
+      rdf = Hyrax::GraphExporter.new(sd, req).fetch.dump(:ntriples)
       File.open(setup_triple_metadata_export_file(e.identifier), "w") do |triples|
-        triples.write(wsp.export_as_nt)
+        triples.write(rdf)
       end
     end
     # errored entries methods
