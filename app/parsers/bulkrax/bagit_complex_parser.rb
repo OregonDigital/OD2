@@ -137,13 +137,14 @@ module Bulkrax
     alias create_from_worktype create_new_entries
 
     def write_files
+      require 'open-uri'
+      require 'socket'
       importerexporter.entries.where(identifier: current_work_ids)[0..limit || total].each do |e|
         bag = BagIt::Bag.new setup_bagit_folder(e.identifier)
         w = ActiveFedora::Base.find(e.identifier)
         w.file_sets.each do |fs|
           file_name = filename(fs)
           next if file_name.blank?
-          require 'open-uri'
           io = open(fs.original_file.uri)
           file = Tempfile.new([file_name, File.extname(file_name)], binmode: true)
           file.write(io.read)
@@ -214,7 +215,7 @@ module Bulkrax
       sd = SolrDocument.find(e.identifier)
       return if sd.nil?
 
-      req = ActionDispatch::Request.new({'HTTP_HOST' => app.root_url})
+      req = ActionDispatch::Request.new({'HTTP_HOST' => Socket.gethostname})
       rdf = Hyrax::GraphExporter.new(sd, req).fetch.dump(:ntriples)
       File.open(setup_triple_metadata_export_file(e.identifier), "w") do |triples|
         triples.write(rdf)
