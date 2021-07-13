@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201117220007) do
+ActiveRecord::Schema.define(version: 2021_03_24_194640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(version: 20201117220007) do
     t.boolean "share_applies_to_new_works", default: true, null: false
     t.boolean "brandable", default: true, null: false
     t.string "badge_color", default: "#663333"
-    t.boolean "facet_configurable"
+    t.boolean "facet_configurable", default: true, null: false
     t.index ["machine_id"], name: "index_hyrax_collection_types_on_machine_id", unique: true
   end
 
@@ -437,9 +437,9 @@ ActiveRecord::Schema.define(version: 20201117220007) do
   end
 
   create_table "single_use_links", id: :serial, force: :cascade do |t|
-    t.string "downloadKey"
+    t.string "download_key"
     t.string "path"
-    t.string "itemId"
+    t.string "item_id"
     t.datetime "expires"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -477,7 +477,7 @@ ActiveRecord::Schema.define(version: 20201117220007) do
 
   create_table "sipity_entity_specific_responsibilities", id: :serial, force: :cascade do |t|
     t.integer "workflow_role_id", null: false
-    t.string "entity_id", null: false
+    t.integer "entity_id", null: false
     t.integer "agent_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
