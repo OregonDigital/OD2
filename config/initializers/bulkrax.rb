@@ -88,7 +88,7 @@ Bulkrax.setup do |config|
   # @todo - work with OD to define the config needed here, eg split
   # This needs to be lower case, irrespective of the header row - CSV downcases it
   config.field_mappings['Bulkrax::CsvParser'] = {
-    'file' => { from: ['ingestfilenametif'] },
+    'file' => { from: ['file'], split: true }, # 'ingestfilenametif'
     'identifier' => { from: ['identifier'] },
     'title' => { from: ['title'] },
     'description' => { from: ['description'] },
@@ -131,4 +131,7 @@ Bulkrax::CsvEntry.class_eval do
     # added resource_type, identifier, and rights_statement
     %w[title source_identifier resource_type identifier rights_statement]
   end
+
+  # Sidebar for hyrax 3+ support
+  Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions" if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
 end
