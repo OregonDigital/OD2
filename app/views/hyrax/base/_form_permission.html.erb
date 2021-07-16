@@ -12,7 +12,7 @@
     <div class="form-group">
       <label class="radio">
         <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
-        <%#= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC) %>
+        <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC) %>
       </label>
       <%# OVRERIDE FROM HYRAX: to add UO and OSU visibility options and remove default institution option %>
       <label class="radio">
@@ -33,7 +33,7 @@
       </label>
       <label class="radio">
         <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>
-        <%#= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE) %>
+        <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE) %>
       </label>
     </div>
   </fieldset>
