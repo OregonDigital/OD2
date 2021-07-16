@@ -3,8 +3,6 @@
 module Helpers
   module SessionHelpers
     def sign_in_as(who = :user)
-      puts "======= #{Capybara.app_host}"
-
       logout(User)
       user = who.is_a?(User) ? who : build(:user).tap(&:save!)
       visit new_user_session_path
