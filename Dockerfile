@@ -10,9 +10,10 @@ FROM bundler as dependencies
 
 # The alpine way
 RUN apk --no-cache update && apk --no-cache upgrade && \
-  apk add --no-cache alpine-sdk nodejs imagemagick unzip ghostscript vim yarn \
-  git sqlite sqlite-dev postgresql-dev libressl libressl-dev java-common \
-  curl libc6-compat build-base tzdata zip autoconf automake libtool texinfo \
+  apk add --no-cache alpine-sdk nodejs unzip ghostscript vim yarn \
+  git sqlite sqlite-dev postgresql-dev libjpeg-turbo-dev libpng-dev \
+  libtool libgomp libressl libressl-dev java-common libc6-compat  \
+  curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg
 
@@ -30,6 +31,29 @@ RUN mkdir -p /tmp/ffi && \
   curl -sL https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1 \
   | tar -xz -C /tmp/ffi && cd /tmp/ffi/libffi-3.2.1 && ./autogen.sh &&\
   ./configure --prefix=/usr/local && make && make install && rm -rf /tmp/ffi
+
+RUN mkdir -p /tmp/im && \
+  curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-4.tar.gz \
+  | tar -xz -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-4 && \
+    ./configure \
+      --build=$CBUILD \
+      --host=$CHOST \
+      --prefix=/usr \
+      --sysconfdir=/etc \
+      --mandir=/usr/share/man \
+      --infodir=/usr/share/info \
+      --localstatedir=/var \
+      --enable-shared \
+      --disable-static \
+      --with-modules \
+      --with-threads \
+      --with-jp2=yes \
+      --with-tiff=yes \
+      --with-gs-font-dir=/usr/share/fonts/Type1 \
+      --with-quantum-depth=16 && \
+    make && \
+    make install && \
+    rm -rf /tmp/im/ImageMagick-7.1.0-4
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
