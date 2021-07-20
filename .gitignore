@@ -42,6 +42,7 @@ coverage/*
 .bash_history
 .cache/
 .local/
+.local/*
 
 config/local_env.yml
 
@@ -51,3 +52,6 @@ fits.log
 rules.log
 log/rules.log
 blazegraph.jnl
+
+# Ignore local engines
+vendor/engines/*

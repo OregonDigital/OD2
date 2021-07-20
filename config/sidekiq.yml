@@ -10,3 +10,5 @@ production:
 :queues:
   - default
   - hyrax_migrator
+  - import
+  - export

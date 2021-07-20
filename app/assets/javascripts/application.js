@@ -23,6 +23,7 @@
 //= require blacklight/blacklight
 
 //= require_directory .
+//= require bulkrax/application
 //= require_tree ./oregon_digital
 //= require hyrax
 

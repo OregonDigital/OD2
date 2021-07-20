@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
+  mount Bulkrax::Engine, at: '/'
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
   end
