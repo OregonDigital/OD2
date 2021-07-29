@@ -48,7 +48,7 @@ body:
       label: Admin user?
       description: Were you logged in as the admin user?
       options:
-        - label: Yes
+        - label: 'Yes'
   - type: textarea
     attributes:
       label: Issue Description
