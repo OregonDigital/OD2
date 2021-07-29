@@ -9,9 +9,9 @@ body:
       description: What OS did you test with?
       multiple: false
       options:
-        - label: MacOS
-        - label: Windows
-        - label: Linux
+        - MacOS
+        - Windows
+        -  Linux
     validations:
       required: true
   - type: dropdown
@@ -20,11 +20,11 @@ body:
       description: What browser did you test with?
       multiple: false
       options:
-        - label: Firefox
-        - label: Edge
-        - label: Safari
-        - label: Chrome
-        - label: Other
+        - Firefox
+        - Edge
+        - Safari
+        - Chrome
+        - Other
     validations:
       required: true
   - type: dropdown
@@ -33,14 +33,14 @@ body:
       description: Which page was the issue found on?
       multiple: false
       options:
-        - label: Homepage
-        - label: Search
-        - label: Work Show
-        - label: Collection Show
-        - label: Explore Collections
-        - label: Advanced Search
-        - label: Supporting (/contact, /help, etc)
-        - label: Backend
+        - Homepage
+        - Search
+        - Work Show
+        - Collection Show
+        - Explore Collections
+        - Advanced Search
+        - Supporting (/contact, /help, etc)
+        - Backend
     validations:
       required: true
   - type: checkboxes
