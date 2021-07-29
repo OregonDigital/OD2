@@ -1,61 +1,61 @@
 name: Accessibility
-about: For accessibility related issues
+description: For accessibility related issues
 title: "[A11y] "
 labels: [Accessibility, Features]
 body:
-- type: dropdown
-  attributes:
-    label: Operating System
-    description: What OS did you test with?
-    multiple: false
-    options:
-      - label: MacOS
-      - label: Windows
-      - label: Linux
-  validations:
-    required: true
-- type: dropdown
-  attributes:
-    label: Browser
-    description: What browser did you test with?
-    multiple: false
-    options:
-      - label: Firefox
-      - label: Edge
-      - label: Safari
-      - label: Chrome
-      - label: Other
-  validations:
-    required: true
-- type: dropdown
-  attributes:
-    label: Affected page
-    description: Which page was the issue found on?
-    multiple: false
-    options:
-      - label: Homepage
-      - label: Search
-      - label: Work Show
-      - label: Collection Show
-      - label: Explore Collections
-      - label: Advanced Search
-      - label: Supporting (/contact, /help, etc)
-      - label: Backend
-  validations:
-    required: true
-- type: checkboxes
-  attributes:
-    label: Admin user?
-    description: Were you logged in as the admin user?
-    options:
-      - label: Yes
-- type: textarea
-  attributes:
-    label: Issue Description
-    description: "Please describe the WCAG failure or accessibility issue."
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: Suggested Fix
-    description: "If applicable, how would you fix this issue?"
+  - type: dropdown
+    attributes:
+      label: Operating System
+      description: What OS did you test with?
+      multiple: false
+      options:
+        - label: MacOS
+        - label: Windows
+        - label: Linux
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Browser
+      description: What browser did you test with?
+      multiple: false
+      options:
+        - label: Firefox
+        - label: Edge
+        - label: Safari
+        - label: Chrome
+        - label: Other
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Affected page
+      description: Which page was the issue found on?
+      multiple: false
+      options:
+        - label: Homepage
+        - label: Search
+        - label: Work Show
+        - label: Collection Show
+        - label: Explore Collections
+        - label: Advanced Search
+        - label: Supporting (/contact, /help, etc)
+        - label: Backend
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Admin user?
+      description: Were you logged in as the admin user?
+      options:
+        - label: Yes
+  - type: textarea
+    attributes:
+      label: Issue Description
+      description: "Please describe the WCAG failure or accessibility issue."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Suggested Fix
+      description: "If applicable, how would you fix this issue?"
