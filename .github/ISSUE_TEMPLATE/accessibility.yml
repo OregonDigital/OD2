@@ -43,12 +43,16 @@ body:
         - Backend
     validations:
       required: true
-  - type: checkboxes
+  - type: dropdown
     attributes:
       label: Admin user?
       description: Were you logged in as the admin user?
+      multiple: false
       options:
-        - label: 'Yes'
+        - Yes
+        - No
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: Issue Description
