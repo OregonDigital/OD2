@@ -49,8 +49,8 @@ body:
       description: Were you logged in as the admin user?
       multiple: false
       options:
-        - Yes
-        - No
+        - 'Yes'
+        - 'No'
     validations:
       required: true
   - type: textarea
