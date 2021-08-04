@@ -13,25 +13,25 @@ module OregonDigital
       solr_params[:fq] = solr_params[:fq] | query
     end
 
-      private
+    private
 
-        def query
-          ["{!terms f=actionable_workflow_roles_ssim}#{roles_for_user.join(',')}", '-workflow_state_name_ssim:deposited']
-        end
+    def query
+      ["{!terms f=actionable_workflow_roles_ssim}#{roles_for_user.join(',')}", '-workflow_state_name_ssim:deposited']
+    end
 
-        # @return [Array<String>] the list of workflow-role combinations this user has
-        def roles_for_user
-          Sipity::Workflow.all.flat_map do |wf|
-            workflow_roles_for_user_and_workflow(wf).map do |wf_role|
-              "#{wf.permission_template.source_id}-#{wf.name}-#{wf_role.role.name}"
-            end
-          end
+    # @return [Array<String>] the list of workflow-role combinations this user has
+    def roles_for_user
+      Sipity::Workflow.all.flat_map do |wf|
+        workflow_roles_for_user_and_workflow(wf).map do |wf_role|
+          "#{wf.permission_template.source_id}-#{wf.name}-#{wf_role.role.name}"
         end
+      end
+    end
 
-        # @param workflow [Sipity::Workflow]
-        # @return [ActiveRecord::Relation<Sipity::WorkflowRole>]
-        def workflow_roles_for_user_and_workflow(workflow)
-          Hyrax::Workflow::PermissionQuery.scope_processing_workflow_roles_for_user_and_workflow(user: current_user, workflow: workflow)
-        end
+    # @param workflow [Sipity::Workflow]
+    # @return [ActiveRecord::Relation<Sipity::WorkflowRole>]
+    def workflow_roles_for_user_and_workflow(workflow)
+      Hyrax::Workflow::PermissionQuery.scope_processing_workflow_roles_for_user_and_workflow(user: current_user, workflow: workflow)
+    end
   end
 end
