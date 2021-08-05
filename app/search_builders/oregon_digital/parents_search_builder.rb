@@ -7,14 +7,14 @@ module OregonDigital
 
     attr_reader :work
 
-    def initialize(work:)
-      @work = work
+    def initialize(id:)
+      @id = id
       super
     end
 
     def parent_works(solr_params)
       solr_params[:fq] ||= []
-      solr_params[:fq] << "member_ids_ssim:(#{work.id})"
+      solr_params[:fq] << "member_ids_ssim:(#{@id})"
     end
   end
 end
