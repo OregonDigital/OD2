@@ -28,12 +28,12 @@ class Collection < ActiveFedora::Base
   end
 
   # Configure disabled blacklight facets for display on collections only
-  def reconfigure_blacklight_facets blacklight_config
+  def reconfigure_blacklight_facets(blacklight_config)
     blacklight_config.configure do |config|
-      config.facet_fields.map{ |_k, facet|
+      config.facet_fields.map do |_k, facet|
         facet.if = true
         facet.show = true
-      }
+      end
     end
   end
 
