@@ -5,7 +5,7 @@ RSpec.describe OregonDigital::ParentsSearchBuilder do
   let(:solr_params) { {} }
   let(:child) { build(:generic, title: ['foo'], id: 123) }
   let(:parent) { build(:generic, title: ['foo'], id: 124, member_ids: [child.id]) }
-  let(:search_builder) { described_class.new(work: child) }
+  let(:search_builder) { described_class.new(id: child.id) }
 
   describe '#processor_chain' do
     subject { processor_chain }
