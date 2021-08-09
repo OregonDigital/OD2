@@ -19,10 +19,10 @@ RSpec.describe OregonDigital::InReviewSearchBuilder do
     let(:solr_params) { {} }
 
     before do
-      allow(search_builder).to receive(:solr_documents).and_return([])
+      allow(search_builder).to receive(:query).and_return([])
       search_builder.in_review_ids(solr_params)
     end
 
-    it { is_expected.to eq(fq: ['id:()']) }
+    it { is_expected.to eq(fq: []) }
   end
 end

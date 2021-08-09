@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'oregon_digital/version'
+require 'rdf/vocab/ons'
 
 # Sets logger for application
 module OregonDigital
