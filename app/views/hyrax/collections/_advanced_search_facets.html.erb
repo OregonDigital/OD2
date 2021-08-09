@@ -10,5 +10,6 @@
 %>
 
 <div class="advanced-facet-limits panel-group">
+    <% @curation_concern.reconfigure_blacklight_facets blacklight_config %>
     <%= render_facet_partials @configured_facets.map(&:solr_name) %>
 </div>
