@@ -16,8 +16,13 @@ RSpec.describe BulkApproveJob, type: :job do
     it { expect(ActiveJob::Base.queue_adapter.enqueued_jobs.count).to eq 1 }
   end
 
+  context 'with approve_list' do
+    let!(:job) { described_class.perform_later(pidlist: 'mylist', user: user_email) }
+    it { expect(ActiveJob::Base.queue_adapter.enqueued_jobs.count).to eq 1 }
+  end
+
   context 'with approve_everything' do
-    let!(:job) { described_class.perform_later(collection_id: nil, user: user_email) }
+    let!(:job) { described_class.perform_later(user: user_email) }
 
     it { expect(ActiveJob::Base.queue_adapter.enqueued_jobs.count).to eq 1 }
   end

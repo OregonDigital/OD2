@@ -25,11 +25,14 @@ namespace :migration do
   desc 'Bulk approve job'
   task bulk_approve_job: :environment do
     collection_id = ENV['collection_id']
+    pidlist = ENV['pidlist']
     migration_user = Hyrax::Migrator.config.migration_user
     if collection_id.present?
       BulkApproveJob.perform_later(collection_id: collection_id, user: migration_user)
+    elsif pidlist.present?
+      BulkApproveJob.perform_later(pidlist: pidlist, user: migration_user)
     else
-      BulkApproveJob.perform_later(collection_id: nil, user: migration_user)
+      BulkApproveJob.perform_later(user: migration_user)
     end
   end
 end
