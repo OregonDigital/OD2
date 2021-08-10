@@ -11,17 +11,30 @@
             <ul>
               <li class="osu-login">
                 <div class="col-md-4">
-                  <input type="radio" name="login-select" onclick="toggleFooter('OSU-footer')"> <%= image_tag('osu_logo.png', height: '50', width: '50', alt: '') %>OSU
+                  <label>
+                    <input type="radio" name="login-select" onclick="toggleFooter('OSU-footer')"> 
+                    <%= image_tag('osu_logo.png', height: '50', width: '50', alt: 'Oregon State University Logo') %>OSU
+                  </label>
                 </div>
               </li>
               <li class="uo-login">
                 <div class="col-md-4">
-                  <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')"> <%= image_tag('uo.png', height: '50', width: '50', alt: '') %>UO
+                  <label>
+                    <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')"> 
+                    <%= image_tag('uo.png', height: '50', width: '50', alt: 'University of Oregon Logo') %>UO
+                  </label>
                 </div>
               </li>
               <li>
                 <div class="col-md-4">
-                  <input type="radio" name="login-select" onclick="toggleFooter('local-footer')">Other Affiliation
+                  <label>
+                    <div class="col-md-1">
+                      <input type="radio" name="login-select" onclick="toggleFooter('local-footer')">
+                    </div>
+                    <div class="col-md-9">
+                      Other Affiliation
+                    </div>
+                  </label>
                 </div>
               </li>
             </ul>
@@ -30,7 +43,7 @@
         <div id="login-modal-footer-OSU-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
           <div class='row'>
             <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
-              <span class="university-login">CONTINUE TO LOG IN</span>
+              <span class="university-login">CONTINUE TO OSU LOG IN</span>
             <% end %>
           </div>
           <div class='row'>
@@ -40,7 +53,7 @@
         <div id="login-modal-footer-UO-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
           <div class='row'>
             <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
-              <span class="university-login">CONTINUE TO LOG IN</span>
+              <span class="university-login">CONTINUE TO UO LOG IN</span>
             <% end %>
           </div>
           <div class='row'>
