@@ -8,8 +8,13 @@ header {
     // Move searchbar back down
     margin-top: 0;
   }
-  .navbar-toggle .icon-bar {
-    background-color: $navy-blue;
+  .navbar-toggle {
+    &:focus {
+      outline: revert;
+    }
+    .icon-bar {
+      background-color: $navy-blue;
+    }
   }
   .navbar-header {
     display: grid;
