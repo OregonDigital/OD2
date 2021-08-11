@@ -63,3 +63,18 @@ body:
     attributes:
       label: Suggested Fix
       description: "If applicable, how would you fix this issue?"
+  - type: dropdown
+    attributes:
+      label: Can anybody QA or does this need an expert?
+      description: Does this issue require an accessibility "expert" to QA it?
+      multiple: false
+      options:
+        - 'Anybody'
+        - 'A11y familiarity recommended'
+        - 'Needs expert'
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: QA Steps
+      description: "What steps can be taken to validate that a fix is complete?"
