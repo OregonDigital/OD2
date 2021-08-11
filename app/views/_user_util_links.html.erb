@@ -12,7 +12,7 @@
         <span class="hidden-xs">&nbsp;My Account</span>
         <span class="caret"></span>
       <% end %>
-      <ul id="user-util-links" class="dropdown-menu dropdown-menu-center text-center" role="menu">
+      <ul id="user-util-links" class="dropdown-menu dropdown-menu-center text-center">
         <% if can? :read, :admin_dashboard %>
           <li><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path %></li>
         <% end %>
