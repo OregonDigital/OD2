@@ -7,4 +7,13 @@ $(document).ready(function() {
       $(this).trigger('click');
     }
   });
+
+  $('#user-dropdown').parent().on('focusout', function(event) {
+    var dropdown = $('#user-dropdown');
+    if (!$.contains(event.currentTarget, event.relatedTarget)) {
+      if (dropdown.parent().hasClass('open')) {
+        $('#user-dropdown').dropdown('toggle');
+      }
+    }
+  });
 });
