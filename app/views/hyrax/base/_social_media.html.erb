@@ -15,7 +15,7 @@
   <% end %>
 
   <!-- Sharingbutton Copy Link -->
-  <button class="copy-single-use-link share-button share-button-copy" data-clipboard-action="copy" data-clipboard-text="<%= share_url %>" data-toggle="tooltip" data-placement="bottom" title="Copied!">
+  <button class="copy-single-use-link share-button share-button-copy" data-clipboard-action="copy" data-clipboard-text="<%= share_url %>" data-toggle="tooltip" data-placement="bottom" title="Copy link to clipboard" onclick='$(this).attr("title", "Copied!").tooltip("_fixTitle").tooltip("show").attr("title", "Copy to clipboard").tooltip("_fixTitle");'>
     <i class="fa fa-link"></i>
   </button>
 </div>
