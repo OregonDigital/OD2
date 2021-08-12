@@ -2,12 +2,10 @@
   <%= hidden_field_tag :search_field, 'all_fields', id: 'header_search_field' %>
   <div class="form-group">
 
-    <label class="sr-only" for="header-search-field-header">
-      <%= t("hyrax.search.form.q.label", application_name: application_name) %>
-    </label>
-
     <div class="input-group">
-      <label class="sr-only" for="header-search-field-header">Search Oregon Digital</label>
+      <label class="sr-only" for="header-search-field-header">
+        <%= t("hyrax.search.form.q.label", application_name: application_name) %>
+      </label>
       <%= text_field_tag 'q[]', nil, class: "q form-control", id: "header-search-field-header", placeholder: "Search Oregon Digital" %>
       <button type="submit" class="" id="header-search-submit-header">
         <i class="fa fa-search"></i>
