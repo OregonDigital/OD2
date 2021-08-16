@@ -225,9 +225,9 @@ en:
           date_modified: Modified
   hyrax:
     advanced_form:
-      all: Search for items that match all of
-      any: Search for items that match any of
-      query_criteria_heading_html: "Scope of advanced search. %{select_menu}"
+      all: Match all fields
+      any: Match any fields
+      query_criteria_heading_html: "Advanced search scope. %{select_menu}"
     base:
       relationships:
         header: 'Collection Information'

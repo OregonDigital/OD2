@@ -10,6 +10,6 @@ module AdvancedHelper
       t('hyrax.advanced_form.any') => 'OR'
     }.sort
 
-    select_tag(:op, options_for_select(options, params[:op]), class: 'input-small', aria: { description: 'scope' })
+    select_tag(:op, options_for_select(options, params[:op]), class: 'input-small')
   end
 end
