@@ -62,11 +62,11 @@
   </div>
 
   <%= render 'lime_green_divider' do %>
-    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button'>View All</a>
+    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All</a>
   <% end %>
 
   <div class="row">
-    <span class="text-center"><h2 class="collection-search-header">OR, SEARCH THIS COLLECTION</h2></span>
+    <div class="text-center"><h2 class="collection-search-header">OR, SEARCH THIS COLLECTION</h2></div>
   </div>
 
   <!-- Search bar -->
@@ -77,6 +77,6 @@
   </div>
 
   <%= render 'lime_green_divider' do %>
-    <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button'><i class='glyphicon glyphicon-search'></i> Search</button>
+    <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
 </div>
