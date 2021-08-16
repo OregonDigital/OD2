@@ -1,0 +1,18 @@
+.panel-heading.collapse-toggle .panel-title.collapsed:after {
+  /* symbol for "collapsed" panels */
+  content: "\e080";
+  /* adjust as needed, taken from bootstrap.css */
+}
+.collapse-toggle.panel-heading {
+  cursor: unset;
+  padding: 0;
+}
+
+.panel-header {
+  margin: 0;
+  button {
+    padding: 10px 15px;
+    text-align: left;
+    line-height: 1.1;
+  }
+}
