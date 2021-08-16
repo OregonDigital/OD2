@@ -6,8 +6,8 @@ module AdvancedHelper
 
   def select_menu_for_field_operator
     options = {
-      t('blacklight_advanced_search.all') => 'AND',
-      t('blacklight_advanced_search.any') => 'OR'
+      t('hyrax.advanced_form.all') => 'AND',
+      t('hyrax.advanced_form.any') => 'OR'
     }.sort
 
     select_tag(:op, options_for_select(options, params[:op]), class: 'input-small', aria: { description: 'scope' })
