@@ -34,4 +34,12 @@ RSpec.describe OregonDigital::ExploreCollectionsController do
 
     it { is_expected.to render_template('index') }
   end
+
+  describe '#build_breadcrumbs' do
+    it 'adds breadcrumbs' do
+      expect(controller).to receive(:add_breadcrumb).with('Home',  Hyrax::Engine.routes.url_helpers.root_path(locale: 'en'))
+      expect(controller).to receive(:add_breadcrumb).with('Explore Collections/All', 'all')
+      get :all
+    end
+  end
 end

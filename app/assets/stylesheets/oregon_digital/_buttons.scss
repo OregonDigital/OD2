@@ -10,18 +10,33 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  &.btn-primary{
+    &:hover,
+    &:focus {
+      background: $black;
+      color: $white;
+    }
+  }
+
+  &.btn-outline {
+    background: unset;
+    border-radius: 0 !important;
+    border: 3px solid $brand-primary;
+    color: $brand-primary;
+    margin: 0 5px;
+    &:hover,
+    &:focus {
+      background: unset;
+      border-color: $black;
+      color: $black;
+    }
+  }
 }
 .btn-lg {
   padding: 16px 24px;
   font-size: 18px;
   line-height: 1.3333333 !important;
-}
-.btn-outline {
-  border-radius: 0 !important;
-  border: 3px solid $brand-primary;
-  margin: 0 5px;
-  color: $brand-primary;
-  background: unset;
 }
 
 /* Reset input-group button size so text shows */
