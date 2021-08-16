@@ -8,6 +8,7 @@ $(document).ready(function() {
     }
   });
 
+  // Close dropdown/disclosure after leaving focus
   $('#user-dropdown').parent().on('focusout', function(event) {
     var dropdown = $('#user-dropdown');
     if (!$.contains(event.currentTarget, event.relatedTarget)) {

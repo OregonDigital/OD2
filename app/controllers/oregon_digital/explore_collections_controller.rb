@@ -30,6 +30,7 @@ module OregonDigital
       @tab = TABS[:all]
       blacklight_config.search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
       (@response, @document_list) = search_results(params)
+      build_breadcrumbs
       render :index
     end
 
@@ -37,6 +38,7 @@ module OregonDigital
       @tab = TABS[:osu]
       blacklight_config.search_builder_class = OregonDigital::OsuCollectionsSearchBuilder
       (@response, @document_list) = search_results(params)
+      build_breadcrumbs
       render :index
     end
 
@@ -44,6 +46,7 @@ module OregonDigital
       @tab = TABS[:uo]
       blacklight_config.search_builder_class = OregonDigital::UoCollectionsSearchBuilder
       (@response, @document_list) = search_results(params)
+      build_breadcrumbs
       render :index
     end
 
@@ -51,6 +54,7 @@ module OregonDigital
       @tab = TABS[:my]
       blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
       (@response, @document_list) = search_results(params)
+      build_breadcrumbs
       render :index
     end
 
@@ -76,6 +80,11 @@ module OregonDigital
 
     def institution_restricted?(id)
       osu_restricted?(id) || uo_restricted?(id)
+    end
+
+    def build_breadcrumbs
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t("hyrax.controls.explore_#{@tab}"), @tab
     end
 
     TABS = {
