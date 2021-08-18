@@ -23,7 +23,8 @@
       <%# Institutional image %>
       <div class="col-md-4 text-right">
         <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
-        <%= image_tag controller.institution_image_path, alt: '', height: "#{@presenter.solr_document.institution.first.to_s.include?('http://id.loc.gov/authorities/names/n80017721') ? 100 : 55 }px;" %>
+        <% path, alt, height = controller.institution_image_info %>
+        <%= image_tag path, alt: alt, height: height %>
       </div>
       <%# Social media share icons %>
       <div class="col-md-12 text-right share-links">
