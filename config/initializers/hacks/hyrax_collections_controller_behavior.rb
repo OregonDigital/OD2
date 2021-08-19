@@ -42,17 +42,22 @@ Hyrax::CollectionsControllerBehavior.module_eval do
   end
 
   # Get the path to institutional branding imag
-  def institution_image_path
+  def institution_image_info
     image = 'no-institution-collection.png'
+    alt = ''
+    height = 55
 
     case OregonDigital::InstitutionPicker.institution_acronym(@curation_concern)
     when 'OSU' then
       image = 'osu-collection.png'
+      alt = 'Oregon State University Libraries and Press'
+      height = 100
     when 'UO'
       image = 'uo-collection.png'
+      alt = 'University of Oregon Libraries'
     end unless @curation_concern.institution.first.nil?
 
-    ApplicationController.helpers.asset_path(image)
+    return ApplicationController.helpers.asset_path(image), alt, height
   end
 
   private
