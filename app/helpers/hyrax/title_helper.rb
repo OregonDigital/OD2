@@ -20,11 +20,10 @@ module Hyrax::TitleHelper
 
   def default_page_title
     if controller_name.singularize.titleize == 'Advanced'
-      text = 'Advanced Search'
+      construct_page_title('Advanced Search')
     else
-      text = controller_name.singularize.titleize
+      construct_page_title(controller_name.singularize.titleize)
     end
-    construct_page_title(text)
   end
 
   def title_presenter(resource)
