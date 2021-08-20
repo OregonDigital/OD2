@@ -1,6 +1,6 @@
 <div class="thumbnail">
     <div id="image-<%= index %>">
-      <%= link_to link do |body| %>
+      <%= link_to link, aria: { haspopup: true, expanded: false, controls: 'user-util-links', label: title } do |body| %>
         <%= img %>
         <span class="h3 hover-over-collection-text show-me<%= index %>" >
           <%= title %>
