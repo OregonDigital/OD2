@@ -61,24 +61,24 @@
   height: 54px;
 }
 
+.panel.facet_limit {
+  background: none;
+  border: 2px solid $navy-blue;
+  border-radius: 0;
+
+  .panel-heading {
+    background: none;;
+  }
+  .panel-body {
+    background-color: white;
+  }
+}
 #facets {
   background-color: $very-light-grey;
   margin-top: 2em;
 
   #facet-panel-collapse {
     padding: 1em;
-  }
-  .panel.facet_limit {
-    background: none;
-    border: 2px solid $navy-blue;
-    border-radius: 0;
-
-    .panel-heading {
-      background: none;;
-    }
-    .panel-body {
-      background-color: white;
-    }
   }
 
   .facets-heading {
