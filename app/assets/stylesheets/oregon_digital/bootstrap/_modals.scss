@@ -14,6 +14,12 @@
     font-weight: normal;
   }
 }
+#ajax-modal {
+    .close {
+      margin-top: -64px;
+    }
+  }
+}
 
 .modal-body {
   padding: 15px 30px 45px;

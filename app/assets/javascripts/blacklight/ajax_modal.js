@@ -107,8 +107,8 @@ Blacklight.ajaxModal.modalCloseSelector   = "[data-ajax-modal~=close], span.ajax
 // network errors.
 Blacklight.ajaxModal.onFailure = function() {
   var contents =  "<div class='modal-header'>" +
-          "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>×</span></button>" +
-          "<h4 id='modal-title'>Network Error</h4></div>";
+          "<h4 id='modal-title'>Network Error</h4>" +
+          "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>×</span></button></div>";
   $(Blacklight.ajaxModal.modalSelector).find('.modal-content').html(contents);
   $(Blacklight.ajaxModal.modalSelector).modal('show', this.relatedObject);
   // Blacklight.ajaxModal.clickTarget = clickTarget;
