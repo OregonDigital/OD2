@@ -212,8 +212,29 @@ $(document).ready(function() {
   $('body').on('show.bs.modal', function(e) {
     Blacklight.ajaxModal.clickTarget = e.relatedTarget;
   });
+  // Find first and last focusable elements in the modal
+  // and making tabing off the modal wrap around instead
+  $('body').on('shown.bs.modal', function(e) {
+    // Find the focusable elements and save them
+    var focusable = $(e.target).find('button:visible, [href]:visible, input:visible, select:visible, textarea:visible, [tabindex]:visible:not([tabindex="-1"])');
+    Blacklight.ajaxModal.firstFocusable = $(focusable[0])
+    Blacklight.ajaxModal.lastFocusable = $(focusable[focusable.length - 1]);
+    // On the first focusable, if we shift+tab off, jump to last focusable
+    Blacklight.ajaxModal.firstFocusable.on('keydown', function(e) {
+      if(e.keyCode == 9 && e.shiftKey) {
+        e.preventDefault();
+        Blacklight.ajaxModal.lastFocusable.focus();
+      }
+    });
+    // On the last focusable, if we tab (but not shift+tab) off, jump to the first focusable
+    Blacklight.ajaxModal.lastFocusable.on('keydown', function(e) {
+      if(e.keyCode == 9 && !e.shiftKey) {
+        e.preventDefault();
+        Blacklight.ajaxModal.firstFocusable.focus();
+      }
+    });
+  });
   $('body').on('hidden.bs.modal', function(e) {
-    console.log(Blacklight.ajaxModal.clickTarget);
     Blacklight.ajaxModal.clickTarget.focus();
   });
 });
