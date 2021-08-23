@@ -1,6 +1,6 @@
 <% institution = OregonDigital::InstitutionPicker.institution_acronym(document) %>
 <tr>
-  <td>
+  <th scope="row">
     <b><%= link_to(document.title_or_label, url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter))) %></b>
   </td>
   <td>
