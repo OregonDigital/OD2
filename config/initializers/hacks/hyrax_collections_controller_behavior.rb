@@ -57,7 +57,7 @@ Hyrax::CollectionsControllerBehavior.module_eval do
       alt = 'University of Oregon Libraries'
     end unless @curation_concern.institution.first.nil?
 
-    return ApplicationController.helpers.asset_path(image), alt, height
+    return ApplicationController.helpers.asset_path(image), alt, style
   end
 
   private
