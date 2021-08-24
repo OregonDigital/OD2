@@ -220,6 +220,16 @@ ul.pagination li {
   &.previous a {
     background: none;
   }
+  &.disabled {
+    span,
+    span:hover,
+    span:focus,
+    a,
+    a:hover,
+    a:focus {
+      color: $dark-grey;
+    }
+  }
 
   a,
   span {
