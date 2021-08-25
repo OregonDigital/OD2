@@ -23,8 +23,8 @@
       <%# Institutional image %>
       <div class="col-md-4 text-right">
         <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
-        <% path, alt, height = controller.institution_image_info %>
-        <%= image_tag path, alt: alt, height: height %>
+        <% path, alt, style = controller.institution_image_info %>
+        <%= image_tag path, alt: alt, style: style %>
       </div>
       <%# Social media share icons %>
       <div class="col-md-12 text-right share-links">
@@ -42,7 +42,7 @@
     <div class="hyc-blacklight hyc-bl-results">
       <div class="row">
       <% @member_docs[0,4].each_with_index do |doc, i| %>
-        <div class="masonry document text-center col-xs-3 col-md-3">
+        <div class="masonry document text-center col-xs-12 col-md-3">
           <%= render 'showcase_tile',
               title: doc.title_or_label,
               index: i,

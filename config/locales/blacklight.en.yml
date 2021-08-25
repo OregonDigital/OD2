@@ -10,6 +10,15 @@ en:
       pagination:
         next: 'Next <i class="fa fa-chevron-circle-right"></i>'
         previous: '<i class="fa fa-chevron-circle-left"></i> Prev'
+      pagination_info:
+        no_items_found: 'No %{entry_name} found'
+        single_item_found: '1 %{entry_name} found'
+        pages:
+          one: '%{start_num} - %{end_num} of %{total_num}'
+          other: '%{start_num} - %{end_num} of %{total_num}'
+      entry_pagination_info:
+        one: '1 of 1'
+        other: '%{current} of %{total}'
       per_page:
         label: '%{count}'
         button_label: '%{count}'
