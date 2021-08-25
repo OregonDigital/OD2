@@ -5,7 +5,6 @@
   data-colls-hash="<%= collection_presenter.available_parent_collections(scope: controller) %>"
   data-post-url="<%= hyrax.dashboard_create_nest_collection_within_path(id) %>"
   data-post-delete-url="<%= is_admin_set ? hyrax.admin_admin_set_path(id) : hyrax.dashboard_collection_path(id) %>">
-  <th><%= collection_presenter.title_or_label %></th>
   <td>
     <label class="sr-only" for="batch_document_<%= id %>"><%= t('hyrax.dashboard.my.sr.batch_checkbox') %></label>
     <% if collection_presenter.allow_batch? %>
@@ -15,7 +14,7 @@
     <input type="checkbox" class="disabled" disabled=true />
     <% end %>
   </td>
-  <td>
+  <th>
     <div class="thumbnail-title-wrapper">
       <div class="thumbnail-wrapper">
         <% if (collection_presenter.thumbnail_path == nil) %>
@@ -52,7 +51,7 @@
         </p>
       </div>
     </div>
-  </td>
+  </th>
   <% if !current_ability.admin? %>
     <td><%= collection_presenter.managed_access %></td>
   <% end %>
