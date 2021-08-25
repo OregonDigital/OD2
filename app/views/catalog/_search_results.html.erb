@@ -15,7 +15,7 @@
 <%= render 'sort_and_per_page' %>
 
 <%# OVERRIDE FROM HYRAX to add h1 to search results page %>
-<h1 class="sr-only"><%= t('blacklight.search.search_results') %></h1>
+<h2 class="sr-only"><%= t('blacklight.search.search_results') %></h2>
 
 <%- if @response.empty? %>
   <%= render "zero_results" %>
