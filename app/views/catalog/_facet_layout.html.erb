@@ -1,4 +1,4 @@
-<div aria-labelledby="<%= facet_field_id(facet_field) %>-header" role="group" class="panel facet_limit blacklight-<%= facet_field.key %> <%= 'facet-limit-active' if facet_field_in_params?(facet_field.key) %>">
+<div aria-labelledby="<%= facet_field_id(facet_field) %>-header" role="group" class="panel facet_limit blacklight-<%= facet_field.key %> <%= 'facet_limit-active' if facet_field_in_params?(facet_field.key) %>">
   <div class="collapse-toggle panel-heading">
     <h4 class="panel-header p-0 facet-field-heading" id="<%= facet_field_id(facet_field) %>-header">
       <button
@@ -14,7 +14,7 @@
       </button>
     </h4>
   </div>
-  <div id="<%= facet_field_id(facet_field) %>" class="panel-collapse facet-content collapse <%= "show" unless should_collapse_facet?(facet_field) %>">
+  <div id="<%= facet_field_id(facet_field) %>" class="panel-collapse facet-content collapse <%= "in" unless should_collapse_facet?(facet_field) %>" aria-expanded="<%= should_collapse_facet?(facet_field) ? 'false' : 'true' %>">
     <div class="panel-body">
       <%= yield %>
     </div>

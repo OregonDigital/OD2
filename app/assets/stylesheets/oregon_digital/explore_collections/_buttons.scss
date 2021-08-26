@@ -35,9 +35,9 @@
   .nav-pills > li.active > div > a,
   .nav-pills > li.active > div > a:hover,
   .nav-pills > li.active > div > a:focus {
-    background-color: $dark-orange;
-    border: 3px solid $dark-orange;
-    color: white;
+    background-color: $contrast-orange;
+    border: 3px solid $contrast-orange;
+    color: $navy-blue;
   }
 }
 
@@ -58,7 +58,7 @@
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid $dark-orange;
+  border-top: 20px solid $contrast-orange;
   position: relative;
   margin-left: 22.5px;
   visibility: hidden;
