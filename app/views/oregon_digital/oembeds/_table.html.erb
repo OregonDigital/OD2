@@ -10,7 +10,7 @@
     <% curation_concern = FileSet.find(file_set.id).parent %>
     <tr>
       <td class="human-readable-type"><%= curation_concern.human_readable_type %></td>
-      <td class="title"><%= link_to file_set, edit_oembed_path(file_set)  %></td>
+      <th class="title"><%= link_to file_set, edit_oembed_path(file_set)  %></th>
       <td class="oembed_link"><%= link_to file_set.solr_document['oembed_url_sim'].first, file_set.solr_document['oembed_url_sim'].first %></td>
       <td class="oembed_status">
         <%= errors.nil? ? content_tag(:span, "Good", class: "label label-success") : content_tag(:span, "Error", class: "label label-danger") %>
