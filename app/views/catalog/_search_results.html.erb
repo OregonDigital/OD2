@@ -17,7 +17,7 @@
 <%# OVERRIDE FROM HYRAX to add h1 to search results page %>
 <%- if controller.controller_name == "catalog" %>
   <h1 class="sr-only"><%= t('blacklight.search.search_results') %></h1>
-<%- else controller.controller_name == "explore_collections" %>
+<%- else %>
   <h2 class="sr-only"><%= t('blacklight.search.search_results') %></h2>
 <%- end %>
 
