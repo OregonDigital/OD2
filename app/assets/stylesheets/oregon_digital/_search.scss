@@ -9,8 +9,8 @@
   border: none;
   box-shadow: none;
   &.active {
-    color: white;
-    background-color: $dark-orange;
+    color: $navy-blue;
+    background-color: $contrast-orange;
   }
 }
 
@@ -210,14 +210,25 @@ div.pagination {
 }
 ul.pagination li {
   &.active span {
-    background-color: $dark-orange;
+    background-color: $contrast-orange;
     border: none;
+    color: $navy-blue;
   }
   &.next span,
   &.next a,
   &.previous span,
   &.previous a {
     background: none;
+  }
+  &.disabled {
+    span,
+    span:hover,
+    span:focus,
+    a,
+    a:hover,
+    a:focus {
+      color: $dark-grey;
+    }
   }
 
   a,
