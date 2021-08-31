@@ -11,7 +11,7 @@
     </div>
     <%= render '/masthead' %>
     <%= content_for(:navbar) %>
-    <div id="content-wrapper" role="main">
+    <div id="content-wrapper">
       <div class="sidebar maximized">
         <%= render 'hyrax/dashboard/sidebar' %>
       </div>
@@ -26,7 +26,7 @@
           </div>
         <% end %>
 
-          <div name="skip-to-content" id="skip-to-content"></div>
+          <a name="skip-to-content" id="skip-to-content"></a>
           <%= content_for?(:content) ? yield(:content) : yield %>
 
       </div>
