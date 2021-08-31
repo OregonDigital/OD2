@@ -140,6 +140,10 @@ table {
   text-transform: lowercase;
 }
 
+.white {
+  color: $white;
+}
+
 a {
   &.mw-sm,
   &.mw-lg,
