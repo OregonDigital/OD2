@@ -1,4 +1,4 @@
-<div class="masonry document collection" style="max-width:15%;">
+<div class="masonry document collection">
   <div class="thumbnail">
     <%= link_to(url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter)))  do |body| %>
       <%= image_tag(thumbnail_url(document), alt: "")%>
