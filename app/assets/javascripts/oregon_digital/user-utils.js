@@ -17,4 +17,19 @@ $(document).ready(function() {
       }
     }
   });
+
+  $('.activity-toggle').on('keydown', function(e) {
+    if(e.key == ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).trigger('click');
+    }
+  });
+
+  $('.activity-toggle').parent().on('focusout', function(event) {
+    var dropdown = $('#user-dropdown');
+    if (!$.contains(event.currentTarget, event.relatedTarget)) {
+      $('.activity-toggle').trigger('click');
+    }
+  });
 });
