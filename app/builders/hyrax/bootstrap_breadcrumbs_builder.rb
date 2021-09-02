@@ -21,7 +21,8 @@ class Hyrax::BootstrapBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Buil
     end
   
     def render_element(element)
-      html_class = 'active' if @context.current_page?(compute_path(element))
+      html_class = 'active' if @context.current_page?(compute_path(element)) || element.options["aria-current"] == "page"
+      element.options['aria-current'] = 'page' if html_class
 
       @context.tag.li(class: html_class) do
         @context.link_to(@context.truncate(compute_name(element), length: 30, separator: ' '), compute_path(element), element.options)
