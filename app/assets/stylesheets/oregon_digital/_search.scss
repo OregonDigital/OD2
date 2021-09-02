@@ -1,7 +1,32 @@
-#appliedParams{
-  background-color: unset;
-  border-bottom: 1em solid $very-light-grey;
-  margin-bottom: 2em;
+.constraints-divider {
+  background-color: $very-light-grey;
+  height: 0.5em;
+
+  @media (min-width: $screen-sm-min) {
+    & {
+      margin-top: 1em;
+    }
+  }
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  #appliedParams.explore-collection {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
+
+  .pull-right.catalog-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
+}
+
+.widget-wrapper {
+  position: relative;
 }
 
 .view-type .btn-default {
@@ -16,8 +41,7 @@
 
 .appliedFilter {
   background-color: $very-light-grey;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: .25em 1em;
 
   .constraint-value,
   .constraint-value:hover,
@@ -29,7 +53,7 @@
 
 #sortAndPerPage {
   border: none;
-  margin-bottom: 2em;
+  margin-bottom: 0;
 
   .search-widgets {
     margin-bottom: .5em;

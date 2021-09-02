@@ -1,0 +1,16 @@
+<div class="widget-wrapper">
+  <%= render_results_collection_tools wrapping_class: "search-widgets visible-xs-inline-block" %>
+
+  <div id="appliedParams" class="explore-collection clearfix visible-all-inline">
+    <div class="pull-right">
+      <%# OVERRIDE FROM BLACKLIGHT to remove start over link and replace with view type widget %>
+      <% tool_config = Blacklight::Configuration::ToolConfig.new %>
+      <% tool_config.name = :view_type_group %>
+      <%= render_filtered_partials(view_type_group: tool_config) %>
+    </div>
+    <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
+    <%= render_constraints(params) %>
+  </div>
+</div>
+
+<div class="constraints-divider"></div>
