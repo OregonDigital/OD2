@@ -27,7 +27,6 @@ $(document).ready(function() {
   });
 
   $('.activity-toggle').parent().on('focusout', function(event) {
-    var dropdown = $('#user-dropdown');
     if (!$.contains(event.currentTarget, event.relatedTarget)) {
       $('.activity-toggle').trigger('click');
     }
