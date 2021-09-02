@@ -25,10 +25,4 @@ $(document).ready(function() {
       $(this).trigger('click');
     }
   });
-
-  $('.activity-toggle').parent().on('focusout', function(event) {
-    if (!$.contains(event.currentTarget, event.relatedTarget)) {
-      $('.activity-toggle').trigger('click');
-    }
-  });
 });
