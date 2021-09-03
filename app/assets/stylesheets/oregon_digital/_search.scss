@@ -10,7 +10,8 @@
 }
 
 @media (max-width: $screen-sm-min - 1) {
-  #appliedParams.explore-collection {
+  #appliedParams.explore-collection,
+  #appliedParamsConstraint.explore-collection {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
