@@ -4,6 +4,9 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+  .nav-pills > li {
+    margin: 0;
+  }
 }
 
 #explore-panes {
@@ -48,26 +51,24 @@
   }
 }
 
-#explore-tabs a {
-  height:57px;
-  width: 75px;
-}
-
 .triangle_down {
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid $contrast-orange;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid $contrast-orange;
   position: relative;
-  margin-left: 22.5px;
+  margin-left: 35%;
   visibility: hidden;
 }
 @media (min-width: $screen-sm-min) {
   .triangle_down {
-    margin-left: 55px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid $contrast-orange;
   }
   #explore-tabs a {
+    height: 55px;
     width: 150px;
   }
 }

@@ -21,7 +21,7 @@
         <%# OVERRIDE FROM HYRAX to offset pagination and add divider %>
         <div class="row record-padding col-md-8 col-md-offset-2 text-center">
           <hr style='border-width: 3px;'>
-          <%= paginate array_of_ids, outer_window: 2, theme: 'blacklight', param_name: :page, route_set: main_app %>
+          <%= paginate array_of_ids, outer_window: 1, window: 2, theme: 'blacklight', param_name: :page, route_set: main_app %>
         </div><!-- /pager -->
         <%# END OVERRIDE %>
     <% end %>
