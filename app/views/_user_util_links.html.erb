@@ -7,7 +7,7 @@
   </li>
   <% if user_signed_in? %>
     <li class="dropdown">
-      <%= link_to hyrax.dashboard_profile_path(current_user), id: 'user-dropdown', class: ['btn', 'btn-outline'],role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false, controls: 'user-util-links' } do %>
+      <%= link_to hyrax.dashboard_profile_path(current_user), id: 'user-dropdown', class: ['btn', 'btn-outline'],role: 'button', data: { toggle: 'dropdown' }, aria: { expanded: false, controls: 'user-util-links' } do %>
         <span class="fa fa-user" aria-hidden="true"></span>
         <span class="hidden-xs">&nbsp;My Account</span>
         <span class="caret"></span>
