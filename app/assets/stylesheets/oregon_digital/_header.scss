@@ -39,16 +39,21 @@ header {
       font-weight: 600;
       padding-left: .25em;
       margin-bottom: 0;
-    }
-    .tagline {
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: $dark-grey;
-      @media (max-width: $screen-sm-min) {
-        & {
-          font-size: 10px;
-        }
+
+      .application-title {
+        color: $navy-blue;
+        letter-spacing: 0;
+        line-height: 64px;
+        margin: 0;
+      }
+
+      .tagline {
+        color: $dark-grey;
+        font-size: 14px;
+        letter-spacing: 3px;
+        position: relative;
+        text-transform: uppercase;
+        top: -.5em;
       }
     }
   }
