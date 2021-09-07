@@ -51,7 +51,7 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     when 'OSU' then
       image = 'osu-collection.png'
       alt = 'Oregon State University Libraries and Press'
-      style = 'max-height: 100px;'
+      style = 'max-height: 90px;'
     when 'UO'
       image = 'uo-collection.png'
       alt = 'University of Oregon Libraries'
