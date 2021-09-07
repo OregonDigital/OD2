@@ -26,7 +26,7 @@ module Hyrax
 		  data: { toggle: 'collapse' },
 		  href: "##{id}",
 		  onclick: "toggleCollapse(this)",
-		  'aria-expanded' => open,
+		  aria: { expanded: true },
 		  'aria-controls' => id) do
 	      safe_join([tag.span('', class: icon_class, 'aria-hidden': true),
 			 tag.span(text)], ' ')
