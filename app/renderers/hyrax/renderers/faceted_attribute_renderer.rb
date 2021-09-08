@@ -7,10 +7,10 @@ module Hyrax
       private
 
       def li_value(value)
-        label_tag do
+	helpers.label_tag do
           '<span class="sr-only">Search Oregon Digital for</span>'.html_safe
           link_to(ERB::Util.h(value), search_path(value))
-        end
+	end
       end
 
       def search_path(value)
