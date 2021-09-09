@@ -2,7 +2,7 @@
   <div class="thumbnail">
     <% unless document.collection? %>
       <p class="pull-left">
-        <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector">
+        <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
       </p>
     <% end %>
     <%= link_to(url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter))) do |body| %>
