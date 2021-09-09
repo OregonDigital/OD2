@@ -15,7 +15,7 @@ RSpec.describe ::SearchAndExternalLinkAttributeRenderer do
       let(:content) do
         '<a href="/catalog?f%5Bcreator_sim%5D%5B%5D=Last%2C+First&amp;locale=en">' \
         'Last, First' \
-        '</a><a aria-label="Open link in new window" class="btn" target="_blank" title="learn more" href="https://google.com">' \
+        '</a><a aria-label="learn more about this taxonomy term" class="btn" target="_blank" title="learn more" href="https://google.com">' \
         '<i class="fa fa-info-circle"></i><span class="sr-only">learn more</span></a>'
       end
 
