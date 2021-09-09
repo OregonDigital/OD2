@@ -44,11 +44,11 @@
           </div>
         <% end %>
         <div class="col-sm-6">
-          <p class='collection-title'><h3><%= collection.title.first %></h3></p>
+          <p class='collection-title'><h3 id="collection-<%= collection.id %>"><%= collection.title.first %></h3></p>
           <p>
             <h4><%= @member_count %> items
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %></h4>
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {labelledby: "collection-#{collection.id}"} %></h4>
           </p>
         </div>
         </div>
