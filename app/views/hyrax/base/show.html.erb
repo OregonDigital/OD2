@@ -119,7 +119,8 @@
               </div>
               <% if @presenter.member_presenters.size > 1 %>
                 <div class='flex-item file-set-manager'>
-                  <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, @presenter]), class: 'btn btn-primary pull-right' %>
+<% byebug %>
+                  <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, @presenter.to_sym]), class: 'btn btn-primary pull-right' %>
                 </div>
               <% end %>
             </div>
