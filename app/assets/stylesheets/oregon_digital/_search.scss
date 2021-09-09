@@ -291,19 +291,13 @@ ul.pagination li {
         .hover-over-collection-text {
           display: block;
         }
-
-        & + p {
-          background: black;
-          z-index: 100;
-        }
       }
       p {
-        background: white;
-        z-index: -100;
+        background: $black;
         height: 36px;
         width: 36px;
         position: absolute;
-        top: calc(1em + 8px);
+        top: calc(1em + 10px);
         input[type="checkbox"] {
           position: absolute;
           margin: 0;
