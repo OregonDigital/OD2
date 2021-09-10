@@ -48,7 +48,7 @@
           <p>
             <h4><%= @member_count %> items
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %></h4>
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"} %></h4>
           </p>
         </div>
         </div>
@@ -58,9 +58,7 @@
       <div class="col-md-4 featured-collection-border">
       </div>
       <div class="col-md-4">
-        <button type="button" class="btn btn-primary all-collections-homepage">
-          View All Collections
-        </button>
+        <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_explore_collections_path, class: 'btn btn-primary all-collections-homepage' %>
       </div>
       <div class="col-md-4 featured-collection-border">
       </div>

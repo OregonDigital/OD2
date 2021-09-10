@@ -1,0 +1,10 @@
+.btn-sidebar {
+  background-color: #5e5e5e;
+  color: white;
+  width: 100%;
+  text-align: left;
+  &:hover {
+    background-color: #f0f0f0;
+    color: black;
+  }
+}

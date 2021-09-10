@@ -1,7 +1,33 @@
-#appliedParams{
-  background-color: unset;
-  border-bottom: 1em solid $very-light-grey;
-  margin-bottom: 2em;
+.constraints-divider {
+  background-color: $very-light-grey;
+  height: 0.5em;
+
+  @media (min-width: $screen-sm-min) {
+    & {
+      margin-top: 1em;
+    }
+  }
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  #appliedParams.explore-collection,
+  #appliedParamsConstraint.explore-collection {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
+
+  .pull-right.catalog-search {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+  }
+}
+
+.widget-wrapper {
+  position: relative;
 }
 
 .view-type .btn-default {
@@ -9,15 +35,14 @@
   border: none;
   box-shadow: none;
   &.active {
-    color: white;
-    background-color: $dark-orange;
+    color: $navy-blue;
+    background-color: $contrast-orange;
   }
 }
 
 .appliedFilter {
   background-color: $very-light-grey;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: .25em 1em;
 
   .constraint-value,
   .constraint-value:hover,
@@ -29,7 +54,7 @@
 
 #sortAndPerPage {
   border: none;
-  margin-bottom: 2em;
+  margin-bottom: 0;
 
   .search-widgets {
     margin-bottom: .5em;
@@ -61,24 +86,24 @@
   height: 54px;
 }
 
+.panel.facet_limit {
+  background: none;
+  border: 2px solid $navy-blue;
+  border-radius: 0;
+
+  .panel-heading {
+    background: none;;
+  }
+  .panel-body {
+    background-color: white;
+  }
+}
 #facets {
   background-color: $very-light-grey;
   margin-top: 2em;
 
   #facet-panel-collapse {
     padding: 1em;
-  }
-  .panel.facet_limit {
-    background: none;
-    border: 2px solid $navy-blue;
-    border-radius: 0;
-
-    .panel-heading {
-      background: none;;
-    }
-    .panel-body {
-      background-color: white;
-    }
   }
 
   .facets-heading {
@@ -210,14 +235,25 @@ div.pagination {
 }
 ul.pagination li {
   &.active span {
-    background-color: $dark-orange;
+    background-color: $contrast-orange;
     border: none;
+    color: $navy-blue;
   }
   &.next span,
   &.next a,
   &.previous span,
   &.previous a {
     background: none;
+  }
+  &.disabled {
+    span,
+    span:hover,
+    span:focus,
+    a,
+    a:hover,
+    a:focus {
+      color: $dark-grey;
+    }
   }
 
   a,
@@ -255,19 +291,13 @@ ul.pagination li {
         .hover-over-collection-text {
           display: block;
         }
-
-        & + p {
-          background: black;
-          z-index: 100;
-        }
       }
       p {
-        background: white;
-        z-index: -100;
+        background: $black;
         height: 36px;
         width: 36px;
         position: absolute;
-        top: calc(1em + 8px);
+        top: calc(1em + 10px);
         input[type="checkbox"] {
           position: absolute;
           margin: 0;
