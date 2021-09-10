@@ -1,19 +1,8 @@
-function transitionActivityChevron() {
-  if ($('.activity-dropdown').hasClass('glyphicon-chevron-right')) {
-    $('.activity-dropdown').removeClass('glyphicon-chevron-right');
-    $('.activity-dropdown').addClass('glyphicon-chevron-down');
+function transitionChevron(elem) {
+  elem = $(elem).find('.activity-dropdown');
+  if (elem.hasClass('glyphicon-chevron-right')) {
+    elem.removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
   } else {
-    $('.activity-dropdown').removeClass('glyphicon-chevron-down');
-    $('.activity-dropdown').addClass('glyphicon-chevron-right');
-  }
-}
-
-function transitionSettingsChevron() {
-  if ($('.activity-dropdown').hasClass('glyphicon-chevron-right')) {
-    $('.activity-dropdown').removeClass('glyphicon-chevron-right');
-    $('.activity-dropdown').addClass('glyphicon-chevron-down');
-  } else {
-    $('.activity-dropdown').removeClass('glyphicon-chevron-down');
-    $('.activity-dropdown').addClass('glyphicon-chevron-right');
+    elem.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
   }
 }

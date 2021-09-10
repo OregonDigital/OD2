@@ -1,12 +1,12 @@
 <li class="h5"><h3 class="lato-p white"><%= t('hyrax.admin.sidebar.activity') %></h3></li>
 
   <li>
-    <button class="btn btn-sidebar collapsed" type="button" data-toggle="collapse" data-target="#collapseActivity2" aria-expanded="false" aria-controls="collapseActivity2" onclick="transitionActivityChevron()">
+    <button class="btn btn-sidebar collapsed" type="button" data-toggle="collapse" data-target="#activityCollapse" aria-expanded="false" aria-controls="activityCollapse" onclick="transitionChevron(this)">
       <span class="fa fa-line-chart" aria-hidden="true"></span> Your Activity <span class="activity-dropdown pull-right glyphicon glyphicon-chevron-right">
     </button>
     <%= menu.collapsable_section t('hyrax.admin.sidebar.user_activity'),
                                  icon_class: "fa fa-line-chart",
-                                 id: 'collapseActivity2',
+                                 id: 'activityCollapse',
                                  open: false do %>
       <%= menu.nav_link(hyrax.dashboard_profile_path(current_user),
                         also_active_for: hyrax.edit_dashboard_profile_path(current_user)) do %>
