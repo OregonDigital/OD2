@@ -48,7 +48,7 @@
           <p>
             <h4><%= @member_count %> items
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %></h4>
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"} %></h4>
           </p>
         </div>
         </div>
