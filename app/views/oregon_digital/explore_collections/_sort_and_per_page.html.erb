@@ -1,6 +1,6 @@
 <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
 
-<span class="pull-left explore-collections-result-count mw-lg-b"> Showing <%= page_entries_info(@response) %> items </span>
+<span class="pull-left explore-collections-result-count mw-lg-b"><strong> Showing <%= page_entries_info(@response) %> items </strong></span>
 <div id="sortAndPerPage" class="explore-collections-per-page sort-pagination" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
   <%= render_results_collection_tools wrapping_class: "search-widgets hidden-xs" %>
   <%= render 'search_form' %>
