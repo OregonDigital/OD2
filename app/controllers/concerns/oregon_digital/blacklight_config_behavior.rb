@@ -92,7 +92,7 @@ module OregonDigital
         rejected_fields += %w[rights_statement resource_type license language oembed_url]
 
         search_fields = []
-        advanced_search_fields = %i(title, creator_label, description, subject_label)
+        advanced_search_fields = %i[title creator_label description subject_label]
         # Add all fields as searchable, reject the non-searchable fields
         Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
           # Skip if this property isn't indexed
