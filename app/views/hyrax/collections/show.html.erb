@@ -5,7 +5,7 @@
   <div class="row hyc-header">
     <%# Title, view, and description %>
     <div class="hyc-generic">
-      <div class="col-md-8">
+      <div class="col-md-8 col-sm-8">
         <div class="hyc-title">
           <h1><%= @presenter.title.first %></h1>
           <span class="lg-border-right item-count">
@@ -13,7 +13,7 @@
             <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
           </span>
           <span>
-            <%= link_to 'View all', view_all_url %>
+            <%= link_to "View all items in collection", view_all_url %>
           </span>
         </div>
         <div class="hyc-desc mw-lg">
@@ -21,10 +21,10 @@
         </div>
       </div>
       <%# Institutional image %>
-      <div class="col-md-4 text-right">
+      <div class="col-md-4 col-sm-4 text-right">
         <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
-        <% path, alt, height = controller.institution_image_info %>
-        <%= image_tag path, alt: alt, height: height %>
+        <% path, alt, style = controller.institution_image_info %>
+        <%= image_tag path, alt: alt, style: style %>
       </div>
       <%# Social media share icons %>
       <div class="col-md-12 text-right share-links">
@@ -42,13 +42,13 @@
     <div class="hyc-blacklight hyc-bl-results">
       <div class="row">
       <% @member_docs[0,4].each_with_index do |doc, i| %>
-        <div class="masonry document text-center col-xs-3 col-md-3">
+        <div class="masonry document text-center col-xs-12 col-md-3">
           <%= render 'showcase_tile',
               title: doc.title_or_label,
               index: i,
               count: @member_docs.length,
               link: [main_app, doc],
-              img: render_thumbnail_tag(doc, {alt: ''}, { suppress_link: true }) %>
+              img: render_thumbnail_tag(doc, {alt: "#{doc.title_or_label}"}, { suppress_link: true }) %>
       <% end %>
       </div>
       <div class="col-md-12 lg-border-bottom"></div>
@@ -64,7 +64,7 @@
   </div>
 
   <%= render 'lime_green_divider' do %>
-    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All</a>
+    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All Items</a>
   <% end %>
 
   <div class="row">

@@ -1,0 +1,15 @@
+#facets, #advanced-facet-limits {
+  .panel-title {
+    color: $black;
+  }
+}
+
+.facet_limit-active > .panel-heading {
+  h4, .h4 {
+    color: #3c763d; //Bootstrap green
+  }
+}
+
+.text-success, .facet-values li .selected {
+  color: black;
+}

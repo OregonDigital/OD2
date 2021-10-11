@@ -17,4 +17,12 @@ $(document).ready(function() {
       }
     }
   });
+
+  $('.activity-toggle').on('keydown', function(e) {
+    if(e.key == ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).trigger('click');
+    }
+  });
 });

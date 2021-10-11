@@ -45,19 +45,19 @@ Hyrax::CollectionsControllerBehavior.module_eval do
   def institution_image_info
     image = 'no-institution-collection.png'
     alt = ''
-    height = 55
+    style = 'max-height: 45px;'
 
     case OregonDigital::InstitutionPicker.institution_acronym(@curation_concern)
     when 'OSU' then
       image = 'osu-collection.png'
       alt = 'Oregon State University Libraries and Press'
-      height = 100
+      style = 'max-height: 90px;'
     when 'UO'
       image = 'uo-collection.png'
       alt = 'University of Oregon Libraries'
     end unless @curation_concern.institution.first.nil?
 
-    return ApplicationController.helpers.asset_path(image), alt, height
+    return ApplicationController.helpers.asset_path(image), alt, style
   end
 
   private

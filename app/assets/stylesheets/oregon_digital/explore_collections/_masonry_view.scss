@@ -1,7 +1,13 @@
 #documents > div.masonry.document.collection {
   background-color: unset;
   border-bottom: none;
-  max-width: 15%;
+  margin: 0;
+  width: calc(16.666% - 40px);
+  @media (max-width: $screen-sm-min) {
+    & {
+      width: calc(50% - 20px);
+    }
+  }
 
   .thumbnail {
     text-align: left;

@@ -11,11 +11,11 @@
     </div>
     <%= render '/masthead' %>
     <%= content_for(:navbar) %>
-    <div id="content-wrapper" role="main">
+    <div id="content-wrapper">
       <div class="sidebar maximized">
         <%= render 'hyrax/dashboard/sidebar' %>
       </div>
-      <div class="main-content maximized">
+      <div class="main-content maximized" role="main">
         <%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>
         <%= render '/flash_msg' %>
         <% if content_for?(:page_header) %>
