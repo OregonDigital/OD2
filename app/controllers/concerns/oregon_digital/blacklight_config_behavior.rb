@@ -92,7 +92,7 @@ module OregonDigital
         rejected_fields += %w[rights_statement resource_type license language oembed_url]
 
         search_fields = []
-        advanced_search_fields = [:title, :creator_label, :description, :subject_label]
+        advanced_search_fields = %i(title, creator_label, description, subject_label)
         # Add all fields as searchable, reject the non-searchable fields
         Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
           # Skip if this property isn't indexed
@@ -112,7 +112,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
+            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
           end
         end
         Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -132,7 +132,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
+            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
           end
         end
         Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -152,7 +152,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
+            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
           end
         end
         # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
@@ -178,7 +178,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
+            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
           end
         end
         config.add_show_field 'resource_type_label_tesim'
