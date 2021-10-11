@@ -92,6 +92,7 @@ module OregonDigital
         rejected_fields += %w[rights_statement resource_type license language oembed_url]
 
         search_fields = []
+        advanced_search_fields = [:title, :creator_label, :description, :subject_label]
         # Add all fields as searchable, reject the non-searchable fields
         Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
           # Skip if this property isn't indexed
@@ -111,7 +112,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = false
+            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
           end
         end
         Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -131,7 +132,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = false
+            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
           end
         end
         Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -151,7 +152,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = false
+            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
           end
         end
         # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
@@ -177,7 +178,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = false
+            advanced_search_fields.include?(field.key.to_sym) ? field.include_in_advanced_search = true : field.include_in_advanced_search = false
           end
         end
         config.add_show_field 'resource_type_label_tesim'
@@ -262,22 +263,13 @@ module OregonDigital
             qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv",
             pf: title_name.to_s
           }
-          field.include_in_advanced_search = false
+          field.include_in_advanced_search = true
         end
-        # Advanced search fields
-        config.add_search_field('title_desc_field', label: 'Title / Description') do |field|
+        config.add_search_field('title_desc_field', label: 'Title') do |field|
           title_name = 'title_tesim'
           field.solr_parameters = {
             qf: "#{title_name} description_tesim",
             pf: title_name.to_s
-          }
-        end
-        config.add_search_field('creator_field', label: 'Creator') do |field|
-          solr_name = 'creator_combined_label_sim'
-          search_fields << solr_name
-          field.solr_local_parameters = {
-            qf: solr_name,
-            pf: solr_name
           }
         end
 
