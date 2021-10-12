@@ -29,6 +29,7 @@ module OregonDigital
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {}
+        config.advanced_search[:form_facet_partial] ||= '_advanced_facet_partial'
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
