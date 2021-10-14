@@ -297,35 +297,35 @@ module OregonDigital
           }
         end
         config.add_search_field('description_field', label: 'Description') do |field|
-          title_name = 'description_tesim'
+          solr_name = 'description_tesim'
           field.solr_parameters = {
             qf: solr_name,
             pf: solr_name
           }
         end
         config.add_search_field('date_field', label: 'Date') do |field|
-          title_name = 'date_combined_year_label_sim'
+          solr_name = 'date_combined_year_label_sim'
           field.solr_parameters = {
             qf: solr_name,
             pf: solr_name
           }
         end
         config.add_search_field('institution_field', label: 'Institution') do |field|
-          title_name = 'institution_label_sim'
+          solr_name = 'institution_label_sim'
           field.solr_parameters = {
             qf: solr_name,
             pf: solr_name
           }
         end
         config.add_search_field('language_field', label: 'Language') do |field|
-          title_name = 'language_label_sim'
+          solr_name = 'language_label_sim'
           field.solr_parameters = {
             qf: solr_name,
             pf: solr_name
           }
         end
         config.add_search_field('subject_field', label: 'Subject') do |field|
-          title_name = 'subject_label_sim'
+          solr_name = 'subject_label_sim'
           field.solr_parameters = {
             qf: solr_name,
             pf: solr_name
