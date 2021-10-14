@@ -29,7 +29,6 @@ module OregonDigital
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {}
-        config.advanced_search[:form_facet_partial] ||= '_advanced_facet_partial'
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
@@ -93,7 +92,6 @@ module OregonDigital
         rejected_fields += %w[rights_statement resource_type license language oembed_url]
 
         search_fields = []
-        advanced_search_fields = %i[title creator_label description subject_label]
         # Add all fields as searchable, reject the non-searchable fields
         Document.document_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
           # Skip if this property isn't indexed
@@ -113,7 +111,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
+            field.include_in_advanced_search = false
           end
         end
         Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -133,7 +131,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
+            field.include_in_advanced_search = false
           end
         end
         Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -153,7 +151,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
+            field.include_in_advanced_search = false
           end
         end
         # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
@@ -179,7 +177,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = advanced_search_fields.include?(field.key.to_sym)
+            field.include_in_advanced_search = false
           end
         end
         config.add_show_field 'resource_type_label_tesim'
@@ -266,14 +264,73 @@ module OregonDigital
           }
           field.include_in_advanced_search = true
         end
+        # Advanced search fields
         config.add_search_field('title_desc_field', label: 'Title') do |field|
           title_name = 'title_tesim'
           field.solr_parameters = {
-            qf: "#{title_name} description_tesim",
+            qf: "#{title_name}",
             pf: title_name.to_s
           }
         end
-
+        config.add_search_field('collection_field', label: 'Collections') do |field|
+          solr_name = 'collection_combined_label_sim'
+          search_fields << solr_name
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+        config.add_search_field('copyright_field', label: 'Copyrights') do |field|
+          solr_name = 'copyright_combined_label_sim'
+          search_fields << solr_name
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+        config.add_search_field('creator_field', label: 'Creator') do |field|
+          solr_name = 'creator_combined_label_sim'
+          search_fields << solr_name
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+        config.add_search_field('description_field', label: 'Description') do |field|
+          title_name = 'description_tesim'
+          field.solr_parameters = {
+            qf: "#{title_name}",
+            pf: title_name.to_s
+          }
+        end
+        config.add_search_field('date_field', label: 'Date') do |field|
+          title_name = 'date_combined_year_label_sim'
+          field.solr_parameters = {
+            qf: "#{title_name}",
+            pf: title_name.to_s
+          }
+        end
+        config.add_search_field('institution_field', label: 'Institution') do |field|
+          title_name = 'institution_label_sim'
+          field.solr_parameters = {
+            qf: "#{title_name}",
+            pf: title_name.to_s
+          }
+        end
+        config.add_search_field('language_field', label: 'Language') do |field|
+          title_name = 'language_label_sim'
+          field.solr_parameters = {
+            qf: "#{title_name}",
+            pf: title_name.to_s
+          }
+        end
+        config.add_search_field('subject_field', label: 'Subject') do |field|
+          title_name = 'subject_label_sim'
+          field.solr_parameters = {
+            qf: "#{title_name}",
+            pf: title_name.to_s
+          }
+        end
         # 'sort results by' select (pulldown)
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc
