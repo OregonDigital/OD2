@@ -31,9 +31,19 @@ $(document).ready(function() {
         break;
     };
   });
+
+  // Close menu when tab focus leaves menu button or menu items
   $("[data-toggle='dropdown']").parent().on('focusout', function(e) {
-    // Figure out how to close menu when tab focus leaves menu button or menu items
-    console.log(e);
+    // The menu we're in
+    let menu = $(e.target).closest('ul');
+    // The target we're tabbing to
+    let target = $(e.relatedTarget);
+    // The button that opens our menu
+    let button = menu.siblings('button,a');
+    // If we tabbed out of the menu, toggle the dropdown off on the button
+    if (menu.find(target).length <= 0 && menu.length > 0) {
+      button.dropdown('toggle');
+    }
   });
 
   $("[data-toggle='dropdown']").siblings('.dropdown-menu').on('keydown', function(e) {
