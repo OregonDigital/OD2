@@ -3,10 +3,10 @@
   <%= t('blacklight.search.per_page.title') %>
   <span class="sr-only" id="search-per-page"> Number of results per page </span>
   <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-controls="search-per-page-list" aria-expanded="false" aria-haspopup="true" aria-labelledby="search-per-page">
+    <button type="button" id="search-per-page-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-controls="search-per-page-list" aria-expanded="false" aria-haspopup="true">
       <%= t(:'blacklight.search.per_page.button_label', :count => current_per_page) %> <span class="caret"></span>
     </button>
-    <ul id="search-per-page-list" class="dropdown-menu" role="menu">
+    <ul id="search-per-page-list" class="dropdown-menu" role="menu" aria-labelledby="search-per-page-button">
       <%- per_page_options_for_select.each do |(label, count)| %>
         <li role="none"><%= link_to(label, url_for(search_state.params_for_search(per_page: count)), role: 'menuitem', tabindex: -1) %></li>
       <%- end -%>
