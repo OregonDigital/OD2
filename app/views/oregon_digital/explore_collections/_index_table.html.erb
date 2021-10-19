@@ -1,0 +1,19 @@
+<% institution = OregonDigital::InstitutionPicker.institution_acronym(document) %>
+<tr>
+  <th scope="row">
+    <b><%= link_to(document.title_or_label, url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter))) %></b>
+  </td>
+  <% if controller.tab != controller.class::TABS[:my] %>
+  <td>
+    <%= !institution.empty? ? institution : t('oregon_digital.explore_collections.list.row.institution.default') %>
+  </td>
+  <% end %>
+  <td>
+    <%= controller.total_viewable_items(document.id) %>
+  </td>
+  <% if controller.tab == controller.class::TABS[:my] %>
+  <td>
+    <%= render 'actions_list', collection: document %>
+  </td>
+  <% end %>
+</tr>

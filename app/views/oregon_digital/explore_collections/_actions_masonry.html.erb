@@ -1,11 +1,11 @@
-<div id='list-actions' class='flex-list actions'>
+<div id='<%= view %>-actions-<%= i %>' class='flex-list actions'>
   <ul>
     <li>
-      <%= link_to t('oregon_digital.explore_collections.actions.view'), hyrax.collection_path(collection.id), class: '' %>
+      <%= link_to t('oregon_digital.explore_collections.actions.view'), hyrax.collection_path(collection.id), class: 'btn btn-primary' %>
     </li>
     <li>
       <%= button_tag t('oregon_digital.explore_collections.actions.edit'),
-            class: 'link',
+            class: 'btn btn-primary',
             data: {
               toggle: 'modal',
               target: '#collection-edit-container',
@@ -18,17 +18,17 @@
         <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
           <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, id: "collection-visibility-#{collection.id}" %>
           <%= hidden_field_tag 'unsharing', true, id: "unsharing-#{collection.id}" %>
-          <%= f.submit t(:'hyrax.collection.select_form.unshare'), class: 'link', name: "unshare_collection" %>
+          <%= f.submit t(:'hyrax.collection.select_form.unshare'), class: 'btn btn-primary', name: "unshare_collection" %>
         <% else %>
           <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, id: "collection-visibility-#{collection.id}" %>
           <%= hidden_field_tag 'sharing', true, id: "sharing-#{collection.id}" %>
-          <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'link', name: "share_collection" %>
+          <%= f.submit t(:'hyrax.collection.select_form.share'), class: 'btn btn-primary', name: "share_collection" %>
         <% end %>
       <% end %>
     </li>
     <li>
       <%= button_tag t('oregon_digital.explore_collections.actions.export'),
-            class: 'link',
+            class: 'btn btn-primary',
             data: {
               toggle: 'modal',
               target: '#collection-export-container',
@@ -39,7 +39,7 @@
     </li>
     <li>
       <%= button_tag t('oregon_digital.explore_collections.actions.delete'),
-            class: 'link',
+            class: 'btn btn-danger',
             data: {
               toggle: 'modal',
               target: '#collection-delete-container',
@@ -51,8 +51,8 @@
   </ul>
   <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
     <div class="center-text">
-      <input id="list-<%= collection.id %>-share-link" value="<%= hyrax.collection_url(collection.id) %>">
-      <button class="copy-single-use-link btn btn-success" data-clipboard-target="#list-<%= collection.id %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!">
+      <input id="<%= view %>-<%= collection.id %>-share-link" value="<%= hyrax.collection_url(collection.id) %>">
+      <button class="copy-single-use-link btn btn-success" data-clipboard-target="#<%= view %>-<%= collection.id %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!">
         Copy
       </button>
     </div>
