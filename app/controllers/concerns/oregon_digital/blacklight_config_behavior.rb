@@ -29,6 +29,7 @@ module OregonDigital
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {}
+        config.advanced_search[:form_facet_partial] = 'custom_advanced_search_facets_as_select'
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
@@ -272,22 +273,6 @@ module OregonDigital
             pf: title_name.to_s
           }
         end
-        config.add_search_field('collection_field', label: 'Collections') do |field|
-          solr_name = 'collection_combined_label_sim'
-          search_fields << solr_name
-          field.solr_local_parameters = {
-            qf: solr_name,
-            pf: solr_name
-          }
-        end
-        config.add_search_field('copyright_field', label: 'Copyrights') do |field|
-          solr_name = 'copyright_combined_label_sim'
-          search_fields << solr_name
-          field.solr_local_parameters = {
-            qf: solr_name,
-            pf: solr_name
-          }
-        end
         config.add_search_field('creator_field', label: 'Creator') do |field|
           solr_name = 'creator_combined_label_sim'
           search_fields << solr_name
@@ -298,27 +283,6 @@ module OregonDigital
         end
         config.add_search_field('description_field', label: 'Description') do |field|
           solr_name = 'description_tesim'
-          field.solr_parameters = {
-            qf: solr_name,
-            pf: solr_name
-          }
-        end
-        config.add_search_field('date_field', label: 'Date') do |field|
-          solr_name = 'date_combined_year_label_sim'
-          field.solr_parameters = {
-            qf: solr_name,
-            pf: solr_name
-          }
-        end
-        config.add_search_field('institution_field', label: 'Institution') do |field|
-          solr_name = 'institution_label_sim'
-          field.solr_parameters = {
-            qf: solr_name,
-            pf: solr_name
-          }
-        end
-        config.add_search_field('language_field', label: 'Language') do |field|
-          solr_name = 'language_label_sim'
           field.solr_parameters = {
             qf: solr_name,
             pf: solr_name

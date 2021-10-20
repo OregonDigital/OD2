@@ -13,6 +13,7 @@
 
 // Required by Blacklight
 //= require jquery
+//= require chosen-jquery
 //= require 'blacklight_advanced_search'
 
 
