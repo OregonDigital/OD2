@@ -19,9 +19,9 @@
   </div>
   <div class="edit-button-sections">
     <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Download
+      <button id="download-button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"  aria-controls="download-list" aria-expanded="false" aria-haspopup="true">Download
       <span class="caret"></span></button>
-      <ul class="dropdown-menu">
+      <ul id="download-list" class="dropdown-menu" role="menu" aria-labelledby="download-button">
         <li><%= link_to "Files + Metadata (ZIP)", ((current_ability.can? :download, ActiveFedora::Base.find(presenter.id)) ? main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) : main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id)) %></li>
         <li><%= link_to "Metadata Only (CSV)", main_app.send(:"metadata_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
       </ul>
@@ -37,9 +37,9 @@
     </div>
     <% if presenter.valid_child_concerns.length > 0 %>
       <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-default dropdown-toggle" type="button" id="attach-child-button" data-toggle="dropdown" aria-haspopup="true" aria-controls="attach-child-list"  aria-expanded="false">
           Attach Child <span class="caret"></span></button>
-          <ul class="dropdown-menu">
+          <ul id="attach-child-list" class="dropdown-menu" role="menu" aria-labelledby="attach-child-button">
             <% presenter.valid_child_concerns.each do |concern| %>
               <li>
                 <%= link_to "Attach #{concern.human_readable_type}", polymorphic_path([main_app, :new, :hyrax, :parent, concern.model_name.singular], parent_id: presenter.id) %>
