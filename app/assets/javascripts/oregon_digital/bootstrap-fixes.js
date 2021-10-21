@@ -24,14 +24,26 @@ $(document).ready(function() {
       case 13: // enter
       case 32: // space
       case 40: // keyboard down
-        console.log('focus first');
         firstElem.focus();
         break;
       case 38: // keyboard up
-        console.log('focus last');
         lastElem.focus();
         break;
     };
+  });
+
+  // Close menu when tab focus leaves menu button or menu items
+  $("[data-toggle='dropdown']").parent().on('focusout', function(e) {
+    // The menu we're in
+    let menu = $(e.target).closest('ul');
+    // The target we're tabbing to
+    let target = $(e.relatedTarget);
+    // The button that opens our menu
+    let button = menu.siblings('button,a');
+    // If we tabbed out of the menu, toggle the dropdown off on the button
+    if (menu.find(target).length <= 0 && menu.length > 0) {
+      button.dropdown('toggle');
+    }
   });
 
   $("[data-toggle='dropdown']").siblings('.dropdown-menu').on('keydown', function(e) {
@@ -95,25 +107,27 @@ $(document).ready(function() {
           // Split the list into elements after the focused and before the focused
           let firstArray = listItems.slice(start);
           let secondArray = listItems.slice(0, start - 1);
+          let found = null;
 
           // Search the list after the focus first
-          let found = firstArray.each( function(elem) {
+          firstArray.each( function(_index, elem) {
             // Check if the first char matches the pressed char in any case
             if (elem.innerText[0].toLowerCase() === char) {
               elem.focus();
+              found = elem;
               return false;
             }
           });
-          console.log(found);
 
-          // Check the list before the focus
-          found = secondArray.each( function(elem) {
-            if (elem.innerText[0].toLowerCase() === char) {
-              elem.focus();
-              return false;
-            }
-          });
-          console.log(found);
+          // Check the list before the focus if we didn't find it previously
+          if (found === null) {
+            secondArray.each( function(_index, elem) {
+              if (elem.innerText[0].toLowerCase() === char) {
+                elem.focus();
+                return false;
+              }
+            });
+          }
         }
         break;
     };
