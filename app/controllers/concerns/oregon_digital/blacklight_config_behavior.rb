@@ -29,6 +29,7 @@ module OregonDigital
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {}
+        config.advanced_search[:form_facet_partial] = 'custom_advanced_search_facets_as_select'
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
@@ -262,13 +263,13 @@ module OregonDigital
             qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv",
             pf: title_name.to_s
           }
-          field.include_in_advanced_search = false
+          field.include_in_advanced_search = true
         end
         # Advanced search fields
-        config.add_search_field('title_desc_field', label: 'Title / Description') do |field|
+        config.add_search_field('title_desc_field', label: 'Title') do |field|
           title_name = 'title_tesim'
           field.solr_parameters = {
-            qf: "#{title_name} description_tesim",
+            qf: title_name.to_s,
             pf: title_name.to_s
           }
         end
@@ -280,7 +281,20 @@ module OregonDigital
             pf: solr_name
           }
         end
-
+        config.add_search_field('description_field', label: 'Description') do |field|
+          solr_name = 'description_tesim'
+          field.solr_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+        config.add_search_field('subject_field', label: 'Subject') do |field|
+          solr_name = 'subject_label_sim'
+          field.solr_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
         # 'sort results by' select (pulldown)
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc
