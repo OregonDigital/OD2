@@ -1,0 +1,47 @@
+.collapsable-actions {
+  margin-bottom: 5px;
+}
+table#documents-table {
+  .my-collections-row {
+    th, td {
+      padding: 0;
+      padding-bottom: .5em;
+    }
+  }
+}
+.actions.flex-list {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+
+  ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+
+    li {
+      flex-grow: 1;
+      flex-basis: auto;
+      margin: 0;
+      text-align: right;
+      list-style: none;
+      input {
+        vertical-align: middle;
+        margin: 0 .25em;
+      }
+    }
+    li:last-child {
+      text-align: left;
+      button.copy-single-use-link {
+        line-height: 4px;
+      }
+      input {
+        height: 22px;
+      }
+    }
+  }
+}

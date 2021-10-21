@@ -1,8 +1,5 @@
-<div id='list-actions' class='flex-list actions'>
+<div id='list-actions' class='actions flex-list'>
   <ul>
-    <li>
-      <%= link_to t('oregon_digital.explore_collections.actions.view'), hyrax.collection_path(collection.id), class: '' %>
-    </li>
     <li>
       <%= button_tag t('oregon_digital.explore_collections.actions.edit'),
             class: 'link',
@@ -11,6 +8,28 @@
               target: '#collection-edit-container',
             },
             onclick: "javascript:open_edit_my_collection_modal('#{collection.id}')"
+      %>
+    </li>
+    <li>
+      <%= button_tag t('oregon_digital.explore_collections.actions.delete'),
+            class: 'link',
+            data: {
+              toggle: 'modal',
+              target: '#collection-delete-container',
+              delete_url: hyrax.dashboard_collection_path(collection.id)
+            },
+            onclick: 'javascript:open_delete_my_collection_modal(this)'
+      %>
+    </li>
+    <li>
+      <%= button_tag t('oregon_digital.explore_collections.actions.export'),
+            class: 'link',
+            data: {
+              toggle: 'modal',
+              target: '#collection-export-container',
+              export_url: download_collection_path(collection.id)
+            },
+            onclick: 'javascript:open_export_my_collection_modal(this)'
       %>
     </li>
     <li>
@@ -26,35 +45,11 @@
         <% end %>
       <% end %>
     </li>
-    <li>
-      <%= button_tag t('oregon_digital.explore_collections.actions.export'),
-            class: 'link',
-            data: {
-              toggle: 'modal',
-              target: '#collection-export-container',
-              export_url: download_collection_path(collection.id)
-            },
-            onclick: 'javascript:open_export_my_collection_modal(this)'
-      %>
-    </li>
-    <li>
-      <%= button_tag t('oregon_digital.explore_collections.actions.delete'),
-            class: 'link',
-            data: {
-              toggle: 'modal',
-              target: '#collection-delete-container',
-              delete_url: hyrax.dashboard_collection_path(collection.id)
-            },
-            onclick: 'javascript:open_delete_my_collection_modal(this)'
-      %>
-    </li>
-  </ul>
-  <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
-    <div class="center-text">
+    <li class="center-text <%= 'invisible' unless collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>">
       <input id="list-<%= collection.id %>-share-link" value="<%= hyrax.collection_url(collection.id) %>">
       <button class="copy-single-use-link btn btn-success" data-clipboard-target="#list-<%= collection.id %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!">
         Copy
       </button>
-    </div>
-  <%end%>
+    </li>
+  </ul>
 </div>
