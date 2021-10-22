@@ -27,10 +27,17 @@ form#explore-collection-search {
 }
 .explore-collections-per-page {
   padding: 2em 0 1em 0;
+  @media (max-width: $screen-xs-max) {
+    &{
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+  }
   .explore-collections-result-count {
     margin: 0;
     font-style: italic;
     font-weight: bold;
+    padding-bottom: 2em;
 
     @media (max-width: $screen-sm-max) {
       &{
