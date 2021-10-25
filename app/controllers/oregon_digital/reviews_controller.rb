@@ -2,7 +2,7 @@
 
 module OregonDigital
   # Bulk Reviews items from the review page
-  class BulkReviewController < ApplicationController
+  class ReviewsController < ApplicationController
     def approve_items
       items_to_review = params[:items_to_review]
       approve(items_to_review)
@@ -15,12 +15,12 @@ module OregonDigital
       items_to_review.each do |pid|
         item = ActiveFedora::Base.find(pid)
         entity = item.to_sipity_entity
-	next if entity.nil? || entity.workflow_state_name != 'pending_review'
+	      next if entity.nil? || entity.workflow_state_name != 'pending_review'
 	  
-	activate_asset(item, entity)
-	rescue StandardError => e
-	  Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
-	end
+	      activate_asset(item, entity)
+	      rescue StandardError => e
+	        Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
+	      end
       end
     end
 

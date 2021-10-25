@@ -85,6 +85,6 @@ Rails.application.routes.draw do
 
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
 
-  post :bulk_review, to: 'bulk_review/:ids', controller: 'oregon_digital/bulk_review#approve_items', as: 'bulk_review'
+  post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
