@@ -2,8 +2,40 @@ table#documents-table {
   width: 100%;
   thead th {
     padding: 2em 0;
+    @media (max-width: $screen-sm-max) {
+      & {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+    }
   }
-  tbody tr td {
-    padding: 0.25em 0;
+  tbody tr {
+    margin: .5em 0;
+    width: 100%;
+    td {
+      padding: 0.25em 0;
+    }
+    @media (max-width: $screen-sm-max) {
+      &, th, td {
+        display: block;
+      }
+      & {
+        margin: 0.75em 0;
+        float: left;
+      }
+      &:first-child {
+        margin-top: 1.5em;
+      }
+      th {
+        font-size: 30px;
+        padding: 0;
+      }
+    }
   }
 }

@@ -9,7 +9,7 @@
   </td>
   <% end %>
   <td>
-    <%= controller.total_viewable_items(document.id) %>
+    <%= controller.total_viewable_items(document.id) %> <span class="hidden-md hidden-lg">items</span>
   </td>
   <% if controller.tab == controller.class::TABS[:my] %>
   <td>
