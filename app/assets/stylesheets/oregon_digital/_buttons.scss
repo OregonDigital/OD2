@@ -1,3 +1,19 @@
+button.link,
+input.link {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: $link-color;
+  cursor: pointer;
+  &:hover, &:focus {
+    text-decoration: underline;
+    color: $link-hover-color;
+  }
+}
+
 .button {
   padding: 10px 35px !important;
   max-width: 250px;
