@@ -1,0 +1,17 @@
+<table id="documents-table" class="table-hover">
+  <thead>
+    <tr>
+      <th class="h4">Collection Name</th>
+      <% if controller.tab != controller.class::TABS[:my] %>
+      <th class="h4">Institution</th>
+      <% end %>
+      <th class="h4">Items</th>
+      <% if controller.tab == controller.class::TABS[:my] %>
+      <th class="h4"><span class="sr-only">Actions</span></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render collection: documents, as: :document, partial: 'index_table', locals: {count: documents.count} %>
+  </tbody>
+</table>
