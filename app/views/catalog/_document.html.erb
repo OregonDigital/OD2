@@ -4,7 +4,7 @@
     <div class="row search-result-wrapper">
       <% unless document.collection? %>
         <p class="pull-left">
-          <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
+          <input onclick="javascript:updateRouteForWorkflows()" type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
         </p>
       <% end %>
       <%= render_document_partials document, blacklight_config.view_config(document_index_view_type).partials, document_counter: document_counter %>

@@ -4,9 +4,9 @@ module OregonDigital
   # Bulk Reviews items from the review page
   class ReviewsController < ApplicationController
     def approve_items
-      items_to_review = params[:items_to_review]
+      items_to_review = params[:ids].split(',')
       approve(items_to_review)
-      redirect_to
+      redirect_back fallback_location: root_path
     end
 
     private
@@ -21,7 +21,6 @@ module OregonDigital
 	      rescue StandardError => e
 	        Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
 	      end
-      end
     end
 
     def activate_asset(item, entity)

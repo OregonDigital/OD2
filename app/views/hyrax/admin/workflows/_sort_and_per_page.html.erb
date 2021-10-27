@@ -14,7 +14,7 @@
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.none') %></span>
                       <span class="sr-only"> Deselect all works for saving </span>
                     <% end %>
-    <%= button_to "Review Selected", bulk_review_path %>
+    <%= button_to "Review Selected", main_app.bulk_review_path(1), id: "bulk_review_button" %>
   </div>
 </div>
 
