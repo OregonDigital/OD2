@@ -1,5 +1,3 @@
-const { LinearToneMapping } = require("three");
-
 function updateRouteForWorkflows(button) {
   clicked_ids = []
   $('input[type=checkbox]').each(function() {

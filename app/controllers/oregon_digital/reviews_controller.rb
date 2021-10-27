@@ -1,4 +1,4 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 module OregonDigital
   # Bulk Reviews items from the review page
@@ -15,12 +15,12 @@ module OregonDigital
       items_to_review.each do |pid|
         item = ActiveFedora::Base.find(pid)
         entity = item.to_sipity_entity
-	      next if entity.nil? || entity.workflow_state_name != 'pending_review'
-	  
-	      activate_asset(item, entity)
-	      rescue StandardError => e
-	        Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
-	      end
+        next if entity.nil? || entity.workflow_state_name != 'pending_review'
+
+        activate_asset(item, entity)
+      rescue StandardError => e
+	      Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
+	    end
     end
 
     def activate_asset(item, entity)
