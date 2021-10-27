@@ -4,7 +4,7 @@
 
 <div class="container">
   <%= render 'constraints' %>
-  <%= render 'search_results' %>
+  <%= render controller.tab == controller.class::TABS[:my] ? 'my_search_results' : 'search_results' %>
 </div>
 
 <%= render 'oregon_digital/explore_collections/form_for_edit_collection' %>
