@@ -12,7 +12,7 @@ function bulkReview(event) {
     timeout: 100,
     url: `/bulk_review/${clicked_ids}?locale=en`,
     complete: function(jqXHR, status) {
-      alert('Your work(s) are being added to the collection. Please give us time to process this request');
+      alert('The selected works are currently being processed for review. Pleasse allow the system time to process these,');
     }
   });
 };
