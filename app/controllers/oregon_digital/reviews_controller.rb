@@ -19,8 +19,8 @@ module OregonDigital
 
         activate_asset(item, entity)
       rescue StandardError => e
-	      Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
-	    end
+	Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
+      end
     end
 
     def activate_asset(item, entity)
