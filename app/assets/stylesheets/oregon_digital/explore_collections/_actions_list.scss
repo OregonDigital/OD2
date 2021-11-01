@@ -1,6 +1,3 @@
-.collapsable-actions {
-  margin-bottom: 5px;
-}
 .actions.flex-list {
   position: relative;
   margin: 0;
@@ -78,6 +75,43 @@
     }
     li:nth-last-child(2) {
       border-right: none;
+    }
+  }
+}
+
+/* Masonry specifc */
+.masonry.document.collection {
+  .actions.flex-list {
+    ul {
+      background: $very-light-grey;
+      border-radius: .25em;
+      justify-content: center;
+      padding: .25em .25em;
+      li {
+        border-right: 3px solid $light-grey;
+        margin: .1em 0;
+        max-width: unset;
+        min-width: unset;
+        text-align: center;
+        width: 33%;
+        @media (min-width: $screen-xs-max) and (max-width: $screen-sm-max) {
+          width: unset;
+        }
+      }
+      li:last-child {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+        width: 100%;
+        input,button {
+          margin: .25em .25em;
+          padding: .5em .25em;
+          width: 100%;
+        }
+      }
+      li:nth-last-child(-n+3) {
+        border-right: none;
+      }
     }
   }
 }

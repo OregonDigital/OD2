@@ -64,7 +64,9 @@ module OregonDigital
         prop.fetch
         label = prop.solrize[1][:label].split('$')
         label[1] = "[#{label[1]}]"
-      rescue TriplestoreAdapter::TriplestoreException
+      # TriplestoreAdapter::TriplestoreException means no fetch possible
+      # NoMethodError likely means the fetch succeeded but no label was actually fetched, this is possible with geonames w/ http
+      rescue TriplestoreAdapter::TriplestoreException, NoMethodError
         label = ['No label found', "[#{prop.solrize.first}]"]
       end
       label.join(' ')
