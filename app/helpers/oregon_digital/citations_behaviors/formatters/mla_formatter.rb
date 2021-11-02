@@ -19,7 +19,7 @@ module OregonDigital
 
           # Institution the work is a part of.
           institution = OregonDigital::InstitutionPicker.institution_full_name(work)
-          text += "#{institution}." unless institution.blank?
+          text += "#{institution}. " unless institution.blank?
 
           # Title
           text += "\"#{work}\""
