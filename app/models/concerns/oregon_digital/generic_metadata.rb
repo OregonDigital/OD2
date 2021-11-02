@@ -693,7 +693,7 @@ module OregonDigital
         { name: 'rights_note', is_controlled: false, collection_facetable: false },
         { name: 'rights_holder', is_controlled: false, collection_facetable: false },
         { name: 'copyright_claimant', is_controlled: false, collection_facetable: false },
-        { name: 'access_restrictions_label', is_controlled: false, collection_facetable: false },
+        { name: 'access_restrictions_label', is_controlled: true, collection_facetable: false },
         { name: 'identifier', is_controlled: false, collection_facetable: false },
         { name: 'item_locator', is_controlled: false, collection_facetable: false },
         { name: 'accession_number', is_controlled: false, collection_facetable: false },

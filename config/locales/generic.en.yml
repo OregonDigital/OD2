@@ -348,6 +348,7 @@ en:
         license_label: "License"
         use_restrictions: "Use Restrictions"
         access_restrictions: "Access Restrictions"
+        access_restrictions_label: "Access Restrictions"
         box_name: "Archival Box Name"
         box_number: "Archival Box Number"
         citation: "Citation"
