@@ -510,7 +510,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :isPartOf, predicate: RDF::URI.new('http://opaquenamespace.org/ns/isPartOf'), multiple: true, basic_searchable: true do |index|
+      property :isPartOf, predicate: RDF::Vocab::DC.isPartOf, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 

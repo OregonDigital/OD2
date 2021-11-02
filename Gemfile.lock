@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: d77598b9c1a1d6e9f883377141f0d7c2c772bc63
+  revision: 73eee90a8bbe44569d2310edc13a20fac90637f1
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -110,7 +110,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     almond-rails (0.3.0)
       rails (>= 4.2)
@@ -635,7 +635,7 @@ GEM
     mime-types-data (3.2020.1104)
     mini_magick (4.10.1)
     mini_mime (1.1.0)
-    mini_portile2 (2.5.3)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -644,13 +644,13 @@ GEM
       redic
     net-http-persistent (3.1.0)
       connection_pool (~> 2.2)
-    nio4r (2.5.7)
+    nio4r (2.5.8)
     noid (0.9.0)
     noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
-    nokogiri (1.11.7)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -699,7 +699,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (4.3.8)
+    puma (4.3.9)
       nio4r (~> 2.0)
     qa (5.6.0)
       activerecord-import
@@ -710,7 +710,7 @@ GEM
       nokogiri (~> 1.6)
       rails (>= 5.0, < 6.2)
       rdf
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
     rack-honeycomb (0.5.0)
       libhoney (>= 1.5.0)
