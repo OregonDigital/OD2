@@ -535,7 +535,7 @@ crosswalk:
     predicate: http://purl.org/dc/terms/hasVersion
     multiple: true
     function: 
-  - property: isPartOf
+  - property: is_part_of
     predicate: http://purl.org/dc/terms/isPartOf
     multiple: true
     function: 

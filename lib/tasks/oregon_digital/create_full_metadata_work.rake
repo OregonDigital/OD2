@@ -102,7 +102,7 @@ def attrs
     'has_finding_aid' => [],
     'has_part' => [],
     'has_version' => [],
-    'isPartOf' => [],
+    'is_part_of' => [],
     'is_version_of' => [],
     'relation' => [],
     'workType' => ['http://opaquenamespace.org/ns/workType/AdviceofCharge'],
