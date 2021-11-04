@@ -16,6 +16,29 @@ module Hyrax
     # Override the way Hyrax's works present iiif manifests
     include OregonDigital::IIIFManifestControllerBehavior
 
+    def show
+      @props = []
+      index = 0
+      Generic::ORDERED_PROPERTIES.each do |prop|
+        if prop[:is_controlled]
+          presenter_value=Array(presenter.send(prop[:name].to_sym))
+          unless presenter_value.nil? || presenter_value.empty?
+            prop[:index] = index
+            @props << prop
+            index += 1
+          end
+        else
+          presenter_value = presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}"))
+          unless presenter_value.nil? || presenter_value.empty?
+            @props << prop
+          end
+        end
+      rescue NoMethodError
+      end
+
+      super
+    end
+
     # Use this line if you want to use a custom presenter
     self.show_presenter = Hyrax::ImagePresenter
   end
