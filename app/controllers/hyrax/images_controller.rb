@@ -21,11 +21,15 @@ module Hyrax
       index = 0
       Generic::ORDERED_PROPERTIES.each do |prop|
         if prop[:is_controlled]
-          presenter_value=Array(presenter.send(prop[:name].to_sym))
-          unless presenter_value.nil? || presenter_value.empty?
-            prop[:index] = index
+          presenter_value = Array(presenter.send(prop[:name].to_sym))
+          zipped = presenter.zipped_values(prop[:name])
+          unless zipped.nil? || zipped.empty?
+            prop[:indices] = {}
+            zipped.each do |value, uri|
+              prop[:indices][uri] = index
+              index += 1
+            end
             @props << prop
-            index += 1
           end
         else
           presenter_value = presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}"))

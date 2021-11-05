@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th>Footer Number</th>
+      <th>Term</th>
+      <th>External URI </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @props.each do |prop| %>
+    <% if prop[:is_controlled] %>
+        <% zipped = presenter.zipped_values(prop[:name]) %>
+        <% zipped.each do |label, uri| %>
+        <tr>
+          <td> <%= prop[:indices][uri] %> </td>
+          <td> <%= label %> </td>
+          <td> <%= link_to uri, uri %> </td>
+        </tr>
+        <% end %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
