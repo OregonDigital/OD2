@@ -45,6 +45,11 @@
             </a>
           </li>
           <li role="presentation">
+            <a href="#data_sources" aria-controls="data_sources" role="tab" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.data_sources") %></h2>
+            </a>
+          </li>
+          <li role="presentation">
             <a href="#contact_us" aria-controls="contact_us" role="tab" data-toggle="tab">
               <h2 class="h4"><%= t("oregon_digital.works.form.tab.contact_us") %></h2>
             </a>
@@ -61,6 +66,12 @@
             <div class="form-tab-content">
               <% # metadata_tab is sometimes provided %>
               <%= render 'citations', presenter: @presenter %>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="data_sources">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'data_sources', presenter: @presenter %>
             </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="contact_us">

@@ -181,7 +181,7 @@ module OregonDigital
         { name: :has_finding_aid, section_name: '' },
         { name: :has_part, section_name: '' },
         { name: :has_version, section_name: '' },
-        { name: :isPartOf, section_name: '' },
+        { name: :is_part_of, section_name: '' },
         { name: :is_version_of, section_name: '' },
         { name: :larger_work, section_name: '' },
         { name: :relation, section_name: '' },

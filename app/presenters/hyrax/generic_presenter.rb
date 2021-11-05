@@ -42,6 +42,13 @@ module Hyrax
       Hyrax::Engine.routes.url_helpers.stats_work_path(self, locale: I18n.locale)
     end
 
+    def zipped_values(prop)
+      labels = Array(send(prop))
+      links = Array(send(prop.to_s.gsub('_label', '')))
+      zipped = labels.zip(links)
+      Hash[zipped]
+    end
+
     private
 
     def presentable?(presenter)

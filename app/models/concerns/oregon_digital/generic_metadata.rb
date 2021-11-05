@@ -510,7 +510,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :isPartOf, predicate: RDF::Vocab::DC.isPartOf, multiple: true, basic_searchable: true do |index|
+      property :is_part_of, predicate: RDF::URI.new('http://opaquenamespace.org/ns/isPartOf'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
@@ -693,7 +693,7 @@ module OregonDigital
         { name: 'rights_note', is_controlled: false, collection_facetable: false },
         { name: 'rights_holder', is_controlled: false, collection_facetable: false },
         { name: 'copyright_claimant', is_controlled: false, collection_facetable: false },
-        { name: 'access_restrictions_label', is_controlled: false, collection_facetable: false },
+        { name: 'access_restrictions_label', is_controlled: true, collection_facetable: false },
         { name: 'identifier', is_controlled: false, collection_facetable: false },
         { name: 'item_locator', is_controlled: false, collection_facetable: false },
         { name: 'accession_number', is_controlled: false, collection_facetable: false },
@@ -726,7 +726,7 @@ module OregonDigital
         { name: 'relation', is_controlled: false, collection_facetable: false },
         { name: 'is_version_of', is_controlled: false, collection_facetable: false },
         { name: 'has_version', is_controlled: false, collection_facetable: false },
-        { name: 'isPartOf', is_controlled: false, collection_facetable: false },
+        { name: 'is_part_of', is_controlled: false, collection_facetable: false },
         { name: 'related_url', is_controlled: false, collection_facetable: false },
         { name: 'has_part', is_controlled: false, collection_facetable: false },
         { name: 'larger_work', is_controlled: false, collection_facetable: false },
@@ -873,7 +873,7 @@ module OregonDigital
         { name: :has_finding_aid, section_name: '' },
         { name: :has_part, section_name: '' },
         { name: :has_version, section_name: '' },
-        { name: :isPartOf, section_name: '' },
+        { name: :is_part_of, section_name: '' },
         { name: :is_version_of, section_name: '' },
         { name: :relation, section_name: '' },
         { name: :related_url, section_name: '' },

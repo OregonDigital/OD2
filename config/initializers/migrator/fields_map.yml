@@ -131,7 +131,7 @@ fields:
   findingAid: has_finding_aid
   hasPart: has_part
   hasVersion: has_version
-  isPartOf: isPartOf
+  isPartOf: is_part_of
   isVersionOf: is_version_of
   largerWork: larger_work
   relation: relation

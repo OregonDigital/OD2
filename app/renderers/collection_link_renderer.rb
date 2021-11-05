@@ -5,6 +5,7 @@ class CollectionLinkRenderer < Hyrax::Renderers::FacetedAttributeRenderer
   private
 
   def li_value(value)
-    link_to value, Hyrax::Engine.routes.url_helpers.collection_path(value)
+    collection = Collection.find(value)
+    link_to collection.title.first, Hyrax::Engine.routes.url_helpers.collection_path(value)
   end
 end
