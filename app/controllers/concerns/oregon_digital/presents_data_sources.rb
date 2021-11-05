@@ -16,7 +16,7 @@ module OregonDigital
       index = 0
       Generic::ORDERED_PROPERTIES.each do |prop|
         if prop[:is_controlled]
-          build_controlled_prop(index, prop)
+          index = build_controlled_prop(index, prop)
         else
           presenter_value = presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}"))
           @props << prop unless presenter_value.nil? || presenter_value.empty?
@@ -26,7 +26,7 @@ module OregonDigital
 
     def build_controlled_prop(index, prop)
       zipped = presenter.zipped_values(prop[:name])
-      return if zipped.nil? || zipped.empty?
+      return index if zipped.nil? || zipped.empty?
 
       prop[:indices] = {}
       zipped.each do |_value, uri|
@@ -34,6 +34,7 @@ module OregonDigital
         index += 1
       end
       @props << prop
+      index
     end
   end
 end
