@@ -8,6 +8,7 @@ module Hyrax
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
+    include OregonDigital::PresentsDataSources
     include OregonDigital::DownloadControllerBehavior
     prepend OregonDigital::WorksControllerBehavior
     include OregonDigital::WorkRelationPaginationBehavior
