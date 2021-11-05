@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-module Hyrax
+module OregonDigital
   # Builds displayed properties with citation indices
   module PresentsDataSources
     extend ActiveSupport::Concern
