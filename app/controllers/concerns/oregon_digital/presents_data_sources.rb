@@ -13,7 +13,7 @@ module OregonDigital
     end
 
     def build_display_properties
-      index = 0
+      index = 1
       Generic::ORDERED_PROPERTIES.each do |prop|
         if prop[:is_controlled]
           index = build_controlled_prop(index, prop)
