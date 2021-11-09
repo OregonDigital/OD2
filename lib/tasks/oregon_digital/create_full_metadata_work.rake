@@ -18,12 +18,13 @@ end
 def build_attributes
   generic_attributes = {}
   attrs.each_pair do |key, value|
+    default_value = key.include?('date') || key == 'issued' ?  '1993-12-31' : 'bacon'
     if value.nil?
-      generic_attributes[key] = 'bacon'
+      generic_attributes[key] = default_value
     elsif value.is_a?(Array) && !value.empty?
       generic_attributes["#{key}_attributes"] = nested_attributes(value.first)
     elsif value.is_a?(Array) && value.empty?
-      generic_attributes[key] = ['bacon']
+      generic_attributes[key] = [default_value]
     else
       generic_attributes[key] = value
     end
@@ -105,6 +106,7 @@ def attrs
     'is_part_of' => [],
     'is_version_of' => [],
     'relation' => [],
+    'related_url' => [],
     'workType' => ['http://opaquenamespace.org/ns/workType/AdviceofCharge'],
     'material' => [],
     'measurements' => [],
@@ -133,8 +135,8 @@ def attrs
     'copyright_claimant' => [],
     'rights_holder' => [],
     'use_restrictions' => [],
-    'oembed_url' => 'http://bacon',
     'original_filename' => nil,
+    'full_size_download_allowed' => 'https://opaquenamespace.org/ns/fullSizeDownloadAllowed/true',
     'access_restrictions' => ['http://opaquenamespace.org/ns/accessRestrictions/OSUrestricted'],
     'arranger' => ['http://id.loc.gov/authorities/names/no2010022998'],
     'artist' => ['http://vocab.getty.edu/ulan/500121373'],
