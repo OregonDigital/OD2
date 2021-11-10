@@ -5,7 +5,6 @@ module Hyrax
   class Admin::WorkflowsController < ApplicationController
     # OVERRIDE FROM HYRAX TO: add workflows catalog behavior to allow review queue to use catalog controller configuration
     include Hyrax::Admin::WorkflowsCatalogBehavior
-
     # END OVERRIDE
 
     before_action :ensure_authorized!
