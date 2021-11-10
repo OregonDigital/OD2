@@ -5,6 +5,7 @@ module Hyrax
   class Admin::WorkflowsController < ApplicationController
     # OVERRIDE FROM HYRAX TO: add workflows catalog behavior to allow review queue to use catalog controller configuration
     include Hyrax::Admin::WorkflowsCatalogBehavior
+
     # END OVERRIDE
 
     before_action :ensure_authorized!
@@ -14,6 +15,13 @@ module Hyrax
     # Works that are in this workflow state (see workflow json template) are excluded from the
     # status list and display in the "Published" tab
     self.deposited_workflow_state_name = 'deposited'
+
+    def self.configure_facets
+      configure_blacklight do |config|
+        config.add_facet_field 'depositor_ssim', limit: 5, label: 'Depositor'
+      end
+    end
+    configure_facets
 
     # rubocop:disable Metrics/AbcSize
     def index
