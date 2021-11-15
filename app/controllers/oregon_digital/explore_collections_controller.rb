@@ -71,11 +71,11 @@ module OregonDigital
     end
 
     def osu_restricted?(id)
-      !osu_items(id).empty? && current_ability.cannot?(:show, osu_items(id), visibility: 'osu')
+      !osu_items(id).empty? && current_ability.cannot?(:show, ActiveFedora::Base.find(osu_items(id).first.id), visibility: 'osu')
     end
 
     def uo_restricted?(id)
-      !uo_items(id).empty? && current_ability.cannot?(:show, uo_items(id), visibility: 'uo')
+      !uo_items(id).empty? && current_ability.cannot?(:show, ActiveFedora::Base.find(uo_items(id).first.id), visibility: 'uo')
     end
 
     def institution_restricted?(id)
