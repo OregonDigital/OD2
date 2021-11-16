@@ -31,6 +31,7 @@ module BlacklightIiifSearch
     # rubocop:disable Metrics/AbcSize
     def coordinates
       query.delete_suffix!('*')
+      query.downcase!
       return '' unless query
 
       # Attempt to read from extracted text first, if there's no bounding boxes or matching word move on
