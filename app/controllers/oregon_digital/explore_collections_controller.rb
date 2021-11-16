@@ -63,19 +63,23 @@ module OregonDigital
     end
 
     def osu_items(id)
-      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id} AND visibility_ssi:osu")
+      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id} AND visibility_ssi:osu").map do |hit|
+        SolrDocument.find(hit.id)
+      end
     end
 
     def uo_items(id)
-      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id} AND visibility_ssi:uo")
+      Hyrax::SolrService.query("member_of_collection_ids_ssim:#{id} AND visibility_ssi:uo").map do |hit|
+        SolrDocument.find(hit.id)
+      end
     end
 
     def osu_restricted?(id)
-      !osu_items(id).empty? && current_ability.cannot?(:show, ActiveFedora::Base.find(osu_items(id).first.id), visibility: 'osu')
+      !osu_items(id).empty? && current_ability.cannot?(:show, {:any => osu_items(id)}, visibility: 'osu')
     end
 
     def uo_restricted?(id)
-      !uo_items(id).empty? && current_ability.cannot?(:show, ActiveFedora::Base.find(uo_items(id).first.id), visibility: 'uo')
+      !uo_items(id).empty? && current_ability.cannot?(:show, {:any => uo_items(id)}, visibility: 'uo')
     end
 
     def institution_restricted?(id)
