@@ -58,8 +58,12 @@ module BlacklightIiifSearch
           words = text.css('word')
           # Create ExtractedWord objects out of the words
           words = words.map { |x| ExtractedWord.new(x) }
-          # Select only words that match the query and return an in-order array of ExtractedWords
-          words.select { |x| x.text.downcase.start_with? *query.split(' ') }
+          # Split on common word separaters (-:;,. ), match either word to query, return an in-order array of ExtractedWords
+          words.select do |word|
+            word.text.downcase.split(/[-:;,.\s]+/).map do |x|
+              x.start_with? *query.split(' ')
+            end.any?
+          end
         end
     end
 
@@ -74,8 +78,12 @@ module BlacklightIiifSearch
           words = hocr.css('.ocrx_word')
           # Create HocrWord objects out of the words
           words = words.map { |x| HocrWord.new(x, i) }
-          # Select only words that match the query and return an in-order array of HocrWord
-          words.select { |x| x.text.downcase.start_with? *query.split(' ') }
+          # Split on common word separaters (-:;,. ), match either word to query, return an in-order array of HocrWord
+          words.select do |word|
+            word.text.downcase.split(/[-:;,.\s]+/).map do |x|
+              x.start_with? *query.split(' ')
+            end.any?
+          end
         end.flatten
     end
 
@@ -115,12 +123,6 @@ module BlacklightIiifSearch
       def bbox
         @bbox ||= BoundingBox.new(nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' '))
       end
-
-      # Pages are ancestors to the word and the page number is of the form 'page_#' in the id
-      # Example element: <div class='ocr_page' id='page_1' title='image "/tmp/od220201217-1-1aadfbx.png"; bbox 0 0 2550 3300; ppageno 0'>
-      def page
-        @page ||= nokogiri_element.ancestors('.ocr_page').attribute('id').value.split('_')[1].to_i - 1
-      end
     end
 
     # Implementation of Word for extracted text
@@ -140,6 +142,16 @@ module BlacklightIiifSearch
         @bbox ||= BoundingBox.new(coords)
       end
       # rubocop:enable Metrics/AbcSize
+
+      # Pages are in-order elements with word children
+      # Example element:
+      # <page width="612.000000" height="792.000000">
+      #   <word xMin="494.880000" yMin="36.049920" xMax="532.206240" yMax="49.529760">Beskow,</word>
+      #   <word xMin="534.720000" yMin="36.049920" xMax="540.317280" yMax="49.529760">5</word>
+      #   <word xMin="108.000000" yMin="72.588000" xMax="129.468000" yMax="85.872000">This</word>...
+      def page
+        @page ||= nokogiri_element.ancestors('page').xpath('preceding-sibling::page').count
+      end
     end
   end
 end
