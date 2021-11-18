@@ -67,16 +67,16 @@ module BlacklightIiifSearch
     # @return [HocrWord]
     def hocr_words
       @hocr_words ||=
-        begin
+        document['hocr_content_tsimv'].map.with_index do |doc, i|
           # Begin by grabbing the output of `tesseract hocr`
-          hocr = Nokogiri::HTML(document['hocr_content_tsimv'][0])
+          hocr = Nokogiri::HTML(doc)
           # Find each individual word
           words = hocr.css('.ocrx_word')
           # Create HocrWord objects out of the words
-          words = words.map { |x| HocrWord.new(x) }
+          words = words.map { |x| HocrWord.new(x, i) }
           # Select only words that match the query and return an in-order array of HocrWord
           words.select { |x| x.text.downcase.start_with? *query.split(' ') }
-        end
+        end.flatten
     end
 
     # A single search result word and bounding box
@@ -105,6 +105,11 @@ module BlacklightIiifSearch
 
     # Implementation of Word for hOCR data
     class HocrWord < Word
+      attr_reader :page
+      def initialize(nokogiri_element, page)
+        @page = page
+        super(nokogiri_element)
+      end
       # Bounding box information is found inside the title attribute of hOCR elements
       # Example element: <span class='ocrx_word' id='word_1_3' title='bbox 452 312 538 348; x_wconf 96'>This</span>
       def bbox
@@ -135,16 +140,6 @@ module BlacklightIiifSearch
         @bbox ||= BoundingBox.new(coords)
       end
       # rubocop:enable Metrics/AbcSize
-
-      # Pages are in-order elements with word children
-      # Example element:
-      # <page width="612.000000" height="792.000000">
-      #   <word xMin="494.880000" yMin="36.049920" xMax="532.206240" yMax="49.529760">Beskow,</word>
-      #   <word xMin="534.720000" yMin="36.049920" xMax="540.317280" yMax="49.529760">5</word>
-      #   <word xMin="108.000000" yMin="72.588000" xMax="129.468000" yMax="85.872000">This</word>...
-      def page
-        @page ||= nokogiri_element.ancestors('page').xpath('preceding-sibling::page').count
-      end
     end
   end
 end
