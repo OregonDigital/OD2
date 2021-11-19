@@ -68,8 +68,18 @@ module BlacklightIiifSearch
         end
     end
 
+    # Convert extracted word XML to ExtractedWord objects
+    # @return [ExtractedWord]
+    def to_extracted_words(nokogiri_element)
+      # Find each individual word
+      words = nokogiri_element.css('word')
+      # Create ExtractedWord objects out of the words
+      words.map { |x| ExtractedWord.new(x) }
+    end
+
     # Search all OCR'd words to find matches
     # @return [HocrWord]
+    # rubocop:disable Metrics/AbcSize
     def hocr_words
       @hocr_words ||=
         document['hocr_content_tsimv'].map.with_index do |doc, i|
@@ -87,6 +97,16 @@ module BlacklightIiifSearch
             ExtractedWord.new(pos)
           end
         end.flatten
+    end
+    # rubocop:enable Metrics/AbcSize
+
+    # Convert OCR'd XML to HocrWord objects
+    # @return [HocrWord]
+    def to_hocr_words(nokogiri_element, page)
+      # Find each individual word
+      words = nokogiri_element.css('.ocrx_word')
+      # Create HocrWord objects out of the words
+      words.map { |x| HocrWord.new(x, page) }
     end
 
     # A single search result word and bounding box
@@ -120,6 +140,7 @@ module BlacklightIiifSearch
         @page = page
         super(nokogiri_element)
       end
+
       # Bounding box information is found inside the title attribute of hOCR elements
       # Example element: <span class='ocrx_word' id='word_1_3' title='bbox 452 312 538 348; x_wconf 96'>This</span>
       def bbox
