@@ -28,7 +28,30 @@ module OregonDigital
 
     def create_derivatives
       result = processor.run!
-      file_set.hocr_content << result.hocr_content
+      words_hash = {}
+
+      # Create a hashmap of words and their bounding boxes
+      # hOCR is returned as an array of xml docs ordered by page. For each doc find all the words and capture the page number
+      page_count = result.hocr_content.count
+      result.hocr_content.each_with_index do |doc, page|
+        # Begin by find all the individual words on the page
+        words = Nokogiri::HTML(doc).css('.ocrx_word')
+        word_count = words.count
+        # For each word, parse out the bbox position and downcased+stemmed word
+        words.each_with_index do |nokogiri_element, word|
+          Rails.logger.debug("word #{word}/#{word_count} of page #{page}/#{page_count}")
+          pos = nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' ')
+          words_hash[nokogiri_element.text.downcase.stem] = "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{page}"
+        end
+      end
+
+      # Serialize our hashmap into a solrfield
+      solr_doc = []
+      words_hash.each do |word,coords|
+        solr_doc << "#{word}:#{coords.join(';')}"
+      end
+
+      file_set.hocr_content << solr_doc
       file_set.ocr_content << result.ocr_content
     end
 

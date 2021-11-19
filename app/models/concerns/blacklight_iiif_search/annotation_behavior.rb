@@ -20,7 +20,7 @@ module BlacklightIiifSearch
     # Get the parent manifest URL
     def parent_url
       # Get the manifest URL for a Generic work, and sub in the correct model name
-      controller.manifest_hyrax_generic_url(parent_document[:id]).gsub(/\?locale=.*/, '').gsub(/generic/, parent_document['has_model_ssim'][0].downcase)
+      controller.manifest_hyrax_generic_url(parent_document[:id]).gsub(/\?locale=.*/, '').gsub(/generic/, parent_document['has_model_ssim'][0].downcase).sub('localhost', 'test.library.oregonstate.edu')
     end
 
     ##
@@ -53,16 +53,17 @@ module BlacklightIiifSearch
       @extracted_words ||=
         begin
           # Begin by grabbing the output of `pdftotext -bbox`
-          text = Nokogiri::HTML(document['all_text_bbox_tsimv'][0])
+          text = document['all_text_bbox_tsimv'].select do |val|
+            val.start_with? *query.split(' ')
+          end
           # Find each individual word
-          words = text.css('word')
+          bboxes = text.map do |val|
+            val.split(':')[1].split(';')
+          end.flatten
           # Create ExtractedWord objects out of the words
-          words = words.map { |x| ExtractedWord.new(x) }
-          # Split on common word separaters (-:;,. ), match either word to query, return an in-order array of ExtractedWords
-          words.select do |word|
-            word.text.downcase.split(/[-:;,.\s]+/).map do |x|
-              x.start_with? *query.split(' ')
-            end.any?
+          words = bboxes.map do |box|
+            pos = box.split(',').map(&:to_f)
+            ExtractedWord.new(pos)
           end
         end
     end
@@ -73,16 +74,17 @@ module BlacklightIiifSearch
       @hocr_words ||=
         document['hocr_content_tsimv'].map.with_index do |doc, i|
           # Begin by grabbing the output of `tesseract hocr`
-          hocr = Nokogiri::HTML(doc)
+          text = document['all_text_bbox_tsimv'].select do |val|
+            val.start_with? *query.split(' ')
+          end
           # Find each individual word
-          words = hocr.css('.ocrx_word')
+          bboxes = text.map do |val|
+            val.split(':')[1].split(';')
+          end.flatten
           # Create HocrWord objects out of the words
-          words = words.map { |x| HocrWord.new(x, i) }
-          # Split on common word separaters (-:;,. ), match either word to query, return an in-order array of HocrWord
-          words.select do |word|
-            word.text.downcase.split(/[-:;,.\s]+/).map do |x|
-              x.start_with? *query.split(' ')
-            end.any?
+          words = bboxes.map do |box|
+            pos = box.split(',').map(&:to_f)
+            ExtractedWord.new(pos)
           end
         end.flatten
     end
@@ -131,13 +133,12 @@ module BlacklightIiifSearch
       # Example element: <word xMin="108.000000" yMin="72.588000" xMax="129.468000" yMax="85.872000">This</word>
       # rubocop:disable Metrics/AbcSize
       def bbox
-        scale_factor = 4.185
-        x = nokogiri_element.attributes['xmin'].value.to_i
-        y = nokogiri_element.attributes['ymin'].value.to_i
-        x2 = nokogiri_element.attributes['xmax'].value.to_i
-        y2 = nokogiri_element.attributes['ymax'].value.to_i
+        x = nokogiri_element[0]
+        y = nokogiri_element[1]
+        x2 = nokogiri_element[2]
+        y2 = nokogiri_element[3]
 
-        coords = [x, y, x2, y2].map { |coord| coord * scale_factor }
+        coords = [x, y, x2, y2]
 
         @bbox ||= BoundingBox.new(coords)
       end
@@ -150,7 +151,7 @@ module BlacklightIiifSearch
       #   <word xMin="534.720000" yMin="36.049920" xMax="540.317280" yMax="49.529760">5</word>
       #   <word xMin="108.000000" yMin="72.588000" xMax="129.468000" yMax="85.872000">This</word>...
       def page
-        @page ||= nokogiri_element.ancestors('page').xpath('preceding-sibling::page').count
+        @page ||= nokogiri_element[4].to_i
       end
     end
   end
