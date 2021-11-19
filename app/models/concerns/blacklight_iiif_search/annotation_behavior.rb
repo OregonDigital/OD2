@@ -54,37 +54,51 @@ module BlacklightIiifSearch
         begin
           # Begin by grabbing the output of `pdftotext -bbox`
           text = Nokogiri::HTML(document['all_text_bbox_tsimv'][0])
-          # Find each individual word
-          words = text.css('word')
-          # Create ExtractedWord objects out of the words
-          words = words.map { |x| ExtractedWord.new(x) }
+          # Get ExtractedWorks
+          words = to_extracted_words(text)
           # Split on common word separaters (-:;,. ), match either word to query, return an in-order array of ExtractedWords
           words.select do |word|
             word.text.downcase.split(/[-:;,.\s]+/).map do |x|
-              x.start_with? *query.split(' ')
+              x.start_with?(*query.split(' '))
             end.any?
           end
         end
     end
 
+    # Convert extracted word XML to ExtractedWord objects
+    # @return [ExtractedWord]
+    def to_extracted_words(nokogiri_element)
+      # Find each individual word
+      words = nokogiri_element.css('word')
+      # Create ExtractedWord objects out of the words
+      words.map { |x| ExtractedWord.new(x) }
+    end
+
     # Search all OCR'd words to find matches
     # @return [HocrWord]
+    # rubocop:disable Metrics/AbcSize
     def hocr_words
       @hocr_words ||=
         document['hocr_content_tsimv'].map.with_index do |doc, i|
           # Begin by grabbing the output of `tesseract hocr`
-          hocr = Nokogiri::HTML(doc)
-          # Find each individual word
-          words = hocr.css('.ocrx_word')
-          # Create HocrWord objects out of the words
-          words = words.map { |x| HocrWord.new(x, i) }
+          words = to_hocr_words(Nokogiri::HTML(doc), i)
           # Split on common word separaters (-:;,. ), match either word to query, return an in-order array of HocrWord
           words.select do |word|
             word.text.downcase.split(/[-:;,.\s]+/).map do |x|
-              x.start_with? *query.split(' ')
+              x.start_with?(*query.split(' '))
             end.any?
           end
         end.flatten
+    end
+    # rubocop:enable Metrics/AbcSize
+
+    # Convert OCR'd XML to HocrWord objects
+    # @return [HocrWord]
+    def to_hocr_words(nokogiri_element, page)
+      # Find each individual word
+      words = nokogiri_element.css('.ocrx_word')
+      # Create HocrWord objects out of the words
+      words.map { |x| HocrWord.new(x, page) }
     end
 
     # A single search result word and bounding box
@@ -118,6 +132,7 @@ module BlacklightIiifSearch
         @page = page
         super(nokogiri_element)
       end
+
       # Bounding box information is found inside the title attribute of hOCR elements
       # Example element: <span class='ocrx_word' id='word_1_3' title='bbox 452 312 538 348; x_wconf 96'>This</span>
       def bbox
