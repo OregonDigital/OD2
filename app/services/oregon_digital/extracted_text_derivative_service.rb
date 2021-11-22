@@ -36,7 +36,7 @@ module OregonDigital
         words = doc.css('word')
         word_count = words.count
         words.each_with_index do |nokogiri_element, word|
-          Rails.logger.debug("word #{word}/#{word_count} on page #{page}/#{page_count}")
+          Rails.logger.debug("word #{word}/#{word_count-1} on page #{page}/#{page_count-1}") if word % 10 == 0
 
           x = nokogiri_element.attributes['xmin'].value.to_i
           y = nokogiri_element.attributes['ymin'].value.to_i
