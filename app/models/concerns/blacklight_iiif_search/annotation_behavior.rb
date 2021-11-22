@@ -20,7 +20,7 @@ module BlacklightIiifSearch
     # Get the parent manifest URL
     def parent_url
       # Get the manifest URL for a Generic work, and sub in the correct model name
-      controller.manifest_hyrax_generic_url(parent_document[:id]).gsub(/\?locale=.*/, '').gsub(/generic/, parent_document['has_model_ssim'][0].downcase).sub('localhost', 'test.library.oregonstate.edu')
+      controller.manifest_hyrax_generic_url(parent_document[:id]).gsub(/\?locale=.*/, '').gsub(/generic/, parent_document['has_model_ssim'][0].downcase)
     end
 
     ##
