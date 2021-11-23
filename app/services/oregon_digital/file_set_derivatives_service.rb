@@ -77,7 +77,7 @@ module OregonDigital
       end
       # Serialize the hOCR hash into a solrfield
       solr_doc = []
-      file_set.hocr_content.each do |word, coords|
+      file_set.hocr_content&.each do |word, coords|
         solr_doc << "#{word}:#{coords.join(';')}"
       end
 

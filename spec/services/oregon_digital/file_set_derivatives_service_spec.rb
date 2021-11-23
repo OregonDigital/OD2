@@ -192,7 +192,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       allow(service).to receive(:create_thumbnail)
       allow(service).to receive(:extract_full_text)
       allow(service).to receive(:extract_text_bbox_derivative_service).and_return service_double
-      allow(service).to receive(:hocr_derivative_service).and_return service_double
+      allow(service).to receive(:hocr_derivative_service).with(anything, anything).and_return service_double
       allow(service).to receive(:manual_convert)
       allow(service).to receive(:create_zoomable_page)
 
@@ -227,7 +227,9 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
     end
 
     it 'generates OCR for each page' do
-      expect(service).to receive(:hocr_derivative_service).with(tmp_png).exactly(pages.count).times
+      pages.each_with_index do |_, i|
+        expect(service).to receive(:hocr_derivative_service).with(tmp_png, i)
+      end
 
       service.create_pdf_derivatives(bogus_pdf)
     end

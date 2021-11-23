@@ -5,7 +5,7 @@ module OregonDigital
   class HocrDerivativeService
     # Build HocrDerivativeService object
     class Factory
-      attr_reader :file_set, :filename, :processor_factory
+      attr_reader :file_set, :filename, :pagenum, :processor_factory
       def initialize(file_set:, filename:, pagenum:, processor_factory: TesseractProcessor)
         @file_set = file_set
         @filename = filename
