@@ -23,20 +23,21 @@ module OregonDigital
       @processor = processor_factory.new(file_path: filename)
     end
 
+    # Extract PDF text and push all words into a hash
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def create_derivatives
       result = processor.run!
       words_hash = {}
 
       pages = Nokogiri::HTML(result.bbox_content).css('page')
       page_count = pages.count
-      word_count = Nokogiri::HTML(result.bbox_content).css('word')
 
       pages.each_with_index do |doc, page|
-        # page = nokogiri_element.ancestors('page').xpath('preceding-sibling::page').count
         words = doc.css('word')
         word_count = words.count
         words.each_with_index do |nokogiri_element, word|
-          Rails.logger.debug("word #{word}/#{word_count-1} on page #{page}/#{page_count-1}") if word % 10 == 0
+          Rails.logger.debug("word #{word}/#{word_count - 1} on page #{page}/#{page_count - 1}") if (word % 10).zero?
 
           x = nokogiri_element.attributes['xmin'].value.to_i
           y = nokogiri_element.attributes['ymin'].value.to_i
@@ -52,13 +53,14 @@ module OregonDigital
       end
 
       solr_doc = []
-      words_hash.each do |word,coords|
+      words_hash.each do |word, coords|
         solr_doc << "#{word}:#{coords.join(';')}"
       end
 
       file_set.bbox_content = solr_doc
-      # file_set.bbox_content = [result.bbox_content]
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     # No cleanup necessary - all this does is set a property on FileSet.
     def cleanup_derivatives; end

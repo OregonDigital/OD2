@@ -60,13 +60,15 @@ module OregonDigital
     end
 
     # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
       extract_text_bbox_derivative_service(filename).create_derivatives
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
+      # Build a hash of words temporarily in file_set.hocr_content
       0.upto(page_count - 1) do |pagenum|
-        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count-1}")
+        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}")
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
           hocr_derivative_service(out_path, pagenum).create_derivatives
@@ -75,13 +77,14 @@ module OregonDigital
       end
       # Serialize the hOCR hash into a solrfield
       solr_doc = []
-      file_set.hocr_content.each do |word,coords|
+      file_set.hocr_content.each do |word, coords|
         solr_doc << "#{word}:#{coords.join(';')}"
       end
 
       file_set.hocr_content = solr_doc
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     def create_thumbnail(filename)
       OregonDigital::Derivatives::Image::GMRunner.create(
