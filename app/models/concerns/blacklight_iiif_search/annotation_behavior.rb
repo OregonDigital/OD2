@@ -34,90 +34,48 @@ module BlacklightIiifSearch
       query.downcase!
       return '' unless query
 
-      # Attempt to read from extracted text first, if there's no bounding boxes or matching word move on
-      if document['all_text_bbox_tsimv'] && (word = extracted_words[hl_index])
-        "#{word.page}#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
-      # Next try OCRd text, if there's no matching words move on
-      elsif (word = hocr_words[hl_index])
-        "#{word.page}#xywh=#{word.bbox.x},#{word.bbox.y},#{word.bbox.w},#{word.bbox.h}"
-      # There were no matching words in extracted or OCRd text, there's no matches.
-      else
-        '0#xywh=0,0,0,0'
-      end
+      # Attempt to grab extracted text if it exists
+      @extracted_words ||= find_words('all_text_bbox_tsimv')
+      # hOCR text is guaranteed to exist because it's automatically part of the derivative process
+      @hocr_words ||= find_words('hocr_content_tsimv')
+
+      # Use extracted words when possible, but fall back to hOCR
+      word = @hocr_words[hl_index]
+      word = @extracted_words[hl_index] if @extracted_words && @extracted_words[hl_index]
+
+      # Write out bbox info
+      word ? "#{word.page}#xywh=#{word.bbox}" : '0#xywh=0,0,0,0'
+      # There were no matching words in extracted or OCRd text, write out an empty result.
     end
     # rubocop:enable Metrics/AbcSize
 
-    # Search all extracted words to find matches
-    # @return [ExtractedWord]
-    def extracted_words
-      @extracted_words ||=
-        begin
-          # Begin by grabbing the output of `pdftotext -bbox`
-          text = document['all_text_bbox_tsimv'].select do |val|
-            val.start_with? *query.split(' ')
-          end
-          # Find each individual word
-          bboxes = text.map do |val|
-            val.split(':')[1].split(';')
-          end.flatten
-          # Create ExtractedWord objects out of the words
-          words = bboxes.map do |box|
-            pos = box.split(',').map(&:to_f)
-            ExtractedWord.new(pos)
-          end
-        end
-    end
-
-    # Convert extracted word XML to ExtractedWord objects
-    # @return [ExtractedWord]
-    def to_extracted_words(nokogiri_element)
+    def find_words(solr_field)
+      # Begin by grabbing the output of `pdftotext -bbox`
+      text = document[solr_field].select { |val| val.start_with?(*query.split(' ')) }
       # Find each individual word
-      words = nokogiri_element.css('word')
+      bboxes = text.map { |val| val.split(':')[1].split(';') }.flatten
       # Create ExtractedWord objects out of the words
-      words.map { |x| ExtractedWord.new(x) }
-    end
-
-    # Search all OCR'd words to find matches
-    # @return [HocrWord]
-    # rubocop:disable Metrics/AbcSize
-    def hocr_words
-      @hocr_words ||=
-        document['hocr_content_tsimv'].map.with_index do |doc, i|
-          # Begin by grabbing the output of `tesseract hocr`
-          text = document['all_text_bbox_tsimv'].select do |val|
-            val.start_with? *query.split(' ')
-          end
-          # Find each individual word
-          bboxes = text.map do |val|
-            val.split(':')[1].split(';')
-          end.flatten
-          # Create HocrWord objects out of the words
-          words = bboxes.map do |box|
-            pos = box.split(',').map(&:to_f)
-            ExtractedWord.new(pos)
-          end
-        end.flatten
-    end
-    # rubocop:enable Metrics/AbcSize
-
-    # Convert OCR'd XML to HocrWord objects
-    # @return [HocrWord]
-    def to_hocr_words(nokogiri_element, page)
-      # Find each individual word
-      words = nokogiri_element.css('.ocrx_word')
-      # Create HocrWord objects out of the words
-      words.map { |x| HocrWord.new(x, page) }
+      bboxes.map do |box|
+        Word.new(box.split(',').map(&:to_f))
+      end
     end
 
     # A single search result word and bounding box
     class Word
-      attr_reader :nokogiri_element
-      def initialize(nokogiri_element)
-        @nokogiri_element = nokogiri_element
+      attr_reader :bbox_coords
+      def initialize(bbox_coords)
+        @bbox_coords = bbox_coords
       end
 
-      def text
-        @text ||= nokogiri_element.text
+      # Bounding box information is sent in as [x, y, x2, y2, page], so just pass the coords to a BoundingBox
+      def bbox
+        coords = [bbox_coords[0], bbox_coords[1], bbox_coords[2], bbox_coords[3]]
+
+        @bbox ||= BoundingBox.new(coords)
+      end
+
+      def page
+        @page ||= bbox_coords[4].to_i
       end
 
       # Bounding box to a word
@@ -130,49 +88,10 @@ module BlacklightIiifSearch
           @w = box_array[2].to_i - @x
           @h = box_array[3].to_i - @y
         end
-      end
-    end
 
-    # Implementation of Word for hOCR data
-    class HocrWord < Word
-      attr_reader :page
-      def initialize(nokogiri_element, page)
-        @page = page
-        super(nokogiri_element)
-      end
-
-      # Bounding box information is found inside the title attribute of hOCR elements
-      # Example element: <span class='ocrx_word' id='word_1_3' title='bbox 452 312 538 348; x_wconf 96'>This</span>
-      def bbox
-        @bbox ||= BoundingBox.new(nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' '))
-      end
-    end
-
-    # Implementation of Word for extracted text
-    class ExtractedWord < Word
-      # Bounding box information is found inside custom attributes of the word element
-      # Example element: <word xMin="108.000000" yMin="72.588000" xMax="129.468000" yMax="85.872000">This</word>
-      # rubocop:disable Metrics/AbcSize
-      def bbox
-        x = nokogiri_element[0]
-        y = nokogiri_element[1]
-        x2 = nokogiri_element[2]
-        y2 = nokogiri_element[3]
-
-        coords = [x, y, x2, y2]
-
-        @bbox ||= BoundingBox.new(coords)
-      end
-      # rubocop:enable Metrics/AbcSize
-
-      # Pages are in-order elements with word children
-      # Example element:
-      # <page width="612.000000" height="792.000000">
-      #   <word xMin="494.880000" yMin="36.049920" xMax="532.206240" yMax="49.529760">Beskow,</word>
-      #   <word xMin="534.720000" yMin="36.049920" xMax="540.317280" yMax="49.529760">5</word>
-      #   <word xMin="108.000000" yMin="72.588000" xMax="129.468000" yMax="85.872000">This</word>...
-      def page
-        @page ||= nokogiri_element[4].to_i
+        def to_s
+          "#{x},#{y},#{w},#{h}"
+        end
       end
     end
   end
