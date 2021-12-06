@@ -5,32 +5,53 @@ module OregonDigital
   class HocrDerivativeService
     # Build HocrDerivativeService object
     class Factory
-      attr_reader :file_set, :filename, :processor_factory
-      def initialize(file_set:, filename:, processor_factory: TesseractProcessor)
+      attr_reader :file_set, :filename, :pagenum, :processor_factory
+      def initialize(file_set:, filename:, pagenum:, processor_factory: TesseractProcessor)
         @file_set = file_set
         @filename = filename
+        @pagenum = pagenum
         @processor_factory = processor_factory
       end
 
       def new
-        HocrDerivativeService.new(file_set: file_set, filename: filename, processor_factory: processor_factory)
+        HocrDerivativeService.new(file_set: file_set, filename: filename, pagenum: pagenum, processor_factory: processor_factory)
       end
     end
 
     attr_reader :file_set, :processor
-    def initialize(file_set:, filename:, processor_factory:)
+    def initialize(file_set:, filename:, pagenum:, processor_factory:)
       @file_set = file_set
+      @pagenum = pagenum
       @processor = processor_factory.new(ocr_language: 'eng', file_path: filename)
 
       @file_set.ocr_content = [] if @file_set.ocr_content.nil?
-      @file_set.hocr_content = [] if @file_set.hocr_content.nil?
+      @file_set.hocr_content = {} if @file_set.hocr_content.nil?
     end
 
+    # OCR text and push all words into a hash, which will be serialized later in OregonDigital::FileSetDerivativesService
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def create_derivatives
       result = processor.run!
-      file_set.hocr_content << result.hocr_content
-      file_set.ocr_content << result.ocr_content
+      @file_set.hocr_content ||= {}
+      words = Nokogiri::HTML(result.hocr_content).css('.ocrx_word')
+
+      # Create a hash of words and their bounding boxes
+      # hOCR is returned as an xml doc string for the current page
+      # For each word on the page parse out the bbox position and downcased+stemmed word
+      word_count = words.count
+      words.each_with_index do |nokogiri_element, word|
+        Rails.logger.debug("word #{word}/#{word_count}") if (word % 10).zero?
+        coords = nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' ')
+
+        @file_set.hocr_content[nokogiri_element.text.downcase.stem] ||= []
+        @file_set.hocr_content[nokogiri_element.text.downcase.stem] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{@pagenum}"
+      end
+
+      @file_set.ocr_content << result.ocr_content
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     # No cleanup necessary - all this does is set a property on FileSet.
     def cleanup_derivatives; end
