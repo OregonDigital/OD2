@@ -16,12 +16,8 @@
                   <%= hidden_field_tag :search_field, 'all_fields', id: 'masthead_search_field' %>
                   <div class="form-group">
 
-                    <label class="sr-only" for="masthead-search-field-header">
-                      <%= t("hyrax.search.form.q.label", application_name: application_name) %>
-                    </label>
-
                     <div class="input-group">
-                      <label class="sr-only" for="masthead-search-field-header">Search Oregon Digital</label>
+                      <label class="sr-only" for="masthead-search-field-header"><%= t("hyrax.search.form.q.label", application_name: application_name) %></label>
                       <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control", id: "masthead-search-field-header", title: "Masthead search field", placeholder: "Search Oregon Digital" %>
                       <button type="submit" class="" id="masthead-search-submit-header">
                         <i class="fa fa-search"></i>
