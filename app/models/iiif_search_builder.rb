@@ -20,5 +20,7 @@ class IiifSearchBuilder < Blacklight::SearchBuilder
     solr_parameters[:hl] = true
     solr_parameters[:'hl.fl'] = blacklight_config.iiif_search[:full_text_field]
     solr_parameters[:'hl.snippets'] = 10_000
+    solr_parameters[:'hl.fragsize'] = solr_parameters[:q].split(' ').map(&:length).max
+    solr_parameters[:'hl.maxAnalyzedChars'] = -1
   end
 end

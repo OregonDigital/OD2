@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe OregonDigital::HocrDerivativeService do
-  let(:derivative_service) do
-    OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: file_path, processor_factory: processor_factory)
+  let(:service) do
+    OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: file_path, pagenum: 0, processor_factory: processor_factory).new
   end
   let(:processor_factory) { OregonDigital::HocrDerivativeService::TesseractProcessor }
   let(:file_path) { Rails.root.join('spec', 'fixtures', 'test.jpg') }
@@ -13,7 +13,6 @@ RSpec.describe OregonDigital::HocrDerivativeService do
     context 'with a pdf source' do
       let(:hocr_content) { File.read(Rails.root.join('spec', 'fixtures', 'test.hocr')) }
       let(:ocr_content) { File.read(Rails.root.join('spec', 'fixtures', 'test.ocr')) }
-      let(:service) { derivative_service.new }
 
       before do
         processor = processor_factory.new(ocr_language: 'eng', file_path: file_path)
@@ -33,7 +32,7 @@ RSpec.describe OregonDigital::HocrDerivativeService do
       end
 
       it 'returns the correct hOCR content' do
-        expect(file_set.hocr_content.first).to eq hocr_content
+        expect(file_set.hocr_content.first).to eq ['youv', ['307,20,493,77,0']]
       end
 
       it 'returns the correct OCR content' do

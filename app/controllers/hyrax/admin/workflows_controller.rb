@@ -15,6 +15,13 @@ module Hyrax
     # status list and display in the "Published" tab
     self.deposited_workflow_state_name = 'deposited'
 
+    def self.configure_facets
+      configure_blacklight do |config|
+        config.add_facet_field 'depositor_ssim', limit: 5, label: 'Depositor'
+      end
+    end
+    configure_facets
+
     # rubocop:disable Metrics/AbcSize
     def index
       add_breadcrumb t(:'hyrax.controls.home'), root_path
