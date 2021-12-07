@@ -1,9 +1,9 @@
 function toggleCopied(element) {
-  $(element.classList.value).attr("title", "Copied!");
-  $(element.classList.value).attr("data-original-title", "Copied");
-  setTimeout(stopTimer(element),15000);
+  $(element).attr("title", "Copied!");
+  $(element).attr("data-original-title", "Copied");
+  setTimeout(stopTimer,10000, element);
 }
 function stopTimer(element) {
-  $(element.classList.value).attr("data-original-title", "Copy text to clipboard");
-  $(element.classList.value).attr("title", "Copy text to clipboard");
+  $(element).attr("data-original-title", "Copy text to clipboard");
+  $(element).attr("title", "Copy text to clipboard");
 }
