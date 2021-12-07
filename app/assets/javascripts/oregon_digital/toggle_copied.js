@@ -1,9 +1,9 @@
-function toggleCopied() {
-  $(".share-button-copy").attr("title", "Copied!");
-  $(".share-button-copy").attr("data-original-title", "Copied");
-  setTimeout(stopTimer,5000);
+function toggleCopied(element) {
+  $(element.classList.value).attr("title", "Copied!");
+  $(element.classList.value).attr("data-original-title", "Copied");
+  setTimeout(stopTimer(element),15000);
 }
-function stopTimer () {
-  $(".share-button-copy").attr("data-original-title", "Copy text to clipboard");
-  $(".share-button-copy").attr("title", "Copy text to clipboard");
+function stopTimer(element) {
+  $(element.classList.value).attr("data-original-title", "Copy text to clipboard");
+  $(element.classList.value).attr("title", "Copy text to clipboard");
 }
