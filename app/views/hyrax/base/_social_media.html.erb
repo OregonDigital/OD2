@@ -13,9 +13,9 @@
   <%= link_to "https://twitter.com/intent/tweet/?#{{text: page_title, url: share_url}.to_param}", class: 'share-button share-button-twitter', target: '_blank', rel: 'noopener noreferrer', title: t('hyrax.base.social_media.twitter'), 'aria-label': t('hyrax.base.social_media.twitter') do %>
     <i class="fa fa-twitter"></i>
   <% end %>
-
-  <!-- Sharingbutton Copy Link -->
-  <button class="copy-single-use-link share-button share-button-copy" data-clipboard-action="copy" data-clipboard-text="<%= share_url %>" data-toggle="tooltip" data-placement="bottom" title="Copy link to clipboard" onclick='$(this).attr("title", "Copied!").tooltip("_fixTitle").tooltip("show").attr("title", "Copy to clipboard").tooltip("_fixTitle");'>
-    <i class="fa fa-link"></i>
+  
+  <input id="list-<%= share_url.split("/").last.split("?").first %>-share-link" value="<%= share_url %>" readonly aria-label="Copy text to Clipboard">
+  <button class="copy-single-use-link btn btn-success" data-clipboard-target="#list-<%= share_url.split("/").last.split("?").first %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
+    Copy
   </button>
 </div>
