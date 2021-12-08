@@ -1,13 +1,13 @@
 <table id="documents-table" class="table-hover">
   <thead>
     <tr>
-      <th class="h4">Collection Name</th>
+      <th class="h4" scope="col">Collection Name</th>
       <% if controller.tab != controller.class::TABS[:my] %>
-      <th class="h4">Institution</th>
+      <th class="h4" scope="col">Institution</th>
       <% end %>
-      <th class="h4">Items</th>
+      <th class="h4" scope="col">Items</th>
       <% if controller.tab == controller.class::TABS[:my] %>
-      <th class="h4"><span class="sr-only">Actions</span></th>
+      <th class="h4" scope="col"><span class="sr-only">Actions</span></th>
       <% end %>
     </tr>
   </thead>
