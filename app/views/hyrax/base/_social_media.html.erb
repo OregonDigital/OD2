@@ -14,8 +14,8 @@
     <i class="fa fa-twitter"></i>
   <% end %>
   
-  <input id="list-<%= share_url.split("/").last.split("?").first %>-share-link" value="<%= share_url %>" readonly>
-  <button class="copy-single-use-link btn btn-success" data-clipboard-target="#list-<%= share_url.split("/").last.split("?").first %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!" onclick="toggleCopied(this)" aria-label="Copy Link to Clipboard">
+  <input id="list-<%= share_url.split("/").last.split("?").first %>-share-link" value="<%= share_url %>" readonly aria-label="Copy Link to Clipboard">
+  <button class="copy-single-use-link btn btn-success" data-clipboard-target="#list-<%= share_url.split("/").last.split("?").first %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!" onclick="toggleCopied(this)">
     Copy
   </button>
 </div>
