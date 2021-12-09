@@ -24,6 +24,7 @@
         <div class="triangle_down"></div>
       </div>
     </li>
+    <% unless current_user.nil? %>
     <li class="<%= 'active' if tab == controller.class::TABS[:my] %>">
       <div class="stacker-container">
         <%= link_to my_explore_collections_path, class: 'btn btn-outline hidden-xs' do %>
@@ -33,5 +34,6 @@
         <div class="triangle_down"></div>
       </div>
     </li>
+    <% end %>
   </ul>
 </div>
