@@ -1,3 +1,5 @@
+<% provide :page_title, construct_page_title(controller.page_title) if controller.respond_to? :page_title %>
+<% provide :page_title, construct_page_title(@presenter.page_title) if @presenter.respond_to? :page_title %>
 <!-- OVERRIDDEN FROM HYRAX TO ALLOW OUR FILES TO HOOK INTO THE MASTHEAD AND USER UTIL LINKS -->
 <!DOCTYPE html>
 <html lang="<%= I18n.locale.to_s %>" prefix="og:http://ogp.me/ns#">
@@ -24,7 +26,7 @@
         </div>
       <% end %>
 
-        <div name="skip-to-content" id="skip-to-content"></div>
+        <div id="skip-to-content"></div>
         <%= content_for?(:content) ? yield(:content) : yield %>
 
     </div><!-- /#content-wrapper -->

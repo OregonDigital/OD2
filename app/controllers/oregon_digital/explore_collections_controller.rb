@@ -17,6 +17,10 @@ module OregonDigital
       super + ['catalog']
     end
 
+    def page_title
+      "#{@tab.titleize} - Explore Collections"
+    end
+
     configure_blacklight do |config|
       config.view.gallery.if = false
       config.view.list.if = false
