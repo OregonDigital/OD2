@@ -18,7 +18,7 @@ module OregonDigital
     end
 
     def page_title
-      "#{"Empty " if @document_list.empty? }Search Results | #{@tab.titleize} Explore Collections"
+      "#{'Empty ' if @document_list.empty?}Search Results | #{@tab.titleize} Explore Collections"
     end
 
     configure_blacklight do |config|
