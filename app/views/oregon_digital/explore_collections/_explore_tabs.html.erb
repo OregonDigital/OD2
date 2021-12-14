@@ -3,7 +3,7 @@
     <li class="<%= 'active' if tab == controller.class::TABS[:all] %>">
       <div class="stacker-container">
         <%= link_to 'All', all_explore_collections_path, class: 'btn btn-outline' %>
-        <div class="triangle_down"></div>
+        <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>
     <li class="<%= 'active' if tab == controller.class::TABS[:osu] %>">
@@ -12,7 +12,7 @@
           Oregon State <br> University
         <% end %>
         <%= link_to 'OSU', osu_explore_collections_path, class: 'btn btn-outline visible-xs' %>
-        <div class="triangle_down"></div>
+        <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>
     <li class="<%= 'active' if tab == controller.class::TABS[:uo] %>">
@@ -21,7 +21,7 @@
           University of <br> Oregon
         <% end %>
         <%= link_to 'UO', uo_explore_collections_path, class: 'btn btn-outline visible-xs' %>
-        <div class="triangle_down"></div>
+        <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>
     <% unless current_user.nil? %>
@@ -31,7 +31,7 @@
           My <br> Collections
         <% end %>
         <%= link_to 'My', my_explore_collections_path, class: 'btn btn-outline visible-xs hidden-sm' %>
-        <div class="triangle_down"></div>
+        <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>
     <% end %>

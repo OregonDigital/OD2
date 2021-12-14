@@ -10,7 +10,7 @@
       <%= link_to hyrax.dashboard_profile_path(current_user), id: 'user-dropdown', class: ['btn', 'btn-outline'],role: 'button', data: { toggle: 'dropdown' }, aria: { expanded: false, controls: 'user-util-links' } do %>
         <span class="fa fa-user" aria-hidden="true"></span>
         <span class="hidden-xs">&nbsp;My Account</span>
-        <span class="caret"></span>
+        <span class="caret-dropdown"></span>
       <% end %>
       <ul id="user-util-links" class="dropdown-menu dropdown-menu-center text-center">
         <% if can? :read, :admin_dashboard %>
