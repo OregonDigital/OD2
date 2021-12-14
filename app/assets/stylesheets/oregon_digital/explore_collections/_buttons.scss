@@ -6,6 +6,7 @@
   }
   .nav-pills > li {
     margin: 0;
+    margin-bottom: 1em;
   }
 }
 
@@ -46,26 +47,77 @@
 
 #explore-tabs,
 #explore-panes {
-  .nav-pills > li.active > div > .triangle_down {
+  .nav-pills > li.active > div > .notch {
     visibility: visible;
   }
 }
 
-.triangle_down {
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid $contrast-orange;
-  position: relative;
-  margin-left: 35%;
+$block-foreground: #fff0;
+$block-background: $contrast-orange;
+$block-border-size: 2.5px;
+$triangle-border-color: $block-foreground;
+$triangle-face-color: $block-background;
+$triangle-size: $block-border-size*4;
+
+.notch {
+  display:block;
+  width:$triangle-size*2;
+  height:$triangle-size*2;
+  overflow:hidden;
+  position:absolute;
   visibility: hidden;
 }
+.notch::before,
+.notch::after {
+  box-sizing:border-box;
+  display:block;
+  content:"";
+  width:0;
+  height:0;
+  border:solid $triangle-size $triangle-border-color;
+  position:absolute;
+  top:0;
+  transform:rotate(45deg);
+}
+.notch::before {
+  left:-($triangle-size + $block-border-size);
+}
+.notch::after {
+  border-color:$triangle-face-color;
+  left:-($triangle-size + $block-border-size*2);
+}
+
+/* Notch on Bottom Middle */
+.notch-xMiddle-yBottom {
+  bottom:-$triangle-size*2;
+  left:50%;
+  transform:rotate(90deg) translateY(50%);
+}
+
 @media (min-width: $screen-sm-min) {
-  .triangle_down {
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid $contrast-orange;
+  $block-border-size: 5px;
+  $triangle-size: $block-border-size*4;
+  .notch {
+    width:$triangle-size*2;
+    height:$triangle-size*2;
+  }
+  .notch::before,
+  .notch::after {
+    border:solid $triangle-size $triangle-border-color;
+  }
+  .notch::before {
+    left:-($triangle-size + $block-border-size);
+  }
+  .notch::after {
+    border-color:$triangle-face-color;
+    left:-($triangle-size + $block-border-size*2);
+  }
+
+  /* Notch on Bottom Middle */
+  .notch-xMiddle-yBottom {
+    bottom:-$triangle-size*2;
+    // left:50%;
+    // transform:rotate(90deg) translateY(50%);
   }
   #explore-tabs a {
     height: 55px;
