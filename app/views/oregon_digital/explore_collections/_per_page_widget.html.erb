@@ -3,7 +3,7 @@
   <%= t('blacklight.search.per_page.title') %>
   <div class="btn-group">
     <button type="button" id="<%= widget_id %>-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-controls="<%= widget_id %>-list" aria-expanded="false" aria-haspopup="true" aria-label="Results per page">
-      <%= t(:'blacklight.search.per_page.button_label', :count => current_per_page) %> <span class="caret"></span>
+      <%= t(:'blacklight.search.per_page.button_label', :count => current_per_page) %> <span class="caret-dropdown"></span>
     </button>
     <ul id="<%= widget_id %>-list" class="dropdown-menu" role="menu" aria-labelledby="<%= widget_id %>-button">
       <%- per_page_options_for_select.each do |(label, count)| %>

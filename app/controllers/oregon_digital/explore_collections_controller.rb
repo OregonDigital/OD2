@@ -27,6 +27,7 @@ module OregonDigital
       config.view.table.partials = %i[index]
       config.view.table.icon_class = 'glyphicon-th-list'
       config.view.masonry.partials = %i[metadata]
+      config.view.masonry.icon_class = 'fa fa-trello fa-lg'
     end
 
     # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
