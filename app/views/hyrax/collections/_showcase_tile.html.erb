@@ -1,9 +1,10 @@
-<div class="thumbnail">
-    <div id="image-<%= index %>">
-      <%= link_to link, aria: { label: title } do |body| %>
-        <%= img %>
-        <span class="h3 hover-over-collection-text show-me<%= index %>" >
-          <%= title %>
+<div class="masonry collection document">
+  <div class="thumbnail">
+    <div id="image-<%= document.id %>">
+      <%= link_to [main_app, document], aria: { label: document.title_or_label } do |body| %>
+        <%= render_thumbnail_tag(document, {alt: "#{document.title_or_label}"}, { suppress_link: true }) %>
+        <span class="h3 hover-over-collection-text show-me<%= document.id %>" >
+          <%= document.title_or_label %>
         </span>
       <% end %>
     </div>
