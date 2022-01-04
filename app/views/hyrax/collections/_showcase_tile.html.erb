@@ -1,12 +1,13 @@
 <div class="masonry collection document">
   <div class="thumbnail">
-    <div id="image-<%= document.id %>">
-      <%= link_to [main_app, document], aria: { label: document.title_or_label } do |body| %>
-        <%= render_thumbnail_tag(document, {alt: "#{document.title_or_label}"}, { suppress_link: true }) %>
-        <span class="h3 hover-over-collection-text show-me<%= document.id %>" >
-          <%= document.title_or_label %>
-        </span>
-      <% end %>
-    </div>
+    <%= link_to(url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter)))  do |body| %>
+      <%= image_tag(thumbnail_url(document), alt: "")%>
+      <p class="visible-all-inline h5">
+        <%= truncate(index_presenter(document).label(document_show_link_field(document)), length: 89) %>
+        <% if current_ability.admin? ? false : controller.institution_restricted?(document.id) %>
+          <span class="glyphicon glyphicon-lock"></span>
+        <% end %>
+      </p>
+    <% end %>
   </div>
 </div>

@@ -46,46 +46,4 @@
       }
     }
   }
-
-  div.masonry.collection.document {
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0;
-    background: transparent;
-
-    div.thumbnail {
-      background: black;
-    }
-    a:hover,
-    a:focus {
-      img {
-        outline: 10px solid black;
-        outline-offset:  -10px;
-        mask-image: linear-gradient(to top, rgba(0, 0, 0, .35) 0%, rgb(0, 0, 0), rgb(0, 0, 0) 100%);
-        -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, .35) 0%, rgb(0, 0, 0), rgb(0, 0, 0) 100%);
-      }
-      .hover-over-collection-text {
-        display: block;
-      }
-    }
-    a {
-      img {
-        border: 0;
-        padding: 0;
-        width: 100%;
-      }
-      .hover-over-collection-text {
-        color: white;
-        display: none;
-        position: absolute;
-        bottom: .5em;
-        text-align: left;
-        left: 2em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 80%;
-      }
-    }
-  }
 }
