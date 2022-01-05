@@ -3,7 +3,7 @@
   </div>
   <div class="col-md-5">
     <% @collections = Collection.limit 5 %>
-    <h2>FEATURED COLLECTIONS</h2>
+    <h2 class="upper-case">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
         <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000)%>
@@ -46,9 +46,9 @@
         <div class="col-sm-6">
           <p class='collection-title'><h3><%= collection.title.first %></h3></p>
           <p>
-            <h4><%= @member_count %> items
+            <div class="h4"><%= @member_count %> items
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"} %></h4>
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"} %></div>
           </p>
         </div>
         </div>
@@ -65,7 +65,7 @@
     </div>
   </div>
   <div class="col-md-5 about-oregondigital-container">
-    <h2>ABOUT OREGON DIGITAL</h2>
+    <h2 class="upper-case">About Oregon Digital</h2>
     <div class="row">
       <%= image_tag('valley_lib.png', height: '250', width: '250', alt: '') %>
       <%= image_tag('uo_lib.jpg', height: '250', width: '250', alt: '') %>
