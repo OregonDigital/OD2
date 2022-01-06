@@ -7,7 +7,7 @@
     remote:        data-remote
 -%>
 <% if current_page.first? %>
-    <li class="previous disabled">
+    <li class="previous disabled" aria-disabled="true">
       <%= link_to raw(t 'blacklight.search.pagination.previous'), '#', :rel => 'prev', :onclick=>'return false;' %>
     </li>
 <% else %>
