@@ -266,9 +266,16 @@ ul.pagination li {
 }
 
 /* Gallery specific */
-.hyc-bl-results.hyc-bl-search {
+#documents.hyc-bl-results.hyc-bl-search {
+  margin: 0;
+  margin-bottom: 2em;
+
   .masonry.document {
+    background: transparent;
     border: none !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
 
     div.thumbnail {
       background: none;
@@ -277,6 +284,22 @@ ul.pagination li {
       padding-top: 1em;
       a {
         text-align: left;
+
+        img {
+          width: 100%;
+        }
+        .hover-over-collection-text {
+          color: white;
+          display: none;
+          position: absolute;
+          bottom: .5em;
+          text-align: left;
+          left: 2em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 80%;
+        }
         h3 {
           color: $navy-blue;
           margin-top: .5em;
@@ -287,6 +310,8 @@ ul.pagination li {
         img {
           mask-image: none;
           -webkit-mask-image: none;
+          outline: 10px solid black;
+          outline-offset:  -10px;
         }
         .hover-over-collection-text {
           display: block;
