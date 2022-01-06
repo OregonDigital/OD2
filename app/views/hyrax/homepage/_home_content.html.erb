@@ -3,7 +3,7 @@
   </div>
   <div class="col-md-5">
     <% @collections = Collection.limit 5 %>
-    <h2 class="upper-case">Featured Collections</h2>
+    <h2 class="uppercase">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
         <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000)%>
@@ -65,7 +65,7 @@
     </div>
   </div>
   <div class="col-md-5 about-oregondigital-container">
-    <h2 class="upper-case">About Oregon Digital</h2>
+    <h2 class="uppercase">About Oregon Digital</h2>
     <div class="row">
       <%= image_tag('valley_lib.png', height: '250', width: '250', alt: '') %>
       <%= image_tag('uo_lib.jpg', height: '250', width: '250', alt: '') %>
