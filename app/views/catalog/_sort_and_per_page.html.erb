@@ -24,4 +24,8 @@
 
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
 <%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
+
+<div role='region' id='select-and-deselect' aria-live='polite'>
+  <p id='select-chosen' class='sr-only' aria-hidden='true'>Deselected All</p>
+</div>
 <!-- END OVERRIDE -->
