@@ -40,9 +40,6 @@ code "bundle exec rails hyrax:workflow:load"
 code "bundle exec rake oregon_digital:create_admin_sets"
 step 2 "create core OD collections:"
 code "bundle exec rake oregon_digital:create_collections"
-step 3 "alter \`config/initializers/hyrax_migrator.rb\`:"
-code "config.upload_storage_service = :file_system"
-code "config.skip_field_mode = true"
 echo
 
 dest=$(realpath ../tmp/shared/batch_$batch)
@@ -60,5 +57,5 @@ for assetdir in $(find $1/ -mindepth 1 -maxdepth 1 -type d); do
 done
 echo "${WARN}Done${RESET}"
 
-step 4 "start the ingest:"
-echo "    rails runner 'Hyrax::Migrator::Services::BagIngestService.new([\"batch_$batch\"], Hyrax::Migrator.config).ingest'"
+step 3 "start the ingest:"
+echo "    rails runner 'Hyrax::Migrator::Services::BagIngestService.new([\"batch_$batch\"]).ingest'"
