@@ -12,10 +12,12 @@ function selectAllSearchResults() {
   $('input[type=checkbox]').each(function() {
     this.checked = true;
   });
+  $('#select-chosen').text("Selected All")
 }
 
 function deselectAllSearchResults() {
   $('input[type=checkbox]').each(function() {
     this.checked = false;
   });
+  $('#select-chosen').text("Deselected All")
 }

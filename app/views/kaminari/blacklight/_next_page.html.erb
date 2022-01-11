@@ -7,7 +7,7 @@
     remote:        data-remote
 -%>
 <% if current_page.last? %>
-    <li class="next disabled">
+    <li class="next disabled" aria-disabled="true">
       <%= link_to raw(t 'blacklight.search.pagination.next'), '#', :rel => 'next', :onclick=>'return false;' %>
     </li>
 <% else %>
