@@ -125,8 +125,8 @@ export class FieldManager {
 
   displayEmptyWarning() {
       let $listing = $(this.listClass, this.element)
-      var $warningMessage  = $("<div class=\'message has-warning\'>cannot add another with empty field</div>");
-      // OVERRIDE to push <div> out of <ul>
+      // OVERRIDE to push <div> out of <ul> and add aria-live for SR announcement
+      var $warningMessage  = $("<div class=\'message has-warning\' aria-live='assertive'>cannot add another with empty field</div>");
       $listing.nextAll(this.warningClass).remove();
       $listing.after($warningMessage);
       // END OVERRIDE
