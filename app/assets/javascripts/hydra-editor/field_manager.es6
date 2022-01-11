@@ -24,7 +24,6 @@ export class FieldManager {
 
   init() {
       this._addInitialClasses();
-      this._addAriaLiveRegions()
       this._appendControls();
       this._attachEvents();
       this._addCallbacks();
@@ -33,10 +32,6 @@ export class FieldManager {
   _addInitialClasses() {
       this.element.addClass("managed");
       $(this.fieldWrapperClass, this.element).addClass("input-group input-append");
-  }
-
-  _addAriaLiveRegions() {
-      $(this.element).find('.listing').attr('aria-live', 'polite')
   }
 
   // Add the "Add another" and "Remove" controls to the DOM
@@ -91,12 +86,16 @@ export class FieldManager {
       event.preventDefault();
       let $listing = $(event.target).closest(this.inputTypeClass).find(this.listClass)
       let $activeField = $listing.children('li').last()
+      // ID from first input + how many other inputs
+      let new_id = $listing.children('li').first().find('input').attr('id') + '_' + $listing.children('li').length;
 
       if (this.inputIsEmpty($activeField)) {
           this.displayEmptyWarning();
       } else {
           this.clearEmptyWarning();
-          $listing.append(this._newField($activeField));
+          let $new = this._newField($activeField);
+          $new.find('input').attr('id', new_id)
+          $listing.append($new);
       }
 
       this._manageFocus()
@@ -120,7 +119,7 @@ export class FieldManager {
 
   clearEmptyWarning() {
       let $listing = $(this.listClass, this.element)
-      $listing.children(this.warningClass).remove();
+      $listing.nextAll(this.warningClass).remove();
   }
 
   displayEmptyWarning() {
@@ -159,6 +158,7 @@ export class FieldManager {
 
   createAddHtml(options) {
       var $addHtml  = $(options.addHtml);
+      $addHtml.attr('aria-label', options.addText + options.label);
       $addHtml.find('.controls-add-text').html(options.addText + options.label);
       return $addHtml;
   }
