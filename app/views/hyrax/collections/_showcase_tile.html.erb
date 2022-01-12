@@ -4,9 +4,6 @@
       <%= image_tag(thumbnail_url(document), alt: "")%>
       <p class="visible-all-inline h5">
         <%= truncate(index_presenter(document).label(document_show_link_field(document)), length: 89) %>
-        <% if current_ability.admin? ? false : controller.institution_restricted?(document.id) %>
-          <span class="glyphicon glyphicon-lock"></span>
-        <% end %>
       </p>
     <% end %>
   </div>
