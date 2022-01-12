@@ -50,6 +50,7 @@ class MultiValueInput < SimpleForm::Inputs::CollectionInput
       end
       options[:class] ||= []
       options[:class] += ["#{input_dom_id} form-control multi-text-field"]
+      # OVERRIDE FROM HYDRA-EDITOR to correct aria labeling
       @rendered_first_element = true
 
       options
