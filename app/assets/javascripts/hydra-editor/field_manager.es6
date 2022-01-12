@@ -36,8 +36,10 @@ export class FieldManager {
   }
 
   _addInitialID() {
-      let id = this.element.find('input').attr('id') + '_' + 'label';
-      this.element.find('label').attr('id', id);
+      let id = this.element.find('input').attr('id') + '_';
+      this.element.find('label').attr('id', id + 'label');
+      this.element.find('p.help-block').attr('id', id + 'help');
+      this.element.find('input').attr('aria-describedby', id + 'help')
   }
 
   // Add the "Add another" and "Remove" controls to the DOM
@@ -93,7 +95,7 @@ export class FieldManager {
       let $listing = $(event.target).closest(this.inputTypeClass).find(this.listClass)
       let $activeField = $listing.children('li').last()
       // ID from first input + how many other inputs
-      let labelID = $listing.children('li').first().find('input').attr('id') + '_' + 'label';
+      let labelID = $listing.children('li').first().find('input').attr('id') + '_';
 
       if (this.inputIsEmpty($activeField)) {
           this.displayEmptyWarning();
@@ -102,7 +104,7 @@ export class FieldManager {
           // Create new field
           let $new = this._newField($activeField);
           // Make new field labelled by field label
-          $new.find('input').attr('aria-labelledby',labelID);
+          $new.find('input').attr('aria-labelledby', labelID + 'label').attr('aria-describedby', labelID + 'help');
           $listing.append($new);
       }
 
