@@ -35,6 +35,10 @@ input.link {
     }
   }
 
+  &.remove {
+    color: #c84c48;
+  }
+
   &.btn-outline {
     background: unset;
     border-radius: 0 !important;
