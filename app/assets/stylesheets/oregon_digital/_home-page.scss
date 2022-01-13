@@ -17,11 +17,18 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   .navbar {
     color: black;
     background: none;
+    border: none;
+    margin-top: 380px;
     padding-bottom: 5em;
+    position: absolute;
+    width: 100%;
   }
 
   .site-title {
+    color: white;
     min-height: 0;
+    padding-bottom: 1em;
+    text-align: center;
   }
 }
 #masthead {
@@ -130,20 +137,18 @@ ul.nav.homepage-nav {
     font-weight: 700;
   }
   li {
-    padding-left: 2em;
+    background: none;
     width: 100%;
-  }
-  li:last-child {
-    padding-left: .5em;
   }
   form {
     width: 100%;
     a.advanced-link {
       position: relative;
-      font-size: .75em;
-      font-weight: 700;
-      padding: 0;
       float: right;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 0;
       top: -.75em;
     }
     .input-group {
@@ -154,18 +159,22 @@ ul.nav.homepage-nav {
         z-index: 10;
         background: unset;
         border: unset;
-        width: 2.25em;
-        height: calc(100% - 16px);
-        margin-top: 8px;
-        margin-bottom: 8px;
-        border-right: 1px solid $light-grey;
+        width: 3.25em;
+        height: calc(100% - 1.25em);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-right: 1.5px solid $very-light-grey;
+        i {
+          font-size: 18px;
+        }
       }
       input {
-        background-color: $very-light-grey;
+        background-color: $white;
         border-radius: 0;
-        padding-left: 2.5em;
         font-size: 1.25em;
         height: 100%;
+        line-height: .75em;
+        padding: .5em 2.5em;
         width: 100%;
       }
     }
@@ -178,14 +187,12 @@ ul.nav.homepage-nav {
   margin-top: 420px;
   height: 240px;
   background-color: black;
+  -webkit-filter: none;
+  filter: none;
 }
 
 #homepage-image.navbar-background-image {
   height: 0px;
-}
-
-nav.navbar-default {
-  margin-top: 400px;
 }
 
 .image-masthead {
@@ -196,7 +203,7 @@ nav.navbar-default {
   padding-top: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid grey;
-  
+
 }
 
 .featured-collection-row:last-child {

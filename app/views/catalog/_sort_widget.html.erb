@@ -1,5 +1,5 @@
-<% if show_sort_and_per_page? and active_sort_fields.many? %>
-<div id="sort-dropdown" class="uppercase dark-grey lato-b h4 <%= "hidden" if constraint %>">
+<% if show_sort_and_per_page? and active_sort_fields.many? and !constraint %>
+<div id="sort-dropdown" class="uppercase dark-grey lato-b h4">
   <%= t('blacklight.search.sort.title') %>
   <span class="sr-only" id="search-sort"> Sort results by </span>
   <div class="btn-group">
