@@ -125,6 +125,7 @@ Blacklight.ajaxModal.receiveAjax = function (contents) {
   }
 
   $(Blacklight.ajaxModal.modalSelector).find('.modal-content').html(contents);
+  $(Blacklight.ajaxModal.modalSelector).attr('aria-labelledby', 'modal-title');
 
   // send custom event with the modal dialog div as the target
   var e    = $.Event('loaded.blacklight.ajax-modal');

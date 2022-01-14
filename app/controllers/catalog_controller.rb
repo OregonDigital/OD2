@@ -19,6 +19,12 @@ class CatalogController < ApplicationController
     super
   end
 
+  def page_title
+    title = 'Search Results'
+    title += " - #{params[:q]}" if params[:q].present?
+    return title
+  end
+
   # CatalogController-scope behavior and configuration for BlacklightIiifSearch
   include BlacklightIiifSearch::Controller
 

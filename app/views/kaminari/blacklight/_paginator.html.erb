@@ -5,10 +5,10 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
     paginator:     the paginator that renders the pagination tags inside
-
    Paginator now using the Bootstrap paginator class
 -%>
 <%= paginator.render do -%>
+<nav aria-label="pagination" role="navigation">
   <ul class="pagination hidden-xs">
     <%= prev_page_tag %>
     <% each_relevant_page do |page| -%>
@@ -24,4 +24,6 @@
     <%= prev_page_tag %>
     <%= next_page_tag %>
   </ul>
+</nav>
 <% end -%>
+
