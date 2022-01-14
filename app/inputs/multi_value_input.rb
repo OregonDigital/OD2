@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # Class for multi-value input forms
 class MultiValueInput < SimpleForm::Inputs::CollectionInput
@@ -69,7 +69,7 @@ class MultiValueInput < SimpleForm::Inputs::CollectionInput
   end
 
   def label_id
-    input_dom_id + '_label'
+    "#{input_dom_id}_label"
   end
 
   def input_dom_id
