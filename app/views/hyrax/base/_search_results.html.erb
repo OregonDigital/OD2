@@ -1,4 +1,4 @@
-<h2 class="sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></h2>
+<div class="h2 sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></div>
 
 <% @page_title = t('blacklight.search.page_title.title', :constraints => render_search_to_page_title(params), :application_name => application_name) %>
 
@@ -8,7 +8,7 @@
 
 <%= render 'search_header' %>
 
-<h2 class="sr-only"><%= t('blacklight.search.search_results') %></h2>
+<div class="h2 sr-only"><%= t('blacklight.search.search_results') %></div>
 
 <%- if @response.empty? %>
   <%= render "zero_results" %>
