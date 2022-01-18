@@ -5,12 +5,14 @@
 
   <div class="save-widgets col-md-6 col-xs-12 text-right">
     <%= button_tag( class: 'select-button',
-                    onclick: 'javascript:selectAllSearchResults()') do %>
+                    onclick: 'javascript:selectAllSearchResults()',
+                    'aria-controls' => 'select-chosen' ) do %>
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.select_all') %></span>
                       <span class="sr-only"> Select all works for saving </span>
                     <% end %>
     <%= button_tag( class: 'deselect-button',
-                    onclick: 'javascript:deselectAllSearchResults()') do %>
+                    onclick: 'javascript:deselectAllSearchResults()',
+                    'aria-controls' => 'select-chosen' ) do %>
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.none') %></span>
                       <span class="sr-only"> Deselect all works for saving </span>
                     <% end %>
@@ -24,4 +26,8 @@
 
 <%= render 'hyrax/dashboard/collections/form_for_select_collection', user_collections: @user_collections %>
 <%= render 'oregon_digital/dashboard/collections/form_for_create_collection' %>
+
+<div role='region' id='select-and-deselect' aria-live='polite'>
+  <p id='select-chosen' class='sr-only'>Deselected All</p>
+</div>
 <!-- END OVERRIDE -->
