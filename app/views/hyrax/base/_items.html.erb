@@ -3,13 +3,14 @@
 <%  members = presenter.member_presenters_for(array_of_ids) %>
 <% if members.present? %>
   <table class="table table-striped related-files">
+    <caption class="sr-only">Works and Files</caption>
     <thead>
       <tr>
-        <th><%= t('.thumbnail') %></th>
-        <th><%= t('.title') %></th>
-        <th><%= t('.date_uploaded') %></th>
-        <th><%= t('.visibility') %></th>
-        <th><%= t('.actions') %></th>
+        <th scope="col"><%= t('.thumbnail') %></th>
+        <th scope="col"><%= t('.title') %></th>
+        <th scope="col"><%= t('.date_uploaded') %></th>
+        <th scope="col"><%= t('.visibility') %></th>
+        <th scope="col"><%= t('.actions') %></th>
       </tr>
     </thead>
     <tbody>
