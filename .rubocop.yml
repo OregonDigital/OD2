@@ -66,6 +66,10 @@ Metrics/ClassLength:
   Exclude:
     - 'app/controllers/catalog_controller.rb'
 
+Metrics/MethodLength:
+  Exclude:
+    - 'app/inputs/multi_value_input.rb'
+
 RSpec/DescribeClass:
   Exclude:
     - 'spec/system/**/*'
