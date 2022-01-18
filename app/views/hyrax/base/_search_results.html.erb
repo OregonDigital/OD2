@@ -1,5 +1,3 @@
-<div class="h2 sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></div>
-
 <% @page_title = t('blacklight.search.page_title.title', :constraints => render_search_to_page_title(params), :application_name => application_name) %>
 
 <% content_for(:head) do -%>
@@ -7,8 +5,6 @@
 <% end %>
 
 <%= render 'search_header' %>
-
-<div class="h2 sr-only"><%= t('blacklight.search.search_results') %></div>
 
 <%- if @response.empty? %>
   <%= render "zero_results" %>
