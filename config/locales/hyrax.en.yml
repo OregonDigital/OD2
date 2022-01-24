@@ -256,6 +256,9 @@ en:
           log_in: 'Log In'
           add_to_collection: 'Save to...'
           select_all: 'Select All'
+    file_sets:
+      actions:
+        header: Actions
     search:
       form:
         facet:

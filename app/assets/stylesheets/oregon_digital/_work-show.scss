@@ -44,8 +44,10 @@
 }
 
 dl.work-show {
-	display: grid;
-  grid-template: auto / 10em 1fr;
+  display: grid;
+  grid-template: auto / 25% calc(75% - 1em);
+  column-gap: 1em;
+  overflow-wrap: anywhere;
 
   dt {
     grid-column: 1;
