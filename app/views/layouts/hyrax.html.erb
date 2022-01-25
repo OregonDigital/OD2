@@ -14,7 +14,9 @@
     </div>
     <%= render '/masthead' %>
     <%= content_for(:navbar) %>
-    <%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>
+    <div class="container">
+      <%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>
+    </div>
     <div id="content-wrapper" class="container" role="main">
       <%= content_for(:precontainer_content) %>
       <%= render '/flash_msg' %>
