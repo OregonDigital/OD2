@@ -14,10 +14,12 @@
     </div>
     <%= render '/masthead' %>
     <%= content_for(:navbar) %>
+    <div class="container">
+      <%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>
+    </div>
     <div id="content-wrapper" class="container" role="main">
       <%= content_for(:precontainer_content) %>
       <%= render '/flash_msg' %>
-      <%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>
       <% if content_for?(:page_header) %>
         <div class="row">
           <div class="col-xs-12 main-header">
