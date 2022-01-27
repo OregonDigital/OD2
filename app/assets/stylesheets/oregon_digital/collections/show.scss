@@ -26,43 +26,23 @@
 .hyc-bl-results {
   margin: 0;
   margin-bottom: 2em;
+}
 
-  .masonry.document {
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0;
-    background: transparent;
-
-    div.thumbnail {
-      background: black;
-    }
-    a:hover,
-    a:focus {
-      img {
-        outline: 10px solid black;
-        outline-offset:  -10px;
-        mask-image: linear-gradient(to top, rgba(0, 0, 0, .35) 0%, rgb(0, 0, 0), rgb(0, 0, 0) 100%);
-        -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, .35) 0%, rgb(0, 0, 0), rgb(0, 0, 0) 100%);
-      }
-      .hover-over-collection-text {
-        display: block;
+#documents #thumbnails {
+  div.masonry.collection,
+  #masonry-sizer {
+    width: calc(25% - 30px);
+    @media (max-width: $screen-sm-min) {
+      & {
+        width: calc(50% - 20px);
       }
     }
-    a {
-      img {
-        width: 100%;
-      }
-      .hover-over-collection-text {
-        color: white;
-        display: none;
-        position: absolute;
-        bottom: .5em;
-        text-align: left;
-        left: 2em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 80%;
+  }
+  #masonry-gutter-sizer {
+    width: 30px;
+    @media (max-width: $screen-sm-min) {
+      & {
+        width: 40px;
       }
     }
   }

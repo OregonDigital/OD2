@@ -237,6 +237,9 @@ en:
         header: 'Print'
       license:
         header: 'Can I use it?'
+      social_media:
+        facebook: 'Post to Facebook'
+        twitter: 'Post to Twitter'
       items:
         header: "Downloads"
     collection:
@@ -256,6 +259,9 @@ en:
           log_in: 'Log In'
           add_to_collection: 'Save to...'
           select_all: 'Select All'
+    file_sets:
+      actions:
+        header: Actions
     search:
       form:
         facet:

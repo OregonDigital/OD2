@@ -37,21 +37,18 @@
 </div>
 
 <div class="hyc-container" itemscope itemtype="http://schema.org/CollectionPage">
-  <h2 clas="sr-only"> featured works</h2>
+  <h2 class="sr-only"> featured works</h2>
   <div class="row">
     <div class="hyc-blacklight hyc-bl-results">
-      <div class="row">
-      <% @member_docs[0,4].each_with_index do |doc, i| %>
-        <div class="masonry document text-center col-xs-12 col-md-3">
-          <%= render 'showcase_tile',
-              title: doc.title_or_label,
-              index: i,
-              count: @member_docs.length,
-              link: [main_app, doc],
-              img: render_thumbnail_tag(doc, {alt: "#{doc.title_or_label}"}, { suppress_link: true }) %>
-      <% end %>
-      </div>
+      <div id="documents">
+        <% # container for all documents in index view -%>
+        <div class="" id="thumbnails" data-behavior="masonry-gallery">
+          <div id="masonry-sizer"></div>
+          <div id="masonry-gutter-sizer"></div>
+          <%= render collection: @member_docs[0..3], as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
+        </div>
       <div class="col-md-12 lg-border-bottom"></div>
+      </div>
     </div>
   </div>
 

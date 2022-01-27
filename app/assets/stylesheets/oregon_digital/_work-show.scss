@@ -44,8 +44,10 @@
 }
 
 dl.work-show {
-	display: grid;
-  grid-template: auto / 10em 1fr;
+  display: grid;
+  grid-template: auto / 25% calc(75% - 1em);
+  column-gap: 1em;
+  overflow-wrap: anywhere;
 
   dt {
     grid-column: 1;
@@ -90,8 +92,43 @@ dl.work-show {
   ul.nav-tabs {
     padding: 0 2em;
 
-    li a {
-      border-radius: 0;
+    li {
+      &.active button {
+        color: #555555;
+        cursor: default;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: rgb(221, 221, 221);
+        border-bottom-color: transparent;
+
+        &:hover,
+        &:focus {
+          color: #555555;
+          cursor: default;
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-bottom-color: transparent;
+        }
+      }
+
+      button {
+        margin-right: 2px;
+        line-height: 1.428571429;
+        border: 1px solid transparent;
+
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        color: $dark-grey;
+        background-color: transparent;
+
+        &:hover,
+        &:focus {
+          border-color: #eeeeee #eeeeee #ddd;
+          text-decoration: none;
+          background-color: #eeeeee;
+        }
+      }
     }
   }
   .h4 {
