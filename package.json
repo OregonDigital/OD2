@@ -6,7 +6,7 @@
     "jquery": "3.5.0",
     "node-fetch": "2.6.1",
     "shx": "^0.3.2",
-    "three": "0.125.0",
+    "three": "0.137.0",
     "universalviewer": "^3.0.16",
     "xmldom": "0.5.0"
   },
