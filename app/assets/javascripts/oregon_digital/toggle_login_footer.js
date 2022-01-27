@@ -5,5 +5,5 @@ function toggleFooter (footer) {
   $('#login-modal-footer-' + footer).toggle();
 
   var e = $.Event('shown.bs.modal', {});
-  $('#user-login-modal').trigger(e); 
+  $('#user-login-modal').trigger(e);
 }
