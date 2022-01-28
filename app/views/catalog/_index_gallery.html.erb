@@ -1,6 +1,6 @@
 <div itemscope itemtype="http://schema.org/CreativeWork" class=" masonry document col-xs-6 col-md-3 ">
   <div class="thumbnail">
-    <% unless document.collection? %>
+    <% unless document.collection? || controller.class != CatalogController %>
       <p class="pull-left">
         <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
       </p>
