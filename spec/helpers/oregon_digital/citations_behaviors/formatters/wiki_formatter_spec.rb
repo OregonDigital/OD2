@@ -19,6 +19,6 @@ RSpec.describe OregonDigital::CitationsBehaviors::Formatters::WikiFormatter do
   end
 
   it 'displays the citation' do
-    expect(formatter.format(presenter)).to eq "<ref name=Oregon Digital>{{cite web | url= http://test.oregondigital.org/blah/blah/12345678 | title= My Title |author= last name, first name |accessdate= #{Date.today} |publisher= My Publisher}}</ref>"
+    expect(formatter.format(presenter)).to eq "{{cite web | url= http://test.oregondigital.org/blah/blah/12345678 | title= My Title |author= last name, first name |accessdate= #{Date.today} |publisher= My Publisher}}"
   end
 end

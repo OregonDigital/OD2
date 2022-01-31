@@ -237,6 +237,9 @@ en:
         header: 'Print'
       license:
         header: 'Can I use it?'
+      social_media:
+        facebook: 'Post to Facebook'
+        twitter: 'Post to Twitter'
       items:
         header: "Downloads"
     collection:
