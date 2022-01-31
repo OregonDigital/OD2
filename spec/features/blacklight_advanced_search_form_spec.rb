@@ -8,7 +8,7 @@ describe 'BlacklightAdvancedSearchForm' do
     end
 
     it 'has breadcrumbs' do
-      expect(page.find(:xpath, "//nav[@class='breadcrumb']/ol/li[2]/a[@href='advanced']")).to be_visible
+      expect(page.find(:xpath, "//nav[@class='breadcrumb col-sm-12']/ol/li[2]/a[@href='advanced']")).to be_visible
     end
   end
 end
