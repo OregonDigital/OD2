@@ -4,7 +4,7 @@
   "repository": "git@github.com:samvera/hyrax.git",
   "dependencies": {
     "jquery": "3.5.0",
-    "node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "shx": "^0.3.2",
     "three": "0.137.0",
     "universalviewer": "^3.0.16",
