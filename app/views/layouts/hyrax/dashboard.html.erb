@@ -15,8 +15,10 @@
       <div class="sidebar maximized">
         <%= render 'hyrax/dashboard/sidebar' %>
       </div>
-      <div class="main-content maximized" role="main">
+      <div class="container">
         <%= render_breadcrumbs builder: Hyrax::BootstrapBreadcrumbsBuilder %>
+      </div>
+      <div class="main-content maximized" role="main">
         <%= render '/flash_msg' %>
         <% if content_for?(:page_header) %>
           <div class="row">

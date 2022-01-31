@@ -9,7 +9,7 @@
 
 
   <div class="edit-button-sections">
-    <%= link_to 'Print <i class="fa fa-print" aria-hidden="true"></i>'.html_safe, '#', class: 'btn btn-default', onclick: 'window.print();return false;'%>
+    <%= button_tag 'Print <i class="fa fa-print" aria-hidden="true"></i>'.html_safe, class: 'btn btn-default', onclick: 'window.print();return false;'%>
   </div>
   <div class="edit-button-sections">
     <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector edit-group" checked="checked" />

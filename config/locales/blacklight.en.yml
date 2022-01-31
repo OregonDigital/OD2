@@ -8,8 +8,8 @@ en:
       filters:
         title: ''
       pagination:
-        next: 'Next <i class="fa fa-chevron-circle-right"></i>'
-        previous: '<i class="fa fa-chevron-circle-left"></i> Prev'
+        next: 'Next <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'
+        previous: '<i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Prev'
       pagination_info:
         no_items_found: '<strong>No %{entry_name} found</strong>'
         single_item_found: '<strong>1 %{entry_name} found</strong>'
