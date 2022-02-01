@@ -13,11 +13,11 @@
                   <div class="form-group">
 
                     <div class="input-group">
-                      <label class="sr-only" for="masthead-search-field-header"><%= t("hyrax.search.form.q.label", application_name: application_name) %></label>
+                      <label class="sr-only" style="color: black;" for="masthead-search-field-header"><%= t("hyrax.search.form.q.label", application_name: application_name) %></label>
                       <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control", id: "masthead-search-field-header", title: "Masthead search field" %>
                       <button type="submit" class="" id="masthead-search-submit-header">
                         <i class="fa fa-search" aria-hidden="true"></i>
-                        <span class="sr-only">Search Catalog</span>
+                        <span class="sr-only" style="color: black;">Search Catalog</span>
                       </button>
                     </div><!-- /.input-group -->
 
