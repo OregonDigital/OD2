@@ -236,6 +236,8 @@ $(document).ready(function() {
     });
   });
   $('body').on('hidden.bs.modal', function(e) {
-    Blacklight.ajaxModal.clickTarget.focus();
+    if (Blacklight.ajaxModal.clickTarget) {
+      Blacklight.ajaxModal.clickTarget.focus();
+    }
   });
 });
