@@ -2,11 +2,11 @@
 <%  array_of_ids = presenter.list_of_item_ids_to_display %>
 <%  members = presenter.member_presenters_for(array_of_ids) %>
 <% if members.present? %>
-  <table class="table table-striped related-files">
+  <table class="table table-striped related-files table-scrollable">
     <caption class="sr-only">Works and Files</caption>
     <thead>
       <tr>
-        <th scope="col" class="hidden-xs"><%= t('.thumbnail') %></th>
+        <th scope="col"><%= t('.thumbnail') %></th>
         <th scope="col"><%= t('.title') %></th>
         <th scope="col"><%= t('.date_uploaded') %></th>
         <th scope="col"><%= t('.visibility') %></th>
@@ -17,16 +17,14 @@
       <%= render partial: 'member', collection: members %>
     </tbody>
   </table>
-  <div class="row">
-    <% if presenter.total_pages > 1 %>
-        <%# OVERRIDE FROM HYRAX to offset pagination and add divider %>
-        <div class="row record-padding col-md-8 col-md-offset-2 text-center">
-          <hr style='border-width: 3px;'>
-          <%= paginate array_of_ids, outer_window: 1, window: 2, theme: 'blacklight', param_name: :page, route_set: main_app %>
-        </div><!-- /pager -->
-        <%# END OVERRIDE %>
-    <% end %>
-  </div>
+  <% if presenter.total_pages > 1 %>
+      <%# OVERRIDE FROM HYRAX to offset pagination and add divider %>
+      <div class="row record-padding col-md-8 col-md-offset-2 text-center">
+        <hr style='border-width: 3px;'>
+        <%= paginate array_of_ids, outer_window: 1, window: 2, theme: 'blacklight', param_name: :page, route_set: main_app %>
+      </div><!-- /pager -->
+      <%# END OVERRIDE %>
+  <% end %>
 <% elsif can? :edit, presenter.id %>
     <div class="alert alert-warning" role="alert"><%= t('.empty', type: presenter.human_readable_type) %></div>
 <% else %>

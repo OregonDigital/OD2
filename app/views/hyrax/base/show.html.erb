@@ -129,8 +129,8 @@
         </div>
       <% end %>
       <% if current_ability.can?(:view, FileSet) %>
-        <!-- Renders file manager -->
         <div class='row'>
+          <!-- Renders file manager -->
           <div class='col-sm-12'>
             <div id='work-show-file-sets' class='flex-container'>
               <div class='flex-item file-set-title'>
@@ -145,9 +145,7 @@
               <hr style='border-width: 3px;'>
               <%= render 'items', presenter: @presenter %>
           </div>
-        </div>
-        <!-- Renders user history -->
-        <div class='row'>
+          <!-- Renders user history -->
           <div class='col-sm-12'>
             <%= render 'hyrax/users/activity_log', events: @presenter.events %>
           </div>
