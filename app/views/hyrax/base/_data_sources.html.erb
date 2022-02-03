@@ -14,7 +14,7 @@
         <% zipped.each do |label, uri| %>
         <tr>
           <td> <%= prop[:indices][uri] %> </td>
-          <th scope="row"> <%= label %> </td>
+          <th scope="row"> <%= label %> </th>
           <td> <%= link_to uri, uri %> </td>
         </tr>
         <% end %>
