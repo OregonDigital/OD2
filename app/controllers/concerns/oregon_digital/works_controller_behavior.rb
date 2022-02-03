@@ -11,5 +11,12 @@ module OregonDigital
 
       attributes
     end
+
+    def create
+      # Resetting :member_of_collection_ids to nil if we were given an empty string
+      # This helps failed form submissions to return to the form and display errors
+      params[hash_key_for_curation_concern][:member_of_collection_ids] = nil if params[hash_key_for_curation_concern][:member_of_collection_ids].empty?
+      super
+    end
   end
 end

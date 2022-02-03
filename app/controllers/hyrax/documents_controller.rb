@@ -14,6 +14,11 @@ module Hyrax
     include OregonDigital::WorkRelationPaginationBehavior
     self.curation_concern_type = ::Document
 
+    # Remove list view from child/sibling renders
+    configure_blacklight do |config|
+      config.view.list.if = false
+    end
+
     # Override the way Hyrax's works present iiif manifests
     include OregonDigital::IIIFManifestControllerBehavior
 
