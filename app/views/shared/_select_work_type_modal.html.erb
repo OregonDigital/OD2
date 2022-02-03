@@ -1,5 +1,4 @@
-
-<!-- OVERRIDDEN FROM HYRAX TO REMOVE NESTED DIVS INSIDE LABELS -->
+<!-- OVERRIDDEN FROM HYRAX TO REMOVE NESTED DIVS -->
 <div class="modal worktypes fade" id="worktypes-to-create" tabindex="-1" role="dialog" aria-labelledby="select-worktype-label">
   <div class="modal-dialog" role="document">
     <form class="modal-content new-work-select">
@@ -10,13 +9,18 @@
       <div class="modal-body">
         <% create_work_presenter.each do |row_presenter| %>
           <div class="select-worktype">
-              <input type="radio" name="payload_concern" id="concern" value="<%= row_presenter.concern %>"
+            <label>
+              <input type="radio" name="payload_concern" value="<%= row_presenter.concern %>"
                 data-single="<%= row_presenter.switch_to_new_work_path(route_set: main_app, params: params) %>"
                 data-batch="<%= row_presenter.switch_to_batch_upload_path(route_set: hyrax, params: params) %>" />
-              <div class="select-work-icon">
+              <span class="select-work-icon">
                 <span class="<%= row_presenter.icon_class %>"></span>
-              </div>
-              <label for="concern"><%= row_presenter.description %></label>
+              </span>
+              <span class="select-work-description">
+                <h3 class="work-type-title"><%= row_presenter.name %></h3>
+                <p><%= row_presenter.description %></p>
+              </span>
+            </label>
           </div>
         <% end %>
       </div>
