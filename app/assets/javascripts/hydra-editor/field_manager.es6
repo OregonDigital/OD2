@@ -115,7 +115,9 @@ export class FieldManager {
           // Create new field
           let $new = this._newField($activeField);
           // Make new field labelled by field label
-          $new.find('input').attr('aria-labelledby', labelID + 'label').attr('aria-describedby', labelID + 'help');
+          $new.find('input').attr('aria-labelledby', labelID + 'label')
+                            .attr('aria-describedby', labelID + 'help')
+                            .attr('id', labelID + $listing.children('li').length);
           $listing.append($new);
       }
 
