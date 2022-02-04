@@ -26,6 +26,7 @@ export class FieldManager {
       this._addInitialClasses();
       this._addInitialID();
       this._appendControls();
+      this._appendWarning();
       this._attachEvents();
       this._addCallbacks();
   }
@@ -55,6 +56,16 @@ export class FieldManager {
         this._createAddControl()
       }
   }
+
+  // OVERRIDE to add an invisible warning box to be filled later
+  _appendWarning() {
+    let $listing = $(this.listClass);
+    // Create
+    var $warningMessage  = $("<div class=\'message has-warning\' aria-live='assertive' style='height:0;padding:0;border:0;'></div>");
+    $listing.nextAll(this.warningClass).remove();
+    $listing.after($warningMessage);
+  }
+  // END OVERRIDE
 
   _createRemoveWrapper() {
     $(this.fieldWrapperClass, this.element).append(this.controls);
@@ -128,16 +139,22 @@ export class FieldManager {
   }
 
   clearEmptyWarning() {
+      // OVERRIDE to clear text instead of delete element
       let $listing = $(this.listClass, this.element)
-      $listing.nextAll(this.warningClass).remove();
+      var $warningElem = $listing.nextAll(this.warningClass);
+      $warningElem.css({"height":"0", "border":"0", "padding":"0"});
+      $warningElem.empty();
+      // END OVERRIDE
   }
 
   displayEmptyWarning() {
       let $listing = $(this.listClass, this.element)
       // OVERRIDE to push <div> out of <ul> and add aria-live for SR announcement
-      var $warningMessage  = $("<div class=\'message has-warning\' aria-live='assertive'>cannot add another with empty field</div>");
-      $listing.nextAll(this.warningClass).remove();
-      $listing.after($warningMessage);
+      // Add text into an existing warning div and remove style that's removing div from visibility
+      var $warningMessage  = "Cannot add another with empty field";
+      var $warningElem = $listing.nextAll(this.warningClass);
+      $warningElem.text($warningMessage);
+      $warningElem.removeAttr('style');
       // END OVERRIDE
   }
 
