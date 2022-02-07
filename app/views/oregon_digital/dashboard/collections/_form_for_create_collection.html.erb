@@ -18,14 +18,9 @@
               <%= render_edit_field_partial(:modal_description, f: f) %>
               <%= f.submit t(:'hyrax.collection.select_form.create'),
                            class: 'btn btn-primary submits-batches submits-batches-add',
-                           onclick: "confirmation_needed = false;",
+                           onclick: "confirmation_needed = true;",
                            id: "create_submit",
-                           name: "create_collection",
-                           data: {
-                             disable_with: false,
-                             toggle: 'modal',
-                             target: '#collection-create-container'
-                           } %>
+                           name: "create_collection" %>
             <% end %>
           </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->

@@ -101,6 +101,7 @@ function submit_create_my_collection_modal(event) {
   $(event.target.elements['batch_document_ids[]']).each(function() {
     batch_ids.push(this.value)
   });
+  $('#collection-create-container').modal('hide')
 
   // Perform async call and alert user this may take some time
   $.ajax({
