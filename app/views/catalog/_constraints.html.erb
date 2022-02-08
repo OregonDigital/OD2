@@ -4,7 +4,7 @@
   <%= render_constraints(params) %>
 </div>
 <div class="widget-wrapper">
-  <div class="pull-right catalog-search">
+  <div id="catalog-search" tabindex="0" class="pull-right catalog-search">
     <%# OVERRIDE FROM BLACKLIGHT to remove start over link and replace with view type widget %>
     <% tool_config = Blacklight::Configuration::ToolConfig.new %>
     <% tool_config.name = :view_type_group %>
@@ -21,3 +21,7 @@
 </div>
 
 <div class="constraints-divider"></div>
+
+<script>
+  document.getElementById('catalog-search').focus()
+</script>
