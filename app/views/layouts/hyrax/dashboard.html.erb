@@ -6,9 +6,9 @@
   </head>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar" class="dashboard">
-    <div class="skip-to-content">
-      <%= link_to "Skip to Content", "#skip-to-content" %>
-    </div>
+    <a id='skip-nav' class='sr-only' href='#main-content'>
+      Skip to Content
+    </a>
     <%= render '/masthead' %>
     <%= content_for(:navbar) %>
     <div id="content-wrapper">
@@ -27,10 +27,8 @@
             </div>
           </div>
         <% end %>
-
-          <a data-name="skip-to-content" id="skip-to-content"></a>
-          <%= content_for?(:content) ? yield(:content) : yield %>
-
+        <div id="main-content"></div>
+        <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
 
     <!-- /#content-wrapper -->

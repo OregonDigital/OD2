@@ -5,6 +5,14 @@
     width: auto;
   }
 }
+table.table-scrollable {
+  @media (max-width: $screen-sm-min) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    height: 100%
+  }
+}
 
 .oembed-widget {
   text-align: center;
