@@ -18,8 +18,7 @@
             <%= render_thumbnail_tag(
                 SolrDocument.find(@member_works[0].id),
                 { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
-                'aria-hidden': true,
-                tabindex: -1
+                'aria-hidden': true
               ) %>
           </div>
         <% end %>
@@ -28,8 +27,7 @@
             <%= render_thumbnail_tag(
                 SolrDocument.find(@member_works[1].id),
                 { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
-                'aria-hidden': true,
-                tabindex: -1
+                'aria-hidden': true
               ) %>
           </div>
         <% end %>
@@ -38,18 +36,16 @@
             <%= render_thumbnail_tag(
                 SolrDocument.find(@member_works[2].id),
                 { class: 'img-thumbnail', alt: '', height: 100, width: 100 },
-                'aria-hidden': true,
-                tabindex: -1
+                'aria-hidden': true
               ) %>
           </div>
         <% end %>
         <div class="col-sm-6">
           <div class='collection-title'><h3><%= collection.title.first %></h3></div>
-          <p>
-            <div class="h4"><%= @member_count %> items
+          <div class="h4"><%= @member_count %> items
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"} %></div>
-          </p>
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"} %>
+          </div>
         </div>
         </div>
       <% end %>
