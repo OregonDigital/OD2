@@ -1,5 +1,5 @@
 <tr class="<%= dom_class(member) %> attributes">
-  <td class="thumbnail hidden-xs">
+  <td class="attribute attribute-thumbnail">
     <%= render_thumbnail_tag member, { alt: "file details" } %>
   </td>
   <th scope="row" class="attribute attribute-filename ensure-wrapped"><%= link_to(member.link_name, contextual_path(member, @presenter)) %></td>

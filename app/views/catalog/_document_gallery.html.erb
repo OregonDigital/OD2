@@ -1,7 +1,7 @@
 <% # container for all documents in index view -%>
 <div class="row hyc-bl-results hyc-bl-search">
   <% documents.in_groups_of(4, false).each do |docs| %>
-  <div class="row">
+  <div class="row box-row">
     <%= render collection: docs, as: :document, partial: 'index_gallery', locals: {count: documents.count} %>
   </div>
   <% end %>
