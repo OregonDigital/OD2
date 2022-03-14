@@ -54,5 +54,12 @@ environment ENV.fetch('RAILS_ENV') { 'development' }
 # end
 #
 
+
+# Activa pumactl and enable the Yabeda puma plugin
+activate_control_app
+plugin :yabeda
+plugin :yabeda_prometheus
+prometheus_exporter_url "tcp://0.0.0.0:9395/metrics"
+
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
