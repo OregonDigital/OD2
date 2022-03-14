@@ -53,8 +53,13 @@ gem 'honeycomb-beeline', '>= 2.4.0'
 gem 'libhoney', '>= 1.18.0'
 gem 'rack-honeycomb', '~> 0.5.0'
 
-# OkComputer
-gem 'okcomputer'
+# Yabeda
+gem 'yabeda-prometheus'
+gem 'yabeda-sidekiq'
+gem 'yabeda-rails'
+gem 'yabeda-puma-plugin'
+gem 'yabeda-http_requests'
+gem 'yabeda'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
