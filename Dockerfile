@@ -33,8 +33,8 @@ RUN mkdir -p /tmp/ffi && \
   ./configure --prefix=/usr/local && make && make install && rm -rf /tmp/ffi
 
 RUN mkdir -p /tmp/im && \
-  curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-9.tar.gz \
-  | tar -xz -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-9 && \
+  curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-27.tar.xz \
+  | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
     ./configure \
       --build=$CBUILD \
       --host=$CHOST \
@@ -53,7 +53,7 @@ RUN mkdir -p /tmp/im && \
       --with-quantum-depth=16 && \
     make && \
     make install && \
-    rm -rf /tmp/im/ImageMagick-7.1.0-9
+    rm -rf /tmp/im/ImageMagick-7.1.0-27
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \

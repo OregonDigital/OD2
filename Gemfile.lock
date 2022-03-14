@@ -930,10 +930,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq_queue_metrics (3.0.0)
+    sidekiq_queue_metrics (2.1.1)
       eldritch
-      redlock
-      sidekiq
+      sidekiq (>= 5.1)
     signet (0.14.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -1101,7 +1100,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 4)
   sidekiq (~> 6.4)
-  sidekiq_queue_metrics
+  sidekiq_queue_metrics (~> 2.0)
   simplecov (>= 0.9)
   stemmify
   triplestore-adapter!
@@ -1113,4 +1112,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.2.29
+   2.2.31
