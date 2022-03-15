@@ -10,7 +10,6 @@ redis_conn = { url: "redis://#{config[:host]}:#{config[:port]}/" }
 
 Sidekiq.configure_server do |s|
   s.redis = redis_conn
-  #Sidekiq::QueueMetrics.init(s)
 end
 
 Sidekiq.configure_client do |s|
