@@ -8,11 +8,11 @@ daemonize false
 
 # Activa pumactl and enable the Yabeda puma plugin
 activate_control_app
-# URL for yabeda prometheus exporter metrics endpoint
-prometheus_exporter_url "tcp://0.0.0.0:9395/metrics"
 # activate yabeda puma plugin for yabeda-puma-plugin
 plugin :yabeda
 # activate yabeda prometheus exporter metrics endpoint
 plugin :yabeda_prometheus
+# URL for yabeda prometheus exporter metrics endpoint
+prometheus_exporter_url "tcp://0.0.0.0:9395/metrics"
 # Allow for `touch tmp/restart.txt` to force puma to restart the app
 plugin :tmp_restart
