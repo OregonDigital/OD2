@@ -17,6 +17,10 @@
     transform: translateY(-50%);
     right: 0;
   }
+  #appliedParamsConstraint {
+    padding-top: 0;
+    padding-bottom: 0
+  }
 
   .pull-right.catalog-search {
     position: absolute;
@@ -31,24 +35,34 @@
 }
 
 .view-type .btn-default {
+  background-color: $very-light-grey;
   border-radius: 5px !important;
   border: none;
   box-shadow: none;
+  padding: .1em .25em;
+  font-size: 18pt;
   &.active {
     color: $navy-blue;
     background-color: $contrast-orange;
+  }
+  &.view-type-gallery {
+    margin-left: .5em;
   }
 }
 
 .appliedFilter {
   background-color: $very-light-grey;
-  padding: .25em 1em;
+  padding: .5em 1em;
 
   .constraint-value,
   .constraint-value:hover,
   .constraint-value:active {
     background-color: unset;
     padding-right: 1em;
+  }
+
+  @media (max-width: $screen-sm-min) {
+    margin-bottom: 1em;
   }
 }
 
@@ -59,7 +73,7 @@
   min-height: 5em;
 
   .search-widgets {
-    margin-bottom: .5em;
+    margin-bottom: .75em;
 
     .btn {
       background-color: $very-light-grey;
@@ -242,6 +256,7 @@ em {
   border-top: 0px solid $very-light-grey;
   border-left: 0px solid $very-light-grey;
   border-bottom: 0px solid $very-light-grey;
+  padding-right: 1em;
 }
 
 .thumbnail > a > .img-thumbnail {

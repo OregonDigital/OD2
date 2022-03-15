@@ -1,6 +1,5 @@
 
-<div id="appliedParamsConstraint" class="clearfix visible-xs-inline-block">
-  <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
+<div id="appliedParamsConstraint" class="clearfix visible-xs-inline-block breadcrumb">
   <%= render_constraints(params) %>
 </div>
 <div class="widget-wrapper">
@@ -12,7 +11,6 @@
   </div>
 
   <div id="appliedParams" class="clearfix hidden-xs">
-    <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
     <%= render_constraints(params) %>
   </div>
 
