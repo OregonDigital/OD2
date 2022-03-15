@@ -42,7 +42,7 @@ RUN mkdir -p /tmp/im && \
       --with-tiff=yes \
       --with-gs-font-dir=/usr/share/fonts/Type1 \
       --with-quantum-depth=16 && \
-    make -j{$nproc) && \
+    make -j($nproc) && \
     make install && \
     rm -rf /tmp/im
 
