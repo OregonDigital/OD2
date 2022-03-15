@@ -22,17 +22,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone && apk del tzdata --purge
 
-# install libffi 3.2.1
-# https://github.com/libffi/libffi/archive/refs/tags/v3.2.1.tar.gz
-# https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1
-# apk add autoconf aclocal automake libtool
-# tar -xvzpf libffi-3.2.1.tar.gz
-# ./configure --prefix=/usr/local
-#RUN mkdir -p /tmp/ffi && \
-#  curl -sL https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1 \
-#  | tar -xz -C /tmp/ffi && cd /tmp/ffi/libffi-3.2.1 && ./autogen.sh &&\
-#  ./configure --prefix=/usr/local && make && make install && rm -rf /tmp/ffi
-
+# Install ImageMagick with jp2/tiff support
 RUN mkdir -p /tmp/im && \
   curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-27.tar.xz \
   | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
@@ -52,7 +42,7 @@ RUN mkdir -p /tmp/im && \
       --with-tiff=yes \
       --with-gs-font-dir=/usr/share/fonts/Type1 \
       --with-quantum-depth=16 && \
-    make && \
+    make -j{$nproc) && \
     make install && \
     rm -rf /tmp/im
 
