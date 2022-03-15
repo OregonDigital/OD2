@@ -1,6 +1,8 @@
 {
   "options": {
-    "limitLocales": true
+    "limitLocales": true,
+    "zoomToSearchResultEnabled": false,
+    "navigatorEnabled": false
   },
   "modules": {
     "footerPanel": {
