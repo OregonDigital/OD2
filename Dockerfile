@@ -15,7 +15,8 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   libtool libgomp libressl libressl-dev java-common libc6-compat  \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
-  poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less
+  poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
+  libffi
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
@@ -27,10 +28,10 @@ RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
 # apk add autoconf aclocal automake libtool
 # tar -xvzpf libffi-3.2.1.tar.gz
 # ./configure --prefix=/usr/local
-RUN mkdir -p /tmp/ffi && \
-  curl -sL https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1 \
-  | tar -xz -C /tmp/ffi && cd /tmp/ffi/libffi-3.2.1 && ./autogen.sh &&\
-  ./configure --prefix=/usr/local && make && make install && rm -rf /tmp/ffi
+#RUN mkdir -p /tmp/ffi && \
+#  curl -sL https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1 \
+#  | tar -xz -C /tmp/ffi && cd /tmp/ffi/libffi-3.2.1 && ./autogen.sh &&\
+#  ./configure --prefix=/usr/local && make && make install && rm -rf /tmp/ffi
 
 RUN mkdir -p /tmp/im && \
   curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-27.tar.xz \
@@ -53,7 +54,7 @@ RUN mkdir -p /tmp/im && \
       --with-quantum-depth=16 && \
     make && \
     make install && \
-    rm -rf /tmp/im/ImageMagick-7.1.0-27
+    rm -rf /tmp/im
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
