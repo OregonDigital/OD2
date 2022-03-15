@@ -16,9 +16,11 @@ AllCops:
     - 'lib/tasks/**/*'
     - 'app/presenters/hyrax/file_set_presenter.rb'
     - 'app/presenters/hyrax/collapsable_section_presenter.rb'
+  NewCops: disable
+  SuggestExtensions: false
 
 Metrics/BlockLength:
-  ExcludedMethods: ['included']
+  IgnoredMethods: ['included']
   Exclude:
     - 'lib/tasks/**/*'
     - 'spec/**/*.rb'
@@ -137,7 +139,7 @@ Lint/NonDeterministicRequireOrder:
 Style/FormatStringToken:
   Enabled: false
 
-FactoryBot/FactoryClassName:
+RSpec/FactoryBot:
   Enabled: false
 
 Style/RedundantReturn:
@@ -145,6 +147,49 @@ Style/RedundantReturn:
 
 Migration/DepartmentName:
   Enabled: false
+
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Style/RedundantRegexpEscape:
+  Enabled: false
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: false
+
+Lint/RedundantCopDisableDirective:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+RSpec/StubbedMock:
+  Enabled: false
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Style/AccessorGrouping:
+  Enabled: false
+
 
 RSpec/VerifiedDoubles:
   Exclude:
