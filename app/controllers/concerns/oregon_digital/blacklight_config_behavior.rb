@@ -31,8 +31,8 @@ module OregonDigital
         config.advanced_search[:form_solr_parameters] ||= {}
         config.advanced_search[:form_facet_partial] = 'custom_advanced_search_facets_as_select'
         config.advanced_search = {
-          :form_solr_parameters => {
-            "facet.limit" => -1, # return all facet values
+          form_solr_parameters: {
+            'facet.limit': -1, # return all facet values
           }
         }
 
