@@ -45,7 +45,8 @@
     color: $navy-blue;
     background-color: $contrast-orange;
   }
-  &.view-type-gallery {
+  &.view-type-gallery,
+  &.view-type-masonry {
     margin-left: .5em;
   }
 }
@@ -66,11 +67,11 @@
   }
 }
 
+.results-constraints-wrapper{
+  margin-top: 2em;
+}
 #sortAndPerPage {
   border: none;
-  margin-bottom: 0;
-  margin-top: 2em;
-  min-height: 5em;
 
   .search-widgets {
     margin-bottom: .75em;
@@ -138,7 +139,6 @@
 }
 #facets {
   background-color: $very-light-grey;
-  margin-top: 2em;
 
   #facet-panel-collapse {
     padding: 1em;

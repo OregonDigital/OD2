@@ -12,12 +12,11 @@
   <%= json_api_link_tag %>
 <% end %>
 
-<%= render 'sort_and_per_page' %>
-
 <%# OVERRIDE FROM HYRAX to add h1 to search results page %>
 <%- if controller.controller_name == "catalog" %>
   <h1 class="sr-only"><%= t('blacklight.search.search_results') %></h1>
 <%- else %>
+  <%= render 'sort_and_per_page' %>
   <h2 class="sr-only"><%= t('blacklight.search.search_results') %></h2>
 <%- end %>
 
