@@ -30,6 +30,11 @@ module OregonDigital
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {}
         config.advanced_search[:form_facet_partial] = 'custom_advanced_search_facets_as_select'
+        config.advanced_search = {
+          form_solr_parameters: {
+            'facet.limit': -1 # return all facet values
+          }
+        }
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
