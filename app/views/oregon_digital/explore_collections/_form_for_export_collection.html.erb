@@ -1,10 +1,10 @@
 <%# Export collection modal #%>
-<div role="dialog" class="modal collection-export-modal fade" id="collection-export-container" tabindex="-1" aria-labelledby="col_export_title">
+<div class="modal collection-export-modal fade" id="collection-export-container">
   <div class="modal-dialog text-left">
-      <div class="modal-content">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="col_export_title">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-label="close">&times;</button>
           <span class="modal-title" id="col_export_title"><%= t("oregon_digital.collection.export_form.title") %></span>
+          <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-label="close">&times;</button>
         </div>
         <div class="modal-body">
           <p>Your download may take some time to get ready for you, please be patient.</p>
