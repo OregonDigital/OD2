@@ -1,10 +1,10 @@
 <%# OVERRIDE FROM HYRAX to restructure add to collection modal #%>
-<div role="dialog" class="modal collection-list-modal fade" id="collection-list-container" tabindex="-1" aria-labelledby="col_add_title">
+<div id="collection-list-container" class="modal collection-list-modal fade">
   <div class="modal-dialog text-left">
-      <div class="modal-content">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="col_add_title">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="<%= t('blacklight.modal.close') %>">&times;</button>
           <h2 class="modal-title" id="col_add_title"><%= t("hyrax.collection.select_form.title") %></h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="<%= t('blacklight.modal.close') %>">&times;</button>
         </div>
         <% unless current_user.nil? %>
           <div class="modal-body">
@@ -58,7 +58,7 @@
                 class: 'btn btn-primary btn-outline login-button',
                 data: { toggle: "modal", dismiss: "modal", target: "#user-login-modal",
                 tabindex: 0 } %>
-      
+
             <%= link_to t('hyrax.dashboard.my.action.sign_up'), main_app.new_user_registration_path,
                 class: 'btn btn-primary login-button',
                 tabindex: 0 %>

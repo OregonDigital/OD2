@@ -15,26 +15,17 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   libtool libgomp libressl libressl-dev java-common libc6-compat  \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
-  poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less
+  poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
+  libffi
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone && apk del tzdata --purge
 
-# install libffi 3.2.1
-# https://github.com/libffi/libffi/archive/refs/tags/v3.2.1.tar.gz
-# https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1
-# apk add autoconf aclocal automake libtool
-# tar -xvzpf libffi-3.2.1.tar.gz
-# ./configure --prefix=/usr/local
-RUN mkdir -p /tmp/ffi && \
-  curl -sL https://codeload.github.com/libffi/libffi/tar.gz/refs/tags/v3.2.1 \
-  | tar -xz -C /tmp/ffi && cd /tmp/ffi/libffi-3.2.1 && ./autogen.sh &&\
-  ./configure --prefix=/usr/local && make && make install && rm -rf /tmp/ffi
-
+# Install ImageMagick with jp2/tiff support
 RUN mkdir -p /tmp/im && \
-  curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-9.tar.gz \
-  | tar -xz -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-9 && \
+  curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-27.tar.xz \
+  | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
     ./configure \
       --build=$CBUILD \
       --host=$CHOST \
@@ -51,9 +42,9 @@ RUN mkdir -p /tmp/im && \
       --with-tiff=yes \
       --with-gs-font-dir=/usr/share/fonts/Type1 \
       --with-quantum-depth=16 && \
-    make && \
+    make -j`nproc` && \
     make install && \
-    rm -rf /tmp/im/ImageMagick-7.1.0-9
+    rm -rf /tmp/im
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
