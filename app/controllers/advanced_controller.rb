@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class should NOT be generated into local app. If you generated
 # into local app in a previous version, remove that, config is done
 # in CatalogController now.
@@ -20,6 +22,9 @@
 # which still mixes in BlacklightAdvancedSearch::AdvancedController. There
 # are probably some other edges that need to be smoothed for that approach, but
 # that'd be the direction.
+
+# rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/BlockLength
 class AdvancedController < BlacklightAdvancedSearch::AdvancedController
   configure_blacklight do |config|
         # configuration for Blacklight IIIF Content Search
@@ -318,4 +323,5 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
         # mean') suggestion is offered.
         config.spell_max = 5
       end
+    end
 end
