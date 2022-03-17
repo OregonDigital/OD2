@@ -10,10 +10,9 @@ redis_conn = { url: "redis://#{config[:host]}:#{config[:port]}/" }
 
 Sidekiq.configure_server do |s|
   s.redis = redis_conn
+  Yabeda::Prometheus::Exporter.start_metrics_server!
 end
 
 Sidekiq.configure_client do |s|
   s.redis = redis_conn
 end
-
-Yabeda::Prometheus::Exporter.start_metrics_server!
