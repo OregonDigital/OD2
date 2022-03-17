@@ -1,6 +1,5 @@
 
-<div id="appliedParamsConstraint" class="clearfix visible-xs-inline-block">
-  <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
+<div id="appliedParamsConstraint" class="clearfix visible-xs-inline-block breadcrumb">
   <%= render_constraints(params) %>
 </div>
 <div class="widget-wrapper">
@@ -12,7 +11,6 @@
   </div>
 
   <div id="appliedParams" class="clearfix hidden-xs">
-    <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
     <%= render_constraints(params) %>
   </div>
 
@@ -21,4 +19,10 @@
 </div>
 
 <div class="constraints-divider"></div>
+
+<div class="results-constraints-wrapper">
+  <h2 class="sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></h2>
+  <div class="result-count mw-lg-b col-md-3 col-sm-4"> <strong>Showing <%= @response.total_count %> works </strong></div>
+  <%= render 'sort_and_per_page' %>
+</div>
 
