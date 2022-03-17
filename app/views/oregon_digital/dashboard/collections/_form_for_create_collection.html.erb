@@ -1,10 +1,10 @@
 <%# OVERRIDE FROM HYRAX to restructure add to collection modal #%>
-<div role="dialog" class="modal collection-create-modal fade" id="collection-create-container" tabindex="-1" aria-labelledby="col_create_title">
+<div id="collection-create-container" class="modal collection-create-modal fade">
   <div class="modal-dialog text-left">
-      <div class="modal-content">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="col_create_title">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-label="close">&times;</button>
           <h2 class="modal-title" id="col_create_title"><%= t("oregon_digital.collection.create_form.title") %></h2>
+          <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-label="close">&times;</button>
         </div>
           <div class="modal-body">
             <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository),
@@ -18,14 +18,9 @@
               <%= render_edit_field_partial(:modal_description, f: f) %>
               <%= f.submit t(:'hyrax.collection.select_form.create'),
                            class: 'btn btn-primary submits-batches submits-batches-add',
-                           onclick: "confirmation_needed = false;",
+                           onclick: "confirmation_needed = true;",
                            id: "create_submit",
-                           name: "create_collection",
-                           data: {
-                             disable_with: false,
-                             toggle: 'modal',
-                             target: '#collection-create-container'
-                           } %>
+                           name: "create_collection" %>
             <% end %>
           </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->

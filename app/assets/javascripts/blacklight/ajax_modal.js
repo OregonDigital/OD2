@@ -141,7 +141,7 @@ Blacklight.ajaxModal.modalAjaxLinkClick = function(e) {
   e.preventDefault();
 
   $.ajax({
-    url: $(this).attr('href'),
+    url: $(this).attr('data-href'),
     relatedObject: this,
   })
   .fail(Blacklight.ajaxModal.onFailure)
@@ -211,7 +211,9 @@ Blacklight.onLoad(function() {
 // Reset focus to element that opened the modal
 $(document).ready(function() {
   $('body').on('show.bs.modal', function(e) {
-    Blacklight.ajaxModal.clickTarget = e.relatedTarget;
+    if (!$(e.relatedTarget).parents('.modal').length) {
+      Blacklight.ajaxModal.clickTarget = $(e.relatedTarget);
+    }
   });
   // Find first and last focusable elements in the modal
   // and making tabing off the modal wrap around instead
@@ -220,6 +222,7 @@ $(document).ready(function() {
     var focusable = $(e.target).find('button:visible, [href]:visible, input:visible, select:visible, textarea:visible, [tabindex]:visible:not([tabindex="-1"])');
     Blacklight.ajaxModal.firstFocusable = $(focusable[0])
     Blacklight.ajaxModal.lastFocusable = $(focusable[focusable.length - 1]);
+    Blacklight.ajaxModal.firstFocusable.focus();
     // On the first focusable, if we shift+tab off, jump to last focusable
     Blacklight.ajaxModal.firstFocusable.on('keydown', function(e) {
       if(e.keyCode == 9 && e.shiftKey) {
@@ -235,7 +238,7 @@ $(document).ready(function() {
       }
     });
   });
-  $('body').on('hidden.bs.modal', function(e) {
+  $('body').on('hide.bs.modal', function(e) {
     if (Blacklight.ajaxModal.clickTarget) {
       Blacklight.ajaxModal.clickTarget.focus();
     }

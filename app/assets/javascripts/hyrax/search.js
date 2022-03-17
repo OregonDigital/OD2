@@ -69,3 +69,7 @@
 Blacklight.onLoad(function() {
   $('#search-form-header').search();
 });
+
+Blacklight.onLoad(function() {
+  location.hash = 'content'
+});

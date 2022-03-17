@@ -29,7 +29,8 @@
       <% end %>
       <div id="main-content"></div>
       <%= content_for?(:content) ? yield(:content) : yield %>
-    <!-- /#content-wrapper -->
+    </div><!-- /#content-wrapper -->
+    <%= render 'hyrax/homepage/login_modal' %>
     <%= render 'shared/ajax_modal' %>
     <%= render 'shared/footer' %>
   </body>
