@@ -25,6 +25,7 @@
 
 # rubocop:disable Metrics/ClassLength
 # rubocop:disable Metrics/BlockLength
+# rubocop:disable Layout/IndentationWidth
 class AdvancedController < BlacklightAdvancedSearch::AdvancedController
   configure_blacklight do |config|
         # configuration for Blacklight IIIF Content Search
@@ -326,3 +327,4 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
 end
 # rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/BlockLength
+# rubocop:enable Layout/IndentationWidth
