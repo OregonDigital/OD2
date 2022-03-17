@@ -1,10 +1,10 @@
 <%# OVERRIDE FROM HYRAX to restructure add to collection modal #%>
-<div role="dialog" class="modal fade" id="user-login-modal" tabindex="-1" aria-labelledby="login_account_title" data-backdrop="false">
+<div id="user-login-modal" class="modal fade">
   <div class="modal-dialog text-left">
-      <div class="modal-content">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="login_account_title">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
           <span class="modal-title" id="login_account_title">LOGIN TO YOUR ACCOUNT</span>
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
         </div>
         <div class="modal-body login-modal">
           <div class="row">
