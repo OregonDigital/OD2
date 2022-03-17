@@ -322,8 +322,7 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
         # If there are more than this many search results, no spelling ('did you
         # mean') suggestion is offered.
         config.spell_max = 5
-      end
-    end
+  end
 end
 # rubocop:enable Metrics/ClassLength
 # rubocop:enable Metrics/BlockLength
