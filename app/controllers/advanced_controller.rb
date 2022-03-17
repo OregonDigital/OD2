@@ -325,3 +325,5 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
       end
     end
 end
+# rubocop:enable Metrics/ClassLength
+# rubocop:enable Metrics/BlockLength
