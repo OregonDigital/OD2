@@ -220,7 +220,7 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
         config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: -1
         config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: -1
         config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: -1
-        config.add_facet_field 'non_user_collections_ssim', limit: -1, label: 'Collection'
+        config.add_facet_field 'non_user_collections_ssim', limit: 10_000, label: 'Collection'
         config.add_facet_field 'institution_label_sim', limit: -1, label: 'Institution'
         config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: -1
 
