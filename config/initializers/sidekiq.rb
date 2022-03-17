@@ -15,3 +15,5 @@ end
 Sidekiq.configure_client do |s|
   s.redis = redis_conn
 end
+
+Yabeda::Prometheus::Exporter.start_metrics_server!
