@@ -1,4 +1,5 @@
 <ul class="facet-values list-unstyled">
+  <% display_facet.items.sort_by! { |v| [facet_in_params?(facet_field.key, v.value) ? 1 : 0, v.hits] }.reverse! %>
   <% paginator = facet_paginator(facet_field, display_facet) %>
   <%= render_facet_limit_list paginator, facet_field.key %>
 
