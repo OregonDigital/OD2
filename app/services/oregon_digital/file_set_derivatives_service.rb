@@ -89,8 +89,7 @@ module OregonDigital
     def create_thumbnail(filename)
       OregonDigital::Derivatives::Image::GMRunner.create(
         filename,
-        outputs: [{ label: :thumbnail, size: '120x120>',
-                    format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+        outputs: [{ label: :thumbnail, size: '480x480>', format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
       )
     end
 
