@@ -1,25 +1,14 @@
-module Hydra::Derivatives::Processors
+module OregonDigital::Derivatives
   module Video
-    class VideoProcessor < Hydra::Derivatives::Processors::Processor
-      include Ffmpeg
-      
-      class_attribute :config
-      self.config = Config.new
+    class VideoProcessor < Hydra::Derivatives::Processors::Video::Processor
       
       protected
       
       def options_for(format)
         input_options = ""
-        output_options = "-c:v libx264 -fpsmax 30 -b:v 3500K -vf \"scale='-1:'min(720,ih)'\""
+        output_options = "-c:v libx264 -fpsmax 30 -b:v 3500K"
       
-        if format == "jpg"
-          input_options += " -itsoffset -2"
-          output_options += " -vframes 1 -an -f rawvideo"
-        else
-          output_options += " #{config.video_attributes} #{config.audio_attributes}"
-        end
-      
-        { Ffmpeg::OUTPUT_OPTIONS => output_options, Ffmpeg::INPUT_OPTIONS => input_options }
+        { Hydra::Derivatives::Processors::Ffmpeg::OUTPUT_OPTIONS => output_options, Hydra::Derivatives::Processors::Ffmpeg::INPUT_OPTIONS => input_options }
       end
       
       def codecs(format)
