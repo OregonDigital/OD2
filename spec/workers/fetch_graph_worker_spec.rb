@@ -17,6 +17,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
     allow(subject_controlled_val).to receive(:fetch).with(:anything).and_return({})
     allow(location_controlled_val).to receive(:fetch).with(:anything).and_return({})
     allow(scientific_controlled_val).to receive(:fetch).with(:anything).and_return({})
+    allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:fetch).and_return({})
     allow_any_instance_of(OregonDigital::ControlledVocabularies::Creator).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
     allow_any_instance_of(OregonDigital::ControlledVocabularies::Subject).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
     allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])

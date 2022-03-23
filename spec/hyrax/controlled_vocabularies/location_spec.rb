@@ -3,6 +3,19 @@
 RSpec.describe Hyrax::ControlledVocabularies::Location do
   let(:location) { described_class.new('https://sws.geonames.org/3469034/') }
   let(:parent_adm1) { described_class.new('https://sws.geonames.org/3469034/') }
+  let(:geo_subject) { RDF::URI('https://sws.geonames.org/3469034/') }
+  let(:graph) do
+    g = RDF::Graph.new
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.geonames.org/ontology#countryCode'), 'BR')
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.geonames.org/ontology#officialName'), 'Brazil')
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.geonames.org/ontology#name'), 'Brazil')
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.geonames.org/ontology#alternateName'), 'Federative Republic of Brazil')
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.geonames.org/ontology#featureClass'), RDF::URI('https://www.geonames.org/ontology#A'))
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.geonames.org/ontology#parentFeature'), RDF::URI('https://sws.geonames.org/11812364/'))
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.geonames.org/ontology#parentFeature'), RDF::URI('https://sws.geonames.org/6255150/'))
+    g << RDF::Statement.new(geo_subject, RDF::URI('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'), RDF::URI('http://www.geonames.org/ontology#Feature'))
+    g
+  end
 
   before do
     stub_request(:get, 'https://sws.geonames.org/3469034/')
@@ -69,6 +82,10 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
   end
 
   describe '#fetch' do
+    before do
+      allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(graph)
+    end
+
     context 'when a top level element is found' do
       before do
         allow(location).to receive(:top_level_element?).and_return(true)
@@ -77,8 +94,36 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
       it { expect(location.fetch).to eq location }
     end
 
-    context 'when a top level element is not found' do
+    context 'when element is in the triplestore' do
       before do
+        allow(location).to receive(:top_level_element?).and_return(true)
+        location.fetch
+      end
+
+      it { expect(location.rdf_label).to eq ['Brazil'] }
+    end
+
+    context 'when element is not in the triplestore' do
+      let(:triplestore_client) { instance_double('TriplestoreAdapter::Client', provider: provider) }
+      let(:provider) { instance_double('TriplestoreAdapter::Providers::Blazegraph', insert: true) }
+
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
+        allow(OregonDigital::Triplestore).to receive(:triplestore_client).and_return(triplestore_client)
+        allow(location).to receive(:top_level_element?).and_return(true)
+        location.fetch
+      end
+
+      it { expect(location.rdf_label).to eq ['Brazil'] }
+    end
+
+    context 'when a top level element is not found' do
+      let(:triplestore_client) { instance_double('TriplestoreAdapter::Client', provider: provider) }
+      let(:provider) { instance_double('TriplestoreAdapter::Providers::Blazegraph', insert: true) }
+
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
+        allow(OregonDigital::Triplestore).to receive(:triplestore_client).and_return(triplestore_client)
         allow(location).to receive(:top_level_element?).and_return(false)
         allow(location).to receive(:parent_hierarchy).and_return([[parent_adm1]])
         allow(parent_adm1).to receive(:fetch).and_return(parent_adm1)
