@@ -4,7 +4,6 @@ module OregonDigital::Derivatives
   module Video
     # Sets output options for video derivatives
     class VideoProcessor < Hydra::Derivatives::Processors::Video::Processor
-
       protected
 
       def options_for(_format)
