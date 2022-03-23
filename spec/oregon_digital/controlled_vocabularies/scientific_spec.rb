@@ -32,5 +32,33 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
 
       it { expect { new_vocab.fetch }.to raise_error OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError }
     end
+
+    context 'with ubio term not in cache' do
+      let(:statement) { RDF::Statement(RDF::URI('http://ubio.org/authority/metadata.php?lsid=urn:lsid:ubio.org:namebank:1187711'), RDF::Vocab::SKOS.prefLabel, 'pony') }
+
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
+        allow(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).to receive(:fetch).and_return(statement)
+      end
+
+      it do
+        expect(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).to receive(:fetch)
+        new_vocab.fetch
+      end
+    end
+
+    context 'with ubio term in cache' do
+      let(:graph) { RDF::Graph.new }
+
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(graph)
+      end
+
+      it do
+        expect(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).not_to receive(:fetch)
+        new_vocab.fetch
+      end
+>>>>>>> add in_triplestore check
+    end
   end
 end
