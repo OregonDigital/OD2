@@ -6,7 +6,7 @@ module OregonDigital::Derivatives
       
       def options_for(format)
         input_options = ""
-        output_options = "-c:v libx264 -fpsmax 30 -b:v 3500K"
+        output_options = "-c:v libx264 -filter:v fps=fps=30 -b:v 3500K"
       
         { Hydra::Derivatives::Processors::Ffmpeg::OUTPUT_OPTIONS => output_options, Hydra::Derivatives::Processors::Ffmpeg::INPUT_OPTIONS => input_options }
       end
