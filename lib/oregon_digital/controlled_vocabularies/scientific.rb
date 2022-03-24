@@ -23,6 +23,8 @@ module OregonDigital
         else
           super
         end
+      rescue IOError
+        raise IOError
       end
     end
   end
