@@ -107,6 +107,13 @@ module OregonDigital
                                                                       layer: 0 }])
     end
 
+    def create_video_derivatives(filename)
+      OregonDigital::Derivatives::Video::VideoRunner.create(filename,
+                                                            outputs: [{ label: :thumbnail, format: 'jpg', url: derivative_url('thumbnail') },
+                                                                      { label: 'webm', format: 'webm', url: derivative_url('webm') },
+                                                                      { label: 'mp4', format: 'mp4', url: derivative_url('mp4') }])
+    end
+
     # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
     def sequence_path(path, sequence = nil)
       return path unless sequence
