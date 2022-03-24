@@ -37,16 +37,32 @@ module Hyrax
         Array(@label)
       end
 
+      def fetch_from_cache(subject)
+        OregonDigital::Triplestore.fetch_cached_term(subject)
+      end
+
+      def store_graph
+        OregonDigital::Triplestore.triplestore_client.provider.insert(persistence_strategy.graph)
+      end
+
       # Fetch parent features if they exist. Necessary for automatic population of rdf label.
       def fetch(*_args, &_block)
+        graph = fetch_from_cache(rdf_subject)
+        unless graph.nil?
+          persistence_strategy.graph = graph
+          return self
+        end
         resource = super
-        return resource if top_level_element?
+        fetch_parents unless top_level_element?
+        store_graph
+        resource
+      end
 
+      def fetch_parents
         parent_hierarchy.each do |p|
           p.first.top_level_element = true
           p.first.fetch
         end
-        resource
       end
 
       # Persist parent features.
