@@ -42,7 +42,8 @@ module OregonDigital
       OregonDigital::Derivatives::Audio::FfmpegRunner.create(
         filename,
         outputs: [{ label: 'mp3', format: 'mp3', url: derivative_url('mp3') },
-                  { label: 'ogg', format: 'ogg', url: derivative_url('ogg') }]
+                  { label: 'ogg', format: 'ogg', url: derivative_url('ogg') },
+                  { label: 'standard', format: 'ogg', ffmpeg_options: '-ar 22050 -b:a 96K', url: derivative_url('ogg') }]
       )
     end
 
