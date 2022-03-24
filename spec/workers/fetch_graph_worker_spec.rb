@@ -17,7 +17,6 @@ RSpec.describe FetchGraphWorker, type: :worker do
     allow(subject_controlled_val).to receive(:fetch).with(:anything).and_return({})
     allow(location_controlled_val).to receive(:fetch).with(:anything).and_return({})
     allow(scientific_controlled_val).to receive(:fetch).with(:anything).and_return({})
-    allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:fetch).and_return({})
     allow_any_instance_of(OregonDigital::ControlledVocabularies::Creator).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
     allow_any_instance_of(OregonDigital::ControlledVocabularies::Subject).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
     allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
@@ -27,6 +26,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
   describe '#perform' do
     context 'when the request works' do
       before do
+        allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:store_graph).and_return(true)
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/creator/ChabreWayne%3E').with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Connection' => 'keep-alive', 'Host' => 'ci-test:8080', 'Keep-Alive' => '30', 'User-Agent' => 'Ruby' }).to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/genus/Acnanthes%3E').to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 200, body: '', headers: {})
