@@ -38,6 +38,14 @@ module OregonDigital
       end
     end
 
+    def create_audio_derivatives(filename)
+      OregonDigital::Derivatives::Audio::FfmpegRunner.create(
+        filename,
+        outputs: [{ label: 'mp3', format: 'mp3', url: derivative_url('mp3') },
+                  { label: 'ogg', format: 'ogg', url: derivative_url('ogg') }]
+      )
+    end
+
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
     def create_image_derivatives(filename)
       OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
