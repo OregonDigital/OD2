@@ -36,7 +36,7 @@ class FetchGraphWorker
             val.fetch(headers: { 'Accept' => default_accept_header })
             val.persist!
           end
-        rescue TriplestoreAdapter::TriplestoreException, IOError
+        rescue TriplestoreAdapter::TriplestoreException, IOError, OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError
           fetch_failed_graph(pid, val, controlled_prop)
           next
         end

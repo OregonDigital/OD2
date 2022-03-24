@@ -23,6 +23,8 @@ module OregonDigital
         else
           super
         end
+      rescue ControlledVocabularyFetchError
+        raise ControlledVocabularyFetchError
       end
     end
   end
