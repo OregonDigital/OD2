@@ -7,7 +7,7 @@ module OregonDigital::Derivatives::Audio
     def options_for(_format)
       {
         Hydra::Derivatives::Processors::Ffmpeg::INPUT_OPTIONS => '',
-        Hydra::Derivatives::Processors::Ffmpeg::OUTPUT_OPTIONS => directives.fetch(:ffmpeg_options) || ''
+        Hydra::Derivatives::Processors::Ffmpeg::OUTPUT_OPTIONS => directives.dig(:ffmpeg_options) || ''
       }
     end
   end

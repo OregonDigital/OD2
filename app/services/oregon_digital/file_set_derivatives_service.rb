@@ -43,7 +43,7 @@ module OregonDigital
         filename,
         outputs: [{ label: 'mp3', format: 'mp3', url: derivative_url('mp3') },
                   { label: 'ogg', format: 'ogg', url: derivative_url('ogg') },
-                  { label: 'standard', format: 'mp3', ffmpeg_options: '-ar 22050 -b:a 96K', url: derivative_url('mp3') }]
+                  { label: 'standard', format: 'mp3', ffmpeg_options: '-ar 22050 -b:a 96K', url: derivative_url('standard.mp3') }]
       )
     end
 
