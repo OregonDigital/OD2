@@ -104,5 +104,6 @@ module OregonDigital
       end
     end
     class ControlledVocabularyError < StandardError; end
+    class ControlledVocabularyFetchError < StandardError; end
   end
 end

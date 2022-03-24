@@ -19,6 +19,8 @@ module OregonDigital
       def self.fetch(vocabulary, subject)
         label = xml_parse_service.xml(vocabulary.as_query(subject.to_s)).at_xpath('/rdf:RDF/rdf:Description/dc:title/text()')
         statement(subject, label)
+      rescue Faraday::ConnectionFailed, Faraday::TimeoutError, Net::ReadTimeout
+        raise ControlledVocabularyFetchError, 'connection failed'
       end
 
       def self.xml_parse_service
