@@ -21,7 +21,7 @@ module OregonDigital
         label = json_parse_service.json(vocabulary.as_query(subject.to_s))['scientificName']['combinedName']
         statement(subject, label)
       rescue Faraday::ConnectionFailed, Faraday::TimeoutError, Net::ReadTimeout
-        raise IOError
+        raise ControlledVocabularyFetchError, 'connection failed'
       end
 
       def self.json_parse_service
