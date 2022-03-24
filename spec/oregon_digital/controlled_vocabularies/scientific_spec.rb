@@ -23,4 +23,14 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
       it { expect(vocab.query_to_vocabulary('http://my.queryuri.com')).to be nil }
     end
   end
+
+  describe '#fetch' do
+    context 'when ubio throws an error' do
+      before do
+        allow(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).to receive(:fetch).and_raise(OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError)
+      end
+
+      it { expect { new_vocab.fetch }.to raise_error OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError }
+    end
+  end
 end
