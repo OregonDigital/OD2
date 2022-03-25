@@ -27,6 +27,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
   describe '#fetch' do
     context 'when ubio throws an error' do
       before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
         allow(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).to receive(:fetch).and_raise(OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError)
       end
 
