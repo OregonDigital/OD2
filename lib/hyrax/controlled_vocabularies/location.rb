@@ -50,6 +50,7 @@ module Hyrax
         graph = fetch_from_cache(rdf_subject)
         unless graph.nil?
           persistence_strategy.graph = graph
+          fetch_parents unless top_level_element?
           return self
         end
         resource = super
