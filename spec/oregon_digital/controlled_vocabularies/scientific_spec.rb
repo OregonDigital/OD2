@@ -61,7 +61,6 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
         expect(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).not_to receive(:fetch)
         new_vocab.fetch
       end
->>>>>>> add in_triplestore check
     end
   end
 end
