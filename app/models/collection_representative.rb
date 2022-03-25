@@ -1,0 +1,2 @@
+class CollectionRepresentative < ApplicationRecord
+end
