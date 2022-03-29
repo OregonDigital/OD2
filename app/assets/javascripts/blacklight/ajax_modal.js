@@ -141,7 +141,7 @@ Blacklight.ajaxModal.modalAjaxLinkClick = function(e) {
   e.preventDefault();
 
   $.ajax({
-    url: $(this).attr('href'),
+    url: $(this).attr('data-href'),
     relatedObject: this,
   })
   .fail(Blacklight.ajaxModal.onFailure)
