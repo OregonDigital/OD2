@@ -143,13 +143,6 @@
             </div> <!-- row logorow -->
           <% end %>
           <span class="files"></span>
-          <label>Landing page thumbnails</label>
-          <fieldset id="representative_ids">
-            <input type="text" name="representative_ids[]" />
-            <input type="text" name="representative_ids[]" />
-            <input type="text" name="representative_ids[]" />
-            <input type="text" name="representative_ids[]" />
-          </fieldset>
         </div> <!-- end container -->
 
         <!-- The global file processing state -->
@@ -157,4 +150,16 @@
       </div> <!-- end col-xs-12 -->
     </div> <!-- end row branding-logo-list -->
   </div> <!-- end fileuploadlogo -->
+
+  <div> <!-- Representative images -->
+    <fieldset>
+      <legend><%= t('.representative.label') %></legend>
+      <p><%= t('.representative.description') %></p>
+      <div id="representative_ids">
+        <% f.object.representative_info.each_with_index do |rinfo, i| %>
+          <input type="text" name="representative_ids[]" value="<%= rinfo.try(:fileset_id) %>" data-text="<%= rinfo.try(:fs_title) %>" placeholder="Select a fileset" />
+        <% end %>
+      </div>
+    </fieldset>
+  </div> <!-- end Representative images -->
 </div> <!-- end set-access-controls -->

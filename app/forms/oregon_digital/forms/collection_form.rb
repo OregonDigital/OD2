@@ -66,6 +66,14 @@ module OregonDigital
         params << :license
         params
       end
+
+      def representative_info
+        @representative_info ||= begin
+          representatives = Array(CollectionRepresentative.where({ collection_id: collection.id }))
+
+          representatives.fill({'order' => -1}, representatives.count, 4 - representatives.count).sort_by { |repr| repr['order'] }
+        end
+      end
     end
     # rubocop:enable Metrics/AbcSize
   end
