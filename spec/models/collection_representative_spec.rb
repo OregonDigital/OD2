@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CollectionRepresentative, type: :model do
@@ -17,17 +19,17 @@ RSpec.describe CollectionRepresentative, type: :model do
   it { expect(model.order).to be_an_instance_of(Integer) }
 
   describe '#fs_title' do
-    context 'When the fileset_id is not set' do
+    context 'when the fileset_id is not set' do
       before do
         model.fileset_id = ''
       end
 
       it 'returns an empty string' do
-        # byebug
         expect(model.fs_title).to eq('')
       end
     end
-    context 'When the fileset_id is set' do
+
+    context 'when the fileset_id is set' do
       before do
         model.fileset_id = fileset.id
       end

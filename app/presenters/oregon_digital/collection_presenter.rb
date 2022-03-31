@@ -20,7 +20,7 @@ module OregonDigital
     end
 
     def representative_docs
-      fs_ids = CollectionRepresentative.where(collection_id: id).select { |repr| !repr.fileset_id.empty? }.sort_by { |repr| repr.order }.map { |r| r.fileset_id }
+      fs_ids = CollectionRepresentative.where(collection_id: id).reject { |repr| repr.fileset_id.empty? }.sort_by(&:order).map(&:fileset_id)
       fs_ids.map { |fid| SolrDocument.find(fid) }
     end
 

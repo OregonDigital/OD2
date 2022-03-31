@@ -71,7 +71,7 @@ module OregonDigital
         @representative_info ||= begin
           representatives = Array(CollectionRepresentative.where({ collection_id: collection.id }))
 
-          representatives.fill({'order' => -1}, representatives.count, 4 - representatives.count).sort_by { |repr| repr['order'] }
+          representatives.fill({ 'order' => -1 }, representatives.count, 4 - representatives.count).sort_by { |repr| repr['order'] }
         end
       end
     end
