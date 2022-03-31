@@ -294,7 +294,8 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
     end
 
     it 'calls derivative_url' do
-      expect(service).to receive(:derivative_url).with('thumbnail')
+      expect(service).to receive(:derivative_url).with('thumbnail').once
+      expect(service).to receive(:derivative_url).with('jpeg').once
       service.create_thumbnail('file')
     end
   end

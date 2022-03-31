@@ -38,6 +38,14 @@ module OregonDigital
       end
     end
 
+    def create_audio_derivatives(filename)
+      OregonDigital::Derivatives::Audio::FfmpegRunner.create(
+        filename,
+        outputs: [{ label: 'mp3', format: 'mp3', url: derivative_url('mp3') },
+                  { label: 'ogg', format: 'ogg', url: derivative_url('ogg') }]
+      )
+    end
+
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
     def create_image_derivatives(filename)
       OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
@@ -89,7 +97,8 @@ module OregonDigital
     def create_thumbnail(filename)
       OregonDigital::Derivatives::Image::GMRunner.create(
         filename,
-        outputs: [{ label: :thumbnail, size: '480x480>', format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+        outputs: [{ label: :thumbnail, size: '480x480>', format: 'jpg', url: derivative_url('thumbnail'), layer: 0 },
+                  { label: :standard, size: '1920x1080>', format: 'jpg', url: derivative_url('jpeg'), layer: 0 }]
       )
     end
 
@@ -105,6 +114,13 @@ module OregonDigital
                                                                       tile_size: '1024',
                                                                       compression: '20',
                                                                       layer: 0 }])
+    end
+
+    def create_video_derivatives(filename)
+      OregonDigital::Derivatives::Video::VideoRunner.create(filename,
+                                                            outputs: [{ label: :thumbnail, format: 'jpg', url: derivative_url('thumbnail') },
+                                                                      { label: 'webm', format: 'webm', url: derivative_url('webm') },
+                                                                      { label: 'mp4', format: 'mp4', url: derivative_url('mp4') }])
     end
 
     # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
