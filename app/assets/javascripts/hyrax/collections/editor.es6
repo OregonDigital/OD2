@@ -10,12 +10,8 @@ import tabifyForm from 'hyrax/tabbed_form'
 export default class {
   constructor(elem) {
     let field = elem.find('#collection_thumbnail_id')
-    console.log(field)
     let fieldReps = elem.find('#representative_ids').children()
     this.thumbnailSelect = new ThumbnailSelect(this.url(), field)
-    // fieldReps.
-    console.log(fieldReps)
-    console.log(fieldReps[0])
     for (var i = 0; i < fieldReps.length; ++i) {
       new ThumbnailSelect(this.url(), $(fieldReps[i]))
     }
