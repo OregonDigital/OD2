@@ -25,6 +25,17 @@ RSpec.describe OregonDigital::CollectionPresenter do
     end
   end
 
+  describe '#representative_docs' do
+    let(:representative) { build(:collection_representative,
+                                  collection_id: collection.id,
+                                  fileset_id: solr_doc.id) }
+    before { allow(::CollectionRepresentative).to receive(:where).with(collection_id: representative.collection_id).and_return(representative) }
+    before { allow(::SolrDocument).to receive(:find).with(solr_doc.id).and_return(solr_doc) }
+    it 'returns solr docs for fileset_id' do
+      expect(presenter.representative_docs).to eq([solr_doc])
+    end
+  end
+
   # Mock bytes so collection does not have to be saved.
 
   describe 'collection type methods' do
