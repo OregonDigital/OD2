@@ -85,7 +85,7 @@ Blacklight.ajaxModal.modalSelector = "#ajax-modal";
 
 // Trigger selectors identify forms or hyperlinks that should open
 // inside a modal dialog.
-Blacklight.ajaxModal.triggerLinkSelector  = "a[data-ajax-modal~=trigger], a.lightboxLink,a.more_facets_link,.ajax_modal_launch";
+Blacklight.ajaxModal.triggerLinkSelector  = "button[data-ajax-modal~=trigger], button.lightboxLink,button.more_facets_link,.ajax_modal_launch";
 Blacklight.ajaxModal.triggerFormSelector  = "form[data-ajax-modal~=trigger], form.ajax_form";
 
 // preserve selectors identify forms or hyperlinks that, if activated already
