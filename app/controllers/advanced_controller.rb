@@ -23,9 +23,6 @@
 # are probably some other edges that need to be smoothed for that approach, but
 # that'd be the direction.
 
-# rubocop:disable Metrics/ClassLength
-# rubocop:disable Metrics/BlockLength
-# rubocop:disable Layout/IndentationWidth
 class AdvancedController < BlacklightAdvancedSearch::AdvancedController
   copy_blacklight_config_from(CatalogController)
 
@@ -45,6 +42,3 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
     config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: -1
   end
 end
-# rubocop:enable Metrics/ClassLength
-# rubocop:enable Metrics/BlockLength
-# rubocop:enable Layout/IndentationWidth
