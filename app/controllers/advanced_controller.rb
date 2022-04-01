@@ -23,6 +23,8 @@
 # are probably some other edges that need to be smoothed for that approach, but
 # that'd be the direction.
 
+# rubocop:disable Metrics/BlockLength
+
 # Override from advanced_controller.rb from blacklight_advanced_search
 class AdvancedController < BlacklightAdvancedSearch::AdvancedController
   copy_blacklight_config_from(CatalogController)
@@ -62,3 +64,4 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
     config.add_facet_fields_to_solr_request!
   end
 end
+# rubocop:enable Metrics/BlockLength

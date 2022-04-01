@@ -62,7 +62,7 @@ class CatalogController < ApplicationController
       config.add_facet_field "#{prop[:name]}_sim", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] && !config.facet_fields.keys.include?("#{prop[:name]}_sim")
     end
 
-    config.add_facet_fields_to_solr_request!  
+    config.add_facet_fields_to_solr_request!
   end
 
   # disable the bookmark control from displaying in gallery view

@@ -186,8 +186,6 @@ module OregonDigital
         config.add_show_field 'rights_statement_label_tesim'
         config.add_show_field 'language_label_tesim'
 
-        
-
         # 'fielded' search configuration. Used by pulldown among other places.
         # For supported keys in hash, see rdoc for Blacklight::SearchFields
         #
