@@ -28,6 +28,18 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
   copy_blacklight_config_from(CatalogController)
 
   configure_blacklight do |config|
+    config.add_facet_field 'open_access', limit: -1, label: 'Open Access', show: false, query: {
+      open: { label: 'Open', fq: 'license_sim:(
+        https\://creativecommons.org/licenses/by/4.0/ OR
+        https\://creativecommons.org/licenses/by-sa/4.0/ OR
+        https\://creativecommons.org/licenses/by-nd/4.0/ OR
+        https\://creativecommons.org/licenses/by-nc/4.0/ OR
+        https\://creativecommons.org/licenses/by-nc-nd/4.0/ OR
+        https\://creativecommons.org/licenses/by-nc-sa/4.0/ OR
+        http\://creativecommons.org/publicdomain/zero/1.0/ OR
+        http\://creativecommons.org/publicdomain/mark/1.0/)' }
+    }
+
     config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: -1
     config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), limit: -1
     config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), limit: -1
@@ -41,5 +53,12 @@ class AdvancedController < BlacklightAdvancedSearch::AdvancedController
     config.add_facet_field 'non_user_collections_ssim', limit: -1, label: 'Collection'
     config.add_facet_field 'institution_label_sim', limit: -1, label: 'Institution'
     config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: -1
+
+    (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
+      label = prop[:name_label].nil? ? prop[:name].sub('_label', '') : prop[:name_label]
+      config.add_facet_field "#{prop[:name]}_sim", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] && !config.facet_fields.keys.include?("#{prop[:name]}_sim")
+    end
+
+    config.add_facet_fields_to_solr_request! 
   end
 end
