@@ -19,10 +19,12 @@ module OregonDigital
       def fetch(*_args, &_block)
         vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
         if vocabulary.to_s.include?('Itis') || vocabulary.to_s.include?('Ubio')
-          store_statement(vocabulary.fetch(vocabulary, rdf_subject))
+          store_statement(vocabulary.fetch(vocabulary, rdf_subject)) unless in_triplestore?
         else
           super
         end
+      rescue ControlledVocabularyFetchError
+        raise ControlledVocabularyFetchError
       end
     end
   end
