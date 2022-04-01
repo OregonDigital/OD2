@@ -33,7 +33,7 @@ RSpec.describe OregonDigital::CollectionPresenter do
     end
 
     before do
-      allow(::CollectionRepresentative).to receive(:where).with(collection_id: representative.collection_id).and_return(representative)
+      allow(::CollectionRepresentative).to receive(:where).with(collection_id: representative.collection_id).and_return([representative])
       allow(::SolrDocument).to receive(:find).with(solr_doc.id).and_return(solr_doc)
     end
 
