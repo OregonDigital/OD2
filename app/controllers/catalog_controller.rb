@@ -57,9 +57,7 @@ class CatalogController < ApplicationController
     config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
     config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
 
-    # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
-    # Do not show these facets, they're for collection configurable facets
-   (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
+    (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
       label = prop[:name_label].nil? ? prop[:name].sub('_label', '') : prop[:name_label]
       config.add_facet_field "#{prop[:name]}_sim", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] && !config.facet_fields.keys.include?("#{prop[:name]}_sim")
     end
