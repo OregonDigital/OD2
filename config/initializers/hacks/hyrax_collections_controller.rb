@@ -18,6 +18,7 @@ Hyrax::Dashboard::CollectionsController.class_eval do
 
     process_member_changes
     process_facets if collection.facet_configurable?
+    process_representative_images
     @collection.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE unless @collection.discoverable?
     # we don't have to reindex the full graph when updating collection
     @collection.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
@@ -96,6 +97,13 @@ Hyrax::Dashboard::CollectionsController.class_eval do
       facet.enabled = params["facet_enabled_#{id}"]
       facet.order = index
       facet.save
+    end
+  end
+
+  def process_representative_images
+    CollectionRepresentative.where(collection_id: collection.id)&.delete_all
+    params[:representative_ids].each_with_index do |fs_id, index|
+      image = CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
     end
   end
 

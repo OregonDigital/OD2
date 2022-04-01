@@ -45,7 +45,7 @@
         <div class="" id="thumbnails" data-behavior="masonry-gallery">
           <div id="masonry-sizer"></div>
           <div id="masonry-gutter-sizer"></div>
-          <%= render collection: @member_docs[0..3], as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
+          <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
         </div>
       <div class="col-md-12 lg-border-bottom"></div>
       </div>
