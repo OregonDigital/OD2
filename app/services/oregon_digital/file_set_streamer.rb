@@ -5,7 +5,7 @@ module OregonDigital
   class FileSetStreamer
     include Enumerable
 
-    def self.stream(work, standard=true, &chunks)
+    def self.stream(work, standard = true, &chunks)
       streamer = new(work)
       streamer.each(standard, &chunks)
     end
@@ -17,7 +17,7 @@ module OregonDigital
       @children = work.child_works
     end
 
-    def each(standard=true, &chunks)
+    def each(standard = true, &chunks)
       writer = ZipTricks::BlockWrite.new(&chunks)
 
       ZipTricks::Streamer.open(writer) do |zip|
@@ -27,7 +27,7 @@ module OregonDigital
         end
 
         standard ? stream_works_low(work, zip) : stream_works(work, zip)
-        @children.each { |child|  standard ? stream_works_low(child, zip) : stream_works(child, zip) }
+        @children.each { |child| standard ? stream_works_low(child, zip) : stream_works(child, zip) }
       end
     end
 
