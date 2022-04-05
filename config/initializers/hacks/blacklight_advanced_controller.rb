@@ -20,8 +20,10 @@
 # which still mixes in BlacklightAdvancedSearch::AdvancedController. There
 # are probably some other edges that need to be smoothed for that approach, but
 # that'd be the direction.
-class AdvancedController < BlacklightAdvancedSearch::AdvancedController
-  blacklight_config.facet_fields.each do |_k, field|
-    field.limit = 10_000
+Rails.application.config.to_prepare do
+  class AdvancedController < BlacklightAdvancedSearch::AdvancedController
+    blacklight_config.facet_fields.each do |_k, field|
+      field.limit = 10_000
+    end
   end
 end
