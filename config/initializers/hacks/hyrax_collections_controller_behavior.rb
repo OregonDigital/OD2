@@ -14,8 +14,8 @@ Hyrax::CollectionsControllerBehavior.module_eval do
     @curation_concern ||= ActiveFedora::Base.find(params[:id])
     # Set list of configured facets for the view to display
     presenter
-    query_collection_members
     configured_facets
+    query_collection_members
     respond_to do |wants|
       wants.html {render :show, status: :ok}
       wants.nt { render body: presenter.export_as_nt, mime_type: Mime[:nt] }
