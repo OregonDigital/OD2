@@ -72,6 +72,7 @@ Hyrax::CollectionsControllerBehavior.module_eval do
       @configured_facets ||= Facet.where(collection_id: collection.id, enabled: true).order(:order)
       @configured_facets.each do |facet|
         blacklight_config.facet_configuration_for_field(facet.solr_name).label = facet.label
+        blacklight_config.facet_configuration_for_field(facet.solr_name).limit = -1
       end
     end
 end

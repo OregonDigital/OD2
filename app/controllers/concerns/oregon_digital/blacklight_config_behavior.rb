@@ -31,7 +31,7 @@ module OregonDigital
         config.advanced_search[:form_solr_parameters] ||= {
           "facet.field" => ["non_user_collections_ssim", "copyright_combined_label_sim", "date_combined_year_label_ssim", "institution_label_sim", "language_label_sim"]
         }
-        config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
+        config.advanced_search[:form_facet_partial] = 'advanced/advanced_search_facets_as_select'
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
