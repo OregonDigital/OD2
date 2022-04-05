@@ -10,18 +10,18 @@ Rails.application.config.to_prepare do
       single_item_search_builder_class.new(self).with(params.except(:f, :q, :page))
     end
 
-    # OVERRIDE FROM HYRAX
-    def show
-      @curation_concern ||= ActiveFedora::Base.find(params[:id])
-      # Set list of configured facets for the view to display
-      presenter
-      query_collection_members
-      configured_facets
-      respond_to do |wants|
-        wants.html {render :show, status: :ok}
-        wants.nt { render body: presenter.export_as_nt, mime_type: Mime[:nt] }
-      end
+  # OVERRIDE FROM HYRAX
+  def show
+    @curation_concern ||= ActiveFedora::Base.find(params[:id])
+    # Set list of configured facets for the view to display
+    presenter
+    configured_facets
+    query_collection_members
+    respond_to do |wants|
+      wants.html {render :show, status: :ok}
+      wants.nt { render body: presenter.export_as_nt, mime_type: Mime[:nt] }
     end
+  end
 
     # Zip up all works in collection into one collection zip
     def download
@@ -69,11 +69,12 @@ Rails.application.config.to_prepare do
         hyrax.collection_url(options.except(:controller, :action))
       end
 
-      def configured_facets
-        @configured_facets ||= Facet.where(collection_id: collection.id, enabled: true).order(:order)
-        @configured_facets.each do |facet|
-          blacklight_config.facet_configuration_for_field(facet.solr_name).label = facet.label
-        end
+    def configured_facets
+      @configured_facets ||= Facet.where(collection_id: collection.id, enabled: true).order(:order)
+      @configured_facets.each do |facet|
+        blacklight_config.facet_configuration_for_field(facet.solr_name).label = facet.label
+        blacklight_config.facet_configuration_for_field(facet.solr_name).limit = -1
       end
+    end
   end
 end
