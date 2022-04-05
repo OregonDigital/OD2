@@ -19,6 +19,11 @@ module OregonDigital
          subject_label language related_url institution_label date repository_label]
     end
 
+    def representative_docs
+      fs_ids = CollectionRepresentative.where(collection_id: id).reject { |repr| repr.fileset_id.empty? }.sort_by(&:order).map(&:fileset_id)
+      fs_ids.map { |fid| SolrDocument.find(fid) }
+    end
+
     def export_as_nt
       ActiveFedora::Base.find(id).resource.dump(:ntriples)
     end

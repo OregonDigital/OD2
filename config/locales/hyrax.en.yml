@@ -259,6 +259,11 @@ en:
           log_in: 'Log In'
           add_to_collection: 'Save to...'
           select_all: 'Select All'
+      collections:
+        form_branding:
+          representative:
+            label: Landing page thumbnails
+            description: Ordered list of thumbnails to present on the landing page
     file_sets:
       actions:
         header: Actions
