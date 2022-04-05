@@ -5,9 +5,9 @@ module OregonDigital
   class FileSetStreamer
     include Enumerable
 
-    def self.stream(work, &chunks)
+    def self.stream(work, standard = true, &chunks)
       streamer = new(work)
-      streamer.each(&chunks)
+      streamer.each(standard, &chunks)
     end
 
     attr_reader :work
@@ -17,7 +17,7 @@ module OregonDigital
       @children = work.child_works
     end
 
-    def each(&chunks)
+    def each(standard = true, &chunks)
       writer = ZipTricks::BlockWrite.new(&chunks)
 
       ZipTricks::Streamer.open(writer) do |zip|
@@ -26,8 +26,8 @@ module OregonDigital
           write_children_metadata(file_writer) unless @children.nil?
         end
 
-        stream_works(work, zip)
-        @children.each { |child| stream_works(child, zip) }
+        standard ? stream_works_low(work, zip) : stream_works(work, zip)
+        @children.each { |child| standard ? stream_works_low(child, zip) : stream_works(child, zip) }
       end
     end
 
@@ -41,6 +41,18 @@ module OregonDigital
         zip.write_deflated_file(file_name) do |file_writer|
           file.stream.each do |chunk|
             file_writer << chunk
+          end
+        end
+      end
+    end
+
+    def stream_works_low(work, zip)
+      work.file_sets.each do |file_set|
+        file_name = file_set.files.first.file_name.first
+
+        zip.write_deflated_file(file_name) do |file_writer|
+          File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, 'jpeg'), 'rb') do |source|
+            IO.copy_stream(source, file_writer)
           end
         end
       end

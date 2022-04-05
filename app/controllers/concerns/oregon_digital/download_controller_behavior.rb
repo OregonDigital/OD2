@@ -7,13 +7,13 @@ module OregonDigital
     include ActionController::Live
 
     def download_low
-      download
+      download(true)
     end
 
     # Use OregonDigital::FileSetSreamer service to find all file sets and split the response into a stream of chunks
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
-    def download
+    def download(standard_size = false)
       zipname = "#{curation_concern.id}.zip"
 
       send_file_headers!(
@@ -24,7 +24,7 @@ module OregonDigital
       response.headers['Last-Modified'] = Time.now.httpdate.to_s
       response.headers['X-Accel-Buffering'] = 'no'
 
-      OregonDigital::FileSetStreamer.stream(curation_concern) do |chunk|
+      OregonDigital::FileSetStreamer.stream(curation_concern, standard_size) do |chunk|
         response.stream.write(chunk)
       end
     ensure
