@@ -17,14 +17,28 @@ module OregonDigital
       end
 
       def fetch(*_args, &_block)
-        vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
-        if vocabulary.to_s.include?('Itis') || vocabulary.to_s.include?('Ubio')
-          store_statement(vocabulary.fetch(vocabulary, rdf_subject)) unless in_triplestore?
-        else
-          super
+        return super unless itis_or_ubio?
+
+        graph = fetch_from_cache(rdf_subject)
+        unless graph.nil?
+          persistence_strategy.graph = graph
+          return self
         end
+        store_statement(vocabulary.fetch(vocabulary, rdf_subject))
       rescue ControlledVocabularyFetchError
         raise ControlledVocabularyFetchError
+      end
+
+      def itis_or_ubio?
+        vocabulary.to_s.include?('Itis') || vocabulary.to_s.include?('Ubio')
+      end
+
+      def vocabulary
+        @vocabulary ||= self.class.query_to_vocabulary(rdf_subject.to_s)
+      end
+
+      def fetch_from_cache(subject)
+        OregonDigital::Triplestore.fetch_cached_term(subject)
       end
     end
   end
