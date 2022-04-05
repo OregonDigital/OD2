@@ -4,6 +4,6 @@
   <div class="metadata-row">
     <% date_min = document['date_combined_year_label_ssim'].min %>
     <% date_max = document['date_combined_year_label_ssim'].max %>
-    Date: <%= date_min %> <% unless date_min == date_max %> - <%= date_max %> <% end %>
+    <%= date_min %> <% unless date_min == date_max %> - <%= date_max %> <% end %>
   </div>
 <% end %>
