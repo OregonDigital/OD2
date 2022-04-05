@@ -3,10 +3,12 @@
 <%= render 'did_you_mean' %>
 <%= render 'constraints' %>
 
-<div id="sidebar" class="col-md-3 col-sm-4">
-  <%= render 'search_sidebar' %>
-</div>
+<div class="flex-container row container">
+  <div id="sidebar" class="flex-item col-md-3 col-sm-4 col-xs-12">
+    <%= render 'search_sidebar' %>
+  </div>
 
-<div id="content" class="col-md-9 col-sm-8">
-  <%= render 'search_results' %>
+  <div id="content" class="flex-item col-md-9 col-sm-8 col-xs-12">
+    <%= render 'search_results' %>
+  </div>
 </div>
