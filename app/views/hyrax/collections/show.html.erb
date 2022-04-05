@@ -28,9 +28,15 @@
       </div>
       <%# Social media share icons %>
       <div class="col-md-12 text-right share-links">
-        <div class=" lg-border-bottom">
-        <%= render 'hyrax/base/social_media' %>
+        <div class="row">
+          <div class="columns col-md-12">
+            <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
+              <%= render 'attribute_rows', presenter: @presenter %>
+            </dl>
+          </div>
         </div>
+        <%= render 'hyrax/base/social_media' %>
+        <div class="col-md-12 lg-border-bottom"></div>
       </div>
     </div>
   </div>
@@ -39,7 +45,7 @@
 <div class="hyc-container" itemscope itemtype="http://schema.org/CollectionPage">
   <h2 class="sr-only"> featured works</h2>
   <div class="row">
-    <div class="hyc-blacklight hyc-bl-results">
+    <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection">
       <div id="documents">
         <% # container for all documents in index view -%>
         <div class="" id="thumbnails" data-behavior="masonry-gallery">
@@ -47,16 +53,7 @@
           <div id="masonry-gutter-sizer"></div>
           <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
         </div>
-      <div class="col-md-12 lg-border-bottom"></div>
       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="columns col-md-12">
-      <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
-        <%= render 'attribute_rows', presenter: @presenter %>
-      </dl>
     </div>
   </div>
 

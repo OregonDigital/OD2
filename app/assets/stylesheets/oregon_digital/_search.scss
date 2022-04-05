@@ -355,22 +355,10 @@ ul.pagination li {
     width: 100%;
   }
 }
-.hyc-bl-results.hyc-bl-search {
+.hyc-bl-results {
   margin: 0;
   margin-bottom: 2em;
 
-  @media (min-width: $screen-md-min) {
-    .masonry.document {
-      position: relative !important;
-      left: unset !important;
-      top: unset !important;
-      transform: unset !important;
-    }
-    & {
-      position: unset !important;
-      height: unset !important;
-    }
-  }
   .masonry.document {
     background: transparent;
     border: none !important;

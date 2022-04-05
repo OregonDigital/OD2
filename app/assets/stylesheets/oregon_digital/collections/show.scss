@@ -28,7 +28,9 @@
   margin-bottom: 2em;
 }
 
-.hyc-bl-results.hyc-bl-search #thumbnails {
+.hyc-bl-results.hyc-bl-search.hyc-bl-collection #thumbnails {
+  padding: 0;
+
   div.masonry.collection,
   #masonry-sizer {
     width: calc(25% - 30px);
@@ -45,5 +47,11 @@
         width: 40px;
       }
     }
+  }
+  img {
+    border-top: unset;
+    margin: unset;
+    padding: unset;
+    width: unset;
   }
 }
