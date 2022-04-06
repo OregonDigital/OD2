@@ -1,4 +1,4 @@
-.collection-show {
+.collection-header {
   .hyc-header {
     margin-bottom: 0;
   }
@@ -56,6 +56,20 @@
   }
   .share-links {
     margin-top: 2em;
+  }
+}
+
+.collection-main {
+  .flex-container {
+    gap: 1em;
+    justify-content: center;
+
+    .flex-item {
+      flex-grow: 0;
+      &:first-child, &:last-child {
+        flex-grow: 1;
+      }
+    }
   }
 }
 

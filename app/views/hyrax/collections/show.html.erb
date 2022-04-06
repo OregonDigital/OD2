@@ -1,7 +1,7 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
 <% view_all_url = "#{search_form_action}&f[non_user_collections_ssim][]=#{@presenter.to_s}" %>
 
-<div class="hyc-container collection-show" itemscope itemtype="http://schema.org/CollectionPage">
+<div class="hyc-container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
     <%# Title, view, and description %>
     <div class="hyc-generic">
@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<div class="hyc-container" itemscope itemtype="http://schema.org/CollectionPage">
+<div class="hyc-container collection-main" itemscope itemtype="http://schema.org/CollectionPage">
   <h2 class="sr-only"> featured works</h2>
   <div class="row">
     <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection">
