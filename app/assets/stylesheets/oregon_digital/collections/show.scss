@@ -45,6 +45,15 @@
   .social-media {
     padding: 0;
   }
+  .metadata-expand {
+    transform: translateY(50%);
+    button {
+      &[aria-expanded="false"] > .expanded,
+      &[aria-expanded="true"] > .collapsed {
+        display: none;
+      }
+    }
+  }
   .share-links {
     margin-top: 2em;
   }

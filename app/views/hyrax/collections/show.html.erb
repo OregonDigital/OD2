@@ -28,12 +28,22 @@
       </div>
       <%# Social media share icons %>
       <div class="col-md-12 text-right share-links">
-        <div class="row">
+        <div class="row collapse" aria-expanded="false" id="collapsible-metadata">
           <div class="col-md-12">
             <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
               <%= render 'attribute_rows', presenter: @presenter %>
             </dl>
           </div>
+        </div>
+        <div class="metadata-expand pull-left">
+          <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
+            <span class="collapsed">
+              Show more
+            </span>
+            <span class="expanded">
+              Show Less
+            </span>
+          </button>
         </div>
         <%= render 'hyrax/base/social_media' %>
         <div class="col-md-12 lg-border-bottom"></div>
