@@ -1,4 +1,4 @@
-<% Collection::ORDERED_HEADER_PROPERTIES.each do |prop| %>
+<% Collection::ORDERED_FOOTER_PROPERTIES.each do |prop| %>
   <% if prop[:is_controlled] %>
     <% labels=Array(presenter.send(prop[:name].to_sym)) %>
     <% links=Array(presenter.send(prop[:name].to_s.gsub('_label', ''))) %>

@@ -35,13 +35,16 @@
             </dl>
           </div>
         </div>
-        <div class="metadata-expand pull-left">
-          <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
+        <div class="metadata-expand pull-left text-left">
+          <a href="#footer-metadata" class="lato-p">Additional Collection Information</a>
+          <br/>
+          <br/>
+          <button class="btn-link lato-p" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
             <span class="collapsed">
-              Show more
+              Read More
             </span>
             <span class="expanded">
-              Show Less
+              Read Less
             </span>
           </button>
         </div>
@@ -85,4 +88,13 @@
   <%= render 'lime_green_divider' do %>
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
+
+  <div id="footer-metadata" class="row">
+    <div class="col-md-12">
+      <h2 class="collection-metadata-header">Explore more about the collection</h2>
+      <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
+        <%= render 'attribute_rows_footer', presenter: @presenter %>
+      </dl>
+    </div>
+  </div>
 </div>

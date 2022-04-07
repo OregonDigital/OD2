@@ -150,6 +150,11 @@ table {
   text-transform: lowercase;
 }
 
+button.btn-link {
+  border: 0;
+  padding: 0;
+}
+
 a, button.btn-link {
   &.mw-sm,
   &.mw-lg,

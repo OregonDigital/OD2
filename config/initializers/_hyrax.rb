@@ -124,7 +124,7 @@ Hyrax.config do |config|
   # config.arkivo_api = false
 
   # Stream realtime notifications to users in the browser
-  # config.realtime_notifications = true
+  config.realtime_notifications = false
 
   # Location autocomplete uses geonames to search for named regions
   # Username for connecting to geonames
