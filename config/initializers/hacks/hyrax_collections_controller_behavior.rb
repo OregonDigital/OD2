@@ -15,8 +15,8 @@ Rails.application.config.to_prepare do
       @curation_concern ||= ActiveFedora::Base.find(params[:id])
       # Set list of configured facets for the view to display
       presenter
-      query_collection_members
       configured_facets
+      query_collection_members
       respond_to do |wants|
         wants.html {render :show, status: :ok}
         wants.nt { render body: presenter.export_as_nt, mime_type: Mime[:nt] }
@@ -73,6 +73,7 @@ Rails.application.config.to_prepare do
         @configured_facets ||= Facet.where(collection_id: collection.id, enabled: true).order(:order)
         @configured_facets.each do |facet|
           blacklight_config.facet_configuration_for_field(facet.solr_name).label = facet.label
+          blacklight_config.facet_configuration_for_field(facet.solr_name).limit = -1
         end
       end
   end

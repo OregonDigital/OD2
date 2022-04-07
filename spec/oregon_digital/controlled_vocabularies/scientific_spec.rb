@@ -54,7 +54,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
 
       before do
         allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(graph)
-        allow_any_instance_of(TriplestoreAdapter::Client).to receive(:insert).and_return(true)
+        allow(OregonDigital::Triplestore).to receive(:fetch).and_return(graph)
       end
 
       it do
