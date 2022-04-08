@@ -1,5 +1,5 @@
 <ul class="facet-values list-unstyled">
-  <% display_facet.items.group_by! { |v| v.hits }.map do |key, value| %>
+  <% display_facet.items.group_by { |v| v.hits }.map do |key, value| %>
     <% value.sort_by! { |v| v.value }.reverse.reverse %>
   <% end.flatten %>
   <% paginator = facet_paginator(facet_field, display_facet) %>
