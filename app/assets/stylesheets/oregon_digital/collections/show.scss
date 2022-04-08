@@ -26,6 +26,19 @@
     align-items: baseline;
     justify-content: flex-start;
     margin-bottom: 2em;
+    @media (max-width: $screen-sm-min) {
+      display: block;
+      padding-top: 1em;
+
+      .item-count {
+        margin-left: 0;
+      }
+      .collection-subtitle {
+        display: inline-block;
+        padding-top: 1em;
+        width: 100%;
+      }
+    }
 
     span {
       flex: 0 0 auto;
@@ -43,6 +56,11 @@
     padding-right: 0.5em;
     margin-right: 0.5em;
     margin-left: 1em;
+  }
+  .institution-header {
+    @media (max-width: $screen-md-min) {
+      padding-top: 1em;
+    }
   }
 
   .social-media {
@@ -71,18 +89,20 @@
 
     .flex-container {
       justify-content: space-between;
-      @media (max-width: $screen-sm-min) {
-        display: block;
-      }
 
-      .institution-footer {
-        @media (max-width: $screen-sm-min) {
-          text-align: left;
-        }
-      }
       .social-links {
         padding: 1em 0;
-        @media (max-width: $screen-sm-min) {
+      }
+    }
+    @media (max-width: $screen-sm-min) {
+      margin-top: 1em;
+
+      .flex-container {
+        display: block;
+        .institution-footer {
+          text-align: left;
+        }
+        .social-links {
           display: block;
         }
       }

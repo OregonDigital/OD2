@@ -8,20 +8,22 @@
       <div class="col-md-8 col-xs-12">
         <div class="hyc-title">
           <h1><%= @presenter.title.first %></h1>
-          <span class="lg-border-right item-count">
-            <%= @presenter.total_viewable_items %>
-            <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
-          </span>
-          <span>
-            <%= link_to "View all items in collection", view_all_url %>
-          </span>
+          <div class="collection-subtitle">
+            <span class="lg-border-right item-count">
+              <%= @presenter.total_viewable_items %>
+              <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
+            </span>
+            <span>
+              <%= link_to "View all items in collection", view_all_url %>
+            </span>
+          </div>
         </div>
         <div class="hyc-desc mw-lg">
           <%= render 'collection_description', presenter: @presenter %>
         </div>
       </div>
       <%# Institutional image %>
-      <div class="col-md-4 col-sm-4 text-right hidden-xs">
+      <div class="col-sm-4 col-sm-offset-7 text-right hidden-xs institution-header">
         <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
         <% path, alt, style = controller.institution_image_info %>
         <%= image_tag path, alt: alt, style: style %>
