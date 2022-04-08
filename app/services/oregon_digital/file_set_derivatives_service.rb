@@ -76,10 +76,10 @@ module OregonDigital
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       # Build a hash of words temporarily in file_set.hocr_content
       0.upto(page_count - 1) do |pagenum|
-        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}")
+        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox_content.empty?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          hocr_derivative_service(out_path, pagenum).create_derivatives
+          hocr_derivative_service(out_path, pagenum).create_derivatives if file_set.bbox_content.empty?
           create_zoomable_page(out_path, pagenum)
         end
       end

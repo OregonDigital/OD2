@@ -201,6 +201,8 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       allow(MiniMagick::Image).to receive(:open).with(bogus_pdf).and_return(minimagick)
       allow(minimagick).to receive(:pages).and_return(pages)
       allow(minimagick).to receive(:destroy!)
+
+      allow(valid_file_set).to receive(:bbox_content).and_return([])
     end
 
     it 'creates a thumbnail' do
