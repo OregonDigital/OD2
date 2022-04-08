@@ -1,7 +1,7 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
 <% view_all_url = "#{search_form_action}&f[non_user_collections_ssim][]=#{@presenter.to_s}" %>
 
-<div class="hyc-container collection-show" itemscope itemtype="http://schema.org/CollectionPage">
+<div class="hyc-container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
     <%# Title, view, and description %>
     <div class="hyc-generic">
@@ -28,18 +28,34 @@
       </div>
       <%# Social media share icons %>
       <div class="col-md-12 text-right share-links">
-        <div class=" lg-border-bottom">
-        <%= render 'hyrax/base/social_media' %>
+        <div class="row collapse" aria-expanded="false" id="collapsible-metadata">
+          <div class="col-md-12">
+            <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
+              <%= render 'attribute_rows', presenter: @presenter %>
+            </dl>
+          </div>
         </div>
+        <div class="metadata-expand pull-left">
+          <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
+            <span class="collapsed">
+              Show more
+            </span>
+            <span class="expanded">
+              Show Less
+            </span>
+          </button>
+        </div>
+        <%= render 'hyrax/base/social_media' %>
+        <div class="col-md-12 lg-border-bottom"></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="hyc-container" itemscope itemtype="http://schema.org/CollectionPage">
+<div class="hyc-container collection-main" itemscope itemtype="http://schema.org/CollectionPage">
   <h2 class="sr-only"> featured works</h2>
   <div class="row">
-    <div class="hyc-blacklight hyc-bl-results">
+    <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection">
       <div id="documents">
         <% # container for all documents in index view -%>
         <div class="" id="thumbnails" data-behavior="masonry-gallery">
@@ -47,16 +63,7 @@
           <div id="masonry-gutter-sizer"></div>
           <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
         </div>
-      <div class="col-md-12 lg-border-bottom"></div>
       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="columns col-md-12">
-      <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
-        <%= render 'attribute_rows', presenter: @presenter %>
-      </dl>
     </div>
   </div>
 

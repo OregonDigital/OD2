@@ -53,7 +53,7 @@ table.table-scrollable {
 
 dl.work-show {
   display: grid;
-  grid-template: auto / 25% calc(75% - 1em);
+  grid-template: auto / max-content auto;
   column-gap: 1em;
   overflow-wrap: anywhere;
 
