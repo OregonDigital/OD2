@@ -116,7 +116,7 @@ module OregonDigital
         { name: 'title', is_controlled: false },
         { name: 'description', is_controlled: false },
         { name: 'date', is_controlled: false },
-        { name: 'has_finding_aid', is_controlled: false },
+        { name: 'has_finding_aid', is_controlled: false }
       ].freeze
 
       ORDERED_FOOTER_PROPERTIES = ORDERED_PROPERTIES
