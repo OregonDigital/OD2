@@ -47,8 +47,12 @@
 
   .social-media {
     padding: 0;
+    @media (max-width: $screen-sm-min) {
+      padding-bottom: 1em;
+    }
   }
   .metadata-expand {
+    display: block;
     padding-bottom: 1em;
 
     button {
@@ -57,9 +61,32 @@
         display: none;
       }
     }
+
+    @media (max-width: $screen-sm-min) {
+      display: block;
+    }
   }
   .share-links {
     margin-top: 2em;
+
+    .flex-container {
+      justify-content: space-between;
+      @media (max-width: $screen-sm-min) {
+        display: block;
+      }
+
+      .institution-footer {
+        @media (max-width: $screen-sm-min) {
+          text-align: left;
+        }
+      }
+      .social-links {
+        padding: 1em 0;
+        @media (max-width: $screen-sm-min) {
+          display: block;
+        }
+      }
+    }
   }
 }
 
