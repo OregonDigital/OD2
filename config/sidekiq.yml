@@ -11,4 +11,5 @@ production:
   - notify
   - hyrax_migrator
   - ingest
+  - reindex
   - default
