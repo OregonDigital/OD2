@@ -56,7 +56,7 @@ ARG UID=8083
 ARG GID=8083
 
 # Create an app user so our program doesn't run as root.
-RUN addgroup -g "$GID" app && adduser -h /data -u "$UID" -G app -D -H app
+RUN addgroup -g 8983 app && adduser -h /data -u 8983 -G app -D -H app
 
 FROM dependencies as gems
 

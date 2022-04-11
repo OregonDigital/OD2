@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
   end
 
   create_table "collection_representatives", force: :cascade do |t|
-    t.string "collection_id"
-    t.string "fileset_id"
+    t.string "collection_id", null: false
+    t.string "fileset_id", null: false
     t.integer "order", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -323,6 +323,22 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
     t.datetime "updated_at", null: false
     t.index ["local_authority_id"], name: "index_qa_local_authority_entries_on_local_authority_id"
     t.index ["uri"], name: "index_qa_local_authority_entries_on_uri", unique: true
+  end
+
+  create_table "qa_mesh_trees", id: :serial, force: :cascade do |t|
+    t.string "term_id"
+    t.string "tree_number"
+    t.index ["term_id"], name: "index_qa_mesh_trees_on_term_id"
+    t.index ["tree_number"], name: "index_qa_mesh_trees_on_tree_number"
+  end
+
+  create_table "qa_subject_mesh_terms", id: :serial, force: :cascade do |t|
+    t.string "term_id"
+    t.string "term"
+    t.text "synonyms"
+    t.string "term_lower"
+    t.index ["term_id"], name: "index_qa_subject_mesh_terms_on_term_id"
+    t.index ["term_lower"], name: "index_qa_subject_mesh_terms_on_term_lower"
   end
 
   create_table "roles", id: :serial, force: :cascade do |t|
