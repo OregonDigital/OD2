@@ -16,8 +16,7 @@
     <span class="sr-only">Post to Twitter</span>
   <% end %>
 
-  <input id="list-<%= share_url.split("/").last.split("?").first %>-share-link" value="<%= share_url %>" readonly aria-label="Copy text to Clipboard">
-  <button class="copy-single-use-link btn btn-success" data-clipboard-target="#list-<%= share_url.split("/").last.split("?").first %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
-    Copy
+  <button class="copy-single-use-link btn-link share-button share-button-copy" data-clipboard-text="<%= share_url %>" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
+    <i class="fas fa-link fa"></i>
   </button>
 </div>

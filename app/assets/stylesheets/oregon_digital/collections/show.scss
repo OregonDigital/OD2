@@ -1,3 +1,22 @@
+.collection-header,
+.collection-main {
+  dl.work-show {
+    margin: 0;
+
+    dt, dd {
+      text-align: left;
+      font-weight: normal;
+    }
+    dt {
+      font-size: 18px;
+    }
+    dd {
+      font-size: 16px;
+      margin-left: 5em;
+    }
+  }
+}
+
 .collection-header {
   .hyc-header {
     margin-bottom: 0;
@@ -7,6 +26,19 @@
     align-items: baseline;
     justify-content: flex-start;
     margin-bottom: 2em;
+    @media (max-width: $screen-sm-min) {
+      display: block;
+      padding-top: 1em;
+
+      .item-count {
+        margin-left: 0;
+      }
+      .collection-subtitle {
+        display: inline-block;
+        padding-top: 1em;
+        width: 100%;
+      }
+    }
 
     span {
       flex: 0 0 auto;
@@ -25,37 +57,56 @@
     margin-right: 0.5em;
     margin-left: 1em;
   }
-
-  dl.work-show {
-    margin: 0;
-
-    dt, dd {
-      text-align: left;
-      font-weight: normal;
-    }
-    dt {
-      font-size: 18px;
-    }
-    dd {
-      font-size: 16px;
-      margin-left: 5em;
+  .institution-header {
+    @media (max-width: $screen-md-min) {
+      padding-top: 1em;
     }
   }
 
   .social-media {
     padding: 0;
+    @media (max-width: $screen-sm-min) {
+      padding-bottom: 1em;
+    }
   }
   .metadata-expand {
-    transform: translateY(50%);
+    display: block;
+    padding-bottom: 1em;
+
     button {
       &[aria-expanded="false"] > .expanded,
       &[aria-expanded="true"] > .collapsed {
         display: none;
       }
     }
+
+    @media (max-width: $screen-sm-min) {
+      display: block;
+    }
   }
   .share-links {
     margin-top: 2em;
+
+    .flex-container {
+      justify-content: space-between;
+
+      .social-links {
+        padding: 1em 0;
+      }
+    }
+    @media (max-width: $screen-sm-min) {
+      margin-top: 1em;
+
+      .flex-container {
+        display: block;
+        .institution-footer {
+          text-align: left;
+        }
+        .social-links {
+          display: block;
+        }
+      }
+    }
   }
 }
 
@@ -70,6 +121,13 @@
         flex-grow: 1;
       }
     }
+  }
+
+  .collection-search-header {
+    margin: 2.5em 0;
+  }
+  .collection-metadata-header {
+    margin-bottom: 2.5em;
   }
 }
 

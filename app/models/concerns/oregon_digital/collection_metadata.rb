@@ -105,10 +105,21 @@ module OregonDigital
         { name: 'repository_label', is_controlled: true },
         { name: 'publisher_label', is_controlled: true },
         { name: 'has_finding_aid', is_controlled: false },
+        { name: 'related_url', is_controlled: false },
+        { name: 'resource_type', is_controlled: true },
         { name: 'institution_label', is_controlled: true },
         { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false }
       ].freeze
+
+      ORDERED_HEADER_PROPERTIES = [
+        { name: 'title', is_controlled: false },
+        { name: 'description', is_controlled: false },
+        { name: 'date', is_controlled: false },
+        { name: 'has_finding_aid', is_controlled: false }
+      ].freeze
+
+      ORDERED_FOOTER_PROPERTIES = ORDERED_PROPERTIES
 
       ORDERED_TERMS = %i[
         title
