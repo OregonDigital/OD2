@@ -7,6 +7,7 @@ namespace :oregon_digital do
     base_url = ENV.fetch('REINDEX_ALL_FEDORA_URI', ActiveFedora.fedora.base_uri)
     debug = ENV.fetch('REINDEX_ALL_DEBUG', false) == '1'
     record = ENV.fetch('REINDEX_ALL_VCR', false) == '1'
+    sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
     puts 'Starting reindex...'
     puts '** DEBUG **' if debug
