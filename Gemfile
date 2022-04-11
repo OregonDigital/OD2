@@ -48,9 +48,8 @@ gem 'omniauth-cas'
 gem 'omniauth-saml'
 
 # Honeycomb
-gem 'honeycomb-beeline', '>= 2.4.0'
-gem 'libhoney', '>= 1.18.0'
-gem 'rack-honeycomb', '~> 0.5.0'
+gem 'honeycomb-beeline', '>= 2.10.0'
+gem 'libhoney', '>= 2.1.0'
 
 # Yabeda
 gem 'yabeda'
