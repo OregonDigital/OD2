@@ -23,7 +23,7 @@
         </div>
       </div>
       <%# Institutional image %>
-      <div class="col-sm-4 col-sm-offset-7 text-right hidden-xs institution-header">
+      <div class="col-sm-4 col-sm-offset-7 col-md-offset-0 text-right hidden-xs institution-header">
         <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
         <% path, alt, style = controller.institution_image_info %>
         <%= image_tag path, alt: alt, style: style %>

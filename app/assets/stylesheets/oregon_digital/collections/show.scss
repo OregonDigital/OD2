@@ -13,6 +13,10 @@
     dd {
       font-size: 16px;
       margin-left: 5em;
+      @media (max-width: $screen-sm-min) {
+        grid-column: 1;
+        margin: 0;
+      }
     }
   }
 }
@@ -140,20 +144,16 @@
 
   div.masonry.collection,
   #masonry-sizer {
-    width: calc(25% - 30px);
+    padding: 0;
+    width: 23%;
     @media (max-width: $screen-sm-min) {
       & {
-        width: calc(50% - 20px);
+        width: 48%;
       }
     }
   }
   #masonry-gutter-sizer {
-    width: 30px;
-    @media (max-width: $screen-sm-min) {
-      & {
-        width: 40px;
-      }
-    }
+    width: 2%;
   }
   img {
     border-top: unset;
