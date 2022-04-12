@@ -10,6 +10,7 @@ production:
 :queues:
   - notify
   - hyrax_migrator
+  - fetch
   - ingest
   - reindex
   - default
