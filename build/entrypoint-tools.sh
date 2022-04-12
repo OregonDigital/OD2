@@ -9,8 +9,3 @@ echo "Installing gems..."
 # Start init
 echo "Starting init"
 exec /sbin/init
-
-# Sleep forever, sweet container
-#while `true`; do
-#   sleep 600
-#done
