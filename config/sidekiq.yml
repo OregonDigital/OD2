@@ -8,5 +8,9 @@ production:
   :concurrency: <%= ENV.fetch('SIDEKIQ_THREADS', 6) %>
   :max_retries: <%= ENV.fetch('SIDEKIQ_RETRY_LIMIT', 3) %>
 :queues:
-  - default
+  - notify
   - hyrax_migrator
+  - fetch
+  - ingest
+  - reindex
+  - default

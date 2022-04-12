@@ -4,6 +4,7 @@
 class FetchGraphWorker
   include Sidekiq::Worker
   sidekiq_options retry: 11 # Around 2.5 days of retries
+  sidekiq_options queue: 'fetch' # Use the 'fetch' queue
 
   # JOBS TEND TOWARD BEING LARGE. DISABLED BECAUSE FETCHING IS HEAVY HANDED.
   # rubocop:disable Metrics/MethodLength

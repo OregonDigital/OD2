@@ -5,6 +5,7 @@
 # failure to reindex doesn't stop the rest of the assets' reindex processes.
 class ReindexWorker
   include Sidekiq::Worker
+  sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
   # pids must be ordered with access control objects first, then the actual
   # asset, then its sub-objects (a.g., proxies, indirect containers, etc.)
