@@ -1,5 +1,5 @@
 ---
-:concurrency: <%= ENV.fetch('SIDEKIQ_THREADS', 4) %>
+:concurrency: <%= ENV.fetch('SIDEKIQ_THREADS', 1) %>
 :logfile: <%= ENV.fetch('SIDEKIQ_LOG', '/proc/self/fd/1') %>
 staging:
   :concurrency: <%= ENV.fetch('SIDEKIQ_THREADS', 4) %>
