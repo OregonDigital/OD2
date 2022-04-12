@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="hyc-desc mw-lg">
-          <%= render 'collection_description', presenter: @presenter %>
+          <%= render 'collection_description', presenter: @presenter unless @presenter.description.first.nil? %>
         </div>
       </div>
       <%# Institutional image %>
@@ -42,6 +42,7 @@
               <br/>
               <br/>
             </a>
+            <% unless @presenter.description.first.nil? %>
             <button class="btn-link lato-p" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
               <span class="collapsed">
                 Read More
@@ -50,6 +51,7 @@
                 Read Less
               </span>
             </button>
+            <% end %>
           </div>
           <div class="institution-footer text-right visible-xs">
             <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
