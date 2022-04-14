@@ -10,12 +10,11 @@ class FetchGraphWorker
   # JOBS TEND TOWARD BEING LARGE. DISABLED BECAUSE FETCHING IS HEAVY HANDED.
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/BlockLength
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/PerceivedComplexity
   def perform(pid, _user_key)
-    Rails.logger.info "FGW: Acquiring Lock"
     acquire_lock_for(pid) do
-      Rails.logger.info "FGW: Lock Acquired"
       # Fetch Work and SolrDoc
       work = ActiveFedora::Base.find(pid)
       solr_doc = SolrDocument.find(pid)
@@ -64,10 +63,10 @@ class FetchGraphWorker
         end
       end
     end
-    Rails.logger.info "FGW: Lock Released"
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/BlockLength
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 
