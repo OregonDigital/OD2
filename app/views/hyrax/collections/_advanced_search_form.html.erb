@@ -8,7 +8,8 @@
 <%= form_tag search_catalog_path, :id => 'collection-search', :class => 'advanced form-horizontal', :method => :get do  %>
   <%= render_hash_as_hidden_fields(advanced_search_context) %>
   <%= hidden_field_tag :search_field, 'all_fields', id: 'collection_search_field' %>
-  <%= hidden_field_tag 'f[non_user_collections_ssim][]', presenter.to_s %>
+  <% collection_index_key = controller.collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
+  <%= hidden_field_tag "f[#{collection_index_key}][]", presenter.to_s %>
 
   <div class="input-criteria row">
 

@@ -1,5 +1,6 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
-<% view_all_url = "#{search_form_action}&f[non_user_collections_ssim][]=#{@presenter.to_s}" %>
+<% collection_index_key = controller.collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
+<% view_all_url = "#{search_form_action}&f[#{collection_index_key}][]=#{@presenter.to_s}" %>
 
 <div class="hyc-container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
@@ -77,7 +78,7 @@
         <div class="" id="thumbnails" data-behavior="masonry-gallery">
           <div id="masonry-sizer"></div>
           <div id="masonry-gutter-sizer"></div>
-          <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
+          <%= render collection: controller.collection.representative_docs.map(&:parents).flatten, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
         </div>
       </div>
     </div>
