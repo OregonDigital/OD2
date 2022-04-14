@@ -3,6 +3,7 @@
 # Sets the expected attributes and other important values for an audio work
 class Audio < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ::Hyrax::Lockable
   include ::OregonDigital::WorkBehavior
   include ::OregonDigital::ValidatesEDTFBehavior
 

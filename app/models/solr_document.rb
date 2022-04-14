@@ -4,6 +4,7 @@
 class SolrDocument
   include Blacklight::Solr::Document
   include Blacklight::Gallery::OpenseadragonSolrDocument
+  include ::Hyrax::Lockable
   include Hyrax::SolrDocumentBehavior
   include OregonDigital::SolrDocumentBehavior
 

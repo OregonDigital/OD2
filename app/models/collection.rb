@@ -6,6 +6,7 @@ class Collection < ActiveFedora::Base
   after_save :fetch_graph
 
   include ::Hyrax::CollectionBehavior
+  include ::Hyrax::Lockable
   # You can replace these metadata if they're not suitable
   include OregonDigital::CollectionMetadata
   include OregonDigital::CollectionBehavior
@@ -60,6 +61,6 @@ class Collection < ActiveFedora::Base
   end
 
   def fetch_graph
-    FetchGraphWorker.perform_at(2.seconds, id, depositor)
+    FetchGraphWorker.perform_async(id, depositor)
   end
 end

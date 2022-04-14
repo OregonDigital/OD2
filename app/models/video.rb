@@ -3,6 +3,7 @@
 # Sets basic behaviors for a video work
 class Video < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ::Hyrax::Lockable
   include ::OregonDigital::WorkBehavior
   include ::OregonDigital::ValidatesEDTFBehavior
 

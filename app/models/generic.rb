@@ -3,6 +3,7 @@
 # Sets the expected behaviors of a generic work
 class Generic < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ::Hyrax::Lockable
   include ::OregonDigital::WorkBehavior
   include ::OregonDigital::ValidatesEDTFBehavior
 

@@ -3,6 +3,7 @@
 # Sets the expected behaviors and validations for a document
 class Document < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include ::Hyrax::Lockable
   include ::OregonDigital::WorkBehavior
   include ::OregonDigital::ValidatesEDTFBehavior
 

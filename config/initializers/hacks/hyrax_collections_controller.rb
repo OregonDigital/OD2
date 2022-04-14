@@ -104,7 +104,10 @@ Rails.application.config.to_prepare do
     def process_representative_images
       CollectionRepresentative.where(collection_id: collection.id)&.delete_all
       params[:representative_ids].each_with_index do |fs_id, index|
-        image = CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
+        CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
+      end
+      for index in member_docs[params[:representative_ids].count..4] do
+        CollectionRepresentative.create({ collection_id: collection.id, fileset_id: member_docs[index].id, order: index })
       end
     end
 
