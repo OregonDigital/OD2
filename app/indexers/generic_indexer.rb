@@ -20,8 +20,10 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       solr_doc['non_user_collections_ssim'] = []
+      solr_doc['user_collections_ssim'] = []
       object.member_of_collections.each do |collection|
-        solr_doc['non_user_collections_ssim'] << collection.first_title unless collection.collection_type.machine_id == 'user_collection'
+        collection_index_key = collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim'
+        solr_doc[collection_index_key] << collection.first_title
       end
       index_topic_combined_label(solr_doc, object.keyword)
       index_edit_groups
