@@ -37,6 +37,7 @@ Rails.application.config.to_prepare do
       # if we are creating the new collection as a subcollection (via the nested collections controller),
       # we pass the parent_id through a hidden field in the form and link the two after the create.
       link_parent_collection(params[:parent_id]) unless params[:parent_id].nil?
+      create_default_representative_images
       respond_to do |format|
         Hyrax::SolrService.instance.conn.commit
         format.html do
@@ -101,10 +102,17 @@ Rails.application.config.to_prepare do
       end
     end
 
+    def create_default_representative_images
+      repr_ids = params[:representative_ids] || []
+      form.select_files.to_a[repr_ids.reject(&:blank?).count..4].each_with_index do |val, index|
+        CollectionRepresentative.create({ collection_id: collection.id, fileset_id: val[1], order: index })
+      end
+    end
+
     def process_representative_images
       CollectionRepresentative.where(collection_id: collection.id)&.delete_all
       params[:representative_ids].each_with_index do |fs_id, index|
-        image = CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
+        CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
       end
     end
 
