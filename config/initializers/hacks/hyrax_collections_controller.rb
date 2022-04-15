@@ -104,7 +104,7 @@ Rails.application.config.to_prepare do
 
     def create_default_representative_images
       repr_ids = params[:representative_ids] || []
-      form.select_files.to_a[repr_ids.reject(&:blank?).count..4].each_with_index do |val, index|
+      form.select_files.to_a[repr_ids.reject(&:blank?).count..3].each_with_index do |val, index|
         CollectionRepresentative.create({ collection_id: collection.id, fileset_id: val[1], order: index })
       end
     end
@@ -114,6 +114,8 @@ Rails.application.config.to_prepare do
       params[:representative_ids].each_with_index do |fs_id, index|
         CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
       end
+      # Fill unset images with default images to maintain 4 thumbnails
+      create_default_representative_images
     end
 
     # Generate alert messages depending on hidden form data
