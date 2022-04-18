@@ -35,12 +35,17 @@ module OregonDigital
 
     def stream_works(work, zip)
       work.file_sets.each do |file_set|
-        file = file_set.files.first
-        file_name = file.file_name.first
+        files = file_set.files
+        # Some filesets have multiple files
+        files.each do |file|
+          file_name = file.file_name.first
+          # And some of those files are empty/broken
+          next if file_name.blank?
 
-        zip.write_deflated_file(file_name) do |file_writer|
-          file.stream.each do |chunk|
-            file_writer << chunk
+          zip.write_deflated_file(file_name) do |file_writer|
+            file.stream.each do |chunk|
+              file_writer << chunk
+            end
           end
         end
       end
@@ -48,10 +53,20 @@ module OregonDigital
 
     def stream_works_low(work, zip)
       work.file_sets.each do |file_set|
-        file_name = file_set.files.first.file_name.first
+        file_name = file_set.label
+        deriv_name = if file_set.image?
+            'jpeg'
+          elsif file_set.audio?
+            'mp3'
+          elsif file_set.video?
+            'mp4'
+          elsif file_set.pdf? || file_set.office_document?
+            # PDF || Office Document get full size
+            return stream_works(work, zip)
+          end
 
         zip.write_deflated_file(file_name) do |file_writer|
-          File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, 'jpeg'), 'rb') do |source|
+          File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, deriv_name), 'rb') do |source|
             IO.copy_stream(source, file_writer)
           end
         end
