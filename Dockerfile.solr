@@ -1,3 +1,0 @@
-# @todo N8 specific - remove for PR to OD
-FROM solr:8.3-slim
-COPY ./config/solr/conf /opt/solr/od2_conf

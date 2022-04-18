@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ template "oregon.blazegraph-env.name" . }}
-data:
-  TRIPLESTORE_ADAPTER_TYPE: "{{ template "oregon.blazegraph.name" . }}"
-  TRIPLESTORE_ADAPTER_URL: "http://{{ template "oregon.blazegraph.name" . }}:8080/bigdata/namespace/kb/sparql"

@@ -1,5 +1,0 @@
-# @todo N8 specific - remove for PR to OD
-FROM lyrasis/blazegraph:2.1.5
-COPY ./config/blazegraph/RWStore.properties /RWStore.properties
-COPY . /data
-RUN chmod a+wx /data

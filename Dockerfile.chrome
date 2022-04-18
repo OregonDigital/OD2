@@ -1,3 +1,0 @@
-# @todo N8 specific - remove for PR to OD
-FROM selenium/standalone-chrome:3.141.5-astatine
-COPY spec/fixtures /data/spec/fixtures
