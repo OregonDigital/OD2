@@ -78,7 +78,7 @@
         <div class="" id="thumbnails" data-behavior="masonry-gallery">
           <div id="masonry-sizer"></div>
           <div id="masonry-gutter-sizer"></div>
-          <%= render collection: controller.collection.representative_docs.map(&:parents).flatten, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
+          <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
         </div>
       </div>
     </div>
