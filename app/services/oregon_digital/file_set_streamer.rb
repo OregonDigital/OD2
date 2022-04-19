@@ -33,25 +33,50 @@ module OregonDigital
 
     private
 
+    def derivative_name(file_set)
+      deriv_name = if file_set.image?
+                     'jpeg'
+                   elsif file_set.audio?
+                     'mp3'
+                   elsif file_set.video?
+                     'mp4'
+                   else
+                     # PDF || Office Document || other files get full size
+                     ''
+                   end
+      return deriv_name
+    end
+
+    def stream_file(file, zip)
+      file_name = file.file_name.first
+      # And some of those files are empty/broken
+      return if file_name.blank?
+
+      zip.write_deflated_file(file_name) do |file_writer|
+        file.stream.each do |chunk|
+          file_writer << chunk
+        end
+      end
+    end
+
     def stream_works(work, zip)
       work.file_sets.each do |file_set|
-        file = file_set.files.first
-        file_name = file.file_name.first
-
-        zip.write_deflated_file(file_name) do |file_writer|
-          file.stream.each do |chunk|
-            file_writer << chunk
-          end
+        files = file_set.files
+        # Some filesets have multiple files
+        files.each do |file|
+          stream_file(file, zip)
         end
       end
     end
 
     def stream_works_low(work, zip)
       work.file_sets.each do |file_set|
-        file_name = file_set.files.first.file_name.first
+        file_name = file_set.label
+        deriv_name = derivative_name(file_set)
+        return stream_works(work, zip) if deriv_name.blank?
 
         zip.write_deflated_file(file_name) do |file_writer|
-          File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, 'jpeg'), 'rb') do |source|
+          File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, deriv_name), 'rb') do |source|
             IO.copy_stream(source, file_writer)
           end
         end
