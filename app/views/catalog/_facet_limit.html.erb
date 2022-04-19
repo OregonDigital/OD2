@@ -1,6 +1,6 @@
 <ul class="facet-values list-unstyled">
   <% display_facet.items.group_by { |v| v.hits }.map do |key, value| %>
-    <% value.sort_by! { |v| v.value }.reverse.reverse %>
+    <% value.sort_by! { |v| v.value.downcase }.reverse.reverse %>
   <% end.flatten %>
   <% paginator = facet_paginator(facet_field, display_facet) %>
   <%= render_facet_limit_list paginator, facet_field.key %>
