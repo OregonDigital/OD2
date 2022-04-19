@@ -33,20 +33,38 @@ module OregonDigital
 
     private
 
+    def derivative_name(file_set)
+      deriv_name = if file_set.image?
+                     'jpeg'
+                   elsif file_set.audio?
+                     'mp3'
+                   elsif file_set.video?
+                     'mp4'
+                   else
+                     # PDF || Office Document || other files get full size
+                     ''
+                   end
+      return deriv_name
+    end
+
+    def stream_file(file, zip)
+      file_name = file.file_name.first
+      # And some of those files are empty/broken
+      return if file_name.blank?
+
+      zip.write_deflated_file(file_name) do |file_writer|
+        file.stream.each do |chunk|
+          file_writer << chunk
+        end
+      end
+    end
+
     def stream_works(work, zip)
       work.file_sets.each do |file_set|
         files = file_set.files
         # Some filesets have multiple files
         files.each do |file|
-          file_name = file.file_name.first
-          # And some of those files are empty/broken
-          next if file_name.blank?
-
-          zip.write_deflated_file(file_name) do |file_writer|
-            file.stream.each do |chunk|
-              file_writer << chunk
-            end
-          end
+          stream_file(file, zip)
         end
       end
     end
@@ -54,16 +72,8 @@ module OregonDigital
     def stream_works_low(work, zip)
       work.file_sets.each do |file_set|
         file_name = file_set.label
-        deriv_name = if file_set.image?
-            'jpeg'
-          elsif file_set.audio?
-            'mp3'
-          elsif file_set.video?
-            'mp4'
-          elsif file_set.pdf? || file_set.office_document?
-            # PDF || Office Document get full size
-            return stream_works(work, zip)
-          end
+        deriv_name = derivative_name(file_set)
+        return stream_works(work, zip) if deriv_name.blank?
 
         zip.write_deflated_file(file_name) do |file_writer|
           File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, deriv_name), 'rb') do |source|
