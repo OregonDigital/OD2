@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
   end
 
   create_table "collection_representatives", force: :cascade do |t|
-    t.string "collection_id"
-    t.string "fileset_id"
+    t.string "collection_id", null: false
+    t.string "fileset_id", null: false
     t.integer "order", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
