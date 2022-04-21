@@ -17,7 +17,7 @@ module OregonDigital
       configure_blacklight do |config|
         # configuration for Blacklight IIIF Content Search
         config.iiif_search = {
-          full_text_field: ['all_text_bbox_tsimv', 'hocr_content_tsimv'],
+          full_text_field: %w[all_text_bbox_tsimv hocr_content_tsimv],
           object_relation_field: 'file_set_ids_ssim',
           supported_params: %w[q page],
           autocomplete_handler: 'iiif_suggest',

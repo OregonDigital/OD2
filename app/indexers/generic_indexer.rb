@@ -29,12 +29,16 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_edit_groups
       index_read_groups
       index_discover_groups
-      solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| file_set.extracted_text&.content&.presence || file_set&.ocr_content&.presence || solr_doc['all_text_timv'].presence }      # Index file formats from file sets for faceting
+      solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| find_all_text_value(file_set, solr_doc) } # Index file formats from file sets for faceting
       solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] }
     end
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+
+  def find_all_text_value(file_set, solr_doc)
+    file_set.extracted_text&.content&.presence || file_set&.ocr_content&.presence || solr_doc['all_text_tsimv'].presence
+  end
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
     solr_doc['copyright_combined_label_sim'] = license_labels + rights_labels

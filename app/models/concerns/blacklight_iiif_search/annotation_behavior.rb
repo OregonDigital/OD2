@@ -28,7 +28,6 @@ module BlacklightIiifSearch
     # corresponding to coordinates of query term on image
     # local implementation expected, value returned below is just a placeholder
     # @return [String]
-    # rubocop:disable Metrics/AbcSize
     def coordinates
       return '' unless query
 
@@ -45,10 +44,11 @@ module BlacklightIiifSearch
       word ? "#{word.page}#xywh=#{word.bbox}" : '0#xywh=0,0,0,0'
       # There were no matching words in extracted or OCRd text, write out an empty result.
     end
-    # rubocop:enable Metrics/AbcSize
 
+    # rubocop:disable Metrics/AbcSize
     def find_words(solr_field)
       return [] unless document[solr_field]
+
       # Begin by grabbing the output of `pdftotext -bbox`
       text = document[solr_field].select { |val| val.split(':')[0] == query }
       # Find each individual word
@@ -58,6 +58,7 @@ module BlacklightIiifSearch
         Word.new(box.split(',').map(&:to_f))
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # A single search result word and bounding box
     class Word

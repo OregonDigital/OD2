@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# corresponds to a IIIF Annotation List
 module BlacklightIiifSearch
+  # corresponds to a IIIF Annotation List
   class IiifSearchResponse
     include BlacklightIiifSearch::Ignored
 
@@ -22,6 +22,8 @@ module BlacklightIiifSearch
 
     ##
     # constructs the IIIF::Presentation::AnnotationList
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     # @return [IIIF::OrderedHash]
     def annotation_list
       list_id = controller.request.original_url
@@ -55,7 +57,7 @@ module BlacklightIiifSearch
         word_array.each do |words|
           word = words.split(':')[0]
           word_count = words.split(':')[1].split(';').count
-          for word_index in 0..word_count-1 do
+          (0..word_count - 1).each do |word_index|
             @total += 1
             # We're going to send the word_index over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb
             # The word stays the same, just the "hit highlight index" changes so the AnnotationBehavior can access the bbox
@@ -71,6 +73,8 @@ module BlacklightIiifSearch
       end
       @resources
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     ##
     # @return [IIIF::Presentation::Layer]

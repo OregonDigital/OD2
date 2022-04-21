@@ -30,9 +30,6 @@ module OregonDigital
       result = processor.run!
       words_hash = {}
 
-      # Trim leading and trailing punctuation
-      punct_trim_regex = /^\W*(.*?)\W*$/m
-
       pages = Nokogiri::HTML(result.bbox_content).css('page')
       page_count = pages.count
 
@@ -51,7 +48,7 @@ module OregonDigital
           scale_factor = 4.185
           coords = [x, y, x2, y2].map { |coord| coord * scale_factor }
 
-          trimmed_word = nokogiri_element.text.downcase.match(punct_trim_regex)&.captures&.first&.stem
+          trimmed_word = trim_word(nokogiri_element.text.downcase)
           words_hash[trimmed_word] ||= []
           words_hash[trimmed_word] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{page}"
         end
@@ -66,6 +63,12 @@ module OregonDigital
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+
+    def trim_word(word)
+      # Trim leading and trailing punctuation
+      punct_trim_regex = /^\W*(.*?)\W*$/m
+      word.match(punct_trim_regex)&.captures&.first&.stem
+    end
 
     # No cleanup necessary - all this does is set a property on FileSet.
     def cleanup_derivatives; end
