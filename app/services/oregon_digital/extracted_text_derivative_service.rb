@@ -30,6 +30,9 @@ module OregonDigital
       result = processor.run!
       words_hash = {}
 
+      # Trim leading and trailing punctuation
+      punct_trim_regex = /^\W*(.*?)\W*$/m
+
       pages = Nokogiri::HTML(result.bbox_content).css('page')
       page_count = pages.count
 
@@ -44,11 +47,13 @@ module OregonDigital
           x2 = nokogiri_element.attributes['xmax'].value.to_i
           y2 = nokogiri_element.attributes['ymax'].value.to_i
 
+          # Some seemingly unknown scaling to get boxes in the right place/size
           scale_factor = 4.185
           coords = [x, y, x2, y2].map { |coord| coord * scale_factor }
 
-          words_hash[nokogiri_element.text.downcase.stem] ||= []
-          words_hash[nokogiri_element.text.downcase.stem] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{page}"
+          trimmed_word = nokogiri_element.text.downcase.match(punct_trim_regex)&.captures&.first&.stem
+          words_hash[trimmed_word] ||= []
+          words_hash[trimmed_word] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{page}"
         end
       end
 

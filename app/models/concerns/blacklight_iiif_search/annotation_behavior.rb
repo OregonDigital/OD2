@@ -7,7 +7,7 @@ module BlacklightIiifSearch
     # Create a URL for the annotation
     # @return [String]
     def annotation_id
-      "#{parent_url}/canvas/#{document[:id]}/annotation/#{hl_index}"
+      "#{parent_url}/canvas/#{document[:id]}/annotation/#{query}-#{hl_index}"
     end
 
     ##
@@ -20,7 +20,7 @@ module BlacklightIiifSearch
     # Get the parent manifest URL
     def parent_url
       # Get the manifest URL for a Generic work, and sub in the correct model name
-      controller.manifest_hyrax_generic_url(parent_document[:id]).gsub(/\?locale=.*/, '').gsub(/generic/, parent_document['has_model_ssim'][0].downcase)
+      controller.manifest_hyrax_generic_url(parent_document[:id]).gsub(/\?locale=.*/, '').gsub('localhost', 'test.library.oregonstate.edu').gsub(/generic/, parent_document['has_model_ssim'][0].downcase)
     end
 
     ##
@@ -30,8 +30,6 @@ module BlacklightIiifSearch
     # @return [String]
     # rubocop:disable Metrics/AbcSize
     def coordinates
-      query.delete_suffix!('*')
-      query.downcase!
       return '' unless query
 
       # Attempt to grab extracted text if it exists
@@ -50,8 +48,9 @@ module BlacklightIiifSearch
     # rubocop:enable Metrics/AbcSize
 
     def find_words(solr_field)
+      return [] unless document[solr_field]
       # Begin by grabbing the output of `pdftotext -bbox`
-      text = document[solr_field].select { |val| val.start_with?(*query.split(' ')) }
+      text = document[solr_field].select { |val| val.split(':')[0] == query }
       # Find each individual word
       bboxes = text.map { |val| val.split(':')[1].split(';') }.flatten
       # Create ExtractedWord objects out of the words
