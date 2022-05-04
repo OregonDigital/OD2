@@ -13,12 +13,16 @@ module OregonDigital
     protected
 
     # override Hyrax/ActiveFedora add_assertions to insert combined labels
+    # do not index unfetched labels
     # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def add_assertions(prefix_method, solr_doc = {})
       fetch_external
       fields.each do |field_key, field_info|
         solr_field_key = solr_document_field_name(field_key, prefix_method)
         field_info.values.each do |val|
+          next if (val.respond_to? :rdf_label) && (val.rdf_label.first.start_with? 'http')
+
           append_to_solr_doc(solr_doc, solr_field_key, field_info, val)
           combined_prop = combined_properties[field_key]
           next if combined_prop.blank?
@@ -54,7 +58,7 @@ module OregonDigital
     # override Hyrax fetch_value to get rid of misleading logging
     def fetch_value(value)
       value.fetch(headers: { 'Accept' => default_accept_header })
-    rescue IOError, SocketError => e
+    rescue IOError, SocketError, TriplestoreAdapter::TriplestoreException => e
       # IOError could result from a 500 error on the remote server
       # SocketError results if there is no server to connect to
       Rails.logger.error "Unable to fetch #{value.rdf_subject}.\n#{e.message}"
@@ -93,5 +97,6 @@ module OregonDigital
       cpm
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop: enable Metrics/AbcSize
   end
 end
