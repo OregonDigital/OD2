@@ -26,6 +26,9 @@ RDFXML
         stub_request(:get, 'https://sws.geonames.org/5037649/')
           .to_return(status: 200, body: newberg,
                      headers: { 'Content-Type' => 'application/rdf+xml;charset=UTF-8' })
+        stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttps://sws.geonames.org/5037649/%3E')
+          .to_return(status: 200, body: newberg,
+                     headers: { 'Content-Type' => 'application/rdf+xml;charset=UTF-8' })
       end
 
       it 'adds both property label and combined label' do
@@ -46,7 +49,6 @@ RDFXML
       end
 
       it 'handles the error' do
-        expect { location.fetch }.to raise_error(IOError)
         solr_doc = service.send(:add_assertions, nil)
         expect(solr_doc['location_combined_label_sim']).to eq nil
       end
