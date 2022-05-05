@@ -49,7 +49,7 @@ RDFXML
       before do
         stub_request(:get, 'http://sws.geonames.org/5037650')
           .to_return(status: 500, body: '', headers: {})
-        stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://sws.geonames.org/5037650')
+        stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://sws.geonames.org/5037650%3E')
           .to_return(status: 500, body: '', headers: {})
       end
 
