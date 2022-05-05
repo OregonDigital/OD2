@@ -12,17 +12,6 @@ RSpec.describe FetchGraphWorker, type: :worker do
   let(:scientific_controlled_val) { OregonDigital::ControlledVocabularies::Scientific.new('http://opaquenamespace.org/ns/genus/Acnanthes') }
   let(:work) { model }
 
-  before do
-    allow(creator_controlled_val).to receive(:fetch).with(:anything).and_return({})
-    allow(subject_controlled_val).to receive(:fetch).with(:anything).and_return({})
-    allow(location_controlled_val).to receive(:fetch).with(:anything).and_return({})
-    allow(scientific_controlled_val).to receive(:fetch).with(:anything).and_return({})
-    allow_any_instance_of(OregonDigital::ControlledVocabularies::Creator).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
-    allow_any_instance_of(OregonDigital::ControlledVocabularies::Subject).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
-    allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
-    allow_any_instance_of(OregonDigital::ControlledVocabularies::Scientific).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/genus/Acnanthes', { label: 'Acnanthes$http://opaquenamespace.org/ns/genus/Acnanthes' }])
-  end
-
   describe '#perform' do
     context 'when the request works' do
       before do
@@ -34,34 +23,10 @@ RSpec.describe FetchGraphWorker, type: :worker do
         stub_request(:get, 'http://opaquenamespace.org/ns/genus/Acnanthes').to_return(status: 200, body: '', headers: {})
       end
 
-      it 'fetches a work and indexes its linked data labels' do
+      it 'fetches all of its linked data labels' do
+        expect(OregonDigital::Triplestore).to receive(:fetch).exactly(3).times
+        expect(OregonDigital::Triplestore).to receive(:fetch_cached_term).once
         worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['creator_label_tesim'].first).to eq 'Chabre, Wayne'
-      end
-
-      it 'indexes creator data into the creator_combined_label field' do
-        worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['creator_combined_label_sim'].first).to eq 'Chabre, Wayne'
-      end
-
-      it 'indexes data into the location_combined_label field' do
-        worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['location_combined_label_sim'].first).to eq 'Chabre, Wayne'
-      end
-
-      it 'indexes non-linked topic data into the creator_combined_label field' do
-        worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include 'bar'
-      end
-
-      it 'indexes linked topic data into the topic_combined_label field' do
-        worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['topic_combined_label_sim']).to include 'Chabre, Wayne'
-      end
-
-      it 'indexes data into the scientific_combined_label field' do
-        worker.perform(work.id, work.depositor)
-        expect(SolrDocument.find(work.id)['scientific_combined_label_sim'].first).to eq 'Acnanthes'
       end
     end
 
