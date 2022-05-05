@@ -39,23 +39,5 @@ module OregonDigital
         stream_works_low(work, zip, folder)
       end
     end
-
-    # def stream_works_low(work, folder = '', zip)
-    #   work.file_sets.each do |file_set|
-    #     file_name = "#{folder}#{file_set.label}"
-    #     deriv_name = derivative_name(file_set)
-
-
-    #     begin
-    #       file = File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, deriv_name), 'rb')
-    #       zip.write_deflated_file(file_name) do |file_writer|
-    #         IO.copy_stream(file, file_writer)
-    #       end
-    #       file.close
-    #     rescue Errno::ENOENT
-    #       stream_files_from_fileset(file_set, zip)
-    #     end
-    #   end
-    # end
   end
 end
