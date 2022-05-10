@@ -119,8 +119,9 @@ module OregonDigital
     def create_video_derivatives(filename)
       OregonDigital::Derivatives::Video::VideoRunner.create(filename,
                                                             outputs: [{ label: :thumbnail, format: 'jpg', url: derivative_url('thumbnail') },
-                                                                      { label: 'webm', format: 'webm', url: derivative_url('webm') },
-                                                                      { label: 'mp4', format: 'mp4', url: derivative_url('mp4') }])
+                                                              { label: 'mp4', format: 'mp4', url: derivative_url('mp4') }])
+      # Hydra::Derivatives::VideoDerivatives.create(filename,
+      #                                             outputs: [{ label: :thumbnail, format: 'jpg', url: derivative_url('thumbnail') }])
     end
 
     # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
@@ -143,7 +144,6 @@ module OregonDigital
 
     # Returns a sorted list of all derivatives of the given name (typically a sequence)
     def sorted_derivative_urls(destination_name)
-      # BREAK
       path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
       ext = File.extname(path)
       paths = derivative_path_factory.derivatives_for_reference(file_set).select do |derivative|
