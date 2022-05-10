@@ -21,17 +21,15 @@ module OregonDigital
     # Creates a display image for IIIFManifest
     #
     # @return [IIIFManifest::DisplayImage] the display image required by the manifest builder.
-    def display_content
+    def display_image
       return nil unless readable
 
       # I have no idea why we have to specify height here; IIIF doesn't require
       # it.  But this is how the Hyrax code seems to work, sooo....
-      IIIFManifest::V3::DisplayContent.new(default_image_path,
-                                     type: 'Video',
-                                     format: 'video/mp4',
-                                     width: 426,
-                                     height: 240,
-                                     duration: 266)
+      IIIFManifest::DisplayImage.new(default_image_path,
+                                     width: 640,
+                                     height: 480,
+                                     iiif_endpoint: iiif_endpoint)
     end
 
     # Returns the derivative file's label - this appears to be used by Hyrax
@@ -58,12 +56,11 @@ module OregonDigital
 
     # Calculates the base URL for IIIF requests against this JP2
     def iiif_url
-      ['test.library.oregonstate.edu:3000', iiif_id].join('/')
+      [ENV.fetch('IIIF_SERVER_BASE_URL', request.base_url), iiif_id].join('/')
     end
 
     def default_image_path
       [iiif_url, 'full', '640,', '0', 'default.jpg'].join('/')
-      'http://test.library.oregonstate.edu:3000/downloads/9g54xh64n?file=mp4'
     end
 
     def iiif_endpoint
