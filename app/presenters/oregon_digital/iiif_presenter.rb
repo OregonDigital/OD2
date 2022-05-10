@@ -19,7 +19,7 @@ module OregonDigital
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
-        urls = file_set_derivatives_service(fs).sorted_derivative_urls('jp2')
+        urls = file_set_derivatives_service(fs).sorted_derivative_urls('mp4')
 
         urls.each_with_index do |derivative, i|
           label = urls.length > 1 ? page_label(fs.label, i) : fs.label

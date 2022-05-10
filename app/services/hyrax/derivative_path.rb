@@ -33,6 +33,7 @@ module Hyrax
     end
 
     def all_paths
+      # BREAK
       Dir.glob(root_path.join('*')).select do |path|
         path.start_with?(path_prefix.to_s)
       end

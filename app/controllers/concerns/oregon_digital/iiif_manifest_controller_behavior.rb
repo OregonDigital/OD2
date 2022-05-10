@@ -9,6 +9,7 @@ module OregonDigital
     def manifest
       headers['Access-Control-Allow-Origin'] = '*'
 
+      # BREAK
       json = sanitize_manifest(JSON.parse(manifest_builder.to_h.to_json))
 
       respond_to do |wants|
@@ -18,7 +19,7 @@ module OregonDigital
     end
 
     def manifest_builder
-      ::IIIFManifest::ManifestFactory.new(jp2_work_presenter)
+      ::IIIFManifest::V3::ManifestFactory.new(jp2_work_presenter)
     end
 
     def jp2_work_presenter

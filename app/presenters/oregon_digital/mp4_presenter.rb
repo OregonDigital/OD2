@@ -6,14 +6,14 @@ module OregonDigital
   # JP2Presenter wraps a single JP2 derivative as if it were a fileset of its
   # own, strictly for the IIIF manifest / viewer.  This is adapted from
   # Hyrax::DisplaysImage.
-  class JP2Presenter
+  class MP4Presenter
     delegate :id, to: :file_set
-    attr_reader :readable, :file_set, :jp2_path, :label, :request
+    attr_reader :readable, :file_set, :mp4_path, :label, :request
 
-    def initialize(file_set, jp2_path, label, current_ability, request)
+    def initialize(file_set, mp4_path, label, current_ability, request)
       @readable = current_ability.can?(:read, file_set)
       @file_set = file_set
-      @jp2_path = jp2_path
+      @mp4_path = mp4_path
       @label = label
       @request = request
     end
@@ -26,7 +26,7 @@ module OregonDigital
 
       # I have no idea why we have to specify height here; IIIF doesn't require
       # it.  But this is how the Hyrax code seems to work, sooo....
-      IIIFManifest::V3::DisplayContent.new(default_image_path,
+      IIIFManifest::V3::DisplayContent.new(default_video_path,
                                      type: 'Video',
                                      format: 'video/mp4',
                                      width: 426,
@@ -50,10 +50,10 @@ module OregonDigital
       fake_ds = OregonDigital::FileSetDerivativesService.new(fake_fs)
 
       # This should end up looking very much like "file:///data/tmp/shared/derivatives/"
-      base_path = fake_ds.derivative_url('jp2').sub('id-jp2.jp2', '')
+      base_path = fake_ds.derivative_url('mp4').sub('id-jp2.jp2', '')
 
       # ...which should make *this* look like "qb%wF98%2Fmf%2F44%2F9-jp2-0005.jp2"
-      jp2_path.sub(base_path, '').gsub('/', '%2F')
+      mp4_path.sub(base_path, '').gsub('/', '%2F')
     end
 
     # Calculates the base URL for IIIF requests against this JP2
@@ -61,13 +61,10 @@ module OregonDigital
       ['test.library.oregonstate.edu:3000', iiif_id].join('/')
     end
 
-    def default_image_path
+    def default_video_path
+      # BREAK
       [iiif_url, 'full', '640,', '0', 'default.jpg'].join('/')
       'http://test.library.oregonstate.edu:3000/downloads/9g54xh64n?file=mp4'
-    end
-
-    def iiif_endpoint
-      IIIFManifest::IIIFEndpoint.new(iiif_url, profile: Hyrax.config.iiif_image_compliance_level_uri)
     end
   end
 end

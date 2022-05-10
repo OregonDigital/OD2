@@ -143,6 +143,7 @@ module OregonDigital
 
     # Returns a sorted list of all derivatives of the given name (typically a sequence)
     def sorted_derivative_urls(destination_name)
+      # BREAK
       path = derivative_path_factory.derivative_path_for_reference(file_set, destination_name)
       ext = File.extname(path)
       paths = derivative_path_factory.derivatives_for_reference(file_set).select do |derivative|
