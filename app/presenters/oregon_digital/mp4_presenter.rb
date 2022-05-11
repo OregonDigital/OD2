@@ -29,7 +29,7 @@ module OregonDigital
                                       format: 'video/mp4',
                                       width: file_set.width.first,
                                       height: file_set.height.first,
-                                      duration: file_set.duration.first.to_f / 1000)
+                                      duration: (file_set.duration.first.to_f / 1000).ceil)
     end
 
     # Returns the derivative file's label - this appears to be used by Hyrax
