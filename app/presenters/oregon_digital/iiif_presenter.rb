@@ -19,17 +19,22 @@ module OregonDigital
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
-        urls = file_set_derivatives_service(fs).sorted_derivative_urls('mp4')
+        if fs.video?
+          deriv_type = 'mp4'
+          presenter_class = MP4Presenter
+        elsif fs.image?
+          deriv_type = 'jp2'
+          presenter_class = JP2Presenter
+        else
+          deriv_type = 'thumbnail'
+          presenter_class = JP2Presenter
+        end
+
+        urls = file_set_derivatives_service(fs).sorted_derivative_urls(deriv_type)
 
         urls.each_with_index do |derivative, i|
           label = urls.length > 1 ? page_label(fs.label, i) : fs.label
-          if fs.video?
-            presenters << MP4Presenter.new(fs, derivative, label, current_ability, request)
-          elsif fs.image?
-            presenters << JP2Presenter.new(fs, derivative, label, current_ability, request)
-          else
-            presenters << JP2Presenter.new(fs, derivative, label, current_ability, request)
-          end
+          presenters << presenter_class.new(fs, derivative, label, current_ability, request)
         end
       end
 
