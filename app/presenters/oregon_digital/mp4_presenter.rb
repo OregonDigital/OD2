@@ -31,7 +31,7 @@ module OregonDigital
                                      format: 'video/mp4',
                                      width: 426,
                                      height: 240,
-                                     duration: 266)
+                                     duration: 46)
     end
 
     # Returns the derivative file's label - this appears to be used by Hyrax
@@ -64,7 +64,7 @@ module OregonDigital
     def default_video_path
       # BREAK
       [iiif_url, 'full', '640,', '0', 'default.jpg'].join('/')
-      'http://test.library.oregonstate.edu:3000/downloads/9g54xh64n?file=mp4'
+      'http://test.library.oregonstate.edu:3000/downloads/kk91fk52b?file=mp4'
     end
   end
 end
