@@ -51,7 +51,6 @@ RUN mkdir -p /opt/fits && \
   curl -fSL -o /opt/fits-1.5.5.zip https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip && \
   cd /opt/fits && unzip /opt/fits-1.5.5.zip  && chmod +X /opt/fits/fits.sh && \
   rm -f /opt/fits-1.5.5.zip
-# Link mediainfo path so FITS can find mediainfo for video files
 
 ARG UID=8083
 ARG GID=8083
