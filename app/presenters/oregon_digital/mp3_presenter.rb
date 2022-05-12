@@ -25,9 +25,9 @@ module OregonDigital
       return nil unless readable
 
       IIIFManifest::V3::DisplayContent.new(default_content_path,
-                                     type: 'Audio',
-                                     format: 'audio/mp3',
-                                     duration: self.duration)
+                                           type: 'Audio',
+                                           format: 'audio/mp3',
+                                           duration: duration)
     end
 
     # Returns the derivative file's label - this appears to be used by Hyrax
@@ -39,7 +39,7 @@ module OregonDigital
     private
 
     def duration
-      dur = @file_set.duration.first.split(":").map(&:to_i)
+      dur = @file_set.duration.first.split(':').map(&:to_i)
       (dur.first * 3600) + (dur.second * 60) + dur.third + 1
     end
 

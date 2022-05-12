@@ -19,16 +19,7 @@ module OregonDigital
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
-        if fs.video?
-          deriv_type = 'mp4'
-          presenter_class = MP4Presenter
-        elsif fs.image?
-          deriv_type = 'jp2'
-          presenter_class = JP2Presenter
-        else
-          deriv_type = 'thumbnail'
-          presenter_class = JP2Presenter
-        end
+        deriv_type, presenter_class = file_set_presenter_info fs
 
         urls = file_set_derivatives_service(fs).sorted_derivative_urls(deriv_type)
 
@@ -39,6 +30,19 @@ module OregonDigital
       end
 
       presenters
+    end
+
+    # Determine which derivative type and IIIF fileset presenter to use
+    def file_set_presenter_info(fs)
+      if fs.video?
+        ['mp4', MP4Presenter]
+      elsif fs.image?
+        ['jp2', JP2Presenter]
+      elsif fs.audio?
+        ['mp3', MP3Presenter]
+      else
+        ['thumbnail', JP2Presenter]
+      end
     end
 
     def work_presenters

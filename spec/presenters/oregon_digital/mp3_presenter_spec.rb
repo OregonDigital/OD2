@@ -1,8 +1,7 @@
 # frozen_string_literal:true
 
 RSpec.describe OregonDigital::MP3Presenter do
-  let(:file_set) { instance_double(FileSet,
-                                   duration: ['0:00:02:30']) }
+  let(:file_set) { instance_double(FileSet, duration: ['0:00:02:30']) }
   let(:mp3_path) { 'file:///data/tmp/shared/derivatives/2v/23/vt/36/2-0001-mp3.mp3' }
   let(:label) { 'Page 2' }
   let(:ability) { instance_double(Ability) }

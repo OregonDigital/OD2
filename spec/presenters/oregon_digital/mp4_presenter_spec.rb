@@ -1,10 +1,12 @@
 # frozen_string_literal:true
 
 RSpec.describe OregonDigital::MP4Presenter do
-  let(:file_set) { instance_double(FileSet,
-                                   width: [100],
-                                   height: [100],
-                                   duration: [2001]) }
+  let(:file_set) do
+    instance_double(FileSet,
+                    width: [100],
+                    height: [100],
+                    duration: [2001])
+  end
   let(:mp4_path) { 'file:///data/tmp/shared/derivatives/2v/23/vt/36/2-0001-mp4.mp4' }
   let(:label) { 'Page 2' }
   let(:ability) { instance_double(Ability) }
