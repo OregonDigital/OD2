@@ -8,12 +8,12 @@ module OregonDigital
   # Hyrax::DisplaysImage.
   class MP4Presenter
     delegate :id, to: :file_set
-    attr_reader :readable, :file_set, :jp2_path, :label, :request
+    attr_reader :readable, :file_set, :mp4_path, :label, :request
 
-    def initialize(file_set, jp2_path, label, current_ability, request)
+    def initialize(file_set, mp4_path, label, current_ability, request)
       @readable = current_ability.can?(:read, file_set)
       @file_set = file_set
-      @jp2_path = jp2_path
+      @mp4_path = mp4_path
       @label = label
       @request = request
     end
