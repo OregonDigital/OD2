@@ -42,7 +42,7 @@ module OregonDigital
 
     def duration
       dur = @file_set.duration.first.split(":")
-      (dur.first * 3600) + (dur.second * 60) + dur.third
+      (dur.first * 3600) + (dur.second * 60) + dur.third + 1
     end
 
     # The path to the derivative download
