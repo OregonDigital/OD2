@@ -20,10 +20,15 @@
           <% @presenter.file_set_presenters.each do |presenter| %>
             <%= render 'oembed_media', presenter: presenter %>
           <% end %>
-        <% end %>
+        <% elsif @presenter.iiif_viewer? %>
           <div class="col-sm-12">
             <%= render 'representative_media', presenter: @presenter, viewer: true %>
           </div>
+        <% else %>
+          <div class="col-sm-12">
+            <%= render 'representative_media', presenter: @presenter, viewer: false %>
+          </div>
+        <% end %>
       </div>
       <div class="col-xs-12">
       </div>

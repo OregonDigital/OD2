@@ -7,13 +7,13 @@
     "node-fetch": "2.6.7",
     "shx": "^0.3.2",
     "three": "0.137.0",
-    "universalviewer": "^3",
+    "universalviewer": "3.0.22",
     "xmldom": "0.5.0"
   },
   "scripts": {
     "preinstall": "rm -rf ./public/uv",
     "postinstall": "yarn run uv-install && yarn run uv-config",
-    "uv-install": "shx mkdir ./public/uv && cp -r ./node_modules/universalviewer/dist/* ./public/uv",
+    "uv-install": "shx mkdir ./public/uv && cp -r ./node_modules/universalviewer/uv/ ./public/",
     "uv-config": "shx cp ./config/uv/uv.html ./public/uv/uv.html & shx cp ./config/uv/uv-config.json ./public/uv/"
   }
 }
