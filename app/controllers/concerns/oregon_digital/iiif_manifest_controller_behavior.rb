@@ -18,7 +18,7 @@ module OregonDigital
     end
 
     def manifest_builder
-      ::IIIFManifest::ManifestFactory.new(jp2_work_presenter)
+      ::IIIFManifest::V3::ManifestFactory.new(jp2_work_presenter)
     end
 
     def jp2_work_presenter

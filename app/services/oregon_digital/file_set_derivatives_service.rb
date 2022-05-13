@@ -118,9 +118,9 @@ module OregonDigital
 
     def create_video_derivatives(filename)
       OregonDigital::Derivatives::Video::VideoRunner.create(filename,
-                                                            outputs: [{ label: :thumbnail, format: 'jpg', url: derivative_url('thumbnail') },
-                                                                      { label: 'webm', format: 'webm', url: derivative_url('webm') },
-                                                                      { label: 'mp4', format: 'mp4', url: derivative_url('mp4') }])
+                                                            outputs: [{ label: 'mp4', format: 'mp4', url: derivative_url('mp4') }])
+      Hydra::Derivatives::VideoDerivatives.create(filename,
+                                                  outputs: [{ label: :thumbnail, format: 'jpg', url: derivative_url('thumbnail') }])
     end
 
     # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired
