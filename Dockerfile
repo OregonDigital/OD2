@@ -48,9 +48,9 @@ RUN mkdir -p /tmp/im && \
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
-  curl -fSL -o /opt/fits-1.5.0.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
-  cd /opt/fits && unzip /opt/fits-1.5.0.zip  && chmod +X /opt/fits/fits.sh && \
-  rm -f /opt/fits-1.5.0.zip
+  curl -fSL -o /opt/fits-1.5.5.zip https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip && \
+  cd /opt/fits && unzip /opt/fits-1.5.5.zip  && chmod +X /opt/fits/fits.sh && \
+  rm -f /opt/fits-1.5.5.zip
 
 ARG UID=8083
 ARG GID=8083
