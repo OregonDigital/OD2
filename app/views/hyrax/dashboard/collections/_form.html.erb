@@ -34,7 +34,7 @@
           <div class="panel-body">
 
             <div id="base-terms">
-              <% unless current_user.roles.blank? %>
+              <% if current_user.role?(current_ability.manager_permission_roles) %>
                 <% f.object.primary_terms.each do |term| %>
                   <%= render_edit_field_partial(term, f: f) %>
                 <% end %>
