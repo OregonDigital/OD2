@@ -5,7 +5,9 @@ module OregonDigital::Derivatives
   extend ActiveSupport::Autoload
 
   eager_autoload do
-    autoload :Image
+    autoload :Audio
     autoload :Document
+    autoload :Image
+    autoload :Video
   end
 end
