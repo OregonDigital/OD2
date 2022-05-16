@@ -51,6 +51,7 @@ services:
       - HONEYCOMB_DATASET=od2-rails
       - HONEYCOMB_SERVICE=od2
       - HONEYCOMB_WRITEKEY=buzzzzzzzzzzzzzzzz
+      - LD_LIBRARY_PATH=/opt/fits/tools/mediainfo/linux
       - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
       - RAILS_CACHE_STORE_URL=memcache
       - RAILS_ENV=development
@@ -118,6 +119,7 @@ services:
       - HONEYCOMB_DATASET=od2-rails
       - HONEYCOMB_SERVICE=od2
       - HONEYCOMB_WRITEKEY=buzzzzzzzzzzzzzzzz
+      - LD_LIBRARY_PATH=/opt/fits/tools/mediainfo/linux
       - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
       - RAILS_CACHE_STORE_URL=memcache
       - RAILS_ENV=test

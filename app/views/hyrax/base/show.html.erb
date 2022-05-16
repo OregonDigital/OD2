@@ -24,6 +24,10 @@
           <div class="col-sm-12">
             <%= render 'representative_media', presenter: @presenter, viewer: true %>
           </div>
+        <% else %>
+          <div class="col-sm-12">
+            <%= render 'representative_media', presenter: @presenter, viewer: false %>
+          </div>
         <% end %>
       </div>
       <div class="col-xs-12">
