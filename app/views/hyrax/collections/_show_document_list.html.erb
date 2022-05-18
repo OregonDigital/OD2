@@ -1,0 +1,14 @@
+<table class="table table-striped collections-list-table collection-works-table">
+  <caption class="sr-only">List of items in this collection</caption>
+  <thead>
+  <tr>
+    <th class="title-column">Title</th>
+    <% if current_user %>
+      <th>Action</th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'show_document_list_row', collection: @collection_member_service.available_member_works.documents, as: :document %>
+  </tbody>
+</table>
