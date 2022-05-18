@@ -30,7 +30,7 @@ class Ability
   end
 
   def in_depositors_collection?(edit_access_person)
-    edit_access_person.include?(current_user.email)
+    edit_access_person.include?(current_user.user_key)
   end
 
   def admin_permission_roles
