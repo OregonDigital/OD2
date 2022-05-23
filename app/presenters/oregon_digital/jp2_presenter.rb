@@ -27,11 +27,11 @@ module OregonDigital
       # I have no idea why we have to specify height here; IIIF doesn't require
       # it.  But this is how the Hyrax code seems to work, sooo....
       IIIFManifest::V3::DisplayContent.new(default_content_path,
-                                     type: 'Image',
-                                     format: 'image/jpeg',
-                                     width: 640,
-                                     height: 480,
-                                     iiif_endpoint: iiif_endpoint)
+                                           type: 'Image',
+                                           format: 'image/jpeg',
+                                           width: 640,
+                                           height: 480,
+                                           iiif_endpoint: iiif_endpoint)
     end
 
     # Returns the derivative file's label - this appears to be used by Hyrax
