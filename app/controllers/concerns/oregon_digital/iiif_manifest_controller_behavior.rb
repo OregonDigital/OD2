@@ -9,12 +9,33 @@ module OregonDigital
     def manifest
       headers['Access-Control-Allow-Origin'] = '*'
 
-      json = sanitize_manifest(JSON.parse(manifest_builder.to_h.to_json))
+      manifest_json = manifest_builder.to_h
+      # Thumbnails are not supported by iiif_manifest V3
+      # https://github.com/samvera/iiif_manifest/issues/34
+      # So we'll add our own
+      manifest_json['items'].each_with_index do |item, i|
+        item['thumbnail'] = thumbnail JSON.parse(item.to_json)
+      end
+      json = sanitize_manifest(JSON.parse(manifest_json.to_json))
 
       respond_to do |wants|
         wants.json { render json: json }
         wants.html { render json: json }
       end
+    end
+
+    ###
+    # Gets the external thumbnail path of a resource.
+    def thumbnail(item)
+      path = item.dig('items', 0, 'items', 0, 'body', 'id')
+      return nil if path.nil?
+      [
+        {
+          "id": path,
+          "type": "Image",
+          "format": "image/jpg"
+        }
+      ]
     end
 
     def manifest_builder
@@ -35,12 +56,18 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/PerceivedComplexity
     def sanitize_manifest(hash)
-      hash['label'] = sanitize_value(hash['label']) if hash.key?('label')
+      hash['label']&.each do |lang, labels|
+        labels&.each_with_index do |label, i|
+          hash['label'][lang][i] = sanitize_value(label) if hash.key?('label')
+        end
+      end
       hash['description'] = hash['description']&.collect { |elem| sanitize_value(elem) } if hash.key?('description')
 
-      hash['sequences']&.each do |sequence|
-        sequence['canvases']&.each do |canvas|
-          canvas['label'] = sanitize_value(canvas['label'])
+      hash['items']&.each do |item|
+        item['label']&.each do |lang, labels|
+          labels&.each_with_index do |label, i|
+            item['label'][lang][i] = sanitize_value(label)
+          end
         end
       end
       hash
