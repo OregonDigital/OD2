@@ -6,14 +6,14 @@ module OregonDigital
   # IIIFManifestControllerBehavior mixes in logic to generate a IIIF manifest
   # without the incorrect assumptions the Hyrax defaults make
   module IIIFManifestControllerBehavior
+    # rubocop:disable Metrics/AbcSize
     def manifest
       headers['Access-Control-Allow-Origin'] = '*'
 
       manifest_json = manifest_builder.to_h
       # Thumbnails are not supported by iiif_manifest V3
       # https://github.com/samvera/iiif_manifest/issues/34
-      # So we'll add our own
-      manifest_json['items'] = with_thumbnails(manifest_json['items'].to_json)
+      manifest_json['items'] = items_with_thumbnails(manifest_json['items'].to_json) unless manifest_json['items'].blank?
       json = sanitize_manifest(JSON.parse(manifest_json.to_json))
 
       respond_to do |wants|
@@ -21,12 +21,13 @@ module OregonDigital
         wants.html { render json: json }
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     ###
     # Gets the external thumbnail path of a resource.
-    def with_thumbnails(items)
-      JSON.parse(items)
-      items.each do |item|
+    def items_with_thumbnails(items)
+      items = JSON.parse(items)
+      items&.each do |item|
         path = item.dig('items', 0, 'items', 0, 'body', 'id')
         next nil if path.nil?
 

@@ -98,11 +98,11 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
   describe '.sanitize_manifest(hash)' do
     let(:h) do
       {
-        'description' => %w[foo bar],
-        'label' => 'baz',
-        'sequences' => [
-          { 'canvases' => [{ 'label' => 'blah' }, { 'label' => 'blah 2' }] },
-          { 'canvases' => [{ 'label' => 'seriously, blah' }] }
+        'summary' => %w[foo bar],
+        'label' => { '@none' => ['baz'] },
+        'items' => [
+          { 'items' => [{ 'label' => 'blah' }, { 'label' => 'blah 2' }] },
+          { 'items' => [{ 'label' => 'seriously, blah' }] }
         ]
       }
     end
