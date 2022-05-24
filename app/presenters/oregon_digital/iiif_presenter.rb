@@ -36,12 +36,12 @@ module OregonDigital
     def file_set_presenter_info(fs)
       if fs.video?
         ['mp4', MP4Presenter]
-      elsif fs.image?
+      elsif fs.image? || fs.pdf?
         ['jp2', JP2Presenter]
       elsif fs.audio?
         ['mp3', MP3Presenter]
       else
-        ['thumbnail', JP2Presenter]
+        ['jp2', JP2Presenter]
       end
     end
 
@@ -61,7 +61,7 @@ module OregonDigital
     end
 
     def search_service
-      Rails.application.routes.url_helpers.solr_document_iiif_search_url(solr_document_id: id.to_s)
+      [request.base_url, Rails.application.routes.url_helpers.solr_document_iiif_search_path(solr_document_id: id.to_s)].join
     end
 
     def viewing_hint

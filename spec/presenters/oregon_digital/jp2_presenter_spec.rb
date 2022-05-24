@@ -8,14 +8,14 @@ RSpec.describe OregonDigital::JP2Presenter do
   let(:request) { OpenStruct.new(base_url: 'http://example.org') }
   let(:presenter) { described_class.new(file_set, jp2_path, label, ability, request) }
   let(:readable) { true }
-  let(:image) { instance_double(IIIFManifest::DisplayImage) }
+  let(:image) { instance_double(IIIFManifest::V3::DisplayContent) }
 
   before do
     allow(ability).to receive(:can?).with(:read, file_set).and_return(readable)
-    allow(IIIFManifest::DisplayImage).to receive(:new).and_return(image)
+    allow(IIIFManifest::V3::DisplayContent).to receive(:new).and_return(image)
   end
 
-  describe '#display_image' do
+  describe '#display_content' do
     let(:iiif_endpoint) { instance_double(IIIFManifest::IIIFEndpoint) }
 
     before do
@@ -26,25 +26,25 @@ RSpec.describe OregonDigital::JP2Presenter do
       let(:readable) { false }
 
       it 'returns nil' do
-        expect(IIIFManifest::DisplayImage).not_to receive(:new)
-        presenter.display_image
+        expect(IIIFManifest::V3::DisplayContent).not_to receive(:new)
+        presenter.display_content
       end
     end
 
     context 'when user is allowed to see it' do
       before do
-        allow(presenter).to receive(:default_image_path).and_return('foo')
+        allow(presenter).to receive(:default_content_path).and_return('foo')
       end
 
       it 'creates a new IIIFManifest::Display image' do
-        expect(IIIFManifest::DisplayImage).to receive(:new).with(
-          'foo', width: 640, height: 480, iiif_endpoint: iiif_endpoint
+        expect(IIIFManifest::V3::DisplayContent).to receive(:new).with(
+          'foo', type: 'Image', format: 'image/jpeg', width: 640, height: 480, iiif_endpoint: iiif_endpoint
         )
-        presenter.display_image
+        presenter.display_content
       end
 
       it 'returns the IIIFManifest::Display image' do
-        expect(presenter.display_image).to eq(image)
+        expect(presenter.display_content).to eq(image)
       end
     end
   end
@@ -98,9 +98,9 @@ RSpec.describe OregonDigital::JP2Presenter do
     end
   end
 
-  describe '#default_image_path' do
+  describe '#default_content_path' do
     it 'returns the IIIF path for a 640-wide jpg' do
-      expect(presenter.send(:default_image_path)).to eq("#{presenter.send(:iiif_url)}/full/640,/0/default.jpg")
+      expect(presenter.send(:default_content_path)).to eq("#{presenter.send(:iiif_url)}/full/640,/0/default.jpg")
     end
   end
 
