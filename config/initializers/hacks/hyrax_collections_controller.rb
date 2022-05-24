@@ -18,7 +18,7 @@ Rails.application.config.to_prepare do
       end
 
       process_member_changes
-      process_facets if collection.facet_configurable?
+      process_facets if collection.facet_configurable? && !params[:facet_configuration].blank?
       process_representative_images
       @collection.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE unless @collection.discoverable?
       # we don't have to reindex the full graph when updating collection
@@ -113,7 +113,7 @@ Rails.application.config.to_prepare do
       CollectionRepresentative.where(collection_id: collection.id)&.delete_all
       params[:representative_ids].each_with_index do |fs_id, index|
         CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
-      end
+      end unless params[:representative_ids].blank?
       # Fill unset images with default images to maintain 4 thumbnails
       create_default_representative_images
     end
