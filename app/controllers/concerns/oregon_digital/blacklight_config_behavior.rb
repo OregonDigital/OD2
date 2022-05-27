@@ -213,6 +213,17 @@ module OregonDigital
         config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
         config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
 
+        config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), limit: 5
+        config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), limit: 5
+        config.add_facet_field 'box_number_sim', label: I18n.translate('simple_form.labels.defaults.box_number'), limit: 5
+        config.add_facet_field 'folder_name_sim', label: I18n.translate('simple_form.labels.defaults.folder_name'), limit: 5
+        config.add_facet_field 'folder_number_sim', label: I18n.translate('simple_form.labels.defaults.folder_number'), limit: 5
+        config.add_facet_field 'has_number_sim', label: I18n.translate('simple_form.labels.defaults.has_number'), limit: 5
+        config.add_facet_field 'is_volume_sim', label: I18n.translate('simple_form.labels.defaults.is_volume'), limit: 5
+        config.add_facet_field 'series_name_sim', label: I18n.translate('simple_form.labels.defaults.series_name'), limit: 5
+        config.add_facet_field 'series_number_sim', label: I18n.translate('simple_form.labels.defaults.series_number'), limit: 5
+        config.add_facet_field 'exhibit_sim', label: I18n.translate('simple_form.labels.defaults.exhibit'), limit: 5
+
         # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
         # Do not show these facets, they're for collection configurable facets
         (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
