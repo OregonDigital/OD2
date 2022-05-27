@@ -16,11 +16,11 @@ module OregonDigital
           end
           # Can download full quality if overriden by full_size_download_allowed metadata field
           can(:download, ActiveFedora::Base) do |record|
-             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
           end
           # Cannot download full quality if overriden by full_size_download_allowed metadata field
           cannot(:download, ActiveFedora::Base) do |record|
-             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'false'
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'false'
           end
           # Can download full quality if admin/manager
           can(:download, ActiveFedora::Base) if current_user.role?(manager_permission_roles)
@@ -30,13 +30,13 @@ module OregonDigital
             current_user.can?(:show, record)
           end
           can(:download_low, ActiveFedora::Base) do |record|
-             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
           end
           can(:metadata, ActiveFedora::Base) do |record|
             current_user.can?(:show, record)
           end
           can(%i[download_low metadata], ActiveFedora::Base) do |record|
-             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
           end
         end
         # rubocop:enable Metrics/AbcSize
