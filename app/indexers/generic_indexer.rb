@@ -23,7 +23,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       solr_doc['user_collections_ssim'] = []
       object.member_of_collections.each do |collection|
         collection_index_key = collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim'
-        solr_doc[collection_index_key] << collection.first_title
+        solr_doc[collection_index_key] << collection.id
       end
       index_topic_combined_label(solr_doc, object.keyword)
       index_edit_groups
