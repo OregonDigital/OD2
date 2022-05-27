@@ -15,9 +15,11 @@ module OregonDigital
             read_doc?(solr_doc)
           end
 
-          cannot(%i[show], FileSet) unless current_user.role?(manager_permission_roles)
-          cannot(%i[show], SolrDocument, visibility: 'osu') unless current_user.role?(osu_roles)
-          cannot(%i[show], SolrDocument, visibility: 'uo') unless current_user.role?(uo_roles)
+          cannot(%i[show read], FileSet) unless current_user.role?(manager_permission_roles)
+          cannot(%i[show read], SolrDocument, visibility: 'osu') unless current_user.role?(osu_roles)
+          cannot(%i[show read], SolrDocument, visibility: 'uo') unless current_user.role?(uo_roles)
+          cannot(%i[show read], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
+          cannot(%i[show read], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(osu_roles)
         end
 
         def show_record?(record)
