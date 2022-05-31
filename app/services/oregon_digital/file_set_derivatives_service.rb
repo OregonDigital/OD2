@@ -41,8 +41,7 @@ module OregonDigital
     def create_audio_derivatives(filename)
       OregonDigital::Derivatives::Audio::FfmpegRunner.create(
         filename,
-        outputs: [{ label: 'mp3', format: 'mp3', url: derivative_url('mp3') },
-                  { label: 'ogg', format: 'ogg', url: derivative_url('ogg') }]
+        outputs: [{ label: 'mp3', format: 'mp3', url: derivative_url('mp3') }]
       )
     end
 

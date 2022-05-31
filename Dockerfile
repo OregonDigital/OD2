@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine3.12 as bundler
+FROM ruby:2.7-alpine3.14 as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -16,7 +16,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
-  libffi
+  libffi xz
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \

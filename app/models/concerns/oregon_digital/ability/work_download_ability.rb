@@ -10,22 +10,33 @@ module OregonDigital
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
         def work_download_ability
-          # Can download full res if admin/manager
-          can(:download, ActiveFedora::Base) if current_user.role?(manager_permission_roles)
-          # Can download OSU/UO and not in a UO restricted admin set
-          can(:download, ActiveFedora::Base) do |record|
-            current_user.role?(osu_roles + uo_roles) && !uo_download_restricted?(record.admin_set) if record.respond_to?(:admin_set)
-          end
-
-          # Cannot download full/low/metadata if they cannot show it
+          # Cannot download full quality if they cannot show it or work is in UO restricted admin set
           cannot(:download, ActiveFedora::Base) do |record|
-            record.respond_to?(:full_size_download_allowed) && record.full_size_download_allowed
+            !current_user.can?(:show, record) || uo_download_restricted?(record.try(:admin_set))
           end
+          # Can download full quality if overriden by full_size_download_allowed metadata field
+          can(:download, ActiveFedora::Base) do |record|
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
+          end
+          # Cannot download full quality if overriden by full_size_download_allowed metadata field
+          cannot(:download, ActiveFedora::Base) do |record|
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'false'
+          end
+          # Can download full quality if admin/manager
+          can(:download, ActiveFedora::Base) if current_user.role?(manager_permission_roles)
+
+          # Can download low/full/metadata if they show it
           can(:download_low, ActiveFedora::Base) do |record|
             current_user.can?(:show, record)
           end
+          can(:download_low, ActiveFedora::Base) do |record|
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
+          end
           can(:metadata, ActiveFedora::Base) do |record|
             current_user.can?(:show, record)
+          end
+          can(%i[download_low metadata], ActiveFedora::Base) do |record|
+            OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
           end
         end
         # rubocop:enable Metrics/AbcSize
