@@ -16,8 +16,7 @@ Rails.application.config.to_prepare do
       uploaded_files.each_with_index do |uploaded_file, i|
         next if uploaded_file.file_set_uri.present?
 
-        pid = "f#{(i+offset_index(work)).to_s}#{work.id}"
-        actor = Hyrax::Actors::FileSetActor.new(FileSet.create(id: pid), user)
+        actor = Hyrax::Actors::FileSetActor.new(FileSet.create(id: pid(i, work)), user)
         uploaded_file.add_file_set!(actor.file_set)
         actor.file_set.permissions_attributes = work_permissions
         actor.create_metadata(metadata)
@@ -26,8 +25,8 @@ Rails.application.config.to_prepare do
       end
     end
 
-    def offset_index(work)
-      work.file_sets.size
+    def pid(index, work)
+      "f#{index + work.file_sets.size}#{work.id}"
     end
   end
 end
