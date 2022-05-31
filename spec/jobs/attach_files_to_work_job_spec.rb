@@ -8,6 +8,10 @@ RSpec.describe AttachFilesToWorkJob, perform_enqueued: [AttachFilesToWorkJob] do
   context 'when use_valkyrie is false' do
     let(:generic_work) { create(:generic, depositor: user.email, visibility: 'open') }
 
+    before do
+      allow(CharacterizeJob).to receive(:perform_later)
+    end
+
     it 'attaches files' do
       described_class.perform_now(generic_work, [uploaded_file1])
       generic_work.reload
