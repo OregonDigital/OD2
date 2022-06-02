@@ -9,6 +9,7 @@ module OregonDigital
       self.terms = %i[resource_type title creator contributor description license publisher
                       date_created subject language has_finding_aid representative_id thumbnail_id
                       related_url visibility collection_type_gid institution date repository]
+      self.required_fields = %i[title resource_type]
 
       def initialize_field(key)
         return if %i[embargo_release_date lease_expiration_date].include?(key)
