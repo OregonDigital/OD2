@@ -237,6 +237,8 @@ workflows:
             - lint
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /infra\/.*/
           repo: od2_web
           environment: production
