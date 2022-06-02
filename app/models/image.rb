@@ -4,7 +4,8 @@
 class Image < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include ::OregonDigital::WorkBehavior
-  include ::OregonDigital::ValidatesEDTFBehavior
+  # temporarily block EDTF validation
+  # include ::OregonDigital::ValidatesEDTFBehavior
 
   self.indexer = ImageIndexer
   # Change this to restrict which works can be added as a child.
