@@ -21,6 +21,7 @@ class FetchGraphWorker
         next
       end
     end
+    work.update_index
   end
   # rubocop:enable Metrics/MethodLength
 
