@@ -71,8 +71,6 @@ module OregonDigital
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
         config.add_index_field 'title_tesim', label: 'Title', itemprop: 'name', if: false, highlight: true
-        config.add_index_field 'creator_label_sim', itemprop: 'creator', link_to_search: 'creator_label_sim', max_values: 3, max_values_label: 'others'
-        config.add_index_field 'date_tesim', itemprop: 'date'
         config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
           # Only display description if a highlight is hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
@@ -84,8 +82,9 @@ module OregonDigital
           # Only try to display full text if a highlight is hit
           !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil?
         }
-        config.add_index_field 'resource_type_label_tesim', label: 'Resource Type', link_to_search: 'resource_type_label_sim', if: false
+        config.add_index_field 'date_tesim', itemprop: 'date'
         config.add_index_field 'rights_statement_label_sim', label: 'Rights Statement', link_to_search: 'rights_statement_label_sim', if: false
+        config.add_index_field 'resource_type_label_tesim', label: 'Resource Type', link_to_search: 'resource_type_label_sim', if: false
 
         config.add_field_configuration_to_solr_request!
 

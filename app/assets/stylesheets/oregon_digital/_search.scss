@@ -238,9 +238,24 @@
     width: 100%;
   }
 
-  .metadata-row .fa {
-    filter: contrast(0%);
-    width: 1.5em;
+  .metadata-row {
+    .fa,
+    .fab,
+    .far {
+      filter: contrast(0%);
+      width: 1.5em;
+    }
+    ul {
+      display: inline-block;
+      padding: 0;
+    }
+    span {
+      vertical-align: top;
+    }
+    i,
+    .children {
+      filter: contrast(0%);
+    }
   }
 
   .search-results-title-row .search-result-title {
