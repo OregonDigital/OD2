@@ -229,8 +229,13 @@
 .search-result-wrapper {
   border-bottom: 2px solid $very-light-grey;
 
-  img {
-    max-width: 120px; // Set to longest side of thumbnails
+  p.pull-left {
+    width: 34px;
+  }
+
+  .list-thumbnail img {
+    max-height: unset;
+    width: 100%;
   }
 
   .metadata-row .fa {
