@@ -235,6 +235,7 @@ workflows:
           name: Build and push application image to Beavernetes image repository
           requires:
             - lint
+            - test
           filters:
             branches:
               only: 
