@@ -91,6 +91,7 @@ jobs:
           SOLR_URL: http://localhost:8985/solr/hydra-test
           TRIPLESTORE_ADAPTER_TYPE: blazegraph
           TRIPLESTORE_ADAPTER_URL: http://ci-test:8080/bigdata/namespace/rw/sparql
+          YABEDA_PROMETHEUS_PATH: /tmp/prom
       - image: circleci/postgres:9.5-alpine-ram
         environment:
           POSTGRES_DB: test
@@ -122,6 +123,9 @@ jobs:
             zip -1 -r solr_hyrax_config.zip ./*
             curl -H "Content-type:application/octet-stream" --data-binary @solr_hyrax_config.zip "http://localhost:8985/solr/admin/configs?action=UPLOAD&name=hyrax"
             curl -H 'Content-type: application/json' http://localhost:8985/api/collections/ -d '{create: {name: hydra-test, config: hyrax, numShards: 1}}'
+      - run:
+          name: Create Prometheus Client Data Store
+          command: mkdir -p $YABEDA_PROMETHEUS_PATH
       - run:
           name: Update bundler
           command: gem install bundler -v 2.1.4
@@ -183,7 +187,7 @@ jobs:
             echo export TAG="$TAG" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$DEPLOYED_VERSION" >> $BASH_ENV
       - setup_remote_docker:
-          version: 20.10.2
+          version: 20.10.12
       - docker/check:
           registry: registry.library.oregonstate.edu
       - docker/pull:
@@ -231,8 +235,11 @@ workflows:
           name: Build and push application image to Beavernetes image repository
           requires:
             - lint
+            - test
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /infra\/.*/
           repo: od2_web
           environment: production

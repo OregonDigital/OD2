@@ -2,11 +2,11 @@
 <% if can?(:read, document) %>
   <li id="document_<%= document.to_param %>" class="document <%= render_document_class document %>" itemscope itemtype="<%= document.itemtype %>">
     <div class="row search-result-wrapper">
-      <% unless document.collection? %>
         <p class="pull-left">
+          <% unless document.collection? %>
           <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
+          <% end %>
         </p>
-      <% end %>
       <%= render_document_partials document, blacklight_config.view_config(document_index_view_type).partials, document_counter: document_counter %>
     </div>
   </li>

@@ -391,6 +391,7 @@ en:
         copy_location: "Copy Location"
         date_digitized: "Date Digitized"
         institution: "Institution"
+        institution_label: "Institution"
         modified: "Modified"
         replaces_url: "Replaces URL"
         creator_combined: "Creator"
