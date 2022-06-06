@@ -1,15 +1,13 @@
 <!-- OVERRIDE FROM HYRAX -->
 <div class="col-xs-9 col-sm-7 col-md-7">
   <div class="metadata-row row">
-    <dl class="row">
-    <% doc_presenter = index_presenter(document) %>
-    <% index_fields(document).each do |field_name, field| -%>
-      <% if should_render_index_field? document, field %>
-          <dt class="col-sm-3"><%= render_index_field_label document, field: field_name %></dt>
-          <dd class="col-sm-9"><%= doc_presenter.field_value field %></dd>
-      <% end %>
+  <% doc_presenter = index_presenter(document) %>
+  <% index_fields(document).each do |field_name, field| -%>
+    <% if should_render_index_field? document, field %>
+        <span><%= render_index_field_label document, field: field_name %></span>
+        <span><%= doc_presenter.field_value field %></span>
     <% end %>
-    </dl>
+  <% end %>
   </div>
   <% if document.collection? %>
     <% collection_presenter = OregonDigital::CollectionPresenter.new(document, current_ability) %>
@@ -22,18 +20,23 @@
       </div>
     </div>
   <% end %>
+  <% if document.children? %>
+    <div class="metadata-row row">
+      <i class="dark-grey large-icon fa fa-<%= document.type_to_fa_class('complex object') %>" aria-hidden="true"></i>
+      <%= document.children.count %> Items
+    </div>
+  <% end %>
   <% if document.parents? %>
     <div class="metadata-row row">
-      <dl class="row">
-        <dt class="col-sm-3"> <%= t('hyrax.search.list.parents.header') %> </dt>
-        <dd class="col-sm-9">
-          <ul class="tabular">
-          <% document.parents.each do |parent| %>
-            <li><%= link_to parent, main_app.url_for(parent) %></li>
-          <% end %>
-          </ul>
-        </dd>
-      </dl>
+      <span class="children"> <%= t('hyrax.search.list.parents.header') %></span>
+      &nbsp;
+      <span>
+        <ul class="tabular">
+        <% document.parents.each do |parent| %>
+          <li><%= link_to parent, main_app.url_for(parent) %></li>
+        <% end %>
+        </ul>
+      </span>
     </div>
   <% end %>
   <div class="metadata-row row">
@@ -45,9 +48,6 @@
   <div class="metadata-row row">
     <%= render 'index_type_icon', document: document unless document.resource_type_label.first.nil? || document.resource_type_label.first.empty? %>
     <%= doc_presenter.field_value index_fields(document)['resource_type_label_tesim'] %>
-    <% if document.children? %>
-      (<%= document.children.count %> Items)
-    <% end %>
   </div>
 </div>
 <!-- ADD SAVE BUTTON AND MODAL -->
