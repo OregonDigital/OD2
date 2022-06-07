@@ -2,9 +2,9 @@ terms:
     - active: true
       id: ""
       term: ""
-    - id: https://opaquenamespace.org/ns/fullSizeDownloadAllowed/true
+    - id: true
       term: "True"
       active: true
-    - id: https://opaquenamespace.org/ns/fullSizeDownloadAllowed/false
+    - id: false
       term: "False"
       active: true
