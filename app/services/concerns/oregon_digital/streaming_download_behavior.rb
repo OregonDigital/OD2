@@ -57,17 +57,15 @@ module OregonDigital
 
     # Determine the low quality derivative
     def derivative_name(file_set)
-      deriv_name = if file_set.image? || file_set.pdf?
-                     'jpeg'
-                   elsif file_set.audio?
-                     'mp3'
-                   elsif file_set.video?
-                     'mp4'
-                   elsif file_set.office_document?
-                     'thumbnail'
-                   end
-      # nil = other files get full size
-      return deriv_name
+      if file_set.image?
+        'jpeg'
+      elsif file_set.audio?
+        'mp3'
+      elsif file_set.video?
+        'mp4'
+      elsif file_set.office_document?
+        'thumbnail'
+      end
     end
   end
 end
