@@ -1,10 +1,44 @@
 {
   "options": {
+    "dropEnabled": true,
+    "footerPanelEnabled": true,
+    "headerPanelEnabled": true,
+    "leftPanelEnabled": true,
     "limitLocales": true,
+    "overrideFullScreen": false,
+    "pagingEnabled": true,
+    "rightPanelEnabled": true,
+    "clickToZoomEnabled": false,
     "zoomToSearchResultEnabled": false,
     "navigatorEnabled": false
   },
   "modules": {
+    "avCenterPanel": {
+      "options": {
+        "mostSpecificRequiredStatement": true
+      }
+    },
+    "downloadDialogue": {
+      "options": {
+        "selectionEnabled": true
+      }
+    },
+    "headerPanel": {
+      "options": {
+        "localeToggleEnabled": false
+      }
+    },
+    "pagingHeaderPanel": {
+      "options": {
+        "pageModeEnabled": true,
+        "pagingToggleEnabled": true
+      }
+    },
+    "openSeadragonCenterPanel": {
+      "options": {
+        "autoHideControls": false
+      }
+    },
     "footerPanel": {
       "options": {
         "bookmarkEnabled": false,
@@ -14,12 +48,6 @@
         "minimiseButtons": false,
         "openEnabled": false,
         "shareEnabled": false
-      }
-    },
-    "pagingHeaderPanel": {
-      "options": {
-        "pageModeEnabled": true,
-        "pagingToggleEnabled": true
       }
     }
   }
