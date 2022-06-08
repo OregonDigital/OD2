@@ -19,13 +19,14 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
              permission_template: create(:permission_template, with_admin_set: true, with_active_workflow: true),
              agent_type: 'user',
              agent_id: user.user_key)
+      create(:adminset_lw, user: user, with_permission_template: true, id: '1234')
       allow(CharacterizeJob).to receive(:perform_later)
       sign_in_as user
     end
 
     it 'Creates an Audio' do
       visit new_hyrax_audio_path
-
+      
       expect(page).to have_content 'Add New Audio'
       click_link 'Files' # switch tab
       expect(page.body).to have_content 'Add files...'
@@ -35,6 +36,11 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
         page.execute_script("$('input[type=file]').css('position','inherit')")
         attach_file('files[]', upload_file_path, visible: false)
       end
+
+      within('ul.nav-tabs') do
+        click_link 'Relationships'
+      end
+      find("#generic_admin_set_id option[value='1234']").select_option
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
