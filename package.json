@@ -7,7 +7,7 @@
     "node-fetch": "2.6.7",
     "shx": "^0.3.2",
     "three": "0.137.0",
-    "universalviewer": "3.1.4",
+    "universalviewer": "^4.0",
     "xmldom": "0.5.0"
   },
   "scripts": {
