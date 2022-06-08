@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-#OVERRIDE FROM HYRAX
+# OVERRIDE FROM HYRAX
 module Hyrax
+  # WorkFormHelper
   module WorkFormHelper
     ##
     # @todo this implementation hits database backends (solr) and is invoked
