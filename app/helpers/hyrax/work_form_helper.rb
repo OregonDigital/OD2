@@ -2,7 +2,7 @@
 
 #OVERRIDE FROM HYRAX
 module Hyrax
-	module WorkFormHelper
+  module WorkFormHelper
 		##
 		# @todo this implementation hits database backends (solr) and is invoked
 		#   from views. refactor to avoid
