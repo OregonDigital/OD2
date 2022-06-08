@@ -26,7 +26,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
 
     it 'Creates an Audio' do
       visit new_hyrax_audio_path
-      
+
       expect(page).to have_content 'Add New Audio'
       click_link 'Files' # switch tab
       expect(page.body).to have_content 'Add files...'
