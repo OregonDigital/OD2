@@ -37,7 +37,11 @@
         const configUrl = urlAdapter.get('config');
         if (configUrl) {
           uv.on("configure", function({ cb }) {
-            fetch(configUrl).then(r => r.json()).then(cb)
+            cb(
+              fetch(configUrl).then(function(resp) {
+                return resp.json();
+              })
+            );
           })
         }
 
