@@ -39,7 +39,8 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       within('ul.nav-tabs') do
         click_link 'Relationships'
       end
-      find("#generic_admin_set_id option[value='1234']").select_option
+      first_element = find('#document_admin_set_id > option:nth-child(2)').text
+      select(first_element, from: 'document_admin_set_id')
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
