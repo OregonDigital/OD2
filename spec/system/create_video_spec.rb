@@ -39,7 +39,8 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       within('ul.nav-tabs') do
         click_link 'Relationships'
       end
-      find("#generic_admin_set_id option[value='1234']").select_option
+      first_element = find('#video_admin_set_id > option:nth-child(2)').text
+      select(first_element, from: 'video_admin_set_id')
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
