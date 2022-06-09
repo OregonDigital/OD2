@@ -40,8 +40,8 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
       within('ul.nav-tabs') do
         click_link 'Relationships'
       end
-      first_element = find("#audio_admin_set_id > option:nth-child(2)").text
-      select(first_element, :from => "audio_admin_set_id")
+      first_element = find('#audio_admin_set_id > option:nth-child(2)').text
+      select(first_element, from: 'audio_admin_set_id')
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
