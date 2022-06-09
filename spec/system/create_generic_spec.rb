@@ -19,7 +19,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
              permission_template: create(:permission_template, with_admin_set: true, with_active_workflow: true),
              agent_type: 'user',
              agent_id: user.user_key)
-      create(:adminset_lw, user: user, with_permission_template: true, id: '1234')
+      create(:admin_set, id: '1234')
       allow(CharacterizeJob).to receive(:perform_later)
       sign_in_as user
     end
