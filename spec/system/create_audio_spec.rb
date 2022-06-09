@@ -40,7 +40,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
       within('ul.nav-tabs') do
         click_link 'Relationships'
       end
-      find("#generic_admin_set_id option[value='1234']").select_option
+      find("#audio_admin_set_id option[value='1234']").select_option
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
