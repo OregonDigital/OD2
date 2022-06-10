@@ -40,8 +40,6 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   li {
     min-width: 55px;
   }
-
-
 }
 .background-container-overlay {
   background: rgba(255, 255, 255, .3);
@@ -199,30 +197,90 @@ ul.nav.homepage-nav {
   height: 660px;
 }
 
+.home-content #showcase {
+  h2 {
+    @media (max-width: $screen-md-min) {
+      & {
+        text-align: center;
+        font-size: 32px;
+        margin: 2em 0;
+      }
+    }
+  }
+  .visible-sm.visible-xs {
+    a.btn {
+      margin-bottom: 3.5em;
+    }
+  }
+}
+
 .featured-collection-row {
   padding-top: 30px;
   padding-bottom: 30px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid $light-grey;
+  display: inline-block;
 
   img {
     width: 100%;
   }
+
+  .collection-title {
+    text-transform: capitalize;
+    font-size: 20px;
+    font-weight: bold;
+    @media (max-width: $screen-md-min) {
+      & {
+        font-size: 28px;
+      }
+    }
+  }
+
+  .home-item-count {
+    border-right: 2px $light-grey solid;
+    padding-right: 1em;
+    margin-right: .5em;
+  }
+
+  .collection-items {
+    @media (max-width: $screen-md-min) {
+      & {
+        font-size: 22px;
+      }
+    }
+  }
 }
 
-.featured-collection-row:last-child {
+.featured-collection-row:nth-of-type(3) {
   border-bottom: none;
 }
 
-.featured-collection-border {
-  border-bottom: 3px solid $lime-green;
+.featured-collection-item {
+  padding: 0 .25em;
 }
 
-.all-collections-homepage {
-  margin-left: -14px;
-  margin-top: -20px;
+.feature-collection-divider {
+  align-items: center;
+}
+.featured-collection-border {
+  border-bottom: 3px solid $lime-green;
+  flex-grow: 1;
+  &:nth-child(3) {
+    margin-left: 1em;
+  }
+  &:nth-child(1) {
+    margin-right: 1em;
+  }
 }
 
 .about-oregondigital-container {
-  margin-left: 100px;
-  padding-right: 140px;
+  img {
+    @media (max-width: $screen-md-min) {
+      padding-bottom: 1em;
+    }
+  }
+  .about-oregondigital-text {
+    font-style: italic;
+    font-size: 20px;
+    margin-top: 1em;
+  }
 }

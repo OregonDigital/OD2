@@ -1,7 +1,5 @@
 <div id="showcase" class="row">
-  <div class="col-md-1" >
-  </div>
-  <div class="col-md-5">
+  <div class="col-md-5 col-md-offset-1">
     <% @collections = Collection.limit 5 %>
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
@@ -12,9 +10,9 @@
         <% end %>
         <% @member_count = @member_docs.length %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
-        <div class="row featured-collection-row">
+        <div class="featured-collection-row">
         <% @member_works[0..2].each do |work| %>
-          <div class="col-xs-4">
+          <div class="col-xs-4 col-sm-2 featured-collection-item">
             <%= render_thumbnail_tag(
                 SolrDocument.find(work.id),
                 { class: 'img-thumbnail', alt: '' },
@@ -22,40 +20,37 @@
               ) %>
           </div>
         <% end %>
-        <div class="col-xs-12">
-          <div class='collection-title'><h3><%= collection.title.first %></h3></div>
-          <div class="h4"><%= @member_count %> items
+        <div class="col-xs-12 col-sm-6">
+          <h3 class='collection-title'><%= collection.title.first %></h3>
+          <div class='collection-items'>
+            <span class='home-item-count'><%= @member_count %> items</span>
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"} %>
+            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"}, class: 'lato-b' %>
           </div>
         </div>
         </div>
       <% end %>
     <% end %>
-    <div class="row">
-      <div class="col-md-4 featured-collection-border">
-      </div>
-      <div class="col-md-4">
-        <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_explore_collections_path, class: 'btn btn-primary all-collections-homepage' %>
-      </div>
-      <div class="col-md-4 featured-collection-border">
-      </div>
+    <div class="flex-container feature-collection-divider hidden-xs hidden-sm">
+      <div class="featured-collection-border"></div>
+      <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_explore_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
+      <div class="featured-collection-border"></div>
     </div>
   </div>
-  <div class="col-md-5 about-oregondigital-container">
+  <div class="visible-sm visible-xs center-text">
+    <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_explore_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
+    <div class="featured-collection-border"></div>
+  </div>
+  <div class="col-xs-12 col-md-5 col-md-offset-1 about-oregondigital-container">
     <h2 class="uppercase">About Oregon Digital</h2>
     <div class="row">
-      <%= image_tag('valley_lib.png', height: '250', width: '250', alt: '') %>
-      <%= image_tag('uo_lib.jpg', height: '250', width: '250', alt: '') %>
+      <%= image_tag('valley_lib.png', height: '250', alt: '', class: 'col-xs-12 col-md-6') %>
+      <%= image_tag('uo_lib.jpg', height: '250', alt: '', class: 'col-xs-12 col-md-6') %>
     </div>
-    <div class="row">
-      <p class='mw-lg'>
-        A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press,
-        Oregon Digital comprises more than 100,000 digitized works including historic and modern photographs,
-        manuscripts, and publications.
-      </p>
-    </div>
-  </div>
-  <div class="col-md-2">
+    <p class='mw-lg about-oregondigital-text'>
+      A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press,
+      Oregon Digital comprises more than 100,000 digitized works including historic and modern photographs,
+      manuscripts, and publications.
+    </p>
   </div>
 </div>
