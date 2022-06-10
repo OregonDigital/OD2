@@ -19,6 +19,7 @@ RSpec.describe 'Create a Image',  js: true, type: :system, clean_repo: true do
              permission_template: create(:permission_template, with_admin_set: true, with_active_workflow: true),
              agent_type: 'user',
              agent_id: user.user_key)
+      create(:admin_set, id: '1234')
       allow(CharacterizeJob).to receive(:perform_later)
       sign_in_as user
     end
@@ -35,6 +36,11 @@ RSpec.describe 'Create a Image',  js: true, type: :system, clean_repo: true do
         page.execute_script("$('input[type=file]').css('position','inherit')")
         attach_file('files[]', upload_file_path, visible: false)
       end
+      within('ul.nav-tabs') do
+        click_link 'Relationships'
+      end
+      first_element = find('#image_admin_set_id > option:nth-child(2)').text
+      select(first_element, from: 'image_admin_set_id')
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
