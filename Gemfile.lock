@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: a7da807186892077c3ef41e7b95ecc1b4a7d2ab7
+  revision: 8b5e5dd9bf3cc0e2618451f61ef547f382bb9eb8
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -1143,4 +1143,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.3.9
+   2.3.12
