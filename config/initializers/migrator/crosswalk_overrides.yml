@@ -237,7 +237,7 @@ overrides:
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/dateDigitized
     function: return_nil
-    predicate: http://purl.org/dc/terms/dateSubmitted
+  - predicate: http://purl.org/dc/terms/dateSubmitted
     function: log_info
 
   # predicate tweaks
