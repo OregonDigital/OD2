@@ -25,6 +25,7 @@ fields:
   recipient: recipient
   transcriber: transcriber
   translator: translator
+  landscapeArchitect: landscape_architect
   description: description
   abstract: abstract
   biographicalInformation: biographical_information
@@ -149,4 +150,3 @@ fields:
   institution: institution
   replacesUrl: replaces_url
   imageResolution: resolution
-  submissionDate: date_uploaded

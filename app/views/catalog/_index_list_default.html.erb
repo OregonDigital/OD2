@@ -22,8 +22,7 @@
   <% end %>
   <% if document.children? %>
     <div class="metadata-row row">
-      <i class="dark-grey large-icon fa fa-<%= document.type_to_fa_class('complex object') %>" aria-hidden="true"></i>
-      <%= document.children.count %> Items
+      Contains <%= document.children.count %> items
     </div>
   <% end %>
   <% if document.parents? %>
