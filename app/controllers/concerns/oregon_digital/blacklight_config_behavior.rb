@@ -71,16 +71,23 @@ module OregonDigital
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
         config.add_index_field 'title_tesim', label: 'Title', itemprop: 'name', if: false, highlight: true
-        config.add_index_field 'description_tesim', itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
+        config.add_index_field 'description_tesim', label: nil, itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
           # Only display description if a highlight is hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
         }
-        config.add_index_field 'all_text_tsimv', itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
+        config.add_index_field 'all_text_tsimv', label: nil, itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
           # Don't display full text if description has a highlight hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
         }, if:  lambda { |_context, _field_config, document|
           # Only try to display full text if a highlight is hit
           !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil?
+        }
+        config.add_index_field 'hocr_text_tsimv', label: nil, itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
+          # Don't display hocr text if all text has a highlight hit
+          !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil?
+        }, if:  lambda { |_context, _field_config, document|
+          # Only try to display hocr text if a highlight is hit
+          !document.response.dig('highlighting', document.id, 'hocr_text_tsimv').nil?
         }
         config.add_index_field 'date_tesim', itemprop: 'date'
         config.add_index_field 'rights_statement_label_sim', label: 'Rights Statement', link_to_search: 'rights_statement_label_sim', if: false
@@ -273,7 +280,7 @@ module OregonDigital
           all_names = search_fields.join(' ')
           title_name = 'title_tesim'
           field.solr_parameters = {
-            qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv",
+            qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv hocr_text_tsimv",
             pf: title_name.to_s
           }
           field.include_in_advanced_search = true

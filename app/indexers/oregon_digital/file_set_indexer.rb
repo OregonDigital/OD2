@@ -23,7 +23,7 @@ module OregonDigital
     end
 
     def find_hocr_text(solr_doc)
-      object&.hocr_content&.presence || solr_doc['hocr_text_tsimv'].presence
+      object&.hocr_text&.presence || solr_doc['hocr_text_tsimv'].presence
     end
 
     def index_additional_characterization_terms(solr_doc)

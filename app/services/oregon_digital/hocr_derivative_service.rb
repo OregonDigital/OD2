@@ -34,8 +34,12 @@ module OregonDigital
     def create_derivatives
       result = processor.run!
       @file_set.hocr_content ||= {}
+      @file_set.hocr_text    ||= []
       words = Nokogiri::HTML(result.hocr_content).css('.ocrx_word')
 
+      @file_set.hocr_text << words.map do |nokogiri_element|
+        nokogiri_element.text
+      end.join(' ')
       # Create a hash of words and their bounding boxes
       # hOCR is returned as an xml doc string for the current page
       # For each word on the page parse out the bbox position and downcased+stemmed word

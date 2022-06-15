@@ -42,7 +42,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def find_hocr_text(file_set, solr_doc)
-    file_set&.hocr_content&.presence || file_set.to_solr['hocr_text_tsimv'].presence || solr_doc['hocr_text_tsimv'].presence
+    file_set&.hocr_text&.presence || file_set.to_solr['hocr_text_tsimv'].presence || solr_doc['hocr_text_tsimv'].presence
   end
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
