@@ -19,7 +19,7 @@ module OregonDigital
     # rubocop:enable Metrics/AbcSize
 
     def find_all_text_value(solr_doc)
-      object.extracted_text&.content&.presence || object&.ocr_content&.presence || object&.hocr_content&.presence || solr_doc['all_text_tsimv'].presence
+      object.extracted_text&.content.presence || object&.ocr_content.presence || solr_doc['all_text_tsimv'].presence
     end
 
     def find_hocr_text(solr_doc)
