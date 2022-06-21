@@ -25,7 +25,8 @@ class GenericIndexer < Hyrax::WorkIndexer
         collection_index_key = collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim'
         solr_doc[collection_index_key] << collection.id
       end
-      index_topic_combined_label(solr_doc, object.keyword)
+      # removing index_topic_combined_label(solr_doc, object.keyword)
+      # will be handled when indexing fetched labels
       index_edit_groups
       index_read_groups
       index_discover_groups
@@ -78,11 +79,6 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['resource_type_label_sim'] = type_label
     solr_doc['resource_type_label_ssim'] = type_label
     solr_doc['resource_type_label_tesim'] = type_label
-  end
-
-  def index_topic_combined_label(solr_doc, topic_labels)
-    solr_doc['topic_combined_label_sim'] = topic_labels
-    solr_doc['topic_combined_label_tesim'] = topic_labels
   end
 
   def index_edit_groups

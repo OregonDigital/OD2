@@ -62,10 +62,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :resource_type, predicate: RDF::Vocab::DC.type, multiple: false, basic_searchable: true do |index|
-        index.as :stored_searchable, :facetable
-      end
-
       property :institution, predicate: RDF::URI.new('http://opaquenamespace.org/ns/contributingInstitution'), multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Institution do |index|
         index.as :stored_searchable, :facetable
       end
