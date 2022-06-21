@@ -83,8 +83,9 @@ module OregonDigital
           !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil?
         }
         config.add_index_field 'hocr_text_tsimv', label: nil, itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
-          # Don't display hocr text if all text has a highlight hit
-          !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil?
+          # Don't display hocr text if all text or description has a highlight hit
+          !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil? ||
+            !document.response.dig('highlighting', document.id, 'description_tesim').nil?
         }, if:  lambda { |_context, _field_config, document|
           # Only try to display hocr text if a highlight is hit
           !document.response.dig('highlighting', document.id, 'hocr_text_tsimv').nil?
