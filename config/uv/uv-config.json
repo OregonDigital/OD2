@@ -36,7 +36,8 @@
     },
     "openSeadragonCenterPanel": {
       "options": {
-        "autoHideControls": false
+        "autoHideControls": true,
+        "controlsFadeLength": -1
       }
     },
     "footerPanel": {
