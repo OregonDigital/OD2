@@ -39,10 +39,21 @@ Rails.application.config.to_prepare do
 
     # When works are added to the collection we want to pad out the list of representative images if there are less than 4
     def create_default_representative_images
-      form = Hyrax::Forms::CollectionForm.new(@collection, current_ability, repository)
       repr_ids = CollectionRepresentative.where(collection_id: @collection.id).map(&:fileset_id) || []
-      form.select_files.to_a[repr_ids.reject(&:blank?).count..3].each_with_index do |val, index|
-        CollectionRepresentative.create({ collection_id: collection.id, fileset_id: val[1], order: index })
+
+      # We don't need any new images if we already have 4
+      return if repr_ids.count >= 4
+      new_ids =  Hyrax.query_service.find_many_by_ids(ids: batch_ids[0..3]).map do |work|
+        Hyrax.query_service.custom_queries.find_child_filesets(resource: work)[0]
+      end.flatten.map(&:id).map(&:id)
+
+      all_ids = (repr_ids + new_ids).reject(&:blank?)
+
+      # We should start adding at the end of the existing images
+      index = repr_ids.reject(&:blank?).count
+      all_ids[index..3].each do |val|
+        CollectionRepresentative.create({ collection_id: collection.id, fileset_id: val, order: index })
+        index += 1
       end
     end
   end
