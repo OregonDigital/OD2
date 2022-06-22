@@ -6,10 +6,11 @@ overrides:
   #  predicate: http://sw-portal.deri.org/ontologies/swportal#containedInJournal
 
   #set and primarySet handled separately, do not map
+  #adding full_size_hack
   - predicate: http://opaquenamespace.org/ns/primarySet
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/set
-    function: return_nil
+    function: full_size_hack
   #not used in OD2
   - predicate: http://opaquenamespace.org/ns/boxName
     function: return_nil
@@ -84,12 +85,14 @@ overrides:
   - property: inscription
     predicate: http://opaquenamespace.org/ns/vra/inscription
     multiple: true
-  - property: style_or_period
+  - property: style_or_period_attributes
     predicate: http://opaquenamespace.org/ns/vra/hasStylePeriod
     multiple: true
-  - property: cultural_context
+    function: attributes_data
+  - property: cultural_context_attributes
     predicate: http://opaquenamespace.org/ns/vra/culturalContext
     multiple: true
+    function: attributes_data
   - property: technique
     predicate: http://opaquenamespace.org/ns/vra/hasTechnique
     multiple: true
@@ -234,6 +237,8 @@ overrides:
     function: return_nil
   - predicate: http://opaquenamespace.org/ns/dateDigitized
     function: return_nil
+  - predicate: http://purl.org/dc/terms/dateSubmitted
+    function: log_info
 
   # predicate tweaks
   - property: street_address

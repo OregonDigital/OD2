@@ -104,16 +104,19 @@ Rails.application.config.to_prepare do
 
     def create_default_representative_images
       repr_ids = params[:representative_ids] || []
-      form.select_files.to_a[repr_ids.reject(&:blank?).count..3].each_with_index do |val, index|
+      form.select_files.uniq { |f| FileSet.find(f[1]).parent.id }.to_a[repr_ids.reject(&:blank?).count..3].each_with_index do |val, index|
         CollectionRepresentative.create({ collection_id: collection.id, fileset_id: val[1], order: index })
       end
     end
 
     def process_representative_images
       CollectionRepresentative.where(collection_id: collection.id)&.delete_all
-      params[:representative_ids].each_with_index do |fs_id, index|
+      params[:representative_ids][0..3].each_with_index do |fs_id, index|
         CollectionRepresentative.create({ collection_id: collection.id, fileset_id: fs_id, order: index })
       end unless params[:representative_ids].blank?
+
+      # Skip default images if we already made all 4 images
+      return if params[:representative_ids].count >= 4
       # Fill unset images with default images to maintain 4 thumbnails
       create_default_representative_images
     end

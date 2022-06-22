@@ -6,7 +6,6 @@ RSpec.describe OregonDigital::CollectionPresenter do
           id: 'adc12v',
           description: ['a nice collection'],
           title: ['A clever title'],
-          resource_type: 'Collection',
           related_url: ['http://example.com/'],
           date_created: ['some date'])
   end
@@ -20,7 +19,7 @@ RSpec.describe OregonDigital::CollectionPresenter do
     let(:terms) { described_class.terms }
 
     it do
-      expect(terms).to eq %i[total_items size resource_type creator_label contributor_label license publisher_label
+      expect(terms).to eq %i[total_items size creator_label contributor_label license publisher_label
                              date_created subject_label language related_url institution_label date repository_label]
     end
   end
@@ -47,7 +46,7 @@ RSpec.describe OregonDigital::CollectionPresenter do
   describe 'collection type methods' do
     let(:props) do
       %i[title description creator contributor subject publisher language embargo_release_date
-         lease_expiration_date license date_created resource_type related_url thumbnail_path
+         lease_expiration_date license date_created related_url thumbnail_path
          title_or_label collection_type_gid create_date modified_date visibility edit_groups edit_people
          institution date repository]
     end
