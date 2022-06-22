@@ -1,38 +1,9 @@
 <% doc_presenter = index_presenter(document) %>
 
-<div class="metadata-row">
-  <%= document.description.first.truncate_words(20) unless document.description.empty? %>
-  <dl class="row">
-  <% if should_render_index_field? document, index_fields(document)['date_tesim'] %>
-    <dt class="col-sm-4"><%= render_index_field_label document, field: 'date_tesim' %></dt>
-    <dd class="col-sm-8"><%= doc_presenter.field_value index_fields(document)['date_tesim'] %></dd>
-  <% end %>
-  <% document.parents.each do |parent| %>
-    <dt class="col-sm-4"><span class="dark-grey">Is Part Of</span></dt>
-    <dd class="col-sm-8"><a href="<%= main_app.url_for(parent) %>"><%= parent.title_or_label %></a></dd>
-  <% end %>
-  </dl>
-</div>
-
-
-<% if document.children? %>
+<% unless document['date_combined_year_label_ssim'].nil? %>
   <div class="metadata-row">
-    <i class="dark-grey large-icon fa fa-<%= document.type_to_fa_class('complex object') %>" aria-hidden="true"></i>
-      <span class="sr-only">Complex Object</span>
-      <%= document.children.count %> Items
-  </div>
-<% end %>
-
-<div class="metadata-row">
-  <% document['rights_statement_tesim'].each_with_index do |rights_statement, i| %>
-    <i class="dark-grey large-icon <%= document.rights_statement_to_fa_class(rights_statement) %>" aria-hidden="true"></i>
-    <%= doc_presenter.field_value index_fields(document)["rights_statement_label_sim"]%>
-  <% end unless document['rights_statement_tesim'].nil? %>
-</div>
-
-<% unless document.children? %>
-  <div class="metadata-row">
-      <%= render 'index_type_icon', document: document unless document.resource_type_label.first.nil? || document.resource_type_label.first.empty? %>
-    <%= doc_presenter.field_value index_fields(document)['resource_type_label_tesim'] %>
+    <% date_min = document['date_combined_year_label_ssim'].min %>
+    <% date_max = document['date_combined_year_label_ssim'].max %>
+    <%= date_min %> <% unless date_min == date_max %> - <%= date_max %> <% end %>
   </div>
 <% end %>

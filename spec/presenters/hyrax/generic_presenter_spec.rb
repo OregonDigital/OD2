@@ -33,6 +33,9 @@ RSpec.describe Hyrax::GenericPresenter do
       presenters.each do |p|
         allow(p).to receive(:image?).and_return false
         allow(p).to receive(:pdf?).and_return false
+        allow(p).to receive(:video?).and_return false
+        allow(p).to receive(:image?).and_return false
+        allow(p).to receive(:audio?).and_return false
       end
     end
 

@@ -14,7 +14,7 @@ function post_collection_update(event) {
     url: event.target.action,
     data: {"collection": {"member_of_collection_ids": collection_id, "members": "add"}, "commit": "Save", "batch_document_ids": batch_ids, "id": collection_id},
     complete: function(jqXHR, status) {
-      alert('Your work(s) are being added to the collection. Please give us time to process this request');
+      alert('Your work(s) are being added to the collection. Please give us time to process this request. You can find your collection under My Account > My Collections');
     }
   });
 };

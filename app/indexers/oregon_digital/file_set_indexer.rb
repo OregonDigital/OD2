@@ -8,9 +8,8 @@ module OregonDigital
       super.tap do |solr_doc|
         solr_doc['oembed_url_sim'] = object.oembed_url
         # Collapse possible extracted text with OCRd text for searching
-        # Full text extraction has been returning the filename as well, so if there's only one word in the text extraction it's probably the title. Otherwise the OCR is probably good enough
-        solr_doc['all_text_tsimv'] = object.ocr_content
-        solr_doc['all_text_tsimv'] = solr_doc['all_text_timv'] unless solr_doc['all_text_timv'].nil? || solr_doc['all_text_timv'].first.strip.split('\n').length <= 1
+        solr_doc['all_text_tsimv'] = find_all_text_value(solr_doc)
+        solr_doc['hocr_text_tsimv'] = find_hocr_text(solr_doc)
         # Set bounding box information for blacklight_iiif_search
         solr_doc['all_text_bbox_tsimv'] = object.bbox_content unless object.bbox_content.nil?
         solr_doc['hocr_content_tsimv'] = object.hocr_content unless object.hocr_content.nil?
@@ -18,6 +17,14 @@ module OregonDigital
       end
     end
     # rubocop:enable Metrics/AbcSize
+
+    def find_all_text_value(solr_doc)
+      object.extracted_text&.content.presence || object&.ocr_content.presence || solr_doc['all_text_tsimv'].presence
+    end
+
+    def find_hocr_text(solr_doc)
+      object&.hocr_text&.presence || solr_doc['hocr_text_tsimv'].presence
+    end
 
     def index_additional_characterization_terms(solr_doc)
       object.characterization_terms.each do |term|

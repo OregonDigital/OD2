@@ -1,7 +1,8 @@
 <%= form_tag search_form_action, method: :get, class: "form-search", id: "collection-search", role: "search" do |f| %>
   <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
   <%= hidden_field_tag :search_field, 'all_fields', id: 'collection_search_field' %>
-  <%= hidden_field_tag 'f[non_user_collections_ssim][]', presenter.to_s %>
+  <% collection_index_key = controller.collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
+  <%= hidden_field_tag "f[#{collection_index_key}][]", presenter.id %>
     <label for="collection_search" class="sr-only"><%= t('hyrax.collections.search_form.label', title: presenter.to_s) %></label>
     <div class="input-group">
       <%= text_field_tag 'q[]', nil, class: "collection-query form-control", placeholder: t('hyrax.collections.search_form.placeholder'), size: '30', type: "search", id: "collection_search" %>

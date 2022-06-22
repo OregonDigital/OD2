@@ -201,6 +201,8 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       allow(MiniMagick::Image).to receive(:open).with(bogus_pdf).and_return(minimagick)
       allow(minimagick).to receive(:pages).and_return(pages)
       allow(minimagick).to receive(:destroy!)
+
+      allow(valid_file_set).to receive(:bbox_content).and_return([])
     end
 
     it 'creates a thumbnail' do
@@ -294,7 +296,8 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
     end
 
     it 'calls derivative_url' do
-      expect(service).to receive(:derivative_url).with('thumbnail')
+      expect(service).to receive(:derivative_url).with('thumbnail').once
+      expect(service).to receive(:derivative_url).with('jpeg').once
       service.create_thumbnail('file')
     end
   end

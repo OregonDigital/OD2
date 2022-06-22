@@ -76,6 +76,7 @@ en:
           subject_label_sim: Subject
         index:
           all_text_tsimv: Full Text
+          hocr_text_tsimv: Full Text
           based_near_label_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
@@ -259,6 +260,11 @@ en:
           log_in: 'Log In'
           add_to_collection: 'Save to...'
           select_all: 'Select All'
+      collections:
+        form_branding:
+          representative:
+            label: Landing page thumbnails
+            description: Ordered list of thumbnails to present on the landing page
     file_sets:
       actions:
         header: Actions
@@ -306,6 +312,22 @@ en:
       explore_my: 'Explore Collections/My Collections'
   simple_form:
     hints:
+      collection:
+        title: Use for primary title or name of work. For works without a title, create a descriptive title consulting institutional standards.
+        creator: Use for an entity primarily responsible for making the resource. Use specific creator roles if applicable and known. URI required.
+        contributor: Use for an individual or entity responsible for making contributions to the resource. URI required.
+        description: Use for additional information about the item that does not belong in other fields.
+        subject: Use for controlled topical terms of the work. URI required. For uncontrolled terms use Keyword.
+        date: Use for a date associated with the work. Use specific date fields if applicable and known. EDTF required.
+        date_created: Use for date associated with the creation of the work. EDTF required.
+        license: Use for specific statements describing official permission to do something with the work. URI required.
+        repository: Use for the institutional organization or sub-unit that hosts the work. Use Copy Location to further specify physical location of original object.
+        language: Use for the language of a work. URI required.
+        publisher: Use for the entity responsible for making the work available. URI required.
+        has_finding_aid: Use for an external link to the finding aid for the collection this work belongs to.
+        related_url: Use for an external but related work linked with a URL.
+        resource_type: Use for high level type of the work, selecting from the DCMI Type vocabulary. URI required.
+        institution: Use for the name of the institution responsible for the work. URI required.
       collection_type:
         facet_configurable: Allow users to configure facet availability, order, and labels
     labels:

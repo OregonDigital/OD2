@@ -38,6 +38,13 @@ module OregonDigital
       end
     end
 
+    def create_audio_derivatives(filename)
+      OregonDigital::Derivatives::Audio::FfmpegRunner.create(
+        filename,
+        outputs: [{ label: 'mp3', format: 'mp3', url: derivative_url('mp3') }]
+      )
+    end
+
     # Overridden: we need our image derivatives to be 100% done our way, not the Hyrax way
     def create_image_derivatives(filename)
       OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
@@ -68,10 +75,10 @@ module OregonDigital
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       # Build a hash of words temporarily in file_set.hocr_content
       0.upto(page_count - 1) do |pagenum|
-        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}")
+        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox_content.empty?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          hocr_derivative_service(out_path, pagenum).create_derivatives
+          hocr_derivative_service(out_path, pagenum).create_derivatives if file_set.bbox_content.empty?
           create_zoomable_page(out_path, pagenum)
         end
       end
@@ -89,8 +96,8 @@ module OregonDigital
     def create_thumbnail(filename)
       OregonDigital::Derivatives::Image::GMRunner.create(
         filename,
-        outputs: [{ label: :thumbnail, size: '120x120>',
-                    format: 'jpg', url: derivative_url('thumbnail'), layer: 0 }]
+        outputs: [{ label: :thumbnail, size: '480x480>', format: 'jpg', url: derivative_url('thumbnail'), layer: 0 },
+                  { label: :standard, size: '1920x1080>', format: 'jpg', url: derivative_url('jpeg'), layer: 0 }]
       )
     end
 
@@ -106,6 +113,13 @@ module OregonDigital
                                                                       tile_size: '1024',
                                                                       compression: '20',
                                                                       layer: 0 }])
+    end
+
+    def create_video_derivatives(filename)
+      OregonDigital::Derivatives::Video::VideoRunner.create(filename,
+                                                            outputs: [{ label: 'mp4', format: 'mp4', url: derivative_url('mp4') }])
+      Hydra::Derivatives::VideoDerivatives.create(filename,
+                                                  outputs: [{ label: :thumbnail, format: 'jpg', url: derivative_url('thumbnail') }])
     end
 
     # Returns the path to a derivative in a sequence, or just the raw path if no sequence is desired

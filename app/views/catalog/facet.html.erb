@@ -13,7 +13,12 @@
 </div>
 <div class="modal-body">
   <div class="facet_extended_list">
-  <%= render_facet_limit(@display_facet, layout: false) %>
+  <% ordered_facet = @display_facet.items.sort_by { |v| v.value.downcase } if @display_facet.sort == 'index' %>
+  <% ordered_facet = @display_facet.items.group_by { |v| v.hits }.map do |key, value| %>
+    <% value.sort_by! { |v| v.value.downcase }.reverse.reverse %>
+  <% end.flatten if @display_facet.sort == 'count' %>
+  <% field_facet = Blacklight::Solr::Response::Facets::FacetField.new(@display_facet.name, ordered_facet) %>
+  <%= render_facet_limit(field_facet, layout: false) %>
   </div>
 </div>
 

@@ -27,7 +27,6 @@ class CatalogController < ApplicationController
 
   # CatalogController-scope behavior and configuration for BlacklightIiifSearch
   include BlacklightIiifSearch::Controller
-
   include OregonDigital::BlacklightConfigBehavior
 
   # disable the bookmark control from displaying in gallery view

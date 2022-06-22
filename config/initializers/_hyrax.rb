@@ -124,7 +124,7 @@ Hyrax.config do |config|
   # config.arkivo_api = false
 
   # Stream realtime notifications to users in the browser
-  # config.realtime_notifications = true
+  config.realtime_notifications = false
 
   # Location autocomplete uses geonames to search for named regions
   # Username for connecting to geonames
@@ -199,7 +199,7 @@ Hyrax.config do |config|
   # config.fits_message_length = 5
 
   # ActiveJob queue to handle ingest-like jobs
-  # config.ingest_queue_name = :default
+  config.ingest_queue_name = :ingest
 
   ## Attributes for the lock manager which ensures a single process/thread is mutating a ore:Aggregation at once.
   # How many times to retry to acquire the lock before raising UnableToAcquireLockError

@@ -27,7 +27,7 @@ gem 'rails', '~> 5.2.5'
 gem 'rsolr', '>= 1.0'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq', '~> 6.4'
-gem 'sidekiq_queue_metrics'
+gem 'streamio-ffmpeg'
 gem 'stemmify'
 gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
@@ -49,12 +49,16 @@ gem 'omniauth-cas'
 gem 'omniauth-saml'
 
 # Honeycomb
-gem 'honeycomb-beeline', '>= 2.4.0'
-gem 'libhoney', '>= 1.18.0'
-gem 'rack-honeycomb', '~> 0.5.0'
+gem 'honeycomb-beeline', '>= 2.10.0'
+gem 'libhoney', '>= 2.1.0'
 
-# OkComputer
-gem 'okcomputer'
+# Yabeda
+gem 'yabeda'
+gem 'yabeda-prometheus'
+gem 'yabeda-sidekiq'
+gem 'yabeda-rails'
+gem 'yabeda-puma-plugin'
+gem 'yabeda-http_requests'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"

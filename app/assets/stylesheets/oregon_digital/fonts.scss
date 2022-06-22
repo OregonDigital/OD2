@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 body {
   font-family: Lato;
@@ -81,7 +81,7 @@ table {
   font-weight: bold;
   font-size: 16px;
 
-  a {
+  a, button.btn-link {
     border-bottom: 1px $light-orange solid;
     padding-bottom: 2px;
   }
@@ -91,7 +91,7 @@ table {
   font-style: normal;
   font-size: 18px;
 
-  a {
+  a, button.btn-link {
     border-bottom: 1px $light-orange solid;
     padding-bottom: 2px;
   }
@@ -110,7 +110,7 @@ table {
 .lato-p {
   font-size: 16px;
 
-  a {
+  a, button.btn-link {
     border-bottom: 1px $light-orange solid;
     padding-bottom: 2px;
   }
@@ -118,7 +118,7 @@ table {
 .lato-b {
   font-weight: bold;
 
-  a {
+  a, button.btn-link {
     border-bottom: 2px $light-orange solid;
     padding-bottom: 2px;
   }
@@ -150,7 +150,12 @@ table {
   text-transform: lowercase;
 }
 
-a {
+button.btn-link {
+  border: 0;
+  padding: 0;
+}
+
+a, button.btn-link {
   &.mw-sm,
   &.mw-lg,
   &.lato-p {

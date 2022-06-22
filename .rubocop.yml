@@ -55,6 +55,7 @@ Style/Documentation:
 
 Metrics/ModuleLength:
   Exclude:
+    - 'app/models/concerns/oregon_digital/collection_metadata.rb'
     - 'app/models/concerns/oregon_digital/generic_metadata.rb'
     - 'app/models/concerns/oregon_digital/video_metadata.rb'
     - 'app/models/concerns/oregon_digital/document_metadata.rb'

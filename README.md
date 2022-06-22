@@ -113,6 +113,8 @@ To set up the system manually:
     bundle exec rails hyrax:default_admin_set:create
     bundle exec rails hyrax:default_collection_types:create
     bundle exec rails hyrax:workflow:load
+    # Optional:
+    bundle exec rails oregon_digital:create_collections
 
 Visit http://localhost:3000/users/sign_up?locale=en to register an account.
 

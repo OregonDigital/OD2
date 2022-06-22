@@ -1,7 +1,52 @@
 collections:
+  - id: aa-images
+    title: >-
+      Art and Architecture Images Collection
+    visibility: uo
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: aerial-photos-mid-willamette
+    title: >-
+      Historical Aerial Photographs of the Mid-Willamette Valley
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
   - id: african-ephemera
     title: >-
       African Political Ephemera and Realia Project
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: alice-b-sheldon
+    title: >-
+      Alice B. Sheldon, pen name James Tiptree, Jr., papers, 1920-1999
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: angelus-studio
+    title: >-
+      Angelus Studio photographs, 1880s-1940s
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: annual-cruise
+    title: >-
+      Annual Cruise
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: arch-entourage
+    title: >-
+      Architectural Entourage
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: art-architecture-design
+    title: >-
+      Art, Architecture and Design
+    visibility: osu
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: artists-books
+    title: >-
+      Artistsʼ Books at the University of Oregon Libraries
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: barbara-fealy-coll262
+    title: >-
+      Barbara Fealy landscape architectural records, 1966-1993
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
   - id: braceros
@@ -9,9 +54,44 @@ collections:
       Braceros in Oregon Photograph Collection
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80017721
-  - id: sheetmusic
+  - id: building-or
     title: >-
-      Historic Sheet Music Collection
+      Building Oregon
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: chester-e-corry-coll522
+    title: >-
+      Chester E. Corry papers, 1947-1989
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: chinavine
+    title: >-
+      ChinaVine
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: clarence-andrews
+    title: >-
+      C. L. Andrews photographs, 1880s-1948
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: coll560
+    title: >-
+      John Edward Tysell, Sr. papers
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: columbia-gorge
+    title: >-
+      Columbia Gorge Discovery Center Photo Archive
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: colver-family
+    title: >-
+      Colver family papers, circa 1860-1888
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: corazon-de-dixie
+    title: >-
+      Corazón de Dixie: Mexicanos in the U.S. South since 1910
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
   - id: corvallis-flood
@@ -19,29 +99,29 @@ collections:
       Rising Flood Waters: 1964 Corvallis
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80017721
-  - id: ohba
+  - id: corvallis-images
     title: >-
-      Oregon Hops & Brewing Archives
+      Corvallis Historical Images
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-yearbooks
+  - id: cw-furlong
     title: >-
-      Oregon State University Yearbooks
+      Charles W. Furlong (1874-1967) photographs, 1895-1965
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: daily-barometer
+    title: >-
+      The Daily Barometer
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80017721
-  - id: aa-images
+  - id: daily-emerald
     title: >-
-      Art and Architecture Images Collection
+      Oregon Daily Emerald Archives
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: artists-books
+  - id: dan-powell
     title: >-
-      Artistsʼ Books at the University of Oregon Libraries
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: building-or
-    title: >-
-      Building Oregon
+      Dan Powell photographs, 1970s-2000s
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
   - id: dissociation
@@ -54,19 +134,209 @@ collections:
       Doris Ulmann (1882-1934) photographs, 1920s-1934
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
+  - id: easia
+    title: >-
+      e-Asia Digital Library
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: edwin-tunis-ax776
+    title: >-
+      Edwin Tunis papers, 1920s-1979
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: electric-studio
+    title: >-
+      The Electric Studio/O.G. Allen photographs, ca. 1911-1913
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: ellis-fuller-lawrence
+    title: >-
+      Ellis Fuller Lawrence papers, 1909-1929
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: ellmaker-family
+    title: >-
+      Ellmaker family papers, 1768-2005
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: ethos-magazine
+    title: >-
+      Ethos Magazine
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: eugene-lesbian-oral-history-project
+    title: >-
+      Eugene Lesbian Oral History Project
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: extension-oral-histories
+    title: >-
+      OSU Extension Faculty and Staff Oral Histories
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: fairbanks
+    title: >-
+      The Fairbanks Fine Arts Print Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: finley-bohlman
+    title: >-
+      Reuniting Finley and Bohlman
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: florence-hartshorn
+    title: >-
+      Florence M. Hartshorn photographs, 1899-1900
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: frank-patterson
+    title: >-
+      Frank Patterson Photographs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: frazier-boutelle
+    title: >-
+      Frazier A. Boutelle photographs, c. 1865-1924
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: freshwater-treaties
+    title: >-
+      International Freshwater Treaties Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: gb-warner
+    title: >-
+      Gertrude Bass Warner (1863-1951) photographs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: gb-warner-nosatsu
+    title: >-
+      The Gertrude Bass Warner Collection of Japanese Votive Slips (nōsatsu), 1850s to 1930s
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: gb-warner-papers-ua022
+    title: >-
+      Gertrude Bass Warner papers, 1879-1954
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: gbwarnerpapers
+    title: >-
+      Gertrude Bass Warner papers, 1909-1923
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: general-catalogs
+    title: >-
+      Oregon State University General Catalogs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: gifford
+    title: >-
+      Gifford Photographic Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: grayson-mathews
+    title: >-
+      Grayson Mathews (1948-2007) photographs, 1970s-1990s
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: gwilliams
+    title: >-
+      Gerald W. Williams Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: herbarium
+    title: >-
+      The OSU Herbarium Type Specimens Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: illustrated-booklets
+    title: >-
+      Illustrated Booklets
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: j-f-ford-photographs
+    title: >-
+      J.F. Ford Photographs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: james-cloutier
+    title: >-
+      James Cloutier photographs, 1977
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
   - id: jasr
     title: >-
       National Japanese American Student Relocation Council records, 1942-1946
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: schnitzer-mofa
+  - id: joanna-russ
     title: >-
-      Jordan Schnitzer Museum of Art
+      Joanna Russ papers, 1968-1989
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: mountaingrove
+  - id: joel-palmer
     title: >-
-      Lesbian Intentional Community: Ruth Mountaingrove (b. 1923) photographs
+      Joel Palmer Papers
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: john-adair-ph397
+    title: >-
+      John Adair Black Lives Matter protest photographs
+    visibility: uo
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: john-bauguess
+    title: >-
+      John Bauguess photographs, 1970s
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: johnyeonarchdrawings
+    title: >-
+      John Yeon architectural drawings, 1934-1976
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: kelp-maps
+    title: >-
+      U.S. Geological Survey Kelp Groves of the Pacific Coast and Islands Maps
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: ken-gray
+    title: >-
+      Ken Gray Insect Image Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: kurt-werth-coll100
+    title: >-
+      Kurt Werth papers, 1919-1983
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: kurt-wiese-ax445
+    title: >-
+      Kurt Wiese papers, circa 1911-1974
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: lchsa
+    title: >-
+      Lincoln County Historical Society Archive
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: lee-drake
+    title: >-
+      Lee D. Drake (1882-1957) photographs, ca. 1910-1957
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: lee-moorhouse
+    title: >-
+      Lee Moorhouse (1850-1926) photographs, 1888-1916
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: lichens-pnw
+    title: >-
+      Lichens of the Pacific Northwest
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: lord-schryver-coll098
+    title: >-
+      Lord & Schryver landscape architectural records, 1929-1970
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
   - id: lowenstam
@@ -79,24 +349,179 @@ collections:
       Mongolian Altai Inventory Collection
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
+  - id: marketing-photos
+    title: >-
+      Marketing Communications Photo Archive
+    visibility: uo
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: mayo-methot-bogart
+    title: >-
+      Mayo Methot Bogart (1904-1951) photographs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: middle-east-water
+    title: >-
+      The Middle East Water Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: minorities-lgbtq-barometer
+    title: >-
+      Minorities and LGBTQ+ Histories in the Barometer
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: mountaingrove
+    title: >-
+      Lesbian Intentional Community: Ruth Mountaingrove (b. 1923) photographs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: mss-rb
+    title: >-
+      University of Oregon Special Collections Manuscripts and Rare Books
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: ncu
+    title: >-
+      Bushnell University
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
   - id: nw-folklife
     title: >-
       Northwest Folklife Digital Collection
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: daily-emerald
+  - id: ocfrp
     title: >-
-      Oregon Daily Emerald Archives
+      Oregon Century Farm and Ranch Program
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: ohba
+    title: >-
+      Oregon Hops & Brewing Archives
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: oimb
+    title: >-
+      Oregon Institute of Marine Biology Slides and Photographs
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
+  - id: opal-whiteley
+    title: >-
+      Opal S. Whiteley (1897-1992) photographs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: or-chinese-disinterment
+    title: >-
+      Oregon Chinese Disinterment Documents
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
   - id: or-latino-herit
     title: >-
       Oregon Latino Heritage
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
+  - id: orange-owl
+    title: >-
+      Orange Owl
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: oregon-explorer
+    title: >-
+      Oregon Explorer
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: oregon-multicultural-archives
+    title: >-
+      Oregon Multicultural Archives
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: oregon-state-yank
+    title: >-
+      Oregon State Yank
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: oregons-agricultural-progress
+    title: >-
+      Oregon's Agricultural Progress
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
   - id: ormaps
     title: >-
       Oregon Maps
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: osu-alumni-magazine
+    title: >-
+      Oregon State University Alumni Magazine
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-athletics
+    title: >-
+      Oregon State University Athletics
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-baseball
+    title: >-
+      OSU Baseball Centennial
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-commencement-programs
+    title: >-
+      Oregon State University Commencement Programs
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-department-histories
+    title: >-
+      Oregon State University College and Department Histories
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-fact-book
+    title: >-
+      Oregon State University Fact Books
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-historical-images
+    title: >-
+      Historical Images of Oregon State University
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-historical-maps
+    title: >-
+      Historical Maps of Oregon State University
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-historical-publications
+    title: >-
+      Historical Publications of Oregon State University
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-scarc
+    title: >-
+      OSU Special Collections & Archives Research Center
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-sports-media-guides
+    title: >-
+      Oregon State University Sports Media Guides
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-student-protest-underground-pubs
+    title: >-
+      Oregon State University Student Protest and Underground Publications
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-wwii-japanese-american-students
+    title: >-
+      OSU's WWII Era Japanese American Students
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: osu-yearbooks
+    title: >-
+      Oregon State University Yearbooks
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: pamela-peters-ph398
+    title: >-
+      Pamela J. Peters Standing Rock Protest photographs (PH 398)
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
   - id: percent-for-art
@@ -109,19 +534,74 @@ collections:
       Petrarch Canzionere
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: moorhouse
+  - id: quincy-scott
     title: >-
-      Picturing the Cayuse, Walla Walla, and Umatilla Tribes
+      Quincy Scott Political Cartoons, 1904-1949
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: mss-rb
+  - id: rockyshore93
     title: >-
-      University of Oregon Special Collections Manuscripts and Rare Books
+      1993 ODFW Oregon Rocky Shore Aerial Photography Survey
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: roy-c-andrews
+    title: >-
+      Roy C. Andrews photographs, 1902-1955
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
+  - id: rv-mills
+    title: >-
+      Randall V. Mills Transportation Collection (1907-1952) photographs, ca. 1937-1952
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: schnitzer-mofa
+    title: >-
+      Jordan Schnitzer Museum of Art
+    visibility: uo
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: schnitzer-nitrate
+    title: >-
+      Gertrude Bass Warner and the Early Photography Archive of the University Art Museum/Jordan Schnitzer Museum of Art
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: sheetmusic
+    title: >-
+      Historic Sheet Music Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: siuslaw
+    title: >-
+      The Siuslaw National Forest Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: streamsurvey
+    title: >-
+      Pacific Northwest Stream Survey
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: textile-and-apparel
+    title: >-
+      Historic and Cultural Textile and Apparel Collection
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
   - id: texts-data
     title: >-
       Texts and Data
+    visibility: uo
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: the-manuscript
+    title: >-
+      The Manuscript
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80017721
+  - id: ua018
+    title: >-
+      Laura J. Bock papers, 1962-1969
+    visibility: open
+    institution: http://id.loc.gov/authorities/names/n80126183
+  - id: university-archives-sound-recordings-ua180
+    title: >-
+      University Archives sound recordings collection, 1933-1995
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
   - id: uo-arch-photos
@@ -149,394 +629,14 @@ collections:
       UO Veterans
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: western-waters
-    title: >-
-      Western Waters Digital Library
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: electric-studio
-    title: >-
-      The Electric Studio/O.G. Allen photographs, ca. 1911-1913
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: oimb
-    title: >-
-      Oregon Institute of Marine Biology Slides and Photographs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: clarence-andrews
-    title: >-
-      C. L. Andrews photographs, 1880s-1948
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: roy-c-andrews
-    title: >-
-      Roy C. Andrews photographs, 1902-1955
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: angelus-studio
-    title: >-
-      Angelus Studio photographs, 1880s-1940s
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
   - id: walter-bowman
     title: >-
       Walter S. Bowman (1865-1938) photographs, 1880s-1920s
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: lee-drake
+  - id: western-waters
     title: >-
-      Lee D. Drake (1882-1957) photographs, ca. 1910-1957
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: cw-furlong
-    title: >-
-      Charles W. Furlong (1874-1967) photographs, 1895-1965
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: gb-warner
-    title: >-
-      Gertrude Bass Warner (1863-1951) photographs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: album-collection
-    title: >-
-      The Album Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: james-cloutier
-    title: >-
-      James Cloutier photographs, 1977
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: grayson-mathews
-    title: >-
-      Grayson Mathews (1948-2007) photographs, 1970s-1990s
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: rv-mills
-    title: >-
-      Randall V. Mills Transportation Collection (1907-1952) photographs, ca. 1937-1952
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: lee-moorhouse
-    title: >-
-      Lee Moorhouse (1850-1926) photographs, 1888-1916
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: dan-powell
-    title: >-
-      Dan Powell photographs, 1970s-2000s
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: john-bauguess
-    title: >-
-      John Bauguess photographs, 1970s
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: siuslaw
-    title: >-
-      The Siuslaw National Forest Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: streamsurvey
-    title: >-
-      Pacific Northwest Stream Survey
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-baseball
-    title: >-
-      OSU Baseball Centennial
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-scarc
-    title: >-
-      OSU Special Collections & Archives Research Center
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: herbarium
-    title: >-
-      The OSU Herbarium Type Specimens Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: oregon-multicultural-archives
-    title: >-
-      Oregon Multicultural Archives
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: fairbanks
-    title: >-
-      The Fairbanks Fine Arts Print Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: gwilliams
-    title: >-
-      Gerald W. Williams Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: gifford
-    title: >-
-      Gifford Photographic Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: middle-east-water
-    title: >-
-      The Middle East Water Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: rockyshore93
-    title: >-
-      1993 ODFW Oregon Rocky Shore Aerial Photography Survey
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: oregon-explorer
-    title: >-
-      Oregon Explorer
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: lchsa
-    title: >-
-      Lincoln County Historical Society Archive
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-historical-publications
-    title: >-
-      Historical Publications of Oregon State University
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: orange-owl
-    title: >-
-      Orange Owl
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: oregon-state-yank
-    title: >-
-      Oregon State Yank
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: illustrated-booklets
-    title: >-
-      Illustrated Booklets
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: general-catalogs
-    title: >-
-      Oregon State University General Catalogs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: daily-barometer
-    title: >-
-      The Daily Barometer
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: the-manuscript
-    title: >-
-      The Manuscript
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: florence-hartshorn
-    title: >-
-      Florence M. Hartshorn photographs, 1899-1900
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: frazier-boutelle
-    title: >-
-      Frazier A. Boutelle photographs, c. 1865-1924
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: mayo-methot-bogart
-    title: >-
-      Mayo Methot Bogart (1904-1951) photographs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: opal-whiteley
-    title: >-
-      Opal S. Whiteley (1897-1992) photographs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: chinavine
-    title: >-
-      ChinaVine
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: osu-commencement-programs
-    title: >-
-      Oregon State University Commencement Programs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: corazon-de-dixie
-    title: >-
-      Corazón de Dixie: Mexicanos in the U.S. South since 1910
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: art-architecture-design
-    title: >-
-      Art, Architecture and Design
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: annual-cruise
-    title: >-
-      Annual Cruise
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: extension-oral-histories
-    title: >-
-      OSU Extension Faculty and Staff Oral Histories
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: columbia-gorge
-    title: >-
-      Columbia Gorge Discovery Center Photo Archive
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: corvallis-images
-    title: >-
-      Corvallis Historical Images
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-historical-images
-    title: >-
-      Historical Images of Oregon State University
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: joel-palmer
-    title: >-
-      Joel Palmer Papers
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: osu-sports-media-guides
-    title: >-
-      Oregon State University Sports Media Guides
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-athletics
-    title: >-
-      Oregon State University Athletics
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-alumni-magazine
-    title: >-
-      Oregon State University Alumni Magazine
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: j-f-ford-photographs
-    title: >-
-      J.F. Ford Photographs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: frank-patterson
-    title: >-
-      Frank Patterson Photographs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: gbwarnerpapers
-    title: >-
-      Gertrude Bass Warner papers, 1909-1923
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: osu-fact-book
-    title: >-
-      Oregon State University Fact Books
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: textile-and-apparel
-    title: >-
-      Historic and Cultural Textile and Apparel Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: schnitzer-nitrate
-    title: >-
-      Gertrude Bass Warner and the Early Photography Archive of the University Art Museum/Jordan Schnitzer Museum of Art
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: gb-warner-nosatsu
-    title: >-
-      The Gertrude Bass Warner Collection of Japanese Votive Slips (nōsatsu), 1850s to 1930s
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: oiss
-    title: >-
-      Oregon International Sculpture Symposium
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: finley-bohlman
-    title: >-
-      Reuniting Finley and Bohlman
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: arch-entourage
-    title: >-
-      Architectural Entourage
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: ken-gray
-    title: >-
-      Ken Gray Insect Image Collection
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: oregons-agricultural-progress
-    title: >-
-      Oregon's Agricultural Progress
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: ocfrp
-    title: >-
-      Oregon Century Farm and Ranch Program
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: lichens-pnw
-    title: >-
-      Lichens of the Pacific Northwest
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: gb-warner-papers-ua022
-    title: >-
-      Gertrude Bass Warner papers, 1879-1954
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: or-chinese-disinterment
-    title: >-
-      Oregon Chinese Disinterment Documents
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: ellis-fuller-lawrence
-    title: >-
-      Ellis Fuller Lawrence papers, 1909-1929
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: osu-student-protest-underground-pubs
-    title: >-
-      Oregon State University Student Protest and Underground Publications
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: osu-department-histories
-    title: >-
-      Oregon State University College and Department Histories
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: alice-b-sheldon
-    title: >-
-      Alice B. Sheldon, pen name James Tiptree, Jr., papers, 1920-1999
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: joanna-russ
-    title: >-
-      Joanna Russ papers, 1968-1989
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: osu-wwii-japanese-american-students
-    title: >-
-      OSU's WWII Era Japanese American Students
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: ellmaker-family
-    title: >-
-      Ellmaker family papers, 1768-2005
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: colver-family
-    title: >-
-      Colver family papers, circa 1860-1888
+      Western Waters Digital Library
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
   - id: willis-dunagan
@@ -544,68 +644,8 @@ collections:
       Willis Dunagan diaries and legal papers, 1858-1897
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183
-  - id: ncu
+  - id: zig-jackson-ph401
     title: >-
-      Northwest Christian University
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: johnyeonarchdrawings
-    title: >-
-      John Yeon architectural drawings, 1934-1976
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: easia
-    title: >-
-      e-Asia Digital Library
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: uo-design-library
-    title: >-
-      UO Design Library Special Collections
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: minorities-lgbtq-barometer
-    title: >-
-      Minorities and LGBTQ+ Histories in the Barometer
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: marketing-photos
-    title: >-
-      Marketing Communications Photo Archive
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: quincy-scott
-    title: >-
-      Quincy Scott Political Cartoons, 1904-1949
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: osu-historical-maps
-    title: >-
-      Historical Maps of Oregon State University
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: ua018
-    title: >-
-      Laura J. Bock papers, 1962-1969
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: kelp-maps
-    title: >-
-      U.S. Geological Survey Kelp Groves of the Pacific Coast and Islands Maps
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: eugene-lesbian-oral-history-project
-    title: >-
-      Eugene Lesbian Oral History Project
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80126183
-  - id: chuck-williams
-    title: >-
-      Chuck Williams Photographs
-    visibility: open
-    institution: http://id.loc.gov/authorities/names/n80017721
-  - id: coll560
-    title: >-
-      John Edward Tysell, Sr. papers
+      Zig Jackson photographs
     visibility: open
     institution: http://id.loc.gov/authorities/names/n80126183

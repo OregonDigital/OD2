@@ -6,9 +6,10 @@ module OregonDigital
     # Disabling because trying to fix Hyrax's broken code isn't worth the time.
     # rubocop:disable Metrics/AbcSize
     class CollectionForm < Hyrax::Forms::CollectionForm
-      self.terms = %i[resource_type title creator contributor description license publisher
+      self.terms = %i[title creator contributor description license publisher
                       date_created subject language has_finding_aid representative_id thumbnail_id
                       related_url visibility collection_type_gid institution date repository]
+      self.required_fields = %i[title]
 
       def initialize_field(key)
         return if %i[embargo_release_date lease_expiration_date].include?(key)
@@ -45,7 +46,7 @@ module OregonDigital
            license publisher
            date_created subject
            language has_finding_aid
-           related_url resource_type
+           related_url
            institution date
            repository]
       end
@@ -65,6 +66,14 @@ module OregonDigital
         end
         params << :license
         params
+      end
+
+      def representative_info
+        @representative_info ||= begin
+          representatives = Array(CollectionRepresentative.where({ collection_id: collection.id }))
+
+          representatives.fill({ 'order' => -1 }, representatives.count, 4 - representatives.count).sort_by { |repr| repr['order'] }
+        end
       end
     end
     # rubocop:enable Metrics/AbcSize

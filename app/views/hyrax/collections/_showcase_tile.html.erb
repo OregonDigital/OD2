@@ -1,10 +1,11 @@
 <div class="masonry collection document">
+  <% parent = document.parents.first %>
   <div class="thumbnail">
-    <%= link_to(url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter)))  do |body| %>
+    <%= link_to(url_for_document(parent), document_link_params(parent, :counter => document_counter_with_offset(document_counter)))  do |body| %>
       <%= image_tag(thumbnail_url(document), alt: "")%>
-      <p class="visible-all-inline h5">
-        <%= truncate(index_presenter(document).label(document_show_link_field(document)), length: 89) %>
-      </p>
+      <span class="visible-all-inline h5 hover-over-collection-text">
+        <%= truncate(index_presenter(parent).label(document_show_link_field(parent)), length: 89) %>
+      </span>
     <% end %>
   </div>
 </div>

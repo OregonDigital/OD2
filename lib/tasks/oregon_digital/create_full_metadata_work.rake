@@ -136,7 +136,7 @@ def attrs
     'rights_holder' => [],
     'use_restrictions' => [],
     'original_filename' => nil,
-    'full_size_download_allowed' => 'https://opaquenamespace.org/ns/fullSizeDownloadAllowed/true',
+    'full_size_download_allowed' => 'true',
     'access_restrictions' => ['http://opaquenamespace.org/ns/accessRestrictions/OSUrestricted'],
     'arranger' => ['http://id.loc.gov/authorities/names/no2010022998'],
     'artist' => ['http://vocab.getty.edu/ulan/500121373'],

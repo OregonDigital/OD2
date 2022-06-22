@@ -18,6 +18,10 @@ RSpec.describe OregonDigital::IIIFPresenter do
     before do
       allow(ability).to receive(:can?).and_return true
       presenter.file_sets = [fs1, fs2, fs3, fs4]
+      allow(fs1).to receive(:image?).and_return(true)
+      allow(fs2).to receive(:image?).and_return(true)
+      allow(fs3).to receive(:image?).and_return(true)
+      allow(fs4).to receive(:image?).and_return(true)
       allow(presenter).to receive(:file_set_derivatives_service).with(fs1).and_return(fsderivs1)
       allow(presenter).to receive(:file_set_derivatives_service).with(fs2).and_return(fsderivs2)
       allow(presenter).to receive(:file_set_derivatives_service).with(fs3).and_return(fsderivs3)

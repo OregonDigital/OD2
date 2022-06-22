@@ -52,7 +52,7 @@ module Hyrax
     private
 
     def presentable?(presenter)
-      (presenter.image? || presenter.pdf?) && current_ability.can?(:read, presenter.id)
+      (presenter.image? || presenter.pdf? || presenter.video? || presenter.audio?) && current_ability.can?(:read, presenter.id)
     end
 
     def oembed?(presenter)

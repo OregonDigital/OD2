@@ -1,3 +1,1 @@
-<% presenter.description.each do |description| %>
-  <%= simple_format(auto_link(description), {}, wrapper_tag: 'div') %>
-<% end %>
+<%= simple_format(auto_link(presenter.description.first.truncate(256, separator: /\s/)), {}, wrapper_tag: 'div') unless presenter.description.first.nil? %>

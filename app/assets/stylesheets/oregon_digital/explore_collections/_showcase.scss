@@ -25,7 +25,7 @@ form#explore-collection-search {
     }
   }
 }
-.explore-collections-per-page {
+#sortAndPerPage.explore-collections-per-page {
   padding: 2em 0 1em 0;
   @media (max-width: $screen-xs-max) {
     &{
@@ -57,6 +57,7 @@ form#explore-collection-search {
     .search-widgets {
       display: inline-block;
       #per_page-dropdown {
+        margin-right: 1.5em;
         margin-top: 0;
       }
     }
@@ -66,13 +67,10 @@ form#explore-collection-search {
 .lime-green-hr {
   border: 2px solid $lime-green;
   color: $lime-green;
+  width: 100%;
 }
 
 .collection-landing-button {
   width: 100%;
   margin-top: -8px;
-}
-
-.collection-search-header {
-  margin: 2.5em 0;
 }

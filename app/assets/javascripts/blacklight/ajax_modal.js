@@ -85,7 +85,7 @@ Blacklight.ajaxModal.modalSelector = "#ajax-modal";
 
 // Trigger selectors identify forms or hyperlinks that should open
 // inside a modal dialog.
-Blacklight.ajaxModal.triggerLinkSelector  = "a[data-ajax-modal~=trigger], a.lightboxLink,a.more_facets_link,.ajax_modal_launch";
+Blacklight.ajaxModal.triggerLinkSelector  = "a[data-ajax-modal~=trigger],button[data-ajax-modal~=trigger], button.lightboxLink,button.more_facets_link,.ajax_modal_launch";
 Blacklight.ajaxModal.triggerFormSelector  = "form[data-ajax-modal~=trigger], form.ajax_form";
 
 // preserve selectors identify forms or hyperlinks that, if activated already
@@ -95,7 +95,7 @@ Blacklight.ajaxModal.triggerFormSelector  = "form[data-ajax-modal~=trigger], for
 // No need to repeat selectors from trigger selectors, those will already
 // be preserved. MUST be manually prefixed with the modal selector,
 // so they only apply to things inside a modal.
-Blacklight.ajaxModal.preserveLinkSelector = Blacklight.ajaxModal.modalSelector + ' a[data-ajax-modal~=preserve]';
+Blacklight.ajaxModal.preserveLinkSelector = Blacklight.ajaxModal.modalSelector + ' a[data-ajax-modal~=preserve],button[data-ajax-modal~=preserve]';
 Blacklight.ajaxModal.preserveFormSelector = Blacklight.ajaxModal.modalSelector + ' form[data-ajax-modal~=preserve]'
 
 Blacklight.ajaxModal.containerSelector    = "[data-ajax-modal~=container]";
@@ -141,7 +141,7 @@ Blacklight.ajaxModal.modalAjaxLinkClick = function(e) {
   e.preventDefault();
 
   $.ajax({
-    url: $(this).attr('href'),
+    url: $(this).attr('data-href'),
     relatedObject: this,
   })
   .fail(Blacklight.ajaxModal.onFailure)

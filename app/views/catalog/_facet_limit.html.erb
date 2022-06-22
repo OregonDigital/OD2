@@ -1,10 +1,14 @@
 <ul class="facet-values list-unstyled">
+  <% ordered_facet = display_facet.items.sort_by { |v| v.value.downcase } if display_facet.sort == 'index' %>
+  <% ordered_facet = display_facet.items.group_by { |v| v.hits }.map do |key, value| %>
+    <% value.sort_by! { |v| v.value.downcase }.reverse.reverse %>
+  <% end.flatten if display_facet.sort == 'count' %>
   <% paginator = facet_paginator(facet_field, display_facet) %>
   <%= render_facet_limit_list paginator, facet_field.key %>
 
   <% unless paginator.last_page? || params[:action] == "facet" %>
     <li class="more_facets_link">
-      <button type="button" class="btn btn-primary btn-sm ajax_modal_launch" data-href="<%= search_facet_path(id: facet_field.key) %>" data-toggle="modal" data-target=""><%= t("more_#{field_name}_html", scope: 'blacklight.search.facets', default: :more_html, field_name: facet_field.label) %></button>
+      <button type="button" class="btn btn-primary btn-sm ajax_modal_launch" data-href="<%= search_facet_path(id: facet_field.key) %>"><%= t("more_#{field_name}_html", scope: 'blacklight.search.facets', default: :more_html, field_name: facet_field.label) %></button>
     </li>
   <% end %>
 </ul>
