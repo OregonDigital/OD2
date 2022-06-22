@@ -1,0 +1,39 @@
+#!/bin/bash
+
+target=$1
+label=$2
+namespace="od2-test"
+registry_prefix="registry.library.oregonstate.edu/od2_web"
+usage_string="Usage: $0 <target> <image label to deploy>"
+targets_example='  targets: all | web | workers | tools'
+
+if [ -z "$label" ]; then
+   echo "$usage_string"
+   exit 1
+fi
+
+if [ -z "$target" ]; then
+   echo "$usage_string"
+   exit 1
+fi
+
+if [ "$target" == 'all' ]; then
+   echo "Updating all deployments to label: $label"
+   kubectl -n $namespace set image deploy/web web=${registry_prefix}:$label
+   kubectl -n $namespace set image deploy/workers workers=${registry_prefix}:$label
+   kubectl -n $namespace set image deploy/tools tools=${registry_prefix}:$label
+elif [ "$target" == 'web' ]; then
+   echo "Updating web deployment to label: $label"
+   kubectl -n $namespace set image deploy/web web=${registry_prefix}:$label
+elif [ "$target" == 'workers' ]; then
+   echo "Updating workers deployment to label: $label"
+   kubectl -n $namespace set image deploy/workers workers=${registry_prefix}:$label
+elif [ "$target" == 'tools' ]; then
+   echo "Updating tools deployment to label: $label"
+   kubectl -n $namespace set image deploy/tools tools=${registry_prefix}:$label
+else
+   echo "Unknown target: $target"
+   echo "$usage_string"
+   echo "$targets_example"
+   exit 1
+fi
