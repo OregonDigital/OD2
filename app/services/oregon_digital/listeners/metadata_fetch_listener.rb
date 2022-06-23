@@ -15,7 +15,7 @@ module OregonDigital
       ##
       # @param event [Dry::Event]
       def on_file_set_attached(event)
-        #FetchGraphWorker.perform_at(2.seconds, event[:file_set].parent.id, event[:file_set].parent.depositor)
+        # FetchGraphWorker.perform_at(2.seconds, event[:file_set].parent.id, event[:file_set].parent.depositor)
       end
     end
   end
