@@ -3,6 +3,7 @@
   <%= f.input :admin_set_id, as: :select,
       include_blank: true,
       required: true,
+      selected: f.object.new_record? ? '' : f.object.admin_set_id,
       collection: Hyrax::AdminSetOptionsPresenter.new(Hyrax::AdminSetService.new(controller)).select_options,
       input_html: { class: 'form-control' } %>
 <% end %>
