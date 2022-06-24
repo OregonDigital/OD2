@@ -3,7 +3,8 @@
 # Sets the behaviors and other data for a collection
 class Collection < ActiveFedora::Base
   after_destroy :destroy_facets
-  after_save :fetch_graph
+  # temporarily remove fetching until after migration
+  # after_save :fetch_graph
 
   include ::Hyrax::CollectionBehavior
   # You can replace these metadata if they're not suitable

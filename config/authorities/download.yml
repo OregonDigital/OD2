@@ -2,9 +2,9 @@ terms:
     - active: true
       id: ""
       term: ""
-    - id: true
+    - id: "true"
       term: "True"
       active: true
-    - id: false
+    - id: "false"
       term: "False"
       active: true
