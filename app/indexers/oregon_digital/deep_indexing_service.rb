@@ -39,7 +39,7 @@ module OregonDigital
     # block this until asset has reached a later stage in its workflow
     # potentially remove block post migration
     def fetch_external
-      return if object.representative_id.nil?
+      return if object.ordered_member_ids.blank?
 
       object.controlled_properties.each do |property|
         object[property].each do |value|
