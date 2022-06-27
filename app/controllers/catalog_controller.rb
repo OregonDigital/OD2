@@ -15,44 +15,7 @@ class CatalogController < ApplicationController
 
   # Combine our search queries as they come in
   def index
-    uo_admin_set_ids = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']
-    visibility = ['open']
-    visibility << 'uo' if current_user.role?(current_ability.uo_roles)
-    visibility << 'osu' if current_user.role?(current_ability.osu_roles)
-    blacklight_config.configure do |config|
-      config.add_facet_field 'full_size_download_allowed', label: 'Full Size Download Allowed', query: {
-          # BIG SOLR QUERY HERE
-          true: { label: 'Allowed', fq:
-            "full_size_download_allowed_tesim:(true)
-              OR (
-                visibility_ssi:(#{visibility.join ' '})
-                AND -primarySet_ssim:(#{uo_admin_set_ids.join ' '})
-                AND (
-                  read_access_group_ssim:(#{current_user.roles.to_a.map(&:name).join ' '})
-                  OR read_access_person_ssim:(#{current_user.name})
-                )
-                AND -full_size_download_allowed_tesim:(false)
-              )"
-            # )
-          },
-          false: { label: 'Disallowed', fq:
-            "full_size_download_allowed_tesim:(false)
-            OR (
-              (
-                *:* -visibility_ssi:(#{visibility.join ' '})
-                OR primarySet_ssim:(#{uo_admin_set_ids.join ' '})
-                OR (
-                  *:* -read_access_group_ssim:(#{current_user.roles.to_a.map(&:name).join ' '})
-                  AND *:* -read_access_person_ssim:(#{current_user.name})
-                )
-              )
-              AND -full_size_download_allowed_tesim:(true)
-            )"
-          }
-        }
-
-      # BREAK
-    end
+    create_full_size_download_facet
     params[:q] = params[:q].join(' AND ') if params[:q].respond_to?('join')
     super
   end
@@ -73,4 +36,58 @@ class CatalogController < ApplicationController
   def render_bookmarks_control?
     false
   end
+
+  # Create a new facet at runtime, using attributes from the current user, to determine downloadability
+  # This can't be tied directly to user abilities and is deeply intertwined with solr fields
+  # By nature it is long and complex
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  def create_full_size_download_facet
+    # Admin sets we're going to prevent downloading
+    uo_admin_set_ids = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']
+    # By default, if it's open you can see it
+    visibility = ['open']
+    # Add OSU/UO visibilities based on user role
+    visibility << 'osu' if current_user.role?(current_ability.osu_roles)
+    visibility << 'uo' if current_user.role?(current_ability.uo_roles)
+    # Add private and in review if the user is an admin
+    visibility << %w[restricted private] if current_user.role?(current_ability.manager_permission_roles)
+    roles = ['public'] + current_user.roles.to_a.map(&:name)
+
+    blacklight_config.configure do |config|
+      config.add_facet_field 'full_size_download_allowed', label: 'Full Size Download Allowed', query: {
+        # BIG SOLR QUERY HERE
+        allowed: {
+          label: 'Allowed',
+          fq: "full_size_download_allowed_tesim:(true)
+            OR (
+              (
+                visibility_ssi:(#{visibility.join ' '})
+                OR read_access_group_ssim:(#{roles.join ' '})
+                OR read_access_person_ssim:(#{current_user.name})
+              )
+              AND *:* -primarySet_ssim:(#{uo_admin_set_ids.join ' '})
+              AND *:* -full_size_download_allowed_tesim:(false)
+            )"
+        }
+        # Reverse query for debugging
+        # disallowed: { label: 'Disallowed', fq:
+        #   "full_size_download_allowed_tesim:(false)
+        #   OR (
+        #     (
+        #       (
+        #         *:* -visibility_ssi:(#{visibility.join ' '})
+        #         AND *:* -read_access_group_ssim:(#{roles.join ' '})
+        #         AND *:* -read_access_person_ssim:(#{current_user.name})
+        #       )
+        #       OR primarySet_ssim:(#{uo_admin_set_ids.join ' '})
+        #     )
+        #     AND -full_size_download_allowed_tesim:(true)
+        #   )"
+        # }
+      }
+    end
+  end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 end
