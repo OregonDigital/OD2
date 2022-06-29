@@ -42,17 +42,19 @@ class CatalogController < ApplicationController
   # By nature it is long and complex
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def create_full_size_download_facet
     # Admin sets we're going to prevent downloading
     uo_admin_set_ids = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']
     # By default, if it's open you can see it
     visibility = ['open']
     # Add OSU/UO visibilities based on user role
-    visibility << 'osu' if current_user.role?(current_ability.osu_roles)
-    visibility << 'uo' if current_user.role?(current_ability.uo_roles)
+    visibility << 'osu' if current_user&.role?(current_ability.osu_roles)
+    visibility << 'uo' if current_user&.role?(current_ability.uo_roles)
     # Add private and in review if the user is an admin
-    visibility << %w[restricted private] if current_user.role?(current_ability.manager_permission_roles)
-    roles = ['public'] + current_user.roles.to_a.map(&:name)
+    visibility << %w[restricted private] if current_user&.role?(current_ability.manager_permission_roles)
+    roles = ['public'] + current_user&.roles.to_a.map(&:name)
 
     blacklight_config.configure do |config|
       config.add_facet_field 'full_size_download_allowed', label: 'Full Size Download Allowed', query: {
@@ -64,7 +66,7 @@ class CatalogController < ApplicationController
               (
                 visibility_ssi:(#{visibility.join ' '})
                 OR read_access_group_ssim:(#{roles.join ' '})
-                OR read_access_person_ssim:(#{current_user.name})
+                OR read_access_person_ssim:(#{current_user&.name})
               )
               AND *:* -primarySet_ssim:(#{uo_admin_set_ids.join ' '})
               AND *:* -full_size_download_allowed_tesim:(false)
@@ -90,4 +92,6 @@ class CatalogController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 end
