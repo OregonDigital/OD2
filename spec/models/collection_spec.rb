@@ -44,7 +44,7 @@ RSpec.describe Collection do
     end
 
     it 'formats a controlled property' do
-      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm [http://opaquenamespace.org/ns/TestVocabulary/TestTerm]')
+      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm')
     end
   end
 

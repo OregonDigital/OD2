@@ -54,7 +54,7 @@ module OregonDigital
 
         values = values.map { |prop| controlled_property_to_csv_value(prop) }
 
-        props[label] = values.map(&:to_s).join('|')
+        props[label.to_sym] = values.map(&:to_s).join('|')
       end
       props
     end
