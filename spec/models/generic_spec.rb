@@ -32,7 +32,7 @@ RSpec.describe Generic do
     end
 
     it 'formats a controlled property' do
-      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm [http://opaquenamespace.org/ns/TestVocabulary/TestTerm]')
+      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm')
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe Generic do
       model.send(:properties_as_s)
     end
     it 'returns a hash with no controlled properties' do
-      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
+      expect(model.send(:properties_as_s)).to eq(depositor: user.email, has_model: 'Generic', resource_type: 'MyType', title: 'foo', identifier: 'MyIdentifier', rights_statement: 'http://rightsstatements.org/vocab/InC/1.0/')
     end
   end
 

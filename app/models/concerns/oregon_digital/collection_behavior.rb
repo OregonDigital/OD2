@@ -11,6 +11,7 @@ module OregonDigital
     def csv_metadata
       # Build a CSV of label headers and metadata value data
       props = properties_as_s.merge(controlled_properties_as_s)
+      props = props.sort.to_h
 
       ::CSV.generate do |csv|
         csv << props.keys
@@ -29,7 +30,7 @@ module OregonDigital
         values = send(label)
         next if values.blank? || rejected_fields.include?(label) || controlled_properties.include?(label.to_sym)
 
-        props[label] = (values.respond_to?(:to_a) ? values.map(&:to_s).join('|') : values)
+        props[label.to_sym] = (values.respond_to?(:to_a) ? values.map(&:to_s).join('|') : values)
       end
       props
     end
@@ -44,17 +45,22 @@ module OregonDigital
 
         values = values.map { |prop| controlled_property_to_csv_value(prop) }
 
-        props[label] = values.map(&:to_s).join('|')
+        props[label.to_sym] = values.map(&:to_s).join('|')
       end
       props
     end
 
-    # Convert work controlled property value to '<label> [<uri>]' format
+    # Convert work controlled property value to label
     def controlled_property_to_csv_value(prop)
-      prop.fetch
-      prop = prop.solrize.second.nil? ? [prop.solrize.first, 'No label found'] : prop.solrize[1][:label].split('$')
-      prop[1] = "[#{prop[1]}]"
-      prop.join(' ')
+      begin
+        prop.fetch
+        label = prop.solrize[1][:label].split('$')[0]
+      # TriplestoreAdapter::TriplestoreException means no fetch possible
+      # NoMethodError likely means the fetch succeeded but no label was actually fetched, this is possible with geonames w/ http
+      rescue TriplestoreAdapter::TriplestoreException, NoMethodError
+        label = ['No label found', "[#{prop.solrize.first}]"].join(' ')
+      end
+      label
     end
   end
 end
