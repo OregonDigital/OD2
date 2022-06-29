@@ -66,7 +66,7 @@ class CatalogController < ApplicationController
               (
                 visibility_ssi:(#{visibility.join ' '})
                 OR read_access_group_ssim:(#{roles.join ' '})
-                OR read_access_person_ssim:(#{current_user&.name})
+                OR read_access_person_ssim:(#{current_user&.name || 0})
               )
               AND *:* -primarySet_ssim:(#{uo_admin_set_ids.join ' '})
               AND *:* -full_size_download_allowed_tesim:(false)
