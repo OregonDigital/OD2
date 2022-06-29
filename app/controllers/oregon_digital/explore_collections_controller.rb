@@ -64,7 +64,8 @@ module OregonDigital
     end
 
     def total_viewable_items(id)
-      Hyrax::SolrService.get("member_of_collection_ids_ssim:#{id}")['response']['numFound']
+      visibility = ['open'] + current_user&.groups
+      Hyrax::SolrService.get("member_of_collection_ids_ssim:#{id} AND visibility_ssi:#{visibility.join(' ')}")['response']['numFound']
     end
 
     def osu_items(id)
@@ -94,6 +95,7 @@ module OregonDigital
     def build_breadcrumbs
       add_breadcrumb t(:'hyrax.controls.home'), root_path
       add_breadcrumb t("hyrax.controls.explore_#{@tab}"), @tab
+      BREAK
     end
 
     TABS = {
