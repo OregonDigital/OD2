@@ -44,7 +44,7 @@ RSpec.describe Collection do
     end
 
     it 'formats a controlled property' do
-      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm [http://opaquenamespace.org/ns/TestVocabulary/TestTerm]')
+      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm')
     end
   end
 
@@ -65,7 +65,7 @@ RSpec.describe Collection do
       model.send(:properties_as_s)
     end
     it 'returns a hash with no controlled properties' do
-      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Collection', 'title' => 'foo')
+      expect(model.send(:properties_as_s)).to eq(depositor: user.email, has_model: 'Collection', title: 'foo')
     end
   end
 
