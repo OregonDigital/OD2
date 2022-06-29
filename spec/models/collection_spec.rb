@@ -65,7 +65,7 @@ RSpec.describe Collection do
       model.send(:properties_as_s)
     end
     it 'returns a hash with no controlled properties' do
-      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Collection', 'title' => 'foo')
+      expect(model.send(:properties_as_s)).to eq(depositor: user.email, has_model: 'Collection', title: 'foo')
     end
   end
 

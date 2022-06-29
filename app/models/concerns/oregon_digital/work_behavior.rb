@@ -59,7 +59,7 @@ module OregonDigital
       props
     end
 
-    # Convert work controlled property value to '<label> [<uri>]' format
+    # Convert work controlled property value to label
     def controlled_property_to_csv_value(prop)
       begin
         prop.fetch
