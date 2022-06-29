@@ -1,2 +1,4 @@
 uo:
-  admin_sets: []
+  admin_sets: [
+    'uo-scua'
+  ]
