@@ -26,7 +26,7 @@ module OregonDigital
             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'false'
           end
           # Can download full quality if admin/manager
-          can(:download, ActiveFedora::Base) if current_user.role?(manager_permission_roles)
+          can(:download, ActiveFedora::Base) if current_user.role?(self.class.manager_permission_roles)
 
           # Can download low/full/metadata if they show it
           can(:download_low, ActiveFedora::Base) do |record|

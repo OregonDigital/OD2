@@ -33,19 +33,19 @@ class Ability
     edit_access_person.include?(current_user.user_key)
   end
 
-  def admin_permission_roles
+  def self.admin_permission_roles
     %w[admin collection_curator]
   end
 
-  def manager_permission_roles
-    admin_permission_roles << 'depositor'
+  def self.manager_permission_roles
+    self.admin_permission_roles << 'depositor'
   end
 
-  def osu_roles
+  def self.osu_roles
     %w[osu_affiliate osu_user]
   end
 
-  def uo_roles
+  def self.uo_roles
     %w[uo_affiliate uo_user]
   end
 end
