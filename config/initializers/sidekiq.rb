@@ -11,9 +11,10 @@ redis_conn = { url: "redis://#{config[:host]}:#{config[:port]}/" }
 Sidekiq.configure_server do |s|
   s.redis = redis_conn
 
+  # If SIDEKIQ_QUEUES exists, populate :queues
+  # If not, generate a default for :queues
   if ENV["SIDEKIQ_QUEUES"]
     queues = []
-
     ENV["SIDEKIQ_QUEUES"].split(/\s+/).each do |queue_weighted|
       queue, count = queue_weighted.split(",")
       count = count.to_i
@@ -23,6 +24,8 @@ Sidekiq.configure_server do |s|
     end
 
     config.options[:queues] = queues
+  else
+    config.options[:queues] = ["notify","fetch","ingest","reindex","default"]
   end
   Yabeda::Prometheus::Exporter.start_metrics_server!
 end
