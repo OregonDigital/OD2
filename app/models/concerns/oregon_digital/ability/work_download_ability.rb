@@ -10,6 +10,9 @@ module OregonDigital
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
         def work_download_ability
+          can(:download, ActiveFedora::Base) do |record|
+            current_user.can?(:show, record)
+          end
           # Cannot download full quality if they cannot show it or work is in UO restricted admin set
           cannot(:download, ActiveFedora::Base) do |record|
             !current_user.can?(:show, record) || uo_download_restricted?(record.try(:admin_set))
