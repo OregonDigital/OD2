@@ -60,7 +60,7 @@ class CatalogController < ApplicationController
         # BIG SOLR QUERY HERE
         allowed: {
           label: 'Allowed',
-          fq: "full_size_download_allowed_tesim:(true)
+          fq: "full_size_download_allowed_sim:(1)
             OR (
               (
                 visibility_ssi:(#{visibility.join ' '})
@@ -68,12 +68,12 @@ class CatalogController < ApplicationController
                 OR read_access_person_ssim:(#{current_user&.name || 0})
               )
               AND *:* -primarySet_ssim:(#{uo_admin_set_ids.join ' '})
-              AND *:* -full_size_download_allowed_tesim:(false)
+              AND *:* -full_size_download_allowed_sim:(0)
             )"
         }
         # Reverse query for debugging
         # disallowed: { label: 'Disallowed', fq:
-        #   "full_size_download_allowed_tesim:(false)
+        #   "full_size_download_allowed_sim:(0)
         #   OR (
         #     (
         #       (
@@ -83,7 +83,7 @@ class CatalogController < ApplicationController
         #       )
         #       OR primarySet_ssim:(#{uo_admin_set_ids.join ' '})
         #     )
-        #     AND -full_size_download_allowed_tesim:(true)
+        #     AND -full_size_download_allowed_sim:(1)
         #   )"
         # }
       }
