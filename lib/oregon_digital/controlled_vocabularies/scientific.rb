@@ -12,7 +12,8 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsClass,
           OregonDigital::ControlledVocabularies::Vocabularies::Wikidata,
           OregonDigital::ControlledVocabularies::Vocabularies::Itis,
-          OregonDigital::ControlledVocabularies::Vocabularies::Ubio
+          OregonDigital::ControlledVocabularies::Vocabularies::Ubio,
+          OregonDigital::ControlledVocabularies::Vocabularies::LocSubjects
         ]
       end
 
