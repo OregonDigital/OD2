@@ -28,6 +28,8 @@ class User < ApplicationRecord
     groups = super
     groups << 'osu' unless (groups & %w[osu_affiliate osu_user]).empty?
     groups << 'uo' unless (groups & %w[uo_affiliate uo_user]).empty?
+    groups << 'restricted' if role?(Ability.manager_permission_roles)
+    groups << 'private' if role?(Ability.admin_permission_roles)
     groups
   end
   # END OVERRIDE

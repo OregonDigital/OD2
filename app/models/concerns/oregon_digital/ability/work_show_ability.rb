@@ -17,28 +17,28 @@ module OregonDigital
             read_doc?(solr_doc)
           end
 
-          cannot(%i[show], FileSet) unless current_user.role?(manager_permission_roles)
-          cannot(%i[show], SolrDocument, visibility: 'osu') unless current_user.role?(osu_roles)
-          cannot(%i[show], SolrDocument, visibility: 'uo') unless current_user.role?(uo_roles)
-          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(uo_roles)
-          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(osu_roles)
+          cannot(%i[show], FileSet) unless current_user.role?(self.class.manager_permission_roles)
+          cannot(%i[show], SolrDocument, visibility: 'osu') unless current_user.role?(self.class.osu_roles)
+          cannot(%i[show], SolrDocument, visibility: 'uo') unless current_user.role?(self.class.uo_roles)
+          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(self.class.uo_roles)
+          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(self.class.osu_roles)
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
 
         def show_record?(record)
           if record.suppressed?
-            current_user.role?(admin_permission_roles) && in_depositors_collection?(record.edit_users)
+            current_user.role?(self.class.admin_permission_roles) && in_depositors_collection?(record.edit_users)
           else
-            current_user.role?(manager_permission_roles)
+            current_user.role?(self.class.manager_permission_roles)
           end
         end
 
         def read_doc?(solr_doc)
           if solr_doc.suppressed?
-            current_user.role?(admin_permission_roles) && in_depositors_collection?(solr_doc.edit_people)
+            current_user.role?(self.class.admin_permission_roles) && in_depositors_collection?(solr_doc.edit_people)
           else
-            current_user.role?(admin_permission_roles)
+            current_user.role?(self.class.admin_permission_roles)
           end
         end
       end
