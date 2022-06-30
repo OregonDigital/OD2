@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <p>Your download may take some time to get ready for you, please be patient.</p>
-          <%= link_to t(:'hyrax.collection.select_form.export'), '', class: 'btn btn-primary' %>
+          <%= link_to t(:'hyrax.collection.select_form.export'), '', class: 'btn btn-primary', onClick: "$('#collection-export-container').modal('hide')" %>
         </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
