@@ -55,7 +55,6 @@ class CatalogController < ApplicationController
     visibility << %w[restricted private] if current_user&.role?(Ability.manager_permission_roles)
     roles = ['public'] + current_user&.roles.to_a.map(&:name)
 
-
     blacklight_config.configure do |config|
       config.add_facet_field 'full_size_download_allowed', label: 'Full Size Download Allowed', query: {
         # BIG SOLR QUERY HERE

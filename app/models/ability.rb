@@ -38,7 +38,7 @@ class Ability
   end
 
   def self.manager_permission_roles
-    self.admin_permission_roles << 'depositor'
+    admin_permission_roles << 'depositor'
   end
 
   def self.osu_roles
