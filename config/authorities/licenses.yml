@@ -24,22 +24,22 @@ terms:
     - id: http://www.europeana.eu/portal/rights/rr-r.html
       term: All rights reserved
       active: false
-    - id: https://creativecommons.org/licenses/by/4.0/
+    - id: http://creativecommons.org/licenses/by/4.0/
       term: Creative Commons BY Attribution 4.0 International
       active: true
-    - id: https://creativecommons.org/licenses/by-sa/4.0/
+    - id: http://creativecommons.org/licenses/by-sa/4.0/
       term: Creative Commons BY-SA Attribution-ShareAlike 4.0 International
       active: true
-    - id: https://creativecommons.org/licenses/by-nd/4.0/
+    - id: http://creativecommons.org/licenses/by-nd/4.0/
       term: Creative Commons BY-ND Attribution-NoDerivatives 4.0 International
       active: true
-    - id: https://creativecommons.org/licenses/by-nc/4.0/
+    - id: http://creativecommons.org/licenses/by-nc/4.0/
       term: Creative Commons BY-NC Attribution-NonCommercial 4.0 International
       active: true
-    - id: https://creativecommons.org/licenses/by-nc-nd/4.0/
+    - id: http://creativecommons.org/licenses/by-nc-nd/4.0/
       term: Creative Commons BY-NC-ND Attribution-NonCommercial-NoDerivs 4.0 International
       active: true
-    - id: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    - id: http://creativecommons.org/licenses/by-nc-sa/4.0/
       term: Creative Commons BY-NC-SA Attribution-NonCommercial-ShareAlike 4.0 International
       active: true
     - id: http://creativecommons.org/publicdomain/zero/1.0/
