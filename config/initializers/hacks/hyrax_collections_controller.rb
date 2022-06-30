@@ -116,7 +116,7 @@ Rails.application.config.to_prepare do
       end unless params[:representative_ids].blank?
 
       # Skip default images if we already made all 4 images
-      return if params[:representative_ids].count >= 4
+      return if !params[:representative_ids].nil? && params[:representative_ids].count >= 4
       # Fill unset images with default images to maintain 4 thumbnails
       create_default_representative_images
     end
