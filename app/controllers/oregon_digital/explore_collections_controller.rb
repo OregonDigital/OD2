@@ -64,7 +64,9 @@ module OregonDigital
     end
 
     def total_viewable_items(id)
-      Hyrax::SolrService.get("member_of_collection_ids_ssim:#{id}")['response']['numFound']
+      visibility = ['open']
+      visibility += current_user&.groups unless current_user.blank?
+      Hyrax::SolrService.get("member_of_collection_ids_ssim:#{id} AND visibility_ssi:(#{visibility.join(' ')})")['response']['numFound']
     end
 
     def osu_items(id)

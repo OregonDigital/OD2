@@ -8,7 +8,7 @@ module OregonDigital
 
       included do
         def work_create_ability
-          can(:create, ActiveFedora::Base) if current_user.role?(manager_permission_roles)
+          can(:create, ActiveFedora::Base) if current_user.role?(self.class.manager_permission_roles)
         end
       end
     end

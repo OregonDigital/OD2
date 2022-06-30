@@ -47,13 +47,12 @@ class CatalogController < ApplicationController
   def create_full_size_download_facet
     # Admin sets we're going to prevent downloading
     uo_admin_set_ids = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']
-    # By default, if it's open you can see it
+    # Select visibility based on current user's group visibilities
     visibility = ['open']
-    # Add OSU/UO visibilities based on user role
-    visibility << 'osu' if current_user&.role?(current_ability.osu_roles)
-    visibility << 'uo' if current_user&.role?(current_ability.uo_roles)
+    visibility << current_user.groups unless current_user.blank?
+    roles = ['public'] + current_user&.roles.to_a.map(&:name)
     # Add private and in review if the user is an admin
-    visibility << %w[restricted private] if current_user&.role?(current_ability.manager_permission_roles)
+    visibility << %w[restricted private] if current_user&.role?(Ability.manager_permission_roles)
     roles = ['public'] + current_user&.roles.to_a.map(&:name)
 
     blacklight_config.configure do |config|
