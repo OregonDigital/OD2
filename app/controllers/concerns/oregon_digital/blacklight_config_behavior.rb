@@ -218,7 +218,6 @@ module OregonDigital
         config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
         config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
         config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
-        config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
 
         config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), limit: 5
         config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), limit: 5
