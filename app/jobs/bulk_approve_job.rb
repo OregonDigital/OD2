@@ -12,8 +12,11 @@ class BulkApproveJob < OregonDigital::ApplicationJob
   def bulk_approve(args)
     collection_id = args[:collection_id]
     user = args[:user]
+    pid = args[:pid]
 
     return approve_collection(collection_id, user) if collection_id.present?
+
+    return approve_item(pid) if pid.present?
 
     approve_everything(user)
   end
@@ -26,6 +29,16 @@ class BulkApproveJob < OregonDigital::ApplicationJob
   def approve_collection(collection_id, user)
     solr_query = deposited_by_admin_in_collection_query(user, collection_id)
     approve(solr_query)
+  end
+
+  def approve_item(pid)
+    item = ActiveFedora::Base.find(pid)
+    entity = item.to_sipity_entity
+    return if entity.nil? || entity.workflow_state_name != 'pending_review'
+
+    activate_asset(item, entity)
+  rescue StandardError => e
+    Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
   end
 
   def approve(solr_query)
