@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 8b5e5dd9bf3cc0e2618451f61ef547f382bb9eb8
+  revision: 90ae9c5adf899b08725d8bb405a1ca77f6313dd1
   branch: master
   specs:
     hyrax-migrator (0.1.0)
