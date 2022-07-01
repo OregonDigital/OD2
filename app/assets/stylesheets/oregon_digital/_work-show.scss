@@ -101,7 +101,7 @@ dl.work-show {
     padding: 0 2em;
 
     li {
-      &.active button {
+      &.active a {
         color: #555555;
         cursor: default;
         background-color: #fff;
@@ -119,7 +119,7 @@ dl.work-show {
         }
       }
 
-      button {
+      a {
         margin-right: 2px;
         line-height: 1.428571429;
         border: 1px solid transparent;

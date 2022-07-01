@@ -25,8 +25,8 @@
         </div>
       </div>
 
+    <% unless @configured_facets.empty? %>
       <div class="limit-criteria col-md-4">
-        <% unless @configured_facets.empty? %>
         <h3 class="limit-criteria-heading"><%= t('blacklight_advanced_search.form.limit_criteria_heading_html')%></h3>
 
         <div id="advanced_search_facets" class="limit_input">
@@ -35,9 +35,9 @@
           <% else %>
             <%= render 'advanced_search_facets' %>
           <% end %>
-        <% end %>
         </div>
       </div>
+    <% end %>
   </div>
 
 <% end %>
