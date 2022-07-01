@@ -1,6 +1,8 @@
-.hyc-bl-results.hyc-bl-search {
+#explore-documents {
   div.masonry.document.collection,
   #masonry-sizer {
+    background: none;
+    border-top: $very-light-grey 2px solid;
     width: calc(16.666% - 20px);
     @media (max-width: $screen-md-min) {
       & {
