@@ -216,7 +216,7 @@ module OregonDigital
         config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
         config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
         config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
-        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
+        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id'
         config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
 
         config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), limit: 5
