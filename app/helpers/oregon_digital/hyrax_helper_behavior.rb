@@ -22,6 +22,10 @@ module OregonDigital::HyraxHelperBehavior
     sanitize combine_hits_with_links(html_content, show_link)
   end
 
+  def collection_title_from_id(field, _show_link = true)
+    SolrDocument.find(field).title_or_label
+  end
+
   private
 
   def combine_hits_with_links(html_content, show_link)
