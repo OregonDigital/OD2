@@ -38,10 +38,14 @@ module OregonDigital
         metadata << work.csv_metadata
       end
 
-      # Add all metadata
+      stream_metadata(metadata, folder, zip)
+    end
+
+    # Add all metadata
+    def stream_metadata(metadata, folder, zip)
       zip.write_deflated_file("#{folder}metadata.csv") do |file_writer|
         metadata.each do |data|
-          file_writer << data 
+          file_writer << data
         end
       end
     end
