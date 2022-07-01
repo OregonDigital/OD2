@@ -70,7 +70,7 @@ module OregonDigital
       Hyrax::SolrService.get(
         "member_of_collection_ids_ssim:#{id}
         AND visibility_ssi:(#{visibility.join(' ')})
-        AND workflow_state_name_ssim(#{workflow_state.join(' ')})"
+        AND workflow_state_name_ssim:(#{workflow_state.join(' ')})"
       )['response']['numFound']
     end
 
