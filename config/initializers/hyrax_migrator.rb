@@ -89,6 +89,7 @@ Hyrax::Migrator.config do |config|
     Hyrax::Migrator::Services::VerifyVisibilityService,
     Hyrax::Migrator::Services::VerifyChecksumsService,
     Hyrax::Migrator::Services::VerifyChildrenService,
-    Hyrax::Migrator::Services::VerifyDerivativesService
+    Hyrax::Migrator::Services::VerifyDerivativesService,
+    Hyrax::Migrator::Services::VerifyLabelsExistService
   ]
 end

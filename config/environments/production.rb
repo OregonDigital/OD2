@@ -113,6 +113,8 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  config.reindex_extent = ENV["MIGRATION_REINDEX_EXTENT"].present? ? 'limited' : 'full'
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
