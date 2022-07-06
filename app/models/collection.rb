@@ -38,6 +38,10 @@ class Collection < ActiveFedora::Base
     end
   end
 
+  def reindex_extent
+    OD2::Application.config.reindex_extent
+  end
+
   private
 
   # Build new Facet objects that might not exist
