@@ -284,7 +284,7 @@ en:
             label_short: Open Content
       button:
         html: 'Go'
-    product_name: 'Oregon Digital (Development)'
+    product_name: 'Oregon Digital (Beta)'
     product_twitter_handle: '@SamveraRepo'
     institution_name: 'Institution'
     institution_name_full: 'The Institution Name'
