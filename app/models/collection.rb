@@ -38,9 +38,17 @@ class Collection < ActiveFedora::Base
     end
   end
 
+  # Adapted from Hyrax::CollectionNesting
   def reindex_extent
-    OD2::Application.config.reindex_extent
+    @reindex_extent ||= OD2::Application.config.reindex_extent
   end
+
+  # Borrowed from Hyrax::CollectionNesting
+  # rubocop:disable Style/TrivialAccessors
+  def reindex_extent=(extent)
+    @reindex_extent = extent
+  end
+  # rubocop:enable Style/TrivialAccessors
 
   private
 
