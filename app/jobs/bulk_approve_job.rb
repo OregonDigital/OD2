@@ -3,6 +3,8 @@
 ##
 # The job responsible for bulk approving
 class BulkApproveJob < OregonDigital::ApplicationJob
+  queue_as :hyrax_migrator
+
   def perform(args)
     bulk_approve(args)
   end
