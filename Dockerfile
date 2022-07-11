@@ -16,7 +16,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
-  libffi xz
+  libffi xz gcompat
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
@@ -24,7 +24,7 @@ RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
 
 # Install ImageMagick with jp2/tiff support
 RUN mkdir -p /tmp/im && \
-  curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-27.tar.xz \
+  curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
   | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
     ./configure \
       --build=$CBUILD \

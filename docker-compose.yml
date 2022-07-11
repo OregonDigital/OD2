@@ -227,6 +227,7 @@ services:
       - 8080
     networks:
       internal:
+    platform: linux/amd64
   fcrepo-dev:
     <<: *fcrepo
     volumes:

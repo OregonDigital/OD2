@@ -78,4 +78,21 @@ RSpec.describe Collection do
       expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Collection', 'title' => 'foo')
     end
   end
+
+  describe '#reindex_extent' do
+    it 'returns the config value' do
+      expect(OD2::Application.config.reindex_extent).to eq 'full'
+      expect(model.reindex_extent).to eq 'full'
+    end
+  end
+
+  describe '#reindex_extent=' do
+    before do
+      model.reindex_extent = 'limited'
+    end
+
+    it 'allows reindex_extent to be temporarily set' do
+      expect(model.reindex_extent).to eq 'limited'
+    end
+  end
 end
