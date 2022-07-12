@@ -19,4 +19,4 @@ echo "   Threads:     $SIDEKIQ_THREADS"
 echo "   Log:         $SIDEKIQ_LOG"
 echo "   Redis:       $REDIS_HOST:$REDIS_PORT"
 echo ""
-bundle exec sidekiq -c $SIDEKIQ_THREADS -e $RAILS_ENV
+exec bundle exec sidekiq -c $SIDEKIQ_THREADS -e $RAILS_ENV

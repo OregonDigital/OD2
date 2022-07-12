@@ -21,4 +21,4 @@ if [ "${RAILS_ENV}" = 'production' ]; then
 fi
 
 mkdir -p /data/tmp/pids
-bundle exec puma --pidfile /data/tmp/pids/puma.pid
+exec bundle exec puma --pidfile /data/tmp/pids/puma.pid
