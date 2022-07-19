@@ -369,7 +369,7 @@ GEM
       faraday
     faraday_middleware (0.10.1)
       faraday (>= 0.7.4, < 1.0)
-    ffi (1.15.1)
+    ffi (1.15.4)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -1089,6 +1089,7 @@ DEPENDENCIES
   equivalent-xml
   factory_bot_rails
   faraday_middleware (~> 0.10.0)
+  ffi (>= 1.15.4)
   font-awesome-sass (~> 5.15)
   honeycomb-beeline (>= 2.10.0)
   hydra-derivatives!

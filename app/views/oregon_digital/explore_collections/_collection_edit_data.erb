@@ -1,0 +1,12 @@
+<script>
+  <%
+    collection_titles = {}
+    collection_descs = {}
+    @document_list.each do |collection|
+      collection_titles[collection.id] = collection.title.first
+      collection_descs[collection.id] = collection.description.first
+    end
+  %>
+  var collection_titles = <%= raw json_escape(collection_titles.to_json) %>;
+  var collection_descs = <%= raw json_escape(collection_descs.to_json) %>;
+</script>

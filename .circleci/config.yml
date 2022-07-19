@@ -34,6 +34,7 @@ jobs:
       - run:
           name: Update Debian Packages for ClamAV
           command: |
+            sudo apt-get update &&
             sudo apt-get install -y software-properties-common build-essential make apt-utils
       - restore_cache:
           name: Restore bundle from cache

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  titles = [];
+  descriptions = [];
   // Show loading gif and hide the form when edit collection modal closes
   $('#collection-edit-container').on('hidden.bs.modal', function(e) {
     $('.loading', this).show();
@@ -18,20 +20,12 @@ $(document).ready(function() {
 });
 
 function open_edit_my_collection_modal(collection_id) {
-  $('#collection-edit-container .modal-content .modal-body .form').load('/dashboard/collections/' + collection_id + '/edit #edit_collection_' + collection_id, function() {
-    // Move the terms and save button out of the tab panel
-    var terms = $('#base-terms');
-    var save = $('#update_submit');
-    $('#edit_collection_' + collection_id).append(terms).append(save);
-    $('#edit_collection_' + collection_id + ' .tab-content').remove();
-
-    // Turn the fields into mutli_value fields
-    $('.multi_value.form-group').manage_fields();
-
-    // Toggle loading gif and form
-    $('#collection-edit-container .loading').hide();
-    $('#collection-edit-container .form').show();
-  });
+  form = $('#collection-edit-container .modal-content .modal-body form');
+  form.attr('action', "/dashboard/collections/" + collection_id);
+  title_input = form.find('input[name="collection[title][]"]');
+  title_input.val(collection_titles[collection_id]);
+  title_input = form.find('textarea[name="collection[description][]"]');
+  title_input.val(collection_descs[collection_id]);
 }
 
 function open_share_my_collection_modal(element) {
