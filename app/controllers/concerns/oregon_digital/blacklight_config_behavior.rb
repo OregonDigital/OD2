@@ -329,6 +329,25 @@ module OregonDigital
         # If there are more than this many search results, no spelling ('did you
         # mean') suggestion is offered.
         config.spell_max = 5
+
+        config.oai = {
+          provider: {
+            repository_name: 'Oregon Digital',
+            repository_url: 'http://prod.oregonstate.edu',
+            record_prefix: 'prod.library.oregonstate.edu',
+            admin_email: 'place_holder@oregondigital.org'
+          },
+          document: {
+            limit: 50,
+            timestamp_field: 'system_create_dtsi',
+            timestamp_method: 'system_created',
+            set_fields: [
+              { 'label': 'title_tesim',
+                'solr_field': 'isPartOf_ssim' }
+            ],
+            set_model: ::OaiSet
+          }
+        }
       end
     end
   end
