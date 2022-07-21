@@ -24,29 +24,40 @@ module OregonDigital
     private
 
     def stream_collection(collection, folder, zip)
-      # Init our metadata CSV
-      metadata = [collection.csv_metadata]
+      # Get a list of all metadata keys
+      rejected_keys = ['head', 'tail']
+      keys = Generic.properties.keys + Image.properties.keys + Video.properties.keys + Audio.properties.keys + Document.properties.keys + ::Collection.properties.keys
+      keys = keys - rejected_keys
+      keys.uniq!
+      controlled_keys = Generic.controlled_properties + Image.controlled_properties + Video.controlled_properties + Audio.controlled_properties + Document.controlled_properties + ::Collection.controlled_properties
 
-      # Recursively drill down into sub-collections
+      metadata = []
+      metadata << collection.metadata_row(keys, controlled_keys)
       collection.child_collections.each do |col|
+        # Recursively drill down into sub-collections
         stream_collection(col, "#{folder}#{col.id}/", zip)
+        metadata << col.metadata_row(keys, controlled_keys)
       end
-
-      # Add low quality works from collection and append metadata
       collection.child_works.each do |work|
+        # Add low quality works from collection and append metadata
         stream_works_low(work, zip, folder)
-        metadata << work.csv_metadata
+        metadata << work.metadata_row(keys, controlled_keys)
       end
 
-      stream_metadata(metadata, folder, zip)
+      stream_metadata(keys, metadata, folder, zip)
     end
 
     # Add all metadata
-    def stream_metadata(metadata, folder, zip)
-      zip.write_deflated_file("#{folder}metadata.csv") do |file_writer|
-        metadata.each do |data|
-          file_writer << data
+    def stream_metadata(keys, metadata, folder, zip)
+      csv = ::CSV.generate do |csv|
+        csv << keys
+        metadata.each do |row|
+          csv << row
         end
+      end
+
+      zip.write_deflated_file("#{folder}metadata.csv") do |file_writer|
+        file_writer << csv
       end
     end
   end
