@@ -28,7 +28,7 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :has_number, predicate: RDF::URI.new('http://opaquenamespace.org/ns/folderNumber'), multiple: true, basic_searchable: false do |index|
+      property :has_number, predicate: RDF::URI('http://purl.org/net/nknouf/ns/bibtex#hasNumber'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable, :facetable
       end
 
