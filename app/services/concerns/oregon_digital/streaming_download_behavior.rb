@@ -10,6 +10,17 @@ module OregonDigital
         streamer = new(concern, standard)
         streamer.each(&chunks)
       end
+
+      # Get a list of all metadata keys
+      def self.metadata_keys
+        rejected_keys = ['head', 'tail']
+        keys = Generic.properties.keys + Image.properties.keys + Video.properties.keys + Audio.properties.keys + Document.properties.keys + ::Collection.properties.keys
+        keys = keys - rejected_keys
+        keys.uniq!
+      end
+      def self.controlled_keys
+        Generic.controlled_properties + Image.controlled_properties + Video.controlled_properties + Audio.controlled_properties + Document.controlled_properties + ::Collection.controlled_properties
+      end
     end
 
     private

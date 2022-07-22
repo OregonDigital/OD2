@@ -16,6 +16,18 @@ module OregonDigital
       @graph_fetch_failures ||= []
     end
 
+    # Export work metadata as CSV string
+    def csv_metadata(keys, controlled_keys)
+      # Build a CSV of label headers and metadata value data
+      ::CSV.generate do |csv|
+        csv << keys
+        csv << self.metadata_row(keys, controlled_keys)
+        child_works.each do |work|
+          csv << work.metadata_row(keys, controlled_keys)
+        end
+      end
+    end
+
     # Export work metadata as a CSV string
     def metadata_row(keys, controlled_keys)
       row = []

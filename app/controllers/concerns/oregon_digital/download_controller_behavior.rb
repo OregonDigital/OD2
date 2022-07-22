@@ -34,7 +34,7 @@ module OregonDigital
     # rubocop:enable Metrics/MethodLength
 
     def metadata
-      send_data curation_concern.csv_metadata, filename: "#{curation_concern.id}.csv"
+      send_data OregonDigital::FileSetStreamer.stream_metadata(curation_concern), filename: "#{curation_concern.id}.csv"
     end
   end
 end

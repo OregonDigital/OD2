@@ -24,12 +24,8 @@ module OregonDigital
     private
 
     def stream_collection(collection, folder, zip)
-      # Get a list of all metadata keys
-      rejected_keys = ['head', 'tail']
-      keys = Generic.properties.keys + Image.properties.keys + Video.properties.keys + Audio.properties.keys + Document.properties.keys + ::Collection.properties.keys
-      keys = keys - rejected_keys
-      keys.uniq!
-      controlled_keys = Generic.controlled_properties + Image.controlled_properties + Video.controlled_properties + Audio.controlled_properties + Document.controlled_properties + ::Collection.controlled_properties
+      keys = self.class.metadata_keys
+      controlled_keys = self.class.controlled_keys
 
       metadata = []
       metadata << collection.metadata_row(keys, controlled_keys)
