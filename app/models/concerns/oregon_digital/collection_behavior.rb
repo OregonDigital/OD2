@@ -9,21 +9,16 @@ module OregonDigital
 
     # Export collection metadata as a CSV string
     def metadata_row(keys, controlled_keys)
-      row = []
-      keys.each do |label|
-        values = (self.respond_to?(label)) ? self.send(label) : nil
+      keys.map do |label|
+        values = try(label)
         if values.nil?
         elsif controlled_keys.include?(label.to_sym)
-          values = values.map { |prop| controlled_property_to_csv_value(prop) }
-
-          values = values.map(&:to_s).join('|')
+          values = values.map { |prop| controlled_property_to_csv_value(prop).to_s }.join('|')
         else
           values = (values.respond_to?(:map) ? values.map(&:to_s).join('|') : values)
         end
-
-        row << values
+        values
       end
-      row
     end
 
     private

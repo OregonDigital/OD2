@@ -45,7 +45,7 @@ module OregonDigital
 
     # Add all metadata
     def stream_metadata(keys, metadata, folder, zip)
-      csv = ::CSV.generate do |csv|
+      csv_file = ::CSV.generate do |csv|
         csv << keys
         metadata.each do |row|
           csv << row
@@ -53,7 +53,7 @@ module OregonDigital
       end
 
       zip.write_deflated_file("#{folder}metadata.csv") do |file_writer|
-        file_writer << csv
+        file_writer << csv_file
       end
     end
   end
