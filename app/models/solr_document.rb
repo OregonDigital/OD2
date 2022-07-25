@@ -95,19 +95,19 @@ class SolrDocument
   field_semantics.merge!(
     title: ['alternative_tesim',
       'tribal_title_tesim',
-      'title_tesim']
-    creator: ['creator_tesim']
-    contributor:  ['photographer_tesim', 
-      'arranger_tesim', 
-      'artist_tesim', 
-      'author_tesim', 
-      'cartographer_tesim', 
-      'collector_tesim', 
-      'composer_tesim', 
-      'contributor_tesim', 
-      'designer_tesim', 
-      'donor_tesim', 
-      'editor_tesim', 
+      'title_tesim'],
+    creator: ['creator_tesim'],
+    contributor:  ['photographer_tesim',
+      'arranger_tesim',
+      'artist_tesim',
+      'author_tesim',
+      'cartographer_tesim',
+      'collector_tesim',
+      'composer_tesim',
+      'contributor_tesim',
+      'designer_tesim',
+      'donor_tesim',
+      'editor_tesim',
       'illustrator_tesim',
       'interviewee_tesim',
       'interviewer_tesim',
@@ -128,7 +128,7 @@ class SolrDocument
       'cultural_context_tesim',
       'style_or_period_tesim',
       'award_date_tesim',
-      'provenance_tesim']
+      'provenance_tesim'],
     subject: ['subject_tesim',
       'award_tesim',
       'ethnographic_term_tesim',
@@ -145,7 +145,7 @@ class SolrDocument
       'family_tesim',
       'genus_tesim',
       'species_tesim',
-      'common_name_tesim']
+      'common_name_tesim'],
     coverage: ['coverage_tesim',
       'temporal_tesim',
       'location_tesim',
@@ -156,21 +156,21 @@ class SolrDocument
       'street_address_tesim',
       'tgn_tesim',
       'water_basin_tesim'
-    ]
+    ],
     date: ['date_tesim',
       'created_tesim',
       'issued_tesim',
-      'view_date_tesim']
+      'view_date_tesim'],
     rights: ['license_tesim',
       'rights_holder_tesim',
       'rights_note_tesim',
-      'rights_statement_tesim']
+      'rights_statement_tesim'],
     publisher: ['repository_tesim',
-      'p0ublisher_tesim']
+      'p0ublisher_tesim'],
     relation: ['local_collection_name_tesim',
-      'citation_tesim']
-    language: ['language_tesim']
-    source: ['source_tesim']
+      'citation_tesim'],
+    language: ['language_tesim'],
+    source: ['source_tesim'],
     relation: ['art_series_tesim',
       'has_finding_aid_tesim',
       'has_part_tesim',
@@ -179,8 +179,8 @@ class SolrDocument
       'isVersionOf_tesim',
       'larger_work_tesim',
       'relation_tesim',
-      'collection_tesim']
-    type: ['media_tesim']
+      'collection_tesim'],
+    type: ['media_tesim'],
     format: ['measurements_tesim',
       'physical_extent_tesim',
       'format_label_tesim']

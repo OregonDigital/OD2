@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'builder'
 
 # This module provide Dublin Core export based on the document's semantic values
@@ -9,8 +10,8 @@ module ScholarsArchive::Document::QualifiedDublinCore
   end
 
   def self.register_export_formats(document)
-#    document.will_export_as(:xml)
-#    document.will_export_as(:dc_xml, "text/xml")
+    #    document.will_export_as(:xml)
+    #    document.will_export_as(:dc_xml, "text/xml")
     document.will_export_as(:oai_qdc_xml, 'text/xml')
   end
 
@@ -35,8 +36,8 @@ module ScholarsArchive::Document::QualifiedDublinCore
     xml.target!
   end
 
-  alias_method :export_as_xml, :export_as_oai_qdc_xml
-  alias_method :export_as_qdc_xml, :export_as_oai_qdc_xml
+  alias :export_as_xml, :export_as_oai_qdc_xml
+  alias :export_as_qdc_xml, :export_as_oai_qdc_xml
 
   private
 

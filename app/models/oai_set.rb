@@ -1,4 +1,9 @@
+#fozen_string_literal: true
+
+# OAI Set
 class OaiSet < BlacklightOaiProvider::SolrSet
+
+  # OAI Set object
   class << self
     # The Solr repository object (optional)
     attr_accessor :repository
@@ -21,7 +26,7 @@ class OaiSet < BlacklightOaiProvider::SolrSet
     def sets_from_facets(facets)
       sets = []
       facets.each do |_facet, terms|
-        sets.concat terms.each_slice(2).map { |t| new(t.first) }
+        sets.concat(terms.each_slice(2).map { |t| new(t.first) })
       end
       sets.empty? ? nil : sets
     end
