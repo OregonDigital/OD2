@@ -27,26 +27,26 @@ module OregonDigital
       keys = self.class.metadata_keys
       controlled_keys = self.class.controlled_keys
 
-      metadata = collection.metadata_row(keys, controlled_keys)
-      stream_child_collections(collection, zip, folder, keys, controlled_keys)
-      stream_child_works(collection, zip, folder, keys, controlled_keys)
+      metadata = [collection.metadata_row(keys, controlled_keys)]
+      metadata += stream_child_collections(collection, zip, folder, keys, controlled_keys)
+      metadata += stream_child_works(collection, zip, folder, keys, controlled_keys)
 
       stream_metadata(keys, metadata, folder, zip)
     end
 
     def stream_child_collections(collection, zip, folder, keys, controlled_keys)
-      collection.child_collections.each do |col|
+      collection.child_collections.map do |col|
         # Recursively drill down into sub-collections
         stream_collection(col, "#{folder}#{col.id}/", zip)
-        metadata << col.metadata_row(keys, controlled_keys)
+        col.metadata_row(keys, controlled_keys)
       end
     end
 
     def stream_child_works(collection, zip, folder, keys, controlled_keys)
-      collection.child_works.each do |work|
+      collection.child_works.map do |work|
         # Add low quality works from collection and append metadata
         stream_works_low(work, zip, folder)
-        metadata << work.metadata_row(keys, controlled_keys)
+        work.metadata_row(keys, controlled_keys)
       end
     end
 
