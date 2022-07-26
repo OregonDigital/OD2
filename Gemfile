@@ -62,6 +62,7 @@ gem 'yabeda-http_requests'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
+gem 'blacklight_oai_provider'
 
 group :development do
   # listen is a requirement of puma but isn't part of its gemspec
