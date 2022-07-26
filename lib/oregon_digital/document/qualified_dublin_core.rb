@@ -19,7 +19,7 @@ module OregonDigital::Document::QualifiedDublinCore
     %i[contributor coverage creator date description format identifier language publisher relation rights source subject title type]
   end
 
-  # rubocop disable: Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength
   # qualified dublin core elements are mapped against the #qualified_dublin_core_field_names whitelist.
   def export_as_oai_qdc_xml
     xml = Builder::XmlMarkup.new
@@ -36,7 +36,7 @@ module OregonDigital::Document::QualifiedDublinCore
     end
     xml.target!
   end
-  # rubocop enable: Metrics/MethodLength
+  # rubocop:enable Metrics/MethodLength
 
   alias export_as_xml export_as_oai_qdc_xml
   alias export_as_qdc_xml export_as_oai_qdc_xml
