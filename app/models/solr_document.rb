@@ -11,7 +11,7 @@ class SolrDocument
   SolrDocument.use_extension(Blacklight::Document::Email)
   SolrDocument.use_extension(Blacklight::Document::Sms)
   use_extension(Blacklight::Document::DublinCore)
-  use_extension(OregonDigital::Document::QualifiedDublinCore)
+  SolrDocument.use_extension(OregonDigital::QualifiedDublinCore)
   use_extension(Hydra::ContentNegotiation)
 
   def self.solrized_methods(property_names)
