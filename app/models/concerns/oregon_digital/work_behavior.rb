@@ -17,47 +17,32 @@ module OregonDigital
     end
 
     # Export work metadata as CSV string
-    def csv_metadata
+    def csv_metadata(keys, controlled_keys)
       # Build a CSV of label headers and metadata value data
-      props = properties_as_s.merge(controlled_properties_as_s)
-      props = props.sort.to_h
-
       ::CSV.generate do |csv|
-        csv << props.keys
-        csv << props.values
+        csv << keys
+        csv << metadata_row(keys, controlled_keys)
+        child_works.each do |work|
+          csv << work.metadata_row(keys, controlled_keys)
+        end
+      end
+    end
+
+    # Export work metadata as a CSV string
+    def metadata_row(keys, controlled_keys)
+      keys.map do |label|
+        values = try(label)
+        if values.nil?
+        elsif controlled_keys.include?(label.to_sym)
+          values = values.map { |prop| controlled_property_to_csv_value(prop).to_s }.join('|')
+        else
+          values = (values.respond_to?(:map) ? values.map(&:to_s).join('|') : values)
+        end
+        values
       end
     end
 
     private
-
-    # Convert work properties to hash of machine_label=>human_value
-    def properties_as_s
-      props = {}
-      rejected_fields = %w[head tail]
-
-      properties.map do |label, _field|
-        values = send(label)
-        next if values.blank? || rejected_fields.include?(label) || controlled_properties.include?(label.to_sym)
-
-        props[label.to_sym] = (values.respond_to?(:to_a) ? values.map(&:to_s).join('|') : values)
-      end
-      props
-    end
-
-    # Convert work controlled vocabulary properties to hash of machine_label=>human_value
-    def controlled_properties_as_s
-      props = {}
-
-      controlled_properties.map do |label, _field|
-        values = send(label)
-        next if values.blank?
-
-        values = values.map { |prop| controlled_property_to_csv_value(prop) }
-
-        props[label.to_sym] = values.map(&:to_s).join('|')
-      end
-      props
-    end
 
     # Convert work controlled property value to label
     def controlled_property_to_csv_value(prop)
