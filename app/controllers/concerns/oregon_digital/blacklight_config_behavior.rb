@@ -6,6 +6,14 @@ module OregonDigital
     extend ActiveSupport::Concern
 
     included do
+      def self.title_field
+        'title_ssi'
+      end
+
+      def self.date_field
+        'date_dtsi'
+      end
+
       def self.uploaded_field
         'system_create_dtsi'
       end
@@ -321,10 +329,11 @@ module OregonDigital
         # except in the relevancy case).
         # label is key, solr field is value
         config.add_sort_field "score desc, #{uploaded_field} desc", label: 'relevance'
-        config.add_sort_field "#{uploaded_field} desc", label: 'date uploaded (desc)'
-        config.add_sort_field "#{uploaded_field} asc", label: 'date uploaded (asc)'
-        config.add_sort_field "#{modified_field} desc", label: 'date modified (desc)'
-        config.add_sort_field "#{modified_field} asc", label: 'date modified (asc)'
+        config.add_sort_field "#{title_field} asc", label: 'Title A-Z'
+        config.add_sort_field "#{title_field} desc", label: 'Title Z-A'
+        config.add_sort_field "#{date_field} desc", label: 'Date Descending'
+        config.add_sort_field "#{date_field} asc", label: 'Date Ascending'
+        config.add_sort_field "#{uploaded_field} desc", label: 'Recently Added'
 
         # If there are more than this many search results, no spelling ('did you
         # mean') suggestion is offered.
