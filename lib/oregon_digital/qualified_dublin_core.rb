@@ -3,10 +3,10 @@
 require 'builder'
 
 # This module provide Dublin Core export based on the document's semantic values
-module OregonDigital::Document::QualifiedDublinCore
+module OregonDigital::QualifiedDublinCore
   def self.extended(document)
     # Register our exportable formats
-    OregonDigital::Document::QualifiedDublinCore.register_export_formats(document)
+    OregonDigital::QualifiedDublinCore.register_export_formats(document)
   end
 
   def self.register_export_formats(document)
