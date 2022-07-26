@@ -1,8 +1,7 @@
-#fozen_string_literal: true
+# frozen_string_literal: true
 
 # OAI Set
 class OaiSet < BlacklightOaiProvider::SolrSet
-
   # OAI Set object
   class << self
     # The Solr repository object (optional)

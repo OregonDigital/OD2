@@ -11,6 +11,7 @@ class SolrDocument
   SolrDocument.use_extension(Blacklight::Document::Email)
   SolrDocument.use_extension(Blacklight::Document::Sms)
   use_extension(Blacklight::Document::DublinCore)
+  use_extension(OregonDigital::Document::QualifiedDublinCore)
   use_extension(Hydra::ContentNegotiation)
 
   def self.solrized_methods(property_names)
@@ -93,137 +94,25 @@ class SolrDocument
   end
 
   field_semantics.merge!(
-    title: ['alternative_tesim',
-      'tribal_title_tesim',
-      'title_tesim'],
-    creator: ['creator_tesim'],
-    contributor:  ['photographer_tesim',
-      'arranger_tesim',
-      'artist_tesim',
-      'author_tesim',
-      'cartographer_tesim',
-      'collector_tesim',
-      'composer_tesim',
-      'contributor_tesim',
-      'designer_tesim',
-      'donor_tesim',
-      'editor_tesim',
-      'illustrator_tesim',
-      'interviewee_tesim',
-      'interviewer_tesim',
-      'landscape_architect_tesim',
-      'lyricist_tesim',
-      'owner_tesim',
-      'patron_tesim',
-      'print_maker_tesim',
-      'recipient_tesim',
-      'transcriber_tesim',
-      'translator_tesim'],
-    description: ['description_tesim',
-      'abstract_tesim',
-      'cover_description_tesim',
-      'description_of_manifestation_tesim',
-      'inscription_tesim',
-      'view_tesim',
-      'cultural_context_tesim',
-      'style_or_period_tesim',
-      'award_date_tesim',
-      'provenance_tesim'],
-    subject: ['subject_tesim',
-      'award_tesim',
-      'ethnographic_term_tesim',
-      'event_tesim',
-      'keyword_tesim',
-      'legal_name_tesim',
-      'military_branch_tesim',
-      'sports_team_tesim',
-      'tribal_classes_tesim',
-      'tribal_terms_tesim',
-      'phylum_or_division_tesim',
-      'taxon_class_tesim',
-      'order_tesim',
-      'family_tesim',
-      'genus_tesim',
-      'species_tesim',
-      'common_name_tesim'],
-    coverage: ['coverage_tesim',
-      'temporal_tesim',
-      'location_tesim',
-      'box_tesim',
-      'gps_latitude_tesim',
-      'gps_longitude_tesim',
-      'ranger_district_tesim',
-      'street_address_tesim',
-      'tgn_tesim',
-      'water_basin_tesim'
-    ],
-    date: ['date_tesim',
-      'created_tesim',
-      'issued_tesim',
-      'view_date_tesim'],
-    rights: ['license_tesim',
-      'rights_holder_tesim',
-      'rights_note_tesim',
-      'rights_statement_tesim'],
-    publisher: ['repository_tesim',
-      'p0ublisher_tesim'],
-    relation: ['local_collection_name_tesim',
-      'citation_tesim'],
-    language: ['language_tesim'],
-    source: ['source_tesim'],
-    relation: ['art_series_tesim',
-      'has_finding_aid_tesim',
-      'has_part_tesim',
-      'has_version_tesim',
-      'isPartOf_tesim',
-      'isVersionOf_tesim',
-      'larger_work_tesim',
-      'relation_tesim',
-      'collection_tesim'],
-    type: ['media_tesim'],
-    format: ['measurements_tesim',
-      'physical_extent_tesim',
-      'format_label_tesim']
+    title: %w[alternative_tesim tribal_title_tesim title_tesim],
+    creator: %w[creator_tesim],
+    contributor:  %w[photographer_tesim arranger_tesim artist_tesim author_tesim cartographer_tesim collector_tesim composer_tesim contributor_tesim designer_tesim donor_tesim editor_tesim illustrator_tesim interviewee_tesim interviewer_tesim landscape_architect_tesim lyricist_tesim owner_tesim patron_tesim print_maker_tesim recipient_tesim transcriber_tesim translator_tesim],
+    description: %w[description_tesim abstract_tesim cover_description_tesim description_of_manifestation_tesim inscription_tesim view_tesim cultural_context_tesim style_or_period_tesim award_date_tesim provenance_tesim],
+    subject: %w[subject_tesim award_tesim ethnographic_term_tesim event_tesim keyword_tesim legal_name_tesim military_branch_tesim sports_team_tesim tribal_classes_tesim tribal_terms_tesim phylum_or_division_tesim taxon_class_tesim order_tesim family_tesim genus_tesim species_tesim common_name_tesim],
+    coverage: %w[coverage_tesim temporal_tesim location_tesim box_tesim gps_latitude_tesim gps_longitude_tesim ranger_district_tesim street_address_tesim tgn_tesim water_basin_tesim],
+    date: %w[date_tesim created_tesim issued_tesim view_date_tesim],
+    rights: %w[license_tesim rights_holder_tesim rights_note_tesim rights_statement_tesim],
+    publisher: %w[repository_tesim publisher_tesim],
+    relation: %w[local_collection_name_tesim citation_tesim],
+    language: %w[language_tesim],
+    source: %w[source_tesim],
+    relation: %w[art_series_tesim has_finding_aid_tesim has_part_tesim has_version_tesim isPartOf_tesim is_version_of_tesim larger_work_tesim relation_tesim collection_tesim],
+    type: %w[media_tesim],
+    format: %w[measurements_tesim physical_extent_tesim format_label_tesim]
   )
-
-
-  # Override SolrDocument hash access for certain virtual fields
-  def [](key)
-    return send(key) if ['oai_academic_affiliation_label', 'oai_rights', 'oai_identifier', 'oai_nested_related_items_label'].include?(key)
-    super
-  end
 
   def sets
     fetch('has_model', []).map { |m| BlacklightOaiProvider::Set.new("has_model_ssim:#{m}") }
-  end
-
-  def oai_nested_related_items_label
-    related_items = []
-    nested_related_items_label.each do |r|
-      related_items << r['label'] + ': ' + r['uri']
-    end
-    related_items
-  end
-
-  def oai_academic_affiliation_label
-    aa_labels = []
-    academic_affiliation_label.each do |a|
-      aa_labels << a['label']
-    end
-    aa_labels
-  end
-
-  # Only return License if present, otherwise Rights
-  def oai_rights
-    license_label ? license_label : rights_statement_label
-  end
-
-  def oai_identifier
-    if self['has_model_ssim'].first.to_s == 'Collection'
-      Hyrax::Engine.routes.url_helpers.url_for(:only_path => false, :action => 'show', :host => CatalogController.blacklight_config.oai[:provider][:repository_url], :controller => 'hyrax/collections', id: self.id)
-    else
-      Rails.application.routes.url_helpers.url_for(:only_path => false, :action => 'show', :host => CatalogController.blacklight_config.oai[:provider][:repository_url], :controller => 'hyrax/' + self['has_model_ssim'].first.to_s.underscore.pluralize, id: self.id)
-    end
   end
 
   solrized_methods Generic.generic_properties
