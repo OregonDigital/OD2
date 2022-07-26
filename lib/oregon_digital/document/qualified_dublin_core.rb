@@ -36,8 +36,8 @@ module OregonDigital::Document::QualifiedDublinCore
     xml.target!
   end
 
-  alias :export_as_xml, :export_as_oai_qdc_xml
-  alias :export_as_qdc_xml, :export_as_oai_qdc_xml
+  alias :export_as_xml :export_as_oai_qdc_xml
+  alias :export_as_qdc_xml :export_as_oai_qdc_xml
 
   private
 

@@ -96,17 +96,16 @@ class SolrDocument
   field_semantics.merge!(
     title: %w[alternative_tesim tribal_title_tesim title_tesim],
     creator: %w[creator_tesim],
-    contributor:  %w[photographer_tesim arranger_tesim artist_tesim author_tesim cartographer_tesim collector_tesim composer_tesim contributor_tesim designer_tesim donor_tesim editor_tesim illustrator_tesim interviewee_tesim interviewer_tesim landscape_architect_tesim lyricist_tesim owner_tesim patron_tesim print_maker_tesim recipient_tesim transcriber_tesim translator_tesim],
+    contributor: %w[photographer_tesim arranger_tesim artist_tesim author_tesim cartographer_tesim collector_tesim composer_tesim contributor_tesim designer_tesim donor_tesim editor_tesim illustrator_tesim interviewee_tesim interviewer_tesim landscape_architect_tesim lyricist_tesim owner_tesim patron_tesim print_maker_tesim recipient_tesim transcriber_tesim translator_tesim],
     description: %w[description_tesim abstract_tesim cover_description_tesim description_of_manifestation_tesim inscription_tesim view_tesim cultural_context_tesim style_or_period_tesim award_date_tesim provenance_tesim],
     subject: %w[subject_tesim award_tesim ethnographic_term_tesim event_tesim keyword_tesim legal_name_tesim military_branch_tesim sports_team_tesim tribal_classes_tesim tribal_terms_tesim phylum_or_division_tesim taxon_class_tesim order_tesim family_tesim genus_tesim species_tesim common_name_tesim],
     coverage: %w[coverage_tesim temporal_tesim location_tesim box_tesim gps_latitude_tesim gps_longitude_tesim ranger_district_tesim street_address_tesim tgn_tesim water_basin_tesim],
     date: %w[date_tesim created_tesim issued_tesim view_date_tesim],
     rights: %w[license_tesim rights_holder_tesim rights_note_tesim rights_statement_tesim],
     publisher: %w[repository_tesim publisher_tesim],
-    relation: %w[local_collection_name_tesim citation_tesim],
     language: %w[language_tesim],
     source: %w[source_tesim],
-    relation: %w[art_series_tesim has_finding_aid_tesim has_part_tesim has_version_tesim isPartOf_tesim is_version_of_tesim larger_work_tesim relation_tesim collection_tesim],
+    relation: %w[local_collection_name_tesim citation_tesim art_series_tesim has_finding_aid_tesim has_part_tesim has_version_tesim isPartOf_tesim is_version_of_tesim larger_work_tesim relation_tesim collection_tesim],
     type: %w[media_tesim],
     format: %w[measurements_tesim physical_extent_tesim format_label_tesim]
   )
