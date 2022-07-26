@@ -6,8 +6,6 @@
     #render_facet_limit.
 %>
 
-<% @curation_concern.reconfigure_blacklight_facets blacklight_config %>
-<% facet_field_names = @configured_facets.map(&:solr_name) %>
 <% facets_from_request(facet_field_names).each do |display_facet| %>
     <% if should_render_facet?(display_facet) %>
         <div class="form-group advanced-search-facet">
