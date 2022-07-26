@@ -17,6 +17,10 @@ $(document).ready(function() {
   $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
     window.location.hash = e.target.hash;
   });
+
+  $('.remove_from_collection').on('submit', function(e) {
+    $('input[type=submit]').prop('disabled', true);
+  });
 });
 
 function open_edit_my_collection_modal(collection_id) {

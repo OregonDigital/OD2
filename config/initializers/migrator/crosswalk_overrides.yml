@@ -133,7 +133,7 @@ overrides:
   - property: creator_display
     predicate: http://opaquenamespace.org/ns/cco/creatorDisplay
     multiple: true
-  - property: view_date
+  - property: view
     predicate: http://opaquenamespace.org/ns/cco/viewDescription
     multiple: true
   - property: accession_number
