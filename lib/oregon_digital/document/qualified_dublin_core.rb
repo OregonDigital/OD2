@@ -16,9 +16,10 @@ module OregonDigital::Document::QualifiedDublinCore
   end
 
   def qualified_dublin_core_field_names
-    [:contributor, :coverage, :creator, :date, :description, :format, :identifier, :language, :publisher, :relation, :rights, :source, :subject, :title, :type]
+    %i[contributor coverage creator date description format identifier language publisher relation rights source subject title type]
   end
 
+  # rubocop disable: Metrics/MethodLength
   # qualified dublin core elements are mapped against the #qualified_dublin_core_field_names whitelist.
   def export_as_oai_qdc_xml
     xml = Builder::XmlMarkup.new
@@ -27,7 +28,7 @@ module OregonDigital::Document::QualifiedDublinCore
              'xmlns:dc' => 'http://purl.org/dc/elements/1.1/',
              'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
              'xsi:schemaLocation' => %(http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd)) do
-      to_semantic_values.select { |field, _values| qualified_dublin_core_field_name? field  }.each do |field, values|
+      to_semantic_values.select { |field, _values| qualified_dublin_core_field_name? field }.each do |field, values|
         Array.wrap(values).each do |v|
           xml.tag! "dc:#{field}", v
         end
@@ -35,13 +36,14 @@ module OregonDigital::Document::QualifiedDublinCore
     end
     xml.target!
   end
+  # rubocop enable: Metrics/MethodLength
 
-  alias :export_as_xml :export_as_oai_qdc_xml
-  alias :export_as_qdc_xml :export_as_oai_qdc_xml
+  alias export_as_xml export_as_oai_qdc_xml
+  alias export_as_qdc_xml export_as_oai_qdc_xml
 
   private
 
-  def qualified_dublin_core_field_name? field
+  def qualified_dublin_core_field_name?(field)
     qualified_dublin_core_field_names.include? field.to_sym
   end
 end
