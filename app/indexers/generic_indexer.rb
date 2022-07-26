@@ -19,6 +19,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
+      index_sort_options(solr_doc)
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
       object.member_of_collections.each do |collection|
@@ -79,6 +80,16 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['resource_type_label_sim'] = type_label
     solr_doc['resource_type_label_ssim'] = type_label
     solr_doc['resource_type_label_tesim'] = type_label
+  end
+
+  def index_sort_options(solr_doc)
+    solr_doc['title_ssort'] = object.title.first
+    solr_doc['date_dtsi'] =
+      begin
+        Date.parse(object.date.first) unless object.date.first.nil?
+      rescue Date::Error
+        nil
+      end
   end
 
   def index_edit_groups
