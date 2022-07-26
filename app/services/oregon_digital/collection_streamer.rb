@@ -24,29 +24,43 @@ module OregonDigital
     private
 
     def stream_collection(collection, folder, zip)
-      # Init our metadata CSV
-      metadata = [collection.csv_metadata]
+      keys = self.class.metadata_keys
+      controlled_keys = self.class.controlled_keys
 
-      # Recursively drill down into sub-collections
-      collection.child_collections.each do |col|
+      metadata = [collection.metadata_row(keys, controlled_keys)]
+      metadata += stream_child_collections(collection, zip, folder, keys, controlled_keys)
+      metadata += stream_child_works(collection, zip, folder, keys, controlled_keys)
+
+      stream_metadata(keys, metadata, folder, zip)
+    end
+
+    def stream_child_collections(collection, zip, folder, keys, controlled_keys)
+      collection.child_collections.map do |col|
+        # Recursively drill down into sub-collections
         stream_collection(col, "#{folder}#{col.id}/", zip)
+        col.metadata_row(keys, controlled_keys)
       end
+    end
 
-      # Add low quality works from collection and append metadata
-      collection.child_works.each do |work|
+    def stream_child_works(collection, zip, folder, keys, controlled_keys)
+      collection.child_works.map do |work|
+        # Add low quality works from collection and append metadata
         stream_works_low(work, zip, folder)
-        metadata << work.csv_metadata
+        work.metadata_row(keys, controlled_keys)
       end
-
-      stream_metadata(metadata, folder, zip)
     end
 
     # Add all metadata
-    def stream_metadata(metadata, folder, zip)
-      zip.write_deflated_file("#{folder}metadata.csv") do |file_writer|
-        metadata.each do |data|
-          file_writer << data
+    def stream_metadata(keys, metadata, folder, zip)
+      csv_file = ::CSV.generate do |csv|
+        csv << keys
+        metadata.each do |row|
+          csv << row
         end
+      end
+
+      zip.write_deflated_file("#{folder}metadata.csv") do |file_writer|
+        file_writer << csv_file
       end
     end
   end
