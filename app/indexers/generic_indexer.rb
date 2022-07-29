@@ -25,6 +25,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       object.member_of_collections.each do |collection|
         collection_index_key = collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim'
         solr_doc[collection_index_key] << collection.id
+        solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
       end
       # removing index_topic_combined_label(solr_doc, object.keyword)
       # will be handled when indexing fetched labels
