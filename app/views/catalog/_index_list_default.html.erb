@@ -32,7 +32,7 @@
       <span>
         <ul class="tabular">
         <% document.parents.each do |parent| %>
-          <li><%= link_to parent, main_app.url_for(parent) %></li>
+          <li><%= parent.to_s %></li>
         <% end %>
         </ul>
       </span>
