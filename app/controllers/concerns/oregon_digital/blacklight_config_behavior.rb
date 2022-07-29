@@ -7,7 +7,7 @@ module OregonDigital
 
     included do
       def self.title_field
-        'title_ssi'
+        'title_ssort'
       end
 
       def self.date_field
