@@ -86,7 +86,7 @@ module OregonDigital
       %w[ranger_district water_basin location].each do |prop|
         cpm[prop] = 'location'
       end
-      %w[arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer lyricist owner patron photographer print_maker recipient transcriber translator].each do |prop|
+      %w[arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer landscape_architect lyricist owner patron photographer print_maker recipient transcriber translator].each do |prop|
         cpm[prop] = 'creator'
       end
       %w[keyword subject].each do |prop|

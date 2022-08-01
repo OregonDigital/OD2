@@ -35,6 +35,7 @@ en:
           illustrator_label_sim: Illustrator
           interviewee_label_sim: Interviewee
           interviewer_label_sim: Interviewer
+          landscape_architect_label_sim: Landscape Architect
           location_label_sim: Location
           lyricist_label_sim: Lyricist
           member_of_collections_ssim: Collections
@@ -111,6 +112,7 @@ en:
           illustrator_label_tesim: Illustrator
           interviewee_label_tesim: Interviewee
           interviewer_label_tesim: Interviewer
+          landscape_architect_label_tesim: Landscape Architect
           lyricist_label_tesim: Lyricist
           patron_label_tesim: Patron
           photographer_label_tesim: Photographer
@@ -192,6 +194,7 @@ en:
           illustrator_label: Illustrator
           interviewee_label: Interviewee
           interviewer_label: Interviewer
+          landscape_architect_label: Landscape Architect
           lyricist_label: Lyricist
           patron_label: Patron
           photographer_label: Photographer
