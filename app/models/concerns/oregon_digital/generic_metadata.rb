@@ -94,6 +94,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :landscape_architect, predicate: RDF::Vocab::MARCRelators.lsa, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :lyricist, predicate: RDF::Vocab::MARCRelators.lyr, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
@@ -610,6 +614,7 @@ module OregonDigital
         { name: 'illustrator_label', is_controlled: true, collection_facetable: true },
         { name: 'interviewee_label', is_controlled: true, collection_facetable: true },
         { name: 'interviewer_label', is_controlled: true, collection_facetable: true },
+        { name: 'landscape_architect_label', is_controlled: true, collection_facetable: true },
         { name: 'lyricist_label', is_controlled: true, collection_facetable: true },
         { name: 'owner_label', is_controlled: true, collection_facetable: true },
         { name: 'patron_label', is_controlled: true, collection_facetable: true },
@@ -771,6 +776,7 @@ module OregonDigital
         { name: :illustrator, section_name: '' },
         { name: :interviewee, section_name: '' },
         { name: :interviewer, section_name: '' },
+        { name: :landscape_architect, section_name: '' },
         { name: :lyricist, section_name: '' },
         { name: :owner, section_name: '' },
         { name: :patron, section_name: '' },

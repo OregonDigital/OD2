@@ -153,6 +153,7 @@ def attrs
     'illustrator' => ['http://id.loc.gov/authorities/names/n81135212'],
     'interviewee' => ['http://id.loc.gov/authorities/names/no2009199813'],
     'interviewer' => ['http://opaquenamespace.org/ns/creator/UhligElizabeth'],
+    'landscape_architect' => ['http://opaquenamespace.org/ns/creator/UhligElizabeth'],
     'lyricist' => ['http://opaquenamespace.org/ns/creator/HealyRobert'],
     'patron' => ['http://opaquenamespace.org/ns/creator/HealyRobert'],
     'photographer' => ['http://opaquenamespace.org/ns/creator/GiffordandPrentiss'],
