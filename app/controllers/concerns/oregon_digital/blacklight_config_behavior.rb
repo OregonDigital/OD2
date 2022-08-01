@@ -284,6 +284,15 @@ module OregonDigital
           }
           field.include_in_advanced_search = false
         end
+        config.add_search_field('non_user_collections') do |field|
+          solr_name = 'non_user_collections_tesim'
+          search_fields << 'non_user_collections_tesim'
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+          field.include_in_advanced_search = false
+        end
         config.add_search_field('all_fields', label: 'All Fields') do |field|
           all_names = search_fields.join(' ')
           title_name = 'title_tesim'
