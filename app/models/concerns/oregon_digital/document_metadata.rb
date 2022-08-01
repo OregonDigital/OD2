@@ -69,6 +69,7 @@ module OregonDigital
         { name: :illustrator, section_name: '' },
         { name: :interviewee, section_name: '' },
         { name: :interviewer, section_name: '' },
+        { name: :landscape_architect, section_name: '' },
         { name: :lyricist, section_name: '' },
         { name: :owner, section_name: '' },
         { name: :patron, section_name: '' },
