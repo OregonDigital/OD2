@@ -14,7 +14,7 @@ class User < ApplicationRecord
   # rubocop:disable Style/SymbolArray
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :recoverable, :confirmable,
-         :omniauthable, omniauth_providers: [:cas, :saml]
+         :omniauthable, :validatable, omniauth_providers: [:cas, :saml]
   # rubocop:enable Style/SymbolArray
 
   # T/F whether user has at least one role
