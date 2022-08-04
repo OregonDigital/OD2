@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe OregonDigital::WorkPermissionChangeJob, type: :job do
+RSpec.describe OregonDigital::PermissionChangeEventJob, type: :job do
   include ActiveJob::TestHelper
 
   let(:curration_concern) { create(:generic) }
