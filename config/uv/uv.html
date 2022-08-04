@@ -28,8 +28,9 @@
         var urlAdapter = new UV.IIIFURLAdapter(true);
 
         const data = urlAdapter.getInitialData({
-          embedded: true,
-        });
+        embedded: true,
+        highlight: urlAdapter.get('h'),
+      });
 
         uv = UV.init("uv", data);
 

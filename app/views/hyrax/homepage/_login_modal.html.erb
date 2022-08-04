@@ -62,7 +62,7 @@
         </div>
         <div id="login-modal-footer-local-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
           <div class='row'>
-            <%= button_to main_app.new_user_session_path, method: :post, class: 'btn btn-primary' do %>
+            <%= link_to main_app.new_user_session_path, class: 'btn btn-primary' do %>
               <span class="university-login">CONTINUE TO LOG IN</span>
             <% end %>
           </div>
