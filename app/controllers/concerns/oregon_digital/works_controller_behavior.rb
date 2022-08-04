@@ -18,5 +18,12 @@ module OregonDigital
       params[hash_key_for_curation_concern][:member_of_collection_ids] = nil if params[hash_key_for_curation_concern][:member_of_collection_ids].empty?
       super
     end
+
+    private
+
+    def after_update_response
+      WorkPermissionChangeJob.perform_later(curation_concern, current_user) if permissions_changed?
+      super
+    end
   end
 end
