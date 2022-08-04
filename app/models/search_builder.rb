@@ -2,13 +2,14 @@
 
 # Sets expected behaviors for the applications search builders
 class SearchBuilder < Blacklight::SearchBuilder
-  include Blacklight::Solr::SearchBuilderBehavior
-  include BlacklightRangeLimit::RangeLimitBuilder
 
-  include BlacklightAdvancedSearch::AdvancedSearchBuilder
-  self.default_processor_chain += %i[add_advanced_parse_q_to_solr add_advanced_search_to_solr]
+  include Blacklight::Solr::SearchBuilderBehavior
+  # Add a filter query to restrict the search to documents the current user has access to
   include Hydra::AccessControlsEnforcement
   include Hyrax::SearchFilters
+  include BlacklightRangeLimit::RangeLimitBuilder
+  include BlacklightAdvancedSearch::AdvancedSearchBuilder
+  self.default_processor_chain += %i[add_advanced_search_to_solr]
 
   ##
   # @example Adding a new step to the processor chain
