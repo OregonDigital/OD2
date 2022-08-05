@@ -6,6 +6,11 @@ RSpec.describe OregonDigital::PermissionChangeEventJob, type: :job do
   let(:curration_concern) { create(:generic) }
   let(:user) { create(:user) }
 
+  before do
+    clear_enqueued_jobs
+    clear_performed_jobs
+  end
+
   after do
     clear_enqueued_jobs
     clear_performed_jobs

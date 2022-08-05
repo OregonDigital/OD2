@@ -5,7 +5,7 @@ RSpec.describe OregonDigital::PermissionChangePropagationJob, type: :job do
 
   let(:curation_concern) { create(:image, ordered_members: [file_set]) }
   let(:file_set) { create(:file_set) }
-  let(:event_job) { OregonDigital::PermissionChangePropagationEventJob }
+  let(:event_job_class) { OregonDigital::PermissionChangePropagationEventJob }
 
   after do
     clear_enqueued_jobs
@@ -13,11 +13,9 @@ RSpec.describe OregonDigital::PermissionChangePropagationJob, type: :job do
   end
 
   context 'when the job runs' do
-    before { allow(event_job).to receive(:perform_later) }
-
     it 'enqueues the child job' do
+      expect(OregonDigital::PermissionChangePropagationEventJob).to receive(:perform_later).with(file_set, curation_concern)
       described_class.perform_now(curation_concern)
-      expect(event_job).to receive(:perform_later).with(file_set, curation_concern)
     end
   end
 end
