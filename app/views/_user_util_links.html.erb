@@ -13,7 +13,7 @@
         <span class="caret-dropdown"></span>
       <% end %>
       <ul id="user-util-links" class="dropdown-menu dropdown-menu-center text-center">
-        <% if can? :read, :admin_dashboard %>
+        <% if can? :create, ActiveFedora::Base %>
           <li><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path, tabindex: -1 %></li>
         <% end %>
         <li><%= link_to 'My Collections', Rails.application.routes.url_helpers.my_explore_collections_path, tabindex: -1 %></li>
