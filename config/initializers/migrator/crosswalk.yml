@@ -240,7 +240,7 @@ crosswalk:
     multiple: true
     function: attributes_data
   - property: event
-    predicate: http://schema.org/Event
+    predicate: http://schema.org/event
     multiple: true
     function: 
   - property: keyword
