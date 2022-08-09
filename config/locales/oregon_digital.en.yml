@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: 'This email address is already in use. Please use `forgot my password` below to recover your account'
   oregon_digital:
     collection:
       create_form:
