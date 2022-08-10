@@ -15,9 +15,10 @@ overrides:
   - predicate: http://opaquenamespace.org/ns/boxName
     function: return_nil
 
-  #not used in OD2
+  #send rightsHolder to rights_holder
   - predicate: http://opaquenamespace.org/rights/rightsHolder
-    function: return_nil
+    property: rights_holder
+    multiple: true
 
   #multiple must be true (is false on map)
   - property: repository_attributes
