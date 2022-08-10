@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
-RSpec.describe OregonDigital::WorkPermissionChangeJob, type: :job do
+RSpec.describe OregonDigital::PermissionChangeEventJob, type: :job do
   include ActiveJob::TestHelper
 
   let(:curration_concern) { create(:generic) }
   let(:user) { create(:user) }
+
+  before do
+    clear_enqueued_jobs
+    clear_performed_jobs
+  end
 
   after do
     clear_enqueued_jobs

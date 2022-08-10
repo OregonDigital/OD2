@@ -22,7 +22,7 @@ module OregonDigital
     private
 
     def after_update_response
-      WorkPermissionChangeJob.perform_later(curation_concern, current_user) if permissions_changed?
+      OregonDigital::PermissionChangeEventJob.perform_later(curation_concern, current_user) if permissions_changed?
       super
     end
   end
