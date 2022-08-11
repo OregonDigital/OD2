@@ -43,7 +43,7 @@ module Hyrax
       # (but we should move that to a different controller)
       def conditionally_update
         return true unless params[:user]
-        
+
         @user.update(user_params)
       end
 
