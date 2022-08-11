@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+# Override
 module Hyrax
 	module Dashboard
 	  ## Shows and edit the profile of the current_user
