@@ -100,7 +100,7 @@ module OregonDigital
       end
 
       def get_language_label(rdf_label)
-        rdf_label.select { |label| label.language == :en if label.respond_to?(:language) }.first
+        rdf_label.select { |label| label.language.in? %i[en en-us] if label.respond_to?(:language) }.first
       end
     end
     class ControlledVocabularyError < StandardError; end

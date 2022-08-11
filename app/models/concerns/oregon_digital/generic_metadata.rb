@@ -230,7 +230,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :event, predicate: RDF::Vocab::SCHEMA.Event, multiple: true, basic_searchable: true do |index|
+      property :event, predicate: RDF::Vocab::SCHEMA.event, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
