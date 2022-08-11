@@ -3,7 +3,7 @@
 # Override
 module Hyrax
   module Dashboard
-  ## Shows and edit the profile of the current_user
+    ## Shows and edit the profile of the current_user
     class ProfilesController < Hyrax::UsersController
       with_themed_layout 'dashboard'
       before_action :find_user
@@ -30,7 +30,7 @@ module Hyrax
       def update
         if conditionally_update
           handle_successful_update
-          redirect_to hyrax.dashboard_profile_path(@user.to_param), notice: "Your profile has been updated"
+          redirect_to hyrax.dashboard_profile_path(@user.to_param), notice: 'Your profile has been updated'
         else
           redirect_to hyrax.edit_dashboard_profile_path(@user.to_param), alert: @user.errors.full_messages
         end
@@ -43,6 +43,7 @@ module Hyrax
       # (but we should move that to a different controller)
       def conditionally_update
         return true unless params[:user]
+        
         @user.update(user_params)
       end
 
