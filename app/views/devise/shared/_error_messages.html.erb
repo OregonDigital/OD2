@@ -1,0 +1,16 @@
+<% if resource.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= I18n.t("errors.messages.not_saved",
+                 count: resource.errors.count,
+                 resource: resource.class.model_name.human.downcase)
+       %>
+    </h2>
+    <ul>
+      <%safe_list_sanitizer = Rails::Html::SafeListSanitizer.new%>
+      <% resource.errors.each do |attr, message| %>
+        <li><b><%= attr.to_s.capitalize %></b>: <%= safe_list_sanitizer.sanitize(message).html_safe %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
