@@ -69,4 +69,4 @@ module Hyrax
 	    end
 	  end
 	end
-      end
+end
