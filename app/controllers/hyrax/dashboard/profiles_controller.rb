@@ -50,7 +50,7 @@ module Hyrax
       def handle_successful_update
         # TODO: this should be moved to TrophiesController
         process_trophy_removal
-        UserEditProfileEventJob.perform_later(@user)
+        UserEditProfileEventJob.perform_later
       end
 
       # if the user wants to remove any trophies, do that here.
