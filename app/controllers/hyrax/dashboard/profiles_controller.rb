@@ -50,14 +50,14 @@ module Hyrax
       def handle_successful_update
         # TODO: this should be moved to TrophiesController
         process_trophy_removal
-        UserEditProfileEventJob.perform_later
+        UserEditProfileEventJob.perform_later(current_user)
       end
 
       # if the user wants to remove any trophies, do that here.
       def process_trophy_removal
         params.keys.select { |k, _v| k.starts_with? 'remove_trophy_' }.each do |smash_trophy|
           smash_trophy = smash_trophy.sub(/^remove_trophy_/, '')
-          current_user.trophies.where(work_id: smash_trophy).destroy_all
+          @user.trophies.where(work_id: smash_trophy).destroy_all
         end
       end
 
