@@ -14,6 +14,7 @@ class Ability
 
   def custom_permissions
     can(%i[show add_user remove_user index edit update destroy], Role)
+    can(%i[show edit index update destroy], User) if current_user.admin?
 
     # Apply works edit permissions
     work_edit_ability

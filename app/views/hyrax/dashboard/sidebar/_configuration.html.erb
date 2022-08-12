@@ -39,6 +39,9 @@
       <%= menu.nav_link(role_management.roles_path) do %>
         <span class="fa fa-users" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.role_management') %></span>
       <% end %>
+      <%= menu.nav_link(users_path) do %>
+        <span class="fa fa-users" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.user_management') %></span>
+      <% end %>
     <% end %>
     <%= render 'hyrax/dashboard/sidebar/menu_partials', menu: menu, section: :configuration %>
   <% end %>
