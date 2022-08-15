@@ -11,10 +11,10 @@
   <% @props.each do |prop| %>
     <% if prop[:is_controlled] %>
         <% zipped = presenter.zipped_values(prop[:name]) %>
-        <% zipped.each do |label, uri| %>
+        <% zipped.each do |uri, label| %>
         <tr>
-          <td> <%= prop[:indices][uri] %> </td>
-          <th scope="row"> <%= label %> </th>
+          <td> <%= prop[:indices][label] %> </td>
+          <th scope="row"> <%= label.is_a?(Array) ? label.first : label %> </th>
           <td> <%= link_to uri, uri %> </td>
         </tr>
         <% end %>
