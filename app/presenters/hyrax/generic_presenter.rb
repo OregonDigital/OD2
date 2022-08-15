@@ -49,13 +49,15 @@ module Hyrax
       prop_label = prop_label.to_s.gsub('_label', '')
       send(prop_label).each do |prop_val|
         if Generic.properties[prop_label].class_name.nil?
-          zipped[prop_val] = send(prop_label + '_label').first
+          label = send(prop_label + '_label').first
+          zipped[label] = prop_val
         else
           prop = Generic.properties[prop_label].class_name.new(prop_val)
           prop.fetch
           solrized = prop.solrize
           label, source = solrized[1][:label].split('$')
-          zipped[source] = label
+          # BREKA
+          zipped[label] = source
         end
       end
       zipped
