@@ -22,8 +22,6 @@ module OregonDigital
       fields.each do |field_key, field_info|
         solr_field_key = solr_document_field_name(field_key, prefix_method)
         field_info.values.each do |val|
-          next if (val.respond_to? :rdf_label) && (val.rdf_label.first.start_with? 'http')
-
           append_to_solr_doc(solr_doc, solr_field_key, field_info, val)
           combined_prop = combined_properties[field_key]
           next if combined_prop.blank?
