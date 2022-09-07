@@ -47,6 +47,7 @@ module Hyrax
     def zipped_values(prop_label)
       zipped = {}
       prop_label = prop_label.to_s.gsub('_label', '')
+      puts "@@@@#{prop_label}@@@@"
       send(prop_label).each do |prop_val|
         if Generic.properties[prop_label].class_name.nil?
           label = send(prop_label + '_label').first
@@ -54,8 +55,10 @@ module Hyrax
         else
           prop = Generic.properties[prop_label].class_name.new(prop_val)
           prop.fetch
+          puts "@@@@#{prop}@@@@"
           solrized = prop.solrize
-          label, source = solrized[1][:label].split('$')
+          puts "@@@@#{solrized}@@@@"
+          label, source = solrized[1]&.[](:label)&.split('$') || [nil, nil]
           # BREKA
           zipped[label] = source
         end

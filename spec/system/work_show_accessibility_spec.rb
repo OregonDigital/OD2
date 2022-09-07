@@ -5,7 +5,55 @@ RSpec.describe 'Work show page', js: true, type: :system, clean_repo: true do
 
   before do
     stub_request(:get, 'http://opaquenamespace.org/ns/creator/UniversityofOregonstudents')
-      .to_return(status: 200, body: '', headers: {})
+      .to_return(status: 200, body: '
+        {
+          "@context": {
+            "dc": "http://purl.org/dc/terms/",
+            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+            "skos": "http://www.w3.org/2004/02/skos/core#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#"
+          },
+          "@id": "http://opaquenamespace.org/ns/creator/UniversityofOregonstudents",
+          "@type": [
+            "skos:CorporateName",
+            "rdfs:Resource"
+          ],
+          "dc:issued": [
+            {
+              "@value": "2015-07-16",
+              "@type": "xsd:date"
+            },
+            {
+              "@value": "2015-08-25",
+              "@type": "xsd:date"
+            }
+          ],
+          "dc:modified": [
+            {
+              "@value": "2015-07-16",
+              "@type": "xsd:date"
+            },
+            {
+              "@value": "2015-08-25",
+              "@type": "xsd:date"
+            }
+          ],
+          "rdfs:comment": {
+            "@value": "Professional contributors.",
+            "@language": "en"
+          },
+          "rdfs:isDefinedBy": {
+            "@id": "http://opaquenamespace.org/VOCAB_PLACEHOLDER.nt"
+          },
+          "rdfs:label": {
+            "@value": "University of Oregon students",
+            "@language": "en"
+          },
+          "rdfs:seeAlso": {
+            "@id": "http://opaquenamespace.org/VOCAB_PLACEHOLDER.nt"
+          }
+        }
+        ', headers: {})
     stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/creator/UniversityofOregonstudents%3E')
       .to_return(status: 200, body: '', headers: {})
   end
