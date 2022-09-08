@@ -75,4 +75,14 @@ class User < ApplicationRecord
     when 'saml' then Role.find_by_name('uo_user')
     end
   end
+
+  protected
+
+  # Checks whether a password is needed or not. For validations only.
+  # Passwords are always required if it's a new record, or if the password
+  # or confirmation are being set somewhere.
+  def password_required?
+    service = OregonDigital::UserAttributeService.new(self)
+    !service.institutional_user? && (!persisted? || !password.nil? || !password_confirmation.nil?)
+  end
 end
