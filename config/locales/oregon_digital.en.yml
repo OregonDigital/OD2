@@ -5,7 +5,7 @@ en:
         user:
           attributes:
             email:
-              taken: 'This email address is already in use. Please use `forgot my password` below to recover your account'
+              taken: 'This email address is already in use. Please use <b>forgot my password</b> below to recover your account'
   oregon_digital:
     collection:
       create_form:
