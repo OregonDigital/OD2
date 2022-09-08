@@ -55,7 +55,7 @@ RDFXML
 
       it 'handles the error' do
         solr_doc = service.send(:add_assertions, nil)
-        expect(solr_doc['location_combined_label_sim']).to eq nil
+        expect(solr_doc['location_combined_label_sim']).to eq ['http://sws.geonames.org/5037650']
       end
     end
   end
