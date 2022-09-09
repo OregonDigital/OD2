@@ -2,22 +2,22 @@
 
 <h2> First time here? </h2>
 <ul class="single-value-input">
-  <li><a href="about">About Oregon Digital</a></li>
-  <li><a href="mission">Mission and Vission</a></li>
-  <li><a href="use">How to Use This Website</a></li>
-  <li><a href="privacy">Privacy Policy</a></li>
-  <li><a href="terms">Terms of Use</a></li>
+  <li><%= link_to 'About', :about, class: "#{current_page?(about_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Mission and Vission', :mission, class: "#{current_page?(mission_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'How to Use This Website', :use, class: "#{current_page?(use_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Privacy Policy', :privacy, class: "#{current_page?(privacy_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Terms of Use', :terms, class: "#{current_page?(terms_path) ? 'active' : nil}" %></li>
 </ul>
 <h2> Dig deeper </h2>
 <ul class="single-value-input">
-  <li><a href="copyright">Copyright and Usage Requirements</a></li>
-  <li><a href="harmful">Harmful Language Statement</a></li>
-  <li><a href="takedown">Take-Down Policy</a></li>
+  <li><%= link_to 'Copyright and Usage Requirements', :copyright, class: "#{current_page?(copyright_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Harmful Language Statement', :harmful, class: "#{current_page?(harmful_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Take-Down Policy', :takedown, class: "#{current_page?(takedown_path) ? 'active' : nil}" %></li>
 </ul>
 <h2> Collection development policy </h2>
 <ul class="single-value-input">
-  <li><a href="uo">University of Oregon</a></li>
-  <li><a href="osu">Oregon State University</a></li>
+  <li><%= link_to 'University of Oregon', :uo_collection_policy, class: "#{current_page?(uo_collection_policy_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Oregon State University', :osu_collection_policy, class: "#{current_page?(osu_collection_policy_path) ? 'active' : nil}" %></li>
 </ul>
 
 </div>
