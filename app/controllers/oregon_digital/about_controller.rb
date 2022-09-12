@@ -3,6 +3,8 @@
 module OregonDigital
   # This controller sets up the static about pages.
   class AboutController < ApplicationController
+    layout 'oregon_digital/about'
+
     def about
       add_breadcrumb t(:'hyrax.controls.home'), root_path
     end
