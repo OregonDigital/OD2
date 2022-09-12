@@ -9,21 +9,45 @@ module OregonDigital
       add_breadcrumb t(:'hyrax.controls.home'), root_path
     end
 
-    def osu; end
+    def osu
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
-    def uo; end
+    def uo
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
-    def copyright; end
+    def copyright
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
-    def harmful; end
+    def harmful
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
-    def privacy; end
+    def privacy
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
-    def takedown; end
+    def takedown
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
-    def terms; end
+    def terms
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
-    def mission; end
+    def mission
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
 
     def use; end
   end
