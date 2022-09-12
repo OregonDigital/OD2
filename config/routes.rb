@@ -88,7 +88,7 @@ Rails.application.routes.draw do
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
   get 'about' => 'oregon_digital/about#about'
   get 'osu-collection-policy' => 'oregon_digital/about#osu'
-  get 'uo-colllection-policy' => 'oregon_digital/about#uo'
+  get 'uo-collection-policy' => 'oregon_digital/about#uo'
   get 'copyright' => 'oregon_digital/about#copyright'
   get 'harmful' => 'oregon_digital/about#harmful'
   get 'privacy' => 'oregon_digital/about#privacy'
