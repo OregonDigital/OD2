@@ -24,14 +24,21 @@ module Hyrax
       # Overrides rdf_label to add location disambiguation when available.
       def rdf_label
         @label = super
-        @label = Array("#{@label.first} County") if us_county? && no_county_label
 
         unless valid_label
           return @label if top_level_element?
 
           @label = @label.first
           parent_hierarchy.each do |p|
-            @label = "#{@label} >> #{p.first.rdf_label.first}"
+            parent_label = if p.first.us_county?
+              county_labels = p.map do |county|
+                county.rdf_label.first
+              end
+              county_labels.join('/') + ' County'.pluralize(county_labels.count)
+            else
+              p.first.rdf_label.first
+            end
+            @label = "#{@label} >> #{parent_label}"
           end
         end
         Array(@label)
@@ -61,8 +68,10 @@ module Hyrax
 
       def fetch_parents
         parent_hierarchy.each do |p|
-          p.first.top_level_element = true
-          p.first.fetch
+          p.each do |loc|
+            loc.top_level_element = true
+            loc.fetch
+          end
         end
       end
 
