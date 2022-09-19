@@ -19,6 +19,17 @@ Rails.application.routes.draw do
   mount Blacklight::Engine => '/'
   mount BlacklightAdvancedSearch::Engine => '/'
 
+  get 'about' => 'oregon_digital/about#about'
+  get 'osu-collection-policy' => 'oregon_digital/about#osu'
+  get 'uo-collection-policy' => 'oregon_digital/about#uo'
+  get 'copyright' => 'oregon_digital/about#copyright'
+  get 'harmful' => 'oregon_digital/about#harmful'
+  get 'privacy' => 'oregon_digital/about#privacy'
+  get 'takedown' => 'oregon_digital/about#takedown'
+  get 'terms' => 'oregon_digital/about#terms'
+  get 'mission' => 'oregon_digital/about#mission'
+  get 'use' => 'oregon_digital/about#use'
+
   concern :oai_provider, BlacklightOaiProvider::Routes.new
   concern :searchable, Blacklight::Routes::Searchable.new
 
@@ -86,16 +97,6 @@ Rails.application.routes.draw do
   end
 
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
-  get 'about' => 'oregon_digital/about#about'
-  get 'osu-collection-policy' => 'oregon_digital/about#osu'
-  get 'uo-collection-policy' => 'oregon_digital/about#uo'
-  get 'copyright' => 'oregon_digital/about#copyright'
-  get 'harmful' => 'oregon_digital/about#harmful'
-  get 'privacy' => 'oregon_digital/about#privacy'
-  get 'takedown' => 'oregon_digital/about#takedown'
-  get 'terms' => 'oregon_digital/about#terms'
-  get 'mission' => 'oregon_digital/about#mission'
-  get 'use' => 'oregon_digital/about#use'
 
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
