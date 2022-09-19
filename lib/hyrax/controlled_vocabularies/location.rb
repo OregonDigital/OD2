@@ -24,27 +24,23 @@ module Hyrax
       # Overrides rdf_label to add location disambiguation when available.
       def rdf_label
         @label = super
+        @label = Array("#{@label.first} County") if us_county? && no_county_label
 
         unless valid_label
           return @label if top_level_element?
 
           @label = @label.first
           parent_hierarchy.each do |p|
-            @label = "#{@label} >> #{parent_label(p)}"
+            p.each do |loc|
+              @label = "#{@label} >> #{loc.rdf_label.first}"
+            end
           end
+          re = />> (.*? County)/ # Capture each county in a group (>> Marion County)
+          re2 = />> .* County/   # Capture all counties  (>> Marion County >> Polk County)
+          counties = '>> ' + (@label.scan(re).join('/').gsub ' County', '') + ' County'.pluralize(@label.scan(re).count) # Collapse grouped counties into slash separated (>> Marion/Polk Counties)
+          @label = @label.gsub re2, counties # Replace county captures with collapsed counties
         end
         Array(@label)
-      end
-
-      def parent_label(parent)
-        if parent.first.us_county?
-          county_labels = parent.map do |county|
-            county.rdf_label.first
-          end
-          county_labels.join('/') + ' County'.pluralize(county_labels.count)
-        else
-          parent.first.rdf_label.first
-        end
       end
 
       def fetch_from_cache(subject)
@@ -84,11 +80,15 @@ module Hyrax
         return result if top_level_element?
 
         parent_hierarchy.each do |p|
-          p.first.persist!
+          p.each do |loc|
+            loc.persist!
+          end
         end
 
         result
       end
+
+      private
 
       # Identify if this is a county in the USA
       def us_county?
@@ -98,8 +98,6 @@ module Hyrax
         us_country_code = 'sws.geonames.org/6252001/'
         feature_code.respond_to?(:rdf_subject) && feature_code.rdf_subject.to_s.include?(sec_adm_level_code) && parent_country.respond_to?(:rdf_subject) && parent_country.rdf_subject.to_s.include?(us_country_code)
       end
-
-      private
 
       def no_county_label
         !@label.first.downcase.include?('county')
