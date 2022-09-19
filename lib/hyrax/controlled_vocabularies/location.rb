@@ -30,18 +30,21 @@ module Hyrax
 
           @label = @label.first
           parent_hierarchy.each do |p|
-            parent_label = if p.first.us_county?
-              county_labels = p.map do |county|
-                county.rdf_label.first
-              end
-              county_labels.join('/') + ' County'.pluralize(county_labels.count)
-            else
-              p.first.rdf_label.first
-            end
-            @label = "#{@label} >> #{parent_label}"
+            @label = "#{@label} >> #{parent_label(p)}"
           end
         end
         Array(@label)
+      end
+
+      def parent_label(parent)
+        if parent.first.us_county?
+          county_labels = parent.map do |county|
+            county.rdf_label.first
+          end
+          county_labels.join('/') + ' County'.pluralize(county_labels.count)
+        else
+          parent.first.rdf_label.first
+        end
       end
 
       def fetch_from_cache(subject)
@@ -87,8 +90,6 @@ module Hyrax
         result
       end
 
-      private
-
       # Identify if this is a county in the USA
       def us_county?
         feature_code = featureCode.first
@@ -97,6 +98,8 @@ module Hyrax
         us_country_code = 'sws.geonames.org/6252001/'
         feature_code.respond_to?(:rdf_subject) && feature_code.rdf_subject.to_s.include?(sec_adm_level_code) && parent_country.respond_to?(:rdf_subject) && parent_country.rdf_subject.to_s.include?(us_country_code)
       end
+
+      private
 
       def no_county_label
         !@label.first.downcase.include?('county')
