@@ -37,8 +37,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
     service = OregonDigital::UserAttributeService.new(user)
     service.email_redirect_path
   end
-
-  def user_destroy_mailer
-
-  end
 end
