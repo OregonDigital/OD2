@@ -20,6 +20,7 @@ RSpec.describe OregonDigital::DeepIndexingService do
       end
 
       before do
+        allow(location).to receive('solrize')
         newberg = <<RDFXML.strip_heredoc
           <?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <rdf:RDF xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:gn="http://www.geonames.org/ontology#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
@@ -51,6 +52,7 @@ RDFXML
           .to_return(status: 500, body: '', headers: {})
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://sws.geonames.org/5037650%3E')
           .to_return(status: 500, body: '', headers: {})
+        allow(location).to receive('fetch')
       end
 
       it 'handles the error' do

@@ -53,6 +53,10 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
   end
 
   describe '#solrize' do
+    before do
+      allow_any_instance_of(described_class).to receive('fetch')
+    end
+
     context 'with a valid label and subject' do
       before do
         allow(location).to receive(:rdf_label).and_return(['RDF_Label'])
