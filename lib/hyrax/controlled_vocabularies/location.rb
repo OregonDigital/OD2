@@ -16,9 +16,9 @@ module Hyrax
       property :featureCode, predicate: RDF::URI('http://www.geonames.org/ontology#featureCode')
 
       def solrize
-        fetch
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
+        fetch
         [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
       end
 
