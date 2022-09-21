@@ -12,9 +12,12 @@
         <span class="hidden-xs">&nbsp;My Account</span>
         <span class="caret-dropdown"></span>
       <% end %>
-      <ul id="user-util-links" class="dropdown-menu dropdown-menu-center text-center">
+      <ul id="user-util-links" class="dropdown-menu dropdown-menu-right text-center">
         <% if can? :create, ActiveFedora::Base %>
           <li><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path, tabindex: -1 %></li>
+        <% end %>
+        <% unless current_user.nil? %>
+          <li><%= link_to current_user.email, hyrax.user_path(current_user.email), tabindex: -1 %></li>
         <% end %>
         <li><%= link_to 'My Collections', Rails.application.routes.url_helpers.my_collections_path, tabindex: -1 %></li>
         <% unless OregonDigital::UserAttributeService.new(current_user).institutional_user? %>
