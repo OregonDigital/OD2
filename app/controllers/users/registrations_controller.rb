@@ -6,6 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :redirect_create_if_university, only: [:create]
   before_action :redirect_edit_if_university, only: [:edit]
 
+  # OVERRIDE from hyrax to add in mailer.
   # rubocop:disable Metrics/AbcSize
   def destroy
     OregonDigital::DeleteUserMailer.with(user: resource).deliver_now
