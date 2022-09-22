@@ -39,6 +39,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
         stub_request(:get, 'http://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 500, body: '', headers: {})
         stub_request(:get, 'https://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 500, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/genus/Acnanthes').to_return(status: 500, body: '', headers: {})
+        allow(location_controlled_val).to receive('fetch')
       end
 
       it 'calls #fetch_failed_graph to fire off new job' do
