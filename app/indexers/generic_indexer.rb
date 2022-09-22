@@ -103,5 +103,8 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def index_discover_groups
     object.discover_groups = (object.edit_groups + object.read_groups + object.discover_groups + %w[admin collection_curator depositor]).uniq
+    object.discover_groups -= ['public'] if object.visibility != 'public'
+    object.discover_groups -= ['uo'] if object.visibility != 'uo'
+    object.discover_groups -= ['osu'] if object.visibility != 'osu'
   end
 end
