@@ -47,7 +47,7 @@ Rails.application.config.to_prepare do
         Hyrax.query_service.custom_queries.find_child_filesets(resource: work)[0]
       end.flatten.map(&:id).map(&:id)
 
-      all_ids = (repr_ids + new_ids).reject(&:blank?)
+      all_ids = (repr_ids + new_ids).reject(&:blank?).uniq
 
       # We should start adding at the end of the existing images
       index = repr_ids.reject(&:blank?).count
