@@ -33,7 +33,7 @@ module Hyrax
     end
 
     def page_title
-      "#{title.first} | #{I18n.t('hyrax.product_name')}"
+      title.first
     end
 
     # Link to add to shelf functionality
