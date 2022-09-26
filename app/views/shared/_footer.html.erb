@@ -2,14 +2,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 center-text">
-        <%= link_to "About Oregon Digital", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Policies", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Copyright", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Contact Us", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Donate", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text #{'right-border' if can? :read, :admin_dashboard}" %>
-        <% if can? :read, :admin_dashboard %>
-          <a href="https://oregondigital.github.io/oregon-digital-style-guide/" class="footer-link-text">Style Guide</a>
-        <% end %>
+        <%= link_to "How to Use This Website", main_app.use_path, method: :get, class: "footer-link-text right-border" %>
+        <%= link_to "About Oregon Digital", main_app.about_path, method: :get, class: "footer-link-text right-border" %>
+        <%= link_to "Copyright and Usage Request", main_app.copyright_path, method: :get, class: "footer-link-text right-border" %>
+        <%= link_to "Harmful Content Statement", main_app.harmful_path, method: :get, class: "footer-link-text right-border" %>
+        <%= link_to "Contact Us", hyrax.contact_path, method: :get, class: "footer-link-text" %>
       </div>
     </div>
     <div class="row navbar-text footer-row">
