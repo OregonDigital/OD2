@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # OVERRIDE from hyrax to add in mailer.
   # rubocop:disable Metrics/AbcSize
   def destroy
-    OregonDigital::DeleteUserMailer.with(user: resource).deliver_now
+    OregonDigital::DeleteUserMailer.delete_user(user: resource).deliver_now
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message! :notice, :destroyed
