@@ -8,13 +8,13 @@
                     onclick: 'javascript:selectAllSearchResults()',
                     'aria-controls' => 'select-chosen' ) do %>
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.select_all') %></span>
-                      <span class="sr-only"> Select all works for saving </span>
+                      <span class="sr-only"> Select all works for adding</span>
                     <% end %>
     <%= button_tag( class: 'deselect-button',
                     onclick: 'javascript:deselectAllSearchResults()',
                     'aria-controls' => 'select-chosen' ) do %>
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.none') %></span>
-                      <span class="sr-only"> Deselect all works for saving </span>
+                      <span class="sr-only"> Deselect all works for adding</span>
                     <% end %>
     <%= button_tag( class: 'bulk-review-button',
                     onclick: 'javascript:bulkReview(event)') do %>

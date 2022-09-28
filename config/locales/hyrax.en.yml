@@ -249,8 +249,8 @@ en:
     collection:
       select_form:
         select_heading: 'My Collections'
-        title: 'Save this item'
-        update: 'Save'
+        title: 'Add this item'
+        update: 'Add'
         delete: 'Delete'
         export: 'Export'
         share: 'Share'
@@ -259,9 +259,11 @@ en:
     dashboard:
       my:
         action:
+          add_selected_to: 'Add selected to'
+          save: 'Add'
           sign_up: 'Sign Up'
           log_in: 'Log In'
-          add_to_collection: 'Save to...'
+          add_to_collection: 'Add to...'
           select_all: 'Select All'
       collections:
         form_branding:

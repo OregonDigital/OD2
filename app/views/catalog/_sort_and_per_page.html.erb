@@ -7,17 +7,17 @@
     <%= button_tag( class: 'select-button',
                     onclick: 'javascript:selectAllSearchResults()') do %>
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.select_all') %></span>
-                      <span class="sr-only"> Select all works for saving </span>
+                      <span class="sr-only"> Select all works for adding </span>
                     <% end %>
     <%= button_tag( class: 'deselect-button',
                     onclick: 'javascript:deselectAllSearchResults()') do %>
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.none') %></span>
-                      <span class="sr-only"> Deselect all works for saving </span>
+                      <span class="sr-only"> Deselect all works for adding </span>
                     <% end %>
     <%= button_tag( class: 'btn btn-default submits-batches submits-batches-add',
                     data: { toggle: "modal", target: "#collection-list-container" }) do %>
-                      <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.save_selected_to') %></span>
-                      <span class="sr-only"> Save selected works to a collection </span>
+                      <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.add_selected_to') %></span>
+                      <span class="sr-only"> Add selected works to a collection </span>
                     <% end %>
   </div>
 </div>
