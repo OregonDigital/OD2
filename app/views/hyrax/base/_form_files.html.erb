@@ -67,6 +67,16 @@
       <input class="form-control string optional" type="url" value="" name="oembed_urls[]" id="oembed_urls">
     </div>
 
+    <div class="row">
+      <% curation_concern.file_sets.each do |fs| %>
+        <% solr_doc = SolrDocument.find(fs.id) %>
+        <%= link_to main_app.hyrax_file_set_path(fs), class:'col-md-3 col-sm-6', style:'margin-bottom:3em' do %>
+          <%= image_tag thumbnail_url(solr_doc), style:'width:100%' %>
+          <%= fs.first_title %>
+        <% end %>
+      <% end %>
+    </div>
+
     <!--
     <div id="oembedupload" class="form-group multi_value managed">
       <label id="oembed_urls_label" for="oembed_urls"><%= t('simple_form.labels.defaults.oembed_urls') %></label>
