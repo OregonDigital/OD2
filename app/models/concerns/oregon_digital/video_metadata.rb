@@ -88,7 +88,7 @@ module OregonDigital
         { name: :scientific_name_authorship, section_name: '' },
         { name: :specimen_type, section_name: '' },
         { name: :identification_verification_status, section_name: '' },
-        { name: :location, section_name: 'Locations' },
+        { name: :location, section_name: 'Geographics' },
         { name: :box, section_name: '' },
         { name: :gps_latitude, section_name: '' },
         { name: :gps_longitude, section_name: '' },

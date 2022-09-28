@@ -33,7 +33,7 @@ module Hyrax
     end
 
     def page_title
-      "#{title.first} | #{I18n.t('hyrax.product_name')}"
+      title.first
     end
 
     # Link to add to shelf functionality
@@ -42,12 +42,27 @@ module Hyrax
       Hyrax::Engine.routes.url_helpers.stats_work_path(self, locale: I18n.locale)
     end
 
-    def zipped_values(prop)
-      labels = Array(send(prop))
-      links = Array(send(prop.to_s.gsub('_label', '')))
-      zipped = labels.zip(links)
-      Hash[zipped]
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    def zipped_values(prop_label)
+      zipped = {}
+      prop_label = prop_label.to_s.gsub('_label', '')
+      send(prop_label).each do |prop_val|
+        if Generic.properties[prop_label].class_name.nil?
+          label = send(prop_label + '_label').first
+          zipped[label] = prop_val
+        else
+          prop = Generic.properties[prop_label].class_name.new(prop_val)
+          prop.fetch
+          solrized = prop.solrize
+          label, source = solrized[1][:label].split('$')
+          zipped[label] = source
+        end
+      end
+      zipped
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     private
 

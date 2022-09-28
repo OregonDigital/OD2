@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
-  resources :explore_collections, controller: 'oregon_digital/explore_collections', only: [] do
+  resources :collections, controller: 'oregon_digital/explore_collections', only: [] do
     collection do
       get :all, :osu, :uo, :my
     end
@@ -18,6 +18,17 @@ Rails.application.routes.draw do
   mount Blacklight::Oembed::Engine, at: 'oembed'
   mount Blacklight::Engine => '/'
   mount BlacklightAdvancedSearch::Engine => '/'
+
+  get 'about' => 'oregon_digital/about#about'
+  get 'osu-collection-policy' => 'oregon_digital/about#osu'
+  get 'uo-collection-policy' => 'oregon_digital/about#uo'
+  get 'copyright' => 'oregon_digital/about#copyright'
+  get 'harmful' => 'oregon_digital/about#harmful'
+  get 'privacy' => 'oregon_digital/about#privacy'
+  get 'takedown' => 'oregon_digital/about#takedown'
+  get 'terms' => 'oregon_digital/about#terms'
+  get 'mission' => 'oregon_digital/about#mission'
+  get 'use' => 'oregon_digital/about#use'
 
   concern :oai_provider, BlacklightOaiProvider::Routes.new
   concern :searchable, Blacklight::Routes::Searchable.new

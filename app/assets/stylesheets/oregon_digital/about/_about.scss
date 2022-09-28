@@ -1,0 +1,25 @@
+.about-pages {
+  #sidebar {
+    ul {
+      padding-left: 1em;
+      margin-left: -1em;
+      border-left: 2px solid $lime-green;
+
+      li {
+        margin: 1em 0;
+
+        a.active {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  h2.about-main {
+    margin-bottom: 3em;
+  }
+
+  h3 {
+    margin: 1em 0;
+  }
+}

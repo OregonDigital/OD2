@@ -29,8 +29,8 @@ module OregonDigital
       return index if zipped.nil? || zipped.empty?
 
       prop[:indices] = {}
-      zipped.each do |_value, uri|
-        prop[:indices][uri] = index
+      zipped.each do |_uri, value|
+        prop[:indices][value] = index
         index += 1
       end
       @props << prop

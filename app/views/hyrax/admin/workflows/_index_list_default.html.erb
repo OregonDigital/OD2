@@ -29,7 +29,7 @@
         <dd class="col-sm-9">
           <ul class="tabular">
           <% document.parents.each do |parent| %>
-            <li><%= link_to parent, parent %></li>
+            <li><%= link_to parent, Rails.application.routes.url_helpers.hyrax_image_path(parent) %></li>
           <% end %>
           </ul>
         </dd>

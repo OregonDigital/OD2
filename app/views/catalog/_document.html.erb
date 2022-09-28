@@ -4,7 +4,7 @@
     <div class="row search-result-wrapper">
         <p class="pull-left">
           <% unless document.collection? %>
-          <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
+          <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" onclick="max_checked(this)" aria-label="Select <%= document.title_or_label %> for saving">
           <% end %>
         </p>
       <%= render_document_partials document, blacklight_config.view_config(document_index_view_type).partials, document_counter: document_counter %>

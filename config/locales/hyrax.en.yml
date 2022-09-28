@@ -309,6 +309,7 @@ en:
         text: 'University of Oregon'
     controls:
       advanced: 'Advanced Search'
+      explore: 'Explore Collections'
       explore_all: 'Explore Collections/All'
       explore_osu: 'Explore Collections/OSU'
       explore_uo: 'Explore Collections/UO'
