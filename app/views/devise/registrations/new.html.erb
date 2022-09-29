@@ -1,11 +1,10 @@
 <h1 class="h2 text-center" style="margin-bottom:2em">Sign up for Oregon Digital</h1>
 <div class="lime-green-hr" style="margin-bottom:1em"></div>
+<%= render "devise/shared/error_messages", resource: resource %>
 
 <%= render "devise/shared/links" %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="flex-container sign-up-form">
+  <div class="flex-container sign-up-form devise-form">
     <div class="field flex-item">
       <div>
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
