@@ -19,7 +19,7 @@ RSpec.describe Admin::OregonDigital::CollectionTypesController, type: :controlle
   end
   let(:valid_session) { {} }
   let(:collection_type) { create(:collection_type) }
-  let(:user) { create(:user) }
+  let(:user) { create(:admin) }
 
   before do
     allow(controller.current_ability).to receive(:can?).with(any_args).and_return(true)
