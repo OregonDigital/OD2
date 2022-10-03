@@ -1,6 +1,6 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
 <% collection_index_key = controller.collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
-<% view_all_url = "#{search_form_action}&f[#{collection_index_key}][]=#{@presenter.id}" %>
+<% view_all_url = "#{search_form_action.split('#')[0]}&f[#{collection_index_key}][]=#{@presenter.id}" %>
 <% footer_metadata = render 'attribute_rows_footer', presenter: @presenter %>
 
 <div class="hyc-container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
