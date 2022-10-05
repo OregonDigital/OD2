@@ -298,7 +298,7 @@ module OregonDigital
           all_names = search_fields.join(' ')
           title_name = 'title_tesim'
           field.solr_parameters = {
-            qf: "#{all_names.gsub('non_user_collections_tesim', '')} #{title_name} license_label_tesim file_format_sim all_text_tsimv hocr_text_tsimv",
+            qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv hocr_text_tsimv",
             pf: title_name.to_s
           }
           field.include_in_advanced_search = true
