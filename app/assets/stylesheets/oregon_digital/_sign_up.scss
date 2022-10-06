@@ -1,0 +1,16 @@
+ul.center-auth-links {
+  list-style-type: none;
+
+  li {
+    padding: 0.25em 0
+  }
+}
+
+.devise-form {
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 3em;
+
+  .flex-item {}
+}
