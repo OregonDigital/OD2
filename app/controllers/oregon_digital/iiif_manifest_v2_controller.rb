@@ -9,7 +9,10 @@ module OregonDigital
 
     def show
       headers['Access-Control-Allow-Origin'] = '*'
-      json = sanitize_manifest(JSON.parse(manifest_builder.to_h.to_json))
+      manifest = manifest_builder.to_h
+      manifest['thumbnail'] = thumbnail
+      json = sanitize_manifest(JSON.parse(manifest.to_json))
+
       respond_to do |wants|
         wants.json { render json: json }
         wants.html { render json: json }
@@ -27,9 +30,14 @@ module OregonDigital
     def jp2_work_presenter
       return @jp2_work_presenter if @jp2_work_presenter
 
-      @jp2_work_presenter = OregonDigital::IIIFPresenter.new(@solrdoc, current_ability, request)
+      @jp2_work_presenter = OregonDigital::IiifV2Presenter.new(@solrdoc, current_ability, request)
       @jp2_work_presenter.file_sets = work.file_sets
       @jp2_work_presenter
+    end
+
+    def thumbnail
+      id = @jp2_work_presenter.file_set_presenters.first.thumbnail_path
+      { '@id': id, 'type': 'Image', 'format': 'image/jpg' }
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
