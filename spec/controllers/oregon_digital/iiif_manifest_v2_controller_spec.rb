@@ -8,11 +8,13 @@ RSpec.describe OregonDigital::IiifManifestV2Controller do
   describe 'show' do
     let(:headers) { {} }
     let(:manifest_builder) { {} }
-    let(:hsh) { { foo: '1', bar: 2 } }
-    let(:sanitized) { '{"foo": "1", "bar": 2}' }
+    let(:hsh) { { foo: '1', bar: 2, thumbnail: { '@id': 'walrus', 'format': 'image/jpg', 'type': 'Image' } } }
+    let(:sanitized) { '{"foo": "1", "bar": 2, "thumbnail": { "@id": "walrus", "format": "image/jpg", "type": "Image" } }' }
     let(:id) { 'abcde1234' }
     let(:solrdoc) { instance_double(SolrDocument, { id: id, hydra_model: Image }) }
     let(:ability) { double }
+    let(:jp2_wp) { instance_double(OregonDigital::IiifV2Presenter) }
+    let(:fp) { instance_double(OregonDigital::Jp2V2Presenter, { thumbnail_path: 'walrus' }) }
 
     before do
       allow(SolrDocument).to receive(:find).and_return(solrdoc)
@@ -23,6 +25,8 @@ RSpec.describe OregonDigital::IiifManifestV2Controller do
       allow(manifest_builder).to receive(:to_h).and_return(hsh)
       allow(controller).to receive(:sanitize_manifest).and_return(sanitized)
       allow(controller).to receive(:respond_to).and_yield(OpenStruct.new(json: nil, html: nil))
+      controller.instance_variable_set('@jp2_work_presenter', jp2_wp)
+      allow(jp2_wp).to receive(:file_set_presenters).and_return([fp])
     end
 
     it 'sets the Access-Control-Allow-Origin header' do
@@ -106,7 +110,7 @@ RSpec.describe OregonDigital::IiifManifestV2Controller do
       end
 
       it 'returns a new IIIF presenter' do
-        expect(controller.jp2_work_presenter).to be_kind_of(OregonDigital::IIIFPresenter)
+        expect(controller.jp2_work_presenter).to be_kind_of(OregonDigital::IiifV2Presenter)
       end
 
       it "assigns the asset's file sets to the presenter" do
