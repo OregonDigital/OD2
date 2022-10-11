@@ -6,6 +6,7 @@
     <% if should_render_index_field? document, field %>
         <span><%= render_index_field_label document, field: field_name %></span>
         <span><%= doc_presenter.field_value field %></span>
+        <br />
     <% end %>
   <% end %>
   </div>
