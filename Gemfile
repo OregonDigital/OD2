@@ -13,6 +13,7 @@ gem 'browse-everything'
 # coffee-rails is a requirement for Hyrax or one of its dependencies but hasn't
 # been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
+gem 'dalli'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
