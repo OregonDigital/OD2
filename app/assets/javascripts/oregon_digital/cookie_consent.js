@@ -17,4 +17,6 @@ $(document).ready(function () {
       "href": "/privacy"
     }
   })
+
+  $('.cc-window.cc-banner').insertAfter($('#skip-nav'))
 });
