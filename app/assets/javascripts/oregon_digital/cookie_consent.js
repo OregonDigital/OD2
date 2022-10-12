@@ -15,7 +15,9 @@ $(document).ready(function () {
       "dismiss": "Got it!",
       "link": "Learn more about our privacy policy",
       "href": "/privacy"
-    }
+    },
+    "position": "top",
+    "static": true
   })
 
   $('.cc-window.cc-banner').insertAfter($('#skip-nav'))
