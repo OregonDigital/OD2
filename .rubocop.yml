@@ -147,6 +147,51 @@ Style/RedundantReturn:
 Migration/DepartmentName:
   Enabled: false
 
+Lint/RedundantCopDisableDirective:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+RSpec/StubbedMock:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/RedundantRegexpEscape:
+  Enabled: false
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: false
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Style/AccessorGrouping:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
+
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Lint/EmptyConditionalBody:
+  Enabled: false
+
 RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb'
