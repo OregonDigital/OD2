@@ -33,6 +33,8 @@ module OregonDigital
       keys.map do |label|
         values = try(label)
         if values.nil?
+        elsif service = local_metadata_authority_service(label)
+          values = Array(values).map { |prop| service.label prop }.join('|')
         elsif controlled_keys.include?(label.to_sym)
           values = values.map { |prop| controlled_property_to_csv_value(prop).to_s }.join('|')
         else
@@ -43,6 +45,20 @@ module OregonDigital
     end
 
     private
+
+    def local_metadata_authority_service(key)
+      @label_services ||= [
+        OregonDigital::LanguageService.new,
+        Hyrax.config.license_service_class.new,
+        Hyrax::ResourceTypesService,
+        Hyrax.config.rights_statement_service_class.new
+      ]
+      @label_services.each do |service|
+        return service if service.authority.subauthority == key.pluralize
+      rescue KeyError
+      end
+      nil
+    end
 
     # Convert work controlled property value to label
     def controlled_property_to_csv_value(prop)
