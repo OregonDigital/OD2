@@ -135,7 +135,10 @@ Rails.application.config.to_prepare do
     def add_members_to_collection(collection = nil)
       collection ||= @collection
       batch.in_groups_of(5).each do |group|
-        collection.add_member_objects group.compact
+        Hyrax::Collections::CollectionMemberService.add_members_by_ids(
+          collection: collection,
+          new_member_ids: group.compact,
+          user: nil)
       end
     end
   end
