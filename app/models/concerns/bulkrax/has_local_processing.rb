@@ -18,17 +18,17 @@ module Bulkrax
     # rubocop:disable Metrics/AbcSize
     def add_local
       properties_with_classes.each_pair do |key, new_key|
-        if parsed_metadata[key].present?
-          if parsed_metadata[key].is_a?(String)
-            parsed_metadata[new_key]['0'] = { id: parsed_metadata[key] }
-          else
-            parsed_metadata[new_key] = {}
-            parsed_metadata[key].each_with_index do |value, index|
-              parsed_metadata[new_key][index.to_s] = { id: value }
-            end
+        next unless parsed_metadata[key].present?
+
+        if parsed_metadata[key].is_a?(String)
+          parsed_metadata[new_key]['0'] = { id: parsed_metadata[key] }
+        else
+          parsed_metadata[new_key] = {}
+          parsed_metadata[key].each_with_index do |value, index|
+            parsed_metadata[new_key][index.to_s] = { id: value }
           end
-          parsed_metadata.delete(key)
         end
+        parsed_metadata.delete(key)
       end
     end
     # rubocop:enable Metrics/MethodLength
