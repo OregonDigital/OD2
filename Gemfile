@@ -18,7 +18,7 @@ gem 'dalli', '~> 2.7.6'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
-gem 'hyrax', '3.0.1'
+gem 'hyrax', '3.4.2'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'sassc-rails'
