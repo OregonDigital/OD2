@@ -251,6 +251,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
+    cookieconsent (0.1.0)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
       simplecov (~> 0.16.1)
@@ -259,6 +260,7 @@ GEM
       tins (~> 1.6)
     crack (0.4.4)
     crass (1.0.6)
+    dalli (2.7.11)
     database_cleaner (1.8.5)
     declarative (0.0.20)
     declarative-builder (0.1.0)
@@ -1090,7 +1092,9 @@ DEPENDENCIES
   capybara (~> 2.17)
   chosen-rails
   coffee-rails (~> 4.2)
+  cookieconsent
   coveralls (~> 0.8)
+  dalli (~> 2.7.6)
   database_cleaner
   devise
   edtf (~> 3.0)
@@ -1151,4 +1155,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.3.12
+   2.3.19
