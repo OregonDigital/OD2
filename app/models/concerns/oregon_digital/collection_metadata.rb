@@ -66,6 +66,11 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      # bulkrax shared system identifier
+      property :source, predicate: ::RDF::Vocab::DC.source do |index|
+        index.as :stored_searchable
+      end
+
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties

@@ -289,6 +289,11 @@ Rails.application.routes.default_url_options = Rails.application.config.action_m
 
 Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
 
+# set bulkrax default work type to first curation_concern if it isn't already set
+if Bulkrax.default_work_type.blank?
+  Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
+end
+
 Hyrax::CurationConcern.actor_factory.insert_before Hyrax::Actors::CreateWithRemoteFilesActor, OregonDigital::Actors::CreateWithOembedUrlActor
 
 # Add extra blacklight routes to Admin Workflows (Review Queue) controller

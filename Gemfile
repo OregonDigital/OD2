@@ -40,6 +40,7 @@ gem 'faraday_middleware', '~> 0.10.0'
 gem 'blacklight_iiif_search', '~> 1.0'
 gem 'rubyzip', '>= 1.2.2'
 gem 'zip_tricks', '~> 5.3'
+gem 'bulkrax', github: 'samvera-labs/bulkrax', branch: 'file_update'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
