@@ -129,7 +129,4 @@ Bulkrax::CsvEntry.class_eval do
     # added resource_type, identifier, and rights_statement
     %w[title source_identifier resource_type identifier rights_statement]
   end
-
-  # Sidebar for hyrax 3+ support
-  ::Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions" if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
 end
