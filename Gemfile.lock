@@ -27,6 +27,25 @@ GIT
       sparql-client
 
 GIT
+  remote: https://github.com/samvera-labs/bulkrax.git
+  revision: f2f386fe440794354800f93cb7653562f7433eda
+  branch: file_update
+  specs:
+    bulkrax (0.1.0)
+      bagit (~> 0.4)
+      coderay
+      iso8601 (~> 0.9.0)
+      kaminari
+      language_list (~> 1.2, >= 1.2.1)
+      libxml-ruby (~> 3.1.0)
+      loofah (>= 2.2.3)
+      oai (>= 0.4, < 2.x)
+      rack (>= 2.0.6)
+      rails (>= 5.1.6)
+      rdf (>= 2.0.2, < 4.0)
+      simple_form
+
+GIT
   remote: https://github.com/samvera/hydra-derivatives.git
   revision: c29338cc5c5a24e7f2819dd973b4133f55a063c5
   specs:
@@ -531,6 +550,7 @@ GEM
       json
     iiif_manifest (1.1.0)
       activesupport (>= 4)
+    iso8601 (0.9.1)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
@@ -570,6 +590,7 @@ GEM
     kaminari-core (1.2.1)
     kaminari_route_prefix (0.1.1)
       kaminari (~> 1.0)
+    language_list (1.2.1)
     ld-patch (0.3.3)
       ebnf (~> 1.1)
       rdf (>= 2.2, < 4.0)
@@ -596,6 +617,7 @@ GEM
       addressable (~> 2.0)
       excon
       http (>= 2.0, < 6.0)
+    libxml-ruby (3.1.0)
     link_header (0.0.8)
     linkeddata (3.0.3)
       equivalent-xml (~> 0.6)
@@ -645,7 +667,6 @@ GEM
     mime-types-data (3.2020.1104)
     mini_magick (4.10.1)
     mini_mime (1.1.0)
-    mini_portile2 (2.8.0)
     minitest (5.14.4)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -659,8 +680,7 @@ GEM
     noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
-    nokogiri (1.13.8)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -1078,7 +1098,7 @@ GEM
     zip_tricks (5.3.1)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   axe-matchers
@@ -1088,6 +1108,7 @@ DEPENDENCIES
   blacklight_oai_provider
   blacklight_range_limit (~> 6)
   browse-everything
+  bulkrax!
   byebug
   capybara (~> 2.17)
   chosen-rails
