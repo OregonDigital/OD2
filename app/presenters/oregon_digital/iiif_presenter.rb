@@ -75,7 +75,7 @@ module OregonDigital
     end
 
     def page_label(label, page_index)
-      page_index + 1
+      "#{page_index + 1}"
     end
 
     # Get collection titles for manifest metadata

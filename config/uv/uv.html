@@ -39,13 +39,14 @@
       if (configUrl) {
         uv.on("configure", function ({ cb }) {
           cb(
-            fetch(configUrl).then(function (resp) {
-              json_config = resp.json()
-              json_config["options"]["searchWithinEnabled"] = !!urlAdapter.get('ocr')
-              return json_config;
-            })
+            fetch(configUrl)
+              .then((response) => response.json())
+              .then((json_config) => {
+                json_config["options"]["searchWithinEnabled"] = (urlAdapter.get('ocr') === "true");
+                return json_config;
+              })
           );
-        })
+        });
       }
 
       var $UV = document.getElementById("uv");

@@ -114,6 +114,14 @@ class SolrDocument
     fetch('has_model', []).map { |m| BlacklightOaiProvider::Set.new("has_model_ssim:#{m}") }
   end
 
+  def hocr_text
+    self['hocr_text_tsimv']
+  end
+
+  def all_text
+    self['all_text_tsimv']
+  end
+
   solrized_methods Generic.generic_properties
   solrized_methods Document.document_properties
   solrized_methods Image.image_properties
@@ -121,5 +129,5 @@ class SolrDocument
   solrized_methods Generic.controlled_properties
   solrized_methods Generic.controlled_property_labels
   solrized_methods FileSet.characterization_terms
-  solrized_methods %w[all_text hocr_text resource_type_label language_label rights_statement_label oembed_url]
+  solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
 end
