@@ -15,6 +15,15 @@ GIT
       sidekiq
 
 GIT
+  remote: https://github.com/notch8/willow_sword.git
+  revision: 74f7684ff9ca96251f341e50a3afc34b5bd312cc
+  specs:
+    willow_sword (0.2.0)
+      bagit (~> 0.4.1)
+      rails (>= 5.1.6)
+      rubyzip (>= 1.0.0)
+
+GIT
   remote: https://github.com/osulp/triplestore-adapter
   revision: 30081b1ff8beb169c88dd338f71ecb0e1bad8a73
   specs:
@@ -28,8 +37,8 @@ GIT
 
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: f2f386fe440794354800f93cb7653562f7433eda
-  branch: file_update
+  revision: 5520a00a2a3f5e4d6415020621a93742561b694a
+  ref: 5520a00a2a3f5e4d6415020621a93742561b694a
   specs:
     bulkrax (0.1.0)
       bagit (~> 0.4)
@@ -1167,6 +1176,7 @@ DEPENDENCIES
   vcr (~> 5.1)
   web-console (>= 3.3.0)
   webmock
+  willow_sword!
   yabeda
   yabeda-http_requests
   yabeda-prometheus
@@ -1176,4 +1186,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.3.19
+   2.3.22

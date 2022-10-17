@@ -42,6 +42,7 @@ gem 'blacklight_iiif_search', '~> 1.0'
 gem 'rubyzip', '>= 1.2.2'
 gem 'zip_tricks', '~> 5.3'
 gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: '5520a00a2a3f5e4d6415020621a93742561b694a'  # branch: 'file_update' - ref is 3 commits back
+gem 'willow_sword', github: 'notch8/willow_sword'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
