@@ -40,7 +40,9 @@
         uv.on("configure", function ({ cb }) {
           cb(
             fetch(configUrl).then(function (resp) {
-              return resp.json();
+              json_config = resp.json()
+              json_config["options"]["searchWithinEnabled"] = !!urlAdapter.get('ocr')
+              return json_config;
             })
           );
         })

@@ -75,10 +75,7 @@ module OregonDigital
     end
 
     def page_label(label, page_index)
-      addendum = "Page #{page_index + 1}"
-      return addendum unless page_index.zero?
-
-      label + ": #{addendum}"
+      page_index + 1
     end
 
     # Get collection titles for manifest metadata
