@@ -42,7 +42,7 @@ RSpec.describe Generic do
     end
     it 'provides correct data' do
       data = model.metadata_row(%i[depositor has_model resource_type title identifier rights_statement], [])
-      expect(data).to eq([user.email, 'Generic', 'MyType', 'foo', 'MyIdentifier', 'http://rightsstatements.org/vocab/InC/1.0/'])
+      expect(data).to eq([user.email, 'Generic', 'Text', 'foo', 'MyIdentifier', 'In Copyright'])
     end
   end
 end
