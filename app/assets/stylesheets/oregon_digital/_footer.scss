@@ -1,5 +1,9 @@
 .cc-window {
   transition: none;
+
+  &.cc-invisible {
+    transition: opacity 1s ease;
+  }
 }
 
 .osu-logo {
