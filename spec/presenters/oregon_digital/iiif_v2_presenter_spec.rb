@@ -43,11 +43,11 @@ RSpec.describe OregonDigital::IiifV2Presenter do
 
   describe '#page_label' do
     it 'includes the asset label and page label for the first page' do
-      expect(presenter.send(:page_label, 'Foo', 0)).to eq('Foo: Page 1')
+      expect(presenter.send(:page_label, 'Foo', 0)).to eq('1')
     end
 
     it "doesn't include the asset label after the first page" do
-      expect(presenter.send(:page_label, 'Foo', 1)).to eq('Page 2')
+      expect(presenter.send(:page_label, 'Foo', 1)).to eq('2')
     end
   end
 end
