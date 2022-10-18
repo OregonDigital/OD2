@@ -74,11 +74,8 @@ module OregonDigital
       OregonDigital::FileSetDerivativesService.new(file_set)
     end
 
-    def page_label(label, page_index)
-      addendum = "Page #{page_index + 1}"
-      return addendum unless page_index.zero?
-
-      label + ": #{addendum}"
+    def page_label(_label, page_index)
+      (page_index + 1).to_s
     end
 
     # Get collection titles for manifest metadata
