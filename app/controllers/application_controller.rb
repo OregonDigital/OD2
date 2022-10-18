@@ -34,8 +34,16 @@ class ApplicationController < ActionController::Base
   # - The request is handled by a Devise controller such as Devise::SessionsController as that could cause an
   #    infinite redirect loop.
   # - The request is an Ajax request as this can lead to very unexpected behaviour.
+  # - The request is handeled by a controller that must be skipped
   def storable_location?
-    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr? && !storable_skipped_controllers.include?(self.class)
+  end
+
+  # Some controllers must be skipped when storing previous visit
+  def storable_skipped_controllers
+    [
+      Hyrax::DownloadsController
+    ]
   end
 
   def store_user_location!
