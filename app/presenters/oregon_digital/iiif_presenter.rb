@@ -74,8 +74,8 @@ module OregonDigital
       OregonDigital::FileSetDerivativesService.new(file_set)
     end
 
-    def page_label(label, page_index)
-      "#{page_index + 1}"
+    def page_label(_label, page_index)
+      (page_index + 1).to_s
     end
 
     # Get collection titles for manifest metadata

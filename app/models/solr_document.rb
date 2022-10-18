@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 # Sets behaviors for the solr document
 class SolrDocument
   include Blacklight::Solr::Document
@@ -131,3 +132,4 @@ class SolrDocument
   solrized_methods FileSet.characterization_terms
   solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
 end
+# rubocop:enable Metrics/ClassLength
