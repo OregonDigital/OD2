@@ -55,7 +55,7 @@ module Hyrax
           prop = Generic.properties[prop_label].class_name.new(prop_val)
           prop.fetch
           solrized = prop.solrize
-          label, source = solrized[1][:label].split('$')
+          label, source = solrized&.[](1)&.[](:label)&.split('$') || ['No label found', prop.rdf_subject.to_s]
           zipped[label] = source
         end
       end
