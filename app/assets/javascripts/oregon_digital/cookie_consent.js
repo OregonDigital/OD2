@@ -20,5 +20,5 @@ $(document).ready(function () {
     "static": true
   })
 
-  $('.cc-window.cc-banner').insertAfter($('#skip-nav'))
+  $('.cc-grower').insertAfter($('#skip-nav'))
 });
