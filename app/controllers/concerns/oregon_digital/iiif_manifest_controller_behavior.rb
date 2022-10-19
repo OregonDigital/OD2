@@ -18,7 +18,7 @@ module OregonDigital
 
       respond_to do |wants|
         wants.json { render json: json }
-        wants.html { render json: json }
+        wants.html { redirect_to main_app.polymorphic_url [main_app, :manifest, presenter], { locale: nil, format: :json } }
       end
     end
     # rubocop:enable Metrics/AbcSize
