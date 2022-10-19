@@ -20,6 +20,9 @@ module OregonDigital
         graph = fetch_from_source(uri, @triplestore)
       end
       graph
+    rescue Exception => e
+      Rails.logger.warn "Failed to fetch #{uri} from cache AND source. #{e.message}"
+      graph
     end
 
     def self.triplestore_client
