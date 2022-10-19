@@ -9,7 +9,7 @@
     <label class="sr-only" for="batch_document_<%= id %>"><%= t('hyrax.dashboard.my.sr.batch_checkbox') %></label>
     <% if collection_presenter.allow_batch? %>
     <input type="checkbox" name="batch_document_ids[]" id="batch_document_<%= id %>" value="<%= id %>" aria-label="Select <%= collection_presenter.title_or_label %> for deletion" class="batch_document_selector"
-      data-hasaccess="<%= (can?(:edit, collection_presenter.solr_document)) %> />
+      data-hasaccess="<%= (can?(:edit, collection_presenter.solr_document)) %>" />
     <% else %>
     <input type="checkbox" class="disabled" disabled=true />
     <% end %>
