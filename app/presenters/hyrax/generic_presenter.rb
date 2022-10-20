@@ -53,9 +53,13 @@ module Hyrax
           zipped[label] = prop_val
         else
           prop = Generic.properties[prop_label].class_name.new(prop_val)
-          prop.fetch
-          solrized = prop.solrize
-          label, source = solrized[1][:label].split('$')
+          begin
+            prop.fetch
+            solrized = prop.solrize
+          rescue TriplestoreAdapter::TriplestoreException => e
+            Rails.logger.warn "Failed to fetch #{prop_val} from cache AND source. #{e.message}"
+          end
+          label, source = split_solrized(solrized) || ['No label found', prop.rdf_subject.to_s]
           zipped[label] = source
         end
       end
@@ -65,6 +69,10 @@ module Hyrax
     # rubocop:enable Metrics/MethodLength
 
     private
+
+    def split_solrized(solrized)
+      solrized&.[](1)&.[](:label)&.split('$')
+    end
 
     def presentable?(presenter)
       (presenter.image? || presenter.pdf? || presenter.video? || presenter.audio?) && current_ability.can?(:read, presenter.id)
