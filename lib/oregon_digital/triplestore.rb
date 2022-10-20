@@ -20,8 +20,6 @@ module OregonDigital
         graph = fetch_from_source(uri, @triplestore)
       end
       graph
-    rescue TriplestoreAdapter::TriplestoreException
-      graph
     end
 
     def self.triplestore_client
