@@ -17,6 +17,10 @@ The details provided assume that the official Docker daemon is running in the ba
 `RAILS_ENV=development`_, and there is no valid AWS configuration.  You can
 copy the included `.env.example` to `.env` and override these things if desired.
 
+**Important:** It's a known issue that Java, in docker images built for x86, ran through Apple's Rosetta2 for M1 chips cause constant errors & crashes.
+The `docker-compose.yml` has a `build` option for Blazegraph and FCrepo. If you're using an M1 mac you should comment out the `image` section and uncomment the `build` ones for these services.
+This will build those images from the `m1` directory, which are copy+paste's from their respective GitHub repos, with the only change being selecting the armv8 base image version.
+
 ### Docker notes
 
 - `$ docker system prune` : A command that will reclaim disk space by deleting stopped containers, networks, dangling images and build cache.
