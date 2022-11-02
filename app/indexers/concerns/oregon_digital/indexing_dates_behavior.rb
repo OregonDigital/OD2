@@ -98,10 +98,8 @@ module OregonDigital
       return [] unless date_values
 
       dates = []
-      date_values.each do |date_value|
-        date = DateDecadeConverter.new(date_value).run
-        date ||= Array.wrap(DecadeDecorator.new(parsed_year(date_value))) if parsed_year(date_value)
-        dates += date if date
+      clean_years(date_values).each do |date_value|
+        dates += Array.wrap(DecadeDecorator.new(date_value))
       end
       dates
     end
@@ -142,46 +140,6 @@ module OregonDigital
 
       def last_year
         year + 10 - (year + 10) % 10 - 1
-      end
-    end
-
-    # Used for processing decades given a date and generates an array of decorated items using DecadeDecorator
-    # when calling run. Expected input dates: "2017-12-01", "2017-12", "2017", "2017-2018", "2010-2020", "1900-1940"
-    class DateDecadeConverter
-      attr_accessor :date
-      def initialize(date)
-        @date = date
-      end
-
-      def run
-        return nil unless valid_date_range?
-
-        decades.times.map do |decade|
-          DecadeDecorator.new(earliest_date + 10 * decade)
-        end
-      end
-
-      private
-
-      def earliest_date
-        @earliest_date ||= dates.first - dates.first % 10
-      end
-
-      def valid_decade_size?
-        decades <= 3
-      end
-
-      def valid_date_range?
-        dates.first.to_s.length == 4 && dates.last.to_s.length == 4 && dates.length == 2
-      end
-
-      def dates
-        @dates ||= date.to_s.split('-').map(&:to_i)
-      end
-
-      def decades
-        calculated_decades = (dates.last - dates.first) / 10 + 1
-        calculated_decades <= 3 ? calculated_decades : 0
       end
     end
   end
