@@ -5,24 +5,33 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="flex-container log-in-form devise-form">
     <div class="field flex-item">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <br />
+        <%= f.label :email %>
+      </div>
     </div>
 
     <div class="field flex-item">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+      <div>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+        <br />
+        <%= f.label :password %>
+      </div>
     </div>
 
     <% if devise_mapping.rememberable? %>
       <div class="field flex-item">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <div>
+          <%= f.check_box :remember_me %>
+          <br />
+          <%= f.label :remember_me %>
+        </div>
       </div>
     <% end %>
 
     <div class="actions flex-item">
-      <%= f.submit "Log in" %>
+      <div><%= f.submit "Log in", class: 'btn btn-primary' %></div>
     </div>
   </div>
 <% end %>
