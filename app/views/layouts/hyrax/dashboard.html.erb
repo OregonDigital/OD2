@@ -27,8 +27,9 @@
             </div>
           </div>
         <% end %>
-        <div id="main-content"></div>
+        <div id="main-content">
         <%= content_for?(:content) ? yield(:content) : yield %>
+        </div>
       </div>
 
     <!-- /#content-wrapper -->
