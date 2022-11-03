@@ -30,41 +30,23 @@
                         <% end %>
                     <% end %>
                 </div>
-                <% else %>
-                    <div class="col-sm-4">
-                        <%= content_tag(:select,
-                            :name   => "range[#{display_facet.name}][begin]",
-                            :id     => display_facet.name.parameterize,
-                            :class  => "form-control advanced-search-facet-select") do %>
-                            <% display_facet.items.each do |facet_item| %>
-                                <%# OVERRIDE blacklight_advanced_search to suport facet value helper methods %>
-                                <%# If a helper_method exists in the base blacklight config for the advanced facet field name, send the helper_method. Otherwise use the existing value %>
-                                <% facet_item_label = !blacklight_config.facet_fields[display_facet.name].helper_method.nil? ? send(blacklight_config.facet_fields[display_facet.name].helper_method, facet_item.label) : facet_item.label %>
-                                <%# END OVERRIDE %>
-                                <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
-                                    <%= facet_item_label %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                    </div>
-                    <div class="col-sm-1" style="text-align:center"> &mdash; </div>
-                    <div class="col-sm-4">
-                        <%= content_tag(:select,
-                            :name   => "range[#{display_facet.name}][end]",
-                            :id     => display_facet.name.parameterize,
-                            :class  => "form-control advanced-search-facet-select") do %>
-                            <% display_facet.items.each do |facet_item| %>
-                                <%# OVERRIDE blacklight_advanced_search to suport facet value helper methods %>
-                                <%# If a helper_method exists in the base blacklight config for the advanced facet field name, send the helper_method. Otherwise use the existing value %>
-                                <% facet_item_label = !blacklight_config.facet_fields[display_facet.name].helper_method.nil? ? send(blacklight_config.facet_fields[display_facet.name].helper_method, facet_item.label) : facet_item.label %>
-                                <%# END OVERRIDE %>
-                                <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
-                                    <%= facet_item_label %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                    </div>
-                <% end %>
+            <% else %>
+                <div class="col-sm-4">
+                    <%= content_tag(:input, nil,
+                        :name   => "range[#{display_facet.name}][begin]",
+                        :type   => "number",
+                        :id     => display_facet.name.parameterize,
+                        :class  => "form-control") %>
+                </div>
+                <div class="col-sm-1" style="text-align:center"> &mdash; </div>
+                <div class="col-sm-4">
+                    <%= content_tag(:input, nil,
+                        :name   => "range[#{display_facet.name}][end]",
+                        :type   => "number",
+                        :id     => display_facet.name.parameterize,
+                        :class  => "form-control") %>
+                </div>
+            <% end %>
         </div>
     <% end %>
 <% end %>
