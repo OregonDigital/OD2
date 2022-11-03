@@ -13,10 +13,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :view, predicate: RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription'), multiple: true, basic_searchable: false do |index|
-        index.as :stored_searchable
-      end
-
       property :color_content, predicate: RDF::URI.new('http://rdaregistry.info/Elements/e/P20224'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end

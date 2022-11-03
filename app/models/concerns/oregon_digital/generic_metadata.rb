@@ -214,6 +214,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :view, predicate: RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription'), multiple: true, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
       property :subject, predicate: RDF::Vocab::DC.subject, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
         index.as :stored_searchable, :facetable
       end
