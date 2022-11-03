@@ -31,7 +31,12 @@
     <% end %>
 
     <div class="actions flex-item">
-      <div><%= f.submit "Log in", class: 'btn btn-primary' %></div>
+      <div>
+        <%= f.submit "Log in", class: 'btn btn-primary' %>
+        <br />
+        <%= link_to "Forgot password?", new_password_path(resource_name) %>
+      </div>
     </div>
+
   </div>
 <% end %>
