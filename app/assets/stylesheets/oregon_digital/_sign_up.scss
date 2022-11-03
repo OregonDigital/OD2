@@ -1,3 +1,34 @@
+.devise-container {
+  max-width: $container-tablet;
+  margin: auto;
+
+  .login-select {
+    ul {
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1em;
+      list-style: none;
+
+      li {
+        display: inline-flex;
+        flex: 1 0;
+
+        div {
+          margin: auto;
+        }
+      }
+
+      @media (max-width: $screen-md-min) {
+        text-align: center;
+
+        li {
+          flex-basis: 100%;
+        }
+      }
+    }
+  }
+}
+
 ul.center-auth-links {
   list-style-type: none;
 

@@ -1,42 +1,76 @@
-<h1 class="h2 text-center" style="margin-bottom:2em">Log in to Oregon Digital</h1>
-<div class="lime-green-hr" style="margin-bottom:1em"></div>
+<div class="devise-container">
+  <h1 class="h2 text-center" style="margin-bottom:2em">Log in to Oregon Digital</h1>
 
-<%= render "devise/shared/links" %>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="flex-container log-in-form devise-form">
-    <div class="field flex-item">
-      <div>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        <br />
-        <%= f.label :email %>
-      </div>
+  <div class="modal-body login-select">
+    <div class="row">
+      <ul class="flex-container">
+        <li class="osu-login flex-item">
+          <div>
+            <label>
+              <input type="radio" name="login-select" checked="checked" onclick="toggleFooter('OSU-footer')">
+              <%= image_tag('osu_logo.png', height: '50', width: '50', alt: 'Oregon State University Login') %>OSU
+            </label>
+          </div>
+        </li>
+        <li class="uo-login flex-item">
+          <div>
+            <label>
+              <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')">
+              <%= image_tag('uo.png', height: '50', width: '50', alt: 'University of Oregon Login') %>UO
+            </label>
+          </div>
+        </li>
+        <li class="flex-item">
+          <div>
+              <label>
+                <input id="other-login" type="radio" name="login-select" onclick="toggleFooter('local-footer')">
+                 Other Affiliation
+              </label>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <div class="field flex-item">
-      <div>
-        <%= f.password_field :password, autocomplete: "current-password" %>
-        <br />
-        <%= f.label :password %>
-      </div>
-    </div>
+  <div class="lime-green-hr" style="margin-bottom:1em"></div>
 
-    <% if devise_mapping.rememberable? %>
+  <%= render "devise/shared/links" %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="flex-container log-in-form devise-form">
       <div class="field flex-item">
         <div>
-          <%= f.check_box :remember_me %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
           <br />
-          <%= f.label :remember_me %>
+          <%= f.label :email %>
         </div>
       </div>
-    <% end %>
 
-    <div class="actions flex-item">
-      <div>
-        <%= f.submit "Log in", class: 'btn btn-primary' %>
-        <br />
-        <%= link_to "Forgot password?", new_password_path(resource_name) %>
+      <div class="field flex-item">
+        <div>
+          <%= f.password_field :password, autocomplete: "current-password" %>
+          <br />
+          <%= f.label :password %>
+        </div>
       </div>
-    </div>
 
-  </div>
-<% end %>
+      <% if devise_mapping.rememberable? %>
+        <div class="field flex-item">
+          <div>
+            <%= f.check_box :remember_me %>
+            <br />
+            <%= f.label :remember_me %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="actions flex-item">
+        <div>
+          <%= f.submit "Log in", class: 'btn btn-primary' %>
+          <br />
+          <%= link_to "Forgot password?", new_password_path(resource_name) %>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+</div>
