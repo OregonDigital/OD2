@@ -41,7 +41,7 @@ ul.center-auth-links {
 .devise-form {
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 1.5em;
   justify-content: center;
 
   input:not([type=button]):not([type=submit]) {
@@ -62,5 +62,12 @@ ul.center-auth-links {
   input[type=button],
   input[type=submit] {
     padding: .75em 1.5em;
+  }
+
+  label {
+    text-transform: uppercase;
+    font-size: 10pt;
+    letter-spacing: 1pt;
+    color: $dark-grey
   }
 }
