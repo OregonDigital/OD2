@@ -8,22 +8,30 @@
       flex-wrap: wrap;
       gap: 1em;
       list-style: none;
+    }
 
-      li {
-        display: inline-flex;
-        flex: 1 0;
+    .flex-item {
+      display: inline-flex;
+      flex: 1 0;
 
-        div {
-          margin: auto;
-        }
+      div {
+        margin: auto;
+      }
+    }
+  }
+
+  .login-select,
+  .devise-form {
+    @media (max-width: $screen-xs-max) {
+
+      ul,
+      .flex-item.action {
+        text-align: center;
       }
 
-      @media (max-width: $screen-md-min) {
-        text-align: center;
-
-        li {
-          flex-basis: 100%;
-        }
+      .flex-item {
+        flex-basis: 100% !important;
+        justify-content: center;
       }
     }
   }
