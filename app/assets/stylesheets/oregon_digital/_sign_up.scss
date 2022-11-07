@@ -25,7 +25,8 @@
     @media (max-width: $screen-xs-max) {
 
       ul,
-      .flex-item.action {
+      .flex-item.action,
+      .password-field {
         text-align: center;
       }
 
