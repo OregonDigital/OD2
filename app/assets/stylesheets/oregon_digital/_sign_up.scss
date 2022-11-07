@@ -31,6 +31,7 @@
 
 ul.center-auth-links {
   list-style-type: none;
+  padding-bottom: 3em;
 
   li {
     padding: 0.4em 0
@@ -42,7 +43,6 @@ ul.center-auth-links {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  padding-top: 3em;
 
   input:not([type=button]):not([type=submit]) {
     background-color: $very-light-grey;

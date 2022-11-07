@@ -1,13 +1,13 @@
 <div class="devise-container">
   <h1 class="h2 text-center" style="margin-bottom:2em">Log in to Oregon Digital</h1>
 
-  <div class="modal-body login-select">
+  <div class="login-select">
     <div class="row">
       <ul class="flex-container">
         <li class="osu-login flex-item">
           <div>
             <label>
-              <input type="radio" name="login-select" checked="checked" onclick="toggleFooter('OSU-footer')">
+              <input type="radio" name="login-page-select" onclick="toggleFooter('.devise-container', '#login-page-footer-OSU-footer')">
               <%= image_tag('osu_logo.png', height: '50', width: '50', alt: 'Oregon State University Login') %>OSU
             </label>
           </div>
@@ -15,7 +15,7 @@
         <li class="uo-login flex-item">
           <div>
             <label>
-              <input type="radio" name="login-select" onclick="toggleFooter('UO-footer')">
+              <input type="radio" name="login-page-select" onclick="toggleFooter('.devise-container', '#login-page-footer-UO-footer')">
               <%= image_tag('uo.png', height: '50', width: '50', alt: 'University of Oregon Login') %>UO
             </label>
           </div>
@@ -23,7 +23,7 @@
         <li class="flex-item">
           <div>
               <label>
-                <input id="other-login" type="radio" name="login-select" onclick="toggleFooter('local-footer')">
+                <input type="radio" name="login-page-select" checked="checked" onclick="toggleFooter('.devise-container', '#login-page-footer-local-footer')">
                  Other Affiliation
               </label>
           </div>
@@ -35,6 +35,28 @@
   <div class="lime-green-hr" style="margin-bottom:1em"></div>
 
   <%= render "devise/shared/links" %>
+    <div id="login-page-footer-OSU-footer" class=" login-footer text-center" style='display: none;'>
+      <div class='row'>
+        <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
+          <span class="university-login">CONTINUE TO OSU LOG IN</span>
+        <% end %>
+      </div>
+      <div class='row'>
+        Questions about logging in? Contact us.
+      </div>
+    </div>
+    <div id="login-page-footer-UO-footer" class=" login-footer text-center" style='display: none;'>
+      <div class='row'>
+        <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
+          <span class="university-login">CONTINUE TO UO LOG IN</span>
+        <% end %>
+      </div>
+      <div class='row'>
+        Questions about logging in? Contact us.
+      </div>
+    </div>
+
+    <div id="login-page-footer-local-footer" class="login-footer" style='display: none;'>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="flex-container log-in-form devise-form">
       <div class="field flex-item">
@@ -73,4 +95,5 @@
 
     </div>
   <% end %>
+  </div>
 </div>
