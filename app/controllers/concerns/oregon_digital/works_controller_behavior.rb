@@ -3,6 +3,15 @@
 module OregonDigital
   # Behavior for each work type controller
   module WorksControllerBehavior
+
+    # Send user to 403 page rather than forward with flash message
+    rescue_from CanCan::AccessDenied do |exception|
+      respond_to do |wants|
+        wants.json { head :forbidden }
+        wants.html { render(file: File.join('public/403.html'), status: 403, layout: false) }
+      end
+    end
+
     # We can use Hyrax::WorksControllerBehavior definition and add on additional params we want
     def attributes_for_actor
       attributes = super
