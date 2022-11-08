@@ -10,7 +10,8 @@ module Hyrax
     end
 
     def dashboard_authorization
-      render(file: File.join('public/401.html'), status: 401, layout: false) unless current_user&.role?(::Ability.manager_permission_roles)
+      response_code = user_signed_in? ? 403 : 401
+      render(file: File.join("public/#{response_code}.html"), status: response_code, layout: false) unless current_user&.role?(::Ability.manager_permission_roles)
     end
   end
 end
