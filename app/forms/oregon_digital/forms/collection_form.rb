@@ -42,14 +42,15 @@ module OregonDigital
 
       def primary_terms
         terms = %i[id title description
-           creator contributor
-           license publisher
-           date_created subject
-           language has_finding_aid
-           related_url
-           institution date
-           repository]
-        return terms - [:id] unless self.id.nil?
+                   creator contributor
+                   license publisher
+                   date_created subject
+                   language has_finding_aid
+                   related_url
+                   institution date
+                   repository]
+        return terms - [:id] unless id.nil?
+
         terms
       end
 
