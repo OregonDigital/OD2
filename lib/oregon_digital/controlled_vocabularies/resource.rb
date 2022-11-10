@@ -21,6 +21,8 @@ module OregonDigital
       # ActiveTriples just grabs the first label
       # This is typically fine because it will find the preferred label first
       # But sometimes the first preferred label isn't in english, or all aren't
+      # Disable rubocop because just barely fails abcsize
+      # rubocop:disable Metrics/AbcSize
       def rdf_label
         labels = Array.wrap(self.class.rdf_label)
         labels += default_labels
@@ -31,8 +33,10 @@ module OregonDigital
         end
         values = values.select { |val| val.language.in? %i[en en-us] }
         return values unless values.blank?
+
         node? ? [] : [rdf_subject.to_s]
       end
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Override fetch to use the triplestore caching mechanism to get the graph,
