@@ -18,6 +18,22 @@ module OregonDigital
         set_subject!(resource_uri)
       end
 
+      # ActiveTriples just grabs the first label
+      # This is typically fine because it will find the preferred label first
+      # But sometimes the first preferred label isn't in english, or all aren't
+      def rdf_label
+        labels = Array.wrap(self.class.rdf_label)
+        labels += default_labels
+        # OVERRIDE from rdf_triples to select only and all english labels
+        values = []
+        labels.each do |label|
+          values += get_values(label).to_a
+        end
+        values = values.select { |val| val.language.in? %i[en en-us] }
+        return values unless values.blank?
+        node? ? [] : [rdf_subject.to_s]
+      end
+
       ##
       # Override fetch to use the triplestore caching mechanism to get the graph,
       # store it locally, and fetch it from the cache, then assign it to the resources
