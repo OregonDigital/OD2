@@ -19,6 +19,15 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  # Send user to 401/403 page rather than forward with flash message
+  rescue_from CanCan::AccessDenied do
+    response_code = user_signed_in? ? 403 : 401
+    respond_to do |wants|
+      wants.json { head :forbidden }
+      wants.html { render(file: File.join("public/#{response_code}.html"), status: response_code, layout: false) }
+    end
+  end
+
   if %w[production].include? Rails.env
     def append_info_to_payload(payload)
       super(payload)
