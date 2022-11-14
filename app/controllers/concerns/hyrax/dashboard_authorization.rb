@@ -10,7 +10,7 @@ module Hyrax
     end
 
     def dashboard_authorization
-      redirect_to root_path unless current_user&.role?(::Ability.manager_permission_roles)
+      redirect_to root_path unless current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent.workflow_responsibilities.count.positive?
     end
   end
 end
