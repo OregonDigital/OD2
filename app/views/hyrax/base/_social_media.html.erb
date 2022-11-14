@@ -16,7 +16,11 @@
     <span class="sr-only">Post to Twitter</span>
   <% end %>
 
-  <button class="copy-single-use-link btn-link share-button share-button-copy" data-clipboard-text="<%= share_url %>" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
-    <i class="fas fa-link fa"></i>
-  </button>
+  <p>
+    <label class="sr-only" for="lname">Copy Link</label>
+    <input class="copy-input" type="text" id="lname" name="lname" value=<%= "#{share_url}" %> style="width: 550px;" onClick="this.select();">
+    <button class="btn btn-primary" data-clipboard-text="<%= share_url %>" type="button" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
+      Copy
+    </button>
+  </p>
 </div>
