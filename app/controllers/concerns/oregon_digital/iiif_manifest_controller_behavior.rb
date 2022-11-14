@@ -6,7 +6,11 @@ module OregonDigital
   # IIIFManifestControllerBehavior mixes in logic to generate a IIIF manifest
   # without the incorrect assumptions the Hyrax defaults make
   module IIIFManifestControllerBehavior
-    # rubocop:disable Metrics/AbcSize
+    extend ActiveSupport::Concern
+    included do
+      before_action :redirect_json, only: :manifest
+    end
+
     def manifest
       headers['Access-Control-Allow-Origin'] = '*'
 
@@ -18,10 +22,14 @@ module OregonDigital
 
       respond_to do |wants|
         wants.json { render json: json }
-        wants.html { redirect_to main_app.polymorphic_url [main_app, :manifest, presenter], { locale: nil, format: :json } }
       end
     end
-    # rubocop:enable Metrics/AbcSize
+
+    def redirect_json
+      return if request.format.json?
+
+      redirect_to main_app.polymorphic_url [:manifest, :hyrax, controller_name.singularize], { locale: nil, format: :json }
+    end
 
     ###
     # Gets the external thumbnail path of a resource.

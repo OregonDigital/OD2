@@ -161,6 +161,8 @@ overrides:
     function: return_nil
   - predicate: http://www.iana.org/assignments/relation/last
     function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/previous
+    function: return_nil
 
   #flip workType predicate
   - property: workType_attributes

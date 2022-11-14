@@ -123,6 +123,10 @@ class SolrDocument
     self['all_text_tsimv']
   end
 
+  def non_user_collections
+    self['non_user_collections_ssim']
+  end
+
   solrized_methods Generic.generic_properties
   solrized_methods Document.document_properties
   solrized_methods Image.image_properties

@@ -1,16 +1,82 @@
+.devise-container {
+  max-width: $container-tablet;
+  margin: auto;
+
+  .login-select {
+    ul {
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1em;
+      list-style: none;
+    }
+
+    .flex-item {
+      display: inline-flex;
+      flex: 1 0;
+
+      div {
+        margin: auto;
+      }
+    }
+  }
+
+  .login-select,
+  .devise-form {
+    @media (max-width: $screen-xs-max) {
+
+      ul,
+      .flex-item.action,
+      .password-field {
+        text-align: center;
+      }
+
+      .flex-item {
+        flex-basis: 100% !important;
+        justify-content: center;
+      }
+    }
+  }
+}
+
 ul.center-auth-links {
   list-style-type: none;
+  padding-bottom: 3em;
 
   li {
-    padding: 0.25em 0
+    padding: 0.4em 0
   }
 }
 
 .devise-form {
+  align-items: baseline;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 1.5em;
   justify-content: center;
-  padding-top: 3em;
 
-  .flex-item {}
+  input:not([type=button]):not([type=submit]) {
+    background-color: $very-light-grey;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: $dark-grey;
+    padding: .5em;
+
+    &:active,
+    &:focus {
+      background-color: $light-grey;
+      border-color: $dark-orange;
+      border-bottom-width: 2px;
+    }
+  }
+
+  input[type=button],
+  input[type=submit] {
+    padding: .75em 1.5em;
+  }
+
+  label {
+    text-transform: uppercase;
+    font-size: 10pt;
+    letter-spacing: 1pt;
+    color: $dark-grey
+  }
 }

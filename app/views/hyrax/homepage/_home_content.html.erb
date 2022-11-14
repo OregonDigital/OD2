@@ -1,10 +1,10 @@
 <div id="showcase" class="row">
   <div class="col-md-5 col-md-offset-1">
-    <% @collections = Collection.limit 5 %>
+    <% @collections = Collection.accessible_by(current_ability).limit 5 %>
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
-        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000)%>
+        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 100000)%>
         <% @member_works = @member_docs[0..2].each do |doc| %>
           <% ActiveFedora::Base.find(doc['id']).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first %>
         <% end %>

@@ -4,7 +4,7 @@
   <%= t('blacklight.search.per_page.title') %>
   <span class="sr-only" id="search-per-page-<%= size %>"> Number of results per page </span>
   <div class="btn-group">
-    <button type="button" id="search-per-page-button-<%= size %>" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-controls="search-per-page-list-<%= size %>" aria-expanded="false" aria-haspopup="true" aria-label="Results per page">
+    <button type="button" id="search-per-page-button-<%= size %>" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-controls="search-per-page-list-<%= size %>" aria-expanded="false" aria-haspopup="true" aria-label="Results per page (<%= current_per_page %>)">
       <%= t(:'blacklight.search.per_page.button_label', :count => current_per_page) %> <span class="caret-dropdown"></span>
     </button>
     <ul id="search-per-page-list-<%= size %>" class="dropdown-menu" role="menu" aria-labelledby="search-per-page-button-<%= size %>">
