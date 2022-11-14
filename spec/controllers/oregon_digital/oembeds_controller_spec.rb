@@ -28,7 +28,7 @@ RSpec.describe OregonDigital::OembedsController do
     context 'when I do not have edit permissions for the object' do
       it 'redirects' do
         get :edit, params: { id: not_my_work }
-        expect(flash[:alert]).to eq 'You are not authorized to access this page.'
+        expect(response).to render_template(file: File.join(Rails.root, 'public/403.html'))
       end
     end
 
