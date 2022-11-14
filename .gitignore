@@ -33,9 +33,8 @@ coverage/*
 /docker-compose.override.yml
 /.env
 
-/public/system
-/public/branding
-/public/uv
+/public/*/
+/public/*.html
 
 /vendor/bundle
 .byebug_history

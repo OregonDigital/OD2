@@ -2,6 +2,11 @@
   max-width: $container-tablet;
   margin: auto;
 
+  .login-footer,
+  .new_user {
+    padding: 2em 0;
+  }
+
   .login-select {
     ul {
       align-items: baseline;
@@ -50,7 +55,7 @@ ul.center-auth-links {
 .devise-form {
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 1.5em;
+  gap: 0.5em 1.5em;
   justify-content: center;
 
   input:not([type=button]):not([type=submit]) {
