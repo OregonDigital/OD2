@@ -6,11 +6,12 @@ module Hyrax
     extend ActiveSupport::Concern
 
     included do
-      before_action :dashboard_authorization
+      prepend_before_action :dashboard_authorization
     end
 
     def dashboard_authorization
-      redirect_to root_path unless current_user&.role?(::Ability.manager_permission_roles)
+      response_code = user_signed_in? ? 403 : 401
+      render(file: File.join("public/#{response_code}.html"), status: response_code, layout: false) unless current_user&.role?(::Ability.manager_permission_roles)
     end
   end
 end

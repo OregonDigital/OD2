@@ -34,66 +34,65 @@
 
   <div class="lime-green-hr" style="margin-bottom:1em"></div>
 
-  <%= render "devise/shared/links" %>
-    <div id="login-page-footer-OSU-footer" class=" login-footer text-center" style='display: none;'>
-      <div class='row'>
-        <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
-          <span class="university-login">CONTINUE TO OSU LOG IN</span>
-        <% end %>
-      </div>
-      <div class='row'>
-        Questions about logging in? Contact us.
-      </div>
+  <div id="login-page-footer-OSU-footer" class=" login-footer text-center" style='display: none;'>
+    <div class='row'>
+      <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
+        <span class="university-login">CONTINUE TO OSU LOG IN</span>
+      <% end %>
     </div>
-    <div id="login-page-footer-UO-footer" class=" login-footer text-center" style='display: none;'>
-      <div class='row'>
-        <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
-          <span class="university-login">CONTINUE TO UO LOG IN</span>
-        <% end %>
-      </div>
-      <div class='row'>
-        Questions about logging in? Contact us.
-      </div>
+    <div class='row'>
+      Questions about logging in? Contact us.
     </div>
+  </div>
+  <div id="login-page-footer-UO-footer" class=" login-footer text-center" style='display: none;'>
+    <div class='row'>
+      <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
+        <span class="university-login">CONTINUE TO UO LOG IN</span>
+      <% end %>
+    </div>
+    <div class='row'>
+      Questions about logging in? Contact us.
+    </div>
+  </div>
 
-    <div id="login-page-footer-local-footer" class="login-footer" style='display: none;'>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="flex-container log-in-form devise-form">
-      <div class="field flex-item">
-        <div>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-          <br />
-          <%= f.label :email %>
-        </div>
-      </div>
-
-      <div class="field flex-item">
-        <div>
-          <%= f.password_field :password, autocomplete: "current-password" %>
-          <br />
-          <%= f.label :password %>
-        </div>
-      </div>
-
-      <% if devise_mapping.rememberable? %>
+  <div id="login-page-footer-local-footer" class="login-footer" style='display: none;'>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="flex-container log-in-form devise-form">
         <div class="field flex-item">
           <div>
-            <%= f.check_box :remember_me %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
             <br />
-            <%= f.label :remember_me %>
+            <%= f.label :email %>
           </div>
         </div>
-      <% end %>
 
-      <div class="actions flex-item">
-        <div>
-          <%= f.submit "Log in", class: 'btn btn-primary' %>
-          <br />
-          <%= link_to "Forgot password?", new_password_path(resource_name) %>
+        <div class="field flex-item">
+          <div>
+            <%= f.password_field :password, autocomplete: "current-password" %>
+            <br />
+            <%= f.label :password %>
+          </div>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field flex-item">
+            <div>
+              <%= f.check_box :remember_me %>
+              <br />
+              <%= f.label :remember_me %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="actions flex-item">
+          <div>
+            <%= f.submit "Log in", class: 'btn btn-primary' %>
+            <br />
+            <%= link_to "Forgot password?", new_password_path(resource_name) %>
+          </div>
         </div>
       </div>
-
-    </div>
-  <% end %>
+    <% end %>
   </div>
+  <%= render "devise/shared/links" %>
 </div>
