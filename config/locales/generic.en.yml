@@ -226,7 +226,7 @@ en:
         donor_label: "Donor"
         designer: "Designer"
         designer_label: "Designer"
-        designer_inscription: "Designer"
+        designer_inscription: "Designer Label"
         editor: "Editor"
         editor_label: "Editor"
         former_owner: "Former Owner"
