@@ -3,15 +3,17 @@
 namespace :oregon_digital do
   desc 'Create full metadata work for testing'
   task create_full_metadata_work: :environment do
-    g = Generic.new
-    attributes = build_attributes
-    g.attributes = attributes
-    g.id = ::Noid::Rails::Service.new.minter.mint
-    g.license = ['https://creativecommons.org/licenses/by/4.0/']
-    g.language = ['http://id.loc.gov/vocabulary/iso639-2/zun']
-    g.resource_type = 'http://purl.org/dc/dcmitype/Collection'
-    g.rights_statement = ['http://rightsstatements.org/vocab/InC/1.0/']
-    g.save!
+    (0..10).each do
+      g = Generic.new
+      attributes = build_attributes
+      g.attributes = attributes
+      g.id = ::Noid::Rails::Service.new.minter.mint
+      g.license = ['https://creativecommons.org/licenses/by/4.0/']
+      g.language = ['http://id.loc.gov/vocabulary/iso639-2/zun']
+      g.resource_type = 'http://purl.org/dc/dcmitype/Collection'
+      g.rights_statement = ['http://rightsstatements.org/vocab/InC/1.0/']
+      g.save!
+    end
   end
 end
 
@@ -29,6 +31,7 @@ def build_attributes
       generic_attributes[key] = value
     end
   end
+  generic_attributes['title'] = ["Bacon #{Generic.all.count}"]
   generic_attributes
 end
 
@@ -40,7 +43,6 @@ end
 def attrs
   {
     'depositor' => nil,
-    'title' => [],
     'date_uploaded' => Hyrax::TimeService.time_in_utc,
     'date_modified' => nil,
     'proxy_depositor' => nil,
@@ -181,7 +183,7 @@ def attrs
     'order' => ['https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=152741'],
     'species' => ['https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=714826'],
     'phylum_or_division' => ['https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=69458'],
-    'common_name' => ['http://ubio.org/authority/metadata.php?lsid=urn:lsid:ubio.org:namebank:835012'],
+    'common_name' => ['https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=117268'],
     'military_branch' => ['http://id.loc.gov/authorities/names/n78095328'],
     'subject' => ['http://id.loc.gov/authorities/subjects/sh85076502'],
     'access_control_id' => '45bf2547-f9b2-4fbb-8a41-2a19cfa84802',
