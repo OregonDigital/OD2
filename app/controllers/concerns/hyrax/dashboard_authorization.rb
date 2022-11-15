@@ -11,7 +11,12 @@ module Hyrax
 
     def dashboard_authorization
       response_code = user_signed_in? ? 403 : 401
-      render(file: File.join("public/#{response_code}.html"), status: response_code, layout: false) unless current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive?
+      render(file: File.join("public/#{response_code}.html"), status: response_code, layout: false) unless dashboard_allowed
+    end
+
+    def dashboard_allowed
+      # current user has a managing role || current user has a workflow responsibility
+      current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive?
     end
   end
 end
