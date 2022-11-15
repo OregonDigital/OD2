@@ -2,7 +2,7 @@
 
 RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
   let(:vocab) { described_class }
-  let(:new_vocab) { described_class.new('http://ubio.org/authority/metadata.php?lsid=urn:lsid:ubio.org:namebank:1187711') }
+  let(:new_vocab) { described_class.new('https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=117268') }
 
   describe '#in_vocab?' do
     context 'when in vocab' do
@@ -25,31 +25,31 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
   end
 
   describe '#fetch' do
-    context 'when ubio throws an error' do
+    context 'when itis throws an error' do
       before do
         allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
-        allow(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).to receive(:fetch).and_raise(OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError)
+        allow(OregonDigital::ControlledVocabularies::Vocabularies::Itis).to receive(:fetch).and_raise(OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError)
       end
 
       it { expect { new_vocab.fetch }.to raise_error OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError }
     end
 
-    context 'with ubio term not in cache' do
-      let(:statement) { RDF::Statement(RDF::URI('http://ubio.org/authority/metadata.php?lsid=urn:lsid:ubio.org:namebank:1187711'), RDF::Vocab::SKOS.prefLabel, 'pony') }
+    context 'with itis term not in cache' do
+      let(:statement) { RDF::Statement(RDF::URI('https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=117268'), RDF::Vocab::SKOS.prefLabel, 'pony') }
 
       before do
         allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
-        allow(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).to receive(:fetch).and_return(statement)
+        allow(OregonDigital::ControlledVocabularies::Vocabularies::Itis).to receive(:fetch).and_return(statement)
         allow_any_instance_of(TriplestoreAdapter::Client).to receive(:insert).and_return(true)
       end
 
       it do
-        expect(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).to receive(:fetch)
+        expect(OregonDigital::ControlledVocabularies::Vocabularies::Itis).to receive(:fetch)
         new_vocab.fetch
       end
     end
 
-    context 'with ubio term in cache' do
+    context 'with itis term in cache' do
       let(:graph) { RDF::Graph.new }
 
       before do
@@ -58,7 +58,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Scientific do
       end
 
       it do
-        expect(OregonDigital::ControlledVocabularies::Vocabularies::Ubio).not_to receive(:fetch)
+        expect(OregonDigital::ControlledVocabularies::Vocabularies::Itis).not_to receive(:fetch)
         new_vocab.fetch
       end
     end
