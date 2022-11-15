@@ -1,3 +1,15 @@
-h1.advanced {
-  margin-bottom: 2em;
+.advanced-search-form {
+  h1.advanced {
+    margin-bottom: 2em;
+  }
+
+  .query-criteria-heading,
+  .limit-criteria-heading {
+    align-self: center;
+    margin: 0;
+
+    label {
+      margin: 0;
+    }
+  }
 }

@@ -1,0 +1,13 @@
+<div class="limit-criteria">
+  <%= render 'shared/colored_divider', color: 'very-light-grey' do %>
+    <h2 class="limit-criteria-heading h3"><i class="fas fa-filter dark-grey"></i>Add additional filters:</h2>
+  <% end %>
+</div>
+
+<div id="advanced_search_facets" class="limit_input">
+  <% if blacklight_config.try(:advanced_search).try {|h| h[:form_facet_partial] } %>
+    <%= render blacklight_config.advanced_search[:form_facet_partial] %>
+  <% else %>
+    <%= render 'advanced_search_facets' %>
+  <% end %>
+</div>
