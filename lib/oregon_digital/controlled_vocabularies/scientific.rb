@@ -4,7 +4,6 @@ module OregonDigital
   module ControlledVocabularies
     # Repository object for storing labels and uris
     class Scientific < Resource
-      # rubocop:disable Metrics/MethodLength
       def self.all_endpoints
         [
           OregonDigital::ControlledVocabularies::Vocabularies::OnsGenus,
@@ -14,14 +13,12 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsSpecies,
           OregonDigital::ControlledVocabularies::Vocabularies::Wikidata,
           OregonDigital::ControlledVocabularies::Vocabularies::Itis,
-          OregonDigital::ControlledVocabularies::Vocabularies::Ubio,
           OregonDigital::ControlledVocabularies::Vocabularies::LocSubjects
         ]
       end
-      # rubocop:enable Metrics/MethodLength
 
       def fetch(*_args, &_block)
-        return super unless itis_or_ubio?
+        return super unless itis?
 
         graph = fetch_from_cache(rdf_subject)
         unless graph.nil?
@@ -33,8 +30,8 @@ module OregonDigital
         raise ControlledVocabularyFetchError
       end
 
-      def itis_or_ubio?
-        vocabulary.to_s.include?('Itis') || vocabulary.to_s.include?('Ubio')
+      def itis?
+        vocabulary.to_s.include?('Itis')
       end
 
       def vocabulary
