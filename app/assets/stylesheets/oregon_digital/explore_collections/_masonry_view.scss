@@ -1,40 +1,53 @@
 #explore-documents {
+
   div.masonry.document.collection,
   #masonry-sizer {
     background: none;
     border-top: $very-light-grey 2px solid;
     width: calc(16.666% - 20px);
+
     @media (max-width: $screen-md-min) {
       & {
         width: calc(25% - 30px);
       }
     }
+
     @media (max-width: $screen-sm-min) {
       & {
         width: calc(50% - 20px);
       }
     }
   }
+
+  #masonry-sizer {
+    border: none;
+  }
+
   #masonry-gutter-sizer {
     width: 20px;
+
     @media (max-width: $screen-md-min) {
       & {
         width: 30px;
       }
     }
+
     @media (max-width: $screen-sm-min) {
       & {
         width: 40px;
       }
     }
   }
+
   div.masonry.document.collection {
     background-color: unset;
     border-bottom: none;
     margin: 0;
+
     .thumbnail {
       text-align: left;
     }
+
     img {
       border-top: 2px solid $very-light-grey;
       margin: 0;
