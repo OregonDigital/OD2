@@ -16,7 +16,7 @@
         <% if user_signed_in? %>
           <li><%= link_to current_user.email, hyrax.user_path(current_user.email), tabindex: -1 %></li>
         <% end %>
-        <% if (can? :create, ActiveFedora::Base) || current_user&.sipity_agent.workflow_responsibilities.count.positive? %>
+        <% if (can? :create, ActiveFedora::Base) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive? %>
           <li><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path, tabindex: -1 %></li>
         <% end %>
         <li><%= link_to 'My Collections', Rails.application.routes.url_helpers.my_collections_path, tabindex: -1 %></li>
