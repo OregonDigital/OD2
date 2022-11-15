@@ -9,12 +9,12 @@ Rails.application.config.to_prepare do
   Hyrax::DashboardController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::TransfersController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::Dashboard::WorksController.class_eval { include Hyrax::DashboardAuthorization }
-  Hyrax::Dashboard::CollectionsController.class_eval { include Hyrax::DashboardAuthorization }
+  # Hyrax::Dashboard::CollectionsController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::Dashboard::CollectionMembersController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::Dashboard::NestCollectionsController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::Dashboard::ProfilesController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::My::WorksController.class_eval { include Hyrax::DashboardAuthorization }
-  Hyrax::My::CollectionsController.class_eval { include Hyrax::DashboardAuthorization }
+  #Hyrax::My::CollectionsController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::My::HighlightsController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::My::SharesController.class_eval { include Hyrax::DashboardAuthorization }
   Hyrax::Admin::PermissionTemplatesController.class_eval { include Hyrax::DashboardAuthorization }
