@@ -10,11 +10,13 @@
   <div class="input-criteria">
 
       <div class="query-criteria">
-        <h2 class="query-criteria-heading h3">
-         <label>
-            <%= t('hyrax.advanced_form.query_criteria_heading_html', :select_menu =>  select_menu_for_field_operator ) %>
-          </label>
-        </h2>
+        <%= render 'shared/colored_divider', color: 'very-light-grey' do %>
+          <h2 class="query-criteria-heading h3">
+            <label>
+              <%= t('hyrax.advanced_form.query_criteria_heading_html', :select_menu =>  select_menu_for_field_operator ) %>
+            </label>
+          </h2>
+        <% end %>
 
         <div id="advanced_search">
           <%= render 'advanced/advanced_search_fields' %>
