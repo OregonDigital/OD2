@@ -13,6 +13,14 @@
     }
   }
 
+  #advanced_search {
+    margin-top: 2em;
+
+    .advanced-search-field {
+      margin: 1.5em -1em;
+    }
+  }
+
   select {
     border: 3px solid $brand-primary;
     padding: .25em;
@@ -27,5 +35,20 @@
     background-repeat: no-repeat;
     background-position-x: 85%;
     background-position-y: 50%;
+  }
+
+  form {
+    label {
+      margin-bottom: .25em;
+    }
+
+    input {
+      background-color: white;
+      border: 2px solid #073C5C;
+      border-radius: 0;
+      padding: .75em 1em;
+      font-size: 1em;
+      height: 100%;
+    }
   }
 }
