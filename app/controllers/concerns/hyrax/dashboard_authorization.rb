@@ -20,7 +20,7 @@ module Hyrax
     end
 
     def user_is_creating_collection?
-      controller_name.to_s.include?("collections") && params[:action] == "create" && params[:collection_type_gid] == Hyrax::CollectionType.find_by(machine_id: :user_collection).gid
+      controller_name.to_s.include?('collections') && params[:collection_type_gid] == Hyrax::CollectionType.find_by(machine_id: :user_collection).gid
     end
   end
 end
