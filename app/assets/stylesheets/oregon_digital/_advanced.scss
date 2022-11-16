@@ -3,6 +3,17 @@
     margin-bottom: 2em;
   }
 
+  .query-criteria,
+  .limit-criteria {
+    .flex-container {
+      height: 2.25em;
+    }
+  }
+
+  .limit-criteria {
+    margin-bottom: 1.5em;
+  }
+
   .query-criteria-heading,
   .limit-criteria-heading {
     align-self: center;
@@ -18,6 +29,19 @@
 
     .advanced-search-field {
       margin: 1.5em -1em;
+    }
+  }
+
+  .advanced-search-facet {
+    color: #6a6a6a;
+
+    .chosen-choices {
+      background-color: white;
+      border: 2px solid #073C5C;
+      border-radius: 0;
+      padding: .75em 1em;
+      font-size: 1em;
+      height: 100%;
     }
   }
 
@@ -60,5 +84,9 @@
 
   .advanced-search-inputs {
     margin-bottom: 2em;
+
+    .limit_input {
+      padding: 2em 0;
+    }
   }
 }

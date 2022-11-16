@@ -4,7 +4,7 @@
   <% end %>
 </div>
 
-<div id="advanced_search_facets" class="limit_input">
+<div id="facets" class="limit_input row">
   <% if blacklight_config.try(:advanced_search).try {|h| h[:form_facet_partial] } %>
     <%= render blacklight_config.advanced_search[:form_facet_partial] %>
   <% else %>

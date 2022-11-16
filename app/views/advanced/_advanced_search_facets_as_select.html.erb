@@ -8,15 +8,16 @@
 
 <% facets_from_request(facet_field_names).each do |display_facet| %>
     <% if should_render_facet?(display_facet) %>
-        <div class="form-group advanced-search-facet">
-            <%= label_tag display_facet.name.parameterize, :class => "col-sm-3 control-label" do %>
+        <div class="advanced-search-facet">
+            <%= label_tag display_facet.name.parameterize, :class => "col-sm-12 dark-grey h6" do %>
                 <%= facet_field_label(display_facet.name) %>
             <% end %>
 
             <% unless display_facet.name == 'date_combined_year_label_ssim' %>
-                <div class="col-sm-9">
+                <div class="col-sm-12">
                     <%= content_tag(:select, :multiple => true,
                         :name   => "f[#{display_facet.name}][]",
+                        'data-placeholder' => 'Start typing or choose from list',
                         :id     => display_facet.name.parameterize,
                         :class  => "form-control advanced-search-facet-select") do %>
                         <% display_facet.items.each do |facet_item| %>
