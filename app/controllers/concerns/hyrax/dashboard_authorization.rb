@@ -15,8 +15,12 @@ module Hyrax
     end
 
     def dashboard_allowed
-      # current user has a managing role || current user has a workflow responsibility
-      current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive?
+      # current user has a managing role || current user has a workflow responsibility || if user is trying to create user_collection
+      current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive? || user_is_creating_collection?
+    end
+
+    def user_is_creating_collection?
+      controller_name.to_s.include?("collections") && params[:action] == "create" && params[:collection_type_gid] == "gid://od2/Hyrax::CollectionType/1"
     end
   end
 end
