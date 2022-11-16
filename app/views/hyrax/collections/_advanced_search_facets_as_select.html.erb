@@ -18,7 +18,7 @@
             <% unless display_facet.name == 'date_combined_year_label_ssim' %>
                 <div class="col-sm-9">
                     <%= content_tag(:select, :multiple => true,
-                        :name   => "f_inclusive[#{display_facet.name}][]",
+                        :name   => "f[#{display_facet.name}][]",
                         :id     => display_facet.name.parameterize,
                         :class  => "form-control advanced-search-facet-select") do %>
                         <% display_facet.items.each do |facet_item| %>

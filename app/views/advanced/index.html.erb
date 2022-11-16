@@ -6,8 +6,8 @@
         Search Oregon Digital
     </h1>
 
-    <div class="row">
-
+<%= form_tag search_catalog_path, :class => 'advanced form-horizontal', :method => :get, :role => :search, :id => 'advanced-form' do  %>
+    <div class="row advanced-search-inputs">
         <div class="col-md-8">
             <%= render 'advanced_search_form' %>
             <%= render 'advanced_search_help' %>
@@ -15,7 +15,14 @@
         <div class="col-md-4">
             <%= render 'advanced_search_sidebar' %>
         </div>
-
     </div>
+    <% end %>
+
+    <%= render 'shared/colored_divider', color: 'lime-green' do %>
+        <%= button_tag :class=>'btn btn-primary btn-lg advanced-search-submit', :id => "advanced-search-submit", :form => 'advanced-form' do %>
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <%= t('blacklight_advanced_search.form.search_btn') %>
+        <% end %>
+    <% end %>
 
 </div>
