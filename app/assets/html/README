@@ -1,0 +1,9 @@
+500.html and 503.html reference a stylesheet that needs to be compiled inline. This is only possible on RAILS_ENV=development
+
+To get around this, we will skip compilation on RAILS_ENV=prod and commit public/500.html and public/503.html. These files are not necessary on production anyway as they are to be copied over to our reverse proxy to serve on actual 500/503's.
+
+To compile any changes, rename `500.html.haml.skip` and `503.html.haml.skip` to `500.html.haml` and `503.html.haml` respectively and run `rake assets:precompile` on RAILS_ENV=development. Then copy the files from `public/assets/500-<stuff>.html` to `public/500.html` or run this command from the dockerfile:
+```
+  for f in public/assets/4*.html; do cp $f public/${f:14:3}.html; done; \
+    for f in public/assets/5*.html; do cp $f public/${f:14:3}.html; done;
+```
