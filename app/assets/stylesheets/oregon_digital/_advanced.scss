@@ -42,6 +42,20 @@
       padding: .75em 1em;
       font-size: 1em;
       height: 100%;
+
+      li.search-choice {
+        border: none;
+        border-radius: 0;
+        background-color: unset;
+        background-image: none;
+        background-size: unset;
+        background-repeat: unset;
+        background-clip: unset;
+        line-height: unset;
+        color: $dark-grey;
+        font-size: 12pt;
+        font-style: italic;
+      }
     }
   }
 
@@ -55,6 +69,7 @@
     -webkit-appearance: none;
     appearance: none;
     background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+Cjxzdmcgdmlld0JveD0iMCAwIDE5IDE0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogIDxwYXRoIGQ9Ik05LjUgMTEuNjVsLTgtOCAyLjEtMi4yIDUuOSA1LjkgNS45LTUuOSAyLjEgMi4yeiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIj48L3BhdGg+Cjwvc3ZnPg==");
+    background-color: $very-light-grey;
     background-size: 0.5em;
     background-repeat: no-repeat;
     background-position-x: 85%;
