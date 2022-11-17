@@ -6,6 +6,9 @@
 <% if Rails.env.development? || Rails.env.test? %>
 file_system:
   :home: <%= ENV['BROWSEEVERYTHING_FILESYSTEM_PATH'] || '/tmp' %>
+google_drive:
+  :client_id: <%= ENV['GOOGLE_DRIVE_API_CLIENT_ID'] %>
+  :client_secret: <%= ENV['GOOGLE_DRIVE_API_CLIENT_SECRET'] %>
 <% end %>
 # dropbox:
 #   :app_key: YOUR_DROPBOX_APP_KEY
@@ -13,9 +16,7 @@ file_system:
 # box:
 #   :client_id: YOUR_BOX_CLIENT_ID
 #   :client_secret: YOUR_BOX_CLIENT_SECRET
-# google_drive:
-#   :client_id: YOUR_GOOGLE_API_CLIENT_ID
-#   :client_secret: YOUR_GOOGLE_API_CLIENT_SECRET
+
 <% if Rails.env.production? %>
 s3:
   :bucket: <%= ENV['AWS_S3_BUCKET'] %>
