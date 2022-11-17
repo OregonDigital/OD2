@@ -78,7 +78,8 @@
 
   form {
     label {
-      margin-bottom: .25em;
+      margin-bottom: .5em;
+      margin-top: 1em;
     }
 
     input {
@@ -100,8 +101,8 @@
   .advanced-search-inputs {
     margin-bottom: 2em;
 
-    .limit_input {
-      padding: 2em 0;
+    #facets {
+      padding: 1em 0;
     }
   }
 }
