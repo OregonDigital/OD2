@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <%= render 'lime_green_divider' do %>
+  <%= render 'shared/colored_divider', color: 'lime-green' do %>
     <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All Items</a>
   <% end %>
 
@@ -96,13 +96,13 @@
   </div>
 
   <!-- Search bar -->
-  <div class="hyc-blacklight hyc-bl-search hyc-body row">
+  <div class="hyc-blacklight hyc-bl-search hyc-body row advanced-search-form">
     <div class="col-sm-12">
       <%= render 'advanced_search_form', presenter: @presenter, search_catalog_path: main_app.search_catalog_path %>
     </div>
   </div>
 
-  <%= render 'lime_green_divider' do %>
+  <%= render 'shared/colored_divider', color: 'lime-green' do %>
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
 
