@@ -6,7 +6,7 @@ module OregonDigital
     class Publisher < Resource
       def self.all_endpoints
         [
-          OregonDigital::ControlledVocabularies::Vocabularies::Ulan,
+          OregonDigital::ControlledVocabularies::Vocabularies::GettyUlan,
           OregonDigital::ControlledVocabularies::Vocabularies::LocNames,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPublisher,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator,
