@@ -34,7 +34,9 @@ module Qa::Authorities
     end
 
     def find_term(response, q)
-      selected_id = response.select { |resp| resp['@id'] == q }
+      uri = URI.parse(q)
+      id = [uri.hostname, uri.path].join
+      selected_id = response.select { |resp| resp['@id'].match? id }
       selected_id.blank? ? [response] : selected_id
     end
   end
