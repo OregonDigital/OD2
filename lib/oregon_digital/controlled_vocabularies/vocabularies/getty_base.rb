@@ -11,7 +11,6 @@ module OregonDigital
           end
         end
         term.first['content']
-        # data.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']
       end
 
       def self.as_query(q)
