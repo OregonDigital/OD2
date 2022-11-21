@@ -26,11 +26,11 @@ module Hyrax
     end
 
     def user_is_updating_collection?
-      (controller_name.to_s == "collection_members") && (params[:collection][:members] == "add")
+      (controller_name.to_s == 'collection_members') && (params[:collection][:members] == 'add')
     end
 
     def allowed_controllers
-      ["collections", "works"]
+      %w[collections works]
     end
   end
 end
