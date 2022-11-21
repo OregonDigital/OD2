@@ -36,13 +36,8 @@ module Qa::Authorities
     def find_term(response, q)
       uri = URI.parse(q)
       id = [uri.hostname, uri.path].join
-<<<<<<< HEAD
       selected_id = response.select { |resp| resp['@id'].to_s.match? id }
       selected_id.blank? ? Array(response) : selected_id
-=======
-      selected_id = response.select { |resp| resp['@id'].match? id }
-      selected_id.blank? ? [response] : selected_id
->>>>>>> master
     end
   end
 end
