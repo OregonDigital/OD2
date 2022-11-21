@@ -40,7 +40,7 @@ RSpec.describe Qa::Authorities::Subject do
   it { expect(repository_instance.label.call([ons_osu_buildings_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuBuildings)).to eq 'mylabel' }
   it { expect(repository_instance.label.call([ons_people_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople)).to eq 'mylabel' }
   it { expect(repository_instance.label.call([ons_subject_response], OregonDigital::ControlledVocabularies::Vocabularies::OnsSubject)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::Ulan)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::GettyUlan)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(wikidata_response, OregonDigital::ControlledVocabularies::Vocabularies::Wikidata)).to eq 'mylabel' }
   describe '#search' do
     before do

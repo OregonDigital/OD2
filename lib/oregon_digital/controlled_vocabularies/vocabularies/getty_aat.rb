@@ -3,17 +3,9 @@
 module OregonDigital
   module ControlledVocabularies::Vocabularies
     # Receives information pulled from the endpoint and can parse and generate queries
-    class GettyAat
+    class GettyAat < GettyBase
       def self.expression
         %r{^http[s]?:\/\/vocab.getty.edu\/aat\/.*}
-      end
-
-      def self.label(data)
-        data.first['http://www.w3.org/2000/01/rdf-schema#label'].first['@value']
-      end
-
-      def self.as_query(q)
-        q + '.jsonld'
       end
     end
   end

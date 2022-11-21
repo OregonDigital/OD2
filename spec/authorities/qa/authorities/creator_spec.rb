@@ -18,7 +18,7 @@ RSpec.describe Qa::Authorities::Creator do
   it { expect(repository_instance.label.call(ons_creator_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(ons_people_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(ons_osu_academic_units_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuAcademicUnits)).to eq 'mylabel' }
-  it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::Ulan)).to eq 'mylabel' }
+  it { expect(repository_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::GettyUlan)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(wikidata_response, OregonDigital::ControlledVocabularies::Vocabularies::Wikidata)).to eq 'mylabel' }
   describe '#search' do

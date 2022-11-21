@@ -15,7 +15,7 @@ RSpec.describe OregonDigital::ControlledVocabularies::Publisher do
 
   describe '#query_to_vocabulary' do
     context 'when in vocab' do
-      it { expect(vocab.query_to_vocabulary('http://vocab.getty.edu/ulan/500302766')).to be OregonDigital::ControlledVocabularies::Vocabularies::Ulan }
+      it { expect(vocab.query_to_vocabulary('http://vocab.getty.edu/ulan/500302766')).to be OregonDigital::ControlledVocabularies::Vocabularies::GettyUlan }
     end
 
     context 'when not in vocab' do
