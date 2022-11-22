@@ -5,7 +5,7 @@ RSpec.describe Qa::Authorities::StylePeriod do
   let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.jsonld' }
   let(:loc_subjects_request) { 'http://id.loc.gov/authorities/subjects/my_id.jsonld' }
   let(:ons_request) { 'http://opaquenamespace.org/ns/stylePeriod/my_id.jsonld' }
-  let(:getty_response) { [{ 'http://www.w3.org/2000/01/rdf-schema#label': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
+  let(:getty_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel' }], 'id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
   let(:loc_subjects_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/subjects/my_id' }.with_indifferent_access] }
   let(:ons_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/stylePeriod/my_id' }.with_indifferent_access] }
 
