@@ -4,7 +4,11 @@
   <span class="mw-lg-b">
     Share this:
   </span>
-  <!-- Sharingbutton Facebook -->
+  <label class="sr-only" for="lname">Copy Link</label>
+  <input class="copy-input" type="text" id="lname" name="lname" value=<%= "#{share_url}" %> style="width: 550px;" onClick="this.select();">
+  <button class="btn btn-primary" data-clipboard-text="<%= share_url %>" type="button" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
+    Copy
+  </button>
   <%= link_to "https://facebook.com/sharer/sharer.php?#{{u: share_url}.to_param}", class: 'share-button share-button-facebook', target: '_blank', rel: 'noopener noreferrer', title: t('hyrax.base.social_media.facebook'), 'aria-label': t('hyrax.base.social_media.facebook') do %>
     <i class="fa fa-facebook-square" aria-hidden="true"></i>
     <span class="sr-only">Post to Facebook</span>
@@ -15,12 +19,4 @@
     <i class="fa fa-twitter" aria-hidden="true"></i>
     <span class="sr-only">Post to Twitter</span>
   <% end %>
-
-  <p>
-    <label class="sr-only" for="lname">Copy Link</label>
-    <input class="copy-input" type="text" id="lname" name="lname" value=<%= "#{share_url}" %> style="width: 550px;" onClick="this.select();">
-    <button class="btn btn-primary" data-clipboard-text="<%= share_url %>" type="button" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
-      Copy
-    </button>
-  </p>
 </div>
