@@ -14,7 +14,7 @@ gem 'browse-everything'
 # been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
 gem 'cookieconsent'
-gem 'dalli', '~> 2.7.6'
+gem 'dalli', '~> 3.2.3'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
