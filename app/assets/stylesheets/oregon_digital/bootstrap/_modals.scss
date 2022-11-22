@@ -9,11 +9,13 @@
   padding: 30px 30px 15px;
 
   .close {
-    font-size: 64px;
-    margin-top: -32px;
+    font-size: 32px;
     font-weight: normal;
+    color: $navy-blue;
+    opacity: 1;
   }
 }
+
 #ajax-modal {
   .close {
     margin-top: -64px;
