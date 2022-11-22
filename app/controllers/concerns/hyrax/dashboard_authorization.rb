@@ -16,6 +16,7 @@ module Hyrax
 
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocob:disable Metrics/PerceivedComplexity
+
     def dashboard_allowed
       # current user has a managing role || current user has a workflow responsibility || if user is trying to create user_collection
       current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive? || user_is_creating_collection? || user_is_updating_collection?
