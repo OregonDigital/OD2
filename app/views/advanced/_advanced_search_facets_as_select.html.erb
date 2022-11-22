@@ -32,15 +32,15 @@
                     <% end %>
                 </div>
             <% else %>
-                <div class="col-xs-5">
+                <div class="col-xs-5 v-center">
                     <%= content_tag(:input, nil,
                         :name   => "range[#{display_facet.name}][begin]",
                         :type   => "number",
                         :id     => display_facet.name.parameterize,
                         :class  => "form-control") %>
                 </div>
-                <div class="col-xs-2" style="text-align:center"> &mdash; </div>
-                <div class="col-xs-5">
+                <div class="col-xs-2 v-center" style="text-align:center"> to </div>
+                <div class="col-xs-5 v-center">
                     <%= content_tag(:input, nil,
                         :name   => "range[#{display_facet.name}][end]",
                         :type   => "number",
