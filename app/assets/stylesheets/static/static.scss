@@ -1,6 +1,6 @@
 /*
  * This is a slightly shrunk down version of the application.css for use on our static pages
  */
-@import "_variables";
-@import "hyrax";
-@import "oregon_digital/*";
+@import "../_variables.scss";
+@import "../hyrax.scss";
+@import "../oregon_digital/*";

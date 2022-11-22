@@ -2,7 +2,7 @@
 
 RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::GettyTgn do
   let(:vocab) { described_class }
-  let(:data) { [{ 'http://www.w3.org/2000/01/rdf-schema#label': [{ '@value': 'blah' }.with_indifferent_access] }.with_indifferent_access] }
+  let(:data) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'blah' }], 'id': 'http://vocab.getty.edu/tgn/term_id' }.with_indifferent_access] }
   let(:query) { 'www.blah.com/blah' }
 
   it { expect(vocab.expression).to be_kind_of(Regexp) }

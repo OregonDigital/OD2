@@ -4,6 +4,7 @@ form#explore-collection-search {
 
   .input-group {
     margin-bottom: 0;
+
     button {
       position: absolute;
       right: 0;
@@ -16,6 +17,7 @@ form#explore-collection-search {
       margin-bottom: 8px;
       border-left: 1px solid $light-grey;
     }
+
     input {
       background-color: $very-light-grey;
       border-radius: 0;
@@ -25,14 +27,17 @@ form#explore-collection-search {
     }
   }
 }
+
 #sortAndPerPage.explore-collections-per-page {
   padding: 2em 0 1em 0;
+
   @media (max-width: $screen-xs-max) {
-    &{
+    & {
       padding-left: 2em;
       padding-right: 2em;
     }
   }
+
   .explore-collections-result-count {
     margin: 0;
     font-style: italic;
@@ -40,22 +45,26 @@ form#explore-collection-search {
     padding-bottom: 2em;
 
     @media (max-width: $screen-sm-max) {
-      &{
+      & {
         display: block;
       }
     }
   }
+
   .explore-collections-search-widgets {
     @media (max-width: $screen-sm-max) {
       & {
         float: left !important;
       }
     }
+
     @media (min-width: $screen-sm-max) {
       transform: 0 15%;
     }
+
     .search-widgets {
       display: inline-block;
+
       #per_page-dropdown {
         margin-right: 1.5em;
         margin-top: 0;
@@ -64,9 +73,17 @@ form#explore-collection-search {
   }
 }
 
+.very-light-grey-hr {
+  border: 1px solid $very-light-grey;
+  color: $very-light-grey;
+  margin: auto;
+  width: 100%;
+}
+
 .lime-green-hr {
   border: 2px solid $lime-green;
   color: $lime-green;
+  margin: auto;
   width: 100%;
 }
 

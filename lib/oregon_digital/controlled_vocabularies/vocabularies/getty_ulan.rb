@@ -3,9 +3,9 @@
 module OregonDigital
   module ControlledVocabularies::Vocabularies
     # Receives information pulled from the endpoint and can parse and generate queries
-    class GettyAat < GettyBase
+    class GettyUlan < GettyBase
       def self.expression
-        %r{^http[s]?:\/\/vocab.getty.edu\/aat\/.*}
+        %r{^http[s]?:\/\/vocab.getty.edu\/ulan\/.*}
       end
     end
   end

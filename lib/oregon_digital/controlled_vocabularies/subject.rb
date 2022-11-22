@@ -20,7 +20,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuBuildings,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsSubject,
-          OregonDigital::ControlledVocabularies::Vocabularies::Ulan,
+          OregonDigital::ControlledVocabularies::Vocabularies::GettyUlan,
           OregonDigital::ControlledVocabularies::Vocabularies::Wikidata
         ]
       end
