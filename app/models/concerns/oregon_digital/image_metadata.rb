@@ -77,7 +77,6 @@ module OregonDigital
         { name: :tribal_notes, section_name: '' },
         { name: :source_condition, section_name: '' },
         { name: :temporal, section_name: '' },
-        { name: :view, section_name: '' },
         { name: :subject, section_name: 'Subjects' },
         { name: :award, section_name: '' },
         { name: :cultural_context, section_name: '' },
