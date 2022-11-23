@@ -14,7 +14,7 @@ module OregonDigital
       end
 
       def self.as_query(q)
-        q + '.jsonld'
+        q + '.json'
       end
     end
   end
