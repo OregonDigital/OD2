@@ -1,4 +1,6 @@
-<div class="devise-container">
+<div class="col-md-3">
+</div>
+<div class="devise-container col-md-6">
   <h1 class="h2 text-center" style="margin-bottom:2em">Sign up for Oregon Digital</h1>
   <div class="lime-green-hr" style="margin-bottom:1em"></div>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -39,4 +41,17 @@
     </div>
   <% end %>
   <%= render "devise/shared/links" %>
+</div>
+<div class="col-md-3">
+<h1 class="h1 text-center"> Looking to Sign Up for an Oregon Digital Account?</h1>
+    <h2 class="h2">I am affiliated with UO or OSU.</h2>
+    <ul>
+      <li><p>Great! You do not need to sign up for an account. UO and OSU affiliates can just login with your university credentials.</p></li>
+      <li><p>Once done, you will have access to all of the material that your university offers through Oregon Digital, as well as the ability to select, organize, and share Oregon Digital materials with others.</p></li>
+    </ul>
+    <h2 class="h2">I am not affiliated with UO or OSU.</h2>
+    <ul>
+      <li><p>If you are not affiliated then you need to sign up for an account</p></li>
+      <li><p>Once done, you will have the ability to select, organize, and share Oregon Digital materials with others.</p></li>
+    </ul>
 </div>
