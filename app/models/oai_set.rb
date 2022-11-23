@@ -15,9 +15,9 @@ class OaiSet < BlacklightOaiProvider::SolrSet
 
     # Return a Solr filter query given a set spec
     def from_spec(spec)
-      raise OAI::ArgumentException unless ActiveFedora::SolrService.query("has_model_ssim:AdminSet AND id:#{spec}", rows: 1).count.positive?
+      raise OAI::ArgumentException unless ActiveFedora::SolrService.query("has_model_ssim:Collection AND id:#{spec}", rows: 1).count.positive?
 
-      "isPartOf_ssim:#{spec}"
+      "member_of_collection_ids_ssim:#{spec}"
     end
 
     private
@@ -27,6 +27,7 @@ class OaiSet < BlacklightOaiProvider::SolrSet
       facets.each do |_facet, terms|
         sets.concat(terms.each_slice(2).map { |t| new(t.first) })
       end
+      sets = sets.select { |set| !set.name.nil? }
       sets.empty? ? nil : sets
     end
   end
@@ -44,6 +45,10 @@ class OaiSet < BlacklightOaiProvider::SolrSet
   private
 
   def name_from_spec
-    ActiveFedora::SolrService.query("has_model_ssim:AdminSet AND id:#{@spec}", rows: 1).first['title_tesim'].first
+    collection = Collection.find @spec
+    return nil if collection.collection_type.gid != Hyrax::CollectionType.find_by(machine_id: :oai_set).gid.to_s
+
+    ActiveFedora::SolrService.query("id:#{@spec}", rows: 1).first['title_tesim'].first
+
   end
 end

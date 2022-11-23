@@ -362,7 +362,7 @@ module OregonDigital
             timestamp_method: 'system_created',
             set_fields: [
               { 'label': 'title_tesim',
-                'solr_field': 'isPartOf_ssim' }
+                'solr_field': 'member_of_collection_ids_ssim' }
             ],
             set_model: ::OaiSet
           }
