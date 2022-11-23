@@ -352,8 +352,8 @@ module OregonDigital
         config.oai = {
           provider: {
             repository_name: 'Oregon Digital',
-            repository_url: ENV.fetch('REPOSITORY_URL', 'http://prod.oregondigital.org'),
-            record_prefix: ENV.fetch('RECORD_PREFIX', 'prod.oregondigital.org'),
+            repository_url: ENV.fetch('OAI_REPOSITORY_URL', 'http://oregondigital.org'),
+            record_prefix: ENV.fetch('OAI_RECORD_PREFIX', 'oregondigital.org'),
             admin_email: ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
           },
           document: {
