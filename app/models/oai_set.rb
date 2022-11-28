@@ -27,7 +27,7 @@ class OaiSet < BlacklightOaiProvider::SolrSet
       facets.each do |_facet, terms|
         sets.concat(terms.each_slice(2).map { |t| new(t.first) })
       end
-      sets = sets.select { |set| !set.name.nil? }
+      sets = sets.reject { |set| set.name.nil? }
       sets.empty? ? nil : sets
     end
   end
@@ -49,6 +49,5 @@ class OaiSet < BlacklightOaiProvider::SolrSet
     return nil if collection.collection_type.gid != Hyrax::CollectionType.find_by(machine_id: :oai_set).gid.to_s
 
     ActiveFedora::SolrService.query("id:#{@spec}", rows: 1).first['title_tesim'].first
-
   end
 end
