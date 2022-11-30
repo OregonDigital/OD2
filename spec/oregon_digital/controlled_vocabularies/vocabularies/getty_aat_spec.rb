@@ -7,5 +7,5 @@ RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::GettyAat do
 
   it { expect(vocab.expression).to be_kind_of(Regexp) }
   it { expect(vocab.label(data)).to eq 'blah' }
-  it { expect(vocab.as_query(query)).to eq query + '.jsonld' }
+  it { expect(vocab.as_query(query)).to eq query + '.json' }
 end

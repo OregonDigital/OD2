@@ -10,11 +10,11 @@ module OregonDigital
             classification['id'] == 'http://vocab.getty.edu/term/type/Descriptor'
           end
         end
-        term.first['content']
+        term.count.positive? ? term.first['content'] : data.first['identified_by'][0]['content']
       end
 
       def self.as_query(q)
-        q + '.jsonld'
+        q + '.json'
       end
     end
   end

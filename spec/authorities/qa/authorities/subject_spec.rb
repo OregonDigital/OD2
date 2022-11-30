@@ -2,7 +2,7 @@
 
 RSpec.describe Qa::Authorities::Subject do
   let(:repository_instance) { described_class.new }
-  let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.jsonld' }
+  let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.json' }
   let(:loc_genre_forms_request) { 'http://id.loc.gov/authorities/genreForms/my_id.jsonld' }
   let(:loc_graphic_materials_request) { 'http://id.loc.gov/vocabulary/graphicMaterials/my_id.jsonld' }
   let(:loc_names_request) { 'http://id.loc.gov/authorities/names/my_id.jsonld' }
@@ -13,7 +13,7 @@ RSpec.describe Qa::Authorities::Subject do
   let(:ons_osu_buildings_request) { 'http://opaquenamespace.org/ns/osuBuildings/my_id.jsonld' }
   let(:ons_people_request) { 'http://opaquenamespace.org/ns/people/my_id.jsonld' }
   let(:ons_subject_request) { 'http://opaquenamespace.org/ns/subject/my_id.jsonld' }
-  let(:ulan_request) { 'http://vocab.getty.edu/ulan/my_id.jsonld' }
+  let(:ulan_request) { 'http://vocab.getty.edu/ulan/my_id.json' }
   let(:wikidata_request) { 'http://www.wikidata.org/entity/my_id' }
   let(:getty_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel' }], 'id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
   let(:loc_genre_forms_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/genreForms/my_id' }.with_indifferent_access] }
