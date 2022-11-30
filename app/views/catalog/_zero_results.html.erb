@@ -12,7 +12,7 @@
   <%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "zero-results-search-form", role: "search" do %>
     <%= hidden_field_tag :search_field, 'all_fields', id: 'zero_results_search_field' %>
     <div class="form-group">
-      <div class="no-results-wrapper">
+      <div class="no-results-wrapper col-sm-8">
         <div class="input-group">
           <label class="sr-only" for="zero-results-search-field-">
             <%= t("hyrax.search.form.q.label", application_name: application_name) %>
@@ -25,7 +25,7 @@
         </div><!-- /.input-group -->
 
         <%= link_to BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link pull-right' do %>
-          Advanced <span class="hidden visible-xs-inline-block">Search</span>
+          Advanced
         <% end %>
       </div>
 
