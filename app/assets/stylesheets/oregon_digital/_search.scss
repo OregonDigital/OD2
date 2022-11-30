@@ -448,3 +448,46 @@ ul.pagination li {
     }
   }
 }
+.no-results-search {
+  .no-results-divider {
+    margin: 4em 0 8em 0;
+  }
+
+  #zero-results-search-form {
+    .no-results-wrapper {
+      width: 50%;
+      margin: auto;
+
+      a {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: .75em;
+        letter-spacing: 2px;
+      }
+      .input-group {
+        margin: 0;
+        width: 100%;
+
+        button {
+          position: absolute;
+          left: 0;
+          z-index: 10;
+          background: unset;
+          border: unset;
+          width: 2.25em;
+          height: calc(100% - 16px);
+          margin-top: 8px;
+          margin-bottom: 8px;
+          border-right: 1px solid $light-grey;
+        }
+        input {
+          background-color: $very-light-grey;
+          border-radius: 0;
+          padding-left: 2.5em;
+          font-size: 1.25em;
+          height: 100%;
+        }
+      }
+    }
+  }
+}

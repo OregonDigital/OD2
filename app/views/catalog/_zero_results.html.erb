@@ -1,0 +1,34 @@
+<div class="no-results-search">
+  <h2 class="h1 text-center"><%= t 'blacklight.search.zero_results.title' %></h2>
+  <div id="documents" class="noresults text-center">
+    <h3 class="h5 mw-lg"><i><%= t 'blacklight.search.zero_results.modify_search' %>:</i></h3>
+    <p class="mw font-sm"> <%= t 'blacklight.search.zero_results.use_fewer_keywords' %> </p>
+  </div>
+
+  <div class="no-results-divider">
+    <%= render 'shared/colored_divider', color: 'very-light-grey' %>
+  </div>
+
+  <%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "zero-results-search-form", role: "search" do %>
+    <%= hidden_field_tag :search_field, 'all_fields', id: 'zero_results_search_field' %>
+    <div class="form-group">
+      <div class="no-results-wrapper">
+        <div class="input-group">
+          <label class="sr-only" for="zero-results-search-field-">
+            <%= t("hyrax.search.form.q.label", application_name: application_name) %>
+          </label>
+          <%= text_field_tag 'q[]', nil, class: "q form-control", id: "zero-results-search-field" %>
+          <button type="submit" class="" id="zero-results-submit">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <span class="sr-only">Search Catalog</span>
+          </button>
+        </div><!-- /.input-group -->
+
+        <%= link_to BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link pull-right' do %>
+          Advanced <span class="hidden visible-xs-inline-block">Search</span>
+        <% end %>
+      </div>
+
+    </div><!-- /.form-group -->
+  <% end %>
+</div>
