@@ -1,7 +1,9 @@
 <div class='flex-container'>
-  <div class="flex-item hidden-xs"><hr class="<%= color %>-hr"></div>
-  <div class="flex-item" >
-    <%= yield %>
-  </div>
-  <div class="flex-item hidden-xs"><hr class="<%= color %>-hr"></div>
+  <div class="flex-item flex-divider hidden-xs"><hr class="<%= color %>-hr"></div>
+  <% if block_given? %>
+    <div class="flex-item flex-divider-content" >
+      <%= yield %>
+    </div>
+  <% end %>
+  <div class="flex-item flex-divider hidden-xs"><hr class="<%= color %>-hr"></div>
 </div>
