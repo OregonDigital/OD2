@@ -352,8 +352,8 @@ module OregonDigital
         config.oai = {
           provider: {
             repository_name: 'Oregon Digital',
-            repository_url: ENV.fetch('REPOSITORY_URL', 'http://prod.oregondigital.org'),
-            record_prefix: ENV.fetch('RECORD_PREFIX', 'prod.oregondigital.org'),
+            repository_url: ENV.fetch('OAI_REPOSITORY_URL', 'http://oregondigital.org'),
+            record_prefix: ENV.fetch('OAI_RECORD_PREFIX', 'oregondigital.org'),
             admin_email: ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
           },
           document: {
@@ -362,7 +362,7 @@ module OregonDigital
             timestamp_method: 'system_created',
             set_fields: [
               { 'label': 'title_tesim',
-                'solr_field': 'isPartOf_ssim' }
+                'solr_field': 'member_of_collection_ids_ssim' }
             ],
             set_model: ::OaiSet
           }

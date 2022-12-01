@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
+  mount Bulkrax::Engine, at: '/'
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
   end
@@ -97,6 +98,8 @@ Rails.application.routes.draw do
   end
 
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
+
+  resources :iiif_manifest_v2, controller: 'oregon_digital/iiif_manifest_v2', path: '/iiif_manifest_v2', only: [:show]
 
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

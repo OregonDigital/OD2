@@ -1,6 +1,6 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
 <% collection_index_key = controller.collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
-<% view_all_url = "#{search_form_action}&f[#{collection_index_key}][]=#{@presenter.id}" %>
+<% view_all_url = "#{search_form_action.split('#')[0]}&f[#{collection_index_key}][]=#{@presenter.id}" %>
 <% footer_metadata = render 'attribute_rows_footer', presenter: @presenter %>
 
 <div class="hyc-container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
@@ -12,7 +12,7 @@
           <h1><%= @presenter.title.first %></h1>
           <div class="collection-subtitle">
             <span class="lg-border-right item-count">
-              <%= @presenter.total_viewable_items %>
+              <%= [ @presenter.total_viewable_items,  @curation_concern.child_works.select { |g| !g.suppressed? }.count ].min %>
               <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
             </span>
             <span>
@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <%= render 'lime_green_divider' do %>
+  <%= render 'shared/colored_divider', color: 'lime-green' do %>
     <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All Items</a>
   <% end %>
 
@@ -96,13 +96,13 @@
   </div>
 
   <!-- Search bar -->
-  <div class="hyc-blacklight hyc-bl-search hyc-body row">
+  <div class="hyc-blacklight hyc-bl-search hyc-body row advanced-search-form">
     <div class="col-sm-12">
       <%= render 'advanced_search_form', presenter: @presenter, search_catalog_path: main_app.search_catalog_path %>
     </div>
   </div>
 
-  <%= render 'lime_green_divider' do %>
+  <%= render 'shared/colored_divider', color: 'lime-green' do %>
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
 

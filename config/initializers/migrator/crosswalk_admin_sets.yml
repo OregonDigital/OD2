@@ -50,6 +50,9 @@ primary_set_crosswalk:
   - primary_set: chinavine
     admin_set_id: uo
     full_size_download: 1
+  - primary_set: chuck-williams
+    admin_set_id: osu-scarc-admin
+    full_size_download: 1
   - primary_set: clarence-andrews
     admin_set_id: uo-scua
     full_size_download: 0

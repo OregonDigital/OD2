@@ -16,7 +16,7 @@
         <% if user_signed_in? %>
           <li><%= link_to current_user.email, hyrax.user_path(current_user.email), tabindex: -1 %></li>
         <% end %>
-        <% if can? :create, ActiveFedora::Base %>
+        <% if (can? :create, ActiveFedora::Base) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive? %>
           <li><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path, tabindex: -1 %></li>
         <% end %>
         <li><%= link_to 'My Collections', Rails.application.routes.url_helpers.my_collections_path, tabindex: -1 %></li>
@@ -31,8 +31,7 @@
     <li>
       <%= button_tag "<i class='fa fa-lock' aria-hidden='true'></i> #{t('hyrax.dashboard.my.action.log_in')}".html_safe,
                    class: 'btn btn-primary btn-outline login-button',
-                   data: { toggle: "modal", target: "#user-login-modal" },
-                   onclick: '$("input[name=login-select]:checked")[0].onclick()' %>
+                   data: { toggle: "modal", target: "#user-login-modal" } %>
     </li>
     <li>
       <%= link_to t('hyrax.dashboard.my.action.sign_up'), main_app.new_user_registration_path,

@@ -9,7 +9,7 @@ class Collection < ActiveFedora::Base
   include ::Hyrax::CollectionBehavior
   # You can replace these metadata if they're not suitable
   include OregonDigital::CollectionMetadata
-  include OregonDigital::CollectionBehavior
+  include OregonDigital::MetadataDownload
   include OregonDigital::AccessControls::Visibility
   self.indexer = OregonDigital::CollectionIndexer
 

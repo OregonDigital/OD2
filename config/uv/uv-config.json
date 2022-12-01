@@ -9,6 +9,7 @@
     "pagingEnabled": true,
     "rightPanelEnabled": true,
     "clickToZoomEnabled": false,
+    "searchWithinEnabled": true,
     "zoomToSearchResultEnabled": false,
     "navigatorEnabled": false
   },
@@ -30,7 +31,7 @@
     },
     "pagingHeaderPanel": {
       "options": {
-        "pageModeEnabled": true,
+        "pageModeEnabled": false,
         "pagingToggleEnabled": true
       }
     },

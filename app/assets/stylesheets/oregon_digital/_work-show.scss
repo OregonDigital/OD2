@@ -69,6 +69,7 @@ dl.work-show {
   dt, dd {
     padding: 0;
     line-height: 1.5;
+    margin-left: 0px
   }
   li a.metadata-superscript {
     border-bottom: none;
@@ -157,4 +158,17 @@ dl.work-show {
     width: 20%;
     text-align: start;
   }
+}
+
+.copy-input {
+  height: 35px;
+  width: 325px;
+}
+
+.social-buttons {
+  margin-top: 10px;
+}
+
+.copy-button {
+  margin-top: 14px;
 }

@@ -12,4 +12,10 @@
           %a{ href: "/"} Oregon Digital
     #content-wrapper.container{ role: "main"}
       .col-xs-12
-        %h2 Ack! Looks like Oregon Digital is temporarily broken. Try again later and let us know on the Contact Form how you wound up here.
+        %h2
+          You have tried to access a resource that is restricted. Try
+          %a{ href: '/users/sign_in' } logging in
+          or
+          %a{ href: 'users/sign_up' } registering
+          for an Oregon Digital account, or
+          %a{ href: '/contact' } contact us.

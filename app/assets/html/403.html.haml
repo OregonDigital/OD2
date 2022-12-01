@@ -1,0 +1,18 @@
+%html
+  %head
+    %title Oregon Digital
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+  %body
+    %nav#masthead.navbar.navbar-inverse.navbar-static-top{ role: 'navigation', style: 'background-color: #dc4405;'}
+      .container-fluid
+    #lower-banner-border-masthead
+      .group-header.institution_name
+        %h1
+          %a{ href: "/"} Oregon Digital
+    #content-wrapper.container{ role: "main"}
+      .col-xs-12
+        %h2
+          You have tried to access a resource for which you are not authorized.
+          %a{ href: '/contact' } Contact us
+          if you have questions.

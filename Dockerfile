@@ -16,7 +16,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
-  libffi xz gcompat tini tmux
+  libffi xz gcompat tini tmux libxslt-dev libxml2-dev
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
@@ -101,6 +101,5 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
     echo "Precompiling assets with $RAILS_ENV environment"; \
     rm -rf /data/.cache; \
     RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
-    cp public/assets/404-*.html public/404.html; \
-    cp public/assets/500-*.html public/500.html; \
+    for f in public/assets/4*.html; do cp $f public/${f:14:3}.html; done; \
   fi

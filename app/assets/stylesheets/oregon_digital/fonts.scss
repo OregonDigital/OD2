@@ -76,6 +76,9 @@ table {
 }
 
 // Merriweather fonts
+.mw {
+  font-family: Merriweather;
+}
 .mw-sm {
   font-family: Merriweather;
   font-weight: bold;
@@ -122,6 +125,13 @@ table {
     border-bottom: 2px $light-orange solid;
     padding-bottom: 2px;
   }
+}
+
+.font-sm {
+  font-size: 16px;
+}
+.font-lg {
+  font-size: 18px;
 }
 
 .navy-blue {

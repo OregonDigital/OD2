@@ -13,10 +13,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :view, predicate: RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription'), multiple: true, basic_searchable: false do |index|
-        index.as :stored_searchable
-      end
-
       property :color_content, predicate: RDF::URI.new('http://rdaregistry.info/Elements/e/P20224'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
@@ -81,7 +77,6 @@ module OregonDigital
         { name: :tribal_notes, section_name: '' },
         { name: :source_condition, section_name: '' },
         { name: :temporal, section_name: '' },
-        { name: :view, section_name: '' },
         { name: :subject, section_name: 'Subjects' },
         { name: :award, section_name: '' },
         { name: :cultural_context, section_name: '' },

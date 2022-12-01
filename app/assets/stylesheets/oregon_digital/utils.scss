@@ -29,6 +29,21 @@
   flex-direction: row;
 }
 
+.flex-divider {
+  flex-grow: 1;
+}
+
+.flex-divider-content {
+  flex-grow: 0;
+}
+
 .visible-all-inline {
   display: inline;
+}
+
+.v-center {
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+  margin-right: -4px;
 }
