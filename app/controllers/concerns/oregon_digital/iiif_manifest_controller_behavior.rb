@@ -55,8 +55,7 @@ module OregonDigital
 
       solrdoc = search_result_document(params)
       @jp2_work_presenter = OregonDigital::IIIFPresenter.new(solrdoc, current_ability, request)
-      work = solrdoc.hydra_model.find(solrdoc.id)
-      @jp2_work_presenter.file_sets = work.file_sets
+      @jp2_work_presenter.file_sets = solrdoc.file_sets
       @jp2_work_presenter
     end
 
