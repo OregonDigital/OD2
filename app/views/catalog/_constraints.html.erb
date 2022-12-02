@@ -22,7 +22,6 @@
 
 <div class="results-constraints-wrapper">
   <h2 class="sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></h2>
-  <div class="result-count mw-lg-b col-md-3 col-sm-4"> <strong>Showing <%= @response.total_count %> works </strong></div>
+  <div class="result-count mw-lg-b col-md-3 col-sm-4"> <strong>Showing <%= ((@response.current_page * @response.limit_value) - (@response.limit_value)) + 1 %> to <%= (@response.current_page * @response.limit_value) %> of <%= @response.total_count %> work(s) </strong></div>
   <%= render 'sort_and_per_page' %>
 </div>
-
