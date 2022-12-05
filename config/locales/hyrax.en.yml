@@ -259,7 +259,7 @@ en:
     dashboard:
       my:
         action:
-          add_selected_to: 'Add selected to'
+          add_selected_to: 'Add selected to...'
           save: 'Add'
           sign_up: 'Sign Up'
           log_in: 'Log In'
