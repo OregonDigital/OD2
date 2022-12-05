@@ -9,6 +9,6 @@ function toggleFooter(parent, footer) {
   $('#user-login-modal').trigger(e);
 }
 $(document).ready(function () {
-  $("input[name=login-select]:checked")[0].onclick()
-  $("input[name=login-page-select]:checked")[0].onclick()
+  $("input[name=login-select]:checked")[0]?.onclick?.call();
+  $("input[name=login-page-select]:checked")[0]?.onclick?.call();
 });
