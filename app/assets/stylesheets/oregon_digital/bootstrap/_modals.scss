@@ -49,8 +49,16 @@ div.collection-list {
 }
 
 #user-login-modal {
+  .modal-body {
+    padding: 0 1em;
+  }
+
   .modal-footer .btn {
     margin: 2.5em 0 1.5em 0;
     padding: .5em 2.5em;
+  }
+
+  .login-radio {
+    margin: 0.25em 0;
   }
 }
