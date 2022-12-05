@@ -76,7 +76,7 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
         allow(controller).to receive(:current_ability).and_return(ability)
         allow(solrdoc).to receive(:hydra_model).and_return(hydra_model)
         allow(hydra_model).to receive(:find).with(id).and_return(asset)
-        allow(asset).to receive(:file_sets).and_return(file_sets)
+        allow(solrdoc).to receive(:file_sets).and_return(file_sets)
         allow(solrdoc).to receive(:id).and_return(id)
 
         controller.instance_variable_set('@jp2_work_presenter', nil)
