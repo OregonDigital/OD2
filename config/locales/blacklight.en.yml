@@ -9,7 +9,7 @@ en:
         title: ''
       pagination:
         next: 'Next <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>'
-        previous: '<i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Prev'
+        previous: '<i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Previous'
       pagination_info:
         no_items_found: '<strong>No %{entry_name} found</strong>'
         single_item_found: '<strong>1 %{entry_name} found</strong>'
