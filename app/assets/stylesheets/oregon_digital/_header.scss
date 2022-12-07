@@ -112,6 +112,8 @@ header {
 
   #masthead {
     box-shadow: 0 0 5px $light-grey;
+    border: solid $light-grey;
+    border-width: 0 0 5px 0;
     padding: 1em 2em;
     @media (max-width: $screen-sm-min) {
       & {
