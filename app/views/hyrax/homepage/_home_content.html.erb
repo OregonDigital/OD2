@@ -112,21 +112,21 @@
       manuscripts, and publications.
     </p>
     <p>
-      <a href="http://www.google.com" class="lato-b"> Read More </a>
+      <%= link_to "Read More", main_app.about_path, method: :get, class: "lato-b" %>
     </p>
     <br>
     <p>
       <div class="first-time-here left-shadow-drop">
         <p><b> First time here? </b></p>
-        <p><%= image_tag('link-img-icon.jpeg', {height: 30, width: 30}) %><a href="http://www.google.com" class="lato-b"> How to use this website</a> </p>
+        <p><%= image_tag('link-img-icon.jpeg', {height: 30, width: 30}) %><%= link_to "How to Use This Website", main_app.use_path, method: :get, class: "lato-b" %></p>
       </div>
     </p>
     <br>
     <p>
       <div class="dig-deeper left-shadow-drop">
         <p><b> Dig deeper </b></p>
-        <p><%= image_tag('link-img-icon.jpeg', {height: 30, width: 30}) %><a href="http://www.google.com" class="lato-b">  Copyright and usage requests </p>
-        <p><%= image_tag('link-img-icon.jpeg', {height: 30, width: 30}) %><a href="http://www.google.com" class="lato-b">  Harmful content statement </p>
+        <p><%= image_tag('link-img-icon.jpeg', {height: 30, width: 30}) %><%= link_to "Copyright and Usage Request", main_app.copyright_path, method: :get, class: "lato-b" %></p>
+        <p><%= image_tag('link-img-icon.jpeg', {height: 30, width: 30}) %><%= link_to "Harmful Content Statement", main_app.harmful_path, method: :get, class: "lato-b" %></p>
       </div>
     </p>
   </div>
