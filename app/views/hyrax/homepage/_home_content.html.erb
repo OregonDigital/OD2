@@ -11,65 +11,16 @@
         <% @member_count = @member_docs.length %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <span class="featured-collection-row flex-container">
-        <% if @member_works.length == 0 %>
-          <div class="featured-collection-item">
-            <%= image_tag(
-                'logo.png',
-                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
-              ) %>
-          </div>
-          <div class="featured-collection-item">
-            <%= image_tag(
-                'logo.png',
-                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
-              ) %>
-          </div>
-          <div class="featured-collection-item">
-            <%= image_tag(
-                'logo.png',
-                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
-              ) %>
-          </div>
-        <% elsif @member_works.length == 1 %>
-          <div class="featured-collection-item">
-            <%= image_tag(
-                'logo.png',
-                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
-              ) %>
-          </div>
-          <div class="featured-collection-item">
-            <%= image_tag(
-                'logo.png',
-                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
-              ) %>
-          </div>
-          <% @member_works[0].each do |work| %>
+        <% @members_filled = @member_works.fill(nil, @member_works.length..2)[0..2].reverse %>
+        <% @members_filled.each do |work| %>
+          <% if work == nil %>
             <div class="featured-collection-item">
-              <%= render_thumbnail_tag(
-                  SolrDocument.find(work.id),
-                  { class: 'img-thumbnail', alt: '', height: 90, width: 90 },
-                  'aria-hidden': true
-                ) %>
-            </div>
-          <% end %>
-        <% elsif @member_works.length == 2 %>
-          <div class="featured-collection-item">
-            <%= image_tag(
+              <%= image_tag(
                 'logo.png',
                 { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
               ) %>
-          </div>
-          <% @member_works[0..1].each do |work| %>
-            <div class="featured-collection-item">
-              <%= render_thumbnail_tag(
-                  SolrDocument.find(work.id),
-                  { class: 'img-thumbnail', alt: '', height: 90, width: 90 },
-                  'aria-hidden': true
-                ) %>
             </div>
-          <% end %>
-        <% else %>
-          <% @member_works[0..2].each do |work| %>
+          <% else %>
             <div class="featured-collection-item">
               <%= render_thumbnail_tag(
                   SolrDocument.find(work.id),
