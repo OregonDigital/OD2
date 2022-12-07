@@ -22,6 +22,8 @@
 }
 
 .collection-header {
+  padding-top: 3em;
+
   .hyc-header {
     margin-bottom: 0;
   }
@@ -29,7 +31,7 @@
     display: flex;
     align-items: baseline;
     justify-content: flex-start;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     @media (max-width: $screen-sm-min) {
       display: block;
       padding-top: 1em;
