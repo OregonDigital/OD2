@@ -88,7 +88,7 @@ en:
         type: 'Type of Item'
     notifications:
       oembed_error:
-        message: 'The oEmbed URL attached to a work you deposited has encounted an error: %{messages}'
+        message: 'The oEmbed URL attached to a work you deposited has encountered an error (either broken or non-allowlisted URI): %{messages}'
         subject: 'Erroring oEmbed content'
       ld_fetch_success:
         message: 'The label and related information for your requested resource at %{uri} has been successfully retrieved'
