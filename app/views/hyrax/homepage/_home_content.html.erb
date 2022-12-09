@@ -11,14 +11,24 @@
         <% @member_count = @member_docs.length %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <span class="featured-collection-row flex-container">
-        <% @member_works[0..2].each do |work| %>
-          <div class="featured-collection-item">
-            <%= render_thumbnail_tag(
-                SolrDocument.find(work.id),
-                { class: 'img-thumbnail', alt: '' },
-                'aria-hidden': true
+        <% @members_filled = @member_works.fill(nil, @member_works.length..2)[0..2].reverse %>
+        <% @members_filled.each do |work| %>
+          <% if work == nil %>
+            <div class="featured-collection-item">
+              <%= image_tag(
+                'logo.png',
+                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
               ) %>
-          </div>
+            </div>
+          <% else %>
+            <div class="featured-collection-item">
+              <%= render_thumbnail_tag(
+                  SolrDocument.find(work.id),
+                  { class: 'img-thumbnail', alt: '', height: 90, width: 90 },
+                  'aria-hidden': true
+                ) %>
+            </div>
+          <% end %>
         <% end %>
         <div class="featured-collection-item">
           <h3 class='collection-title'><%= collection.title.first %></h3>
@@ -51,6 +61,24 @@
       A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press,
       Oregon Digital comprises more than 500,000 digitized works including historic and modern photographs,
       manuscripts, and publications.
+    </p>
+    <p>
+      <%= link_to "Read More", main_app.about_path, method: :get, class: "lato-b" %>
+    </p>
+    <br>
+    <p>
+      <div class="first-time-here left-shadow-drop">
+        <p><b> First time here? </b></p>
+        <p><%= image_tag('link-img-icon.jpg', {height: 30, width: 30, alt: ''}) %><%= link_to "How to Use This Website", main_app.use_path, method: :get, class: "lato-b" %></p>
+      </div>
+    </p>
+    <br>
+    <p>
+      <div class="dig-deeper left-shadow-drop">
+        <p><b> Dig deeper </b></p>
+        <p><%= image_tag('link-img-icon.jpg', {height: 30, width: 30, alt: ''}) %><%= link_to "Copyright and Usage Request", main_app.copyright_path, method: :get, class: "lato-b" %></p>
+        <p><%= image_tag('link-img-icon.jpg', {height: 30, width: 30, alt: ''}) %><%= link_to "Harmful Content Statement", main_app.harmful_path, method: :get, class: "lato-b" %></p>
+      </div>
     </p>
   </div>
 </div>

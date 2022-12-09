@@ -3,5 +3,6 @@ $(document).ready(function() {
     transitionDuration: 5,
     columnWidth: '#masonry-sizer',
     gutter: '#masonry-gutter-sizer',
+    horizontalOrder: true,
   });
 });
