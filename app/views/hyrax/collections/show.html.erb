@@ -12,7 +12,7 @@
           <h1><%= @presenter.title.first %></h1>
           <div class="collection-subtitle">
             <span class="lg-border-right item-count">
-              <%= [ @presenter.total_viewable_items,  @curation_concern.child_works.select { |g| !g.suppressed? }.count ].min %>
+              <%= [ @presenter.total_viewable_items,  @members_count ].min %>
               <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
             </span>
             <span>
