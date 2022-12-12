@@ -17,11 +17,11 @@
       <%# OVRERIDE FROM HYRAX: to add UO and OSU visibility options and remove default institution option %>
       <label class="radio">
         <%= f.radio_button :visibility, 'uo' %>
-        <%= "UO" %>
+        <%= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO) %>
       </label>
       <label class="radio">
         <%= f.radio_button :visibility, 'osu' %>
-        <%= "OSU" %>
+        <%= visibility_badge(OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU) %>
       </label>
       <label class="radio">
         <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_EMBARGO %>
