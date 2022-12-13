@@ -40,7 +40,7 @@ module Hyrax
           end
           re = />> (.*? County)/ # Capture each county in a group (>> Marion County)
           re2 = />> .* County/   # Capture all counties  (>> Marion County >> Polk County)
-          counties = '>> ' + (@label.scan(re).join('/').gsub ' County', '') + ' County'.pluralize(@label.scan(re).count) # Collapse grouped counties into slash separated (>> Marion/Polk Counties)
+          counties = '>> ' + (@label.scan(re).sort.join('/').gsub ' County', '') + ' County'.pluralize(@label.scan(re).count) # Collapse grouped counties into slash separated (>> Marion/Polk Counties)
           @label = @label.gsub re2, counties # Replace county captures with collapsed counties
         end
         Array(@label)
