@@ -80,7 +80,7 @@ module OregonDigital
     # Get collection titles for manifest metadata
     def collections
       solr_document.member_of_collection_ids.map do |c|
-        Collection.find(c).title.first
+        SolrDocument.find(c).title.first
       end.compact
     end
 
