@@ -1,15 +1,16 @@
 <div itemscope itemtype="http://schema.org/CreativeWork" class=" masonry document col-xs-6 col-md-3 ">
   <div class="thumbnail">
-    <% unless document.collection? || controller.class != CatalogController %>
-      <p class="pull-left">
-        <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
-      </p>
-    <% end %>
+    
     <%= link_to(url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter))) do |body| %>
       <%= image_tag thumbnail_url(document), alt: "#{document.title_or_label} show page link" %>
       <h3>
         <%= truncate(index_presenter(document).label(document_show_link_field(document)), length: 89) %>
       </h3>
+    <% end %>
+    <% unless document.collection? || controller.class != CatalogController %>
+      <p class="pull-left">
+        <input type="checkbox" name="batch_document_ids[]" id=<%="batch_document_#{document.id}"%> value=<%= document.id %> class="batch_document_selector" aria-label="Select <%= document.title_or_label %> for saving">
+      </p>
     <% end %>
   </div>
   <%= render_document_partials document, blacklight_config.view_config(:gallery).partials, :document_counter => document_counter %>
