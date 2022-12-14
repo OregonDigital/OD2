@@ -12,6 +12,7 @@ module Hyrax
     delegate(:rights_statement_label, to: :solr_document)
     delegate(:language_label, to: :solr_document)
     delegate(:non_user_collections, to: :solr_document)
+    delegate(:oai_collections, to: :solr_document)
 
     # Returns true if any fileset or any child work has a filset that is an image or PDF,
     # both of which will always have one or more JP2s

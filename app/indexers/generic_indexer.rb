@@ -1,6 +1,7 @@
 # frozen_string_literal:true
 
 # Indexer that indexes generic specific metadata
+# rubocop:disable Metrics/ClassLength
 class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::IndexesBasicMetadata
   include OregonDigital::IndexesLinkedMetadata
@@ -22,8 +23,9 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_sort_options(solr_doc)
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
+      solr_doc['oai_collections_ssim'] = []
       object.member_of_collections.each do |collection|
-        collection_index_key = collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim'
+        collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
         solr_doc[collection_index_key] << collection.id
         solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
       end
@@ -39,6 +41,17 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+
+  def collection_indexing_key(machine_id)
+    case machine_id
+    when 'user_collection'
+      'user_collections_ssim'
+    when 'oai_set'
+      'oai_collections_ssim'
+    else
+      'non_user_collections_ssim'
+    end
+  end
 
   def find_all_text_value(file_set, solr_doc)
     file_set.extracted_text&.content&.presence || file_set&.ocr_content&.presence || solr_doc['all_text_tsimv'].presence
@@ -117,3 +130,4 @@ class GenericIndexer < Hyrax::WorkIndexer
     (object.edit_groups + object.read_groups + object.discover_groups)
   end
 end
+# rubocop:enable Metrics/ClassLength

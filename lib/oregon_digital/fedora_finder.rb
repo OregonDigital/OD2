@@ -9,6 +9,7 @@ IGNORED_MODELS = [
   '<blob>',
   'Hydra::AccessControls::Permission',
   'Hydra::AccessControls::Embargo',
+  'Hydra::AccessControls::Lease',
   'Hydra::AccessControl',
   'ActiveFedora::Aggregation::Proxy',
   'ActiveFedora::Aggregation::ListSource',
