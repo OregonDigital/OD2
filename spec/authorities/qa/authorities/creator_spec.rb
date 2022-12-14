@@ -11,7 +11,7 @@ RSpec.describe Qa::Authorities::Creator do
   let(:ons_creator_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/creator/my_id' }.with_indifferent_access] }
   let(:ons_people_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/people/my_id' }.with_indifferent_access] }
   let(:ons_osu_academic_units_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/osuAcademicUnits/my_id' }.with_indifferent_access] }
-  let(:ulan_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel' }], 'id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
+  let(:ulan_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel', 'language': [{ 'id': 'http://vocab.getty.edu/language/en' }] }], 'id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
   let(:loc_names_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/names/my_id' }.with_indifferent_access] }
   let(:wikidata_response) { [{ 'entities': { '123': { 'labels': { "#{I18n.locale}": { 'value': 'mylabel' } } } }, '@id': 'http://www.wikidata.org/entity/my_id' }.with_indifferent_access] }
 

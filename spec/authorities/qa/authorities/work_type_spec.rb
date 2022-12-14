@@ -4,7 +4,7 @@ RSpec.describe Qa::Authorities::WorkType do
   let(:repository_instance) { described_class.new }
   let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.json' }
   let(:ons_request) { 'http://opaquenamespace.org/ns/workType/my_id.jsonld' }
-  let(:getty_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel' }], 'id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
+  let(:getty_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel', 'language': [{ 'id': 'http://vocab.getty.edu/language/en' }] }], 'id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
   let(:ons_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/workType/my_id' }.with_indifferent_access] }
 
   it { expect(repository_instance.label.call(getty_response, OregonDigital::ControlledVocabularies::Vocabularies::GettyAat)).to eq 'mylabel' }
