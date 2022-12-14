@@ -2,7 +2,7 @@
 
 RSpec.describe Qa::Authorities::Culture do
   let(:repository_instance) { described_class.new }
-  let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.jsonld' }
+  let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.json' }
   let(:loc_names_request) { 'http://id.loc.gov/authorities/names/my_id.jsonld' }
   let(:loc_subjects_request) { 'http://id.loc.gov/authorities/subjects/my_id.jsonld' }
   let(:ons_request) { 'http://opaquenamespace.org/ns/culture/my_id.jsonld' }

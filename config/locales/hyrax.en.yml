@@ -229,9 +229,9 @@ en:
           date_modified: Modified
   hyrax:
     advanced_form:
-      all: Match all fields
-      any: Match any fields
-      query_criteria_heading_html: "Advanced search scope. %{select_menu}"
+      all: All
+      any: Any
+      query_criteria_heading_html: "Match %{select_menu} of these fields:"
     base:
       relationships:
         header: 'Collection Information'
@@ -259,7 +259,7 @@ en:
     dashboard:
       my:
         action:
-          add_selected_to: 'Add selected to'
+          add_selected_to: 'Add selected to...'
           save: 'Add'
           sign_up: 'Sign Up'
           log_in: 'Log In'

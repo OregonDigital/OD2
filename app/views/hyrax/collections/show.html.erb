@@ -12,7 +12,7 @@
           <h1><%= @presenter.title.first %></h1>
           <div class="collection-subtitle">
             <span class="lg-border-right item-count">
-              <%= [ @presenter.total_viewable_items,  @curation_concern.child_works.select { |g| !g.suppressed? }.count ].min %>
+              <%= [ @presenter.total_viewable_items,  @members_count ].min %>
               <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
             </span>
             <span>
@@ -39,22 +39,22 @@
         </div>
         <div class="flex-container">
           <div class="metadata-expand flex-item text-left">
+            <% unless @presenter.description.first.nil? %>
+              <button class="btn-link lato-p" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
+                <span class="collapsed">
+                  Read More
+                </span>
+                <span class="expanded">
+                  Read Less
+                </span>
+              </button>
+              <br/>
+              <br/>
+            <% end %>
             <% unless footer_metadata.empty? %>
               <a href="#footer-metadata" class="lato-p hidden-xs">
                 Additional Collection Information
-                <br/>
-                <br/>
               </a>
-            <% end %>
-            <% unless @presenter.description.first.nil? %>
-            <button class="btn-link lato-p" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
-              <span class="collapsed">
-                Read More
-              </span>
-              <span class="expanded">
-                Read Less
-              </span>
-            </button>
             <% end %>
           </div>
           <div class="institution-footer text-right visible-xs">

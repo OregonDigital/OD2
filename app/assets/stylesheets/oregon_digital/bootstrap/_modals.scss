@@ -9,11 +9,13 @@
   padding: 30px 30px 15px;
 
   .close {
-    font-size: 64px;
-    margin-top: -32px;
+    font-size: 32px;
     font-weight: normal;
+    color: $navy-blue;
+    opacity: 1;
   }
 }
+
 #ajax-modal {
   .close {
     margin-top: -64px;
@@ -21,7 +23,7 @@
 }
 
 .modal-body {
-  padding: 15px 30px 45px;
+  padding: 1em 1em 2em;
   overflow-y: auto;
   max-height: calc(100vh - 200px);
 }
@@ -29,7 +31,6 @@
 .modal-footer {
   padding: 30px;
   font-size: 1.4em;
-  font-weight: bold;
   border-top-width: 3px;
 }
 
@@ -44,5 +45,20 @@ div.collection-list {
     margin-bottom: 2px;
     text-transform: uppercase;
     letter-spacing: 1px;
+  }
+}
+
+#user-login-modal {
+  .modal-body {
+    padding: 0 1em;
+  }
+
+  .modal-footer .btn {
+    margin: 2.5em 0 1.5em 0;
+    padding: .5em 2.5em;
+  }
+
+  .login-radio {
+    margin: 0.25em 0;
   }
 }

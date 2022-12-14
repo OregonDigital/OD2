@@ -3,14 +3,15 @@
   <div class="modal-dialog text-left">
       <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="login_account_title">
         <div class="modal-header">
-          <span class="modal-title" id="login_account_title">LOGIN TO YOUR ACCOUNT</span>
           <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
+          <div class="clearfix"></div>
+          <div class="modal-title text-center" id="login_account_title">LOGIN TO YOUR ACCOUNT</div>
         </div>
         <div class="modal-body login-modal">
           <div class="row">
             <ul>
               <li class="osu-login">
-                <div class="col-md-4">
+                <div class="col-sm-4 col-xs-12 login-radio">
                   <label>
                     <input type="radio" name="login-select" checked="checked" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-OSU-footer')">
                     <%= image_tag('osu_logo.png', height: '50', width: '50', alt: 'Oregon State University Login') %>OSU
@@ -18,7 +19,7 @@
                 </div>
               </li>
               <li class="uo-login">
-                <div class="col-md-4">
+                <div class="col-sm-4 col-xs-12 login-radio">
                   <label>
                     <input type="radio" name="login-select" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-UO-footer')">
                     <%= image_tag('uo.png', height: '50', width: '50', alt: 'University of Oregon Login') %>UO
@@ -26,16 +27,15 @@
                 </div>
               </li>
               <li>
-                <div class="col-md-4">
-                    <div class="col-md-1">
-                      <input id="other-login" type="radio" name="login-select" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-local-footer')">
-                    </div>
-                    <div class="col-md-9">
-                      <label for="other-login">
-                        Other Affiliation
-                      </label>
-                    </div>
-                </div>
+                <div class="col-sm-4 col-xs-12 login-radio">
+                  <div>
+                    <label for="other-login">
+                    <div style="display:inline-block;height:50px;vertical-align:middle"></div><!-- Weird spacing formatter so radio is aligned -->
+                    <input id="other-login" type="radio" name="login-select" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-local-footer')">
+                      Other Affiliation
+                    </label>
+                  </div>
+              </div>
               </li>
             </ul>
           </div>
@@ -43,31 +43,31 @@
         <div id="login-modal-footer-OSU-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
           <div class='row'>
             <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
-              <span class="university-login">CONTINUE TO OSU LOG IN</span>
+              <span class="university-login">CONTINUE TO <span class="visible-xs"></span> LOG IN</span>
             <% end %>
           </div>
-          <div class='row'>
-            Questions about logging in? Contact us.
+          <div class='row lato-p'>
+            Questions about logging in? <a href="/contact">Contact us.</a>
           </div>
         </div>
         <div id="login-modal-footer-UO-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
           <div class='row'>
             <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
-              <span class="university-login">CONTINUE TO UO LOG IN</span>
+              <span class="university-login">CONTINUE TO <span class="visible-xs"></span> LOG IN</span>
             <% end %>
           </div>
-          <div class='row'>
-            Questions about logging in? Contact us.
+          <div class='row lato-p'>
+            Questions about logging in? <a href="/contact">Contact us.</a>
           </div>
         </div>
         <div id="login-modal-footer-local-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
           <div class='row'>
             <%= link_to main_app.new_user_session_path, class: 'btn btn-primary' do %>
-              <span class="university-login">CONTINUE TO LOG IN</span>
+              <span class="university-login">CONTINUE TO <span class="visible-xs"></span> LOG IN</span>
             <% end %>
           </div>
-          <div class='row'>
-            Questions about logging in? Contact us.
+          <div class='row lato-p'>
+            Questions about logging in? <a href="/contact">Contact us.</a>
           </div>
         </div>
       </div><!-- /.modal-content -->

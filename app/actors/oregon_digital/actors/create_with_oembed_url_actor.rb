@@ -48,9 +48,11 @@ module OregonDigital
             resource = OEmbed::Providers.get(oembed_url)
             title = resource.respond_to?(:title) ? resource.title : "oEmbed Media from #{resource.provider_name}"
           rescue OEmbed::Error => e
+            msg = e.message
+            msg += ' (broken or non-allowlisted URI)' if e.is_a? OEmbed::NotFound
             OembedError.find_or_create_by(document_id: fs.id) do |error|
               error.document_id = fs.id
-            end.add_error(e)
+            end.add_error(msg)
           end
           fs.title = Array(title)
           actor = Hyrax::Actors::FileSetActor.new(fs, env.user)

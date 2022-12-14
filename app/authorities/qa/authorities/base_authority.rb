@@ -37,7 +37,7 @@ module Qa::Authorities
       uri = URI.parse(q)
       id = [uri.hostname, uri.path].join
       selected_id = response.select { |resp| resp['@id'].to_s.match? id }
-      selected_id.blank? ? Array(response) : selected_id
+      selected_id.blank? ? Array.wrap(response) : selected_id
     end
   end
 end
