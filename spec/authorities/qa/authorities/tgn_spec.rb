@@ -2,7 +2,7 @@
 
 RSpec.describe Qa::Authorities::Tgn do
   let(:tgn_instance) { described_class.new }
-  let(:response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel' }], 'id': 'http://vocab.getty.edu/tgn/term_id' }.with_indifferent_access] }
+  let(:response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel', 'language': [{ 'id': 'http://vocab.getty.edu/language/en' }] }], 'id': 'http://vocab.getty.edu/tgn/term_id' }.with_indifferent_access] }
 
   it { expect(tgn_instance.label.call(response, OregonDigital::ControlledVocabularies::Vocabularies::GettyTgn)).to eq 'mylabel' }
   describe '#search' do
