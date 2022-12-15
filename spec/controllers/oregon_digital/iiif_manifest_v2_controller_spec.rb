@@ -105,6 +105,7 @@ RSpec.describe OregonDigital::IiifManifestV2Controller do
         allow(controller).to receive(:current_ability).and_return(ability)
         allow(work).to receive(:file_sets).and_return(file_sets)
         allow(solrdoc).to receive(:id).and_return(id)
+        allow(solrdoc).to receive(:file_sets).and_return(file_sets)
         controller.instance_variable_set('@solrdoc', solrdoc)
         controller.instance_variable_set('@jp2_work_presenter', nil)
       end

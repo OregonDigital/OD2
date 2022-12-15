@@ -79,8 +79,11 @@ module OregonDigital
 
     # Get collection titles for manifest metadata
     def collections
+      @collections ||= {}
       solr_document.member_of_collection_ids.map do |c|
-        SolrDocument.find(c).title.first
+        next @collections[c] unless @collections[c].nil?
+
+        @collections[c] = SolrDocument.find(c).title.first
       end.compact
     end
 
