@@ -49,11 +49,10 @@ module OregonDigital
       presenters = []
 
       (ordered_ids - file_sets.map(&:id)).each do |work_id|
-        work = ActiveFedora::Base.find(work_id)
         doc = SolrDocument.find(work_id)
 
         presenter = IiifV2Presenter.new(doc, current_ability, request)
-        presenter.file_sets = work.file_sets
+        presenter.file_sets = doc.file_sets
         presenters << presenter
       end
 
@@ -80,8 +79,11 @@ module OregonDigital
 
     # Get collection titles for manifest metadata
     def collections
+      @collections ||= {}
       solr_document.member_of_collection_ids.map do |c|
-        SolrDocument.find(c).title.first
+        next @collections[c] unless @collections[c].nil?
+
+        @collections[c] = SolrDocument.find(c).title.first
       end.compact
     end
 
