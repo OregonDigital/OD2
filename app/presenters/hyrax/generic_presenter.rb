@@ -38,6 +38,12 @@ module Hyrax
       title.first
     end
 
+    def total_viewable_items(id)
+      visibility = ['open']
+      visibility += current_ability&.current_user&.groups
+      ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id} AND suppressed_bsi:false AND visibility_ssi:(#{visibility.join(' ')})").accessible_by(current_ability).count
+    end
+
     # Link to add to shelf functionality
     def add_shelf_path
       # Links to item stats page until we have shelves
