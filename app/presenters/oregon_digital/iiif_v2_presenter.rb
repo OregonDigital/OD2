@@ -48,7 +48,7 @@ module OregonDigital
     def work_presenters
       work_ids = (ordered_ids - file_sets.map(&:id))
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
-      solr_response = Hyrax::SolrService.get(solr_query)
+      solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
 
       solr_response['response']['docs'].map do |doc|
         doc = SolrDocument.new(doc)
