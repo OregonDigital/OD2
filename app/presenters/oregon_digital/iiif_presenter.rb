@@ -85,6 +85,7 @@ module OregonDigital
 
     # Get collection titles for manifest metadata
     def collections
+      @collections ||= {}
       cached_cols = @collections.select { |key, _val| key.in? solr_document.member_of_collection_ids }.values
       return cached_cols unless cached_cols.count < solr_document.member_of_collection_ids.count
 
