@@ -8,6 +8,7 @@ module OregonDigital
   # only be used for helping to build the IIIF manifest.
   class IIIFPresenter < Hyrax::WorkShowPresenter
     attr_accessor :file_sets
+    attr_writer :collections
     delegate :id, to: :solr_document
     delegate(*Hyrax.config.iiif_metadata_fields, to: :solr_document)
 
@@ -45,18 +46,24 @@ module OregonDigital
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def work_presenters
       work_ids = (ordered_ids - file_sets.map(&:id))
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
       solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
+      collections # Prime the @collections cache
 
       solr_response['response']['docs'].map do |doc|
         doc = SolrDocument.new(doc)
         presenter = IIIFPresenter.new(doc, current_ability, request)
         presenter.file_sets = doc.file_sets
+        presenter.collections = @collections
         presenter
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def search_service
       [request.base_url, Rails.application.routes.url_helpers.solr_document_iiif_search_path(solr_document_id: id.to_s)].join
@@ -78,12 +85,19 @@ module OregonDigital
 
     # Get collection titles for manifest metadata
     def collections
-      @collections ||= {}
+      cached_cols = @collections.select { |key, _val| key.in? solr_document.member_of_collection_ids }.values
+      return cached_cols unless cached_cols.count < solr_document.member_of_collection_ids.count
+
+      cache_collections(solr_document)
+    end
+
+    def cache_collections(solr_document)
       solr_document.member_of_collection_ids.map do |c|
         next @collections[c] unless @collections[c].nil?
 
         @collections[c] = SolrDocument.find(c).title.first
       end.compact
+      @collections
     end
 
     # Get file set format labels for manifest metadata
