@@ -54,6 +54,7 @@ module OregonDigital
         doc = SolrDocument.new(doc)
         presenter = IIIFPresenter.new(doc, current_ability, request)
         presenter.file_sets = doc.file_sets
+        presenter
       end
     end
 
