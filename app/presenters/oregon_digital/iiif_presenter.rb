@@ -46,20 +46,15 @@ module OregonDigital
     end
 
     def work_presenters
-      presenters = []
       work_ids = (ordered_ids - file_sets.map(&:id))
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
       solr_response = Hyrax::SolrService.get(solr_query)
-      solr_docs = solr_response['response']['docs']
 
-      solr_docs.each do |doc|
+      solr_response['response']['docs'].map do |doc|
         doc = SolrDocument.new(doc)
         presenter = IIIFPresenter.new(doc, current_ability, request)
         presenter.file_sets = doc.file_sets
-        presenters << presenter
       end
-
-      presenters
     end
 
     def search_service
