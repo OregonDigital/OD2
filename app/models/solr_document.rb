@@ -84,8 +84,11 @@ class SolrDocument
 
   # Find and return file sets
   def file_sets
-    @file_sets ||= member_ids.map do |member_id|
-      document = SolrDocument.find(member_id)
+    solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(member_ids)
+    solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
+
+    @file_sets ||= solr_response['response']['docs'].map do |response|
+      document = SolrDocument.new(response)
       document['has_model_ssim'].first == 'FileSet' ? document : nil
     end.compact
   end
