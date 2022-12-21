@@ -13,6 +13,8 @@ gem 'browse-everything'
 # coffee-rails is a requirement for Hyrax or one of its dependencies but hasn't
 # been added to either gemspecs
 gem 'coffee-rails', '~> 4.2'
+gem 'cookieconsent'
+gem 'dalli', '~> 2.7.6'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
@@ -39,6 +41,8 @@ gem 'faraday_middleware', '~> 0.10.0'
 gem 'blacklight_iiif_search', '~> 1.0'
 gem 'rubyzip', '>= 1.2.2'
 gem 'zip_tricks', '~> 5.3'
+gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: '5520a00a2a3f5e4d6415020621a93742561b694a'  # branch: 'file_update' - ref is 3 commits back
+gem 'willow_sword', github: 'notch8/willow_sword'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
@@ -62,6 +66,7 @@ gem 'yabeda-http_requests'
 
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
+gem 'blacklight_oai_provider'
 
 group :development do
   # listen is a requirement of puma but isn't part of its gemspec

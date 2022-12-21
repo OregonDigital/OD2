@@ -1,6 +1,6 @@
 
 <% # container for all documents in index view -%>
-<div id="documents" class="row" data-behavior="masonry-gallery">
+<div id="explore-documents" class="row" data-behavior="masonry-gallery">
   <div id="masonry-sizer"></div>
   <div id="masonry-gutter-sizer"></div>
   <%= render collection: documents, as: :document, partial: 'index_masonry', locals: {count: documents.count} %>

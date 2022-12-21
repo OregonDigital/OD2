@@ -1,0 +1,13 @@
+<% content_for(:content) do %>
+<h1> About </h1>
+
+<div class="about-pages">
+  <%= render 'sidebar' %>
+
+  <div id="content" class="col-md-9 col-sm-8 col-xs-12">
+    <%= yield %>
+  </div>
+</div>
+<% end %>
+
+<%= render template: 'layouts/hyrax' %>

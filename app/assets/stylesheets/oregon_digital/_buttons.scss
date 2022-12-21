@@ -84,6 +84,11 @@ input[type=checkbox] {
   padding-top: .25em;
   padding: .25em 0 0 0.5em;
 }
+#download-button {
+  .caret-dropdown::after {
+    color: $white;
+  }
+}
 
 .tab-padding {
   padding-left: 5px;

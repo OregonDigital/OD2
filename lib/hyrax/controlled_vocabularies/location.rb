@@ -18,10 +18,13 @@ module Hyrax
       def solrize
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
+        fetch
         [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
       end
 
       # Overrides rdf_label to add location disambiguation when available.
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength
       def rdf_label
         @label = super
         @label = Array("#{@label.first} County") if us_county? && no_county_label
@@ -31,11 +34,19 @@ module Hyrax
 
           @label = @label.first
           parent_hierarchy.each do |p|
-            @label = "#{@label} >> #{p.first.rdf_label.first}"
+            p.each do |loc|
+              @label = "#{@label} >> #{loc.rdf_label.first}"
+            end
           end
+          re = />> (.*? County)/ # Capture each county in a group (>> Marion County)
+          re2 = />> .* County/   # Capture all counties  (>> Marion County >> Polk County)
+          counties = '>> ' + (@label.scan(re).sort.join('/').gsub ' County', '') + ' County'.pluralize(@label.scan(re).count) # Collapse grouped counties into slash separated (>> Marion/Polk Counties)
+          @label = @label.gsub re2, counties # Replace county captures with collapsed counties
         end
         Array(@label)
       end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/MethodLength
 
       def fetch_from_cache(subject)
         OregonDigital::Triplestore.fetch_cached_term(subject)
@@ -61,8 +72,10 @@ module Hyrax
 
       def fetch_parents
         parent_hierarchy.each do |p|
-          p.first.top_level_element = true
-          p.first.fetch
+          p.each do |loc|
+            loc.top_level_element = true
+            loc.fetch
+          end
         end
       end
 
@@ -72,7 +85,7 @@ module Hyrax
         return result if top_level_element?
 
         parent_hierarchy.each do |p|
-          p.first.persist!
+          p.each(&:persist!)
         end
 
         result

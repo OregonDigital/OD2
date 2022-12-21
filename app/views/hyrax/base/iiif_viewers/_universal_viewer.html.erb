@@ -1,0 +1,11 @@
+<div class="viewer-wrapper">
+  <iframe aria-label="image view"
+    <% previous_query = URI.parse(request.referer).query unless request.referer.blank? %>
+    <% previous_params = CGI.parse(previous_query) unless previous_query.blank? %>
+    <% text_present = presenter.file_set_presenters.map { |fs| fs.all_text || fs.hocr_text }.flatten.any? %>
+    <% search_term = previous_params&.[]('q[]').presence&.join(' ') || previous_params&.[]('q')&.map { |q| q.split 'AND' }&.flatten&.map(&:strip)&.presence&.join(' ') || previous_params&.[]('all_fields').presence&.join(' ') if text_present %>
+    src="<%= universal_viewer_base_url %>#?manifest=<%= main_app.polymorphic_url [main_app, :manifest, presenter], { locale: nil, format: :json } %>&config=<%= universal_viewer_config_url %>&h=<%= search_term %>&ocr=<%= text_present %>"
+    allowfullscreen="true"
+    frameborder="0"
+  ></iframe>
+</div>

@@ -1,14 +1,22 @@
 <%# OVERRIDE FROM HYRAX to swap facet and results render order %>
 
-<%= render 'did_you_mean' %>
-<%= render 'constraints' %>
+<%- unless @response.empty? %>
+  <%= render 'did_you_mean' %>
+  <%= render 'constraints' %>
+<% end %>
 
 <div class="flex-container row container">
+<%- unless @response.empty? %>
   <div id="sidebar" class="flex-item col-md-3 col-sm-4 col-xs-12">
     <%= render 'search_sidebar' %>
   </div>
+<% end %>
 
+<%- if @response.empty? %>
+  <div id="content" class="flex-item col-xs-12">
+<% else %>
   <div id="content" class="flex-item col-md-9 col-sm-8 col-xs-12">
+<% end %>
     <%= render 'search_results' %>
   </div>
 </div>

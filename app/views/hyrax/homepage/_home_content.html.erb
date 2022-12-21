@@ -1,24 +1,34 @@
 <div id="showcase" class="row">
   <div class="col-md-5 col-md-offset-1">
-    <% @collections = Collection.limit 5 %>
+    <% @collections = Collection.accessible_by(current_ability).limit 5 %>
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
-        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 10000)%>
+        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 100000)%>
         <% @member_works = @member_docs[0..2].each do |doc| %>
           <% ActiveFedora::Base.find(doc['id']).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first %>
         <% end %>
         <% @member_count = @member_docs.length %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <span class="featured-collection-row flex-container">
-        <% @member_works[0..2].each do |work| %>
-          <div class="featured-collection-item">
-            <%= render_thumbnail_tag(
-                SolrDocument.find(work.id),
-                { class: 'img-thumbnail', alt: '' },
-                'aria-hidden': true
+        <% @members_filled = @member_works.fill(nil, @member_works.length..2)[0..2].reverse %>
+        <% @members_filled.each do |work| %>
+          <% if work == nil %>
+            <div class="featured-collection-item">
+              <%= image_tag(
+                'logo.png',
+                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
               ) %>
-          </div>
+            </div>
+          <% else %>
+            <div class="featured-collection-item">
+              <%= render_thumbnail_tag(
+                  SolrDocument.find(work.id),
+                  { class: 'img-thumbnail', alt: '', height: 90, width: 90 },
+                  'aria-hidden': true
+                ) %>
+            </div>
+          <% end %>
         <% end %>
         <div class="featured-collection-item">
           <h3 class='collection-title'><%= collection.title.first %></h3>
@@ -33,12 +43,12 @@
     <% end %>
     <div class="flex-container feature-collection-divider hidden-xs hidden-sm">
       <div class="featured-collection-border"></div>
-      <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_explore_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
+      <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
       <div class="featured-collection-border"></div>
     </div>
   </div>
   <div class="visible-sm visible-xs center-text">
-    <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_explore_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
+    <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
     <div class="featured-collection-border"></div>
   </div>
   <div class="col-xs-12 col-md-5 col-md-offset-1 about-oregondigital-container">
@@ -49,8 +59,26 @@
     </div>
     <p class='mw-lg about-oregondigital-text'>
       A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press,
-      Oregon Digital comprises more than 100,000 digitized works including historic and modern photographs,
+      Oregon Digital comprises more than 500,000 digitized works including historic and modern photographs,
       manuscripts, and publications.
+    </p>
+    <p>
+      <%= link_to "Read More", main_app.about_path, method: :get, class: "lato-b" %>
+    </p>
+    <br>
+    <p>
+      <div class="first-time-here left-shadow-drop">
+        <p><b> First time here? </b></p>
+        <p><%= image_tag('link-img-icon.jpg', {height: 30, width: 30, alt: ''}) %><%= link_to "How to Use This Website", main_app.use_path, method: :get, class: "lato-b" %></p>
+      </div>
+    </p>
+    <br>
+    <p>
+      <div class="dig-deeper left-shadow-drop">
+        <p><b> Dig deeper </b></p>
+        <p><%= image_tag('link-img-icon.jpg', {height: 30, width: 30, alt: ''}) %><%= link_to "Copyright and Usage Request", main_app.copyright_path, method: :get, class: "lato-b" %></p>
+        <p><%= image_tag('link-img-icon.jpg', {height: 30, width: 30, alt: ''}) %><%= link_to "Harmful Content Statement", main_app.harmful_path, method: :get, class: "lato-b" %></p>
+      </div>
     </p>
   </div>
 </div>

@@ -10,14 +10,15 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPhylum,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsCommonNames,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsClass,
+          OregonDigital::ControlledVocabularies::Vocabularies::OnsSpecies,
           OregonDigital::ControlledVocabularies::Vocabularies::Wikidata,
           OregonDigital::ControlledVocabularies::Vocabularies::Itis,
-          OregonDigital::ControlledVocabularies::Vocabularies::Ubio
+          OregonDigital::ControlledVocabularies::Vocabularies::LocSubjects
         ]
       end
 
       def fetch(*_args, &_block)
-        return super unless itis_or_ubio?
+        return super unless itis?
 
         graph = fetch_from_cache(rdf_subject)
         unless graph.nil?
@@ -29,8 +30,8 @@ module OregonDigital
         raise ControlledVocabularyFetchError
       end
 
-      def itis_or_ubio?
-        vocabulary.to_s.include?('Itis') || vocabulary.to_s.include?('Ubio')
+      def itis?
+        vocabulary.to_s.include?('Itis')
       end
 
       def vocabulary

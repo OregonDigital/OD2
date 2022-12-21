@@ -20,8 +20,7 @@ module OregonDigital
           OregonDigital::ControlledVocabularies::Vocabularies::OnsOsuBuildings,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsPeople,
           OregonDigital::ControlledVocabularies::Vocabularies::OnsSubject,
-          OregonDigital::ControlledVocabularies::Vocabularies::Ubio,
-          OregonDigital::ControlledVocabularies::Vocabularies::Ulan,
+          OregonDigital::ControlledVocabularies::Vocabularies::GettyUlan,
           OregonDigital::ControlledVocabularies::Vocabularies::Wikidata
         ]
       end
@@ -29,7 +28,7 @@ module OregonDigital
 
       def fetch(*_args, &_block)
         vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
-        if vocabulary.to_s.include?('Itis') || vocabulary.to_s.include?('Ubio')
+        if vocabulary.to_s.include?('Itis')
           store_statement(vocabulary.fetch(vocabulary, rdf_subject))
         else
           super

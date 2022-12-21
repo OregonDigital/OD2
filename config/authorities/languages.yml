@@ -492,6 +492,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/him
       term: "Himachali languages |  Western Pahari languages [him]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hin
+      term: "Hindi [hin]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/hmo
       term: "Hiri Motu [hmo]"
     - active: true
@@ -1130,6 +1133,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/sun
       term: "Sundanese [sun]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/swa
+      term: "Swahili [swa]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/ssw
       term: "Swati [ssw]"

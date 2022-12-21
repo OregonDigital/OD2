@@ -165,14 +165,20 @@ services:
   ##
   # Selenium and Chrome for System (browser) tests
   selenium-hub:
+    # x86
     image: selenium/hub:3.141.5-astatine
+    # m1/arm
+    # image: seleniarm/hub:4.4.0-20220903
     volumes:
       - ./spec/fixtures:/data/spec/fixtures
     networks:
       internal:
       external:
   chrome:
+    # x86
     image: selenium/node-chrome-debug:3.141.5-astatine
+    # m1/arm
+    # image: seleniarm/node-chromium:105.0
     volumes:
       - ./spec/fixtures:/data/spec/fixtures
     depends_on:
@@ -220,7 +226,11 @@ services:
   ##
   # Fedora repository server
   fcrepo: &fcrepo
+    # x86
     image: ualbertalib/docker-fcrepo4:4.7
+    # m1/arm
+    # build:
+    #   context: m1/fcrepo
     environment:
       - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
     expose:
@@ -238,7 +248,11 @@ services:
   ##
   # Fedora repository server
   blazegraph: &blazegraph
+    # x86
     image: lyrasis/blazegraph:2.1.5
+    # m1/arm
+    # build:
+    #   context: m1/bg
     expose:
       - 8080
     networks:

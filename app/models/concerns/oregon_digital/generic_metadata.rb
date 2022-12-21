@@ -94,6 +94,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :landscape_architect, predicate: RDF::Vocab::MARCRelators.lsa, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :lyricist, predicate: RDF::Vocab::MARCRelators.lyr, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
@@ -210,6 +214,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :view, predicate: RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription'), multiple: true, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
       property :subject, predicate: RDF::Vocab::DC.subject, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Subject do |index|
         index.as :stored_searchable, :facetable
       end
@@ -226,7 +234,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :event, predicate: RDF::Vocab::SCHEMA.Event, multiple: true, basic_searchable: true do |index|
+      property :event, predicate: RDF::Vocab::SCHEMA.event, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
@@ -603,13 +611,14 @@ module OregonDigital
         { name: 'collector_label', is_controlled: true, collection_facetable: true },
         { name: 'composer_label', is_controlled: true, collection_facetable: true },
         { name: 'dedicatee_label', is_controlled: true, collection_facetable: true },
-        { name: 'donor_label', is_controlled: true, collection_facetable: true },
         { name: 'designer_label', is_controlled: true, collection_facetable: true },
+        { name: 'donor_label', is_controlled: true, collection_facetable: true },
         { name: 'editor_label', is_controlled: true, collection_facetable: true },
         { name: 'former_owner', is_controlled: false, collection_facetable: true },
         { name: 'illustrator_label', is_controlled: true, collection_facetable: true },
         { name: 'interviewee_label', is_controlled: true, collection_facetable: true },
         { name: 'interviewer_label', is_controlled: true, collection_facetable: true },
+        { name: 'landscape_architect_label', is_controlled: true, collection_facetable: true },
         { name: 'lyricist_label', is_controlled: true, collection_facetable: true },
         { name: 'owner_label', is_controlled: true, collection_facetable: true },
         { name: 'patron_label', is_controlled: true, collection_facetable: true },
@@ -649,6 +658,7 @@ module OregonDigital
         { name: 'military_highest_rank', is_controlled: false, collection_facetable: false },
         { name: 'military_occupation', is_controlled: false, collection_facetable: false },
         { name: 'military_service_location', is_controlled: false, collection_facetable: false },
+        { name: 'mods_note', is_controlled: false, collection_facetable: false },
         { name: 'specimen_type', is_controlled: false, collection_facetable: false },
         { name: 'identification_verification_status', is_controlled: false, collection_facetable: false },
         { name: 'accepted_name_usage', is_controlled: false, collection_facetable: false },
@@ -720,9 +730,9 @@ module OregonDigital
         { name: 'publication_place_label', is_controlled: true, collection_facetable: false },
         { name: 'place_of_production_label', is_controlled: true, collection_facetable: false },
         { name: 'contained_in_journal', is_controlled: false, collection_facetable: false },
+        { name: 'on_pages', is_controlled: false, collection_facetable: false },
         { name: 'is_volume', is_controlled: false, collection_facetable: true },
         { name: 'has_number', is_controlled: false, collection_facetable: true },
-        { name: 'on_pages', is_controlled: false, collection_facetable: false },
         { name: 'citation', is_controlled: false, collection_facetable: false },
         { name: 'has_finding_aid', is_controlled: false, collection_facetable: false },
         { name: 'relation', is_controlled: false, collection_facetable: false },
@@ -734,6 +744,7 @@ module OregonDigital
         { name: 'art_series', is_controlled: false, collection_facetable: false },
         { name: 'related_url', is_controlled: false, collection_facetable: false },
         { name: 'resource_type_label', is_controlled: true, name_label: 'Media', collection_facetable: true },
+        # SET
         { name: 'exhibit', is_controlled: false, collection_facetable: true },
         { name: 'institution_label', is_controlled: true, collection_facetable: true },
         { name: 'conversion', is_controlled: false, collection_facetable: false },
@@ -741,6 +752,7 @@ module OregonDigital
         { name: 'date_modified', is_controlled: false, collection_facetable: false },
         { name: 'resolution', is_controlled: false, collection_facetable: false },
         { name: 'color_content', is_controlled: false, collection_facetable: false }
+        # Edited full text
       ].freeze
 
       UNORDERED_PROPERTIES = [
@@ -768,6 +780,7 @@ module OregonDigital
         { name: :illustrator, section_name: '' },
         { name: :interviewee, section_name: '' },
         { name: :interviewer, section_name: '' },
+        { name: :landscape_architect, section_name: '' },
         { name: :lyricist, section_name: '' },
         { name: :owner, section_name: '' },
         { name: :patron, section_name: '' },
@@ -797,6 +810,7 @@ module OregonDigital
         { name: :tribal_notes, section_name: '' },
         { name: :source_condition, section_name: '' },
         { name: :temporal, section_name: '' },
+        { name: :view, section_name: '' },
         { name: :subject, section_name: 'Subjects' },
         { name: :award, section_name: '' },
         { name: :cultural_context, section_name: '' },

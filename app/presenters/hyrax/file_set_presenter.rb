@@ -33,7 +33,7 @@ module Hyrax
              :embargo_release_date, :lease_expiration_date,
              :depositor, :keyword, :title_or_label, :keyword,
              :date_created, :date_modified, :itemtype,
-             :original_file_id, :oembed_url,
+             :original_file_id, :oembed_url, :all_text, :hocr_text,
              to: :solr_document
 
     def self.characterization_terms
@@ -59,7 +59,7 @@ module Hyrax
 
     # The title of the webpage that shows this FileSet.
     def page_title
-      "#{human_readable_type} | #{title.first} | ID: #{id} | #{I18n.t('hyrax.product_name')}"
+      "#{human_readable_type} | #{title.first} | ID: #{id}"
     end
 
     # The first title assertion

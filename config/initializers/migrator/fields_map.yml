@@ -104,6 +104,7 @@ fields:
   accessRestrictions: access_restrictions
   copyrightClaimant: copyright_claimant
   dcRightsHolder: rights_holder
+  rightsHolder: rights_holder
   rights: rights_statement
   useRestrictions: use_restrictions
   od_repository: repository

@@ -48,11 +48,11 @@
           </div><!-- /.modal-body -->
           <div class="modal-footer text-center lato-b">
             <%# @TODO: Send this link to new My Collections page %>
-            <%= link_to 'View My Collections', Rails.application.routes.url_helpers.my_explore_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my]) %>
+            <%= link_to 'View My Collections', Rails.application.routes.url_helpers.my_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my]) %>
           </div>
         <% else %>
           <div class="modal-body">
-            <p>Please login or create an account to save this work to a collection:</p>
+            <p>Please login or create an account to add this work to a collection:</p>
 
             <%= button_tag "<i class='fa fa-lock' aria-hidden='true'></i> #{t('hyrax.dashboard.my.action.log_in')}".html_safe,
                 class: 'btn btn-primary btn-outline login-button',

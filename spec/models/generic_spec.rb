@@ -32,38 +32,17 @@ RSpec.describe Generic do
     end
 
     it 'formats a controlled property' do
-      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm [http://opaquenamespace.org/ns/TestVocabulary/TestTerm]')
+      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm')
     end
   end
 
-  describe '#controlled_properties_as_s' do
-    it 'tries to format all controlled properties' do
-      model.controlled_properties.map { |prop| expect(model).to receive(prop.to_s) }
-      model.send(:controlled_properties_as_s)
-    end
-    it 'returns an empty hash with no controlled properties' do
-      expect(model.send(:controlled_properties_as_s)).to eq({})
-    end
-  end
-
-  describe '#properties_as_s' do
-    it 'tries to format the correct properties' do
-      rejected_fields = %w[head tail] + model.controlled_properties.map(&:to_sym)
-      (model.send(:properties).keys - rejected_fields).map { |prop| expect(model).to receive(prop.to_s) }
-      model.send(:properties_as_s)
-    end
-    it 'returns a hash with no controlled properties' do
-      expect(model.send(:properties_as_s)).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
-    end
-  end
-
-  describe '#csv_metadata' do
-    it 'provides a string' do
-      expect(model.csv_metadata).to be_kind_of(String)
+  describe '#metadata_row' do
+    it 'provides an array' do
+      expect(model.metadata_row([:title], [])).to be_kind_of(Array)
     end
     it 'provides correct data' do
-      csv = CSV.parse(model.csv_metadata, headers: true)
-      expect(csv[0].to_h).to eq('depositor' => user.email, 'has_model' => 'Generic', 'resource_type' => 'MyType', 'title' => 'foo', 'identifier' => 'MyIdentifier', 'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/')
+      data = model.metadata_row(%i[depositor has_model resource_type title identifier rights_statement], [])
+      expect(data).to eq([user.email, 'Generic', 'Text', 'foo', 'MyIdentifier', 'In Copyright'])
     end
   end
 end

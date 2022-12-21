@@ -14,6 +14,7 @@ class Ability
 
   def custom_permissions
     can(%i[show add_user remove_user index edit update destroy], Role)
+    can(%i[show edit index update destroy], User) if current_user.admin?
 
     # Apply works edit permissions
     work_edit_ability
@@ -33,19 +34,19 @@ class Ability
     edit_access_person.include?(current_user.user_key)
   end
 
-  def admin_permission_roles
+  def self.admin_permission_roles
     %w[admin collection_curator]
   end
 
-  def manager_permission_roles
+  def self.manager_permission_roles
     admin_permission_roles << 'depositor'
   end
 
-  def osu_roles
+  def self.osu_roles
     %w[osu_affiliate osu_user]
   end
 
-  def uo_roles
+  def self.uo_roles
     %w[uo_affiliate uo_user]
   end
 end

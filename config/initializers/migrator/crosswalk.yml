@@ -79,6 +79,10 @@ crosswalk:
     predicate: http://id.loc.gov/vocabulary/relators/ivr
     multiple: true
     function: attributes_data
+  - property: landscape_architect_attributes
+    predicate: http://id.loc.gov/vocabulary/relators/lsa
+    multiple: true
+    function: attributes_data
   - property: lyricist_attributes
     predicate: http://id.loc.gov/vocabulary/relators/lyr
     multiple: true
@@ -236,7 +240,7 @@ crosswalk:
     multiple: true
     function: attributes_data
   - property: event
-    predicate: http://schema.org/Event
+    predicate: http://schema.org/event
     multiple: true
     function: 
   - property: keyword

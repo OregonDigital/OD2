@@ -64,7 +64,9 @@ module OregonDigital
     end
 
     def total_viewable_items(id)
-      Hyrax::SolrService.get("member_of_collection_ids_ssim:#{id}")['response']['numFound']
+      visibility = ['open']
+      visibility += current_user&.groups if user_signed_in?
+      ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id} AND suppressed_bsi:false AND visibility_ssi:(#{visibility.join(' ')})").accessible_by(current_ability).count
     end
 
     def osu_items(id)

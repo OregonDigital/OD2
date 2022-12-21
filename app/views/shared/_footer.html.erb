@@ -1,41 +1,37 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
+    <div class="row padding-row"></div>
     <div class="row">
-      <div class="col-md-12 center-text">
-        <%= link_to "About Oregon Digital", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Policies", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Copyright", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Contact Us", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text right-border" %>
-        <%= link_to "Donate", Hyrax::Engine.routes.url_helpers.help_path, method: :get, class: "footer-link-text #{'right-border' if can? :read, :admin_dashboard}" %>
-        <% if can? :read, :admin_dashboard %>
-          <a href="https://oregondigital.github.io/oregon-digital-style-guide/" class="footer-link-text">Style Guide</a>
-        <% end %>
+      <div class="col-md-1"></div>
+      <div class="col-md-2 left-border">
+        <p><b class="homepage-info-text">Explore Collections</b></p>
+        <p><b class="homepage-info-text">Advanced Search</b></p>
+        <p><b class="homepage-info-text">My Collections</b></p>
       </div>
-    </div>
-    <div class="row navbar-text footer-row">
-      <div class="col-md-4 col-xs-12">
-        <a href="https://oregonstate.edu"><img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="Oregon State University"></a>
-        <a href="https://www.uoregon.edu"><img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="University of Oregon"></a>
+      <div class="col-md-2 left-border">
+        <p><b> <%= link_to "How to Use This Website", main_app.use_path, method: :get, class: "homepage-info-text" %></b></p>
+        <p><b> <%= link_to "About Oregon Digital", main_app.about_path, method: :get, class: "homepage-info-text" %></b></p>
+        <p><b> <%= link_to "Copyright and Usage Request", main_app.copyright_path, method: :get, class: "homepage-info-text" %></b></p>
+        <p><b> <%= link_to "Harmful Content Statement", main_app.harmful_path, method: :get, class: "homepage-info-text" %></b></p>
+        <p><b> <%= link_to "Contact Us", hyrax.contact_path, method: :get, class: "homepage-info-text" %></b></p>
       </div>
-      <div class="text-center col-md-4 col-xs-7">
-        <p class="homepage-info-text" >
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <p>
+          <a href="https://oregonstate.edu"><img class='osu-logo' src='<%= image_url('osu-logo.png')%>' alt="Oregon State University"></a>
+          <a href="https://www.uoregon.edu"><img class='uo-logo' src='<%= image_url('uologo.png')%>' alt="University of Oregon"></a>
+        </p>
+        <br>
+        <p class="homepage-info-text right-align" >
           Oregon Digital is collaboratively managed by the Digital Scholarship Services of the
           <a class="footer-link-text" href='https://library.uoregon.edu/'>University of Oregon Libraries</a>
           and by
           <a class="footer-link-text" href='https://osulibrary.oregonstate.edu/'>Oregon State University Libraries</a>.
         </p>
-      </div>
-      <div class="col-md-4 col-xs-5">
-        <div class="text-right">
-          <p>
-            <a class="footer-link-text" href="https://twitter.com/oregondigcol"><img class='social-logo' src='<%= image_url('twitter.jpg')%>' alt="">
-            OD on Twitter</a>
-          </p>
-          <p class='deployed-version'>
-            Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
-          </p>
-          <p>Powered by <a class="footer-link-text" href="https://www.samvera.org">Samvera</a> Hyrax <%= Hyrax::VERSION %></p>
-        </div>
+        <p class='deployed-version homepage-info-text right-align'>
+          Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
+        </p>
+        <p class="homepage-info-text right-align">Powered by <a class="footer-link-text" href="https://www.samvera.org">Samvera</a> Hyrax <%= Hyrax::VERSION %></p>
       </div>
     </div>
   </div>

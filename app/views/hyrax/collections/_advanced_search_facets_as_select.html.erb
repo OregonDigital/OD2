@@ -10,23 +10,46 @@
 <% facet_field_names = @configured_facets.map(&:solr_name) %>
 <% facets_from_request(facet_field_names).each do |display_facet| %>
     <% if should_render_facet?(display_facet) %>
-        <div class="form-group advanced-search-facet">
-            <%= label_tag display_facet.name.parameterize, :class => "col-sm-3 control-label" do %>
+        <div class="advanced-search-facet">
+            <%= label_tag display_facet.name.parameterize, :class => "col-sm-12 dark-grey h6" do %>
                 <%= facet_field_label(display_facet.name) %>
             <% end %>
 
-            <div class="col-sm-9">
-                <%= content_tag(:select, :multiple => true,
-                    :name   => "f_inclusive[#{display_facet.name}][]",
-                    :id     => display_facet.name.parameterize,
-                    :class  => "form-control advanced-search-facet-select") do %>
-                    <% display_facet.items.each do |facet_item| %>
-                        <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
-                            <%= facet_item.label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
+            <% unless display_facet.name == 'date_combined_year_label_ssim' %>
+                <div class="col-sm-12">
+                    <%= content_tag(:select, :multiple => true,
+                        :name   => "f[#{display_facet.name}][]",
+                        'data-placeholder' => 'Start typing or choose from list',
+                        :id     => display_facet.name.parameterize,
+                        :class  => "form-control advanced-search-facet-select") do %>
+                        <% display_facet.items.sort_by { |facet_item| facet_display_value(display_facet.name, facet_item) }.each do |facet_item| %>
+                            <%# OVERRIDE blacklight_advanced_search to suport facet value helper methods %>
+                            <%# If a helper_method exists in the base blacklight config for the advanced facet field name, send the helper_method. Otherwise use the existing value %>
+                            <% facet_item_label = facet_display_value(display_facet.name, facet_item) %>
+                            <%# END OVERRIDE %>
+                            <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
+                                <%= facet_item_label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
+                            <% end %>
                         <% end %>
                     <% end %>
-                <% end %>
-            </div>
+                </div>
+            <% else %>
+                <div class="col-xs-5 v-center">
+                    <%= content_tag(:input, nil,
+                        :name   => "range[#{display_facet.name}][begin]",
+                        :type   => "number",
+                        :id     => display_facet.name.parameterize,
+                        :class  => "form-control") %>
+                </div>
+                <div class="col-xs-2 v-center" style="text-align:center"> to </div>
+                <div class="col-xs-5 v-center">
+                    <%= content_tag(:input, nil,
+                        :name   => "range[#{display_facet.name}][end]",
+                        :type   => "number",
+                        :id     => display_facet.name.parameterize,
+                        :class  => "form-control") %>
+                </div>
+            <% end %>
         </div>
     <% end %>
 <% end %>

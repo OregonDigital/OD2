@@ -6,6 +6,14 @@ module OregonDigital
     extend ActiveSupport::Concern
 
     included do
+      def self.title_field
+        'title_ssort'
+      end
+
+      def self.date_field
+        'date_dtsi'
+      end
+
       def self.uploaded_field
         'system_create_dtsi'
       end
@@ -210,15 +218,15 @@ module OregonDigital
         config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), limit: 5
         config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), limit: 5
         config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5
+        config.add_facet_field 'scientific_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.scientific_combined'), limit: 5
         config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
         config.add_facet_field 'date_combined_year_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_year_combined'), limit: 5, range: { segments: false }, include_in_advanced_search: false
         config.add_facet_field 'date_combined_decade_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_decade_combined'), limit: 5
         config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
         config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
         config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
-        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection'
+        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id'
         config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
-        config.add_facet_field 'full_size_download_allowed_label_sim', label: I18n.translate('simple_form.labels.defaults.full_size_download_allowed'), limit: 5
 
         config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), limit: 5
         config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), limit: 5
@@ -277,6 +285,15 @@ module OregonDigital
           }
           field.include_in_advanced_search = false
         end
+        config.add_search_field('non_user_collections') do |field|
+          solr_name = 'non_user_collections_tesim'
+          search_fields << 'non_user_collections_tesim'
+          field.solr_local_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+          field.include_in_advanced_search = false
+        end
         config.add_search_field('all_fields', label: 'All Fields') do |field|
           all_names = search_fields.join(' ')
           title_name = 'title_tesim'
@@ -322,14 +339,34 @@ module OregonDigital
         # except in the relevancy case).
         # label is key, solr field is value
         config.add_sort_field "score desc, #{uploaded_field} desc", label: 'relevance'
-        config.add_sort_field "#{uploaded_field} desc", label: 'date uploaded (desc)'
-        config.add_sort_field "#{uploaded_field} asc", label: 'date uploaded (asc)'
-        config.add_sort_field "#{modified_field} desc", label: 'date modified (desc)'
-        config.add_sort_field "#{modified_field} asc", label: 'date modified (asc)'
+        config.add_sort_field "#{title_field} asc", label: 'Title A-Z'
+        config.add_sort_field "#{title_field} desc", label: 'Title Z-A'
+        config.add_sort_field "#{date_field} desc", label: 'Date Descending'
+        config.add_sort_field "#{date_field} asc", label: 'Date Ascending'
+        config.add_sort_field "#{uploaded_field} desc", label: 'Recently Added'
 
         # If there are more than this many search results, no spelling ('did you
         # mean') suggestion is offered.
         config.spell_max = 5
+
+        config.oai = {
+          provider: {
+            repository_name: 'Oregon Digital',
+            repository_url: ENV.fetch('OAI_REPOSITORY_URL', 'http://oregondigital.org'),
+            record_prefix: ENV.fetch('OAI_RECORD_PREFIX', 'oregondigital.org'),
+            admin_email: ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
+          },
+          document: {
+            limit: 50,
+            timestamp_field: 'system_create_dtsi',
+            timestamp_method: 'system_created',
+            set_fields: [
+              { 'label': 'title_tesim',
+                'solr_field': 'member_of_collection_ids_ssim' }
+            ],
+            set_model: ::OaiSet
+          }
+        }
       end
     end
   end

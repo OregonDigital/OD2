@@ -10,391 +10,394 @@ institution_crosswalk:
 primary_set_crosswalk:
   - primary_set: aa-images
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: aerial-photos-mid-willamette
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: african-ephemera
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: alice-b-sheldon
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: angelus-studio
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: annual-cruise
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: arch-entourage
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: art-architecture-design
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: artists-books
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: barbara-fealy-coll262
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: braceros
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: building-or
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: chester-e-corry-coll522
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: chinavine
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
+  - primary_set: chuck-williams
+    admin_set_id: osu-scarc-admin
+    full_size_download: 1
   - primary_set: clarence-andrews
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: coll560
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: columbia-gorge
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: colver-family
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: corazon-de-dixie
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: corvallis-flood
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: corvallis-images
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: cw-furlong
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: daily-barometer
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: daily-emerald
     admin_set_id: uo
-    full_size_download: false
+    full_size_download: 0
   - primary_set: dan-powell
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: dissociation
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: doris-ulmann
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: easia
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: edwin-tunis-ax776
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: electric-studio
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: ellis-fuller-lawrence
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: ellmaker-family
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: ethos-magazine
     admin_set_id: uo
-    full_size_download: false
+    full_size_download: 0
   - primary_set: eugene-lesbian-oral-history-project
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: extension-oral-histories
     admin_set_id: osu
-    full_size_download: true
+    full_size_download: 1
   - primary_set: fairbanks
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: finley-bohlman
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: florence-hartshorn
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: frank-patterson
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: frazier-boutelle
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: freshwater-treaties
     admin_set_id: osu
-    full_size_download: true
+    full_size_download: 1
   - primary_set: gb-warner
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: gb-warner-nosatsu
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: gb-warner-papers-ua022
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: gbwarnerpapers
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: general-catalogs
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: gifford
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: grayson-mathews
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: gwilliams
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: herbarium
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: illustrated-booklets
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: j-f-ford-photographs
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: james-cloutier
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: jasr
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: joanna-russ
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: joel-palmer
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: john-adair-ph397
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: john-bauguess
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: johnyeonarchdrawings
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: kelp-maps
     admin_set_id: osu
-    full_size_download: true
+    full_size_download: 1
   - primary_set: ken-gray
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: kurt-werth-coll100
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: kurt-wiese-ax445
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: lchsa
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: lee-drake
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: lee-moorhouse
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: lichens-pnw
     admin_set_id: osu
-    full_size_download: true
+    full_size_download: 1
   - primary_set: lord-schryver-coll098
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: lowenstam
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: maic
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: marketing-photos
     admin_set_id: uo-mc
-    full_size_download: true
+    full_size_download: 1
   - primary_set: mayo-methot-bogart
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: middle-east-water
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: minorities-lgbtq-barometer
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: mountaingrove
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: mss-rb
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: ncu
     admin_set_id: nwcu
-    full_size_download: true
+    full_size_download: 1
   - primary_set: nw-folklife
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: ocfrp
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: ohba
     admin_set_id: osu-scarc-admin
-    full_size_download: false
+    full_size_download: 0
   - primary_set: oimb
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: opal-whiteley
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: or-chinese-disinterment
     admin_set_id: osu-scarc-admin
-    full_size_download: false
+    full_size_download: 0
   - primary_set: or-latino-herit
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: orange-owl
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: oregon-explorer
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: oregon-multicultural-archives
     admin_set_id: osu-scarc-admin
-    full_size_download: false
+    full_size_download: 0
   - primary_set: oregon-state-yank
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: oregons-agricultural-progress
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: ormaps
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-alumni-magazine
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-athletics
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-baseball
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-commencement-programs
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-department-histories
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-fact-book
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-historical-images
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-historical-maps
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-historical-publications
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-scarc
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-sports-media-guides
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-student-protest-underground-pubs
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-wwii-japanese-american-students
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: osu-yearbooks
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: pamela-peters-ph398
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: percent-for-art
     admin_set_id: oac
-    full_size_download: true
+    full_size_download: 1
   - primary_set: petrarch
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: quincy-scott
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: rockyshore93
     admin_set_id: osu
-    full_size_download: true
+    full_size_download: 1
   - primary_set: roy-c-andrews
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: rv-mills
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: schnitzer-mofa
     admin_set_id: uo-jsma
-    full_size_download: false
+    full_size_download: 0
   - primary_set: schnitzer-nitrate
     admin_set_id: uo-jsma
-    full_size_download: false
+    full_size_download: 0
   - primary_set: sheetmusic
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: siuslaw
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: streamsurvey
     admin_set_id: osu
-    full_size_download: false
+    full_size_download: 0
   - primary_set: textile-and-apparel
     admin_set_id: osu
-    full_size_download: true
+    full_size_download: 1
   - primary_set: texts-data
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: the-manuscript
     admin_set_id: osu-scarc-admin
-    full_size_download: true
+    full_size_download: 1
   - primary_set: ua018
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: university-archives-sound-recordings-ua180
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: uo-arch-photos
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: uo-athletics
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: uo-president
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: uo-stock-photos
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: uo-veterans
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: walter-bowman
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: western-waters
     admin_set_id: uo
-    full_size_download: true
+    full_size_download: 1
   - primary_set: willis-dunagan
     admin_set_id: uo-scua
-    full_size_download: false
+    full_size_download: 0
   - primary_set: zig-jackson-ph401
     admin_set_id: uo-scua
     full_size_download: false

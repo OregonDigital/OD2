@@ -1,0 +1,16 @@
+%html
+  %head
+    %title Oregon Digital
+    %style{:type => "text/css"}
+      = Rails.application.assets["static/static.css"].to_s.html_safe
+  %body
+    %nav#masthead.navbar.navbar-inverse.navbar-static-top{ role: 'navigation', style: 'background-color: #dc4405;'}
+      .container-fluid
+    #lower-banner-border-masthead
+      .group-header.institution_name
+        %h1
+          %a{ href: "/"} Oregon Digital
+    #content-wrapper.container{ role: "main"}
+      .col-xs-12
+        %h2
+          Oregon Digital is out of service or undergoing maintenance.

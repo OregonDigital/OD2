@@ -14,7 +14,7 @@ class User < ApplicationRecord
   # rubocop:disable Style/SymbolArray
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :recoverable, :confirmable,
-         :omniauthable, omniauth_providers: [:cas, :saml]
+         :omniauthable, :validatable, omniauth_providers: [:cas, :saml]
   # rubocop:enable Style/SymbolArray
 
   # T/F whether user has at least one role
@@ -28,6 +28,8 @@ class User < ApplicationRecord
     groups = super
     groups << 'osu' unless (groups & %w[osu_affiliate osu_user]).empty?
     groups << 'uo' unless (groups & %w[uo_affiliate uo_user]).empty?
+    groups << 'restricted' if role?(Ability.manager_permission_roles)
+    groups << 'private' if role?(Ability.admin_permission_roles)
     groups
   end
   # END OVERRIDE
@@ -72,5 +74,15 @@ class User < ApplicationRecord
     when 'cas' then Role.find_by_name('osu_user')
     when 'saml' then Role.find_by_name('uo_user')
     end
+  end
+
+  protected
+
+  # Checks whether a password is needed or not. For validations only.
+  # Passwords are always required if it's a new record, or if the password
+  # or confirmation are being set somewhere.
+  def password_required?
+    service = OregonDigital::UserAttributeService.new(self)
+    !service.institutional_user? && (!persisted? || !password.nil? || !password_confirmation.nil?)
   end
 end

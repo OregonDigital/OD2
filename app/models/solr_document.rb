@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 # Sets behaviors for the solr document
 class SolrDocument
   include Blacklight::Solr::Document
   include Blacklight::Gallery::OpenseadragonSolrDocument
   include Hyrax::SolrDocumentBehavior
+  include BlacklightOaiProvider::SolrDocument
   include OregonDigital::SolrDocumentBehavior
 
   SolrDocument.use_extension(Blacklight::Document::Email)
   SolrDocument.use_extension(Blacklight::Document::Sms)
   use_extension(Blacklight::Document::DublinCore)
+  SolrDocument.use_extension(OregonDigital::QualifiedDublinCore)
   use_extension(Hydra::ContentNegotiation)
 
   def self.solrized_methods(property_names)
@@ -81,14 +84,54 @@ class SolrDocument
 
   # Find and return file sets
   def file_sets
-    @file_sets ||= member_ids.map do |member_id|
-      document = SolrDocument.find(member_id)
+    solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(member_ids)
+    solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
+
+    @file_sets ||= solr_response['response']['docs'].map do |response|
+      document = SolrDocument.new(response)
       document['has_model_ssim'].first == 'FileSet' ? document : nil
     end.compact
   end
 
   def file_sets?
     !file_sets.empty?
+  end
+
+  field_semantics.merge!(
+    title: %w[alternative_tesim tribal_title_tesim title_tesim],
+    creator: %w[creator_label_tesim],
+    contributor: %w[photographer_label_tesim arranger_label_tesim artist_label_tesim author_label_tesim cartographer_label_tesim collector_label_tesim composer_label_tesim contributor_label_tesim designer_label_tesim donor_label_tesim editor_label_tesim illustrator_label_tesim interviewee_label_tesim interviewer_label_tesim landscape_architect_label_tesim lyricist_label_tesim owner_label_tesim patron_label_tesim print_maker_label_tesim recipient_label_tesim transcriber_label_tesim translator_label_tesim],
+    description: %w[description_tesim abstract_tesim cover_description_tesim description_of_manifestation_tesim inscription_tesim view_tesim cultural_context_label_tesim style_or_period_label_tesim award_date_tesim provenance_tesim],
+    subject: %w[subject_label_tesim award_tesim ethnographic_term_label_tesim event_tesim keyword_tesim legal_name_tesim military_branch_label_tesim sports_team_tesim tribal_classes_tesim tribal_terms_tesim phylum_or_division_label_tesim taxon_class_label_tesim order_label_tesim family_label_tesim genus_label_tesim species_label_tesim common_name_label_tesim],
+    coverage: %w[coverage_tesim temporal_tesim location_label_tesim box_tesim gps_latitude_tesim gps_longitude_tesim ranger_district_label_tesim street_address_tesim tgn_label_tesim water_basin_label_tesim],
+    date: %w[date_tesim created_tesim issued_tesim view_date_tesim],
+    rights: %w[license_label_tesim rights_holder_tesim rights_note_tesim rights_statement_label_tesim],
+    publisher: %w[repository_label_tesim publisher_label_tesim],
+    language: %w[language_label_tesim],
+    source: %w[source_tesim],
+    relation: %w[local_collection_name_label_tesim citation_tesim art_series_tesim has_finding_aid_tesim has_part_tesim has_version_tesim isPartOf_tesim is_version_of_tesim larger_work_tesim relation_tesim collection_tesim],
+    type: %w[media_tesim],
+    format: %w[measurements_tesim physical_extent_tesim format_label_tesim]
+  )
+
+  def sets
+    fetch('has_model', []).map { |m| BlacklightOaiProvider::Set.new("has_model_ssim:#{m}") }
+  end
+
+  def hocr_text
+    self['hocr_text_tsimv']
+  end
+
+  def all_text
+    self['all_text_tsimv']
+  end
+
+  def non_user_collections
+    self['non_user_collections_ssim']
+  end
+
+  def oai_collections
+    self['oai_collections_ssim']
   end
 
   solrized_methods Generic.generic_properties
@@ -100,3 +143,4 @@ class SolrDocument
   solrized_methods FileSet.characterization_terms
   solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
 end
+# rubocop:enable Metrics/ClassLength

@@ -1,0 +1,16 @@
+<%= f.input key,
+            as: :label_and_uri_controlled_vocabulary,
+            placeholder: 'Search for a Landscape Architect using a valid URI',
+            input_html: {
+              class: 'form-control',
+              data: { 'autocomplete-url' => "/authorities/search/creator",
+                      'autocomplete' => key,
+                      'field-type' => 'linked_data' }
+            },
+            ### Required for the ControlledVocabulary javascript:
+            wrapper_html: {
+                class: 'controlled_vocabulary',
+                data: { 'autocomplete-url' => "/authorities/search/creator",
+                        'field-name' => key,
+                        'field-type' => 'linked_data' }},
+            required: f.object.required?(key) %>

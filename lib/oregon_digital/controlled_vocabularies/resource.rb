@@ -18,6 +18,26 @@ module OregonDigital
         set_subject!(resource_uri)
       end
 
+      # ActiveTriples just grabs the first label
+      # This is typically fine because it will find the preferred label first
+      # But sometimes the first preferred label isn't in english, or all aren't
+      # Disable rubocop because just barely fails abcsize
+      # rubocop:disable Metrics/AbcSize
+      def rdf_label
+        labels = Array.wrap(self.class.rdf_label)
+        labels += default_labels
+        # OVERRIDE from rdf_triples to select only and all english labels
+        values = []
+        labels.each do |label|
+          values += get_values(label).to_a
+        end
+        values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
+        return values unless values.blank?
+
+        node? ? [] : [rdf_subject.to_s]
+      end
+      # rubocop:enable Metrics/AbcSize
+
       ##
       # Override fetch to use the triplestore caching mechanism to get the graph,
       # store it locally, and fetch it from the cache, then assign it to the resources
@@ -100,7 +120,7 @@ module OregonDigital
       end
 
       def get_language_label(rdf_label)
-        rdf_label.select { |label| label.language == :en if label.respond_to?(:language) }.first
+        rdf_label.select { |label| label.language.in? %i[en en-us] if label.respond_to?(:language) }.first
       end
     end
     class ControlledVocabularyError < StandardError; end

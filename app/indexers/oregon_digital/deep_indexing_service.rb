@@ -16,13 +16,12 @@ module OregonDigital
     # do not index unfetched labels
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
     def add_assertions(prefix_method, solr_doc = {})
       fetch_external
       fields.each do |field_key, field_info|
         solr_field_key = solr_document_field_name(field_key, prefix_method)
         field_info.values.each do |val|
-          next if (val.respond_to? :rdf_label) && (val.rdf_label.first.start_with? 'http')
-
           append_to_solr_doc(solr_doc, solr_field_key, field_info, val)
           combined_prop = combined_properties[field_key]
           next if combined_prop.blank?
@@ -39,7 +38,7 @@ module OregonDigital
     # block this until asset has reached a later stage in its workflow
     # potentially remove block post migration
     def fetch_external
-      return if object.representative_id.nil?
+      return if object.ordered_member_ids.blank? && !object.collection?
 
       object.controlled_properties.each do |property|
         object[property].each do |value|
@@ -85,7 +84,7 @@ module OregonDigital
       %w[ranger_district water_basin location].each do |prop|
         cpm[prop] = 'location'
       end
-      %w[arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer lyricist owner patron photographer print_maker recipient transcriber translator].each do |prop|
+      %w[arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer landscape_architect lyricist owner patron photographer print_maker recipient transcriber translator].each do |prop|
         cpm[prop] = 'creator'
       end
       %w[keyword subject].each do |prop|
@@ -97,6 +96,7 @@ module OregonDigital
       cpm
     end
     # rubocop:enable Metrics/MethodLength
-    # rubocop: enable Metrics/AbcSize
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

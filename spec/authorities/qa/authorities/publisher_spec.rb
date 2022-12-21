@@ -4,15 +4,15 @@ RSpec.describe Qa::Authorities::Publisher do
   let(:publisher_instance) { described_class.new }
   let(:ons_request) { 'http://opaquenamespace.org/ns/publisher/my_id.jsonld' }
   let(:ons_creator_request) { 'http://opaquenamespace.org/ns/creator/my_id.jsonld' }
-  let(:ulan_request) { 'http://vocab.getty.edu/ulan/my_id.jsonld' }
+  let(:ulan_request) { 'http://vocab.getty.edu/ulan/my_id.json' }
   let(:loc_names_request) { 'http://id.loc.gov/authorities/names/my_id.jsonld' }
   let(:ons_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/publisher/my_id' }.with_indifferent_access] }
   let(:ons_creator_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/creator/my_id' }.with_indifferent_access] }
-  let(:ulan_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
+  let(:ulan_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel', 'language': [{ 'id': 'http://vocab.getty.edu/language/en' }] }], 'id': 'http://vocab.getty.edu/ulan/my_id' }.with_indifferent_access] }
   let(:loc_names_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/names/my_id' }.with_indifferent_access] }
 
   it { expect(publisher_instance.label.call(ons_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsPublisher)).to eq 'mylabel' }
-  it { expect(publisher_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::Ulan)).to eq 'mylabel' }
+  it { expect(publisher_instance.label.call(ulan_response, OregonDigital::ControlledVocabularies::Vocabularies::GettyUlan)).to eq 'mylabel' }
   it { expect(publisher_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
   it { expect(publisher_instance.label.call(ons_creator_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsCreator)).to eq 'mylabel' }
   describe '#search' do

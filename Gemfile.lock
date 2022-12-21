@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OregonDigital/hyrax-migrator.git
-  revision: 8b5e5dd9bf3cc0e2618451f61ef547f382bb9eb8
+  revision: 87173608ae1def27fe9f97bc46e10cd4f72c6a3a
   branch: master
   specs:
     hyrax-migrator (0.1.0)
@@ -15,6 +15,15 @@ GIT
       sidekiq
 
 GIT
+  remote: https://github.com/notch8/willow_sword.git
+  revision: 74f7684ff9ca96251f341e50a3afc34b5bd312cc
+  specs:
+    willow_sword (0.2.0)
+      bagit (~> 0.4.1)
+      rails (>= 5.1.6)
+      rubyzip (>= 1.0.0)
+
+GIT
   remote: https://github.com/osulp/triplestore-adapter
   revision: 30081b1ff8beb169c88dd338f71ecb0e1bad8a73
   specs:
@@ -25,6 +34,25 @@ GIT
       rdf-rdfxml
       rdf-vocab
       sparql-client
+
+GIT
+  remote: https://github.com/samvera-labs/bulkrax.git
+  revision: 5520a00a2a3f5e4d6415020621a93742561b694a
+  ref: 5520a00a2a3f5e4d6415020621a93742561b694a
+  specs:
+    bulkrax (0.1.0)
+      bagit (~> 0.4)
+      coderay
+      iso8601 (~> 0.9.0)
+      kaminari
+      language_list (~> 1.2, >= 1.2.1)
+      libxml-ruby (~> 3.1.0)
+      loofah (>= 2.2.3)
+      oai (>= 0.4, < 2.x)
+      rack (>= 2.0.6)
+      rails (>= 5.1.6)
+      rdf (>= 2.0.2, < 4.0)
+      simple_form
 
 GIT
   remote: https://github.com/samvera/hydra-derivatives.git
@@ -42,7 +70,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.2.0)
+    aasm (5.3.0)
       concurrent-ruby (~> 1.0)
     actioncable (5.2.5)
       actionpack (= 5.2.5)
@@ -191,6 +219,9 @@ GEM
       blacklight (~> 6.0)
       iiif-presentation
       rails (>= 4.2, < 6)
+    blacklight_oai_provider (6.1.1)
+      blacklight (~> 6.0)
+      oai (~> 1.0)
     blacklight_range_limit (6.5.0)
       blacklight (~> 6.10)
       jquery-rails
@@ -248,6 +279,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
+    cookieconsent (0.1.0)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
       simplecov (~> 0.16.1)
@@ -256,6 +288,7 @@ GEM
       tins (~> 1.6)
     crack (0.4.4)
     crass (1.0.6)
+    dalli (2.7.11)
     database_cleaner (1.8.5)
     declarative (0.0.20)
     declarative-builder (0.1.0)
@@ -369,7 +402,7 @@ GEM
       faraday
     faraday_middleware (0.10.1)
       faraday (>= 0.7.4, < 1.0)
-    ffi (1.15.1)
+    ffi (1.15.4)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -410,7 +443,7 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     hashdiff (1.0.1)
-    hashie (4.1.0)
+    hashie (5.0.0)
     hiredis (0.6.3)
     honeycomb-beeline (2.10.0)
       libhoney (>= 1.14.2)
@@ -526,6 +559,7 @@ GEM
       json
     iiif_manifest (1.1.0)
       activesupport (>= 4)
+    iso8601 (0.9.1)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
@@ -565,6 +599,7 @@ GEM
     kaminari-core (1.2.1)
     kaminari_route_prefix (0.1.1)
       kaminari (~> 1.0)
+    language_list (1.2.1)
     ld-patch (0.3.3)
       ebnf (~> 1.1)
       rdf (>= 2.2, < 4.0)
@@ -591,6 +626,7 @@ GEM
       addressable (~> 2.0)
       excon
       http (>= 2.0, < 6.0)
+    libxml-ruby (3.1.0)
     link_header (0.0.8)
     linkeddata (3.0.3)
       equivalent-xml (~> 0.6)
@@ -659,6 +695,10 @@ GEM
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
+    oai (1.1.0)
+      builder (>= 3.1.0)
+      faraday
+      faraday_middleware
     oauth (0.5.6)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
@@ -666,7 +706,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    omniauth (1.9.1)
+    omniauth (1.9.2)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
     omniauth-cas (1.1.1)
@@ -716,7 +756,7 @@ GEM
       rails (>= 5.0, < 6.2)
       rdf
     racc (1.6.0)
-    rack (2.2.3.1)
+    rack (2.2.4)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.5)
@@ -739,7 +779,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.3.0)
+    rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     rails_autolink (1.1.6)
       rails (> 3.1)
@@ -995,7 +1035,7 @@ GEM
       railties (>= 3.1)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
-    tzinfo (1.2.9)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     tzinfo-data (1.2020.4)
       tzinfo (>= 1.0.0)
@@ -1069,20 +1109,24 @@ GEM
     zip_tricks (5.3.1)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   axe-matchers
   blacklight-oembed
   blacklight_advanced_search (~> 6.4)
   blacklight_iiif_search (~> 1.0)
+  blacklight_oai_provider
   blacklight_range_limit (~> 6)
   browse-everything
+  bulkrax!
   byebug
   capybara (~> 2.17)
   chosen-rails
   coffee-rails (~> 4.2)
+  cookieconsent
   coveralls (~> 0.8)
+  dalli (~> 2.7.6)
   database_cleaner
   devise
   edtf (~> 3.0)
@@ -1134,6 +1178,7 @@ DEPENDENCIES
   vcr (~> 5.1)
   web-console (>= 3.3.0)
   webmock
+  willow_sword!
   yabeda
   yabeda-http_requests
   yabeda-prometheus
@@ -1143,4 +1188,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.3.12
+   2.3.22

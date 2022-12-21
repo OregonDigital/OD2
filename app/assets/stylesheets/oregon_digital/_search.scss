@@ -1,6 +1,6 @@
 .constraints-divider {
   background-color: $very-light-grey;
-  height: 0.5em;
+  height: 0.75em;
 
   @media (min-width: $screen-sm-min) {
     & {
@@ -70,7 +70,7 @@
   }
 }
 
-.results-constraints-wrapper{
+.results-constraints-wrapper {
   margin-top: 2em;
 
   + .flex-container {
@@ -414,11 +414,17 @@ ul.pagination li {
       }
       a:hover,
       a:focus {
+        span.gradient-wrapper{
+          background: linear-gradient(to top, rgba(0,0,0,60%), rgba(255, 255, 255, 0) 25%);
+          display: block;
+        }
         img {
           mask-image: none;
           -webkit-mask-image: none;
           outline: 10px solid black;
           outline-offset:  -10px;
+          z-index: -1;
+          position: relative;
         }
         .hover-over-collection-text {
           display: block;
@@ -447,4 +453,74 @@ ul.pagination li {
       }
     }
   }
+}
+.no-results-search {
+  margin-bottom: 6em;
+
+  .no-results-divider {
+    margin: 4em 0 8em 0;
+  }
+
+  #zero-results-search-form {
+    .no-results-wrapper {
+      // width: 50%;
+      float: none;
+      padding: 0;
+      margin: auto;
+
+      a {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: .75em;
+        letter-spacing: 2px;
+      }
+      .input-group {
+        margin: 0;
+        width: 100%;
+
+        button {
+          position: absolute;
+          left: 0;
+          z-index: 10;
+          background: unset;
+          border: unset;
+          width: 2.25em;
+          height: calc(100% - 16px);
+          margin-top: 8px;
+          margin-bottom: 8px;
+          border-right: 1px solid $light-grey;
+        }
+        input {
+          background-color: $very-light-grey;
+          border-radius: 0;
+          padding-left: 2.5em;
+          font-size: 1.25em;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $screen-sm-min) {
+    h3 {
+      margin: 1em 0;
+    }
+    .text-center{
+      text-align: left !important;
+    }
+    #zero-results-search-form .no-results-wrapper {
+      width: 100%;
+    }
+    .no-results-divider {
+      margin: 4em 0;
+      .flex-divider {
+        display: flex !important;
+      }
+    }
+  }
+}
+
+.horizontal-top {
+  border-top: $very-light-grey solid 3px;
+  padding-top: 10px;
 }

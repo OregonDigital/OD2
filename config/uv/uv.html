@@ -4,60 +4,65 @@
 
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="uv.css" />
-    <script type="text/javascript" src="umd/UV.js"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="uv" class="uv"></div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        var urlAdapter = new UV.IIIFURLAdapter(true);
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="uv.css" />
+  <link rel="stylesheet" type="text/css" href="uv-custom.css" />
+  <script type="text/javascript" src="umd/UV.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
 
-        const data = urlAdapter.getInitialData({
-          embedded: true,
-        });
+<body>
+  <div id="uv" class="uv"></div>
 
-        uv = UV.init("uv", data);
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var urlAdapter = new UV.IIIFURLAdapter(true);
+
+      const data = urlAdapter.getInitialData({
+        embedded: true,
+        highlight: urlAdapter.get('h'),
+      });
+
+      uv = UV.init("uv", data);
 
 
-        const configUrl = urlAdapter.get('config');
-        if (configUrl) {
-          uv.on("configure", function({ cb }) {
-            cb(
-              fetch(configUrl).then(function(resp) {
-                return resp.json();
+      const configUrl = urlAdapter.get('config');
+      if (configUrl) {
+        uv.on("configure", function ({ cb }) {
+          cb(
+            fetch(configUrl)
+              .then((response) => response.json())
+              .then((json_config) => {
+                json_config["options"]["searchWithinEnabled"] = (urlAdapter.get('ocr') === "true");
+                return json_config;
               })
-            );
-          })
-        }
-
-        var $UV = document.getElementById("uv");
-
-        function resize() {
-          $UV.setAttribute("style", "width:" + window.innerWidth + "px");
-          $UV.setAttribute("style", "height:" + window.innerHeight + "px");
-        }
-
-        document.addEventListener("resize", function() {
-          resize();
+          );
         });
+      }
 
+      var $UV = document.getElementById("uv");
+
+      function resize() {
+        $UV.setAttribute("style", "width:" + window.innerWidth + "px");
+        $UV.setAttribute("style", "height:" + window.innerHeight + "px");
+      }
+
+      document.addEventListener("resize", function () {
         resize();
       });
-    </script>
-  </body>
+
+      resize();
+    });
+  </script>
+</body>
+
 </html>

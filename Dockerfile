@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine3.14 as bundler
+FROM ruby:2.7-alpine3.15 as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -16,7 +16,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
-  libffi xz
+  libffi xz gcompat tini tmux libxslt-dev libxml2-dev
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
@@ -24,7 +24,7 @@ RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
 
 # Install ImageMagick with jp2/tiff support
 RUN mkdir -p /tmp/im && \
-  curl -sL https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.1.0-27.tar.xz \
+  curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
   | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
     ./configure \
       --build=$CBUILD \
@@ -81,9 +81,6 @@ FROM gems as code
 # Add the rest of the code
 COPY --chown=app:app . /data
 
-#ARG RAILS_ENV=development
-#ARG FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
-#ARG DEPLOYED_VERSION=development
 ARG RAILS_ENV=${RAILS_ENV}
 ENV RAILS_ENV=${RAILS_ENV}
 ARG FEDORA_URL=${FEDORA_URL}
@@ -104,6 +101,5 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
     echo "Precompiling assets with $RAILS_ENV environment"; \
     rm -rf /data/.cache; \
     RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
-    cp public/assets/404-*.html public/404.html; \
-    cp public/assets/500-*.html public/500.html; \
+    for f in public/assets/4*.html; do cp $f public/${f:14:3}.html; done; \
   fi

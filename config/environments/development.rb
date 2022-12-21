@@ -43,7 +43,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Don't actually send emails in development
-  config.action_mailer.delivery_method = :test
+  config.action_mailer.delivery_method = :file
+  config.action_mailer.file_settings = { :location => Rails.root.join('tmp/mail') }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -73,6 +74,8 @@ Rails.application.configure do
   end
 
   config.active_job.queue_adapter = ENV.fetch('ACTIVE_JOB_QUEUE_ADAPTER', 'inline').to_sym
+
+  config.reindex_extent = ENV["MIGRATION_REINDEX_EXTENT"].present? ? 'limited' : 'full'
 
   # Whitelist docker containers for webconsole during development
   config.web_console.whitelisted_ips = ['172.0.0.0/8', '192.0.0.0/8']

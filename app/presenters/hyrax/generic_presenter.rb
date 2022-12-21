@@ -11,6 +11,8 @@ module Hyrax
     delegate(:resource_type_label, to: :solr_document)
     delegate(:rights_statement_label, to: :solr_document)
     delegate(:language_label, to: :solr_document)
+    delegate(:non_user_collections, to: :solr_document)
+    delegate(:oai_collections, to: :solr_document)
 
     # Returns true if any fileset or any child work has a filset that is an image or PDF,
     # both of which will always have one or more JP2s
@@ -33,7 +35,13 @@ module Hyrax
     end
 
     def page_title
-      "#{title.first} | #{I18n.t('hyrax.product_name')}"
+      title.first
+    end
+
+    def total_viewable_items(id)
+      visibility = ['open']
+      visibility += current_ability&.current_user&.groups
+      ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id} AND suppressed_bsi:false AND visibility_ssi:(#{visibility.join(' ')})").accessible_by(current_ability).count
     end
 
     # Link to add to shelf functionality
@@ -42,14 +50,37 @@ module Hyrax
       Hyrax::Engine.routes.url_helpers.stats_work_path(self, locale: I18n.locale)
     end
 
-    def zipped_values(prop)
-      labels = Array(send(prop))
-      links = Array(send(prop.to_s.gsub('_label', '')))
-      zipped = labels.zip(links)
-      Hash[zipped]
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    def zipped_values(prop_label)
+      zipped = {}
+      prop_label = prop_label.to_s.gsub('_label', '')
+      send(prop_label).each do |prop_val|
+        if Generic.properties[prop_label].class_name.nil?
+          label = send(prop_label + '_label').first
+          zipped[label] = prop_val
+        else
+          prop = Generic.properties[prop_label].class_name.new(prop_val)
+          begin
+            prop.fetch
+            solrized = prop.solrize
+          rescue TriplestoreAdapter::TriplestoreException => e
+            Rails.logger.warn "Failed to fetch #{prop_val} from cache AND source. #{e.message}"
+          end
+          label, source = split_solrized(solrized) || ['No label found', prop.rdf_subject.to_s]
+          zipped[label] = source
+        end
+      end
+      zipped
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     private
+
+    def split_solrized(solrized)
+      solrized&.[](1)&.[](:label)&.split('$')
+    end
 
     def presentable?(presenter)
       (presenter.image? || presenter.pdf? || presenter.video? || presenter.audio?) && current_ability.can?(:read, presenter.id)

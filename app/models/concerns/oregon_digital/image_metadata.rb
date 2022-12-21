@@ -13,10 +13,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :view, predicate: RDF::URI.new('http://opaquenamespace.org/ns/cco_viewDescription'), multiple: true, basic_searchable: false do |index|
-        index.as :stored_searchable
-      end
-
       property :color_content, predicate: RDF::URI.new('http://rdaregistry.info/Elements/e/P20224'), multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
@@ -50,6 +46,7 @@ module OregonDigital
         { name: :illustrator, section_name: '' },
         { name: :interviewee, section_name: '' },
         { name: :interviewer, section_name: '' },
+        { name: :landscape_architect, section_name: '' },
         { name: :lyricist, section_name: '' },
         { name: :owner, section_name: '' },
         { name: :patron, section_name: '' },
@@ -80,7 +77,6 @@ module OregonDigital
         { name: :tribal_notes, section_name: '' },
         { name: :source_condition, section_name: '' },
         { name: :temporal, section_name: '' },
-        { name: :view, section_name: '' },
         { name: :subject, section_name: 'Subjects' },
         { name: :award, section_name: '' },
         { name: :cultural_context, section_name: '' },
@@ -106,7 +102,7 @@ module OregonDigital
         { name: :scientific_name_authorship, section_name: '' },
         { name: :specimen_type, section_name: '' },
         { name: :identification_verification_status, section_name: '' },
-        { name: :location, section_name: 'Locations' },
+        { name: :location, section_name: 'Geographics' },
         { name: :box, section_name: '' },
         { name: :gps_latitude, section_name: '' },
         { name: :gps_longitude, section_name: '' },

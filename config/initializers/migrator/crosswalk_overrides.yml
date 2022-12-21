@@ -15,9 +15,10 @@ overrides:
   - predicate: http://opaquenamespace.org/ns/boxName
     function: return_nil
 
-  #not used in OD2
+  #send rightsHolder to rights_holder
   - predicate: http://opaquenamespace.org/rights/rightsHolder
-    function: return_nil
+    property: rights_holder
+    multiple: true
 
   #multiple must be true (is false on map)
   - property: repository_attributes
@@ -133,7 +134,7 @@ overrides:
   - property: creator_display
     predicate: http://opaquenamespace.org/ns/cco/creatorDisplay
     multiple: true
-  - property: view_date
+  - property: view
     predicate: http://opaquenamespace.org/ns/cco/viewDescription
     multiple: true
   - property: accession_number
@@ -159,6 +160,8 @@ overrides:
   - predicate: http://www.iana.org/assignments/relation/first
     function: return_nil
   - predicate: http://www.iana.org/assignments/relation/last
+    function: return_nil
+  - predicate: http://www.iana.org/assignments/relation/previous
     function: return_nil
 
   #flip workType predicate

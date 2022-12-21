@@ -22,3 +22,15 @@ fi
 
 mkdir -p /data/tmp/pids
 bundle exec puma --pidfile /data/tmp/pids/puma.pid
+
+# Fall through in case puma dies
+if [ "$RAILS_ENV" != "production" ]; then
+   timestamp=`date +'%Y-%m-%d %H:%M:%S'`
+   echo "[$timestamp] Fell through puma, starting life support systems."
+
+   while `true`; do
+      timestamp=`date +'%Y-%m-%d %H:%M:%S'`
+      echo "[$timestamp] sleeping..."
+      sleep 30
+   done
+fi

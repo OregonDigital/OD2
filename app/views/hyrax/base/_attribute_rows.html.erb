@@ -12,4 +12,7 @@
     <% end %>
   <% end %>
 <% end %>
-<%= presenter.attribute_to_html(:member_of_collection_ids, render_as: :collection_link, html_dl: true, label: t("simple_form.labels.defaults.set")) %>
+<%= presenter.attribute_to_html(:non_user_collections, render_as: :collection_link, html_dl: true, label: t("simple_form.labels.defaults.set")) %>
+<% if current_ability.admin? %>
+  <%= presenter.attribute_to_html(:oai_collections, render_as: :collection_link, html_dl: true, label: t("simple_form.labels.defaults.primary_set")) %>
+<% end %>

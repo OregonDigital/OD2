@@ -81,7 +81,7 @@ Rails.application.configure do
   config.log_tags = %i[request_id]
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :mem_cache_store, ENV.fetch('RAILS_CACHE_STORE_URL', 'localhost')
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
@@ -112,6 +112,8 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
+
+  config.reindex_extent = ENV["MIGRATION_REINDEX_EXTENT"].present? ? 'limited' : 'full'
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

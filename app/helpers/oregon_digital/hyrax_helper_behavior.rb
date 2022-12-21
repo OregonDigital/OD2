@@ -22,6 +22,20 @@ module OregonDigital::HyraxHelperBehavior
     sanitize combine_hits_with_links(html_content, show_link)
   end
 
+  def collection_title_from_id(field, _show_link = true)
+    SolrDocument.find(field).title_or_label
+  end
+
+  # @return [String] the appropriate action url for our search form (depending on our current page)
+  def search_form_action
+    anchor = '#content'
+    if on_the_dashboard?
+      search_action_for_dashboard + anchor
+    else
+      main_app.search_catalog_path + anchor
+    end
+  end
+
   private
 
   def combine_hits_with_links(html_content, show_link)

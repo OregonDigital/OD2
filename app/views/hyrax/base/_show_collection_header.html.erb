@@ -1,26 +1,31 @@
-<div class="col-sm-6">
-  <% @collection = Collection.find(@presenter.member_of_collection_ids.first) %>
-  <% @member_work_1 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).first['id'] %>
-  <% @member_work_2 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).first['id'] %>
-  <% @member_work_3 = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 3).first['id'] %>
-  <% @member_work_1 = ActiveFedora::Base.find(@member_work_1).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_1.nil? %>
-  <% @member_work_2 = ActiveFedora::Base.find(@member_work_2).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_2.nil? %>
-  <% @member_work_3 = ActiveFedora::Base.find(@member_work_3).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first unless @member_work_3.nil? %>
-  <% @collection_solr_doc = SolrDocument.find(@collection.id) %>
-  <% if @member_work_1 %>
-    <%= render 'show_page_collection_image', work_id: @member_work_1.id %>
-  <% end %>
-  <% if @member_work_2 %>
-    <%= render 'show_page_collection_image', work_id: @member_work_2.id %>
-  <% end %>
-  <% if @member_work_3 %>
-    <%= render 'show_page_collection_image', work_id: @member_work_3.id %>
-  <% end %>
-  <div class="col-sm-6 collection-info">
-    <p class="collection-title h3"><%= @collection.title.first %></p>
-    <p class="collection-data">
-      <%= Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 10000).length %> items
-      <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
-    </p>
+
+<% @collection_solr_doc = SolrDocument.find(@presenter.member_of_collection_ids.first) %>
+<div class="col-md-8 col-xs-12 collection-header collection-info">
+  <div class="hyc-title">
+    <div class="h3"><%= @collection_solr_doc.title.first %></div>
+    <div class="collection-subtitle">
+      <span class="lg-border-right item-count">
+        <%= @presenter.total_viewable_items(@collection_solr_doc.id) %>
+        <%= 'Item'.pluralize(@presenter.total_viewable_items(@collection_solr_doc.id)) %>
+      </span>
+      <span>
+        <%#= link_to "View all items in collection", view_all_url %>
+        <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
+      </span>
+    </div>
   </div>
 </div>
+
+
+<% if false %>
+  <div class="col-sm-8">
+    <% @collection_solr_doc = SolrDocument.find(@presenter.member_of_collection_ids.first) %>
+    <div class="col-sm-6 collection-info">
+      <p class="collection-title h3"><%= @collection_solr_doc.title.first %></p>
+      <p class="collection-data">
+        <%= Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 10000).length %> items
+        <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
+      </p>
+    </div>
+  </div>
+<% end %>

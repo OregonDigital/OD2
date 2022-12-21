@@ -1,6 +1,7 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
 <% collection_index_key = controller.collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
-<% view_all_url = "#{search_form_action}&f[#{collection_index_key}][]=#{@presenter.id}" %>
+<% view_all_url = "#{search_form_action.split('#')[0]}&f[#{collection_index_key}][]=#{@presenter.id}" %>
+<% footer_metadata = render 'attribute_rows_footer', presenter: @presenter %>
 
 <div class="hyc-container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
@@ -11,7 +12,7 @@
           <h1><%= @presenter.title.first %></h1>
           <div class="collection-subtitle">
             <span class="lg-border-right item-count">
-              <%= @presenter.total_viewable_items %>
+              <%= [ @presenter.total_viewable_items,  @members_count ].min %>
               <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
             </span>
             <span>
@@ -38,20 +39,22 @@
         </div>
         <div class="flex-container">
           <div class="metadata-expand flex-item text-left">
-            <a href="#footer-metadata" class="lato-p hidden-xs">
-              Additional Collection Information
-              <br/>
-              <br/>
-            </a>
             <% unless @presenter.description.first.nil? %>
-            <button class="btn-link lato-p" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
-              <span class="collapsed">
-                Read More
-              </span>
-              <span class="expanded">
-                Read Less
-              </span>
-            </button>
+              <button class="btn-link lato-p" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
+                <span class="collapsed">
+                  Read More
+                </span>
+                <span class="expanded">
+                  Read Less
+                </span>
+              </button>
+              <br/>
+              <br/>
+            <% end %>
+            <% unless footer_metadata.empty? %>
+              <a href="#footer-metadata" class="lato-p hidden-xs">
+                Additional Collection Information
+              </a>
             <% end %>
           </div>
           <div class="institution-footer text-right visible-xs">
@@ -60,7 +63,7 @@
             <%= image_tag path, alt: alt, style: style %>
           </div>
           <div class="flex-item social-links">
-            <%= render 'hyrax/base/social_media' %>
+            <%= render '/shared/fileset_collection_social_media' %>
           </div>
         </div>
         <div class="lg-border-bottom clearfix"></div>
@@ -84,7 +87,7 @@
     </div>
   </div>
 
-  <%= render 'lime_green_divider' do %>
+  <%= render 'shared/colored_divider', color: 'lime-green' do %>
     <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All Items</a>
   <% end %>
 
@@ -93,24 +96,26 @@
   </div>
 
   <!-- Search bar -->
-  <div class="hyc-blacklight hyc-bl-search hyc-body row">
+  <div class="hyc-blacklight hyc-bl-search hyc-body row advanced-search-form">
     <div class="col-sm-12">
       <%= render 'advanced_search_form', presenter: @presenter, search_catalog_path: main_app.search_catalog_path %>
     </div>
   </div>
 
-  <%= render 'lime_green_divider' do %>
+  <%= render 'shared/colored_divider', color: 'lime-green' do %>
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
 
-  <div id="footer-metadata" class="row">
-    <div class="col-md-12">
-      <h2 class="collection-metadata-header">Explore more about the collection</h2>
-      <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
-        <%= render 'attribute_rows_footer', presenter: @presenter %>
-      </dl>
+  <% unless footer_metadata.empty? %>
+    <div id="footer-metadata" class="row">
+      <div class="col-md-12">
+        <h2 class="collection-metadata-header">Explore more about the collection</h2>
+        <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
+          <%= render 'attribute_rows_footer', presenter: @presenter %>
+        </dl>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <% if (current_user && can?(:edit, @curation_concern)) %>
     <%= render partial: 'show_document_list', documents: @collection_member_service.available_member_works.documents %>

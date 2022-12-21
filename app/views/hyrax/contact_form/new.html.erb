@@ -1,8 +1,17 @@
-<% provide :page_title, I18n.t('hyrax.contact_form.title') %>
+<% provide :page_title, construct_page_title(I18n.t('hyrax.contact_form.title')) %>
 
-<div class="alert alert-info">
-  <%= render 'directions' %>
-</div>
+<p>
+<%= render 'directions' %>
+</p>
+
+<p><div>
+Oregon Digital is a joint collaboration between the <u><a href="http://library.uoregon.edu">University of Oregon Libraries</a></u> and <u><a href="http://osulibrary.oregonstate.edu">Oregon State University Libraries & Press</a></u>.
+Oregon Digital hosts materials from both institutions, as well as collaborating partners.
+</div></p>
+
+<p>
+Please use the following form to send us feedback:
+</p>
 
 <h1>
     <%= t('hyrax.contact_form.header') %>
@@ -46,7 +55,9 @@
     <div class="col-sm-10"><%= f.text_area :message, rows: 4, class: 'form-control', required: true %></div>
   </div>
 
-  <%= recaptcha_tags if Hyrax.config.recaptcha? %>
+  <div class="pull-right"">
+    <%= recaptcha_tags if Hyrax.config.recaptcha? %>
 
-  <%= f.submit value: t('hyrax.contact_form.button_label'), class: "btn btn-primary" %>
+    <%= f.submit value: t('hyrax.contact_form.button_label'), class: "btn btn-primary btn-lg pull-right" %>
+  </div>
 <% end %>

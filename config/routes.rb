@@ -4,12 +4,13 @@ Rails.application.routes.draw do
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
-  resources :explore_collections, controller: 'oregon_digital/explore_collections', only: [] do
+  resources :collections, controller: 'oregon_digital/explore_collections', only: [] do
     collection do
       get :all, :osu, :uo, :my
     end
   end
 
+  mount Bulkrax::Engine, at: '/'
   namespace :admin do
     resources :collection_types, except: :show, controller: 'oregon_digital/collection_types'
   end
@@ -19,11 +20,24 @@ Rails.application.routes.draw do
   mount Blacklight::Engine => '/'
   mount BlacklightAdvancedSearch::Engine => '/'
 
+  get 'about' => 'oregon_digital/about#about'
+  get 'osu-collection-policy' => 'oregon_digital/about#osu'
+  get 'uo-collection-policy' => 'oregon_digital/about#uo'
+  get 'copyright' => 'oregon_digital/about#copyright'
+  get 'harmful' => 'oregon_digital/about#harmful'
+  get 'privacy' => 'oregon_digital/about#privacy'
+  get 'takedown' => 'oregon_digital/about#takedown'
+  get 'terms' => 'oregon_digital/about#terms'
+  get 'mission' => 'oregon_digital/about#mission'
+  get 'use' => 'oregon_digital/about#use'
+
+  concern :oai_provider, BlacklightOaiProvider::Routes.new
   concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
     concerns :range_searchable
+    concerns :oai_provider
   end
 
   devise_for :users, controllers: { confirmations: 'users/confirmations', omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
@@ -84,6 +98,8 @@ Rails.application.routes.draw do
   end
 
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
+
+  resources :iiif_manifest_v2, controller: 'oregon_digital/iiif_manifest_v2', path: '/iiif_manifest_v2', only: [:show]
 
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

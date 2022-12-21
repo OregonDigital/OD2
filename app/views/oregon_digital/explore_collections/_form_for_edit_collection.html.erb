@@ -7,8 +7,20 @@
           <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-label="close">&times;</button>
         </div>
         <div class="modal-body">
-          <div class="loading" style="height: 128px;"></div>
-          <div class="form"></div>
+            <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository),
+                                method: :patch,
+                                url: Hyrax::Engine.routes.url_helpers.dashboard_collections_path do |f| %>
+              <% unless Hyrax::CollectionType.find_by(machine_id: :user_collection).nil? %>
+                <%= hidden_field_tag :type, Hyrax::CollectionType.find_by(machine_id: :user_collection).id %>
+                <%= hidden_field_tag :collection_type_gid, Hyrax::CollectionType.find_by(machine_id: :user_collection).gid %>
+              <% end %>
+              <%= render_edit_field_partial(:modal_title, f: f) %>
+              <%= render_edit_field_partial(:modal_description, f: f) %>
+              <%= f.submit t(:'hyrax.collection.select_form.update'),
+                           class: 'btn btn-primary submits-batches submits-batches-add',
+                           id: "edit_submit",
+                           name: "edit_collection" %>
+            <% end %>
         </div><!-- /.modal-body -->
       </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

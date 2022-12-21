@@ -35,6 +35,7 @@ en:
           illustrator_label_sim: Illustrator
           interviewee_label_sim: Interviewee
           interviewer_label_sim: Interviewer
+          landscape_architect_label_sim: Landscape Architect
           location_label_sim: Location
           lyricist_label_sim: Lyricist
           member_of_collections_ssim: Collections
@@ -111,6 +112,7 @@ en:
           illustrator_label_tesim: Illustrator
           interviewee_label_tesim: Interviewee
           interviewer_label_tesim: Interviewer
+          landscape_architect_label_tesim: Landscape Architect
           lyricist_label_tesim: Lyricist
           patron_label_tesim: Patron
           photographer_label_tesim: Photographer
@@ -192,6 +194,7 @@ en:
           illustrator_label: Illustrator
           interviewee_label: Interviewee
           interviewer_label: Interviewer
+          landscape_architect_label: Landscape Architect
           lyricist_label: Lyricist
           patron_label: Patron
           photographer_label: Photographer
@@ -226,9 +229,9 @@ en:
           date_modified: Modified
   hyrax:
     advanced_form:
-      all: Match all fields
-      any: Match any fields
-      query_criteria_heading_html: "Advanced search scope. %{select_menu}"
+      all: All
+      any: Any
+      query_criteria_heading_html: "Match %{select_menu} of these fields:"
     base:
       relationships:
         header: 'Collection Information'
@@ -246,8 +249,8 @@ en:
     collection:
       select_form:
         select_heading: 'My Collections'
-        title: 'Save this item'
-        update: 'Save'
+        title: 'Add this item'
+        update: 'Add'
         delete: 'Delete'
         export: 'Export'
         share: 'Share'
@@ -256,9 +259,11 @@ en:
     dashboard:
       my:
         action:
+          add_selected_to: 'Add selected to...'
+          save: 'Add'
           sign_up: 'Sign Up'
           log_in: 'Log In'
-          add_to_collection: 'Save to...'
+          add_to_collection: 'Add to...'
           select_all: 'Select All'
       collections:
         form_branding:
@@ -284,7 +289,7 @@ en:
             label_short: Open Content
       button:
         html: 'Go'
-    product_name: 'Oregon Digital (Development)'
+    product_name: 'Oregon Digital (Beta)'
     product_twitter_handle: '@SamveraRepo'
     institution_name: 'Institution'
     institution_name_full: 'The Institution Name'
@@ -306,6 +311,7 @@ en:
         text: 'University of Oregon'
     controls:
       advanced: 'Advanced Search'
+      explore: 'Explore Collections'
       explore_all: 'Explore Collections/All'
       explore_osu: 'Explore Collections/OSU'
       explore_uo: 'Explore Collections/UO'

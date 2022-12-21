@@ -19,8 +19,10 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Oregon Digital Account Verification"
+        user_subject: "Oregon Digital Account Verification" 
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Reset Password Instructions"
+        user_subject: "Oregon Digital Password Reset Instructions"
       unlock_instructions:
         subject: "Unlock instructions"
       email_changed:

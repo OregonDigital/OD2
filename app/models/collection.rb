@@ -3,12 +3,13 @@
 # Sets the behaviors and other data for a collection
 class Collection < ActiveFedora::Base
   after_destroy :destroy_facets
-  after_save :fetch_graph
+  # temporarily remove fetching until after migration
+  # after_save :fetch_graph
 
   include ::Hyrax::CollectionBehavior
   # You can replace these metadata if they're not suitable
   include OregonDigital::CollectionMetadata
-  include OregonDigital::CollectionBehavior
+  include OregonDigital::MetadataDownload
   include OregonDigital::AccessControls::Visibility
   self.indexer = OregonDigital::CollectionIndexer
 
@@ -36,6 +37,18 @@ class Collection < ActiveFedora::Base
       end
     end
   end
+
+  # Adapted from Hyrax::CollectionNesting
+  def reindex_extent
+    @reindex_extent ||= OD2::Application.config.reindex_extent
+  end
+
+  # Borrowed from Hyrax::CollectionNesting
+  # rubocop:disable Style/TrivialAccessors
+  def reindex_extent=(extent)
+    @reindex_extent = extent
+  end
+  # rubocop:enable Style/TrivialAccessors
 
   private
 

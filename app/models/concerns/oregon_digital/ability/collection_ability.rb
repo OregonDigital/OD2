@@ -15,7 +15,7 @@ module OregonDigital
           end
           can(%i[create new], Collection) if current_user
           can(%i[delete], Collection) if current_user.admin?
-          can(%i[index show], Collection) if current_user.role?(admin_permission_roles)
+          can(%i[index show], Collection) if current_user.role?(self.class.admin_permission_roles)
           can %i[edit update], Collection do |collection|
             admin_or_in_depositor?(collection)
           end
@@ -28,7 +28,7 @@ module OregonDigital
         # rubocop:enable Metrics/MethodLength
 
         def admin_or_in_depositor?(collection)
-          current_user.role?(admin_permission_roles) && in_depositors_collection?(collection.edit_users)
+          current_user.role?(self.class.admin_permission_roles) && in_depositors_collection?(collection.edit_users)
         end
       end
     end

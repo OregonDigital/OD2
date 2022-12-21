@@ -9,10 +9,10 @@ module OregonDigital
       included do
         def work_edit_ability
           # Roles that can edit any work
-          can(%i[edit update], work_classes) if current_user.role?(admin_permission_roles)
+          can(%i[edit update], work_classes) if current_user.role?(self.class.admin_permission_roles)
 
           # Roles that can edit their own works
-          can(%i[edit update], work_classes, depositor: current_user.email) if current_user.role?(manager_permission_roles)
+          can(%i[edit update], work_classes, depositor: current_user.email) if current_user.role?(self.class.manager_permission_roles)
         end
       end
     end

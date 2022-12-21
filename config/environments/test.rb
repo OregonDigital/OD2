@@ -46,6 +46,7 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = ENV.fetch('ACTIVE_JOB_QUEUE_ADAPTER', 'inline').to_sym
 
+  config.reindex_extent = 'full'
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

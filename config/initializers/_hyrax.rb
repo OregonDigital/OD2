@@ -254,14 +254,14 @@ Hyrax.config do |config|
   config.iiif_metadata_fields = %i[
     title creator_label photographer_label arranger_label artist_label author_label
     cartographer_label collector_label composer_label contributor_label designer_label donor_label editor_label
-    illustrator_label interviewee_label interviewer_label lyricist_label owner_label patron_label print_maker_label
-    recipient_label transcriber_label translator_label description abstract inscription view subject_label award
-    cultural_context_label ethnographic_term_label event keyword legal_name military_branch_label sports_team
+    illustrator_label interviewee_label interviewer_label landscape_architect_label lyricist_label owner_label patron_label
+    print_maker_label recipient_label transcriber_label translator_label description abstract inscription view subject_label
+    award cultural_context_label ethnographic_term_label event keyword legal_name military_branch_label sports_team
     style_or_period_label phylum_or_division_label taxon_class_label order_label family_label genus_label species_label
     common_name_label location_label gps_latitude gps_longitude ranger_district_label street_address tgn_label
     water_basin_label date date_created view_date license_label rights_holder rights_note rights_statement_label
-    repository_label local_collection_name_label language_label publisher_label provenance source has_finding_aid
-    is_part_of resource_type_label workType_label measurements physical_extent collections format_label
+    use_restrictions repository_label local_collection_name_label language_label publisher_label provenance source has_finding_aid
+    is_part_of resource_type_label workType_label measurements collections
   ]
 
   # Enables the use of Google ReCaptcha on the contact form.
@@ -288,6 +288,11 @@ Hyrax::Engine.routes.default_url_options = Rails.application.config.action_maile
 Rails.application.routes.default_url_options = Rails.application.config.action_mailer.default_url_options
 
 Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
+
+# set bulkrax default work type to first curation_concern if it isn't already set
+if Bulkrax.default_work_type.blank?
+  Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
+end
 
 Hyrax::CurationConcern.actor_factory.insert_before Hyrax::Actors::CreateWithRemoteFilesActor, OregonDigital::Actors::CreateWithOembedUrlActor
 
