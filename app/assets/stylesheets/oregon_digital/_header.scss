@@ -32,9 +32,11 @@ header {
 
     .logo {
       grid-column: 1;
+      height: 45px;
+      width: 45px;
     }
     .institution_name {
-      grid-column: 2;
+      padding-top: .25em;
       line-height: 1em;
       font-weight: 600;
       padding-left: .25em;
@@ -43,14 +45,12 @@ header {
       .application-title {
         color: $navy-blue;
         letter-spacing: 0;
-        line-height: 64px;
         margin: 0;
       }
 
       .tagline {
         color: $dark-grey;
-        font-size: 14px;
-        letter-spacing: 3px;
+        font-size: 11px;
         position: relative;
         text-transform: uppercase;
         top: -.5em;
@@ -58,15 +58,23 @@ header {
     }
   }
 
-  .navbar .btn {
-    padding: 10px 24px;
-    margin-right: 16px;
+  .navbar {
+    button.btn {
+      padding: 7px 21px;
+    }
+    a.btn {
+      padding: 10px 18px;
+    }
+    .btn {
+      margin-right: 16px;
+    }
   }
 
   ul.nav {
     text-transform: uppercase;
 
     a.explore-collections {
+      padding-bottom: 2px;
       font-weight: 700;
     }
     & > li:nth-child(2) {
@@ -124,6 +132,12 @@ header {
 
   #top-navbar-collapse {
     letter-spacing: 2px;
+
+    .navbar-left-sm {
+      @media (max-width: $screen-sm-max) {
+        float: left !important;
+      }
+    }
   }
 }
 
