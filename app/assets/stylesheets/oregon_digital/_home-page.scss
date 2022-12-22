@@ -135,11 +135,16 @@ body {
 
 
 ul.nav.homepage-nav {
-  text-transform: uppercase;
+  text-transform: unset;
   width: 100%;
 
   #masthead-search-field-header {
     width: 100%;
+  }
+  #masthead-search-form-header {
+    .advanced-link {
+      text-transform: unset;
+    }
   }
   li {
     background: none;
@@ -232,7 +237,8 @@ ul.nav.homepage-nav {
   }
 
   img {
-    width: 100%;
+    width: 90px;
+    height: 90px;
   }
 
   .collection-title {
