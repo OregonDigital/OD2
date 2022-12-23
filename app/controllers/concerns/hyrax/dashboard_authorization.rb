@@ -36,7 +36,7 @@ module Hyrax
     end
 
     def user_is_sharing_collection?
-      (controller_name.to_s == 'collections') && (params[:collection][:visibility].in? ['open', 'restricted'])
+      (controller_name.to_s == 'collections') && (params[:collection][:visibility].in? %w[open restricted])
     end
 
     def allowed_controllers
