@@ -107,7 +107,21 @@ dl.work-show {
 }
 
 .social-media {
-  padding: 1em 0;
+  padding: 14px 0;
+
+  input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    // border: ;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+    height: 38px;
+  }
+  button {
+    margin-top: -4px;
+  }
 }
 
 .work-type {
