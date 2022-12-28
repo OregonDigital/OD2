@@ -113,10 +113,15 @@ dl.work-show {
 .work-type {
   div.tab-content {
     margin-bottom: 5em;
+
+    .form-tab-content {
+      margin: 0;
+    }
   }
 
   ul.nav-tabs {
     padding: 0 2em;
+    margin-bottom: 15px;
 
     li {
       &.active a {
