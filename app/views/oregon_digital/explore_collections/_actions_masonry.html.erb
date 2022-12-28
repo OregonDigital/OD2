@@ -52,7 +52,7 @@
   <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
     <div class="center-text">
       <input id="<%= view %>-<%= collection.id %>-share-link" value="<%= hyrax.collection_url(collection.id) %>">
-      <button class="copy-single-use-link btn btn-success" data-clipboard-target="#<%= view %>-<%= collection.id %>-share-link" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copied!">
+      <button id="copy-button" class="btn btn-success" data-clipboard-target="#<%= view %>-<%= collection.id %>-share-link" type="button" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom">
         Copy
       </button>
     </div>
