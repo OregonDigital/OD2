@@ -31,7 +31,8 @@ module OregonDigital
         labels.each do |label|
           values += get_values(label).to_a
         end
-        values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
+        eng_values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
+        return eng_values unless eng_values.blank?
         return values unless values.blank?
 
         node? ? [] : [rdf_subject.to_s]
