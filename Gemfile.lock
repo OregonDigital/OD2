@@ -562,7 +562,7 @@ GEM
     iso8601 (0.9.1)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
-    jmespath (1.4.0)
+    jmespath (1.6.2)
     jquery-datatables-rails (3.4.0)
       actionpack (>= 3.1)
       jquery-rails
@@ -676,6 +676,7 @@ GEM
     mime-types-data (3.2020.1104)
     mini_magick (4.10.1)
     mini_mime (1.1.0)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -689,6 +690,9 @@ GEM
     noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
+      racc (~> 1.4)
     nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     nokogumbo (2.0.5)
@@ -1107,6 +1111,7 @@ GEM
     zip_tricks (5.3.1)
 
 PLATFORMS
+  aarch64-linux-musl
   x86_64-linux
 
 DEPENDENCIES
@@ -1186,4 +1191,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.3.22
+   2.3.19
