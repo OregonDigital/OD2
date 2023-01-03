@@ -99,8 +99,8 @@ RSpec.describe OregonDigital::Jp2V2Presenter do
   end
 
   describe '#default_image_path' do
-    it 'returns the IIIF path for a 640-wide jpg' do
-      expect(presenter.send(:default_image_path)).to eq("#{presenter.send(:iiif_url)}/full/640,/0/default.jpg")
+    it 'returns the IIIF path for a jpg' do
+      expect(presenter.send(:default_image_path)).to eq("#{presenter.send(:iiif_url)}/full/full/0/default.jpg")
     end
   end
 

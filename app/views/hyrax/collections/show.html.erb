@@ -16,7 +16,7 @@
               <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
             </span>
             <span>
-              <%= link_to "View all items in collection", view_all_url %>
+              <%= link_to "View all", view_all_url %>
             </span>
           </div>
         </div>
@@ -63,7 +63,7 @@
             <%= image_tag path, alt: alt, style: style %>
           </div>
           <div class="flex-item social-links">
-            <%= render 'hyrax/base/social_media' %>
+            <%= render '/shared/fileset_collection_social_media' %>
           </div>
         </div>
         <div class="lg-border-bottom clearfix"></div>
@@ -88,7 +88,7 @@
   </div>
 
   <%= render 'shared/colored_divider', color: 'lime-green' do %>
-    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All Items</a>
+    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All</a>
   <% end %>
 
   <div class="row">

@@ -1,0 +1,24 @@
+<% page_title ||= content_for?(:page_title) ? content_for(:page_title) : default_page_title %>
+<% share_url ||= request.original_url %>
+
+<div class="social-media">
+  <span class="mw-lg-b">
+    Share this:
+  </span>
+  <label class="sr-only" for="lname">Copy Link</label>
+  <input class="copy-input-fileset" readonly type="text" id="lname" name="lname" value=<%= "#{share_url}" %> onClick="this.select();"><button id="copy-button" class="btn btn-primary" data-clipboard-target="#lname" type="button" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom">
+      Copy
+    </button>
+  <div class="pull-right centered-socials">
+    <%= link_to "https://facebook.com/sharer/sharer.php?#{{u: share_url}.to_param}", class: 'share-button share-button-facebook', target: '_blank', rel: 'noopener noreferrer', title: t('hyrax.base.social_media.facebook'), 'aria-label': t('hyrax.base.social_media.facebook') do %>
+      <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      <span class="sr-only">Post to Facebook</span>
+    <% end %>
+
+    <!-- Sharingbutton Twitter -->
+    <%= link_to "https://twitter.com/intent/tweet/?#{{text: page_title, url: share_url}.to_param}", class: 'share-button share-button-twitter', target: '_blank', rel: 'noopener noreferrer', title: t('hyrax.base.social_media.twitter'), 'aria-label': t('hyrax.base.social_media.twitter') do %>
+      <i class="fa fa-twitter" aria-hidden="true"></i>
+      <span class="sr-only">Post to Twitter</span>
+    <% end %>
+  </div>
+</div>

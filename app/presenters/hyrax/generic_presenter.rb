@@ -12,6 +12,7 @@ module Hyrax
     delegate(:rights_statement_label, to: :solr_document)
     delegate(:language_label, to: :solr_document)
     delegate(:non_user_collections, to: :solr_document)
+    delegate(:oai_collections, to: :solr_document)
 
     # Returns true if any fileset or any child work has a filset that is an image or PDF,
     # both of which will always have one or more JP2s
@@ -35,6 +36,12 @@ module Hyrax
 
     def page_title
       title.first
+    end
+
+    def total_viewable_items(id)
+      visibility = ['open']
+      visibility += current_ability&.current_user&.groups
+      ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id} AND suppressed_bsi:false AND visibility_ssi:(#{visibility.join(' ')})").accessible_by(current_ability).count
     end
 
     # Link to add to shelf functionality
