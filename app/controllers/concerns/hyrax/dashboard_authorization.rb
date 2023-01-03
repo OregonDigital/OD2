@@ -24,7 +24,7 @@ module Hyrax
     # rubocop:enable Metrics/CyclomaticComplexity
 
     def collection_exceptions?
-      user_is_creating_collection? || user_is_updating_collection?
+      user_is_creating_collection? || user_is_updating_collection? || user_is_sharing_collection?
     end
 
     def user_is_creating_collection?
@@ -33,6 +33,10 @@ module Hyrax
 
     def user_is_updating_collection?
       (controller_name.to_s == 'collection_members') && (params[:collection][:members] == 'add')
+    end
+
+    def user_is_sharing_collection?
+      (controller_name.to_s == 'collections') && (params[:collection][:visibility].in? %w[open restricted])
     end
 
     def allowed_controllers

@@ -53,6 +53,10 @@
     h1 {
       font-size: 30px;
     }
+
+    .collection-subtitle{
+      min-width: 200px;
+    }
   }
   .hyc-desc {
     font-weight: lighter;
@@ -162,6 +166,6 @@
     border-top: unset;
     margin: unset;
     padding: unset;
-    width: unset;
+    width: 100%;
   }
 }

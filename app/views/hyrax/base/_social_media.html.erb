@@ -13,7 +13,7 @@
   <% end %>
 </div>
 <div class="pull-right copy-button">
-  <button class="btn btn-primary" data-clipboard-text="<%= share_url %>" type="button" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" title="Copy text to clipboard" onclick="toggleCopied(this)">
+  <button id="copy-button" class="btn btn-primary" data-clipboard-target="#lname" type="button" data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom" >
     Copy
   </button>
 </div>
@@ -22,6 +22,5 @@
     Share this:
   </span>
   <label class="sr-only" for="lname">Copy Link</label>
-  <input class="copy-input" type="text" id="lname" name="lname" value=<%= "#{share_url}" %> onClick="this.select();">
-  
+  <input class="copy-input" readonly type="text" id="lname" name="lname" value=<%= "#{share_url}" %> onClick="this.select();">
 </div>

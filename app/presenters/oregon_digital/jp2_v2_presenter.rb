@@ -33,7 +33,7 @@ module OregonDigital
     end
 
     def thumbnail_path
-      [iiif_url, 'full', '400,', '0', 'default.jpg'].join('/')
+      [iiif_url, 'full', '!400,400', '0', 'default.jpg'].join('/')
     end
 
     def to_s
@@ -62,7 +62,7 @@ module OregonDigital
     end
 
     def default_image_path
-      [iiif_url, 'full', '640,', '0', 'default.jpg'].join('/')
+      [iiif_url, 'full', 'full', '0', 'default.jpg'].join('/')
     end
 
     def iiif_endpoint

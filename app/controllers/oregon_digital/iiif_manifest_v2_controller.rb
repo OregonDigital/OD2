@@ -31,7 +31,7 @@ module OregonDigital
       return @jp2_work_presenter if @jp2_work_presenter
 
       @jp2_work_presenter = OregonDigital::IiifV2Presenter.new(@solrdoc, current_ability, request)
-      @jp2_work_presenter.file_sets = work.file_sets
+      @jp2_work_presenter.file_sets = @solrdoc.file_sets
       @jp2_work_presenter
     end
 
