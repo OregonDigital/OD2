@@ -35,6 +35,9 @@ Bulkrax.setup do |config|
     'Bulkrax::RdfEntry' => 'http://opaquenamespace.org/ns/set'
   }
 
+  config.fill_in_blank_source_identifiers = ->(obj, index) { "#{obj.importerexporter.id}-#{index}" }
+
+
   # Field mappings
   # Create a completely new set of mappings by replacing the whole set as follows
   #   config.field_mappings = {
@@ -104,7 +107,8 @@ Bulkrax.setup do |config|
     'rights_holder' => { from: ['rightholder'] },
     'set' => { from: ['set'] },
     'institution' => { from: ['contributinginstitution'] },
-    'primary_set' => { from: ['primaryset'] }
+    'primary_set' => { from: ['primaryset'] },
+    'bulkrax_identifier' => { from: ['original_identifier'], source_identifier: true }
   }
 end
 
@@ -123,11 +127,40 @@ Bulkrax::ApplicationMatcher.class_eval do
   end
 end
 
+## override perform_now in export controller
+Bulkrax::ExportersController.class_eval do
+  def create
+    @exporter = Exporter.new(exporter_params)
+    field_mapping_params
+
+    if @exporter.save
+      if params[:commit] == 'Create and Export'
+        Bulkrax::ExporterJob.perform_later(@exporter.id)
+      end
+      redirect_to exporters_path, notice: 'Exporter was successfully created.'
+    else
+      render :new
+    end
+  end
+
+  # PATCH/PUT /exporters/1
+  def update
+    field_mapping_params
+    if @exporter.update(exporter_params)
+      Bulkrax::ExporterJob.perform_later(@exporter.id) if params[:commit] == 'Update and Re-Export All Items'
+      redirect_to exporters_path, notice: 'Exporter was successfully updated.'
+    else
+      render :edit
+    end
+  end
+end
 ## override CsvEntry#required_elements to include OD-specific required_fields
-Bulkrax::CsvEntry.class_eval do
+Bulkrax::ApplicationParser.class_eval do
   def required_elements
+    elts = %w[title resource_type identifier rights_statement]
     # added resource_type, identifier, and rights_statement
-    %w[title source_identifier resource_type identifier rights_statement]
+    elts << source_identifier unless Bulkrax.fill_in_blank_source_identifiers
+    elts
   end
 
   ::Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions" if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)

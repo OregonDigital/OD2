@@ -67,7 +67,7 @@ module OregonDigital
       end
 
       # bulkrax shared system identifier
-      property :source, predicate: ::RDF::Vocab::DC.source do |index|
+      property :bulkrax_identifier, predicate: RDF::URI.new('http://id.loc.gov/vocabulary/identifiers/local') do |index|
         index.as :stored_searchable
       end
 

@@ -594,6 +594,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :bulkrax_identifier, predicate: RDF::URI.new('http://id.loc.gov/vocabulary/identifiers/local'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
       define_singleton_method :generic_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
