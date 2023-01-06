@@ -48,7 +48,7 @@ module OregonDigital
         coords = nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' ')
 
         @file_set.hocr_content[nokogiri_element.text.downcase.stem] ||= []
-        @file_set.hocr_content[nokogiri_element.text.downcase.stem] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{@pagenum}"
+        @file_set.hocr_content[nokogiri_element.text.downcase.stem] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{@pagenum},#{word}"
       end
 
       @file_set.ocr_content << result.ocr_content

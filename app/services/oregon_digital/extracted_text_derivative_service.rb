@@ -50,7 +50,7 @@ module OregonDigital
 
           trimmed_word = trim_word(nokogiri_element.text.downcase)
           words_hash[trimmed_word] ||= []
-          words_hash[trimmed_word] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{page}"
+          words_hash[trimmed_word] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{page},#{word}"
         end
       end
 
