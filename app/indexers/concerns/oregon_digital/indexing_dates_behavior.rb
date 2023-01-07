@@ -34,7 +34,7 @@ module OregonDigital
 
     # The metadata fields to be combined into one date/decade facet
     def date_combined_fields
-      %i[award_date date_created collected_date date issued view_date acquisition_date]
+      %i[award_date date_created collected_date date issued view_date]
     end
 
     # date_facet_yearly is intended to be used for date_facet_yearly_ssim, which is used by the facet provided
