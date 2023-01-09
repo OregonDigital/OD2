@@ -1,10 +1,11 @@
 <div class="devise-container">
-  <h1 class="h2 text-center" style="margin-bottom:2em">LOOKING TO SIGN UP FOR AN OREGON DIGITAL ACCOUNT?</h1>
+  <h1 class="h2 text-center" style="margin-bottom:2em">LOOKING TO SIGN UP FOR AN</h1><br>
+  <h1 class="h2 text-center" style="margin-bottom:2em">OREGON DIGITAL ACCOUNT?</h1>
   <%- if controller_name != 'sessions' %>
     <div class="text-center" style="margin-bottom:2em">Already have an account? <%= link_to "Log in", new_session_path(resource_name) %><br /></div>
   <% end -%>
 
-  <h3 class="h4 text-center" style="margin-bottom:2em">AFFILIATED WITH UO OR OSU?<a id="affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h3>
+  <h3 class="h4 text-center" style="margin-bottom:2em">I AM AFFILIATED WITH UO OR OSU?<a id="affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h3>
 
     <div class="row">
       <div class="col-sm-3"></div>
@@ -29,7 +30,7 @@
   <div class="lime-green-hr" style="margin-bottom:1em"></div>
   <%= render "devise/shared/error_messages", resource: resource %>
   <br>
-  <h3 class="h4 text-center" style="margin-bottom:2em">NOT AFFILIATED WITH UO OR OSU?<a id="not-affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#not-affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h3>
+  <h3 class="h4 text-center" style="margin-bottom:2em">I AM NOT AFFILIATED WITH UO OR OSU?<a id="not-affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#not-affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h3>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div class="flex-container sign-up-form devise-form">
       <div class="field flex-item">
@@ -65,6 +66,8 @@
       </div>
     </div>
   <% end %>
+  <div class="text-center"><%= link_to "Forgot password?", new_password_path(resource_name) %></div><br>
+
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <div class="text-center"><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %></div><br>
   <% end -%>
