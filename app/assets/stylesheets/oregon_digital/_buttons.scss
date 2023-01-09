@@ -24,7 +24,6 @@ input.link {
   border-radius: 0 !important;
   border: 3px solid transparent;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 1px;
 
   &.btn-primary{
@@ -83,6 +82,11 @@ input[type=checkbox] {
   line-height: normal;
   padding-top: .25em;
   padding: .25em 0 0 0.5em;
+}
+#download-button {
+  .caret-dropdown::after {
+    color: $white;
+  }
 }
 
 .tab-padding {

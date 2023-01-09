@@ -7,14 +7,24 @@
 }
 
 .osu-logo {
-  height: 40%;
-  width: 40%;
+  height: 50%;
+  width: 45%;
 }
 
 .uo-logo {
   height: 50%;
-  width: 50%;
+  width: 45%;
   margin-left: 10px;
+}
+
+@media (max-width: $screen-md-min) {
+
+  .osu-logo,
+  .uo-logo {
+    display: block;
+    margin: .5em auto;
+    width: 25%;
+  }
 }
 
 .site-footer {
@@ -71,10 +81,31 @@ a.toc-link {
 
 .left-border {
   border-left: $lime-green 2px solid;
+
+  @media (max-width: $screen-md-min) {
+    & {
+      text-align: center;
+      border: none;
+    }
+  }
+}
+
+@media (max-width: $screen-md-min) {
+  .horizontal-sm {
+    width: 4em;
+    border-bottom: $lime-green 2px solid;
+    margin: 1.5em auto;
+  }
 }
 
 .right-align {
   text-align: right;
+
+  @media (max-width: $screen-md-min) {
+    & {
+      text-align: center;
+    }
+  }
 }
 
 .padding-row {
