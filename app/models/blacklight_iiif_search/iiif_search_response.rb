@@ -52,29 +52,53 @@ module BlacklightIiifSearch
         hit = { '@type': 'search:Hit', 'annotations': [] }
         # Find which of our extracted text or hOCR fields this document has, then find the word:bbox string in that field for each searched word
         extract, ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
-        word_array = (extract.nil? ? ocr : extract).select { |val| query.split(' ').include? val.split(':')[0] }
+        # All words in corpus that are in any of the query words
+        # word_array = (extract.nil? ? ocr : extract).select { |val| query.split(' ').map { |q_word| q_word.include?(val.split(':')[0]) }.reduce('|') }
+        word_array = extract.nil? ? ocr_word_array(ocr) : extracted_word_array(extract, query)
+        # BREAK
         # word_array is an array of [word:bbox] for each word in the search
-        word_array.each do |words|
-          word = words.split(':')[0]
-          word_count = words.split(':')[1].split(';').count
-          (0..word_count - 1).each do |word_index|
-            @total += 1
-            # We're going to send the word_index over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb
-            # The word stays the same, just the "hit highlight index" changes so the AnnotationBehavior can access the bbox
-            annotation = IiifSearchAnnotation.new(document,
-                                                  word,
-                                                  word_index, word, controller,
-                                                  @parent_document)
-            @resources << annotation.as_hash
-            hit[:annotations] << annotation.annotation_id
-          end
+        word_array.each_with_index do |word, index|
+          # We're going to send the word_index over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb
+          # The word stays the same, just the "hit highlight index" changes so the AnnotationBehavior can access the bbox
+          annotation = IiifSearchAnnotation.new(document,
+                                                query,
+                                                index, word.text, controller,
+                                                @parent_document)
+          @resources << annotation.as_hash
+          hit[:annotations] << annotation.annotation_id
         end
         @hits << hit
+        # BREAK
       end
       @resources
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+
+    def extracted_word_array(extract, query)
+      Nokogiri::HTML(extract[0]).css('word').select { |w| w.text.downcase.include? query }
+    end
+
+    def ocr_word_array(ocr) ; end
+
+    def matches(matched_words, query)
+      simplified_hash = {}
+      q_words = query.split(' ')
+      matched_words.each_key { |word|
+        if word.to_s.include? q_word
+          simp_hash[q_word] ||= []
+          simp_hash[q_word] << test_words[key].flatten
+        end
+      }
+      simp_hash = simp_hash.map { |k,v| [k, v.flatten] }.to_h
+
+      matched_words = []
+      simp_hash[q_words[0]].each_with_index { |word, start_pos|
+        q_words[1..-1].each_with_index { |q_word, index|
+          simp_hash[q_word]
+        }
+      }
+    end
 
     ##
     # @return [IIIF::Presentation::Layer]

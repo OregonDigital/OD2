@@ -28,47 +28,10 @@ module OregonDigital
     # rubocop:disable Metrics/MethodLength
     def create_derivatives
       result = processor.run!
-      words_hash = {}
-
-      pages = Nokogiri::HTML(result.bbox_content).css('page')
-      page_count = pages.count
-
-      pages.each_with_index do |doc, page|
-        words = doc.css('word')
-        word_count = words.count
-        words.each_with_index do |nokogiri_element, word|
-          Rails.logger.debug("word #{word}/#{word_count - 1} on page #{page}/#{page_count - 1}") if (word % 10).zero?
-
-          x = nokogiri_element.attributes['xmin'].value.to_i
-          y = nokogiri_element.attributes['ymin'].value.to_i
-          x2 = nokogiri_element.attributes['xmax'].value.to_i
-          y2 = nokogiri_element.attributes['ymax'].value.to_i
-
-          # Some seemingly unknown scaling to get boxes in the right place/size
-          scale_factor = 4.185
-          coords = [x, y, x2, y2].map { |coord| coord * scale_factor }
-
-          trimmed_word = trim_word(nokogiri_element.text.downcase)
-          words_hash[trimmed_word] ||= []
-          words_hash[trimmed_word] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{page},#{word}"
-        end
-      end
-
-      solr_doc = []
-      words_hash.each do |word, coords|
-        solr_doc << "#{word}:#{coords.join(';')}"
-      end
-
-      file_set.bbox_content = solr_doc
+      file_set.bbox_content = result.bbox_content if Nokogiri::HTML(result.bbox_content).css('page').count > 0
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
-
-    def trim_word(word)
-      # Trim leading and trailing punctuation
-      punct_trim_regex = /^\W*(.*?)\W*$/m
-      word.match(punct_trim_regex)&.captures&.first&.stem
-    end
 
     # No cleanup necessary - all this does is set a property on FileSet.
     def cleanup_derivatives; end

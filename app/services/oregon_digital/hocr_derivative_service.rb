@@ -25,7 +25,7 @@ module OregonDigital
       @processor = processor_factory.new(ocr_language: 'eng', file_path: filename)
 
       @file_set.ocr_content = [] if @file_set.ocr_content.nil?
-      @file_set.hocr_content = {} if @file_set.hocr_content.nil?
+      @file_set.hocr_content = [] if @file_set.hocr_content.nil?
     end
 
     # OCR text and push all words into a hash, which will be serialized later in OregonDigital::FileSetDerivativesService
@@ -34,22 +34,13 @@ module OregonDigital
     # rubocop:disable Metrics/CyclomaticComplexity
     def create_derivatives
       result = processor.run!
-      @file_set.hocr_content ||= {}
+      @file_set.hocr_content ||= []
       @file_set.hocr_text    ||= []
+      @file_set.hocr_content << result.hocr_content
       words = Nokogiri::HTML(result.hocr_content).css('.ocrx_word')
 
       # hocr_text will be the plain text equivilant to all_text_tismv, to allow searching on ocr text
       @file_set.hocr_text << words.map(&:text).join(' ')
-      # Create a hash of words and their bounding boxes
-      # hOCR is returned as an xml doc string for the current page
-      # For each word on the page parse out the bbox position and downcased+stemmed word
-      words.each_with_index do |nokogiri_element, word|
-        Rails.logger.debug("word #{word}/#{words.count}") if (word % 10).zero?
-        coords = nokogiri_element.attributes['title'].value.split(';').find { |x| x.include?('bbox') }.gsub('bbox ', '').split(' ')
-
-        @file_set.hocr_content[nokogiri_element.text.downcase.stem] ||= []
-        @file_set.hocr_content[nokogiri_element.text.downcase.stem] << "#{coords[0]},#{coords[1]},#{coords[2]},#{coords[3]},#{@pagenum},#{word}"
-      end
 
       @file_set.ocr_content << result.ocr_content
     end
