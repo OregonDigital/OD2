@@ -8,7 +8,7 @@ module BlacklightIiifSearch
     # Create a URL for the annotation
     # @return [String]
     def annotation_id
-      "#{parent_url}/canvas/#{document[:id]}/annotation/#{query.sub(' ', '_')}-#{hl_index/2}"
+      "#{parent_url}/canvas/#{document[:id]}/annotation/#{query.sub(' ', '_')}-#{hl_index / 2}"
     end
 
     ##

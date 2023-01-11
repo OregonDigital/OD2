@@ -25,7 +25,6 @@ module OregonDigital
 
     # Extract PDF text and push all words into a hash
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/MethodLength
     def create_derivatives
       result = processor.run!
       # extracted text is derived from original PDF and isn't scaled when derivatives are created
@@ -38,10 +37,9 @@ module OregonDigital
         word['ymax'] = word['ymax'].to_i * scale_factor
       end
 
-      file_set.bbox_content = bbox_content.to_s if bbox_content.css('word').count > 0
+      file_set.bbox_content = bbox_content.to_s if bbox_content.css('word').count.positive?
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/MethodLength
 
     # No cleanup necessary - all this does is set a property on FileSet.
     def cleanup_derivatives; end

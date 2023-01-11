@@ -69,7 +69,7 @@ module BlacklightIiifSearch
         end
         @hits << hitBREAK
       end
-      @total = @hits[0][:annotations].count / query.strip.split(" ").count unless @hits[0].blank?
+      @total = @hits[0][:annotations].count / query.strip.split(' ').count unless @hits[0].blank?
       @resources
     end
     # rubocop:enable Metrics/AbcSize
@@ -78,12 +78,8 @@ module BlacklightIiifSearch
     # Create Word objects for all extracted words
     # @param [String] Output from `pdftotext`
     def extracted_word_array(extract)
-      # Short circuit if we've already found matches
-      @matches ||= []
-      return @matches unless @matches.empty?
-
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      words = extract.map do |text|
+      extract.map do |text|
         Nokogiri::HTML(text).css('page').map.with_index do |page, page_number|
           page.css('word').map do |word|
             Word.new([word.attr('xmin'), word.attr('ymin'), word.attr('xmax'), word.attr('ymax')], page_number, word.text)
@@ -94,13 +90,10 @@ module BlacklightIiifSearch
 
     # Create Word objects for all extracted words
     # @param [String] Output from `tesseract`
+    # rubocop:disable Metrics/AbcSize
     def ocr_word_array(ocr)
-      # Short circuit if we've already found matches
-      @matches ||= []
-      return @matches unless @matches.empty?
-
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      words = ocr.map.with_index do |text, page_number|
+      ocr.map.with_index do |text, page_number|
         Nokogiri::HTML(text).css('.ocrx_word').map do |word|
           bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
 
@@ -108,26 +101,28 @@ module BlacklightIiifSearch
         end.flatten
       end.flatten
     end
+    # rubocop:enable Metrics/AbcSize
 
+    # rubocop:disable Metrics/AbcSize
     def match_words(words, query)
       # Query as an array
-      word_queries = query.strip.split(" ")
+      word_queries = query.strip.split(' ')
+      matches = []
 
       # Find the matches
       words.each_with_index do |word, index|
         # Check if this word matches the begining of the query
         next unless word.text.downcase.include?(word_queries.first)
         # Check if there is enough words left to match whole query phrase
-        next unless index+word_queries.length-1 < words.length
+        next unless index + word_queries.length - 1 < words.length
 
         # If the whole query phrase matches from the first word to the last, we've found a match!
-        if words[index..index+word_queries.length-1].map(&:text).join(" ").downcase.include?(query)
-          @matches |= words[index..index+word_queries.length-1]
-        end
+        matches |= words[index..index + word_queries.length - 1] if words[index..index + word_queries.length - 1].map(&:text).join(' ').downcase.include?(query)
       end
 
-      @matches
+      matches
     end
+    # rubocop:enable Metrics/AbcSize
 
     ##
     # @return [IIIF::Presentation::Layer]
