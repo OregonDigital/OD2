@@ -75,20 +75,21 @@ module OregonDigital
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       # Build a hash of words temporarily in file_set.hocr_content
       0.upto(page_count - 1) do |pagenum|
-        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox_content.empty?
+        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox_content.blank?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          hocr_derivative_service(out_path, pagenum).create_derivatives if file_set.bbox_content.empty?
+          hocr_derivative_service(out_path, pagenum).create_derivatives if file_set.bbox_content.blank?
           create_zoomable_page(out_path, pagenum)
         end
       end
-      # Serialize the hOCR hash into a solrfield
-      solr_doc = []
-      file_set.hocr_content&.each do |word, coords|
-        solr_doc << "#{word}:#{coords.join(';')}"
-      end
+      # # Serialize the hOCR hash into a solrfield
+      # # REMOVE THIS AND REPLACE WITH SOME WAY TO INCLUDE THE TESSERACT OUTPUT
+      # solr_doc = []
+      # file_set.hocr_content&.each do |word, coords|
+      #   solr_doc << "#{word}:#{coords.join(';')}"
+      # end
 
-      file_set.hocr_content = solr_doc
+      # file_set.hocr_content = solr_doc
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
