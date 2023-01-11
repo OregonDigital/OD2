@@ -67,7 +67,7 @@ module BlacklightIiifSearch
           @resources << annotation.as_hash
           hit[:annotations] << annotation.annotation_id
         end
-        @hits << hitBREAK
+        @hits << hit
       end
       @total = @hits[0][:annotations].count / query.strip.split(' ').count unless @hits[0].blank?
       @resources
