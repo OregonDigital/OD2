@@ -24,8 +24,9 @@ module OregonDigital
       @pagenum = pagenum
       @processor = processor_factory.new(ocr_language: 'eng', file_path: filename)
 
-      @file_set.ocr_content = [] if @file_set.ocr_content.nil?
-      @file_set.hocr_content = [] if @file_set.hocr_content.nil?
+      @file_set.ocr_content  ||= []
+      @file_set.hocr_content ||= []
+      @file_set.hocr_text    ||= []
     end
 
     # OCR text and push all words into a hash, which will be serialized later in OregonDigital::FileSetDerivativesService
@@ -34,8 +35,6 @@ module OregonDigital
     # rubocop:disable Metrics/CyclomaticComplexity
     def create_derivatives
       result = processor.run!
-      @file_set.hocr_content ||= []
-      @file_set.hocr_text    ||= []
       @file_set.hocr_content << result.hocr_content
       words = Nokogiri::HTML(result.hocr_content).css('.ocrx_word')
 
@@ -81,7 +80,7 @@ module OregonDigital
       private
 
       def run_derivatives
-        system('tesseract', file_path.to_s, temporary_output.path.to_s, '-l', ocr_language.to_s, 'hocr', out: File::NULL, err: File::NULL)
+        system('tesseract', file_path.to_s, temporary_output.path.to_s, '-l', ocr_language.to_s, 'hocr', '-c', "tessedit_page_number=#{@pagenum}" , out: File::NULL, err: File::NULL)
       end
 
       def temporary_output

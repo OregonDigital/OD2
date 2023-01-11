@@ -28,7 +28,17 @@ module OregonDigital
     # rubocop:disable Metrics/MethodLength
     def create_derivatives
       result = processor.run!
-      file_set.bbox_content = result.bbox_content if Nokogiri::HTML(result.bbox_content).css('page').count > 0
+      # extracted text is derived from original PDF and isn't scaled when derivatives are created
+      scale_factor = 4.175
+      bbox_content = Nokogiri::HTML(result.bbox_content)
+      bbox_content.css('word').each do |word|
+        word['xmin'] = word['xmin'].to_i * scale_factor
+        word['xmax'] = word['xmax'].to_i * scale_factor
+        word['ymin'] = word['ymin'].to_i * scale_factor
+        word['ymax'] = word['ymax'].to_i * scale_factor
+      end
+
+      file_set.bbox_content = bbox_content.to_s if bbox_content.css('word').count > 0
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength

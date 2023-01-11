@@ -35,8 +35,8 @@ module BlacklightIiifSearch
       word = @found_words[hl_index]
 
       # Write out bbox info
-      word ? "#{word.page}#xywh=#{word.bbox}" : '0#xywh=0,0,0,0'
       # There were no matching words in extracted or OCRd text, write out an empty result.
+      word ? "#{word.page}#xywh=#{word.bbox}" : '0#xywh=0,0,0,0'
     end
   end
 end

@@ -52,7 +52,8 @@ module BlacklightIiifSearch
         hit = { '@type': 'search:Hit', 'annotations': [] }
         # Find which of our extracted text or hOCR fields this document has, then parse the entire document
         extract, ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
-        word_array = extract.nil? ? ocr_word_array(ocr) : extracted_word_array(extract, query)
+        all_words = extract.nil? ? ocr_word_array(ocr) : extracted_word_array(extract)
+        word_array = match_words(all_words, query)
 
         # word_array is an array of BlacklightIiifSearch::Word for each word in the document
         word_array.each_with_index do |word, index|
@@ -66,9 +67,9 @@ module BlacklightIiifSearch
           @resources << annotation.as_hash
           hit[:annotations] << annotation.annotation_id
         end
-        @hits << hit
-        # BREAK
+        @hits << hitBREAK
       end
+      @total = @hits[0][:annotations].count / query.strip.split(" ").count unless @hits[0].blank?
       @resources
     end
     # rubocop:enable Metrics/AbcSize
@@ -76,14 +77,10 @@ module BlacklightIiifSearch
 
     # Create Word objects for all extracted words
     # @param [String] Output from `pdftotext`
-    # @param [String] Full query sent to Solr
-    def extracted_word_array(extract, query)
+    def extracted_word_array(extract)
       # Short circuit if we've already found matches
       @matches ||= []
       return @matches unless @matches.empty?
-
-      # Query as an array
-      word_queries = query.strip.split(" ")
 
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
       words = extract.map do |text|
@@ -93,6 +90,28 @@ module BlacklightIiifSearch
           end.flatten
         end.flatten
       end.flatten
+    end
+
+    # Create Word objects for all extracted words
+    # @param [String] Output from `tesseract`
+    def ocr_word_array(ocr)
+      # Short circuit if we've already found matches
+      @matches ||= []
+      return @matches unless @matches.empty?
+
+      # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
+      words = ocr.map.with_index do |text, page_number|
+        Nokogiri::HTML(text).css('.ocrx_word').map do |word|
+          bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
+
+          Word.new([bbox_info[0], bbox_info[1], bbox_info[2], bbox_info[3]], page_number, word.text)
+        end.flatten
+      end.flatten
+    end
+
+    def match_words(words, query)
+      # Query as an array
+      word_queries = query.strip.split(" ")
 
       # Find the matches
       words.each_with_index do |word, index|
@@ -109,8 +128,6 @@ module BlacklightIiifSearch
 
       @matches
     end
-
-    def ocr_word_array(ocr) ; end
 
     ##
     # @return [IIIF::Presentation::Layer]
@@ -164,11 +181,10 @@ module BlacklightIiifSearch
     class BoundingBox
       attr_reader :x, :y, :w, :h
       def initialize(box_array)
-        scale = 4.175
-        @x = (box_array[0].to_i * scale).floor
-        @y = (box_array[1].to_i * scale).floor
-        @w = (box_array[2].to_i * scale - @x).floor
-        @h = (box_array[3].to_i * scale - @y).floor
+        @x = box_array[0].to_i
+        @y = box_array[1].to_i
+        @w = box_array[2].to_i - @x
+        @h = box_array[3].to_i - @y
       end
 
       def to_s
