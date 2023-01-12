@@ -7,6 +7,8 @@ class ReExtractTextWorker
   sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
   # A fileset and the file path on disk is required
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
   def perform(pid, filename)
     file_set = FileSet.find pid
     # Create extracted text bbox_content
@@ -17,14 +19,19 @@ class ReExtractTextWorker
     # Create the fileset derivative service and use it to iterate the existing jp2 derivatives
     derivative_service = OregonDigital::FileSetDerivativesService.new(file_set)
     file_set.hocr_content = []
+    # Skip OCR if we already got extracted bbox content
+    return unless file_set.bbox_content.blank?
+
     0.upto(page_count - 1) do |pagenum|
       Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}")
 
       # This jp2 needs to be converted to png before it can be OCRd by tesseract
       OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
         derivative_service.manual_convert(filename, pagenum, out_path)
-        hocr_deriv_servce = OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: out_path, pagenum: pagenum).new.create_derivatives
+        OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: out_path, pagenum: pagenum).new.create_derivatives
       end
-    end if file_set.bbox_content.blank?
+    end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 end
