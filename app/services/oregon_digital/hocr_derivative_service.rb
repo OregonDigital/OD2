@@ -56,6 +56,7 @@ module OregonDigital
         run_derivatives
         Result.new(hocr_content: created_file.read).tap do
           FileUtils.rm_f(created_file)
+          temporary_output.unlink
         end
       end
 
