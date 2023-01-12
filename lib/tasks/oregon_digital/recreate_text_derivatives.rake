@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'vcr'
 
 namespace :oregon_digital do
   desc 'Create jobs to recreate text extraction and hOCR derivatives'
