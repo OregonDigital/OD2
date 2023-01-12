@@ -94,7 +94,7 @@
       <% @document_list = @child_doc_list %>
       <% if @document_list.length > 0 %>
         <div class='row'>
-          <div class='col-sm-12'>
+          <div class='col-sm-12 contained-in'>
             <h2 class='h4'>Contained In This Object</h2> &nbsp; <%= @response['response']['numFound'] %> items
             <hr style='border-width: 3px;'>
             <%= render 'search_results', param_name: :child_page %>

@@ -1,0 +1,33 @@
+@media print {
+
+  /* display none: global */
+  .masthead,
+  #skip-nav,
+  .breadcrumb,
+  #user-login-modal,
+  .site-footer {
+    display: none !important;
+  }
+
+
+  /* print style for workshow page: https://staging.oregondigital.org/concern/generics/df70sk17p?locale=en */
+  .work-type {
+
+    /* display none: workshow page */
+    hr,
+    .show-actions,
+    .modal-header,
+    #collection-list-container,
+    #collection-create-container,
+    .pull-right.social-buttons,
+    .pull-right.copy-button,
+    .pull-right.social-media,
+    #work-show-tablist,
+    #contact_us .form-tab-content,
+    #data_sources .form-tab-content,
+    .contained-in,
+    .workflow-actions {
+      display: none !important;
+    }
+  }
+}
