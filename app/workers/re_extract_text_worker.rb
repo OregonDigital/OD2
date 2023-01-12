@@ -31,6 +31,8 @@ class ReExtractTextWorker
         OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: out_path, pagenum: pagenum).new.create_derivatives
       end
     end
+
+    file_set.update_index
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
