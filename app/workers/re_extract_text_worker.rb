@@ -18,10 +18,12 @@ class ReExtractTextWorker
 
     # Create the fileset derivative service and use it to iterate the existing jp2 derivatives
     derivative_service = OregonDigital::FileSetDerivativesService.new(file_set)
-    file_set.hocr_content = []
 
-    # Skip OCR if we already got extracted bbox content
+    # OCR if we didn't get extracted bbox content
     if file_set.bbox_content.blank?
+      file_set.ocr_content = []
+      file_set.hocr_content = []
+      file_set.hocr_text = []
       0.upto(page_count - 1) do |pagenum|
         Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}")
 
