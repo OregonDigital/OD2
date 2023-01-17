@@ -1,5 +1,5 @@
 
-<% @collection_solr_doc = SolrDocument.find(@presenter.member_of_collection_ids.first) %>
+<% @collection_solr_doc = SolrDocument.find(@presenter.non_user_collections.first) %>
 <div class="col-md-8 col-xs-12 collection-header collection-info">
   <div class="hyc-title">
     <div class="h3"><%= @collection_solr_doc.title.first %></div>
@@ -19,11 +19,11 @@
 
 <% if false %>
   <div class="col-sm-8">
-    <% @collection_solr_doc = SolrDocument.find(@presenter.member_of_collection_ids.first) %>
+    <% @collection_solr_doc = SolrDocument.find(@presenter.non_user_collections.first) %>
     <div class="col-sm-6 collection-info">
       <p class="collection-title h3"><%= @collection_solr_doc.title.first %></p>
       <p class="collection-data">
-        <%= Hyrax::SolrService.query("member_of_collection_ids_ssim:#{@presenter.member_of_collection_ids.first}", fl: 'id', rows: 10000).length %> items
+        <%= Hyrax::SolrService.query("non_user_collections:#{@presenter.non_user_collections.first}", fl: 'id', rows: 10000).length %> items
         <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
       </p>
     </div>

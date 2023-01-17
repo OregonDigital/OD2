@@ -4,13 +4,12 @@
     <div class="text-center" style="margin-bottom:2em">Already have an account? <%= link_to "Log in", new_session_path(resource_name) %><br /></div>
   <% end -%>
 
-  <h3 class="h4 text-center" style="margin-bottom:2em">I AM AFFILIATED WITH UO OR OSU?<a id="affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h3>
+  <h2 class="h4 text-center" style="margin-bottom:2em">I AM AFFILIATED WITH UO OR OSU<a id="affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h2>
 
     <div class="row">
       <div class="col-sm-3"></div>
       <div class="col-sm-4 col-xs-12 login-radio">
         <label>
-          <input type="radio" name="login-select" checked="checked" onclick="toggleLogin('OSU')">
           <%= link_to main_app.new_osu_session_path, method: :post do %>
             <%= image_tag('osu_logo.png', height: '50', width: '50', alt: 'Oregon State University Login') %>OSU
           <% end %>
@@ -18,8 +17,7 @@
       </div>
       <div class="col-sm-4 col-xs-12 login-radio">
         <label>
-          <input type="radio" name="login-select" onclick="toggleLogin('UO')">
-          <%= link_to main_app.new_uo_session_path, method: :post do %> 
+          <%= link_to main_app.new_uo_session_path, method: :post do %>
             <%= image_tag('uo.png', height: '50', width: '50', alt: 'University of Oregon Login') %>UO
           <% end %>
         </label>
@@ -29,7 +27,7 @@
   <div class="lime-green-hr" style="margin-bottom:1em"></div>
   <%= render "devise/shared/error_messages", resource: resource %>
   <br>
-  <h3 class="h4 text-center" style="margin-bottom:2em">I AM NOT AFFILIATED WITH UO OR OSU?<a id="not-affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#not-affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h3>
+  <h2 class="h4 text-center" style="margin-bottom:2em">I AM NOT AFFILIATED WITH UO OR OSU<a id="not-affiliated" data-toggle="tooltip" data-placement="top" title="By signing up or signing in, you will have the ability to select, organize and share Oregon Digital materials with others." onclick="$('#not-affiliated').tooltip('show')" class="glyphicon glyphicon-question-sign"></a></h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div class="flex-container sign-up-form devise-form">
       <div class="field flex-item">
