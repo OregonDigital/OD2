@@ -25,6 +25,8 @@ module Hyrax
       # Overrides rdf_label to add location disambiguation when available.
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
       def rdf_label
         @label = super
         @label = Array("#{@label.first} County") if us_county? && no_county_label
@@ -51,6 +53,8 @@ module Hyrax
       end
       # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
 
       def fetch_from_cache(subject)
         OregonDigital::Triplestore.fetch_cached_term(subject)
