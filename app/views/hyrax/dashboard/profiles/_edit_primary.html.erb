@@ -2,12 +2,18 @@
              url: hyrax.dashboard_profile_path(@user.to_param),
              html: { multipart: true } do |f| %>
 
-<div class="form-group row">
+  <div class="form-group row">
     <%= f.label :display_name, t(".name").html_safe, class: 'col-4 col-form-label' %>
     <div class="col-8">
        <%= f.text_field :display_name, class: "form-control" %>
     </div>
-  </div><!-- .form-group -->  
+  </div><!-- .form-group -->
+  <div class="form-group row">
+    <%= f.label :email, t(".email").html_safe, class: 'col-4 col-form-label' %>
+    <div class="col-8">
+       <%= f.text_field :email, class: "form-control" %>
+    </div>
+  </div><!-- .form-group -->
   <div class="form-group row">
     <%= f.label :avatar, t(".change_picture").html_safe, class: "col-4 col-form-label" %>
     <div class="col-8">
