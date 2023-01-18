@@ -69,3 +69,20 @@
   <%= render 'trophy_edit', trophies: @trophies %>
   <%= f.button t(".save_profile").html_safe, type: 'submit', class: "btn btn-primary" %>
 <% end %>
+
+<div class="lime-green-hr" style="margin:1em 0;"></div>
+<%= render "devise/shared/error_messages", resource: @user %>
+
+<%= form_for(@user, as: :user, url: password_path(:user), html: { method: :post }) do |f| %>
+  <div class="flex-container password-reset-form devise-form">
+    <div class="field flex-item">
+      <%= f.label :email, class: 'sr-only' %><br />
+      <%= f.hidden_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.hidden_field :dashboard, value: true %>
+    </div>
+
+    <div class="actions flex-item">
+      <%= f.submit "Send reset password instructions to user" %>
+    </div>
+  </div>
+<% end %>
