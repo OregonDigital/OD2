@@ -9,6 +9,7 @@
     </div>
   </div><!-- .form-group -->
   <div class="form-group row">
+    <div class="alert alert-warning" role="alert">CHANGING THE EMAIL WILL CHANGE THE USERS LOGIN INFORMATION. MAKE SURE TO COMMUNICATE THIS TO THE USER</div>
     <%= f.label :email, t(".email").html_safe, class: 'col-4 col-form-label' %>
     <div class="col-8">
        <%= f.text_field :email, class: "form-control" %>
