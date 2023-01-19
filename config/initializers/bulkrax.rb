@@ -85,7 +85,7 @@ Bulkrax.setup do |config|
   )
   prop_names = all_terms.map{ |x| x[:name].to_s }
   # Need properties for assigning split
-  all_props = Generic.properties
+  all_props = Generic.properties.clone
   all_props.merge! Document.properties
   all_props.merge! Image.properties
   all_props.merge! Audio.properties
