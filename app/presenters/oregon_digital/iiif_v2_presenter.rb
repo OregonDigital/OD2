@@ -12,6 +12,10 @@ module OregonDigital
     delegate :id, to: :solr_document
     delegate(*Hyrax.config.iiif_metadata_fields, to: :solr_document)
 
+    def manifest_url
+      Rails.application.routes.url_helpers.iiif_manifest_v2_url(id)
+    end
+
     # Select out the metadata that doesn't have a value
     def manifest_metadata
       super.select { |m| m['value'].present? }
