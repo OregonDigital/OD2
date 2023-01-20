@@ -41,7 +41,7 @@ gem 'faraday_middleware', '~> 0.10.0'
 gem 'blacklight_iiif_search', '~> 1.0'
 gem 'rubyzip', '>= 1.2.2'
 gem 'zip_tricks', '~> 5.3'
-gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: '553aa70e6f9ea585281f2de113f2242a22347c53'  # branch: 'file_update' - ref is 3 commits back
+gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: '9d670acacaffcf379bdeb9dc6456f35d14de2969'  # v2.0.2
 gem 'willow_sword', github: 'notch8/willow_sword'
 
 # Security Audit updates
