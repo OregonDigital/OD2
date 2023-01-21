@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
     t.text "parsed_metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "last_error"
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.string "importerexporter_type", default: "Bulkrax::Importer"
@@ -65,7 +64,6 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
     t.string "export_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "last_error"
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.date "start_date"
@@ -87,8 +85,8 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
     t.integer "processed_collections", default: 0
     t.integer "failed_collections", default: 0
     t.integer "total_collection_entries", default: 0
-    t.integer "processed_children", default: 0
-    t.integer "failed_children", default: 0
+    t.integer "processed_relationships", default: 0
+    t.integer "failed_relationships", default: 0
     t.text "invalid_records"
     t.index ["importer_id"], name: "index_bulkrax_importer_runs_on_importer_id"
   end
@@ -105,7 +103,6 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "validate_only"
-    t.text "last_error"
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.index ["user_id"], name: "index_bulkrax_importers_on_user_id"
@@ -114,7 +111,7 @@ ActiveRecord::Schema.define(version: 2022_03_25_221318) do
   create_table "bulkrax_statuses", force: :cascade do |t|
     t.string "status_message"
     t.string "error_class"
-    t.string "error_message"
+    t.text "error_message"
     t.text "error_backtrace"
     t.integer "statusable_id"
     t.string "statusable_type"
