@@ -5,44 +5,50 @@
 class Users::PasswordsController < Devise::PasswordsController
   before_action :redirect_if_university, only: [:create]
 
-    # POST /resource/password
-    def create
-      self.resource = resource_class.send_reset_password_instructions(resource_params)
-      yield resource if block_given?
+  # POST /resource/password
+  def create
+    self.resource = resource_class.send_reset_password_instructions(resource_params)
+    yield resource if block_given?
 
-      if successfully_sent?(resource)
-        respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
-      else
-        respond_with(resource)
-      end
+    if successfully_sent?(resource)
+      respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
+    else
+      respond_with(resource)
     end
+  end
 
   # Helper for use in before_actions where no authentication is required.
   #
   # Example:
   #   before_action :require_no_authentication, only: :new
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def require_no_authentication
     # OVERRIDE DEVISE: Return false early if the previous controller was the admin dashboard
     previous_url = Rails.application.routes.recognize_path(request.referrer)
     return false if previous_url[:controller] == 'hyrax/dashboard/profiles' && previous_url[:action] == 'edit'
+
     # END OVERRIDE
 
     assert_is_devise_resource!
     return unless is_navigational_format?
+
     no_input = devise_mapping.no_input_strategies
 
     authenticated = if no_input.present?
-      args = no_input.dup.push scope: resource_name
-      warden.authenticate?(*args)
-    else
-      warden.authenticated?(resource_name)
-    end
+                      args = no_input.dup.push scope: resource_name
+                      warden.authenticate?(*args)
+                    else
+                      warden.authenticated?(resource_name)
+                    end
 
-    if authenticated && resource = warden.user(resource_name)
-      set_flash_message(:alert, 'already_authenticated', scope: 'devise.failure')
-      redirect_to after_sign_in_path_for(resource)
-    end
+    return unless authenticated && (resource = warden.user(resource_name))
+
+    set_flash_message(:alert, 'already_authenticated', scope: 'devise.failure')
+    redirect_to after_sign_in_path_for(resource)
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   protected
 

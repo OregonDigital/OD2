@@ -5,6 +5,7 @@
 class Users::SessionsController < Devise::SessionsController
   before_action :redirect_if_university, only: [:create]
 
+  # rubocop:disable Metrics/AbcSize
   def create
     user = User.find_by_email params[:user]['email']
     set_flash_message!(:alert, :deactivated) if user.deactivated?
@@ -16,6 +17,7 @@ class Users::SessionsController < Devise::SessionsController
     yield resource if block_given?
     respond_with resource, location: after_sign_in_path_for(resource)
   end
+  # rubocop:enable Metrics/AbcSize
 
   protected
 

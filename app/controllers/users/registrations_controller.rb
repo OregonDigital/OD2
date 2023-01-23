@@ -8,6 +8,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # OVERRIDE from hyrax to add in mailer.
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Style/IfUnlessModifierOfIfUnless
   def destroy
     previous_url = Rails.application.routes.recognize_path(request.referrer)
     admin_delete_request = previous_url[:controller] == 'hyrax/dashboard/profiles' && previous_url[:action] == 'edit'
@@ -24,6 +26,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     respond_with_navigational(resource) { redirect_to after_sign_out_path_for(resource_name) }
   end
+  # rubocop:enable Style/IfUnlessModifierOfIfUnless
+  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
   protected
