@@ -87,3 +87,9 @@
     </div>
   </div>
 <% end %>
+
+<p>Deactivate User</p>
+<% if @user.deactivated? %>
+  <div class="alert alert-danger"> User already deactived </div>
+<% end %>
+<%= button_to "Deactivate user account", registration_path(:user), data: { confirm: "Are you sure?" }, params: {user_id: @user.id}, disabled: @user.deactivated?, method: :delete %>

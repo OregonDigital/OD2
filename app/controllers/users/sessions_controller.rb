@@ -6,6 +6,10 @@ class Users::SessionsController < Devise::SessionsController
   before_action :redirect_if_university, only: [:create]
 
   def create
+    user = User.find_by_email params[:user]['email']
+    set_flash_message!(:alert, :deactivated) if user.deactivated?
+    return redirect_back fallback_location: '/' if user.deactivated?
+
     self.resource = warden.authenticate!(auth_options)
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
