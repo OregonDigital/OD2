@@ -17,6 +17,16 @@ class User < ApplicationRecord
          :omniauthable, :validatable, omniauth_providers: [:cas, :saml]
   # rubocop:enable Style/SymbolArray
 
+  # Instead of deleting users, we'll set the deactivated flag
+  def destroy
+    update_attributes(deactivated: true) unless deactivated
+  end
+
+  # Prevent login if the user is deactivated
+  def active_for_authentication?
+    super && !deactivated
+  end
+
   # T/F whether user has at least one role
   def role?(role)
     !(roles.map(&:name) & Array(role)).empty?
