@@ -14,33 +14,17 @@ module Hyrax
       render(file: File.join("public/#{response_code}.html"), status: response_code, layout: false) unless dashboard_allowed
     end
 
-    # rubocob:disable Metrics/PerceivedComplexity
-    # rubocop:disable Metrics/CyclomaticComplexity
     def dashboard_allowed
-      # current user has a managing role || current user has a workflow responsibility || if user is trying to create user_collection
-      current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive? || collection_exceptions?
-    end
-    # rubocob:enable Metrics/PerceivedComplexity
-    # rubocop:enable Metrics/CyclomaticComplexity
-
-    def collection_exceptions?
-      user_is_creating_collection? || user_is_updating_collection? || user_is_sharing_collection?
+      admin || operating_on_user_collection
     end
 
-    def user_is_creating_collection?
-      (allowed_controllers.include? controller_name.to_s) && (params[:collection_type_gid] == Hyrax::CollectionType.find_by(machine_id: :user_collection).gid.to_s)
+    def admin
+      current_user&.role?(::Ability.manager_permission_roles) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive?
     end
 
-    def user_is_updating_collection?
-      (controller_name.to_s == 'collection_members') && (params[:collection][:members] == 'add')
-    end
-
-    def user_is_sharing_collection?
-      (controller_name.to_s == 'collections') && (params[:collection][:visibility].in? %w[open restricted])
-    end
-
-    def allowed_controllers
-      %w[collections works]
+    def operating_on_user_collection
+      curation_concern ||= nil
+      (params[:collection_type_gid] || curation_concern&.collection_type_gid) == Hyrax::CollectionType.find_by(machine_id: :user_collection).gid.to_s
     end
   end
 end
