@@ -24,7 +24,7 @@ module Hyrax
 
     def operating_on_user_collection
       curation_concern ||= nil
-      (params[:collection_type_gid] || curation_concern&.collection_type_gid) == Hyrax::CollectionType.find_by(machine_id: :user_collection).gid.to_s
+      (params[:collection_type_gid] || curation_concern&.collection_type_gid) == Hyrax::CollectionType.find_by(machine_id: :user_collection)&.gid&.to_s
     end
   end
 end
