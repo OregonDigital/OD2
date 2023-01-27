@@ -52,7 +52,7 @@ module OregonDigital
         config.show.partials.insert(1, :openseadragon)
         config.search_builder_class = OregonDigital::CatalogSearchBuilder
         config.http_method = :post
-        config.per_page = [8, 20, 60, 100]
+        config.per_page = [20, 60, 100]
 
         ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
         config.default_solr_params = {
