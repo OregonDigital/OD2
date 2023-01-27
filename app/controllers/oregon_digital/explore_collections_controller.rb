@@ -28,6 +28,8 @@ module OregonDigital
       config.view.table.icon_class = 'glyphicon-th-list'
       config.view.masonry.partials = %i[metadata]
       config.view.masonry.icon_class = 'fa fa-trello fa-lg'
+
+      config.sort_fields.except! 'score desc, system_create_dtsi desc', 'date_dtsi desc', 'date_dtsi asc', 'system_create_dtsi desc'
     end
 
     # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
