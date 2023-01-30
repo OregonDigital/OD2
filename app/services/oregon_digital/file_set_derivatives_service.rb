@@ -194,6 +194,7 @@ module OregonDigital
         cmd.density(300)
         cmd << format('%<filename>s[%<page>d]', filename: filename, page: pagenum)
         cmd.depth(8)
+        cmd.trim
         cmd << out_path
       end
     end
