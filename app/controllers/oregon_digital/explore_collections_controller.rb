@@ -30,6 +30,8 @@ module OregonDigital
       config.view.masonry.icon_class = 'fa fa-trello fa-lg'
 
       config.sort_fields.except! 'score desc, system_create_dtsi desc', 'date_dtsi desc', 'date_dtsi asc', 'system_create_dtsi desc'
+      config.sort_fields['title_ssort desc'][:label] = 'Z-A'
+      config.sort_fields['title_ssort asc'][:label] = 'A-Z'
     end
 
     # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
