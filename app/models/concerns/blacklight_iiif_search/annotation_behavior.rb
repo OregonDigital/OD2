@@ -8,7 +8,7 @@ module BlacklightIiifSearch
     # Create a URL for the annotation
     # @return [String]
     def annotation_id
-      "#{parent_url}/canvas/#{document[:id]}/annotation/#{query.sub(' ', '_')}-#{hl_index / 2}"
+      "#{parent_url}/canvas/#{document[:id]}/annotation/#{query.gsub(' ', '_')}-#{hl_index}"
     end
 
     ##
@@ -32,11 +32,17 @@ module BlacklightIiifSearch
     def coordinates
       return '' unless query
 
-      word = @found_words[hl_index]
+      bbox = {}
+      bbox[:x] = @found_words[0].bbox.x
+      bbox[:y] = @found_words[0].bbox.y
+      # All words, starting from the first, found on a single line
+      continuous_words = @found_words.select { |f| f.bbox.x >= @found_words[0].bbox.x }
+      bbox[:w] = continuous_words[-1].bbox.x + continuous_words[-1].bbox.w - continuous_words[0].bbox.x
+      bbox[:h] = @found_words[0].bbox.h
 
       # Write out bbox info
       # There were no matching words in extracted or OCRd text, write out an empty result.
-      word ? "#{word.page}#xywh=#{word.bbox}" : '0#xywh=0,0,0,0'
+      @found_words ? "#{@found_words[0].page}#xywh=#{bbox.values.join(',')}" : '0#xywh=0,0,0,0'
     end
   end
 end
