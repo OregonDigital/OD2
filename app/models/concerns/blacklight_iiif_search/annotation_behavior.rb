@@ -32,17 +32,26 @@ module BlacklightIiifSearch
     def coordinates
       return '' unless query
 
-      bbox = {}
-      bbox[:x] = @found_words[0].bbox.x
-      bbox[:y] = @found_words[0].bbox.y
-      # All words, starting from the first, found on a single line
-      continuous_words = @found_words.select { |f| f.bbox.x >= @found_words[0].bbox.x }
-      bbox[:w] = continuous_words[-1].bbox.x + continuous_words[-1].bbox.w - continuous_words[0].bbox.x
-      bbox[:h] = @found_words[0].bbox.h
+      bbox = {
+        x: @found_words[0].bbox.x,
+        y: @found_words[0].bbox.y,
+        w: continuous_words_width,
+        h: @found_words[0].bbox.h
+      }
 
       # Write out bbox info
       # There were no matching words in extracted or OCRd text, write out an empty result.
       @found_words ? "#{@found_words[0].page}#xywh=#{bbox.values.join(',')}" : '0#xywh=0,0,0,0'
+    end
+
+    ##
+    # return a number equal to the width of a bounding box that surrounds the first matched word
+    #   and all following words on the same line
+    def continuous_words_width
+      # All words, starting from the first, found on a single line
+      continuous_words = @found_words.select { |f| f.bbox.x >= @found_words[0].bbox.x }.map(&:bbox)
+      # (the very last x point) - the very first x point == total width
+      (continuous_words[-1].x + continuous_words[-1].w) - continuous_words[0].x
     end
   end
 end
