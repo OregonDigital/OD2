@@ -12,7 +12,7 @@ FROM bundler as dependencies
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs unzip ghostscript vim yarn \
   git sqlite sqlite-dev postgresql-dev libjpeg-turbo-dev libpng-dev \
-  libtool libgomp libressl libressl-dev java-common libc6-compat  \
+  libtool libgomp libreoffice libressl libressl-dev java-common libc6-compat  \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
