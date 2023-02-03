@@ -48,6 +48,7 @@ module BlacklightIiifSearch
     def resources
       @total = 0
       query = solr_response.params['q'].delete_suffix('*').downcase
+      query_length = query.strip.split(' ').length
       solr_response['response']['docs'].each do |document|
         hit = { '@type': 'search:Hit', 'annotations': [] }
         # Find which of our extracted text or hOCR fields this document has, then parse the entire document
@@ -56,20 +57,21 @@ module BlacklightIiifSearch
         word_array = match_words(all_words, query)
 
         # word_array is an array of BlacklightIiifSearch::Word for each word in the document
-        word_array.each_with_index do |word, index|
+        word_array.each_slice(query_length).with_index do |words, index|
+          text = words.map(&:text).join(' ')
           annotation = IiifSearchAnnotation.new(document,
                                                 query,
-                                                index, word.text, controller,
+                                                index, text, controller,
                                                 @parent_document)
           # Send word_array over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb to create coordinates
-          annotation.found_words = word_array
+          annotation.found_words = words
 
           @resources << annotation.as_hash
           hit[:annotations] << annotation.annotation_id
         end
         @hits << hit
       end
-      @total = @hits[0][:annotations].count / query.strip.split(' ').count unless @hits[0].blank?
+      @total = @hits[0][:annotations].count unless @hits.blank?
       @resources
     end
     # rubocop:enable Metrics/AbcSize
