@@ -13,16 +13,18 @@
   <% end %>
 <% end %>
 <% docs = [] %>
-<% presenter.non_user_collections.each do |collection| %>
+<% presenter.non_user_collections&.each do |collection| %>
   <% doc = SolrDocument.find(collection) %>
-  <% docs << doc if current_ability.current_user.can?(:read, doc)%>
+  <% docs << doc if current_ability.can?(:read, doc)%>
 <% end %>
-<dt>Collections</dt>
-<dd><ul class="tabular">
-  <% docs.each do |doc| %>
-    <li class="attribute attribute-collections_label"><%= link_to doc.title_or_label, doc %><%= " (#{doc.visibility})" %></li><br>
-  <% end %>
-</ul></dd>
+<% unless docs.empty? %>
+  <dt>Collections</dt>
+  <dd><ul class="tabular">
+    <% docs.each do |doc| %>
+      <li class="attribute attribute-collections_label"><%= link_to doc.title_or_label, doc %><%= " (#{doc.visibility})" %></li><br>
+    <% end %>
+  </ul></dd>
+<% end %>
 <% if current_ability.admin? %>
   <%= presenter.attribute_to_html(:oai_collections, render_as: :collection_link, html_dl: true, label: t("simple_form.labels.defaults.primary_set")) %>
 <% end %>
