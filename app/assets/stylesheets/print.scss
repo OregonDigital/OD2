@@ -72,6 +72,11 @@
     position: static !important;
     top: unset !important;
     left: unset !important;
+    transform: none !important;
+  }
+
+  #thumbnails {
+    height: auto !important;
   }
 
 
