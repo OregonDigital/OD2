@@ -32,7 +32,7 @@ RSpec.describe OregonDigital::HocrDerivativeService do
       end
 
       it 'returns the correct hOCR content' do
-        expect(file_set.hocr_content.first).to eq ['youv', ['307,20,493,77,0']]
+        expect(file_set.hocr_content.first).to eq hocr_content.strip
       end
 
       it 'returns the correct OCR content' do

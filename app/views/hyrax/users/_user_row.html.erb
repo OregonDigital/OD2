@@ -8,4 +8,5 @@
    <td><%= link_to user.user_key, hyrax.user_path(user) %></td>
    <td><%= user.department %></td>
    <td><%= number_of_works(user) %></td>
+   <td><%= !user.deactivated? %></td>
 </tr>

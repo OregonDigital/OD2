@@ -1,0 +1,105 @@
+@media print {
+
+  /* display none: global */
+  #masthead,
+  #skip-nav,
+  .breadcrumb,
+  #user-login-modal,
+  .site-footer {
+    display: none !important;
+  }
+
+
+  /* homepage view: https://staging.oregondigital.org/?locale=en */
+
+  /* display none: homepage */
+  .background-container,
+  .homepage-nav {
+    display: none;
+  }
+
+
+  /* print style for workshow page: https://staging.oregondigital.org/concern/generics/df70sk17p?locale=en */
+  .work-type {
+
+    /* display none: workshow page */
+    hr,
+    .show-actions,
+    .modal-header,
+    #collection-list-container,
+    #collection-create-container,
+    .pull-right.social-buttons,
+    .pull-right.copy-button,
+    .pull-right.social-media,
+    #work-show-tablist,
+    #contact_us .form-tab-content,
+    #data_sources .form-tab-content,
+    .contained-in,
+    .workflow-actions {
+      display: none !important;
+    }
+
+    #work-print-thumbnail {
+      display: block !important;
+    }
+  }
+
+  .hyc-container.collection-header,
+  .hyc-container.collection-main {
+    /* institution logo top and bottom padding */
+
+    .institution-header {
+      padding: 30px 0px;
+    }
+
+    /* display none: collection landing */
+
+    .metadata-expand,
+    .institution-footer,
+    .social-links,
+    .lime-green-hr,
+    .collection-landing-button,
+    .collection-search-header,
+    .advanced-search-form,
+    .collection-landing-button {
+      display: none;
+    }
+
+  }
+
+  /* General masonry display. Explore Collection and Landing page */
+  .masonry.document.collection {
+    position: static !important;
+    top: unset !important;
+    left: unset !important;
+    transform: none !important;
+  }
+
+  #thumbnails {
+    height: auto !important;
+  }
+
+
+  /* print style for search results collection: https://staging.oregondigital.org/catalog?locale=en&f[non_user_collections_ssim][]=ohba */
+
+  /* display none: search result */
+
+  .widget-wrapper,
+  #sortAndPerPage,
+  #collection-list-container,
+  #collection-create-container,
+  #select-and-deselect,
+  #facets,
+  .pagination {
+    display: none;
+  }
+
+
+  /* explore collection list view: https://staging.oregondigital.org/collections/all?locale=en&view=table */
+
+  tbody {
+    text-align: left;
+  }
+
+
+}

@@ -48,33 +48,83 @@ module BlacklightIiifSearch
     def resources
       @total = 0
       query = solr_response.params['q'].delete_suffix('*').downcase
+      query_length = query.strip.split(' ').length
       solr_response['response']['docs'].each do |document|
         hit = { '@type': 'search:Hit', 'annotations': [] }
-        # Find which of our extracted text or hOCR fields this document has, then find the word:bbox string in that field for each searched word
+        # Find which of our extracted text or hOCR fields this document has, then parse the entire document
         extract, ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
-        word_array = (extract.nil? ? ocr : extract).select { |val| query.split(' ').include? val.split(':')[0] }
-        # word_array is an array of [word:bbox] for each word in the search
-        word_array.each do |words|
-          word = words.split(':')[0]
-          word_count = words.split(':')[1].split(';').count
-          (0..word_count - 1).each do |word_index|
-            @total += 1
-            # We're going to send the word_index over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb
-            # The word stays the same, just the "hit highlight index" changes so the AnnotationBehavior can access the bbox
-            annotation = IiifSearchAnnotation.new(document,
-                                                  word,
-                                                  word_index, word, controller,
-                                                  @parent_document)
-            @resources << annotation.as_hash
-            hit[:annotations] << annotation.annotation_id
-          end
+        all_words = extract.nil? ? ocr_word_array(ocr) : extracted_word_array(extract)
+        word_array = match_words(all_words, query)
+
+        # word_array is an array of BlacklightIiifSearch::Word for each word in the document
+        word_array.each_slice(query_length).with_index do |words, index|
+          text = words.map(&:text).join(' ')
+          annotation = IiifSearchAnnotation.new(document,
+                                                query,
+                                                index, text, controller,
+                                                @parent_document)
+          # Send word_array over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb to create coordinates
+          annotation.found_words = words
+
+          @resources << annotation.as_hash
+          hit[:annotations] << annotation.annotation_id
         end
         @hits << hit
       end
+      @total = @hits[0][:annotations].count unless @hits.blank?
       @resources
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+
+    # Create Word objects for all extracted words
+    # @param [String] Output from `pdftotext`
+    def extracted_word_array(extract)
+      # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
+      extract.map do |text|
+        Nokogiri::HTML(text).css('page').map.with_index do |page, page_number|
+          page.css('word').map do |word|
+            Word.new([word.attr('xmin'), word.attr('ymin'), word.attr('xmax'), word.attr('ymax')], page_number, word.text)
+          end.flatten
+        end.flatten
+      end.flatten
+    end
+
+    # Create Word objects for all extracted words
+    # @param [String] Output from `tesseract`
+    # rubocop:disable Metrics/AbcSize
+    def ocr_word_array(ocr)
+      # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
+      ocr.map.with_index do |text, page_number|
+        Nokogiri::HTML(text).css('.ocrx_word').map do |word|
+          bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
+
+          Word.new([bbox_info[0], bbox_info[1], bbox_info[2], bbox_info[3]], page_number, word.text)
+        end.flatten
+      end.flatten
+    end
+    # rubocop:enable Metrics/AbcSize
+
+    # rubocop:disable Metrics/AbcSize
+    def match_words(words, query)
+      # Query as an array
+      word_queries = query.strip.split(' ')
+      matches = []
+
+      # Find the matches
+      words.each_with_index do |word, index|
+        # Check if this word matches the begining of the query
+        next unless word.text.downcase.include?(word_queries.first)
+        # Check if there is enough words left to match whole query phrase
+        next unless index + word_queries.length - 1 < words.length
+
+        # If the whole query phrase matches from the first word to the last, we've found a match!
+        matches |= words[index..index + word_queries.length - 1] if words[index..index + word_queries.length - 1].map(&:text).join(' ').downcase.include?(query)
+      end
+
+      matches
+    end
+    # rubocop:enable Metrics/AbcSize
 
     ##
     # @return [IIIF::Presentation::Layer]
@@ -103,6 +153,40 @@ module BlacklightIiifSearch
     def clean_params
       remove = ignored.map(&:to_sym)
       controller.iiif_search_params.except(*%i[page solr_document_id] + remove)
+    end
+  end
+
+  # A single word and bounding box
+  class Word
+    attr_reader :bbox_coords
+    attr_accessor :page, :text
+    def initialize(bbox_coords, page, text)
+      @bbox_coords = bbox_coords
+      @page = page
+      @text = text
+    end
+
+    # Bounding box information is sent in as [x, y, x2, y2, page], so just pass the coords to a BoundingBox
+    def bbox
+      coords = [bbox_coords[0], bbox_coords[1], bbox_coords[2], bbox_coords[3]]
+
+      @bbox ||= BoundingBox.new(coords)
+    end
+
+    # Bounding box to a word
+    # x,y coords and width/height
+    class BoundingBox
+      attr_reader :x, :y, :w, :h
+      def initialize(box_array)
+        @x = box_array[0].to_i
+        @y = box_array[1].to_i
+        @w = box_array[2].to_i - @x
+        @h = box_array[3].to_i - @y
+      end
+
+      def to_s
+        "#{x},#{y},#{w},#{h}"
+      end
     end
   end
 end
