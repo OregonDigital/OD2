@@ -11,7 +11,7 @@ module OregonDigital
     def generate_solr_document
       super.tap do |solr_doc|
         # Sortable collection title
-        solr_doc['title_ssort'] = strip_stopwords(object.title.first.downcase) if object.title.first
+        solr_doc['title_ssort'] = strip_stopwords(object.title.first)
       end
     end
   end

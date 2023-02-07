@@ -100,7 +100,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_sort_options(solr_doc)
-    solr_doc['title_ssort'] = strip_stopwords(object.title.first.downcase) if object.title.first
+    solr_doc['title_ssort'] = strip_stopwords(object.title.first)
     solr_doc['date_dtsi'] =
       begin
         Date.parse(object.date.first) unless object.date.first.nil?
