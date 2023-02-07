@@ -69,10 +69,17 @@
 
   /* General masonry display. Explore Collection and Landing page */
   .masonry.document.collection {
+    display: inline-block;
     position: static !important;
     top: unset !important;
     left: unset !important;
     transform: none !important;
+    margin: 1em;
+    width: 20%;
+  }
+
+  .gradient-wrapper img {
+    width: 100%;
   }
 
   #thumbnails {
