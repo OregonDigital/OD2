@@ -39,7 +39,7 @@ module OregonDigital
     private
 
     def duration
-      dur = @file_set.duration.first.split(':').map(&:to_i)
+      dur = @file_set.duration.first&.split(':')&.map(&:to_i) || [0, 0, -1]
       (dur.first * 3600) + (dur.second * 60) + dur.third + 1
     end
 

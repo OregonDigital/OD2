@@ -12,11 +12,11 @@ FROM bundler as dependencies
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs unzip ghostscript vim yarn \
   git sqlite sqlite-dev postgresql-dev libjpeg-turbo-dev libpng-dev \
-  libtool libgomp libressl libressl-dev java-common libc6-compat  \
+  libtool libgomp libreoffice libressl libressl-dev java-common libc6-compat  \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
-  libffi xz gcompat tini tmux libxslt-dev libxml2-dev
+  libffi libffi-dev xz gcompat tini tmux libxslt-dev libxml2-dev
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \

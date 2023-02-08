@@ -6,6 +6,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::IndexesBasicMetadata
   include OregonDigital::IndexesLinkedMetadata
   include OregonDigital::IndexingDatesBehavior
+  include OregonDigital::StripsStopwords
 
   # ABC Size is hard to avoid here because there are many types of fields we need to index.
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
@@ -99,7 +100,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_sort_options(solr_doc)
-    solr_doc['title_ssort'] = object.title.first
+    solr_doc['title_ssort'] = strip_stopwords(object.title.first)
     solr_doc['date_dtsi'] =
       begin
         Date.parse(object.date.first) unless object.date.first.nil?

@@ -29,7 +29,7 @@ RSpec.describe OregonDigital::ExtractedTextDerivativeService do
       end
 
       it 'returns the correct bbox_content content' do
-        expect(file_set.bbox_content.first).to eq bbox_content
+        expect(file_set.bbox_content).to eq bbox_content
       end
     end
   end

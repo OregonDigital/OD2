@@ -3,11 +3,12 @@
 module BlacklightIiifSearch
   # customizable behavior for IiifSearchAnnotation
   module AnnotationBehavior
+    attr_writer :found_words
     ##
     # Create a URL for the annotation
     # @return [String]
     def annotation_id
-      "#{parent_url}/canvas/#{document[:id]}/annotation/#{query}-#{hl_index}"
+      "#{parent_url}/canvas/#{document[:id]}/annotation/#{query.gsub(' ', '_')}-#{hl_index}"
     end
 
     ##
@@ -31,68 +32,26 @@ module BlacklightIiifSearch
     def coordinates
       return '' unless query
 
-      # Attempt to grab extracted text if it exists
-      @extracted_words ||= find_words('all_text_bbox_tsimv')
-      # hOCR text is guaranteed to exist because it's automatically part of the derivative process
-      @hocr_words ||= find_words('hocr_content_tsimv')
-
-      # Use extracted words when possible, but fall back to hOCR
-      word = @hocr_words[hl_index]
-      word = @extracted_words[hl_index] if @extracted_words && @extracted_words[hl_index]
+      bbox = {
+        x: @found_words[0].bbox.x,
+        y: @found_words[0].bbox.y,
+        w: continuous_words_width,
+        h: @found_words[0].bbox.h
+      }
 
       # Write out bbox info
-      word ? "#{word.page}#xywh=#{word.bbox}" : '0#xywh=0,0,0,0'
       # There were no matching words in extracted or OCRd text, write out an empty result.
+      @found_words ? "#{@found_words[0].page}#xywh=#{bbox.values.join(',')}" : '0#xywh=0,0,0,0'
     end
 
-    # rubocop:disable Metrics/AbcSize
-    def find_words(solr_field)
-      return [] unless document[solr_field]
-
-      # Begin by grabbing the output of `pdftotext -bbox`
-      text = document[solr_field].select { |val| val.split(':')[0] == query }
-      # Find each individual word
-      bboxes = text.map { |val| val.split(':')[1].split(';') }.flatten
-      # Create ExtractedWord objects out of the words
-      bboxes.map do |box|
-        Word.new(box.split(',').map(&:to_f))
-      end
-    end
-    # rubocop:enable Metrics/AbcSize
-
-    # A single search result word and bounding box
-    class Word
-      attr_reader :bbox_coords
-      def initialize(bbox_coords)
-        @bbox_coords = bbox_coords
-      end
-
-      # Bounding box information is sent in as [x, y, x2, y2, page], so just pass the coords to a BoundingBox
-      def bbox
-        coords = [bbox_coords[0], bbox_coords[1], bbox_coords[2], bbox_coords[3]]
-
-        @bbox ||= BoundingBox.new(coords)
-      end
-
-      def page
-        @page ||= bbox_coords[4].to_i
-      end
-
-      # Bounding box to a word
-      # x,y coords and width/height
-      class BoundingBox
-        attr_reader :x, :y, :w, :h
-        def initialize(box_array)
-          @x = box_array[0].to_i
-          @y = box_array[1].to_i
-          @w = box_array[2].to_i - @x
-          @h = box_array[3].to_i - @y
-        end
-
-        def to_s
-          "#{x},#{y},#{w},#{h}"
-        end
-      end
+    ##
+    # return a number equal to the width of a bounding box that surrounds the first matched word
+    #   and all following words on the same line
+    def continuous_words_width
+      # All words, starting from the first, found on a single line
+      continuous_words = @found_words.select { |f| f.bbox.x >= @found_words[0].bbox.x }.map(&:bbox)
+      # (the very last x point) - the very first x point == total width
+      (continuous_words[-1].x + continuous_words[-1].w) - continuous_words[0].x
     end
   end
 end

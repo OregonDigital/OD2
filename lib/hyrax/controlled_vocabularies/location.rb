@@ -25,6 +25,8 @@ module Hyrax
       # Overrides rdf_label to add location disambiguation when available.
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
       def rdf_label
         @label = super
         @label = Array("#{@label.first} County") if us_county? && no_county_label
@@ -38,15 +40,21 @@ module Hyrax
               @label = "#{@label} >> #{loc.rdf_label.first}"
             end
           end
-          re = />> (.*? County)/ # Capture each county in a group (>> Marion County)
-          re2 = />> .* County/   # Capture all counties  (>> Marion County >> Polk County)
-          counties = '>> ' + (@label.scan(re).sort.join('/').gsub ' County', '') + ' County'.pluralize(@label.scan(re).count) # Collapse grouped counties into slash separated (>> Marion/Polk Counties)
-          @label = @label.gsub re2, counties # Replace county captures with collapsed counties
+          # Get all county names
+          counties = @label.split('>>').select { |c| c.include? ' County' }.sort.map(&:strip)
+          # Sort and Combine county names + append "County/Counties"
+          counties = counties.join('/').gsub(' County', '') + ' County'.pluralize(counties.count)
+          # Pad the county string
+          counties = " #{counties.strip} "
+          # Replace old counties with new county string and squash down to one whole string
+          @label = @label.split('>>').map { |c| c.include?(' County') ? counties : c }.uniq.join('>>')
         end
         Array(@label)
       end
       # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
 
       def fetch_from_cache(subject)
         OregonDigital::Triplestore.fetch_cached_term(subject)
