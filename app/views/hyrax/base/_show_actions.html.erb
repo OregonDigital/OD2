@@ -25,7 +25,7 @@
         <% if current_ability.can? :download, ActiveFedora::Base.find(presenter.id) %>
           <li><%= link_to "Files (High Quality) + Metadata (ZIP)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
         <% end %>
-        <li><%= link_to "Files (Standard Quality) + Metadata (ZIP)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless presenter.file_set_presenters.map { |p| p.mime_type }.include?('pdf') %></li>
+        <li><%= link_to "Files (Standard Quality) + Metadata (ZIP)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application'))  %></li>
         <li><%= link_to "Metadata Only (CSV)", main_app.send(:"metadata_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
       </ul>
     </div>
