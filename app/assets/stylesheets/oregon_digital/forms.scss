@@ -1,9 +1,11 @@
 .single-value-input {
   list-style: none;
 }
+
 .btn-danger {
   background-color: #cc0600;
 }
+
 .label.label-info.required-tag {
   color: $black;
 }
@@ -14,4 +16,12 @@
 
 .small-font-size {
   font-size: 13px;
+}
+
+.file_set_oembed_url {
+  width: 100%;
+
+  input#file_set_oembed_url {
+    width: 100%;
+  }
 }
