@@ -100,6 +100,7 @@ class User < ApplicationRecord
   private
 
   def role_from_devise
-    roles << Role.find_by_name('community_user') if roles.blank?
+    com_user_role = Role.find_by_name('community_user')
+    roles << com_user_role if roles.blank? && !com_user_role.nil?
   end
 end
