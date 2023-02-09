@@ -8,8 +8,8 @@ describe Ability do
     let(:user) do
       u = create(:user)
       r = role
-      r.users << u
-      r.save
+      u.roles << r
+      u.save
       u
     end
     let(:role) { Role.create(name: 'admin') }
