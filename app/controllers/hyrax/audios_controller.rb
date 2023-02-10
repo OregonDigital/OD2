@@ -10,7 +10,7 @@ module Hyrax
     include Hyrax::BreadcrumbsForWorks
     include OregonDigital::PresentsDataSources
     include OregonDigital::DownloadControllerBehavior
-    prepend OregonDigital::WorksControllerBehavior
+    include OregonDigital::WorksControllerBehavior
     include OregonDigital::WorkRelationPaginationBehavior
     self.curation_concern_type = ::Audio
 

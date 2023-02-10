@@ -524,3 +524,8 @@ ul.pagination li {
   border-top: $very-light-grey solid 3px;
   padding-top: 10px;
 }
+
+ul li.blacklight-collection:first-child {
+  border-top: $very-light-grey solid 3px;
+  padding-top: 10px;
+}

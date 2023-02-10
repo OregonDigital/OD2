@@ -9,11 +9,13 @@
   <div class="panel-body">
     <%= simple_form_for [main_app, curation_concern] do |f| %>
       <fieldset class="set-access-controls">
-        <section class="help-block">
-          <p>
-            <%= t('.oembed_broken_html') %>
-          </p>
-        </section>
+        <% if curation_concern.errors.count.positive? %>
+          <section class="help-block">
+            <p>
+              <%= t('.oembed_broken_html') %>
+            </p>
+          </section>
+        <% end %>
 
         <div class="form-group">
           <%= render 'oregon_digital/base/form_oembed_url', curation_concern: curation_concern, f: f  %>

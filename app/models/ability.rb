@@ -13,7 +13,7 @@ class Ability
   include OregonDigital::Ability::CollectionAbility
 
   def custom_permissions
-    can(%i[show add_user remove_user index edit update destroy], Role)
+    can(%i[show add_user remove_user index edit update destroy], Role) if current_user.admin?
     can(%i[show edit index update destroy], User) if current_user.admin?
 
     # Apply works edit permissions

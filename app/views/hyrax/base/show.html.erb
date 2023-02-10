@@ -4,8 +4,8 @@
   <%# OVERRIDE FROM HYRAX remove work type heading %>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
     <div class='row'>
-      <%= render 'show_collection_header', presenter: @presenter unless @presenter.member_of_collection_ids.empty? %>
-      <%= render 'show_institution_header', presenter: @presenter unless @presenter.institution.empty? %>
+      <%= render 'show_collection_header', presenter: @presenter unless @presenter.non_user_collections.blank? %>
+      <%= render 'show_institution_header', presenter: @presenter unless @presenter.institution.blank? %>
     </div>
       <hr style='border-width: 15px;'>
       <%= render 'work_title', presenter: @presenter %>
@@ -94,7 +94,7 @@
       <% @document_list = @child_doc_list %>
       <% if @document_list.length > 0 %>
         <div class='row'>
-          <div class='col-sm-12'>
+          <div class='col-sm-12 contained-in'>
             <h2 class='h4'>Contained In This Object</h2> &nbsp; <%= @response['response']['numFound'] %> items
             <hr style='border-width: 3px;'>
             <%= render 'search_results', param_name: :child_page %>

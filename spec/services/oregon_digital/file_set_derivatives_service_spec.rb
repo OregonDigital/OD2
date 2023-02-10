@@ -252,6 +252,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       c = []
       c.define_singleton_method(:density) { |_| nil }
       c.define_singleton_method(:depth) { |_| nil }
+      c.define_singleton_method(:trim) { nil }
       c
     end
 
@@ -276,6 +277,11 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
     it 'sets the PDF density to 300' do
       expect(convert).to receive(:density).with(300)
+      func.call
+    end
+
+    it 'trims the border of the PDF' do
+      expect(convert).to receive(:trim)
       func.call
     end
 

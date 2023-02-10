@@ -10,10 +10,6 @@ Bulkrax.setup do |config|
   ]
   config.parsers += [{ name: "BagIt for Oregon Digital", class_name: "Bulkrax::BagitComplexParser", partial: "bagit_fields" }]
 
-  # Field to use during import to identify if the Work or Collection already exists.
-  # Default is 'source'.
-  #   config.system_identifier_field = 'source'
-
   # WorkType to use as the default if none is specified in the import
   # Default is the first returned by Hyrax.config.curation_concerns
   config.default_work_type = 'Image'
@@ -27,16 +23,7 @@ Bulkrax.setup do |config|
   # Path to get the 'file removed' image from
   # config.removed_image_path = '/path/to/removed/image'
 
-  config.parent_child_field_mapping = {
-    'Bulkrax::RdfEntry' => 'http://opaquenamespace.org/ns/contents'
-  }
-
-  config.collection_field_mapping = {
-    'Bulkrax::RdfEntry' => 'http://opaquenamespace.org/ns/set'
-  }
-
   config.fill_in_blank_source_identifiers = ->(obj, index) { "#{obj.importerexporter.id}-#{index}" }
-
 
   # Field mappings
   # Create a completely new set of mappings by replacing the whole set as follows
@@ -85,31 +72,40 @@ Bulkrax.setup do |config|
   fieldhash['rights'] = fieldhash['license']
   fieldhash.delete('license')
 
+  fieldhash['parents'] = { from: ['http://opaquenamespace.org/ns/set'], related_parents_field_mapping: true }
+  fieldhash['children'] = { from: ['http://opaquenamespace.org/ns/contents'], related_children_field_mapping: true }
+  fieldhash['bulkrax_identifier'] = { from: ['http://id.loc.gov/vocabulary/identifiers/local'], source_identifier: true }
   config.field_mappings['Bulkrax::BagitComplexParser'] = fieldhash
 
-  # @todo - work with OD to define the config needed here, eg split
-  # This needs to be lower case, irrespective of the header row - CSV downcases it
-  config.field_mappings['Bulkrax::CsvParser'] = {
+  # Assemble the fields available in the UI form, i.e ORDERED_TERMS
+  all_terms = OregonDigital::GenericMetadata::ORDERED_TERMS.union(
+    OregonDigital::ImageMetadata::ORDERED_TERMS,
+    OregonDigital::DocumentMetadata::ORDERED_TERMS,
+    OregonDigital::VideoMetadata::ORDERED_TERMS
+  )
+  prop_names = all_terms.map{ |x| x[:name].to_s }
+  # Need properties for assigning split
+  all_props = Generic.properties.clone
+  all_props.merge! Document.properties
+  all_props.merge! Image.properties
+  all_props.merge! Audio.properties
+  all_props.merge! Video.properties
+  config_hash1 = {}
+  prop_names.each do |prop_name|
+    prop_hash = { from: [prop_name] }
+    prop_hash[:split] = true if all_props[prop_name].multiple?
+    config_hash1[prop_name] = prop_hash
+  end
+  # Fields used by Bulkrax
+  config_hash2 = {
     'file' => { from: ['file'], split: true }, # 'ingestfilenametif'
-    'identifier' => { from: ['identifier'] },
-    'title' => { from: ['title'] },
-    'description' => { from: ['description'] },
-    'local_collection_name' => { from: ['localcollectionname'], exclude: true },
-    'local_collection_id' => { from: ['localcollectionid'] },
-    'photographer' => { from: ['photographer'] },
-    'date' => { from: ['date'] },
-    'subject' => { from: ['lcsubject'], split: /\s*[;|]\s*/ },
-    'location' => { from: ['location'] },
-    'resource_type' => { from: ['type'] },
-    'model' => { from: ['type'], parsed: true },
-    'format' => { from: ['format'] },
-    'rights_statement' => { from: ['rights'] },
-    'rights_holder' => { from: ['rightholder'] },
-    'set' => { from: ['set'] },
-    'institution' => { from: ['contributinginstitution'] },
-    'primary_set' => { from: ['primaryset'] },
-    'bulkrax_identifier' => { from: ['original_identifier'], source_identifier: true }
+    'model' => { from: ['resource_type'], parsed: true },
+    'bulkrax_identifier' => { from: ['original_identifier'], source_identifier: true },
+    'parents' => { from: ['parents'], related_parents_field_mapping: true },
+    'children' => { from: ['children'], related_children_field_mapping: true }
   }
+  config_hash2.merge! config_hash1
+  config.field_mappings['Bulkrax::CsvParser'] = config_hash2
 end
 
 ## override model mapping - map collection to Generic for now
@@ -127,33 +123,6 @@ Bulkrax::ApplicationMatcher.class_eval do
   end
 end
 
-## override perform_now in export controller
-Bulkrax::ExportersController.class_eval do
-  def create
-    @exporter = Exporter.new(exporter_params)
-    field_mapping_params
-
-    if @exporter.save
-      if params[:commit] == 'Create and Export'
-        Bulkrax::ExporterJob.perform_later(@exporter.id)
-      end
-      redirect_to exporters_path, notice: 'Exporter was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /exporters/1
-  def update
-    field_mapping_params
-    if @exporter.update(exporter_params)
-      Bulkrax::ExporterJob.perform_later(@exporter.id) if params[:commit] == 'Update and Re-Export All Items'
-      redirect_to exporters_path, notice: 'Exporter was successfully updated.'
-    else
-      render :edit
-    end
-  end
-end
 ## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
   def required_elements

@@ -3,14 +3,14 @@
 module Hyrax
   # Generated controller for Generic
   class GenericsController < ApplicationController
-    load_and_authorize_resource except: [:manifest]
+    load_and_authorize_resource except: [:manifest] # THIS IS WHERE redirect_mismatched_work IS HAVING PROBLEMS. CAN IT HAPPEN AFTER redirect_mismatched_work?
 
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
     include OregonDigital::PresentsDataSources
     include OregonDigital::DownloadControllerBehavior
-    prepend OregonDigital::WorksControllerBehavior
+    include OregonDigital::WorksControllerBehavior
     include OregonDigital::WorkRelationPaginationBehavior
     self.curation_concern_type = ::Generic
 
