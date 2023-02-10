@@ -1,4 +1,13 @@
 # See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 User-agent: *
+Crawl-delay: 15
 Disallow: /
 Disallow: /oai
+Disallow: /catalog*
+Disallow: /users*
+Disallow: /*?file=thumbnail$
+
+User-agent: PetalBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
