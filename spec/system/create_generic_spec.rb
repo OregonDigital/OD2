@@ -69,7 +69,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
 
       click_on 'Save'
       expect(page).to have_content('Test Title')
-      expect(page).to have_content 'Your files are being processed by Oregon Digital (Beta) in the background.'
+      expect(page).to have_content "Your files are being processed by #{I18n.t('hyrax.product_name')} in the background."
       expect(page).to be_accessible.skipping('aria-allowed-role').excluding('.label-success')
 
       # save a successful screenshot if running in CI for build artifacts
