@@ -11,4 +11,15 @@ class OregonDigital::NonUserCollectionsSearchBuilder < Hyrax::CollectionSearchBu
     params_will_change!
     @rows = value.to_i
   end
+
+  # @return [String] Solr field name indicating default sort order
+  def sort_field
+    'title_ssort'
+  end
+
+  # copy sorting params from BL app over to solr
+  # OVERRIDE FROM hyrax: This overrides the override from hyrax creating a default sort
+  def add_sorting_to_solr(solr_parameters)
+    solr_parameters[:sort] = sort unless sort.blank?
+  end
 end

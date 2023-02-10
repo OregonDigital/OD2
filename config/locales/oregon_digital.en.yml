@@ -71,7 +71,7 @@ en:
         header:
           current: Current oEmbed URL
         manage_oembeds_html: 'Manage oEmbed for %{cc}'
-        oembed_apply: 'Update & Resolve'
+        oembed_apply: 'Update URL'
         oembed_broken_html: 'This oEmbed URL is broken'
         oembed_cancel: 'Cancel and manage all oEmbeds'
         oembed_return: 'Return to editing this Work'

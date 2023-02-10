@@ -62,7 +62,7 @@ module Hyrax
       end
 
       def user_params
-        params.require(:user).permit(:display_name, :avatar, :facebook_handle, :twitter_handle, :googleplus_handle, :linkedin_handle, :remove_avatar, :orcid)
+        params.require(:user).permit(:display_name, :avatar, :email, :facebook_handle, :twitter_handle, :googleplus_handle, :linkedin_handle, :remove_avatar, :orcid)
       end
 
       def find_user

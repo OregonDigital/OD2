@@ -19,7 +19,7 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Oregon Digital Account Verification"
-        user_subject: "Oregon Digital Account Verification" 
+        user_subject: "Oregon Digital Account Verification"
       reset_password_instructions:
         subject: "Reset Password Instructions"
         user_subject: "Oregon Digital Password Reset Instructions"
@@ -50,6 +50,8 @@ en:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
+      user:
+        deactivated: "Your account is deactivated. If you believe this is a mistake please contact us through the <a href='/contact'> contact form. </a>"
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."

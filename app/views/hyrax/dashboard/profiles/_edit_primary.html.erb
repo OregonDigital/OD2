@@ -2,12 +2,19 @@
              url: hyrax.dashboard_profile_path(@user.to_param),
              html: { multipart: true } do |f| %>
 
-<div class="form-group row">
+  <div class="form-group row">
     <%= f.label :display_name, t(".name").html_safe, class: 'col-4 col-form-label' %>
     <div class="col-8">
        <%= f.text_field :display_name, class: "form-control" %>
     </div>
-  </div><!-- .form-group -->  
+  </div><!-- .form-group -->
+  <div class="form-group row">
+    <div class="alert alert-warning" role="alert">CHANGING THE EMAIL WILL CHANGE THE USERS LOGIN INFORMATION. MAKE SURE TO COMMUNICATE THIS TO THE USER</div>
+    <%= f.label :email, t(".email").html_safe, class: 'col-4 col-form-label' %>
+    <div class="col-8">
+       <%= f.text_field :email, class: "form-control" %>
+    </div>
+  </div><!-- .form-group -->
   <div class="form-group row">
     <%= f.label :avatar, t(".change_picture").html_safe, class: "col-4 col-form-label" %>
     <div class="col-8">
@@ -63,3 +70,26 @@
   <%= render 'trophy_edit', trophies: @trophies %>
   <%= f.button t(".save_profile").html_safe, type: 'submit', class: "btn btn-primary" %>
 <% end %>
+
+<div class="lime-green-hr" style="margin:1em 0;"></div>
+<%= render "devise/shared/error_messages", resource: @user %>
+
+<%= form_for(@user, as: :user, url: password_path(:user), html: { method: :post }) do |f| %>
+  <div class="flex-container password-reset-form devise-form">
+    <div class="field flex-item">
+      <%= f.label :email, class: 'sr-only' %><br />
+      <%= f.hidden_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.hidden_field :dashboard, value: true %>
+    </div>
+
+    <div class="actions flex-item">
+      <%= f.submit "Send reset password instructions to user" %>
+    </div>
+  </div>
+<% end %>
+
+<p>Deactivate User</p>
+<% if @user.deactivated? %>
+  <div class="alert alert-danger"> User already deactived </div>
+<% end %>
+<%= button_to "Deactivate user account", registration_path(:user), data: { confirm: "Are you sure?" }, params: {user_id: @user.id}, disabled: @user.deactivated?, method: :delete %>

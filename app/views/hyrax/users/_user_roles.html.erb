@@ -1,0 +1,7 @@
+<i class="fa fa-user" aria-hidden="true"></i>
+Roles
+<ul id="roles_info">
+  <% user.roles.each do |role| %>
+    <li><%= role.name %></li>
+  <% end %>
+</ul>

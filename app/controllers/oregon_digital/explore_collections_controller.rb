@@ -28,6 +28,10 @@ module OregonDigital
       config.view.table.icon_class = 'glyphicon-th-list'
       config.view.masonry.partials = %i[metadata]
       config.view.masonry.icon_class = 'fa fa-trello fa-lg'
+
+      config.sort_fields.except! 'score desc, system_create_dtsi desc', 'date_dtsi desc', 'date_dtsi asc', 'system_create_dtsi desc'
+      config.sort_fields['title_ssort desc'][:label] = 'Z-A'
+      config.sort_fields['title_ssort asc'][:label] = 'A-Z'
     end
 
     # Each of these routes sets a different tab and builder then has to run #index to setup the blacklight search results
@@ -64,9 +68,7 @@ module OregonDigital
     end
 
     def total_viewable_items(id)
-      visibility = ['open']
-      visibility += current_user&.groups if user_signed_in?
-      ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id} AND suppressed_bsi:false AND visibility_ssi:(#{visibility.join(' ')})").accessible_by(current_ability).count
+      ActiveFedora::Base.where("member_of_collection_ids_ssim:#{id}").accessible_by(current_ability).count
     end
 
     def osu_items(id)
