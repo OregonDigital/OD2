@@ -13,14 +13,13 @@ module BlacklightDynamicSitemap
 
       index_connection.select(
         params: show_params(id, {
-          q: public_access,
-          fq: ["{!prefix f=#{hashed_id_field} v=#{id}}"],
-          fl: [unique_id_field, last_modified_field, 'has_model_ssim'].join(','), # OVERRIDE add has_model_ssim so hash=>SolrDocument conversion understands what model it is
-          rows: 20_000_000, # Ensure that we do not page this result. OVERRIDE increase rows
-          facet: false,
-          defType: 'lucene'
-        })
-        ).dig('response', 'docs')
+                              q: public_access,
+                              fq: ["{!prefix f=#{hashed_id_field} v=#{id}}"],
+                              fl: [unique_id_field, last_modified_field, 'has_model_ssim'].join(','), # OVERRIDE add has_model_ssim so hash=>SolrDocument conversion understands what model it is
+                              rows: 20_000_000, # Ensure that we do not page this result. OVERRIDE increase rows
+                              facet: false
+                            })
+      ).dig('response', 'docs')
     end
 
     def list
