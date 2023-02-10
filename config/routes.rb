@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   mount BrowseEverything::Engine => '/browse'
   mount Blacklight::Oembed::Engine, at: 'oembed'
   mount Blacklight::Engine => '/'
+  mount BlacklightDynamicSitemap::Engine => '/'
+
   mount BlacklightAdvancedSearch::Engine => '/'
 
   get 'about' => 'oregon_digital/about#about'
