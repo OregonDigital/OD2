@@ -229,6 +229,11 @@
 .search-result-wrapper {
   border-bottom: 2px solid $very-light-grey;
 
+  &:first-child {
+    border-top: 2px solid $very-light-grey;
+    padding-top: 30px;
+  }
+
   p.pull-left {
     width: 34px;
   }
