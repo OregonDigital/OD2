@@ -1,4 +1,5 @@
 uo:
   admin_sets: [
-    'uo-scua'
+    'uo-scua',
+    'uo-jsma'
   ]

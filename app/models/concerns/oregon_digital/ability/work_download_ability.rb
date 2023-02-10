@@ -10,10 +10,13 @@ module OregonDigital
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
         def work_download_ability
+          # By default unauthed/community users cannot download full size
+          cannot(:download, ActiveFedora::Base)
+          # You CAN download full quality if you're a UO or OSU authenticated/affiliated user
           can(:download, ActiveFedora::Base) do |record|
-            current_user.can?(:show, record)
+            current_user.role?(self.class.osu_roles + self.class.uo_roles)
           end
-          # Cannot download full quality if they cannot show it or work is in UO restricted admin set
+          # But you CANNOT download full quality if you cannot show the work (restricted) or it is in UO restricted admin set
           cannot(:download, ActiveFedora::Base) do |record|
             !current_user.can?(:show, record) || uo_download_restricted?(record.try(:admin_set))
           end
