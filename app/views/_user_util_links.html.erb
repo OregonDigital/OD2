@@ -14,7 +14,7 @@
       <% end %>
       <ul id="user-util-links" class="dropdown-menu dropdown-menu-right text-center">
         <% if user_signed_in? %>
-          <li><%= link_to current_user.email, hyrax.user_path(current_user.email), tabindex: -1 %></li>
+          <li><%= link_to current_user.email, hyrax.user_path(current_user), tabindex: -1 %></li>
         <% end %>
         <% if (can? :create, ActiveFedora::Base) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive? %>
           <li><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path, tabindex: -1 %></li>
