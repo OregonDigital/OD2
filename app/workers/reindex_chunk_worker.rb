@@ -6,7 +6,6 @@ class ReindexChunkWorker
   sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/AbcSize
   def perform(uris)
     counter = 0
     logger = Rails.logger
@@ -26,5 +25,4 @@ class ReindexChunkWorker
     logger.info "Total indexed: #{counter}/#{uris.count}"
   end
   # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/AbcSize
 end
