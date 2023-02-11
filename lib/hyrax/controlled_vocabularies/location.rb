@@ -47,7 +47,7 @@ module Hyrax
           # Pad the county string
           counties = " #{counties.strip} "
           # Replace old counties with new county string and squash down to one whole string
-          @label = @label.split('>>').map { |c| c.include?(' County') ? counties : c }.uniq.join('>>')
+          @label = @label.split('>>').map { |c| c.include?(' County') ? counties : c }.uniq.join('>>').strip
         end
         Array(@label)
       end
