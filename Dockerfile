@@ -91,8 +91,8 @@ FROM code
 # Uninstall tools for compiling native code
 USER root
 RUN apk --no-cache update && apk del autoconf automake gcc g++ --purge && \
-  rm -f /data/docker-compose.override.yml-example /data/README.md \
-    /data/.env.example
+  rm -rf /data/docker-compose.override.yml-example /data/README.md \
+    /data/.env.example /data/config/nginx /data/config/solr
 USER app
 
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
