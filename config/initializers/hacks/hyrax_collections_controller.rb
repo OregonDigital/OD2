@@ -9,6 +9,7 @@ Rails.application.config.to_prepare do
   Hyrax::Dashboard::CollectionsController.class_eval do
     self.form_class = OregonDigital::Forms::CollectionForm
     self.presenter_class = OregonDigital::CollectionPresenter
+    self.membership_service_class = OregonDigital::Collections::CollectionMemberService
 
     # Override update to add facet processing
     def update
