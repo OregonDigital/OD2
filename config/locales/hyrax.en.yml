@@ -290,7 +290,7 @@ en:
       button:
         html: 'Go'
     product_name: 'Oregon Digital'
-    product_twitter_handle: '@SamveraRepo'
+    product_twitter_handle: 'Oregon Digital'
     institution_name: 'Institution'
     institution_name_full: 'The Institution Name'
     account_name: 'My Institution Account Id'
