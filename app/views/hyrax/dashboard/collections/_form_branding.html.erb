@@ -157,7 +157,7 @@
       <p><%= t('.representative.description') %></p>
       <div id="representative_ids">
         <% f.object.representative_info.each_with_index do |rinfo, i| %>
-          <input type="text" name="representative_ids[]" value="<%= rinfo.try(:fileset_id) %>" data-text="<%= rinfo.try(:fs_title) %>" placeholder="Select a fileset" />
+          <input type="text" name="representative_ids[]" value="<%= rinfo.try(:fileset_id) %>" data-text="<%= rinfo.try(:fs_title) %>" placeholder="Begin typing a child work ID" />
         <% end %>
       </div>
     </fieldset>
