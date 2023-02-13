@@ -72,6 +72,14 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   font-size: 1.5em;
 }
 
+div#announcement {
+  background-color: $navy-blue !important;
+  padding: 10px;
+  a {
+    color: $contrast-orange;
+  }
+}
+
 body {
   background-color: white;
 }
@@ -234,11 +242,6 @@ ul.nav.homepage-nav {
 
   &:last-of-type {
     border-bottom: none;
-  }
-
-  img {
-    width: 90px;
-    height: 90px;
   }
 
   .collection-title {

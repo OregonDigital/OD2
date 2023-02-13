@@ -6,6 +6,7 @@ module BlacklightDynamicSitemap
   class Sitemap
     delegate :hashed_id_field, :unique_id_field, :last_modified_field, to: :engine_config
 
+    # rubocop:disable Metrics/MethodLength
     def get(id)
       # if someone's hacking URLs (in ways that could potentially generate enormous requests),
       # just return an empty response
@@ -17,10 +18,12 @@ module BlacklightDynamicSitemap
                               fq: ["{!prefix f=#{hashed_id_field} v=#{id}}"],
                               fl: [unique_id_field, last_modified_field, 'has_model_ssim'].join(','), # OVERRIDE add has_model_ssim so hash=>SolrDocument conversion understands what model it is
                               rows: 20_000_000, # Ensure that we do not page this result. OVERRIDE increase rows
-                              facet: false
+                              facet: false,
+                              defType: 'lucene'
                             })
       ).dig('response', 'docs')
     end
+    # rubocop:enable Metrics/MethodLength
 
     def list
       access_list
