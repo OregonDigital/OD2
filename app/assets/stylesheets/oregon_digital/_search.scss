@@ -228,6 +228,7 @@
 
 .search-result-wrapper {
   border-bottom: 2px solid $very-light-grey;
+  margin-bottom: 0 !important;
 
   &:first-child {
     border-top: 2px solid $very-light-grey;
