@@ -227,8 +227,7 @@
 }
 
 .search-result-wrapper {
-  border-bottom: 2px solid $very-light-grey;
-  margin-bottom: 0 !important;
+  border-bottom: 0px solid $very-light-grey !important;
 
   &:first-child {
     border-top: 2px solid $very-light-grey;
@@ -527,11 +526,6 @@ ul.pagination li {
 }
 
 .horizontal-top {
-  border-top: $very-light-grey solid 3px;
-  padding-top: 10px;
-}
-
-ul li.blacklight-collection:first-child {
   border-top: $very-light-grey solid 3px;
   padding-top: 10px;
 }
