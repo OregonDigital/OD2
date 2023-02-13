@@ -10,6 +10,7 @@ module OregonDigital
                       date_created subject language has_finding_aid representative_id thumbnail_id
                       related_url visibility collection_type_gid institution date repository]
       self.required_fields = %i[id title]
+      self.membership_service_class = OregonDigital::Collections::CollectionMemberService
 
       def initialize_field(key)
         return if %i[embargo_release_date lease_expiration_date].include?(key)
