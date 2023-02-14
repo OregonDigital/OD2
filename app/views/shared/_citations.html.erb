@@ -1,8 +1,8 @@
 <% content_for(:twitter_meta) do %>
-  <meta name="twitter:card" content="product" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="<%= t('hyrax.product_twitter_handle') %>" />
   <meta property="og:site_name" content="<%= application_name %>" />
-  <meta property="og:type" content="object" />
+  <meta property="og:type" content="website" />
   <meta property="og:title" content="<%= @presenter.title.first %>" />
   <meta property="og:description" content="<%= @presenter.description.first.truncate(200) rescue @presenter.title.first %>" />
   <meta property="og:image" content="<%= URI.join(root_url, thumbnail_url(@presenter.solr_document)) %>" />
