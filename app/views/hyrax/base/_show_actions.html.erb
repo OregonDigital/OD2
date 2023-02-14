@@ -1,5 +1,5 @@
 <div class="show-actions">
-  <% if Hyrax.config.analytics? %>
+  <% if Hyrax.config.analytics? && current_ability.admin? %>
     <%= link_to "Analytics", presenter.stats_path, id: 'stats', class: 'btn btn-default' %>
   <% end %>
 
