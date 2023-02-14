@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
   def self.email_from_omniauth(access_token)
     case access_token.provider.to_s
-    when 'cas' then access_token.extra.osuprimarymail.to_s
+    when 'cas' then access_token.extra.eduPersonPrincipalName.to_s
     when 'saml' then "#{access_token.uid}@uoregon.edu"
     else access_token.uid
     end
