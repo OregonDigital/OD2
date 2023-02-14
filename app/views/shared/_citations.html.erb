@@ -5,7 +5,7 @@
   <meta property="og:type" content="object" />
   <meta property="og:title" content="<%= @presenter.title.first %>" />
   <meta property="og:description" content="<%= @presenter.description.first.truncate(200) rescue @presenter.title.first %>" />
-  <meta property="og:image" content="<%= URI.join(root_url, thumbnail_url(document)) %>" />
+  <meta property="og:image" content="<%= URI.join(root_url, thumbnail_url(@presenter.solr_document)) %>" />
   <meta property="og:url" content="<%= polymorphic_url([main_app, @presenter]) %>" />
   <meta name="twitter:data1" content="<%= @presenter.keyword.join(', ') %>" />
   <meta name="twitter:label1" content="Keywords" />
