@@ -12,7 +12,7 @@ RSpec.describe User do
       before do
         allow(access_token).to receive(:provider).and_return('cas')
         allow(access_token).to receive(:extra).and_return(extra)
-        allow(extra).to receive(:osuprimarymail).and_return(email1)
+        allow(extra).to receive(:eduPersonPrincipalName).and_return(email1)
         Role.create(name: 'osu_user')
       end
 
