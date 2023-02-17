@@ -72,11 +72,20 @@ header {
     a.explore-collections {
       padding-bottom: 2px;
       font-weight: 700;
+      @media (max-width: $screen-xs-max) {
+        display: inline-block;
+        font-size: 20px;
+        margin-bottom: 2em;
+      }
     }
     & > li:nth-child(2) {
       padding: 0 2em;
     }
     form {
+      @media (max-width: $screen-xs-max) {
+        padding-bottom: 2em;
+      }
+
       a.advanced-link {
         font-size: .75em;
         font-weight: 700;
@@ -87,9 +96,15 @@ header {
             float: right;
           }
         }
+        @media (max-width: $screen-xs-max) {
+          font-size: 1.25em;
+        }
       }
       .input-group {
         margin: auto;
+        @media (max-width: $screen-sm-max) {
+          width: 75%;
+        }
 
         button {
           position: absolute;
@@ -128,8 +143,39 @@ header {
   #top-navbar-collapse {
     letter-spacing: 2px;
 
+    .divider {
+      height: 1px;
+      overflow: hidden;
+      background-color: #e5e5e5;
+    }
+
+    #user-dropdown {
+      @media (max-width: $screen-xs-max) {
+        display: none;
+      }
+    }
+    #user-util-links {
+      @media (max-width: $screen-xs-max) {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        display: block;
+
+        li {
+          font-size: 16px;
+        }
+        .my-account-option {
+          margin: .25em 0;
+        }
+      }
+    }
+
     .navbar-left-sm {
-      @media (max-width: $screen-sm-max) {
+      @media (max-width: $screen-sm-max) and (min-width: $screen-sm-min) {
         float: left !important;
       }
     }
