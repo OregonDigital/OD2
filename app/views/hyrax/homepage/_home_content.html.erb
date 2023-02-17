@@ -24,8 +24,7 @@
             <div class="featured-collection-item">
               <%= render_thumbnail_tag(
                   SolrDocument.find(work.id),
-                  { class: 'img-thumbnail', alt: '' },
-                  'aria-hidden': true
+                  { class: 'img-thumbnail', alt: '' }
                 ) %>
             </div>
           <% end %>
