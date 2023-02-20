@@ -4,14 +4,13 @@
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
-        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 100000)%>
-        <% @member_works = @member_docs[0..2].each do |doc| %>
-          <% ActiveFedora::Base.find(doc['id']).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first %>
-        <% end %>
+        <% @member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id,file_set_ids_ssim', rows: 100000).map do |solr_hit|
+          SolrDocument.find(solr_hit['id']) if solr_hit['file_set_ids_ssim'].length.positive?
+        end %>
         <% @member_count = @member_docs.length %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <span class="featured-collection-row flex-container">
-        <% @members_filled = @member_works.fill(nil, @member_works.length..2)[0..2].reverse %>
+        <% @members_filled = @member_docs.fill(nil, @member_docs.length..2)[0..2].reverse %>
         <% @members_filled.each do |work| %>
           <% if work == nil %>
             <div class="featured-collection-item">
@@ -23,8 +22,8 @@
           <% else %>
             <div class="featured-collection-item">
               <%= render_thumbnail_tag(
-                  SolrDocument.find(work.id),
-                  { class: 'img-thumbnail', alt: '' }
+                  work,
+                  { class: 'img-thumbnail', alt: work.title_or_label }
                 ) %>
             </div>
           <% end %>
