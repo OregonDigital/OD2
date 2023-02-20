@@ -4,10 +4,10 @@
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
-        <% @member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id,file_set_ids_ssim', rows: 100000).map do |solr_hit|
+        <% @member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND file_set_ids_ssim:[* TO *]", rows: 3).map do |solr_hit|
           SolrDocument.find(solr_hit['id']) if solr_hit['file_set_ids_ssim'].length.positive?
         end %>
-        <% @member_count = @member_docs.length %>
+        <% @member_count = Hyrax::SolrService.new.count("member_of_collection_ids_ssim:#{collection.id}") %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <span class="featured-collection-row flex-container">
         <% @members_filled = @member_docs.fill(nil, @member_docs.length..2)[0..2].reverse %>
