@@ -72,6 +72,7 @@ services:
       - TRIPLESTORE_ADAPTER_TYPE=blazegraph
       - TRIPLESTORE_ADAPTER_URL=http://blazegraph-dev:8080/bigdata/namespace/kb/sparql
       - SKIP_FIELD_MODE=false
+      - DISABLE_ROBOTS=true
     depends_on:
       - db-dev
       - blazegraph-dev
