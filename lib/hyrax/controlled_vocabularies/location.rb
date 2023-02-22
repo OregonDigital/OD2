@@ -28,6 +28,8 @@ module Hyrax
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity
       def rdf_label
+        return rdf_ons_label unless geonames?
+
         @label = super
         @label = Array("#{@label.first} County") if us_county? && no_county_label
 
@@ -55,6 +57,27 @@ module Hyrax
       # rubocop:enable Metrics/MethodLength
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/PerceivedComplexity
+
+      # ActiveTriples just grabs the first label
+      # This is typically fine because it will find the preferred label first
+      # But sometimes the first preferred label isn't in english, or all aren't
+      # Disable rubocop because just barely fails abcsize
+      # rubocop:disable Metrics/AbcSize
+      def rdf_ons_label
+        labels = Array.wrap(self.class.rdf_label)
+        labels += default_labels
+        # OVERRIDE from rdf_triples to select only and all english labels
+        values = []
+        labels.each do |label|
+          values += get_values(label).to_a
+        end
+        eng_values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
+        return eng_values unless eng_values.blank?
+        return values unless values.blank?
+
+        node? ? [] : [rdf_subject.to_s]
+      end
+      # rubocop:enable Metrics/AbcSize
 
       def fetch_from_cache(subject)
         OregonDigital::Triplestore.fetch_cached_term(subject)
@@ -135,6 +158,10 @@ module Hyrax
 
       def top_level_element?
         @top_level_element ||= false
+      end
+
+      def geonames?
+        id.include? 'geonames.org'
       end
     end
   end
