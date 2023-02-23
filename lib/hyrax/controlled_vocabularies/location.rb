@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 module Hyrax
   module ControlledVocabularies
     # Location object
@@ -166,3 +167,4 @@ module Hyrax
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

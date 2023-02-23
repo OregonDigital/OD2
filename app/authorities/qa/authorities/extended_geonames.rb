@@ -43,6 +43,7 @@ module Qa::Authorities
           'label' => label.call(result, translate_fcl(result['fcl'])) }
       end
     end
+
     # Reformats the data received from the service
     def parse_ons_authority_response(term, vocabulary)
       [{ 'id' => term.first['@id'].to_s,
