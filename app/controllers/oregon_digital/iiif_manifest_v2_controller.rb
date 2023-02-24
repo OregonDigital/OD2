@@ -12,16 +12,22 @@ module OregonDigital
 
     def show
       headers['Access-Control-Allow-Origin'] = '*'
-      manifest = manifest_builder.to_h
-      manifest['thumbnail'] = thumbnail
+      expires_in = Hyrax.config.iiif_manifest_cache_duration || 12.hours
+
       json = Rails.cache.fetch(manifest_cache_key(presenter: jp2_work_presenter), expires_in: expires_in) do
-        sanitize_manifest(JSON.parse(manifest.to_json))
+        build_manifest
       end
 
       respond_to do |wants|
         wants.json { render json: json }
         wants.html { render json: json }
       end
+    end
+
+    def build_manifest
+      manifest = manifest_builder.to_h
+      manifest['thumbnail'] = thumbnail
+      sanitize_manifest(JSON.parse(manifest.to_json))
     end
 
     def manifest_builder

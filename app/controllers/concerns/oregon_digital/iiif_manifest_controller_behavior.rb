@@ -19,16 +19,20 @@ module OregonDigital
       expires_in = Hyrax.config.iiif_manifest_cache_duration || 12.hours
 
       json = Rails.cache.fetch(manifest_cache_key(presenter: jp2_work_presenter), expires_in: expires_in) do
-        manifest_json = manifest_builder.to_h
-        # Thumbnails are not supported by iiif_manifest V3
-        # https://github.com/samvera/iiif_manifest/issues/34
-        manifest_json['items'] = items_with_thumbnails(manifest_json['items'].to_json) unless manifest_json['items'].blank?
-        sanitize_manifest(JSON.parse(manifest_json.to_json))
+        build_manifest
       end
 
       respond_to do |wants|
         wants.json { render json: json }
       end
+    end
+
+    def build_manifest
+      manifest_json = manifest_builder.to_h
+      # Thumbnails are not supported by iiif_manifest V3
+      # https://github.com/samvera/iiif_manifest/issues/34
+      manifest_json['items'] = items_with_thumbnails(manifest_json['items'].to_json) unless manifest_json['items'].blank?
+      sanitize_manifest(JSON.parse(manifest_json.to_json))
     end
 
     def redirect_json
