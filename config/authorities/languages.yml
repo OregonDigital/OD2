@@ -39,6 +39,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/alb
       term: "Albanian [alb]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/sqi
+      term: "Albanian [sqi]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/ale
       term: "Aleut [ale]"
     - active: true
@@ -71,6 +74,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/arm
       term: "Armenian [arm]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/hye
+      term: "Armenian [hye]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/rup
       term: "Aromanian |  Arumanian |  Macedo-Romanian [rup]"
@@ -135,6 +141,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/baq
       term: "Basque [baq]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/eus
+      term: "Basque [eus]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/btk
       term: "Batak languages [btk]"
     - active: true
@@ -192,6 +201,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/bur
       term: "Burmese [bur]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mya
+      term: "Burmese [mya]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/cad
       term: "Caddo [cad]"
     - active: true
@@ -236,6 +248,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/chi
       term: "Chinese [chi]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/zho
+      term: "Chinese [zho]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/chn
       term: "Chinook jargon [chn]"
@@ -300,6 +315,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/ces
       term: "Czech [ces]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/cze
+      term: "Czech [cze]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/dak
       term: "Dakota [dak]"
     - active: true
@@ -329,6 +347,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/dut
       term: "Dutch |  Flemish [dut]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/nld
+      term: "Dutch |  Flemish [nld]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/dum
       term: "Dutch, Middle (ca.1050-1350) [dum]"
@@ -387,6 +408,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/fra
       term: "French [fra]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/fre
+      term: "French [fre]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/frm
       term: "French, Middle (ca.1400-1600) [frm]"
     - active: true
@@ -426,8 +450,14 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/geo
       term: "Georgian [geo]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/kat
+      term: "Georgian [kat]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/deu
       term: "German [deu]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/ger
+      term: "German [ger]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/gmh
       term: "German, Middle High (ca.1050-1500) [gmh]"
@@ -458,6 +488,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/ell
       term: "Greek, Modern (1453-) [ell]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/gre
+      term: "Greek, Modern (1453-) [gre]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/grn
       term: "Guarani [grn]"
@@ -515,6 +548,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/ice
       term: "Icelandic [ice]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/isl
+      term: "Icelandic [isl]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/ibo
       term: "Igbo [ibo]"
@@ -741,6 +777,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/mac
       term: "Macedonian [mac]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mkd
+      term: "Macedonian [mkd]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/mad
       term: "Madurese [mad]"
     - active: true
@@ -755,6 +794,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/may
       term: "Malay [may]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/msa
+      term: "Malay [msa]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/mlt
       term: "Maltese [mlt]"
@@ -776,6 +818,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/mao
       term: "Maori [mao]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/mri
+      term: "Maori [mri]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/arn
       term: "Mapudungun |  Mapuche [arn]"
@@ -951,6 +996,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/fas
       term: "Persian [fas]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/per
+      term: "Persian [per]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/peo
       term: "Persian, Old (ca.600-400 B.C.) [peo]"
     - active: true
@@ -995,6 +1043,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/ron
       term: "Romanian |  Moldavian |  Moldovan [ron]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/rum
+      term: "Romanian |  Moldavian |  Moldovan [rum]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/roh
       term: "Romansh [roh]"
@@ -1089,6 +1140,9 @@ terms:
       id: http://id.loc.gov/vocabulary/iso639-2/slk
       term: "Slovak [slk]"
     - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/slo
+      term: "Slovak [slo]"
+    - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/slv
       term: "Slovenian [slv]"
     - active: true
@@ -1178,6 +1232,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/bod
       term: "Tibetan [bod]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/tib
+      term: "Tibetan [tib]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/tig
       term: "Tigre [tig]"
@@ -1289,6 +1346,9 @@ terms:
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/cym
       term: "Welsh [cym]"
+    - active: true
+      id: http://id.loc.gov/vocabulary/iso639-2/wel
+      term: "Welsh [wel]"
     - active: true
       id: http://id.loc.gov/vocabulary/iso639-2/fry
       term: "Western Frisian [fry]"
