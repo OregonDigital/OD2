@@ -93,7 +93,7 @@ module OregonDigital
     #
     # @return [String]
     def manifest_cache_key
-      "#{KEY_PREFIX}_#{@solrdoc.id}/#{version_for(presenter)}"
+      "#{KEY_PREFIX}_#{@solrdoc.id}/#{version_for}"
     end
 
     ##
