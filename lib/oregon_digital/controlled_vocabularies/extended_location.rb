@@ -6,7 +6,7 @@ module OregonDigital
     class ExtendedLocation < Resource
       def self.all_endpoints
         [
-          OregonDigital::ControlledVocabularies::Vocabularies::OnsTDFFBasin
+          OregonDigital::ControlledVocabularies::Vocabularies::OnsTFDDBasin
         ]
       end
     end
