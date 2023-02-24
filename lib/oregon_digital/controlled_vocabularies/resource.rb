@@ -29,7 +29,7 @@ module OregonDigital
         # OVERRIDE from rdf_triples to select only and all english labels
         values = []
         labels.each do |label|
-          values << get_values(label).to_a
+          values += get_values(label).to_a
         end
         eng_values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
         # We want English first
