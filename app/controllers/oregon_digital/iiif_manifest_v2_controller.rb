@@ -14,7 +14,7 @@ module OregonDigital
       headers['Access-Control-Allow-Origin'] = '*'
       expires_in = Hyrax.config.iiif_manifest_cache_duration || 12.hours
 
-      json = Rails.cache.fetch(manifest_cache_key(presenter: jp2_work_presenter), expires_in: expires_in) do
+      json = Rails.cache.fetch(manifest_cache_key, expires_in: expires_in) do
         build_manifest
       end
 
@@ -91,11 +91,9 @@ module OregonDigital
     # @note adding a version_for suffix helps us manage cache expiration,
     #   reducing false cache hits
     #
-    # @param presenter [Hyrax::IiifManifestPresenter]
-    #
     # @return [String]
-    def manifest_cache_key(presenter:)
-      "#{KEY_PREFIX}_#{presenter.id}/#{version_for(presenter)}"
+    def manifest_cache_key
+      "#{KEY_PREFIX}_#{@solrdoc.id}/#{version_for(presenter)}"
     end
 
     ##
@@ -104,8 +102,8 @@ module OregonDigital
     #   built!
     #
     # @return [String]
-    def version_for(presenter)
-      presenter.solr_document['_version_']
+    def version_for
+      @solrdoc['_version_']
     end
   end
 end
