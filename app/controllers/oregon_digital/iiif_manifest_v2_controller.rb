@@ -5,18 +5,29 @@ require 'iiif_manifest'
 module OregonDigital
   # display the v2 manifest, based mainly on old version of IIIFManifestControllerBehavior
   class IiifManifestV2Controller < ApplicationController
+    # Steal the key prefix & some of the logic from Hyrax::CachingIiifManifestBuilder
+    KEY_PREFIX = 'iiif-cache-v1'
+
     before_action :my_load_and_authorize_resource, only: [:show]
 
     def show
       headers['Access-Control-Allow-Origin'] = '*'
-      manifest = manifest_builder.to_h
-      manifest['thumbnail'] = thumbnail
-      json = sanitize_manifest(JSON.parse(manifest.to_json))
+      expires_in = Hyrax.config.iiif_manifest_cache_duration || 12.hours
+
+      json = Rails.cache.fetch(manifest_cache_key, expires_in: expires_in) do
+        build_manifest
+      end
 
       respond_to do |wants|
         wants.json { render json: json }
         wants.html { render json: json }
       end
+    end
+
+    def build_manifest
+      manifest = manifest_builder.to_h
+      manifest['thumbnail'] = thumbnail
+      sanitize_manifest(JSON.parse(manifest.to_json))
     end
 
     def manifest_builder
@@ -74,6 +85,25 @@ module OregonDigital
       return render plain: "manifest not supported for #{@solrdoc.id}", status: :unprocessable_entity unless @solrdoc.hydra_model == Image
     rescue Blacklight::Exceptions::RecordNotFound
       render plain: "id '#{params[:id]}' not found", status: :not_found
+    end
+
+    ##
+    # @note adding a version_for suffix helps us manage cache expiration,
+    #   reducing false cache hits
+    #
+    # @return [String]
+    def manifest_cache_key
+      "#{KEY_PREFIX}_#{@solrdoc.id}/#{version_for}"
+    end
+
+    ##
+    # @note `etag` is a better option than the solr document `_version_`; the
+    #   latter isn't always available, depending on how the presenter was
+    #   built!
+    #
+    # @return [String]
+    def version_for
+      @solrdoc['_version_']
     end
   end
 end

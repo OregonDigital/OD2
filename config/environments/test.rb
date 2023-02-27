@@ -49,4 +49,7 @@ Rails.application.configure do
   config.reindex_extent = 'full'
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Disable caching in test environment
+  config.cache_store = :null_store
 end

@@ -18,6 +18,7 @@ RSpec.describe OregonDigital::IiifManifestV2Controller do
 
     before do
       allow(SolrDocument).to receive(:find).and_return(solrdoc)
+      allow(solrdoc).to receive(:[]).with('_version_').and_return('version')
       allow(controller).to receive(:current_ability).and_return(ability)
       allow(ability).to receive(:can?).with(:read, solrdoc).and_return(true)
       allow(controller).to receive(:headers).and_return(headers)

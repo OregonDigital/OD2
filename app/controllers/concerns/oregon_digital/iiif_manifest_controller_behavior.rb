@@ -6,6 +6,9 @@ module OregonDigital
   # IIIFManifestControllerBehavior mixes in logic to generate a IIIF manifest
   # without the incorrect assumptions the Hyrax defaults make
   module IIIFManifestControllerBehavior
+    # Steal the key prefix & some of the logic from Hyrax::CachingIiifManifestBuilder
+    KEY_PREFIX = 'iiif-cache-v1'
+
     extend ActiveSupport::Concern
     included do
       before_action :redirect_json, only: :manifest
@@ -13,16 +16,23 @@ module OregonDigital
 
     def manifest
       headers['Access-Control-Allow-Origin'] = '*'
+      expires_in = Hyrax.config.iiif_manifest_cache_duration || 12.hours
 
-      manifest_json = manifest_builder.to_h
-      # Thumbnails are not supported by iiif_manifest V3
-      # https://github.com/samvera/iiif_manifest/issues/34
-      manifest_json['items'] = items_with_thumbnails(manifest_json['items'].to_json) unless manifest_json['items'].blank?
-      json = sanitize_manifest(JSON.parse(manifest_json.to_json))
+      json = Rails.cache.fetch(manifest_cache_key, expires_in: expires_in) do
+        build_manifest
+      end
 
       respond_to do |wants|
         wants.json { render json: json }
       end
+    end
+
+    def build_manifest
+      manifest_json = manifest_builder.to_h
+      # Thumbnails are not supported by iiif_manifest V3
+      # https://github.com/samvera/iiif_manifest/issues/34
+      manifest_json['items'] = items_with_thumbnails(manifest_json['items'].to_json) unless manifest_json['items'].blank?
+      sanitize_manifest(JSON.parse(manifest_json.to_json))
     end
 
     def redirect_json
@@ -84,6 +94,30 @@ module OregonDigital
 
     def sanitize_value(text)
       Loofah.fragment(text.to_s).scrub!(:prune).to_s
+    end
+
+    private
+
+    ##
+    # @note adding a version_for suffix helps us manage cache expiration,
+    #   reducing false cache hits
+    #
+    # @param presenter [Hyrax::IiifManifestPresenter]
+    #
+    # @return [String]
+    def manifest_cache_key
+      solrdoc = search_result_document(params)
+      "#{KEY_PREFIX}_#{solrdoc.id}/#{version_for(solrdoc)}"
+    end
+
+    ##
+    # @note `etag` is a better option than the solr document `_version_`; the
+    #   latter isn't always available, depending on how the presenter was
+    #   built!
+    #
+    # @return [String]
+    def version_for(solrdoc)
+      solrdoc['_version_']
     end
   end
 end
