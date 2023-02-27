@@ -63,7 +63,7 @@
             <%= image_tag path, alt: alt, style: style %>
           </div>
           <div class="flex-item social-links">
-            <%= render '/shared/fileset_collection_social_media' %>
+            <%= render '/shared/fileset_collection_social_media' unless controller.collection.collection_type.machine_id == 'user_collection' && controller.collection.visibility != 'open' %>
           </div>
         </div>
         <div class="lg-border-bottom clearfix"></div>
