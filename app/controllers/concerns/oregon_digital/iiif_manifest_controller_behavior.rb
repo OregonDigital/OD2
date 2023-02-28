@@ -7,7 +7,7 @@ module OregonDigital
   # without the incorrect assumptions the Hyrax defaults make
   module IIIFManifestControllerBehavior
     # Steal the key prefix & some of the logic from Hyrax::CachingIiifManifestBuilder
-    KEY_PREFIX = 'iiif-cache-v1'
+    KEY_PREFIX = 'iiif-cache-v3'
 
     extend ActiveSupport::Concern
     included do
