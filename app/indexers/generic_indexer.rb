@@ -101,12 +101,13 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def index_sort_options(solr_doc)
     solr_doc['title_ssort'] = strip_stopwords(object.title.first)
-    solr_doc['date_dtsi'] =
-      begin
-        Date.parse(object.date.first) unless object.date.first.nil?
-      rescue Date::Error
-        nil
-      end
+    solr_doc['date_dtsi'] = object.date.map do |date|
+      # Try a basic parse first, we're not officially supporting EDTF yet until the gem updates for all of 2012+ spec is included
+      Date.parse(date)
+    rescue Date::Error
+      # But singular years can slip through and some edge cases might best be captured with EDTF
+      Date.edtf(date)
+    end.compact.first
   end
 
   def index_edit_groups
