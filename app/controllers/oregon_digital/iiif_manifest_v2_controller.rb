@@ -6,7 +6,7 @@ module OregonDigital
   # display the v2 manifest, based mainly on old version of IIIFManifestControllerBehavior
   class IiifManifestV2Controller < ApplicationController
     # Steal the key prefix & some of the logic from Hyrax::CachingIiifManifestBuilder
-    KEY_PREFIX = 'iiif-cache-v1'
+    KEY_PREFIX = 'iiif-cache-v2'
 
     before_action :my_load_and_authorize_resource, only: [:show]
 
