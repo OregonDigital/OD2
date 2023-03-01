@@ -32,7 +32,10 @@ module OregonDigital
           values += get_values(label).to_a
         end
         eng_values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
+        # We want English first
         return eng_values unless eng_values.blank?
+
+        # But we'll take non-english if that's all there is
         return values unless values.blank?
 
         node? ? [] : [rdf_subject.to_s]

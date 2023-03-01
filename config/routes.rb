@@ -103,6 +103,8 @@ Rails.application.routes.draw do
 
   resources :iiif_manifest_v2, controller: 'oregon_digital/iiif_manifest_v2', path: '/iiif_manifest_v2', only: [:show]
 
+  get '/robots.txt' => 'oregon_digital/robots#robots'
+
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
