@@ -1,3 +1,11 @@
+.dashboard .main-content {
+  background-color: transparent !important;
+}
+
+.panel.panel-default.collections-panel-wrapper.admin-show-page {
+  background-color: transparent;
+}
+
 .constraints-divider {
   background-color: $very-light-grey;
   height: 0.75em;

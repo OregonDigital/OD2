@@ -3,7 +3,8 @@
 
     <%= link_to(url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter))) do |body| %>
       <span class="gradient-wrapper"><%= image_tag thumbnail_url(document), alt: "#{document.title_or_label} show page link" %></span>
-      <h3><%= link_to document.title_or_label.truncate_words(10).html_safe, Rails.application.routes.url_helpers.polymorphic_path(document) %></h3>
+      <h3><%= link_to document.title_or_label.truncate_words(10).html_safe, Rails.application.routes.url_helpers.polymorphic_path(document) unless document.collection? %></h3>
+      <h3><%= link_to document.title_or_label.truncate_words(10).html_safe, hyrax.collection_path(document.id) if document.collection? %></h3>
     <% end %>
     <% unless document.collection? || controller.class != CatalogController %>
       <p class="pull-left">
