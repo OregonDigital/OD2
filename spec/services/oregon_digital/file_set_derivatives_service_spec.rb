@@ -280,14 +280,9 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       func.call
     end
 
-    it 'trims the border of the PDF' do
-      expect(convert).to receive(:trim)
-      func.call
-    end
-
     it 'sets up the proper convert parameters' do
       func.call
-      expect(convert).to eq(['in.pdf[4]', 'out.tmp'])
+      expect(convert).to eq(['-define', 'pdf:use-cropbox=true', 'in.pdf[4]', 'out.tmp'])
     end
   end
 
