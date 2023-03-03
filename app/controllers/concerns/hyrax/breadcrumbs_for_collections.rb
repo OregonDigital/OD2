@@ -30,6 +30,7 @@ module Hyrax
 
     def add_breadcrumb_for_controller; end
 
+    # rubocop:disable Metrics/AbcSize
     def add_breadcrumb_for_action
       case action_name
       when 'edit'
@@ -39,6 +40,7 @@ module Hyrax
         add_breadcrumb presenter.to_s, collection_path(params['id']), mark_active_action
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def mark_active_action
       { 'aria-current' => 'page' }
