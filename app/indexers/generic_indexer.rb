@@ -100,7 +100,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_sort_options(solr_doc)
-    solr_doc['title_ssort'] = strip_stopwords(object.title.first)
+    solr_doc['title_ssort'] = strip_stopwords(object.first_title)
     solr_doc['date_dtsi'] = object.date.map do |date|
       # Try a basic parse first, we're not officially supporting EDTF yet until the gem updates for all of 2012+ spec is included
       DateTime.parse(date)
