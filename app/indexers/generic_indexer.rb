@@ -106,7 +106,9 @@ class GenericIndexer < Hyrax::WorkIndexer
       DateTime.parse(date)
     rescue Date::Error
       # But singular years can slip through and some edge cases might best be captured with EDTF
-      Date.edtf(date)&.to_datetime
+      edtf = Date.edtf(date)
+      edtf = edtf.first if edtf.is_a? EDTF::Interval
+      edtf&.to_datetime
     end.compact.first
   end
 
