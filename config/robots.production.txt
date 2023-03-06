@@ -5,7 +5,7 @@ Crawl-delay: 15
 Disallow: /oai
 Disallow: /catalog*
 Disallow: /users*
-Disallow: /*?file=thumbnail$
+# Disallow: /*?file=thumbnail$
 
 User-agent: PetalBot
 Disallow: /
