@@ -30,14 +30,17 @@ module Hyrax
 
     def add_breadcrumb_for_controller; end
 
+    # rubocop:disable Metrics/AbcSize
     def add_breadcrumb_for_action
       case action_name
       when 'edit'
-        add_breadcrumb I18n.t('hyrax.collection.edit_view'), collection_path(params['id']), mark_active_action
-      when 'show'
+        add_breadcrumb presenter.to_s, collection_path(params['id'])
         add_breadcrumb I18n.t('hyrax.collection.edit_view'), edit_dashboard_collection_path(params['id']), mark_active_action if user_signed_in? && current_user.admin?
+      when 'show'
+        add_breadcrumb presenter.to_s, collection_path(params['id']), mark_active_action
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def mark_active_action
       { 'aria-current' => 'page' }

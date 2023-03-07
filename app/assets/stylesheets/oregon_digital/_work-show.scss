@@ -151,6 +151,20 @@ dl.work-show {
           border: 1px solid #ddd;
           border-bottom-color: transparent;
         }
+
+        @media (max-width: 722px) {
+
+          &,
+          &:hover,
+          &:focus {
+            border-color: #ddd;
+            background-color: $very-light-grey;
+
+            span {
+              color: $black;
+            }
+          }
+        }
       }
 
       a {
@@ -170,6 +184,19 @@ dl.work-show {
           text-decoration: none;
           background-color: #eeeeee;
         }
+      }
+
+      @media (max-width: $screen-sm-min) {
+        float: none;
+        display: flex;
+
+        a {
+          height: 100%;
+        }
+      }
+
+      @media (max-width: 722px) {
+        flex-basis: 50%;
       }
     }
   }
@@ -216,4 +243,12 @@ dl.work-show {
 #stats.btn-default {
   margin-top: 25px;
   margin-left: 1.5em;
+}
+
+#work-show-tablist {
+  @media (max-width: $screen-sm-min) {
+    display: flex;
+    flex-basis: 50%;
+    flex-wrap: wrap;
+  }
 }
