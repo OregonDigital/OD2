@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import argparse
 import json
 import os
@@ -5,6 +6,11 @@ import re
 from pprint import pprint
 import urllib.request
 from datetime import datetime
+
+### WARNING ###
+# This script is somewhat brittle
+# Only pass in exactly URIs for --uris
+# Only pass a file of uris separated by line breaks to --file
 
 start_time = datetime.now()
 
@@ -25,19 +31,17 @@ parser.add_argument('-s', '--skip_base', action='store_true',
 
 args = parser.parse_args()
 
-arg_ui_stack = (args.uris, [])[args.skip_base]
+# We're going to push (append) and pop uris from uri_stack. Use base/--uris list unless --skip_base
+uri_stack = (args.uris, [])[args.skip_base]
+# Import from --files
 for file in args.files:
-    with open(file, "r") as lsv:
-        for line in lsv.readlines():
-            arg_ui_stack.append(line.strip())
+    uri_stack += [line.strip() for line in open(file, "r")]
 
-# We're going to push (append) and pop uris from uri_stack
-uri_stack = args.uris
 # And we're going to store all uris in final_uri list. This actually might be a bad idea for memory
 #   maybe we should just log each uri then throw it away
 final_uri = []
 print('Starting URI stack:')
-print(uri_stack)
+pprint(uri_stack)
 
 # This is pretty cool. While uri_stack has values we'll loop, and since we're going to push and pop to uri_stack we'll iterate all uris
 while uri_stack:
