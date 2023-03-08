@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 module Qa::Authorities
+  # QA Authority for searching collections. Typically used for adding a work to a collection
   class Collections < Qa::Authorities::Base
     class_attribute :search_builder_class
     self.search_builder_class = Hyrax::CollectionSearchBuilder
@@ -7,6 +9,7 @@ module Qa::Authorities
     def search(_q, controller)
       # The Hyrax::CollectionSearchBuilder expects a current_user
       return [] unless controller.current_user
+
       response, _docs = search_response(controller)
       docs = response.documents
       docs.map do |doc|
