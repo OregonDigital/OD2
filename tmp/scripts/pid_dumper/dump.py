@@ -16,10 +16,20 @@ URI_KEY = '@id'
 
 # Take in an array of URIs or default to the Fedora base URI
 parser = argparse.ArgumentParser(description='Crawl a fedora base url')
+parser.add_argument('-F', '--files', default=[], nargs='+',
+                    help='List of files that contain root URIs to start the crawler with')
 parser.add_argument('-U', '--uris', default=[FEDORA_ENV_URL], nargs='+',
-                    help='Root URIs to start the crawler with')
+                    help='List of root URIs to start the crawler with')
+parser.add_argument('-s', '--skip_base', action='store_true',
+                    help='Skip the base URI of the graph. This will also skip URIs given by -F/--files')
 
 args = parser.parse_args()
+
+arg_ui_stack = (args.uris, [])[args.skip_base]
+for file in args.files:
+    with open(file, "r") as lsv:
+        for line in lsv.readlines():
+            arg_ui_stack.append(line.strip())
 
 # We're going to push (append) and pop uris from uri_stack
 uri_stack = args.uris
