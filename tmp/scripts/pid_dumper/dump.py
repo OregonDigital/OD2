@@ -50,18 +50,22 @@ while uri_stack:
     uri = uri_stack.pop()
     # Print the working URI
     print(uri)
-    # Add to the final_uri list
-    final_uri.append(uri)
 
     # Setup for the request to fedora
     req = urllib.request.Request(uri)
     req.add_header('Accept', 'application/ld+json')
-    response = urllib.request.urlopen(req)
+    try:
+        response = urllib.request.urlopen(req)
+    except:
+        uri_stack = [uri] + uri_stack
+        continue
     # Read the response into JSON
     data = response.read()
     encoding = response.info().get_content_charset('utf-8')
     json_response = json.loads(data.decode(encoding))
 
+    # Add to the final_uri list
+    final_uri.append(uri)
     # Leaf nodes won't contain the contains predicate
     if not CONTAINS_PREDICATE in json_response[0]:
         continue
