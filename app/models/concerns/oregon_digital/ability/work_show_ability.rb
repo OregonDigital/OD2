@@ -18,10 +18,10 @@ module OregonDigital
           end
 
           cannot(%i[show], FileSet) unless current_user.role?(self.class.manager_permission_roles)
-          cannot(%i[show], SolrDocument, visibility: 'osu') unless current_user.role?(self.class.osu_roles)
-          cannot(%i[show], SolrDocument, visibility: 'uo') unless current_user.role?(self.class.uo_roles)
-          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(self.class.uo_roles)
-          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(self.class.osu_roles)
+          cannot(%i[show], SolrDocument, visibility: 'osu') unless current_user.role?(self.class.osu_roles) && !current_user.role?(self.class.manager_permission_roles)
+          cannot(%i[show], SolrDocument, visibility: 'uo') unless current_user.role?(self.class.uo_roles) && !current_user.role?(self.class.manager_permission_roles)
+          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(self.class.uo_roles) || current_user.role?(self.class.manager_permission_roles)
+          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(self.class.osu_roles) || !current_user.role?(self.class.manager_permission_roles)
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
