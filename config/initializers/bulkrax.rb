@@ -71,41 +71,12 @@ Bulkrax.setup do |config|
   # add rights; remove license - it will break the view
   fieldhash['rights'] = fieldhash['license']
   fieldhash.delete('license')
-
-  fieldhash['parents'] = { from: ['http://opaquenamespace.org/ns/set'], related_parents_field_mapping: true }
-  fieldhash['children'] = { from: ['http://opaquenamespace.org/ns/contents'], related_children_field_mapping: true }
-  fieldhash['bulkrax_identifier'] = { from: ['http://id.loc.gov/vocabulary/identifiers/local'], source_identifier: true }
+  fieldhash['file'] = { from: ['file'], split: true } # 'ingestfilenametif'
+  fieldhash['parents'] = { from: ['parents'], related_parents_field_mapping: true }
+  fieldhash['children'] = { from: ['children'], related_children_field_mapping: true }
+  fieldhash['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   config.field_mappings['Bulkrax::BagitComplexParser'] = fieldhash
-
-  # Assemble the fields available in the UI form, i.e ORDERED_TERMS
-  all_terms = OregonDigital::GenericMetadata::ORDERED_TERMS.union(
-    OregonDigital::ImageMetadata::ORDERED_TERMS,
-    OregonDigital::DocumentMetadata::ORDERED_TERMS,
-    OregonDigital::VideoMetadata::ORDERED_TERMS
-  )
-  prop_names = all_terms.map{ |x| x[:name].to_s }
-  # Need properties for assigning split
-  all_props = Generic.properties.clone
-  all_props.merge! Document.properties
-  all_props.merge! Image.properties
-  all_props.merge! Audio.properties
-  all_props.merge! Video.properties
-  config_hash1 = {}
-  prop_names.each do |prop_name|
-    prop_hash = { from: [prop_name] }
-    prop_hash[:split] = true if all_props[prop_name].multiple?
-    config_hash1[prop_name] = prop_hash
-  end
-  # Fields used by Bulkrax
-  config_hash2 = {
-    'file' => { from: ['file'], split: true }, # 'ingestfilenametif'
-    'model' => { from: ['resource_type'], parsed: true },
-    'bulkrax_identifier' => { from: ['original_identifier'], source_identifier: true },
-    'parents' => { from: ['parents'], related_parents_field_mapping: true },
-    'children' => { from: ['children'], related_children_field_mapping: true }
-  }
-  config_hash2.merge! config_hash1
-  config.field_mappings['Bulkrax::CsvParser'] = config_hash2
+  config.field_mappings['Bulkrax::CsvParser'] = fieldhash
 end
 
 ## override model mapping - map collection to Generic for now
@@ -123,6 +94,11 @@ Bulkrax::ApplicationMatcher.class_eval do
   end
 end
 
+Bulkrax::Exporter.class_eval do
+  def replace_files
+    false
+  end
+end
 ## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
   def required_elements
