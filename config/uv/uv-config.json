@@ -50,7 +50,7 @@
       "options": {
         "bookmarkEnabled": false,
         "downloadEnabled": false,
-        "embedEnabled": false,
+        "embedEnabled": true,
         "feedbackEnabled": false,
         "minimiseButtons": false,
         "openEnabled": false,
