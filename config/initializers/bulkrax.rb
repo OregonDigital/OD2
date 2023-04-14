@@ -63,6 +63,7 @@ Bulkrax.setup do |config|
     next if property.nil?
     property = property.gsub('_attributes', '')
     fieldhash[property][:from] << c['predicate']
+    fieldhash[property][:split] = '\|' unless c['multiple'].blank?
   end
 
   # add model
@@ -72,8 +73,8 @@ Bulkrax.setup do |config|
   fieldhash['rights'] = fieldhash['license']
   fieldhash.delete('license')
   fieldhash['file'] = { from: ['file'], split: true } # 'ingestfilenametif'
-  fieldhash['parents'] = { from: ['parents'], related_parents_field_mapping: true }
-  fieldhash['children'] = { from: ['children'], related_children_field_mapping: true }
+  fieldhash['parents'] = { from: ['parents'], related_parents_field_mapping: true, split: true}
+  fieldhash['children'] = { from: ['children'], related_children_field_mapping: true, split: true }
   fieldhash['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   config.field_mappings['Bulkrax::BagitComplexParser'] = fieldhash
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash

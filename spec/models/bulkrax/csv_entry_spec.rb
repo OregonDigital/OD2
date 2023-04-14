@@ -14,14 +14,14 @@ RSpec.describe Bulkrax::CsvEntry, type: :model do
 
   describe 'builds entry' do
     let(:entry) { described_class.new(importerexporter: importer) }
-    let(:importer) { FactoryBot.create(:bulkrax_importer_csv, :with_relationships_mappings) }
+    let(:importer) { FactoryBot.create(:bulkrax_importer_csv) }
     # no original_identifier field
     let(:data) do
       {
         model: 'image',
         identifier: 'pna_99999',
         title: 'Museum of Natural and Cultural History',
-        subject: 'http://id.loc.gov/authorities/subjects/sh85006700',
+        subject: 'http://id.loc.gov/authorities/subjects/sh85006700|http://vocab.getty.edu/aat/300124515',
         resource_type: 'http://purl.org/dc/dcmitype/Image',
         rights_statement: 'http://rightsstatements.org/vocab/InC/1.0/',
         parents: collection.id
@@ -39,7 +39,8 @@ RSpec.describe Bulkrax::CsvEntry, type: :model do
       it 'succeeds without original_identifier' do
         entry.build_metadata
         expect(entry.parsed_metadata['admin_set_id']).to eq 'osuo'
-        expect(entry.parsed_metadata['subject_attributes']).to eq attribute
+        expect(entry.parsed_metadata['subject_attributes'].size).to eq 2
+        expect(entry.parsed_metadata['subject_attributes'].select { |k, _v| k == '0' }).to eq attribute
         expect(entry.parsed_metadata['parents']).to eq [collection.id]
       end
     end
