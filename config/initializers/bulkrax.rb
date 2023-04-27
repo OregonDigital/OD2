@@ -99,6 +99,7 @@ Bulkrax::CsvEntry.class_eval do
   def key_for_export(key)
     clean_key = key_without_numbers(key)
     unnumbered_key = mapping[clean_key] ? mapping[clean_key]['from'].first : clean_key
+    # change: revert if it is a uri
     unnumbered_key = clean_key if unnumbered_key.start_with? 'http'
     # Bring the number back if there is one
     "#{unnumbered_key}#{key.sub(clean_key, '')}"
