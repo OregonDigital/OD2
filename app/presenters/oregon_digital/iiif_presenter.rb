@@ -46,21 +46,17 @@ module OregonDigital
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def work_presenters
       work_ids = (ordered_ids - file_sets.map(&:id))
-      solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
-      solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
-
-      solr_response['response']['docs'].map do |doc|
-        doc = SolrDocument.new(doc)
+      responses = solr_response(work_ids)
+      responses.map do |r|
+        doc = SolrDocument.new(r)
         presenter = IIIFPresenter.new(doc, current_ability, request)
         presenter.file_sets = doc.file_sets
         presenter.collections = cached_collections
         presenter
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     def search_service
       [request.base_url, Rails.application.routes.url_helpers.solr_document_iiif_search_path(solr_document_id: id.to_s)].join
@@ -71,6 +67,20 @@ module OregonDigital
     end
 
     private
+
+    # querying all of the work ids together jumbles the order
+    def solr_response(work_ids)
+      responses = []
+      work_ids.each do |id|
+        responses << query_solr(id)['response']['docs'].first
+      end
+      responses
+    end
+
+    def query_solr(id)
+      query = Hyrax::SolrQueryBuilderService.construct_query_for_ids([id])
+      Hyrax::SolrService.get(query, rows: 1)
+    end
 
     def file_set_derivatives_service(file_set)
       OregonDigital::FileSetDerivativesService.new(file_set)
