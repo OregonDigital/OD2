@@ -1,5 +1,6 @@
 version: 2.1
 orbs:
+  browser-tools: circleci/browser-tools@1.4.1
   docker: circleci/docker@1.0.0
 jobs:
   checkout_code:
@@ -29,6 +30,15 @@ jobs:
       BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
     steps:
+      - browser-tools/install-chrome:
+          chrome-version: 114.0.5735.133
+          replace-existing: true
+      - browser-tools/install-chromedriver
+      - run:
+          command: |
+            google-chrome --version
+            chromedriver --version
+          name: Check install
       - attach_workspace:
           at: ~/
       - run:
@@ -116,7 +126,7 @@ jobs:
             sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg
             sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
             sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
-            sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools
+            sudo apt-get install -y imagemagick graphicsmagick libopenjp2-tools libopenjp2-7 libopenjp2-7-dev
       - run:
           name: Load config into SolrCloud
           command: |
@@ -137,6 +147,15 @@ jobs:
           name: Wait for Redis
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
       - run: bundle exec rake db:create db:schema:load --trace
+      - browser-tools/install-chrome:
+          chrome-version: 114.0.5735.133
+          replace-existing: true
+      - browser-tools/install-chromedriver
+      - run:
+          command: |
+            google-chrome --version
+            chromedriver --version
+          name: Check install
       - run:
           name: Run Tests
           command: |
