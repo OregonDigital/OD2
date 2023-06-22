@@ -126,7 +126,7 @@ jobs:
             sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg
             sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
             sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
-            sudo apt-get install -y graphicsmagick libopenjp2-tools libopenjp2-7 libopenjp2-7-dev libltdl-dev
+            sudo apt-get install -y graphicsmagick libjpeg-turbo8-dev libopenjp2-tools libopenjp2-7 libopenjp2-7-dev libltdl-dev
       - run:
           name: Compile imagemagick with jp2 support
           command: |
@@ -146,6 +146,7 @@ jobs:
                 --with-modules \
                 --with-threads \
                 --with-jp2=yes \
+                --with-jpeg=yes \
                 --with-tiff=yes \
                 --with-gs-font-dir=/usr/share/fonts/Type1 \
                 --with-quantum-depth=16 && \
