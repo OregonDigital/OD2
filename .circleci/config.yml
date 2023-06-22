@@ -150,7 +150,7 @@ jobs:
                 --with-gs-font-dir=/usr/share/fonts/Type1 \
                 --with-quantum-depth=16 && \
               make -j`nproc` && \
-              make install && \
+              sudo make install && \
               rm -rf /tmp/im
       - run:
           name: Load config into SolrCloud
