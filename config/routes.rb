@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   mount BrowseEverything::Engine => '/browse'
   mount Blacklight::Oembed::Engine, at: 'oembed'
   mount Blacklight::Engine => '/'
+  mount BlacklightDynamicSitemap::Engine => '/'
+
   mount BlacklightAdvancedSearch::Engine => '/'
 
   get 'about' => 'oregon_digital/about#about'
@@ -100,6 +102,8 @@ Rails.application.routes.draw do
   resources :oembeds, controller: 'oregon_digital/oembeds', only: %i[index edit]
 
   resources :iiif_manifest_v2, controller: 'oregon_digital/iiif_manifest_v2', path: '/iiif_manifest_v2', only: [:show]
+
+  get '/robots.txt' => 'oregon_digital/robots#robots'
 
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

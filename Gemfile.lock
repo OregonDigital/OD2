@@ -215,6 +215,9 @@ GEM
     blacklight_advanced_search (6.4.1)
       blacklight (~> 6.0, >= 6.0.1)
       parslet
+    blacklight_dynamic_sitemap (0.6.0)
+      blacklight (> 6.0)
+      rails
     blacklight_iiif_search (1.0.0)
       blacklight (~> 6.0)
       iiif-presentation
@@ -689,7 +692,9 @@ GEM
     noid-rails (3.0.3)
       actionpack (>= 5.0.0, < 7)
       noid (~> 0.9)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.14.3-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -754,7 +759,7 @@ GEM
       rails (>= 5.0, < 6.2)
       rdf
     racc (1.6.2)
-    rack (2.2.6.2)
+    rack (2.2.6.4)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.5)
@@ -1107,12 +1112,14 @@ GEM
     zip_tricks (5.3.1)
 
 PLATFORMS
+  aarch64-linux-musl
   x86_64-linux
 
 DEPENDENCIES
   axe-matchers
   blacklight-oembed
   blacklight_advanced_search (~> 6.4)
+  blacklight_dynamic_sitemap
   blacklight_iiif_search (~> 1.0)
   blacklight_oai_provider
   blacklight_range_limit (~> 6)
@@ -1186,4 +1193,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.3.12
+   2.4.6

@@ -4,9 +4,8 @@
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-2 left-border">
-        <p><b class="homepage-info-text">Explore Collections</b></p>
-        <p><b class="homepage-info-text">Advanced Search</b></p>
-        <p><b class="homepage-info-text">My Collections</b></p>
+        <p><b class="homepage-info-text"><%= link_to 'Explore Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'homepage-info-text' %></b></p>
+        <p><b class="homepage-info-text"><%= link_to 'Advanced Search', BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'homepage-info-text' %></b></p>
       </div>
       <div class="horizontal-sm" ></div>
       <div class="col-md-2 left-border">
@@ -28,9 +27,6 @@
           <a class="footer-link-text" href='https://library.uoregon.edu/'>University of Oregon Libraries</a>
           and by
           <a class="footer-link-text" href='https://osulibrary.oregonstate.edu/'>Oregon State University Libraries</a>.
-        </p>
-        <p class='deployed-version homepage-info-text right-align'>
-          Oregon Digital <%= "#{OregonDigital::VERSION}-#{ENV.fetch('DEPLOYED_VERSION', 'development')}" %>
         </p>
         <p class="homepage-info-text right-align">Powered by <a class="footer-link-text" href="https://www.samvera.org">Samvera</a> Hyrax <%= Hyrax::VERSION %></p>
       </div>

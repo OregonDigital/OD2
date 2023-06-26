@@ -72,6 +72,14 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
   font-size: 1.5em;
 }
 
+div#announcement {
+  background-color: $navy-blue !important;
+  padding: 10px;
+  a {
+    color: $contrast-orange;
+  }
+}
+
 body {
   background-color: white;
 }
@@ -199,6 +207,21 @@ ul.nav.homepage-nav {
   background-color: black;
   -webkit-filter: none;
   filter: none;
+  img {
+    height:660px;
+    margin-top:-420px;
+    background: black;
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+
+    @media (min-width: $screen-lg-min) {
+      width: 100%;
+    }
+  }
 }
 
 #homepage-image.navbar-background-image {
@@ -207,6 +230,7 @@ ul.nav.homepage-nav {
 
 .image-masthead {
   height: 660px;
+  overflow: hidden;
 }
 
 .home-content #showcase {
@@ -234,11 +258,6 @@ ul.nav.homepage-nav {
 
   &:last-of-type {
     border-bottom: none;
-  }
-
-  img {
-    width: 90px;
-    height: 90px;
   }
 
   .collection-title {

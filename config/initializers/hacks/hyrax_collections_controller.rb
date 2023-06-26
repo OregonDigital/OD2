@@ -10,6 +10,19 @@ Rails.application.config.to_prepare do
     self.form_class = OregonDigital::Forms::CollectionForm
     self.presenter_class = OregonDigital::CollectionPresenter
 
+
+      # Renders a JSON response with a list of files in this collection
+      # This is used by the edit form to populate the thumbnail_id dropdown
+      def files
+        work_id = params[:q]
+        file_set_ids = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND id:#{work_id}*", rows: 100, fl: 'file_set_ids_ssim').flat_map{ |sd| sd['file_set_ids_ssim'] }
+        result = file_set_ids.map do |id|
+          label = SolrDocument.find(id).to_s
+          { id: id, text: label }
+        end
+        render json: result
+      end
+
     # Override update to add facet processing
     def update
       unless params[:update_collection].nil?

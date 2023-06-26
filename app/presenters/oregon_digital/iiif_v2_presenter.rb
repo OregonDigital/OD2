@@ -17,8 +17,16 @@ module OregonDigital
     end
 
     # Select out the metadata that doesn't have a value
+    # Don't scrub the value, overriding super
     def manifest_metadata
-      super.select { |m| m['value'].present? }
+      Hyrax.config.iiif_metadata_fields.each_with_object([]) do |field, metadata|
+        next if send(field).blank?
+
+        metadata << {
+          'label' => I18n.t("simple_form.labels.defaults.#{field}"),
+          'value' => Array.wrap(send(field))
+        }
+      end
     end
 
     def file_set_presenters

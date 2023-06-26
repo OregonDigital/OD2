@@ -252,6 +252,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
       c = []
       c.define_singleton_method(:density) { |_| nil }
       c.define_singleton_method(:depth) { |_| nil }
+      c.define_singleton_method(:trim) { nil }
       c
     end
 
@@ -281,7 +282,7 @@ RSpec.describe OregonDigital::FileSetDerivativesService do
 
     it 'sets up the proper convert parameters' do
       func.call
-      expect(convert).to eq(['in.pdf[4]', 'out.tmp'])
+      expect(convert).to eq(['-define', 'pdf:use-cropbox=true', 'in.pdf[4]', 'out.tmp'])
     end
   end
 

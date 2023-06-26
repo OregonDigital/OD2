@@ -4,28 +4,26 @@
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @collections.to_a.empty? %>
       <% @collections.each do |collection| %>
-        <%@member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", fl: 'id', rows: 100000)%>
-        <% @member_works = @member_docs[0..2].each do |doc| %>
-          <% ActiveFedora::Base.find(doc['id']).members.to_a.delete_if { |work| !work.class.to_s.include?('FileSet') }.first %>
-        <% end %>
-        <% @member_count = @member_docs.length %>
+        <% @member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND file_set_ids_ssim:[* TO *]", rows: 3).map do |solr_hit|
+          SolrDocument.find(solr_hit['id']) if solr_hit['file_set_ids_ssim'].length.positive?
+        end %>
+        <% @member_count = Hyrax::SolrService.new.count("member_of_collection_ids_ssim:#{collection.id}") %>
         <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <span class="featured-collection-row flex-container">
-        <% @members_filled = @member_works.fill(nil, @member_works.length..2)[0..2].reverse %>
+        <% @members_filled = @member_docs.fill(nil, @member_docs.length..2)[0..2].reverse %>
         <% @members_filled.each do |work| %>
           <% if work == nil %>
             <div class="featured-collection-item">
               <%= image_tag(
                 'logo.png',
-                { class: 'img-thumbnail', alt: '', height: 90, width: 90 }
+                { class: 'img-thumbnail', alt: '' }
               ) %>
             </div>
           <% else %>
             <div class="featured-collection-item">
               <%= render_thumbnail_tag(
-                  SolrDocument.find(work.id),
-                  { class: 'img-thumbnail', alt: '', height: 90, width: 90 },
-                  'aria-hidden': true
+                  work,
+                  { class: 'img-thumbnail', alt: work.title_or_label }
                 ) %>
             </div>
           <% end %>
@@ -54,8 +52,8 @@
   <div class="col-xs-12 col-md-5 col-md-offset-1 about-oregondigital-container">
     <h2 class="uppercase">About Oregon Digital</h2>
     <div class="row">
-      <%= image_tag('valley_lib.png', height: '250', alt: '', class: 'col-xs-12 col-md-6') %>
-      <%= image_tag('uo_lib.jpg', height: '250', alt: '', class: 'col-xs-12 col-md-6') %>
+      <%= image_tag('valley_lib.webp', alt: '', class: 'col-xs-12 col-sm-6') %>
+      <%= image_tag('uo_lib.jpg', alt: '', class: 'col-xs-12 col-sm-6') %>
     </div>
     <p class='mw-lg about-oregondigital-text'>
       A collaboration between the University of Oregon Libraries and Oregon State University Libraries & Press,

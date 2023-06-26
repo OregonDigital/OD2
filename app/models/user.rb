@@ -9,6 +9,7 @@ class User < ApplicationRecord
   include Blacklight::User
 
   attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
+  before_create :role_from_devise
 
   # DISABLE RUBOCOP BECAUSE DEVISE REQUIRES A PARTICULAR FORMAT
   # rubocop:disable Style/SymbolArray
@@ -16,6 +17,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :confirmable,
          :omniauthable, :validatable, omniauth_providers: [:cas, :saml]
   # rubocop:enable Style/SymbolArray
+
+  # Instead of deleting users, we'll set the deactivated flag
+  def destroy
+    update_attributes(deactivated: true) unless deactivated
+  end
+
+  # Prevent login if the user is deactivated
+  def active_for_authentication?
+    super && !deactivated
+  end
 
   # T/F whether user has at least one role
   def role?(role)
@@ -63,7 +74,7 @@ class User < ApplicationRecord
 
   def self.email_from_omniauth(access_token)
     case access_token.provider.to_s
-    when 'cas' then access_token.extra.osuprimarymail.to_s
+    when 'cas' then access_token.extra.eduPersonPrincipalName.to_s
     when 'saml' then "#{access_token.uid}@uoregon.edu"
     else access_token.uid
     end
@@ -84,5 +95,12 @@ class User < ApplicationRecord
   def password_required?
     service = OregonDigital::UserAttributeService.new(self)
     !service.institutional_user? && (!persisted? || !password.nil? || !password_confirmation.nil?)
+  end
+
+  private
+
+  def role_from_devise
+    com_user_role = Role.find_by_name('community_user')
+    roles << com_user_role if roles.blank? && !com_user_role.nil?
   end
 end

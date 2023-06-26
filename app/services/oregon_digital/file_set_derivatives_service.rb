@@ -192,8 +192,9 @@ module OregonDigital
     def manual_convert(filename, pagenum, out_path)
       MiniMagick::Tool::Convert.new do |cmd|
         cmd.density(300)
-        cmd << format('%<filename>s[%<page>d]', filename: filename, page: pagenum)
+        cmd << '-define' << 'pdf:use-cropbox=true'
         cmd.depth(8)
+        cmd << format('%<filename>s[%<page>d]', filename: filename, page: pagenum)
         cmd << out_path
       end
     end

@@ -22,6 +22,7 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
     before do
       allow(controller).to receive(:headers).and_return(headers)
       allow(controller).to receive(:manifest_builder).and_return(manifest_builder)
+      allow(controller).to receive(:manifest_cache_key).and_return('key')
       allow(manifest_builder).to receive(:to_h).and_return(hsh)
       allow(controller).to receive(:sanitize_manifest).and_return(sanitized)
       allow(controller).to receive(:respond_to).and_yield(OpenStruct.new(json: nil, html: nil))

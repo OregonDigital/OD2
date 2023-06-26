@@ -9,11 +9,13 @@ module OregonDigital
       included do
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/CyclomaticComplexity
         def work_download_ability
-          can(:download, ActiveFedora::Base) do |record|
-            current_user.can?(:show, record)
-          end
-          # Cannot download full quality if they cannot show it or work is in UO restricted admin set
+          # By default unauthed/community users cannot download full size
+          cannot(:download, ActiveFedora::Base)
+          # You CAN download full quality if you're a UO or OSU authenticated/affiliated user
+          can(:download, ActiveFedora::Base) if current_user.role?(self.class.osu_roles + self.class.uo_roles)
+          # But you CANNOT download full quality if you cannot show the work (restricted) or it is in UO restricted admin set
           cannot(:download, ActiveFedora::Base) do |record|
             !current_user.can?(:show, record) || uo_download_restricted?(record.try(:admin_set))
           end
@@ -44,6 +46,7 @@ module OregonDigital
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/CyclomaticComplexity
 
         def uo_download_restricted?(admin_set)
           admin_sets = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']

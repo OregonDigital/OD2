@@ -10,6 +10,15 @@
   }
 
 
+  /* homepage view: https://staging.oregondigital.org/?locale=en */
+
+  /* display none: homepage */
+  .background-container,
+  .homepage-nav {
+    display: none;
+  }
+
+
   /* print style for workshow page: https://staging.oregondigital.org/concern/generics/df70sk17p?locale=en */
   .work-type {
 
@@ -58,6 +67,25 @@
 
   }
 
+  /* General masonry display. Explore Collection and Landing page */
+  .masonry.document.collection {
+    display: inline-block;
+    position: static !important;
+    top: unset !important;
+    left: unset !important;
+    transform: none !important;
+    margin: 1em;
+    width: 20%;
+  }
+
+  .gradient-wrapper img {
+    width: 100%;
+  }
+
+  #thumbnails {
+    height: auto !important;
+  }
+
 
   /* print style for search results collection: https://staging.oregondigital.org/catalog?locale=en&f[non_user_collections_ssim][]=ohba */
 
@@ -71,6 +99,13 @@
   #facets,
   .pagination {
     display: none;
+  }
+
+
+  /* explore collection list view: https://staging.oregondigital.org/collections/all?locale=en&view=table */
+
+  tbody {
+    text-align: left;
   }
 
 

@@ -50,6 +50,10 @@ Naming/MethodParameterName:
 Layout/LineLength:
   Enabled: false
 
+Layout/RescueEnsureAlignment:
+  Exclude:
+    - 'app/indexers/generic_indexer.rb'
+
 Style/Documentation:
   Exclude:
     - 'spec/**/*'

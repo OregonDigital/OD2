@@ -476,10 +476,10 @@
         <filter class="solr.LowerCaseFilterFactory"/>
         <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-        <!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
+        <!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:-->
         <filter class="solr.EnglishMinimalStemFilterFactory"/>
-	      -->
-        <filter class="solr.PorterStemFilterFactory"/>
+	      
+        <!-- <filter class="solr.PorterStemFilterFactory"/>  -->
       </analyzer>
       <analyzer type="query">
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -491,10 +491,10 @@
         <filter class="solr.LowerCaseFilterFactory"/>
         <filter class="solr.EnglishPossessiveFilterFactory"/>
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
-        <!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
+        <!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:-->
         <filter class="solr.EnglishMinimalStemFilterFactory"/>
-	      -->
-        <filter class="solr.PorterStemFilterFactory"/>
+        
+        <!-- <filter class="solr.PorterStemFilterFactory"/> -->
       </analyzer>
     </fieldType>
 

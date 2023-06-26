@@ -289,8 +289,8 @@ en:
             label_short: Open Content
       button:
         html: 'Go'
-    product_name: 'Oregon Digital (Beta)'
-    product_twitter_handle: '@SamveraRepo'
+    product_name: 'Oregon Digital'
+    product_twitter_handle: 'Oregon Digital'
     institution_name: 'Institution'
     institution_name_full: 'The Institution Name'
     account_name: 'My Institution Account Id'
@@ -316,6 +316,12 @@ en:
       explore_osu: 'Explore Collections/OSU'
       explore_uo: 'Explore Collections/UO'
       explore_my: 'Explore Collections/My Collections'
+    users:
+      index:
+        activated: Active
+      sessions:
+        create:
+          deactivated_url: 'Your account has been deactivated'
   simple_form:
     hints:
       collection:
