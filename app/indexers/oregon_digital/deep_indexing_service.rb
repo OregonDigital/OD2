@@ -15,8 +15,6 @@ module OregonDigital
     # override Hyrax/ActiveFedora add_assertions to insert combined labels
     # do not index unfetched labels
     # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/CyclomaticComplexity
     def add_assertions(prefix_method, solr_doc = {})
       fetch_external
       fields.each do |field_key, field_info|
@@ -92,7 +90,5 @@ module OregonDigital
       cpm
     end
     # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end
