@@ -26,3 +26,13 @@ en:
       sort:
         button_label: '%{field}'
         title: 'Sort:'
+      zero_results:
+        title: 'No results found for your search'
+        modify_search: 'Try modifying your search'
+        use_fewer_keywords: 'Use fewer keywords to start, then refine your search using the links on the left.'
+        search_fields: 'you searched by %{search_fields}'
+        search_everything: 'try searching everything'
+        variant_spelling: 'Make sure spelling is correct or try variant spellings. (Example: "Dialog" or "Dialogue" as a variant spelling)'
+        different_keywords: 'Try different keywords. (Example: "track and field", "running", "races", "Hayward Field")'
+        general_keywords: 'Try more general keywords. (Example: "oaks" vs "trees")'
+        filter_words: 'Try removing filters.'
