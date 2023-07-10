@@ -36,3 +36,5 @@ en:
         different_keywords: 'Try different keywords. (Example: "track and field", "running", "races", "Hayward Field")'
         general_keywords: 'Try more general keywords. (Example: "oaks" vs "trees")'
         filter_words: 'Try removing filters.'
+        contact_info: "If you're still having trouble finding what you're looking for, %{link} and we'll try and help."
+        contact_link: 'Contact Us'
