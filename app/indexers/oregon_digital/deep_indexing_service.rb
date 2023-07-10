@@ -35,11 +35,7 @@ module OregonDigital
 
     private
 
-    # block this until asset has reached a later stage in its workflow
-    # potentially remove block post migration
     def fetch_external
-      return if object.ordered_member_ids.blank? && !object.collection?
-
       object.controlled_properties.each do |property|
         object[property].each do |value|
           resource = value.respond_to?(:resource) ? value.resource : value
