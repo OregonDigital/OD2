@@ -18,13 +18,21 @@ module OregonDigital
           end
 
           cannot(%i[show], FileSet) unless current_user.role?(self.class.manager_permission_roles)
-          cannot(%i[show], SolrDocument, visibility: 'osu') unless current_user.role?(self.class.osu_roles) && !current_user.role?(self.class.manager_permission_roles)
-          cannot(%i[show], SolrDocument, visibility: 'uo') unless current_user.role?(self.class.uo_roles) && !current_user.role?(self.class.manager_permission_roles)
-          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless current_user.role?(self.class.uo_roles) || current_user.role?(self.class.manager_permission_roles)
-          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless current_user.role?(self.class.osu_roles) || !current_user.role?(self.class.manager_permission_roles)
+          cannot(%i[show], SolrDocument, visibility: 'osu') unless osu_allowed?
+          cannot(%i[show], SolrDocument, visibility: 'uo') unless uo_allowed?
+          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless osu_allowed?
+          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless uo_allowed?
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
+
+        def osu_allowed?
+          current_user.role?(self.class.osu_roles) || current_user.role?(self.class.manager_permission_roles)
+        end
+
+        def uo_allowed?
+          current_user.role?(self.class.uo_roles) || current_user.role?(self.class.manager_permission_roles)
+        end
 
         def show_record?(record)
           if record.suppressed?
