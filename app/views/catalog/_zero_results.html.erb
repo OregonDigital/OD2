@@ -1,12 +1,15 @@
 <div class="no-results-search">
   <h2 class="h1 text-center"><%= t 'blacklight.search.zero_results.title' %></h2>
-  <div id="documents" class="noresults text-center">
-    <h3 class="h5 mw-lg"><i><%= t 'blacklight.search.zero_results.modify_search' %>:</i></h3>
-    <p class="mw font-sm"> <%= t 'blacklight.search.zero_results.variant_spelling' %> </p>
-    <p class="mw font-sm"> <%= t 'blacklight.search.zero_results.different_keywords' %> </p>
-    <p class="mw font-sm"> <%= t 'blacklight.search.zero_results.general_keywords' %> </p>
-    <p class="mw font-sm"> <%= t 'blacklight.search.zero_results.filter_words' %> </p>
-    <p class="mw font-sm"> <%= t('blacklight.search.zero_results.contact_info', link: link_to(t('blacklight.search.zero_results.contact_link'), hyrax.contact_path)).html_safe %> </p>
+  <div id="documents" class="noresults">
+    <h3 class="h5 mw-lg text-center"><i><%= t 'blacklight.search.zero_results.modify_search' %>:</i></h3>
+    <ul class="noresults-tips">
+      <li class="mw font-sm"> <%= t 'blacklight.search.zero_results.variant_spelling' %> </li>
+      <li class="mw font-sm"> <%= t 'blacklight.search.zero_results.different_keywords' %> </li>
+      <li class="mw font-sm"> <%= t 'blacklight.search.zero_results.general_keywords' %> </li>
+      <li class="mw font-sm"> <%= t 'blacklight.search.zero_results.filter_words' %> </li>
+    </ul>
+    <br>
+    <p class="mw-sm text-center"> <%= t('blacklight.search.zero_results.contact_info', link: link_to(t('blacklight.search.zero_results.contact_link'), hyrax.contact_path)).html_safe %> </p>
   </div>
 
   <div class="no-results-divider">
