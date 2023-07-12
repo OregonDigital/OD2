@@ -47,6 +47,7 @@ module OregonDigital
     end
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def work_presenters
       work_ids = (ordered_ids - file_sets.map(&:id))
       return if work_ids.empty?
@@ -63,6 +64,7 @@ module OregonDigital
       end.sort_by(&:title)
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def search_service
       [request.base_url, Rails.application.routes.url_helpers.solr_document_iiif_search_path(solr_document_id: id.to_s)].join
@@ -91,9 +93,7 @@ module OregonDigital
     def cached_collections
       @collections ||= {}
       # Get collections not in the cache
-      new_cols = solr_document.member_of_collection_ids.select { |c|
-        !c.in? @collection.keys
-      }
+      new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collection.keys }
       # Add collections to cache
       new_cols.each do |c|
         @collections[c] = SolrDocument.find(c).title.first
