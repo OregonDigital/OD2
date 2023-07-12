@@ -49,6 +49,8 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     def work_presenters
       work_ids = (ordered_ids - file_sets.map(&:id))
+      return if work_ids.empty?
+
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
       solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
 
@@ -88,9 +90,12 @@ module OregonDigital
     # Fill @collections with a hash :id => :title if not set by #work_presenters
     def cached_collections
       @collections ||= {}
-      solr_document.member_of_collection_ids.each do |c|
-        next @collections[c] unless @collections[c].nil?
-
+      # Get collections not in the cache
+      new_cols = solr_document.member_of_collection_ids.select { |c|
+        !c.in? @collection.keys
+      }
+      # Add collections to cache
+      new_cols.each do |c|
         @collections[c] = SolrDocument.find(c).title.first
       end
       @collections
