@@ -58,7 +58,7 @@ module OregonDigital
         presenter.file_sets = doc.file_sets
         presenter.collections = cached_collections
         presenter
-      end
+      end.sort_by(&:title)
     end
     # rubocop:enable Metrics/AbcSize
 
