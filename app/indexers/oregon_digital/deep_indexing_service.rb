@@ -15,8 +15,6 @@ module OregonDigital
     # override Hyrax/ActiveFedora add_assertions to insert combined labels
     # do not index unfetched labels
     # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/CyclomaticComplexity
     def add_assertions(prefix_method, solr_doc = {})
       fetch_external
       fields.each do |field_key, field_info|
@@ -35,11 +33,7 @@ module OregonDigital
 
     private
 
-    # block this until asset has reached a later stage in its workflow
-    # potentially remove block post migration
     def fetch_external
-      return if object.ordered_member_ids.blank? && !object.collection?
-
       object.controlled_properties.each do |property|
         object[property].each do |value|
           resource = value.respond_to?(:resource) ? value.resource : value
@@ -96,7 +90,5 @@ module OregonDigital
       cpm
     end
     # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end
