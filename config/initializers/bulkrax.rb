@@ -73,7 +73,7 @@ Bulkrax.setup do |config|
   fieldhash['rights'] = fieldhash['license']
   fieldhash.delete('license')
   fieldhash['file'] = { from: ['file'], split: true } # 'ingestfilenametif'
-  fieldhash['parents'] = { from: ['parents'], related_parents_field_mapping: true, split: true}
+  fieldhash['parents'] = { from: ['parents'], related_parents_field_mapping: true, split: true, join: true}
   fieldhash['children'] = { from: ['children'], related_children_field_mapping: true, split: true }
   fieldhash['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   config.field_mappings['Bulkrax::BagitComplexParser'] = fieldhash
