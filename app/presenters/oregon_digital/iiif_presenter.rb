@@ -17,6 +17,7 @@ module OregonDigital
       super.select { |m| m['value'].present? }
     end
 
+    # rubocop:disable Metrics/AbcSize
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
@@ -32,6 +33,7 @@ module OregonDigital
 
       presenters.sort_by(&:label)
     end
+    # rubocop:enable Metrics/AbcSize
 
     # Determine which derivative type and IIIF fileset presenter to use
     def file_set_presenter_info(fs)
@@ -93,7 +95,7 @@ module OregonDigital
     def cached_collections
       @collections ||= {}
       # Get collections not in the cache
-      new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collections.keys }
+      new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collection.keys }
       # Add collections to cache
       new_cols.each do |c|
         @collections[c] = SolrDocument.find(c).title.first
