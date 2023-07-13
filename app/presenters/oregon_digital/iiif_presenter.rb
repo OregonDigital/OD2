@@ -30,7 +30,7 @@ module OregonDigital
         end
       end
 
-      presenters
+      presenters.sort_by(&:label)
     end
 
     # Determine which derivative type and IIIF fileset presenter to use
@@ -93,7 +93,7 @@ module OregonDigital
     def cached_collections
       @collections ||= {}
       # Get collections not in the cache
-      new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collection.keys }
+      new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collections.keys }
       # Add collections to cache
       new_cols.each do |c|
         @collections[c] = SolrDocument.find(c).title.first
