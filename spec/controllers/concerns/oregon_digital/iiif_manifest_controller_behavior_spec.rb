@@ -48,7 +48,7 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
       end
 
       it "doesn't fetch a solr doc" do
-        expect(controller).not_to receive(:search_result_document)
+        expect(SolrDocument).not_to receive(:find)
         controller.jp2_work_presenter
       end
 
@@ -73,7 +73,7 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
 
       before do
         allow(controller).to receive(:params).and_return({})
-        allow(controller).to receive(:search_result_document).and_return(solrdoc)
+        allow(SolrDocument).to receive(:find).and_return(solrdoc)
         allow(controller).to receive(:current_ability).and_return(ability)
         allow(solrdoc).to receive(:hydra_model).and_return(hydra_model)
         allow(hydra_model).to receive(:find).with(id).and_return(asset)

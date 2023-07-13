@@ -16,7 +16,7 @@ module OregonDigital
 
     def manifest
       headers['Access-Control-Allow-Origin'] = '*'
-      expires_in = Hyrax.config.iiif_manifest_cache_duration || 12.hours
+      expires_in = Hyrax.config.iiif_manifest_cache_duration || 7.days
 
       json = Rails.cache.fetch(manifest_cache_key, expires_in: expires_in) do
         build_manifest
@@ -63,7 +63,7 @@ module OregonDigital
     def jp2_work_presenter
       return @jp2_work_presenter if @jp2_work_presenter
 
-      solrdoc = search_result_document(params)
+      solrdoc = SolrDocument.find(params['id'])
       @jp2_work_presenter = OregonDigital::IIIFPresenter.new(solrdoc, current_ability, request)
       @jp2_work_presenter.file_sets = solrdoc.file_sets
       @jp2_work_presenter
@@ -106,7 +106,7 @@ module OregonDigital
     #
     # @return [String]
     def manifest_cache_key
-      solrdoc = search_result_document(params)
+      solrdoc = SolrDocument.find(params['id'])
       "#{KEY_PREFIX}_#{solrdoc.id}/#{version_for(solrdoc)}"
     end
 
