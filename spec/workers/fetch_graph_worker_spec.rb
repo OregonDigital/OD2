@@ -16,6 +16,11 @@ RSpec.describe FetchGraphWorker, type: :worker do
     context 'when the request works' do
       before do
         allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:store_graph).and_return(true)
+        allow_any_instance_of(OregonDigital::ControlledVocabularies::Creator).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
+        allow_any_instance_of(OregonDigital::ControlledVocabularies::Subject).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
+        allow_any_instance_of(Hyrax::ControlledVocabularies::Location).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/ChabreWayne', { label: 'Chabre, Wayne$http://opaquenamespace.org/ns/creator/ChabreWayne' }])
+        allow_any_instance_of(OregonDigital::ControlledVocabularies::Scientific).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/genus/Acnanthes', { label: 'Acnanthes$http://opaquenamespace.org/ns/genus/Acnanthes' }])
+
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/creator/ChabreWayne%3E').with(headers: { 'Accept' => '*/*', 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Connection' => 'keep-alive', 'Host' => 'ci-test:8080', 'Keep-Alive' => '30', 'User-Agent' => 'Ruby' }).to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://opaquenamespace.org/ns/genus/Acnanthes%3E').to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 200, body: '', headers: {})
@@ -24,9 +29,14 @@ RSpec.describe FetchGraphWorker, type: :worker do
       end
 
       it 'fetches all of its linked data labels' do
-        expect(OregonDigital::Triplestore).to receive(:fetch).exactly(3).times
-        expect(OregonDigital::Triplestore).to receive(:fetch_cached_term).once
         worker.perform(work.id, work.depositor)
+        sd = SolrDocument.find(work.id)
+        expect(sd['creator_label_tesim'].first).to eq 'Chabre, Wayne'
+        expect(sd['creator_combined_label_sim'].first).to eq 'Chabre, Wayne'
+        expect(sd['subject_label_tesim'].first).to eq 'Chabre, Wayne'
+        expect(sd['topic_combined_label_sim'].first).to eq 'Chabre, Wayne'
+        expect(sd['location_combined_label_sim'].first).to eq 'Chabre, Wayne'
+        expect(sd['scientific_combined_label_sim'].first).to eq 'Acnanthes'
       end
     end
 

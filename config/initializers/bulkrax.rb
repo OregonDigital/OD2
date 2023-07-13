@@ -73,7 +73,7 @@ Bulkrax.setup do |config|
   fieldhash['rights'] = fieldhash['license']
   fieldhash.delete('license')
   fieldhash['file'] = { from: ['file'], split: true } # 'ingestfilenametif'
-  fieldhash['parents'] = { from: ['parents'], related_parents_field_mapping: true, split: true}
+  fieldhash['parents'] = { from: ['parents'], related_parents_field_mapping: true, split: true, join: true}
   fieldhash['children'] = { from: ['children'], related_children_field_mapping: true, split: true }
   fieldhash['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   config.field_mappings['Bulkrax::BagitComplexParser'] = fieldhash
@@ -92,6 +92,17 @@ Bulkrax::ApplicationMatcher.class_eval do
     end
   rescue StandardError
     nil
+  end
+end
+
+Bulkrax::CsvEntry.class_eval do
+  def key_for_export(key)
+    clean_key = key_without_numbers(key)
+    unnumbered_key = mapping[clean_key] ? mapping[clean_key]['from'].first : clean_key
+    # change: revert if it is a uri
+    unnumbered_key = clean_key if unnumbered_key.start_with? 'http'
+    # Bring the number back if there is one
+    "#{unnumbered_key}#{key.sub(clean_key, '')}"
   end
 end
 
