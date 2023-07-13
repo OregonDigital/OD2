@@ -50,7 +50,7 @@ module OregonDigital
     # rubocop:disable Metrics/MethodLength
     def work_presenters
       work_ids = (ordered_ids - file_sets.map(&:id))
-      return if work_ids.empty?
+      return [] if work_ids.empty?
 
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
       solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
@@ -93,7 +93,7 @@ module OregonDigital
     def cached_collections
       @collections ||= {}
       # Get collections not in the cache
-      new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collection.keys }
+      new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collections.keys }
       # Add collections to cache
       new_cols.each do |c|
         @collections[c] = SolrDocument.find(c).title.first
