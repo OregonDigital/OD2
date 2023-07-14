@@ -1,9 +1,8 @@
 <div id="showcase" class="row">
   <div class="col-md-5 col-md-offset-1">
-    <% @collections = Collection.accessible_by(current_ability).limit 5 %>
     <h2 class="uppercase">Featured Collections</h2>
-    <% unless @collections.to_a.empty? %>
-      <% @collections.each do |collection| %>
+    <% unless @presenter.collections.to_a.empty? %>
+      <% @presenter.collections.each do |collection| %>
         <% @member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND file_set_ids_ssim:[* TO *]", rows: 3).map do |solr_hit|
           SolrDocument.find(solr_hit['id']) if solr_hit['file_set_ids_ssim'].length.positive?
         end %>
