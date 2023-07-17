@@ -412,3 +412,4 @@ en:
         file_format: "Format"
         set: "Collection"
         oembed_urls: "oEmbed URL"
+        local_collection: "Local Collection Name"
