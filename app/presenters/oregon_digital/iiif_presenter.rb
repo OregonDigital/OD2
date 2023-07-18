@@ -30,7 +30,7 @@ module OregonDigital
           presenters << presenter_class.new(fs, derivative, label, current_ability, request)
         end
       end
-			presenters
+      presenters
     end
     # rubocop:enable Metrics/AbcSize
 
@@ -50,12 +50,12 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def work_presenters
-      work_ids = (ordered_ids - file_sets.map(&:id))
+      work_ids = ordered_ids
       return [] if work_ids.empty?
 
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
       solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
-			document_hash = array_to_hash_response(solr_response)
+      document_hash = array_to_hash_response(solr_response)
 
       work_ids.map do |id|
         doc = SolrDocument.new(document_hash[id])
@@ -68,10 +68,10 @@ module OregonDigital
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
-		def array_to_hash_response(solr_response)
-			solr_response['response']['docs'].each_with_object({}) do |doc,object|
-				object[doc["id"]] = doc
-			end
+    def array_to_hash_response(solr_response)
+      solr_response['response']['docs'].each_with_object({}) do |doc,object|
+        object[doc["id"]] = doc
+      end
 		end
 
     def search_service
