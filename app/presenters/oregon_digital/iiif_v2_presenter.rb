@@ -37,7 +37,7 @@ module OregonDigital
         urls = file_set_derivatives_service(fs).sorted_derivative_urls(deriv_type)
 
         urls.each_with_index do |derivative, i|
-          label = urls.length > 1 ? page_label(fs.label, i) : fs.label
+          label = urls.length > 1 ? page_label(fs.parents.first.title_or_label, i) : fs.parents.first.title_or_label
           presenters << presenter_class.new(fs, derivative, label, current_ability, request)
         end
       end
