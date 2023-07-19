@@ -17,7 +17,6 @@ module OregonDigital
       super.select { |m| m['value'].present? }
     end
 
-    # rubocop:disable Metrics/AbcSize
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
@@ -32,7 +31,6 @@ module OregonDigital
       end
       presenters
     end
-    # rubocop:enable Metrics/AbcSize
 
     # Determine which derivative type and IIIF fileset presenter to use
     def file_set_presenter_info(fs)
@@ -50,7 +48,7 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def work_presenters
-      work_ids = ordered_ids
+      work_ids = (ordered_ids - file_sets.map(&:id)) 
       return [] if work_ids.empty?
 
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
@@ -69,10 +67,8 @@ module OregonDigital
     # rubocop:enable Metrics/MethodLength
 
     def array_to_hash_response(solr_response)
-      solr_response['response']['docs'].each_with_object({}) do |doc,object|
-        object[doc["id"]] = doc
-      end
-		end
+      solr_response['response']['docs'].each_with_object({}) { |doc, object| object[doc['id']] = doc }
+    end
 
     def search_service
       [request.base_url, Rails.application.routes.url_helpers.solr_document_iiif_search_path(solr_document_id: id.to_s)].join
