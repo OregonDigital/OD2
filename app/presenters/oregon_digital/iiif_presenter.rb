@@ -48,7 +48,7 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def work_presenters
-      work_ids = (ordered_ids - file_sets.map(&:id)) 
+      work_ids = (ordered_ids - file_sets.map(&:id))
       return [] if work_ids.empty?
 
       solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(work_ids)
