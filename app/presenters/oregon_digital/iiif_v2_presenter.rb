@@ -29,6 +29,7 @@ module OregonDigital
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
@@ -44,6 +45,7 @@ module OregonDigital
 
       presenters
     end
+    # rubocop:enable Metrics/AbcSize
 
     # Determine which derivative type and IIIF fileset presenter to use
     def file_set_presenter_info(fs)
