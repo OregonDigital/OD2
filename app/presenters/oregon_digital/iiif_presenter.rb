@@ -17,6 +17,7 @@ module OregonDigital
       super.select { |m| m['value'].present? }
     end
 
+    # rubocop:disable Metrics/AbcSize
     def file_set_presenters
       presenters = []
       file_sets.each do |fs|
@@ -25,12 +26,13 @@ module OregonDigital
         urls = file_set_derivatives_service(fs).sorted_derivative_urls(deriv_type)
 
         urls.each_with_index do |derivative, i|
-          label = urls.length > 1 ? page_label(fs.label, i) : fs.label
+          label = urls.length > 1 ? page_label(fs.parents.first.title_or_label, i) : fs.parents.first.title_or_label
           presenters << presenter_class.new(fs, derivative, label, current_ability, request)
         end
       end
       presenters
     end
+    # rubocop:enable Metrics/AbcSize
 
     # Determine which derivative type and IIIF fileset presenter to use
     def file_set_presenter_info(fs)

@@ -22,6 +22,10 @@ RSpec.describe OregonDigital::IIIFPresenter do
       allow(fs2).to receive(:image?).and_return(true)
       allow(fs3).to receive(:image?).and_return(true)
       allow(fs4).to receive(:image?).and_return(true)
+      allow(fs1.parents.first).to receive(:title_or_label).and_return('fs1')
+      allow(fs2.parents.first).to receive(:title_or_label).and_return('fs2')
+      allow(fs3.parents.first).to receive(:title_or_label).and_return('fs3')
+      allow(fs4.parents.first).to receive(:title_or_label).and_return('fs4')
       allow(presenter).to receive(:file_set_derivatives_service).with(fs1).and_return(fsderivs1)
       allow(presenter).to receive(:file_set_derivatives_service).with(fs2).and_return(fsderivs2)
       allow(presenter).to receive(:file_set_derivatives_service).with(fs3).and_return(fsderivs3)
@@ -33,6 +37,7 @@ RSpec.describe OregonDigital::IIIFPresenter do
     end
 
     it 'returns one presenter for each JP2 for each fileset' do
+      print(presenter.file_set_presenters.length.to_s)
       expect(presenter.file_set_presenters.length).to eq(5)
     end
 
