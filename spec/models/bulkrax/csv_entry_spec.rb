@@ -45,4 +45,34 @@ RSpec.describe Bulkrax::CsvEntry, type: :model do
       end
     end
   end
+
+  # rubocop:disable RSpec/SubjectStub
+  describe 'build_mapping_metadata' do
+    subject(:entry) { described_class.new(importerexporter: exporter) }
+
+    let(:exporter) { create(:bulkrax_exporter) }
+    let(:hyrax_record) { build(:document, title: ['Frog and Toad Together']) }
+    let(:mapping) do
+      hash = {}
+      hash['title'] = { from: ['http://purl.org/dc/terms/title'], split: true }
+      hash['resource_type'] = { from: ['http://purl.org/dc/terms/type'] }
+      hash['rights_statement'] = { from: ['http://www.europeana.edu/schemas/edm/rights'] }
+      hash['identifier'] = { from: ['http://purl.org/dc/terms/identifier'], split: true }
+      hash['first_line'] = { from: ['http://opaquenamespace.org/ns/sheetmusic_firstLine'] }
+      hash
+    end
+
+    before do
+      allow(entry).to receive(:fetch_field_mapping).and_return(mapping)
+      allow(entry).to receive(:hyrax_record).and_return(hyrax_record)
+    end
+
+    it 'adds to the parsed_metadata without empty vals' do
+      entry.parsed_metadata = {}
+      entry.build_mapping_metadata
+      expect(entry.parsed_metadata.keys).to include 'resource_type'
+      expect(entry.parsed_metadata.keys).not_to include 'first_line'
+    end
+  end
+  # rubocop:enable RSpec/SubjectStub
 end

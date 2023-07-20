@@ -63,7 +63,7 @@ Bulkrax.setup do |config|
     next if property.nil?
     property = property.gsub('_attributes', '')
     fieldhash[property][:from] << c['predicate']
-    fieldhash[property][:split] = '\|' unless c['multiple'].blank?
+    fieldhash[property][:split] = '\|' if c['multiple']
   end
 
   # add model
@@ -104,6 +104,22 @@ Bulkrax::CsvEntry.class_eval do
     # Bring the number back if there is one
     "#{unnumbered_key}#{key.sub(clean_key, '')}"
   end
+
+  def build_value(key, value)
+    data = hyrax_record.send(key.to_s)
+    if data.is_a?(ActiveTriples::Relation)
+      if value['join']
+        self.parsed_metadata[key_for_export(key)] = data.map { |d| prepare_export_data(d) }.join(' | ').to_s # TODO: make split char dynamic
+      else
+        data.each_with_index do |d, i|
+          self.parsed_metadata["#{key_for_export(key)}_#{i + 1}"] = prepare_export_data(d)
+        end
+      end
+    else
+      self.parsed_metadata[key_for_export(key)] = prepare_export_data(data) unless data.blank?
+    end
+  end
+
 end
 
 Bulkrax::Exporter.class_eval do
