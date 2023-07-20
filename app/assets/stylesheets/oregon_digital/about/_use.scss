@@ -1,0 +1,37 @@
+// CSS: A stylize CSS for the how-to use page
+.subhead_label {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.desc_label {
+  font-size: 15px;
+}
+
+// TABLE OF CONTENTS: Setup the layout for table of contents
+.use_toc { 
+  list-style-type: none;
+  counter-reset: item;
+  margin: 0px;
+  padding: 0px; 
+}
+
+.use_toc li { 
+  display: table;
+  counter-increment: item;
+  margin-bottom: 0.8em;
+  
+  li {
+    margin: 0px;
+  }
+
+  li:before {
+    content: counters(item, ".") " ";
+  }
+}
+
+.use_toc li:before { 
+  content: counters(item, ".") ". ";
+  display: table-cell;
+  padding-right: 0.8em; 
+}
