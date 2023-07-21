@@ -1,5 +1,5 @@
 <ul class="facet-values list-unstyled">
-  <% ordered_facet = display_facet.items.sort_by { |v| v.value.downcase } if display_facet.sort == 'index' %>
+  <% ordered_facet = display_facet.items.sort_by! { |v| v.value.downcase }.reverse.reverse if display_facet.sort == 'index' %>
   <% ordered_facet = display_facet.items.group_by { |v| v.hits }.map do |key, value| %>
     <% value.sort_by! { |v| v.value.downcase }.reverse.reverse %>
   <% end.flatten if display_facet.sort == 'count' %>
