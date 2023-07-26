@@ -30,6 +30,7 @@
   }
 }
 
+// LIST: Format numbering on the table of content
 .use_toc li:before { 
   content: counters(item, ".") ". ";
   display: table-cell;
