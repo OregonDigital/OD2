@@ -35,3 +35,8 @@
   display: table-cell;
   padding-right: 0.8em; 
 }
+
+// SCROLL: Make the scrolling when click on link smooth for document
+html {
+  scroll-behavior: smooth;
+}
