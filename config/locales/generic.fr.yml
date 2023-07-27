@@ -6,3 +6,7 @@ fr:
       generic:
         description:        "Generic œuvres"
         name:               "Generic"
+  simple_form:
+    labels:
+      defaults:
+        local_collection: "Nom de la Collection Locale"

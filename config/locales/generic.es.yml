@@ -8,3 +8,7 @@ es:
         description:        "Generic trabajos"
         name:               "Generic"
         # TODO: translate `human_name` into Spanish
+  simple_form:
+    labels:
+      defaults:
+        local_collection: "Nombre de la Colección Local"
