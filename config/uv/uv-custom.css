@@ -23,3 +23,14 @@
     height: 28px;
   }
 }
+
+/* NEW CSS: Add in CSS stylization for fixing the label layout to display more text  */
+.uv .loaded .uv-iiif-extension-host .mainPanel .leftPanel .main .tabsContent .views .thumbsView .thumbs .thumb .info .label  {
+  float: left;
+  overflow-x: visible;
+  white-space: normal;
+}
+
+.uv .loaded .uv-iiif-extension-host .mainPanel .leftPanel .main .tabsContent .views .thumbsView .thumbs .thumb.twoCol .label  {
+  width: 100px;
+}
