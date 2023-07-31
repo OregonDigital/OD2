@@ -30,7 +30,7 @@ module OregonDigital
           presenters << presenter_class.new(fs, derivative, label, current_ability, request)
         end
       end
-      presenters
+      presenters.sort(&:label)
     end
     # rubocop:enable Metrics/AbcSize
 
