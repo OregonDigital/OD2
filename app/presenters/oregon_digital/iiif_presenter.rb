@@ -18,6 +18,7 @@ module OregonDigital
     end
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     # TODO: DRY this up with #work_presenters?
     def file_set_presenters
       file_set_ids = (ordered_ids & file_sets.map(&:id))
@@ -41,6 +42,7 @@ module OregonDigital
       presenters
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     # Determine which derivative type and IIIF fileset presenter to use
     def file_set_presenter_info(fs)
