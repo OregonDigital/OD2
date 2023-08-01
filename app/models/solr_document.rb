@@ -21,6 +21,13 @@ class SolrDocument
     end
   end
 
+  # Add support for querying for multiple ids
+  def self.find(ids)
+    return super(ids) unless ids.is_a? Array
+
+    repository.find(ids).documents
+  end
+
   # Turn document type into FontAwesome icon class
   # See app\views\catalog\_index_list_type_icon.html.erb
   def type_to_fa_class(type)
@@ -72,8 +79,7 @@ class SolrDocument
 
   # Find and return child works (excluding FileSets)
   def children
-    @children ||= member_ids.map do |member_id|
-      document = SolrDocument.find(member_id)
+    @children ||= SolrDocument.find(member_ids).map do |document|
       document['has_model_ssim'].first == 'FileSet' ? nil : document
     end.compact
   end
@@ -84,11 +90,7 @@ class SolrDocument
 
   # Find and return file sets
   def file_sets
-    solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(member_ids)
-    solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
-
-    @file_sets ||= solr_response['response']['docs'].map do |response|
-      document = SolrDocument.new(response)
+    @file_sets ||= SolrDocument.find(member_ids).map do |document|
       document['has_model_ssim'].first == 'FileSet' ? document : nil
     end.compact
   end
