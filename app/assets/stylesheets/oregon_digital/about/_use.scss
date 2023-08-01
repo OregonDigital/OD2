@@ -9,32 +9,22 @@
 }
 
 // TABLE OF CONTENTS: Setup the layout for table of contents
-.use_toc { 
-  list-style-type: none;
+.use_toc {
   counter-reset: item;
-  margin: 0px;
-  padding: 0px; 
 }
 
 .use_toc li { 
-  display: table;
-  counter-increment: item;
-  margin-bottom: 15px;
-  
-  li {
-    margin: 0 0 10px 0;
-  }
-
-  li:before {
-    content: counters(item, ".") " ";
-  }
+  display: block;
+  position: relative;
+  margin: 5px 10px 5px 1em;
 }
 
-// LIST: Format numbering on the table of content
-.use_toc li:before { 
-  content: counters(item, ".") ". ";
-  display: table-cell;
-  padding-right: 0.8em; 
+.use_toc li:before {
+  content: counters(item, ".") ".";
+  counter-increment: item;
+  position: absolute;
+  margin-right: 100%;
+  right: 10px;
 }
 
 // SCROLL: Make the scrolling when click on link smooth for document
