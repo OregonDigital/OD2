@@ -24,8 +24,12 @@ class SolrDocument
   # Add support for querying for multiple ids
   def self.find(ids)
     return super(ids) unless ids.is_a? Array
+    return [] if ids.blank?
 
-    repository.find(ids).documents
+    solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(ids)
+    path = repository.blacklight_config.document_solr_path || repository.blacklight_config.solr_path
+    docs = repository.send_and_receive path, { fq: solr_query }
+    docs.documents
   end
 
   # Turn document type into FontAwesome icon class
