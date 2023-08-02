@@ -8,3 +8,7 @@ zh:
         description:        "Generic 作品"
         name:               "Generic"
         # TODO: translate `human_name` into Chinese
+  simple_form:
+    labels:
+      defaults:
+        local_collection: "本地集合名称"
