@@ -120,6 +120,29 @@ Bulkrax::CsvEntry.class_eval do
     end
   end
 
+  # changing call from member_work_ids to member_ids as the former does not return results
+  # removing in_work_ids as redundant, member_of_work_ids works for both works and filesets
+  # removing file_set_ids as redundant, member_ids returns both child works and filesets
+  def build_relationship_metadata
+    # Includes all relationship methods for all exportable record types (works, Collections, FileSets)
+    relationship_methods = {
+      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids],
+      related_children_parsed_mapping => %i[member_collection_ids member_ids]
+    }
+
+    relationship_methods.each do |relationship_key, methods|
+      next if relationship_key.blank?
+
+      values = []
+      methods.each do |m|
+        values << hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+      end
+      values = values.flatten.uniq
+      next if values.blank?
+
+      handle_join_on_export(relationship_key, values, mapping[related_parents_parsed_mapping]['join'].present?)
+    end
+  end
 end
 
 Bulkrax::CsvParser.class_eval do
