@@ -14,7 +14,7 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def download(standard_size = false)
-      formatted_page_title = presenter.page_title.split[0..4].join("_")
+      formatted_page_title = presenter.page_title.split[0..4].join('_')
       zipname = "#{formatted_page_title}_#{curation_concern.id}.zip"
 
       send_file_headers!(
@@ -35,7 +35,7 @@ module OregonDigital
     # rubocop:enable Metrics/MethodLength
 
     def metadata
-      formatted_page_title = presenter.page_title.split[0..4].join("_")
+      formatted_page_title = presenter.page_title.split[0..4].join('_')
       send_data OregonDigital::FileSetStreamer.stream_metadata(curation_concern), filename: "#{formatted_page_title}_#{curation_concern.id}.csv"
     end
   end
