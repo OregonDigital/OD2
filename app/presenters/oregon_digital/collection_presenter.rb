@@ -21,7 +21,7 @@ module OregonDigital
 
     def representative_docs
       fs_ids = CollectionRepresentative.where(collection_id: id).reject { |repr| repr.fileset_id.empty? }.sort_by(&:order).map(&:fileset_id)
-      fs_ids.map { |fid| SolrDocument.find(fid) }
+      SolrDocument.find(fs_ids)
     end
 
     def export_as_nt

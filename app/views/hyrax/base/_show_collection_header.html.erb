@@ -10,7 +10,7 @@
       </span>
       <span>
         <%#= link_to "View all items in collection", view_all_url %>
-        <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
+        <%= link_to_document @collection_solr_doc, "View all" %>
       </span>
     </div>
   </div>
@@ -24,7 +24,7 @@
       <p class="collection-title h3"><%= @collection_solr_doc.title.first %></p>
       <p class="collection-data">
         <%= Hyrax::SolrService.query("non_user_collections:#{@presenter.non_user_collections.first}", fl: 'id', rows: 10000).length %> items
-        <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all" %>
+        <%= link_to_document @collection_solr_doc, "View all" %>
       </p>
     </div>
   </div>
