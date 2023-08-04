@@ -6,3 +6,7 @@ it:
       generic:
         description:        "Generic opere"
         name:               "Generic"
+  simple_form:
+    labels:
+      defaults:
+        local_collection: "Collezione Locale Nome"
