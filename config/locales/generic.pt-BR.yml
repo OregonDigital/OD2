@@ -6,3 +6,7 @@ pt-BR:
       generic:
         description:        "Generic trabalhos"
         name:               "Generic"
+  simple_form:
+    labels:
+      defaults:
+        local_collection: "Nome da Coleção Local"
