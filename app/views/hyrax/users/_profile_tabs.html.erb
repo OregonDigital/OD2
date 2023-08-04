@@ -1,0 +1,8 @@
+<%# OVERRIDE: Override the original tab to remove the highlighted tab as no longer needed %>
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#activity_log"><span class="glyphicon glyphicon-calendar"></span> <%= I18n.t('hyrax.user_profile.tab_activity') %></a></li>
+</ul>
+
+<div class="tab-content panel-body">
+  <%= render 'activity', presenter: presenter %>
+</div> <!-- /tab-content -->
