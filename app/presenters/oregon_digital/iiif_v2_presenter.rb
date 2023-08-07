@@ -102,10 +102,11 @@ module OregonDigital
     # Fill @collections with a hash :id => :title if not set by #work_presenters
     def cached_collections
       @collections ||= {}
+      docs = SolrDocument.find(solr_document.member_of_collection_ids)
       solr_document.member_of_collection_ids.each do |c|
         next @collections[c] unless @collections[c].nil?
 
-        @collections[c] = SolrDocument.find(c).title.first
+        @collections[c] = docs.select { |sd| sd.id == c }.title.first
       end
       @collections
     end

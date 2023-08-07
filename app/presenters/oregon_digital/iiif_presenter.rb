@@ -112,8 +112,9 @@ module OregonDigital
       # Get collections not in the cache
       new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collections.keys }
       # Add collections to cache
+      docs = SolrDocument.find(new_cols)
       new_cols.each do |c|
-        @collections[c] = SolrDocument.find(c).title.first
+        @collections[c] = docs.select { |sd| sd.id == c }.first.title_or_label
       end
       @collections
     end
