@@ -18,21 +18,31 @@ module OregonDigital
     end
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    # TODO: DRY this up with #work_presenters?
     def file_set_presenters
-      presenters = []
-      file_sets.each do |fs|
+      file_set_ids = (ordered_ids & file_sets.map(&:id))
+      return [] if file_set_ids.empty?
+
+      solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(file_set_ids)
+      solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
+      document_hash = array_to_hash_response(solr_response)
+
+      presenters = file_set_ids.map do |id|
+        fs = SolrDocument.new(document_hash[id])
         deriv_type, presenter_class = file_set_presenter_info fs
 
         urls = file_set_derivatives_service(fs).sorted_derivative_urls(deriv_type)
 
-        urls.each_with_index do |derivative, i|
+        urls.each_with_index.map do |derivative, i|
           label = urls.length > 1 ? page_label(fs.parents.first.title_or_label, i) : fs.parents.first.title_or_label
-          presenters << presenter_class.new(fs, derivative, label, current_ability, request)
+          presenter_class.new(fs, derivative, label, current_ability, request)
         end
-      end
+      end.flatten
       presenters
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     # Determine which derivative type and IIIF fileset presenter to use
     def file_set_presenter_info(fs)
@@ -57,14 +67,14 @@ module OregonDigital
       solr_response = Hyrax::SolrService.get(solr_query, rows: 10_000)
       document_hash = array_to_hash_response(solr_response)
 
-      works = work_ids.map do |id|
+      presenters = work_ids.map do |id|
         doc = SolrDocument.new(document_hash[id])
         presenter = IIIFPresenter.new(doc, current_ability, request)
         presenter.file_sets = doc.file_sets
         presenter.collections = cached_collections
         presenter
       end
-      works
+      presenters
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
@@ -102,8 +112,9 @@ module OregonDigital
       # Get collections not in the cache
       new_cols = solr_document.member_of_collection_ids.reject { |c| c.in? @collections.keys }
       # Add collections to cache
+      docs = SolrDocument.find(new_cols)
       new_cols.each do |c|
-        @collections[c] = SolrDocument.find(c).title.first
+        @collections[c] = docs.select { |sd| sd.id == c }.first.title_or_label
       end
       @collections
     end

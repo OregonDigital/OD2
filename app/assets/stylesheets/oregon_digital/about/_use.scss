@@ -1,0 +1,33 @@
+// CSS: A stylize CSS for the how-to use page
+.subhead_label {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.desc_label {
+  font-size: 15px;
+}
+
+// TABLE OF CONTENTS: Setup the layout for table of contents
+.use_toc {
+  counter-reset: item;
+}
+
+.use_toc li { 
+  display: block;
+  position: relative;
+  margin: 5px 10px 5px 1em;
+}
+
+.use_toc li:before {
+  content: counters(item, ".") ".";
+  counter-increment: item;
+  position: absolute;
+  margin-right: 100%;
+  right: 10px;
+}
+
+// SCROLL: Make the scrolling when click on link smooth for document
+#use_page {
+  scroll-behavior: smooth;
+}

@@ -120,6 +120,55 @@ Bulkrax::CsvEntry.class_eval do
     end
   end
 
+  # changing call from member_work_ids to member_ids as the former does not return results
+  # removing in_work_ids as redundant, member_of_work_ids works for both works and filesets
+  # removing file_set_ids as redundant, member_ids returns both child works and filesets
+  def build_relationship_metadata
+    # Includes all relationship methods for all exportable record types (works, Collections, FileSets)
+    relationship_methods = {
+      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids],
+      related_children_parsed_mapping => %i[member_collection_ids member_ids]
+    }
+
+    relationship_methods.each do |relationship_key, methods|
+      next if relationship_key.blank?
+
+      values = []
+      methods.each do |m|
+        values << hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+      end
+      values = values.flatten.uniq
+      next if values.blank?
+
+      handle_join_on_export(relationship_key, values, mapping[related_parents_parsed_mapping]['join'].present?)
+    end
+  end
+end
+
+Bulkrax::CsvParser.class_eval do
+  # This method goes away in bulkrax 5.2
+  # removing direct call to Solrizer, see issue #699 on bulkrax
+  def set_ids_for_exporting_from_importer
+    entry_ids = Bulkrax::Importer.find(importerexporter.export_source).entries.pluck(:id)
+    complete_statuses = Bulkrax::Status.latest_by_statusable
+                                       .includes(:statusable)
+                                       .where('bulkrax_statuses.statusable_id IN (?) AND bulkrax_statuses.statusable_type = ? AND status_message = ?', entry_ids, 'Bulkrax::Entry', 'Complete')
+
+    complete_entry_identifiers = complete_statuses.map { |s| s.statusable&.identifier&.gsub(':', '\:') }
+    extra_filters = extra_filters.presence || '*:*'
+
+    { :@work_ids => ::Hyrax.config.curation_concerns, :@collection_ids => [::Collection], :@file_set_ids => [::FileSet] }.each do |instance_var, models_to_search|
+      instance_variable_set(instance_var, ActiveFedora::SolrService.post(
+        extra_filters.to_s,
+        fq: [
+          %(#{solr_name(work_identifier)}:("#{complete_entry_identifiers.join('" OR "')}")),
+          "has_model_ssim:(#{models_to_search.join(' OR ')})"
+        ],
+        fl: 'id',
+        rows: 2_000_000_000
+      )['response']['docs'].map { |obj| obj['id'] })
+    end
+  end
 end
 
 Bulkrax::Exporter.class_eval do
@@ -134,6 +183,16 @@ Bulkrax::ApplicationParser.class_eval do
     # added resource_type, identifier, and rights_statement
     elts << source_identifier unless Bulkrax.fill_in_blank_source_identifiers
     elts
+  end
+
+  # see Bulkrax parser_export_record_set
+  # added to fix set_ids_for_exporting_from_importer above in CsvParser
+  def solr_name(base_name)
+    if Module.const_defined?(:Solrizer)
+      ::Solrizer.solr_name(base_name)
+    else
+      ::ActiveFedora.index_field_mapper.solr_name(base_name)
+    end
   end
 
   ::Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions" if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
