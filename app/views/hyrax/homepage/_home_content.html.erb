@@ -3,11 +3,9 @@
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @presenter.collections.to_a.empty? %>
       <% @presenter.collections.each do |collection| %>
-        <% @member_docs = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND file_set_ids_ssim:[* TO *]", rows: 3).map do |solr_hit|
-          SolrDocument.find(solr_hit['id']) if solr_hit['file_set_ids_ssim'].length.positive?
-        end %>
+        <% solr_hits = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND file_set_ids_ssim:[* TO *]", rows: 3) %>
+        <% @member_docs = SolrDocument.find(solr_hits.map(&:id)) %>
         <% @member_count = Hyrax::SolrService.new.count("member_of_collection_ids_ssim:#{collection.id}") %>
-        <% @collection_solr_doc = SolrDocument.find(collection.id) %>
         <span class="featured-collection-row flex-container">
         <% @members_filled = @member_docs.fill(nil, @member_docs.length..2)[0..2].reverse %>
         <% @members_filled.each do |work| %>
@@ -32,7 +30,7 @@
           <div class='collection-items'>
             <span class='home-item-count'><%= @member_count %> items</span>
             &nbsp;
-            <%= link_to_document SolrDocument.find(@collection_solr_doc.id), "View all", aria: {label: "View All #{collection.title.first}"}, class: 'lato-b' %>
+            <%= link_to_document collection, "View all", aria: {label: "View All #{collection.title.first}"}, class: 'lato-b' %>
           </div>
         </div>
         </span>
