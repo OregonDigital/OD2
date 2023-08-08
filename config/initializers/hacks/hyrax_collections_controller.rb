@@ -16,9 +16,8 @@ Rails.application.config.to_prepare do
       def files
         work_id = params[:q]
         file_set_ids = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND id:#{work_id}*", rows: 100, fl: 'file_set_ids_ssim').flat_map{ |sd| sd['file_set_ids_ssim'] }
-        result = file_set_ids.map do |id|
-          label = SolrDocument.find(id).to_s
-          { id: id, text: label }
+        result = SolrDocument.find(file_set_ids).map do |doc|
+          { id: doc.id, text: doc.to_s }
         end
         render json: result
       end
