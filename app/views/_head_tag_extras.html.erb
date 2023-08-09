@@ -1,0 +1,16 @@
+<%# Override this partial in your application to insert extra HEAD content into every page %>
+<%# DEFAULT: Add in default favicon %>
+<%= favicon_link_tag asset_path('od2_favicon/favicon.ico') %>
+
+<%# SIZE: Add in sizing option for favicon %>
+<% %w(16 32).each do |s| %>
+  <%= favicon_link_tag "od2_favicon/favicon-#{s}x#{s}.png", rel: 'icon', type: 'image/png', sizes: "#{s}x#{s}" %>
+<% end %>
+
+<%# SIZE: Add in sizing option for apple icon %>
+<%= favicon_link_tag "od2_favicon/apple-touch-icon.png", rel: 'apple-touch-icon', type: 'image/png' %>
+
+<%# SIZE: Add in sizing option for android chrome %>
+<% %w(192 512).each do |s| %>
+  <%= favicon_link_tag "od2_favicon/android-chrome-#{s}x#{s}.png", rel: 'android-chrome', type: 'image/png', sizes: "#{s}x#{s}" %>
+<% end %>
