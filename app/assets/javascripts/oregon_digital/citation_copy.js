@@ -1,9 +1,9 @@
 $(document).ready(function () {
     // Init clipboard-rails button for all copy URL buttons
-    var clipboard = new Clipboard('#chicago-copy-button');
+    var clipboard = new Clipboard('.citation-copy-button');
     // Init Bootstrap tooltips for all copy URL buttons
-    $('#copy-button').tooltip({
-      title: 'Copy text to clipboard'
+    $('.citation-copy-button').tooltip({
+      title: 'Copy citation to clipboard'
     });
   
     // On clipboard copy success
@@ -16,7 +16,7 @@ $(document).ready(function () {
       // Set a timeout to hide and restore tooltip text after 1sec
       setTimeout(function () {
         $(e.trigger).tooltip('hide')
-          .attr('data-original-title', 'Copy text to clipboard');
+          .attr('data-original-title', 'Copy citation to clipboard');
       }, 1000);
     });
   });
