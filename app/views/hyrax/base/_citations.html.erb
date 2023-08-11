@@ -1,12 +1,10 @@
 <div class="citations">
     <% if Hyrax.config.citations? %>
-      <h3><%= t('apa_header') %></h3>
-      <%= export_as_apa_citation(@presenter) %>
-      <h3><%= t('mla_header') %></h3>
-      <%= export_as_mla_citation(@presenter) %>
-      <h3><%= t('chicago_header') %></h3>
-      <%= export_as_chicago_citation(@presenter) %>
-      <h3><%= t('wiki_header') %></h3>
-      <%= export_as_wiki_citation(@presenter) %>
+      
+      <%= render 'citation_and_copy_button', citation_style: "apa", citation_text: export_as_apa_citation(@presenter) %>
+      <%= render 'citation_and_copy_button', citation_style: "mla", citation_text: export_as_mla_citation(@presenter) %>
+      <%= render 'citation_and_copy_button', citation_style: "chicago", citation_text: export_as_chicago_citation(@presenter) %>
+      <%= render 'citation_and_copy_button', citation_style: "wiki", citation_text: export_as_wiki_citation(@presenter) %>
+
     <% end %>
 </div>
