@@ -22,7 +22,6 @@ class ReExtractTextWorker
     # OCR if we didn't get extracted bbox content
     if file_set.bbox_content.blank?
       file_set.ocr_content = []
-      file_set.hocr_content = []
       file_set.hocr_text = []
       0.upto(page_count - 1) do |pagenum|
         Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}")

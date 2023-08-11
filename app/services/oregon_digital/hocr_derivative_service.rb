@@ -25,14 +25,12 @@ module OregonDigital
       @processor = processor_factory.new(ocr_language: 'eng', file_path: filename)
 
       @file_set.ocr_content  ||= []
-      @file_set.hocr_content ||= []
       @file_set.hocr_text    ||= []
     end
 
     # OCR text and push all words into a hash, which will be serialized later in OregonDigital::FileSetDerivativesService
     def create_derivatives
       result = processor.run!
-      @file_set.hocr_content << result.hocr_content
       words = Nokogiri::HTML(result.hocr_content).css('.ocrx_word')
 
       # hocr_text will be the plain text equivilant to all_text_tismv, to allow searching on ocr text

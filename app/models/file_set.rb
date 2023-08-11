@@ -11,7 +11,7 @@ class FileSet < ActiveFedora::Base
 
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
-  attr_writer :ocr_content, :hocr_content, :hocr_text, :bbox_content
+  attr_writer :ocr_content, :hocr_text, :bbox_content
 
   self.indexer = OregonDigital::FileSetIndexer
 
@@ -40,12 +40,6 @@ class FileSet < ActiveFedora::Base
 
   def bbox_content
     @bbox_content ||= SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
-  rescue Blacklight::Exceptions::RecordNotFound
-    nil
-  end
-
-  def hocr_content
-    @hocr_content ||= SolrDocument.find(id).to_h.dig('hocr_content_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
