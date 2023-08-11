@@ -79,6 +79,7 @@ module OregonDigital
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
           hocr_derivative_service(out_path, pagenum).create_derivatives if file_set.bbox_content.blank?
+          create_hocr_content(out_path, pagenum)
           create_zoomable_page(out_path, pagenum)
         end
       end
@@ -114,6 +115,11 @@ module OregonDigital
                                                                       tile_size: '1024',
                                                                       compression: '20',
                                                                       layer: 0 }])
+    end
+
+    def create_hocr_content(filename, pagenum)
+      OregonDigital::Derivatives::Image::TesseractRunner.create(filename,
+                                                                outputs: [{ url: derivative_url('hocr', pagenum) }])
     end
 
     def create_video_derivatives(filename)
