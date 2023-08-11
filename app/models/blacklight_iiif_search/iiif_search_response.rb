@@ -51,9 +51,21 @@ module BlacklightIiifSearch
       query_length = query.strip.split(' ').length
       solr_response['response']['docs'].each do |document|
         hit = { '@type': 'search:Hit', 'annotations': [] }
-        # Find which of our extracted text or hOCR fields this document has, then parse the entire document
-        extract, ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
-        all_words = extract.nil? ? ocr_word_array(ocr) : extracted_word_array(extract)
+        # Prepare to find ocr and hocr derivative file uris
+        sd = SolrDocument.new(document)
+        fds = OregonDigital::FileSetDerivativesService.new(sd)
+
+        # Get the extracted text out of the solr document and noop the ocr text
+        extract, _ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
+
+        # Check for extracted text first, later this will use the ocr derivative uris
+        all_words = unless extract.blank? # unless fds.sorted_derivative_urls('ocr').blank?
+          # extracted_word_array(fds.sorted_derivative_urls('ocr'))
+          extracted_word_array(extract)
+        else
+          ocr_word_array(fds.sorted_derivative_urls('hocr'))
+        end
+
         word_array = match_words(all_words, query)
 
         # word_array is an array of BlacklightIiifSearch::Word for each word in the document
@@ -93,9 +105,11 @@ module BlacklightIiifSearch
     # Create Word objects for all extracted words
     # @param [String] Output from `tesseract`
     # rubocop:disable Metrics/AbcSize
-    def ocr_word_array(ocr)
+    def ocr_word_array(file_uris)
+      file_uris.map.with_index do |file, page_number|
+        text = File.read(file.sub('file://', ''))
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      ocr.map.with_index do |text, page_number|
+      # ocr.map.with_index do |text, page_number|
         Nokogiri::HTML(text).css('.ocrx_word').map do |word|
           bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
 
