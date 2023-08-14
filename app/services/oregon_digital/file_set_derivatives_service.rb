@@ -118,7 +118,7 @@ module OregonDigital
     end
 
     def create_hocr_content(filename, pagenum)
-      OregonDigital::Derivatives::Image::TesseractRunner.create(filename,
+      OregonDigital::Derivatives::Document::TesseractRunner.create(filename,
                                                                 outputs: [{ url: derivative_url('hocr', pagenum) }])
     end
 
