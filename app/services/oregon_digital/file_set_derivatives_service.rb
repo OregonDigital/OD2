@@ -73,24 +73,14 @@ module OregonDigital
       extract_full_text(filename, uri)
       extract_text_bbox_derivative_service(filename).create_derivatives
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
-      # Build a hash of words temporarily in file_set.hocr_content
       0.upto(page_count - 1) do |pagenum|
         Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox_content.blank?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          hocr_derivative_service(out_path, pagenum).create_derivatives if file_set.bbox_content.blank?
           create_hocr_content(out_path, pagenum)
           create_zoomable_page(out_path, pagenum)
         end
       end
-      # # Serialize the hOCR hash into a solrfield
-      # # REMOVE THIS AND REPLACE WITH SOME WAY TO INCLUDE THE TESSERACT OUTPUT
-      # solr_doc = []
-      # file_set.hocr_content&.each do |word, coords|
-      #   solr_doc << "#{word}:#{coords.join(';')}"
-      # end
-
-      # file_set.hocr_content = solr_doc
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
@@ -208,10 +198,6 @@ module OregonDigital
     # Returns the JP2Processor class of choice
     def jp2_processor
       OregonDigital::Derivatives::Image::JP2Processor
-    end
-
-    def hocr_derivative_service(filename, pagenum, file_set: self.file_set)
-      OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: filename, pagenum: pagenum).new
     end
 
     def extract_text_bbox_derivative_service(filename, file_set: self.file_set)

@@ -125,7 +125,14 @@ class SolrDocument
   end
 
   def hocr_text
-    self['hocr_text_tsimv']
+    @hocr_text ||= begin
+      fds = OregonDigital::FileSetDerivativesService.new(self)
+      uris = fds.sorted_derivative_urls('hocr')
+      uris.map do |path|
+        hocr_text = File.read(path.sub('file://', ''))
+        Nokogiri::HTML(hocr_text).css('.ocrx_word').map(&:text).join(' ')
+      end
+    end
   end
 
   def all_text

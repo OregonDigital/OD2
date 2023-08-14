@@ -37,7 +37,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_read_groups
       index_discover_groups
       solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| find_all_text_value(file_set, solr_doc) }
-      solr_doc['hocr_text_tsimv'] = object.file_sets.map { |file_set| find_hocr_text(file_set, solr_doc) }
+      solr_doc['hocr_text_timv'] = object.file_sets.map { |file_set| file_set.hocr_text }
       solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] } # Index file formats from file sets for faceting
       # for bulkrax
       solr_doc['bulkrax_identifier_sim'] = object.bulkrax_identifier
@@ -59,10 +59,6 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def find_all_text_value(file_set, solr_doc)
     file_set.extracted_text&.content&.presence || file_set&.ocr_content&.presence || solr_doc['all_text_tsimv'].presence
-  end
-
-  def find_hocr_text(file_set, solr_doc)
-    file_set&.hocr_text&.presence || file_set.to_solr['hocr_text_tsimv'].presence || solr_doc['hocr_text_tsimv'].presence
   end
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
