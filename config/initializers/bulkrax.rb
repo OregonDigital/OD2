@@ -96,6 +96,16 @@ Bulkrax::ApplicationMatcher.class_eval do
 end
 
 Bulkrax::CsvEntry.class_eval do
+
+  # from 4.4, see https://github.com/samvera-labs/bulkrax/issues/669
+  def self.read_data(path)
+    raise StandardError, 'CSV path empty' if path.blank?
+    CSV.read(path,
+      headers: true,
+      header_converters: ->(h) { h.to_sym },
+      encoding: 'utf-8')
+  end
+
   def key_for_export(key)
     clean_key = key_without_numbers(key)
     unnumbered_key = mapping[clean_key] ? mapping[clean_key]['from'].first : clean_key
