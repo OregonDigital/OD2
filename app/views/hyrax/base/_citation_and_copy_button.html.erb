@@ -1,6 +1,6 @@
 <div id=<%= "#{citation_style}-citation-header" %>>
     <h3><%= t("#{citation_style}_header") %></h3>
-    <div class="copy-button">
+    <div style="margin: 0.2em 0;">
         <button id=<%= "#{citation_style}-copy-button" %> class="btn btn-primary citation-copy-button" data-clipboard-target= <%="##{citation_style}-citation-text" %> data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom">
             Copy <%= t( "#{citation_style}_header" ) %> Citation
         </button>
