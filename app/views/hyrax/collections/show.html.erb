@@ -90,7 +90,7 @@
   <%= render 'shared/colored_divider', color: 'lime-green' do %>
     <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All</a>
     <%# NEW BUTTON: Add in an edit button to collection rather than going through the dashboard %>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && (current_user.admin? || current_ability.can?(:edit, @presenter.solr_document)) %>
       <a href="<%= edit_dashboard_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Edit Collection</a>
     <% end %>
   <% end %>
