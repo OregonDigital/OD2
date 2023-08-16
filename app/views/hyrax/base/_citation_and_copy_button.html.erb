@@ -1,13 +1,9 @@
 <div id=<%= "#{citation_style}-citation-header" %>>
-    <div class="row">
-        <div class="col-sm-2">
-            <h3><%= t("#{citation_style}_header") %></h3>
-        </div>
-        <div class="col-sm-1 copy-button">
-            <button id=<%= "#{citation_style}-copy-button" %> class="btn btn-primary citation-copy-button" data-clipboard-target= <%="##{citation_style}-citation-text" %> data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom">
-                Copy <%= t( "#{citation_style}_header" ) %> Citation
-            </button>
-        </div>
+    <h3><%= t("#{citation_style}_header") %></h3>
+    <div style="margin: 0.2em 0;">
+        <button id=<%= "#{citation_style}-copy-button" %> class="btn btn-primary citation-copy-button" data-clipboard-target= <%="##{citation_style}-citation-text" %> data-clipboard-action="copy" data-toggle="tooltip" data-placement="bottom">
+            Copy <%= t( "#{citation_style}_header" ) %> Citation
+        </button>
     </div>
 </div>
 
