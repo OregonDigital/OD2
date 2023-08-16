@@ -103,6 +103,8 @@ module Hyrax
         fetch_parents unless top_level_element?
         store_graph
         resource
+      rescue IOError => e
+        Rails.logger("Failed fetching location: #{rdf_subject}: #{e.message}")
       end
 
       def fetch_parents
