@@ -105,7 +105,7 @@ module Hyrax
         store_graph
         resource
       rescue IOError => e
-        Rails.logger("Failed fetching location: #{rdf_subject}: #{e.message}")
+        Rails.logger.warn("Failed fetching location: #{rdf_subject}: #{e.message}")
       end
       # rubocop:enable Metrics/MethodLength
 
