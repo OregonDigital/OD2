@@ -26,7 +26,7 @@
           <% end %>
         <% end %>
         <div class="featured-collection-item">
-          <h3 class='collection-title'><%= collection.title.first %></h3>
+          <h3 class='collection-title'><%= link_to_document collection, "#{collection.title.first}", aria: {label: "#{collection.title.first}"}, class: 'lato-b' %></h3>
           <div class='collection-items'>
             <span class='home-item-count'><%= @member_count %> items</span>
             &nbsp;
