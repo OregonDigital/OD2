@@ -264,6 +264,7 @@ ul.nav.homepage-nav {
     text-transform: capitalize;
     font-size: 20px;
     font-weight: bold;
+    line-height: 30px;
     @media (max-width: $screen-md-min) {
       & {
         font-size: 28px;
