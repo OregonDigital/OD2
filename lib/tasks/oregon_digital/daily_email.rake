@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :oregon_digital do
-  desc 'Send out daily email to users based on if changes/review is require'
+  desc 'Send out daily email to users based on if changes/review is required'
   task daily_email: :environment do
     # Grab all the users
     user_list = User.all
