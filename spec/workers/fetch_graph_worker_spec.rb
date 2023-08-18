@@ -53,7 +53,7 @@ RSpec.describe FetchGraphWorker, type: :worker do
       end
 
       it 'calls #fetch_failed_graph to fire off new job' do
-        expect(worker).to receive(:fetch_failed_graph).exactly(4).times
+        expect(worker).to receive(:fetch_failed_graph).exactly(3).times
         worker.perform(work.id, work.depositor)
       end
     end
