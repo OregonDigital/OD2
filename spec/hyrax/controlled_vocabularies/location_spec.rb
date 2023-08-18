@@ -139,6 +139,18 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
         location.fetch
       end
     end
+
+    context 'when a uri does not exist' do
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
+        stub_request(:get, 'https://sws.geonames.org/3469034/').to_return(status: 500, body: '', headers: {})
+      end
+
+      it do
+        expect(Rails.logger).to receive(:warn).once
+        location.fetch
+      end
+    end
   end
 
   describe '#persist!' do
