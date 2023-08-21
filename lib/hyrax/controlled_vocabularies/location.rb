@@ -92,6 +92,7 @@ module Hyrax
       end
 
       # Fetch parent features if they exist. Necessary for automatic population of rdf label.
+      # rubocop:disable Metrics/MethodLength
       def fetch(*_args, &_block)
         graph = fetch_from_cache(rdf_subject)
         unless graph.nil?
@@ -103,7 +104,10 @@ module Hyrax
         fetch_parents unless top_level_element?
         store_graph
         resource
+      rescue IOError => e
+        Rails.logger.warn("Failed fetching location: #{rdf_subject}: #{e.message}")
       end
+      # rubocop:enable Metrics/MethodLength
 
       def fetch_parents
         parent_hierarchy.each do |p|
