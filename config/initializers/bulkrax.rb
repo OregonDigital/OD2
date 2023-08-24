@@ -106,6 +106,7 @@ Bulkrax::CsvEntry.class_eval do
       encoding: 'utf-8')
   end
 
+  # commented change to avoid urls in the export headers
   def key_for_export(key)
     clean_key = key_without_numbers(key)
     unnumbered_key = mapping[clean_key] ? mapping[clean_key]['from'].first : clean_key
@@ -115,11 +116,12 @@ Bulkrax::CsvEntry.class_eval do
     "#{unnumbered_key}#{key.sub(clean_key, '')}"
   end
 
+  # check for empty vals: unless data.blank?
   def build_value(key, value)
     data = hyrax_record.send(key.to_s)
     if data.is_a?(ActiveTriples::Relation)
       if value['join']
-        self.parsed_metadata[key_for_export(key)] = data.map { |d| prepare_export_data(d) }.join(' | ').to_s # TODO: make split char dynamic
+          self.parsed_metadata[key_for_export(key)] = data.map { |d| prepare_export_data(d) }.join(Bulkrax.multi_value_element_join_on).to_s
       else
         data.each_with_index do |d, i|
           self.parsed_metadata["#{key_for_export(key)}_#{i + 1}"] = prepare_export_data(d)
