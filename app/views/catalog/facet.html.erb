@@ -13,13 +13,13 @@
 </div>
 <div class="modal-body">
   <div role="region" id="facet_list_header" aria-live="polite">
-    <%if @pagination.prefix && @display_facet.index? %>
+    <% if @pagination.prefix && @display_facet.index? %>
       <h4>Topics starting with "<%= @pagination.prefix %>" </h4>
     <% elsif @display_facet.index? %>
       <h4><%= t('blacklight.search.facets.all') %> Topics</h4> 
-    <%end %>
-    
+    <% end %>
   </div>
+
   <div class="facet_extended_list">
     <% ordered_facet = @display_facet.items.sort_by { |v| v.value.downcase } if @display_facet.sort == 'index' %>
     <% ordered_facet = @display_facet.items.group_by { |v| v.hits }.map do |key, value| %>
