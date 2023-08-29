@@ -83,7 +83,6 @@ Bulkrax.setup do |config|
     v['from'] = [k]
   end
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
-  fieldhash['visibility'] = { from: ['visibility'] }
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
 
@@ -173,11 +172,50 @@ Bulkrax::CsvEntry.class_eval do
   end
 end
 
+Bulkrax::CsvParser.class_eval do
+  alias create_from_local_collection create_new_entries
+
+  # modify how it uses the export_source value to create file path
+  def setup_export_file(folder_count)
+    path = File.join(importerexporter.exporter_export_path, folder_count.to_s)
+    FileUtils.mkdir_p(path) unless File.exist?(path)
+    esource = importerexporter.export_source
+    esource = esource.split("/").last.strip if esource.start_with? "http"
+
+    File.join(path, "export_#{esource}_from_#{importerexporter.export_from}_#{folder_count}.csv")
+  end
+end
+
 Bulkrax::Exporter.class_eval do
+  delegate :create_from_local_collection, to: :parser
   def replace_files
     false
   end
+
+  def export_from_list
+      if defined?(::Hyrax)
+        [
+          [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
+          [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
+          [I18n.t('bulkrax.exporter.labels.worktype'), 'worktype'],
+          [I18n.t('bulkrax.exporter.labels.local_collection'), 'local_collection'],
+          [I18n.t('bulkrax.exporter.labels.all'), 'all']
+        ]
+      else
+        [
+          [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
+          [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
+          [I18n.t('bulkrax.exporter.labels.all'), 'all']
+        ]
+      end
+    end
+
+  def export_source_local_collection
+    self.export_source if self.export_from == 'local_collection'
+  end
 end
+
+
 ## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
   def required_elements
@@ -186,6 +224,7 @@ Bulkrax::ApplicationParser.class_eval do
     elts << source_identifier unless Bulkrax.fill_in_blank_source_identifiers
     elts
   end
+
 
   # parser_fields are set by the importer form
   # do not use a default value at this point
