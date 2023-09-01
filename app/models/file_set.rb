@@ -6,8 +6,8 @@ class FileSet < ActiveFedora::Base
 
   property :oembed_url, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/oembed'), multiple: false
   property :bulkrax_identifier, predicate: ::RDF::URI.new('http://id.loc.gov/vocabulary/identifiers/local'), multiple: true, basic_searchable: true do |index|
-        index.as :stored_searchable
-      end
+    index.as :stored_searchable
+  end
 
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
