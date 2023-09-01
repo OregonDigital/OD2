@@ -77,7 +77,13 @@ Bulkrax.setup do |config|
   fieldhash['children'] = { from: ['children'], related_children_field_mapping: true, split: true }
   fieldhash['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   config.field_mappings['Bulkrax::BagitComplexParser'] = fieldhash
-  config.field_mappings['Bulkrax::CsvParser'] = fieldhash
+
+  fieldhash_csv = fieldhash.clone
+  fieldhash_csv.each do |k,v|
+    v['from'] = [k]
+  end
+  fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
+  config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
 
 ## override model mapping - map collection to Generic for now
