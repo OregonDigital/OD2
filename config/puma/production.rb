@@ -4,7 +4,7 @@ bind 'tcp://0.0.0.0:3000'
 workers 4
 preload_app!
 environment 'production'
-daemonize false
+# daemonize false
 
 # Activa pumactl and enable the Yabeda puma plugin
 activate_control_app
