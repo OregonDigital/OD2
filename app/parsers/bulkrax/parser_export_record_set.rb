@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This class from Bulkrax v5.2, with LocalCollectionName added.
 module Bulkrax
   # This module is responsible for providing the means of querying Solr for the appropriate works,
   # collections, and file sets for an export of entries.
@@ -211,7 +212,7 @@ module Bulkrax
       end
 
       def local_coll_id
-        importerexporter.export_source.split("/").last
+        importerexporter.export_source.split("/").last.strip
       end
 
       def collections_query
