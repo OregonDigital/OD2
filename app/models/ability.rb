@@ -11,6 +11,7 @@ class Ability
   include OregonDigital::Ability::WorkShowAbility
   include OregonDigital::Ability::WorkReviewAbility
   include OregonDigital::Ability::CollectionAbility
+  include OregonDigital::Ability::BulkraxAbility
 
   def custom_permissions
     can(%i[show add_user remove_user index edit update destroy], Role) if current_user.admin?
