@@ -13,12 +13,14 @@ module Qa::Authorities
       [item['name'], item['adminName1'], item['countryName'], "(#{translated_fcl})"].compact.join(', ')
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def search(q)
       vocabulary = controlled_vocabulary.query_to_vocabulary(q)
       if vocabulary.present?
         parse_ons_authority_response(find_ons_term(json(vocabulary.as_query(q)), q), vocabulary)
       # CONDITION: Add in a search condition if submit with GeoName ID or URI
-      elsif q.to_s.match(/^https?:\/\/www\.geonames\.org/)
+      elsif q.to_s.match(%r{^https?:\/\/www\.geonames\.org})
         # PARSE: Get the id out of the URL & fetch the id to be use for
         uri_path = URI(q.to_s).path
         query = uri_path.split('/')[1]
@@ -29,6 +31,8 @@ module Qa::Authorities
         parse_authority_response(json(build_query_url(q)))
       end
     end
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     def controlled_vocabulary
       OregonDigital::ControlledVocabularies::ExtendedLocation
