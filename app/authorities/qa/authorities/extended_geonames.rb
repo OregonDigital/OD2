@@ -17,6 +17,14 @@ module Qa::Authorities
       vocabulary = controlled_vocabulary.query_to_vocabulary(q)
       if vocabulary.present?
         parse_ons_authority_response(find_ons_term(json(vocabulary.as_query(q)), q), vocabulary)
+      # CONDITION: Add in a search condition if submit with GeoName ID or URI
+      elsif q.to_s.match(/^https?:\/\/www\.geonames\.org/)
+        # PARSE: Get the id out of the URL & fetch the id to be use for
+        uri_path = URI(q.to_s).path
+        query = uri_path.split('/')[1]
+        parse_authority_response_on_id(json(build_query_url_with_id(query)))
+      elsif q.to_s.match(/^[0-9]*$/)
+        parse_authority_response_on_id(json(build_query_url_with_id(q)))
       else
         parse_authority_response(json(build_query_url(q)))
       end
@@ -27,6 +35,14 @@ module Qa::Authorities
     end
 
     private
+
+    # METHOD: Build query on ids search
+    def build_query_url_with_id(q)
+      # VARIABLE: Get the value to build the query url
+      query = q.to_s
+      # URL: Form and return the query url
+      "http://api.geonames.org/getJSON?geonameId=#{query}&username=#{username}"
+    end
 
     def find_ons_term(response, q)
       uri = URI.parse(q)
@@ -42,6 +58,13 @@ module Qa::Authorities
         { 'id' => "https://sws.geonames.org/#{result['geonameId']}/",
           'label' => label.call(result, translate_fcl(result['fcl'])) }
       end
+    end
+
+    # Reformats the data received from the service
+    def parse_authority_response_on_id(response)
+      # Note: the trailing slash is meaningful.
+      [{ 'id' => "https://sws.geonames.org/#{response['geonameId']}/",
+         'label' => label.call(response, translate_fcl(response['fcl'])) }]
     end
 
     # Reformats the data received from the service
