@@ -22,8 +22,7 @@ module Qa::Authorities
       # CONDITION: Add in a search condition if submit with GeoName ID or URI
       elsif q.to_s.match(%r{^https?:\/\/www\.geonames\.org})
         # PARSE: Get the id out of the URL & fetch the id to be use for
-        uri_path = URI(q.to_s).path
-        query = uri_path.split('/')[1]
+        query = URI(q.to_s).path.split('/')[1]
         parse_authority_response_on_id(json(build_query_url_with_id(query)))
       elsif q.to_s.match(/^[0-9]*$/)
         parse_authority_response_on_id(json(build_query_url_with_id(q)))
