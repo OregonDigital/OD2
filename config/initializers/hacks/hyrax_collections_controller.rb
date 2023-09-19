@@ -23,35 +23,33 @@ Rails.application.config.to_prepare do
       end
 
     # Override update to add facet processing
-    def update
-      unless params[:update_collection].nil?
-        process_banner_input
-        process_logo_input
-      end
-
+    def update_active_fedora_collection
       process_member_changes
+      process_branding
       process_facets if collection.facet_configurable? && !params[:facet_configuration].blank?
       process_representative_images
       @collection.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE unless @collection.discoverable?
       # we don't have to reindex the full graph when updating collection
       @collection.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
       if @collection.update(collection_params.except(:members))
-        after_update
+        after_update_response
       else
-        after_update_error
+        after_update_errors(@collection.errors)
       end
     end
 
     # Override after create method to redirect users back to where they created the collection from
-    def after_create
+    def after_create_response
+      if @collection.is_a?(ActiveFedora::Base)
       form
-      set_default_permissions
-      # if we are creating the new collection as a subcollection (via the nested collections controller),
-      # we pass the parent_id through a hidden field in the form and link the two after the create.
-      link_parent_collection(params[:parent_id]) unless params[:parent_id].nil?
+        set_default_permissions
+        # if we are creating the new collection as a subcollection (via the nested collections controller),
+        # we pass the parent_id through a hidden field in the form and link the two after the create.
+        link_parent_collection(params[:parent_id]) unless params[:parent_id].nil?
+      end
       create_default_representative_images
       respond_to do |format|
-        Hyrax::SolrService.instance.conn.commit
+        Hyrax::SolrService.commit
         format.html do
           case URI(request.referer).path.split('/')[1]
           when 'dashboard'
@@ -138,17 +136,6 @@ Rails.application.config.to_prepare do
       return t('oregon_digital.explore_collections.messages.shared', collection_title: collection.title.first) if params['sharing']
       return t('oregon_digital.explore_collections.messages.unshared', collection_title: collection.title.first) if params['unsharing']
       nil
-    end
-
-    # Override to chunk batch into groups of 5 to cut down on factorial saves.
-    # Compact removes nil from array, which gets autofilled by #in_groups_of
-    # when chunking the array. i.e [1, 2, 3, 4 ,5].in_groups_of(2) becomes
-    # [[1, 2], [3, 4], [5, nil]]
-    def add_members_to_collection(collection = nil)
-      collection ||= @collection
-      batch.in_groups_of(5).each do |group|
-        collection.add_member_objects group.compact
-      end
     end
   end
 end

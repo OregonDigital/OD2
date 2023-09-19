@@ -23,17 +23,22 @@ Rails.application.config.to_prepare do
       return if err_msg.present?
 
       create_default_representative_images
-      collection.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
-      members = collection.add_member_objects batch_ids
-      messages = members.collect { |member| member.errors.full_messages }.flatten
-      if messages.size == members.size
-        after_update_error(messages.uniq.join(', '))
-      elsif messages.present?
-        flash[:error] = messages.uniq.join(', ')
-        after_update
-      else
+      @collection.try(:reindex_extent=, Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX)
+      begin
+        members = Hyrax::Collections::CollectionMemberService.add_members_by_ids(collection_id: collection_id,
+                                                                       new_member_ids: batch_ids,
+                                                                       user: current_user)
+
         members.each { |member| Hyrax.config.callback.run(:after_update_metadata, member, current_user, warn: false) unless member.instance_of? Collection }
         after_update
+      rescue Hyrax::SingleMembershipError => err
+        messages = JSON.parse(err.message)
+        if messages.size == batch_ids.size
+          after_update_error(messages.uniq.join(', '))
+        elsif messages.present?
+          flash[:error] = messages.uniq.join(', ')
+          after_update
+        end
       end
     end
 
