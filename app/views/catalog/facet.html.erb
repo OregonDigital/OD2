@@ -14,9 +14,9 @@
 <div class="modal-body">
   <div role="region" id="facet_list_header" aria-live="polite">
     <% if @pagination.prefix && @display_facet.index? %>
-      <h4>Topics starting with "<%= @pagination.prefix %>" </h4>
+      <h4><%= facet_field_label(@facet.key) %>s starting with "<%= @pagination.prefix %>" </h4>
     <% elsif @display_facet.index? %>
-      <h4><%= t('blacklight.search.facets.all') %> Topics</h4> 
+      <h4><%= t('blacklight.search.facets.all') %> <%= facet_field_label(@facet.key) %>s</h4> 
     <% end %>
   </div>
 
