@@ -25,11 +25,10 @@ Rails.application.config.to_prepare do
       create_default_representative_images
       @collection.try(:reindex_extent=, Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX)
       begin
-        members = Hyrax::Collections::CollectionMemberService.add_members_by_ids(collection_id: collection_id,
+        Hyrax::Collections::CollectionMemberService.add_members_by_ids(collection_id: collection_id,
                                                                        new_member_ids: batch_ids,
                                                                        user: current_user)
 
-        members.each { |member| Hyrax.config.callback.run(:after_update_metadata, member, current_user, warn: false) unless member.instance_of? Collection }
         after_update
       rescue Hyrax::SingleMembershipError => err
         messages = JSON.parse(err.message)
