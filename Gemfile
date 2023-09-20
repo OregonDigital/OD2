@@ -24,7 +24,7 @@ gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'chosen-rails'
 gem 'pg'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.6'
 gem 'rails', '~> 5.2.5'
 gem 'rsolr', '>= 1.0'
 gem 'sass-rails', '~> 5.0'
@@ -42,7 +42,7 @@ gem 'faraday_middleware', '~> 0.10.0'
 gem 'blacklight_iiif_search', '~> 1.0'
 gem 'rubyzip', '>= 1.2.2'
 gem 'zip_tricks', '~> 5.3'
-gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: '0a644637260378ac25fd9e3d4b2e68addb2b3ade'  #v3.5.1
+gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: 'd9bc39781b9c542a766b9ff2f7a7cce2d736debd' #5.2.1
 gem 'willow_sword', github: 'notch8/willow_sword'
 
 # Security Audit updates

@@ -77,7 +77,13 @@ Bulkrax.setup do |config|
   fieldhash['children'] = { from: ['children'], related_children_field_mapping: true, split: true }
   fieldhash['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   config.field_mappings['Bulkrax::BagitComplexParser'] = fieldhash
-  config.field_mappings['Bulkrax::CsvParser'] = fieldhash
+
+  fieldhash_csv = fieldhash.clone
+  fieldhash_csv.each do |k,v|
+    v['from'] = [k]
+  end
+  fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
+  config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
 
 ## override model mapping - map collection to Generic for now
@@ -97,15 +103,7 @@ end
 
 Bulkrax::CsvEntry.class_eval do
 
-  # from 4.4, see https://github.com/samvera-labs/bulkrax/issues/669
-  def self.read_data(path)
-    raise StandardError, 'CSV path empty' if path.blank?
-    CSV.read(path,
-      headers: true,
-      header_converters: ->(h) { h.to_sym },
-      encoding: 'utf-8')
-  end
-
+  # commented change to avoid urls in the export headers
   def key_for_export(key)
     clean_key = key_without_numbers(key)
     unnumbered_key = mapping[clean_key] ? mapping[clean_key]['from'].first : clean_key
@@ -115,11 +113,14 @@ Bulkrax::CsvEntry.class_eval do
     "#{unnumbered_key}#{key.sub(clean_key, '')}"
   end
 
+  # check for empty vals: unless data.blank?
   def build_value(key, value)
+    return unless hyrax_record.respond_to?(key.to_s)
+
     data = hyrax_record.send(key.to_s)
     if data.is_a?(ActiveTriples::Relation)
       if value['join']
-        self.parsed_metadata[key_for_export(key)] = data.map { |d| prepare_export_data(d) }.join(' | ').to_s # TODO: make split char dynamic
+          self.parsed_metadata[key_for_export(key)] = data.map { |d| prepare_export_data(d) }.join(Bulkrax.multi_value_element_join_on).to_s
       else
         data.each_with_index do |d, i|
           self.parsed_metadata["#{key_for_export(key)}_#{i + 1}"] = prepare_export_data(d)
@@ -155,31 +156,7 @@ Bulkrax::CsvEntry.class_eval do
   end
 end
 
-Bulkrax::CsvParser.class_eval do
-  # This method goes away in bulkrax 5.2
-  # removing direct call to Solrizer, see issue #699 on bulkrax
-  def set_ids_for_exporting_from_importer
-    entry_ids = Bulkrax::Importer.find(importerexporter.export_source).entries.pluck(:id)
-    complete_statuses = Bulkrax::Status.latest_by_statusable
-                                       .includes(:statusable)
-                                       .where('bulkrax_statuses.statusable_id IN (?) AND bulkrax_statuses.statusable_type = ? AND status_message = ?', entry_ids, 'Bulkrax::Entry', 'Complete')
 
-    complete_entry_identifiers = complete_statuses.map { |s| s.statusable&.identifier&.gsub(':', '\:') }
-    extra_filters = extra_filters.presence || '*:*'
-
-    { :@work_ids => ::Hyrax.config.curation_concerns, :@collection_ids => [::Collection], :@file_set_ids => [::FileSet] }.each do |instance_var, models_to_search|
-      instance_variable_set(instance_var, ActiveFedora::SolrService.post(
-        extra_filters.to_s,
-        fq: [
-          %(#{solr_name(work_identifier)}:("#{complete_entry_identifiers.join('" OR "')}")),
-          "has_model_ssim:(#{models_to_search.join(' OR ')})"
-        ],
-        fl: 'id',
-        rows: 2_000_000_000
-      )['response']['docs'].map { |obj| obj['id'] })
-    end
-  end
-end
 
 Bulkrax::Exporter.class_eval do
   def replace_files
@@ -195,15 +172,6 @@ Bulkrax::ApplicationParser.class_eval do
     elts
   end
 
-  # see Bulkrax parser_export_record_set
-  # added to fix set_ids_for_exporting_from_importer above in CsvParser
-  def solr_name(base_name)
-    if Module.const_defined?(:Solrizer)
-      ::Solrizer.solr_name(base_name)
-    else
-      ::ActiveFedora.index_field_mapper.solr_name(base_name)
-    end
-  end
 
   ::Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions" if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
 end
