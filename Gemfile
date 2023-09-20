@@ -84,15 +84,15 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.93'
   gem 'rubocop-rspec'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3'
   gem 'webmock'
 end
 
 group :test do
   gem 'coveralls', '~> 0.8'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '~> 1.8'
   gem 'equivalent-xml'
   gem 'rails-controller-testing'
   gem 'rspec'

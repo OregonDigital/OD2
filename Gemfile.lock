@@ -167,7 +167,6 @@ GEM
     bagit (0.4.6)
       docopt (~> 0.5.0)
       validatable (~> 1.6)
-    base64 (0.1.1)
     bcp47 (0.3.3)
       i18n
     bcrypt (3.1.19)
@@ -245,6 +244,7 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
       ssrf_filter (~> 1.0, < 1.1.0)
+    childprocess (3.0.0)
     chosen-rails (1.10.0)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
@@ -274,12 +274,7 @@ GEM
       rexml
     crass (1.0.6)
     dalli (3.2.5)
-    database_cleaner (2.0.2)
-      database_cleaner-active_record (>= 2, < 3)
-    database_cleaner-active_record (2.1.0)
-      activerecord (>= 5.a)
-      database_cleaner-core (~> 2.0.0)
-    database_cleaner-core (2.0.1)
+    database_cleaner (1.99.0)
     date (3.3.3)
     declarative (0.0.20)
     declarative-builder (0.1.0)
@@ -615,7 +610,6 @@ GEM
     kaminari_route_prefix (0.1.1)
       kaminari (~> 1.0)
     language_list (1.2.1)
-    language_server-protocol (3.17.0.3)
     ld-patch (3.2.2)
       ebnf (~> 2.3)
       rdf (~> 3.2)
@@ -952,28 +946,20 @@ GEM
     rspec-support (3.12.1)
     rspec_junit_formatter (0.6.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (1.56.3)
-      base64 (~> 0.1.1)
-      json (~> 2.3)
-      language_server-protocol (>= 3.17.0)
+    rubocop (0.93.1)
       parallel (~> 1.10)
-      parser (>= 3.2.2.3)
+      parser (>= 2.7.1.5)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8, < 3.0)
-      rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.28.1, < 2.0)
+      regexp_parser (>= 1.8)
+      rexml
+      rubocop-ast (>= 0.6.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.29.0)
-      parser (>= 3.2.1.0)
-    rubocop-capybara (2.18.0)
-      rubocop (~> 1.41)
-    rubocop-factory_bot (2.24.0)
-      rubocop (~> 1.33)
-    rubocop-rspec (2.24.0)
-      rubocop (~> 1.33)
-      rubocop-capybara (~> 2.17)
-      rubocop-factory_bot (~> 2.22)
+      unicode-display_width (>= 1.4.0, < 2.0)
+    rubocop-ast (1.1.0)
+      parser (>= 2.7.1.5)
+    rubocop-rspec (1.44.1)
+      rubocop (~> 0.87)
+      rubocop-ast (>= 0.7.1)
     ruby-box (1.15.0)
       addressable
       json
@@ -1011,10 +997,9 @@ GEM
       tilt
     scanf (1.0.0)
     select2-rails (3.5.11)
-    selenium-webdriver (4.9.0)
-      rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2, < 3.0)
-      websocket (~> 1.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     shacl (0.1.1)
       json-ld (~> 3.1, >= 3.1.7)
       rdf (~> 3.1, >= 3.1.8)
@@ -1115,7 +1100,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
-    unicode-display_width (2.4.2)
+    unicode-display_width (1.8.0)
     unicode-types (1.8.0)
     validatable (1.6.7)
     valkyrie (2.2.0)
@@ -1152,7 +1137,6 @@ GEM
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.8.1)
-    websocket (1.2.9)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -1206,7 +1190,7 @@ DEPENDENCIES
   cookieconsent
   coveralls (~> 0.8)
   dalli (~> 3.2.3)
-  database_cleaner
+  database_cleaner (~> 1.8)
   devise
   edtf (~> 3.0)
   equivalent-xml
@@ -1238,13 +1222,13 @@ DEPENDENCIES
   rspec-mocks
   rspec-rails
   rspec_junit_formatter
-  rubocop
+  rubocop (~> 0.93)
   rubocop-rspec
   ruby-oembed
   rubyzip (~> 2)
   sass-rails (~> 5.0)
   sassc-rails
-  selenium-webdriver
+  selenium-webdriver (~> 3)
   shoulda-matchers (~> 4)
   sidekiq (~> 6.4)
   simplecov (>= 0.9)
