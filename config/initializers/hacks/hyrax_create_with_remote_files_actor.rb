@@ -1,10 +1,10 @@
 # frozen_string_literal:true
 
 Rails.application.config.to_prepare do
-  Hyrax::Actors::CreateWithRemoteFilesActor.class_eval do
+  Hyrax::Actors::CreateWithRemoteFilesActor::IngestRemoteFilesService.class_eval do
     # @param [HashWithIndifferentAccess] remote_files
     # @return [TrueClass]
-    def attach_files(env, remote_files)
+    def attach!(env, remote_files)
       return true unless remote_files
       remote_files.each do |file_info|
         next if file_info.blank? || file_info[:url].blank?
@@ -14,14 +14,14 @@ Rails.application.config.to_prepare do
         # Regex for a case insensitive double-encoded percent character followed
         # by the original hex, such as %2F => %252F
         uri = URI.parse(Addressable::URI.escape(file_info[:url]).gsub(/%25([0-9a-f]{2})/i, '%\1'))
-        ## End Hack
-        unless validate_remote_url(uri)
-          Rails.logger.error "User #{env.user.user_key} attempted to ingest file from url #{file_info[:url]}, which doesn't pass validation"
+        unless self.class.validate_remote_url(uri)
+          Rails.logger.error "User #{user.user_key} attempted to ingest file from url #{file_info[:url]}, which doesn't pass validation"
           return false
         end
         auth_header = file_info.fetch(:auth_header, {})
-        create_file_from_url(env, uri, file_info[:file_name], auth_header)
+        create_file_from_url(uri, file_info[:file_name], auth_header)
       end
+      add_ordered_members! if ordered
       true
     end
   end
