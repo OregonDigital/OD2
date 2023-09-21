@@ -93,3 +93,8 @@ input[type=checkbox] {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+// DISPLAY: Override the button to display it rather than hiding it
+.label_and_uri_controlled_vocabulary .listing li:first-of-type .remove {
+  display: inline-block;
+}
