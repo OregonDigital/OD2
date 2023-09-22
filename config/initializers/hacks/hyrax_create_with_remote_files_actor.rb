@@ -2,9 +2,8 @@
 
 Rails.application.config.to_prepare do
   Hyrax::Actors::CreateWithRemoteFilesActor::IngestRemoteFilesService.class_eval do
-    # @param [HashWithIndifferentAccess] remote_files
     # @return [TrueClass]
-    def attach!(env, remote_files)
+    def attach!
       return true unless remote_files
       remote_files.each do |file_info|
         next if file_info.blank? || file_info[:url].blank?
