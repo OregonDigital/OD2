@@ -83,6 +83,7 @@ Bulkrax.setup do |config|
     v['from'] = [k]
   end
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
+  fieldhash['visibility'] = { from: ['visibility'] }
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
 
