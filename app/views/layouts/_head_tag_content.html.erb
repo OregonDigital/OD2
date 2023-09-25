@@ -14,6 +14,8 @@ signed in %>
 <%= yield :twitter_meta %>
 <!-- Google Scholar metadata -->
 <%= yield :gscholar_meta %>
+<!-- Facebook metadata -->
+<%= yield :facebook_meta %>
 
 <title><%= content_for?(:page_title) ? yield(:page_title) : default_page_title %></title>
 
