@@ -105,4 +105,5 @@ end
 
 gem "vcr", "~> 5.1"
 
-gem "font-awesome-sass", "~> 5.15"
+# INSTALL: Get the new Font Awesome
+gem 'font-awesome-sass', '~> 6.4', '>= 6.4.2'
