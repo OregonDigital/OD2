@@ -1,8 +1,6 @@
-<div class="columns">
-  <dl class="work-show lato-p <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>>
-    <%= render 'attribute_rows', presenter: presenter %>
-    <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
-    <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
-    <%# OVERRIDE FROM HYRAX: Removed license render. Fixed but not in any <3.0.0 releases https://github.com/samvera/hyrax/pull/3153 %>
-  </dl>
-</div>
+<dl class="work-show lato-p <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>>
+  <%= render 'attribute_rows', presenter: presenter %>
+  <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
+  <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
+  <%# OVERRIDE FROM HYRAX: Removed license render. Fixed but not in any <3.0.0 releases https://github.com/samvera/hyrax/pull/3153 %>
+</dl>
