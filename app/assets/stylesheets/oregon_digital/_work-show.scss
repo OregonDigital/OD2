@@ -56,17 +56,15 @@ table.table-scrollable {
 
 dl.work-show {
   display: grid;
-  grid-template: auto / max-content auto;
+  grid-template: auto / max-content auto max-content auto;
   column-gap: 1em;
   overflow-wrap: anywhere;
 
-  dt {
-    grid-column: 1;
+  @media (max-width: $screen-sm-min) {
+    grid-template: auto / max-content auto;
   }
 
   dd {
-    grid-column: 2;
-
     ul {
       padding: 0;
     }
