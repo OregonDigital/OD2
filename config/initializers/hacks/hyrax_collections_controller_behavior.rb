@@ -7,7 +7,7 @@ Rails.application.config.to_prepare do
     # OVERRIDE FROM HYRAX
     # Remove :f (facets) from single item search to allow collection to verify user access
     def single_item_search_builder
-      single_item_search_builder_class.new(self).with(params.except(:f, :q, :page))
+      search_service.search_builder.with(params.except(:f, :q, :page))
     end
 
     # OVERRIDE FROM HYRAX
