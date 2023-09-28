@@ -416,8 +416,8 @@ GEM
       jquery-rails
     font-awesome-rails (4.7.0.7)
       railties (>= 3.2, < 7)
-    font-awesome-sass (5.15.1)
-      sassc (>= 1.11)
+    font-awesome-sass (6.4.2)
+      sassc (~> 2.0)
     geocoder (1.6.7)
     globalid (1.0.1)
       activesupport (>= 5.0)
@@ -1139,7 +1139,7 @@ DEPENDENCIES
   equivalent-xml
   factory_bot_rails
   faraday_middleware (~> 0.10.0)
-  font-awesome-sass (~> 5.15)
+  font-awesome-sass (~> 6.4, >= 6.4.2)
   honeycomb-beeline (>= 2.10.0)
   hydra-derivatives!
   hydra-role-management
@@ -1194,4 +1194,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.3.12
+   2.4.15

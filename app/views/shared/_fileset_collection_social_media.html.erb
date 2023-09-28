@@ -11,13 +11,13 @@
     </button>
   <div class="pull-right centered-socials">
     <%= link_to "https://facebook.com/sharer/sharer.php?#{{u: share_url}.to_param}", class: 'share-button share-button-facebook', target: '_blank', rel: 'noopener noreferrer', title: t('hyrax.base.social_media.facebook'), 'aria-label': t('hyrax.base.social_media.facebook') do %>
-      <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
       <span class="sr-only">Post to Facebook</span>
     <% end %>
 
     <!-- Sharingbutton Twitter -->
     <%= link_to "https://twitter.com/intent/tweet/?#{{text: page_title, url: share_url}.to_param}", class: 'share-button share-button-twitter', target: '_blank', rel: 'noopener noreferrer', title: t('hyrax.base.social_media.twitter'), 'aria-label': t('hyrax.base.social_media.twitter') do %>
-      <i class="fa fa-twitter" aria-hidden="true"></i>
+      <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
       <span class="sr-only">Post to Twitter</span>
     <% end %>
   </div>
