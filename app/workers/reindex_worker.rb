@@ -11,15 +11,15 @@ class ReindexWorker
   # asset, then its sub-objects (a.g., proxies, indirect containers, etc.)
   def perform(access_control_pids, asset_pid, contains_pids)
     access_control_pids.each do |pid|
-      obj = ActiveFedora::Base.find(pid)
+      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
       obj.permissions.each(&:update_index)
       obj.update_index
     end
 
-    a = ActiveFedora::Base.find(asset_pid)
+    a = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: asset_pid)
     a.update_index
 
-    contains_pids.each { |pid| ActiveFedora::Base.find(pid).update_index }
+    contains_pids.each { |pid| Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid).update_index }
 
     FetchGraphWorker.perform_async(asset_pid, a.depositor) if a.respond_to?(:depositor)
   end

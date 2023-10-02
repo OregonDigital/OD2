@@ -9,7 +9,7 @@ class FetchGraphWorker
   # rubocop:disable Metrics/MethodLength
   # user not needed any longer?
   def perform(pid, _user_key)
-    work = ActiveFedora::Base.find(pid)
+    work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
         next unless val.respond_to?(:fetch)

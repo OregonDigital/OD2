@@ -9,7 +9,7 @@ class ReindexOneLite
 
   # A single pid is expected
   def perform(pid)
-    w = ActiveFedora::Base.find(pid)
+    w = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
     w.update_index
   end
 end
