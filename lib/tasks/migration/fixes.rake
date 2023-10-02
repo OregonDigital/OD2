@@ -26,7 +26,7 @@ namespace :migration do
 end
 
 def assess(pid)
-  af_object = ActiveFedora::Base.exists?(pid) ? ActiveFedora::Base.find(pid) : nil
+  af_object = ActiveFedora::Base.exists?(pid) ? Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid) : nil
   attach_file(af_object) if !af_object.nil? && af_object.representative_id.nil?
 end
 

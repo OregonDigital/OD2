@@ -30,13 +30,13 @@ namespace :migration do
 end
 
 def cleanup(pid)
-  gid = ActiveFedora::Base.find(pid).to_global_id.to_s if ActiveFedora::Base.exists?(pid)
+  gid = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid).to_global_id.to_s if ActiveFedora::Base.exists?(pid)
   Sipity::Entity.find_by(proxy_for_global_id: gid).delete if Sipity::Entity.find_by(proxy_for_global_id: gid).present?
   af_cleanup(pid)
   Hyrax::Migrator::Work.find_by_pid(pid).delete if Hyrax::Migrator::Work.find_by_pid(pid).present?
 end
 
 def af_cleanup(pid)
-  ActiveFedora::Base.find(pid).delete if ActiveFedora::Base.exists?(pid)
+  Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid).delete if ActiveFedora::Base.exists?(pid)
   ActiveFedora::Base.eradicate(pid)
 end

@@ -144,7 +144,7 @@ module Bulkrax
       require 'socket'
       importerexporter.entries.where(identifier: current_work_ids)[0..limit || total].each do |e|
         bag = BagIt::Bag.new setup_bagit_folder(e.identifier)
-        w = ActiveFedora::Base.find(e.identifier)
+        w = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: e.identifier)
         w.file_sets.each do |fs|
           file_name = filename(fs)
           next if file_name.blank?

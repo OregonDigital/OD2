@@ -12,7 +12,7 @@ class ReindexChunkWorker
 
     logger.info "Reindexing #{uris.count} URIs"
     uris.each do |uri|
-      work = ActiveFedora::Base.find(ActiveFedora::Base.uri_to_id(uri))
+      work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: ActiveFedora::Base.uri_to_id(uri))
       logger.info "\t reindexing #{work.id}"
       work.update_index
       counter += 1

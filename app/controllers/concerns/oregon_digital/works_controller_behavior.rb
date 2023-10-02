@@ -8,7 +8,7 @@ module OregonDigital
       prepend_before_action :redirect_mismatched_work, only: [:show]
 
       def redirect_mismatched_work
-        curation_concern = ActiveFedora::Base.find(params[:id])
+        curation_concern = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
         redirect_to(main_app.polymorphic_path(curation_concern), status: :moved_permanently) and return if curation_concern.class != _curation_concern_type
       end
     end

@@ -12,7 +12,7 @@ Rails.application.config.to_prepare do
 
     # OVERRIDE FROM HYRAX
     def show
-      @curation_concern ||= ActiveFedora::Base.find(params[:id])
+      @curation_concern ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
       # Set list of configured facets for the view to display
       presenter
       configured_facets
