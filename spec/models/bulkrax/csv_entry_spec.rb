@@ -12,6 +12,7 @@ RSpec.describe Bulkrax::CsvEntry, type: :model do
     allow_any_instance_of(described_class).to receive(:find_collection).and_return(collection)
   end
 
+  # rubocop:disable RSpec/NestedGroups
   describe 'builds entry' do
     let(:entry) { described_class.new(importerexporter: importer) }
     let(:importer) { FactoryBot.create(:bulkrax_importer_csv) }
@@ -42,6 +43,66 @@ RSpec.describe Bulkrax::CsvEntry, type: :model do
         expect(entry.parsed_metadata['subject_attributes'].size).to eq 2
         expect(entry.parsed_metadata['subject_attributes'].select { |k, _v| k == '0' }).to eq attribute
         expect(entry.parsed_metadata['parents']).to eq [collection.id]
+      end
+    end
+
+    describe 'add_visibility' do
+      before do
+        allow_any_instance_of(Bulkrax::ObjectFactory).to receive(:run!)
+        allow(entry).to receive(:raw_metadata).and_return data.with_indifferent_access
+      end
+
+      context 'when item has a visibility value' do
+        before do
+          data['visibility'] = 'csv_val'
+          allow(entry).to receive(:raw_metadata).and_return data.with_indifferent_access
+        end
+
+        it 'creates an entry with expected visibility' do
+          entry.build_metadata
+          expect(entry.parsed_metadata['visibility']).to eq 'csv_val'
+        end
+      end
+
+      context 'when item and has visibility form value' do
+        let(:visibility) { { 'visibility' => 'form_val' } }
+
+        before do
+          importer.parser_fields.merge! visibility
+        end
+
+        it 'creates an entry with expected visibility' do
+          entry.build_metadata
+          expect(entry.parsed_metadata['visibility']).to eq 'form_val'
+        end
+      end
+
+      context 'when item is new and has no visibility values' do
+        let(:visibility) { { 'visibility' => '' } }
+
+        before do
+          importer.parser_fields.merge! visibility
+        end
+
+        it 'creates an entry with expected visibility' do
+          entry.build_metadata
+          expect(entry.parsed_metadata['visibility']).to eq 'open'
+        end
+      end
+
+      context 'when item is an update and has no visibility values' do
+        let(:visibility) { { 'visibility' => '' } }
+
+        before do
+          importer.parser_fields.merge! visibility
+          data['id'] = 'abcde1234'
+          allow(entry).to receive(:raw_metadata).and_return data.with_indifferent_access
+        end
+
+        it 'creates an entry with no visibility' do
+          entry.build_metadata
+          expect(entry.parsed_metadata.keys).not_to include 'visibility'
+        end
       end
     end
   end
@@ -75,4 +136,5 @@ RSpec.describe Bulkrax::CsvEntry, type: :model do
     end
   end
   # rubocop:enable RSpec/SubjectStub
+  # rubocop:enable RSpec/NestedGroups
 end

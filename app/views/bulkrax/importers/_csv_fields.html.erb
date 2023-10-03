@@ -1,9 +1,11 @@
 <div class='csv_fields'>
   <!--differs from bulkrax in use of hyrax visibility_options -->
   <%= fi.input :visibility,
+    include_blank: true,
     collection: visibility_options(nil),
-    selected: importer.parser_fields['visibility'] || 'open',
-    input_html: { class: 'form-control' }
+    selected: importer.parser_fields['visibility'],
+    input_html: { class: 'form-control' },
+    required: false
   %>
 
   <% if defined?(::Hyrax) %>
