@@ -9,6 +9,8 @@ class ReindexWorker
 
   # pids must be ordered with access control objects first, then the actual
   # asset, then its sub-objects (a.g., proxies, indirect containers, etc.)
+  # rubocop:disable Metrics/AbcSize:
+  # rubocop:disable Metrics/MethodLength:
   def perform(access_control_pids, asset_pid, contains_pids)
     access_control_pids.each do |pid|
       obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
@@ -26,4 +28,6 @@ class ReindexWorker
 
     FetchGraphWorker.perform_async(asset_pid, a.depositor) if a.respond_to?(:depositor)
   end
+  # rubocop:enable Metrics/MethodLength:
+  # rubocop:enable Metrics/AbcSize:
 end
