@@ -16,8 +16,10 @@
 //= require chosen-jquery
 //= require 'blacklight_advanced_search'
 
+// Required by browse-everything. requireing all of browse-everything causes bootstrap to be included twice
+//= require jquery.treetable
+//= require browse_everything/behavior
 
-//= require browse_everything
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap

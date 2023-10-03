@@ -14,7 +14,10 @@ Rails.application.config.to_prepare do
       return true if params[:file] == 'thumbnail'
 
       authorize! :download, params[asset_param_key]
-    rescue CanCan::AccessDenied
+      # Deny access if the work containing this file is restricted by a workflow
+      return unless workflow_restriction?(file_set_parent(params[asset_param_key]), ability: current_ability)
+      raise Hyrax::WorkflowAuthorizationException
+    rescue CanCan::AccessDenied, Hyrax::WorkflowAuthorizationException
       unauthorized_image = Rails.root.join("app", "assets", "images", "unauthorized.png")
       send_file unauthorized_image, status: :unauthorized
     end

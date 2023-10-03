@@ -1,12 +1,12 @@
 // Here we have to import the font-awesome-sass libraries manualy because the font-awesome base name is being used by font-awesome-rails
 // The imports here should match the imports in this file: https://github.com/FortAwesome/font-awesome-sass/blob/master/assets/stylesheets/_font-awesome.scss
+// Font Awesome - Version 6.4.2
 
-@import "font-awesome-sprockets";
+@import "font-awesome/functions";
 @import "font-awesome/variables";
 @import "font-awesome/mixins";
-@import "font-awesome/path";
 @import "font-awesome/core";
-@import "font-awesome/larger";
+@import "font-awesome/sizing";
 @import "font-awesome/fixed-width";
 @import "font-awesome/list";
 @import "font-awesome/bordered-pulled";
@@ -15,3 +15,6 @@
 @import "font-awesome/stacked";
 @import "font-awesome/icons";
 @import "font-awesome/screen-reader";
+@import "font-awesome/solid";
+@import "font-awesome/regular";
+@import "font-awesome/brands";

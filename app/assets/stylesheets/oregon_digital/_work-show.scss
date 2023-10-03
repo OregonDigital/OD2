@@ -15,6 +15,16 @@ table.table-scrollable {
   }
 }
 
+.panel-workflow {
+  .panel-heading {
+    background-color: $contrast-orange;
+
+    a {
+      color: $navy-blue;
+    }
+  }
+}
+
 .oembed-widget {
   text-align: center;
 }
