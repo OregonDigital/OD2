@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # TODO: make this a version specification once we get a new release cut
-gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
+# gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
 
 gem "blacklight_range_limit", "~> 6"
 gem 'browse-everything'
@@ -18,14 +18,14 @@ gem 'dalli', '~> 3.2.3'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
-gem 'hyrax', '3.0.1'
+gem 'hyrax', '3.6.0'
 gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'chosen-rails'
 gem 'pg'
 gem 'puma', '~> 5.6'
-gem 'rails', '~> 5.2.5'
+gem 'rails', '~> 5.2'
 gem 'rsolr', '>= 1.0'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq', '~> 6.4'
@@ -40,7 +40,7 @@ gem 'blacklight_dynamic_sitemap'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware', '~> 0.10.0'
 gem 'blacklight_iiif_search', '~> 1.0'
-gem 'rubyzip', '>= 1.2.2'
+gem 'rubyzip', '~> 2'
 gem 'zip_tricks', '~> 5.3'
 gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: 'd9bc39781b9c542a766b9ff2f7a7cce2d736debd' #5.2.1
 gem 'willow_sword', github: 'notch8/willow_sword'
@@ -84,15 +84,15 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.93'
   gem 'rubocop-rspec'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3'
   gem 'webmock'
 end
 
 group :test do
   gem 'coveralls', '~> 0.8'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '~> 1.8'
   gem 'equivalent-xml'
   gem 'rails-controller-testing'
   gem 'rspec'
@@ -105,4 +105,5 @@ end
 
 gem "vcr", "~> 5.1"
 
-gem "font-awesome-sass", "~> 5.15"
+# INSTALL: Get the new Font Awesome
+gem 'font-awesome-sass', '~> 6.4', '>= 6.4.2'

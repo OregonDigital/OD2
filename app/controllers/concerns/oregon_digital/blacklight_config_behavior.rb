@@ -214,32 +214,32 @@ module OregonDigital
             http\://creativecommons.org/publicdomain/zero/1.0/ OR
             http\://creativecommons.org/publicdomain/mark/1.0/)' }
         }
-        config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), limit: 5
-        config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), limit: 5
-        config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), limit: 5
-        config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), limit: 5, index_range: 'A'..'Z'
-        config.add_facet_field 'scientific_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.scientific_combined'), limit: 5
-        config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), limit: 5
+        config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'scientific_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.scientific_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'date_combined_year_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_year_combined'), limit: 5, range: { segments: false }, include_in_advanced_search: false
-        config.add_facet_field 'date_combined_decade_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_decade_combined'), limit: 5
-        config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), limit: 5
-        config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), limit: 5
-        config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), limit: 5
+        config.add_facet_field 'date_combined_decade_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_decade_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id'
-        config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), limit: 5
+        config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
-        config.add_facet_field 'cultural_context_label_sim', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), limit: 5
+        config.add_facet_field 'cultural_context_label_sim', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), index_range: 'A'..'Z', limit: 5
 
-        config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), limit: 5
-        config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), limit: 5
-        config.add_facet_field 'box_number_sim', label: I18n.translate('simple_form.labels.defaults.box_number'), limit: 5
-        config.add_facet_field 'folder_name_sim', label: I18n.translate('simple_form.labels.defaults.folder_name'), limit: 5
-        config.add_facet_field 'folder_number_sim', label: I18n.translate('simple_form.labels.defaults.folder_number'), limit: 5
-        config.add_facet_field 'has_number_sim', label: I18n.translate('simple_form.labels.defaults.has_number'), limit: 5
-        config.add_facet_field 'is_volume_sim', label: I18n.translate('simple_form.labels.defaults.is_volume'), limit: 5
-        config.add_facet_field 'series_name_sim', label: I18n.translate('simple_form.labels.defaults.series_name'), limit: 5
-        config.add_facet_field 'series_number_sim', label: I18n.translate('simple_form.labels.defaults.series_number'), limit: 5
-        config.add_facet_field 'exhibit_sim', label: I18n.translate('simple_form.labels.defaults.exhibit'), limit: 5
+        config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'box_number_sim', label: I18n.translate('simple_form.labels.defaults.box_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'folder_name_sim', label: I18n.translate('simple_form.labels.defaults.folder_name'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'folder_number_sim', label: I18n.translate('simple_form.labels.defaults.folder_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'has_number_sim', label: I18n.translate('simple_form.labels.defaults.has_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'is_volume_sim', label: I18n.translate('simple_form.labels.defaults.is_volume'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'series_name_sim', label: I18n.translate('simple_form.labels.defaults.series_name'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'series_number_sim', label: I18n.translate('simple_form.labels.defaults.series_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'exhibit_sim', label: I18n.translate('simple_form.labels.defaults.exhibit'), index_range: 'A'..'Z', limit: 5
 
         # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
         # Do not show these facets, they're for collection configurable facets
