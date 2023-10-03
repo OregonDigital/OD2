@@ -13,13 +13,16 @@ class ReindexWorker
     access_control_pids.each do |pid|
       obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
       obj.permissions.each(&:update_index)
-      obj.update_index
+      Hyrax.index_adapter.save(resource: obj)
     end
 
     a = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: asset_pid)
-    a.update_index
+    Hyrax.index_adapter.save(resource: a)
 
-    contains_pids.each { |pid| Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid).update_index }
+    contains_pids.each do |pid|
+      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+      Hyrax.index_adapter.save(resource: obj)
+    end
 
     FetchGraphWorker.perform_async(asset_pid, a.depositor) if a.respond_to?(:depositor)
   end

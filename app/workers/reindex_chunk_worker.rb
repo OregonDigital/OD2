@@ -14,7 +14,7 @@ class ReindexChunkWorker
     uris.each do |uri|
       work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: ActiveFedora::Base.uri_to_id(uri))
       logger.info "\t reindexing #{work.id}"
-      work.update_index
+      Hyrax.index_adapter.save(resource: work)
       counter += 1
     # rubocop:disable Style/RescueStandardError
     rescue => e

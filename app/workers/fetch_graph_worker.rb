@@ -9,7 +9,10 @@ class FetchGraphWorker
   # rubocop:disable Metrics/MethodLength
   # user not needed any longer?
   def perform(pid, _user_key)
-    work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+    # Here be dragons
+    # A valkyrie work's controlled properties don't resolve to our OregonDigital::ControlledVocabularies::* objects
+    # They resolve to RDF::URI, we need to find a way to get the right CV & index it
+    work = ActiveFedora::Base.find(pid)
     work.controlled_properties.each do |controlled_prop|
       work.attributes[controlled_prop.to_s].each do |val|
         next unless val.respond_to?(:fetch)
