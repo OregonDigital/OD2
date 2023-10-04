@@ -1,6 +1,12 @@
 # frozen_string_literal:true
 
 RSpec.describe 'Homepage', js: true, type: :system, clean_repo: true do
+  let(:collection_type) { create(:collection_type, machine_id: :user_collection) }
+
+  before do
+    allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :user_collection).and_return(collection_type)
+  end
+
   context 'with an annonymous user' do
     it 'is accessible' do
       visit '/'

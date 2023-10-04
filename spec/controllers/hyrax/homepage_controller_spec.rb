@@ -1,6 +1,8 @@
 # frozen_string_literal:true
 
 RSpec.describe Hyrax::HomepageController, type: :controller do
+  let(:collection_type) { create(:collection_type, machine_id: :user_collection) }
+
   routes { Hyrax::Engine.routes }
 
   describe '#index' do
@@ -8,6 +10,7 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
 
     before do
       sign_in user
+      allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :user_collection).and_return(collection_type)
     end
 
     context 'with existing featured researcher' do
@@ -113,7 +116,7 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
       before do
         allow(controller).to receive(:repository).and_return(repository)
         allow(controller).to receive(:search_results).and_return([nil, ['recent document']])
-        allow(controller.repository).to receive(:search).with(an_instance_of(Hyrax::CollectionSearchBuilder))
+        allow(controller.repository).to receive(:search).with(an_instance_of(OregonDigital::NonUserCollectionsSearchBuilder))
                                                         .and_return(collection_results)
       end
 
