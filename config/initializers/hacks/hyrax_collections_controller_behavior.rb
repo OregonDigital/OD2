@@ -56,7 +56,7 @@ Rails.application.config.to_prepare do
       when 'UO'
         image = 'uo-collection.png'
         alt = 'University of Oregon Libraries'
-      end unless @curation_concern.institution.first.nil?
+      end unless Array(@curation_concern.institution).first.nil?
 
       return ApplicationController.helpers.asset_path(image), alt, style
     end
