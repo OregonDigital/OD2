@@ -6,6 +6,7 @@ require_dependency 'oai'
 # OVERRIDE: Override controller to add in new method for download
 module Bulkrax
   # rubocop:disable Metrics/ClassLength
+  # Importer Controller from Bulkrax
   class ImportersController < ApplicationController
     include Hyrax::ThemedLayoutController if defined?(::Hyrax)
     include Bulkrax::DownloadBehavior
@@ -13,10 +14,10 @@ module Bulkrax
     include Bulkrax::ValidationHelper
 
     protect_from_forgery unless: -> { api_request? }
-    before_action :token_authenticate!, if: -> { api_request? }, only: [:create, :update, :delete]
+    before_action :token_authenticate!, if: -> { api_request? }, only: %i[create update delete]
     before_action :authenticate_user!, unless: -> { api_request? }
     before_action :check_permissions
-    before_action :set_importer, only: [:show, :edit, :update, :destroy]
+    before_action :set_importer, only: %i[show edit update destroy]
     with_themed_layout 'dashboard' if defined?(::Hyrax)
 
     # GET /importers
@@ -31,6 +32,7 @@ module Bulkrax
     end
 
     # GET /importers/1
+    # rubocop:disable Metrics/AbcSize
     def show
       if api_request?
         json_response('show')
@@ -42,6 +44,7 @@ module Bulkrax
       @collection_entries = @importer.entries.where(type: @importer.parser.collection_entry_class.to_s).page(params[:collections_entries_page]).per(30)
       @file_set_entries = @importer.entries.where(type: @importer.parser.file_set_entry_class.to_s).page(params[:file_set_entries_page]).per(30)
     end
+    # rubocop:enable Metrics/AbcSize
 
     # GET /importers/new
     def new
@@ -66,9 +69,8 @@ module Bulkrax
     end
 
     # POST /importers
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable all
     def create
-      # rubocop:disable Style/IfInsideElse
       if api_request?
         return return_json_response unless valid_create_params?
       end
@@ -99,8 +101,8 @@ module Bulkrax
           render :new
         end
       end
-      # rubocop:enable Style/IfInsideElse
     end
+    # rubocop:enable all
 
     # PATCH/PUT /importers/1
     # # @todo refactor so as to not need to disable rubocop
@@ -137,7 +139,6 @@ module Bulkrax
       end
     end
     # rubocop:enable all
-    # rubocop:enable Metrics/MethodLength
 
     # DELETE /importers/1
     def destroy
@@ -158,9 +159,11 @@ module Bulkrax
     end
 
     # GET /importer/1/upload_corrected_entries
+    # rubocop:disable Metrics/AbcSize
     def upload_corrected_entries
       @importer = Importer.find(params[:importer_id])
       return unless defined?(::Hyrax)
+
       add_breadcrumb t(:'hyrax.controls.home'), main_app.root_path
       add_breadcrumb t(:'hyrax.dashboard.breadcrumbs.admin'), hyrax.dashboard_path
       add_breadcrumb 'Importers', bulkrax.importers_path
@@ -181,6 +184,7 @@ module Bulkrax
         redirect_to importer_upload_corrected_entries_path(@importer), alert: 'Importer failed to update with new file.'
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def external_sets
       if list_external_sets
@@ -197,7 +201,7 @@ module Bulkrax
       send_content
     end
 
-     # GET /importers/1/download
+    # GET /importers/1/download
     def download
       @importer = Importer.find(params[:importer_id])
       send_file(params[:url])
@@ -207,6 +211,7 @@ module Bulkrax
 
     def files_for_import(file, cloud_files)
       return if file.blank? && cloud_files.blank?
+
       @importer[:parser_fields]['import_file_path'] = @importer.parser.write_import_file(file) if file.present?
       if cloud_files.present?
         # For BagIt, there will only be one bag, so we get the file_path back and set import_file_path
@@ -231,6 +236,7 @@ module Bulkrax
       params&.[](:importer)&.[](:parser_fields)&.except(:file)&.keys
     end
 
+    # rubocop:disable Metrics/MethodLength
     # Only allow a trusted parameters through.
     def importer_params
       importable_params.require(:importer).permit(
@@ -251,18 +257,19 @@ module Bulkrax
       url = params[:base_url] || (@harvester ? @harvester.base_url : nil)
       setup_client(url) if url.present?
 
-      @sets = [['All', 'all']]
+      @sets = [%w[All all]]
 
       begin
         @client.list_sets.each do |s|
           @sets << [s.name, s.spec]
         end
-      rescue
+      rescue StandardError
         return false
       end
 
       @sets
     end
+    # rubocop:enable Metrics/MethodLength
 
     def file_param
       params.require(:importer).require(:parser_fields).fetch(:file) if params&.[](:importer)&.[](:parser_fields)&.[](:file)
@@ -285,11 +292,14 @@ module Bulkrax
       add_breadcrumb 'Importers', bulkrax.importers_path
     end
 
+    # rubocop:disable Naming/MemoizedInstanceVariableName
     def setup_client(url)
       return false if url.nil?
+
       headers = { from: Bulkrax.server_name }
       @client ||= OAI::Client.new(url, headers: headers, parser: 'libxml')
     end
+    # rubocop:enable Naming/MemoizedInstanceVariableName
 
     # Download methods
 
