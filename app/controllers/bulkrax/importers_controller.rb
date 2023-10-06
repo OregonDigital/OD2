@@ -3,6 +3,7 @@
 require_dependency 'bulkrax/application_controller'
 require_dependency 'oai'
 
+# OVERRIDE: Override controller to add in new method for download
 module Bulkrax
   # rubocop:disable Metrics/ClassLength
   class ImportersController < ApplicationController
