@@ -17,7 +17,7 @@ AllCops:
     - 'app/presenters/hyrax/file_set_presenter.rb'
     - 'app/presenters/hyrax/collapsable_section_presenter.rb'
     - 'app/parsers/bulkrax/bagit_complex_parser.rb'
-
+    - 'app/views/bulkrax/**/*'
 Metrics/BlockLength:
   ExcludedMethods: ['included']
   Exclude:

@@ -1,0 +1,64 @@
+<%# OVERRIDE: Override the view to setup specific view for importer %>
+<% provide :page_header do %>
+  <h1><span class="fa fa-cloud-upload" aria-hidden="true"></span> Importers</h1>
+  <div class="pull-right">
+    <%= link_to new_importer_path, class: 'btn btn-primary' do %>
+      <span class="fa fa-edit" aria-hidden="true"></span> <%= t(:'helpers.action.importer.new') %>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for(:head) do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% if @importers.present? %>
+      <div class="table-responsive" id="import-table">
+        <table class="table table-striped datatable">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Last Run</th>
+              <th scope="col">Next Run</th>
+              <th scope="col">Entries Enqueued</th>
+              <th scope="col">Entries Processed</th>
+              <th scope="col">Entries Failed</th>
+              <th scope="col">Entries Deleted Upstream</th>
+              <th scope="col">Total Collection Entries</th>
+              <th scope="col">Total Work Entries</th>
+              <th scope="col">Total File Set Entries</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @importers.each do |importer| %>
+              <tr>
+                <th scope="row"><%= link_to importer.name, importer_path(importer) %></th>
+                <td><%= importer.status %></td>
+                <td><%= importer.last_imported_at.strftime("%b %d, %Y") if importer.last_imported_at %></td>
+                <td><%= importer.next_import_at.strftime("%b %d, %Y") if importer.next_import_at %></td>
+                <td><%= importer.last_run&.enqueued_records %></td>
+                <td><%= (importer.last_run&.processed_records || 0) %></td>
+                <td><%= (importer.last_run&.failed_records || 0) %></td>
+                <td><%= importer.last_run&.deleted_records %></td>
+                <td><%= importer.last_run&.total_collection_entries %></td>
+                <td><%= importer.last_run&.total_work_entries %></td>
+                <td><%= importer.last_run&.total_file_set_entries %></td>
+                <td><%= link_to raw('<span class="glyphicon glyphicon-info-sign"></span>'), importer_path(importer) %></td>
+                <td><%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'), edit_importer_path(importer) %></td>
+                <td><%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'), importer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <% else %>
+        <p>No importers have been created.</p>
+      <% end %>
+  </div>
+</div>
