@@ -83,6 +83,7 @@ Bulkrax.setup do |config|
     v['from'] = [k]
   end
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
+  fieldhash['visibility'] = { from: ['visibility'] }
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
 
@@ -154,9 +155,23 @@ Bulkrax::CsvEntry.class_eval do
       handle_join_on_export(relationship_key, values, mapping[related_parents_parsed_mapping]['join'].present?)
     end
   end
+
+  # parsed_metadata['visibility'] has already been set by csv values if they exist.
+  def add_visibility
+    return unless self.parsed_metadata['visibility'].blank?
+
+    # use visibility from importer form if it exists
+    self.parsed_metadata['visibility'] = importerexporter.visibility
+    return unless self.parsed_metadata['visibility'].blank?
+
+    # set the visibility to default if this is a create
+    self.parsed_metadata['visibility'] = 'open' if self.parsed_metadata['id'].blank?
+    return unless self.parsed_metadata['visibility'].blank?
+
+    # do not add default visibility to an update
+    self.parsed_metadata.delete 'visibility'
+  end
 end
-
-
 
 Bulkrax::Exporter.class_eval do
   def replace_files
@@ -172,6 +187,11 @@ Bulkrax::ApplicationParser.class_eval do
     elts
   end
 
+  # parser_fields are set by the importer form
+  # do not use a default value at this point
+  def visibility
+    @visibility ||= self.parser_fields['visibility'] || ''
+  end
 
   ::Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions" if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
 end
