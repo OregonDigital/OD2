@@ -225,9 +225,9 @@ module OregonDigital
         config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id'
+        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id', index_range: 'A'..'Z'
         config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution'
+        config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution', index_range: 'A'..'Z'
         config.add_facet_field 'cultural_context_label_sim', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), index_range: 'A'..'Z', limit: 5
 
         config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), index_range: 'A'..'Z', limit: 5
