@@ -3,8 +3,12 @@
 RSpec.describe OregonDigital::PermissionChangePropagationJob, type: :job do
   include ActiveJob::TestHelper
 
-  let(:curation_concern) { create(:image, ordered_members: [file_set]) }
-  let(:file_set) { create(:file_set) }
+  let(:curation_concern) do
+    cc = create(:image).valkyrie_resource
+    cc.member_ids << file_set.id
+    Hyrax.persister.save(resource: cc)
+  end
+  let(:file_set) { create(:file_set).valkyrie_resource }
   let(:event_job_class) { OregonDigital::PermissionChangePropagationEventJob }
 
   after do
