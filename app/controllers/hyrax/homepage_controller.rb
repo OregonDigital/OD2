@@ -33,8 +33,9 @@ class Hyrax::HomepageController < ApplicationController
   # Return 8 collections
   def collections(rows: 8)
     # TODO: set CollectionSearchBuilder to retrieve collections from a curated list, instead of newest collections
-    builder = Hyrax::CollectionSearchBuilder.new(self)
-                                            .rows(rows)
+    builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)
+                                                            .rows(rows)
+                                                            .merge(sort: sort_field)
     response = repository.search(builder)
     response.documents
   rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
@@ -50,6 +51,6 @@ class Hyrax::HomepageController < ApplicationController
   end
 
   def sort_field
-    'date_uploaded_dtsi desc'
+    'system_create_dtsi desc'
   end
 end
