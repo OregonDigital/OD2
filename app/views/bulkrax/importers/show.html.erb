@@ -1,0 +1,112 @@
+<%# OVERRIDE: Override the Show page to add in a download button %>
+<div class="col-xs-12 main-header">
+  <h1><span class="fa fa-cloud-upload" aria-hidden="true"></span> Importer: <%= @importer.name %></h1>
+  <% if @importer.parser_klass == 'Bulkrax::CsvParser' && @work_entries.map(&:failed?).any? %>
+    <div class="pull-right">
+      <%= link_to 'Export Errored Entries', importer_export_errors_path(@importer.id), class: 'btn btn-primary' %>
+      <%= link_to 'Upload Corrected Entries', importer_upload_corrected_entries_path(@importer.id), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+<div class="panel panel-default bulkrax-align-text">
+  <div class="panel-body">
+    <p class="bulkrax-p-align">
+      <strong><%= t('bulkrax.importer.labels.name') %>:</strong>
+      <%= @importer.name %>
+    </p>
+    <% if defined?(::Hyrax) %>
+      <p class="bulkrax-p-align">
+        <strong><%= t('bulkrax.importer.labels.admin_set') %>:</strong>
+        <%= @importer.admin_set_id %>
+      </p>
+    <% end %>
+    <p class="bulkrax-p-align">
+      <strong><%= t('bulkrax.importer.labels.user') %>:</strong>
+      <%= @importer.user %>
+    </p>
+    <p class="bulkrax-p-align">
+      <strong><%= t('bulkrax.importer.labels.frequency') %>:</strong>
+      <%= @importer.frequency %>
+    </p>
+    <p class="bulkrax-p-align">
+      <strong><%= t('bulkrax.importer.labels.parser_klass') %>:</strong>
+      <%= @importer.parser_klass %>
+    </p>
+    <p class="bulkrax-p-align">
+      <strong><%= t('bulkrax.importer.labels.limit') %>:</strong>
+      <%= @importer.limit %>
+    </p>
+
+    <%= render partial: 'bulkrax/shared/bulkrax_errors', locals: {item: @importer} %>
+
+    <div class="accordion-container">
+      <div class="accordion-heading" role="tab" id="parser-fields-heading">
+        <a class="accordion-title" role="button" data-toggle="collapse" data-target="#parser-fields-importer-show" aria-expanded="true" aria-controls="parser-fields-importer-show">
+          Parser fields:
+        </a>
+        <a role="button" data-toggle="collapse" data-target="#parser-fields-importer-show" aria-expanded="true" aria-controls="parser-fields-importer-show">
+          <div class="accordion-icon glyphicon glyphicon-remove-circle" aria-hidden="true"></div>
+        </a>
+      </div>
+      <div id="parser-fields-importer-show" class="accordion-collapse collapse" role="tabpanel" aria-labelledby="parser-fields-heading">
+        <div class="accordion-body">
+          <% @importer.parser_fields.each do |key,value| %>
+            <strong><%= key %>:</strong> <%= value %> <br />
+            <%# BUTTON: Add in download button %>
+            <% if key == 'import_file_path' %>
+              <% filename = value.split('/')[-1].strip %>
+              <br /> <%= link_to "Download", importer_download_path(@importer.id, url: value), class: "btn btn-primary" %> <br />
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render partial: 'bulkrax/shared/bulkrax_field_mapping', locals: {item: @importer} %>
+
+    <p class="bulkrax-p-align" title="<%= @importer.last_run&.processed_works %> processed, <%= @importer.last_run&.failed_works %> failed">
+      <strong><%= t('bulkrax.importer.labels.total_work_entries') %>:</strong>
+      <%= @importer.last_run&.total_work_entries %>
+    </p>
+
+    <p class="bulkrax-p-align" title="<%= @importer.last_run&.processed_collections %> processed, <%= @importer.last_run&.failed_collections %> failed">
+      <strong><%= t('bulkrax.importer.labels.total_collections') %>:</strong>
+      <%= @importer.last_run&.total_collection_entries %>
+    </p>
+
+    <p class="bulkrax-p-align" title="<%= @importer.last_run&.processed_file_sets %> processed, <%= @importer.last_run&.failed_file_sets %> failed">
+      <strong><%= t('bulkrax.importer.labels.total_file_sets') %>:</strong>
+      <%= @importer.last_run&.total_file_set_entries %>
+    </p>
+
+    <div class="bulkrax-nav-tab-bottom-margin">
+      <!-- Nav tabs -->
+      <ul class="bulkrax-nav-tab-top-margin tab-nav nav nav-tabs" role="tablist">
+        <li role="presentation" class='active'><a href="#work-entries" aria-controls="work-entries" role="tab" data-toggle="tab"><%= t('bulkrax.importer.labels.work_entries') %></a></li>
+        <li role="presentation"><a href="#collection-entries" aria-controls="collection-entries" role="tab" data-toggle="tab"><%= t('bulkrax.importer.labels.collection_entries') %></a></li>
+        <li role="presentation"><a href="#file-set-entries" aria-controls="file-set-entries" role="tab" data-toggle="tab"><%= t('bulkrax.importer.labels.file_set_entries') %></a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content outline">
+        <%= render partial: 'bulkrax/shared/work_entries_tab', locals: { item: @importer, entries: @work_entries } %>
+        <%= render partial: 'bulkrax/shared/collection_entries_tab', locals: { item: @importer, entries: @collection_entries } %>
+        <%= render partial: 'bulkrax/shared/file_set_entries_tab', locals: { item: @importer, entries: @file_set_entries } %>
+      </div>
+    </div>
+
+    <p class="bulkrax-p-align">
+      <%= link_to 'Edit', edit_importer_path(@importer) %>
+      |
+      <%= link_to 'Back', importers_path %><br /><br />
+    </p>
+
+    <% if @importer.validate_only == true %>
+      <div class='pull-left'>
+        <%= button_to 'Continue', importer_continue_path(@importer), method: :put, class: 'btn btn-primary' %>
+      </div>
+      <div class='pull-right'>
+        <%= button_to 'Discard', @importer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

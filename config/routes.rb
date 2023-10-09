@@ -108,3 +108,22 @@ Rails.application.routes.draw do
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
+# OVERRIDE: Add in the download function towards the importers
+Bulkrax::Engine.routes.draw do
+  resources :exporters do
+    get :download
+    resources :entries, only: %i[show]
+  end
+
+  resources :importers do
+    put :continue
+    get :export_errors, :download
+    collection do
+      post :external_sets
+    end
+    resources :entries, only: %i[show]
+    get :upload_corrected_entries
+    post :upload_corrected_entries_file
+  end
+end
