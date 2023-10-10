@@ -5,7 +5,8 @@ module OregonDigital
   class OembedsController < ApplicationController
     attr_accessor :curation_concern
     helper_method :curation_concern
-    load_and_authorize_resource class: ActiveFedora::Base, instance_name: :curation_concern
+    authorize_resource class: ActiveFedora::Base, instance_name: :curation_concern
+    authorize_resource class: Hyrax::Resource, instance_name: :curation_concern
 
     def index
       add_breadcrumb t(:'hyrax.controls.home'), root_path
