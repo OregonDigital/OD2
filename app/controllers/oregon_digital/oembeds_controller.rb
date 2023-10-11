@@ -5,10 +5,10 @@ module OregonDigital
   class OembedsController < ApplicationController
     attr_accessor :curation_concern
     helper_method :curation_concern
-    authorize_resource class: ActiveFedora::Base, instance_name: :curation_concern
-    authorize_resource class: Hyrax::Resource, instance_name: :curation_concern
 
     def index
+      authorize! :show, Hyrax::Resource
+
       add_breadcrumb t(:'hyrax.controls.home'), root_path
       add_breadcrumb t(:'hyrax.dashboard.breadcrumbs.admin'), hyrax.dashboard_path
       add_breadcrumb t(:'oregon_digital.oembeds.index.manage_oembeds'), Rails.application.routes.url_helpers.oembeds_path
@@ -17,6 +17,9 @@ module OregonDigital
     end
 
     def edit
+      @curation_concern = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
+      authorize! :edit, @curation_concern
+
       add_breadcrumb t(:'hyrax.controls.home'), root_path
       add_breadcrumb t(:'hyrax.dashboard.breadcrumbs.admin'), hyrax.dashboard_path
       add_breadcrumb t(:'oregon_digital.oembeds.index.manage_oembeds'), Rails.application.routes.url_helpers.oembeds_path
