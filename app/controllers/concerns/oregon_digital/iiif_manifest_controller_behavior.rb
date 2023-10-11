@@ -38,7 +38,7 @@ module OregonDigital
     def redirect_json
       return if request.format.json?
 
-      redirect_to main_app.polymorphic_url [:manifest, :hyrax, controller_name.singularize], { locale: nil, format: :json }
+      redirect_to main_app.polymorphic_url [:manifest, :hyrax, controller_name.singularize.to_sym], { locale: nil, format: :json }
     end
 
     ###
