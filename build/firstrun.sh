@@ -23,13 +23,5 @@ bundle exec rails runner 'User.create(
 )'
 
 echo
-echo "Creating default collection types"
-bundle exec rails runner '
-  Hyrax::CollectionType.find_or_create_by(title: 'User Collection')
-  Hyrax::CollectionType.find_or_create_by(title: 'Digital Collection')
-  Hyrax::CollectionType.find_or_create_by(title: 'OAI Set')
-'
-
-echo
 echo "Creating Oregon Digital admin sets"
 bundle exec rake oregon_digital:create_admin_sets_and_collection_types
