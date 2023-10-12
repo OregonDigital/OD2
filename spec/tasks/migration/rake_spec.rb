@@ -41,7 +41,7 @@ RSpec.describe 'Rake tasks' do
       it 'approves them' do
         work2.reload
         expect(work2.suppressed?).to eq(false)
-        expect(Sipity::Entity(work2).workflow_state_name).to eq('deposited')
+        expect(work2.to_sipity_entity.workflow_state_name).to eq('deposited')
         solr = work2.to_solr
         expect(solr['workflow_state_name_ssim']).to eq('deposited')
         expect(solr['suppressed_bsi']).to eq(false)

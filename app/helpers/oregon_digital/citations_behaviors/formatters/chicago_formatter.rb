@@ -14,7 +14,7 @@ module OregonDigital
         def format(work)
           text = ''
           # Collection the work is a part of.
-          collection = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: work.member_of_collection_ids.first) unless work.member_of_collection_ids.empty?
+          collection = ActiveFedora::Base.find(work.member_of_collection_ids.first) unless work.member_of_collection_ids.empty?
           text += "#{collection.title.first}, " unless collection.nil?
 
           # Institution the work is a part of.
