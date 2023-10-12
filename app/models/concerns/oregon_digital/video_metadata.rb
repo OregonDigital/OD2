@@ -97,6 +97,7 @@ module OregonDigital
         { name: :street_address, section_name: '' },
         { name: :tgn, section_name: '' },
         { name: :water_basin, section_name: '' },
+        { name: :plss, section_name: '' },
         { name: :date, section_name: 'Dates' },
         { name: :acquisition_date, section_name: '' },
         { name: :award_date, section_name: '' },

@@ -257,7 +257,7 @@ Hyrax.config do |config|
     award cultural_context_label ethnographic_term_label event keyword legal_name military_branch_label sports_team
     style_or_period_label phylum_or_division_label taxon_class_label order_label family_label genus_label species_label
     common_name_label location_label gps_latitude gps_longitude ranger_district_label street_address tgn_label
-    water_basin_label date date_created view_date license_label rights_holder rights_note rights_statement_label
+    water_basin_label plss_label date date_created view_date license_label rights_holder rights_note rights_statement_label
     use_restrictions repository_label local_collection_name_label language_label publisher_label provenance source has_finding_aid
     is_part_of resource_type_label workType_label measurements collections
   ]

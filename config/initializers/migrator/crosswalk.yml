@@ -359,6 +359,10 @@ crosswalk:
     predicate: http://opaquenamespace.org/ns/waterBasin
     multiple: true
     function: attributes_data
+  - property: plss_attributes
+    predicate: http://opaquenamespace.org/ns/plss
+    multiple: true
+    function: 
   - property: date
     predicate: http://purl.org/dc/terms/date
     multiple: true

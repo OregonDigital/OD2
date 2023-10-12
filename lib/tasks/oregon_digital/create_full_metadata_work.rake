@@ -169,6 +169,7 @@ def attrs
     'publication_place' => ['https://sws.geonames.org/4929022/'],
     'ranger_district' => ['https://sws.geonames.org/5711134/'],
     'water_basin' => ['https://sws.geonames.org/294624/'],
+    'plss' => [],
     'cultural_context' => ['http://vocab.getty.edu/aat/300073715'],
     'ethnographic_term' => ['http://id.loc.gov/vocabulary/ethnographicTerms/afset011049'],
     'style_or_period' => ['http://vocab.getty.edu/aat/300021712'],

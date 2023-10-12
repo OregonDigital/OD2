@@ -354,6 +354,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :plss, predicate: RDF::URI.new('http://opaquenamespace.org/ns/plss'), multiple: true, basic_searchable: true, class_name: Hyrax::ControlledVocabularies::Location do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :date, predicate: RDF::Vocab::DC.date, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
