@@ -6,15 +6,15 @@ class ReindexChunkWorker
   sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/AbcSize
   def perform(uris)
     counter = 0
+    logger = Rails.logger
 
     logger.info "Reindexing #{uris.count} URIs"
     uris.each do |uri|
-      work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: Hyrax.config.translate_uri_to_id.call(uri))
+      work = ActiveFedora::Base.find(ActiveFedora::Base.uri_to_id(uri))
       logger.info "\t reindexing #{work.id}"
-      Hyrax.index_adapter.save(resource: work)
+      work.update_index
       counter += 1
     # rubocop:disable Style/RescueStandardError
     rescue => e
@@ -24,6 +24,5 @@ class ReindexChunkWorker
     # rubocop:enable Style/RescueStandardError
     logger.info "Total indexed: #{counter}/#{uris.count}"
   end
-  # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 end

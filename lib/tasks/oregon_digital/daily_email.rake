@@ -18,11 +18,11 @@ namespace :oregon_digital do
 
     # For each entitiy, grab the object if the entity was updated on "Today"
     review_entities.each do |e|
-      review_items << Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: e.proxy_for_global_id.split('/').last) if e.updated_at.to_date == Date.today
+      review_items << ActiveFedora::Base.find(e.proxy_for_global_id.split('/').last) if e.updated_at.to_date == Date.today
     end
 
     changes_entities.each do |e|
-      changes_items << Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: e.proxy_for_global_id.split('/').last) if e.updated_at.to_date == Date.today
+      changes_items << ActiveFedora::Base.find(e.proxy_for_global_id.split('/').last) if e.updated_at.to_date == Date.today
     end
 
     # Check to see if any users have the ability to review the objects
