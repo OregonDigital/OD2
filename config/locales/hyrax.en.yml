@@ -13,6 +13,7 @@ en:
           subject_sim: Subject
           owner_label_sim: Owner
           workType_label_sim: Work Type
+          applicant_label_sim: Applicant
           arranger_label_sim: Arranger
           artist_label_sim: Artist
           author_label_sim: Author
@@ -96,6 +97,7 @@ en:
           subject_tesim: Subject
           owner_label_tesim: Owner
           workType_label_tesim: Work Type
+          applicant_label_tesim: Applicant
           arranger_label_tesim: Arranger
           artist_label_tesim: Artist
           author_label_tesim: Author
@@ -179,6 +181,7 @@ en:
           subject: Subject
           owner_label: Owner
           workType_label: Work Type
+          applicant_label: Applicant
           arranger_label: Arranger
           artist_label: Artist
           author_label: Author

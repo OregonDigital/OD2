@@ -250,7 +250,7 @@ Hyrax.config do |config|
 
   # Fields to display in the IIIF metadata section; default is the required fields
   config.iiif_metadata_fields = %i[
-    title creator_label photographer_label arranger_label artist_label author_label
+    title creator_label photographer_label applicant_label arranger_label artist_label author_label
     cartographer_label collector_label composer_label contributor_label designer_label donor_label editor_label
     illustrator_label interviewee_label interviewer_label landscape_architect_label lyricist_label owner_label patron_label
     print_maker_label recipient_label transcriber_label translator_label description abstract inscription view subject_label

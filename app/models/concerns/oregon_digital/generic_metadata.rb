@@ -34,6 +34,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :applicant, predicate: RDF::Vocab::MARCRelators.app, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :arranger, predicate: RDF::Vocab::MARCRelators.arr, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
@@ -608,6 +612,7 @@ module OregonDigital
         { name: 'creator_display', is_controlled: false, collection_facetable: false },
         { name: 'creator_label', is_controlled: true, collection_facetable: true },
         { name: 'contributor_label', is_controlled: true, collection_facetable: true },
+        { name: 'applicant_label', is_controlled: true, collection_facetable: true },
         { name: 'arranger_label', is_controlled: true, collection_facetable: true },
         { name: 'artist_label', is_controlled: true, collection_facetable: true },
         { name: 'author_label', is_controlled: true, collection_facetable: true },
@@ -769,6 +774,7 @@ module OregonDigital
         { name: :title, section_name: '' },
         { name: :creator, section_name: 'Creators' },
         { name: :photographer, section_name: '' },
+        { name: :applicant, section_name: '' },
         { name: :arranger, section_name: '' },
         { name: :artist, section_name: '' },
         { name: :author, section_name: '' },

@@ -140,6 +140,7 @@ def attrs
     'original_filename' => nil,
     'full_size_download_allowed' => 1,
     'access_restrictions' => ['http://opaquenamespace.org/ns/accessRestrictions/OSUrestricted'],
+    'applicant' => ['http://id.loc.gov/authorities/names/no2010022998'],
     'arranger' => ['http://id.loc.gov/authorities/names/no2010022998'],
     'artist' => ['http://vocab.getty.edu/ulan/500121373'],
     'author' => ['http://opaquenamespace.org/ns/creator/ClarkeRuthJohnson'],

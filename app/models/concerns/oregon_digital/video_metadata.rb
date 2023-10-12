@@ -18,6 +18,7 @@ module OregonDigital
         { name: :title, section_name: '' },
         { name: :creator, section_name: 'creators' },
         { name: :photographer, section_name: '' },
+        { name: :applicant, section_name: '' },
         { name: :arranger, section_name: '' },
         { name: :artist, section_name: '' },
         { name: :author, section_name: '' },
