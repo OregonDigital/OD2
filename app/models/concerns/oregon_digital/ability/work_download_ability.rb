@@ -12,35 +12,35 @@ module OregonDigital
         # rubocop:disable Metrics/CyclomaticComplexity
         def work_download_ability
           # By default unauthed/community users cannot download full size
-          cannot(:download, [ActiveFedora::Base, Hyrax::Resource])
+          cannot(:download, ActiveFedora::Base)
           # You CAN download full quality if you're a UO or OSU authenticated/affiliated user
-          can(:download, [ActiveFedora::Base, Hyrax::Resource]) if current_user.role?(self.class.osu_roles + self.class.uo_roles)
+          can(:download, ActiveFedora::Base) if current_user.role?(self.class.osu_roles + self.class.uo_roles)
           # But you CANNOT download full quality if you cannot show the work (restricted) or it is in UO restricted admin set
-          cannot(:download, [ActiveFedora::Base, Hyrax::Resource]) do |record|
+          cannot(:download, ActiveFedora::Base) do |record|
             !current_user.can?(:show, record) || uo_download_restricted?(record.try(:admin_set))
           end
           # Can download full quality if overriden by full_size_download_allowed metadata field
-          can(:download, [ActiveFedora::Base, Hyrax::Resource]) do |record|
+          can(:download, ActiveFedora::Base) do |record|
             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
           end
           # Cannot download full quality if overriden by full_size_download_allowed metadata field
-          cannot(:download, [ActiveFedora::Base, Hyrax::Resource]) do |record|
+          cannot(:download, ActiveFedora::Base) do |record|
             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'false'
           end
           # Can download full quality if admin/manager
-          can(:download, [ActiveFedora::Base, Hyrax::Resource]) if current_user.role?(self.class.manager_permission_roles)
+          can(:download, ActiveFedora::Base) if current_user.role?(self.class.manager_permission_roles)
 
           # Can download low/full/metadata if they show it
-          can(:download_low, [ActiveFedora::Base, Hyrax::Resource]) do |record|
+          can(:download_low, ActiveFedora::Base) do |record|
             current_user.can?(:show, record)
           end
-          can(:download_low, [ActiveFedora::Base, Hyrax::Resource]) do |record|
+          can(:download_low, ActiveFedora::Base) do |record|
             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
           end
-          can(:metadata, [ActiveFedora::Base, Hyrax::Resource]) do |record|
+          can(:metadata, ActiveFedora::Base) do |record|
             current_user.can?(:show, record)
           end
-          can(%i[download_low metadata], [ActiveFedora::Base, Hyrax::Resource]) do |record|
+          can(%i[download_low metadata], ActiveFedora::Base) do |record|
             OregonDigital::DownloadService.new.all_labels(record.try(:full_size_download_allowed))&.downcase == 'true'
           end
         end
