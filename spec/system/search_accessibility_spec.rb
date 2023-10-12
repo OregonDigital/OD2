@@ -1,8 +1,12 @@
 # frozen_string_literal:true
 
 RSpec.describe 'Search Results', js: true, type: :system, clean_repo: true do
+  let(:user_collection_type) { create(:collection_type, machine_id: :user_collection) }
+  let(:oai_collection_type) { create(:collection_type, machine_id: :oai_set) }
+
   before do
-    create(:user_collection_type)
+    allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :user_collection).and_return(user_collection_type)
+    allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :oai_set).and_return(oai_collection_type)
   end
 
   context 'with an annonymous user' do
