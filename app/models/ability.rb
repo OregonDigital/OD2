@@ -28,7 +28,7 @@ class Ability
   end
 
   def work_classes
-    [SolrDocument, ActiveFedora::Base]
+    [SolrDocument, ActiveFedora::Base, Hyrax::Resource]
   end
 
   def in_depositors_collection?(edit_access_person)
