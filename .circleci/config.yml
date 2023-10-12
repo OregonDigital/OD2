@@ -17,7 +17,7 @@ jobs:
           name: Save code cache
           key: v1-source-{{ .Branch }}-{{ .Revision }}
           paths:
-            - '.git'
+            - ".git"
       - persist_to_workspace:
           root: ~/
           paths:
@@ -78,17 +78,17 @@ jobs:
           CAPYBARA_APP_HOST: http://test:3001
           FEDORA_URL: http://localhost:8080/fcrepo/rest
           HONEYCOMB_DATASET: od2-rails-test
-          HONEYCOMB_DEBUG: 'true'
+          HONEYCOMB_DEBUG: "true"
           HONEYCOMB_WRITEKEY: buzzzzzzzzzzzzzzzz
           HONEYCOMB_SERVICE: od2
           RAILS_ENV: test
           RDS_DB_NAME: test
           RDS_HOSTNAME: localhost
-          RDS_PASSWORD: 'postgres'
-          RDS_PORT: '5432'
+          RDS_PASSWORD: "postgres"
+          RDS_PORT: "5432"
           RDS_USERNAME: postgres
           REDIS_HOST: localhost
-          REDIS_PORT: '6379'
+          REDIS_PORT: "6379"
           SECRET_KEY_BASE: bobross1234bobross1234bobross1234bobross1234bobross1234
           SOLR_URL: http://localhost:8985/solr/hydra-test
           TRIPLESTORE_ADAPTER_TYPE: blazegraph
@@ -102,7 +102,7 @@ jobs:
       - image: circleci/redis:4
       - image: ualbertalib/docker-fcrepo4:4.7
         environment:
-          CATALINA_OPTS: '-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC'
+          CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
       - image: solr:8.3-slim
         command: bin/solr -cloud -noprompt -f -p 8985
     working_directory: ~/app
@@ -194,15 +194,15 @@ jobs:
     parameters:
       repo:
         type: string
-        default: ''
+        default: ""
       environment:
         type: string
-        default: 'production'
+        default: "production"
       fedora_url:
         type: string
-        default: 'http://fcrepo:8080/fcrepo/rest'
+        default: "http://fcrepo:8080/fcrepo/rest"
     executor:
-      name: 'docker/docker'
+      name: "docker/docker"
     environment:
       DOCKER_LOGIN: admin
       DOCKER_PASSWORD: admin
@@ -243,15 +243,15 @@ jobs:
       - docker/build:
           registry: registry.library.oregonstate.edu
           image: od2_web_cache
-          tag: 'latest'
+          tag: "latest"
           extra_build_args: --target gems
           cache_from: registry.library.oregonstate.edu/od2_web_cache:latest
-          step-name: 'Rebuild cache image'
+          step-name: "Rebuild cache image"
       - docker/push:
           registry: registry.library.oregonstate.edu
           image: od2_web_cache
           tag: latest
-          step-name: 'Push cache image'
+          step-name: "Push cache image"
 workflows:
   ci:
     jobs:
@@ -278,5 +278,6 @@ workflows:
               only:
                 - master
                 - /infra\/.*/
+                - /staging\/.*/
           repo: od2_web
           environment: production
