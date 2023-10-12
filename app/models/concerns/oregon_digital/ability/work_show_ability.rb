@@ -10,7 +10,7 @@ module OregonDigital
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
         def work_show_ability
-          can :show, ActiveFedora::Base do |record|
+          can :show, [ActiveFedora::Base, Hyrax::Resource] do |record|
             show_record?(record)
           end
           can :read, SolrDocument do |solr_doc|
@@ -20,8 +20,8 @@ module OregonDigital
           cannot(%i[show], FileSet) unless current_user.role?(self.class.manager_permission_roles)
           cannot(%i[show], SolrDocument, visibility: 'osu') unless osu_allowed?
           cannot(%i[show], SolrDocument, visibility: 'uo') unless uo_allowed?
-          cannot(%i[show], ActiveFedora::Base, visibility: 'osu') unless osu_allowed?
-          cannot(%i[show], ActiveFedora::Base, visibility: 'uo') unless uo_allowed?
+          cannot(%i[show], [ActiveFedora::Base, Hyrax::Resource], visibility: 'osu') unless osu_allowed?
+          cannot(%i[show], [ActiveFedora::Base, Hyrax::Resource], visibility: 'uo') unless uo_allowed?
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
@@ -35,7 +35,7 @@ module OregonDigital
         end
 
         def show_record?(record)
-          if record.suppressed?
+          if Hyrax::ResourceStatus.new(resource: record).inactive?
             current_user.role?(self.class.admin_permission_roles) && in_depositors_collection?(record.edit_users)
           else
             current_user.role?(self.class.manager_permission_roles)
