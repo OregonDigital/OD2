@@ -25,7 +25,7 @@ module OregonDigital
     end
 
     def export_as_nt
-      Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: id).resource.dump(:ntriples)
+      ActiveFedora::Base.find(id).resource.dump(:ntriples)
     end
   end
 end

@@ -144,13 +144,8 @@ module Bulkrax
       require 'socket'
       importerexporter.entries.where(identifier: current_work_ids)[0..limit || total].each do |e|
         bag = BagIt::Bag.new setup_bagit_folder(e.identifier)
-        w = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: e.identifier)
-        # The fileset api isn't perfect yet, it's easier to just use those directly
-        file_sets = w.member_ids.map(&:id).map do |id|
-          fs = ActiveFedora::Base.find(id)
-          fs.file_set? ? fs : nil
-        end.compact
-        file_sets.each do |fs|
+        w = ActiveFedora::Base.find(e.identifier)
+        w.file_sets.each do |fs|
           file_name = filename(fs)
           next if file_name.blank?
 

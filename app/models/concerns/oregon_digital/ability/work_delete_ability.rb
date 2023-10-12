@@ -8,7 +8,7 @@ module OregonDigital
 
       included do
         def work_delete_ability
-          can(:delete, [ActiveFedora::Base, Hyrax::Resource]) if current_user.role?(self.class.admin_permission_roles)
+          can(:delete, ActiveFedora::Base) if current_user.role?(self.class.admin_permission_roles)
         end
       end
     end

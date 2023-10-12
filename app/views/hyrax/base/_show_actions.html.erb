@@ -22,7 +22,7 @@
       <button id="download-button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"  aria-controls="download-list" aria-expanded="false" aria-haspopup="true">Download
       <span class="caret-dropdown"></span></button>
       <ul id="download-list" class="dropdown-menu" role="menu" aria-labelledby="download-button">
-        <% if current_ability.can? :download, Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: presenter.id) %>
+        <% if current_ability.can? :download, ActiveFedora::Base.find(presenter.id) %>
           <li><%= link_to "Files (High Quality) + Metadata (ZIP)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
         <% end %>
         <li><%= link_to "Files (Standard Quality) + Metadata (ZIP)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/vnd.ms-'))  %></li>
