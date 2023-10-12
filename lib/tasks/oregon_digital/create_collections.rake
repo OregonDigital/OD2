@@ -32,5 +32,7 @@ def prep_collection_type
 
   c = Hyrax::CollectionType.new(title: 'Digital Collection', facet_configurable: true)
   c.save
+  u = User.where(username: 'admin').first
+  Hyrax::Collections::PermissionsCreateService.add_access(collection_id: c.id, grants: [{agent_type: Hyrax::PermissionTemplateAccess::USER, agent_id: u.user_key, access: Hyrax::PermissionTemplateAccess::MANAGE }])
   c.id
 end
