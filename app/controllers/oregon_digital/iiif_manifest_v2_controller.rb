@@ -35,7 +35,7 @@ module OregonDigital
     end
 
     def work
-      @work ||= ActiveFedora::Base.find(params['id'])
+      @work ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params['id'])
     end
 
     def jp2_work_presenter

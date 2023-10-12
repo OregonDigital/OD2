@@ -7,7 +7,7 @@ namespace :migration do
     migration_user = Hyrax::Migrator.config.migration_user
     Hyrax::SolrService.query("suppressed_bsi:true AND depositor_ssim:#{migration_user}", fl: 'id', rows: 10_000).map { |x| x['id'] }.each do |pid|
       item = ActiveFedora::Base.find(pid)
-      entity = item.to_sipity_entity
+      entity = Sipity::Entity(item)
       next if entity.nil? || entity.workflow_state_name != 'pending_review'
 
       Hyrax::Workflow::ActivateObject.call(target: item)
