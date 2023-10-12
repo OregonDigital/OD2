@@ -354,8 +354,8 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      property :plss, predicate: RDF::URI.new('http://opaquenamespace.org/ns/plss'), multiple: true, basic_searchable: true, class_name: Hyrax::ControlledVocabularies::Location do |index|
-        index.as :stored_searchable, :facetable
+      property :plss, predicate: RDF::URI.new('http://opaquenamespace.org/ns/plss'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
       end
 
       property :date, predicate: RDF::Vocab::DC.date, multiple: true, basic_searchable: true do |index|
@@ -704,6 +704,7 @@ module OregonDigital
         { name: 'tgn_label', is_controlled: true, collection_facetable: true },
         { name: 'ranger_district_label', is_controlled: true, collection_facetable: true },
         { name: 'water_basin_label', is_controlled: true, collection_facetable: true },
+        { name: 'plss', is_controlled: false, collection_facetable: false },
         { name: 'street_address', is_controlled: false, collection_facetable: false },
         { name: 'gps_latitude', is_controlled: false, collection_facetable: false },
         { name: 'gps_longitude', is_controlled: false, collection_facetable: false },
@@ -858,6 +859,7 @@ module OregonDigital
         { name: :street_address, section_name: '' },
         { name: :tgn, section_name: '' },
         { name: :water_basin, section_name: '' },
+        { name: :plss, section_name: '' },
         { name: :date, section_name: 'Dates' },
         { name: :acquisition_date, section_name: '' },
         { name: :award_date, section_name: '' },

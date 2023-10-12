@@ -53,7 +53,7 @@ en:
           transcriber_label_sim: Transcriber
           translator_label_sim: Translator
           water_basin_label_sim: Water Basin
-          plss_label_sim: Public Land Survey System
+          plss_sim: Public Land Survey System
           based_near_label_sim: Location
           cultural_context_label_sim: Cultural Context
           ethnographic_term_label_sim: Ethnographic Term
@@ -125,7 +125,7 @@ en:
           transcriber_label_tesim: Transcriber
           translator_label_tesim: Translator
           water_basin_label_tesim: Water Basin
-          plss_label_tesim: Public Land Survey System
+          plss_tesim: Public Land Survey System
           based_near_label_tesim: Location
           cultural_context_label_tesim: Cultural Context
           ethnographic_term_label_tesim: Ethnographic Term
@@ -209,7 +209,7 @@ en:
           transcriber_label: Transcriber
           translator_label: Translator
           water_basin_label: Water Basin
-          plss_label: Public Land Survey System
+          plss: Public Land Survey System
           based_near_label: Location
           cultural_context_label: Cultural Context
           ethnographic_term_label: Ethnographic Term

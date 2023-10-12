@@ -359,7 +359,7 @@ crosswalk:
     predicate: http://opaquenamespace.org/ns/waterBasin
     multiple: true
     function: attributes_data
-  - property: plss_attributes
+  - property: plss
     predicate: http://opaquenamespace.org/ns/plss
     multiple: true
     function: 
