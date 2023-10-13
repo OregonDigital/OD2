@@ -16,8 +16,15 @@ module OregonDigital
     def each(&chunks)
       writer = ZipTricks::BlockWrite.new(&chunks)
 
-      ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
-        stream_collection(collection, '', zip)
+      # CHECK: To see if collection is user collection
+      if collection.collection_type.machine_id == 'user_collection'
+        ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
+          stream_user_collection(collection, '', zip)
+        end
+      else
+        ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
+          stream_collection(collection, '', zip)
+        end
       end
     end
 
@@ -32,6 +39,23 @@ module OregonDigital
       metadata += stream_child_works(collection, zip, folder, keys, controlled_keys)
 
       stream_metadata(keys, metadata, folder, zip)
+    end
+
+    # METHOD: Create a special stream method for user collection
+    def stream_user_collection(collection, folder, zip)
+      # COLLECTION: Recursively drill down into sub-collections
+      collection.child_collections.map do |col|
+        # Recursively drill down into sub-collections
+        stream_collection(col, "#{folder}#{col.id}/", zip)
+      end
+
+      # WORK: Append child works from collection in zip folder
+      collection.child_works.map do |work|
+        # Add low quality works from collection and append metadata
+        if work.visibility == 'open'
+          stream_works_low(work, zip, folder)
+        end
+      end
     end
 
     def stream_child_collections(collection, zip, folder, keys, controlled_keys)
