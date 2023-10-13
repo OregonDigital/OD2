@@ -18,6 +18,7 @@ namespace :oregon_digital do
       collection = Collection.new(id: id, title: [title], visibility: visibility, institution: [institution], collection_type_gid: coll_type_gid)
       Hyrax::PermissionTemplate.create!(source_id: id)
       puts "Successfully created collection #{id}" if collection.save
+      Hyrax::Collections::PermissionsCreateService.add_access(collection_id: collection.id, grants: [{agent_type: Hyrax::PermissionTemplateAccess::GROUP, agent_id: 'admin', access: Hyrax::PermissionTemplateAccess::MANAGE }])
     rescue StandardError => e
       puts "Unable to create collection #{id}"
       puts "Error: #{e.message}"
