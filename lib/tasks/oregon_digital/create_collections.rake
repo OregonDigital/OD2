@@ -18,6 +18,8 @@ namespace :oregon_digital do
       collection = Collection.new(id: id, title: [title], visibility: visibility, institution: [institution], collection_type_gid: coll_type_gid)
       Hyrax::PermissionTemplate.create!(source_id: id)
       puts "Successfully created collection #{id}" if collection.save
+      u = User.where(username: 'admin').first
+      Hyrax::Collections::PermissionsCreateService.add_access(collection_id: collection.id, grants: [{agent_type: Hyrax::PermissionTemplateAccess::USER, agent_id: u.user_key, access: Hyrax::PermissionTemplateAccess::MANAGE }])
     rescue StandardError => e
       puts "Unable to create collection #{id}"
       puts "Error: #{e.message}"
@@ -32,7 +34,5 @@ def prep_collection_type
 
   c = Hyrax::CollectionType.new(title: 'Digital Collection', facet_configurable: true)
   c.save
-  u = User.where(username: 'admin').first
-  Hyrax::Collections::PermissionsCreateService.add_access(collection_id: c.id, grants: [{agent_type: Hyrax::PermissionTemplateAccess::USER, agent_id: u.user_key, access: Hyrax::PermissionTemplateAccess::MANAGE }])
   c.id
 end
