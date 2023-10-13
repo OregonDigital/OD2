@@ -8,4 +8,7 @@ FactoryBot.define do
   factory :user_collection_type, class: Hyrax::CollectionType do
     initialize_with { Hyrax::CollectionType.find_or_create_default_collection_type }
   end
+  factory :oai_collection_type, class: Hyrax::CollectionType do
+    initialize_with { Hyrax::CollectionType.find_or_create_by(title: 'OAI Set') }
+  end
 end
