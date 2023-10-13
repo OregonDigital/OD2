@@ -52,9 +52,7 @@ module OregonDigital
       # WORK: Append child works from collection in zip folder
       collection.child_works.map do |work|
         # Add low quality works from collection and append metadata
-        if work.visibility == 'open'
-          stream_works_low(work, zip, folder)
-        end
+        stream_works_low(work, zip, folder) if work.visibility == 'open'
       end
     end
 
