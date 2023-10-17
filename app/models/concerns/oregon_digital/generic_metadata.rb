@@ -34,6 +34,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :applicant, predicate: RDF::Vocab::MARCRelators.app, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       property :arranger, predicate: RDF::Vocab::MARCRelators.arr, multiple: true, basic_searchable: true, class_name: OregonDigital::ControlledVocabularies::Creator do |index|
         index.as :stored_searchable, :facetable
       end
@@ -350,6 +354,10 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      property :plss, predicate: RDF::URI.new('http://opaquenamespace.org/ns/plss'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
       property :date, predicate: RDF::Vocab::DC.date, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
@@ -608,6 +616,7 @@ module OregonDigital
         { name: 'creator_display', is_controlled: false, collection_facetable: false },
         { name: 'creator_label', is_controlled: true, collection_facetable: true },
         { name: 'contributor_label', is_controlled: true, collection_facetable: true },
+        { name: 'applicant_label', is_controlled: true, collection_facetable: true },
         { name: 'arranger_label', is_controlled: true, collection_facetable: true },
         { name: 'artist_label', is_controlled: true, collection_facetable: true },
         { name: 'author_label', is_controlled: true, collection_facetable: true },
@@ -695,6 +704,7 @@ module OregonDigital
         { name: 'tgn_label', is_controlled: true, collection_facetable: true },
         { name: 'ranger_district_label', is_controlled: true, collection_facetable: true },
         { name: 'water_basin_label', is_controlled: true, collection_facetable: true },
+        { name: 'plss', is_controlled: false, collection_facetable: false },
         { name: 'street_address', is_controlled: false, collection_facetable: false },
         { name: 'gps_latitude', is_controlled: false, collection_facetable: false },
         { name: 'gps_longitude', is_controlled: false, collection_facetable: false },
@@ -769,6 +779,7 @@ module OregonDigital
         { name: :title, section_name: '' },
         { name: :creator, section_name: 'Creators' },
         { name: :photographer, section_name: '' },
+        { name: :applicant, section_name: '' },
         { name: :arranger, section_name: '' },
         { name: :artist, section_name: '' },
         { name: :author, section_name: '' },
@@ -848,6 +859,7 @@ module OregonDigital
         { name: :street_address, section_name: '' },
         { name: :tgn, section_name: '' },
         { name: :water_basin, section_name: '' },
+        { name: :plss, section_name: '' },
         { name: :date, section_name: 'Dates' },
         { name: :acquisition_date, section_name: '' },
         { name: :award_date, section_name: '' },
