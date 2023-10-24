@@ -3,6 +3,7 @@
   "private": true,
   "repository": "git@github.com:samvera/hyrax.git",
   "dependencies": {
+    "handlebars": "4.0.5",
     "jquery": "3.5.0",
     "node-fetch": "2.6.7",
     "shx": "^0.3.2",

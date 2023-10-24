@@ -5,7 +5,6 @@ class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
   include Hydra::AccessControlsEnforcement
   include Hyrax::SearchFilters
-  include BlacklightRangeLimit::RangeLimitBuilder
   include BlacklightAdvancedSearch::AdvancedSearchBuilder
   self.default_processor_chain += %i[add_advanced_search_to_solr]
 

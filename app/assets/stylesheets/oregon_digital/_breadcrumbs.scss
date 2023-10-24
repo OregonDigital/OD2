@@ -17,12 +17,12 @@
 }
 
 // Dashboard nav needs to act like main content
-.sidebar {
-  &.maximized + div nav.breadcrumb {
-    padding-left: $drawer-large + $gutter-width;
-  }
-  & + div nav.breadcrumb {
-    margin-left: 0;
-    padding-left: $drawer-small + $gutter-width;
-  }
-}
+// .sidebar {
+//   &.maximized + div nav.breadcrumb {
+//     padding-left: $drawer-large + $gutter-width;
+//   }
+//   & + div nav.breadcrumb {
+//     margin-left: 0;
+//     padding-left: $drawer-small + $gutter-width;
+//   }
+// }

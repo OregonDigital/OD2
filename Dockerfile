@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine3.15 as bundler
+FROM ruby:alpine3.18 as bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -12,7 +12,7 @@ FROM bundler as dependencies
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs unzip ghostscript vim yarn \
   git sqlite sqlite-dev postgresql-dev libjpeg-turbo-dev libpng-dev \
-  libtool libgomp libreoffice libressl libressl-dev java-common libc6-compat  \
+  libtool libgomp libreoffice java-common libc6-compat  \
   curl build-base tzdata zip autoconf automake libtool texinfo \
   bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
@@ -56,7 +56,7 @@ ARG UID=8083
 ARG GID=8083
 
 # Create an app user so our program doesn't run as root.
-RUN addgroup -g "$GID" app && adduser -h /data -u "$UID" -G app -D -H app
+RUN addgroup -g 8083 app && adduser -h /data -u 8083 -G app -D -H app
 
 FROM dependencies as gems
 

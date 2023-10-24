@@ -8,7 +8,6 @@ end
 # TODO: make this a version specification once we get a new release cut
 # gem 'hydra-derivatives', git: 'https://github.com/samvera/hydra-derivatives.git'
 
-gem "blacklight_range_limit", "~> 6"
 gem 'browse-everything'
 # coffee-rails is a requirement for Hyrax or one of its dependencies but hasn't
 # been added to either gemspecs
@@ -18,28 +17,28 @@ gem 'dalli', '~> 3.2.3'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
-gem 'hyrax', '3.6.0'
-gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
+gem 'hyrax', '5.0.0.rc2'
 gem 'jquery-rails'
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'sassc-rails'
 gem 'chosen-rails'
 gem 'pg'
-gem 'puma', '~> 5.6'
-gem 'rails', '~> 5.2'
+gem 'puma'
+gem 'rails', '~> 6.1'
 gem 'rsolr', '>= 1.0'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 gem 'sidekiq', '~> 6.4'
 gem 'streamio-ffmpeg'
 gem 'stemmify'
 gem 'tzinfo-data'
 gem 'uglifier', '>= 1.3.0'
 gem 'ruby-oembed'
-gem 'blacklight_advanced_search', '~> 6.4'
+gem 'blacklight_advanced_search'
 gem 'blacklight-oembed'
 gem 'blacklight_dynamic_sitemap'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
-gem 'faraday_middleware', '~> 0.10.0'
-gem 'blacklight_iiif_search', '~> 1.0'
+gem 'faraday_middleware'
+gem 'blacklight_iiif_search'
 gem 'rubyzip', '~> 2'
 gem 'zip_tricks', '~> 5.3'
 gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: 'd9bc39781b9c542a766b9ff2f7a7cce2d736debd' #5.2.1
@@ -107,3 +106,4 @@ gem "vcr", "~> 5.1"
 
 # INSTALL: Get the new Font Awesome
 gem 'font-awesome-sass', '~> 6.4', '>= 6.4.2'
+gem 'bootstrap-sass'

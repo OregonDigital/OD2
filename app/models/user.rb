@@ -8,13 +8,12 @@ class User < ApplicationRecord
   include Hyrax::UserUsageStats
   include Blacklight::User
 
-  attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
   before_create :role_from_devise
 
   # DISABLE RUBOCOP BECAUSE DEVISE REQUIRES A PARTICULAR FORMAT
   # rubocop:disable Style/SymbolArray
   # Include default devise modules. Others available are:
-  devise :database_authenticatable, :registerable, :recoverable, :confirmable,
+  devise :database_authenticatable, :registerable, :recoverable,
          :omniauthable, :validatable, omniauth_providers: [:cas, :saml]
   # rubocop:enable Style/SymbolArray
 

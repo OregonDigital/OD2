@@ -6,7 +6,6 @@ module Hyrax
     module WorkflowsCatalogBehavior
       extend ActiveSupport::Concern
       include BlacklightAdvancedSearch::Controller
-      include BlacklightRangeLimit::ControllerOverride
       include Hydra::Catalog
       include Hydra::Controller::ControllerBehavior
       include OregonDigital::BlacklightConfigBehavior

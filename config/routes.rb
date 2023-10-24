@@ -2,7 +2,6 @@
 
 Rails.application.routes.draw do
 
-  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
   resources :collections, controller: 'oregon_digital/explore_collections', only: [] do
     collection do
@@ -38,7 +37,6 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
-    concerns :range_searchable
     concerns :oai_provider
   end
 
@@ -57,7 +55,6 @@ Rails.application.routes.draw do
   mount Hydra::RoleManagement::Engine => '/'
   mount Qa::Engine => '/authorities'
   mount Hyrax::Engine, at: '/'
-  mount Hyrax::Migrator::Engine, at: '/migrator'
   resources :welcome, only: 'index'
   root 'hyrax/homepage#index'
   curation_concerns_basic_routes
@@ -75,7 +72,6 @@ Rails.application.routes.draw do
   scope module: 'hyrax' do
     namespace :admin do
       resource :workflows, only: [:index], as: 'workflows', path: '/workflows', controller: 'workflows' do
-        concerns :range_searchable
       end
     end
   end
