@@ -14,7 +14,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   git sqlite sqlite-dev postgresql-dev libjpeg-turbo-dev libpng-dev \
   libtool libgomp libreoffice java-common libc6-compat  \
   curl build-base tzdata zip autoconf automake libtool texinfo \
-  bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
+  bash bash-completion java-common openjdk11-jre-headless libressl graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
   libffi libffi-dev xz gcompat tini tmux libxslt-dev libxml2-dev
 
