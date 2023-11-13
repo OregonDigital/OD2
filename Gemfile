@@ -39,6 +39,7 @@ gem 'blacklight_dynamic_sitemap'
 gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware'
 gem 'blacklight_iiif_search'
+gem 'blacklight_range_limit'
 gem 'rubyzip', '~> 2'
 gem 'zip_tricks', '~> 5.3'
 gem 'bulkrax', github: 'samvera-labs/bulkrax', ref: 'd9bc39781b9c542a766b9ff2f7a7cce2d736debd' #5.2.1
