@@ -4,6 +4,7 @@ describe 'BlacklightAdvancedSearchForm' do
   describe 'advanced search form' do
     before do
       Hyrax::CollectionType.new(machine_id: 'user_collection', title: 'User Collection').save
+      Hyrax::CollectionType.new(machine_id: 'oai_set', title: 'OAI Set').save
       visit '/advanced'
     end
 

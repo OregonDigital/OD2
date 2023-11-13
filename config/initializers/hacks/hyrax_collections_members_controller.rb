@@ -56,7 +56,7 @@ Rails.application.config.to_prepare do
       # We should start adding at the end of the existing images
       index = repr_ids.reject(&:blank?).count
       all_ids[index..3].each do |val|
-        CollectionRepresentative.create({ collection_id: collection.id, fileset_id: val, order: index })
+        CollectionRepresentative.create({ collection_id: @collection.id, fileset_id: val, order: index })
         index += 1
       end
     end

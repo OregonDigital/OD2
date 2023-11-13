@@ -24,4 +24,4 @@ bundle exec rails runner 'User.create(
 
 echo
 echo "Creating Oregon Digital admin sets"
-bundle exec rake oregon_digital:create_admin_sets
+bundle exec rake oregon_digital:create_admin_sets_and_collection_types
