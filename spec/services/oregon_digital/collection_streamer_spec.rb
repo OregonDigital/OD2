@@ -7,7 +7,7 @@ describe OregonDigital::CollectionStreamer do
 
   describe '#stream' do
     before do
-      allow(collection).to receive_message_chain(:collection_type)
+      allow(collection).to receive(:collection_type)
       allow(collection.collection_type).to receive(:machine_id).and_return('')
     end
 
