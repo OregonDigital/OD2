@@ -6,14 +6,16 @@ describe OregonDigital::CollectionStreamer do
   let(:streamer) { service_class.new(collection, false) }
 
   describe '#stream' do
+    before do
+      allow(collection).to receive_message_chain(:collection_type)
+      allow(collection.collection_type).to receive(:machine_id).and_return('')
+    end
+
     it 'assembles a zip out of chunks' do
       chunk_count = 0
-      skip 'the weird uri case' do
-        service_class.stream(collection) do
-          chunk_count += 1
-        end
+      service_class.stream(collection) do
+        chunk_count += 1
       end
-      chunk_count = 46
       expect(chunk_count).to eq 46
     end
   end
