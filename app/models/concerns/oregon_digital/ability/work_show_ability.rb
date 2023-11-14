@@ -17,7 +17,7 @@ module OregonDigital
             read_doc?(solr_doc)
           end
 
-          cannot(%i[show], FileSet) unless current_user.role?(self.class.manager_permission_roles)
+          cannot(%i[show], [FileSet, Hyrax::Resource]) unless current_user.role?(self.class.manager_permission_roles)
           cannot(%i[show], SolrDocument, visibility: 'osu') unless osu_allowed?
           cannot(%i[show], SolrDocument, visibility: 'uo') unless uo_allowed?
           cannot(%i[show], [ActiveFedora::Base, Hyrax::Resource], visibility: 'osu') unless osu_allowed?

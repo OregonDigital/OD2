@@ -7,7 +7,7 @@
   <tbody>
   <% file_sets.each do |file_set| %>
     <% errors = @errors.find_by(document_id: file_set.id) %>
-    <% curation_concern = FileSet.find(file_set.id).parent %>
+    <% curation_concern = Hyrax.query_service.find_parents(resource: file_set).first %>
     <tr>
       <td class="human-readable-type"><%= curation_concern.human_readable_type %></td>
       <th class="title" scope="row"><%= link_to file_set, edit_oembed_path(file_set)  %></th>
