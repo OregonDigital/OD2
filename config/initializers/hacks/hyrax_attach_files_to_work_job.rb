@@ -19,7 +19,7 @@ Rails.application.config.to_prepare do
     end
 
     def attach_work(user, work, work_attributes, work_permissions, uploaded_file, index)
-      actor = Hyrax::Actors::FileSetActor.new(FileSet.create(id: pid(index, work)), user)
+      actor = Hyrax::Actors::FileSetActor.new(FileSet.new(id: pid(index, work)), user)
       file_set_attributes = file_set_attrs(work_attributes, uploaded_file)
       metadata = visibility_attributes(work_attributes, file_set_attributes)
       uploaded_file.add_file_set!(actor.file_set)

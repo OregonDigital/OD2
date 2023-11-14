@@ -42,7 +42,9 @@ module OregonDigital
       # rubocop:disable Metrics/MethodLength
       def create_file_from_url(env, uri)
         oembed_url = URI.decode_www_form_component(uri.to_s)
-        ::FileSet.new(oembed_url: oembed_url) do |fs|
+        use_valkyrie = false
+
+        file_set = ::FileSet.new(oembed_url: oembed_url) do |fs|
           title = 'oEmbed Media'
           begin
             resource = OEmbed::Providers.get(oembed_url)
@@ -55,11 +57,17 @@ module OregonDigital
             end.add_error(msg)
           end
           fs.title = Array(title)
-          actor = Hyrax::Actors::FileSetActor.new(fs, env.user)
-          actor.create_metadata(visibility: env.curation_concern.visibility)
-          actor.attach_to_work(env.curation_concern)
-          fs.save!
         end
+
+        if curation_concern.is_a? Valkyrie::Resource
+          file_set = Hyrax.persister.save(resource: file_set)
+          use_valkyrie = true
+        end
+
+        actor = Hyrax::Actors::FileSetActor.new(fs, env.user, use_valkyrie: use_valkyrie)
+        actor.create_metadata(visibility: env.curation_concern.visibility)
+        actor.attach_to_work(env.curation_concern)
+        file_set.save! if file_set.respond_to?(:save!)
       end
       # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength

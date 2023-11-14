@@ -87,7 +87,7 @@ module Hyrax
     end
 
     def oembed?(presenter)
-      ::FileSet.find(presenter.id).oembed? && current_ability.can?(:read, presenter.id)
+      Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: presenter.id).oembed? && current_ability.can?(:read, presenter.id)
     end
   end
 end
