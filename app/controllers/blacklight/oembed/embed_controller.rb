@@ -24,9 +24,9 @@ module Blacklight::Oembed
       # Create OembedError for oEmbed Errors dashboard
 
       Hyrax.query_service
-          .find_all_of_model(model: Hyrax::FileSet)
-          .select { |file_set| file_set.oembed_url == url }
-          .each do |file_set|
+           .find_all_of_model(model: Hyrax::FileSet)
+           .select { |file_set| file_set.oembed_url == url }
+           .each do |file_set|
         OembedError.find_or_create_by(document_id: file_set.id) do |error|
           error.document_id = file_set.id
         end.add_error(msg)
