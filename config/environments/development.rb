@@ -79,4 +79,6 @@ Rails.application.configure do
 
   # Whitelist docker containers for webconsole during development
   config.web_console.whitelisted_ips = ['172.0.0.0/8', '192.0.0.0/8']
+
+  config.active_record.yaml_column_permitted_classes = [Symbol, ActiveSupport::HashWithIndifferentAccess, Time]
 end
