@@ -81,6 +81,9 @@ jobs:
           HONEYCOMB_DEBUG: "true"
           HONEYCOMB_WRITEKEY: buzzzzzzzzzzzzzzzz
           HONEYCOMB_SERVICE: od2
+          HYRAX_VALKYRIE: true
+          VALKYRIE_SOLR_CORE: hydra-test
+          VALKYRIE_SOLR_PORT: "8985"
           RAILS_ENV: test
           RDS_DB_NAME: test
           RDS_HOSTNAME: localhost
