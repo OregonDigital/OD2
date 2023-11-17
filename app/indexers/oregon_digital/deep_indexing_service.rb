@@ -34,9 +34,6 @@ module OregonDigital
     private
 
     def fetch_external
-      # Here be dragons
-      # A valkyrie work's controlled properties don't resolve to our OregonDigital::ControlledVocabularies::* objects
-      # They resolve to RDF::URI, we need to find a way to get the right CV & index it
       object.controlled_properties.each do |property|
         object[property].each do |value|
           resource = value.respond_to?(:resource) ? value.resource : value
@@ -81,7 +78,7 @@ module OregonDigital
       %w[ranger_district water_basin location].each do |prop|
         cpm[prop] = 'location'
       end
-      %w[arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer landscape_architect lyricist owner patron photographer print_maker recipient transcriber translator].each do |prop|
+      %w[applicant arranger artist author cartographer collector composer creator contributor dedicatee donor designer editor illustrator interviewee interviewer landscape_architect lyricist owner patron photographer print_maker recipient transcriber translator].each do |prop|
         cpm[prop] = 'creator'
       end
       %w[keyword subject].each do |prop|

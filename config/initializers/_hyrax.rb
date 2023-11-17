@@ -250,14 +250,14 @@ Hyrax.config do |config|
 
   # Fields to display in the IIIF metadata section; default is the required fields
   config.iiif_metadata_fields = %i[
-    title creator_label photographer_label arranger_label artist_label author_label
+    title creator_label photographer_label applicant_label arranger_label artist_label author_label
     cartographer_label collector_label composer_label contributor_label designer_label donor_label editor_label
     illustrator_label interviewee_label interviewer_label landscape_architect_label lyricist_label owner_label patron_label
     print_maker_label recipient_label transcriber_label translator_label description abstract inscription view subject_label
     award cultural_context_label ethnographic_term_label event keyword legal_name military_branch_label sports_team
     style_or_period_label phylum_or_division_label taxon_class_label order_label family_label genus_label species_label
     common_name_label location_label gps_latitude gps_longitude ranger_district_label street_address tgn_label
-    water_basin_label date date_created view_date license_label rights_holder rights_note rights_statement_label
+    water_basin_label plss date date_created view_date license_label rights_holder rights_note rights_statement_label
     use_restrictions repository_label local_collection_name_label language_label publisher_label provenance source has_finding_aid
     is_part_of resource_type_label workType_label measurements collections
   ]

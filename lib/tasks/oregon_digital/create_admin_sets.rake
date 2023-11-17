@@ -2,7 +2,11 @@
 
 namespace :oregon_digital do
   desc 'Create admin sets in OregonDigital'
-  task create_admin_sets: :environment do
+  task create_admin_sets_and_collection_types: :environment do
+    puts 'Creating collection types'
+
+    create_initial_collection_types
+
     user = User.where(email: Hyrax::Migrator.config.migration_user).first
     abort "User with email #{Hyrax::Migrator.config.migration_user} does not exist. An existing migration_user is required for this task." if user.blank?
 
@@ -28,4 +32,10 @@ namespace :oregon_digital do
       end
     end
   end
+end
+
+def create_initial_collection_types
+  Hyrax::CollectionType.find_or_create_by(title: 'Digital Collection')
+  Hyrax::CollectionType.find_or_create_by(title: 'User Collection')
+  Hyrax::CollectionType.find_or_create_by(title: 'OAI Set')
 end

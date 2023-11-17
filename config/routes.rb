@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get 'terms' => 'oregon_digital/about#terms'
   get 'mission' => 'oregon_digital/about#mission'
   get 'use' => 'oregon_digital/about#use'
+  get 'recommend' => 'oregon_digital/about#recommend'
 
   concern :oai_provider, BlacklightOaiProvider::Routes.new
   concern :searchable, Blacklight::Routes::Searchable.new
