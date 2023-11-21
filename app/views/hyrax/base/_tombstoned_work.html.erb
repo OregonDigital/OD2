@@ -1,0 +1,32 @@
+<% @content_block = ContentBlock.find_or_create_by(name: "tombstone-#{@presenter.solr_document.id}") %>
+<% @content_block.update(value: 'Default') unless @content_block.value.present? %>
+<% @content = displayable_content_block @content_block, class: 'tombstone-text' %>
+
+<div class='col-md-10 col-offset-md-2'>
+  <%= raw @content %>
+</div>
+<div class='col-md-10 col-offset-md-2'>
+  <h2> Citations </h2>
+  <br>
+  <p>MLA Citation: <%= export_as_mla_citation(@presenter) %></p>
+  <br>
+  <p>APA Citation: <%= export_as_apa_citation(@presenter) %></p>
+  <br>
+  <p>Chicago Citation: <%= export_as_chicago_citation(@presenter) %></p>
+</div>
+<% if can?(:manage, @presenter.admin_set.first) %>
+  <div class='col-md-12'>
+    <h2>Tombstone Message Editor</h2>
+    <%= simple_form_for @content_block, url: "/contentblock/update/#{@content_block.name}", html: { class: 'nav-safety' } do |f| %>
+      <div class="panel-body">
+        <div class="field form-group">
+          <%= f.text_area :content, value: f.object.value, class: 'form-control tinymce', rows: 20, cols: 120 %>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <%= link_to t(:'hyrax.pages.cancel'), hyrax.admin_admin_sets_path, class: 'btn btn-default pull-right' %>
+        <%= f.button :submit, class: 'btn btn-primary pull-right' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
