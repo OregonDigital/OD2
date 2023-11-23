@@ -17,7 +17,7 @@ module OregonDigital
       writer = ZipTricks::BlockWrite.new(&chunks)
 
       # CHECK: To see if collection is user collection
-      if @collection.collection_type.machine_id.to_s == 'user_collection'
+      if @collection.collection_type.machine_id.to_s == 'user_collection' || @collection.collection_type.machine_id.to_s == 'digital_collection'
         ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
           stream_user_collection(collection, '', zip)
         end

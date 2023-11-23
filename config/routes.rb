@@ -83,7 +83,7 @@ Rails.application.routes.draw do
 
   resources :collections, controller: 'hyrax/collections', only: [] do # public landing show page
     member do
-      get :download
+      get :download, :download_low
     end
   end
 
