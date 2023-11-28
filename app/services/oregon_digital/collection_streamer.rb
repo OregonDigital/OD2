@@ -16,15 +16,8 @@ module OregonDigital
     def each(&chunks)
       writer = ZipTricks::BlockWrite.new(&chunks)
 
-      # CHECK: To see if collection is user collection
-      if @collection.collection_type.machine_id.to_s == 'user_collection'
-        ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
-          stream_user_collection(collection, '', zip)
-        end
-      else
-        ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
-          stream_collection(collection, '', zip)
-        end
+      ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
+        stream_collection(collection, '', zip)
       end
     end
 
@@ -41,21 +34,6 @@ module OregonDigital
       stream_metadata(keys, metadata, folder, zip)
     end
 
-    # METHOD: Create a special stream method for user collection
-    def stream_user_collection(collection, folder, zip)
-      # COLLECTION: Recursively drill down into sub-collections
-      collection.child_collections.map do |col|
-        # Recursively drill down into sub-collections
-        stream_collection(col, "#{folder}#{col.id}/", zip)
-      end
-
-      # WORK: Append child works from collection in zip folder
-      collection.child_works.map do |work|
-        # Add low quality works from collection and append metadata
-        stream_works_low(work, zip, folder) if work.visibility == 'open'
-      end
-    end
-
     def stream_child_collections(collection, zip, folder, keys, controlled_keys)
       collection.child_collections.map do |col|
         # Recursively drill down into sub-collections
@@ -67,7 +45,7 @@ module OregonDigital
     def stream_child_works(collection, zip, folder, keys, controlled_keys)
       collection.child_works.map do |work|
         # Add low quality works from collection and append metadata
-        stream_works_low(work, zip, folder)
+        stream_works_low(work, zip, folder) if work.visibility == 'open'
         work.metadata_row(keys, controlled_keys)
       end
     end
