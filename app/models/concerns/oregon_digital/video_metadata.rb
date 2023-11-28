@@ -157,7 +157,8 @@ module OregonDigital
         { name: :original_filename, section_name: '' },
         { name: :full_size_download_allowed, section_name: '' },
         { name: :date_modified, section_name: '' },
-        { name: :date_uploaded, section_name: '' }
+        { name: :date_uploaded, section_name: '' },
+        { name: :archival_object_id, section_name: 'Identifiers' }
       ].freeze
     end
   end
