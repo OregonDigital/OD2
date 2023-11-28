@@ -1,6 +1,6 @@
 <% @content_block = ContentBlock.find_or_create_by(name: "tombstone-#{@presenter.solr_document.id}") %>
 <% @content_block.update(value: 'Default') unless @content_block.value.present? %>
-<% @content = displayable_content_block @content_block, class: 'tombstone-text' %>
+<% @content = tag.div(raw(@content_block.value), class: 'tombstone-text') %>
 
 <div class='col-md-10 col-offset-md-2'>
   <%= raw @content %>
