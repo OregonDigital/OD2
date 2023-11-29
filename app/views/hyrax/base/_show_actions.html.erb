@@ -38,7 +38,7 @@
     <div class='edit-button-sections'>
     <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger delete-button-show-page', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
     </div>
-    <% if @presenter.workflow.actions.present? && @presenter.solr_document['workflow_state_name_ssim'] && @presenter.solr_document['workflow_state_name_ssim'].first.capitalize == 'Deposited' %>
+    <% if @presenter.workflow.actions.present? && @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Deposited' %>
       <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
         <%= hidden_field :workflow_action, :name, value: 'tombstone' %>
         <input class="btn btn-danger" type="submit" value="Tombstone" data-confirm='<%= t('hyrax.tombstone.confirmation') %>'>
