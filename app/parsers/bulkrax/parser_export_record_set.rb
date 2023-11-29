@@ -208,7 +208,7 @@ module Bulkrax
 
     class LocalCollection < Base
       def works_query
-        "local_collection_name_tesim:*#{local_coll_id} #{extra_filters}"
+        "local_collection_name_tesim:#{local_coll_id} #{extra_filters}"
       end
 
       def local_coll_id
