@@ -18,6 +18,8 @@ AllCops:
     - 'app/presenters/hyrax/collapsable_section_presenter.rb'
     - 'app/parsers/bulkrax/bagit_complex_parser.rb'
     - 'app/views/bulkrax/**/*'
+    - 'app/parsers/bulkrax/parser_export_record_set.rb'
+
 Metrics/BlockLength:
   ExcludedMethods: ['included']
   Exclude:
