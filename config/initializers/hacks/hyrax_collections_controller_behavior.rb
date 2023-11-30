@@ -23,13 +23,8 @@ Rails.application.config.to_prepare do
       end
     end
 
-    # Add in collection download to low resolution
-    def download_low
-      download(true)
-    end
-
     # Zip up all works in collection into one collection zip
-    def download(standard_size = false)
+    def download
       zipname = "#{collection.id}.zip"
 
       send_file_headers!(
@@ -40,7 +35,7 @@ Rails.application.config.to_prepare do
       response.headers['Last-Modified'] = Time.now.httpdate.to_s
       response.headers['X-Accel-Buffering'] = 'no'
 
-      OregonDigital::CollectionStreamer.stream(collection, standard_size) do |chunk|
+      OregonDigital::CollectionStreamer.stream(collection) do |chunk|
         response.stream.write(chunk)
       end
     ensure
