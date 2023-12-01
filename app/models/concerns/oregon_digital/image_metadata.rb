@@ -120,6 +120,7 @@ module OregonDigital
         { name: :issued, section_name: '' },
         { name: :view_date, section_name: '' },
         { name: :accession_number, section_name: 'Identifiers' },
+        { name: :archival_object_id, section_name: '' },
         { name: :barcode, section_name: '' },
         { name: :hydrologic_unit_code, section_name: '' },
         { name: :identifier, section_name: '' },
@@ -173,8 +174,7 @@ module OregonDigital
         { name: :resolution, section_name: '' },
         { name: :full_size_download_allowed, section_name: '' },
         { name: :date_modified, section_name: '' },
-        { name: :date_uploaded, section_name: '' },
-        { name: :archival_object_id, section_name: 'Identifiers' }
+        { name: :date_uploaded, section_name: '' }
       ].freeze
     end
   end
