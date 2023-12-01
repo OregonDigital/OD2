@@ -138,6 +138,7 @@ def attrs
     'rights_holder' => [],
     'use_restrictions' => [],
     'original_filename' => nil,
+    'archival_object_id' => [],
     'full_size_download_allowed' => 1,
     'access_restrictions' => ['http://opaquenamespace.org/ns/accessRestrictions/OSUrestricted'],
     'applicant' => ['http://id.loc.gov/authorities/names/no2010022998'],

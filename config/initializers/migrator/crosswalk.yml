@@ -635,3 +635,7 @@ crosswalk:
     predicate: http://purl.org/dc/terms/dateSubmitted
     multiple: false
     function:
+  - property: archival_object_id
+    predicate: http://opaquenamespace.org/ns/archival_object_id
+    multiple: true
+    function:

@@ -234,6 +234,8 @@ en:
           subject_label: Subject
           date_modified: Modified
   hyrax:
+    tombstone:
+      confirmation: 'Are you sure you want to tombstone this item?'
     advanced_form:
       all: All
       any: Any
