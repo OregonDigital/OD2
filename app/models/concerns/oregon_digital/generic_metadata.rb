@@ -606,6 +606,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :archival_object_id, predicate: RDF::URI.new('http://opaquenamespace.org/ns/archival_object_id'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
       define_singleton_method :generic_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
@@ -872,6 +876,7 @@ module OregonDigital
         { name: :hydrologic_unit_code, section_name: '' },
         { name: :identifier, section_name: '' },
         { name: :item_locator, section_name: '' },
+        { name: :archival_object_id, section_name: '' },
         { name: :longitude_latitude_identification, section_name: '' },
         { name: :license, section_name: 'Rights' },
         { name: :access_restrictions, section_name: '' },
