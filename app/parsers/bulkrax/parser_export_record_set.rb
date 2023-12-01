@@ -208,11 +208,7 @@ module Bulkrax
 
     class LocalCollection < Base
       def works_query
-        "local_collection_name_tesim:*#{local_coll_id} #{extra_filters}"
-      end
-
-      def local_coll_id
-        importerexporter.export_source.split("/").last.strip
+        "local_collection_name_sim:\"#{importerexporter.export_source}\" #{extra_filters}"
       end
 
       def collections_query

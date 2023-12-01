@@ -1,0 +1,118 @@
+<p id='notice'><%= notice %></p>
+
+<div class='col-xs-12 main-header'>
+  <h1><span class='fa fa-cloud-download' aria-hidden='true'></span> Exporter: <%= @exporter.name %></h1>
+</div>
+
+<div class='panel panel-default'>
+  <div class='panel-body'>
+
+    <% if File.exist?(@exporter.exporter_export_zip_path) %>
+      <%= simple_form_for @exporter, method: :get, url: exporter_download_path(@exporter), html: { class: 'form-inline bulkrax-p-align' } do |form| %>
+        <strong>Download:</strong>
+        <%= render 'downloads', exporter: @exporter, form: form %>
+        <%= form.button :submit, value: 'Download', data: { disable_with: false } %>
+      <% end %>
+    <% end %>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.name') %>:</strong>
+      <%= @exporter.name %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.user') %>:</strong>
+      <%= @exporter.user %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.export_type') %>:</strong>
+      <%= @exporter.export_type %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.export_from') %>:</strong>
+      <%= @exporter.export_from %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.export_source') %>:</strong>
+      <% case @exporter.export_from %>
+      <% when 'collection' %>
+        <% collection = Collection.find(@exporter.export_source) %>
+        <%= link_to collection&.title&.first, hyrax.dashboard_collection_path(collection.id) %>
+      <% when 'importer' %>
+        <% importer = Bulkrax::Importer.find(@exporter.export_source) %>
+        <%= link_to importer.name, bulkrax.importer_path(importer.id) %>
+      <% when 'worktype' %>
+        <%= @exporter.export_source %>
+      <% when 'local_collection' %>
+        <%= @exporter.export_source %>
+      <% end %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.parser_klass') %>:</strong>
+      <%= @exporter.parser_klass %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.limit') %>:</strong>
+      <%= @exporter.limit %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.generated_metadata') %>:</strong>
+      <%= @exporter.generated_metadata %>
+    </p>
+
+    <p class='bulkrax-p-align'>
+      <strong><%= t('bulkrax.exporter.labels.include_thumbnails') %>:</strong>
+      <%= @exporter.include_thumbnails %>
+    </p>
+
+
+    <%= render partial: 'bulkrax/shared/bulkrax_errors', locals: {item: @exporter} %>
+
+    <%= render partial: 'bulkrax/shared/bulkrax_field_mapping', locals: {item: @exporter} %>
+
+    <%# Currently, no parser-specific fields exist on Exporter,
+        thus there's no real reason to always show this field %>
+    <% if @exporter.parser_fields.present? %>
+      <p class='bulkrax-p-align'>
+        <strong><%= t('bulkrax.exporter.labels.parser_fields') %>:</strong><br>
+        <% @exporter.parser_fields.each do |k, v| %>
+          <%= k %>: <%= v %><br>
+        <% end %>
+      </p>
+    <% end %>
+
+    <p class='bulkrax-p-align'><strong><%= t('bulkrax.exporter.labels.field_mapping') %>:</strong></p>
+
+    <p class="bulkrax-p-align" title="<%= @exporter.last_run&.total_work_entries %> processed, <%= @exporter.last_run&.failed_records %> failed">
+      <strong>Total Entries:</strong>
+      <%= @exporter.last_run&.total_work_entries %>
+    </p>
+    <br>
+
+    <div class="bulkrax-nav-tab-bottom-margin">
+      <!-- Nav tabs -->
+      <ul class="bulkrax-nav-tab-top-margin tab-nav nav nav-tabs" role="tablist">
+        <li role="presentation" class='active'><a href="#work-entries" aria-controls="work-entries" role="tab" data-toggle="tab"><%= t('bulkrax.exporter.labels.work_entries') %></a></li>
+        <li role="presentation"><a href="#collection-entries" aria-controls="collection-entries" role="tab" data-toggle="tab"><%= t('bulkrax.exporter.labels.collection_entries') %></a></li>
+        <li role="presentation"><a href="#file-set-entries" aria-controls="file-set-entries" role="tab" data-toggle="tab"><%= t('bulkrax.exporter.labels.file_set_entries') %></a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content outline">
+        <%= render partial: 'bulkrax/shared/work_entries_tab', locals: { item: @exporter, entries: @work_entries } %>
+        <%= render partial: 'bulkrax/shared/collection_entries_tab', locals: { item: @exporter, entries: @collection_entries } %>
+        <%= render partial: 'bulkrax/shared/file_set_entries_tab', locals: { item: @exporter, entries: @file_set_entries } %>
+      </div>
+      <br>
+      <%= link_to 'Edit', edit_exporter_path(@exporter) %>
+      |
+      <%= link_to 'Back', exporters_path %>
+    </div>
+  </div>
+</div>
+
