@@ -49,6 +49,14 @@ module OregonDigital
       add_breadcrumb t(:'hyrax.controls.about'), about_path
     end
 
-    def use; end
+    def use
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
+
+    def recommend
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
   end
 end

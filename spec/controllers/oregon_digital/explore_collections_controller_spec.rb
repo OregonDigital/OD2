@@ -2,11 +2,14 @@
 
 RSpec.describe OregonDigital::ExploreCollectionsController do
   let(:user) { create(:user) }
-  let(:collection_type) { create(:collection_type, machine_id: :user_collection) }
-  let(:collection) { create(:collection, collection_type_gid: "gid://od2/hyrax-collectiontype/#{collection_type.id}") }
+  let(:user_collection_type) { create(:collection_type, machine_id: :user_collection) }
+  let(:user_collection) { create(:collection, collection_type_gid: "gid://od2/hyrax-collectiontype/#{user_collection_type.id}") }
+  let(:oai_collection_type) { create(:collection_type, machine_id: :oai_set) }
+  let(:oai_collection) { create(:collection, collection_type_gid: "gid://od2/hyrax-collectiontype/#{oai_collection_type.id}") }
 
   before do
-    allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :user_collection).and_return(collection_type)
+    allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :user_collection).and_return(user_collection_type)
+    allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :oai_set).and_return(oai_collection_type)
   end
 
   describe '#all' do

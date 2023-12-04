@@ -13,6 +13,7 @@ en:
           subject_sim: Subject
           owner_label_sim: Owner
           workType_label_sim: Work Type
+          applicant_label_sim: Applicant
           arranger_label_sim: Arranger
           artist_label_sim: Artist
           author_label_sim: Author
@@ -52,6 +53,7 @@ en:
           transcriber_label_sim: Transcriber
           translator_label_sim: Translator
           water_basin_label_sim: Water Basin
+          plss_sim: Public Land Survey System
           based_near_label_sim: Location
           cultural_context_label_sim: Cultural Context
           ethnographic_term_label_sim: Ethnographic Term
@@ -96,6 +98,7 @@ en:
           subject_tesim: Subject
           owner_label_tesim: Owner
           workType_label_tesim: Work Type
+          applicant_label_tesim: Applicant
           arranger_label_tesim: Arranger
           artist_label_tesim: Artist
           author_label_tesim: Author
@@ -122,6 +125,7 @@ en:
           transcriber_label_tesim: Transcriber
           translator_label_tesim: Translator
           water_basin_label_tesim: Water Basin
+          plss_tesim: Public Land Survey System
           based_near_label_tesim: Location
           cultural_context_label_tesim: Cultural Context
           ethnographic_term_label_tesim: Ethnographic Term
@@ -179,6 +183,7 @@ en:
           subject: Subject
           owner_label: Owner
           workType_label: Work Type
+          applicant_label: Applicant
           arranger_label: Arranger
           artist_label: Artist
           author_label: Author
@@ -204,6 +209,7 @@ en:
           transcriber_label: Transcriber
           translator_label: Translator
           water_basin_label: Water Basin
+          plss: Public Land Survey System
           based_near_label: Location
           cultural_context_label: Cultural Context
           ethnographic_term_label: Ethnographic Term
@@ -228,6 +234,8 @@ en:
           subject_label: Subject
           date_modified: Modified
   hyrax:
+    tombstone:
+      confirmation: 'Are you sure you want to tombstone this item?'
     advanced_form:
       all: All
       any: Any

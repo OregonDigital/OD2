@@ -19,6 +19,10 @@ crosswalk:
     predicate: http://id.loc.gov/vocabulary/relators/pht
     multiple: true
     function: attributes_data
+  - property: applicant_attributes
+    predicate: http://id.loc.gov/vocabulary/relators/app
+    multiple: true
+    function: attributes_data
   - property: arranger_attributes
     predicate: http://id.loc.gov/vocabulary/relators/arr
     multiple: true
@@ -355,6 +359,10 @@ crosswalk:
     predicate: http://opaquenamespace.org/ns/waterBasin
     multiple: true
     function: attributes_data
+  - property: plss
+    predicate: http://opaquenamespace.org/ns/plss
+    multiple: true
+    function: 
   - property: date
     predicate: http://purl.org/dc/terms/date
     multiple: true
@@ -626,4 +634,8 @@ crosswalk:
   - property: date_uploaded
     predicate: http://purl.org/dc/terms/dateSubmitted
     multiple: false
+    function:
+  - property: archival_object_id
+    predicate: http://opaquenamespace.org/ns/archival_object_id
+    multiple: true
     function:

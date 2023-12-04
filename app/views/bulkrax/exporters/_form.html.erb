@@ -51,6 +51,12 @@
       }
     }
   %>
+  <%= form.input :export_source_local_collection,
+    label: t('bulkrax.exporter.labels.local_collection'),
+    required: true,
+    prompt: 'eg http://opaquenamespace.org/ns/localCollectionName/',
+    label_html: { class: 'local_collection export-source-option hidden' },
+    input_html: { class: 'local_collection export-source-option hidden form-control' } %>
 
   <%= form.input :export_source_worktype,
     label: t('bulkrax.exporter.labels.worktype'),
