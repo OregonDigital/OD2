@@ -330,5 +330,8 @@ ul.nav.homepage-nav {
 
 .chevron-align {
   height: 1%;
-  margin-top: 13px;
+  @media (max-width: $screen-md-min) {
+    margin-top: 13px;
+  }
+  margin-right: 5px;
 }
