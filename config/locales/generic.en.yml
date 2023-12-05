@@ -187,6 +187,7 @@ en:
         original_filename: "Use for the original filename of the resource."
         date_modified: "Include date when the resource was modified (ex. Scanned missing pages and replaced file in Oregon Digital; Redacted signatures). Use EDTF format (YYYY-MM-DD)."
         oembed_urls: "Add an oEmbed URL here. Use one URL here or the files above, but not both."
+        archival_object_id: "Use for system-generated identifers from archival collections management systems or digital asset management systems."
     labels:
       defaults:
         collections: "Collections"
@@ -418,3 +419,4 @@ en:
         set: "Collection"
         oembed_urls: "oEmbed URL"
         local_collection: "Local Collection Name"
+        archival_object_id: "Archival Object ID"
