@@ -96,15 +96,13 @@ input[type=checkbox] {
 
 // DISPLAY: Override the button to display it rather than hiding it & fix formatting issue
 .label_and_uri_controlled_vocabulary .listing li:first-of-type .ui-autocomplete-input {
-  width: 125%;
+  width: 100%;
 }
 
 .label_and_uri_controlled_vocabulary .listing li:first-of-type .input {
   border-radius: 4px;
-  width: 125%;
 }
 
 .label_and_uri_controlled_vocabulary .listing li:first-of-type .remove {
   display: inline-block;
-  margin: 0 0 0 110%;
 }

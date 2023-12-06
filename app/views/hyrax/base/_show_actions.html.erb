@@ -1,53 +1,63 @@
-<div class="show-actions">
-  <% if Hyrax.config.analytics? && current_ability.admin? %>
-    <%= link_to "Analytics", presenter.stats_path, id: 'stats', class: 'btn btn-default' %>
-  <% end %>
-
-  <%# OVERRIDE FROM HYRAX to remove restritctions from add to collection button #%>
 
 
+<div class="not-show-actions">
+  <div class='row pull-right'>
 
+    <div class='col-md-4 pull-right'>
+    <div class="edit-button-sections">
+      <div class="dropdown">
+        <button id="download-button" class="btn btn-primary dropdown-toggle" style='width: 130%;' type="button" data-toggle="dropdown"  aria-controls="download-list" aria-expanded="false" aria-haspopup="true">Download
+        <span class="caret-dropdown"></span></button>
+        <ul id="download-list" class="dropdown-menu" role="menu" aria-labelledby="download-button">
+          <% if current_ability.can? :download, Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: presenter.id) %>
+            <li><%= link_to "Files (High Quality) + Metadata (ZIP)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
+          <% end %>
+          <li><%= link_to "Files (Standard Quality) + Metadata (ZIP)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/vnd.ms-'))  %></li>
+          <li><%= link_to "Metadata Only (CSV)", main_app.send(:"metadata_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
+        </ul>
+      </div>
+    </div>
+    </div>
 
-  <div class="edit-button-sections">
-    <%= button_tag 'Print <i class="fa fa-print" aria-hidden="true"></i>'.html_safe, class: 'btn btn-default', onclick: 'window.print();return false;'%>
-  </div>
-  <div class="edit-button-sections">
-    <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector edit-group" checked="checked" />
-    <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
-                  class: 'btn btn-default submits-batches submits-batches-add',
+    <div class='col-md-4 pull-right no-left-padding'>
+    <div class="edit-button-sections">
+      <input type="checkbox"  style="display:none" name="batch_document_ids[]" id="batch_document_<%= presenter.id %>" value="<%= presenter.id %>" class="batch_document_selector edit-group" checked="checked" />
+      <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
+                  class: 'btn btn-default submits-batches submits-batches-add add-to-align',
                   data: { toggle: "modal", target: "#collection-list-container" } %>
-  </div>
-  <div class="edit-button-sections">
-    <div class="dropdown">
-      <button id="download-button" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"  aria-controls="download-list" aria-expanded="false" aria-haspopup="true">Download
-      <span class="caret-dropdown"></span></button>
-      <ul id="download-list" class="dropdown-menu" role="menu" aria-labelledby="download-button">
-        <% if current_ability.can? :download, Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: presenter.id) %>
-          <li><%= link_to "Files (High Quality) + Metadata (ZIP)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
-        <% end %>
-        <li><%= link_to "Files (Standard Quality) + Metadata (ZIP)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/vnd.ms-'))  %></li>
-        <li><%= link_to "Metadata Only (CSV)", main_app.send(:"metadata_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
-      </ul>
     </div>
-  </div>
+    </div>
 
+    <div class='col-md-4 pull-right'>
+    <div class="edit-button-sections">
+      <%= button_tag 'Print <i class="fa fa-print" aria-hidden="true"></i>'.html_safe, class: 'btn btn-default pull-right print-button', onclick: 'window.print();return false;'%>
+    </div>
+    </div>
+
+  </div>
+  <div class='row pull-right' style="margin-top: 5px;">
   <% if presenter.editor? %>
-    <div class='edit-button-sections'>
-    <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
+
+    <div class='col-md-3 pull-right'>
+      <div class='edit-button-sections'>
+        <%= link_to "Delete", [main_app, presenter], class: 'btn delete-button-show-page align-button', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
+      </div>
     </div>
-    <div class='edit-button-sections'>
-    <%= link_to "Delete", [main_app, presenter], class: 'btn btn-danger delete-button-show-page', data: { confirm: "Delete this #{presenter.human_readable_type}?" }, method: :delete %>
-    </div>
-    <% if @presenter.workflow.actions.present? && @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Deposited' %>
-      <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
-        <%= hidden_field :workflow_action, :name, value: 'tombstone' %>
-        <input class="btn btn-danger" type="submit" value="Tombstone" data-confirm='<%= t('hyrax.tombstone.confirmation') %>'>
+
+    <div class='col-md-3 pull-right no-left-padding right-padded'>
+      <% if @presenter.workflow.actions.present? && @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Deposited' %>
+        <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
+          <%= hidden_field :workflow_action, :name, value: 'tombstone' %>
+          <input class="btn btn-default" style='width: 105%;' type="submit" value="Tombstone" data-confirm='<%= t('hyrax.tombstone.confirmation') %>'>
+        <% end %>
       <% end %>
-    <% end %>
-    <% if presenter.valid_child_concerns.length > 0 %>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" type="button" id="attach-child-button" data-toggle="dropdown" aria-haspopup="true" aria-controls="attach-child-list"  aria-expanded="false">
-          Attach Child <span class="caret-dropdown"></span></button>
+    </div>
+
+    <div class='col-md-5 pull-right'>
+      <% if presenter.valid_child_concerns.length > 0 %>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" type="button" id="attach-child-button" data-toggle="dropdown" aria-haspopup="true" aria-controls="attach-child-list"  aria-expanded="false">
+          Attach Child <span class="attach-caret-dropdown"></span></button>
           <ul id="attach-child-list" class="dropdown-menu" role="menu" aria-labelledby="attach-child-button">
             <% presenter.valid_child_concerns.each do |concern| %>
               <li>
@@ -55,9 +65,20 @@
               </li>
             <% end %>
           </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <div class='col-md-1 pull-right'>
+      <div class='edit-button-sections'>
+        <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
       </div>
-    <% end %>
+    </div>
+
   <% end %>
+  </div>
+
+
   <%# END OVERRIDE #%>
   <!-- >
   <% if presenter.work_featurable? %>
