@@ -35,6 +35,7 @@ table.table-scrollable {
 
 .delete-button-show-page {
   margin-left: 30px;
+  background-color: #E88F2A;
 }
 
 .show-actions {
@@ -259,4 +260,46 @@ dl.work-show {
     flex-basis: 50%;
     flex-wrap: wrap;
   }
+}
+.align-button {
+  width: 134%;
+  margin-left: -3px;
+}
+
+.add-to-align {
+  width: 109%;
+  margin-left: 7px;
+}
+
+.print-button {
+  margin-right: -7px;
+}
+
+.no-left-padding {
+  padding-left: 0px;
+}
+
+.right-padded {
+  padding-right: 8px;
+}
+
+.attach-caret-dropdown::after {
+  font-family: 'Glyphicons Halflings';
+  content: "\e114";
+  float: right;
+  color: $black;
+  font-size: 0.8em;
+  line-height: normal;
+  padding-top: .25em;
+  padding: .25em 0 0 0.5em;
+  color: $white;
+}
+
+.padded-right {
+  padding-right: 45px;
+}
+
+.analytics-button {
+  margin-top: 5px !important;
+  width: 35%;
 }
