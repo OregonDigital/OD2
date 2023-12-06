@@ -9,7 +9,7 @@
   <div class="panel-body">
     <%= simple_form_for [main_app, curation_concern] do |f| %>
       <fieldset class="set-access-controls">
-        <% if curation_concern.errors.count.positive? %>
+        <% if curation_concern.respond_to?(:errors) && curation_concern.errors.count.positive? %>
           <section class="help-block">
             <p>
               <%= t('.oembed_broken_html') %>
