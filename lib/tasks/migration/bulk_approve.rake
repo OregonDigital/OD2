@@ -14,7 +14,7 @@ namespace :migration do
       deposited = entity.workflow.workflow_states.find_by(name: 'deposited')
       entity.workflow_state_id = deposited.id
       entity.save!
-      item.save!
+      Hyrax.persister.save(resource: item)
     rescue StandardError => e
       puts "Unable to approve #{pid}"
       puts "Error: #{e.message}"

@@ -44,7 +44,9 @@ module OregonDigital
         oembed_url = URI.decode_www_form_component(uri.to_s)
         use_valkyrie = false
 
-        file_set = ::FileSet.new(oembed_url: oembed_url) do |fs|
+        fs_class = curation_concern.is_a? Valkyrie::Resource ? Hyrax::FileSet : ::FileSet
+
+        file_set = fs_class.new(oembed_url: oembed_url) do |fs|
           title = 'oEmbed Media'
           begin
             resource = OEmbed::Providers.get(oembed_url)
