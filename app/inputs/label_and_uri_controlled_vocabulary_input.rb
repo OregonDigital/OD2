@@ -4,30 +4,30 @@
 class LabelAndUriControlledVocabularyInput < ControlledVocabularyInput
   private
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def build_options_for_existing_row(attribute_name, index, value, options)
+    solr_document_label = ''
     if attribute_name.to_s == 'subject'
       subject_terms = find_subject_term(attribute_name)
       solr_document_label = subject_terms[index]
-      value_uri = value.rdf_subject
-      options[:value] = "#{solr_document_label} (#{value_uri})" || "Unable to fetch label for #{value.rdf_subject}"
-      options[:readonly] = true
     else
       solr_document_label = SolrDocument.find(object.model.id).send("#{attribute_name}_label")[index]
-      value_uri = value.rdf_subject
-      options[:value] = "#{solr_document_label} (#{value_uri})" || "Unable to fetch label for #{value.rdf_subject}"
-      options[:readonly] = true
     end
+    value_uri = value.rdf_subject
+    options[:value] = "#{solr_document_label} (#{value_uri})" || "Unable to fetch label for #{value.rdf_subject}"
+    options[:readonly] = true
   end
 
   def find_subject_term(attribute_name)
     # FIND: Find all the subject uri
-    subject_arr = SolrDocument.find(object.model.id).send("#{attribute_name}")
+    subject_arr = SolrDocument.find(object.model.id).send(attribute_name.to_s)
 
     # CREATE: Create empty arr
     sub_term_arr = []
 
     # LOOP: Loop through and add in updated term to check depreciated links
-    subject_arr.each_with_index do |val, ind|
+    subject_arr.each do |val|
       # FETCH: Begin to fetch uri and label
       prop = Generic.properties[attribute_name.to_s].class_name.new(val)
       begin
@@ -36,10 +36,14 @@ class LabelAndUriControlledVocabularyInput < ControlledVocabularyInput
       rescue TriplestoreAdapter::TriplestoreException => e
         Rails.logger.warn "Failed to fetch #{val} from cache AND source. #{e.message}"
       end
-      sub_term_arr << solrized_term(solrized).first if !solrized_term(solrized).blank?  || ["Label Does Not Exist"]
+      # rubocop:disable Lint/LiteralAsCondition
+      sub_term_arr << solrized_term(solrized).first if !solrized_term(solrized).blank? || ['Label Does Not Exist']
+      # rubocop:enable Lint/LiteralAsCondition
     end
     sub_term_arr
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   # METHOD: To solrized term
   def solrized_term(solrized)
