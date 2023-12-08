@@ -19,6 +19,7 @@ class LabelAndUriControlledVocabularyInput < ControlledVocabularyInput
     options[:readonly] = true
   end
 
+  # METHOD: Check to make sure the term can be fetch from the uri
   def find_subject_term(attribute_name)
     # FIND: Find all the subject uri
     subject_arr = SolrDocument.find(object.model.id).send(attribute_name.to_s)
