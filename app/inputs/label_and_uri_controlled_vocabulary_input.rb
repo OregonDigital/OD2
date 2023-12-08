@@ -37,9 +37,7 @@ class LabelAndUriControlledVocabularyInput < ControlledVocabularyInput
       rescue TriplestoreAdapter::TriplestoreException => e
         Rails.logger.warn "Failed to fetch #{val} from cache AND source. #{e.message}"
       end
-      # rubocop:disable Lint/LiteralAsCondition
-      sub_term_arr << solrized_term(solrized).first if !solrized_term(solrized).blank? || ['Label Does Not Exist']
-      # rubocop:enable Lint/LiteralAsCondition
+      sub_term_arr << (!solrized_term(solrized).blank? ? solrized_term(solrized).first : 'Label Does Not Exist')
     end
     sub_term_arr
   end
