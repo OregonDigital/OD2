@@ -4,7 +4,6 @@ module OregonDigital
   # Controller for explore collections interface
   class ExploreCollectionsController < ApplicationController
     include BlacklightAdvancedSearch::Controller
-    include BlacklightRangeLimit::ControllerOverride
     include Hydra::Catalog
     include Hydra::Controller::ControllerBehavior
     include OregonDigital::BlacklightConfigBehavior
