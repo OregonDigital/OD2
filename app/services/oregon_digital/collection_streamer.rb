@@ -46,12 +46,12 @@ module OregonDigital
 
     def stream_child_works(collection, zip, folder, keys, controlled_keys)
       # Fetch out the user info to check condition
-      @current_user = User.find_by(email: @user.to_s)
+      @current_user = User.find_by(email: @user.to_s) if @user.to_s != 'not_login'
 
       collection.child_works.map do |work|
         # Add low quality works from collection and append metadata
         # Check if the work are able to download from user and check if it is public to download
-        next unless @current_user.can?(:download_low, work)
+        next unless @current_user.can?(:download_low, work) if @user.to_s != 'not_login'
 
         stream_works_low(work, zip, folder) if work.visibility == 'open'
         work.metadata_row(keys, controlled_keys)

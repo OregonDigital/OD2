@@ -96,7 +96,11 @@
     <%# DOWNLOAD: Add in download button for user collection %>
     <% if @collection.sharable? && @collection.visibility == 'open' %>
       <%# PARAMS: Add in params to the download behavior to hold user info to check if user can download it %>
-      <a href="<%= main_app.download_collection_path(user: current_user.email) %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Download Collection</a>
+      <% if user_signed_in? %>
+        <a href="<%= main_app.download_collection_path(user: current_user.email) %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Download Collection</a>
+      <% else %>
+        <a href="<%= main_app.download_collection_path(user: 'not_login') %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Download Collection</a>
+      <% end %>
     <% end %>
   <% end %>
 
