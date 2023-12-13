@@ -3,7 +3,7 @@
 describe OregonDigital::CollectionStreamer do
   let(:service_class) { described_class }
   let(:collection) { build(:collection) }
-  let(:streamer) { service_class.new(collection, false) }
+  let(:streamer) { service_class.new('test@example.com', collection, false) }
 
   describe '#stream' do
     it 'assembles a zip out of chunks' do
