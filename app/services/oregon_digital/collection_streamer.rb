@@ -51,7 +51,9 @@ module OregonDigital
       collection.child_works.map do |work|
         # Add low quality works from collection and append metadata
         # Check if the work are able to download from user and check if it is public to download
-        next unless @current_user.can?(:download_low, work) if @user.to_s != 'not_login'
+        if @user.to_s != 'not_login'
+          next unless @current_user.can?(:download_low, work)
+        end
 
         stream_works_low(work, zip, folder) if work.visibility == 'open'
         work.metadata_row(keys, controlled_keys)
