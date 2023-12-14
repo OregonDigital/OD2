@@ -18,7 +18,11 @@ Rails.application.config.to_prepare do
         solr_doc['hasRelatedMediaFragment_ssim'] = [resource.representative_id.to_s]
         solr_doc['hasRelatedImage_ssim'] = [resource.thumbnail_id.to_s]
         # Add workflow_state_name_ssim
-        solr_doc['workflow_state_name_ssim'] = Sipity::Entity(resource).workflow_state_name
+        begin
+          solr_doc['workflow_state_name_ssim'] = Sipity::Entity(resource).workflow_state_name
+        rescue Sipity::ConversionError
+          nil
+        end
       end
     end
   end
