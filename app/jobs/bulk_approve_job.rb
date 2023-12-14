@@ -61,6 +61,7 @@ class BulkApproveJob < OregonDigital::ApplicationJob
     entity.workflow_state_id = deposited.id
     entity.save!
     Hyrax.persister.save(resource: item)
+    Hyrax.index_adapter.save(resource: item)
   end
 
   def deposited_by_admin_query(user)

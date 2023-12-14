@@ -29,6 +29,7 @@ module OregonDigital
       entity.workflow_state_id = deposited.id
       entity.save!
       Hyrax.persister.save(resource: item)
+      Hyrax.index_adapter.save(resource: item)
     end
   end
 end
