@@ -174,7 +174,6 @@ Bulkrax::CsvEntry.class_eval do
 end
 
 Bulkrax::CsvParser.class_eval do
-  alias create_from_local_collection create_new_entries
 
   # modify how it uses the export_source value to create file path
   def setup_export_file(folder_count)
@@ -185,12 +184,76 @@ Bulkrax::CsvParser.class_eval do
 
     File.join(path, "export_#{esource}_from_#{importerexporter.export_from}_#{folder_count}.csv")
   end
+
+  # switch to batch job if this is a large export
+  def create_new_entries
+    # divert to new batches method
+    return create_new_entries_in_batches if importerexporter.is_large?
+      # NOTE: The each method enforces the limit, as it can best optimize the underlying queries.
+    current_records_for_export.each do |id, entry_class|
+      new_entry = find_or_create_entry(entry_class, id, 'Bulkrax::Exporter')
+      begin
+        entry = ExportWorkJob.perform_now(new_entry.id, current_run.id)
+      rescue => e
+        Rails.logger.info("#{e.message} was detected during export")
+      end
+
+    self.headers |= entry.parsed_metadata.keys if entry
+    end
+  end
+  alias create_from_collection create_new_entries
+  alias create_from_importer create_new_entries
+  alias create_from_worktype create_new_entries
+  alias create_from_all create_new_entries
+  alias create_from_local_collection create_new_entries
+
+  def create_new_entries_in_batches
+    current_records_for_export.in_groups_of(OD2::Application.config.batch_size) do |group|
+      OregonDigital::ExportBatchJob.perform_later(group, current_run.id)
+    end
+  end
+
+  def group_headers(entries)
+    headers = []
+    entries.each do |entry|
+      headers |= entry.parsed_metadata.keys
+    end
+    self.headers = headers
+  end
+
+  # insert call to group_headers
+  # generates headers per group of entries if they haven't already been created
+  def write_files
+    require 'open-uri'
+    folder_count = 0
+    # TODO: This is not performant as well; unclear how to address, but lower priority as of
+    #       <2023-02-21 Tue>.
+    sorted_entries = sort_entries(importerexporter.entries.uniq(&:identifier))
+                     .select { |e| valid_entry_types.include?(e.type) }
+    group_size = limit.to_i.zero? ? total : limit.to_i
+    sorted_entries[0..group_size].in_groups_of(records_split_count, false) do |group|
+      folder_count += 1
+      group_headers(group) if self.headers.empty?
+      CSV.open(setup_export_file(folder_count), "w", headers: export_headers, write_headers: true) do |csv|
+        group.each do |entry|
+          csv << entry.parsed_metadata
+          next if importerexporter.metadata_only? || entry.type == 'Bulkrax::CsvCollectionEntry'
+
+          store_files(entry.identifier, folder_count.to_s)
+        end
+      end
+    end
+  end
 end
 
 Bulkrax::Exporter.class_eval do
   delegate :create_from_local_collection, to: :parser
   def replace_files
     false
+  end
+
+  def is_large?
+    current_run.total_work_entries > OD2::Application.config.large_export_size
   end
 
   def export_from_list
