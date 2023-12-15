@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get 'use' => 'oregon_digital/about#use'
   get 'recommend' => 'oregon_digital/about#recommend'
 
+  patch '/contentblock/update/:name', to: 'scholars_archive/content_blocks#update', as: 'update_content_blocks'
+
   concern :oai_provider, BlacklightOaiProvider::Routes.new
   concern :searchable, Blacklight::Routes::Searchable.new
 
