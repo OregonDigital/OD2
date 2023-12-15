@@ -4,6 +4,7 @@ require 'rails_helper'
 
 module OregonDigital
   RSpec.describe ExportBatchJob, type: :job do
+    include ActiveJob::TestHelper
     subject(:export_batch_job) { described_class.new }
 
     let(:exporter) { create(:bulkrax_exporter) }
@@ -30,6 +31,10 @@ module OregonDigital
     describe 'wrap_up' do
       before do
         ActiveJob::Base.queue_adapter = :test
+      end
+
+      after do
+        clear_enqueued_jobs
       end
 
       it 'sets the status' do
