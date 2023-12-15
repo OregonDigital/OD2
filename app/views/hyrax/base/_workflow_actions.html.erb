@@ -1,7 +1,7 @@
 <div id="workflow_controls" class="card panel-workflow" data-toggle="collapse" data-target="#workflow_controls_collapse">
   <button data-toggle="collapse" data-target="#workflow_controls_collapse" class="btn workflow-actions-button">
     <div class="card-header">
-        <h2 class="card-title"><%= t('.title') %> <span class="fa fa-chevron-right float-right"></span></h2>
+        <h2 class="card-title" style="color: #073C5C"><%= t('.title') %> <span class="fa fa-chevron-right float-right"></span></h2>
     </div>
   </button>
   <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
