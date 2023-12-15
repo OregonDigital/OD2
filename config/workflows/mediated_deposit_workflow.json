@@ -35,7 +35,8 @@
                         }
                     ],
                     "methods": [
-                        "Hyrax::Workflow::MetadataOnlyRecord"
+                        "Hyrax::Workflow::SwapVisibilityToPrivate",
+                        "Hyrax::Workflow::DeactivateObject"
                     ]
                 }, {
                     "name": "request_changes",
@@ -54,7 +55,7 @@
                     ]
                 }, {
                     "name": "approve",
-                    "from_states": [{"names": ["pending_review"], "roles": ["approving"]}],
+                    "from_states": [{"names": ["pending_review", "tombstoned"], "roles": ["approving"]}],
                     "transition_to": "deposited",
                     "notifications": [
                         {
