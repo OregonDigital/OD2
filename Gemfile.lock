@@ -581,7 +581,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.6.3)
-    json-canonicalization (0.3.2)
+    json-canonicalization (0.4.0)
     json-ld (3.1.10)
       htmlentities (~> 4.3)
       json-canonicalization (~> 0.2)
@@ -1250,4 +1250,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.4.15
+   2.4.21
