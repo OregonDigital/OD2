@@ -31,10 +31,10 @@ module Bulkrax
       before do
         allow(exporter).to receive(:entries).and_return(entries)
         allow(CSV).to receive(:open).and_return(csv)
-        allow(parser).to receive(:setup_export_file).and_return('/banana/banana.csv')
+        allow(parser).to receive(:setup_export_file).and_return('tmp/banana.csv')
         allow(csv).to receive(:<<)
         allow(parser).to receive(:headers).and_return([])
-        allow(exporter).to receive(:exporter_export_path).and_return('/banana')
+        allow(exporter).to receive(:exporter_export_path).and_return('tmp')
       end
 
       context 'when headers have not been created' do
