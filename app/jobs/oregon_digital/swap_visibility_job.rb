@@ -4,7 +4,7 @@
 class OregonDigital::SwapVisibilityJob < ContentEventJob
   def perform(work, visibility)
     work.visibility = visibility
-    work.save
+    Hyrax.persister.save(resource: work)
     Hyrax::VisibilityPropagator.for(source: work).propagate
     OregonDigital::PermissionChangePropagationJob.perform_later(work)
   end
