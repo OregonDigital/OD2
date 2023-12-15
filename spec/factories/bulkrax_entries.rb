@@ -14,11 +14,13 @@ FactoryBot.define do
     type { 'Bulkrax::CsvEntry' }
     importerexporter { FactoryBot.build(:bulkrax_exporter) }
     raw_metadata { {} }
-    parsed_metadata { {
-      'title' => 'Hiphopopotamus',
-      'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/',
-      'resource_type' => 'http://purl.org/dc/dcmitype/Image',
-      'identifier': 'abcde1234'
-    } }
+    parsed_metadata do
+      {
+        'title' => 'Hiphopopotamus',
+        'rights_statement' => 'http://rightsstatements.org/vocab/InC/1.0/',
+        'resource_type' => 'http://purl.org/dc/dcmitype/Image',
+        'identifier': 'abcde1234'
+      }
+    end
   end
 end
