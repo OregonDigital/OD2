@@ -1,4 +1,4 @@
-<% @curation_concern.reconfigure_blacklight_facets blacklight_config %>
+<% controller.reconfigure_blacklight_facets blacklight_config %>
 <% facets = @configured_facets.map(&:solr_name) %>
 
 <% facets_from_request(facets).each do |display_facet| %>

@@ -327,3 +327,11 @@ ul.nav.homepage-nav {
 .dropshadow-align {
   padding-bottom: 0px;
 }
+
+.chevron-align {
+  height: 1%;
+  @media (max-width: $screen-md-min) {
+    margin-top: 13px;
+  }
+  margin-right: 5px;
+}
