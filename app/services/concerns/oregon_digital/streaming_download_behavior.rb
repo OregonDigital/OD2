@@ -12,8 +12,8 @@ module OregonDigital
       end
 
       # Add in new stream specialty for the collection
-      def self.stream_col(user, concern, standard = true, &chunks)
-        streamer = new(user, concern, standard)
+      def self.stream_col(ability, concern, standard = true, &chunks)
+        streamer = new(ability, concern, standard)
         streamer.each(&chunks)
       end
 

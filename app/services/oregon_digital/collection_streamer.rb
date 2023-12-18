@@ -8,9 +8,9 @@ module OregonDigital
 
     attr_reader :collection
 
-    def initialize(user, collection, standard)
-      # Add in @user to hold the current_user info (e.g. email)
-      @user = user
+    def initialize(ability, collection, standard)
+      # Add in @ability to check the ability to download
+      @ability = ability
       @collection = collection
       @standard = standard
     end
@@ -45,19 +45,14 @@ module OregonDigital
     end
 
     def stream_child_works(collection, zip, folder, keys, controlled_keys)
-      # Fetch out the user info to check condition
-      @current_user = User.find_by(email: @user.to_s) if @user.to_s != 'not_login'
-
       collection.child_works.map do |work|
         # Add low quality works from collection and append metadata
-        # Check if the work are able to download from user and check if it is public to download
-        if @user.to_s != 'not_login'
-          next unless @current_user.can?(:download_low, work)
-        end
+        # Check if the work are able to download from user
+        next unless @ability.can?(:download_low, work)
 
-        stream_works_low(work, zip, folder) if work.visibility == 'open'
+        stream_works_low(work, zip, folder)
         work.metadata_row(keys, controlled_keys)
-      end
+      end.compact
     end
 
     # Add all metadata

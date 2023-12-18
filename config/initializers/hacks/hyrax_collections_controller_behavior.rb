@@ -26,8 +26,6 @@ Rails.application.config.to_prepare do
     # Zip up all works in collection into one collection zip
     def download
       zipname = "#{collection.id}.zip"
-      # Accept in the param hold user email to use later for streamer
-      current_user = params[:user]
 
       send_file_headers!(
         type: 'application/zip',
@@ -37,7 +35,7 @@ Rails.application.config.to_prepare do
       response.headers['Last-Modified'] = Time.now.httpdate.to_s
       response.headers['X-Accel-Buffering'] = 'no'
 
-      OregonDigital::CollectionStreamer.stream_col(current_user, collection) do |chunk|
+      OregonDigital::CollectionStreamer.stream_col(current_ability, collection) do |chunk|
         response.stream.write(chunk)
       end
     ensure

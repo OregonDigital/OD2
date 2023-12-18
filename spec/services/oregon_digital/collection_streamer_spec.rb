@@ -3,12 +3,12 @@
 describe OregonDigital::CollectionStreamer do
   let(:service_class) { described_class }
   let(:collection) { build(:collection) }
-  let(:streamer) { service_class.new('test@example.com', collection, false) }
+  let(:streamer) { service_class.new('ability', collection, false) }
 
   describe '#stream' do
     it 'assembles a zip out of chunks' do
       chunk_count = 0
-      service_class.stream_col('test@example.com', collection) do
+      service_class.stream_col('ability', collection) do
         chunk_count += 1
       end
       expect(chunk_count).to eq 46
