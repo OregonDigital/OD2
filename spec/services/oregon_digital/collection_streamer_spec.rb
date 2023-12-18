@@ -3,17 +3,12 @@
 describe OregonDigital::CollectionStreamer do
   let(:service_class) { described_class }
   let(:collection) { build(:collection) }
-  let(:streamer) { service_class.new(collection, false) }
+  let(:streamer) { service_class.new('ability', collection, false) }
 
   describe '#stream' do
-    before do
-      allow(collection).to receive(:collection_type)
-      allow(collection.collection_type).to receive(:machine_id).and_return('')
-    end
-
     it 'assembles a zip out of chunks' do
       chunk_count = 0
-      service_class.stream(collection) do
+      service_class.stream_col('ability', collection) do
         chunk_count += 1
       end
       expect(chunk_count).to eq 46

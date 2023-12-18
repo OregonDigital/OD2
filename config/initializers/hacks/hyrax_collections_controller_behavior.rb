@@ -35,7 +35,7 @@ Rails.application.config.to_prepare do
       response.headers['Last-Modified'] = Time.now.httpdate.to_s
       response.headers['X-Accel-Buffering'] = 'no'
 
-      OregonDigital::CollectionStreamer.stream(collection) do |chunk|
+      OregonDigital::CollectionStreamer.stream_col(current_ability, collection) do |chunk|
         response.stream.write(chunk)
       end
     ensure
