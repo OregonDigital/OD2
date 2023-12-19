@@ -9,13 +9,10 @@
         <div class="col-md-6">
           <li class="radio">
             <label class="small-font-size">
-              <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, data: { 'target': '#collapsePublic' } %>
+              <%= f.radio_button :visibility, Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
               <%= visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC) %>
               <br />
               <%= t('hyrax.visibility.open.note_html', type: f.object.human_readable_type) %>
-              <div class="collapse" id="collapsePublic">
-                <%= t('hyrax.visibility.open.warning_html', label: visibility_badge(Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC)) %>
-              </div>
             </label>
           </li>
         <%# OVRERIDE FROM HYRAX: to add UO and OSU visibility options and remove default institution option %>
