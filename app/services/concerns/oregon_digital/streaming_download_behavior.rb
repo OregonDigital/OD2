@@ -11,6 +11,12 @@ module OregonDigital
         streamer.each(&chunks)
       end
 
+      # Add in new stream specialty for the collection
+      def self.stream_col(ability, concern, standard = true, &chunks)
+        streamer = new(ability, concern, standard)
+        streamer.each(&chunks)
+      end
+
       # Get a list of all metadata keys
       # rubocop:disable Metrics/AbcSize
       def self.metadata_keys
