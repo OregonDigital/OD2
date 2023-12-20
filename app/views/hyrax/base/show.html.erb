@@ -14,10 +14,6 @@
         <% if can?(:review, @presenter.solr_document) %>
           <%= render 'workflow_actions_widget', presenter: @presenter %>
         <% end %>
-        <%= render 'tombstoned_work', presenter: @presenter%>
-        <% if can?(:review, @presenter.solr_document) %>
-          <%= render 'workflow_actions_widget', presenter: @presenter %>
-        <% end %>
         <% if @presenter.oembed_viewer? %>
           <% @presenter.file_set_presenters.each do |presenter| %>
             <%= render 'oembed_media', presenter: presenter %>
