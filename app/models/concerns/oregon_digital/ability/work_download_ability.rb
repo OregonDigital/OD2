@@ -17,7 +17,7 @@ module OregonDigital
           can(:download, ActiveFedora::Base) if current_user.role?(self.class.osu_roles + self.class.uo_roles)
           # But you CANNOT download full quality if you cannot show the work (restricted) or it is in UO restricted admin set
           cannot(:download, ActiveFedora::Base) do |record|
-            !current_user.can?(:show, record) || uo_download_restricted?(record.try(:admin_set))
+            !current_user.can?(:show, record) || uo_download_restricted?(record)
           end
           # Can download full quality if overriden by full_size_download_allowed metadata field
           can(:download, ActiveFedora::Base) do |record|
@@ -48,7 +48,10 @@ module OregonDigital
         # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/CyclomaticComplexity
 
-        def uo_download_restricted?(admin_set)
+        def uo_download_restricted?(record)
+          return false unless record.respond_to?(:admin_set)
+
+          admin_set = record.admin_set
           admin_sets = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']
           admin_sets.include?(admin_set.id)
         end
