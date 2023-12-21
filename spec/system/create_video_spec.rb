@@ -62,7 +62,6 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
 
-      check('agreement', visible: false)
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
 

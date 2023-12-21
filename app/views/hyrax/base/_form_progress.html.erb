@@ -8,9 +8,6 @@
           <% if Hyrax.config.work_requires_files? %>
             <li class="incomplete" id="required-files"><%= t('.required_files') %></li>
           <% end %>
-          <% if Flipflop.show_deposit_agreement? && Flipflop.active_deposit_agreement_acceptance? %>
-            <li class="incomplete" id="required-agreement"><%= t('.required_agreement') %></li>
-          <% end %>
         </ul>
       </fieldset>
     </div>
@@ -28,23 +25,6 @@
     <% end %>
   </div>
   <div class="panel-footer text-center">
-    <% if ::Flipflop.show_deposit_agreement? %>
-      <% if ::Flipflop.active_deposit_agreement_acceptance? %>
-        <label class="small-font-size">
-          <%= check_box_tag 'agreement', 1, f.object.agreement_accepted, required: true %>
-          <%= t('hyrax.active_consent_to_agreement') %><br />
-          <%= link_to t('hyrax.pages.tabs.agreement_page'),
-                      hyrax.agreement_path,
-                      target: '_blank' %>
-        </label>
-      <% else %>
-        <%= t('hyrax.passive_consent_to_agreement') %><br />
-        <%= link_to t('hyrax.pages.tabs.agreement_page'),
-                    hyrax.agreement_path,
-                    target: '_blank' %>
-      <% end %>
-    <% end %>
-    <br />
     <%# TODO: If we start using ActionCable, we could listen for object updates and
               alert the user that the object has changed by someone else %>
     <%= f.input Hyrax::Actors::OptimisticLockValidator.version_field, as: :hidden if f.object.persisted? %>
