@@ -37,7 +37,7 @@ module OregonDigital
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {
-          'facet.field' => %w[non_user_collections_ssim copyright_combined_label_sim date_combined_year_label_ssim institution_label_sim language_label_sim]
+          'facet.field' => %w[non_user_collections_ssim copyright_combined_label_sim date_combined_decade_label_ssim institution_label_sim language_label_sim]
         }
         config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
 
