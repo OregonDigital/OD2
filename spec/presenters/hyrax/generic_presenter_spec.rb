@@ -12,6 +12,7 @@ RSpec.describe Hyrax::GenericPresenter do
   before do
     allow(presenter).to receive(:file_set_presenters).and_return(presenters)
     allow(file_set).to receive(:id).and_return 'abcde1234'
+    allow(file_set).to receive(:oembed_url).and_return 'google.com'
   end
 
   it 'delegates the method to solr document' do
@@ -102,7 +103,7 @@ RSpec.describe Hyrax::GenericPresenter do
         allow(p).to receive(:id).and_return file_set.id
       end
       allow(file_set).to receive(:oembed?).and_return false
-      allow(::FileSet).to receive(:find).with(file_set.id).and_return file_set
+      allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).with(alternate_identifier: file_set.id).and_return file_set
     end
 
     context 'when an oembed presenter exists' do
@@ -130,6 +131,7 @@ RSpec.describe Hyrax::GenericPresenter do
     context 'when none are oembeds' do
       it 'returns false' do
         allow(ability).to receive(:can?).with(:read, file_set.id).and_return true
+        allow(file_set).to receive(:oembed_url).and_return []
         expect(presenter.oembed_viewer?).to eq(false)
       end
     end

@@ -34,8 +34,8 @@ class BulkApproveJob < OregonDigital::ApplicationJob
   end
 
   def approve_item(pid)
-    item = ActiveFedora::Base.find(pid)
-    entity = item.to_sipity_entity
+    item = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+    entity = Sipity::Entity(item)
     return if entity.nil? || entity.workflow_state_name != 'pending_review'
 
     activate_asset(item, entity)
@@ -45,8 +45,8 @@ class BulkApproveJob < OregonDigital::ApplicationJob
 
   def approve(solr_query)
     Hyrax::SolrService.query(solr_query, fl: 'id', rows: 10_000).map { |x| x['id'] }.each do |pid|
-      item = ActiveFedora::Base.find(pid)
-      entity = item.to_sipity_entity
+      item = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+      entity = Sipity::Entity(item)
       next if entity.nil? || entity.workflow_state_name != 'pending_review'
 
       activate_asset(item, entity)
@@ -60,7 +60,8 @@ class BulkApproveJob < OregonDigital::ApplicationJob
     deposited = entity.workflow.workflow_states.find_by(name: 'deposited')
     entity.workflow_state_id = deposited.id
     entity.save!
-    item.save!
+    Hyrax.persister.save(resource: item)
+    Hyrax.index_adapter.save(resource: item)
   end
 
   def deposited_by_admin_query(user)

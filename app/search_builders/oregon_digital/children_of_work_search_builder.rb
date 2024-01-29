@@ -17,7 +17,7 @@ module OregonDigital
       ids << '""' if ids.empty?
       solr_params[:fq] ||= []
       solr_params[:fq] << "id:(#{ids.join(' OR ')})"
-      solr_params[:fq] << '-has_model_ssim:FileSet'
+      solr_params[:fq] << '-has_model_ssim:*FileSet'
     end
   end
 end

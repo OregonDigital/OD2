@@ -19,7 +19,7 @@ module OregonDigital
       solr_params[:fq] ||= []
       solr_params[:fq] << "id:(#{sibling_ids.join(' OR ')})"
       solr_params[:fq] << "-id:(#{@work.id})"
-      solr_params[:fq] << '-has_model_ssim:FileSet'
+      solr_params[:fq] << '-has_model_ssim:*FileSet'
     end
   end
 end

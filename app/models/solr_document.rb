@@ -84,7 +84,7 @@ class SolrDocument
   # Find and return child works (excluding FileSets)
   def children
     @children ||= SolrDocument.find(member_ids).map do |document|
-      document['has_model_ssim'].first == 'FileSet' ? nil : document
+      document['has_model_ssim'].first.include?('FileSet') ? nil : document
     end.compact
   end
 
@@ -95,7 +95,7 @@ class SolrDocument
   # Find and return file sets
   def file_sets
     @file_sets ||= SolrDocument.find(member_ids).map do |document|
-      document['has_model_ssim'].first == 'FileSet' ? document : nil
+      document['has_model_ssim'].first.include?('FileSet') ? document : nil
     end.compact
   end
 
