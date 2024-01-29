@@ -51,6 +51,8 @@ services:
       - HONEYCOMB_DATASET=od2-rails
       - HONEYCOMB_SERVICE=od2
       - HONEYCOMB_WRITEKEY=buzzzzzzzzzzzzzzzz
+      - HYRAX_VALKYRIE=true
+      - VALKYRIE_SOLR_CORE=development
       - LD_LIBRARY_PATH=/opt/fits/tools/mediainfo/linux
       - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
       - RAILS_CACHE_STORE_URL=memcache
@@ -122,6 +124,9 @@ services:
       - HONEYCOMB_DATASET=od2-rails
       - HONEYCOMB_SERVICE=od2
       - HONEYCOMB_WRITEKEY=buzzzzzzzzzzzzzzzz
+      - HYRAX_VALKYRIE=true
+      - VALKYRIE_SOLR_CORE=test
+      - VALKYRIE_SOLR_PORT=8983
       - LD_LIBRARY_PATH=/opt/fits/tools/mediainfo/linux
       - IIIF_SERVER_BASE_URL=http://localhost:8080/iiif
       - RAILS_CACHE_STORE_URL=memcache

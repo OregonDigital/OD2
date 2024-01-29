@@ -2,7 +2,7 @@
   <%= content_tag(:div, '',
       data: {
         embed_url:
-          Blacklight::Oembed::Engine.routes.url_helpers.embed_path(url: FileSet.find(presenter.id).oembed_url)
+          Blacklight::Oembed::Engine.routes.url_helpers.embed_path(url: Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: presenter.id).oembed_url)
       }
     )
   %>

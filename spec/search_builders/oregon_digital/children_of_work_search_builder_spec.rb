@@ -25,6 +25,6 @@ RSpec.describe OregonDigital::ChildrenOfWorkSearchBuilder do
       search_builder.child_works(solr_params)
     end
 
-    it { is_expected.to eq(fq: ['id:(123 OR 124)', '-has_model_ssim:FileSet']) }
+    it { is_expected.to eq(fq: ['id:(123 OR 124)', '-has_model_ssim:*FileSet']) }
   end
 end
