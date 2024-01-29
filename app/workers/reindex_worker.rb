@@ -9,18 +9,25 @@ class ReindexWorker
 
   # pids must be ordered with access control objects first, then the actual
   # asset, then its sub-objects (a.g., proxies, indirect containers, etc.)
+  # rubocop:disable Metrics/AbcSize:
+  # rubocop:disable Metrics/MethodLength:
   def perform(access_control_pids, asset_pid, contains_pids)
     access_control_pids.each do |pid|
-      obj = ActiveFedora::Base.find(pid)
+      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
       obj.permissions.each(&:update_index)
-      obj.update_index
+      Hyrax.index_adapter.save(resource: obj)
     end
 
-    a = ActiveFedora::Base.find(asset_pid)
-    a.update_index
+    a = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: asset_pid)
+    Hyrax.index_adapter.save(resource: a)
 
-    contains_pids.each { |pid| ActiveFedora::Base.find(pid).update_index }
+    contains_pids.each do |pid|
+      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+      Hyrax.index_adapter.save(resource: obj)
+    end
 
     FetchGraphWorker.perform_async(asset_pid, a.depositor) if a.respond_to?(:depositor)
   end
+  # rubocop:enable Metrics/MethodLength:
+  # rubocop:enable Metrics/AbcSize:
 end
