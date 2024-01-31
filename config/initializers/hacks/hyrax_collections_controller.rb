@@ -114,7 +114,11 @@ Rails.application.config.to_prepare do
 
     def create_default_representative_images
       repr_ids = params[:representative_ids] || []
-      form.select_files.uniq { |f| FileSet.find(f[1]).parent.id }.to_a[repr_ids.reject(&:blank?).count..3].each_with_index do |val, index|
+
+      files = form.select_files.uniq do |f|
+        file_set = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: f[1], use_valkyrie: Hyrax.config.use_valkyrie?)
+        Hyrax.query_service.find_parents(resource: file_set).first.id.to_s
+      end.to_a[repr_ids.reject(&:blank?).count..3].each_with_index do |val, index|
         CollectionRepresentative.create({ collection_id: collection.id, fileset_id: val[1], order: index })
       end
     end

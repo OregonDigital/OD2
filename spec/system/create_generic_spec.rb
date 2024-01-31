@@ -59,7 +59,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
       find('#required-metadata').click
 
       choose('generic_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+      expect(page).to have_content('Make available to all.')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
 

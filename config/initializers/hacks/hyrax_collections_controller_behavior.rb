@@ -12,7 +12,7 @@ Rails.application.config.to_prepare do
 
     # OVERRIDE FROM HYRAX
     def show
-      @curation_concern ||= ActiveFedora::Base.find(params[:id])
+      @curation_concern ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
       # Set list of configured facets for the view to display
       presenter
       configured_facets
@@ -35,7 +35,7 @@ Rails.application.config.to_prepare do
       response.headers['Last-Modified'] = Time.now.httpdate.to_s
       response.headers['X-Accel-Buffering'] = 'no'
 
-      OregonDigital::CollectionStreamer.stream(collection) do |chunk|
+      OregonDigital::CollectionStreamer.stream_col(current_ability, collection) do |chunk|
         response.stream.write(chunk)
       end
     ensure
@@ -56,7 +56,7 @@ Rails.application.config.to_prepare do
       when 'UO'
         image = 'uo-collection.png'
         alt = 'University of Oregon Libraries'
-      end unless @curation_concern.institution.first.nil?
+      end unless Array(@curation_concern.institution).first.nil?
 
       return ApplicationController.helpers.asset_path(image), alt, style
     end

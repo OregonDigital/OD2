@@ -24,20 +24,6 @@
                         "Hyrax::Workflow::DeactivateObject"
                     ]
                 }, {
-                    "name": "tombstone",
-                    "from_states": [{"names": ["deposited"], "roles": ["approving"]}],
-                    "transition_to": "tombstoned",
-                    "notifications": [
-                        {
-                            "notification_type": "email",
-                            "name": "Hyrax::Workflow::DeletionApprovalNotification",
-                            "to": ["depositing"]
-                        }
-                    ],
-                    "methods": [
-                        "Hyrax::Workflow::MetadataOnlyRecord"
-                    ]
-                }, {
                     "name": "request_changes",
                     "from_states": [{"names": ["deposited", "pending_review"], "roles": ["approving"]}],
                     "transition_to": "changes_required",

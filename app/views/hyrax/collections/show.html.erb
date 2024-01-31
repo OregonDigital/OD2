@@ -94,7 +94,7 @@
       <a href="<%= edit_dashboard_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Edit Collection</a>
     <% end %>
     <%# DOWNLOAD: Add in download button for user collection %>
-    <% if @collection.collection_type.machine_id == 'user_collection' && @collection.sharable? && @collection.visibility == 'open' %>
+    <% if @collection.sharable? && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
       <a href="<%= main_app.download_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Download Collection</a>
     <% end %>
   <% end %>
