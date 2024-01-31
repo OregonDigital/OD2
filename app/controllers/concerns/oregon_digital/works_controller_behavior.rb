@@ -16,8 +16,8 @@ module OregonDigital
     # We can use Hyrax::WorksControllerBehavior definition and add on additional params we want
     def attributes_for_actor
       attributes = super
-      #oembed_urls = params.fetch(:oembed_urls, [])
-      #attributes[:oembed_urls] = oembed_urls
+      oembed_urls = params.fetch(:oembed_urls, [])
+      attributes[:oembed_urls] = oembed_urls
 
       attributes
     end
@@ -35,11 +35,13 @@ module OregonDigital
       OregonDigital::PermissionChangeEventJob.perform_later(curation_concern, current_user) if permissions_changed?
       super
     end
-    
-    #Override from hyrax to add in a different message depending on if the work is tombstoned or under review
+
+    # Override from hyrax to add in a different message depending on if the work is tombstoned or under review
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def render_unavailable
       tombstoned = (unavailable_presenter.workflow.state == 'tombstoned')
-      message = tombstoned ? I18n.t('hyrax.workflow.tombstoned') : I18n.t("hyrax.workflow.unauthorized")
+      message = tombstoned ? I18n.t('hyrax.workflow.tombstoned') : I18n.t('hyrax.workflow.unauthorized')
       respond_to do |wants|
         wants.html do
           unavailable_presenter
@@ -53,5 +55,7 @@ module OregonDigital
         wants.nt { render plain: message, status: :unauthorized }
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
   end
 end
