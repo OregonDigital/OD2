@@ -22,8 +22,9 @@
     </div>
   <% end %>
   <% if document.children? %>
+    <% @works = ActiveFedora::Base.find(document.id) %>
     <div class="metadata-row row">
-      Contains <%= document.children.count %> items
+      Contains <%= @works.child_works.count %> items
     </div>
   <% end %>
   <% if document.parents? %>
