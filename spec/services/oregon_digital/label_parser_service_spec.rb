@@ -15,7 +15,7 @@ describe OregonDigital::LabelParserService do
     end
 
     context 'when label does not include a special character $' do
-      let(:labels) { ['label1 the cost is 200.00 www.test.com', '100.00 www.test.com'] }
+      let(:labels) { ['label1 the cost is 200.00$www.test.com', 'label2 100.00$www.test.com'] }
 
       it 'returns a hash of label and uri from a label$uri pair' do
         expect(described_class.parse_label_uris(labels)).to eq [{ 'label' => 'label1', 'uri' => 'www.test.com' }, { 'label' => 'label2', 'uri' => 'www.test.com' }]
