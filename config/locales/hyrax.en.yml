@@ -234,6 +234,8 @@ en:
           subject_label: Subject
           date_modified: Modified
   hyrax:
+    workflow:
+      tombstoned: "This item is unavailable due to being deleted."
     tombstone:
       confirmation: 'Are you sure you want to tombstone this item?'
     advanced_form:
@@ -256,7 +258,7 @@ en:
         header: "Downloads"
     collection:
       select_form:
-        select_heading: 'My Collections'
+        select_heading: 'My Collections()'
         title: 'Add this item'
         update: 'Add'
         delete: 'Delete'

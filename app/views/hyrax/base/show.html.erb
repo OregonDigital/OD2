@@ -11,6 +11,9 @@
       <%= render 'work_title', presenter: @presenter %>
       <hr style='border-width: 3px;'>
       <div class="row">
+        <% if @presenter.solr_document['workflow_state_name_ssim'] && @presenter.solr_document['workflow_state_name_ssim'].first == 'tombstoned' %>
+          <%= render 'tombstoned_work', presenter: @presenter%>
+        <% end %>
         <% if can?(:review, @presenter.solr_document) %>
           <%= render 'workflow_actions_widget', presenter: @presenter %>
         <% end %>
