@@ -1,19 +1,19 @@
+<% provide :page_title, construct_page_title(t('.header')) %>
+
 <% provide :page_header do %>
   <h1><span class="glyphicon glyphicon-ok-circle"></span> <%= t('.header') %></h1>
 <% end %>
 
 <div class="row">
   <div class="col-md-12">
+    <%= render 'constraints' %>
+
+    <div id="sidebar" class="col-md-3 col-sm-4">
+      <%= render 'search_sidebar' %>
+    </div>
+
     <div id="content" class="col-md-9 col-sm-8">
-      <%= render 'constraints' %>
-
-      <div id="sidebar" class="col-md-3 col-sm-4">
-        <%= render 'search_sidebar' %>
-      </div>
-
-      <div id="content" class="col-md-9 col-sm-8">
-        <%= render 'search_results' %>
-      </div>
+      <%= render 'search_results' %>
     </div>
   </div>
 </div>
