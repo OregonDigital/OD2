@@ -140,6 +140,10 @@ class SolrDocument
     self['oai_collections_ssim']
   end
 
+  def subject_label
+    OregonDigital::LabelParserService.parse_label_uris(self['subject_label_ssim'])
+  end
+
   solrized_methods Generic.generic_properties
   solrized_methods Document.document_properties
   solrized_methods Image.image_properties
