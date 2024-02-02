@@ -12,7 +12,7 @@ namespace :oregon_digital do
 
     # SETUP: Create a checking variable to see which one to save for audio or video
     video_check = "http://purl.org/dc/dcmitype/MovingImage"
-    audio check = "http://purl.org/dc/dcmitype/Sound"
+    audio_check = "http://purl.org/dc/dcmitype/Sound"
 
     # LOOP: Now loop through each works and find the matching one to resave
     puts 'FINDING - Now finding work to resave that matches either audio or video...'
