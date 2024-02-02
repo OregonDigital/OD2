@@ -59,8 +59,10 @@ def process_line(line, fields, email, logger)
     end
   end
   work.depositor = email
-  Hyrax.persister.save(resource: work)
-  Hyrax.index_adapter.save(resource: work)
+  work.save
+  # Enable once all model objects are fully valkyrized and indexing works again
+  # Hyrax.persister.save(resource: work)
+  # Hyrax.index_adapter.save(resource: work)
   work
 end
 
@@ -87,8 +89,9 @@ def associate_admin_set(work)
   if work.admin_set_id.blank?
     id = 'admin_set/default'
     work.admin_set_id = [id]
-    Hyrax.persister.save(resource: work)
-    Hyrax.index_adapter.save(resource: work)
+    work.save
+    # Hyrax.persister.save(resource: work)
+    # Hyrax.index_adapter.save(resource: work)
   else
     id = work.admin_set_id
   end

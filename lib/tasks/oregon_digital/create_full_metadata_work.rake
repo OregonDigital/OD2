@@ -12,8 +12,10 @@ namespace :oregon_digital do
       g.language = ['http://id.loc.gov/vocabulary/iso639-2/zun']
       g.resource_type = 'http://purl.org/dc/dcmitype/Collection'
       g.rights_statement = ['http://rightsstatements.org/vocab/InC/1.0/']
-      Hyrax.persister.save(resource: g)
-      Hyrax.index_adapter.save(resource: g)
+      g.save
+      # Enable once all model objects are fully valkyrized and indexing works again
+      # Hyrax.persister.save(resource: g)
+      # Hyrax.index_adapter.save(resource: g)
     end
   end
 end
