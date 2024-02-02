@@ -6,7 +6,7 @@ namespace :migration do
     puts 'Approving all the things...'
     migration_user = Hyrax::Migrator.config.migration_user
     Hyrax::SolrService.query("suppressed_bsi:true AND depositor_ssim:#{migration_user}", fl: 'id', rows: 10_000).map { |x| x['id'] }.each do |pid|
-      item = Hyrax.query_service.find_by(id: pid)
+      item = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
       entity = Sipity::Entity(item)
       next if entity.nil? || entity.workflow_state_name != 'pending_review'
 
@@ -14,8 +14,10 @@ namespace :migration do
       deposited = entity.workflow.workflow_states.find_by(name: 'deposited')
       entity.workflow_state_id = deposited.id
       entity.save!
-      Hyrax.persister.save(resource: item)
-      Hyrax.index_adapter.save(resource: item)
+      item.save
+      # Enable once all model objects are fully valkyrized and indexing works again
+      # Hyrax.persister.save(resource: item)
+      # Hyrax.index_adapter.save(resource: item)
     rescue StandardError => e
       puts "Unable to approve #{pid}"
       puts "Error: #{e.message}"
