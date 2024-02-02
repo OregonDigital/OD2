@@ -41,13 +41,12 @@ Rails.application.config.to_prepare do
 
       obj.class.delegated_attributes.keys.each_with_object(attrs) do |attr_name, mem|
         next unless obj.respond_to?(attr_name) && !mem.key?(attr_name.to_sym)
-        mem[attr_name.to_sym] = TransformerValueMapper.for(obj.public_send(attr_name)).result
+        mem[attr_name.to_sym] = Wings::TransformerValueMapper.for(obj.public_send(attr_name)).result
       end
     end
   end
 
   Wings::ModelTransformer.class_eval do
-
     ##
     # Builds a `Valkyrie::Resource` equivalent to the `pcdm_object`
     #
@@ -55,7 +54,7 @@ Rails.application.config.to_prepare do
     # rubocop:disable Metrics/AbcSize
     def build
       klass = cache.fetch(pcdm_object.class) do
-        OrmConverter.to_valkyrie_resource_class(klass: pcdm_object.class)
+        Wings::OrmConverter.to_valkyrie_resource_class(klass: pcdm_object.class)
       end
 
       mint_id unless pcdm_object.id
