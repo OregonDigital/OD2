@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-module OregonDigital::Services
+module OregonDigital
   # Create report on facet values for migrated batch of assets
   class VerifyService
     def initialize(work)
@@ -10,4 +10,3 @@ module OregonDigital::Services
     def verify; end
   end
 end
-

@@ -1,6 +1,6 @@
 # frozen_string_literal:true
 
-module OregonDigital::Services
+module OregonDigital
   # Called by the VerifyWorkJob
   # Runs the verification suite and adds any returned errors to the work
   # required args: pid
@@ -13,16 +13,16 @@ module OregonDigital::Services
 
     def run
       @services.each do |service|
-        verifier = service.new(@work)
-        verifier.verify.each do |k,v|
-          if v.blank?
-            @work.errors.delete(k)
-          else
-            v.each do |message|
-              @work.errors.add(k, message)
-            end
-          end
+        verifier = service.new(work)
+        verifier.verify.each do |k, v|
+          v.blank? ? work.errors.delete(k) : add_errors(k, v)
         end
+      end
+    end
+
+    def add_errors(key, messages)
+      messages.each do |message|
+        work.errors.add(key, message)
       end
     end
 
@@ -31,7 +31,7 @@ module OregonDigital::Services
     end
 
     def resource_type
-      @solr_doc['has_model_ssim'].first
+      solr_doc['has_model_ssim'].first
     end
 
     def work
@@ -50,4 +50,3 @@ module OregonDigital::Services
     end
   end
 end
-
