@@ -12,9 +12,11 @@ class ReindexChunkWorker
 
     logger.info "Reindexing #{uris.count} URIs"
     uris.each do |uri|
-      work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: Hyrax.config.translate_uri_to_id.call(uri))
+      work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: Hyrax.config.translate_uri_to_id.call(uri), use_valkyrie: false)
       logger.info "\t reindexing #{work.id}"
-      Hyrax.index_adapter.save(resource: work)
+      work.update_index
+      # Enable once all model objects are fully valkyrized and indexing works again
+      # Hyrax.index_adapter.save(resource: work)
       counter += 1
     # rubocop:disable Style/RescueStandardError
     rescue => e

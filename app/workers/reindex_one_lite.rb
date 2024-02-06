@@ -9,7 +9,9 @@ class ReindexOneLite
 
   # A single pid is expected
   def perform(pid)
-    w = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
-    Hyrax.index_adapter.save(resource: w)
+    w = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
+    w.update_index
+    # Enable once all model objects are fully valkyrized and indexing works again
+    # Hyrax.index_adapter.save(resource: w)
   end
 end
