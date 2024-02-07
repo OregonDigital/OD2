@@ -16,6 +16,7 @@ module OregonDigital
     # Parse all the data metadata in EDTF format and coalesce into two solr fields to be used
     # as a year range facet and decade facet
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def index_date_combined_label(solr_doc)
       solr_doc['date_combined_year_label_ssim'] = []
       solr_doc['date_combined_decade_label_ssim'] = []
@@ -32,6 +33,7 @@ module OregonDigital
       solr_doc['date_combined_year_label_sim'] = solr_doc['date_combined_year_label_ssim']
       solr_doc['date_combined_decade_label_sim'] = solr_doc['date_combined_decade_label_ssim']
     end
+    # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
 
     # The metadata fields to be combined into one date/decade facet
