@@ -29,6 +29,8 @@ module OregonDigital
 
       solr_doc['date_combined_year_label_ssim'].uniq!
       solr_doc['date_combined_decade_label_ssim'].uniq!
+      solr_doc['date_combined_year_label_sim'] = solr_doc['date_combined_year_label_ssim']
+      solr_doc['date_combined_decade_label_sim'] = solr_doc['date_combined_decade_label_ssim']
     end
     # rubocop:enable Metrics/AbcSize
 
