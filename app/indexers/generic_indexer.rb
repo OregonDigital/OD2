@@ -148,8 +148,8 @@ class GenericIndexer < Hyrax::WorkIndexer
       labels = OregonDigital::TriplePoweredService.new.fetch_all_labels(controlled_vocabs)
 
       # ASSIGN: Put the labels into their own field in solr_doc
-      solr_doc["#{o[:field]}_parsable_label_ssim"] = labels
-      solr_doc["#{o[:field]}_parsable_label_tesim"] = labels
+      solr_doc["#{o}_parsable_label_ssim"] = labels
+      solr_doc["#{o}_parsable_label_tesim"] = labels
     end
 
     # RETURN: Return the solr 'label$uri' in their field
