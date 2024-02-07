@@ -22,6 +22,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       index_sort_options(solr_doc)
+      triple_powered_properties_solr_doc(object, solr_doc)
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
       solr_doc['oai_collections_ssim'] = []
@@ -134,6 +135,28 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def all_existing_groups
     (object.edit_groups + object.read_groups + object.discover_groups)
+  end
+
+  # METHOD: Solrize 'label$uri' into Solr
+  def triple_powered_properties_solr_doc(object, solr_doc)
+    # LOOP: Go through the controlled properties to get the field needed for indexing
+    object.controlled_properties.each do |o|
+      # SETUP: Create the array of labels
+      labels = []
+
+      # FETCH: Get the array of controlled vocab from the properties
+      controlled_vocabs = object[o]
+
+      # RETURN: Return all labels format 'label$uri' from using the Triple Powered Service
+      labels = OregonDigital::TriplePoweredService.new.fetch_all_labels(controlled_vocabs)
+
+      # ASSIGN: Put the labels into their own field in solr_doc
+      solr_doc["#{o[:field]}_parsable_label_ssim"] = labels
+      solr_doc["#{o[:field]}_parsable_label_tesim"] = labels
+    end
+
+    # RETURN: Return the solr 'label$uri' in their field
+    solr_doc
   end
 end
 # rubocop:enable Metrics/ClassLength
