@@ -138,7 +138,6 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   # METHOD: Solrize 'label$uri' into Solr
-  Lint/UselessAssignment
   def triple_powered_properties_solr_doc(object, solr_doc)
     # LOOP: Go through the controlled properties to get the field needed for indexing
     object.controlled_properties.each do |o|
