@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # This class from Bulkrax v5.2, with LocalCollectionName added.
+# Also adds :in_groups_of as an alternative to :each
 module Bulkrax
   # This module is responsible for providing the means of querying Solr for the appropriate works,
   # collections, and file sets for an export of entries.
@@ -77,6 +78,37 @@ module Bulkrax
           yield(file_set.fetch('id'), file_set_entry_class)
           counter += 1
         end
+      end
+
+      def in_groups_of(size)
+        arr = []
+        limited_works = limit.zero? ? works : works.slice(0, limit)
+        limited_works.each do |work|
+          arr << [work.fetch('id'), work_entry_class.to_s]
+          if arr.size == size
+            yield arr
+            arr = []
+          end
+        end
+
+        limited_colls = limit.zero? ? collections : (collections.slice(0, limit - works.size) || [])
+        limited_colls.each do |coll|
+          arr << [coll.fetch('id'), collection_entry_class.to_s]
+          if arr.size == size
+            yield arr
+            arr = []
+          end
+        end
+
+        limited_fs = limit.zero? ? file_sets : (file_sets.slice(0, limit - (works.size + collections.size)) || [])
+        limited_fs.each do |fs|
+          arr << [fs.fetch('id'), file_set_entry_class.to_s]
+          if arr.size == size
+            yield arr
+            arr = []
+          end
+        end
+        yield arr unless arr.empty?
       end
 
       private

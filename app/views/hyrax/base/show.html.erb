@@ -12,23 +12,19 @@
       <hr style='border-width: 3px;'>
       <div class="row">
         <% if @presenter.solr_document['workflow_state_name_ssim'] && @presenter.solr_document['workflow_state_name_ssim'].first == 'tombstoned' %>
-          <% if can?(:review, @presenter.solr_document) %>
-            <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% end %>
           <%= render 'tombstoned_work', presenter: @presenter%>
-        <% else %>
-          <% if can?(:review, @presenter.solr_document) %>
-            <%= render 'workflow_actions_widget', presenter: @presenter %>
+        <% end %>
+        <% if can?(:review, @presenter.solr_document) %>
+          <%= render 'workflow_actions_widget', presenter: @presenter %>
+        <% end %>
+        <% if @presenter.oembed_viewer? %>
+          <% @presenter.file_set_presenters.each do |presenter| %>
+            <%= render 'oembed_media', presenter: presenter %>
           <% end %>
-          <% if @presenter.oembed_viewer? %>
-            <% @presenter.file_set_presenters.each do |presenter| %>
-              <%= render 'oembed_media', presenter: presenter %>
-            <% end %>
-          <% elsif @presenter.iiif_viewer? %>
-            <div class="col-sm-12">
-              <%= render 'representative_media', presenter: @presenter, viewer: true %>
-            </div>
-          <% end %>
+        <% elsif @presenter.iiif_viewer? %>
+          <div class="col-sm-12">
+            <%= render 'representative_media', presenter: @presenter, viewer: true %>
+          </div>
         <% end %>
       </div>
       <div class="col-xs-12">

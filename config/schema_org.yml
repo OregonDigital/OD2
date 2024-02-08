@@ -28,9 +28,9 @@ schema_org:
     Complex Object: "http://purl.org/dc/dcmitype/Collection"
     Dataset: "http://purl.org/dc/dcmitype/Dataset"
     Image: "http://purl.org/dc/dcmitype/Image"
-    Moving Image: "http://purl.org/dc/dcmitype/MovingImage"
+    Video: "http://purl.org/dc/dcmitype/MovingImage"
     Physical Object: "http://purl.org/dc/dcmitype/PhysicalObject"
-    Sound: "http://purl.org/dc/dcmitype/Sound"
+    Audio: "http://purl.org/dc/dcmitype/Sound"
     Text: "http://purl.org/dc/dcmitype/Text"
   subject:
     property: about

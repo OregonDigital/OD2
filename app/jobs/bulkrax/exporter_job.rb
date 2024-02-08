@@ -12,9 +12,13 @@ module Bulkrax
       end
     end
 
+    # if export is large, only export
+    # move the rest to ExporterWriteJob
     def perform(exporter_id)
       exporter = Exporter.find(exporter_id)
       exporter.export
+      return if exporter.is_large?
+
       exporter.write
       exporter.save
       true
