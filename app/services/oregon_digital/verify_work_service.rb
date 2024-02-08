@@ -13,7 +13,7 @@ module OregonDigital
 
     def run
       @services.each do |service|
-        verifier = service.new(work)
+        verifier = service.new(service_args)
         verifier.verify.each do |k, v|
           v.blank? ? work.errors.delete(k) : add_errors(k, v)
         end
@@ -24,6 +24,14 @@ module OregonDigital
       messages.each do |message|
         work.errors.add(key, message)
       end
+    end
+
+    def service_args
+      @service_args ||=
+        {
+          solr_doc => solr_doc,
+          work => work
+        }
     end
 
     def solr_doc

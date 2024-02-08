@@ -9,7 +9,7 @@ module OregonDigital
     end
 
     def verify
-      pids.each do |pid|
+      @pids.each do |pid|
         args = @options.merge({ pid: pid })
         OregonDigital::VerifyWorkJob.perform_later(args)
       end
