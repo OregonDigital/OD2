@@ -16,7 +16,7 @@ module OregonDigital
       custom_labels = []
       controlled_vocabs.each do |cv|
         cv.fetch
-        labels << "#{cv.rdf_label.first}$#{cv.rdf_subject}"
+        custom_labels << "#{cv.rdf_label.first}$#{cv.rdf_subject}"
       end
       custom_labels.flatten.compact
     end
