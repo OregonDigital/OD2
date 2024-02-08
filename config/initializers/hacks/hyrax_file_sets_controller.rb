@@ -23,13 +23,13 @@ Rails.application.config.to_prepare do
 
     # rubocop:disable Metrics/MethodLength
     def render_unavailable
-      s = SolrDocument.find(Hyrax.query_service.find_parents(resource: unavailable_presenter.to_model).first.id)
+      unavailable_presenter
+      s = SolrDocument.find(Hyrax.query_service.find_parents(resource: @presenter.to_model).first.id)
       tombstoned = (s.workflow_state == 'tombstoned')
-      @parent_presenter = "Hyrax::#{s["has_model_ssim"].first}Presenter".constantize.new(Hyrax.query_service.find_parents(resource: unavailable_presenter.to_model).first, current_ability)
+      @presenter = "Hyrax::#{s["has_model_ssim"].first}Presenter".constantize.new(s, current_ability)
       message = tombstoned ? I18n.t('hyrax.workflow.tombstoned') : I18n.t('hyrax.workflow.unauthorized')
       respond_to do |wants|
         wants.html do
-          unavailable_presenter
           flash[:notice] = message
           render 'unavailable', status: :unauthorized
         end

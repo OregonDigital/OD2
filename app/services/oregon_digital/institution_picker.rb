@@ -36,7 +36,6 @@ module OregonDigital
       end
 
       def contains_university?(collection)
-        return false unless collection.institution
         !collection.institution.map(&:to_s).&(osu + uo).empty?
       end
 
