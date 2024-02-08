@@ -24,8 +24,9 @@ Rails.application.config.to_prepare do
     # rubocop:disable Metrics/MethodLength
     def render_unavailable
       parent_sd = unavailable_presenter.solr_document.parents.first
-      @presenter = "Hyrax::#{s["has_model_ssim"].first}Presenter".constantize.new(parent_sd, current_ability) if parent_sd.workflow_state == 'tombstoned'
-      message = (parent_sd.workflow_state == 'tombstoned') ? I18n.t('hyrax.workflow.tombstoned') : I18n.t('hyrax.workflow.unauthorized')
+      @tombstoned = parent_sd.workflow_state == 'tombstoned'
+      @presenter = "Hyrax::#{parent_sd["has_model_ssim"].first}Presenter".constantize.new(parent_sd, current_ability) if @tombstoned
+      message = @tombstoned ? I18n.t('hyrax.workflow.tombstoned') : I18n.t('hyrax.workflow.unauthorized')
       respond_to do |wants|
         wants.html do
           flash[:notice] = message
