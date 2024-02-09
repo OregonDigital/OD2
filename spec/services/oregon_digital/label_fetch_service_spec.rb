@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe OregonDigital::TriplePoweredService do
+describe OregonDigital::LabelFetchService do
   let(:service) { described_class.new }
 
   # TEST NO.1: Test to see if label are being able to fetch and format 'label$uri'
@@ -13,7 +13,7 @@ describe OregonDigital::TriplePoweredService do
     end
 
     it 'returns labels for uri' do
-      expect(service.fetch_all_labels(['http://www.blah.com', 'http://www.blah2.com'])).to eq 'label1$http://www.blah.com'
+      expect(service.fetch_all_labels(['http://www.blah.com', 'http://www.blah2.com'])).to eq ['label1$http://www.blah.com', 'label2$http://www.blah2.com']
     end
   end
 end
