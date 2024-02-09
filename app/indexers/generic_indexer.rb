@@ -137,6 +137,8 @@ class GenericIndexer < Hyrax::WorkIndexer
     (object.edit_groups + object.read_groups + object.discover_groups)
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   # METHOD: Solrize 'label$uri' into Solr
   def label_fetch_properties_solr_doc(object, solr_doc)
     # LOOP: Go through the controlled properties to get the field needed for indexing
@@ -170,12 +172,14 @@ class GenericIndexer < Hyrax::WorkIndexer
     # LOOP: do a special loop through :keyword
     object[:keyword].each do |kw|
       # ASSIGN: Put the labels into their own field in solr_doc
-      solr_doc["topic_parsable_combined_label_ssim"] << "#{kw}$"
-      solr_doc["topic_parsable_combined_label_tesim"] << "#{kw}$"
+      solr_doc['topic_parsable_combined_label_ssim'] << "#{kw}$"
+      solr_doc['topic_parsable_combined_label_tesim'] << "#{kw}$"
     end
 
     # RETURN: Return the solr 'label$uri' in their field
     solr_doc
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 end
 # rubocop:enable Metrics/ClassLength
