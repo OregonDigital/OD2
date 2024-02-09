@@ -142,7 +142,7 @@ class SolrDocument
 
   # Uncomment out later for work on 'label$uri'
   # def subject_label
-  #   OregonDigital::LabelParserService.parse_labels(self['subject_parsable_label_ssim'])
+  #   OregonDigital::LabelParserService.parse_label_uris(self['subject_parsable_label_ssim'])
   # end
 
   solrized_methods Generic.generic_properties
