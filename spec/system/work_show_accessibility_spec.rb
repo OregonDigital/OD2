@@ -19,7 +19,7 @@ RSpec.describe 'Work show page', js: true, type: :system, clean_repo: true do
         <http://opaquenamespace.org/ns/creator/UniversityofOregonstudents> <http://purl.org/dc/terms/modified> "2015-08-25"^^<http://www.w3.org/2001/XMLSchema#date> .
       ', headers: {})
 
-      allow(work).to receive(:label_fetch_properties_solr_doc).with(['http://opaquenamespace.org/ns/creator/my_id']).and_return(['label1$http://opaquenamespace.org/ns/creator/my_id'])
+    allow(work).to receive(:label_fetch_properties_solr_doc).with(['http://opaquenamespace.org/ns/creator/my_id']).and_return(['label1$http://opaquenamespace.org/ns/creator/my_id'])
   end
 
   context 'with an annonymous user' do
