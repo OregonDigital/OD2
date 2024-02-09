@@ -53,7 +53,7 @@
       <% else %>
         <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
           <%= hidden_field :workflow_action, :name, value: 'approve' %>
-          <input class="btn btn-default" style='width: 105%;' type="submit" value="Approve" data-confirm='<%= t('hyrax.tombstone.revert') %>'>
+          <input class="btn btn-default" style='width: 105%;' type="submit" value="Reapprove" data-confirm='<%= t('hyrax.tombstone.revert') %>'>
         <% end %>
       <% end %>
     </div>
