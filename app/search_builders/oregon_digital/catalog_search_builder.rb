@@ -4,5 +4,5 @@
 class OregonDigital::CatalogSearchBuilder < ::SearchBuilder
   include OregonDigital::OnlyNonUserCollectionsBehavior
   include OregonDigital::FilterTombstone
-  self.default_processor_chain += %i(show_only_collections_not_created_users, non_tombstoned_works)
+  self.default_processor_chain += %i[show_only_collections_not_created_users non_tombstoned_works]
 end
