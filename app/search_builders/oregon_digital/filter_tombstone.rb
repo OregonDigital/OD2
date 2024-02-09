@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hyrax
+module OregonDigital
   # Injects a search builder filter to hide documents marked as suppressed
   module FilterTombstone
     extend ActiveSupport::Concern
