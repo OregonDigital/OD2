@@ -22,7 +22,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       index_sort_options(solr_doc)
-      triple_powered_properties_solr_doc(object, solr_doc)
+      label_fetch_properties_solr_doc(object, solr_doc)
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
       solr_doc['oai_collections_ssim'] = []
@@ -138,7 +138,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   # METHOD: Solrize 'label$uri' into Solr
-  def triple_powered_properties_solr_doc(object, solr_doc)
+  def label_fetch_properties_solr_doc(object, solr_doc)
     # LOOP: Go through the controlled properties to get the field needed for indexing
     object.controlled_properties.each do |o|
       # FETCH: Get the array of controlled vocab from the properties
