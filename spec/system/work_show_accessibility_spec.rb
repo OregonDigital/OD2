@@ -18,7 +18,6 @@ RSpec.describe 'Work show page', js: true, type: :system, clean_repo: true do
         <http://opaquenamespace.org/ns/creator/UniversityofOregonstudents> <http://purl.org/dc/terms/modified> "2015-07-16"^^<http://www.w3.org/2001/XMLSchema#date> .
         <http://opaquenamespace.org/ns/creator/UniversityofOregonstudents> <http://purl.org/dc/terms/modified> "2015-08-25"^^<http://www.w3.org/2001/XMLSchema#date> .
       ', headers: {})
-
   end
 
   context 'with an annonymous user' do
