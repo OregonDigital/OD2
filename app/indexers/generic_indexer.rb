@@ -139,6 +139,7 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/CyclomaticComplexity
   # METHOD: Solrize 'label$uri' into Solr
   def label_fetch_properties_solr_doc(object, solr_doc)
     # LOOP: Go through the controlled properties to get the field needed for indexing
@@ -153,6 +154,8 @@ class GenericIndexer < Hyrax::WorkIndexer
       controlled_vocabs.each do |cv|
         cv.fetch
         labels << (cv.solrize.last.is_a?(String) ? ['No label found', cv.solrize.last].join('$') : cv.solrize.last[:label])
+      rescue IOError, SocketError, TriplestoreAdapter::TriplestoreException
+        labels << ['No label found', cv.solrize.last].join('$')
       end
 
       # FETCH: Get the combined_properties from DeepIndex
@@ -181,5 +184,6 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
 # rubocop:enable Metrics/ClassLength

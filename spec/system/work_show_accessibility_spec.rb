@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 RSpec.describe 'Work show page', js: true, type: :system, clean_repo: true do
-  let(:work) { create(:work, with_admin_set: true, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, rights_statement: ['http://rightsstatements.org/vocab/InC/1.0/'], creator: ['http://opaquenamespace.org/ns/creator/my_id'], description: ['description']) }
+  let(:work) { create(:work, with_admin_set: true, visibility: Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC, rights_statement: ['http://rightsstatements.org/vocab/InC/1.0/'], creator: [OregonDigital::ControlledVocabularies::Creator.new('http://opaquenamespace.org/ns/creator/my_id')], description: ['description']) }
 
   before do
     allow_any_instance_of(OregonDigital::ControlledVocabularies::Creator).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/creator/my_id', { label: 'MyID$http://opaquenamespace.org/ns/creator/my_id' }])
@@ -19,7 +19,6 @@ RSpec.describe 'Work show page', js: true, type: :system, clean_repo: true do
         <http://opaquenamespace.org/ns/creator/UniversityofOregonstudents> <http://purl.org/dc/terms/modified> "2015-08-25"^^<http://www.w3.org/2001/XMLSchema#date> .
       ', headers: {})
 
-    allow(work).to receive(:label_fetch_properties_solr_doc).with(['http://opaquenamespace.org/ns/creator/my_id']).and_return(['label1$http://opaquenamespace.org/ns/creator/my_id'])
   end
 
   context 'with an annonymous user' do
