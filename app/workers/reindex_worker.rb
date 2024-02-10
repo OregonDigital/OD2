@@ -13,17 +13,23 @@ class ReindexWorker
   # rubocop:disable Metrics/MethodLength:
   def perform(access_control_pids, asset_pid, contains_pids)
     access_control_pids.each do |pid|
-      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
       obj.permissions.each(&:update_index)
-      Hyrax.index_adapter.save(resource: obj)
+      obj.update_index
+      # Enable once all model objects are fully valkyrized and indexing works again
+      # Hyrax.index_adapter.save(resource: obj)
     end
 
-    a = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: asset_pid)
-    Hyrax.index_adapter.save(resource: a)
+    a = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: asset_pid, use_valkyrie: false)
+    a.update_index
+    # Enable once all model objects are fully valkyrized and indexing works again
+    # Hyrax.index_adapter.save(resource: a)
 
     contains_pids.each do |pid|
-      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
-      Hyrax.index_adapter.save(resource: obj)
+      obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
+      obj.update_index
+      # Enable once all model objects are fully valkyrized and indexing works again
+      # Hyrax.index_adapter.save(resource: obj)
     end
 
     FetchGraphWorker.perform_async(asset_pid, a.depositor) if a.respond_to?(:depositor)

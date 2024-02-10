@@ -13,7 +13,7 @@ module OregonDigital
 
     def approve(items_to_review)
       items_to_review.each do |pid|
-        item = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+        item = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
         entity = Sipity::Entity(item)
         next if entity.nil? || entity.workflow_state_name != 'pending_review'
 
@@ -28,8 +28,10 @@ module OregonDigital
       deposited = entity.workflow.workflow_states.find_by(name: 'deposited')
       entity.workflow_state_id = deposited.id
       entity.save!
-      Hyrax.persister.save(resource: item)
-      Hyrax.index_adapter.save(resource: item)
+      item.save
+      # Enable once all model objects are fully valkyrized and indexing works again
+      # Hyrax.persister.save(resource: item)
+      # Hyrax.index_adapter.save(resource: item)
     end
   end
 end

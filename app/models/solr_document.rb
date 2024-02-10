@@ -39,7 +39,7 @@ class SolrDocument
       'complex object': 'cubes',
       'dataset': 'database',
       'image': 'picture-o',
-      'moving image': 'video-camera',
+      'video': 'video-camera',
       'physical object': 'archive',
       'audio': 'music',
       'text': 'file-text'
