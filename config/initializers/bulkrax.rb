@@ -193,7 +193,7 @@ Bulkrax::CsvParser.class_eval do
     current_records_for_export.each do |id, entry_class|
       new_entry = find_or_create_entry(entry_class, id, 'Bulkrax::Exporter')
       begin
-        entry = ExportWorkJob.perform_now(new_entry.id, current_run.id)
+        entry = Bulkrax::ExportWorkJob.perform_now(new_entry.id, current_run.id)
       rescue => e
         Rails.logger.info("#{e.message} was detected during export")
       end
