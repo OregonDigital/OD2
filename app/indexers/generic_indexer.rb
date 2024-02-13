@@ -22,6 +22,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       index_sort_options(solr_doc)
+      label_fetch_properties_solr_doc(object, solr_doc)
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
       solr_doc['oai_collections_ssim'] = []
@@ -135,5 +136,54 @@ class GenericIndexer < Hyrax::WorkIndexer
   def all_existing_groups
     (object.edit_groups + object.read_groups + object.discover_groups)
   end
+
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # METHOD: Solrize 'label$uri' into Solr
+  def label_fetch_properties_solr_doc(object, solr_doc)
+    # LOOP: Go through the controlled properties to get the field needed for indexing
+    object.controlled_properties.each do |o|
+      # FETCH: Get the array of controlled vocab from the properties
+      controlled_vocabs = object[o]
+
+      # CREATE: Make an empty label array
+      labels = []
+
+      # LOOP: Loop through all controlled vocabs uri and solrize to make it into 'label$uri'
+      controlled_vocabs.each do |cv|
+        cv.fetch
+        labels << (cv.solrize.last.is_a?(String) ? ['No label found', cv.solrize.last].join('$') : cv.solrize.last[:label])
+      rescue IOError, SocketError, TriplestoreAdapter::TriplestoreException
+        labels << ['No label found', cv.solrize.last].join('$')
+      end
+
+      # FETCH: Get the combined_properties from DeepIndex
+      combined_label = rdf_indexer.combined_properties[o.to_s]
+
+      # CHECK: Check to make sure this field exist or not before assign labels
+      solr_doc["#{combined_label}_parsable_combined_label_ssim"] ||= []
+      solr_doc["#{combined_label}_parsable_combined_label_tesim"] ||= []
+
+      # ASSIGN: Put the labels into their own field in solr_doc
+      solr_doc["#{o}_parsable_label_ssim"] = labels
+      solr_doc["#{o}_parsable_label_tesim"] = labels
+      solr_doc["#{combined_label}_parsable_combined_label_ssim"] += labels
+      solr_doc["#{combined_label}_parsable_combined_label_tesim"] += labels
+    end
+
+    # LOOP: do a special loop through :keyword
+    object[:keyword].each do |kw|
+      # ASSIGN: Put the labels into their own field in solr_doc
+      solr_doc['topic_parsable_combined_label_ssim'] << "#{kw}$"
+      solr_doc['topic_parsable_combined_label_tesim'] << "#{kw}$"
+    end
+
+    # RETURN: Return the solr 'label$uri' in their field
+    solr_doc
+  end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
 # rubocop:enable Metrics/ClassLength
