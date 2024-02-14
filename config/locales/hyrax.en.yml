@@ -235,9 +235,10 @@ en:
           date_modified: Modified
   hyrax:
     workflow:
-      tombstoned: "This item is unavailable due to being deleted."
+      tombstoned: "This item has been deleted. It is no longer available."
     tombstone:
       confirmation: 'Are you sure you want to tombstone this item?'
+      revert: 'Are you sure you want to revert this item?'
     advanced_form:
       all: All
       any: Any
