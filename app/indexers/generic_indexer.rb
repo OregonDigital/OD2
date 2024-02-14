@@ -170,12 +170,9 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_parsable_combined_labels(combined_label, labels, solr_doc)
     end
 
-    # LOOP: do a special loop through :keyword
-    object[:keyword].each do |kw|
-      # ASSIGN: Put the labels into their own field in solr_doc
-      solr_doc['topic_parsable_combined_label_ssim'] << "#{kw}$"
-      solr_doc['topic_parsable_combined_label_tesim'] << "#{kw}$"
-    end
+    keyword_labels = object[:keyword].map { |kw| "#{kw}$" }
+    # Add keyword values to topic combined labels
+    index_parsable_combined_labels('topic', keyword_labels, solr_doc)
 
     # RETURN: Return the solr 'label$uri' in their field
     solr_doc
