@@ -52,4 +52,8 @@ Rails.application.configure do
 
   # Disable caching in test environment
   config.cache_store = :null_store
+
+  config.verify_services = [
+    OregonDigital::VerifyDerivativesService
+  ]
 end
