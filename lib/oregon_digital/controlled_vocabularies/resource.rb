@@ -64,9 +64,12 @@ module OregonDigital
 
       # Return a tuple of url & label
       def solrize
-        return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
+        standard_uri = URI.parse(rdf_subject.to_s)
+        standard_uri.scheme = 'https'
+        standard_uri = RDF::URI.new(standard_uri)
+        return [standard_uri.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
-        [rdf_subject.to_s, { label: "#{language_label(get_language_label(rdf_label))}$#{rdf_subject}" }]
+        [standard_uri.to_s, { label: "#{language_label(get_language_label(rdf_label))}$#{standard_uri}" }]
       end
 
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
@@ -105,7 +108,7 @@ module OregonDigital
 
       # Return the URI as a string
       def to_s
-        respond_to?(:rdf_subject) ? rdf_subject.to_s : super
+        respond_to?(:rdf_subject) ? solrize.first : super
       end
 
       private
