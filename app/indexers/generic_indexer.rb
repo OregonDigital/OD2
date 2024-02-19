@@ -139,7 +139,6 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/CyclomaticComplexity
   # METHOD: Solrize 'label$uri' into Solr
   def label_fetch_properties_solr_doc(object, solr_doc)
     # LOOP: Go through the controlled properties to get the field needed for indexing
@@ -158,32 +157,35 @@ class GenericIndexer < Hyrax::WorkIndexer
         labels << ['No label found', cv.solrize.last].join('$')
       end
 
-      # FETCH: Get the combined_properties from DeepIndex
-      combined_label = rdf_indexer.combined_properties[o.to_s]
-
       # CHECK: Check to make sure this field exist or not before assign labels
-      solr_doc["#{combined_label}_parsable_combined_label_ssim"] ||= []
-      solr_doc["#{combined_label}_parsable_combined_label_tesim"] ||= []
 
       # ASSIGN: Put the labels into their own field in solr_doc
       solr_doc["#{o}_parsable_label_ssim"] = labels
       solr_doc["#{o}_parsable_label_tesim"] = labels
-      solr_doc["#{combined_label}_parsable_combined_label_ssim"] += labels
-      solr_doc["#{combined_label}_parsable_combined_label_tesim"] += labels
+
+      # FETCH: Get the combined_properties from DeepIndex
+      combined_label = rdf_indexer.combined_properties[o.to_s]
+      next if combined_label.blank?
+
+      index_parsable_combined_labels(combined_label, labels, solr_doc)
     end
 
-    # LOOP: do a special loop through :keyword
-    object[:keyword].each do |kw|
-      # ASSIGN: Put the labels into their own field in solr_doc
-      solr_doc['topic_parsable_combined_label_ssim'] << "#{kw}$"
-      solr_doc['topic_parsable_combined_label_tesim'] << "#{kw}$"
-    end
+    keyword_labels = object[:keyword].map { |kw| "#{kw}$" }
+    # Add keyword values to topic combined labels
+    index_parsable_combined_labels('topic', keyword_labels, solr_doc)
 
     # RETURN: Return the solr 'label$uri' in their field
     solr_doc
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/CyclomaticComplexity
+
+  def index_parsable_combined_labels(label, values, solr_doc)
+    solr_doc["#{label}_parsable_combined_label_ssim"] ||= []
+    solr_doc["#{label}_parsable_combined_label_tesim"] ||= []
+
+    solr_doc["#{label}_parsable_combined_label_ssim"] += values
+    solr_doc["#{label}_parsable_combined_label_tesim"] += values
+  end
 end
 # rubocop:enable Metrics/ClassLength
