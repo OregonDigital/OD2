@@ -10,15 +10,14 @@ module OregonDigital
     queue_as :default
 
     def perform(pid, group_key)
-      w = ActiveFedora::Base.find(pid)
-      w.edit_groups += [group_key]
-      w.save
+      r = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid) # Getting a valk resource
+      r.permission_manager.edit_groups += [group_key] # Add group
+      r.permission_manager.acl.save # Save permissions changes
 
-      # Also grant to filesets
-      file_set_ids(w).each do |file_set_id|
-        file_set = ::FileSet.find(file_set_id)
-        file_set.edit_groups += [group_key]
-        file_set.save!
+      file_set_ids(r).each do |file_set_id|
+        file_set = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: file_set_id)
+        file_set.permission_manager.edit_groups += [group_key]
+        file_set.permission_manager.acl.save
       end
     end
   end
