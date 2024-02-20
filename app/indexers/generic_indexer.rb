@@ -152,26 +152,24 @@ class GenericIndexer < Hyrax::WorkIndexer
       # LOOP: Loop through all controlled vocabs uri and solrize to make it into 'label$uri'
       controlled_vocabs.each do |cv|
         cv.fetch
-        labels << (cv.solrize.last.is_a?(String) ? ['No label found', cv.solrize.last].join('$') : cv.solrize.last[:label])
+        labels << (cv.solrize.last.is_a?(String) ? ['', cv.solrize.last].join('$') : cv.solrize.last[:label])
       rescue IOError, SocketError, TriplestoreAdapter::TriplestoreException
-        labels << ['No label found', cv.solrize.last].join('$')
+        labels << ['', cv.solrize.last].join('$')
       end
-
-      # CHECK: Check to make sure this field exist or not before assign labels
 
       # ASSIGN: Put the labels into their own field in solr_doc
       solr_doc["#{o}_parsable_label_ssim"] = labels
-      solr_doc["#{o}_parsable_label_tesim"] = labels
 
       # FETCH: Get the combined_properties from DeepIndex
       combined_label = rdf_indexer.combined_properties[o.to_s]
       next if combined_label.blank?
 
+      # CREATE: Push item into the new field of combine labels
       index_parsable_combined_labels(combined_label, labels, solr_doc)
     end
 
+    # ADD: Add keyword values to topic combined labels
     keyword_labels = object[:keyword].map { |kw| "#{kw}$" }
-    # Add keyword values to topic combined labels
     index_parsable_combined_labels('topic', keyword_labels, solr_doc)
 
     # RETURN: Return the solr 'label$uri' in their field
@@ -180,12 +178,11 @@ class GenericIndexer < Hyrax::WorkIndexer
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 
+  # METHOD: Create the combined label parsable
   def index_parsable_combined_labels(label, values, solr_doc)
     solr_doc["#{label}_parsable_combined_label_ssim"] ||= []
-    solr_doc["#{label}_parsable_combined_label_tesim"] ||= []
 
     solr_doc["#{label}_parsable_combined_label_ssim"] += values
-    solr_doc["#{label}_parsable_combined_label_tesim"] += values
   end
 end
 # rubocop:enable Metrics/ClassLength
