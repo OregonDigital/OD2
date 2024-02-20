@@ -62,14 +62,17 @@ module OregonDigital
       end
       # rubocop:enable AccessorMethodName
 
-      # Return a tuple of url & label
-      def solrize
+      def storage_uri
         standard_uri = URI.parse(rdf_subject.to_s)
         standard_uri.scheme = 'https'
-        standard_uri = RDF::URI.new(standard_uri)
-        return [standard_uri.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
+        RDF::URI.new(standard_uri)
+      end
 
-        [standard_uri.to_s, { label: "#{language_label(get_language_label(rdf_label))}$#{standard_uri}" }]
+      # Return a tuple of url & label
+      def solrize
+        return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
+
+        [storage_uri.to_s, { label: "#{language_label(get_language_label(rdf_label))}$#{storage_uri}" }]
       end
 
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
