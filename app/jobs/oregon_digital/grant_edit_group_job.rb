@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 #
 # Helper job to bulk grant edit permissions for a user group (role).
 
