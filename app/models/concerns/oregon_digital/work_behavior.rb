@@ -8,6 +8,7 @@ module OregonDigital
     extend ActiveSupport::Concern
     include OregonDigital::AccessControls::Visibility
     include OregonDigital::MetadataDownload
+    include OregonDigital::Errors
 
     included do
       validates_presence_of %i[title resource_type rights_statement identifier]

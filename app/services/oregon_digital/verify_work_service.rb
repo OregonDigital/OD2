@@ -15,22 +15,22 @@ module OregonDigital
       @services.each do |service|
         verifier = service.new(service_args)
         verifier.verify.each do |k, v|
-          v.blank? ? work.errors.delete(k) : add_errors(k, v)
+          v.blank? ? work.remove_errors(k) : add_errors(k, v)
         end
       end
     end
 
     def add_errors(key, messages)
       messages.each do |message|
-        work.errors.add(key, message)
+        work.add_error(key, message)
       end
     end
 
     def service_args
       @service_args ||=
         {
-          solr_doc => solr_doc,
-          work => work
+          solr_doc: solr_doc,
+          work: work
         }
     end
 
@@ -43,7 +43,7 @@ module OregonDigital
     end
 
     def work
-      @work ||= resource_type.constantize.find(@args[:pid])
+      @work ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: @args[:pid])
     end
 
     # allow a different list of services to be used on the fly
