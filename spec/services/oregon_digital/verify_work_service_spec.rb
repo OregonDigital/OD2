@@ -17,15 +17,19 @@ RSpec.describe OregonDigital::VerifyWorkService do
 
   before do
     allow(SolrDocument).to receive(:find).and_return(solr_doc)
-    allow(Image).to receive(:find).and_return(work)
+    allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).and_return(work)
     allow(OregonDigital::VerifyDerivativesService).to receive(:new).and_return(derivs_verify)
     allow(derivs_verify).to receive(:verify).and_return({ derivs: [message] })
+  end
+
+  after do
+    work.remove_errors(:derivs)
   end
 
   describe 'running the service when there are errors' do
     it 'adds the error to the work' do
       service.run
-      expect(work.errors.messages).to eq({ derivs: [message] })
+      expect(work.all_errors[:derivs]).to include(message)
     end
   end
 
@@ -42,6 +46,10 @@ RSpec.describe OregonDigital::VerifyWorkService do
       end
       allow(DummyVerify).to receive(:new).and_return(dummy)
       allow(dummy).to receive(:verify).and_return({ dummy: [message] })
+    end
+
+    after do
+      work.remove_errors(:dummy)
     end
 
     it 'instantiates DummyVerify' do
