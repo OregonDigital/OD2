@@ -29,5 +29,10 @@ module OregonDigital
         end
       end
     end
+
+    # Matching valkyrie resource method for improved compatibility
+    def internal_resource
+      self.class.to_s
+    end
   end
 end
