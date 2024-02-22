@@ -56,7 +56,7 @@ module OregonDigital
     # rubocop:disable Metrics/PerceivedComplexity
     def sanitize_manifest(hash)
       hash['label'] = sanitize_value(hash['label']) if hash.key?('label')
-      hash['description'] = hash['description']&.collect { |elem| sanitize_value(elem) } if hash.key?('description')
+      hash['description'] = sanitize_value(hash['description']) if hash.key?('description')
 
       hash['sequences']&.each do |sequence|
         sequence['canvases']&.each do |canvas|
