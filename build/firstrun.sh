@@ -5,6 +5,13 @@ echo "Creating default admin set..."
 bundle exec rails hyrax:default_admin_set:create
 
 echo
+echo "Converting default admin set to ActiveFedora..."
+bundle exec rails runner '
+admin_set = Hyrax.query_service.find_by(id: "admin_set/default")
+Hyrax.persister.save(resource: admin_set)
+'
+
+echo
 echo "Creating default collection types..."
 bundle exec rails hyrax:default_collection_types:create
 

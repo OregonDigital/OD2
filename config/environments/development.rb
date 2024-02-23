@@ -86,5 +86,8 @@ Rails.application.configure do
   config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 5000).to_i
   config.batch_size = ENV.fetch('BULKRAX_BATCH_SIZE', 100).to_i
 
+  config.verify_services = [
+
+  ]
 
 end
