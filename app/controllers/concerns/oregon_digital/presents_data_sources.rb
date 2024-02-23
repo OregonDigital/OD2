@@ -12,6 +12,7 @@ module OregonDigital
       super
     end
 
+    # rubocop:disable Metrics/AbcSize
     def build_display_properties
       index = 1
       # FETCH: Get the label$uri from SolrDocument
@@ -26,6 +27,7 @@ module OregonDigital
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def build_controlled_prop(index, prop, cv_label_uris)
       # GET: Get the 'label$uri' from specific controlled vocab
