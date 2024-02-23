@@ -11,22 +11,17 @@ RSpec.describe OregonDigital::VerifyDerivativesService do
     }
   end
   let(:pid) { 'df70jh899' }
-  let(:file_set) do
-    instance_double(
-      'FileSet',
-      id: 'bn999672v',
-      uri: 'http://127.0.0.1/rest/fake/bn/99/96/72/bn999672v',
-      extracted_text: 'banana',
-      mime_type: 'image/png'
-    )
-  end
+  let(:file_set) { instance_double('Hyrax::FileSet') }
+  let(:file_metadata) { instance_double('Hyrax::FileMetadata') }
   let(:content_path) { 'spec/fixtures/test.jpg' }
 
   before do
     allow(work).to receive(:class).and_return(Image)
-    allow(file_set).to receive(:class).and_return(FileSet)
+    allow(Hyrax.custom_queries).to receive(:find_files).and_return([file_metadata])
+    allow(file_set).to receive(:internal_resource)
+    allow(file_metadata).to receive(:mime_type).and_return('image/jpg')
     allow(Hyrax::DerivativePath).to receive(:derivatives_for_reference).and_return(all_derivative_paths)
-    allow(work).to receive(:file_sets).and_return([file_set])
+    allow(Hyrax.custom_queries).to receive(:find_child_file_sets).and_return([file_set])
   end
 
   # rubocop:disable RSpec/NestedGroups
@@ -35,7 +30,7 @@ RSpec.describe OregonDigital::VerifyDerivativesService do
 
     context 'when there is no file set' do
       before do
-        allow(work).to receive(:file_sets).and_return([])
+        allow(service).to receive(:file_sets).and_return([])
       end
 
       context 'when the asset is an Image' do
@@ -182,12 +177,13 @@ RSpec.describe OregonDigital::VerifyDerivativesService do
       end
     end
 
+    # undo skip if/when extracted_text is restored in the service
     context 'when the derivative is not present' do
       let(:all_derivative_paths) { [] }
 
       before { allow(file_set).to receive(:extracted_text).and_return nil }
 
-      it 'returns the errors' do
+      xit 'returns the errors' do
         service.instance_variable_set(:@verification_errors, { derivatives: [] })
         service.check_office_document_derivatives(file_set)
         expect(service.verification_errors[:derivatives]).to include('Missing extracted text')

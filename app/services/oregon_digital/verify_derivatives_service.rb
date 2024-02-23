@@ -12,7 +12,7 @@ module OregonDigital
       @verification_errors = { derivatives: [] }
       return { derivatives: ['no file set'] } if no_fileset_warning
 
-      @work.file_sets.each do |file_set|
+      file_sets.each do |file_set|
         verify_file_set(file_set)
       end
       @verification_errors
@@ -21,19 +21,30 @@ module OregonDigital
       @verification_errors
     end
 
+    def file_sets
+      @file_sets ||= Hyrax.custom_queries.find_child_file_sets(resource: @work)
+    end
+
+    def mime_type(file_set)
+      file_metadata(file_set).mime_type
+    end
+
+    def file_metadata(file_set)
+      Hyrax.custom_queries.find_files(file_set: file_set).first
+    end
+
     def no_fileset_warning
-      @work.file_sets.empty? && @work.class.to_s != 'Generic'
+      file_sets.empty? && @work.class.to_s != 'Generic'
     end
 
     # rubocop:disable Metrics/AbcSize
-    def verify_file_set(object)
-      fsc = object.class
-      case object.mime_type
-      when *fsc.pdf_mime_types             then check_pdf_derivatives(object)
-      when *fsc.office_document_mime_types then check_office_document_derivatives(object)
-      when *fsc.audio_mime_types           then check_audio_derivatives(object)
-      when *fsc.video_mime_types           then check_video_derivatives(object)
-      when *fsc.image_mime_types           then check_image_derivatives(object)
+    def verify_file_set(file_set)
+      case mime_type(file_set)
+      when FileSet.pdf_mime_types             then check_pdf_derivatives(object)
+      when FileSet.office_document_mime_types then check_office_document_derivatives(object)
+      when FileSet.audio_mime_types           then check_audio_derivatives(object)
+      when FileSet.video_mime_types           then check_video_derivatives(object)
+      when FileSet.image_mime_types           then check_image_derivatives(object)
       end
       @verification_errors[:derivatives] << 'Index problem (fileset)' unless index_info[:file_set]
     end
@@ -46,7 +57,8 @@ module OregonDigital
 
     def check_office_document_derivatives(file_set)
       check_thumbnail(file_set)
-      check_extracted_content(file_set)
+      # TODO: restore this check when we know more about extracted_text
+      # check_extracted_content(file_set)
     end
 
     def check_audio_derivatives(file_set)
@@ -103,9 +115,8 @@ module OregonDigital
     def work_info(file_set)
       @work_info ||=
         {
-          file_set_id: file_set.id,
           has_thumbnail: all_derivatives(file_set).select { |b| b.match 'thumbnail' }.present?,
-          has_extracted_text: file_set.extracted_text.present?,
+          # has_extracted_text: file_set.extracted_text.present?,
           page_count: derivatives_for_reference(file_set, 'jp2').count
         }
     end
