@@ -40,8 +40,8 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def render_unavailable
-      tombstoned = (unavailable_presenter.workflow.state == 'tombstoned')
-      message = tombstoned ? I18n.t('hyrax.workflow.tombstoned') : I18n.t('hyrax.workflow.unauthorized')
+      @tombstoned = (unavailable_presenter.workflow.state == 'tombstoned')
+      message = @tombstoned ? I18n.t('hyrax.workflow.tombstoned') : I18n.t('hyrax.workflow.unauthorized')
       respond_to do |wants|
         wants.html do
           unavailable_presenter

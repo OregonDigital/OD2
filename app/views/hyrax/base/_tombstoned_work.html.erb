@@ -3,10 +3,13 @@
 <% @content = tag.div(raw(@content_block.value), class: 'tombstone-text') %>
 
 <div class='col-md-10 col-offset-md-2'>
-  <%= raw @content %>
+  <h1><%= raw @content %></h1>
 </div>
+
+<br>
+
 <div class='col-md-10 col-offset-md-2'>
-  <h2> Citations </h2>
+  <h3> Citations </h3>
   <br>
   <p>MLA Citation: <%= export_as_mla_citation(@presenter) %></p>
   <br>

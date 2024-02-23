@@ -140,6 +140,11 @@ class SolrDocument
     self['oai_collections_ssim']
   end
 
+  # METHOD: Fetch the ssim for 'label$uri'
+  def label_uri_helpers(attribute_name)
+    OregonDigital::LabelParserService.parse_label_uris(self["#{attribute_name}_parsable_label_ssim"])
+  end
+
   solrized_methods Generic.generic_properties
   solrized_methods Document.document_properties
   solrized_methods Image.image_properties

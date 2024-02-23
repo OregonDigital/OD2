@@ -32,6 +32,16 @@ module OregonDigital::HyraxHelperBehavior
     end
   end
 
+  # @return [Array<String>] the list of all user groups
+  # OVERRIDE: Modify the method to return Role instead of RoleMapper
+  def available_user_groups(ability:)
+    # Return list of Roles if user an admin
+    return Role.all.map(&:name) if ability.admin?
+
+    # Else return user_groups for non admin
+    ability.user_groups
+  end
+
   private
 
   def combine_hits_with_links(html_content, show_link)

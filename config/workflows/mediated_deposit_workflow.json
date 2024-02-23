@@ -61,7 +61,7 @@
                     "notifications": [
                         {
                             "notification_type": "email",
-                            "name": "Hyrax::Workflow::DeletionApprovalNotification",
+                            "name": "Hyrax::Workflow::TombstoneApprovalNotification",
                             "to": ["depositing"]
                         }
                     ],

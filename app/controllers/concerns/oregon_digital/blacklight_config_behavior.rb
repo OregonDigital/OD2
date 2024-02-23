@@ -314,7 +314,7 @@ module OregonDigital
           }
         end
         config.add_search_field('creator_field', label: 'Creator') do |field|
-          solr_name = 'creator_combined_label_sim'
+          solr_name = 'creator_combined_label_tesim'
           search_fields << solr_name
           field.solr_local_parameters = {
             qf: solr_name,
@@ -329,7 +329,7 @@ module OregonDigital
           }
         end
         config.add_search_field('subject_field', label: 'Subject') do |field|
-          solr_name = 'subject_label_sim'
+          solr_name = 'subject_label_tesim'
           field.solr_parameters = {
             qf: solr_name,
             pf: solr_name

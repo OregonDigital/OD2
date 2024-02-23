@@ -10,6 +10,10 @@ module OregonDigital
     self.stored_fields = %i[]
     self.symbol_fields = %i[]
 
+    def combined_properties
+      @combined_properties ||= combined_property_map
+    end
+
     protected
 
     # override Hyrax/ActiveFedora add_assertions to insert combined labels
@@ -70,10 +74,6 @@ module OregonDigital
       return val if val.first.is_a?(String)
 
       val.solrize.last.is_a?(String) ? val.solrize.last : val.solrize.last[:label].split('$').first
-    end
-
-    def combined_properties
-      @combined_properties ||= combined_property_map
     end
 
     def combined_property_map

@@ -8,6 +8,7 @@ module OregonDigital
     extend ActiveSupport::Concern
     include OregonDigital::AccessControls::Visibility
     include OregonDigital::MetadataDownload
+    include OregonDigital::Errors
 
     included do
       validates_presence_of %i[title resource_type rights_statement identifier]
@@ -27,6 +28,11 @@ module OregonDigital
           csv << work.metadata_row(keys, controlled_keys)
         end
       end
+    end
+
+    # Matching valkyrie resource method for improved compatibility
+    def internal_resource
+      self.class.to_s
     end
   end
 end
