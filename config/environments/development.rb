@@ -87,7 +87,7 @@ Rails.application.configure do
   config.batch_size = ENV.fetch('BULKRAX_BATCH_SIZE', 100).to_i
 
   config.verify_services = [
-
+    OregonDigital::VerifyDerivativesService
   ]
 
 end
