@@ -15,7 +15,7 @@ Rails.application.config.to_prepare do
       # This is used by the edit form to populate the thumbnail_id dropdown
       def files
         work_id = params[:q]
-        file_set_ids = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND id:#{work_id}*", rows: 100, fl: 'file_set_ids_ssim').flat_map{ |sd| sd['file_set_ids_ssim'] }.delete_if { |id| !CollectionRepresentative.where(fileset_id: id).empty? }
+        file_set_ids = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND id:#{work_id}* AND -workflow_state_name_ssim:tombstoned", rows: 100, fl: 'file_set_ids_ssim').flat_map{ |sd| sd['file_set_ids_ssim'] }
         result = SolrDocument.find(file_set_ids).map do |doc|
           { id: doc.id, text: doc.to_s }
         end
