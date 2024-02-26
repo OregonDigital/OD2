@@ -83,8 +83,9 @@ module OregonDigital
           # Only display description if a highlight is hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
         }
-        config.add_index_field 'all_text_timv', label: nil, itemprop: 'keyword'
+        config.add_index_field 'all_text_tsimv', label: nil, itemprop: 'keyword'
         config.add_index_field 'hocr_text_timv', label: nil, itemprop: 'keyword'
+        config.add_index_field 'hocr_text_tsimv', label: nil, itemprop: 'keyword' # Remove after all text/hocr text derivative creation
         config.add_index_field 'date_tesim', itemprop: 'date'
         config.add_index_field 'rights_statement_label_sim', label: 'Rights Statement', link_to_search: 'rights_statement_label_sim', if: false
         config.add_index_field 'resource_type_label_tesim', label: 'Resource Type', link_to_search: 'resource_type_label_sim', if: false

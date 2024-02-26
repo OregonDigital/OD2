@@ -8,6 +8,7 @@ class SolrDocument
   include Hyrax::SolrDocumentBehavior
   include BlacklightOaiProvider::SolrDocument
   include OregonDigital::SolrDocumentBehavior
+  include OregonDigital::TextExtractedBehavior
 
   SolrDocument.use_extension(Blacklight::Document::Email)
   SolrDocument.use_extension(Blacklight::Document::Sms)
@@ -122,17 +123,6 @@ class SolrDocument
 
   def sets
     fetch('has_model', []).map { |m| BlacklightOaiProvider::Set.new("has_model_ssim:#{m}") }
-  end
-
-  def hocr_text
-    @hocr_text ||= begin
-      fds = OregonDigital::FileSetDerivativesService.new(self)
-      uris = fds.sorted_derivative_urls('hocr')
-      uris.map do |path|
-        hocr_text = File.read(path.sub('file://', ''))
-        Nokogiri::HTML(hocr_text).css('.ocrx_word').map(&:text).join(' ')
-      end
-    end
   end
 
   def all_text

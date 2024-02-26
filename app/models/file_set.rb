@@ -11,6 +11,7 @@ class FileSet < ActiveFedora::Base
 
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
+  include OregonDigital::TextExtractedBehavior
   attr_writer :ocr_content, :bbox_content
 
   self.indexer = OregonDigital::FileSetIndexer
@@ -42,17 +43,6 @@ class FileSet < ActiveFedora::Base
     @bbox_content ||= SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
-  end
-
-  def hocr_text
-    @hocr_text ||= begin
-      fds = OregonDigital::FileSetDerivativesService.new(self)
-      uris = fds.sorted_derivative_urls('hocr')
-      uris.map do |path|
-        hocr_text = File.read(path.sub('file://', ''))
-        Nokogiri::HTML(hocr_text).css('.ocrx_word').map(&:text).join(' ')
-      end
-    end
   end
 
   private
