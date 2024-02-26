@@ -17,7 +17,7 @@ module OregonDigital
         if (service = local_metadata_authority_service(label))
           from_local_authority(service, Array(values))
         elsif controlled_keys.include?(label.to_sym)
-          from_controlled_field(values)
+          from_controlled_field(label)
         elsif values.respond_to?(:map)
           values.map(&:to_s).join('|')
         else
@@ -33,8 +33,15 @@ module OregonDigital
       values.map { |prop| service.label prop }.join('|')
     end
 
-    def from_controlled_field(values)
-      values.map { |prop| controlled_property_to_csv_value(prop).to_s }.join('|')
+    def from_controlled_field(label)
+      # FETCH: Get the SolrDocument that store the label$uri
+      cv_values = SolrDocument.find(id)
+
+      # GET: Get the parse value out of the label$uri
+      parse_cv_values = cv_values.label_uri_helpers(label)
+
+      # MAP: Map out the value and return a string of labels
+      parse_cv_values.map { |cv| !cv['label'].empty? ? cv['label'] : "No label found [#{cv['uri']}]" }.join('|')
     end
 
     def local_metadata_authority_service(key)
@@ -47,19 +54,6 @@ module OregonDigital
         ]
         @label_services.find { |service| service.authority.subauthority == key.to_s.pluralize }
       end
-    end
-
-    # Convert work controlled property value to label
-    def controlled_property_to_csv_value(prop)
-      begin
-        prop.fetch
-        label = prop.solrize[1][:label].split('$')[0]
-      # TriplestoreAdapter::TriplestoreException means no fetch possible
-      # NoMethodError likely means the fetch succeeded but no label was actually fetched, this is possible with geonames w/ http
-      rescue TriplestoreAdapter::TriplestoreException, NoMethodError
-        label = ['No label found', "[#{prop.solrize.first}]"].join(' ')
-      end
-      label
     end
   end
 end
