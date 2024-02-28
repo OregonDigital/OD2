@@ -12,25 +12,34 @@ module OregonDigital
       super
     end
 
+    # rubocop:disable Metrics/AbcSize
     def build_display_properties
       index = 1
+      # FETCH: Get the label$uri from SolrDocument
+      solr_doc = SolrDocument.find(presenter.id)
+
       Generic::ORDERED_PROPERTIES.each do |prop|
         if prop[:is_controlled]
-          index = build_controlled_prop(index, prop)
+          index = build_controlled_prop(index, prop, solr_doc)
         else
           presenter_value = presenter.attribute_to_html(prop[:name].to_sym, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name_label].nil? ? prop[:name] : prop[:name_label]}"))
           @props << prop unless presenter_value.nil? || presenter_value.empty?
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
-    def build_controlled_prop(index, prop)
-      zipped = presenter.zipped_values(prop[:name])
-      return index if zipped.nil? || zipped.empty?
+    def build_controlled_prop(index, prop, solr_doc)
+      # GET: Get the 'label$uri' from specific controlled vocab from solr_doc
+      parse_cv = solr_doc.label_uri_helpers(prop[:name].gsub('_label', ''))
 
+      # CHECK: Return index if either parse_cv is empty or nil
+      return index if parse_cv.nil? || parse_cv.empty?
+
+      # SETUP & LOOP: Setup the indices storage and loop through each parse_cv
       prop[:indices] = {}
-      zipped.each do |_uri, value|
-        prop[:indices][value] = index
+      parse_cv.each do |value|
+        prop[:indices][value['uri']] = index
         index += 1
       end
       @props << prop

@@ -8,14 +8,15 @@
     </tr>
   </thead>
   <tbody>
+  <% solr_doc = SolrDocument.find(presenter.id) %>
   <% @props.each do |prop| %>
     <% if prop[:is_controlled] %>
-        <% zipped = presenter.zipped_values(prop[:name]) %>
-        <% zipped.each do |label, uri| %>
+        <% parse_values = solr_doc.label_uri_helpers(prop[:name].gsub('_label', '')) %>
+        <% parse_values.each do |value| %>
         <tr>
-          <td> <%= prop[:indices][uri] %> </td>
-          <th scope="row"> <%= label %> </th>
-          <td> <%= link_to uri, uri %> </td>
+          <td> <%= prop[:indices][value['uri']] %> </td>
+          <th scope="row"> <%= !value['label'].empty? ? value['label'] : 'No label found' %> </th>
+          <td> <%= link_to value['uri'], value['uri'] %> </td>
         </tr>
         <% end %>
     <% end %>
