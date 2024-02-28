@@ -35,10 +35,10 @@ module OregonDigital
 
     def from_controlled_field(label)
       # FETCH: Get the SolrDocument that store the label$uri
-      cv_values = SolrDocument.find(id)
+      solr_doc = SolrDocument.find(id)
 
       # GET: Get the parse value out of the label$uri
-      parse_cv_values = cv_values.label_uri_helpers(label)
+      parse_cv_values = solr_doc.label_uri_helpers(label)
 
       # MAP: Map out the value and return a string of labels
       parse_cv_values.map { |cv| !cv['label'].empty? ? cv['label'] : "No label found [#{cv['uri']}]" }.join('|')

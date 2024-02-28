@@ -1,10 +1,9 @@
 <%# FETCH: Fetch the label$uri by finding it in SolrDocument %>
-<% cv_label_uris = SolrDocument.find(presenter.id) %>
+<% solr_doc = SolrDocument.find(presenter.id) %>
 <% @props.each do |prop| %>
   <% if prop[:is_controlled] %>
-    <% zipped = presenter.zipped_values(prop[:name]) %>
     <%# GET: Get the 'label$uri' from specific controlled vocab %>
-    <% parse_cv = cv_label_uris.label_uri_helpers(prop[:name].gsub('_label', '')) %>
+    <% parse_cv = solr_doc.label_uri_helpers(prop[:name].gsub('_label', '')) %>
     <%# CONVERT: Then get it into a hash to fit with the form method %>
     <% hash_cv = parse_cv.map { |cv| [cv['label'], cv['uri']] }.to_h %>
     <% @presenter_value = presenter.attribute_to_html(prop[:name].to_sym, indices: prop[:indices], render_as: :search_and_external_link, links: hash_cv, html_dl: true, label: t("simple_form.labels.defaults.#{prop[:name]}"))%>

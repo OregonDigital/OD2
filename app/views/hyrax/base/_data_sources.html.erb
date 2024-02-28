@@ -8,10 +8,10 @@
     </tr>
   </thead>
   <tbody>
-  <% cv_label_uris = SolrDocument.find(presenter.id) %>
+  <% solr_doc = SolrDocument.find(presenter.id) %>
   <% @props.each do |prop| %>
     <% if prop[:is_controlled] %>
-        <% parse_values = cv_label_uris.label_uri_helpers(prop[:name].gsub('_label', '')) %>
+        <% parse_values = solr_doc.label_uri_helpers(prop[:name].gsub('_label', '')) %>
         <% parse_values.each do |value| %>
         <tr>
           <td> <%= prop[:indices][value['uri']] %> </td>
