@@ -1,0 +1,92 @@
+# LOCAL CONTEXT: YML file to be use as selection for local_contexts
+terms:
+    - id: http://localcontexts.org/label/tk-attribution/
+      term: TK Attribution (TK A)
+      active: false
+    - id: http://localcontexts.org/label/tk-clan/
+      term: TK Clan (TK CL)
+      active: false
+    - id: http://localcontexts.org/label/tk-family/
+      term: TK Family (TK F)
+      active: false
+    - id: http://localcontexts.org/label/tk-multiple-communities/
+      term: TK Multiple Communities (TK MC)
+      active: false
+    - id: http://localcontexts.org/label/tk-community-voice/
+      term: TK Community Voice (TK CV)
+      active: false
+    - id: http://localcontexts.org/label/tk-creative/
+      term: TK Creative (TK CR)
+      active: false
+    - id: http://localcontexts.org/label/tk-verified/
+      term: TK Verified (TK V)
+      active: false
+    - id: http://localcontexts.org/label/tk-non-verified/
+      term: TK Non-Verified (TK NV)
+      active: false
+    - id: http://localcontexts.org/label/tk-seasonal/
+      term: TK Seasonal (TK S)
+      active: false
+    - id: http://localcontexts.org/label/tk-women-general/
+      term: TK Women General (TK WG)
+      active: false
+    - id: http://localcontexts.org/label/tk-men-general/
+      term: TK Men General (TK MG)
+      active: false
+    - id: http://localcontexts.org/label/tk-men-restricted/
+      term: TK Men Restricted (TK MR)
+      active: false
+    - id: http://localcontexts.org/label/tk-women-restricted/
+      term: TK Women Restricted (TK WR)
+      active: false
+    - id: http://localcontexts.org/label/tk-culturally-sensitive/
+      term: TK Culturally Sensitive (TK CS)
+      active: false
+    - id: http://localcontexts.org/label/tk-secret-sacred/
+      term: TK Secret / Sacred (TK SS)
+      active: false
+    - id: http://localcontexts.org/label/tk-commercial/
+      term: TK Open to Commercialization (TK OC)
+      active: false
+    - id: http://localcontexts.org/label/tk-non-commercial/
+      term: TK Non-Commercial (TK NC)
+      active: false
+    - id: http://localcontexts.org/label/tk-community-use-only/
+      term: TK Community Use Only (TK CO)
+      active: false
+    - id: http://localcontexts.org/label/tk-outreach/
+      term: TK Outreach (TK O)
+      active: false
+    - id: http://localcontexts.org/label/tk-open-to-collaboration/
+      term: TK Open to Collaboration (TK CB)
+      active: false
+    - id: http://localcontexts.org/label/bc-consent-verified/
+      term: BC Consent Verified (BC CV)
+      active: false
+    - id: http://localcontexts.org/label/bc-consent-non-verified/
+      term: BC Consent Non-Verified (BC CNV)
+      active: false
+    - id: http://localcontexts.org/label/bc-research-use/
+      term: BC Research Use (BC R)
+      active: false
+    - id: http://localcontexts.org/label/bc-open-to-collaboration/
+      term: BC Open to Collaboration (BC CB)
+      active: false
+    - id: http://localcontexts.org/label/bc-open-to-commercialization/																				
+      term: BC Open to Commercialization (BC OC)
+      active: false
+    - id: http://localcontexts.org/label/bc-outreach/
+      term: BC Outreach (BC O)
+      active: false
+    - id: http://localcontexts.org/label/bc-non-commercial/
+      term: BC Non-Commercial (BC NC)
+      active: false
+    - id: http://localcontexts.org/label/bc-provenance/
+      term: BC Provenance (BC P)
+      active: false
+    - id: http://localcontexts.org/label/bc-multiple-communities/
+      term: BC Multiple Communities (BC MC)
+      active: false
+    - id: http://localcontexts.org/label/bc-clan/
+      term: BC Clan (BC CL)
+      active: false
