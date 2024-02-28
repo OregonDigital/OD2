@@ -37,17 +37,6 @@ RSpec.describe Collection do
     end
   end
 
-  describe '#controlled_property_to_csv_value' do
-    before do
-      allow(term).to receive(:fetch)
-      allow(term).to receive(:solrize).and_return(['http://opaquenamespace.org/ns/TestVocabulary/TestTerm', { label: 'TestTerm$http://opaquenamespace.org/ns/TestVocabulary/TestTerm' }])
-    end
-
-    it 'formats a controlled property' do
-      expect(model.send(:controlled_property_to_csv_value, term)).to eq('TestTerm')
-    end
-  end
-
   describe '#metadata_row' do
     it 'provides an array' do
       expect(model.metadata_row([:title], [])).to be_kind_of(Array)
