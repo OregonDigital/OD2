@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe OregonDigital::LocalContextService do
+describe OregonDigital::LocalContextsService do
   # SETUP: Create a test variable
   let(:service) { described_class.new }
 

@@ -698,7 +698,7 @@ module OregonDigital
         { name: 'award', is_controlled: false, collection_facetable: false },
         { name: 'workType_label', is_controlled: true, collection_facetable: true },
         { name: 'cultural_context_label', is_controlled: true, collection_facetable: true },
-        { name: 'local_contexts_label', is_controlled: false, collection_facetable: true },
+        { name: 'local_contexts_label', is_controlled: true, collection_facetable: true },
         { name: 'style_or_period_label', is_controlled: true, collection_facetable: true },
         { name: 'state_or_edition', is_controlled: false, collection_facetable: false },
         { name: 'common_name_label', is_controlled: false, collection_facetable: false },

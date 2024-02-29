@@ -1,5 +1,5 @@
 <!-- SELECTION: Create a dropdown list fetching from the local context -->
-<% local_context_service = OregonDigital::LocalContextService.new %>
+<% local_context_service = OregonDigital::LocalContextsService.new %>
 <%= f.input :local_contexts,
     as: :multi_value_select,
     collection: local_context_service.select_active_options,

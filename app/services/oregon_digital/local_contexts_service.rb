@@ -2,7 +2,7 @@
 
 module OregonDigital
   # CLASS: Local Context Service to provide select options for the local context (dcterms:rights) field
-  class LocalContextService < Hyrax::QaSelectService
+  class LocalContextsService < Hyrax::QaSelectService
     # METHOD: Override the intialize with using the YML file
     def initialize
       super('local_contexts')
