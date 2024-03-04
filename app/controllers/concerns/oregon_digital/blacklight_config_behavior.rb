@@ -229,6 +229,7 @@ module OregonDigital
         config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution', index_range: 'A'..'Z'
         config.add_facet_field 'cultural_context_label_sim', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'local_contexts_label_sim', label: I18n.translate('simple_form.labels.defaults.local_contexts'), index_range: 'A'..'Z', limit: 5
 
         config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), index_range: 'A'..'Z', limit: 5
