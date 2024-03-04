@@ -56,6 +56,7 @@ en:
           plss_sim: Public Land Survey System
           based_near_label_sim: Location
           cultural_context_label_sim: Cultural Context
+          local_contexts_label_sim: Local Contexts
           ethnographic_term_label_sim: Ethnographic Term
           style_or_period_label_sim: Style / Period
           form_of_work_label_sim: Form of Work
@@ -356,6 +357,8 @@ en:
     labels:
       collection_type:
         facet_configurable: FACET CONFIGURABLE
+      defaults:
+        local_contexts: Local Contexts
   howto:
     researchers:
       title: 'Researchers'

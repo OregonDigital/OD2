@@ -12,6 +12,7 @@ fr:
           language_sim: La langue
           publisher_sim: Éditeur
           subject_sim: Assujettir
+          local_contexts_label_sim: Contextes Locaux
         index:
           based_near_tesim: Emplacement
           contributor_tesim: Donateur
@@ -60,3 +61,7 @@ fr:
     institution_name_full: Nom de l'établissement
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
+  simple_form:
+    labels:
+      defaults:
+        local_contexts: Contextes Locaux
