@@ -12,15 +12,15 @@ class ReExtractTextWorker
   def perform(pid, filename)
     file_set = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
     # Create extracted text bbox_content
-    OregonDigital::ExtractedTextDerivativeService::Factory.new(file_set: file_set, filename: filename).new.create_derivatives
+    OregonDigital::Derivatives::Document::PDFToTextRunner.create(filename,
+                                                                outputs: [{ url: uri(file_set), container: 'bbox' }])
     # We need the individual pages as PNGs to redo the OCR, but we can skip it if we were able to extract the exact text
     page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
 
-    # Create the fileset derivative service and use it to iterate the existing jp2 derivatives
-    derivative_service = OregonDigital::FileSetDerivativesService.new(file_set)
-
     # OCR if we didn't get extracted bbox content
     if file_set.bbox_content.blank?
+      # Create the fileset derivative service and use it to iterate the existing jp2 derivatives
+      derivative_service = OregonDigital::FileSetDerivativesService.new(file_set)
       file_set.ocr_content = []
       file_set.hocr_text = []
       0.upto(page_count - 1) do |pagenum|
@@ -29,7 +29,8 @@ class ReExtractTextWorker
         # This jp2 needs to be converted to png before it can be OCRd by tesseract
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           derivative_service.manual_convert(filename, pagenum, out_path)
-          OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: out_path, pagenum: pagenum).new.create_derivatives
+          OregonDigital::Derivatives::Document::TesseractRunner.create(out_path,
+                                                                    outputs: [{ url: uri(file_set), container: 'hocr' }])
         end
       end
     end
@@ -38,4 +39,13 @@ class ReExtractTextWorker
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+
+  def uri(file_set)
+    # If given a FileMetadata object, use its parent ID.
+    if file_set.respond_to?(:file_set_id)
+      file_set.file_set_id.to_s
+    else
+      file_set.uri
+    end
+  end
 end
