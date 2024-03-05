@@ -77,7 +77,7 @@ module OregonDigital
         Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox.blank?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          create_hocr_content(out_path, pagenum) if file_set.bbox.blank?
+          create_hocr_content(out_path) if file_set.bbox.blank?
           create_zoomable_page(out_path, pagenum)
         end
       end
@@ -107,7 +107,7 @@ module OregonDigital
                                                                       layer: 0 }])
     end
 
-    def create_hocr_content(filename, pagenum)
+    def create_hocr_content(filename)
       OregonDigital::Derivatives::Document::TesseractRunner.create(filename,
                                                                 outputs: [{ url: uri, container: 'hocr' }])
     end
