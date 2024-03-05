@@ -10,7 +10,7 @@ class ReExtractTextWorker
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def perform(pid, filename)
-    file_set = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+    file_set = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
     # Create extracted text bbox_content
     OregonDigital::ExtractedTextDerivativeService::Factory.new(file_set: file_set, filename: filename).new.create_derivatives
     # We need the individual pages as PNGs to redo the OCR, but we can skip it if we were able to extract the exact text
