@@ -14,6 +14,7 @@ class FileSet < ActiveFedora::Base
   include OregonDigital::TextExtractedBehavior
 
   directly_contains :hocr, has_member_relation: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
+  directly_contains_one :bbox, through: :files, type: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
 
   attr_writer :ocr_content, :bbox_content
 

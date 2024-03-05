@@ -71,13 +71,13 @@ module OregonDigital
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
-      extract_text_bbox_derivative_service(filename).create_derivatives
+      create_extracted_text_bbox_content(filename)
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       0.upto(page_count - 1) do |pagenum|
-        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox_content.blank?
+        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox.blank?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          create_hocr_content(out_path, pagenum)
+          create_hocr_content(out_path, pagenum) if file_set.bbox.blank?
           create_zoomable_page(out_path, pagenum)
         end
       end
@@ -109,7 +109,12 @@ module OregonDigital
 
     def create_hocr_content(filename, pagenum)
       OregonDigital::Derivatives::Document::TesseractRunner.create(filename,
-                                                                outputs: [{ url: uri, container: "hocr" }])
+                                                                outputs: [{ url: uri, container: 'hocr' }])
+    end
+
+    def create_extracted_text_bbox_content(filename, file_set: self.file_set)
+      OregonDigital::Derivatives::Document::PDFToTextRunner.create(filename,
+                                                                outputs: [{ url: uri, container: 'bbox' }])
     end
 
     def create_video_derivatives(filename)
@@ -198,10 +203,6 @@ module OregonDigital
     # Returns the JP2Processor class of choice
     def jp2_processor
       OregonDigital::Derivatives::Image::JP2Processor
-    end
-
-    def extract_text_bbox_derivative_service(filename, file_set: self.file_set)
-      OregonDigital::ExtractedTextDerivativeService::Factory.new(file_set: file_set, filename: filename).new
     end
   end
 end
