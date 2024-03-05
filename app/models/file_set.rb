@@ -12,6 +12,9 @@ class FileSet < ActiveFedora::Base
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
   include OregonDigital::TextExtractedBehavior
+
+  directly_contains :hocr, has_member_relation: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
+
   attr_writer :ocr_content, :bbox_content
 
   self.indexer = OregonDigital::FileSetIndexer

@@ -109,7 +109,7 @@ module OregonDigital
 
     def create_hocr_content(filename, pagenum)
       OregonDigital::Derivatives::Document::TesseractRunner.create(filename,
-                                                                outputs: [{ url: derivative_url('hocr', pagenum) }])
+                                                                outputs: [{ url: uri, container: "hocr" }])
     end
 
     def create_video_derivatives(filename)

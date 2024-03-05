@@ -5,7 +5,7 @@ require 'tempfile'
 
 module OregonDigital::Derivatives::Document
   # OpenJP2 processor for derivatives
-  class TesseractProcessor < Hydra::Derivatives::Processors::Processor
+  class TesseractProcessor < Hydra::Derivatives::Processors::FullText
     include Hydra::Derivatives::Processors::ShellBasedProcessor
 
     class << self
@@ -20,10 +20,13 @@ module OregonDigital::Derivatives::Document
       end
     end
 
+    def output_file_service
+      OregonDigital::PersistDirectlyContainedOutputFileService
+    end
+
     def process
       OregonDigital::Derivatives::Image::Utils.tmp_file('hocr') do |out_path|
         self.class.encode(source_path, out_path)
-        byebug
         output_file_service.call(File.open(out_path, 'rb'), directives)
       end
     end
