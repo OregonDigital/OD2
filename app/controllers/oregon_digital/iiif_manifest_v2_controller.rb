@@ -51,9 +51,6 @@ module OregonDigital
       { '@id': id, 'type': 'Image', 'format': 'image/jpg' }
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/PerceivedComplexity
     def sanitize_manifest(hash)
       hash['label'] = sanitize_value(hash['label']) if hash.key?('label')
       hash['description'] = sanitize_value(hash['description']) if hash.key?('description')
