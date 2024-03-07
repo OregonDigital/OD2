@@ -21,7 +21,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
       index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
-      index_local_contexts_label(solr_doc, OregonDigital::LocalContextsService.new.all_labels(object.local_contexts))
+      index_local_contexts_label(solr_doc, object)
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
       solr_doc['non_user_collections_ssim'] = []
@@ -102,10 +102,12 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   # METHOD: Create index for local_context
-  def index_local_contexts_label(solr_doc, local_context_labels)
+  def index_local_contexts_label(solr_doc, object)
+    local_context_labels = OregonDigital::LanguageService.new.all_labels(object.local_contexts)
     solr_doc['local_contexts_label_sim'] = local_context_labels
     solr_doc['local_contexts_label_ssim'] = local_context_labels
     solr_doc['local_contexts_label_tesim'] = local_context_labels
+    solr_doc['local_contexts_parsable_label_ssim'] = object.local_contexts.map { |uri| "#{OregonDigital::LocalContextsService.new.label(uri)}$#{uri}" }
   end
 
   def index_sort_options(solr_doc)
