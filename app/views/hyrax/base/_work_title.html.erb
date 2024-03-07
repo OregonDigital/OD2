@@ -35,7 +35,7 @@
             <% lc_text = lc_service.label(lc) %>
             <% parse_lc_path = lc_text.split(/[()]+/).last.gsub("\s", '_label_').downcase %>
             <a href="<%= ERB::Util.h(lc) %>">
-              <%= image_tag("local_contexts_icons/#{parse_lc_path}.png", height: '20px') %>
+              <%# image_tag("local_contexts_icons/#{parse_lc_path}.png", height: '20px') %>
               <%= lc_text %>
               <br/>
             </a>

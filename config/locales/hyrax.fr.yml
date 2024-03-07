@@ -65,3 +65,4 @@ fr:
     labels:
       defaults:
         local_contexts: Contextes Locaux
+        local_contexts_local: Contextes Locaux

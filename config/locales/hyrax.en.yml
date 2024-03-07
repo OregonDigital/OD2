@@ -359,6 +359,7 @@ en:
         facet_configurable: FACET CONFIGURABLE
       defaults:
         local_contexts: Local Contexts
+        local_contexts_label: Local Contexts
   howto:
     researchers:
       title: 'Researchers'

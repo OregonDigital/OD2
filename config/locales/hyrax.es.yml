@@ -61,3 +61,4 @@ es:
     labels:
       defaults:
         local_contexts: Local Contexts
+        local_contexts_label: Local Contexts
