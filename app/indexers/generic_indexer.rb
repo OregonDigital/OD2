@@ -106,7 +106,7 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['resource_type_label_sim'] = type_label
     solr_doc['resource_type_label_ssim'] = type_label
     solr_doc['resource_type_label_tesim'] = type_label
-    solr_doc['resource_type_parsable_label_ssim'] = object.resource_type.map { |uri| "#{OregonDigital::TypeService.new.label(uri)}$#{uri}" }
+    solr_doc['resource_type_parsable_label_ssim'] = "#{OregonDigital::TypeService.new.label(object.resource_type)}$#{object.resource_type}"
   end
 
   # METHOD: Create index for local_context
