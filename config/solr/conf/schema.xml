@@ -601,6 +601,8 @@
 
     <!-- lowercases the entire field value, keeping it as a single token.  -->
     <dynamicField name="*_s_lower" type="lowercase"  indexed="true"  stored="true"/>
+    <dynamicField name="*_s_lower_m" type="lowercase"  indexed="true"  stored="false" multiValued="true"/>
+    <copyField source="*_sim" dest="*_s_lower_m" />
     <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
