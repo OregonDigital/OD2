@@ -55,15 +55,15 @@ module BlacklightIiifSearch
         sd = SolrDocument.new(document)
         fds = OregonDigital::FileSetDerivativesService.new(sd)
 
-        # Get the extracted text out of the solr document and noop the ocr text
-        extract, _ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
+        # Get the bbox content
+        bbox_content = sd.bbox_content
 
-        # Check for extracted text first, later this will use the ocr derivative uris
-        all_words = unless extract.blank? # unless fds.sorted_derivative_urls('ocr').blank?
-          # extracted_word_array(fds.sorted_derivative_urls('ocr'))
-          extracted_word_array(extract)
+        # Check for bbox first
+        all_words = unless bbox_content.blank?
+          extracted_word_array(bbox_content)
         else
-          ocr_word_array(fds.sorted_derivative_urls('hocr'))
+          # Otherwise use hocr
+          ocr_word_array(sd.hocr)
         end
 
         word_array = match_words(all_words, query)
@@ -105,11 +105,10 @@ module BlacklightIiifSearch
     # Create Word objects for all extracted words
     # @param [String] Output from `tesseract`
     # rubocop:disable Metrics/AbcSize
-    def ocr_word_array(file_uris)
-      file_uris.map.with_index do |file, page_number|
-        text = File.read(file.sub('file://', ''))
-      # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      # ocr.map.with_index do |text, page_number|
+    def ocr_word_array(hocr_files)
+      hocr_files.map.with_index do |file, page_number|
+        text = file.content
+        # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
         Nokogiri::HTML(text).css('.ocrx_word').map do |word|
           bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
 

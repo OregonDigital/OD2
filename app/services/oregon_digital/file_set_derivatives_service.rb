@@ -71,7 +71,7 @@ module OregonDigital
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
-      create_extracted_text_bbox_content(filename)
+      create_extracted_text_bbox_content(filename) unless file_set.bbox.blank?
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       0.upto(page_count - 1) do |pagenum|
         Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox.blank?

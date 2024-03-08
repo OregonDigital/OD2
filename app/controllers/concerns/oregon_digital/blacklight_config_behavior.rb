@@ -25,7 +25,7 @@ module OregonDigital
       configure_blacklight do |config|
         # configuration for Blacklight IIIF Content Search
         config.iiif_search = {
-          full_text_field: %w[all_text_bbox_tsimv hocr_text_timv],
+          full_text_field: %w[all_text_bbox_timv hocr_text_timv],
           object_relation_field: 'file_set_ids_ssim',
           supported_params: %w[q page],
           autocomplete_handler: 'iiif_suggest',
@@ -83,6 +83,7 @@ module OregonDigital
           # Only display description if a highlight is hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
         }
+        config.add_index_field 'all_text_timv', label: nil, itemprop: 'keyword'
         config.add_index_field 'all_text_tsimv', label: nil, itemprop: 'keyword'
         config.add_index_field 'hocr_text_timv', label: nil, itemprop: 'keyword'
         config.add_index_field 'hocr_text_tsimv', label: nil, itemprop: 'keyword' # Remove after all text/hocr text derivative creation
@@ -288,7 +289,7 @@ module OregonDigital
           all_names = search_fields.join(' ')
           title_name = 'title_tesim'
           field.solr_parameters = {
-            qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv hocr_text_timv",
+            qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv all_text_timv hocr_text_timv hocr_text_tsimv",
             pf: title_name.to_s
           }
           field.include_in_advanced_search = true
