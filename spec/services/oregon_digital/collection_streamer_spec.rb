@@ -6,6 +6,10 @@ describe OregonDigital::CollectionStreamer do
   let(:streamer) { service_class.new('ability', collection, false) }
 
   describe '#stream' do
+    before do
+      allow(collection).to receive(:metadata_row).and_return([])
+    end
+
     it 'assembles a zip out of chunks' do
       chunk_count = 0
       service_class.stream_col('ability', collection) do

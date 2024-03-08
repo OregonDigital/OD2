@@ -103,7 +103,7 @@ RSpec.describe Hyrax::GenericPresenter do
         allow(p).to receive(:id).and_return file_set.id
       end
       allow(file_set).to receive(:oembed?).and_return false
-      allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).with(alternate_identifier: file_set.id).and_return file_set
+      allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).with(alternate_identifier: file_set.id, use_valkyrie: false).and_return file_set
     end
 
     context 'when an oembed presenter exists' do
