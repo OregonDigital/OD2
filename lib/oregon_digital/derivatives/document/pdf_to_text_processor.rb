@@ -11,8 +11,6 @@ module OregonDigital::Derivatives::Document
     class << self
       def encode(path, output_file)
         out_file = out_path_without_extension(output_file)
-        Rails.logger.info '@@@'
-        Rails.logger.info output_file
         system('pdftotext', '-bbox', path.to_s, output_file.to_s, out: File::NULL, err: File::NULL)
       end
 
@@ -29,9 +27,6 @@ module OregonDigital::Derivatives::Document
     def process
       OregonDigital::Derivatives::Image::Utils.tmp_file('ocr') do |out_path|
         self.class.encode(source_path, out_path)
-        Rails.logger.info '###'
-        Rails.logger.info source_path
-        Rails.logger.info out_path
         file_content = File.read(out_path)
         # extracted text is derived from original PDF and isn't scaled when derivatives are created
         scale_factor = 4.175
