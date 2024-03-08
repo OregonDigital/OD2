@@ -79,6 +79,8 @@ en:
           subject_label_sim: Subject
         index:
           all_text_tsimv: Full Text
+          all_text_timv: Full Text
+          hocr_text_tsimv: Full Text
           hocr_text_timv: Full Text
           based_near_label_tesim: Location
           contributor_tesim: Contributor

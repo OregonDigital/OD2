@@ -128,20 +128,20 @@ class SolrDocument
 
   def all_text
     '' unless self.file_set?
-    @all_text ||= self['all_text_tsimv'] || resource.extracted_text.content
+    @all_text ||= resource.extracted_text.content.presence || self['all_text_tsimv']
   end
 
   def hocr_text
     '' unless self.file_set?
-    @hocr_text ||= self['hocr_text_tsimv'] || resource.hocr_text
+    @hocr_text ||= resource.hocr_text.presence || self['hocr_text_tsimv']
   end
 
   def bbox_content
-    @bbox_content ||= self['all_text_bbox_tsimv'] || resource.bbox_content
+    @bbox_content ||= resource.bbox_content.presence || self['all_text_bbox_tsimv']
   end
 
   def hocr_content
-    @hocr_content ||= self['all_text_bbox_tsimv'] || resource.hocr_content
+    @hocr_content ||= resource.hocr_content.presence || self['all_text_bbox_tsimv']
   end
 
   def resource

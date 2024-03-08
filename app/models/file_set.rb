@@ -15,6 +15,8 @@ class FileSet < ActiveFedora::Base
   directly_contains :hocr, has_member_relation: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
   directly_contains_one :bbox, through: :files, type: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
 
+  # attr_writer :ocr_content, :bbox_content, :hocr_text
+
   self.indexer = OregonDigital::FileSetIndexer
 
   def oembed?
@@ -35,13 +37,13 @@ class FileSet < ActiveFedora::Base
   delegate(*characterization_terms, to: :characterization_proxy)
 
   def ocr_content
-    @ocr_content ||= self.extracted_text&.content || SolrDocument.find(id).to_h.dig('all_text_tsimv')
+    @ocr_content ||= self.extracted_text&.content.presence || SolrDocument.find(id).to_h.dig('all_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
 
   def bbox_content
-    @bbox_content ||= self.bbox&.content || SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
+    @bbox_content ||= self.bbox&.content.presence || SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
@@ -60,7 +62,7 @@ class FileSet < ActiveFedora::Base
   def hocr_content
     return @hocr_content unless @hocr_content.blank?
 
-    @hocr_text = self.hocr.map(&:content).join(' ') || SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
+    @hocr_text = self.hocr.map(&:content).join(' ').presence || SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end

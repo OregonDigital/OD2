@@ -10,7 +10,6 @@ module OregonDigital
     # @return [ActiveFedora::File]
     def self.retrieve_remote_file(file_set, directives)
       file_set.association(directives.fetch(:container).to_sym).build
-      # file_set.send("build_#{directives.fetch(:container)}".to_sym)
     end
     private_class_method :retrieve_remote_file
   end

@@ -53,7 +53,6 @@ module BlacklightIiifSearch
         hit = { '@type': 'search:Hit', 'annotations': [] }
         # Prepare to find ocr and hocr derivative file uris
         sd = SolrDocument.new(document)
-        fds = OregonDigital::FileSetDerivativesService.new(sd)
 
         # Get the bbox content
         bbox_content = sd.bbox_content
@@ -106,9 +105,9 @@ module BlacklightIiifSearch
     # @param [String] Output from `tesseract`
     # rubocop:disable Metrics/AbcSize
     def ocr_word_array(hocr_files)
+      # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
       hocr_files.map.with_index do |file, page_number|
         text = file.content
-        # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
         Nokogiri::HTML(text).css('.ocrx_word').map do |word|
           bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
 
