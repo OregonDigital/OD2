@@ -8,10 +8,13 @@ module OregonDigital
       super.tap do |solr_doc|
         solr_doc['oembed_url_sim'] = object.oembed_url
         # Collapse possible extracted text with OCRd text for searching
-        solr_doc['all_text_tsimv'] = find_all_text_value(solr_doc)
+        solr_doc['all_text_tsimv'] = find_all_text_value(solr_doc) unless
+        solr_doc['all_text_timv'] = find_all_text_value(solr_doc)
         solr_doc['hocr_text_timv'] = object.hocr_text
+        solr_doc['hocr_text_tsimv'] = object.hocr_text
         # Set bounding box information for blacklight_iiif_search
-        solr_doc['all_text_bbox_tsimv'] = object.bbox_content unless object.bbox_content.nil?
+        solr_doc['all_text_bbox_tsimv'] = object.bbox_content
+        solr_doc['hocr_content_tsimv'] = object.hocr_content
         index_additional_characterization_terms(solr_doc)
       end
     end

@@ -11,12 +11,9 @@ class FileSet < ActiveFedora::Base
 
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
-  include OregonDigital::TextExtractedBehavior
 
   directly_contains :hocr, has_member_relation: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
   directly_contains_one :bbox, through: :files, type: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
-
-  attr_writer :ocr_content, :bbox_content
 
   self.indexer = OregonDigital::FileSetIndexer
 
@@ -38,13 +35,32 @@ class FileSet < ActiveFedora::Base
   delegate(*characterization_terms, to: :characterization_proxy)
 
   def ocr_content
-    @ocr_content ||= SolrDocument.find(id).to_h.dig('all_text_tsimv')
+    @ocr_content ||= self.extracted_text&.content || SolrDocument.find(id).to_h.dig('all_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
 
   def bbox_content
-    @bbox_content ||= SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
+    @bbox_content ||= self.bbox&.content || SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
+  rescue Blacklight::Exceptions::RecordNotFound
+    nil
+  end
+
+  def hocr_text
+    return @hocr_text unless @hocr_text.blank?
+
+    all_bbox_text = self.hocr.map(&:content).join(' ')
+    all_text = Nokogiri::HTML(all_bbox_text).css('.ocrx_word').map(&:text).join(' ')
+
+    @hocr_text = all_text.presence || SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
+  rescue Blacklight::Exceptions::RecordNotFound
+    nil
+  end
+
+  def hocr_content
+    return @hocr_content unless @hocr_content.blank?
+
+    @hocr_text = self.hocr.map(&:content).join(' ') || SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
