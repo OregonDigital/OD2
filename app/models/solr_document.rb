@@ -8,7 +8,6 @@ class SolrDocument
   include Hyrax::SolrDocumentBehavior
   include BlacklightOaiProvider::SolrDocument
   include OregonDigital::SolrDocumentBehavior
-  include OregonDigital::TextExtractedBehavior
 
   SolrDocument.use_extension(Blacklight::Document::Email)
   SolrDocument.use_extension(Blacklight::Document::Sms)
