@@ -5,6 +5,8 @@ RSpec.describe GenericIndexer do
   let(:solr_doc) { indexer.generate_solr_document }
   let(:work) { create(:generic, license: ['MyLicense'], rights_statement: ['MyRights'], language: ['MyLanguage'], resource_type: 'http://purl.org/dc/dcmitype/Collection') }
 
+  allow(solr_doc).to receive (solr_doc['rights_statement_parasable_label_ssim']).with([]).and_return([])
+
   it { expect(solr_doc['resource_type_label_tesim']).to eq 'Complex Object' }
   it { expect(solr_doc['license_tesim']).to eq ['MyLicense'] }
   it { expect(solr_doc['language_tesim']).to eq ['MyLanguage'] }
