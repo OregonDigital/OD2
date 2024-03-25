@@ -1,0 +1,8 @@
+<!-- SELECTION: Create a dropdown list fetching from the local context -->
+<% local_context_service = OregonDigital::LocalContextsService.new %>
+<%= f.input :local_contexts,
+    as: :multi_value_select,
+    collection: local_context_service.select_active_options,
+    include_blank: true,
+    item_helper: local_context_service.method(:include_current_value),
+    input_html: { class: 'form-control' } %>
