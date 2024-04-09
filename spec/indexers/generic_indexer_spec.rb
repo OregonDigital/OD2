@@ -7,7 +7,7 @@ RSpec.describe GenericIndexer do
 
   it { expect(solr_doc['resource_type_label_tesim']).to eq 'Complex Object' }
   it { expect(solr_doc['license_label_tesim']).to eq ['Creative Commons BY Attribution 4.0 International'] }
-  it { expect(solr_doc['language__label_tesim']).to eq ['English [eng]'] }
+  it { expect(solr_doc['language_label_tesim']).to eq ['English [eng]'] }
   it { expect(solr_doc['rights_statement_label_tesim']).to eq ['In Copyright'] }
 
   describe 'date facet yearly' do
