@@ -3,19 +3,12 @@
 RSpec.describe GenericIndexer do
   let(:indexer) { described_class.new(work) }
   let(:solr_doc) { indexer.generate_solr_document }
-  let(:work) { create(:generic, license: ['MyLicense'], rights_statement: ['MyRights'], language: ['MyLanguage'], resource_type: 'http://purl.org/dc/dcmitype/Collection') }
-
-  before do
-    allow(solr_doc).to receive(solr_doc['rights_statement_parasable_label_ssim']).with([]).and_return([])
-    allow(solr_doc).to receive(solr_doc['license_parasable_label_ssim']).with([]).and_return([])
-    allow(solr_doc).to receive(solr_doc['resource_type_parasable_label_ssim']).with('').and_return('')
-    allow(solr_doc).to receive(solr_doc['language_parasable_label_ssim']).with([]).and_return([])
-  end
+  let(:work) { create(:generic, license: ['http://creativecommons.org/licenses/by/4.0/'], rights_statement: ['http://rightsstatements.org/vocab/InC/1.0/'], language: ['http://id.loc.gov/vocabulary/iso639-2/eng'], resource_type: 'http://purl.org/dc/dcmitype/Collection') }
 
   it { expect(solr_doc['resource_type_label_tesim']).to eq 'Complex Object' }
-  it { expect(solr_doc['license_tesim']).to eq ['MyLicense'] }
-  it { expect(solr_doc['language_tesim']).to eq ['MyLanguage'] }
-  it { expect(solr_doc['rights_statement_tesim']).to eq ['MyRights'] }
+  it { expect(solr_doc['license_label_tesim']).to eq ['Creative Commons BY Attribution 4.0 International'] }
+  it { expect(solr_doc['language__label_tesim']).to eq ['English [eng]'] }
+  it { expect(solr_doc['rights_statement_label_tesim']).to eq ['In Copyright'] }
 
   describe 'date facet yearly' do
     let(:field) { solr_doc['date_combined_year_label_ssim'] }
