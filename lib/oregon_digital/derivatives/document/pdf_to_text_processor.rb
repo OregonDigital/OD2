@@ -37,8 +37,7 @@ module OregonDigital::Derivatives::Document
           word['ymin'] = word['ymin'].to_i * scale_factor
           word['ymax'] = word['ymax'].to_i * scale_factor
         end
-        File.write(out_path, bbox_content)
-        output_file_service.call(File.open(out_path, 'rb'), directives)
+        output_file_service.call(file_content, directives)
       end
     end
   end

@@ -27,7 +27,7 @@ module OregonDigital::Derivatives::Document
     def process
       OregonDigital::Derivatives::Image::Utils.tmp_file('hocr') do |out_path|
         self.class.encode(source_path, out_path)
-        output_file_service.call(File.open(out_path, 'rb'), directives)
+        output_file_service.call(File.read(out_path), directives)
       end
     end
   end

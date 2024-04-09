@@ -58,7 +58,7 @@ module BlacklightIiifSearch
         bbox_content = sd.bbox_content
 
         # Check for bbox first
-        all_words = unless bbox_content.blank?
+        all_words = unless sd.extracted_text&.content.blank? || bbox_content.blank?
           extracted_word_array(bbox_content)
         else
           # Otherwise use hocr
