@@ -25,7 +25,7 @@
       <%= button_tag t('hyrax.dashboard.my.action.add_to_collection'),
                   class: 'btn btn-default submits-batches submits-batches-add add-to-align',
                   data: { toggle: "modal", target: "#collection-list-container" },
-                  disabled: 'disabled' if @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Tombstoned' %>
+                  disabled: ('disabled' if @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Tombstoned') %>
     </div>
     </div>
 
@@ -54,7 +54,7 @@
       <% else %>
         <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
           <%= hidden_field :workflow_action, :name, value: 'approve' %>
-          <input class="btn btn-default" style='width: 105%;' type="submit" value="Reapprove" data-confirm='<%= t('hyrax.tombstone.revert') %>' disabled=<%= 'disabled' unless @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Deposited' %>>
+          <input class="btn btn-default" style='width: 105%;' type="submit" value="Reapprove" data-confirm='<%= t('hyrax.tombstone.revert') %>' <%= disabled='disabled' unless (@presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Tombstoned' && current_user.admin?) %>>
         <% end %>
       <% end %>
     </div>
