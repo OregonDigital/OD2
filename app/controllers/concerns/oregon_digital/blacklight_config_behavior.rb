@@ -83,7 +83,7 @@ module OregonDigital
           # Only display description if a highlight is hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
         }
-         # Remove after all text/hocr text derivative creation
+        # Remove after all text/hocr text derivative creation
         config.add_index_field 'all_text_tsimv', label: nil, itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
           # Don't display full text if description has a highlight hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
@@ -91,7 +91,7 @@ module OregonDigital
           # Only try to display full text if a highlight is hit
           !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil?
         }
-         # Remove after all text/hocr text derivative creation
+        # Remove after all text/hocr text derivative creation
         config.add_index_field 'hocr_text_tsimv', label: nil, itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
           # Don't display hocr text if all text or description has a highlight hit
           !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil? ||

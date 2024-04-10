@@ -37,21 +37,21 @@ class FileSet < ActiveFedora::Base
 
   def ocr_content
     # Use extracted_text derivative first if available
-    @ocr_content ||= self.extracted_text&.content.presence || SolrDocument.find(id).to_h.dig('all_text_tsimv')
+    @ocr_content ||= extracted_text&.content.presence || SolrDocument.find(id).to_h.dig('all_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
 
   def bbox_content
     # Use bbox derivative first if available
-    @bbox_content ||= self.bbox&.content.presence || SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
+    @bbox_content ||= bbox&.content.presence || SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
 
   def hocr_content
     # Use hocr derivative first if available
-    @hocr_content ||= self.hocr&.map(&:content)&.join(' ').presence || SolrDocument.find(id).to_h.dig('hocr_content_tsimv')
+    @hocr_content ||= hocr&.map(&:content)&.join(' ').presence || SolrDocument.find(id).to_h.dig('hocr_content_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
@@ -60,15 +60,10 @@ class FileSet < ActiveFedora::Base
     return @hocr_text unless @hocr_text.blank?
 
     # Use hocr derivative if available
-    all_text = ''
-    unless self.hocr.blank?
-      all_bbox_text = self.hocr.map(&:content).join(' ')
-      all_text = Nokogiri::HTML(all_bbox_text).css('.ocrx_word').map(&:text).join(' ')
-    end
+    all_bbox_text = hocr.map(&:content).join("\n")
+    all_text = Nokogiri::HTML(all_bbox_text).css('.ocrx_word').map(&:text).join(' ')
 
     @hocr_text = all_text.presence || SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
-
-    @hocr_text ||= SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end

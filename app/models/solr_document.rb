@@ -125,12 +125,12 @@ class SolrDocument
   end
 
   def hocr_text
-    '' unless self.file_set?
+    '' unless file_set?
     @hocr_text ||= resource.hocr_text.presence || self['hocr_text_tsimv']
   end
 
   def all_text
-    '' unless self.file_set?
+    '' unless file_set?
     @all_text ||= resource.extracted_text.content.presence || self['all_text_tsimv']
   end
 
@@ -148,7 +148,7 @@ class SolrDocument
   end
 
   def resource
-    @resource ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: self.id, use_valkyrie: false)
+    @resource ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: id, use_valkyrie: false)
   end
 
   solrized_methods Generic.generic_properties
