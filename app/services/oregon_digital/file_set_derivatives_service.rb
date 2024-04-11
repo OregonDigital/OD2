@@ -110,13 +110,13 @@ module OregonDigital
 
     def create_hocr_content(filename)
       OregonDigital::Derivatives::Document::TesseractRunner.create(filename,
-                                                                outputs: [{ url: uri, container: 'hocr' }])
+                                                                   outputs: [{ url: uri, container: 'hocr' }])
     end
 
     def create_extracted_text_bbox_content(filename, file_set: self.file_set)
       file_set.reload
       OregonDigital::Derivatives::Document::PDFToTextRunner.create(filename,
-                                                                outputs: [{ url: uri, container: 'bbox' }])
+                                                                   outputs: [{ url: uri, container: 'bbox' }])
       # We have to reload the fileset to get the updated bbox data for some reason
       file_set.reload
     end

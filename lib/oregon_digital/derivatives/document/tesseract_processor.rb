@@ -11,11 +11,11 @@ module OregonDigital::Derivatives::Document
     class << self
       def encode(path, output_file)
         out_file = out_path_without_extension(output_file)
-        execute "tesseract #{path.to_s} #{out_file.to_s} -l eng hocr"
+        execute "tesseract #{path} #{out_file} -l eng hocr"
       end
 
       def out_path_without_extension(file_path)
-        filename = File.basename(file_path,File.extname(file_path))
+        filename = File.basename(file_path, File.extname(file_path))
         [File.dirname(file_path), filename].join('/')
       end
     end

@@ -15,7 +15,7 @@ class ReExtractTextWorker
 
     # Create extracted text bbox_content
     Hydra::Derivatives::FullTextExtract.create(filename,
-                                               outputs: [{ url: uri(file_set), container: "extracted_text" }])
+                                               outputs: [{ url: uri(file_set), container: 'extracted_text' }])
 
     derivative_service.create_extracted_text_bbox_content(filename)
 
