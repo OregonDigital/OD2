@@ -13,6 +13,9 @@ class FileSet < ActiveFedora::Base
   include OregonDigital::AccessControls::Visibility
   attr_writer :ocr_content, :hocr_content, :hocr_text, :bbox_content
 
+  directly_contains :hocr, has_member_relation: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
+  directly_contains_one :bbox, through: :files, type: ::RDF::Vocab::LDP.hasMemberRelation, class_name: 'Hydra::PCDM::File'
+
   self.indexer = OregonDigital::FileSetIndexer
 
   def oembed?
@@ -33,25 +36,35 @@ class FileSet < ActiveFedora::Base
   delegate(*characterization_terms, to: :characterization_proxy)
 
   def ocr_content
-    @ocr_content ||= SolrDocument.find(id).to_h.dig('all_text_tsimv')
+    # Use extracted_text derivative first if available
+    @ocr_content ||= extracted_text&.content.presence || SolrDocument.find(id).to_h.dig('all_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
 
   def bbox_content
-    @bbox_content ||= SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
+    # Use bbox derivative first if available
+    @bbox_content ||= bbox&.content.presence || SolrDocument.find(id).to_h.dig('all_text_bbox_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
 
   def hocr_content
-    @hocr_content ||= SolrDocument.find(id).to_h.dig('hocr_content_tsimv')
+    # Use hocr derivative first if available
+    @hocr_content ||= hocr&.map(&:content)&.join(' ').presence || SolrDocument.find(id).to_h.dig('hocr_content_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
 
   def hocr_text
-    @hocr_text ||= SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
+    return @hocr_text unless @hocr_text.blank?
+
+    # Use hocr derivative if available
+    # all_bbox_text = hocr.map(&:content).join("\n")
+    # all_text = Nokogiri::HTML(all_bbox_text).css('.ocrx_word').map(&:text).join(' ')
+    all_text = ''
+
+    @hocr_text ||= all_text.presence || SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
     nil
   end
