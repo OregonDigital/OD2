@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::Derivatives::Document::PDFToTextRunner do
   let(:file_set) { create(:file_set) }
   let(:source) { "#{Rails.root}/spec/fixtures/upload.pdf" }
   let(:extracted_text) { double }
-  let(:extracted_text_content ) { File.read(Rails.root.join('spec', 'fixtures', 'upload.xml')) }
+  let(:extracted_text_content) { File.read(Rails.root.join('spec', 'fixtures', 'upload.xml')) }
   let(:bbox_content) { File.read(Rails.root.join('spec', 'fixtures', 'upload.txt')) }
 
   describe '#create' do
@@ -15,7 +15,6 @@ RSpec.describe OregonDigital::Derivatives::Document::PDFToTextRunner do
 
     context 'when creating a bbox' do
       subject do
-        outfile = '/tmp/foo'
         described_class.create(source,
                                outputs: [
                                  { url: file_set.uri,
