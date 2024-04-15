@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.config.to_prepare do
-  Hyrax::AttachFilesToWorkJob.class_eval do
+  Bulkrax::ObjectFactoryInterface.class_eval do
     def create
       attrs = transform_attributes
       attrs['full_size_download_allowed'] = attrs['full_size_download_allowed'].to_i
