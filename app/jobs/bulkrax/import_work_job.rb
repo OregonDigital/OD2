@@ -6,6 +6,7 @@ module Bulkrax
     queue_as Bulkrax.config.ingest_queue_name
 
     # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     #
     # @note Yes, we are calling {ImporterRun.find} each time.  these were on purpose to prevent race
     #       conditions on the database update. If you do not re-find (or at least reload) the object
@@ -56,6 +57,7 @@ module Bulkrax
       reschedule(entry_id, run_id, time_to_live)
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     def reschedule(entry_id, run_id, time_to_live)
       ImportWorkJob.set(wait: 1.minute).perform_later(entry_id, run_id, time_to_live - 1)
