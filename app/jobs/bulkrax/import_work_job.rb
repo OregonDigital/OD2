@@ -3,7 +3,7 @@
 module Bulkrax
   # Runs the build process for an entry found in a file for import
   class ImportWorkJob < ApplicationJob
-    queue_as Bulkrax.config.ingest_queue_name
+    queue_as :import
 
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
