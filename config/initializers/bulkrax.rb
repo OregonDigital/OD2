@@ -280,6 +280,9 @@ Bulkrax::Exporter.class_eval do
   end
 end
 
+Bulkrax::ImportersController.class_eval do
+  include OregonDigital::ImporterControllerBehavior
+end
 
 ## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
