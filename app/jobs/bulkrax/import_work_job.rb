@@ -22,7 +22,7 @@ module Bulkrax
     def perform(entry_id, run_id, time_to_live = 3, *)
       entry = Entry.find(entry_id)
       entry.build
-      if entry.status == "Complete"
+      if entry.status == 'Complete'
         ImporterRun.increment_counter(:processed_records, run_id)
         ImporterRun.increment_counter(:processed_works, run_id)
       else
@@ -31,6 +31,7 @@ module Bulkrax
         ImporterRun.increment_counter(:failed_records, run_id)
         ImporterRun.increment_counter(:failed_works, run_id)
       end
+      
       # Regardless of completion or not, we want to decrement the enqueued records.
       ImporterRun.decrement_counter(:enqueued_records, run_id) unless ImporterRun.find(run_id).enqueued_records <= 0
 
@@ -49,6 +50,7 @@ module Bulkrax
       if time_to_live <= 1
         raise "Exhauted reschedule limit for #{self.class} entry_id: #{entry_id}, run_id: #{run_id}.  Attemping retries"
       end
+      
       # rubocop:enable Style/IfUnlessModifier
       reschedule(entry_id, run_id, time_to_live)
     end
