@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 module Bulkrax
+  # Runs the build process for an entry found in a file for import
+  
   class ImportWorkJob < ApplicationJob
     queue_as Bulkrax.config.ingest_queue_name
 
-    # rubocop:disable Rails/SkipsModelValidations
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     #
     # @note Yes, we are calling {ImporterRun.find} each time.  these were on purpose to prevent race
     #       conditions on the database update. If you do not re-find (or at least reload) the object
@@ -54,7 +57,8 @@ module Bulkrax
       # rubocop:enable Style/IfUnlessModifier
       reschedule(entry_id, run_id, time_to_live)
     end
-    # rubocop:enable Rails/SkipsModelValidations
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
 
     def reschedule(entry_id, run_id, time_to_live)
       ImportWorkJob.set(wait: 1.minute).perform_later(entry_id, run_id, time_to_live - 1)
