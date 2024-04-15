@@ -13,6 +13,8 @@ module Bulkrax
       klass.properties.keys.map { |k| "#{k}_attributes".to_sym unless klass.properties[k].class_name.nil? }.compact
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def create
       attrs = transform_attributes
       attrs['full_size_download_allowed'] = attrs['full_size_download_allowed'].to_i
@@ -33,5 +35,7 @@ module Bulkrax
       apply_depositor_metadata
       log_created(object)
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
   end
 end
