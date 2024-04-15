@@ -6,7 +6,6 @@ module Bulkrax
     queue_as Bulkrax.config.ingest_queue_name
 
     # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
     #
     # @note Yes, we are calling {ImporterRun.find} each time.  these were on purpose to prevent race
     #       conditions on the database update. If you do not re-find (or at least reload) the object
@@ -33,7 +32,7 @@ module Bulkrax
         ImporterRun.increment_counter(:failed_records, run_id)
         ImporterRun.increment_counter(:failed_works, run_id)
       end
-      
+
       # Regardless of completion or not, we want to decrement the enqueued records.
       ImporterRun.decrement_counter(:enqueued_records, run_id) unless ImporterRun.find(run_id).enqueued_records <= 0
 
@@ -52,12 +51,11 @@ module Bulkrax
       if time_to_live <= 1
         raise "Exhauted reschedule limit for #{self.class} entry_id: #{entry_id}, run_id: #{run_id}.  Attemping retries"
       end
-      
+
       # rubocop:enable Style/IfUnlessModifier
       reschedule(entry_id, run_id, time_to_live)
     end
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def reschedule(entry_id, run_id, time_to_live)
       ImportWorkJob.set(wait: 1.minute).perform_later(entry_id, run_id, time_to_live - 1)
