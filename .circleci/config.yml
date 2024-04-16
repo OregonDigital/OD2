@@ -72,10 +72,12 @@ jobs:
       - run: bundle exec rubocop
   test:
     docker:
-      - image: cimg/ruby:2.7-browsers
+      - image: registry.library.oregonstate.edu/od2_web_cache:latest
+        user: root
         environment:
           BUNDLE_PATH: vendor/bundle
           CAPYBARA_APP_HOST: http://test:3001
+          DOCKERIZE_VERSION: v0.7.0
           FEDORA_URL: http://localhost:8080/fcrepo/rest
           HONEYCOMB_DATASET: od2-rails-test
           HONEYCOMB_DEBUG: "true"
@@ -113,40 +115,47 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-          name: Update Debian Packages
+          name: Install Additional Packages
           command: |
-            sudo apt-get update -qq
-            sudo apt-get upgrade -qq
-            sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg tesseract-ocr
-            sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
-            sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
-            sudo apt-get install -y graphicsmagick libjpeg-turbo8-dev libopenjp2-tools libopenjp2-7 libopenjp2-7-dev libltdl-dev
-      - run:
-          name: Compile imagemagick with jp2 support
-          command: |
-            mkdir -p /tmp/im && \
-            curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
-            | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
-              ./configure \
-                --build=$CBUILD \
-                --host=$CHOST \
-                --prefix=/usr \
-                --sysconfdir=/etc \
-                --mandir=/usr/share/man \
-                --infodir=/usr/share/info \
-                --localstatedir=/var \
-                --enable-shared \
-                --disable-static \
-                --with-modules \
-                --with-threads \
-                --with-openjp2=yes \
-                --with-jpeg=yes \
-                --with-tiff=yes \
-                --with-gs-font-dir=/usr/share/fonts/Type1 \
-                --with-quantum-depth=16 && \
-              make -j`nproc` && \
-              sudo make install && \
-              rm -rf /tmp/im
+            apk update --no-cache
+            apk add --no-cache wget openssl
+            wget -O - https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz | tar xzf - -C /usr/local/bin
+            apk del wget
+      # - run:
+      #     name: Update Debian Packages
+      #     command: |
+      #       sudo apt-get update -qq
+      #       sudo apt-get upgrade -qq
+      #       sudo apt-get install -y -f software-properties-common build-essential nodejs make apt-utils ffmpeg tesseract-ocr
+      #       sudo apt-get install -y openjdk-8-jre-headless ca-certificates-java
+      #       sudo apt-get install -y openjdk-8-jre openjdk-8-jdk openjdk-8-jdk-headless
+      #       sudo apt-get install -y graphicsmagick libjpeg-turbo8-dev libopenjp2-tools libopenjp2-7 libopenjp2-7-dev libltdl-dev
+      # - run:
+      #     name: Compile imagemagick with jp2 support
+      #     command: |
+      #       mkdir -p /tmp/im && \
+      #       curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
+      #       | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
+      #         ./configure \
+      #           --build=$CBUILD \
+      #           --host=$CHOST \
+      #           --prefix=/usr \
+      #           --sysconfdir=/etc \
+      #           --mandir=/usr/share/man \
+      #           --infodir=/usr/share/info \
+      #           --localstatedir=/var \
+      #           --enable-shared \
+      #           --disable-static \
+      #           --with-modules \
+      #           --with-threads \
+      #           --with-openjp2=yes \
+      #           --with-jpeg=yes \
+      #           --with-tiff=yes \
+      #           --with-gs-font-dir=/usr/share/fonts/Type1 \
+      #           --with-quantum-depth=16 && \
+      #         make -j`nproc` && \
+      #         sudo make install && \
+      #         rm -rf /tmp/im
       - run:
           name: Load config into SolrCloud
           command: |
@@ -160,6 +169,9 @@ jobs:
       - run:
           name: Update bundler
           command: gem install bundler -v 2.1.4
+      - run:
+          name: Install dependencies
+          command: bundle check || bundle install
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
