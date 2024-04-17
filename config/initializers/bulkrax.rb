@@ -118,11 +118,7 @@ Bulkrax::CsvEntry.class_eval do
   def build_value(key, value)
     return unless hyrax_record.respond_to?(key.to_s)
     
-    # Extendable to other keys for the future
-    integer_keys = ["full_size_download_allowed"]
-
-    # Casts data to integer if the key is included in above list of keys
-    data = integer_keys.include?(key.to_s) ? hyrax_record.send(key.to_s).to_i : hyrax_record.send(key.to_s)
+    data = hyrax_record.send(key.to_s)
 
     if data.is_a?(ActiveTriples::Relation)
       if value['join']

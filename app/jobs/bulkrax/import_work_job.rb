@@ -23,7 +23,12 @@ module Bulkrax
     # @see https://github.com/samvera-labs/bulkrax/commit/5c2c795452e13a98c9217fdac81ae2f5aea031a0#r105848236
     def perform(entry_id, run_id, time_to_live = 3, *)
       entry = Entry.find(entry_id)
-      entry.build
+
+      # Update the work to use integer for download allowed
+      w = entry.build
+      w.full_size_download_allowed = w.full_size_download_allowed.to_i
+      w.save!
+
       if entry.status == 'Complete'
         ImporterRun.increment_counter(:processed_records, run_id)
         ImporterRun.increment_counter(:processed_works, run_id)
@@ -36,10 +41,6 @@ module Bulkrax
 
       # Regardless of completion or not, we want to decrement the enqueued records.
       ImporterRun.decrement_counter(:enqueued_records, run_id) unless ImporterRun.find(run_id).enqueued_records <= 0
-
-      # OVERRIDE FROM BULKRAX
-      # We need to do a small data correction before the final save for the entry.
-      entry.full_size_download_allowed = entry.full_size_download_allowed.to_s if entry.respond_to?(:full_size_download_allowed)
 
       entry.save!
       entry.importer.current_run = ImporterRun.find(run_id)
