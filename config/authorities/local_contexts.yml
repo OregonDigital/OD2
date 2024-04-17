@@ -85,7 +85,7 @@ terms:
       term: TK Women Restricted (TK WR)
       active: true
     - id: http://localcontexts.org/notice/attribution-incomplete/
-      term: Atrribution Incomplete
+      term: Attribution Incomplete
       active: true
     - id: http://localcontexts.org/notice/open-to-collaborate/
       term: Open To Collaborate
