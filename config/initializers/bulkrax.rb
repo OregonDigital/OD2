@@ -118,6 +118,8 @@ Bulkrax::CsvEntry.class_eval do
   def build_value(key, value)
     return unless hyrax_record.respond_to?(key.to_s)
     
+    data = hyrax_record.send(key.to_s)
+
     if data.is_a?(ActiveTriples::Relation)
       if value['join']
           self.parsed_metadata[key_for_export(key)] = data.map { |d| prepare_export_data(d) }.join(Bulkrax.multi_value_element_join_on).to_s
