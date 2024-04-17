@@ -4,7 +4,7 @@
 RSpec.describe OregonDigital::Derivatives::Document::TesseractRunner do
   let(:file_set) { create(:file_set) }
   let(:source) { "#{Rails.root}/spec/fixtures/test.jpg" }
-  let(:hocr_content) { File.read(Rails.root.join('spec', 'fixtures', 'test.hocr')) }
+  let(:hocr_content) { File.read(Rails.root.join('spec', 'fixtures', 'test.hocr')).strip }
 
   describe '#create' do
     subject do
@@ -14,7 +14,7 @@ RSpec.describe OregonDigital::Derivatives::Document::TesseractRunner do
                                  container: 'hocr' }
                              ])
       file_set.reload
-      file_set.hocr[0].content
+      file_set.hocr[0].content.strip
     end
 
     it { is_expected.not_to be_blank }
