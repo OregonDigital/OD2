@@ -14,7 +14,7 @@ describe OregonDigital::LocalContextsService do
   # TEST #2: Test to see if the service be able to parse out the labels
   describe '#parse_labels_for_image' do
     it 'returns parsable array path for image for display' do
-      expect(service.parse_labels_for_image(['TK Attribution (TK A)', 'Attribution Incomplete', 'BC Multiple Communities (BC MC)'])).to eq ['tk_a', 'attribution_incomplete', 'bc_mc']
+      expect(service.parse_labels_for_image(['TK Attribution (TK A)', 'Attribution Incomplete', 'BC Multiple Communities (BC MC)'])).to eq %w[tk_a attribution_incomplete bc_mc]
     end
   end
 
