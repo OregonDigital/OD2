@@ -131,7 +131,7 @@ class SolrDocument
 
   def all_text
     '' unless file_set?
-    @all_text ||= resource.extracted_text.content.presence || self['all_text_tsimv']
+    @all_text ||= resource.extracted_text&.content.presence || self['all_text_tsimv']
   end
 
   def non_user_collections
