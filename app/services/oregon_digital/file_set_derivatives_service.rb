@@ -187,7 +187,7 @@ module OregonDigital
 
     def other_to_png(source, dest)
       image = MiniMagick::Image.open(source)
-      image.depth(8).format('png').write(dest)
+      image.strip.depth(8).format('png').write(dest)
 
       # The above code generates a temp file which we don't need beyond the
       # .write() call, so we explicitly destroy the image object
