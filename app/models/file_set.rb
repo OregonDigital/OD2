@@ -57,12 +57,12 @@ class FileSet < ActiveFedora::Base
   end
 
   def hocr_text
-    return @hocr_text unless @hocr_text.blank?
-
     # Use hocr derivative if available
-    # all_bbox_text = hocr.map(&:content).join("\n")
-    # all_text = Nokogiri::HTML(all_bbox_text).css('.ocrx_word').map(&:text).join(' ')
     all_text = ''
+    if hocr
+      all_bbox_text = hocr.map(&:content).join("\n")
+      all_text = Nokogiri::HTML(all_bbox_text).css('.ocrx_word').map(&:text).join(' ')
+    end
 
     @hocr_text ||= all_text.presence || SolrDocument.find(id).to_h.dig('hocr_text_tsimv')
   rescue Blacklight::Exceptions::RecordNotFound
