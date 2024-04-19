@@ -114,9 +114,12 @@ module OregonDigital
     end
 
     def create_extracted_text_bbox_content(filename, file_set: self.file_set)
+      # We have to reload the fileset to get the extracted_text data for some reason
       file_set.reload
-      OregonDigital::Derivatives::Document::PDFToTextRunner.create(filename,
-                                                                   outputs: [{ url: uri, container: 'bbox' }])
+      unless file_set.extracted_text&.content.blank?
+        OregonDigital::Derivatives::Document::PDFToTextRunner.create(filename,
+                                                                     outputs: [{ url: uri, container: 'bbox' }])
+      end
       # We have to reload the fileset to get the updated bbox data for some reason
       file_set.reload
     end

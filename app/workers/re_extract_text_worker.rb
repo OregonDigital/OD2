@@ -14,6 +14,7 @@ class ReExtractTextWorker
     derivative_service = OregonDigital::FileSetDerivativesService.new(file_set)
 
     # Create extracted text bbox_content
+    file_set.bbox = nil
     Hydra::Derivatives::FullTextExtract.create(filename,
                                                outputs: [{ url: uri(file_set), container: 'extracted_text' }])
 
