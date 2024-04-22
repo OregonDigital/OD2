@@ -10,6 +10,8 @@ module OregonDigital
         # Collapse possible extracted text with OCRd text for searching
         solr_doc['all_text_tsimv'] = find_all_text_value(solr_doc)
         solr_doc['hocr_text_tsimv'] = find_hocr_text(solr_doc)
+        solr_doc['all_text_timv'] = find_all_text_value(solr_doc)
+        solr_doc['hocr_text_timv'] = find_hocr_text(solr_doc)
         # Set bounding box information for blacklight_iiif_search
         solr_doc['all_text_bbox_tsimv'] = object.bbox_content unless object.bbox_content.nil?
         solr_doc['hocr_content_tsimv'] = object.hocr_content unless object.hocr_content.nil?
