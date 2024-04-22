@@ -19,23 +19,36 @@ describe OregonDigital::LocalContextsService do
   end
 
   # TEST #3: Test to see if the service be able to get the correct size for indicator
-  describe '#get_carousel_indicator_size' do
-    it 'returns 1 indicator for any number less or equal to 4' do
-      expect(service.get_carousel_indicator_size(3)).to eq 1
-      expect(service.get_carousel_indicator_size(4)).to eq 1
-      expect(service.get_carousel_indicator_size(2)).to eq 1
+  describe '#get_row_size' do
+    it 'returns 1 rows for any number less or equal to 4' do
+      expect(service.get_row_size(3)).to eq 1
+      expect(service.get_row_size(4)).to eq 1
+      expect(service.get_row_size(2)).to eq 1
     end
 
-    it 'returns many indicators for any number greater than 4 when divisible by 4' do
-      expect(service.get_carousel_indicator_size(20)).to eq 5
-      expect(service.get_carousel_indicator_size(12)).to eq 3
-      expect(service.get_carousel_indicator_size(32)).to eq 8
+    it 'returns many rows for any number greater than 4 when divisible by 4' do
+      expect(service.get_row_size(20)).to eq 5
+      expect(service.get_row_size(12)).to eq 3
+      expect(service.get_row_size(32)).to eq 8
     end
 
-    it 'returns many indicators for any number greater than 4 when it not divisible by 4' do
-      expect(service.get_carousel_indicator_size(23)).to eq 6
-      expect(service.get_carousel_indicator_size(13)).to eq 4
-      expect(service.get_carousel_indicator_size(38)).to eq 10
+    it 'returns many rows for any number greater than 4 when it not divisible by 4' do
+      expect(service.get_row_size(23)).to eq 6
+      expect(service.get_row_size(13)).to eq 4
+      expect(service.get_row_size(38)).to eq 10
+    end
+  end
+
+  # TEST #4: Test to see if the service be able to split array out to chunk
+  describe '#split_array_chunk' do
+    let(:test_arr1) { [1, 2, 3, 4] }
+    let(:test_arr2) { [1, 2, 3, 4, 5] }
+    let(:test_arr3) { [1, 2, 3, 4, 5, 6] }
+
+    it 'returns the split chunk array correctly' do
+      expect(service.split_array_chunk(test_arr1)).to eq [[1, 2, 3, 4]]
+      expect(service.split_array_chunk(test_arr2)).to eq [[1, 2, 3, 4], [5]]
+      expect(service.split_array_chunk(test_arr3)).to eq [[1, 2, 3, 4], [5, 6]]
     end
   end
 end

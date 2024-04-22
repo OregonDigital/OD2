@@ -32,6 +32,67 @@
       <div class="row">
         <%= render 'social_media' %>
       </div>
+
+      <!-- Create render display for the Local Contexts Icon -->
+      <% if !@presenter.local_contexts.blank? || !@presenter.local_contexts.empty? %>
+        <br/>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="title-link-local-contexts">
+              <p><%= link_to 'About Local Contexts', Rails.application.routes.url_helpers.local_contexts_path, 'aria-label': "Read more about Local Contexts", class: 'lato-p' %></p>
+            </div>
+            <h2 class='h4'>Local Contexts</h2>
+            <hr style='border-width: 3px;'>
+            
+            <%# FETCH: Get the rows and image path for carousel %>
+            <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@presenter.local_contexts_label) %>
+            <% @row_size = OregonDigital::LocalContextsService.new.get_row_size(@presenter.local_contexts_label.count) %>
+            <% @lc_nested = OregonDigital::LocalContextsService.new.split_array_chunk(@lc_arr) %>
+            <% @label_nested = OregonDigital::LocalContextsService.new.split_array_chunk(@presenter.local_contexts_label) %>
+
+            <%# CAROUSEL: Implement a carousel to display the local contexts %>
+            <div id="lc_carousel" class="carousel slide" data-ride="carousel">
+              <!-- SLIDER: Wrapper for slides -->
+              <div class="carousel-inner">
+                <% @row_size.times do |r| %>
+                  <% @carousel_name = (r == 0 ? 'item active' : 'item') %>
+                  <div class="<%= @carousel_name %>">
+                    <div class="row">
+                      <%# GET: Get the right index to print on carousel %>
+                      <% @lc_images = @lc_nested[r] %>
+                      <% @lc_labels = @label_nested[r] %>
+                      <% @lc_images.each_with_index do |value, index| %>
+                        <div class="col-xs-3">
+                          <%= image_tag "local_contexts/#{value}.png", class: "carousel-lc-image" %>
+                          <% if @lc_labels[index].include?('(') %>
+                            <% @parse_value = @lc_labels[index].gsub(/\(.*?\)|\S+/).to_a %>
+                            <p class="carousel-lc-title lato-b"><%= @parse_value[0..-2].join(' ') %></p>
+                            <p class="carousel-lc-sub lato-b"><%= @parse_value[-1] %></p>
+                          <% else %>
+                            <p class="carousel-lc-title lato-b"><%= @lc_labels[index] %></p>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+
+              <!-- CONTROLLER: Left & right controls -->
+              <a class="left carousel-control" href="#lc_carousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#lc_carousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <br/>
+      <% end %>
+
       <div class='row'>
         <%# OVERRIDE FROM HYRAX remove work description %>
         <ul class="nav nav-tabs" id="work-show-tablist">
@@ -154,3 +215,6 @@
       <% end %>
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

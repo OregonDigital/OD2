@@ -2,3 +2,44 @@
 #local_contexts_page {
   scroll-behavior: smooth;
 }
+
+// ALIGN: Making the align of the title section to the right handside
+.title-link-local-contexts {
+  float: right;
+  overflow: hidden;
+}
+
+// CAROUSEL: Custom carousel properties
+.carousel-control.left {
+  background-image: none!important;
+  margin-left: -75px;
+}
+
+.carousel-control.right {
+  background-image: none!important;
+  margin-right: -75px;
+}
+
+.item .carousel-lc-image {
+  margin: auto; 
+  display: flex;
+}
+
+.item .carousel-lc-title {
+  font-size: 18px;
+  color: #000000;
+
+  margin: auto;
+  margin-top: 15px;
+  width: 150px;
+  text-align: center;
+}
+
+.item .carousel-lc-sub {
+  font-size: 18px;
+  color: #000000;
+
+  margin: auto;
+  width: 150px;
+  text-align: center;
+}
