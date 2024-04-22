@@ -9,5 +9,7 @@ module OregonDigital::Derivatives::Document
     autoload :Runner
     autoload :TesseractProcessor
     autoload :TesseractRunner
+    autoload :PDFToTextProcessor
+    autoload :PDFToTextRunner
   end
 end
