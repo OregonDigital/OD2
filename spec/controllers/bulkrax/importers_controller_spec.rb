@@ -53,6 +53,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
     allow(Hyrax::SolrService).to receive(:query).and_return([{ 'id' => 'abcde1234' }])
     allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).and_return(work)
     allow(work).to receive(:all_errors).and_return({ dessert: ['no chocolate'] })
+    allow(OregonDigital::VerifyWorkJob).to receive(:perform_later).and_return(true)
   end
 
   describe '#work_ids' do
