@@ -99,6 +99,7 @@
       |
       <%= link_to 'Back', importers_path %><br /><br />
     </p>
+    <%= render partial: 'oregon_digital/importer_verification/verify', locals: { item: @importer } %>
 
     <% if @importer.validate_only == true %>
       <div class='pull-left'>
