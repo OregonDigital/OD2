@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Hyrax
-  #Helper for work form
+  # Helper for work form
   module WorkFormHelper
     def admin_set_options
       return @admin_set_options.select_options if @admin_set_options
