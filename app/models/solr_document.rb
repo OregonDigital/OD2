@@ -126,12 +126,12 @@ class SolrDocument
 
   def hocr_text
     '' unless file_set?
-    @hocr_text ||= resource.hocr_text.presence || self['hocr_text_tsimv']
+    @hocr_text ||= resource.hocr_text.presence
   end
 
   def all_text
     '' unless file_set?
-    @all_text ||= resource.extracted_text&.content.presence || self['all_text_tsimv']
+    @all_text ||= resource.extracted_text&.content.presence
   end
 
   def non_user_collections
