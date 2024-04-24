@@ -15,6 +15,8 @@ class SolrDocument
   SolrDocument.use_extension(OregonDigital::QualifiedDublinCore)
   use_extension(Hydra::ContentNegotiation)
 
+  delegate :bbox, :extracted_text, :hocr, to: :resource
+
   def self.solrized_methods(property_names)
     property_names.each do |property_name|
       attribute property_name, Solr::Array, "#{property_name}_tesim"
