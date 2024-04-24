@@ -1,0 +1,46 @@
+  <%= "<h2 id=\"Content Warning\">Content Warning</h2>".html_safe %>
+  <%= "<h3 id=\"Blur Image\">Blur Image</h2>".html_safe %>
+  <p> Would you like to blur your image?</p>
+  <ul>
+    <li class="radio">
+      <label>
+        <!-- Uncomment when properties added to models -->
+        <%#= f.radio_button :blurred_item, value: true %>
+        <%= t('hyrax.content_warning.item_show_page') %>
+      </label>
+    </li>
+    <li class="radio">
+      <label>
+        <!-- Uncomment when properties added to models -->
+        <%#= f.radio_button :blurred_search, value: true %>
+        <%= t('hyrax.content_warning.search_results_page') %>
+      </label>
+    </li>
+  </ul>
+
+<%= "<h3 id=\"Content Warning Statement\">Content Warning Statement</h2>".html_safe %>
+
+  <ul>
+    <li class="radio">
+      <label>
+        <!-- Uncomment when properties added to models -->
+        <%#= f.radio_button :content_warning_text, value: 'lorem ipsum 1' %>
+        <%= t('hyrax.content_warning.lorem_ipsum_1') %>
+      </label>
+    </li>
+    <li class="radio">
+      <label>
+        <!-- Uncomment when properties added to models -->
+        <%#= f.radio_button :content_warning_text, value: 'lorem ipsum 1' %>
+        <%= t('hyrax.content_warning.lorem_ipsum_2') %>
+      </label>
+    </li>
+    <li class="radio">
+      <label>
+        <%#= f.radio_button :content_warning_text %>
+        <%= t('hyrax.content_warning.create_your_own_warning_statement') %>
+        <!-- Needs JS to support transplanting this value into the radio button value on submit -->
+        <%#= f.text_field :content_warning_text, :class => "custom_content_warning" %>
+      </label>
+    </li>
+  </ul>
