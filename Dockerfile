@@ -14,7 +14,7 @@ RUN apk --no-cache update && apk --no-cache upgrade && \
   git sqlite sqlite-dev postgresql-dev libjpeg-turbo-dev libpng-dev \
   libtool libgomp libreoffice libressl libressl-dev java-common libc6-compat  \
   curl build-base tzdata zip autoconf automake libtool texinfo \
-  bash bash-completion java-common openjdk11-jre-headless graphicsmagick \
+  bash bash-completion java-common openjdk17-jre-headless graphicsmagick \
   poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
   libffi libffi-dev xz gcompat tini tmux libxslt-dev libxml2-dev
 
@@ -92,7 +92,7 @@ FROM code
 USER root
 RUN apk --no-cache update && apk del autoconf automake gcc g++ --purge && \
   rm -rf /data/docker-compose.override.yml-example /data/README.md \
-    /data/.env.example /data/config/nginx /data/config/solr
+         /data/.env.example /data/config/nginx /data/config/solr
 USER app
 
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}

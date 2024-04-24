@@ -71,25 +71,17 @@ module OregonDigital
     def create_pdf_derivatives(filename)
       create_thumbnail(filename)
       extract_full_text(filename, uri)
-      extract_text_bbox_derivative_service(filename).create_derivatives
+      create_extracted_text_bbox_content(filename)
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
-      # Build a hash of words temporarily in file_set.hocr_content
+      # Use tesseract to populate #hocr on filesets if
       0.upto(page_count - 1) do |pagenum|
-        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox_content.blank?
+        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.extracted_text&.content.blank?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          hocr_derivative_service(out_path, pagenum).create_derivatives if file_set.bbox_content.blank?
+          create_hocr_content(out_path) if file_set.extracted_text&.content.blank?
           create_zoomable_page(out_path, pagenum)
         end
       end
-      # # Serialize the hOCR hash into a solrfield
-      # # REMOVE THIS AND REPLACE WITH SOME WAY TO INCLUDE THE TESSERACT OUTPUT
-      # solr_doc = []
-      # file_set.hocr_content&.each do |word, coords|
-      #   solr_doc << "#{word}:#{coords.join(';')}"
-      # end
-
-      # file_set.hocr_content = solr_doc
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
@@ -114,6 +106,22 @@ module OregonDigital
                                                                       tile_size: '1024',
                                                                       compression: '20',
                                                                       layer: 0 }])
+    end
+
+    def create_hocr_content(filename)
+      OregonDigital::Derivatives::Document::TesseractRunner.create(filename,
+                                                                   outputs: [{ url: uri, container: 'hocr' }])
+    end
+
+    def create_extracted_text_bbox_content(filename, file_set: self.file_set)
+      # We have to reload the fileset to get the extracted_text data for some reason
+      file_set.reload
+      unless file_set.extracted_text&.content.blank?
+        OregonDigital::Derivatives::Document::PDFToTextRunner.create(filename,
+                                                                     outputs: [{ url: uri, container: 'bbox' }])
+      end
+      # We have to reload the fileset to get the updated bbox data for some reason
+      file_set.reload
     end
 
     def create_video_derivatives(filename)
@@ -182,7 +190,7 @@ module OregonDigital
 
     def other_to_png(source, dest)
       image = MiniMagick::Image.open(source)
-      image.depth(8).format('png').write(dest)
+      image.strip.depth(8).format('png').write(dest)
 
       # The above code generates a temp file which we don't need beyond the
       # .write() call, so we explicitly destroy the image object
@@ -202,14 +210,6 @@ module OregonDigital
     # Returns the JP2Processor class of choice
     def jp2_processor
       OregonDigital::Derivatives::Image::JP2Processor
-    end
-
-    def hocr_derivative_service(filename, pagenum, file_set: self.file_set)
-      OregonDigital::HocrDerivativeService::Factory.new(file_set: file_set, filename: filename, pagenum: pagenum).new
-    end
-
-    def extract_text_bbox_derivative_service(filename, file_set: self.file_set)
-      OregonDigital::ExtractedTextDerivativeService::Factory.new(file_set: file_set, filename: filename).new
     end
   end
 end

@@ -125,11 +125,13 @@ class SolrDocument
   end
 
   def hocr_text
-    self['hocr_text_tsimv']
+    '' unless file_set?
+    @hocr_text ||= resource.hocr_text.presence || self['hocr_text_tsimv']
   end
 
   def all_text
-    self['all_text_tsimv']
+    '' unless file_set?
+    @all_text ||= resource.extracted_text&.content.presence || self['all_text_tsimv']
   end
 
   def non_user_collections
@@ -143,6 +145,10 @@ class SolrDocument
   # METHOD: Fetch the ssim for 'label$uri'
   def label_uri_helpers(attribute_name)
     OregonDigital::LabelParserService.parse_label_uris(self["#{attribute_name}_parsable_label_ssim"])
+  end
+
+  def resource
+    @resource ||= Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: id, use_valkyrie: false)
   end
 
   solrized_methods Generic.generic_properties
