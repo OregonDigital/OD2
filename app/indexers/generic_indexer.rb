@@ -23,14 +23,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
-      solr_doc['non_user_collections_ssim'] = []
-      solr_doc['user_collections_ssim'] = []
-      solr_doc['oai_collections_ssim'] = []
-      object.member_of_collections.each do |collection|
-        collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
-        solr_doc[collection_index_key] << collection.id
-        solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
-      end
+      index_collection_membership(object, solr_doc)
       # removing index_topic_combined_label(solr_doc, object.keyword)
       # will be handled when indexing fetched labels
       index_edit_groups
@@ -186,5 +179,19 @@ class GenericIndexer < Hyrax::WorkIndexer
 
     solr_doc["#{label}_parsable_combined_label_ssim"] += values
   end
+
+  # rubocop:disable Metrics/AbcSize
+  def index_collection_membership(object, solr_doc)
+    solr_doc['non_user_collections_ssim'] = []
+    solr_doc['user_collections_ssim'] = []
+    solr_doc['oai_collections_ssim'] = []
+    object.member_of_collections.each do |collection|
+      collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
+      solr_doc[collection_index_key] << collection.id
+      solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
+      solr_doc[collection_index_key.gsub('_ssim', '_sim')] = collection.title
+    end
+  end
+  # rubocop:enable Metrics/AbcSize
 end
 # rubocop:enable Metrics/ClassLength

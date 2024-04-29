@@ -44,7 +44,7 @@ class ReExtractTextWorker
     # Hyrax.index_adapter.save(resource: file_set)
     # Hyrax.index_adapter.save(resource: file_set.parent)
     file_set.save
-    file_set.parent.update_index
+    file_set.parent&.update_index
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
