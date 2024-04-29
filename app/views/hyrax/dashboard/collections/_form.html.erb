@@ -24,6 +24,9 @@
         <a href="#configurable_facets" role="tab" data-toggle="tab"><%= t('.tabs.facets') %></a>
       </li>
       <% end %>
+      <li>
+        <a href="#content_warning" role="tab" data-toggle="tab"><%= t('.tabs.content_warning') %></a>
+      </li>
     <% end %>
   </ul>
 
@@ -94,6 +97,14 @@
           <div class="panel panel-default labels" id="collection_permissions" data-param-key="<%= f.object.model_name.param_key %>">
             <div class="panel-body">
               <%= render 'form_facets', f: f %>
+            </div>
+          </div>
+        </div>
+
+        <div id="content_warning" class="tab-pane">
+          <div class="panel panel-default labels" id="collection_permissions" data-param-key="<%= f.object.model_name.param_key %>">
+            <div class="panel-body">
+              <%= render 'form_content_warning', f: f %>
             </div>
           </div>
         </div>
