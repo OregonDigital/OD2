@@ -51,21 +51,8 @@ module BlacklightIiifSearch
       query_length = query.strip.split(' ').length
       solr_response['response']['docs'].each do |document|
         hit = { '@type': 'search:Hit', 'annotations': [] }
-        # Prepare to find ocr and hocr derivative file uris
-        sd = SolrDocument.new(document)
 
-        # Get the bbox content
-        bbox_content = sd.bbox&.content.presence
-
-        # Check for bbox first
-        all_words = unless sd.extracted_text&.content.blank? || bbox_content.blank?
-          extracted_word_array(bbox_content)
-        else
-          # Otherwise use hocr
-          ocr_word_array(sd.hocr)
-        end
         word_array = match_words(all_words, query)
-
         # word_array is an array of BlacklightIiifSearch::Word for each word in the document
         word_array.each_slice(query_length).with_index do |words, index|
           text = words.map(&:text).join(' ')
@@ -86,6 +73,22 @@ module BlacklightIiifSearch
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+
+    def all_words
+      # Prepare to find ocr and hocr derivative file uris
+      sd = SolrDocument.new(document)
+
+      # Get the bbox content
+      bbox_content = sd.bbox&.content.presence
+
+      # Check for bbox first
+      if !sd.extracted_text&.content.blank? && !bbox_content.blank?
+        extracted_word_array(bbox_content)
+      else
+        # Otherwise use hocr
+        ocr_word_array(sd.hocr)
+      end
+    end
 
     # Create Word objects for all extracted words
     # @param [String] Output from `pdftotext`
