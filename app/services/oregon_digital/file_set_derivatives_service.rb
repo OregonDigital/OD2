@@ -75,10 +75,10 @@ module OregonDigital
       page_count = OregonDigital::Derivatives::Image::Utils.page_count(filename)
       # Use tesseract to populate #hocr on filesets if
       0.upto(page_count - 1) do |pagenum|
-        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.extracted_text&.content.blank?
+        Rails.logger.debug("HOCR: page #{pagenum}/#{page_count - 1}") if file_set.bbox&.content.blank?
         OregonDigital::Derivatives::Image::Utils.tmp_file('png') do |out_path|
           manual_convert(filename, pagenum, out_path)
-          create_hocr_content(out_path) if file_set.extracted_text&.content.blank?
+          create_hocr_content(out_path) if file_set.bbox&.content.blank?
           create_zoomable_page(out_path, pagenum)
         end
       end
@@ -116,7 +116,7 @@ module OregonDigital
     def create_extracted_text_bbox_content(filename, file_set: self.file_set)
       # We have to reload the fileset to get the extracted_text data for some reason
       file_set.reload
-      unless file_set.extracted_text&.content.blank?
+      unless file_set.bbox&.content.blank?
         OregonDigital::Derivatives::Document::PDFToTextRunner.create(filename,
                                                                      outputs: [{ url: uri, container: 'bbox' }])
       end

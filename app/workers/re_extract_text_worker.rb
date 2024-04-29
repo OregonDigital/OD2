@@ -21,7 +21,7 @@ class ReExtractTextWorker
     derivative_service.create_extracted_text_bbox_content(filename)
 
     # OCR if we didn't get extracted bbox content
-    if file_set.extracted_text&.content.blank?
+    if file_set.bbox&.content.blank?
       # Reset the hocr content
       file_set.hocr = []
       # We need the individual pages as PNGs to redo the OCR, but we can skip it if we were able to extract the exact text

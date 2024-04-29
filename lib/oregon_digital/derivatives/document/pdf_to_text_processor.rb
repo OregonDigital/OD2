@@ -37,6 +37,9 @@ module OregonDigital::Derivatives::Document
       OregonDigital::Derivatives::Image::Utils.tmp_file('ocr') do |out_path|
         self.class.encode(source_path, out_path)
         file_content = File.read(out_path)
+        # Skip saving bbox content if there's no bbox words
+        break unless Nokogiri::HTML(file_content).css('word').count.positive?
+
         scaled_content = scale_bbox(file_content)
         output_file_service.call(scaled_content, directives)
       end
