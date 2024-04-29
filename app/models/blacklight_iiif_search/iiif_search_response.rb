@@ -51,11 +51,8 @@ module BlacklightIiifSearch
       query_length = query.strip.split(' ').length
       solr_response['response']['docs'].each do |document|
         hit = { '@type': 'search:Hit', 'annotations': [] }
-        # Find which of our extracted text or hOCR fields this document has, then parse the entire document
-        extract, ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
-        all_words = extract.nil? ? ocr_word_array(ocr) : extracted_word_array(extract)
-        word_array = match_words(all_words, query)
 
+        word_array = match_words(all_words, query)
         # word_array is an array of BlacklightIiifSearch::Word for each word in the document
         word_array.each_slice(query_length).with_index do |words, index|
           text = words.map(&:text).join(' ')
@@ -77,25 +74,40 @@ module BlacklightIiifSearch
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
+    def all_words
+      # Prepare to find ocr and hocr derivative file uris
+      sd = SolrDocument.new(document)
+
+      # Get the bbox content
+      bbox_content = sd.bbox&.content.presence
+
+      # Check for bbox first
+      if !sd.extracted_text&.content.blank? && !bbox_content.blank?
+        extracted_word_array(bbox_content)
+      else
+        # Otherwise use hocr
+        ocr_word_array(sd.hocr)
+      end
+    end
+
     # Create Word objects for all extracted words
     # @param [String] Output from `pdftotext`
     def extracted_word_array(extract)
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      extract.map do |text|
-        Nokogiri::HTML(text).css('page').map.with_index do |page, page_number|
-          page.css('word').map do |word|
-            Word.new([word.attr('xmin'), word.attr('ymin'), word.attr('xmax'), word.attr('ymax')], page_number, word.text)
-          end.flatten
+      Nokogiri::HTML(extract).css('page').map.with_index do |page, page_number|
+        page.css('word').map do |word|
+          Word.new([word.attr('xmin'), word.attr('ymin'), word.attr('xmax'), word.attr('ymax')], page_number, word.text)
         end.flatten
       end.flatten
     end
 
-    # Create Word objects for all extracted words
-    # @param [String] Output from `tesseract`
+    # Create Word objects for all ocr'd words
+    # @param [Hydra::PCDM::File] Output from `tesseract`
     # rubocop:disable Metrics/AbcSize
-    def ocr_word_array(ocr)
+    def ocr_word_array(hocr_files)
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      ocr.map.with_index do |text, page_number|
+      hocr_files.map.with_index do |file, page_number|
+        text = file.content
         Nokogiri::HTML(text).css('.ocrx_word').map do |word|
           bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
 

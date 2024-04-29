@@ -25,7 +25,7 @@ module OregonDigital
       configure_blacklight do |config|
         # configuration for Blacklight IIIF Content Search
         config.iiif_search = {
-          full_text_field: %w[all_text_bbox_tsimv hocr_content_tsimv all_text_bbox_timv hocr_text_timv],
+          full_text_field: %w[all_text_timv hocr_text_timv],
           object_relation_field: 'file_set_ids_ssim',
           supported_params: %w[q page],
           autocomplete_handler: 'iiif_suggest',
@@ -82,23 +82,6 @@ module OregonDigital
         config.add_index_field 'description_tesim', label: nil, itemprop: 'description', helper_method: :iconify_auto_link_with_highlight, truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, if: lambda { |_context, _field_config, document|
           # Only display description if a highlight is hit
           !document.response.dig('highlighting', document.id, 'description_tesim').nil?
-        }
-        # Remove after all text/hocr text derivative creation
-        config.add_index_field 'all_text_tsimv', label: nil, itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
-          # Don't display full text if description has a highlight hit
-          !document.response.dig('highlighting', document.id, 'description_tesim').nil?
-        }, if:  lambda { |_context, _field_config, document|
-          # Only try to display full text if a highlight is hit
-          !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil?
-        }
-        # Remove after all text/hocr text derivative creation
-        config.add_index_field 'hocr_text_tsimv', label: nil, itemprop: 'keyword', truncate: { list: 20, masonry: 10 }, max_values: 1, highlight: true, unless: lambda { |_context, _field_config, document|
-          # Don't display hocr text if all text or description has a highlight hit
-          !document.response.dig('highlighting', document.id, 'all_text_tsimv').nil? ||
-            !document.response.dig('highlighting', document.id, 'description_tesim').nil?
-        }, if:  lambda { |_context, _field_config, document|
-          # Only try to display hocr text if a highlight is hit
-          !document.response.dig('highlighting', document.id, 'hocr_text_tsimv').nil?
         }
         config.add_index_field 'all_text_timv', label: nil, itemprop: 'keyword'
         config.add_index_field 'hocr_text_timv', label: nil, itemprop: 'keyword'
@@ -304,7 +287,7 @@ module OregonDigital
           all_names = search_fields.join(' ')
           title_name = 'title_tesim'
           field.solr_parameters = {
-            qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_tsimv hocr_text_tsimv all_text_timv hocr_text_timv",
+            qf: "#{all_names} #{title_name} license_label_tesim file_format_sim all_text_timv hocr_text_timv",
             pf: title_name.to_s
           }
           field.include_in_advanced_search = true
