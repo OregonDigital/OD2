@@ -276,11 +276,11 @@ workflows:
           requires:
             - lint
             - test
-          filters:
-            branches:
-              only:
-                - master
-                - /infra\/.*/
-                - /staging\/.*/
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
+          #       - /infra\/.*/
+          #       - /staging\/.*/
           repo: od2_web
           environment: production
