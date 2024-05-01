@@ -1,5 +1,9 @@
 <div class="row">
   <div class="col-sm-6">
+    <% jobs = sidekiq_jobs('verify') %>
+    <% if jobs > 0 %>
+      <p>NOTE: there are <%= jobs %> verify jobs currently enqueued. If the job for a given work has not yet been run, the number of reported errors will likely be inaccurate.</p>
+    <% end %>
     <h3>Errors for <%= @importer.name %> </h3>
     <% @errors.keys.each do |key| %>
       <p>Work id: <%= key %><ul>

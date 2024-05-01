@@ -13,7 +13,7 @@ module OregonDigital
       @importer = Bulkrax::Importer.find(params[:importer_id])
       bvs = OregonDigital::BatchVerificationService.new(work_ids.map { |x| x[:work_id] }.reject(&:nil?))
       bvs.verify
-      redirect_to importer_path(@importer.id), notice: 'Verification jobs are enqueued.'
+      redirect_to importer_path(@importer.id), notice: "Verification jobs are enqueued. There are #{helpers.sidekiq_jobs_all} jobs enqueued ahead of you."
     end
 
     # returns an array of hashes, eg { work_id: 'abcde1234', entry_identifier: '80-101' }
