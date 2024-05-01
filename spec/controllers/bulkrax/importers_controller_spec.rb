@@ -19,6 +19,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
 
   let(:role) { Role.create(name: 'admin') }
   let(:user) { create(:admin) }
+  let(:queue) { double }
 
   controller do
     include OregonDigital::ImporterControllerBehavior
@@ -54,6 +55,8 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
     allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).and_return(work)
     allow(work).to receive(:all_errors).and_return({ dessert: ['no chocolate'] })
     allow(OregonDigital::VerifyWorkJob).to receive(:perform_later).and_return(true)
+    allow(Sidekiq::Queue).to receive(:new).and_return(queue)
+    allow(queue).to receive(:size).and_return(0)
   end
 
   describe '#work_ids' do
@@ -110,7 +113,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
   describe 'GET #verify' do
     it 'displays notice and redirects' do
       get :verify, params: { importer_id: importer.id }
-      expect(flash[:notice]).to eq('Verification jobs are enqueued.')
+      expect(flash[:notice]).to eq('Verification jobs are enqueued. There are 0 jobs enqueued ahead of you.')
       expect(response).to redirect_to importer_path(importer.id)
     end
   end
