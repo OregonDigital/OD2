@@ -113,7 +113,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
   describe 'GET #verify' do
     it 'displays notice and redirects' do
       get :verify, params: { importer_id: importer.id }
-      expect(flash[:notice]).to eq('Verification jobs are enqueued. There are 0 jobs enqueued ahead of you.')
+      expect(flash[:notice]).to eq('Verification jobs are enqueued. Jobs may be delayed depending on number/type of jobs already enqueued; please wait 5-10 minutes before checking results.')
       expect(response).to redirect_to importer_path(importer.id)
     end
   end
