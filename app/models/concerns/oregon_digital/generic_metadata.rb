@@ -614,6 +614,10 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :mask_content, predicate: RDF::URI.new('http://opaquenamespace.org/ns/maskContent'), multiple: false, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
       define_singleton_method :generic_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
