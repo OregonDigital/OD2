@@ -114,6 +114,18 @@
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
 
+  <%# LOCAL CONTEXTS: Render local contexts if presented in collection %>
+  <% @collection_lc = [] %>
+  <% @collection.child_works.map { |col| col.local_contexts.map { |lc| @collection_lc << lc } if (!col.local_contexts.blank?) } %>
+  <% @collection_lc = @collection_lc&.uniq %>
+
+  <% if !@collection_lc.blank? || !@collection_lc.empty? %>
+    <br/>
+    <h2 class="h4">Explore More About The Collection</h2>
+    <%= render 'oregon_digital/collections/local_contexts_collection', collection_items: @collection_lc %>
+    <br/>
+  <% end %>
+
   <% unless footer_metadata.empty? %>
     <div id="footer-metadata" class="row">
       <div class="col-md-12">

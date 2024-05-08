@@ -43,3 +43,23 @@
   width: 150px;
   text-align: center;
 }
+
+.carousel-indicators {
+  margin-bottom: -50px;
+}
+
+.carousel-indicators li {
+  background-color: gray;
+}
+
+.carousel-indicators li.active {
+  background-color: black;
+}
+
+#carousel-arrow {
+  color: black;
+}
+
+.carousel-buttons {
+  margin-top: 10px;
+}
