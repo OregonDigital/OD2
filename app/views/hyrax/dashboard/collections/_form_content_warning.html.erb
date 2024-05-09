@@ -4,15 +4,13 @@
 <ul>
   <li class="radio">
     <label>
-      <!-- Uncomment when properties added to models -->
-      <%#= f.radio_button :blurred_item, value: true %>
+      <%= f.check_box :mask_content, value: 'true-1' %>
       <%= t('hyrax.content_warning.item_show_page') %>
     </label>
   </li>
   <li class="radio">
     <label>
-      <!-- Uncomment when properties added to models -->
-      <%#= f.radio_button :blurred_search, value: true %>
+      <%= f.check_box :mask_content, value: 'true-2' %>
       <%= t('hyrax.content_warning.search_results_page') %>
     </label>
   </li>
@@ -23,15 +21,13 @@
 <ul>
   <li class="radio">
     <label>
-      <!-- Uncomment when properties added to models -->
-      <%#= f.radio_button :content_warning_text, value: 'lorem ipsum 1' %>
+      <%= f.radio_button :content_alert, 'lorem ipsum 1' %>
       <%= t('hyrax.content_warning.lorem_ipsum_1') %>
     </label>
   </li>
   <li class="radio">
     <label>
-      <!-- Uncomment when properties added to models -->
-      <%#= f.radio_button :content_warning_text, value: 'lorem ipsum 1' %>
+      <%= f.radio_button :content_alert, 'lorem ipsum 2' %>
       <%= t('hyrax.content_warning.lorem_ipsum_2') %>
     </label>
   </li>
