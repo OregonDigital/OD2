@@ -61,18 +61,42 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
       controller.instance_variable_set(:@importer, importer)
     end
 
-    it 'returns an array of pids' do
-      expect(controller.work_ids).to eq(['abcde1234'])
+    it 'returns an array of hashes' do
+      expect(controller.work_ids).to eq([{ entry_identifier: 'csv_entry', work_id: 'abcde1234' }])
     end
   end
 
   describe '#compile_errors' do
-    before do
-      controller.instance_variable_set(:@importer, importer)
+    context 'when the work exists' do
+      before do
+        controller.instance_variable_set(:@importer, importer)
+      end
+
+      it 'returns a hash of errors' do
+        expect(controller.compile_errors).to eq({ 'abcde1234' => { dessert: ['no chocolate'] } })
+      end
     end
 
-    it 'returns a hash of errors' do
-      expect(controller.compile_errors).to eq({ 'abcde1234' => { dessert: ['no chocolate'] } })
+    context 'when the work does not exist in solr' do
+      before do
+        controller.instance_variable_set(:@importer, importer)
+        allow(Hyrax::SolrService).to receive(:query).and_return([])
+      end
+
+      it 'returns a hash with correct error' do
+        expect(controller.compile_errors).to eq({ 'csv_entry' => 'Unable to load work for this entry.' })
+      end
+    end
+
+    context 'when the work does not exist in valkyrie' do
+      before do
+        controller.instance_variable_set(:@importer, importer)
+        allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).and_raise(Valkyrie::Persistence::ObjectNotFoundError)
+      end
+
+      it 'returns a hash with correct error' do
+        expect(controller.compile_errors).to eq({ 'abcde1234' => 'Unable to load work.' })
+      end
     end
   end
 
