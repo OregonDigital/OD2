@@ -1,31 +1,21 @@
-// SCROLL: Make the scrolling when click on link smooth for document
-#local_contexts_page {
-  scroll-behavior: smooth;
-}
-
 // ALIGN: Making the align of the title section to the right handside
 .title-link-local-contexts {
   float: right;
   overflow: hidden;
 }
 
-// CAROUSEL: Custom carousel properties
-.carousel-control.left {
-  background-image: none!important;
-  margin-left: -75px;
-}
-
-.carousel-control.right {
-  background-image: none!important;
-  margin-right: -75px;
-}
-
-.item .carousel-lc-image {
-  margin: auto; 
+// DIV: Make the display flex on display of LC
+.lc-wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
-.item .carousel-lc-title {
+.lc-wrapper > * {
+  margin: 20px 30px 20px 30px;
+}
+
+// TEXT: Align text to center and match font
+.lc-title {
   font-size: 18px;
   color: #000000;
 
@@ -35,31 +25,11 @@
   text-align: center;
 }
 
-.item .carousel-lc-sub {
+.lc-sub {
   font-size: 18px;
   color: #000000;
 
   margin: auto;
   width: 150px;
   text-align: center;
-}
-
-.carousel-indicators {
-  margin-bottom: -50px;
-}
-
-.carousel-indicators li {
-  background-color: gray;
-}
-
-.carousel-indicators li.active {
-  background-color: black;
-}
-
-#carousel-arrow {
-  color: black;
-}
-
-.carousel-buttons {
-  margin-top: 10px;
 }

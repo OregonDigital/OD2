@@ -36,8 +36,8 @@
       <!-- Create render display for the Local Contexts Icon -->
       <% if !@presenter.local_contexts.blank? || !@presenter.local_contexts.empty? %>
         <br/>
-        <%= render 'oregon_digital/base/local_contexts_work' %>
-        <br/><br/>
+        <%= render 'oregon_digital/base/local_contexts', work_lc: @presenter, location_name: 'work' %>
+        <br/>
       <% end %>
 
       <div class='row'>
