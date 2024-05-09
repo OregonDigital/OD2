@@ -25,7 +25,7 @@ Sidekiq.configure_server do |s|
 
     s.options[:queues] = queues
   else
-    s.options[:queues] = ["notify","fetch","ingest","reindex","default","import","export"]
+    s.options[:queues] = ["notify","fetch","ingest","reindex","default","import","export","verify"]
   end
   Yabeda::Prometheus::Exporter.start_metrics_server!
 end
