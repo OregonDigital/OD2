@@ -87,7 +87,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
       end
 
       it 'returns a hash with correct error' do
-        expect(controller.compile_errors).to eq({ 'csv_entry' => 'Unable to load work for this entry.' })
+        expect(controller.compile_errors).to eq({ 'csv_entry' => { solr: ['Unable to load work for this entry.'] } })
       end
     end
 
@@ -98,7 +98,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
       end
 
       it 'returns a hash with correct error' do
-        expect(controller.compile_errors).to eq({ 'abcde1234' => 'Unable to load work.' })
+        expect(controller.compile_errors).to eq({ 'abcde1234' => { valkyrie: ['Unable to load work.'] } })
       end
     end
   end
