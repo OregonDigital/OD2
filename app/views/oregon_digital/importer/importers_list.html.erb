@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Importers</h3>
+    <table>
+    <tr><td>Name</td><td>Date</td></tr>
+    <% importers_list_all.each do |vals| %>
+      <tr>
+        <td><%= link_to vals[0], importer_path(vals[1]) %></td><td><%=vals[2]%></td>
+      </tr>
+    <% end %>
+  </div>
+</div>
