@@ -71,6 +71,11 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      # LC: Local Contexts Predicate for Collection
+      property :local_contexts, predicate: RDF::URI.new('http://opaquenamespace.org/ns/localContexts'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties
@@ -86,7 +91,7 @@ module OregonDigital
       # defines a method for Collection to be able to grab a list of properties
       define_singleton_method :controlled_property_labels do
         remote_controlled_props = controlled_properties.each_with_object([]) { |prop, array| array << "#{prop}_label" }
-        file_controlled_props = %w[license_label]
+        file_controlled_props = %w[license_label local_contexts_label]
         (remote_controlled_props + file_controlled_props).freeze
       end
 
@@ -110,7 +115,8 @@ module OregonDigital
         { name: 'resource_type', is_controlled: true },
         { name: 'institution_label', is_controlled: true },
         { name: 'date_uploaded', is_controlled: false },
-        { name: 'date_modified', is_controlled: false }
+        { name: 'date_modified', is_controlled: false },
+        { name: 'local_contexts_label', is_controlled: true}
       ].freeze
 
       ORDERED_HEADER_PROPERTIES = [
@@ -138,6 +144,7 @@ module OregonDigital
         related_url
         resource_type
         institution
+        local_contexts
       ].freeze
     end
   end
