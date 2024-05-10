@@ -116,7 +116,7 @@ module OregonDigital
         { name: 'institution_label', is_controlled: true },
         { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false },
-        { name: 'local_contexts_label', is_controlled: true}
+        { name: 'local_contexts_label', is_controlled: true }
       ].freeze
 
       ORDERED_HEADER_PROPERTIES = [
