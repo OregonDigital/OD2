@@ -31,7 +31,7 @@ module OregonDigital
       errors = {}
       work_ids.each do |item|
         if item[:work_id].nil?
-          errors[item[:entry_identifier]] = 'Unable to load work for this entry.'
+          errors[item[:entry_identifier]] = { solr: ['Unable to load work for this entry.'] }
         else
           errors[item[:work_id]] = retrieve_errors(item[:work_id])
         end
@@ -43,7 +43,7 @@ module OregonDigital
       work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: id)
       work.all_errors
     rescue Valkyrie::Persistence::ObjectNotFoundError
-      'Unable to load work.'
+      { valkyrie: ['Unable to load work.'] }
     end
   end
 end
