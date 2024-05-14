@@ -23,10 +23,10 @@
           <%= image_tag "local_contexts/#{value}.png", class: "lc-image" %>
           <% if @lc_labels[index].include?('(') %>
             <% @parse_value = @lc_labels[index].gsub(/\(.*?\)|\S+/).to_a %>
-            <p class="lc-title lato-b"><%= @parse_value[0..-2].join(' ') %></p>
-            <p class="lc-sub lato-b"><%= @parse_value[-1] %></p>
+            <p class="lc-title lato-b font-lg"><%= @parse_value[0..-2].join(' ') %></p>
+            <p class="lc-sub lato-b font-lg"><%= @parse_value[-1] %></p>
           <% else %>
-            <p class="lc-title lato-b"><%= @lc_labels[index] %></p>
+            <p class="lc-title lato-b font-lg"><%= @lc_labels[index] %></p>
           <% end %>
         </div>
       <% end %>
