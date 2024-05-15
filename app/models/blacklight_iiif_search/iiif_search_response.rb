@@ -46,24 +46,23 @@ module BlacklightIiifSearch
     # OVERRIDE FROM BLACKLIGHT_IIIF_SEARCH: To circumvent using Solr hit-highlighting. Parsing our OCR'd storage field is more accurate
     # @return [Array]
     def resources
-      @total = 0
       query = solr_response.params['q'].delete_suffix('*').downcase
       query_length = query.strip.split(' ').length
       solr_response['response']['docs'].each do |document|
         hit = { '@type': 'search:Hit', 'annotations': [] }
-        # Find which of our extracted text or hOCR fields this document has, then parse the entire document
-        extract, ocr = document.values_at(*controller.blacklight_config.iiif_search[:full_text_field])
-        all_words = extract.nil? ? ocr_word_array(ocr) : extracted_word_array(extract)
-        word_array = match_words(all_words, query)
+        # Convert solr hit to solr doc
+        solr_doc = SolrDocument.new(document)
 
-        # word_array is an array of BlacklightIiifSearch::Word for each word in the document
-        word_array.each_slice(query_length).with_index do |words, index|
+        word_array = all_words(solr_doc)
+        matched_word_array = match_words(word_array, query)
+        # matched_word_array is an array of BlacklightIiifSearch::Word for each word in the document
+        matched_word_array.each_slice(query_length).with_index do |words, index|
           text = words.map(&:text).join(' ')
           annotation = IiifSearchAnnotation.new(document,
                                                 query,
                                                 index, text, controller,
                                                 @parent_document)
-          # Send word_array over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb to create coordinates
+          # Send words over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb to create coordinates
           annotation.found_words = words
 
           @resources << annotation.as_hash
@@ -71,31 +70,43 @@ module BlacklightIiifSearch
         end
         @hits << hit
       end
-      @total = @hits[0][:annotations].count unless @hits.blank?
+      @total = @hits.blank? ? 0 : @hits[0][:annotations].count
       @resources
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
+    def all_words(solr_doc)
+      # Get the bbox content
+      bbox_content = solr_doc.bbox&.content.presence
+
+      # Check for bbox first
+      if !solr_doc.extracted_text&.content.blank? && !bbox_content.blank?
+        extracted_word_array(bbox_content)
+      else
+        # Otherwise use hocr
+        ocr_word_array(solr_doc.hocr)
+      end
+    end
+
     # Create Word objects for all extracted words
     # @param [String] Output from `pdftotext`
     def extracted_word_array(extract)
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      extract.map do |text|
-        Nokogiri::HTML(text).css('page').map.with_index do |page, page_number|
-          page.css('word').map do |word|
-            Word.new([word.attr('xmin'), word.attr('ymin'), word.attr('xmax'), word.attr('ymax')], page_number, word.text)
-          end.flatten
+      Nokogiri::HTML(extract).css('page').map.with_index do |page, page_number|
+        page.css('word').map do |word|
+          Word.new([word.attr('xmin'), word.attr('ymin'), word.attr('xmax'), word.attr('ymax')], page_number, word.text)
         end.flatten
       end.flatten
     end
 
-    # Create Word objects for all extracted words
-    # @param [String] Output from `tesseract`
+    # Create Word objects for all ocr'd words
+    # @param [Hydra::PCDM::File] Output from `tesseract`
     # rubocop:disable Metrics/AbcSize
-    def ocr_word_array(ocr)
+    def ocr_word_array(hocr_files)
       # Create ordered BlacklightIiifSearch::Word objects for every word in the PDF
-      ocr.map.with_index do |text, page_number|
+      hocr_files.map.with_index do |file, page_number|
+        text = file.content
         Nokogiri::HTML(text).css('.ocrx_word').map do |word|
           bbox_info = word.attr('title').split(';')[0].sub('bbox ', '').split(' ')
 

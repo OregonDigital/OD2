@@ -23,16 +23,21 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
-      index_collection_membership(object, solr_doc)
+      solr_doc['non_user_collections_ssim'] = []
+      solr_doc['user_collections_ssim'] = []
+      solr_doc['oai_collections_ssim'] = []
+      object.member_of_collections.each do |collection|
+        collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
+        solr_doc[collection_index_key] << collection.id
+        solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
+      end
       # removing index_topic_combined_label(solr_doc, object.keyword)
       # will be handled when indexing fetched labels
       index_edit_groups
       index_read_groups
       index_discover_groups
-      solr_doc['all_text_timv'] = object.file_sets.map { |file_set| find_all_text_value(file_set, solr_doc) }
-      solr_doc['all_text_tsimv'] = object.file_sets.map { |file_set| find_all_text_value(file_set, solr_doc) }
-      solr_doc['hocr_text_timv'] = object.file_sets.map { |file_set| find_hocr_text(file_set, solr_doc) }
-      solr_doc['hocr_text_tsimv'] = object.file_sets.map { |file_set| find_hocr_text(file_set, solr_doc) }
+      solr_doc['all_text_timv'] = object.file_sets.map { |file_set| find_all_text_value(file_set) }
+      solr_doc['hocr_text_timv'] = object.file_sets.map { |file_set| find_hocr_text(file_set) }
       solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] } # Index file formats from file sets for faceting
       # for bulkrax
       solr_doc['bulkrax_identifier_sim'] = object.bulkrax_identifier
@@ -52,12 +57,12 @@ class GenericIndexer < Hyrax::WorkIndexer
     end
   end
 
-  def find_all_text_value(file_set, solr_doc)
-    file_set.extracted_text&.content&.presence || file_set&.ocr_content&.presence || solr_doc['all_text_tsimv'].presence
+  def find_all_text_value(file_set)
+    file_set.extracted_text&.content.presence
   end
 
-  def find_hocr_text(file_set, solr_doc)
-    file_set&.hocr_text&.presence || file_set.to_solr['hocr_text_tsimv'].presence || solr_doc['hocr_text_tsimv'].presence
+  def find_hocr_text(file_set)
+    file_set.hocr_text
   end
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
@@ -179,19 +184,5 @@ class GenericIndexer < Hyrax::WorkIndexer
 
     solr_doc["#{label}_parsable_combined_label_ssim"] += values
   end
-
-  # rubocop:disable Metrics/AbcSize
-  def index_collection_membership(object, solr_doc)
-    solr_doc['non_user_collections_ssim'] = []
-    solr_doc['user_collections_ssim'] = []
-    solr_doc['oai_collections_ssim'] = []
-    object.member_of_collections.each do |collection|
-      collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
-      solr_doc[collection_index_key] << collection.id
-      solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
-      solr_doc[collection_index_key.gsub('_ssim', '_sim')] = collection.title
-    end
-  end
-  # rubocop:enable Metrics/AbcSize
 end
 # rubocop:enable Metrics/ClassLength

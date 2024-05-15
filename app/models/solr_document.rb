@@ -15,6 +15,8 @@ class SolrDocument
   SolrDocument.use_extension(OregonDigital::QualifiedDublinCore)
   use_extension(Hydra::ContentNegotiation)
 
+  delegate :bbox, :extracted_text, :hocr, to: :resource
+
   def self.solrized_methods(property_names)
     property_names.each do |property_name|
       attribute property_name, Solr::Array, "#{property_name}_tesim"
@@ -126,12 +128,12 @@ class SolrDocument
 
   def hocr_text
     '' unless file_set?
-    @hocr_text ||= resource.hocr_text.presence || self['hocr_text_tsimv']
+    @hocr_text ||= resource.hocr_text.presence
   end
 
   def all_text
     '' unless file_set?
-    @all_text ||= resource.extracted_text&.content.presence || self['all_text_tsimv']
+    @all_text ||= resource.extracted_text&.content.presence
   end
 
   def non_user_collections
