@@ -1,4 +1,4 @@
-<div class="viewer-wrapper <%= 'blurred-image' unless presenter.mask_content.blank? %>">
+<div class="viewer-wrapper <%= 'blurred-image' unless presenter.mask_content.include?('Item Show Page') %>">
   <iframe aria-label="image view"
     <% previous_query = URI.parse(request.referer).query unless request.referer.blank? %>
     <% previous_params = CGI.parse(previous_query) unless previous_query.blank? %>
