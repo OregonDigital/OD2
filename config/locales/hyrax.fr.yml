@@ -12,6 +12,7 @@ fr:
           language_sim: La langue
           publisher_sim: Éditeur
           subject_sim: Assujettir
+          identifier_sim: Identificateur
         index:
           based_near_tesim: Emplacement
           contributor_tesim: Donateur
