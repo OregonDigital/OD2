@@ -322,6 +322,14 @@ module OregonDigital
             pf: solr_name
           }
         end
+        config.add_search_field('identifier_field', label: 'Identifier') do |field|
+          solr_name = 'identifier_tesim'
+          field.solr_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+
         # 'sort results by' select (pulldown)
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc

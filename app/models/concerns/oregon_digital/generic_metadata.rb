@@ -399,7 +399,7 @@ module OregonDigital
       end
 
       property :identifier, predicate: RDF::Vocab::DC.identifier, multiple: true, basic_searchable: true do |index|
-        index.as :stored_searchable
+        index.as :stored_searchable, :facetable
       end
 
       property :item_locator, predicate: RDF::URI.new('http://purl.org/ontology/holding'), multiple: true, basic_searchable: true do |index|
