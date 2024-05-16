@@ -279,6 +279,9 @@ Bulkrax::Exporter.class_eval do
     self.export_source if self.export_from == 'local_collection'
   end
 end
+Bulkrax::Importer.class_eval do
+  paginates_per OD2::Application.config.importer_pagination_per
+end
 
 Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
