@@ -322,7 +322,6 @@ module OregonDigital
             pf: solr_name
           }
         end
-
         config.add_search_field('identifier_field', label: 'Identifier') do |field|
           solr_name = 'identifier_tesim'
           field.solr_parameters = {
