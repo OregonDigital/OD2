@@ -315,9 +315,8 @@ dl.work-show {
 
   /* Add the blur effect */
 .blurred-image {
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-  pointer-events: none;
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
 }
 
 .bg-text {
@@ -334,3 +333,31 @@ dl.work-show {
   padding: 20px;
   text-align: center;
 }
+
+.button-text-mask {
+  color: white;
+  font-weight: bold;
+  position: absolute;
+
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 10px;
+  text-align: center;
+}
+
+// .box-t {
+//   background-color: rgb(0,0,0); /* Fallback color */
+//   background-color: rgba(0,0,0, 0.5); /* Black w/opacity/see-through */
+//   position: absolute;
+//   z-index: 1;
+//   background-position: center;
+
+//   top: 25%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 1000px;
+//   height: 300px;
+// }

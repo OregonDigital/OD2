@@ -78,10 +78,15 @@
     <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection">
       <div id="documents">
         <% # container for all documents in index view -%>
-        <div class="" id="thumbnails" data-behavior="masonry-gallery">
+        <div class="blurred-image" id="thumbnails" data-behavior="masonry-gallery">
           <div id="masonry-sizer"></div>
           <div id="masonry-gutter-sizer"></div>
           <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
+        </div>
+
+        <div class='button-text-mask'>
+          <p class="sample-txt">Test text in the middle</p>
+          <button type="button" class="btn btn-primary" onclick="this.parentNode.style.display = 'none'; $('.blurred-image').removeClass('blurred-image')">I Understand</button>
         </div>
       </div>
     </div>
