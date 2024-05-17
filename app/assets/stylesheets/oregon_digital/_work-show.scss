@@ -318,8 +318,6 @@ dl.work-show {
   filter: blur(10px);
   -webkit-filter: blur(10px);
   pointer-events: none;
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
 
 }
 
@@ -336,6 +334,11 @@ dl.work-show {
   width: 80%;
   padding: 20px;
   text-align: center;
+}
+
+.bg-collection {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
 }
 
 // Display for button and text in the content mask
