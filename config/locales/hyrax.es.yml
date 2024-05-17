@@ -13,6 +13,7 @@ es:
           publisher_sim: Editor
           subject_sim: Tema
           local_contexts_label_sim: Local Contexts
+          identifier_sim: Identificador
         index:
           based_near_tesim: Ubicación
           contributor_tesim: Contribuidor

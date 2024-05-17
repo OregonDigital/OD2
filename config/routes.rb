@@ -129,5 +129,7 @@ Bulkrax::Engine.routes.draw do
     resources :entries, only: %i[show]
     get :upload_corrected_entries
     post :upload_corrected_entries_file
+    get :verify
+    get :show_errors
   end
 end

@@ -13,6 +13,7 @@ fr:
           publisher_sim: Éditeur
           subject_sim: Assujettir
           local_contexts_label_sim: Contextes Locaux
+          identifier_sim: Identificateur
         index:
           based_near_tesim: Emplacement
           contributor_tesim: Donateur

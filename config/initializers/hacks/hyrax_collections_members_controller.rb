@@ -49,7 +49,7 @@ Rails.application.config.to_prepare do
       return if repr_ids.count >= 4
       new_ids =  Hyrax.query_service.find_many_by_ids(ids: batch_ids[0..3]).map do |work|
         Hyrax.query_service.custom_queries.find_child_filesets(resource: work)[0]
-      end.flatten.map(&:id).map(&:id)
+      end.flatten.map(&:id).map(&:to_s)
 
       all_ids = (repr_ids + new_ids).reject(&:blank?).uniq
 

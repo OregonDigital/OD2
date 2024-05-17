@@ -12,6 +12,7 @@ it:
           language_sim: Lingua
           publisher_sim: Editore
           subject_sim: Soggetto
+          identifier_sim: Identifier
         index:
           based_near_tesim: luogo
           contributor_tesim: Collaboratore

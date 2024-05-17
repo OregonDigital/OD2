@@ -7,5 +7,9 @@ module OregonDigital::Derivatives::Document
   eager_autoload do
     autoload :Processor
     autoload :Runner
+    autoload :TesseractProcessor
+    autoload :TesseractRunner
+    autoload :PDFToTextProcessor
+    autoload :PDFToTextRunner
   end
 end
