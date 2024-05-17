@@ -317,6 +317,10 @@ dl.work-show {
 .blurred-image {
   filter: blur(10px);
   -webkit-filter: blur(10px);
+  pointer-events: none;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+
 }
 
 .bg-text {
@@ -347,17 +351,3 @@ dl.work-show {
   padding: 10px;
   text-align: center;
 }
-
-// .box-t {
-//   background-color: rgb(0,0,0); /* Fallback color */
-//   background-color: rgba(0,0,0, 0.5); /* Black w/opacity/see-through */
-//   position: absolute;
-//   z-index: 1;
-//   background-position: center;
-
-//   top: 25%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   width: 1000px;
-//   height: 300px;
-// }
