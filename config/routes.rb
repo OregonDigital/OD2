@@ -132,4 +132,5 @@ Bulkrax::Engine.routes.draw do
     get :verify
     get :show_errors
   end
+  get '/importers_all', to: 'importers#importers_list', as: 'importers_all'
 end

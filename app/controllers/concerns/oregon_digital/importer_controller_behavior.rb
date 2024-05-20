@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module OregonDigital
-  # adds verification behavior to bulkrax importer
+  # adds custom behavior to bulkrax importer
   module ImporterControllerBehavior
     def show_errors
       @importer = Bulkrax::Importer.find(params[:importer_id])
       @errors = compile_errors
-      render 'oregon_digital/importer_verification/show_errors'
+      render 'oregon_digital/importer/show_errors'
     end
 
     def verify
@@ -44,6 +44,10 @@ module OregonDigital
       work.all_errors
     rescue Valkyrie::Persistence::ObjectNotFoundError
       { valkyrie: ['Unable to load work.'] }
+    end
+
+    def importers_list
+      render 'oregon_digital/importer/importers_list'
     end
   end
 end
