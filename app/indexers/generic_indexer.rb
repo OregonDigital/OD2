@@ -15,15 +15,23 @@ class GenericIndexer < Hyrax::WorkIndexer
   # rubocop:disable Metrics/MethodLength
   def generate_solr_document
     super.tap do |solr_doc|
-      index_rights_statement_label(solr_doc, OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
+      index_rights_statement_label(solr_doc, object)
       index_full_size_download_allowed_label(solr_doc, OregonDigital::DownloadService.new.all_labels(object.full_size_download_allowed))
-      index_license_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license))
+      index_license_label(solr_doc, object)
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
-      index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
-      index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
+      index_language_label(solr_doc, object)
+      index_type_label(solr_doc, object)
+      index_local_contexts_label(solr_doc, object)
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
-      index_collection_membership(object, solr_doc)
+      solr_doc['non_user_collections_ssim'] = []
+      solr_doc['user_collections_ssim'] = []
+      solr_doc['oai_collections_ssim'] = []
+      object.member_of_collections.each do |collection|
+        collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
+        solr_doc[collection_index_key] << collection.id
+        solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
+      end
       # removing index_topic_combined_label(solr_doc, object.keyword)
       # will be handled when indexing fetched labels
       index_edit_groups
@@ -69,28 +77,45 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['full_size_download_allowed_label_tesim'] = full_size_download_allowed_labels
   end
 
-  def index_rights_statement_label(solr_doc, rights_statement_labels)
+  def index_rights_statement_label(solr_doc, object)
+    rights_statement_labels = OregonDigital::RightsStatementService.new.all_labels(object.rights_statement)
     solr_doc['rights_statement_label_sim'] = rights_statement_labels
     solr_doc['rights_statement_label_ssim'] = rights_statement_labels
     solr_doc['rights_statement_label_tesim'] = rights_statement_labels
+    solr_doc['rights_statement_parsable_label_ssim'] = object.rights_statement.map { |uri| "#{OregonDigital::RightsStatementService.new.label(uri)}$#{uri}" }
   end
 
-  def index_license_label(solr_doc, license_labels)
+  def index_license_label(solr_doc, object)
+    license_labels = OregonDigital::LicenseService.new.all_labels(object.license)
     solr_doc['license_label_sim'] = license_labels
     solr_doc['license_label_ssim'] = license_labels
     solr_doc['license_label_tesim'] = license_labels
+    solr_doc['license_parsable_label_ssim'] = object.license.map { |uri| "#{OregonDigital::LicenseService.new.label(uri)}$#{uri}" }
   end
 
-  def index_language_label(solr_doc, language_labels)
+  def index_language_label(solr_doc, object)
+    language_labels = OregonDigital::LanguageService.new.all_labels(object.language)
     solr_doc['language_label_sim'] = language_labels
     solr_doc['language_label_ssim'] = language_labels
     solr_doc['language_label_tesim'] = language_labels
+    solr_doc['language_parsable_label_ssim'] = object.language.map { |uri| "#{OregonDigital::LanguageService.new.label(uri)}$#{uri}" }
   end
 
-  def index_type_label(solr_doc, type_label)
+  def index_type_label(solr_doc, object)
+    type_label = OregonDigital::TypeService.new.all_labels(object.resource_type)
     solr_doc['resource_type_label_sim'] = type_label
     solr_doc['resource_type_label_ssim'] = type_label
     solr_doc['resource_type_label_tesim'] = type_label
+    solr_doc['resource_type_parsable_label_ssim'] = "#{OregonDigital::TypeService.new.label(object.resource_type)}$#{object.resource_type}"
+  end
+
+  # METHOD: Create index for local_context
+  def index_local_contexts_label(solr_doc, object)
+    local_context_labels = OregonDigital::LocalContextsService.new.all_labels(object.local_contexts)
+    solr_doc['local_contexts_label_sim'] = local_context_labels
+    solr_doc['local_contexts_label_ssim'] = local_context_labels
+    solr_doc['local_contexts_label_tesim'] = local_context_labels
+    solr_doc['local_contexts_parsable_label_ssim'] = object.local_contexts.map { |uri| "#{OregonDigital::LocalContextsService.new.label(uri)}$#{uri}" }
   end
 
   def index_sort_options(solr_doc)
@@ -177,19 +202,5 @@ class GenericIndexer < Hyrax::WorkIndexer
 
     solr_doc["#{label}_parsable_combined_label_ssim"] += values
   end
-
-  # rubocop:disable Metrics/AbcSize
-  def index_collection_membership(object, solr_doc)
-    solr_doc['non_user_collections_ssim'] = []
-    solr_doc['user_collections_ssim'] = []
-    solr_doc['oai_collections_ssim'] = []
-    object.member_of_collections.each do |collection|
-      collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
-      solr_doc[collection_index_key] << collection.id
-      solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
-      solr_doc[collection_index_key.gsub('_ssim', '_sim')] = collection.title
-    end
-  end
-  # rubocop:enable Metrics/AbcSize
 end
 # rubocop:enable Metrics/ClassLength

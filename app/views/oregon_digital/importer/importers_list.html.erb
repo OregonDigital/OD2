@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Importers</h3>
+    <table class="table">
+    <tr>
+      <% list_headers.each do |h| %>
+        <td><%= h %></td>
+      <% end %>
+    </tr>
+    <% importers_list_all.each do |i| %>
+      <tr>
+        <td><%= link_to i.name, importer_path(i.id) %></td>
+        <% list_fields.each do |f| %>
+          <td><%= i.send(f) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <%= paginate importers_list_all %>
+  </div>
+</div>

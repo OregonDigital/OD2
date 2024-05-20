@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'mission' => 'oregon_digital/about#mission'
   get 'use' => 'oregon_digital/about#use'
   get 'recommend' => 'oregon_digital/about#recommend'
+  get 'local-contexts' => 'oregon_digital/about#local_contexts'
 
   patch '/contentblock/update/:name', to: 'oregon_digital/content_blocks#update', as: 'update_content_blocks'
 
@@ -131,4 +132,5 @@ Bulkrax::Engine.routes.draw do
     get :verify
     get :show_errors
   end
+  get '/importers_all', to: 'importers#importers_list', as: 'importers_all'
 end

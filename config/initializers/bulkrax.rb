@@ -279,9 +279,21 @@ Bulkrax::Exporter.class_eval do
     self.export_source if self.export_from == 'local_collection'
   end
 end
+Bulkrax::Importer.class_eval do
+  paginates_per OD2::Application.config.importer_pagination_per
+end
 
 Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
+  # overriding method from 5.2.1 to limit number of importers retrieved
+  def index
+    @importers = Bulkrax::Importer.order(created_at: :desc).limit(OD2::Application.config.importer_cap)
+    if api_request?
+      json_response('index')
+    elsif defined?(::Hyrax)
+      add_importer_breadcrumbs
+    end
+  end
 end
 
 ## override CsvEntry#required_elements to include OD-specific required_fields
@@ -292,7 +304,6 @@ Bulkrax::ApplicationParser.class_eval do
     elts << source_identifier unless Bulkrax.fill_in_blank_source_identifiers
     elts
   end
-
 
   # parser_fields are set by the importer form
   # do not use a default value at this point

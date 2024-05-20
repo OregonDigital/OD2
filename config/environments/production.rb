@@ -123,6 +123,8 @@ Rails.application.configure do
 
   config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 5000).to_i
   config.batch_size = ENV.fetch('BULKRAX_BATCH_SIZE', 100).to_i
+  config.importer_cap = ENV.fetch('BULKRAX_IMPORTER_CAP', 50).to_i
+  config.importer_pagination_per = ENV.fetch('BULKRAX_IMPORTER_PAGINATION_PER', 50).to_i
   config.verify_services = [
     OregonDigital::VerifyDerivativesService
   ]

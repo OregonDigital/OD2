@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-4 col-md-3">
-  <div class="list-thumbnail">
+  <div class="list-thumbnail <%= 'blurred-image' if document.mask_content.include?('Search Results Page') %>">
     <%= render_thumbnail_tag document, alt: document.title_or_label.truncate_words(10) %>
   </div>
 </div>
