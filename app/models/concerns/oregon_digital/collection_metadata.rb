@@ -74,6 +74,13 @@ module OregonDigital
       # LC: Local Contexts Predicate for Collection
       property :local_contexts, predicate: RDF::URI.new('http://opaquenamespace.org/ns/localContexts'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable, :facetable
+
+      property :content_alert, predicate: RDF::Vocab::EBUCore.ContentAlert, multiple: false, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
+      property :mask_content, predicate: RDF::URI.new('http://opaquenamespace.org/ns/maskContent'), multiple: true, basic_searchable: false do |index|
+        index.as :stored_searchable
       end
 
       id_blank = proc { |attributes| attributes[:id].blank? }

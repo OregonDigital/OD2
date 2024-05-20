@@ -116,7 +116,7 @@ module OregonDigital
       @work_info ||=
         {
           has_thumbnail: all_derivatives(file_set).select { |b| b.match 'thumbnail' }.present?,
-          # has_extracted_text: file_set.extracted_text.present?,
+          # has_extracted_text: file_set.bbox.present?,
           page_count: derivatives_for_reference(file_set, 'jp2').count
         }
     end

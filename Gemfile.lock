@@ -275,7 +275,7 @@ GEM
     crass (1.0.6)
     dalli (3.2.6)
     database_cleaner (1.99.0)
-    date (3.3.3)
+    date (3.3.4)
     declarative (0.0.20)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
@@ -1250,4 +1250,4 @@ DEPENDENCIES
   zip_tricks (~> 5.3)
 
 BUNDLED WITH
-   2.4.21
+   2.4.20

@@ -11,7 +11,7 @@ RSpec.describe CollectionRepresentative, type: :model do
   before do
     allow(fileset).to receive(:id).and_return 'abcde1234'
     allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).with(anything).and_return nil
-    allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).with(alternate_identifier: fileset.id).and_return fileset
+    allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).with(alternate_identifier: fileset.id, use_valkyrie: false).and_return fileset
   end
 
   it { expect(model.collection_id).to be_an_instance_of(String) }

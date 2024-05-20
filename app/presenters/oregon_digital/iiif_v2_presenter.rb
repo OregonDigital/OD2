@@ -106,7 +106,7 @@ module OregonDigital
       solr_document.member_of_collection_ids.each do |c|
         next @collections[c] unless @collections[c].nil?
 
-        @collections[c] = docs.select { |sd| sd.id == c }.title.first
+        @collections[c] = docs.select { |sd| sd.id == c }.first.title.first
       end
       @collections
     end

@@ -1,0 +1,28 @@
+<%= "<h2 id=\"Content Warning\">Content Warning</h2>".html_safe %>
+<%= "<h3 id=\"Blur Image\">Blur Image</h3>".html_safe %>
+<p> Would you like to blur your image?</p>
+<ul>
+  <li class="radio">
+    <label>
+      <%= f.input :mask_content, as: :check_boxes, label: false, collection: ['Item Show Page', 'Search Results Page'] %>
+    </label>
+  </li>
+</ul>
+
+<%= "<h3 id=\"Content Warning Statement\">Content Warning Statement</h3>".html_safe %>
+
+<ul>
+  <li class="radio">
+    <label>
+      <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert') %>
+      <%= t('hyrax.content_warning.content_alert') %>
+    </label>
+  </li>
+  <li class="radio">
+    <label>
+      <%= f.radio_button :content_alert, f.object.content_alert, class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
+      <label>Custom Content Warning</label>
+      <input type='text' value="<%= f.object.content_alert %>" size=50 id='content_alert' onKeyup='document.getElementsByClassName("content_alert_custom_radio")[0].value = this.value;'>
+    </label>
+  </li>
+</ul>
