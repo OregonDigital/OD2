@@ -1,0 +1,33 @@
+// ALIGN: Making the align of the title section to the right handside
+.title-link-local-contexts {
+  float: right;
+  overflow: hidden;
+}
+
+// DIV: Make the display flex on display of LC
+.lc-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.lc-wrapper > * {
+  margin: 20px 30px 20px 30px;
+}
+
+// TEXT: Align text to center and match font
+.lc-title {
+  color: #000000;
+
+  margin: auto;
+  margin-top: 15px;
+  width: 150px;
+  text-align: center;
+}
+
+.lc-sub {
+  color: #000000;
+
+  margin: auto;
+  width: 150px;
+  text-align: center;
+}

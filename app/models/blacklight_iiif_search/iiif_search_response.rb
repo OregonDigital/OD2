@@ -46,21 +46,23 @@ module BlacklightIiifSearch
     # OVERRIDE FROM BLACKLIGHT_IIIF_SEARCH: To circumvent using Solr hit-highlighting. Parsing our OCR'd storage field is more accurate
     # @return [Array]
     def resources
-      @total = 0
       query = solr_response.params['q'].delete_suffix('*').downcase
       query_length = query.strip.split(' ').length
       solr_response['response']['docs'].each do |document|
         hit = { '@type': 'search:Hit', 'annotations': [] }
+        # Convert solr hit to solr doc
+        solr_doc = SolrDocument.new(document)
 
-        word_array = match_words(all_words, query)
-        # word_array is an array of BlacklightIiifSearch::Word for each word in the document
-        word_array.each_slice(query_length).with_index do |words, index|
+        word_array = all_words(solr_doc)
+        matched_word_array = match_words(word_array, query)
+        # matched_word_array is an array of BlacklightIiifSearch::Word for each word in the document
+        matched_word_array.each_slice(query_length).with_index do |words, index|
           text = words.map(&:text).join(' ')
           annotation = IiifSearchAnnotation.new(document,
                                                 query,
                                                 index, text, controller,
                                                 @parent_document)
-          # Send word_array over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb to create coordinates
+          # Send words over to app/models/concerns/blacklight_iiif_search/annotation_behavior.rb to create coordinates
           annotation.found_words = words
 
           @resources << annotation.as_hash
@@ -68,25 +70,22 @@ module BlacklightIiifSearch
         end
         @hits << hit
       end
-      @total = @hits[0][:annotations].count unless @hits.blank?
+      @total = @hits.blank? ? 0 : @hits[0][:annotations].count
       @resources
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
-    def all_words
-      # Prepare to find ocr and hocr derivative file uris
-      sd = SolrDocument.new(document)
-
+    def all_words(solr_doc)
       # Get the bbox content
-      bbox_content = sd.bbox&.content.presence
+      bbox_content = solr_doc.bbox&.content.presence
 
       # Check for bbox first
-      if !sd.extracted_text&.content.blank? && !bbox_content.blank?
+      if !solr_doc.extracted_text&.content.blank? && !bbox_content.blank?
         extracted_word_array(bbox_content)
       else
         # Otherwise use hocr
-        ocr_word_array(sd.hocr)
+        ocr_word_array(solr_doc.hocr)
       end
     end
 

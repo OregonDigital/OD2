@@ -11,7 +11,8 @@
 <% content_for(:head) do %>
   <meta name="turbolinks-cache-control" content="no-cache">
 <% end %>
-
+<!-- adding div here, see #3119 -->
+<div><p>NOTE: This page will only provide access to the last <%= OD2::Application.config.importer_cap %> importers. For older importers, please see the link at the bottom. </p></div>
 <div class="panel panel-default">
   <div class="panel-body">
     <% if @importers.present? %>
@@ -60,5 +61,7 @@
       <% else %>
         <p>No importers have been created.</p>
       <% end %>
+      <!-- adding link here, see #3119 -->
+      <p><%= link_to 'List of all importers', importers_all_path %>
   </div>
 </div>

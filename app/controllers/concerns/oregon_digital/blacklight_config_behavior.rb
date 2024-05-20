@@ -201,38 +201,39 @@ module OregonDigital
             http\://creativecommons.org/publicdomain/zero/1.0/ OR
             http\://creativecommons.org/publicdomain/mark/1.0/)' }
         }
-        config.add_facet_field 'copyright_combined_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'file_format_s_lower_m', label: I18n.translate('simple_form.labels.defaults.file_format'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'resource_type_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'topic_combined_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.topic_combined'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'scientific_combined_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.scientific_combined'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'creator_combined_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.creator_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'topic_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.topic_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'scientific_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.scientific_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'creator_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.creator_combined'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'date_combined_year_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_year_combined'), limit: 5, range: { segments: false }, include_in_advanced_search: false
-        config.add_facet_field 'date_combined_decade_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.date_decade_combined'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'location_combined_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.location_combined'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'workType_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.workType'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'language_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.language'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'non_user_collections_s_lower_m', limit: 5, label: 'Collection', index_range: 'A'..'Z'
-        config.add_facet_field 'local_collection_name_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'institution_label_s_lower_m', limit: 5, label: 'Institution', index_range: 'A'..'Z'
-        config.add_facet_field 'cultural_context_label_s_lower_m', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'date_combined_decade_label_ssim', label: I18n.translate('simple_form.labels.defaults.date_decade_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id', index_range: 'A'..'Z'
+        config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution', index_range: 'A'..'Z'
+        config.add_facet_field 'cultural_context_label_sim', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'local_contexts_label_sim', label: I18n.translate('simple_form.labels.defaults.local_contexts'), index_range: 'A'..'Z', limit: 5
 
-        config.add_facet_field 'former_owner_s_lower_m', label: I18n.translate('simple_form.labels.defaults.former_owner'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'mode_of_issuance_s_lower_m', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'box_number_s_lower_m', label: I18n.translate('simple_form.labels.defaults.box_number'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'folder_name_s_lower_m', label: I18n.translate('simple_form.labels.defaults.folder_name'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'folder_number_s_lower_m', label: I18n.translate('simple_form.labels.defaults.folder_number'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'has_number_s_lower_m', label: I18n.translate('simple_form.labels.defaults.has_number'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'is_volume_s_lower_m', label: I18n.translate('simple_form.labels.defaults.is_volume'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'series_name_s_lower_m', label: I18n.translate('simple_form.labels.defaults.series_name'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'series_number_s_lower_m', label: I18n.translate('simple_form.labels.defaults.series_number'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'exhibit_s_lower_m', label: I18n.translate('simple_form.labels.defaults.exhibit'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'box_number_sim', label: I18n.translate('simple_form.labels.defaults.box_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'folder_name_sim', label: I18n.translate('simple_form.labels.defaults.folder_name'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'folder_number_sim', label: I18n.translate('simple_form.labels.defaults.folder_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'has_number_sim', label: I18n.translate('simple_form.labels.defaults.has_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'is_volume_sim', label: I18n.translate('simple_form.labels.defaults.is_volume'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'series_name_sim', label: I18n.translate('simple_form.labels.defaults.series_name'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'series_number_sim', label: I18n.translate('simple_form.labels.defaults.series_number'), index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'exhibit_sim', label: I18n.translate('simple_form.labels.defaults.exhibit'), index_range: 'A'..'Z', limit: 5
 
         # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
         # Do not show these facets, they're for collection configurable facets
         (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
           label = prop[:name_label].nil? ? prop[:name].sub('_label', '') : prop[:name_label]
-          config.add_facet_field "#{prop[:name]}_s_lower_m", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] && !config.facet_fields.keys.include?("#{prop[:name]}_s_lower_m")
+          config.add_facet_field "#{prop[:name]}_sim", label: I18n.translate("simple_form.labels.defaults.#{label}"), show: false if prop[:collection_facetable] && !config.facet_fields.keys.include?("#{prop[:name]}_sim")
         end
 
         config.add_facet_fields_to_solr_request!
@@ -322,6 +323,14 @@ module OregonDigital
             pf: solr_name
           }
         end
+        config.add_search_field('identifier_field', label: 'Identifier') do |field|
+          solr_name = 'identifier_tesim'
+          field.solr_parameters = {
+            qf: solr_name,
+            pf: solr_name
+          }
+        end
+
         # 'sort results by' select (pulldown)
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc

@@ -32,6 +32,14 @@
       <div class="row">
         <%= render 'social_media' %>
       </div>
+
+      <!-- Create render display for the Local Contexts Icon -->
+      <% if !@presenter.local_contexts.blank? || !@presenter.local_contexts.empty? %>
+        <br/>
+        <%= render 'oregon_digital/base/local_contexts', work_lc: @presenter, location_name: 'work' %>
+        <br/>
+      <% end %>
+
       <div class='row'>
         <%# OVERRIDE FROM HYRAX remove work description %>
         <ul class="nav nav-tabs" id="work-show-tablist">

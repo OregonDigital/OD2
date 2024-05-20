@@ -52,7 +52,8 @@ Rails.application.configure do
 
   # Disable caching in test environment
   config.cache_store = :null_store
-
+  config.importer_cap = ENV.fetch('BULKRAX_IMPORTER_CAP', 10).to_i
+  config.importer_pagination_per = ENV.fetch('BULKRAX_IMPORTER_PAGINATION_PER', 5).to_i
   config.verify_services = [
     OregonDigital::VerifyDerivativesService
   ]
