@@ -8,7 +8,9 @@
     <%# FETCH: Get the array of the local contexts from work/collection %>
     <% if location_name.eql?('collection') %>
       <h2 class='h6'>Local Contexts</h2>
-      <%# DISPLAY COLLECTION CODE WILL GO HERE ON ANOTHER PR %>
+      <% @local_contexts_labels = OregonDigital::LocalContextsService.new.all_labels(collection_lc.local_contexts) %>
+      <% @lc_labels = @local_contexts_labels %>
+      <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@local_contexts_labels) %>
     <% else %>
       <h2 class='h4'>Local Contexts</h2>
       <% @lc_labels = work_lc.local_contexts_label %>

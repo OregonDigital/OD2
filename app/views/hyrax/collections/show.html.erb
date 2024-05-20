@@ -114,6 +114,14 @@
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
 
+  <!-- Create render display for the Local Contexts Icon -->
+  <% if !@collection.local_contexts.blank? %>
+    <br/>
+    <h2 class="h4">Explore More about the Collection</h2>
+    <%= render 'oregon_digital/base/local_contexts', collection_lc: @collection, location_name: 'collection' %>
+    <br/>
+  <% end %>
+
   <% unless footer_metadata.empty? %>
     <div id="footer-metadata" class="row">
       <div class="col-md-12">
