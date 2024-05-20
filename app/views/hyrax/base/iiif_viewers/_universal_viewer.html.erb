@@ -1,4 +1,4 @@
-<div class="viewer-wrapper">
+<div class="viewer-wrapper <%= 'blurred-image' if presenter.mask_content.include?('Item Show Page') %>">
   <iframe aria-label="image view"
     <% previous_query = URI.parse(request.referer).query unless request.referer.blank? %>
     <% previous_params = CGI.parse(previous_query) unless previous_query.blank? %>
@@ -10,3 +10,4 @@
     frameborder="0"
   ></iframe>
 </div>
+<div class='bg-text'><%= presenter.content_alert.first %><p><button type="button" class='btn btn-primary' onclick="this.parentNode.parentNode.style.display = 'none'; $('.blurred-image').removeClass('blurred-image')">I Understand</button></p></div>
