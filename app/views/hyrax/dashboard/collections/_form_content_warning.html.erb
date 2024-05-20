@@ -20,10 +20,9 @@
   </li>
   <li class="radio">
     <label>
-      <%#= f.radio_button :content_warning_text %>
-      <%= t('hyrax.content_warning.create_your_own_warning_statement') %>
-      <!-- Needs JS to support transplanting this value into the radio button value on submit -->
-      <%#= f.text_field :content_warning_text, :class => "custom_content_warning" %>
+      <%= f.radio_button :content_alert, f.object.content_alert, class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
+      <label>Custom Content Warning</label>
+      <input type='text' value="<%= f.object.content_alert %>" size=50 id='content_alert' onKeyup='document.getElementsByClassName("content_alert_custom_radio")[0].value = this.value;'>
     </label>
   </li>
 </ul>
