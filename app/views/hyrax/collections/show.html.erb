@@ -84,8 +84,9 @@
           <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
         </div>
 
+        <%# CONTENT ALERT: Area to display content alert if blurring happens on the collection %>
         <% if @collection.mask_content.include?('Item Show Page') %>
-          <div class='bg-collection'>
+          <div class="bg-collection">
             <p><%= @collection.content_alert.blank? ? '' : @collection.content_alert %></p>
             <button type="button" class='btn btn-primary' onclick="this.parentNode.style.display = 'none'; $('.blurred-image').removeClass('blurred-image')">I Understand</button>
           </div>
