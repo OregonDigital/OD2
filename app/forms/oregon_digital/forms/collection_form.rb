@@ -8,7 +8,8 @@ module OregonDigital
     class CollectionForm < Hyrax::Forms::CollectionForm
       self.terms = %i[id title creator contributor description license publisher
                       date_created subject language has_finding_aid representative_id thumbnail_id
-                      related_url visibility collection_type_gid institution date repository local_contexts]
+                      related_url visibility collection_type_gid institution date repository local_contexts
+                      content_alert mask_content]
       self.required_fields = %i[id title]
 
       def initialize_field(key)
@@ -64,7 +65,7 @@ module OregonDigital
 
       def self.build_permitted_params
         params = super
-        %w[creator contributor institution repository publisher subject local_contexts].each do |prop|
+        %w[creator contributor institution repository publisher subject local_contexts content_alert mask_content].each do |prop|
           params << { "#{prop}_attributes" => %i[id _destroy] }
         end
         params << :license
