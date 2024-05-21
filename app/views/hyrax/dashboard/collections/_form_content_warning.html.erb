@@ -21,8 +21,7 @@
   <li class="radio">
     <label>
       <%= f.radio_button :content_alert, f.object.content_alert, class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
-      <label>Custom Content Warning</label>
-      <input type='text' value="<%= f.object.content_alert %>" size=50 id='content_alert' onKeyup='document.getElementsByClassName("content_alert_custom_radio")[0].value = this.value;'>
+      <input type='textarea' value="<%= f.object.content_alert %>" cols='10' rows='10' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message'>
     </label>
   </li>
 </ul>

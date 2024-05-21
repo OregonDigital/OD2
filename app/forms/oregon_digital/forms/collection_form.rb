@@ -67,7 +67,7 @@ module OregonDigital
         %w[creator contributor institution repository publisher subject local_contexts].each do |prop|
           params << { "#{prop}_attributes" => %i[id _destroy] }
         end
-        params << :license
+        params << %i[license mask_content]
         params
       end
 
