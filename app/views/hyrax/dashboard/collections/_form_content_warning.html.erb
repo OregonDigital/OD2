@@ -3,9 +3,7 @@
 <p> Would you like to blur your image?</p>
 <ul>
   <li class="radio">
-    <label>
-      <%= f.input :mask_content, as: :check_boxes, label: false, collection: ['Item Show Page', 'Search Results Page'] %>
-    </label>
+    <%= f.input :mask_content, as: :check_boxes, label: false, collection: ['Item Show Page', 'Search Results Page'] %>
   </li>
 </ul>
 
@@ -13,15 +11,11 @@
 
 <ul>
   <li class="radio">
-    <label>
-      <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert') %>
-      <%= t('hyrax.content_warning.content_alert') %>
-    </label>
+    <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert') %>
+    <%= t('hyrax.content_warning.content_alert') %>
   </li>
   <li class="radio">
-    <label>
-      <%= f.radio_button :content_alert, f.object.content_alert, class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
-      <input type='textarea' value="<%= f.object.content_alert %>" cols='10' rows='10' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message'>
-    </label>
+    <%= f.radio_button :content_alert, f.object.content_alert, class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
+    <input type='textarea' value="<%= f.object.content_alert %>" cols='10' rows='10' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message'>
   </li>
 </ul>
