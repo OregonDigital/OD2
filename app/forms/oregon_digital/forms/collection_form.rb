@@ -48,7 +48,8 @@ module OregonDigital
                    language has_finding_aid
                    related_url
                    institution date
-                   repository local_contexts]
+                   repository local_contexts
+                   content_alert mask_content]
         return terms - [:id] unless id.nil?
 
         terms
