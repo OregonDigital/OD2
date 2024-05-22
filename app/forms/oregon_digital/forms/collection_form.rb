@@ -8,7 +8,7 @@ module OregonDigital
     class CollectionForm < Hyrax::Forms::CollectionForm
       self.terms = %i[id title creator contributor description license publisher
                       date_created subject language has_finding_aid representative_id thumbnail_id
-                      related_url visibility collection_type_gid institution date repository local_contexts]
+                      related_url visibility collection_type_gid institution date repository local_contexts mask_content content_alert]
       self.required_fields = %i[id title]
 
       def initialize_field(key)
