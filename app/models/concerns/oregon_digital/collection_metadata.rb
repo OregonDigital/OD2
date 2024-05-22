@@ -76,6 +76,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      # Content Alert & Mask Content Predicate
       property :content_alert, predicate: RDF::Vocab::EBUCore.ContentAlert, multiple: false, basic_searchable: false do |index|
         index.as :stored_searchable
       end
