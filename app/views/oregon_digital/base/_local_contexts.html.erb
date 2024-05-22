@@ -8,13 +8,12 @@
     <%# FETCH: Get the array of the local contexts from work/collection %>
     <% if location_name.eql?('collection') %>
       <h2 class='h6'>Local Contexts</h2>
-      <% @local_contexts_labels = OregonDigital::LocalContextsService.new.all_labels(collection_lc.local_contexts) %>
-      <% @lc_labels = @local_contexts_labels %>
-      <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@local_contexts_labels) %>
+      <% @lc_labels = OregonDigital::LocalContextsService.new.all_labels(collection_lc.local_contexts) %>
+      <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@lc_labels) %>
     <% else %>
       <h2 class='h4'>Local Contexts</h2>
       <% @lc_labels = work_lc.local_contexts_label %>
-      <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(work_lc.local_contexts_label) %>
+      <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@lc_labels) %>
     <% end %>
     <hr style='border-width: 3px;'>
 
