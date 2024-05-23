@@ -11,11 +11,11 @@
 
 <ul>
   <li class="radio">
-    <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert') %>
-    <%= t('hyrax.content_warning.content_alert') %>
+    <% @checked = (f.object.content_alert.blank? || (f.object.content_alert == t('hyrax.content_warning.content_alert'))) %>
+    <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), checked: @checked ? 'checked' : '' %>
   </li>
   <li class="radio">
-    <%= f.radio_button :content_alert, f.object.content_alert, class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
-    <textarea value="<%= f.object.content_alert %>" cols='100' rows='5' class='content_alert_box' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'></textarea>
+    <%= f.radio_button :content_alert, f.object.content_alert, checked: !@checked ? 'checked' : '', class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
+    <textarea value="<%= f.object.content_alert %>" cols='100' rows='5' class='content_alert_box' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'><%= f.object.content_alert unless @checked %></textarea>
   </li>
 </ul>
