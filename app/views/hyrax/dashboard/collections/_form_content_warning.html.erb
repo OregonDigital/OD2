@@ -16,6 +16,6 @@
   </li>
   <li class="radio">
     <%= f.radio_button :content_alert, f.object.content_alert, checked: !@checked ? 'checked' : '', class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
-    <textarea value="<%= f.object.content_alert %>" cols='100' rows='5' class='content_alert_box' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'><%= f.object.content_alert unless @checked %></textarea>
+    <textarea value="<%= f.object.content_alert unless @checked %>" cols='100' rows='5' class='content_alert_box' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'><%= f.object.content_alert unless @checked %></textarea>
   </li>
 </ul>

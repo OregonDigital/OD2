@@ -15,14 +15,14 @@
   <li class="radio">
     <label>
       <% @checked = (f.object.content_alert.blank? || (f.object.content_alert == t('hyrax.content_warning.content_alert'))) %>
-      <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), checked: @checked ? 'checked' : '' %>
+      <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), class='content_alert_box', checked: @checked ? 'checked' : '' %>
       <%= t('hyrax.content_warning.content_alert') %>
     </label>
   </li>
   <li class="radio">
     <label>
       <%= f.radio_button :content_alert, f.object.content_alert, checked: !@checked ? 'checked' : '', class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
-      <textarea cols='100' rows='5' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'><%= f.object.content_alert unless @checked %></textarea>
+      <textarea value="<%= f.object.content_alert unless @checked %>" cols='100' rows='5' class='content_alert_box' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'><%= f.object.content_alert unless @checked %></textarea>
     </label>
   </li>
 </ul>
