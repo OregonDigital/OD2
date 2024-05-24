@@ -10,6 +10,7 @@
 </ul>
 
 <%= "<h3 id=\"Content Warning Statement\">Content Warning Statement</h3>".html_safe %>
+<p class="help-block" id="content_alert_help"><%= t('simple_form.hints.defaults.content_alert') %></p>
 
 <% @default_content_alert = (f.object.content_alert.blank? || (f.object.content_alert == t('hyrax.content_warning.content_alert'))) %>
 <ul>
