@@ -9,13 +9,14 @@
 
 <%= "<h3 id=\"Content Warning Statement\">Content Warning Statement</h3>".html_safe %>
 
+<% @default_content_alert = (f.object.content_alert.blank? || (f.object.content_alert == t('hyrax.content_warning.content_alert'))) %>
 <ul>
   <li class="radio">
-    <% @checked = (f.object.content_alert.blank? || (f.object.content_alert == t('hyrax.content_warning.content_alert'))) %>
-    <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), checked: @checked ? 'checked' : '' %>
+    <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), checked: @default_content_alert %>
+    <%= t('hyrax.content_warning.content_alert') %>
   </li>
   <li class="radio">
-    <%= f.radio_button :content_alert, f.object.content_alert, checked: !@checked ? 'checked' : '', class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
-    <textarea value="<%= f.object.content_alert unless @checked %>" cols='100' rows='5' class='content_alert_box' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'><%= f.object.content_alert unless @checked %></textarea>
+    <%= f.radio_button :content_alert, f.object.content_alert, checked: !@default_content_alert, class: 'content_alert_custom_radio', label: "Custom Content Warning Message" %>
+    <textarea value="<%= f.object.content_alert unless @default_content_alert %>" cols='100' rows='5' class='content_alert_box' id='content_alert' onKeyup='copyContentWarningValue(event);' placeholder='Custom Content Warning Message...'><%= f.object.content_alert unless @default_content_alert %></textarea>
   </li>
 </ul>
