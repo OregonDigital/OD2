@@ -22,22 +22,39 @@ RSpec.describe SolrDocument do
   end
 
   describe 'max_members_query' do
-    let(:max_members_query) { 100 }
-    let(:ids) do
-      i = []
-      (0..max_members_query).each do |num|
-        i << "abc#{num}"
-      end
-      i
-    end
-
     before do
       allow(sd).to receive(:member_ids).and_return(ids)
       OD2::Application.config.max_members_query = max_members_query
     end
 
-    it 'returns without throwing too long uri error' do
-      expect { sd.sort_members }.not_to raise_error
+    context 'when chunk size is low' do
+      let(:max_members_query) { 100 }
+      let(:ids) do
+        i = []
+        (0..max_members_query).each do |num|
+          i << "abc#{num}"
+        end
+        i
+      end
+
+      it 'returns without throwing an error' do
+        expect { sd.sort_members }.not_to raise_error
+      end
+    end
+
+    context 'when chunk size is high' do
+      let(:max_members_query) { 1000 }
+      let(:ids) do
+        i = []
+        (0..max_members_query).each do |num|
+          i << "abc#{num}"
+        end
+        i
+      end
+
+      it 'throws error' do
+        expect { sd.sort_members }.to raise_error(Blacklight::Exceptions::InvalidRequest)
+      end
     end
   end
 end
