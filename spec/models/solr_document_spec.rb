@@ -36,7 +36,7 @@ RSpec.describe SolrDocument do
       OD2::Application.config.max_members_query = max_members_query
     end
 
-    it 'returns without throwing too many uris error' do
+    it 'returns without throwing too long uri error' do
       expect { sd.sort_members }.not_to raise_error
     end
   end
