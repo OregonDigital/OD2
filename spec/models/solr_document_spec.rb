@@ -7,13 +7,10 @@ RSpec.describe SolrDocument do
   let(:docs) { [sd1, sd2] }
   let(:ids) { [sd1['id'], sd2['id']] }
 
-  before do
-    allow(described_class).to receive(:find).and_return(docs)
-  end
-
   describe 'process_chunk' do
     before do
       allow(sd).to receive(:member_ids).and_return(ids)
+      allow(described_class).to receive(:find).and_return(docs)
       OD2::Application.config.max_members_query = 2
       sd.sort_members
     end
@@ -21,6 +18,26 @@ RSpec.describe SolrDocument do
     it 'populates children and file_sets' do
       expect(sd.children).to eq [sd2]
       expect(sd.file_sets).to eq [sd1]
+    end
+  end
+
+  describe 'max_members_query' do
+    let(:max_members_query) { 100 }
+    let(:ids) do
+      i = []
+      (0..max_members_query).each do |num|
+        i << "abc#{num}"
+      end
+      i
+    end
+
+    before do
+      allow(sd).to receive(:member_ids).and_return(ids)
+      OD2::Application.config.max_members_query = max_members_query
+    end
+
+    it 'returns without throwing too many uris error' do
+      expect { sd.sort_members }.not_to raise_error
     end
   end
 end
