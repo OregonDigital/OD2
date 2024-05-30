@@ -30,7 +30,7 @@ class SolrDocument
 
     solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(ids)
     path = repository.blacklight_config.document_solr_path || repository.blacklight_config.solr_path
-    docs = repository.send_and_receive path, { fq: solr_query }
+    docs = repository.send_and_receive path, { fq: solr_query, rows: ids.count }
     docs.documents
   end
 
@@ -85,9 +85,28 @@ class SolrDocument
 
   # Find and return child works (excluding FileSets)
   def children
-    @children ||= SolrDocument.find(member_ids).map do |document|
-      document['has_model_ssim'].first.include?('FileSet') ? nil : document
-    end.compact
+    return @children unless @children.nil?
+
+    sort_members
+    @children
+  end
+
+  def sort_members
+    @children = []
+    @file_sets = []
+    member_ids.each_slice(OD2::Application.config.max_members_query) do |chunk|
+      process_chunk(chunk)
+    end
+  end
+
+  def process_chunk(chunk)
+    SolrDocument.find(chunk).map do |document|
+      if document['has_model_ssim'].first.include?('FileSet')
+        @file_sets << document
+      else
+        @children << document
+      end
+    end
   end
 
   def children?
@@ -96,9 +115,10 @@ class SolrDocument
 
   # Find and return file sets
   def file_sets
-    @file_sets ||= SolrDocument.find(member_ids).map do |document|
-      document['has_model_ssim'].first.include?('FileSet') ? document : nil
-    end.compact
+    return @file_sets unless @file_sets.nil?
+
+    sort_members
+    @file_sets
   end
 
   def file_sets?
