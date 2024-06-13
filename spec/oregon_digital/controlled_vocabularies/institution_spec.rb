@@ -28,28 +28,28 @@ RSpec.describe OregonDigital::ControlledVocabularies::Institution do
     context 'with a valid label and subject' do
       before do
         allow(vocab_inst).to receive(:rdf_label).and_return([RDF::Literal.new('RDF_Label', language: I18n.locale)])
-        allow(vocab_inst).to receive(:rdf_subject).and_return('RDF.Subject.Org')
+        allow(vocab_inst).to receive(:rdf_subject).and_return('http://RDF.Subject.Org')
       end
 
-      it { expect(vocab_inst.solrize).to eq ['RDF.Subject.Org', { label: 'RDF_Label$RDF.Subject.Org' }] }
+      it { expect(vocab_inst.solrize).to eq ['https://RDF.Subject.Org', { label: 'RDF_Label$https://RDF.Subject.Org' }] }
     end
 
     context 'without a label' do
       before do
         allow(vocab_inst).to receive(:rdf_label).and_return([])
-        allow(vocab_inst).to receive(:rdf_subject).and_return('RDF.Subject.Org')
+        allow(vocab_inst).to receive(:rdf_subject).and_return('http://RDF.Subject.Org')
       end
 
-      it { expect(vocab_inst.solrize).to eq ['RDF.Subject.Org'] }
+      it { expect(vocab_inst.solrize).to eq ['http://RDF.Subject.Org'] }
     end
 
     context 'when label and uri are the same' do
       before do
-        allow(vocab_inst).to receive(:rdf_label).and_return([RDF::Literal.new('RDF.Subject.Org', language: I18n.locale)])
-        allow(vocab_inst).to receive(:rdf_subject).and_return('RDF.Subject.Org')
+        allow(vocab_inst).to receive(:rdf_label).and_return([RDF::Literal.new('http://RDF.Subject.Org', language: I18n.locale)])
+        allow(vocab_inst).to receive(:rdf_subject).and_return('http://RDF.Subject.Org')
       end
 
-      it { expect(vocab_inst.solrize).to eq ['RDF.Subject.Org'] }
+      it { expect(vocab_inst.solrize).to eq ['http://RDF.Subject.Org'] }
     end
   end
 end

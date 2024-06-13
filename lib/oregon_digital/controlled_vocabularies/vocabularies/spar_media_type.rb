@@ -5,7 +5,7 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class SparMediaType
       def self.expression
-        %r{^https:\/\/w3id.org\/spar\/mediatype\/.*/.*}
+        %r{^http[s]:\/\/w3id.org\/spar\/mediatype\/.*/.*}
       end
 
       def self.label(data)
