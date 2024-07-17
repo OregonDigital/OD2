@@ -8,6 +8,7 @@ module OregonDigital
 
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/CyclomaticComplexity
     # METHOD: Solrize 'label$uri' into Solr
     def label_fetch_properties_solr_doc(object, solr_doc)
       # LOOP: Go through the controlled properties to get the field needed for indexing
@@ -48,6 +49,7 @@ module OregonDigital
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     # METHOD: Create the combined label parsable
     def index_parsable_combined_labels(label, values, solr_doc)
