@@ -25,7 +25,7 @@ module OregonDigital
     def build_record
       record['dates'] = [add_date]
       record['title'] = work.title.first
-      record['lang'] = [lang]
+      record['lang_materials'] = [lang]
       record['file_versions'] = file_versions
       record['digital_object_type'] = do_type
       record['linked_instances'] = [linked_instance]
