@@ -47,7 +47,7 @@ module OregonDigital
     def record
       @record ||= {
         'jsonmodel_type' => 'digital_object',
-        'is_slug_auto' => 'false',
+        'is_slug_auto' => false,
         'extents' => []
       }
     end
@@ -87,11 +87,11 @@ module OregonDigital
     end
 
     def file_version_embed
-      [true, true, 'Image-Thumbnail', 'onload', 'embed']
+      [true, true, 'image-thumbnail', 'onLoad', 'embed']
     end
 
     def file_version_show
-      [true, false, 'Image-Service', 'onRequest', 'new']
+      [true, false, 'image-service', 'onRequest', 'new']
     end
 
     def file_versions
@@ -127,11 +127,11 @@ module OregonDigital
     def do_type
       case @work.class.to_s
       when 'Document'
-        return 'text'
+        return 'Text'
       when 'Image'
-        return 'still_image'
+        return 'Still Image'
       when 'Generic'
-        return 'mixed_materials'
+        return 'Mixed Materials'
       when 'Video'
         return 'moving_image'
       when 'Audio'
