@@ -25,12 +25,12 @@ module OregonDigital
     end
 
     def assign_uris(item)
-      @asset_show_uri = show_url(item.class.to_s.downcase + 's', item.id)
+      @asset_show_uri = show_url(item.class.to_s.downcase + 's', item.id.to_s)
       return image_uri(item) unless item.class.to_s == 'Generic'
 
       return if item.member_ids.blank?
 
-      image_uri(query(item.member_ids.first))
+      image_uri(query(item.member_ids.first.to_s))
     end
 
     def query(pid)

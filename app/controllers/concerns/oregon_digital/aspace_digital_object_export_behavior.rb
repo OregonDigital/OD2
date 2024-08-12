@@ -27,7 +27,7 @@ module OregonDigital
     end
 
     def build(pid)
-      work = ActiveFedora::Base.find(pid)
+      work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
       ado = OregonDigital::AspaceDigitalObject.new(work)
       ado.build_record
       ado

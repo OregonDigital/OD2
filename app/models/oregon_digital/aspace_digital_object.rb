@@ -36,7 +36,7 @@ module OregonDigital
 
     def linked_instance
       if work.archival_object_id.empty?
-        errors << "#{work.id} has no archival_object_id"
+        errors << "#{work.id.to_s} has no archival_object_id"
         return {}
 
       end
@@ -53,7 +53,7 @@ module OregonDigital
     end
 
     def add_visibility
-      restrict = (work.visibility != 'open' || !work.access_restrictions.empty?)
+      restrict = (work.visibility != 'open' || !work.access_restrictions.blank?)
       record['publish'] = true
       record['restrictions'] = restrict
       record['suppressed'] = false
@@ -125,7 +125,7 @@ module OregonDigital
 
     # rubocop:disable Metrics/MethodLength
     def do_type
-      case @work.class.to_s
+      case work.class.to_s
       when 'Document'
         return 'Text'
       when 'Image'
