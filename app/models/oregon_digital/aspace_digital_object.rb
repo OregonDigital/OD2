@@ -35,7 +35,7 @@ module OregonDigital
     # rubocop:enable Metrics/AbcSize
 
     def linked_instance
-      if work.archival_object_id.empty?
+      if work.archival_object_id.blank?
         errors << "#{work.id.to_s} has no archival_object_id"
         return {}
 
@@ -68,7 +68,7 @@ module OregonDigital
     end
 
     def add_date
-      return {} if work.date.empty?
+      return {} if work.date.blank?
 
       date_hash.tap do |t|
         d = work.date.first
@@ -112,7 +112,7 @@ module OregonDigital
     end
 
     def lang
-      return {} if work.language.empty?
+      return {} if work.language.blank?
 
       {
         'jsonmodel_type' => 'lang_material',
