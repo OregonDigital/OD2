@@ -24,6 +24,7 @@ module OregonDigital
       "https://oregondigital.org#{doc['thumbnail_path_ss']}"
     end
 
+    # rubocop:disable Metrics/AbcSize
     def assign_uris(item)
       @asset_show_uri = show_url(item.class.to_s.downcase + 's', item.id.to_s)
       return image_uri(item) unless item.class.to_s == 'Generic'
@@ -32,6 +33,7 @@ module OregonDigital
 
       image_uri(query(item.member_ids.first.to_s))
     end
+    # rubocop:enable Metrics/AbcSize
 
     def query(pid)
       Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)

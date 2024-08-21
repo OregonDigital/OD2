@@ -36,7 +36,7 @@ module OregonDigital
 
     def linked_instance
       if work.archival_object_id.blank?
-        errors << "#{work.id.to_s} has no archival_object_id"
+        errors << "#{work.id} has no archival_object_id"
         return {}
 
       end
@@ -67,6 +67,8 @@ module OregonDigital
       }
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def add_date
       return {} if work.date.blank?
 
@@ -81,6 +83,8 @@ module OregonDigital
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def file_version_keys
       %w[publish is_representative use_statement xlink_actuate_attribute xlink_show_attribute]
