@@ -36,11 +36,7 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
         page.execute_script("$('input[type=file]').css('position','inherit')")
         attach_file('files[]', upload_file_path, visible: false)
       end
-      within('ul.nav-tabs') do
-        click_link 'Relationships'
-      end
-      first_element = find('#document_admin_set_id > option:nth-child(2)').text
-      select(first_element, from: 'document_admin_set_id')
+
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
@@ -56,12 +52,18 @@ RSpec.describe 'Create a Document', js: true, type: :system, clean_repo: true do
       select('In Copyright', from: 'Rights')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
-
+      within('ul.nav-tabs') do
+        click_link 'Relationships'
+      end
+      first_element = find('#document_admin_set_id > option:nth-child(2)').text
+      select(first_element, from: 'document_admin_set_id')
+      find('#required-metadata').click
       choose('document_visibility_open')
       expect(page).to have_content('Make available to all.')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
-
+      check('agreement', visible: false) if find('#agreement').visible?
+      find('#required-metadata').click
       click_on 'Save'
       expect(page).to have_content('Test Title')
       expect(page).to have_content "Your files are being processed by #{I18n.t('hyrax.product_name')} in the background."
