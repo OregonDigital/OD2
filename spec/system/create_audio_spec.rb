@@ -65,8 +65,9 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
       expect(page).to have_content('Make available to all.')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
-
-      click_on 'Save'
+      check('agreement', visible: false) if find('#agreement').visible?
+      find('#required-metadata').click
+      click_on('Save')
       expect(page).to have_content('Test Title')
       expect(page).to have_content "Your files are being processed by #{I18n.t('hyrax.product_name')} in the background."
       expect(page).to be_accessible.skipping('aria-allowed-role').excluding('.label-success')
