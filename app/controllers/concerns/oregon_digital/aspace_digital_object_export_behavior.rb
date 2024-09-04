@@ -42,7 +42,7 @@ module OregonDigital
     end
 
     def format_result
-      @result[:errors] = errors
+      result[:errors] = errors
       JSON.generate(@result)
     end
 
