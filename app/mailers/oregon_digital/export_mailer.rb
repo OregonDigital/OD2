@@ -3,7 +3,7 @@
 module OregonDigital
   # notify user that export is done
   class ExportMailer < ApplicationMailer
-    default from: 'no_reply@example.org'
+    default from: 'noreply@oregondigital.org'
 
     def export_ready
       Hyrax.logger.info("emailing to #{@email} regarding #{@coll_id}")
