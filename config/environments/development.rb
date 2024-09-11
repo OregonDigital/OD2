@@ -83,6 +83,7 @@ Rails.application.configure do
   # Fix errors eg Psych::DisallowedClass: Tried to load unspecified class: Symbol
   config.active_record.yaml_column_permitted_classes = [Symbol, ActiveSupport::HashWithIndifferentAccess, Time]
 
+  config.local_path = ENV.fetch('LOCAL_PATH', 'tmp/shared')
   config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 5000).to_i
   config.batch_size = ENV.fetch('BULKRAX_BATCH_SIZE', 100).to_i
   config.importer_cap = ENV.fetch('BULKRAX_IMPORTER_CAP', 10).to_i

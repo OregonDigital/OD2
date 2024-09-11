@@ -144,5 +144,6 @@
   <% if (current_user && can?(:edit, @curation_concern)) %>
     <%= render partial: 'show_document_list', documents: @collection_member_service.available_member_works.documents %>
     <%= render 'results_pagination' %>
+    <%= link_to "Export members as RDF", main_app.export_members_collection_path(@collection.id), :class => 'lato-p' %>
   <% end %>
 </div>
