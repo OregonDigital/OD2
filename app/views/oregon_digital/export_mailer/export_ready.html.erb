@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your export is ready</h1>
+    <p>
+     An export for the members of <%=@coll_id%> as RDF is available at:&nbsp;
+     <%= URI.join(Rails.application.routes.url_helpers.root_url, main_app.download_members_collection_path(@coll_id)).to_s %>
+    </p>
+  </body>
+</html>
