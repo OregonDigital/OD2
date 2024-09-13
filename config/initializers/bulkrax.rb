@@ -285,6 +285,7 @@ end
 
 Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
+  include OregonDigital::AspaceDigitalObjectExportBehavior
   # overriding method from 5.2.1 to limit number of importers retrieved
   def index
     @importers = Bulkrax::Importer.order(created_at: :desc).limit(OD2::Application.config.importer_cap)
