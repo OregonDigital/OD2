@@ -19,7 +19,7 @@ module OregonDigital
           count += 1
         end
       end
-      ExportMailer.with(email: @email, coll_id: @coll_id).export_ready.deliver_later
+      ExportMailer.with(email: @email, url: download_url, subject: mail_subject).export_ready.deliver_later
     end
 
     def write_file(zip_file, output, start)
@@ -30,6 +30,14 @@ module OregonDigital
           f.write data if data.start_with? '<' + path
         end
       end
+    end
+
+    def mail_subject
+      "members of #{@coll_id}"
+    end
+
+    def download_url
+      URI.join(Rails.application.routes.url_helpers.root_url, Rails.application.routes.url_helpers.download_members_collection_path(@coll_id)).to_s
     end
 
     def max
