@@ -134,7 +134,8 @@ Bulkrax::Engine.routes.draw do
     post :upload_corrected_entries_file
     get :verify
     get :show_errors
-    get :show_do_export
+    get :export_do
+    get :download_do
   end
   get '/importers_all', to: 'importers#importers_list', as: 'importers_all'
 end
