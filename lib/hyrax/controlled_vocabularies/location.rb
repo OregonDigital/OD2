@@ -20,7 +20,7 @@ module Hyrax
         return [rdf_subject.to_s] if rdf_label.first.to_s.blank? || rdf_label_uri_same?
 
         fetch
-        [rdf_subject.to_s, { label: "#{rdf_label.first}$#{rdf_subject}" }]
+        [storage_uri.to_s, { label: "#{rdf_label.first}$#{storage_uri}" }]
       end
 
       # Overrides rdf_label to add location disambiguation when available.
@@ -131,6 +131,12 @@ module Hyrax
       end
 
       private
+
+      def storage_uri
+        standard_uri = URI.parse(rdf_subject.to_s)
+        standard_uri.scheme = 'https'
+        RDF::URI.new(standard_uri)
+      end
 
       # Identify if this is a county in the USA
       def us_county?
