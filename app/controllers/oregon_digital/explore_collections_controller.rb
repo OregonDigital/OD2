@@ -19,7 +19,7 @@ module OregonDigital
 
     def page_title
       # CONDITION: Add in a ternary case to upcase / titleize depend on value
-      @tab_title = (@tab == 'osu' || @tab == 'uo') ? @tab.upcase : @tab.titleize
+      @tab_title = (@tab == 'osu' || @tab == 'uo' ? @tab.upcase : @tab.titleize)
       "#{'Empty ' if @document_list.empty?}Search Results | Explore Collections / #{@tab_title}"
     end
 
