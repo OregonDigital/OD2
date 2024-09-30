@@ -18,7 +18,9 @@ module OregonDigital
     end
 
     def page_title
-      "#{'Empty ' if @document_list.empty?}Search Results | #{@tab.titleize} Explore Collections"
+      # CONDITION: Add in a ternary case to upcase / titleize depend on value
+      @tab_title = (@tab == 'osu' || @tab == 'uo') ? @tab.upcase : @tab.titleize
+      "#{'Empty ' if @document_list.empty?}Search Results | Explore Collections / #{@tab_title}"
     end
 
     configure_blacklight do |config|
@@ -104,7 +106,7 @@ module OregonDigital
       all: 'all',
       osu: 'osu',
       uo: 'uo',
-      my: 'my'
+      my: 'my collections'
     }.freeze
   end
 end
