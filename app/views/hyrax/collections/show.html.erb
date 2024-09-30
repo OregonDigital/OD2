@@ -78,11 +78,19 @@
     <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection">
       <div id="documents">
         <% # container for all documents in index view -%>
-        <div class="" id="thumbnails" data-behavior="masonry-gallery">
+        <div class="<%= 'blurred-image' if @collection.mask_content.include?('Item Show Page') %>" id="thumbnails" data-behavior="masonry-gallery">
           <div id="masonry-sizer"></div>
           <div id="masonry-gutter-sizer"></div>
           <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
         </div>
+
+        <%# CONTENT ALERT: Area to display content alert if blurring happens on the collection %>
+        <% if @collection.mask_content.include?('Item Show Page') %>
+          <div class="bg-collection">
+            <p><%= @collection.content_alert.blank? ? '' : @collection.content_alert %></p>
+            <button type="button" class='btn btn-primary' onclick="this.parentNode.style.display = 'none'; $('.blurred-image').removeClass('blurred-image')">I Understand</button>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -114,6 +122,14 @@
     <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
   <% end %>
 
+  <!-- Create render display for the Local Contexts Icon -->
+  <% if !@collection.local_contexts.blank? %>
+    <br/>
+    <h2 class="h4">Explore More about the Collection</h2>
+    <%= render 'oregon_digital/base/local_contexts', collection_lc: @collection, location_name: 'collection' %>
+    <br/>
+  <% end %>
+
   <% unless footer_metadata.empty? %>
     <div id="footer-metadata" class="row">
       <div class="col-md-12">
@@ -128,5 +144,6 @@
   <% if (current_user && can?(:edit, @curation_concern)) %>
     <%= render partial: 'show_document_list', documents: @collection_member_service.available_member_works.documents %>
     <%= render 'results_pagination' %>
+    <%= link_to "Export members as RDF", main_app.export_members_collection_path(@collection.id), :class => 'lato-p' %>
   <% end %>
 </div>

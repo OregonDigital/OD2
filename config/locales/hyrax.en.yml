@@ -56,6 +56,7 @@ en:
           plss_sim: Public Land Survey System
           based_near_label_sim: Location
           cultural_context_label_sim: Cultural Context
+          local_contexts_label_sim: Local Contexts
           ethnographic_term_label_sim: Ethnographic Term
           style_or_period_label_sim: Style / Period
           form_of_work_label_sim: Form of Work
@@ -77,6 +78,7 @@ en:
           common_name_label_sim: Common Name
           military_branch_label_sim: Military Branch
           subject_label_sim: Subject
+          identifier_sim: Identifier
         index:
           all_text_timv: Full Text
           hocr_text_timv: Full Text
@@ -150,7 +152,6 @@ en:
         show:
           based_near_label: Location
           contributor: Contributor
-          contributor: Contributor
           creator: Creator
           date_created: Date Created
           date_modified_dtsi: Date Modified
@@ -167,20 +168,6 @@ en:
           title: Title
           oembed_url: oEmbed
           location_label: Location
-          contributor: Contributor
-          creator: Creator
-          date_created: Date Created
-          date_modified_dtsi: Date Modified
-          date_uploaded_dtsi: Date Uploaded
-          description: Description
-          file_format: File Format
-          identifier: Identifier
-          keyword: Keyword
-          language_label: Language
-          license: License
-          publisher_label: Publisher
-          rights_statement: Rights Statement
-          subject: Subject
           owner_label: Owner
           workType_label: Work Type
           applicant_label: Applicant
@@ -234,6 +221,8 @@ en:
           subject_label: Subject
           date_modified: Modified
   hyrax:
+    content_warning:
+      content_alert: 'This material contains content or imagery that may be harmful or difficult for some users. By clicking the ‘I Understand’ button you are acknowledging that you have been informed about the content you will view.' 
     workflow:
       tombstoned: "This item has been deleted. It is no longer available."
     tombstone:
@@ -356,6 +345,9 @@ en:
     labels:
       collection_type:
         facet_configurable: FACET CONFIGURABLE
+      defaults:
+        local_contexts: Local Contexts
+        local_contexts_label: Local Contexts
   howto:
     researchers:
       title: 'Researchers'

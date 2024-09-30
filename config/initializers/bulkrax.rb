@@ -279,9 +279,13 @@ Bulkrax::Exporter.class_eval do
     self.export_source if self.export_from == 'local_collection'
   end
 end
+Bulkrax::Importer.class_eval do
+  paginates_per OD2::Application.config.importer_pagination_per
+end
 
 Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
+  include OregonDigital::AspaceDigitalObjectExportBehavior
   # overriding method from 5.2.1 to limit number of importers retrieved
   def index
     @importers = Bulkrax::Importer.order(created_at: :desc).limit(OD2::Application.config.importer_cap)

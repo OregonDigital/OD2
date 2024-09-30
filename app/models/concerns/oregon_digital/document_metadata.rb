@@ -117,6 +117,7 @@ module OregonDigital
         { name: :style_or_period, section_name: '' },
         { name: :tribal_classes, section_name: '' },
         { name: :tribal_terms, section_name: '' },
+        { name: :local_contexts, section_name: '' },
         { name: :phylum_or_division, section_name: 'Scientifics' },
         { name: :taxon_class, section_name: '' },
         { name: :order, section_name: '' },

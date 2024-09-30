@@ -40,7 +40,7 @@ module Hyrax
       Generic.controlled_property_labels.each do |prop|
         params << { prop.gsub('_label', '_attributes') => %i[id _destroy] }
       end
-      params << :license
+      params << %i[license mask_content]
       params
     end
   end

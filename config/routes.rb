@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'mission' => 'oregon_digital/about#mission'
   get 'use' => 'oregon_digital/about#use'
   get 'recommend' => 'oregon_digital/about#recommend'
+  get 'local-contexts' => 'oregon_digital/about#local_contexts'
 
   patch '/contentblock/update/:name', to: 'oregon_digital/content_blocks#update', as: 'update_content_blocks'
 
@@ -84,8 +85,11 @@ Rails.application.routes.draw do
   end
 
   resources :collections, controller: 'hyrax/collections', only: [] do # public landing show page
+
     member do
       get :download
+      get :download_members
+      get :export_members
     end
   end
 
@@ -130,5 +134,7 @@ Bulkrax::Engine.routes.draw do
     post :upload_corrected_entries_file
     get :verify
     get :show_errors
+    get :show_do_export
   end
+  get '/importers_all', to: 'importers#importers_list', as: 'importers_all'
 end

@@ -399,7 +399,7 @@ module OregonDigital
       end
 
       property :identifier, predicate: RDF::Vocab::DC.identifier, multiple: true, basic_searchable: true do |index|
-        index.as :stored_searchable
+        index.as :stored_searchable, :facetable
       end
 
       property :item_locator, predicate: RDF::URI.new('http://purl.org/ontology/holding'), multiple: true, basic_searchable: true do |index|
@@ -610,6 +610,18 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      property :content_alert, predicate: RDF::Vocab::EBUCore.ContentAlert, multiple: false, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
+      property :mask_content, predicate: RDF::URI.new('http://opaquenamespace.org/ns/maskContent'), multiple: true, basic_searchable: false do |index|
+        index.as :stored_searchable
+      end
+
+      property :local_contexts, predicate: RDF::URI.new('http://opaquenamespace.org/ns/localContexts'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable, :facetable
+      end
+
       define_singleton_method :generic_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
@@ -694,6 +706,7 @@ module OregonDigital
         { name: 'award', is_controlled: false, collection_facetable: false },
         { name: 'workType_label', is_controlled: true, collection_facetable: true },
         { name: 'cultural_context_label', is_controlled: true, collection_facetable: true },
+        { name: 'local_contexts_label', is_controlled: true, collection_facetable: true },
         { name: 'style_or_period_label', is_controlled: true, collection_facetable: true },
         { name: 'state_or_edition', is_controlled: false, collection_facetable: false },
         { name: 'common_name_label', is_controlled: false, collection_facetable: false },
@@ -843,6 +856,7 @@ module OregonDigital
         { name: :style_or_period, section_name: '' },
         { name: :tribal_classes, section_name: '' },
         { name: :tribal_terms, section_name: '' },
+        { name: :local_contexts, section_name: '' },
         { name: :phylum_or_division, section_name: 'Scientifics' },
         { name: :taxon_class, section_name: '' },
         { name: :order, section_name: '' },

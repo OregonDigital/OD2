@@ -1,0 +1,36 @@
+<%# LOCAL CONTEXTS: Display the local contexts appropriately base on the selection in metadata  %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="title-link-local-contexts">
+      <p><%= link_to 'About Local Contexts', Rails.application.routes.url_helpers.local_contexts_path, 'aria-label': "Read more about Local Contexts", class: 'lato-p' %></p>
+    </div>
+    
+    <%# FETCH: Get the array of the local contexts from work/collection %>
+    <% if location_name.eql?('collection') %>
+      <h2 class='h6'>Local Contexts</h2>
+      <% @lc_labels = OregonDigital::LocalContextsService.new.all_labels(collection_lc.local_contexts) %>
+      <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@lc_labels) %>
+    <% else %>
+      <h2 class='h4'>Local Contexts</h2>
+      <% @lc_labels = work_lc.local_contexts_label %>
+      <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@lc_labels) %>
+    <% end %>
+    <hr style='border-width: 3px;'>
+
+    <%# DISPLAY: Display the Local Contexts %>
+    <div class="lc-wrapper">
+      <% @lc_arr.each_with_index do |value, index| %>
+        <div>
+          <%= image_tag "local_contexts/#{value}.png", class: "lc-image" %>
+          <% if @lc_labels[index].include?('(') %>
+            <% @parse_value = @lc_labels[index].gsub(/\(.*?\)|\S+/).to_a %>
+            <p class="lc-title lato-b font-lg"><%= @parse_value[0..-2].join(' ') %></p>
+            <p class="lc-sub lato-b font-lg"><%= @parse_value[-1] %></p>
+          <% else %>
+            <p class="lc-title lato-b font-lg"><%= @lc_labels[index] %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::IndexesLinkedMetadata
   include OregonDigital::IndexingDatesBehavior
   include OregonDigital::StripsStopwords
+  include OregonDigital::ParsableLabelBehavior
 
   # ABC Size is hard to avoid here because there are many types of fields we need to index.
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
@@ -15,12 +16,13 @@ class GenericIndexer < Hyrax::WorkIndexer
   # rubocop:disable Metrics/MethodLength
   def generate_solr_document
     super.tap do |solr_doc|
-      index_rights_statement_label(solr_doc, OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
+      index_rights_statement_label(solr_doc, object)
       index_full_size_download_allowed_label(solr_doc, OregonDigital::DownloadService.new.all_labels(object.full_size_download_allowed))
-      index_license_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license))
+      index_license_label(solr_doc, object)
       index_copyright_combined_label(solr_doc, OregonDigital::LicenseService.new.all_labels(object.license), OregonDigital::RightsStatementService.new.all_labels(object.rights_statement))
-      index_language_label(solr_doc, OregonDigital::LanguageService.new.all_labels(object.language))
-      index_type_label(solr_doc, OregonDigital::TypeService.new.all_labels(object.resource_type))
+      index_language_label(solr_doc, object)
+      index_type_label(solr_doc, object)
+      index_local_contexts_label(solr_doc, object)
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
       solr_doc['non_user_collections_ssim'] = []
@@ -76,28 +78,45 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['full_size_download_allowed_label_tesim'] = full_size_download_allowed_labels
   end
 
-  def index_rights_statement_label(solr_doc, rights_statement_labels)
+  def index_rights_statement_label(solr_doc, object)
+    rights_statement_labels = OregonDigital::RightsStatementService.new.all_labels(object.rights_statement)
     solr_doc['rights_statement_label_sim'] = rights_statement_labels
     solr_doc['rights_statement_label_ssim'] = rights_statement_labels
     solr_doc['rights_statement_label_tesim'] = rights_statement_labels
+    solr_doc['rights_statement_parsable_label_ssim'] = object.rights_statement.map { |uri| "#{OregonDigital::RightsStatementService.new.label(uri)}$#{uri}" }
   end
 
-  def index_license_label(solr_doc, license_labels)
+  def index_license_label(solr_doc, object)
+    license_labels = OregonDigital::LicenseService.new.all_labels(object.license)
     solr_doc['license_label_sim'] = license_labels
     solr_doc['license_label_ssim'] = license_labels
     solr_doc['license_label_tesim'] = license_labels
+    solr_doc['license_parsable_label_ssim'] = object.license.map { |uri| "#{OregonDigital::LicenseService.new.label(uri)}$#{uri}" }
   end
 
-  def index_language_label(solr_doc, language_labels)
+  def index_language_label(solr_doc, object)
+    language_labels = OregonDigital::LanguageService.new.all_labels(object.language)
     solr_doc['language_label_sim'] = language_labels
     solr_doc['language_label_ssim'] = language_labels
     solr_doc['language_label_tesim'] = language_labels
+    solr_doc['language_parsable_label_ssim'] = object.language.map { |uri| "#{OregonDigital::LanguageService.new.label(uri)}$#{uri}" }
   end
 
-  def index_type_label(solr_doc, type_label)
+  def index_type_label(solr_doc, object)
+    type_label = OregonDigital::TypeService.new.all_labels(object.resource_type)
     solr_doc['resource_type_label_sim'] = type_label
     solr_doc['resource_type_label_ssim'] = type_label
     solr_doc['resource_type_label_tesim'] = type_label
+    solr_doc['resource_type_parsable_label_ssim'] = "#{OregonDigital::TypeService.new.label(object.resource_type)}$#{object.resource_type}"
+  end
+
+  # METHOD: Create index for local_context
+  def index_local_contexts_label(solr_doc, object)
+    local_context_labels = OregonDigital::LocalContextsService.new.all_labels(object.local_contexts)
+    solr_doc['local_contexts_label_sim'] = local_context_labels
+    solr_doc['local_contexts_label_ssim'] = local_context_labels
+    solr_doc['local_contexts_label_tesim'] = local_context_labels
+    solr_doc['local_contexts_parsable_label_ssim'] = object.local_contexts.map { |uri| "#{OregonDigital::LocalContextsService.new.label(uri)}$#{uri}" }
   end
 
   def index_sort_options(solr_doc)
@@ -135,54 +154,6 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def all_existing_groups
     (object.edit_groups + object.read_groups + object.discover_groups)
-  end
-
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
-  # METHOD: Solrize 'label$uri' into Solr
-  def label_fetch_properties_solr_doc(object, solr_doc)
-    # LOOP: Go through the controlled properties to get the field needed for indexing
-    object.controlled_properties.each do |o|
-      # FETCH: Get the array of controlled vocab from the properties
-      controlled_vocabs = object[o]
-
-      # CREATE: Make an empty label array
-      labels = []
-
-      # LOOP: Loop through all controlled vocabs uri and solrize to make it into 'label$uri'
-      controlled_vocabs.each do |cv|
-        cv.fetch
-        labels << (cv.solrize.last.is_a?(String) ? ['', cv.solrize.last].join('$') : cv.solrize.last[:label])
-      rescue IOError, SocketError, TriplestoreAdapter::TriplestoreException
-        labels << ['', cv.solrize.last].join('$')
-      end
-
-      # ASSIGN: Put the labels into their own field in solr_doc
-      solr_doc["#{o}_parsable_label_ssim"] = labels
-
-      # FETCH: Get the combined_properties from DeepIndex
-      combined_label = rdf_indexer.combined_properties[o.to_s]
-      next if combined_label.blank?
-
-      # CREATE: Push item into the new field of combine labels
-      index_parsable_combined_labels(combined_label, labels, solr_doc)
-    end
-
-    # ADD: Add keyword values to topic combined labels
-    keyword_labels = object[:keyword].map { |kw| "#{kw}$" }
-    index_parsable_combined_labels('topic', keyword_labels, solr_doc)
-
-    # RETURN: Return the solr 'label$uri' in their field
-    solr_doc
-  end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
-
-  # METHOD: Create the combined label parsable
-  def index_parsable_combined_labels(label, values, solr_doc)
-    solr_doc["#{label}_parsable_combined_label_ssim"] ||= []
-
-    solr_doc["#{label}_parsable_combined_label_ssim"] += values
   end
 end
 # rubocop:enable Metrics/ClassLength
