@@ -26,10 +26,34 @@ module OregonDigital
       # Resetting :member_of_collection_ids to nil if we were given an empty string
       # This helps failed form submissions to return to the form and display errors
       params[hash_key_for_curation_concern][:member_of_collection_ids] = nil if params[hash_key_for_curation_concern][:member_of_collection_ids].empty?
+      set_permissions_to_work
+      super
+    end
+
+    def update
+      set_permissions_to_work
       super
     end
 
     private
+
+    # METHOD: Manually ingest in the group/user permission on work form
+    def set_permissions_to_work
+      # VAR: Add in an array for permission storage
+      permission_arr = []
+
+      # FIND: Find the permission attributes & convert into a hash
+      permission_vals = params[hash_key_for_curation_concern][:permissions_attributes].to_unsafe_h
+
+      # LOOP: Loop through each hash
+      permission_vals.each do |val|
+        # STORE: Store all the permission into the var
+        permission_arr << val[1]
+      end
+
+      # ASSIGN: Get it into the curation_concern with the value
+      curation_concern.permissions_attributes=(permission_arr) if !permission_arr.blank?
+    end
 
     def after_update_response
       OregonDigital::PermissionChangeEventJob.perform_later(curation_concern, current_user) if permissions_changed?
