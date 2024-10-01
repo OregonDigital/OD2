@@ -30,6 +30,7 @@ module OregonDigital
       super
     end
 
+    # MODIFY: Add in a special method to help on updating the permissions
     def update
       set_permissions_to_work
       super
@@ -52,7 +53,7 @@ module OregonDigital
       end
 
       # ASSIGN: Get it into the curation_concern with the value
-      curation_concern.permissions_attributes=(permission_arr) if !permission_arr.blank?
+      curation_concern.permissions_attributes = (permission_arr) unless permission_arr.blank?
     end
 
     def after_update_response
