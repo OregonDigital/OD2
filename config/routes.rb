@@ -85,8 +85,11 @@ Rails.application.routes.draw do
   end
 
   resources :collections, controller: 'hyrax/collections', only: [] do # public landing show page
+
     member do
       get :download
+      get :download_members
+      get :export_members
     end
   end
 
@@ -131,6 +134,7 @@ Bulkrax::Engine.routes.draw do
     post :upload_corrected_entries_file
     get :verify
     get :show_errors
+    get :show_do_export
   end
   get '/importers_all', to: 'importers#importers_list', as: 'importers_all'
 end

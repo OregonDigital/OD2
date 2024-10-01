@@ -3,6 +3,7 @@
 Rails.application.config.to_prepare do
   require Hyrax::Engine.root.join('lib', 'hyrax', 'search_state.rb')
   Hyrax::CollectionsController.class_eval do
+    include OregonDigital::ExportCollectionMembersBehavior
     self.presenter_class = OregonDigital::CollectionPresenter
   end
 
