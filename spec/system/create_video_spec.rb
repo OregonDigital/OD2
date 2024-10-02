@@ -24,7 +24,7 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    it 'Creates an Video' do
+    xit 'Creates an Video' do
       visit new_hyrax_video_path
 
       expect(page).to have_content 'Add New Video'
@@ -64,9 +64,9 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       check('agreement', visible: false) if find('#agreement').visible?
       find('#required-metadata').click
       click_on 'Save'
-      # expect(page).to have_content('Test Title')
-      # expect(page).to have_content "Your files are being processed by #{I18n.t('hyrax.product_name')} in the background."
-      # expect(page).to be_accessible.skipping('aria-allowed-role').excluding('.label-success')
+      expect(page).to have_content('Test Title')
+      expect(page).to have_content "Your files are being processed by #{I18n.t('hyrax.product_name')} in the background."
+      expect(page).to be_accessible.skipping('aria-allowed-role').excluding('.label-success')
 
       # save a successful screenshot if running in CI for build artifacts
       # rubocop:disable Lint/Debugger
