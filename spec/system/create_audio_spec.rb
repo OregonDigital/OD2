@@ -21,6 +21,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
              agent_id: user.user_key)
       create(:admin_set, id: '1234')
       allow(CharacterizeJob).to receive(:perform_later)
+      allow(OregonDigital::WorksControllerBehavior).to receive(:set_permissions_to_work).and_return([])
       sign_in_as user
     end
 
