@@ -226,7 +226,7 @@ jobs:
             echo export TAG="$TAG" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$DEPLOYED_VERSION" >> $BASH_ENV
       - setup_remote_docker:
-          version: 20.10.12
+          version: docker23
       - docker/check:
           registry: registry.library.oregonstate.edu
       - docker/pull:
