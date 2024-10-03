@@ -312,10 +312,10 @@ en:
     controls:
       advanced: 'Advanced Search'
       explore: 'Explore Collections'
-      explore_all: 'Explore Collections/All'
-      explore_osu: 'Explore Collections/OSU'
-      explore_uo: 'Explore Collections/UO'
-      explore_my: 'Explore Collections/My Collections'
+      explore_all: 'Explore Collections / All'
+      explore_osu: 'Explore Collections / OSU'
+      explore_uo: 'Explore Collections / UO'
+      explore_my: 'Explore Collections / My Collections'
     users:
       index:
         activated: Active
