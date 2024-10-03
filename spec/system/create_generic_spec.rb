@@ -24,7 +24,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    xit 'Creates an Generic' do
+    it 'Creates an Generic' do
       visit new_hyrax_generic_path
 
       expect(page).to have_content 'Add New Generic'

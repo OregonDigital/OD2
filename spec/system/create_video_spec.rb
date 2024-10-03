@@ -24,7 +24,7 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    xit 'Creates an Video' do
+    it 'Creates an Video' do
       visit new_hyrax_video_path
 
       expect(page).to have_content 'Add New Video'

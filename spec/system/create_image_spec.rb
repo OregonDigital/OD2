@@ -24,7 +24,7 @@ RSpec.describe 'Create a Image',  js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    xit 'Creates an Image' do
+    it 'Creates an Image' do
       visit new_hyrax_image_path
 
       expect(page).to have_content 'Add New Image'

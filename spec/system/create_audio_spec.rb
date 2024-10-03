@@ -24,7 +24,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    xit 'Creates an Audio' do
+    it 'Creates an Audio' do
       visit new_hyrax_audio_path
 
       expect(page).to have_content 'Add New Audio'
