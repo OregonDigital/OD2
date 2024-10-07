@@ -43,8 +43,7 @@ module OregonDigital
       def create_file_from_url(env, uri)
         oembed_url = URI.decode_www_form_component(uri.to_s)
         use_valkyrie = false
-
-        fs_class = curation_concern.is_a? Valkyrie::Resource ? Hyrax::FileSet : ::FileSet
+        fs_class = env.curation_concern.is_a?(Valkyrie::Resource) ? Hyrax::FileSet : ::FileSet
 
         file_set = fs_class.new(oembed_url: oembed_url) do |fs|
           title = 'oEmbed Media'
@@ -61,12 +60,12 @@ module OregonDigital
           fs.title = Array(title)
         end
 
-        if curation_concern.is_a? Valkyrie::Resource
+        if env.curation_concern.is_a? Valkyrie::Resource
           file_set = Hyrax.persister.save(resource: file_set)
           use_valkyrie = true
         end
 
-        actor = Hyrax::Actors::FileSetActor.new(fs, env.user, use_valkyrie: use_valkyrie)
+        actor = Hyrax::Actors::FileSetActor.new(file_set, env.user, use_valkyrie: use_valkyrie)
         actor.create_metadata(visibility: env.curation_concern.visibility)
         actor.attach_to_work(env.curation_concern)
         file_set.save! if file_set.respond_to?(:save!)
