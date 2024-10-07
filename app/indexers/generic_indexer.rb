@@ -69,7 +69,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
 
   def index_sorted_facets(solr_doc)
-    solr_doc['creator_sfacet'] = solr_doc['creator_tesim']
+    solr_doc['creator_sfacet'] = solr_doc['creator_ssim']
   end
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
