@@ -25,6 +25,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_local_contexts_label(solr_doc, object)
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
+      index_sorted_facets(solr_doc)
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
       solr_doc['oai_collections_ssim'] = []
@@ -65,6 +66,10 @@ class GenericIndexer < Hyrax::WorkIndexer
 
   def find_hocr_text(file_set)
     file_set.hocr_text
+  end
+
+  def index_sorted_facets(solr_doc)
+    solr_doc['creator_sfacet'] = solr_doc['creator_tesim']
   end
 
   def index_copyright_combined_label(solr_doc, license_labels, rights_labels)
