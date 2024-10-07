@@ -84,6 +84,7 @@ Bulkrax.setup do |config|
   end
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   fieldhash_csv['visibility'] = { from: ['visibility'] }
+  fieldhash_csv['oembed_urls'] = { from:['oembed_urls'], split: true }
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
 
@@ -103,6 +104,30 @@ Bulkrax::ApplicationMatcher.class_eval do
 end
 
 Bulkrax::CsvEntry.class_eval do
+
+  # override to use add_oembed
+  def build_metadata
+    validate_record
+
+    self.parsed_metadata = {}
+    add_identifier
+    establish_factory_class
+    add_ingested_metadata
+    # TODO(alishaevn): remove the collections stuff entirely and only reference collections via the new parents code
+    add_collections
+    add_visibility
+    add_metadata_for_model
+    add_rights_statement
+    sanitize_controlled_uri_values!
+    add_local
+    add_oembed
+
+    self.parsed_metadata
+  end
+
+  def add_oembed
+      self.parsed_metadata['oembed_urls'] = [record['oembed_urls']]
+  end
 
   # commented change to avoid urls in the export headers
   def key_for_export(key)
