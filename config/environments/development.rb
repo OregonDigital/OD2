@@ -91,5 +91,6 @@ Rails.application.configure do
   config.verify_services = [
     OregonDigital::VerifyDerivativesService
   ]
+  config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
 
 end
