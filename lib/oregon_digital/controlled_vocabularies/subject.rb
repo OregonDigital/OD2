@@ -9,6 +9,7 @@ module OregonDigital
       def self.all_endpoints
         [
           OregonDigital::ControlledVocabularies::Vocabularies::GettyAat,
+          OregonDigital::ControlledVocabularies::Vocabularies::Homosaurus,
           OregonDigital::ControlledVocabularies::Vocabularies::Itis,
           OregonDigital::ControlledVocabularies::Vocabularies::LocGenreForms,
           OregonDigital::ControlledVocabularies::Vocabularies::LocGraphicMaterials,

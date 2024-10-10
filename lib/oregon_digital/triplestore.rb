@@ -67,14 +67,24 @@ module OregonDigital
 
     def self.fetch_from_cache(uri, triplestore)
       Rails.logger.info "Attempting to fetch #{uri} from local graph cache."
-      graph = triplestore.fetch(uri, from_remote: false)
+      # CONDITION: Check on one of the CV is Homosaurus
+      graph = if uri.to_s.include?('homosaurus')
+                triplestore.fetch(uri + '.jsonld', from_remote: false)
+              else
+                triplestore.fetch(uri, from_remote: false)
+              end
       Rails.logger.info 'Fetched From Cache'
       graph
     end
 
     def self.fetch_from_source(uri, triplestore)
       Rails.logger.info "Fetching #{uri} from the authorative source. (this is slow)"
-      graph = triplestore.fetch(uri, from_remote: true)
+      # CONDITION: Check on one of the CV is Homosaurus
+      graph = if uri.to_s.include?('homosaurus')
+                triplestore.fetch(uri + '.jsonld', from_remote: true)
+              else
+                triplestore.fetch(uri, from_remote: true)
+              end
       Rails.logger.info 'Fetched From Source'
       graph
     end
