@@ -303,22 +303,22 @@ Bulkrax::Exporter.class_eval do
   end
 
   def export_from_list
-      if defined?(::Hyrax)
-        [
-          [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
-          [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
-          [I18n.t('bulkrax.exporter.labels.worktype'), 'worktype'],
-          [I18n.t('bulkrax.exporter.labels.local_collection'), 'local_collection'],
-          [I18n.t('bulkrax.exporter.labels.all'), 'all']
-        ]
-      else
-        [
-          [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
-          [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
-          [I18n.t('bulkrax.exporter.labels.all'), 'all']
-        ]
-      end
+    if defined?(::Hyrax)
+      [
+        [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
+        [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
+        [I18n.t('bulkrax.exporter.labels.worktype'), 'worktype'],
+        [I18n.t('bulkrax.exporter.labels.local_collection'), 'local_collection'],
+        [I18n.t('bulkrax.exporter.labels.all'), 'all']
+      ]
+    else
+      [
+        [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
+        [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
+        [I18n.t('bulkrax.exporter.labels.all'), 'all']
+      ]
     end
+  end
 
   def export_source_local_collection
     self.export_source if self.export_from == 'local_collection'
@@ -331,22 +331,12 @@ end
 Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
   include OregonDigital::AspaceDigitalObjectExportBehavior
-  # overriding method from 5.2.1 to limit number of importers retrieved
-#  def index
-#    @importers = Bulkrax::Importer.order(created_at: :desc).limit(OD2::Application.config.importer_cap)
-#    if api_request?
-#      json_response('index')
-#    elsif defined?(::Hyrax)
-#      add_importer_breadcrumbs
-#    end
-#  end
 
-    # GET /importers/1/download
-    def download
-      @importer = Importer.find(params[:importer_id])
-      send_file(params[:url])
-    end
-
+  # GET /importers/1/download
+  def download
+    @importer = Importer.find(params[:importer_id])
+    send_file(params[:url])
+  end
 end
 
 ## override CsvEntry#required_elements to include OD-specific required_fields
