@@ -6,7 +6,7 @@ module Bulkrax
   module HasLocalProcessing
     # Override the factory to use a customized version
     def factory
-      @factory ||= Bulkrax::OregonDigitalObjectFactory.new(attributes: parsed_metadata, source_identifier_value: identifier, work_identifier: work_identifier, importer_run_id: nil, replace_files: replace_files, user: user, klass: factory_class, update_files: update_files)
+      @factory ||= Bulkrax::OregonDigitalObjectFactory.new(attributes: parsed_metadata, source_identifier_value: identifier, work_identifier: work_identifier, importer_run_id: importerexporter.last_run.id, replace_files: replace_files, user: user, klass: factory_class, update_files: update_files, work_identifier_search_field: 'bulkrax_identifier_sim')
     end
 
     # This method is called during build_metadata

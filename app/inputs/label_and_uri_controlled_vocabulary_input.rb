@@ -5,6 +5,7 @@ class LabelAndUriControlledVocabularyInput < ControlledVocabularyInput
   private
 
   def build_options_for_existing_row(attribute_name, index, _value, options)
+byebug
     # FETCH: Get the label$uri out from parser => [{label: , uri: }]
     solr_document_label_uri = SolrDocument.find(object.model.id).send(:label_uri_helpers, attribute_name)[index]
 

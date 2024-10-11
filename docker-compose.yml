@@ -76,6 +76,8 @@ services:
       - SKIP_FIELD_MODE=false
       - DISABLE_ROBOTS=true
       - HYKU_BULKRAX_ENABLED=true
+      - BULKRAX_LARGE_EXPORT=50
+      - BULKRAX_BATCH_SIZE=10
     depends_on:
       - db-dev
       - blazegraph-dev

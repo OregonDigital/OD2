@@ -74,12 +74,12 @@ RSpec.describe Bulkrax::ParserExportRecordSet do
              [works[4].id, parser.entry_class.to_s],
              [works[5].id, parser.entry_class.to_s]],
             [[collections[0].id, parser.collection_entry_class.to_s],
-             [collections[1].id, parser.collection_entry_class.to_s],
-             [file_sets[0].id, parser.file_set_entry_class.to_s]],
-            [[file_sets[1].id, parser.file_set_entry_class.to_s],
-             [file_sets[2].id, parser.file_set_entry_class.to_s],
-             [file_sets[3].id, parser.file_set_entry_class.to_s]],
-            [[file_sets[4].id, parser.file_set_entry_class.to_s],
+             [collections[1].id, parser.collection_entry_class.to_s]],
+            [[file_sets[0].id, parser.file_set_entry_class.to_s],
+             [file_sets[1].id, parser.file_set_entry_class.to_s],
+             [file_sets[2].id, parser.file_set_entry_class.to_s]],
+            [[file_sets[3].id, parser.file_set_entry_class.to_s],
+             [file_sets[4].id, parser.file_set_entry_class.to_s],
              [file_sets[5].id, parser.file_set_entry_class.to_s]]
           )
         end

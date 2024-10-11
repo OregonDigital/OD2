@@ -8,7 +8,6 @@ module OregonDigital
     subject(:export_batch_job) { described_class.new }
 
     let(:exporter) { create(:bulkrax_exporter) }
-    let(:entry) { create(:bulkrax_csv_entry_export, identifier: work.id) }
     let(:exporter_run) { create(:bulkrax_exporter_run, exporter: exporter) }
     let(:work) { create(:generic) }
 
@@ -52,30 +51,24 @@ module OregonDigital
 
     describe 'failed' do
       let(:error) { StandardError }
-      let(:entry) { instance_double('Bulkrax::CsvEntry', id: 1, identifier: 'abcde1234') }
-      let(:work) { instance_double('Generic', id: 'abcde1234') }
-      let(:result) { double }
+      let(:entry2) { instance_double('Bulkrax::CsvEntry', id: 1, identifier: work.id) }
+      let(:work) { instance_double('Generic', id: 'fxfx12345') }
+      let(:parser) { instance_double('Bulkrax::CsvParser') }
+      # ActiveFedora tries to find the work and can't, and so the entry fails
+      # If the test stops working, it might be because ActiveFedora actually finds something.
 
       before do
-        allow(Bulkrax::CsvEntry).to receive(:where).and_return(result)
-        allow(result).to receive(:first_or_create!).and_return(entry)
-        allow(entry).to receive(:raw_metadata=)
-        allow(entry).to receive(:save!)
-        allow(entry).to receive(:build).and_raise(error)
+        allow(exporter).to receive(:parser).and_return(parser)
+        allow(parser).to receive(:find_or_create_entry).and_return(entry2)
       end
 
-      it 'increments :failed_records' do
-        count = exporter_run.failed_records
+      it 'updates record counts' do
+        count_failed = exporter_run.failed_records
+        count_enqueued = exporter_run.enqueued_records
         export_batch_job.perform([[work.id, 'Bulkrax::CsvEntry']], exporter_run.id)
         exporter_run.reload
-        expect(exporter_run.failed_records).to eq(count + 1)
-      end
-
-      it 'decrements :enqueued_records' do
-        count = exporter_run.enqueued_records
-        export_batch_job.perform([[work.id, 'Bulkrax::CsvEntry']], exporter_run.id)
-        exporter_run.reload
-        expect(exporter_run.enqueued_records).to eq(count - 1)
+        expect(exporter_run.failed_records).to eq(count_failed + 1)
+        expect(exporter_run.enqueued_records).to eq(count_enqueued - 1)
       end
     end
   end
