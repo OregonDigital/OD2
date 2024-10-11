@@ -39,14 +39,16 @@
       <strong><%= t('bulkrax.exporter.labels.export_source') %>:</strong>
       <% case @exporter.export_from %>
       <% when 'collection' %>
-        <% collection = Collection.find(@exporter.export_source) %>
-        <%= link_to collection&.title&.first, hyrax.dashboard_collection_path(collection.id) %>
+	<% collection = Bulkrax.object_factory.find_or_nil(@exporter.export_source) %>
+	<% id = collection&.id || @exporter.export_source %>
+	<% title = collection&.title&.first || @exporter.export_source %>
+        <%= link_to title, hyrax.dashboard_collection_path(id) %>
       <% when 'importer' %>
         <% importer = Bulkrax::Importer.find(@exporter.export_source) %>
         <%= link_to importer.name, bulkrax.importer_path(importer.id) %>
       <% when 'worktype' %>
         <%= @exporter.export_source %>
-      <% when 'local_collection' %>
+      <% when 'local_collection' %><!--insert two lines for local_collection -->
         <%= @exporter.export_source %>
       <% end %>
     </p>
@@ -97,16 +99,8 @@
 
     <div class="bulkrax-nav-tab-bottom-margin">
       <!-- Nav tabs -->
-      <ul class="bulkrax-nav-tab-top-margin tab-nav nav nav-tabs" role="tablist">
-        <li role="presentation" class='active'><a href="#work-entries" aria-controls="work-entries" role="tab" data-toggle="tab"><%= t('bulkrax.exporter.labels.work_entries') %></a></li>
-        <li role="presentation"><a href="#collection-entries" aria-controls="collection-entries" role="tab" data-toggle="tab"><%= t('bulkrax.exporter.labels.collection_entries') %></a></li>
-        <li role="presentation"><a href="#file-set-entries" aria-controls="file-set-entries" role="tab" data-toggle="tab"><%= t('bulkrax.exporter.labels.file_set_entries') %></a></li>
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content outline">
-        <%= render partial: 'bulkrax/shared/work_entries_tab', locals: { item: @exporter, entries: @work_entries } %>
-        <%= render partial: 'bulkrax/shared/collection_entries_tab', locals: { item: @exporter, entries: @collection_entries } %>
-        <%= render partial: 'bulkrax/shared/file_set_entries_tab', locals: { item: @exporter, entries: @file_set_entries } %>
+      <div class="outline">
+        <%= render partial: 'bulkrax/shared/entries_tab', locals: { item: @exporter } %>
       </div>
       <br>
       <%= link_to 'Edit', edit_exporter_path(@exporter) %>

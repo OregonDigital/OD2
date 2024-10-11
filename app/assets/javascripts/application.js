@@ -41,4 +41,4 @@
 //= require cookieconsent
 
 // Add in custom JS file for filter bulkrax
-//= require bulkrax/filter_bulkrax.js
+//= require bulkrax/datatables.js

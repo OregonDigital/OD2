@@ -24,10 +24,11 @@ module Bulkrax
     def perform(entry_id, run_id, time_to_live = 3, *)
       entry = Entry.find(entry_id)
 
+      entry.build
       # Update the work to use integer for download allowed
-      w = entry.build
-      w.full_size_download_allowed = w.full_size_download_allowed.to_i
-      w.save!
+      #w = entry.build
+      #w.full_size_download_allowed = w.full_size_download_allowed.to_i
+      #w.save!
 
       if entry.status == 'Complete'
         ImporterRun.increment_counter(:processed_records, run_id)
