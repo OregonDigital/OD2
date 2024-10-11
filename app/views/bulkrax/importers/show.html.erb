@@ -1,13 +1,13 @@
 <%# OVERRIDE: Override the Show page to add in a download button %>
 <div class="col-xs-12 main-header">
   <h1><span class="fa fa-cloud-upload" aria-hidden="true"></span> Importer: <%= @importer.name %></h1>
-
-  <% if @importer.failed_entries? %>
-    <div class="pull-right">
+  <div class="pull-right">
+    <%= link_to 'Download Original File', importer_original_file_path(@importer.id), class: 'btn btn-primary', data: { turbolinks: false } if @importer.original_file %>
+    <% if @importer.failed_entries? %>
       <%= link_to 'Export Errored Entries', importer_export_errors_path(@importer.id), class: 'btn btn-primary', data: { turbolinks: false }%>
       <%= link_to 'Upload Corrected Entries', importer_upload_corrected_entries_path(@importer.id), class: 'btn btn-primary' if @importer.parser.is_a?(Bulkrax::CsvParser) %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 <div class="panel panel-default bulkrax-align-text">
   <div class="panel-body">
