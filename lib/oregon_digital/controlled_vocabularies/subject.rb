@@ -8,6 +8,7 @@ module OregonDigital
       # rubocop:disable Metrics/MethodLength
       def self.all_endpoints
         [
+          OregonDigital::ControlledVocabularies::Vocabularies::BneAuthorityFile,
           OregonDigital::ControlledVocabularies::Vocabularies::GettyAat,
           OregonDigital::ControlledVocabularies::Vocabularies::Homosaurus,
           OregonDigital::ControlledVocabularies::Vocabularies::Itis,
