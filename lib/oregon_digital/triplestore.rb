@@ -65,11 +65,15 @@ module OregonDigital
       graph.query(predicate: predicate).reject { |statement| statement.is_a?(Array) }.map { |statement| statement.object.to_s }
     end
 
+    # rubocop:disable Metrics/MethodLength
     def self.fetch_from_cache(uri, triplestore)
       Rails.logger.info "Attempting to fetch #{uri} from local graph cache."
       # CONDITION: Check on one of the CV is Homosaurus
       graph = if uri.to_s.include?('homosaurus')
                 triplestore.fetch(uri + '.jsonld', from_remote: false)
+              elsif uri.to_s.include?('datos.bne.es')
+                new_uri = uri.to_s.include?('.html') ? uri.gsub('.html', '.jsonld') : uri + '.jsonld'
+                triplestore.fetch(new_uri, from_remote: false)
               else
                 triplestore.fetch(uri, from_remote: false)
               end
@@ -82,11 +86,15 @@ module OregonDigital
       # CONDITION: Check on one of the CV is Homosaurus
       graph = if uri.to_s.include?('homosaurus')
                 triplestore.fetch(uri + '.jsonld', from_remote: true)
+              elsif uri.to_s.include?('datos.bne.es')
+                new_uri = uri.to_s.include?('.html') ? uri.gsub('.html', '.jsonld') : uri + '.jsonld'
+                triplestore.fetch(new_uri, from_remote: true)
               else
                 triplestore.fetch(uri, from_remote: true)
               end
       Rails.logger.info 'Fetched From Source'
       graph
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end
