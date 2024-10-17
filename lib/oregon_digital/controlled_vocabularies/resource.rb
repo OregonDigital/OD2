@@ -36,7 +36,7 @@ module OregonDigital
         end
 
         esp_values = values.select { |val| val.language.in? %i[es] if val.is_a?(RDF::Literal) }
-        eng_values = values.select { |val| val.language.in? %i[es en en-us] if val.is_a?(RDF::Literal) }
+        eng_values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
 
         # We take espanol label for BNE first
         return esp_values unless esp_values.blank?
