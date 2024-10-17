@@ -23,6 +23,9 @@ module OregonDigital
       # But sometimes the first preferred label isn't in english, or all aren't
       # Disable rubocop because just barely fails abcsize
       # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/MethodLength
       def rdf_label
         labels = Array.wrap(self.class.rdf_label)
         labels += default_labels
@@ -31,8 +34,14 @@ module OregonDigital
         labels.each do |label|
           values += get_values(label).to_a
         end
-        eng_values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
-        # We want English first
+
+        esp_values = values.select { |val| val.language.in? %i[es] if val.is_a?(RDF::Literal) }
+        eng_values = values.select { |val| val.language.in? %i[es en en-us] if val.is_a?(RDF::Literal) }
+
+        # We take espanol label for BNE first
+        return esp_values unless esp_values.blank?
+
+        # We then want other in English
         return eng_values unless eng_values.blank?
 
         # But we'll take non-english if that's all there is
@@ -41,6 +50,9 @@ module OregonDigital
         node? ? [] : [rdf_subject.to_s]
       end
       # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Override fetch to use the triplestore caching mechanism to get the graph,
