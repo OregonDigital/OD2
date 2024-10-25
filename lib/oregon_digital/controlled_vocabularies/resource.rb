@@ -35,7 +35,7 @@ module OregonDigital
           values += get_values(label).to_a
         end
 
-        esp_values = values.select { |val| val.language.in? %i[es] if val.is_a?(RDF::Literal) }
+        esp_values = values.select { |val| val.language.in? %i[es] if val.is_a?(RDF::Literal) && rdf_subject.to_s.include?('datos.bne.es') }
         eng_values = values.select { |val| val.language.in? %i[en en-us] if val.is_a?(RDF::Literal) }
 
         # We take espanol label for BNE first
