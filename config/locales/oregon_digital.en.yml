@@ -82,10 +82,11 @@ en:
         manage_oembeds: 'Manage oEmbeds'
         oembed_edit: 'Edit oEmbed'
       table_headers:
-        oembed_link: 'oEmbed Link'
-        oembed_status: 'oEmbed Status'
+        oembed_link: 'oEmbed URL'
+        oembed_status: 'Status'
         title: 'Title'
-        type: 'Type of Item'
+        edit: 'Edit'
+        last_modified: 'Last Modified'
     notifications:
       oembed_error:
         message: 'The oEmbed URL attached to a work you deposited has encountered an error (either broken or non-allowlisted URI): %{messages}'

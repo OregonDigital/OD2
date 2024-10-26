@@ -7,15 +7,15 @@
   <tbody>
   <% file_sets.each do |file_set| %>
     <% errors = @errors.find_by(document_id: file_set.id) %>
-    <% curation_concern = Hyrax.query_service.find_parents(resource: file_set).first %>
     <tr>
-      <td class="human-readable-type"><%= curation_concern.human_readable_type %></td>
-      <th class="title" scope="row"><%= link_to file_set, edit_oembed_path(file_set)  %></th>
+      <th class="title" scope="row"><%= link_to file_set, hyrax_file_set_path(file_set) %></th>
       <td class="oembed_link"><%= link_to file_set.solr_document['oembed_url_sim'].first, file_set.solr_document['oembed_url_sim'].first %></td>
+      <td class="edit"><%= link_to 'Edit', edit_oembed_path(file_set) %></td>
       <td class="oembed_status">
-        <%= errors.nil? ? content_tag(:span, "Good", class: "label label-success") : content_tag(:span, "Error", class: "label label-danger") %>
+        <%= errors.nil? ? content_tag(:span, "Good", class: "label label-success") : content_tag(:span, "ERROR", class: "label label-danger") %>
         <%= render 'oembed_list_errors', errors: errors if show_error_list && !errors.nil? %>
       </td>
+      <td><%= file_set.solr_document['date_modified_dtsi'].to_datetime.to_s(:long) %></td>
     </tr>
   <% end %>
   </tbody>
