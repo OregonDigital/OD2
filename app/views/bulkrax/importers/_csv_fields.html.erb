@@ -7,6 +7,7 @@
     input_html: { class: 'form-control' },
     required: false
   %>
+  <!--end of change -->
 
   <% if defined?(::Hyrax) %>
     <% rights_statements = Hyrax.config.rights_statement_service_class.new %>
@@ -23,13 +24,19 @@
   <h4>Add CSV File to Import:</h4>
   <%# accept a single file upload; data files and bags will need to be added another way %>
 
-  <%= fi.input :file_style, collection: ['Upload a File', 'Specify a Path on the Server'], as: :radio_buttons, label: false %>
+  <% file_style_list = ['Upload a File', 'Specify a Path on the Server'] %>
+  <% file_style_list << 'Existing Entries' unless importer.new_record? %>
+  <%= fi.input :file_style, collection: file_style_list, as: :radio_buttons, label: false %>
   <div id='file_upload'>
-    <%= fi.input 'file', as: :file, input_html: { accept: 'text/csv,application/zip' } %><br />
+    <%= fi.input 'file', as: :file, input_html: { accept: 'text/csv,application/zip,application/gzip' } %><br />
   </div>
   <div id='file_path'>
     <%= fi.input :import_file_path, as: :string, input_html: { value: importer.parser_fields['import_file_path'] } %>
   </div>
+  <div id='existing_options'>
+    <%= fi.collection_check_boxes :entry_statuses, [['Failed'], ['Pending'], ['Skipped'], ['Deleted'], ['Complete']], :first, :first %>
+  </div>
+
   <% if defined?(::Hyrax) && Hyrax.config.browse_everything? %>
 	  <h4>Add Files to Import:</h4>
 	  <p>Choose files to upload. The filenames must be unique, and the filenames must be referenced in a column called 'file' in the accompanying CSV file.</p>

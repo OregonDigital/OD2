@@ -25,6 +25,8 @@ Bulkrax.setup do |config|
 
   config.fill_in_blank_source_identifiers = ->(obj, index) { "#{obj.importerexporter.id}-#{index}" }
 
+  # adding with upgrade to v.8.0.0
+  config.object_factory = Bulkrax::ObjectFactory
   # Field mappings
   # Create a completely new set of mappings by replacing the whole set as follows
   #   config.field_mappings = {
@@ -85,11 +87,15 @@ Bulkrax.setup do |config|
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   fieldhash_csv['visibility'] = { from: ['visibility'] }
   fieldhash_csv['oembed_urls'] = { from:['oembed_urls'], split: true }
+  fieldhash_csv['full_size_download_allowed'][:parsed] = true
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
 
 ## override model mapping - map collection to Generic for now
 Bulkrax::ApplicationMatcher.class_eval do
+  # add full_size_download_allowed to the parsed_fields
+  class_attribute :parsed_fields, instance_writer: false, default: ['remote_files', 'language', 'subject', 'types', 'model', 'resource_type', 'format_original', 'full_size_download_allowed']
+
   def extract_model(src)
     if src&.match('http://purl.org/dc/dcmitype/Collection')
       'Generic'
@@ -104,6 +110,17 @@ Bulkrax::ApplicationMatcher.class_eval do
 end
 
 Bulkrax::CsvEntry.class_eval do
+  # override this method from HasMatchers module, included in Entry
+  def single_metadata(content)
+    content = content.content if content.is_a?(Nokogiri::XML::NodeSet)
+    return unless content
+
+    # preempt final line with to_s
+    return content if content.is_a? Integer
+
+    Array.wrap(content.to_s.strip).join('; ')
+  end
+  
 
   # override to use add_oembed
   def build_metadata
@@ -199,8 +216,11 @@ Bulkrax::CsvEntry.class_eval do
   end
 end
 
-Bulkrax::CsvParser.class_eval do
+Bulkrax::ParserExportRecordSet::Base.class_eval do
+  include OregonDigital::ParserExportRecordSetBehavior
+end
 
+Bulkrax::CsvParser.class_eval do
   # modify how it uses the export_source value to create file path
   def setup_export_file(folder_count)
     path = File.join(importerexporter.exporter_export_path, folder_count.to_s)
@@ -283,22 +303,22 @@ Bulkrax::Exporter.class_eval do
   end
 
   def export_from_list
-      if defined?(::Hyrax)
-        [
-          [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
-          [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
-          [I18n.t('bulkrax.exporter.labels.worktype'), 'worktype'],
-          [I18n.t('bulkrax.exporter.labels.local_collection'), 'local_collection'],
-          [I18n.t('bulkrax.exporter.labels.all'), 'all']
-        ]
-      else
-        [
-          [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
-          [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
-          [I18n.t('bulkrax.exporter.labels.all'), 'all']
-        ]
-      end
+    if defined?(::Hyrax)
+      [
+        [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
+        [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
+        [I18n.t('bulkrax.exporter.labels.worktype'), 'worktype'],
+        [I18n.t('bulkrax.exporter.labels.local_collection'), 'local_collection'],
+        [I18n.t('bulkrax.exporter.labels.all'), 'all']
+      ]
+    else
+      [
+        [I18n.t('bulkrax.exporter.labels.importer'), 'importer'],
+        [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
+        [I18n.t('bulkrax.exporter.labels.all'), 'all']
+      ]
     end
+  end
 
   def export_source_local_collection
     self.export_source if self.export_from == 'local_collection'
@@ -311,14 +331,11 @@ end
 Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
   include OregonDigital::AspaceDigitalObjectExportBehavior
-  # overriding method from 5.2.1 to limit number of importers retrieved
-  def index
-    @importers = Bulkrax::Importer.order(created_at: :desc).limit(OD2::Application.config.importer_cap)
-    if api_request?
-      json_response('index')
-    elsif defined?(::Hyrax)
-      add_importer_breadcrumbs
-    end
+
+  # GET /importers/1/download
+  def download
+    @importer = Importer.find(params[:importer_id])
+    send_file(params[:url])
   end
 end
 
