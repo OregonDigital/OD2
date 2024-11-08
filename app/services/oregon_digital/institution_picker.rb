@@ -40,11 +40,11 @@ module OregonDigital
       end
 
       def osu
-        ['http://id.loc.gov/authorities/names/n80017721']
+        ['https://id.loc.gov/authorities/names/n80017721']
       end
 
       def uo
-        ['http://id.loc.gov/authorities/names/n80126183']
+        ['https://id.loc.gov/authorities/names/n80126183']
       end
     end
   end
