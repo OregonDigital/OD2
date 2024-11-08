@@ -63,6 +63,7 @@ module OregonDigital
         persistence_strategy.graph = triplestore_fetch
 
         # Reset the rdf_subject if the rdf_subject doesn't match the rdf_subject from the fetched URI
+        # This is most common when this object is initialized with an 'https' scheme rather than 'http'
         @rdf_subject = subjects.select do |subject_uri|
           # Find subjects that match rdf_subject excluding the scheme. I think this should almost always be a length 1 array
           subject_uri.is_a?(RDF::URI) && [rdf_subject.host, rdf_subject.path].join == [subject_uri.host, subject_uri.path].join
@@ -104,6 +105,8 @@ module OregonDigital
         !triplestore.fetch_cached_term(rdf_subject).nil?
       end
 
+      # the linkeddata or rdf gem can't always recognize what content-type to use in the accept header
+      # this will be the same URI used to complete the QA autocomplete page, this is right more often
       def query_uri
         self.class.query_to_vocabulary(rdf_subject).as_query(rdf_subject)
       end
