@@ -3,10 +3,10 @@
 RSpec.describe OregonDigital::InstitutionPicker do
   let(:picker) { described_class }
   let(:collection) { ::Collection.new }
-  let(:osu_array) { ['https://id.loc.gov/authorities/names/n80017721'] }
-  let(:uo_array) { ['https://id.loc.gov/authorities/names/n80126183'] }
+  let(:osu_array) { ['http://id.loc.gov/authorities/names/n80017721'] }
+  let(:uo_array) { ['http://id.loc.gov/authorities/names/n80126183'] }
   let(:junk_array) { ['blah', 1] }
-  let(:both_array) { ['https://id.loc.gov/authorities/names/n80126183', 'https://id.loc.gov/authorities/names/n80017721'] }
+  let(:both_array) { ['http://id.loc.gov/authorities/names/n80126183', 'http://id.loc.gov/authorities/names/n80017721'] }
 
   describe '#institution_acronym' do
     context 'when osu array is present' do
