@@ -8,7 +8,7 @@ module OregonDigital
     included do
       def show_only_osu_collections(solr_parameters)
         clauses = [
-          '(_query_:"{!raw f=institution_sim}https://id.loc.gov/authorities/names/n80017721")'
+          '(_query_:"{!raw f=institution_sim}http://id.loc.gov/authorities/names/n80017721")'
         ]
         solr_parameters[:fq] ||= []
         solr_parameters[:fq] += ["(#{clauses.join(' AND ')})"]
