@@ -359,6 +359,16 @@ Bulkrax::ExportersController.class_eval do
   end
 end
 
+Bulkrax::ObjectFactory.class_eval do
+  def self.solr_name(field_name)
+    if (defined?(Hyrax) && Hyrax.respond_to?(:index_field_mapper))
+      Hyrax.index_field_mapper.solr_name(field_name)
+    else
+      ActiveFedora.index_field_mapper.solr_name(field_name)
+    end
+  end
+end
+
 ## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
   def required_elements
