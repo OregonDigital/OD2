@@ -31,7 +31,7 @@ module OregonDigital
     # @param workflow [Sipity::Workflow]
     # @return [ActiveRecord::Relation<Sipity::WorkflowRole>]
     def workflow_roles_for_user_and_workflow(workflow)
-      Hyrax::Workflow::PermissionQuery.scope_processing_workflow_roles_for_user_and_workflow(user: current_user, workflow: workflow)
+      Hyrax::Workflow::PermissionQuery.scope_processing_workflow_roles_for_user_and_workflow(user: current_ability.current_user, workflow: workflow)
     end
   end
 end

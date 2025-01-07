@@ -1,3 +1,4 @@
+load_defaults: 7.40.0
 default: &default
   adapter: solr
   url: <%= ENV['SOLR_URL']  %>

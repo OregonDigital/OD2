@@ -118,16 +118,16 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Fix errors eg Psych::DisallowedClass: Tried to load unspecified class: Symbol
-  config.active_record.yaml_column_permitted_classes = [Symbol, ActiveSupport::HashWithIndifferentAccess, Time]
-
   config.local_path = ENV.fetch('LOCAL_PATH', 'tmp/shared')
   config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 5000).to_i
   config.batch_size = ENV.fetch('BULKRAX_BATCH_SIZE', 100).to_i
   config.importer_cap = ENV.fetch('BULKRAX_IMPORTER_CAP', 50).to_i
   config.importer_pagination_per = ENV.fetch('BULKRAX_IMPORTER_PAGINATION_PER', 50).to_i
-  config.verify_services = [
-    OregonDigital::VerifyDerivativesService
-  ]
+
+  config.to_prepare do
+    Rails.application.config.verify_services = [
+      OregonDigital::VerifyDerivativesService
+    ]
+  end
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 100).to_i
 end

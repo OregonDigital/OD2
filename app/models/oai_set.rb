@@ -46,7 +46,7 @@ class OaiSet < BlacklightOaiProvider::SolrSet
 
   def name_from_spec
     collection = Collection.find @spec
-    return nil if collection.collection_type.gid != Hyrax::CollectionType.find_by(machine_id: :oai_set).gid.to_s
+    return nil if collection.collection_type.to_global_id.to_s != Hyrax::CollectionType.find_by(machine_id: :oai_set).to_global_id.to_s
 
     ActiveFedora::SolrService.query("id:#{@spec}", rows: 1).first['title_tesim'].first
   end

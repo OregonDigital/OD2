@@ -94,7 +94,7 @@ $triangle-size: $block-border-size*4;
   transform:rotate(90deg) translateY(50%);
 }
 
-@media (min-width: $screen-sm-min) {
+@media (min-width: breakpoint-min(sm)) {
   $block-border-size: 5px;
   $triangle-size: $block-border-size*4;
   .notch {

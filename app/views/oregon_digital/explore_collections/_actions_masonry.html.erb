@@ -14,7 +14,7 @@
       %>
     </li>
     <li>
-      <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository), url: hyrax.dashboard_collection_path(collection.id), method: :patch, html: { id: "new-collection-#{collection.id}"} do |f| %>
+      <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.search_service.repository), url: hyrax.dashboard_collection_path(collection.id), method: :patch, html: { id: "new-collection-#{collection.id}"} do |f| %>
         <% if collection.visibility == Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>
           <%= hidden_field_tag 'collection[visibility]', Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE, id: "collection-visibility-#{collection.id}" %>
           <%= hidden_field_tag 'unsharing', true, id: "unsharing-#{collection.id}" %>

@@ -41,11 +41,11 @@ module OregonDigital
         }
         config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
 
-        config.view.list.partials = %i[thumbnail index_header index]
-        config.view.gallery.partials = %i[metadata]
-        config.view.gallery.icon_class = 'fa fa-trello fa-lg'
+        # config.view.list.partials = %i[thumbnail index_header index]
+        # config.view.gallery.partials = %i[metadata]
+        # config.view.gallery.icon_class = 'fa fa-trello fa-lg'
         config.view.gallery.if = true
-        config.view.slideshow.partials = %i[index]
+        # config.view.slideshow.partials = %i[index]
         config.view.slideshow.if = false
 
         config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
@@ -67,7 +67,7 @@ module OregonDigital
         config.index.thumbnail_field = 'thumbnail_path_ss'
 
         # Remove the view type selector (masonry, grid, list, etc) from the sort/show section so we can add it somewhere else
-        config.index.collection_actions.delete_field 'view_type_group'
+        # config.index.collection_actions.delete_field 'view_type_group'
 
         # The generic_type isn't displayed on the facet list
         # It's used to give a label to the filter that comes from the user profile

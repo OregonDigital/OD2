@@ -31,7 +31,7 @@ form#explore-collection-search {
 #sortAndPerPage.explore-collections-per-page {
   padding: 2em 0 1em 0;
 
-  @media (max-width: $screen-xs-max) {
+  @media (max-width: breakpoint-max(xs)) {
     & {
       padding-left: 2em;
       padding-right: 2em;
@@ -44,7 +44,7 @@ form#explore-collection-search {
     font-weight: bold;
     padding-bottom: 2em;
 
-    @media (max-width: $screen-sm-max) {
+    @media (max-width: breakpoint-max(sm)) {
       & {
         display: block;
       }
@@ -52,13 +52,13 @@ form#explore-collection-search {
   }
 
   .explore-collections-search-widgets {
-    @media (max-width: $screen-sm-max) {
+    @media (max-width: breakpoint-max(sm)) {
       & {
         float: left !important;
       }
     }
 
-    @media (min-width: $screen-sm-max) {
+    @media (min-width: breakpoint-max(sm)) {
       transform: 0 15%;
     }
 

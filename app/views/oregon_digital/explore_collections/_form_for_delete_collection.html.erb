@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <p><%= t('hyrax.dashboard.my.action.collections_confirmation_no_items_html') %></p>
-          <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository),
+          <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.search_service.repository),
                               url: hyrax.dashboard_collections_path,
                               method: :delete,
                               html: {

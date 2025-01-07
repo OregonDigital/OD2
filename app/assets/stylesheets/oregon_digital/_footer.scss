@@ -17,7 +17,7 @@
   margin-left: 10px;
 }
 
-@media (max-width: $screen-md-min) {
+@media (max-width: breakpoint-min(md)) {
 
   .osu-logo,
   .uo-logo {
@@ -82,7 +82,7 @@ a.toc-link {
 .left-border {
   border-left: $lime-green 2px solid;
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(md)) {
     & {
       text-align: center;
       border: none;
@@ -90,7 +90,7 @@ a.toc-link {
   }
 }
 
-@media (max-width: $screen-md-min) {
+@media (max-width: breakpoint-min(md)) {
   .horizontal-sm {
     width: 4em;
     border-bottom: $lime-green 2px solid;
@@ -101,7 +101,7 @@ a.toc-link {
 .right-align {
   text-align: right;
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(md)) {
     & {
       text-align: center;
     }

@@ -73,10 +73,9 @@ class SolrDocument
 
   # Find and return parent works
   def parents
-    config = ::CatalogController.new
-    repository = config.repository
-    search_builder = OregonDigital::ParentsSearchBuilder.new(id: self['id'])
-    @parents ||= repository.search(search_builder).docs
+    @parents ||= Hyrax::SolrService.get("{!field f=member_ids_ssim}#{id}")['response']['docs'].map do |doc|
+      SolrDocument.new(doc)
+    end
   end
 
   def parents?

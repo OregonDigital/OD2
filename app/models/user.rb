@@ -8,7 +8,6 @@ class User < ApplicationRecord
   include Hyrax::UserUsageStats
   include Blacklight::User
 
-  attr_accessible :email, :password, :password_confirmation if Blacklight::Utils.needs_attr_accessible?
   before_create :role_from_devise
 
   # DISABLE RUBOCOP BECAUSE DEVISE REQUIRES A PARTICULAR FORMAT

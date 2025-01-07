@@ -4,7 +4,6 @@
 class Hyrax::HomepageController < ApplicationController
   # Adds Hydra behaviors into the application controller
   include Blacklight::SearchContext
-  include Blacklight::SearchHelper
   include Blacklight::AccessControls::Catalog
 
   # The search builder for finding recent documents
@@ -36,7 +35,7 @@ class Hyrax::HomepageController < ApplicationController
     builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)
                                                             .rows(rows)
                                                             .merge(sort: sort_field)
-    response = repository.search(builder)
+    response = search_service.repository.search(builder)
     response.documents
   rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
     []

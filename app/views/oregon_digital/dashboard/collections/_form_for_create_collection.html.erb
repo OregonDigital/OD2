@@ -7,12 +7,12 @@
           <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#collection-list-container" aria-label="close">&times;</button>
         </div>
           <div class="modal-body">
-            <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.repository),
+            <%= simple_form_for OregonDigital::Forms::CollectionForm.new(Collection.new, current_ability, controller.search_service.repository),
                                 url: Hyrax::Engine.routes.url_helpers.dashboard_collections_path,
                                 html: { onsubmit: 'return submit_create_my_collection_modal(event)' } do |f| %>
               <% unless Hyrax::CollectionType.find_by(machine_id: :user_collection).nil? %>
                 <%= hidden_field_tag :type, Hyrax::CollectionType.find_by(machine_id: :user_collection).id %>
-                <%= hidden_field_tag :collection_type_gid, Hyrax::CollectionType.find_by(machine_id: :user_collection).gid %>
+                <%= hidden_field_tag :collection_type_gid, Hyrax::CollectionType.find_by(machine_id: :user_collection).to_global_id %>
               <% end %>
               <%= render_edit_field_partial(:modal_title, f: f) %>
               <%= render_edit_field_partial(:modal_description, f: f) %>

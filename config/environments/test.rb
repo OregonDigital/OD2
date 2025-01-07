@@ -54,8 +54,11 @@ Rails.application.configure do
   config.cache_store = :null_store
   config.importer_cap = ENV.fetch('BULKRAX_IMPORTER_CAP', 10).to_i
   config.importer_pagination_per = ENV.fetch('BULKRAX_IMPORTER_PAGINATION_PER', 5).to_i
-  config.verify_services = [
-    OregonDigital::VerifyDerivativesService
-  ]
+
+  config.to_prepare do
+    Rails.application.config.verify_services = [
+      OregonDigital::VerifyDerivativesService
+    ]
+  end
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
 end
