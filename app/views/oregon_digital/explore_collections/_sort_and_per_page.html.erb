@@ -3,7 +3,7 @@
 <div id="sortAndPerPage" class="clearfix explore-collections-per-page sort-pagination" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
   <span class="explore-collections-result-count mw-lg-b"><strong> Showing <%= page_entries_info(@response) %> items </strong></span>
   <div class="pull-right explore-collections-search-widgets">
-    <%= render_results_collection_tools wrapping_class: "search-widgets hidden-xs", widget_id: 'per_page-dropdown' %>
+    <%= render_results_collection_tools wrapping_class: "search-widgets hidden-xs" %>
     <%= render 'search_form' %>
   </div>
 </div>

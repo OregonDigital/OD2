@@ -40,7 +40,7 @@ module OregonDigital
     def all
       @tab = TABS[:all]
       blacklight_config.search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results()
       build_breadcrumbs
       render :index
     end
@@ -64,7 +64,7 @@ module OregonDigital
     def my
       @tab = TABS[:my]
       blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results()
       build_breadcrumbs
       render :index
     end
@@ -108,5 +108,9 @@ module OregonDigital
       uo: 'uo',
       my: 'my collections'
     }.freeze
+
+    def search_service
+      Hyrax::SearchService.new(config: blacklight_config, user_params: { q: '' }, scope: self, search_builder_class: blacklight_config.search_builder_class)
+    end
   end
 end
