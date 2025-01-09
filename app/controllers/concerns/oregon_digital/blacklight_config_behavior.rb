@@ -41,11 +41,11 @@ module OregonDigital
         }
         config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
 
-        # config.view.list.partials = %i[thumbnail index_header index]
-        # config.view.gallery.partials = %i[metadata]
-        # config.view.gallery.icon_class = 'fa fa-trello fa-lg'
+        config.view.list.partials = %i[thumbnail index_header index]
+        config.view.gallery.partials = %i[metadata]
+        config.view.gallery.icon_class = 'fa fa-trello fa-lg'
         config.view.gallery.if = true
-        # config.view.slideshow.partials = %i[index]
+        config.view.slideshow.partials = %i[index]
         config.view.slideshow.if = false
 
         config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
