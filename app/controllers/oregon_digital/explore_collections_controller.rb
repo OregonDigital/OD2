@@ -28,8 +28,8 @@ module OregonDigital
       config.view.list.if = false
       # config.view.table.partials = %i[index]
       # config.view.table.icon_class = 'glyphicon-th-list'
-      # config.view.masonry.partials = %i[metadata]
-      # config.view.masonry.icon_class = 'fa fa-trello fa-lg'
+      config.view.masonry.partials = %i[metadata]
+      config.view.masonry.icon_class = 'fa fa-trello fa-lg'
 
       config.sort_fields.except! 'score desc, system_create_dtsi desc', 'date_dtsi desc', 'date_dtsi asc', 'system_create_dtsi desc'
       config.sort_fields['title_ssort desc'][:label] = 'Z-A'
@@ -48,7 +48,7 @@ module OregonDigital
     def osu
       @tab = TABS[:osu]
       blacklight_config.search_builder_class = OregonDigital::OsuCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results()
       build_breadcrumbs
       render :index
     end
@@ -56,7 +56,7 @@ module OregonDigital
     def uo
       @tab = TABS[:uo]
       blacklight_config.search_builder_class = OregonDigital::UoCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results()
       build_breadcrumbs
       render :index
     end
