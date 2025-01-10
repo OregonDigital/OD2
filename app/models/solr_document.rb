@@ -28,9 +28,7 @@ class SolrDocument
     return super(ids) unless ids.is_a? Array
     return [] if ids.blank?
 
-    solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(ids)
-    path = repository.blacklight_config.document_solr_path || repository.blacklight_config.solr_path
-    docs = repository.send_and_receive path, { fq: solr_query, rows: ids.count }
+    docs = repository.find(ids)
     docs.documents
   end
 
