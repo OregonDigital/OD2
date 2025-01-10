@@ -302,7 +302,7 @@ services:
   ##
   # Redis queue server
   redis: &redis
-    image: redis:4-alpine
+    image: redis:6-alpine
     command: redis-server
     networks:
       internal:
