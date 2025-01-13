@@ -4,41 +4,40 @@ AllCops:
   TargetRubyVersion: 2.5
   DisplayCopNames: true
   Exclude:
-    - 'db/**/*'
-    - 'script/**/*'
-    - 'build/**/*'
-    - 'vendor/**/*'
-    - 'bin/**/*'
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'config/**/*'
-    - 'tmp/**/*'
-    - 'lib/tasks/**/*'
-    - 'app/presenters/hyrax/file_set_presenter.rb'
-    - 'app/presenters/hyrax/collapsable_section_presenter.rb'
-    - 'app/parsers/bulkrax/bagit_complex_parser.rb'
-    - 'app/views/bulkrax/**/*'
-    - 'app/parsers/bulkrax/parser_export_record_set.rb'
+    - "db/**/*"
+    - "script/**/*"
+    - "build/**/*"
+    - "vendor/**/*"
+    - "bin/**/*"
+    - "Gemfile"
+    - "Rakefile"
+    - "config/**/*"
+    - "tmp/**/*"
+    - "lib/tasks/**/*"
+    - "app/presenters/hyrax/file_set_presenter.rb"
+    - "app/presenters/hyrax/collapsable_section_presenter.rb"
+    - "app/parsers/bulkrax/bagit_complex_parser.rb"
+    - "app/views/bulkrax/**/*"
+    - "app/parsers/bulkrax/parser_export_record_set.rb"
 
 Metrics/BlockLength:
-  ExcludedMethods: ['included']
   Exclude:
-    - 'lib/tasks/**/*'
-    - 'spec/**/*.rb'
-    - 'config/**/*'
-    - 'app/controllers/catalog_controller.rb'
-    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
+    - "lib/tasks/**/*"
+    - "spec/**/*.rb"
+    - "config/**/*"
+    - "app/controllers/catalog_controller.rb"
+    - "app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb"
 
 Style/AsciiComments:
   Enabled: false
 
 Style/CollectionMethods:
   PreferredMethods:
-    collect: 'map'
-    collect!: 'map!'
-    inject: 'reduce'
-    detect: 'find'
-    find_all: 'select'
+    collect: "map"
+    collect!: "map!"
+    inject: "reduce"
+    detect: "find"
+    find_all: "select"
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -54,36 +53,35 @@ Layout/LineLength:
 
 Layout/RescueEnsureAlignment:
   Exclude:
-    - 'app/indexers/generic_indexer.rb'
+    - "app/indexers/generic_indexer.rb"
 
 Style/Documentation:
   Exclude:
-    - 'spec/**/*'
+    - "spec/**/*"
 
 Metrics/ModuleLength:
   Exclude:
-    - 'app/models/concerns/oregon_digital/collection_metadata.rb'
-    - 'app/models/concerns/oregon_digital/generic_metadata.rb'
-    - 'app/models/concerns/oregon_digital/video_metadata.rb'
-    - 'app/models/concerns/oregon_digital/document_metadata.rb'
-    - 'app/models/concerns/oregon_digital/image_metadata.rb'
-    - 'app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb'
-
+    - "app/models/concerns/oregon_digital/collection_metadata.rb"
+    - "app/models/concerns/oregon_digital/generic_metadata.rb"
+    - "app/models/concerns/oregon_digital/video_metadata.rb"
+    - "app/models/concerns/oregon_digital/document_metadata.rb"
+    - "app/models/concerns/oregon_digital/image_metadata.rb"
+    - "app/controllers/concerns/oregon_digital/blacklight_config_behavior.rb"
 
 Metrics/ClassLength:
   Exclude:
-    - 'app/controllers/catalog_controller.rb'
+    - "app/controllers/catalog_controller.rb"
 
 Metrics/MethodLength:
   Exclude:
-    - 'app/inputs/multi_value_input.rb'
+    - "app/inputs/multi_value_input.rb"
 
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/system/**/*'
-    - 'spec/views/**/*'
-    - 'spec/config/initializers/**/*'
-    - 'spec/tasks/**/*'
+    - "spec/system/**/*"
+    - "spec/views/**/*"
+    - "spec/config/initializers/**/*"
+    - "spec/tasks/**/*"
 
 RSpec/AnyInstance:
   Enabled: false
@@ -145,7 +143,7 @@ Lint/NonDeterministicRequireOrder:
 Style/FormatStringToken:
   Enabled: false
 
-FactoryBot/FactoryClassName:
+RSpec/FactoryBot/FactoryClassName:
   Enabled: false
 
 Style/RedundantReturn:
@@ -156,8 +154,8 @@ Migration/DepartmentName:
 
 RSpec/VerifiedDoubles:
   Exclude:
-    - 'spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb'
+    - "spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb"
 
 RSpec/SubjectStub:
   Exclude:
-    - 'spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb'
+    - "spec/helpers/oregon_digital/citations_behaviors/formatters/wiki_formatter_spec.rb"
