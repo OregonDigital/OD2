@@ -88,6 +88,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rspec'
+  gem 'rubocop-factory_bot'
   gem 'selenium-webdriver', '~> 3'
   gem 'webmock'
 end
