@@ -19,6 +19,7 @@ AllCops:
     - 'app/parsers/bulkrax/bagit_complex_parser.rb'
     - 'app/views/bulkrax/**/*'
     - 'app/parsers/bulkrax/parser_export_record_set.rb'
+    - 'app/jobs/bulkrax/export_work_job.rb'
 
 Metrics/BlockLength:
   ExcludedMethods: ['included']
