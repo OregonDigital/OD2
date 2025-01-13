@@ -615,7 +615,6 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_list (1.2.1)
-    language_server-protocol (3.17.0.3)
     ld-patch (3.3.0)
       ebnf (~> 2.4)
       rdf (~> 3.3)
@@ -989,22 +988,20 @@ GEM
     rspec-support (3.13.2)
     rspec_junit_formatter (0.6.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (1.69.2)
-      json (~> 2.3)
-      language_server-protocol (>= 3.17.0)
+    rubocop (0.93.1)
       parallel (~> 1.10)
-      parser (>= 3.3.0.2)
+      parser (>= 2.7.1.5)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 2.9.3, < 3.0)
-      rubocop-ast (>= 1.36.2, < 2.0)
+      regexp_parser (>= 1.8)
+      rexml
+      rubocop-ast (>= 0.6.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 2.4.0, < 4.0)
+      unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-ast (1.37.0)
       parser (>= 3.3.1.0)
-    rubocop-factory_bot (2.26.1)
-      rubocop (~> 1.61)
-    rubocop-rspec (3.3.0)
-      rubocop (~> 1.61)
+    rubocop-rspec (1.44.1)
+      rubocop (~> 0.87)
+      rubocop-ast (>= 0.7.1)
     ruby-box (1.15.0)
       addressable
       json
@@ -1139,7 +1136,7 @@ GEM
     uber (0.1.0)
     uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (2.6.0)
+    unicode-display_width (1.8.0)
     unicode-types (1.10.0)
     validatable (1.6.7)
     valkyrie (3.0.3)
@@ -1270,8 +1267,7 @@ DEPENDENCIES
   rspec-mocks
   rspec-rails
   rspec_junit_formatter
-  rubocop
-  rubocop-factory_bot
+  rubocop (~> 0.93)
   rubocop-rspec
   ruby-oembed
   rubyzip (~> 2)
