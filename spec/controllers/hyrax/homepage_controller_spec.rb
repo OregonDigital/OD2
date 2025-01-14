@@ -18,22 +18,14 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
     context 'with existing featured researcher' do
       let!(:frodo) { ContentBlock.create!(name: ContentBlock::NAME_REGISTRY[:researcher], value: 'Frodo Baggins', created_at: Time.zone.now) }
 
-      it 'finds a featured researcher' do
-        get :index
-        expect(response).to be_success
-      end
       it 'finds the featured researcher' do
         get :index
+        expect(response).to be_successful
         expect(assigns(:featured_researcher)).to eq frodo
       end
     end
 
     context 'with no featured researcher' do
-      it 'responds' do
-        get :index
-        expect(response).to be_success
-      end
-
       it 'creates a featured researcher' do
         get :index
         assigns(:featured_researcher).tap do |researcher|
@@ -42,15 +34,12 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
       end
       it 'sets featured researcher' do
         get :index
+        expect(response).to be_successful
         assigns(:featured_researcher).tap do |researcher|
+          expect(researcher).to be_kind_of ContentBlock
           expect(researcher.name).to eq 'featured_researcher'
         end
       end
-    end
-
-    it 'responds' do
-      get :index
-      expect(response).to be_success
     end
 
     it 'creates marketing text' do
@@ -61,13 +50,16 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
     end
     it 'sets marketing text' do
       get :index
+      expect(response).to be_successful
       assigns(:marketing_text).tap do |marketing|
+        expect(marketing).to be_kind_of ContentBlock
         expect(marketing.name).to eq 'marketing_text'
       end
     end
 
     it 'does not include other user\'s private documents in recent documents' do
       get :index
+      expect(response).to be_successful
       titles = assigns(:recent_documents).map { |d| d['title_tesim'][0] }
       expect(titles).not_to include('Test Private Document')
     end
@@ -94,17 +86,14 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
         gw3.save
       end
 
-      it 'responds' do
-        get :index
-        expect(response).to be_success
-      end
-
       it 'does not exceed the maximum recent documents' do
         get :index
         expect(assigns(:recent_documents).length).to be <= 6
       end
       it 'sets recent documents in the right order' do
         get :index
+        expect(response).to be_successful
+        expect(assigns(:recent_documents).length).to be <= 6
         create_times = assigns(:recent_documents).map { |d| d['date_uploaded_dtsi'] }
         expect(create_times).to eq create_times.sort.reverse
       end
@@ -112,19 +101,11 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
 
     context 'with collections' do
       let(:presenter) { double }
-      let(:repository) { double }
-      let(:collection_results) { instance_double('Blacklight::Solr::Response', documents: ['collection results']) }
+      let(:collection_results) { double(documents: ['collection results']) }
 
       before do
-        allow(controller).to receive(:repository).and_return(repository)
         allow(controller).to receive(:search_results).and_return([nil, ['recent document']])
-        allow(controller.repository).to receive(:search).with(an_instance_of(OregonDigital::NonUserCollectionsSearchBuilder))
-                                                        .and_return(collection_results)
-      end
-
-      it 'responds' do
-        get :index
-        expect(response).to be_success
+        allow_any_instance_of(Hyrax::CollectionsService).to receive(:search_results).and_return(collection_results.documents)
       end
 
       it 'initializes the presenter with ability and a list of collections' do
@@ -149,13 +130,9 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
         FeaturedWork.create!(work_id: my_work.id)
       end
 
-      it 'responds' do
-        get :index
-        expect(response).to be_success
-      end
-
       it 'sets featured works' do
         get :index
+        expect(response).to be_successful
         expect(assigns(:featured_work_list)).to be_kind_of FeaturedWorkList
       end
     end
@@ -168,15 +145,16 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
     end
     it 'sets announcement content block' do
       get :index
+      expect(response).to be_successful
       assigns(:announcement_text).tap do |announcement|
+        expect(announcement).to be_kind_of ContentBlock
         expect(announcement.name).to eq 'announcement_text'
       end
     end
 
     context 'without solr' do
       before do
-        allow(controller).to receive(:repository).and_return(instance_double(Blacklight::Solr::Repository))
-        allow(controller.repository).to receive(:search).and_raise Blacklight::Exceptions::InvalidRequest
+        allow_any_instance_of(Hyrax::SearchService).to receive(:search_results).and_raise Blacklight::Exceptions::InvalidRequest
       end
 
       it 'errors admin_sets gracefully' do
