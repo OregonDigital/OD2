@@ -26,6 +26,7 @@ class Hyrax::HomepageController < ApplicationController
   # Return 8 collections
   def collections(rows: 8)
     # TODO: set CollectionSearchBuilder to retrieve collections from a curated list, instead of newest collections
+    Hyrax::CollectionsService.list_search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
     Hyrax::CollectionsService.new(self).search_results do |builder|
       builder.rows(rows)
       builder.merge(sort: sort_field)
@@ -46,7 +47,7 @@ class Hyrax::HomepageController < ApplicationController
   end
 
   def search_service
-    Hyrax::SearchService.new(config: blacklight_config, user_params: { q: '' }, scope: self, search_builder_class: OregonDigital::NonUserCollectionsSearchBuilder)
+    Hyrax::SearchService.new(config: blacklight_config, user_params: { q: '' }, scope: self, search_builder_class: Hyrax::HomepageSearchBuilder)
   end
 
   def sort_field
