@@ -332,10 +332,40 @@ Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
   include OregonDigital::AspaceDigitalObjectExportBehavior
 
+  # change values for default sort
+  def importer_table
+    @importers = Bulkrax::Importer.order("last_imported_at desc").page(table_page).per(table_per_page)
+      @importers = @importers.where(importer_table_search) if importer_table_search.present?
+      respond_to do |format|
+        format.json { render json: format_importers(@importers) }
+      end
+    end
+
   # GET /importers/1/download
   def download
     @importer = Importer.find(params[:importer_id])
     send_file(params[:url])
+  end
+end
+
+Bulkrax::ExportersController.class_eval do
+  # change values for default sort
+  def exporter_table
+    @exporters = Bulkrax::Exporter.order("created_at desc").page(table_page).per(table_per_page)
+    @exporters = @exporters.where(exporter_table_search) if exporter_table_search.present?
+    respond_to do |format|
+      format.json { render json: format_exporters(@exporters) }
+    end
+  end
+end
+
+Bulkrax::ObjectFactory.class_eval do
+  def self.solr_name(field_name)
+    if (defined?(Hyrax) && Hyrax.respond_to?(:index_field_mapper))
+      Hyrax.index_field_mapper.solr_name(field_name)
+    else
+      ActiveFedora.index_field_mapper.solr_name(field_name)
+    end
   end
 end
 
