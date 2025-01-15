@@ -101,7 +101,7 @@ RSpec.describe Hyrax::HomepageController, type: :controller do
 
     context 'with collections' do
       let(:presenter) { double }
-      let(:collection_results) { double(documents: ['collection results']) }
+      let(:collection_results) { instance_double(Object, documents: ['collection results']) }
 
       before do
         allow(controller).to receive(:search_results).and_return([nil, ['recent document']])
