@@ -42,7 +42,7 @@ module OregonDigital
       keywords.join(', ')
     end
 
-    # workflow = review_pending or changes_required
+    # workflow = pending_review or changes_required
     def fetch_items(workflow, fields, span)
       t = get_time_window(span)
       items = Hyrax::SolrService.query("system_create_dtsi:[#{t[0]} TO #{t[1]}] AND  workflow_state_name_ssim:#{workflow}", fl: fields, rows: 10_000)

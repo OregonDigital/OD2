@@ -60,4 +60,16 @@ RSpec.describe OregonDigital::Notification do
       expect(t_test.between?(tstart, tend)).to be(false)
     end
   end
+
+  describe 'simple_derivative_check' do
+    let(:path1) { { 'thumbnail_path_ss' => '/downloads/f0abcde1234?file=thumbnail' } }
+    let(:path2) { { 'thumbnail_path_ss' => '/assets/work-12345678987654321abcdefg.png' } }
+    let(:path3) { { 'id' => 'abcde1234' } }
+
+    it 'checks the thumbnail path' do
+      expect(notifier.simple_derivative_check(path1)).to eq(true)
+      expect(notifier.simple_derivative_check(path2)).to eq(false)
+      expect(notifier.simple_derivative_check(path3)).to eq(false)
+    end
+  end
 end
