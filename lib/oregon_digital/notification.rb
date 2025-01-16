@@ -12,7 +12,7 @@ module OregonDigital
     end
 
     def add_change_items
-      span = 86_400 # seconds
+      span = (60 * 60 * 24 * 7) # seconds 7 days
       fields = 'id,depositor_ssim'
       change_items = fetch_items('changes_required', fields, span)
       change_items.each do |item|
@@ -21,8 +21,9 @@ module OregonDigital
     end
 
     # rubocop:disable Style/IfUnlessModifier
+    # rubocop:disable Metrics/AbcSize
     def add_review_items
-      span = 172_800 # seconds
+      span = (60 * 60 * 24 * 2) # seconds in 2 days
       fields = 'id,depositor_ssim,thumbnail_path_ss,has_model_ssim'
       review_items = fetch_items('pending_review', fields, span)
       review_items.each do |item|
@@ -31,6 +32,7 @@ module OregonDigital
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
     # rubocop:enable Style/IfUnlessModifier
 
     # expects a structure (see above)
