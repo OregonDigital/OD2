@@ -29,9 +29,8 @@ Rails.application.config.to_prepare do
       process_branding
       process_facets if collection.facet_configurable? && !params[:facet_configuration].blank?
       process_representative_images
-      @collection.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE unless @collection.discoverable?
-      # we don't have to reindex the full graph when updating collection
-      @collection.reindex_extent = Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX
+
+      @collection.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE unless Hyrax::CollectionType.for(collection: @collection).discoverable?
       if @collection.update(collection_params.except(:members))
         after_update_response
       else
@@ -42,7 +41,7 @@ Rails.application.config.to_prepare do
     # Override after create method to redirect users back to where they created the collection from
     def after_create_response
       if @collection.is_a?(ActiveFedora::Base)
-      form
+        form
         set_default_permissions
         # if we are creating the new collection as a subcollection (via the nested collections controller),
         # we pass the parent_id through a hidden field in the form and link the two after the create.

@@ -52,7 +52,7 @@ gem 'loofah', '>= 2.2.3'
 
 # Login gems
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-gem 'omniauth-cas'
+gem 'omniauth-cas', '~> 3.0'
 gem 'omniauth-saml'
 
 # Honeycomb
