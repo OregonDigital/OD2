@@ -100,7 +100,7 @@ module Hyrax
           fetch_parents unless top_level_element?
           return self
         end
-        resource = super
+        resource = super()
         fetch_parents unless top_level_element?
         store_graph
         resource

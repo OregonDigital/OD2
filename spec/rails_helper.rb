@@ -97,13 +97,6 @@ RSpec.configure do |config|
       # may think the root path has already been created:
       ActiveFedora.fedora.connection.send(:init_base_path) if example.metadata[:js]
     end
-    Hyrax.config.nested_relationship_reindexer = if example.metadata[:with_nested_reindexing]
-                                                   # Use the default relationship reindexer (and the cascading reindexing of child documents)
-                                                   Hyrax.config.default_nested_relationship_reindexer
-                                                 else
-                                                   # Don't use the nested relationship reindexer. This slows everything down quite a bit.
-                                                   ->(id:, extent:) {}
-                                                 end
   end
 
   config.after do
