@@ -11,20 +11,20 @@ Sidekiq.configure_server do |s|
 
   # If SIDEKIQ_QUEUES exists, populate :queues
   # If not, generate a default for :queues
-  if ENV["SIDEKIQ_QUEUES"]
-    queues = []
-    ENV["SIDEKIQ_QUEUES"].split(/\s+/).each do |queue_weighted|
-      queue, count = queue_weighted.split(",")
-      count = count.to_i
-      [count, 1].max.times do
-        queues.push(queue)
-      end
-    end
+  # if ENV["SIDEKIQ_QUEUES"]
+  #   queues = []
+  #   ENV["SIDEKIQ_QUEUES"].split(/\s+/).each do |queue_weighted|
+  #     queue, count = queue_weighted.split(",")
+  #     count = count.to_i
+  #     [count, 1].max.times do
+  #       queues.push(queue)
+  #     end
+  #   end
 
-    s.options[:queues] = queues
-  else
-    s.options[:queues] = ["notify","fetch","ingest","reindex","default","import","export","verify"]
-  end
+  #   s.options[:queues] = queues
+  # else
+  #   s.options[:queues] = ["notify","fetch","ingest","reindex","default","import","export","verify"]
+  # end
   Yabeda::Prometheus::Exporter.start_metrics_server!
 end
 
