@@ -5,7 +5,7 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class LocOrgs
       def self.expression
-        %r{^http[s]?:\/\/id.loc.gov\/vocabulary\/organizations\/.*}
+        %r{^http:\/\/id.loc.gov\/vocabulary\/organizations\/.*}
       end
 
       def self.label(data)
