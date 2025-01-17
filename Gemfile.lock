@@ -1251,7 +1251,7 @@ DEPENDENCIES
   libhoney (>= 2.1.0)
   listen (>= 3.0.5, < 3.2)
   loofah (>= 2.2.3)
-  omniauth-cas
+  omniauth-cas (~> 3.0)
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth-saml
   pg
