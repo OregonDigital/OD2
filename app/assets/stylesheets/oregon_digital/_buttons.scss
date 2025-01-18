@@ -41,8 +41,8 @@ input.link {
   &.btn-outline {
     background: unset;
     border-radius: 0 !important;
-    border: 3px solid $brand-primary;
-    color: $brand-primary;
+    border: 3px solid $primary;
+    color: $primary;
     margin: 0 5px;
     &:hover,
     &:focus {
@@ -64,8 +64,8 @@ input.link {
 }
 
 .btn-default {
-  color: $brand-primary;
-  border: 3px solid $brand-primary;
+  color: $primary;
+  border: 3px solid $primary;
 }
 
 /* increase checkbox size */
