@@ -80,6 +80,7 @@ header {
 
   ul.nav {
     a.explore-collections {
+      padding: 10px 15px;
       padding-bottom: 2px;
       font-weight: 700;
       @media (max-width: breakpoint-max(sm)) {
