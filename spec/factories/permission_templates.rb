@@ -80,7 +80,7 @@ FactoryBot.define do
 
   class SourceFinder
     def self.find_or_create_admin_set(source_id)
-      Hyrax.config.use_valkyrie? ? find_or_create_admin_set_valkyrie(source_id) : find_or_create_admin_set_active_fedora(source_id)
+      false ? find_or_create_admin_set_valkyrie(source_id) : find_or_create_admin_set_active_fedora(source_id)
     end
 
     def self.find_or_create_admin_set_active_fedora(source_id)
