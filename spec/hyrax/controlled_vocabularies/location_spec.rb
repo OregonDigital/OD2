@@ -137,7 +137,7 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
       xit { expect(location.fetch).to eq location }
       xit do
         expect(parent_adm1).to receive(:fetch).once
-        #location.fetch
+        # location.fetch
       end
     end
 
