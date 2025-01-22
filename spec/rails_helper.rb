@@ -14,6 +14,11 @@ Dir[File.join(Rails.root, 'spec/support/**/*.rb')].each { |f| require f }
 require 'shoulda/matchers'
 require 'triplestore_adapter'
 require 'cancan/matchers'
+require 'factory_bot_rails'
+require 'database_cleaner'
+require 'rspec/active_model/mocks'
+require 'webmock'
+WebMock.allow_net_connect!
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

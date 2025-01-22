@@ -90,6 +90,7 @@ group :development, :test do
   gem 'rubocop-rspec'
   gem 'selenium-webdriver', '~> 3'
   gem 'webmock'
+  gem 'rails-controller-testing'
 end
 
 group :test do

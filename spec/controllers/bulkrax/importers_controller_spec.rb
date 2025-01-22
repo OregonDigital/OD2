@@ -18,7 +18,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
   let(:work) { double }
 
   let(:role) { Role.create(name: 'admin') }
-  let(:user) { create(:admin) }
+  let(:user) { create(:user) }
   let(:queue) { double }
 
   controller do

@@ -1,52 +1,50 @@
-# frozen_string_literal:true
-
 FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     password { 'password' }
 
-    transient do
-      # Allow for custom groups when a user is instantiated.
-      # @example create(:user, groups: 'avacado')
-      groups { [] }
+    factory :jill do
+      email { 'jilluser@example.com' }
     end
 
-    after(:build) do |user, evaluator|
-      User.group_service.add(user: user, groups: evaluator.groups)
-    end
-
-    factory :admin do
-      groups { ['admin'] }
+    factory :archivist, aliases: [:user_with_fixtures] do
+      email { 'archivist1@example.com' }
     end
 
     factory :user_with_mail do
       after(:create) do |user|
+        # TODO: what is this class for?
+        # <span class="batchid ui-helper-hidden">fake_batch_noid</span>
+        #message = BatchMessage.new
+
         # Create examples of single file successes and failures
         (1..10).each do |number|
-          file = MockFile.new(number.to_s, "Single File #{number}")
-          User.batch_user.send_message(user, 'File 1 could not be updated. You do not have sufficient privileges to edit it.', file.to_s, false)
-          User.batch_user.send_message(user, 'File 1 has been saved', file.to_s, false)
+          file = MockFile.new(number.to_s, "Single File #{number.to_s}")
+          User.batchuser().send_message(user, message.single_success("single-batch-success", file), message.success_subject, sanitize_text = false)
+          User.batchuser().send_message(user, message.single_failure("single-batch-failure", file), message.failure_subject, sanitize_text = false)
         end
 
         # Create examples of mulitple file successes and failures
         files = []
         (1..50).each do |number|
-          files << MockFile.new(number.to_s, "File #{number}")
+          files << MockFile.new(number.to_s, "File #{number.to_s}")
         end
-        User.batch_user.send_message(user, 'These files could not be updated. You do not have sufficient privileges to edit them.', 'Batch upload permission denied', false)
-        User.batch_user.send_message(user, 'These files have been saved', 'Batch upload complete', false)
+        User.batchuser().send_message(user, message.multiple_success("multiple-batch-success", files), message.success_subject, sanitize_text = false)
+        User.batchuser().send_message(user, message.multiple_failure("multiple-batch-failure", files), message.failure_subject, sanitize_text = false)
       end
     end
-  end
 
-  trait :guest do
-    guest { true }
+    factory :curator do
+      email { 'curator1@example.com' }
+    end
+
   end
 end
 
 class MockFile
-  attr_accessor :to_s, :id
-  def initialize(id, string)
+  attr_accessor :noid, :to_s, :id
+  def initialize id, string
+    self.noid = id
     self.id = id
     self.to_s = string
   end

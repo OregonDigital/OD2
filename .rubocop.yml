@@ -43,6 +43,9 @@ Style/CollectionMethods:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Layout/BlockAlignment:
+  Enabled: false
+
 Style/SingleLineBlockParams:
   Enabled: false
 
