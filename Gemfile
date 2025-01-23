@@ -98,7 +98,6 @@ group :test do
   gem 'coveralls', '~> 0.8'
   gem 'database_cleaner', '~> 1.8'
   gem 'equivalent-xml'
-  gem 'rails-controller-testing'
   gem 'rspec'
   gem 'rspec-mocks'
   gem 'rspec-activemodel-mocks'
