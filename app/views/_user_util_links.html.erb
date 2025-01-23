@@ -1,4 +1,4 @@
-<ul id="user_utility_links" class="nav navbar-nav navbar-right navbar-left-sm text-center center-navbar">
+<ul id="user_utility_links" class="nav navbar-nav text-center">
   <li>
     <%= link_to 'Explore Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'explore-collections visible-all-inline-block lato-b' %>
   </li>
@@ -8,7 +8,7 @@
   <li class="divider"></li>
   <% if user_signed_in? %>
     <li class="dropdown">
-      <%= link_to hyrax.dashboard_profile_path(current_user), id: 'user-dropdown', class: ['btn', 'btn-outline', 'dropdown-toggle'],role: 'button', data: { toggle: 'dropdown' }, aria: { expanded: false, controls: 'user-util-links' } do %>
+      <%= link_to hyrax.dashboard_profile_path(current_user), id: 'user-dropdown', class: ['btn', 'btn-sm', 'btn-outline', 'dropdown-toggle'],role: 'button', data: { toggle: 'dropdown' }, aria: { expanded: false, controls: 'user-util-links' } do %>
         <span class="fa fa-user" aria-hidden="true"></span>
         <span class="d-none d-sm-inline-block">&nbsp;My Account</span>
       <% end %>

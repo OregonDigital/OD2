@@ -78,6 +78,12 @@ header {
     padding-bottom:15px
   }
 
+  #user_utility_links {
+    @media (min-width: breakpoint-min(lg)) {
+      margin-right: -15px;
+    }
+  }
+
   ul.nav {
     a.explore-collections {
       padding: 10px 15px;
@@ -144,7 +150,7 @@ header {
     box-shadow: 0 0 10px $dark-grey;
     border-width: 0 0 5px 0;
     padding: 1em 2em;
-    @media (max-width: breakpoint-min(sm)) {
+    @media (max-width: breakpoint-min(md)) {
       & {
         padding: .5em;
       }
@@ -152,6 +158,8 @@ header {
 
     .container-fluid {
       flex-wrap: wrap;
+      padding-left: 15px;
+      padding-right: 15px;
     }
   }
 
@@ -187,6 +195,7 @@ header {
         li {
           font-size: 16px;
         }
+        
         .my-account-option {
           margin: .25em 0;
         }
