@@ -1,4 +1,4 @@
-<ul id="user_utility_links" class="nav navbar-nav navbar-right navbar-left-sm text-center center-navbar">
+<ul id="user_utility_links" class="nav navbar-nav text-center">
   <li>
     <%= link_to 'Explore Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'explore-collections visible-all-inline-block lato-b' %>
   </li>
@@ -8,24 +8,23 @@
   <li class="divider"></li>
   <% if user_signed_in? %>
     <li class="dropdown">
-      <%= link_to hyrax.dashboard_profile_path(current_user), id: 'user-dropdown', class: ['btn', 'btn-outline'],role: 'button', data: { toggle: 'dropdown' }, aria: { expanded: false, controls: 'user-util-links' } do %>
+      <%= link_to hyrax.dashboard_profile_path(current_user), id: 'user-dropdown', class: ['btn', 'btn-sm', 'btn-outline', 'dropdown-toggle'],role: 'button', data: { toggle: 'dropdown' }, aria: { expanded: false, controls: 'user-util-links' } do %>
         <span class="fa fa-user" aria-hidden="true"></span>
-        <span class="hidden-xs">&nbsp;My Account</span>
-        <span class="caret-dropdown"></span>
+        <span class="d-none d-sm-inline-block">&nbsp;My Account</span>
       <% end %>
       <ul id="user-util-links" class="dropdown-menu dropdown-menu-right text-center">
         <% if user_signed_in? %>
-          <li class="my-account-option"><%= link_to current_user.email, hyrax.user_path(current_user), tabindex: -1 %></li>
+          <li class="my-account-option dropdown-item"><%= link_to current_user.email, hyrax.user_path(current_user), tabindex: -1 %></li>
         <% end %>
         <% if (can? :create, ActiveFedora::Base) || current_user&.sipity_agent&.workflow_responsibilities&.count&.positive? %>
-          <li class="my-account-option"><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path, tabindex: -1 %></li>
+          <li class="my-account-option dropdown-item"><%= link_to t("hyrax.toolbar.dashboard.menu"), hyrax.dashboard_path, tabindex: -1 %></li>
         <% end %>
-        <li class="my-account-option"><%= link_to 'My Collections', Rails.application.routes.url_helpers.my_collections_path, tabindex: -1 %></li>
+        <li class="my-account-option dropdown-item"><%= link_to 'My Collections', Rails.application.routes.url_helpers.my_collections_path, tabindex: -1 %></li>
         <% unless OregonDigital::UserAttributeService.new(current_user).institutional_user? %>
-          <li class="my-account-option"><%= link_to "Change your password", edit_registration_path(current_user), tabindex: -1 %></li>
+          <li class="my-account-option dropdown-item"><%= link_to "Change your password", edit_registration_path(current_user), tabindex: -1 %></li>
         <% end %>
         <li class="divider"></li>
-        <li><%= link_to t("hyrax.toolbar.profile.logout"), main_app.destroy_user_session_path, tabindex: -1 %></li>
+        <li><%= link_to t("hyrax.toolbar.profile.logout"), main_app.destroy_user_session_path, class: ['dropdown-item'], tabindex: -1 %></li>
       </ul>
     </li><!-- /.btn-group -->
   <% else %>
