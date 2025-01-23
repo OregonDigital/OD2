@@ -355,11 +355,11 @@ GEM
     excon (1.2.3)
     execjs (2.10.0)
     facets (3.1.0)
-    factory_bot (6.5.0)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.4)
-      factory_bot (~> 6.5)
-      railties (>= 5.0.0)
+    factory_bot (4.11.1)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.11.1)
+      factory_bot (~> 4.11.1)
+      railties (>= 3.0.0)
     faraday (1.10.4)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -1103,7 +1103,7 @@ DEPENDENCIES
   devise
   edtf (~> 3.0)
   equivalent-xml
-  factory_bot_rails
+  factory_bot_rails (~> 4.4)
   faraday_middleware
   font-awesome-sass (~> 6.4, >= 6.4.2)
   honeycomb-beeline (>= 2.10.0)
