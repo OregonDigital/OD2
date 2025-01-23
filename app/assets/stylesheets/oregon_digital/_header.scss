@@ -182,6 +182,10 @@ header {
       }
     }
     #user-util-links {
+      li {
+        font-size: 0.875rem;
+      }
+      
       @media (max-width: breakpoint-max(sm)) {
         position: static;
         float: none;
