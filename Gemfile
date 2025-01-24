@@ -51,8 +51,9 @@ gem 'jquery-datatables-rails'
 gem 'loofah', '>= 2.2.3'
 
 # Login gems
-gem 'omniauth-rails_csrf_protection', '~> 1.0'
-gem 'omniauth-cas', '~> 3.0'
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'omniauth-cas'
 gem 'omniauth-saml'
 
 # Honeycomb
@@ -86,17 +87,17 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.93'
   gem 'rubocop-rspec'
   gem 'selenium-webdriver', '~> 3'
   gem 'webmock'
+  gem 'rails-controller-testing'
 end
 
 group :test do
   gem 'coveralls', '~> 0.8'
   gem 'database_cleaner', '~> 1.8'
   gem 'equivalent-xml'
-  gem 'rails-controller-testing'
   gem 'rspec'
   gem 'rspec-mocks'
   gem 'rspec-activemodel-mocks'

@@ -20,7 +20,7 @@ RSpec.describe Admin::OregonDigital::CollectionTypesController, type: :controlle
   let(:role) { Role.create(name: 'admin') }
   let(:valid_session) { {} }
   let(:collection_type) { create(:collection_type) }
-  let(:user) { create(:admin) }
+  let(:user) { create(:user) }
 
   before do
     user.roles << role

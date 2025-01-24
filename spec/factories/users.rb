@@ -1,33 +1,52 @@
-# frozen_string_literal:true
+# frozen_string_literal: true
 
 FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     password { 'password' }
-    password_confirmation { 'password' }
 
-    transient do
-      groups { [] }
+    factory :jill do
+      email { 'jilluser@example.com' }
     end
 
-    after(:build) do |user, evaluator|
-      # In case we have the instance but it has not been persisted
-      ::RSpec::Mocks.allow_message(user, :groups).and_return(Array.wrap(evaluator.groups))
-      # Given that we are stubbing the class, we need to allow for the original to be called
-      ::RSpec::Mocks.allow_message(user.class.group_service, :fetch_groups).and_call_original
-      # We need to ensure that each instantiation of the admin user behaves as expected.
-      # This resolves the issue of both the created object being used as well as re-finding the created object.
-      ::RSpec::Mocks.allow_message(user.class.group_service, :fetch_groups).with(user: user).and_return(Array.wrap(evaluator.groups))
+    factory :archivist, aliases: [:user_with_fixtures] do
+      email { 'archivist1@example.com' }
     end
 
-    after(:create, &:confirm)
+    factory :user_with_mail do
+      after(:create) do |user|
+        # TODO: what is this class for?
+        # <span class="batchid ui-helper-hidden">fake_batch_noid</span>
+        # message = BatchMessage.new
 
-    factory :admin do
-      groups { ['admin'] }
+        # Create examples of single file successes and failures
+        (1..10).each do |number|
+          file = MockFile.new(number.to_s, "Single File #{number}")
+          User.batchuser.send_message(user, message.single_success('single-batch-success', file), message.success_subject, false)
+          User.batchuser.send_message(user, message.single_failure('single-batch-failure', file), message.failure_subject, false)
+        end
+
+        # Create examples of mulitple file successes and failures
+        files = []
+        (1..50).each do |number|
+          files << MockFile.new(number.to_s, "File #{number}")
+        end
+        User.batchuser.send_message(user, message.multiple_success('multiple-batch-success', files), message.success_subject, false)
+        User.batchuser.send_message(user, message.multiple_failure('multiple-batch-failure', files), message.failure_subject, false)
+      end
+    end
+
+    factory :curator do
+      email { 'curator1@example.com' }
     end
   end
+end
 
-  trait :guest do
-    guest { true }
+class MockFile
+  attr_accessor :noid, :to_s, :id
+  def initialize(id, string)
+    self.noid = id
+    self.id = id
+    self.to_s = string
   end
 end
