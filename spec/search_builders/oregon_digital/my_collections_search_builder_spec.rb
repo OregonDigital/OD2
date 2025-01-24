@@ -4,10 +4,6 @@ RSpec.describe OregonDigital::MyCollectionsSearchBuilder do
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
 
-  before do
-    allow(search_builder).to receive(:blacklight_config)
-  end
-
   describe '#models' do
     subject { search_builder.models }
 

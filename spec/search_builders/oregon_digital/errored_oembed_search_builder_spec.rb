@@ -7,10 +7,6 @@ RSpec.describe OregonDigital::ErroredOembedSearchBuilder do
   let(:search_builder) { described_class.new(context) }
   let(:solr_params) { Blacklight::Solr::Request.new }
 
-  before do
-    allow(search_builder).to receive(:blacklight_config)
-  end
-
   describe '#processor_chain' do
     subject { search_builder.processor_chain }
 

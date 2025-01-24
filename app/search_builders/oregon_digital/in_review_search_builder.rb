@@ -7,6 +7,8 @@ module OregonDigital
     self.default_processor_chain += %i[in_review_ids]
     self.default_processor_chain -= %i[only_active_works]
 
+    def blacklight_config;end
+
     # Get all the ids for the works in review from Hyrax and pipe into this search builder
     def in_review_ids(solr_params)
       solr_params[:fq] ||= []
