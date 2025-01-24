@@ -5,7 +5,7 @@ RSpec.describe OregonDigital::NonUserCollectionsSearchBuilder do
   let(:oai_collection_type) { create(:collection_type, machine_id: :oai_set) }
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
-  
+
   before do
     user_collection_type.save
     oai_collection_type.save
