@@ -12,7 +12,6 @@ RSpec.describe OregonDigital::SiblingsOfWorkSearchBuilder do
     allow(child).to receive(:id).and_return(123)
     allow(child).to receive(:parents).and_return([parent])
     allow(parent).to receive(:member_ids).and_return([child.id, sibling.id])
-    allow(context).to receive(:blacklight_config)
   end
 
   describe '#processor_chain' do

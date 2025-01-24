@@ -7,10 +7,6 @@ RSpec.describe OregonDigital::ParentsSearchBuilder do
   let(:parent) { build(:generic, title: ['foo'], id: 124, member_ids: [child.id]) }
   let(:search_builder) { described_class.new(id: child.id) }
 
-  before do
-    allow(context).to receive(:blacklight_config)
-  end
-
   describe '#processor_chain' do
     subject { processor_chain }
 
