@@ -5,7 +5,7 @@ class OregonDigital::MyCollectionsSearchBuilder < Hyrax::My::CollectionsSearchBu
   include OregonDigital::FilterTombstone
   self.default_processor_chain += [:non_tombstoned_works]
 
-  def blacklight_config;end
+  def blacklight_config; end
 
   # This overrides the models in Hyrax::My::CollectionsSearchBuilder
   # @return [Array<Class>] a list of classes to include

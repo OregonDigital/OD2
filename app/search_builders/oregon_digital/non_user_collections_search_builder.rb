@@ -5,7 +5,7 @@ class OregonDigital::NonUserCollectionsSearchBuilder < Hyrax::CollectionSearchBu
   include OregonDigital::OnlyNonUserCollectionsBehavior
   self.default_processor_chain += [:show_only_collections_not_created_users]
 
-  def blacklight_config;end
+  def blacklight_config; end
 
   # OVERRIDE FROM BLACKLIGHT https://github.com/projectblacklight/blacklight/blob/v6.23.0/lib/blacklight/search_builder.rb#L187-L190
   # Removes per_page limit to rows maximum value

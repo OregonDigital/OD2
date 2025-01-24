@@ -5,7 +5,7 @@ module OregonDigital
   class OembedSearchBuilder < Blacklight::SearchBuilder
     self.default_processor_chain = %i[with_pagination with_sorting only_oembed]
 
-    def blacklight_config;end
+    def blacklight_config; end
 
     def with_pagination(solr_params)
       solr_params[:rows] = 1000
