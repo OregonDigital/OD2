@@ -10,6 +10,7 @@ RSpec.describe OregonDigital::ChildrenOfWorkSearchBuilder do
 
   before do
     allow(parent).to receive(:[]).with('member_ids_ssim').and_return([child1.id, child2.id])
+    allow(search_builder).to receive(:blacklight_config)
   end
 
   describe '#processor_chain' do
