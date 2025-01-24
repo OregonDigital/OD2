@@ -9,6 +9,7 @@ RSpec.describe OregonDigital::NonUserCollectionsSearchBuilder do
   before do
     user_collection_type.save
     oai_collection_type.save
+    allow(context).to receive(:blacklight_config)
   end
 
   describe '#show_only_collections_not_created_users' do

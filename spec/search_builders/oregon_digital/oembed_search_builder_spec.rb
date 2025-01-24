@@ -7,6 +7,10 @@ RSpec.describe OregonDigital::OembedSearchBuilder do
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
 
+  before do
+    allow(context).to receive(:blacklight_config)
+  end
+
   describe '#processor_chain' do
     it { is_expected.to eq %i[with_pagination with_sorting only_oembed] }
   end

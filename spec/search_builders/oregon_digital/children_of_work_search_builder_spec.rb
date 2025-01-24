@@ -9,6 +9,7 @@ RSpec.describe OregonDigital::ChildrenOfWorkSearchBuilder do
   let(:search_builder) { described_class.new(work: parent) }
 
   before do
+    allow(context).to receive(:blacklight_config)
     allow(parent).to receive(:[]).with('member_ids_ssim').and_return([child1.id, child2.id])
   end
 
