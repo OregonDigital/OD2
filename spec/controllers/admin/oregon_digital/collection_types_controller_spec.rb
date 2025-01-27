@@ -23,7 +23,9 @@ RSpec.describe Admin::OregonDigital::CollectionTypesController, type: :controlle
   let(:user) { create(:user) }
 
   before do
-    user.roles << role
+    r = role
+    r.users << user
+    r.save
     allow(controller.current_ability).to receive(:can?).with(any_args).and_return(true)
     sign_in user
   end
