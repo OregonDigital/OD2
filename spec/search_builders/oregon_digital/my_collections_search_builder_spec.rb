@@ -4,7 +4,7 @@ RSpec.describe OregonDigital::MyCollectionsSearchBuilder do
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
 
-  # TODO REMOVE WHEN WE FIGURE OUT WHATS WRONG WITH SEARCH BUILDERS
+  # TODO: REMOVE WHEN WE FIGURE OUT WHATS WRONG WITH SEARCH BUILDERS
   before do
     allow(context).to receive(:blacklight_config)
   end
