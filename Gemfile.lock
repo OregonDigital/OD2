@@ -789,7 +789,7 @@ GEM
       pry (>= 0.13.0)
     psych (3.3.4)
     public_suffix (6.0.1)
-    puma (6.5.0)
+    puma (4.3.12)
       nio4r (~> 2.0)
     qa (5.14.0)
       activerecord-import
@@ -1258,7 +1258,7 @@ DEPENDENCIES
   poltergeist
   pry-byebug
   pry-rails
-  puma
+  puma (~> 4.3.8)
   rails (~> 6.0.6)
   rails-controller-testing
   recaptcha
