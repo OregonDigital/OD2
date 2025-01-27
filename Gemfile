@@ -24,7 +24,7 @@ gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'chosen-rails'
 gem 'pg'
-gem 'puma'
+gem 'puma', '~> 4.3.8'
 gem 'rails', '~> 6.0.6'
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sidekiq', '~> 7.0'
@@ -68,6 +68,7 @@ gem 'yabeda-rails'
 gem 'yabeda-puma-plugin'
 gem 'yabeda-http_requests'
 
+
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
 gem 'blacklight_oai_provider'
@@ -92,6 +93,7 @@ group :development, :test do
   gem 'selenium-webdriver', '~> 3'
   gem 'webmock'
   gem 'rails-controller-testing'
+  gem 'webdrivers', '~> 4.0'
 end
 
 group :test do
