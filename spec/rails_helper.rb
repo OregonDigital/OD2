@@ -18,7 +18,6 @@ require 'factory_bot_rails'
 require 'database_cleaner'
 require 'rspec/active_model/mocks'
 require 'webmock'
-require 'webdrivers'
 WebMock.allow_net_connect!
 # Add additional requires below this line. Rails is not loaded until this point!
 
