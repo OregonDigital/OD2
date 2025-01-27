@@ -68,7 +68,6 @@ gem 'yabeda-rails'
 gem 'yabeda-puma-plugin'
 gem 'yabeda-http_requests'
 
-
 # Recaptcha
 gem "recaptcha", require: "recaptcha/rails"
 gem 'blacklight_oai_provider'
@@ -93,7 +92,6 @@ group :development, :test do
   gem 'selenium-webdriver', '~> 3'
   gem 'webmock'
   gem 'rails-controller-testing'
-  gem 'webdrivers', '~> 4.0'
 end
 
 group :test do
