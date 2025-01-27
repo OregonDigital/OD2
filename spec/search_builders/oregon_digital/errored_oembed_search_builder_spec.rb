@@ -7,6 +7,7 @@ RSpec.describe OregonDigital::ErroredOembedSearchBuilder do
   let(:search_builder) { described_class.new(context) }
   let(:solr_params) { Blacklight::Solr::Request.new }
 
+  # TODO REMOVE WHEN WE FIGURE OUT WHATS WRONG WITH SEARCH BUILDERS
   before do
     allow(context).to receive(:blacklight_config)
   end
