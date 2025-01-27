@@ -201,6 +201,7 @@ module OregonDigital
             http\://creativecommons.org/publicdomain/zero/1.0/ OR
             http\://creativecommons.org/publicdomain/mark/1.0/)' }
         }
+
         config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), index_range: 'A'..'Z', limit: 5
@@ -215,9 +216,9 @@ module OregonDigital
         config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id', index_range: 'a'..'z'
         config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution', index_range: 'A'..'Z'
+
         config.add_facet_field 'cultural_context_label_sim', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'local_contexts_label_sim', label: I18n.translate('simple_form.labels.defaults.local_contexts'), index_range: 'A'..'Z', limit: 5
-
         config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'box_number_sim', label: I18n.translate('simple_form.labels.defaults.box_number'), index_range: 'A'..'Z', limit: 5
