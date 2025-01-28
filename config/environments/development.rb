@@ -82,7 +82,7 @@ Rails.application.configure do
   config.reindex_extent = ENV["MIGRATION_REINDEX_EXTENT"].present? ? 'limited' : 'full'
 
   # Whitelist docker containers for webconsole during development
-  config.web_console.whitelisted_ips = ['172.0.0.0/8', '192.0.0.0/8']
+  config.web_console.allowed_ips = ['172.0.0.0/8', '192.0.0.0/8']
 
   config.local_path = ENV.fetch('LOCAL_PATH', 'tmp/shared')
   config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 5000).to_i
