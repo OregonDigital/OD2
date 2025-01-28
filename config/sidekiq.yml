@@ -14,3 +14,4 @@ production:
   - import
   - export
   - ingest
+  - reindex
