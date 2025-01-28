@@ -6,13 +6,13 @@
     border-top: $very-light-grey 2px solid;
     width: calc(16.666% - 20px);
 
-    @media (max-width: breakpoint-min(md)) {
+    @media (max-width: breakpoint-min(xl)) {
       & {
         width: calc(25% - 30px);
       }
     }
 
-    @media (max-width: breakpoint-min(sm)) {
+    @media (max-width: breakpoint-min(md)) {
       & {
         width: calc(50% - 20px);
       }
@@ -26,13 +26,13 @@
   #masonry-gutter-sizer {
     width: 20px;
 
-    @media (max-width: breakpoint-min(md)) {
+    @media (max-width: breakpoint-min(xl)) {
       & {
         width: 30px;
       }
     }
 
-    @media (max-width: breakpoint-min(sm)) {
+    @media (max-width: breakpoint-min(md)) {
       & {
         width: 40px;
       }
