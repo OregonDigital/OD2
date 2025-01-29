@@ -68,7 +68,7 @@ class User < ApplicationRecord
     User.where(email: email).first_or_create do |u|
       u.email = email
       u.roles << role unless role.nil?
-      #u.skip_confirmation!
+      # u.skip_confirmation!
     end
   end
 
