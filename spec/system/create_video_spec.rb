@@ -31,11 +31,11 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       click_link 'Files' # switch tab
       expect(page.body).to have_content 'Add files...'
       expect(page.body).to have_content 'Add folder...'
-      #within('div#add-files') do
-      page.execute_script("$('input[type=file]').css('opacity','1')")
-      page.execute_script("$('input[type=file]').css('position','inherit')")
-      attach_file('files[]', upload_file_path, visible: false)
-      #end
+      # within('div#add-files') do
+        page.execute_script("$('input[type=file]').css('opacity','1')")
+        page.execute_script("$('input[type=file]').css('position','inherit')")
+        attach_file('files[]', upload_file_path, visible: false)
+      # end
       within('ul.nav-tabs') do
         click_link 'Descriptions' # switch tab
       end
