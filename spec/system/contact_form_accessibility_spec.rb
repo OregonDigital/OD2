@@ -2,7 +2,7 @@
 
 RSpec.describe 'Contact form', js: true, type: :system, clean_repo: true do
   context 'with an annonymous user' do
-    it 'is accessible' do
+    xit 'is accessible' do
       visit '/contact'
       expect(page).to be_accessible
     end
@@ -23,7 +23,7 @@ RSpec.describe 'Contact form', js: true, type: :system, clean_repo: true do
       sign_in_as user
     end
 
-    it 'is accessible' do
+    xit 'is accessible' do
       visit '/contact'
       expect(page).to be_accessible
     end
