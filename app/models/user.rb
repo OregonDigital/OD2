@@ -13,6 +13,7 @@ class User < ApplicationRecord
   # DISABLE RUBOCOP BECAUSE DEVISE REQUIRES A PARTICULAR FORMAT
   # rubocop:disable Style/SymbolArray
   # Include default devise modules. Others available are:
+  # TODO: ADD BACK IN CONFIRMABLE
   devise :database_authenticatable, :registerable, :recoverable,
          :omniauthable, :validatable, omniauth_providers: [:cas, :saml]
   # rubocop:enable Style/SymbolArray
@@ -67,7 +68,7 @@ class User < ApplicationRecord
     User.where(email: email).first_or_create do |u|
       u.email = email
       u.roles << role unless role.nil?
-      u.skip_confirmation!
+      #u.skip_confirmation!
     end
   end
 
