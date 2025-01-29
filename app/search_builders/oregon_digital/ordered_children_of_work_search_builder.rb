@@ -18,7 +18,7 @@ module OregonDigital
     end
 
     def ordered_child_works(solr_params)
-      ids = query_for_ordered_ids || ['""']
+      ids = @work.ordered_member_ids || ['""']
       ids = ids.slice(find_start(@child_page), @count)
       solr_params[:fq] ||= []
       solr_params[:fq] << "id:(#{ids.join(' OR ')})"
@@ -29,16 +29,6 @@ module OregonDigital
       return 0 if page.nil?
 
       return (page.to_i - 1) * @count
-    end
-
-    # copied from Hyrax::SolrDocument::OrderedMembers
-    def query_for_ordered_ids(limit: 10_000,
-                              proxy_field: 'proxy_in_ssi',
-                              target_field: 'ordered_targets_ssim')
-      Hyrax::SolrService
-        .query("#{proxy_field}:#{@work.id}", rows: limit, fl: target_field)
-        .flat_map { |x| x.fetch(target_field, nil) }
-        .compact
     end
   end
 end

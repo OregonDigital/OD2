@@ -25,8 +25,14 @@ module OregonDigital
 
     # Pass work to relationship search builders
     def search_builder
-      work ||= ::SolrDocument.find(params['id'])
       search_builder_class == Hyrax::WorkSearchBuilder ? search_builder_class.new(self) : search_builder_class.new(self, work: work)
+    end
+
+    def work
+      @work ||= begin
+        doc = ::SolrDocument.find(params['id'])
+        Hyrax::SolrDocument::OrderedMembers.decorate(doc)
+      end
     end
 
     # Get all parent documents
@@ -59,7 +65,7 @@ module OregonDigital
 
     def sort_by_ordered(doc_list, start_ind)
       ordered_docs = []
-      query_for_ordered_ids.slice(start_ind, COUNT).each do |id|
+      work.ordered_member_ids.slice(start_ind, COUNT).each do |id|
         ordered_docs << doc_list.find { |x| x['id'] == id }
       end
       ordered_docs.compact
@@ -69,16 +75,6 @@ module OregonDigital
       return 0 if page.nil?
 
       (page.to_i - 1) * COUNT
-    end
-
-    # copied from Hyrax::SolrDocument::OrderedMembers
-    def query_for_ordered_ids(limit: 10_000,
-                              proxy_field: 'proxy_in_ssi',
-                              target_field: 'ordered_targets_ssim')
-      Hyrax::SolrService
-        .query("#{proxy_field}:#{params['id']}", rows: limit, fl: target_field)
-        .flat_map { |x| x.fetch(target_field, nil) }
-        .compact
     end
   end
 end
