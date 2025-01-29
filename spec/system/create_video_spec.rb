@@ -31,17 +31,29 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       click_link 'Files' # switch tab
       expect(page.body).to have_content 'Add files...'
       expect(page.body).to have_content 'Add folder...'
-      page.execute_script("$('input[type=file]').css('opacity','1')")
-      page.execute_script("$('input[type=file]').css('position','inherit')")
-      attach_file('files[]', upload_file_path, visible: false)
-      click_link 'Descriptions' # switch tab
-      fill_in('Title', with: 'Test Title')
-      fill_in('Identifier', with: 'Test ID')
+      within('div#add-files') do |_file|
+        page.execute_script("$('input[type=file]').css('opacity','1')")
+        page.execute_script("$('input[type=file]').css('position','inherit')")
+        attach_file('files[]', upload_file_path, visible: false)
+      end
+      within('ul.nav-tabs') do |_file|
+        click_link 'Descriptions' # switch tab
+      end
+      within('div.video_title') do |_file|
+        fill_in('Title', with: 'Test Title')
+      end
+      within('div.video_identifier') do |_file|
+        fill_in('Identifier', with: 'Test ID')
+      end
       select('In Copyright', from: 'Rights')
-      select('Dataset', from: 'Resource type')
+      within('div.video_resource_type') do |_file|
+        select('Dataset', from: 'Resource type')
+      end
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
-      click_link 'Relationships'
+      within('ul.nav-tabs') do |_file|
+        click_link 'Relationships'
+      end
       first_element = find('#video_admin_set_id > option:nth-child(2)').text
       select(first_element, from: 'video_admin_set_id')
       find('#required-metadata').click
