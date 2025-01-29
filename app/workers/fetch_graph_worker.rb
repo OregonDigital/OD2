@@ -25,7 +25,7 @@ class FetchGraphWorker
         val.persist!
       rescue TriplestoreAdapter::TriplestoreException, IOError, OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError => e
         failed_cv << { uri: val.to_s, error: e.message }
-        fetch_failed_graph(val, pid)
+        fetch_failed_graph(val)
         next
       end
     end
@@ -38,7 +38,7 @@ class FetchGraphWorker
   #   Hyrax.config.callback.run(:ld_fetch_failure, user, val.rdf_subject.value)
   # end
 
-  def fetch_failed_graph(val, _pid)
+  def fetch_failed_graph(val)
     FetchFailedGraphWorker.perform_async(val)
   end
 
@@ -55,7 +55,7 @@ class FetchGraphWorker
     path = "./tmp/failed_fetch/#{pid}.txt"
 
     # SEARCH: Look for works to create a link
-    work = ActiveFedora::Base.find(pid)
+    work = SolrDocument.find(pid)
     url_path = Rails.application.routes.url_helpers.polymorphic_path(work)
     url_path[0] = ''
 
