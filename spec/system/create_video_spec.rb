@@ -31,29 +31,17 @@ RSpec.describe 'Create a Video',  js: true, type: :system, clean_repo: true do
       click_link 'Files' # switch tab
       expect(page.body).to have_content 'Add files...'
       expect(page.body).to have_content 'Add folder...'
-      # within('div#add-files') do
-        page.execute_script("$('input[type=file]').css('opacity','1')")
-        page.execute_script("$('input[type=file]').css('position','inherit')")
-        attach_file('files[]', upload_file_path, visible: false)
-      # end
-      within('ul.nav-tabs') do
-        click_link 'Descriptions' # switch tab
-      end
-      within('div.video_title') do
-        fill_in('Title', with: 'Test Title')
-      end
-      within('div.video_identifier') do
-        fill_in('Identifier', with: 'Test ID')
-      end
+      page.execute_script("$('input[type=file]').css('opacity','1')")
+      page.execute_script("$('input[type=file]').css('position','inherit')")
+      attach_file('files[]', upload_file_path, visible: false)
+      click_link 'Descriptions' # switch tab
+      fill_in('Title', with: 'Test Title')
+      fill_in('Identifier', with: 'Test ID')
       select('In Copyright', from: 'Rights')
-      within('div.video_resource_type') do
-        select('Dataset', from: 'Resource type')
-      end
+      select('Dataset', from: 'Resource type')
       # Selenium/chrome on CircleCI requires the focus to change after the previous method
       find('#required-metadata').click
-      within('ul.nav-tabs') do
-        click_link 'Relationships'
-      end
+      click_link 'Relationships'
       first_element = find('#video_admin_set_id > option:nth-child(2)').text
       select(first_element, from: 'video_admin_set_id')
       find('#required-metadata').click
