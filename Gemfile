@@ -87,7 +87,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 5.0'
   gem 'rubocop', '~> 0.93'
   gem 'rubocop-rspec'
   gem 'selenium-webdriver', '~> 3'

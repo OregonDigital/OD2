@@ -1266,7 +1266,7 @@ DEPENDENCIES
   rspec
   rspec-activemodel-mocks
   rspec-mocks
-  rspec-rails
+  rspec-rails (~> 5.0)
   rspec_junit_formatter
   rubocop (~> 0.93)
   rubocop-rspec
