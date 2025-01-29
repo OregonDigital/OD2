@@ -339,38 +339,42 @@ em {
 div.pagination {
   display: flex;
   justify-content: center;
+  margin: 20px 0;
 }
-ul.pagination li {
-  &.active span {
-    background-color: $contrast-orange;
-    border: none;
-    color: $navy-blue;
-  }
-  &.next span,
-  &.next a,
-  &.previous span,
-  &.previous a {
-    background: none;
-  }
-  &.disabled {
-    span,
-    span:hover,
-    span:focus,
+ul.pagination {
+  align-items: center;
+  li {
+    &.active span.page-link {
+      background-color: $contrast-orange;
+      border: none;
+      color: $navy-blue;
+    }
+    &.next span,
+    &.next a,
+    &.previous span,
+    &.previous a {
+      background: none;
+    }
+    &.disabled {
+      span,
+      span:hover,
+      span:focus,
+      a,
+      a:hover,
+      a:focus {
+        color: $dark-grey;
+      }
+    }
+
     a,
-    a:hover,
-    a:focus {
-      color: $dark-grey;
+    span {
+      background-color: $very-light-grey;
+      border: none;
+      margin: 0 .25em;
+      padding: 6px 12px;
     }
   }
-
-  a,
-  span {
-    background-color: $very-light-grey;
-    border: none;
-    margin: 0 .25em;
-  }
 }
-
 /* Gallery specific */
 #content {
   flex-direction: column;

@@ -64,7 +64,7 @@ $triangle-size: $block-border-size*4;
   width:$triangle-size*2;
   height:$triangle-size*2;
   overflow:hidden;
-  position:absolute;
+  position:relative;
   visibility: hidden;
 }
 .notch::before,
@@ -89,12 +89,11 @@ $triangle-size: $block-border-size*4;
 
 /* Notch on Bottom Middle */
 .notch-xMiddle-yBottom {
-  bottom:-$triangle-size*2;
   left:50%;
   transform:rotate(90deg) translateY(50%);
 }
 
-@media (min-width: breakpoint-min(sm)) {
+@media (min-width: breakpoint-min(md)) {
   $block-border-size: 5px;
   $triangle-size: $block-border-size*4;
   .notch {
@@ -113,12 +112,6 @@ $triangle-size: $block-border-size*4;
     left:-($triangle-size + $block-border-size*2);
   }
 
-  /* Notch on Bottom Middle */
-  .notch-xMiddle-yBottom {
-    bottom:-$triangle-size*2;
-    // left:50%;
-    // transform:rotate(90deg) translateY(50%);
-  }
   #explore-tabs a {
     height: 55px;
     width: 150px;

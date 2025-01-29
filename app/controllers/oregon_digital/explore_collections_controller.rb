@@ -106,7 +106,7 @@ module OregonDigital
       all: 'all',
       osu: 'osu',
       uo: 'uo',
-      my: 'my collections'
+      my: 'my'
     }.freeze
 
     def search_service
