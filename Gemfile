@@ -82,7 +82,7 @@ end
 group :development, :test do
   gem 'axe-matchers'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.17'
+  gem 'capybara', '~> 3.29'
   gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'pry-byebug'
