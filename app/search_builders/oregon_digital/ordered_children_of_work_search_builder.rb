@@ -11,6 +11,8 @@ module OregonDigital
       @work = work
       super(options.first)
       @child_page = options.first.params['child_page']
+      # page must be set to 1, otherwise search builder assumes
+      # that all docs have already been returned on the previous page
       options.first.params['page'] = '1'
       @count = blacklight_config.per_page.first
     end
