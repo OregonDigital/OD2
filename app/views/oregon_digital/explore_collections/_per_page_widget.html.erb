@@ -1,4 +1,5 @@
 <% if show_sort_and_per_page? and !blacklight_config.per_page.blank? %>
+<% widget_id = 'per_page-dropdown' %>
 <div id="<%= widget_id %>" class="h4">
   <%= t('blacklight.search.per_page.title') %>
   <div class="btn-group">

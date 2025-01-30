@@ -26,8 +26,6 @@ module OregonDigital
     configure_blacklight do |config|
       config.view.gallery.if = false
       config.view.list.if = false
-      # config.view.table.partials = %i[index]
-      # config.view.table.icon_class = 'glyphicon-th-list'
       config.view.masonry.partials = %i[metadata]
       config.view.masonry.icon_class = 'fa fa-trello fa-lg'
 

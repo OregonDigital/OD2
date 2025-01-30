@@ -17,7 +17,6 @@ class CatalogController < ApplicationController
   # Combine our search queries as they come in
   def index
     create_full_size_download_facet
-    params[:q] = params[:q].join(' AND ') if params[:q].respond_to?('join')
     super
   end
 
@@ -94,4 +93,15 @@ class CatalogController < ApplicationController
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
+
+  private
+
+  # OVERRIDE FROM BLACKLIGHT: Allow and account for multiple q: query params
+  # This must be on every controller that uses the layout, because it is used in
+  # the header to draw Blacklight::SearchNavbarComponent (via the shared/header_navbar template)
+  # @return [Blacklight::SearchState] a memoized instance of the parameter state.
+  def search_state
+    params[:q] = params[:q].join(' AND ') if params[:q].respond_to?('join')
+    @search_state ||= search_state_class.new(params, blacklight_config, self)
+  end
 end

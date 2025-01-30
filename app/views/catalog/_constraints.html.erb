@@ -1,5 +1,5 @@
 
-<div id="appliedParamsConstraint" class="clearfix visible-xs-inline-block breadcrumb">
+<div id="appliedParamsConstraint" class="clearfix d-inline-block d-sm-none breadcrumb">
   <%= render_constraints(params) %>
 </div>
 <div class="widget-wrapper">
@@ -10,11 +10,13 @@
     <%= render_filtered_partials(view_type_group: tool_config) %>
   </div>
 
-  <div id="appliedParams" class="clearfix hidden-xs">
+  <div id="appliedParams" class="clearfix d-none d-sm-block">
     <%= render_constraints(params) %>
   </div>
 
-  <%= render_results_collection_tools wrapping_class: "search-widgets" %>
+  <div class="d-md-none">
+    <%= render 'per_page_widget', size: 'xs' %>
+  </div>
 
 </div>
 
