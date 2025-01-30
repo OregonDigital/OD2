@@ -8,6 +8,11 @@ RUN gem install bundler -v '2.3.26'
 
 FROM bundler as dependencies
 
+# Temporary fix for Google Bundle
+RUN wget -O - "https://dl.google.com/linux/linux_signing_key.pub" | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
+RUN echo 'c1db534ce40334b793cdbecba6459ddd21ebccbdef24dc603d6b0debcfb8f746  /etc/apt/keyrings/google-chrome.gpg' | sha256sum -c
+RUN echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+
 # The alpine way
 RUN apk --no-cache update && apk --no-cache upgrade && \
   apk add --no-cache alpine-sdk nodejs unzip ghostscript vim yarn \
