@@ -1,7 +1,7 @@
 <div class="widget-wrapper">
-  <%= render_results_collection_tools wrapping_class: "search-widgets visible-xs-inline-block" %>
+  <%= render_results_collection_tools wrapping_class: "search-widgets d-md-none d-inline-block" %>
 
-  <div id="appliedParams" class="explore-collection clearfix visible-all-inline">
+  <div id="appliedParams" class="explore-collection clearfix d-inline">
     <div class="pull-right">
       <%# OVERRIDE FROM BLACKLIGHT to remove start over link and replace with view type widget %>
       <% tool_config = Blacklight::Configuration::ToolConfig.new %>

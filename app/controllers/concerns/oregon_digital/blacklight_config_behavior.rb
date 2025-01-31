@@ -43,7 +43,6 @@ module OregonDigital
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
-        config.view.gallery.icon_class = 'fa fa-trello fa-lg'
         config.view.gallery.if = true
         config.view.slideshow.partials = %i[index]
         config.view.slideshow.if = false

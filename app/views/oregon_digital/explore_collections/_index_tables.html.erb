@@ -1,7 +1,8 @@
 <% institution = OregonDigital::InstitutionPicker.institution_full_name(document) %>
 <tr class="my-collections-row">
   <th scope="row" class="col-lg-6 col-md-5">
-    <b><%= link_to(document.title_or_label, url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter))) %></b>
+
+    <b><%= link_to(document.title_or_label, url_for_document(document)) %></b>
     <% if controller.institution_restricted?(document.id) == true %>
       <span class="glyphicon glyphicon-lock"></span>
     <% end %>

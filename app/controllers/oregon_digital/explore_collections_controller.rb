@@ -26,8 +26,10 @@ module OregonDigital
     configure_blacklight do |config|
       config.view.gallery.if = false
       config.view.list.if = false
+      config.view.tables.partials = %i[metadata index table]
+      config.view.tables.template = 'document_tables'
+      config.view.masonry(document_component: Blacklight::Gallery::DocumentComponent)
       config.view.masonry.partials = %i[metadata]
-      config.view.masonry.icon_class = 'fa fa-trello fa-lg'
 
       config.sort_fields.except! 'score desc, system_create_dtsi desc', 'date_dtsi desc', 'date_dtsi asc', 'system_create_dtsi desc'
       config.sort_fields['title_ssort desc'][:label] = 'Z-A'
