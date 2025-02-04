@@ -127,6 +127,9 @@ Lint/StructNewOverride:
 Style/ExponentialNotation:
   Enabled: false
 
+RSpec/VerifiedDoubles:
+  Enabled: false
+
 Style/HashEachMethods:
   Enabled: false
 
