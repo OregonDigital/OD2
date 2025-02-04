@@ -58,6 +58,9 @@ module OregonDigital
 
     # hacky method for getting one page of child docs in order
     def ordered_child_results
+      @child_doc_list = []
+      return unless @child_response['response']['numFound'].positive?
+
       @search_builder_class = OregonDigital::OrderedChildrenOfWorkSearchBuilder
       (_, @child_doc_list) = search_results(params)
       @child_doc_list = sort_by_ordered(@child_doc_list, start(params[:child_page]))
