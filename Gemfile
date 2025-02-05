@@ -82,15 +82,15 @@ end
 group :development, :test do
   gem 'axe-matchers'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.17'
+  gem 'capybara', '~> 3.29'
   gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 5.0'
   gem 'rubocop', '~> 0.93'
   gem 'rubocop-rspec'
-  gem 'selenium-webdriver', '~> 3'
+  gem 'selenium-webdriver', '~> 4.4'
   gem 'webmock'
   gem 'rails-controller-testing'
 end
