@@ -23,7 +23,7 @@ RSpec.describe 'Contact form', js: true, type: :system, clean_repo: true do
       allow(CharacterizeJob).to receive(:perform_later)
       sign_in_as user
     end
-    
+
     # TODO: Add this back in
     xit 'is accessible' do
       visit '/contact'
