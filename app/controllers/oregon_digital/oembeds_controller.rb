@@ -18,7 +18,7 @@ module OregonDigital
 
     def edit
       load_curation_concern
-      if can? :edit, @curation_concern
+      return unless can? :edit, @curation_concern
       # authorize! :edit, @curation_concern
 
       add_breadcrumb t(:'hyrax.controls.home'), root_path
