@@ -110,7 +110,7 @@ module OregonDigital
     }.freeze
 
     def search_service
-      Hyrax::SearchService.new(config: blacklight_config, user_params: { q: '' }, scope: self, search_builder_class: blacklight_config.search_builder_class)
+      Hyrax::SearchService.new(config: blacklight_config, user_params: params, scope: self, search_builder_class: blacklight_config.search_builder_class)
     end
   end
 end
