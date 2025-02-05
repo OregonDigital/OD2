@@ -18,7 +18,8 @@ module OregonDigital
 
     def edit
       load_curation_concern
-      authorize! :edit, @curation_concern
+      if can? :edit, @curation_concern
+      # authorize! :edit, @curation_concern
 
       add_breadcrumb t(:'hyrax.controls.home'), root_path
       add_breadcrumb t(:'hyrax.dashboard.breadcrumbs.admin'), hyrax.dashboard_path
