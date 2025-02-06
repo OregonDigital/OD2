@@ -10,11 +10,9 @@ class FetchGraphWorker
   # rubocop:disable Metrics/AbcSize
   # user not needed any longer?
   def perform(pid, _user_key)
-    # Create an array to store failed fetch
+    # Create an array to store failed fetch & call method to check/create exist of tmp folder
     failed_cv = []
-
-    # Check for directory existence and clear out old files if needed
-    check_exist_directory
+    create_and_check_directory
 
     # Here be dragons
     # A valkyrie work's controlled properties don't resolve to our OregonDigital::ControlledVocabularies::* objects
@@ -33,7 +31,8 @@ class FetchGraphWorker
       end
     end
 
-    store_failed_fetch(pid) unless failed_cv.blank?
+    # CALL: Invoke the creation of failed_fetch file if array is not empty
+    store_failed_fetch(pid, failed_cv) unless failed_cv.blank?
     work.update_index
   end
   # rubocop:enable Metrics/MethodLength
@@ -53,39 +52,29 @@ class FetchGraphWorker
   end
 
   # METHOD: Create a method store all fails CV fetch
-  def store_failed_fetch(pid)
+  # rubocop:disable Metrics/MethodLength
+  def store_failed_fetch(pid, failed_cv)
     # PATH: Setup a path for the txt file
-    path = './tmp/failed_fetch/failed_pid.txt'
+    path = "./tmp/failed_fetch/#{pid}.txt"
 
-    # STORE: Add in pid to txt file
+    # SEARCH: Look for works to create a link & get URL path
+    work = SolrDocument.find(pid)
+    url_path = Rails.application.routes.url_helpers.polymorphic_url(work)
+    # STORE: Add in data to txt file
     File.open(path, 'w+') do |f|
-      f.write(pid.to_s)
-    end
-  end
-
-  # METHOD: To clear existing files in directory
-  def check_exist_directory
-    # CHECK: To see if directory exist
-    if File.exist? './tmp/failed_fetch/'
-      check_and_clear_exist_files
-    else
-      Dir.mkdir './tmp/failed_fetch/'
-    end
-  end
-
-  # METHOD: To clear existing files in directory
-  # rubocop:disable Style/GuardClause
-  def check_and_clear_exist_files
-    # GET: Get the list of files in the folder
-    files = Dir.entries('./tmp/failed_fetch') - ['.', '..']
-
-    # CHECK: Check if file not empty
-    unless files.empty?
-      files.each do |f|
-        file_path = File.join('./tmp/failed_fetch', f)
-        File.delete(file_path) if File.file?(file_path)
+      f.puts('Failed Fetch Record')
+      f.puts("Work ID: #{pid}")
+      f.puts("Work Link: #{url_path}")
+      failed_cv.each do |w|
+        f.puts("Error Placement: #{w[:uri]}   Error on Value: #{w[:error]}")
       end
+      f.puts("Time Recorded: #{Time.now.strftime('%m-%d-%Y %I:%M %p')}")
     end
   end
-  # rubocop:enable Style/GuardClause
+  # rubocop:enable Metrics/MethodLength
+
+  # METHOD: Create and check exist of folder
+  def create_and_check_directory
+    Dir.mkdir './tmp/failed_fetch/' if File.exist? './tmp/failed_fetch/'
+  end
 end
