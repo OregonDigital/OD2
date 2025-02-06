@@ -26,6 +26,8 @@ RSpec.describe FetchGraphWorker, type: :worker do
         stub_request(:get, 'http://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'https://opaquenamespace.org/ns/creator/ChabreWayne').to_return(status: 200, body: '', headers: {})
         stub_request(:get, 'http://opaquenamespace.org/ns/genus/Acnanthes').to_return(status: 200, body: '', headers: {})
+
+        allow(worker).to receive(:store_failed_fetch).and_return([])
       end
 
       it 'fetches all of its linked data labels' do
