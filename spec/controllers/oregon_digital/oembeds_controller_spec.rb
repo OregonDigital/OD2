@@ -24,6 +24,7 @@ RSpec.describe OregonDigital::OembedsController do
     end
   end
 
+  # TODO: Re-enable
   describe '#edit' do
     context 'when I do not have edit permissions for the object' do
       xit 'redirects' do
