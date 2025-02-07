@@ -7,7 +7,7 @@ module OregonDigital
   class FailedFetchNotification
     # METHOD: User mapping of all pid
     def user_map
-      @user_map ||= {}
+      @user_map ||= []
     end
 
     # METHOD: Add user to the 'map_user' list
@@ -21,7 +21,7 @@ module OregonDigital
       # LOOP: Go through Solr Doc to find depositor to user_map
       solr_docs = SolrDocument.find(pid_arr)
       solr_docs.each do |doc|
-        user_map[doc['depositor_ssim'].first] << "#{doc['id']}.txt"
+        user_map << {doc['depositor_ssim'].first => "#{doc['id']}.txt"}
       end
     end
 
