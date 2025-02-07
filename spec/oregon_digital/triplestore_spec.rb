@@ -28,6 +28,7 @@ RSpec.describe OregonDigital::Triplestore do
     end
   end
 
+  # TODO: re-enable
   describe '#predicate_labels' do
     xit 'returns an hash of labels' do
       expect(triplestore.predicate_labels(build_graph)).to eq('http://purl.org/dc/terms/title' => [],
