@@ -21,7 +21,7 @@ module OregonDigital
       # LOOP: Go through Solr Doc to find depositor to user_map
       solr_docs = SolrDocument.find(pid_arr)
       solr_docs.each do |doc|
-        user_map << {doc['depositor_ssim'].first => "#{doc['id']}.txt"}
+        user_map << { doc['depositor_ssim'].first => "#{doc['id']}.txt" }
       end
     end
 
