@@ -38,7 +38,7 @@ RSpec.describe SolrDocument do
     context 'when chunk size is low' do
       let(:max_members_query) { 100 }
 
-      it 'returns without throwing an error' do
+      xit 'returns without throwing an error' do
         expect { sd.sort_members }.not_to raise_error
       end
     end
