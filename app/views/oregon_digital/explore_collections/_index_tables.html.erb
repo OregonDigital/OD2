@@ -13,7 +13,7 @@
   </td>
   <% end %>
   <td>
-    <%= controller.total_viewable_items(document.id) %> <span class="hidden-md hidden-lg">items</span>
+    <%= controller.total_viewable_items(document.id) %> <span class="d-xl-none d-inline-block">items</span>
   </td>
   <% if controller.tab == controller.class::TABS[:my] %>
   <td>

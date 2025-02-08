@@ -2,7 +2,7 @@ table#documents-table {
   width: 100%;
   thead th {
     padding: 2em 0;
-    @media (max-width: breakpoint-max(sm)) {
+    @media (max-width: breakpoint-max(lg)) {
       & {
         position: absolute;
         width: 1px;
@@ -21,7 +21,10 @@ table#documents-table {
     td {
       padding: 0.25em 0;
     }
-    @media (max-width: breakpoint-max(sm)) {
+    b {
+      font-weight: bold;
+    }
+    @media (max-width: breakpoint-max(lg)) {
       &, th, td {
         display: block;
       }
@@ -33,6 +36,7 @@ table#documents-table {
         margin-top: 1.5em;
       }
       th {
+        max-width: 100%;
         font-size: 30px;
         padding: 0;
       }

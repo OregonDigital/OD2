@@ -50,7 +50,8 @@
   border-radius: 5px !important;
   border: none;
   box-shadow: none;
-  padding: .1em .25em;
+  padding: .2em .25em;
+  padding-top: 0;
   font-size: 18pt;
   &.active {
     color: $navy-blue;
@@ -114,7 +115,7 @@
     }
   }
   #sort-dropdown {
-    margin-right: 1.5em;
+    margin-right: 1.5em !important;
   }
 
   @media (max-width: breakpoint-min(md)) {
