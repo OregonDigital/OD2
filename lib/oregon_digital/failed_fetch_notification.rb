@@ -77,5 +77,15 @@ module OregonDigital
       File.delete('./tmp/failed_fetch_items.zip') if File.file?('./tmp/failed_fetch_items.zip')
       File.new('./tmp/failed_fetch_items.zip', 'w+')
     end
+
+    # METHOD: Delete all files in folder to clear up
+    def delete_files
+      folder = './tmp/failed_fetch'
+
+      # LOOP: Go through and delete the files
+      Dir.glob("#{folder}/*").each do |file|
+        File.delete(file) if File.file?(file)  # Ensure only files are deleted
+      end
+    end
   end
 end

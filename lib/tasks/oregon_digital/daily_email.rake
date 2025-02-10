@@ -26,5 +26,6 @@ namespace :oregon_digital do
 
     fetch_notifier.create_zip_file
     OregonDigital::FailedFetchMailer.with(to: fetch_notifier.fetch_metadeities, filename: 'failed_fetch_items.zip').failed_fetch_email.deliver_now
+    fetch_notifier.delete_files unless ActionMailer::Base.deliveries.last.blank?
   end
 end
