@@ -54,6 +54,8 @@ form#explore-collection-search {
   .explore-collections-search-widgets {
     @media (max-width: breakpoint-max(lg)) {
       & {
+        display: flex;
+        flex-direction: column;
         float: left !important;
       }
     }
@@ -66,8 +68,18 @@ form#explore-collection-search {
       display: inline-block;
 
       #per_page-dropdown {
-        margin-right: 1.5em;
+        margin-right: 1.5em !important;
         margin-top: 0;
+      }
+
+      .btn-group .dropdown-toggle:focus {
+        outline: 2px auto Highlight;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline: -2px;
+      }
+
+      .dropdown-item {
+        font-size: 14px;
       }
     }
   }
