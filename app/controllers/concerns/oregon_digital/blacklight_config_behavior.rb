@@ -213,7 +213,7 @@ module OregonDigital
         config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'non_user_collections_label_ssim', label: 'Collection', index_range: 'A'..'Z', limit: 5
+        config.add_facet_field 'non_user_collections_label_ssim', label: 'Collection', helper_method: 'collection_title_modify', index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'institution_label_sim', label: 'Institution', index_range: 'A'..'Z', limit: 5
 
