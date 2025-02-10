@@ -13,5 +13,6 @@ production:
   - hyrax_migrator
   - import
   - export
+  - fetch
   - ingest
   - reindex
