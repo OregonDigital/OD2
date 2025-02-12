@@ -13,17 +13,9 @@ Rails.application.config.to_prepare do
         message = Hyrax::MultipleMembershipChecker.new(item: new_member).check(collection_ids: [collection_id], include_current_members: true)
         raise Hyrax::SingleMembershipError, message if message.present?
         new_member.member_of_collection_ids << collection_id # only populate this direction
+        new_member = Hyrax.persister.save(resource: new_member)
+        # OVERRIDE FROM HYRAX: Reindex as AF or Valkyrie based on Hyrax config
         new_member = Hyrax.query_service.resource_factory.from_resource(resource: new_member) unless Hyrax.config.use_valkyrie?
-
-        # OVERRIDE FROM HYRAX: Use AF or Valkyrie based on Hyrax config
-        new_member = case new_member
-        when ActiveFedora::Base
-          new_member.save
-          new_member.valkyrie_resource
-        else
-          Hyrax.persister.save(resource: new_member)
-        end
-
         publish_metadata_updated(new_member, user)
         new_member
       end
@@ -35,17 +27,9 @@ Rails.application.config.to_prepare do
       def remove_member(collection_id:, member:, user:)
         return member unless member?(collection_id: collection_id, member: member)
         member.member_of_collection_ids.delete(collection_id)
-        member = Hyrax.query_service.resource_factory.from_resource(resource: member) unless Hyrax.config.use_valkyrie?
-
-        # OVERRIDE FROM HYRAX: Use AF or Valkyrie based on Hyrax config
-        member = case member
-        when ActiveFedora::Base
-          member.save
-          member.valkyrie_resource
-        else
-          Hyrax.persister.save(resource: member)
-        end
-
+        member = Hyrax.persister.save(resource: member)
+        # OVERRIDE FROM HYRAX: Reindex as AF or Valkyrie based on Hyrax config
+        new_member = Hyrax.query_service.resource_factory.from_resource(resource: new_member) unless Hyrax.config.use_valkyrie?
         publish_metadata_updated(member, user)
         member
       end
