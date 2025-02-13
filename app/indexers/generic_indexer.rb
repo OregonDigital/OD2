@@ -9,6 +9,17 @@ class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::StripsStopwords
   include OregonDigital::ParsableLabelBehavior
 
+  # Valkyrie compatibility hack to allow Hyrax.indexing_adapter to see AF based indexers
+  def initialize(obj)
+    obj = obj[:resource] if obj.is_a?(Hash) && obj.key?(:resource)
+    super(obj)
+  end
+
+  # Valkyrie compatibility hack to allow Hyrax.indexing_adapter to see AF based indexers
+  def to_solr
+    generate_solr_document
+  end
+
   # ABC Size is hard to avoid here because there are many types of fields we need to index.
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
   # propogate downwards.
