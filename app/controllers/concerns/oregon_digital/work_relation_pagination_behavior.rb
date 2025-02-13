@@ -54,6 +54,9 @@ module OregonDigital
       @search_builder_class = OregonDigital::ChildrenOfWorkSearchBuilder
       params[:page] = params[:child_page]
       (@child_response,) = search_results(params)
+      # handle pagination if some assets will be restricted for some reason
+      @child_response['response']['numFound'] = work.ordered_member_ids.count
+      @child_response['response']['start'] = start(params[:child_page])
     end
 
     # hacky method for getting one page of child docs in order

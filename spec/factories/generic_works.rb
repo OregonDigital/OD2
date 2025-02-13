@@ -34,5 +34,14 @@ FactoryBot.define do
     after(:build) do |work, evaluator|
       work.apply_depositor_metadata(evaluator.user.user_key)
     end
+
+    factory :work_with_ten_children do
+      before(:create) do |work, evaluator|
+        work.visibility = 'open'
+        (0..9).each do |i|
+          work.ordered_members << create(:work, user: evaluator.user, title: ["Child #{i}"], id: "abcde123#{i}", visibility: 'open')
+        end
+      end
+    end
   end
 end
