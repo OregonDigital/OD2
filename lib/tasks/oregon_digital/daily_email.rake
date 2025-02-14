@@ -12,7 +12,7 @@ namespace :oregon_digital do
     fetch_notifier = OregonDigital::FailedFetchNotification.new
     fetch_notifier.add_list_of_users
 
-    email users
+    # email users
     notifier.user_map.keys.each do |key|
       message = notifier.build_message(notifier.user_map[key])
       OregonDigital::NotificationMailer.with(email: key, message: message).notification_email.deliver_now
