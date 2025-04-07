@@ -27,12 +27,14 @@ module OregonDigital
       # This helps failed form submissions to return to the form and display errors
       params[hash_key_for_curation_concern][:member_of_collection_ids] = nil if params[hash_key_for_curation_concern][:member_of_collection_ids].empty?
       set_permissions_to_work
+      set_content_alert
       super
     end
 
     # MODIFY: Add in a special method to help on updating the permissions
     def update
       set_permissions_to_work
+      set_content_alert
       super
     end
 
@@ -54,6 +56,11 @@ module OregonDigital
       curation_concern.permissions_attributes = (permission_arr) unless permission_arr.blank?
     end
     # rubocop:enable Metrics/AbcSize
+
+    # METHOD: Check for mask_content not being check
+    def set_content_alert
+      curation_concern.content_alert = nil if params[hash_key_for_curation_concern][:mask_content].all?(&:blank?)
+    end
 
     def after_update_response
       OregonDigital::PermissionChangeEventJob.perform_later(curation_concern, current_user) if permissions_changed?
