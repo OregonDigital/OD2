@@ -13,11 +13,7 @@
 <% @default_content_alert = (f.object.content_alert.blank? || (f.object.content_alert == t('hyrax.content_warning.content_alert'))) %>
 <ul>
   <li class="radio">
-    <% if f.object.mask_content.all?(&:blank?) %>
-      <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), id: 'content_alert_default' %>
-    <% else %>
-      <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), checked: @default_content_alert, id: 'content_alert_default' %>
-    <% end %>
+    <%= f.radio_button :content_alert, t('hyrax.content_warning.content_alert'), id: 'content_alert_default' %>
     <p id="content_alert_text"><%= t('hyrax.content_warning.content_alert') %></p>
   </li>
   <li class="radio">
