@@ -27,8 +27,7 @@ module OregonDigital
     end
 
     def build(pid)
-      work = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
-      ado = OregonDigital::AspaceDigitalObject.new(work)
+      ado = OregonDigital::AspaceDigitalObject.new(pid)
       ado.build_record
       ado
     end
@@ -43,7 +42,7 @@ module OregonDigital
 
     def format_result
       result[:errors] = errors
-      JSON.generate(@result)
+      JSON.dump(result)
     end
 
     def errors
