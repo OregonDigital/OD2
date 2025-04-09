@@ -9,7 +9,7 @@ module OregonDigital
       end
 
       def self.label(data)
-        data.first['skos:prefLabel'].map {|v| v['@value'] if v['@language'] == 'en' }
+        data.first['skos:prefLabel'].map { |v| v['@value'] if v['@language'] == 'en' }.first
       end
 
       def self.as_query(q)
