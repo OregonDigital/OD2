@@ -15,12 +15,10 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
   end
 
   describe 'add_date' do
-    context 'date is invalid'
-      let(:resp) { {} }
+    let(:resp) { {} }
 
-      it 'returns empty hash' do
+    it 'returns empty hash instead of invalid date' do
         expect(ado.add_date).to eq resp
-      end
     end
   end
 

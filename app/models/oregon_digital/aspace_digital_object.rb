@@ -44,7 +44,7 @@ module OregonDigital
       id_match = /[0-9]+/.match val
       return {} if id_match.nil?
 
-      { 'ref' => "/repositories/2/archival_objects/#{id_match.to_s}" }
+      { 'ref' => "/repositories/2/archival_objects/#{id_match}" }
     end
 
     def record
@@ -76,7 +76,6 @@ module OregonDigital
       return doc['date_created_tesim'].first unless doc['date_created_tesim'].blank?
     end
 
-    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def add_date
       d = date_present
@@ -94,7 +93,6 @@ module OregonDigital
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
     def file_version_keys
