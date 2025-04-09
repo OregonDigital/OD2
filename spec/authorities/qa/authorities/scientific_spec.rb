@@ -3,7 +3,7 @@
 RSpec.describe Qa::Authorities::Scientific do
   let(:repository_instance) { described_class.new }
   let(:ons_request) { 'http://opaquenamespace.org/ns/class/my_id.jsonld' }
-  let(:ons_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/class/my_id' }.with_indifferent_access] }
+  let(:ons_response) { [{ 'rdfs:label': [{ '@language': 'en', '@value': 'mylabel' }], '@id': 'http://opaquenamespace.org/ns/class/my_id' }.with_indifferent_access] }
 
   it { expect(repository_instance.label.call(ons_response, OregonDigital::ControlledVocabularies::Vocabularies::OnsStylePeriod)).to eq 'mylabel' }
   describe '#search' do
