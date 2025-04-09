@@ -5,7 +5,7 @@ module OregonDigital
   module AspaceDigitalObjectExportBehavior
     def show_do_export
       @importer = Bulkrax::Importer.find(params[:importer_id])
-      render plain: export
+      render json: export
     end
 
     def export

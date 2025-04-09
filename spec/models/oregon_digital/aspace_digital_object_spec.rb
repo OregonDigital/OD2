@@ -1,12 +1,12 @@
 # frozen_string_literal:true
 
 RSpec.describe OregonDigital::AspaceDigitalObject do
-  let(:subject) { described_class.new('abcde1234') }
+  let(:ado) { described_class.new('abcde1234') }
   let(:solrdoc) do
     {
       'id' => 'abcde1234',
       'date_tesim' => ['1920s'],
-      'archival_object_id_tesim' => ["['1234']"]
+      'archival_object_id_tesim' => ["['archival_objects/1234']"]
     }
   end
 
@@ -15,16 +15,20 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
   end
 
   describe 'add_date' do
-    let(:resp) { {} }
-    it 'returns empty hash' do
-      expect(subject.add_date).to eq resp
+    context 'date is invalid'
+      let(:resp) { {} }
+
+      it 'returns empty hash' do
+        expect(ado.add_date).to eq resp
+      end
     end
   end
 
   describe 'linked_instance' do
     let(:resp) { { 'ref' => '/repositories/2/archival_objects/1234' } }
+
     it 'returns path with correct id' do
-      expect(subject.linked_instance).to eq resp
+      expect(ado.linked_instance).to eq resp
     end
   end
 end
