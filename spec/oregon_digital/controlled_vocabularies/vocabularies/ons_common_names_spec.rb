@@ -2,7 +2,7 @@
 
 RSpec.describe OregonDigital::ControlledVocabularies::Vocabularies::OnsCommonNames do
   let(:vocab) { described_class }
-  let(:data) { [{ 'rdfs:label': [{ '@language': 'en', '@value': 'blah' }] }.with_indifferent_access] }
+  let(:data) { [{ 'rdfs:label': { '@value': 'blah' }.with_indifferent_access }.with_indifferent_access] }
   let(:query) { 'www.blah.com/blah' }
 
   it { expect(vocab.expression).to be_kind_of(Regexp) }

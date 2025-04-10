@@ -5,7 +5,13 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class OnsBase
       def self.label(data)
-        data.first['rdfs:label'].map { |v| v['@value'] if v['@language'] == 'en' }.first
+        labels = data.first['rdfs:label']
+
+        if labels.is_a?(Array)
+          labels.map { |v| v['@value'] if v['@language'] == 'en' }.first
+        else
+          labels['@value']
+        end
       end
 
       def self.as_query(q)
