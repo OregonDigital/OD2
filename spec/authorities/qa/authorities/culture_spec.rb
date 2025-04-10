@@ -9,7 +9,7 @@ RSpec.describe Qa::Authorities::Culture do
   let(:getty_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel', 'language': [{ 'id': 'http://vocab.getty.edu/language/en' }] }], 'id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
   let(:loc_names_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/names/my_id' }.with_indifferent_access] }
   let(:loc_subjects_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/subjects/my_id' }.with_indifferent_access] }
-  let(:ons_response) { [{ 'rdfs:label': [{ '@language': 'en', '@value': 'mylabel' }], '@id': 'http://opaquenamespace.org/ns/culture/my_id' }.with_indifferent_access] }
+  let(:ons_response) { [{ 'rdfs:label': { '@value': 'mylabel' }.with_indifferent_access, '@id': 'http://opaquenamespace.org/ns/culture/my_id' }.with_indifferent_access] }
 
   it { expect(repository_instance.label.call(getty_response, OregonDigital::ControlledVocabularies::Vocabularies::GettyAat)).to eq 'mylabel' }
   it { expect(repository_instance.label.call(loc_names_response, OregonDigital::ControlledVocabularies::Vocabularies::LocNames)).to eq 'mylabel' }
