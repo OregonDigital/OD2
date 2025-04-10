@@ -1,0 +1,6 @@
+// CSS: Create a custom CSS for the edit form on OD2
+.disabled-text {
+  cursor: default;
+  user-select: none; /* Prevents text selection */
+  color: #ccc; /* Make color looks like disable */
+}
