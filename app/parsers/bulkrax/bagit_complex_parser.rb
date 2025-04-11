@@ -154,7 +154,7 @@ module Bulkrax
           file_name = filename(fs)
           next if file_name.blank?
 
-          io = open(fs.original_file.uri)
+          io = URI.open(fs.original_file.uri)
           file = Tempfile.new([file_name, File.extname(file_name)], binmode: true)
           file.write(io.read)
           file.close

@@ -14,6 +14,7 @@
 // Required by Blacklight
 //= require rails-ujs
 //= require jquery3
+//= require jquery-ui
 //= require popper
 //= require twitter/typeahead
 //= require bootstrap-sprockets
