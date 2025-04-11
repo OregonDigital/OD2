@@ -6,9 +6,11 @@ RSpec.describe OregonDigital::NonUserCollectionsSearchBuilder do
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
 
+  # TODO: REMOVE WHEN WE FIGURE OUT WHATS WRONG WITH SEARCH BUILDERS
   before do
     user_collection_type.save
     oai_collection_type.save
+    allow(context).to receive(:blacklight_config)
   end
 
   describe '#show_only_collections_not_created_users' do

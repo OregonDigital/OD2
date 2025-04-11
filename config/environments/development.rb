@@ -35,6 +35,7 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  config.hosts << "test.lib.oregonstate.edu"
   config.action_mailer.default_url_options = {
     host: ENV.fetch('DEFAULT_URL_OPTION', 'localhost:3000'),
     protocol: ENV.fetch('DEFAULT_URL_OPTION_PROTOCOL', 'http')
@@ -60,6 +61,9 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Add inline sass source maps
+  config.sass.inline_source_maps = true
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
@@ -78,19 +82,19 @@ Rails.application.configure do
   config.reindex_extent = ENV["MIGRATION_REINDEX_EXTENT"].present? ? 'limited' : 'full'
 
   # Whitelist docker containers for webconsole during development
-  config.web_console.whitelisted_ips = ['172.0.0.0/8', '192.0.0.0/8']
-
-  # Fix errors eg Psych::DisallowedClass: Tried to load unspecified class: Symbol
-  config.active_record.yaml_column_permitted_classes = [Symbol, ActiveSupport::HashWithIndifferentAccess, Time]
+  config.web_console.allowed_ips = ['172.0.0.0/8', '192.0.0.0/8']
 
   config.local_path = ENV.fetch('LOCAL_PATH', 'tmp/shared')
   config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 5000).to_i
   config.batch_size = ENV.fetch('BULKRAX_BATCH_SIZE', 100).to_i
   config.importer_cap = ENV.fetch('BULKRAX_IMPORTER_CAP', 10).to_i
   config.importer_pagination_per = ENV.fetch('BULKRAX_IMPORTER_PAGINATION_PER', 5).to_i
-  config.verify_services = [
-    OregonDigital::VerifyDerivativesService
-  ]
+
+  config.to_prepare do
+    Rails.application.config.verify_services = [
+      OregonDigital::VerifyDerivativesService
+    ]
+  end
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
 
 end

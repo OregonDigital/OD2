@@ -26,10 +26,10 @@ module OregonDigital
     configure_blacklight do |config|
       config.view.gallery.if = false
       config.view.list.if = false
-      config.view.table.partials = %i[index]
-      config.view.table.icon_class = 'glyphicon-th-list'
+      config.view.tables.partials = %i[metadata index table]
+      config.view.tables.template = 'document_tables'
+      config.view.masonry(document_component: Blacklight::Gallery::DocumentComponent)
       config.view.masonry.partials = %i[metadata]
-      config.view.masonry.icon_class = 'fa fa-trello fa-lg'
 
       config.sort_fields.except! 'score desc, system_create_dtsi desc', 'date_dtsi desc', 'date_dtsi asc', 'system_create_dtsi desc'
       config.sort_fields['title_ssort desc'][:label] = 'Z-A'
@@ -40,7 +40,7 @@ module OregonDigital
     def all
       @tab = TABS[:all]
       blacklight_config.search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results
       build_breadcrumbs
       render :index
     end
@@ -48,7 +48,7 @@ module OregonDigital
     def osu
       @tab = TABS[:osu]
       blacklight_config.search_builder_class = OregonDigital::OsuCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results
       build_breadcrumbs
       render :index
     end
@@ -56,7 +56,7 @@ module OregonDigital
     def uo
       @tab = TABS[:uo]
       blacklight_config.search_builder_class = OregonDigital::UoCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results
       build_breadcrumbs
       render :index
     end
@@ -64,7 +64,7 @@ module OregonDigital
     def my
       @tab = TABS[:my]
       blacklight_config.search_builder_class = OregonDigital::MyCollectionsSearchBuilder
-      (@response, @document_list) = search_results(params)
+      (@response, @document_list) = search_service.search_results
       build_breadcrumbs
       render :index
     end
@@ -106,7 +106,11 @@ module OregonDigital
       all: 'all',
       osu: 'osu',
       uo: 'uo',
-      my: 'my collections'
+      my: 'my'
     }.freeze
+
+    def search_service
+      Hyrax::SearchService.new(config: blacklight_config, user_params: params, scope: self, search_builder_class: blacklight_config.search_builder_class)
+    end
   end
 end

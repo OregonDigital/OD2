@@ -10,14 +10,14 @@
   background-color: $very-light-grey;
   height: 0.75em;
 
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: breakpoint-min(sm)) {
     & {
       margin-top: 1em;
     }
   }
 }
 
-@media (max-width: $screen-sm-min) {
+@media (max-width: breakpoint-min(sm)) {
   #appliedParams.explore-collection,
   #appliedParamsConstraint.explore-collection {
     position: absolute;
@@ -50,7 +50,8 @@
   border-radius: 5px !important;
   border: none;
   box-shadow: none;
-  padding: .1em .25em;
+  padding: .2em .25em;
+  padding-top: 0;
   font-size: 18pt;
   &.active {
     color: $navy-blue;
@@ -73,7 +74,7 @@
     padding-right: 1em;
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     margin-bottom: 1em;
   }
 }
@@ -82,7 +83,7 @@
   margin-top: 2em;
 
   + .flex-container {
-    @media (max-width: $screen-sm-min) {
+    @media (max-width: breakpoint-min(sm)) {
       flex-direction: column;
     }
   }
@@ -114,16 +115,16 @@
     }
   }
   #sort-dropdown {
-    margin-right: 1.5em;
+    margin-right: 1.5em !important;
   }
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(md)) {
     .search-widgets {
       text-align: right;
     }
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     #sort-dropdown {
       margin-right: 0;
     }
@@ -141,7 +142,7 @@
   font-style: italic;
   height: 54px;
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(md)) {
     text-align: center;
   }
 }
@@ -167,7 +168,7 @@
     padding: 1em;
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     background: none;
     #facet-panel-collapse {
       display: block;
@@ -339,38 +340,42 @@ em {
 div.pagination {
   display: flex;
   justify-content: center;
+  margin: 20px 0;
 }
-ul.pagination li {
-  &.active span {
-    background-color: $contrast-orange;
-    border: none;
-    color: $navy-blue;
-  }
-  &.next span,
-  &.next a,
-  &.previous span,
-  &.previous a {
-    background: none;
-  }
-  &.disabled {
-    span,
-    span:hover,
-    span:focus,
+ul.pagination {
+  align-items: center;
+  li {
+    &.active span.page-link {
+      background-color: $contrast-orange;
+      border: none;
+      color: $navy-blue;
+    }
+    &.next span,
+    &.next a,
+    &.previous span,
+    &.previous a {
+      background: none;
+    }
+    &.disabled {
+      span,
+      span:hover,
+      span:focus,
+      a,
+      a:hover,
+      a:focus {
+        color: $dark-grey;
+      }
+    }
+
     a,
-    a:hover,
-    a:focus {
-      color: $dark-grey;
+    span {
+      background-color: $very-light-grey;
+      border: none;
+      margin: 0 .25em;
+      padding: 6px 12px;
     }
   }
-
-  a,
-  span {
-    background-color: $very-light-grey;
-    border: none;
-    margin: 0 .25em;
-  }
 }
-
 /* Gallery specific */
 #content {
   flex-direction: column;
@@ -514,7 +519,7 @@ ul.pagination li {
     }
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     h3 {
       margin: 1em 0;
     }

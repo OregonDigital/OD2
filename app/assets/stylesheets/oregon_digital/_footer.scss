@@ -17,7 +17,7 @@
   margin-left: 10px;
 }
 
-@media (max-width: $screen-md-min) {
+@media (max-width: breakpoint-min(xl)) {
 
   .osu-logo,
   .uo-logo {
@@ -33,6 +33,24 @@
   width: 100%;
   height: 100%;
   background-color: $dark-grey;
+
+  p {
+    margin: 0 0 10px;
+  }
+
+  @media (max-width: breakpoint-min(xl)) {
+    .row {
+      display: block;
+    }
+
+    .col-md-1,
+    .col-md-2,
+    .horizontal-sm,
+    .col-md-4 {
+      max-width: 100%;
+      flex: max-content;
+    }
+  }
 }
 
 .homepage-info-text {
@@ -81,8 +99,9 @@ a.toc-link {
 
 .left-border {
   border-left: $lime-green 2px solid;
+  height: fit-content;
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(xl)) {
     & {
       text-align: center;
       border: none;
@@ -90,7 +109,7 @@ a.toc-link {
   }
 }
 
-@media (max-width: $screen-md-min) {
+@media (max-width: breakpoint-min(xl)) {
   .horizontal-sm {
     width: 4em;
     border-bottom: $lime-green 2px solid;
@@ -101,7 +120,7 @@ a.toc-link {
 .right-align {
   text-align: right;
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(xl)) {
     & {
       text-align: center;
     }

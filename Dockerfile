@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine3.15 as bundler
+FROM ruby:3.2-alpine3.16 AS bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -6,7 +6,7 @@ ENV LC_ALL C.UTF-8
 
 RUN gem install bundler -v '2.3.26'
 
-FROM bundler as dependencies
+FROM bundler AS dependencies
 
 # The alpine way
 RUN apk --no-cache update && apk --no-cache upgrade && \
@@ -58,7 +58,7 @@ ARG GID=8083
 # Create an app user so our program doesn't run as root.
 RUN addgroup -g 8083 app && adduser -h /data -u 8083 -G app -D -H app
 
-FROM dependencies as gems
+FROM dependencies AS gems
 
 # Make sure the new user has complete control over all code, including
 # bundler's installed assets
@@ -76,7 +76,7 @@ COPY --chown=app:app build/install_gems.sh /data/build
 USER app
 RUN /data/build/install_gems.sh
 
-FROM gems as code
+FROM gems AS code
 
 # Add the rest of the code
 COPY --chown=app:app . /data
@@ -92,14 +92,14 @@ FROM code
 USER root
 RUN apk --no-cache update && apk del autoconf automake gcc g++ --purge && \
   rm -rf /data/docker-compose.override.yml-example /data/README.md \
-         /data/.env.example /data/config/nginx /data/config/solr
+  /data/.env.example /data/config/nginx /data/config/solr
 USER app
 
 ENV DEPLOYED_VERSION=${DEPLOYED_VERSION}
 
 RUN if [ "${RAILS_ENV}" = "production" ]; then \
-    echo "Precompiling assets with $RAILS_ENV environment"; \
-    rm -rf /data/.cache; \
-    RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
-    for f in public/assets/4*.html; do cp $f public/${f:14:3}.html; done; \
+  echo "Precompiling assets with $RAILS_ENV environment"; \
+  rm -rf /data/.cache; \
+  RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
+  for f in public/assets/4*.html; do cp $f public/${f:14:3}.html; done; \
   fi

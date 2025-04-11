@@ -1,6 +1,6 @@
 <% if show_sort_and_per_page? and !blacklight_config.per_page.blank? %>
-<% size = constraint ? 'xs' : 'sm' %>
-<div id="per_page-dropdown-<%= size %>" class="h4 <%= constraint ? 'visible' : 'hidden'  %>-xs">
+<% size ||= 'sm' %>
+<div id="per_page-dropdown-<%= size %>" class="h4 <%= size == 'xs' ? 'd-md-none' : 'd-none d-md-inline-block' %>">
   <%= t('blacklight.search.per_page.title') %>
   <span class="sr-only" id="search-per-page-<%= size %>"> Number of results per page </span>
   <div class="btn-group">

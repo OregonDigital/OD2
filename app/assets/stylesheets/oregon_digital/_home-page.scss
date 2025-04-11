@@ -218,7 +218,7 @@ ul.nav.homepage-nav {
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
 
-    @media (min-width: $screen-lg-min) {
+    @media (min-width: breakpoint-min(lg)) {
       width: 100%;
     }
   }
@@ -235,7 +235,7 @@ ul.nav.homepage-nav {
 
 .home-content #showcase {
   h2 {
-    @media (max-width: $screen-md-min) {
+    @media (max-width: breakpoint-min(md)) {
       & {
         text-align: center;
         font-size: 32px;
@@ -265,7 +265,7 @@ ul.nav.homepage-nav {
     font-size: 20px;
     font-weight: bold;
     line-height: 30px;
-    @media (max-width: $screen-md-min) {
+    @media (max-width: breakpoint-min(md)) {
       & {
         font-size: 28px;
       }
@@ -279,7 +279,7 @@ ul.nav.homepage-nav {
   }
 
   .collection-items {
-    @media (max-width: $screen-md-min) {
+    @media (max-width: breakpoint-min(md)) {
       & {
         font-size: 22px;
       }
@@ -312,7 +312,7 @@ ul.nav.homepage-nav {
 
 .about-oregondigital-container {
   img {
-    @media (max-width: $screen-md-min) {
+    @media (max-width: breakpoint-min(md)) {
       padding-bottom: 1em;
     }
   }
@@ -330,7 +330,7 @@ ul.nav.homepage-nav {
 
 .chevron-align {
   height: 1%;
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(md)) {
     margin-top: 13px;
   }
   margin-right: 5px;

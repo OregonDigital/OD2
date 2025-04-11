@@ -7,7 +7,7 @@
 }
 
 table.table-scrollable {
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
@@ -71,7 +71,7 @@ dl.work-show {
   column-gap: 1em;
   overflow-wrap: anywhere;
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     grid-template: auto / max-content auto;
   }
 
@@ -99,7 +99,7 @@ dl.work-show {
   column-gap: 2em;
   margin-bottom: 20px;
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     & {
       display: block;
       column-count: 1;
@@ -195,7 +195,7 @@ dl.work-show {
         }
       }
 
-      @media (max-width: $screen-sm-min) {
+      @media (max-width: breakpoint-min(sm)) {
         float: none;
         display: flex;
 
@@ -255,7 +255,7 @@ dl.work-show {
 }
 
 #work-show-tablist {
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     display: flex;
     flex-basis: 50%;
     flex-wrap: wrap;
@@ -354,6 +354,6 @@ dl.work-show {
 
 // CSS for the custom message text box to fit the div
 .content_alert_box {
-  width: 100%; 
+  width: 100%;
   height: 100%;
 }

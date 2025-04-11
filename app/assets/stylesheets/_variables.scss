@@ -13,8 +13,11 @@ $medium-grey: #999999;
 $light-grey: #CCCCCC;
 $very-light-grey: #ECECEC;
 
-$brand-primary: $navy-blue;
-// $brand-primary: $apple-green;
+$primary: $navy-blue;
+
+$theme-colors: (
+    primary: $primary
+);
 
 // Change bootstrap grid breakpoints
 $grid-gutter-width: 30px;

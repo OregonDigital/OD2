@@ -7,17 +7,22 @@ header {
     // Move searchbar back down
     margin-top: 0;
   }
-  .navbar-toggle {
+  .navbar-toggler#main-nav-toggler {
+    border-color: transparent;
+
     &:focus {
       outline: revert;
     }
-    .icon-bar {
-      background-color: $navy-blue;
+    .navbar-toggler-icon {
+      display: inline-block;
     }
   }
   .navbar-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    margin-right: -15px;
+    margin-left: -15px;
   }
   .navbar-header:before {
     display: unset;
@@ -68,11 +73,23 @@ header {
     }
   }
 
+  .navbar-nav > li > a {
+    padding-top:15px;
+    padding-bottom:15px
+  }
+
+  #user_utility_links {
+    @media (min-width: breakpoint-min(lg)) {
+      margin-right: -15px;
+    }
+  }
+
   ul.nav {
     a.explore-collections {
+      padding: 10px 15px;
       padding-bottom: 2px;
       font-weight: 700;
-      @media (max-width: $screen-xs-max) {
+      @media (max-width: breakpoint-max(sm)) {
         display: inline-block;
         font-size: 20px;
         margin-bottom: 2em;
@@ -82,7 +99,7 @@ header {
       padding: 0 2em;
     }
     form {
-      @media (max-width: $screen-xs-max) {
+      @media (max-width: breakpoint-max(sm)) {
         padding-bottom: 2em;
       }
 
@@ -91,18 +108,18 @@ header {
         font-weight: 700;
         padding: 0;
 
-        @media (min-width: $screen-sm-min) {
+        @media (min-width: breakpoint-min(md)) {
           & {
             float: right;
           }
         }
-        @media (max-width: $screen-xs-max) {
+        @media (max-width: breakpoint-max(sm)) {
           font-size: 1.25em;
         }
       }
       .input-group {
         margin: auto;
-        @media (max-width: $screen-sm-max) {
+        @media (max-width: breakpoint-max(lg)) {
           width: 75%;
         }
 
@@ -133,15 +150,25 @@ header {
     box-shadow: 0 0 10px $dark-grey;
     border-width: 0 0 5px 0;
     padding: 1em 2em;
-    @media (max-width: $screen-sm-min) {
+    @media (max-width: breakpoint-min(md)) {
       & {
         padding: .5em;
       }
+    }
+
+    .container-fluid {
+      flex-wrap: wrap;
+      padding-left: 15px;
+      padding-right: 15px;
     }
   }
 
   #top-navbar-collapse {
     letter-spacing: 2px;
+
+    @media (max-width: breakpoint-max(lg)) {
+      justify-content: flex-start !important;
+    }
 
     .divider {
       height: 1px;
@@ -150,12 +177,16 @@ header {
     }
 
     #user-dropdown {
-      @media (max-width: $screen-xs-max) {
+      @media (max-width: breakpoint-max(sm)) {
         display: none;
       }
     }
     #user-util-links {
-      @media (max-width: $screen-xs-max) {
+      li {
+        font-size: 0.875rem;
+      }
+      
+      @media (max-width: breakpoint-max(sm)) {
         position: static;
         float: none;
         width: auto;
@@ -168,15 +199,10 @@ header {
         li {
           font-size: 16px;
         }
+        
         .my-account-option {
           margin: .25em 0;
         }
-      }
-    }
-
-    .navbar-left-sm {
-      @media (max-width: $screen-sm-max) and (min-width: $screen-sm-min) {
-        float: left !important;
       }
     }
   }

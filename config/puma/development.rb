@@ -15,7 +15,7 @@ plugin :yabeda
 plugin :yabeda_prometheus
 
 # URL for yabeda prometheus exporter metrics endpoint
-prometheus_exporter_url "tcp://0.0.0.0:9395/metrics"
+prometheus_exporter_url "tcp://0.0.0.0:9396/metrics"
 
 # Allow for `touch tmp/restart.txt` to force puma to restart the app
 plugin :tmp_restart

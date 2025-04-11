@@ -39,21 +39,27 @@ module OregonDigital
     def parent_results
       @search_builder_class = OregonDigital::ParentsOfWorkSearchBuilder
       params[:page] = params[:parent_page]
-      (@parent_response, @parent_doc_list) = search_results(params)
+      (@parent_response, @parent_doc_list) = search_service.search_results do
+        search_builder
+      end
     end
 
     # Get all sibling documents
     def sibling_results
       @search_builder_class = OregonDigital::SiblingsOfWorkSearchBuilder
       params[:page] = params[:sibling_page]
-      (@sibling_response, @sibling_doc_list) = search_results(params)
+      (@sibling_response, @sibling_doc_list) = search_service.search_results do
+        search_builder
+      end
     end
 
     # get all child works for response
     def child_results
       @search_builder_class = OregonDigital::ChildrenOfWorkSearchBuilder
       params[:page] = params[:child_page]
-      (@child_response,) = search_results(params)
+      (@child_response,) = search_service.search_results do
+        search_builder
+      end
       # handle pagination if some assets will be restricted for some reason
       @child_response['response']['numFound'] = work.ordered_member_ids.count
       @child_response['response']['start'] = start(params[:child_page])
@@ -65,7 +71,9 @@ module OregonDigital
       return unless @child_response['response']['numFound'].positive?
 
       @search_builder_class = OregonDigital::OrderedChildrenOfWorkSearchBuilder
-      (_, @child_doc_list) = search_results(params)
+      (_, @child_doc_list) = search_service.search_results do
+        search_builder
+      end
       @child_doc_list = sort_by_ordered(@child_doc_list, start(params[:child_page]))
     end
 

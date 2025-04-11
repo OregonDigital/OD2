@@ -43,7 +43,6 @@ module OregonDigital
 
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
-        config.view.gallery.icon_class = 'fa fa-trello fa-lg'
         config.view.gallery.if = true
         config.view.slideshow.partials = %i[index]
         config.view.slideshow.if = false
@@ -53,6 +52,9 @@ module OregonDigital
         config.search_builder_class = OregonDigital::CatalogSearchBuilder
         config.http_method = :post
         config.per_page = [20, 60, 100]
+
+        config.add_results_collection_tool(:sort_widget)
+        config.add_results_collection_tool(:per_page_widget)
 
         ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
         config.default_solr_params = {
@@ -67,7 +69,7 @@ module OregonDigital
         config.index.thumbnail_field = 'thumbnail_path_ss'
 
         # Remove the view type selector (masonry, grid, list, etc) from the sort/show section so we can add it somewhere else
-        config.index.collection_actions.delete_field 'view_type_group'
+        # config.index.collection_actions.delete_field 'view_type_group'
 
         # The generic_type isn't displayed on the facet list
         # It's used to give a label to the filter that comes from the user profile

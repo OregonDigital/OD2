@@ -1,7 +1,7 @@
 <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
 
 <div id="sortAndPerPage" class="row sort-pagination d-md-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
-  <%= render_results_collection_tools wrapping_class: "search-widgets col-md-4 col-xs-12 text-right", constraint: false %>
+  <%= render_results_collection_tools wrapping_class: "search-widgets col-md-4 col-xs-12 text-right" %>
 
   <div class="save-widgets col-md-4 col-xs-12 text-right">
     <%= button_tag( class: 'select-button',

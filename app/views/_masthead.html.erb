@@ -1,19 +1,16 @@
 <!-- OVERRIDDEN FROM HYRAX TO PUSH THROUGH THE CHANGES TO _user_util_links -->
 <header class="header dropshadow-align" aria-label="header">
-  <nav id="masthead" class="navbar navbar-static-top">
+  <nav id="masthead" class="navbar navbar-light navbar-expand-md">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <%= render '/logo' %>
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
 
-      <div class="collapse navbar-collapse" id="top-navbar-collapse">
+      <div class="navbar-header"> 
+        <%= render '/logo' %>
+        <button class="navbar-toggler" id="main-nav-toggler" type="button" data-toggle="collapse" data-target="#top-navbar-collapse" aria-controls="top-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div> 
+
+      <div class="collapse navbar-collapse justify-content-end" id="top-navbar-collapse">
         <%= render '/user_util_links' %>
       </div>
     </div>

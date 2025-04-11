@@ -18,7 +18,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
   let(:work) { double }
 
   let(:role) { Role.create(name: 'admin') }
-  let(:user) { create(:admin) }
+  let(:user) { create(:user) }
   let(:queue) { double }
 
   controller do
@@ -26,7 +26,9 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
   end
 
   before do
-    user.roles << role
+    r = role
+    r.users << user
+    r.save
     allow(controller.current_ability).to receive(:can_import_works?).with(any_args).and_return(true)
     sign_in user
     # copied from samvera/bulkrax

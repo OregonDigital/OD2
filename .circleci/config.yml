@@ -5,7 +5,7 @@ orbs:
 jobs:
   checkout_code:
     docker:
-      - image: cimg/ruby:2.7
+      - image: cimg/ruby:3.2
     working_directory: ~/app
     steps:
       - restore_cache:
@@ -25,7 +25,7 @@ jobs:
             - app/**/*
   bundle:
     docker:
-      - image: cimg/ruby:2.7-browsers
+      - image: cimg/ruby:3.2-browsers
     environment:
       BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
@@ -63,7 +63,7 @@ jobs:
             - app/**/*
   lint:
     docker:
-      - image: cimg/ruby:2.7-browsers
+      - image: cimg/ruby:3.2-browsers
     environment:
       BUNDLE_PATH: vendor/bundle
     working_directory: ~/app
@@ -76,7 +76,7 @@ jobs:
       - run: bundle exec rubocop
   test:
     docker:
-      - image: cimg/ruby:2.7-browsers
+      - image: cimg/ruby:3.2-browsers
         environment:
           BUNDLE_PATH: vendor/bundle
           CAPYBARA_APP_HOST: http://test:3001

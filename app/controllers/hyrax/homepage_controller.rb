@@ -4,14 +4,7 @@
 class Hyrax::HomepageController < ApplicationController
   # Adds Hydra behaviors into the application controller
   include Blacklight::SearchContext
-  include Blacklight::SearchHelper
   include Blacklight::AccessControls::Catalog
-
-  # The search builder for finding recent documents
-  # Override of Blacklight::RequestBuilders
-  def search_builder_class
-    Hyrax::HomepageSearchBuilder
-  end
 
   class_attribute :presenter_class
   self.presenter_class = Hyrax::HomepagePresenter
@@ -33,11 +26,11 @@ class Hyrax::HomepageController < ApplicationController
   # Return 8 collections
   def collections(rows: 8)
     # TODO: set CollectionSearchBuilder to retrieve collections from a curated list, instead of newest collections
-    builder = OregonDigital::NonUserCollectionsSearchBuilder.new(self)
-                                                            .rows(rows)
-                                                            .merge(sort: sort_field)
-    response = repository.search(builder)
-    response.documents
+    Hyrax::CollectionsService.list_search_builder_class = OregonDigital::NonUserCollectionsSearchBuilder
+    Hyrax::CollectionsService.new(self).search_results do |builder|
+      builder.rows(rows)
+      builder.merge(sort: sort_field)
+    end
   rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
     []
   end
@@ -45,9 +38,16 @@ class Hyrax::HomepageController < ApplicationController
   def recent
     # OVERRIDE FROM HYRAX to increase number of recent document rows
     # grab any recent documents
-    (_, @recent_documents) = search_results(q: '', sort: sort_field, rows: 6)
+    (_, @recent_documents) = search_service.search_results do |builder|
+      builder.rows(6)
+      builder.merge(sort: sort_field)
+    end
   rescue Blacklight::Exceptions::ECONNREFUSED, Blacklight::Exceptions::InvalidRequest
     @recent_documents = []
+  end
+
+  def search_service
+    Hyrax::SearchService.new(config: blacklight_config, user_params: { q: '' }, scope: self, search_builder_class: Hyrax::HomepageSearchBuilder)
   end
 
   def sort_field

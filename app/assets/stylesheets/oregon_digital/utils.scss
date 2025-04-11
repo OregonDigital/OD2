@@ -12,7 +12,7 @@
   left: 50% !important;
   transform: translateX(-50%);
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     & {
       position: relative !important;
     }
