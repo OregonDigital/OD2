@@ -294,6 +294,16 @@ ul.nav.homepage-nav {
     flex-basis: 50%;
     margin-left: 1em;
   }
+
+  // Add in the thumbnail as the first order
+  order: 1;
+}
+
+/* Move title to the end of the block */
+.featured-collection-title {
+  order: 2;
+  flex-basis: 50%;
+  margin-left: 1em;
 }
 
 .feature-collection-divider {
