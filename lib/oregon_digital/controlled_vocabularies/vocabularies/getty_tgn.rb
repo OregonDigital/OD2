@@ -5,7 +5,7 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class GettyTgn < GettyBase
       def self.expression
-        %r{^http[s]?:\/\/vocab.getty.edu\/tgn\/.*}
+        %r{^http:\/\/vocab.getty.edu\/tgn\/.*}
       end
     end
   end

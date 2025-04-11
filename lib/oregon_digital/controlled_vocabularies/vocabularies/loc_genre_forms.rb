@@ -5,7 +5,7 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class LocGenreForms
       def self.expression
-        %r{^http[s]?:\/\/id.loc.gov\/authorities\/genreForms\/.*}
+        %r{^http:\/\/id.loc.gov\/authorities\/genreForms\/.*}
       end
 
       def self.label(data)

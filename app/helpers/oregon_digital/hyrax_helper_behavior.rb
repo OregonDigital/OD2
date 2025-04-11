@@ -22,8 +22,9 @@ module OregonDigital::HyraxHelperBehavior
     sanitize combine_hits_with_links(html_content, show_link)
   end
 
-  def collection_title_from_id(field, _show_link = true)
-    SolrDocument.find(field).title_or_label
+  # METHOD: Modify the string of collection title so it can display correctly
+  def collection_title_modify(field, _show_link = true)
+    field.match?(/^\[.*\]$/) ? field.gsub(/^\[|\]$/, '') : field
   end
 
   # @return [String] the appropriate action url for our search form (depending on our current page)

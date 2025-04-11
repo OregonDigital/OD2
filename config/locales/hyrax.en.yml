@@ -250,7 +250,7 @@ en:
       select_form:
         select_heading: 'My Collections()'
         title: 'Add this item'
-        update: 'Add'
+        update: 'Save'
         delete: 'Delete'
         export: 'Export'
         share: 'Share'

@@ -1,0 +1,37 @@
+# Removes unneeded and problematic statements causing blank nodes and other bloat in Fedora
+
+# This can be loaded into Blazegraph > Update tab > Choose File to upload at any time
+# Will also be run regularly with a CronJob
+
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#adminMetadata> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#elementList> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasSource> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasVariant> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasCloseExternalAuthority> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasExactExternalAuthority> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasRelatedAuthority> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasBroaderAuthority> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasNarrowerAuthority> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasNarrowerExternalAuthority> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#identifiesRWO> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#isMemberOfMADSCollection> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#isMemberOfMADSScheme> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#hasEarlierEstablishedForm> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#editorialNote> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#classification> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#componentList> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#fullerName> ?o };
+DELETE WHERE { ?s <http://www.loc.gov/mads/rdf/v1#note> ?o };
+
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#changeNote> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#closeMatch> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#exactMatch> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#inScheme> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#editorial> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#broader> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#narrowMatch> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#narrower> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#semanticRelation> ?o };
+DELETE WHERE { ?s <http://www.w3.org/2004/02/skos/core#note> ?o };
+
+DELETE WHERE { ?s <http://www.w3.org/2008/05/skos-xl#altLabel> ?o };

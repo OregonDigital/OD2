@@ -5,7 +5,7 @@ module OregonDigital
     # Receives information pulled from the endpoint and can parse and generate queries
     class LocGraphicMaterials
       def self.expression
-        %r{^http[s]?:\/\/id.loc.gov\/vocabulary\/graphicMaterials\/.*}
+        %r{^http:\/\/id.loc.gov\/vocabulary\/graphicMaterials\/.*}
       end
 
       def self.label(data)

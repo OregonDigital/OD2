@@ -55,10 +55,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
     allow(importer).to receive(:entries).and_return([entry])
     allow(Hyrax::SolrService).to receive(:query).and_return([{ 'id' => 'abcde1234' }])
     allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).and_return(work)
-    allow(work).to receive(:all_errors).and_return({ dessert: ['no chocolate'] })
     allow(OregonDigital::VerifyWorkJob).to receive(:perform_later).and_return(true)
-    allow(Sidekiq::Queue).to receive(:new).and_return(queue)
-    allow(queue).to receive(:size).and_return(0)
   end
 
   describe '#work_ids' do
@@ -71,43 +68,13 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
     end
   end
 
-  describe '#compile_errors' do
-    context 'when the work exists' do
-      before do
-        controller.instance_variable_set(:@importer, importer)
-      end
-
-      it 'returns a hash of errors' do
-        expect(controller.compile_errors).to eq({ 'abcde1234' => { dessert: ['no chocolate'] } })
-      end
-    end
-
-    context 'when the work does not exist in solr' do
-      before do
-        controller.instance_variable_set(:@importer, importer)
-        allow(Hyrax::SolrService).to receive(:query).and_return([])
-      end
-
-      it 'returns a hash with correct error' do
-        expect(controller.compile_errors).to eq({ 'csv_entry' => { solr: ['Unable to load work for this entry.'] } })
-      end
-    end
-
-    context 'when the work does not exist in valkyrie' do
-      before do
-        controller.instance_variable_set(:@importer, importer)
-        allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).and_raise(Valkyrie::Persistence::ObjectNotFoundError)
-      end
-
-      it 'returns a hash with correct error' do
-        expect(controller.compile_errors).to eq({ 'abcde1234' => { valkyrie: ['Unable to load work.'] } })
-      end
-    end
-  end
-
   describe 'GET #show_errors' do
+    before do
+      allow(controller).to receive(:report_path).and_return(fixture_path + '/batch_60_report_202404040930.json')
+    end
+
     it 'responds sucessfully' do
-      get :show_errors, params: { importer_id: importer.id }
+      get :show_errors, params: { importer_id: importer.id, time: '202404040930' }
       expect(response).to be_successful
     end
   end
@@ -115,7 +82,7 @@ RSpec.describe Bulkrax::ImportersController, type: :controller do
   describe 'GET #verify' do
     it 'displays notice and redirects' do
       get :verify, params: { importer_id: importer.id }
-      expect(flash[:notice]).to eq('Verification jobs are enqueued. Jobs may be delayed depending on number/type of jobs already enqueued; please wait 5-10 minutes before checking results.')
+      expect(flash[:notice]).to eq('Verification jobs are enqueued. Jobs may be delayed depending on number/type of jobs already enqueued; an email will be sent to you when the report is complete.')
       expect(response).to redirect_to importer_path(importer.id)
     end
   end
