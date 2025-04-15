@@ -18,9 +18,21 @@
   </div>
 
   <div id="facet-panel-collapse" class="collapse panel-group">
+    <%# SPLIT: Going through facet field name & split them up into two arrays %>
+    <% @prime_facets, @secondary_facets = facet_field_names.split { |v| v == 'cultural_context_label_sim' } %>
+    <% @secondary_facets.unshift('cultural_context_label_sim') if @secondary_facets.any? %>
+
     <%= render 'search_form' %>
 
-    <%= render_facet_partials %>
+    <%# RENDER: Render the primary facets and add a dropdown for the remaining secondary facets %>
+    <%= render_facet_partials(@prime_facets) %>
+    <button type="button" class="btn btn-default btn-block secondary-facets" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" href="#dropdown-secondary-facets">
+      <%= t('blacklight.facets.more_option') %>
+    </button>
+    
+    <div id="dropdown-secondary-facets" class="collapse panel-group">
+      <%= render_facet_partials(@secondary_facets) %>
+    </div>
   </div>
 </div>
 <% end %>

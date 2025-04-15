@@ -38,3 +38,6 @@ en:
         filter_words: 'Try removing filters.'
         contact_info: "If you're still having trouble finding what you're looking for, %{link} and we'll try and help."
         contact_link: 'Contact Us'
+
+    facets:
+      more_option: 'More'

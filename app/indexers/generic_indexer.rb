@@ -25,6 +25,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   # propogate downwards.
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/BlockLength
   def generate_solr_document
     super.tap do |solr_doc|
       index_rights_statement_label(solr_doc, object)
@@ -36,6 +37,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_local_contexts_label(solr_doc, object)
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
+      solr_doc['non_user_collections_label_ssim'] = []
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
       solr_doc['oai_collections_ssim'] = []
@@ -43,6 +45,7 @@ class GenericIndexer < Hyrax::WorkIndexer
         collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
         solr_doc[collection_index_key] << collection.id
         solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
+        solr_doc['non_user_collections_label_ssim'] << collection.title if collection_index_key == 'non_user_collections_ssim'
       end
       # removing index_topic_combined_label(solr_doc, object.keyword)
       # will be handled when indexing fetched labels
@@ -58,6 +61,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/BlockLength
 
   def collection_indexing_key(machine_id)
     case machine_id
