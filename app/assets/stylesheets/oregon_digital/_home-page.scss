@@ -290,10 +290,6 @@ ul.nav.homepage-nav {
 .featured-collection-item {
   padding: 0 .25em;
   flex-basis: 16.67%;
-  &:last-of-type {
-    flex-basis: 50%;
-    margin-left: 1em;
-  }
 
   // Add in the thumbnail as the first order
   order: 1;
