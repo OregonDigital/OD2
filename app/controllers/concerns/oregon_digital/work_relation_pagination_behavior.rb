@@ -53,6 +53,7 @@ module OregonDigital
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     # get all child works for response
     def child_results
       @search_builder_class = OregonDigital::ChildrenOfWorkSearchBuilder
@@ -64,6 +65,7 @@ module OregonDigital
       @child_response['response']['numFound'] = work.ordered_member_ids.count
       @child_response['response']['start'] = start(params[:child_page])
     end
+    # rubocop:enable Metrics/AbcSize
 
     # hacky method for getting one page of child docs in order
     def ordered_child_results
