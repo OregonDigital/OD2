@@ -19,6 +19,9 @@ $theme-colors: (
     primary: $primary
 );
 
+// Bootstrap color variables
+$secondary: #fff;
+
 // Change bootstrap grid breakpoints
 $grid-gutter-width: 30px;
 $container-tablet: (720px + $grid-gutter-width);

@@ -51,6 +51,12 @@ input.link {
       color: $black;
     }
   }
+
+  &.btn-secondary {
+    &:hover {
+      border-color: #adadad;
+    }
+  }
 }
 .btn-sm {
   font-size: 14px;
@@ -66,7 +72,7 @@ input.link {
   font-size: 14px;
 }
 
-.btn-default {
+.btn-default, .btn-secondary {
   color: $primary;
   border: 3px solid $primary;
 }
