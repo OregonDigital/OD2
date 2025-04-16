@@ -1,13 +1,13 @@
-<li class="h5"><h3 class="lato-p white"><%= t('hyrax.admin.sidebar.repository_objects') %></h3></li>
+<li class="h5 nav-item"><h3 class="lato-p white"><%= t('hyrax.admin.sidebar.repository_objects') %></h3></li>
 
   <%= menu.nav_link(hyrax.my_collections_path,
                     onclick: "dontChangeAccordion(event);",
-                    also_active_for: hyrax.dashboard_collections_path) do %>
+                    also_active_for: hyrax.dashboard_collections_path, class: "nav-link") do %>
     <span class="fa fa-folder-open" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.collections') %></span>
   <% end %>
   <%= menu.nav_link(hyrax.my_works_path,
                     onclick: "dontChangeAccordion(event);",
-                    also_active_for: hyrax.dashboard_works_path) do %>
+                    also_active_for: hyrax.dashboard_works_path, class: "nav-link") do %>
     <span class="fa fa-file" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.works') %></span>
   <% end %>
   <%= render 'hyrax/dashboard/sidebar/menu_partials', menu: menu, section: :repository_content %>
