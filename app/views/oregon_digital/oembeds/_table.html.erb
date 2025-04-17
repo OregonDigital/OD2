@@ -12,7 +12,7 @@
       <td class="oembed_link"><%= link_to file_set.solr_document['oembed_url_sim'].first, file_set.solr_document['oembed_url_sim'].first %></td>
       <td class="edit"><%= link_to 'Edit', edit_oembed_path(file_set) %></td>
       <td class="oembed_status">
-        <%= errors.nil? ? content_tag(:span, "Good", class: "label label-success") : content_tag(:span, "ERROR", class: "label label-danger") %>
+        <%= errors.nil? ? content_tag(:span, "Good", class: "badge badge-success") : content_tag(:span, "ERROR", class: "badge badge-danger") %>
         <%= render 'oembed_list_errors', errors: errors if show_error_list && !errors.nil? %>
       </td>
       <td><%= file_set.solr_document['date_modified_dtsi'].to_datetime.to_s(:long) %></td>

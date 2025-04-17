@@ -6,13 +6,13 @@ module OregonDigital
     include ActionView::Helpers::TagHelper
 
     VISIBILITY_LABEL_CLASS = {
-      authenticated: 'label-info',
-      embargo: 'label-warning',
-      osu: 'label-warning',
-      uo: 'label-warning',
-      lease: 'label-warning',
-      open: 'label-success',
-      restricted: 'label-danger'
+      authenticated: 'badge-info',
+      embargo: 'badge-warning',
+      osu: 'badge-warning',
+      uo: 'badge-warning',
+      lease: 'badge-warning',
+      open: 'badge-success',
+      restricted: 'badge-danger'
     }.freeze
 
     private
