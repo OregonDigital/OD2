@@ -152,4 +152,15 @@
       </div> <!-- end col-12 -->
     </div> <!-- end row branding-logo-list -->
   </div> <!-- end fileuploadlogo -->
+  <div> <!-- Representative images -->
+    <fieldset>
+      <legend><%= t('.representative.label') %></legend>
+      <p><%= t('.representative.description') %></p>
+      <div id="representative_ids">
+        <% f.object.representative_info.each_with_index do |rinfo, i| %>
+          <input type="text" name="representative_ids[]" value="<%= rinfo.try(:fileset_id) %>" data-text="<%= rinfo.try(:fs_title) %>" placeholder="Begin typing a child work ID" />
+        <% end %>
+      </div>
+    </fieldset>
+  </div> <!-- end Representative images -->
 </div> <!-- end set-access-controls -->
