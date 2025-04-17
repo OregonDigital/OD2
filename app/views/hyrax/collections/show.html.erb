@@ -96,15 +96,17 @@
   </div>
 
   <%= render 'shared/colored_divider', color: 'lime-green' do %>
+    <div class='btn-group' role="group">
     <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All</a>
     <%# NEW BUTTON: Add in an edit button to collection rather than going through the dashboard %>
-    <% if user_signed_in? && current_ability.can?(:edit, @presenter.solr_document) && @presenter.collection_type.machine_id != 'user_collection' %>
+    <%# if user_signed_in? && current_ability.can?(:edit, @presenter.solr_document) && @presenter.collection_type.machine_id != 'user_collection' %>
       <a href="<%= edit_dashboard_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Edit Collection</a>
-    <% end %>
+    <%# end %>
     <%# DOWNLOAD: Add in download button for user collection %>
-    <% if @collection.sharable? && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
+    <%# if @collection.sharable? && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
       <a href="<%= main_app.download_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Download Collection</a>
-    <% end %>
+    <%# end %>
+    </div>
   <% end %>
 
   <div class="row">
