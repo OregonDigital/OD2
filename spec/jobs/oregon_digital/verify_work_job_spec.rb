@@ -10,7 +10,7 @@ RSpec.describe OregonDigital::VerifyWorkJob, type: :job do
   end
 
   context 'when there is a job to run' do
-    let(:job) { described_class.perform_later(pid: pid) }
+    let(:job) { described_class.perform_later(pid: pid, size: 1) }
     let(:service) { double }
     let(:work) { double }
 

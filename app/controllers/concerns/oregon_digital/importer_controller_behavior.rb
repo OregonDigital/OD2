@@ -21,13 +21,18 @@ module OregonDigital
       File.join(OD2::Application.config.local_path, "verify/batch_#{params[:importer_id]}_report_#{params[:time]}.json")
     end
 
+    # rubocop:disable Metrics/AbcSize
     def verify
       @importer = Bulkrax::Importer.find(params[:importer_id])
+      Redis.current.del("verify_count:#{@importer.id}")
       ids = work_ids.map { |x| x[:work_id] }.reject(&:nil?)
+      redirect_to(importer_path(@importer.id), notice: 'Unable to find any items to verify.') and return if ids.empty?
+
       bvs = OregonDigital::BatchVerificationService.new(ids, { batch_id: @importer.id, user_mail: current_user.email, size: ids.size, reporter: 'OregonDigital::ImporterVerificationReporter' })
       bvs.verify
       redirect_to importer_path(@importer.id), notice: 'Verification jobs are enqueued. Jobs may be delayed depending on number/type of jobs already enqueued; an email will be sent to you when the report is complete.'
     end
+    # rubocop:enable Metrics/AbcSize
 
     def importers_list
       render 'oregon_digital/importer/importers_list'
