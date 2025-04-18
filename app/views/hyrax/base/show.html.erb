@@ -2,7 +2,7 @@
 
 <div class="row work-type">
   <%# OVERRIDE FROM HYRAX remove work type heading %>
-  <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
+  <div itemscope itemtype="http://schema.org/CreativeWork" class="col-12">
     <div class='row'>
       <%= render 'show_collection_header', presenter: @presenter unless @presenter.non_user_collections.blank? %>
       <%= render 'show_institution_header', presenter: @presenter unless @presenter.institution.blank? %>
@@ -27,7 +27,7 @@
           </div>
         <% end %>
       </div>
-      <div class="col-xs-12">
+      <div class="col-12">
       </div>
       <div class="row">
         <%= render 'social_media' %>

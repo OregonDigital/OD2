@@ -1,5 +1,5 @@
 .devise-container {
-  max-width: $container-tablet;
+  max-width: map-get($container-max-widths, "md");;
   margin: auto;
 
   .login-footer,
