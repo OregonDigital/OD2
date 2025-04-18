@@ -45,7 +45,7 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
   end
 
   describe 'file_versions' do
-    let(:iiif) { ENV.fetch('IIIF_SERVER_BASE_URL') }
+    let(:iiif) { ENV.fetch('IIIF_SERVER_BASE_URL', 'http://localhost:3000') }
     let(:base) { Rails.application.routes.url_helpers.root_url }
     let(:resp) do
       [{
