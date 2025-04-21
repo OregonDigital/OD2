@@ -13,7 +13,7 @@ module OregonDigital
     # image_uri is the iiif path, show_uri is the show page
     attr_accessor :asset_image_uri, :asset_show_uri, :doc, :errors
     def initialize(pid)
-      @doc = SolrDocument.find pid
+      @doc = Hyrax::SolrDocument::OrderedMembers.decorate(SolrDocument.find(pid))
       @errors = []
     end
 
