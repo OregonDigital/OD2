@@ -19,5 +19,7 @@ module OregonDigital
     autoload :FeatureClassUriToLabel
     autoload :AccessControls
     autoload :WorkToPresenterConverter
+    autoload :VerificationReporter
+    autoload :ImporterVerificationReporter
   end
 end
