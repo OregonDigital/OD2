@@ -10,8 +10,9 @@ RSpec.describe OregonDigital::FailedFetchMailer do
 
   # MOCK: Mock the file existence to simulate real file checks
   before do
-    allow(File).to receive(:exist?).with("./tmp/failed_fetch/#{filename}").and_return(true)
-    allow(File).to receive(:read).with("./tmp/failed_fetch/#{filename}").and_return('file_content')
+    @path = "#{Rails.root.join('tmp', 'failed_fetch')}/#{params[:filename]}"
+    allow(File).to receive(:exist?).with(@path).and_return(true)
+    allow(File).to receive(:read).with(@path).and_return('file_content')
   end
 
   # TEST GROUP: Create couple test to see if the mailer class pass the test
@@ -21,7 +22,7 @@ RSpec.describe OregonDigital::FailedFetchMailer do
 
   it 'does not add any attachments when the file does not exist' do
     # SIMULATE: Simulate the file not existing
-    allow(File).to receive(:exist?).with("./tmp/failed_fetch/#{filename}").and_return(false)
+    allow(File).to receive(:exist?).with(@path).and_return(false)
 
     # CHECK: Check that no attachment is added
     expect(mail.attachments).to be_empty
