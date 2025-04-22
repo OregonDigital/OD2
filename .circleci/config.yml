@@ -277,7 +277,9 @@ workflows:
             - lint
           filters:
             branches:
-              ignore: master
+              ignore:
+                - master
+                - feature/hyrax-4
       - build_and_push_beavernetes:
           name: Build and push application image to Beavernetes image repository
           requires:
