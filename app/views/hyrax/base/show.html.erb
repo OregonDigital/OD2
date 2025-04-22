@@ -42,37 +42,29 @@
 
       <div class='row'>
         <%# OVERRIDE FROM HYRAX remove work description %>
-        <ul class="nav nav-tabs" id="work-show-tablist">
-          <li class="active">
-            <div class="tab-padding" role="heading" aria-level="2">
-              <a id="metadata_button" href="#metadata" class="btn-link" aria-controls="metadata" aria-expanded="false" aria-disabled="false" role="button" data-toggle="tab">
-                <span class="h4"><%= t("oregon_digital.works.form.tab.details") %></span>
-              </a>
-            </div>
+        <ul class="nav nav-tabs col-12" id="work-show-tablist">
+          <li class="nav-item tab-padding">
+            <a id="metadata_button" href="#metadata" class="nav-link active" aria-controls="metadata" aria-expanded="true" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.details") %></h2>
+            </a>
           </li>
-          <li>
-            <div class="tab-padding" role="heading" aria-level="2">
-              <a id="citations_button"  href="#citations" class="btn-link" aria-controls="citations" aria-expanded="false" aria-disabled="false" role="button" data-toggle="tab">
-                <span class="h4"><%= t("oregon_digital.works.form.tab.how_to_cite") %></span>
-              </a>
-            </div>
+          <li class="nav-item tab-padding">
+            <a id="citations_button"  href="#citations" class="nav-link" aria-controls="citations" aria-expanded="false" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.how_to_cite") %></h2>
+            </a>
           </li>
-          <li>
-            <div class="tab-padding" role="heading" aria-level="2">
-              <a id="data_sources_button"  href="#data_sources" class="btn-link" aria-controls="data_sources" aria-expanded="false" aria-disabled="false" role="button" data-toggle="tab">
-                <span class="h4"><%= t("oregon_digital.works.form.tab.data_sources") %></span>
-              </a>
-            </div>
+          <li class="nav-item tab-padding">
+            <a id="data_sources_button"  href="#data_sources" class="nav-link" aria-controls="data_sources" aria-expanded="false" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.data_sources") %></h2>
+            </a>
           </li>
-          <li>
-            <div class="tab-padding" role="heading" aria-level="2">
-              <a id="contact_us_button" href="#contact_us" class="btn-link" aria-controls="contact_us" aria-expanded="false" aria-disabled="false" role="button" data-toggle="tab">
-                <span class="h4"><%= t("oregon_digital.works.form.tab.contact_us") %></span>
-              </a>
-            </div>
+          <li class="nav-item tab-padding">
+            <a id="contact_us_button" href="#contact_us" class="nav-link" aria-controls="contact_us" aria-expanded="false" data-toggle="tab">
+              <h2 class="h4"><%= t("oregon_digital.works.form.tab.contact_us") %></h2>
+            </a>
           </li>
         </ul>
-        <div class="tab-content">
+        <div class="tab-content w-100">
           <div role="region" aria-labelledby="metadata_button" class="tab-pane active" id="metadata">
             <div class="form-tab-content">
               <% # metadata_tab is sometimes provided %>

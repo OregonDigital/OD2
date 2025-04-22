@@ -6,12 +6,18 @@
   }
 }
 
-table.table-scrollable {
-  @media (max-width: breakpoint-min(sm)) {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    height: 100%
+table {
+  .table-scrollable {
+    @media (max-width: breakpoint-min(sm)) {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      height: 100%
+    }
+  }
+
+  &.table thead tr th {
+    border-top: none;
   }
 }
 
@@ -139,7 +145,7 @@ dl.work-show {
     margin-bottom: 15px;
 
     li {
-      &.active a {
+      a.active {
         color: #555555;
         cursor: default;
         background-color: #fff;
@@ -175,6 +181,7 @@ dl.work-show {
         margin-right: 2px;
         line-height: 1.428571429;
         border: 1px solid transparent;
+        border-radius: 0;
 
         position: relative;
         display: block;
