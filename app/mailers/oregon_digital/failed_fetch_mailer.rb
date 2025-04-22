@@ -5,17 +5,17 @@ module OregonDigital
   class FailedFetchMailer < ApplicationMailer
     # METHOD: Create an email and send a report to the user
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Style/IfInsideElse
     def failed_fetch_email
       if params[:to] == 'kevin.jones@oregonstate.edu'
-        attachments[params[:filename]] = File.read("./tmp/#{params[:filename]}") if File.exist?("./tmp/#{params[:filename]}")
+        file_path = "#{Rails.root.join('tmp')}/#{params[:filename]}"
+        attachments[params[:filename]] = File.read(file_path) if File.exist?(file_path)
       else
-        attachments[params[:filename]] = File.read("./tmp/failed_fetch/#{params[:filename]}") if File.exist?("./tmp/failed_fetch/#{params[:filename]}")
+        file_text = "#{Rails.root.join('tmp', 'failed_fetch')}/#{params[:filename]}"
+        attachments[params[:filename]] = File.read(file_text) if File.exist?(file_text)
       end
 
       mail(to: params[:to], subject: 'Oregon Digital: Failed Fetch Notice')
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Style/IfInsideElse
   end
 end

@@ -25,7 +25,10 @@ namespace :oregon_digital do
     end
 
     fetch_notifier.create_zip_file
-    OregonDigital::FailedFetchMailer.with(to: fetch_notifier.fetch_metadeities, filename: 'failed_fetch_items.zip').failed_fetch_email.deliver_now
-    fetch_notifier.delete_files unless ActionMailer::Base.deliveries.last.blank?
+    zip_path = Rails.root.join('tmp', 'failed_fetch_items.zip').to_s
+    if File.exist?(zip_path)
+      OregonDigital::FailedFetchMailer.with(to: fetch_notifier.fetch_metadeities, filename: 'failed_fetch_items.zip').failed_fetch_email.deliver_now
+      fetch_notifier.delete_files unless ActionMailer::Base.deliveries.last.blank?
+    end
   end
 end
