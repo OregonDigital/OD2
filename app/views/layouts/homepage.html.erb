@@ -3,7 +3,9 @@
     <div class="background-container" role="search">
       <%= image_tag('blimp.jpg', alt: "")%>
     </div>
-    <div class="background-container background-container-overlay"></div>
+    <div class="background-container background-container-overlay">
+      <%= render '/controls' %>
+    </div>
 
     <div class="container site-title-container">
       <div class="site-title h1" style="text-align: center;">
@@ -11,7 +13,6 @@
       </div>
     </div>
 
-    <%= render '/controls' %>
   </div>
 <% end %>
 
