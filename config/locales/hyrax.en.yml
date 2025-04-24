@@ -79,6 +79,7 @@ en:
           military_branch_label_sim: Military Branch
           subject_label_sim: Subject
           identifier_sim: Identifier
+          workflow_state_name_ssim: Workflow State
         index:
           all_text_timv: Full Text
           hocr_text_timv: Full Text
