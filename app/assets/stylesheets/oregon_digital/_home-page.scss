@@ -141,7 +141,15 @@ body {
   background: none;
 }
 
-
+.advanced-link {
+      float: right;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 0;
+      top: -.75em;
+      color: white;
+}
 ul.nav.homepage-nav {
   text-transform: unset;
   width: 100%;
