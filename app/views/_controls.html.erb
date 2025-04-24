@@ -17,7 +17,7 @@
                   <span class="sr-only" style="color: white;">Search Catalog</span>
                 </button>
               </div>
-              <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control", id: "masthead-search-field-header", title: "Masthead search field" %>
+              <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control z-index-home", id: "masthead-search-field-header", title: "Masthead search field" %>
             </div><!-- /.input-group -->
           </div><!-- /.form-group -->
           <%= link_to 'Advanced', BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link' %>
