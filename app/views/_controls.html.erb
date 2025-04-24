@@ -9,7 +9,7 @@
           <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
           <%= hidden_field_tag :search_field, 'all_fields', id: 'masthead_search_field' %>
           <div class="form-group">
-            <div class="input-group homepage-black-background">
+            <div class="input-group">
               <label class="sr-only" style="color: white;" for="masthead-search-field-header"><%= t("hyrax.search.form.q.label", application_name: application_name) %></label>
               <div class='input-group-prepend'>
                 <button type="submit" class="btn btn-default" style='border: 0;' id="masthead-search-submit-header">
@@ -17,7 +17,7 @@
                   <span class="sr-only" style="color: white;">Search Catalog</span>
                 </button>
               </div>
-              <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control z-index-home", id: "masthead-search-field-header", title: "Masthead search field" %>
+              <%= text_field_tag 'q[]', current_search_parameters , class: "q form-control test-color", id: "masthead-search-field-header", title: "Masthead search field", placeholder: 'Search Oregon Digital' %>
             </div><!-- /.input-group -->
           </div><!-- /.form-group -->
           <%= link_to 'Advanced', BlacklightAdvancedSearch::Engine.routes.url_helpers.advanced_search_path, class: 'advanced-link' %>
