@@ -1,5 +1,5 @@
 <div id="showcase" class="row">
-  <div class="col-lg-5 col-lg-offset-1">
+  <div class="col-lg-5 offset-lg-1">
     <h2 class="uppercase">Featured Collections</h2>
     <% unless @presenter.collections.to_a.empty? %>
       <% @presenter.collections.each do |collection| %>
@@ -42,11 +42,7 @@
       <div class="featured-collection-border"></div>
     </div>
   </div>
-  <div class="visible-sm visible-xs center-text">
-    <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
-    <div class="featured-collection-border"></div>
-  </div>
-  <div class="col-12 col-lg-5 col-lg-offset-1 about-oregondigital-container">
+  <div class="col-12 col-lg-5 offset-lg-1 about-oregondigital-container">
     <h2 class="uppercase">About Oregon Digital</h2>
     <div class="row">
       <%= image_tag('valley_lib.webp', alt: '', class: 'col-12 col-md-6') %>
