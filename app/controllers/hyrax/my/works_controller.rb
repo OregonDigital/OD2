@@ -11,7 +11,7 @@ module Hyrax
           config.add_facet_field 'admin_set_sim', limit: 5
           config.add_facet_field 'member_of_collections_ssim', limit: 5
 
-          # ADD: Add in a new field to the works filter list
+          # ADD: Add in a new field 'Workflow State' to the works filter list
           config.add_facet_field 'workflow_state_name_ssim', label: I18n.translate('blacklight.search.fields.facet.workflow_state_name_ssim'), helper_method: :workflow_state_display
         end
       end
