@@ -4,12 +4,12 @@
   <%= t('blacklight.search.per_page.title') %>
   <span class="sr-only" id="search-per-page-<%= size %>"> Number of results per page </span>
   <div class="btn-group">
-    <button type="button" id="search-per-page-button-<%= size %>" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-controls="search-per-page-list-<%= size %>" aria-expanded="false" aria-haspopup="true" aria-label="Results per page (<%= current_per_page %>)">
-      <%= t(:'blacklight.search.per_page.button_label', :count => current_per_page) %> <span class="caret-dropdown"></span>
+    <button type="button" id="search-per-page-button-<%= size %>" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-controls="search-per-page-list-<%= size %>" aria-expanded="false" aria-haspopup="true" aria-label="Results per page (<%= current_per_page %>)">
+      <%= t(:'blacklight.search.per_page.button_label', :count => current_per_page) %>
     </button>
     <ul id="search-per-page-list-<%= size %>" class="dropdown-menu" role="menu" aria-labelledby="search-per-page-button-<%= size %>">
       <%- per_page_options_for_select.each do |(label, count)| %>
-        <li role="none"><%= link_to(label, url_for(search_state.params_for_search(per_page: count)), role: 'menuitem', tabindex: -1) %></li>
+        <li role="none"><%= link_to(label, url_for(search_state.params_for_search(per_page: count)), class: 'dropdown-item', role: 'menuitem', tabindex: -1) %></li>
       <%- end -%>
     </ul>
   </div>
