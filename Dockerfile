@@ -1,10 +1,10 @@
-FROM ruby:3.2-alpine3.16 AS bundler
+FROM ruby:3.2.1-alpine3.16 AS bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
-RUN gem install bundler -v '2.3.26'
+RUN gem install bundler -v '2.6.8'
 
 FROM bundler AS dependencies
 

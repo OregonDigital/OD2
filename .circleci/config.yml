@@ -252,14 +252,14 @@ jobs:
           tag: $TAG
       - docker/build:
           registry: registry.library.oregonstate.edu
-          image: od2_web_cache
+          image: od2_web_v4_cache
           tag: "latest"
           extra_build_args: --target gems
           cache_from: registry.library.oregonstate.edu/od2_web_v4_cache:latest
           step-name: "Rebuild cache image"
       - docker/push:
           registry: registry.library.oregonstate.edu
-          image: od2_web_v4
+          image: od2_web_v4_cache
           tag: latest
           step-name: "Push cache image"
 workflows:
