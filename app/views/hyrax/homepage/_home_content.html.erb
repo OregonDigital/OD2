@@ -6,33 +6,36 @@
         <% solr_hits = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND file_set_ids_ssim:* AND -thumbnail_path_ss:*png", fl: 'id,title_sim,thumbnail_path_ss,has_model_ssim', rows: 3) %>
         <% @member_count = Hyrax::SolrService.new.count("member_of_collection_ids_ssim:#{collection.id}") %>
         <span class="featured-collection-row flex-container">
-        <% solr_hits.each do |sh| %>
-          <% if sh == nil %>
-            <div class="featured-collection-item">
-              <%= image_tag(
-                'logo.png',
-                { class: 'img-thumbnail', alt: '' }
-              ) %>
+          <%# MOVE: Move the title to the upper level to be read by screen reader first %>
+          <div class="featured-collection-item featured-collection-title">
+            <h3 class='collection-title'><%= link_to_document collection, "#{collection.title.first}", aria: {label: "#{collection.title.first}"}, class: 'lato-b' %></h3>
+            <div class='collection-items'>
+              <span class='home-item-count'><%= @member_count %> items</span>
+              &nbsp;
+              <%= link_to_document collection, "View all", aria: {label: "View All #{collection.title.first}"}, class: 'lato-p' %>
             </div>
-          <% else %>
-            <div class="featured-collection-item">
-              <%= link_to "/concern/#{sh['has_model_ssim'].first.downcase.pluralize}/#{(sh['id'])}" do %>
-                <%= image_tag(
-                sh['thumbnail_path_ss'],
-                  { class: 'img-thumbnail', alt: sh['title_sim'] }
-                  ) %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-        <div class="featured-collection-item">
-          <h3 class='collection-title'><%= link_to "#{collection.title.first}", hyrax.collection_path(collection), aria: {label: "#{collection.title.first}"}, class: 'lato-b' %></h3>
-          <div class='collection-items'>
-            <span class='home-item-count'><%= @member_count %> items</span>
-            &nbsp;
-            <%= link_to "View all", hyrax.collection_path(collection), aria: {label: "View All #{collection.title.first}"}, class: 'lato-p' %>
           </div>
-        </div>
+
+          <%# MOVE: Move the thumbnail display down so it get read later %>
+          <% solr_hits.each do |sh| %>
+            <% if sh == nil %>
+              <div class="featured-collection-item">
+                <%= image_tag(
+                  'logo.png',
+                  { class: 'img-thumbnail', alt: '' }
+                ) %>
+              </div>
+            <% else %>
+              <div class="featured-collection-item">
+                <%= link_to "/concern/#{sh['has_model_ssim'].first.downcase.pluralize}/#{(sh['id'])}" do %>
+                  <%= image_tag(
+                  sh['thumbnail_path_ss'],
+                    { class: 'img-thumbnail', alt: sh['title_sim'] }
+                    ) %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
         </span>
       <% end %>
     <% end %>
