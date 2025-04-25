@@ -194,6 +194,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      # KEEP: Just keeping the metadata here just in case of changes in the future of reimplement
       property :mods_note, predicate: RDF::Vocab::MODS.note, multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
@@ -687,7 +688,6 @@ module OregonDigital
         { name: 'military_highest_rank', is_controlled: false, collection_facetable: false },
         { name: 'military_occupation', is_controlled: false, collection_facetable: false },
         { name: 'military_service_location', is_controlled: false, collection_facetable: false },
-        { name: 'mods_note', is_controlled: false, collection_facetable: false },
         { name: 'specimen_type', is_controlled: false, collection_facetable: false },
         { name: 'identification_verification_status', is_controlled: false, collection_facetable: false },
         { name: 'accepted_name_usage', is_controlled: false, collection_facetable: false },
@@ -836,7 +836,6 @@ module OregonDigital
         { name: :military_occupation, section_name: '' },
         { name: :military_service_location, section_name: '' },
         { name: :mode_of_issuance, section_name: '' },
-        { name: :mods_note, section_name: '' },
         { name: :motif, section_name: '' },
         { name: :object_orientation, section_name: '' },
         { name: :tribal_notes, section_name: '' },
