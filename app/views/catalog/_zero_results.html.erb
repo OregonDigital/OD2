@@ -19,7 +19,7 @@
   <%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "zero-results-search-form", role: "search" do %>
     <%= hidden_field_tag :search_field, 'all_fields', id: 'zero_results_search_field' %>
     <div class="form-group">
-      <div class="no-results-wrapper col-sm-8">
+      <div class="no-results-wrapper col-md-8">
         <div class="input-group">
           <label class="sr-only" for="zero-results-search-field">
             <%= t("hyrax.search.form.q.label", application_name: application_name) %>
