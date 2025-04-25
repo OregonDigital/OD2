@@ -29,12 +29,28 @@ module OregonDigital
       # rubocop:enable Metrics/MethodLength
 
       def fetch(*_args, &_block)
-        vocabulary = self.class.query_to_vocabulary(rdf_subject.to_s)
-        if vocabulary.to_s.include?('Itis')
-          store_statement(vocabulary.fetch(vocabulary, rdf_subject))
-        else
-          super
+        return super unless itis?
+
+        graph = fetch_from_cache(rdf_subject)
+        unless graph.nil?
+          persistence_strategy.graph = graph
+          return self
         end
+        store_statement(vocabulary.fetch(vocabulary, rdf_subject))
+      rescue ControlledVocabularyFetchError
+        raise ControlledVocabularyFetchError
+      end
+
+      def itis?
+        vocabulary.to_s.include?('Itis')
+      end
+
+      def vocabulary
+        @vocabulary ||= self.class.query_to_vocabulary(rdf_subject.to_s)
+      end
+
+      def fetch_from_cache(subject)
+        OregonDigital::Triplestore.fetch_cached_term(subject)
       end
     end
   end
