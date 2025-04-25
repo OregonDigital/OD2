@@ -1,11 +1,16 @@
-.panel-heading.collapse-toggle .panel-title.collapsed:after {
+.panel-heading.collapse-toggle .panel-title:after {
   /* symbol for "collapsed" panels */
-  content: "\e080";
+  color: grey;
   /* adjust as needed, taken from bootstrap.css */
 }
 .collapse-toggle.panel-heading {
   cursor: unset;
   padding: 0;
+}
+
+.facet-field-heading button {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .panel-header {
