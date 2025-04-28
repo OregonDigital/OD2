@@ -194,7 +194,7 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
-      # KEEP: Just keeping the metadata here just in case of changes in the future of reimplement
+      # KEEP: Still hold the MODS Note from past work to display but moving forward, remove it from field of form
       property :mods_note, predicate: RDF::Vocab::MODS.note, multiple: true, basic_searchable: false do |index|
         index.as :stored_searchable
       end
@@ -688,6 +688,7 @@ module OregonDigital
         { name: 'military_highest_rank', is_controlled: false, collection_facetable: false },
         { name: 'military_occupation', is_controlled: false, collection_facetable: false },
         { name: 'military_service_location', is_controlled: false, collection_facetable: false },
+        { name: 'mods_note', is_controlled: false, collection_facetable: false },
         { name: 'specimen_type', is_controlled: false, collection_facetable: false },
         { name: 'identification_verification_status', is_controlled: false, collection_facetable: false },
         { name: 'accepted_name_usage', is_controlled: false, collection_facetable: false },
