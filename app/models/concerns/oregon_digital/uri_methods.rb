@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require 'uri'
 module OregonDigital
   # create urls needed to point to asset show pages and representative images
   module UriMethods
     def iiif_url(pid)
-      "https://iiif.oregondigital.org/iiif/#{bucket_path(pid)}-jp2.jp2/full/430,/0/default.jpg"
+      URI.join(iiif_server, bucket_path(pid) + '-jp2.jp2/full/430,/0/default.jpg').to_s
     end
 
     def bucket_path(pid)
@@ -12,43 +13,48 @@ module OregonDigital
     end
 
     def iiif_doc_url(pid)
-      "https://iiif.oregondigital.org/iiif/#{bucket_path(pid)}-jp2-0000.jp2/full/430,/0/default.jpg"
+      URI.join(iiif_server, bucket_path(pid) + '-jp2-0000.jp2/full/430,/0/default.jpg').to_s
     end
 
     def show_url(klass, pid)
-      "https://oregondigital.org/concern/#{klass}/#{pid}"
+      URI.join(app_base_url, "concern/#{klass}/#{pid}").to_s
     end
 
     def video_thumb(pid)
       doc = Hyrax::SolrService.query("id:#{pid}", rows: 1).first
-      "https://oregondigital.org#{doc['thumbnail_path_ss']}"
+      URI.join(app_base_url, doc['thumbnail_path_ss']).to_s
     end
 
-    # rubocop:disable Metrics/AbcSize
-    def assign_uris(item)
-      @asset_show_uri = show_url(item.class.to_s.downcase + 's', item.id.to_s)
-      return image_uri(item) unless item.class.to_s == 'Generic'
+    # requires solr document to be decorated, i.e.
+    # Hyrax::SolrDocument::OrderedMembers.decorate(doc)
+    def assign_uris(doc)
+      @asset_show_uri = show_url(doc['has_model_ssim'].first.downcase + 's', doc['id'])
+      return image_uri(doc) unless doc['has_model_ssim'].first == 'Generic'
 
-      return if item.member_ids.blank?
+      return if doc.ordered_member_ids.blank?
 
-      image_uri(query(item.member_ids.first.to_s))
-    end
-    # rubocop:enable Metrics/AbcSize
-
-    def query(pid)
-      Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid)
+      chdoc = SolrDocument.find(doc.ordered_member_ids.first)
+      image_uri(chdoc)
     end
 
-    def image_uri(item)
-      return if item.member_ids.blank?
+    def iiif_server
+      ENV.fetch('IIIF_SERVER_BASE_URL')
+    end
 
-      case item.class.to_s
+    def app_base_url
+      Rails.application.routes.url_helpers.root_url
+    end
+
+    def image_uri(doc)
+      return if doc['member_ids_ssim'].blank?
+
+      case doc['has_model_ssim'].first
       when 'Image'
-        @asset_image_uri = iiif_url(item.member_ids.first.to_s)
+        @asset_image_uri = iiif_url(doc['member_ids_ssim'].first)
       when 'Document'
-        @asset_image_uri = iiif_doc_url(item.member_ids.first.to_s)
+        @asset_image_uri = iiif_doc_url(doc['member_ids_ssim'].first)
       when 'Video'
-        @asset_image_uri = video_thumb(item.member_ids.first.to_s)
+        @asset_image_uri = video_thumb(doc['member_ids_ssim'].first)
       end
     end
   end

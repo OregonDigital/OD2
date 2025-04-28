@@ -53,9 +53,10 @@ class FetchGraphWorker
 
   # METHOD: Create a method store all fails CV fetch
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def store_failed_fetch(pid, failed_cv)
     # PATH: Setup a path for the txt file
-    path = "./tmp/failed_fetch/#{pid}.txt"
+    path = Rails.root.join('tmp', 'failed_fetch', "#{pid}.txt").to_s
 
     # SEARCH: Look for works to create a link & get URL path
     work = SolrDocument.find(pid)
@@ -71,10 +72,12 @@ class FetchGraphWorker
       f.puts("Time Recorded: #{Time.now.strftime('%m-%d-%Y %I:%M %p')}")
     end
   end
+  # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 
   # METHOD: Create and check exist of folder
   def create_and_check_directory
-    Dir.mkdir './tmp/failed_fetch/' if File.exist? './tmp/failed_fetch/'
+    dir_path = Rails.root.join('tmp', 'failed_fetch').to_s
+    FileUtils.mkdir_p(dir_path)
   end
 end

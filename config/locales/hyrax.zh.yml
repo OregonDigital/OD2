@@ -12,6 +12,7 @@ zh:
           language_sim: 语言
           publisher_sim: 出版者
           subject_sim: 学科
+          workflow_state_name_ssim: 流程状态
         index:
           based_near_tesim: 位置
           contributor_tesim: 贡献者

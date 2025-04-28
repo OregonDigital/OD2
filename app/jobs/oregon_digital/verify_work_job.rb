@@ -10,7 +10,7 @@ module OregonDigital
     after_perform do |job|
       args = job.arguments.first
       count = Redis.current.incr("verify_count:#{args[:batch_id]}")
-      if count == args[:size]
+      if count >= args[:size]
         follow_up(args)
         Redis.current.expire("verify_count:#{args[:batch_id]}", 5)
       end

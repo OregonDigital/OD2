@@ -13,6 +13,7 @@ it:
           publisher_sim: Editore
           subject_sim: Soggetto
           identifier_sim: Identifier
+          workflow_state_name_ssim: Stato del Workflow
         index:
           based_near_tesim: luogo
           contributor_tesim: Collaboratore
