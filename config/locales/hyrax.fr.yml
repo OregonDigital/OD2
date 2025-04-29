@@ -68,3 +68,4 @@ fr:
       defaults:
         local_contexts: Contextes Locaux
         local_contexts_local: Contextes Locaux
+        resource_type: Médias

@@ -58,3 +58,9 @@ it:
     institution_name_full: Nome dell'Istituzione
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
+  simple_form:
+    labels:
+      defaults:
+        local_contexts: Contesti Locali
+        local_contexts_local: Contesti Locali
+        resource_type: Media

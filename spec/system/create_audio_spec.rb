@@ -47,7 +47,7 @@ RSpec.describe 'Create a Audio', js: true, type: :system, clean_repo: true do
         fill_in('Identifier', with: 'Test ID')
       end
       within('div.audio_resource_type') do
-        select('Dataset', from: 'Resource type')
+        select('Dataset', from: 'Media')
       end
       select('In Copyright', from: 'Rights')
       # TODO: Rights statement list is missing from generic model, uncomment/resolve
