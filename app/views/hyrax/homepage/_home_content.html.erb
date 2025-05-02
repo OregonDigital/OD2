@@ -8,11 +8,11 @@
         <span class="featured-collection-row flex-container">
           <%# MOVE: Move the title to the upper level to be read by screen reader first %>
           <div class="featured-collection-item featured-collection-title">
-            <h3 class='collection-title'><%= link_to_document collection, "#{collection.title.first}", aria: {label: "#{collection.title.first}"}, class: 'lato-b' %></h3>
+            <h3 class='collection-title'><%= link_to collection.title.first, collection, aria: {label: "#{collection.title.first}"}, class: 'lato-b' %></h3>
             <div class='collection-items'>
               <span class='home-item-count'><%= @member_count %> items</span>
               &nbsp;
-              <%= link_to_document collection, "View all", aria: {label: "View All #{collection.title.first}"}, class: 'lato-p' %>
+              <%= link_to "View all", collection, aria: {label: "View All #{collection.title.first}"}, class: 'lato-p' %>
             </div>
           </div>
 
