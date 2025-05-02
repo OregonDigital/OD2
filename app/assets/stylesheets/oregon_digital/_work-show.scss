@@ -6,6 +6,9 @@
   }
 }
 
+caption {
+  caption-side: unset;
+}
 table {
   .table-scrollable {
     @media (max-width: breakpoint-min(sm)) {
