@@ -14,7 +14,7 @@
     <%= render_constraints(params) %>
   </div>
 
-  <div class="d-md-none">
+  <div class="d-lg-none">
     <%= render 'per_page_widget', size: 'xs' %>
   </div>
 
@@ -22,8 +22,8 @@
 
 <div class="constraints-divider"></div>
 
-<div class="results-constraints-wrapper">
+<div class="results-constraints-wrapper d-flex flex-wrap justify-content-between">
   <h2 class="sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></h2>
-  <div class="result-count mw-lg-b col-md-3 col-sm-4"> <strong>Showing <%= ((@response.current_page * @response.limit_value) - (@response.limit_value)) + 1 %> to <%= ([@response.total_count, @response.current_page * @response.limit_value].min) %> of <%= @response.total_count %> item(s) </strong></div>
+  <div class="result-count mw-lg-b col-lg-3 col-md-4"> <strong>Showing <%= ((@response.current_page * @response.limit_value) - (@response.limit_value)) + 1 %> to <%= ([@response.total_count, @response.current_page * @response.limit_value].min) %> of <%= @response.total_count %> item(s) </strong></div>
   <%= render 'sort_and_per_page' %>
 </div>
