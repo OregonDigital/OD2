@@ -119,18 +119,20 @@ dl.work-show {
   padding: 14px 0;
 
   input {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    // border: ;
-    border-radius: 5px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-right: 0;
     height: 38px;
+    border-radius: 5px;
+    @media (min-width: breakpoint-min(lg)) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: 0;
+    }
   }
 
   button {
-    margin-top: -4px;
+    margin-top: -5px;
+    @media (max-width: breakpoint-min(lg)) {
+      margin-top: 5px;
+    }
   }
 }
 

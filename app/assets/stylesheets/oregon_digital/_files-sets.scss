@@ -17,8 +17,13 @@
 
 .copy-input-fileset {
   width: 215px;
+  @media (min-width: breakpoint-min(xl)) {
+    width: 285px;
+  }
 }
 
 .centered-socials {
+  @media (min-width: breakpoint-min(xl)) {
     margin-top: -5px;
+  }
 }
