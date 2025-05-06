@@ -126,11 +126,16 @@ dl.work-show {
       border-bottom-right-radius: 0;
       border-right: 0;
     }
+    @media (max-width: breakpoint-min(md)) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: 0;
+    }
   }
 
   button {
     margin-top: -5px;
-    @media (max-width: breakpoint-min(lg)) {
+    @media (max-width: breakpoint-min(lg)) and (min-width: breakpoint-min(md)) {
       margin-top: 5px;
     }
   }
