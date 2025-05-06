@@ -7,9 +7,8 @@
 %>
 
 <%# SPLIT: Going through facet field name & split them up into two arrays & sort alphabetically %>
-<% @main_facets, @secondary_facets = facet_field_names.split { |v| v == 'cultural_context_label_sim' } %>
-<% @secondary_facets.unshift('cultural_context_label_sim') if @secondary_facets.any? %>
-<% @secondary_facets = @secondary_facets.uniq.sort %>
+<% @main_facets = %w[copyright_combined_label_sim topic_combined_label_sim creator_combined_label_sim date_combined_year_label_ssim location_combined_label_sim workType_label_sim resource_type_label_sim file_format_sim language_label_sim non_user_collections_label_ssim institution_label_sim] %>
+<% @secondary_facets = (facet_field_names - @main_facets).sort %>
 
 <% facets_from_request(@main_facets).each do |display_facet| %>
     <% if should_render_facet?(display_facet) %>
