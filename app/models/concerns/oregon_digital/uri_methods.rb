@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require 'uri'
 module OregonDigital
   # create urls needed to point to asset show pages and representative images
   module UriMethods
     def iiif_url(pid)
-      URI.join(iiif_server, bucket_path(pid) + '-jp2.jp2/full/430,/0/default.jpg').to_s
+      iiif_server + bucket_path(pid) + '-jp2.jp2/full/430,/0/default.jpg'
     end
 
     def bucket_path(pid)
@@ -13,16 +12,15 @@ module OregonDigital
     end
 
     def iiif_doc_url(pid)
-      URI.join(iiif_server, bucket_path(pid) + '-jp2-0000.jp2/full/430,/0/default.jpg').to_s
+      iiif_server + bucket_path(pid) + '-jp2-0000.jp2/full/430,/0/default.jpg'
     end
 
     def show_url(klass, pid)
-      URI.join(app_base_url, "concern/#{klass}/#{pid}").to_s
+      app_base_url + "concern/#{klass}/#{pid}"
     end
 
     def video_thumb(pid)
-      doc = Hyrax::SolrService.query("id:#{pid}", rows: 1).first
-      URI.join(app_base_url, doc['thumbnail_path_ss']).to_s
+      app_base_url + thumbnail_path(pid)
     end
 
     # requires solr document to be decorated, i.e.
@@ -38,11 +36,18 @@ module OregonDigital
     end
 
     def iiif_server
-      ENV.fetch('IIIF_SERVER_BASE_URL')
+      uri = ENV.fetch('IIIF_SERVER_BASE_URL')
+      uri.ends_with?('/') ? uri : uri + '/'
     end
 
     def app_base_url
-      Rails.application.routes.url_helpers.root_url
+      uri = Rails.application.routes.url_helpers.root_url
+      uri.ends_with?('/') ? uri : uri + '/'
+    end
+
+    def thumbnail_path(pid)
+      doc = Hyrax::SolrService.query("id:#{pid}", rows: 1).first
+      doc['thumbnail_path_ss'].delete_prefix('/')
     end
 
     def image_uri(doc)
