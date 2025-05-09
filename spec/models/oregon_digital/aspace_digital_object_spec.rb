@@ -1,6 +1,5 @@
 # frozen_string_literal:true
 
-require 'uri'
 RSpec.describe OregonDigital::AspaceDigitalObject do
   let(:ado) { described_class.new('abcde1234') }
   let(:solrdoc) { SolrDocument.new(attributes) }
@@ -46,10 +45,12 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
 
   describe 'file_versions' do
     let(:iiif) { ENV.fetch('IIIF_SERVER_BASE_URL') }
+    let(:iiif_url) { iiif.ends_with?('/') ? iiif : iiif + '/' }
     let(:base) { Rails.application.routes.url_helpers.root_url }
+    let(:base_url) { base.ends_with?('/') ? base : base + '/' }
     let(:resp) do
       [{
-        'file_uri' => URI.join(iiif, 'f0/ab/cd/e2/34/5-jp2.jp2/full/430,/0/default.jpg').to_s,
+        'file_uri' => iiif_url + 'f0/ab/cd/e2/34/5-jp2.jp2/full/430,/0/default.jpg',
         'is_representative' => true,
         'publish' => true,
         'use_statement' => 'image-thumbnail',
@@ -57,7 +58,7 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
         'xlink_show_attribute' => 'embed'
       },
        {
-         'file_uri' => URI.join(base, 'concern/generics/abcde1234').to_s,
+         'file_uri' => base + 'concern/generics/abcde1234',
          'is_representative' => false,
          'publish' => true,
          'use_statement' => 'image-service',
