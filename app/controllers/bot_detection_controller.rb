@@ -36,6 +36,7 @@ class BotDetectionController
   end
 
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def verify_challenge
     body = { secret: cf_turnstile_secret_key, response: params['cf_turnstile_response'], remoteip: request.remote_ip }
     response = HTTP.timeout(cf_timeout.to_i).post(cf_turnstile_validation_url, json: body)
@@ -58,4 +59,5 @@ class BotDetectionController
     redirect_to '/contact'
   end
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end
