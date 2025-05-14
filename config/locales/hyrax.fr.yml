@@ -14,6 +14,7 @@ fr:
           subject_sim: Assujettir
           local_contexts_label_sim: Contextes Locaux
           identifier_sim: Identificateur
+          workflow_state_name_ssim: État du Workflow
         index:
           based_near_tesim: Emplacement
           contributor_tesim: Donateur
@@ -67,3 +68,4 @@ fr:
       defaults:
         local_contexts: Contextes Locaux
         local_contexts_local: Contextes Locaux
+        resource_type: Médias

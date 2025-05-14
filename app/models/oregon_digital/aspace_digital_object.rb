@@ -11,37 +11,40 @@ module OregonDigital
     # jsonmodel_type, extents, lang_materials, dates, is_slug_auto,
     # file_versions, restrictions, title, digital_object_id
     # image_uri is the iiif path, show_uri is the show page
-    attr_accessor :asset_image_uri, :asset_show_uri, :work, :errors
-    def initialize(work)
-      @work = work
+    attr_accessor :asset_image_uri, :asset_show_uri, :doc, :errors
+    def initialize(pid)
+      @doc = Hyrax::SolrDocument::OrderedMembers.decorate(SolrDocument.find(pid))
       @errors = []
     end
 
     def json
-      JSON.generate(record)
+      JSON.dump(record)
     end
 
     # rubocop:disable Metrics/AbcSize
     def build_record
       record['dates'] = [add_date]
-      record['title'] = work.title.first
+      record['title'] = doc['title_tesim'].first
       record['lang_materials'] = [lang]
       record['file_versions'] = file_versions
       record['digital_object_type'] = do_type
       record['linked_instances'] = [linked_instance]
-      record['digital_object_id'] = work.identifier.first
+      record['digital_object_id'] = doc['identifier_tesim'].first
       add_visibility
     end
     # rubocop:enable Metrics/AbcSize
 
     def linked_instance
-      if work.archival_object_id.blank?
-        errors << "#{work.id} has no archival_object_id"
+      if doc['archival_object_id_tesim'].blank?
+        errors << "#{doc['id']} has no archival_object_id"
         return {}
 
       end
-      ao_id = work.archival_object_id.first.split('/').last
-      { 'ref' => "/repositories/2/archival_objects/#{ao_id}" }
+      val = doc['archival_object_id_tesim'].first.split('/').last
+      id_match = /[0-9]+/.match val
+      return {} if id_match.nil?
+
+      { 'ref' => "/repositories/2/archival_objects/#{id_match}" }
     end
 
     def record
@@ -53,7 +56,7 @@ module OregonDigital
     end
 
     def add_visibility
-      restrict = (work.visibility != 'open' || !work.access_restrictions.blank?)
+      restrict = (doc['visibility_ssi'] != 'open' || !doc['access_restrictions_tesim'].blank?)
       record['publish'] = true
       record['restrictions'] = restrict
       record['suppressed'] = false
@@ -67,13 +70,20 @@ module OregonDigital
       }
     end
 
-    # rubocop:disable Metrics/AbcSize
+    def date_present
+      return doc['date_tesim'].first unless doc['date_tesim'].blank?
+
+      return doc['date_created_tesim'].first unless doc['date_created_tesim'].blank?
+    end
+
     # rubocop:disable Metrics/MethodLength
     def add_date
-      return {} if work.date.blank?
+      d = date_present
+      return {} if d.nil?
+
+      return {} unless EDTF.parse(d).present?
 
       date_hash.tap do |t|
-        d = work.date.first
         t['expression'] = d
         arr = d.split('/')
         t['begin'] = arr[0]
@@ -83,7 +93,6 @@ module OregonDigital
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
     def file_version_keys
@@ -99,9 +108,9 @@ module OregonDigital
     end
 
     def file_versions
-      assign_uris(work)
+      assign_uris(doc)
       [].tap do |a|
-        a << build_file_version(file_version_embed, @asset_image_uri) if work.visibility == 'open'
+        a << build_file_version(file_version_embed, @asset_image_uri) if doc['visibility_ssi'] == 'open'
         a << build_file_version(file_version_show, @asset_show_uri)
       end
     end
@@ -116,12 +125,12 @@ module OregonDigital
     end
 
     def lang
-      return {} if work.language.blank?
+      return {} if doc['language_tesim'].blank?
 
       {
         'jsonmodel_type' => 'lang_material',
         'language_and_script' => {
-          'language' => work.language.first.split('/').last,
+          'language' => doc['language_tesim'].first.split('/').last,
           'jsonmodel_type' => 'language_and_script'
         }
       }
@@ -129,7 +138,7 @@ module OregonDigital
 
     # rubocop:disable Metrics/MethodLength
     def do_type
-      case work.class.to_s
+      case doc['has_model_ssim'].first
       when 'Document'
         return 'Text'
       when 'Image'

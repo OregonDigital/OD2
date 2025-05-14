@@ -4,7 +4,7 @@ RSpec.describe Qa::Authorities::Subject do
   let(:repository_instance) { described_class.new }
   let(:bne_authority_file_request) { 'http://datos.bne.es/my_id.jsonld' }
   let(:getty_request) { 'http://vocab.getty.edu/aat/my_id.json' }
-  let(:homosaurus_request) { 'http://homosaurus.org/v3/my_id.jsonld' }
+  let(:homosaurus_request) { 'http://homosaurus.org/v4/my_id.jsonld' }
   let(:loc_genre_forms_request) { 'http://id.loc.gov/authorities/genreForms/my_id.jsonld' }
   let(:loc_graphic_materials_request) { 'http://id.loc.gov/vocabulary/graphicMaterials/my_id.jsonld' }
   let(:loc_names_request) { 'http://id.loc.gov/authorities/names/my_id.jsonld' }
@@ -19,7 +19,7 @@ RSpec.describe Qa::Authorities::Subject do
   let(:wikidata_request) { 'http://www.wikidata.org/entity/my_id' }
   let(:bne_authority_file_response) { [{ '@graph': ['@id': 'http://datos.bne.es/my_id', 'label': { '@language': 'es', '@value': 'mylabel' }] }.with_indifferent_access] }
   let(:getty_response) { [{ 'identified_by': [{ 'classified_as': [{ 'id': 'http://vocab.getty.edu/term/type/Descriptor' }], 'content': 'mylabel', 'language': [{ 'id': 'http://vocab.getty.edu/language/en' }] }], 'id': 'http://vocab.getty.edu/aat/my_id' }.with_indifferent_access] }
-  let(:homosaurus_response) { [{ 'skos:prefLabel': { '@language': 'en', '@value': 'mylabel' }, '@id': 'http://homosaurus.org/v3/my_id' }.with_indifferent_access] }
+  let(:homosaurus_response) { [{ 'skos:prefLabel': { '@language': 'en', '@value': 'mylabel' }, '@id': 'http://homosaurus.org/v4/my_id' }.with_indifferent_access] }
   let(:loc_genre_forms_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/genreForms/my_id' }.with_indifferent_access] }
   let(:loc_graphic_materials_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/vocabulary/graphicMaterials/my_id' }.with_indifferent_access] }
   let(:loc_names_response) { [{ 'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'mylabel' }], '@id': 'http://id.loc.gov/authorities/names/my_id' }.with_indifferent_access] }
@@ -70,7 +70,7 @@ RSpec.describe Qa::Authorities::Subject do
     context 'with a uri in the vocabulary' do
       it { expect(repository_instance.search('http://datos.bne.es/my_id')).to eq [{ id: 'http://datos.bne.es/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://vocab.getty.edu/aat/my_id')).to eq [{ id: 'http://vocab.getty.edu/aat/my_id', label: 'mylabel' }.with_indifferent_access] }
-      it { expect(repository_instance.search('http://homosaurus.org/v3/my_id')).to eq [{ id: 'http://homosaurus.org/v3/my_id', label: 'mylabel' }.with_indifferent_access] }
+      it { expect(repository_instance.search('http://homosaurus.org/v4/my_id')).to eq [{ id: 'http://homosaurus.org/v4/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://id.loc.gov/authorities/genreForms/my_id')).to eq [{ id: 'http://id.loc.gov/authorities/genreForms/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://id.loc.gov/vocabulary/graphicMaterials/my_id')).to eq [{ id: 'http://id.loc.gov/vocabulary/graphicMaterials/my_id', label: 'mylabel' }.with_indifferent_access] }
       it { expect(repository_instance.search('http://id.loc.gov/authorities/names/my_id')).to eq [{ id: 'http://id.loc.gov/authorities/names/my_id', label: 'mylabel' }.with_indifferent_access] }

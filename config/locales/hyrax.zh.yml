@@ -12,6 +12,7 @@ zh:
           language_sim: 语言
           publisher_sim: 出版者
           subject_sim: 学科
+          workflow_state_name_ssim: 流程状态
         index:
           based_near_tesim: 位置
           contributor_tesim: 贡献者
@@ -56,3 +57,9 @@ zh:
     institution_name_full: 机构名称
     product_name: 蹄兔
     product_twitter_handle: "@SamveraRepo"
+  simple_form:
+    labels:
+      defaults:
+        local_contexts: 在地脉络
+        local_contexts_local: 在地脉络
+        resource_type: 媒体

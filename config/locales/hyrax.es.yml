@@ -14,6 +14,7 @@ es:
           subject_sim: Tema
           local_contexts_label_sim: Local Contexts
           identifier_sim: Identificador
+          workflow_state_name_ssim: Estado del Workflow
         index:
           based_near_tesim: Ubicación
           contributor_tesim: Contribuidor
@@ -63,3 +64,4 @@ es:
       defaults:
         local_contexts: Local Contexts
         local_contexts_label: Local Contexts
+        resource_type: Medios

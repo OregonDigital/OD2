@@ -97,7 +97,6 @@ module OregonDigital
         { name: :military_occupation, section_name: '' },
         { name: :military_service_location, section_name: '' },
         { name: :mode_of_issuance, section_name: '' },
-        { name: :mods_note, section_name: '' },
         { name: :motif, section_name: '' },
         { name: :object_orientation, section_name: '' },
         { name: :tribal_notes, section_name: '' },

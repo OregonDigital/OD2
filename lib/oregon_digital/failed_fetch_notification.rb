@@ -35,8 +35,11 @@ module OregonDigital
       # SETUP: Add array to store pids
       pids = []
 
+      # FETCH: Ensure the directory exists and is not empty
+      fetch_dir = Rails.root.join('tmp', 'failed_fetch').to_s
+
       # LOOP: Loop through the directory to check on file
-      Dir.foreach('./tmp/failed_fetch/') do |filename|
+      Dir.foreach(fetch_dir) do |filename|
         # CHECK: Make sure to check for hidden file
         next if (filename == '.') || (filename == '..')
 
@@ -52,35 +55,50 @@ module OregonDigital
 
     # Create zip file to send to metadeities
     def create_zip_file
+      # GET: Get path to folder
+      dir_path = Rails.root.join('tmp', 'failed_fetch').to_s
+
+      # CHECK: Ensure the directory exists and is not empty
+      return unless folder_exist?
+
       # CHECK: Check if file exist if not create a new one
       zip_file = zip_exist
 
       # ZIP: Add file and zip them together
       Zip::File.open(zip_file.path, Zip::File::CREATE) do |zip|
         # LOOP: Loop through the directory to store in zip
-        Dir.foreach('./tmp/failed_fetch/') do |filename|
+        Dir.foreach(dir_path) do |filename|
           # CHECK: Make sure to check for hidden file
           next if (filename == '.') || (filename == '..')
 
-          zip.add(filename.to_s, "./tmp/failed_fetch/#{filename}")
+          # PATH: Full path to the file
+          file_path = File.join(dir_path, filename)
+
+          zip.add(filename.to_s, file_path)
         end
       end
     end
 
     # METHOD: Return a bool to see if folder exist
     def folder_exist?
-      File.exist?('./tmp/failed_fetch/') && !Dir.empty?('./tmp/failed_fetch/')
+      dir_path = Rails.root.join('tmp', 'failed_fetch').to_s
+      File.exist?(dir_path) && !Dir.empty?(dir_path)
     end
 
     # METHOD: To check if zip file exist
     def zip_exist
-      File.delete('./tmp/failed_fetch_items.zip') if File.file?('./tmp/failed_fetch_items.zip')
-      File.new('./tmp/failed_fetch_items.zip', 'w+')
+      zip_path = Rails.root.join('tmp', 'failed_fetch_items.zip').to_s
+      File.delete(zip_path) if File.file?(zip_path)
+      File.new(zip_path, 'w+')
     end
 
     # METHOD: Delete all files in folder to clear up
     def delete_files
-      folder = './tmp/failed_fetch'
+      # PATH: Define the folder path using Rails.root.join for safety
+      folder = Rails.root.join('tmp', 'failed_fetch').to_s
+
+      # CHECK: Check if the directory exists before trying to delete files
+      return unless Dir.exist?(folder)
 
       # LOOP: Go through and delete the files
       Dir.glob("#{folder}/*").each do |file|
