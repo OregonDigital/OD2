@@ -143,4 +143,7 @@ Bulkrax::Engine.routes.draw do
     get :show_do_export
   end
   get '/importers_all', to: 'importers#importers_list', as: 'importers_all'
+  # bot detection challenge
+  get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
+  post "/challenge", to: "bot_detection#verify_challenge"
 end
