@@ -78,6 +78,7 @@ services:
       - HYKU_BULKRAX_ENABLED=true
       - BULKRAX_LARGE_EXPORT=50
       - BULKRAX_BATCH_SIZE=10
+      - MAXFILESIZE=4000.megabytes
     depends_on:
       - db-dev
       - blazegraph-dev
