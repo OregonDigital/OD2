@@ -1,6 +1,9 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
+  # bot detection challenge
+  get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
+  post "/challenge", to: "bot_detection#verify_challenge"
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
@@ -114,9 +117,6 @@ Rails.application.routes.draw do
 
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  # bot detection challenge
-  get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
-  post "/challenge", to: "bot_detection#verify_challenge"
 end
 
 # OVERRIDE: Add in the download function towards the importers

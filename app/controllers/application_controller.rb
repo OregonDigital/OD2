@@ -19,9 +19,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  # Redirect for Bot Detection
-  before_action { |controller| BotDetectionController.bot_detection_enforce_filter(controller) }
-
   # Send user to 401/403 page rather than forward with flash message
   rescue_from CanCan::AccessDenied do
     response_code = user_signed_in? ? 403 : 401
