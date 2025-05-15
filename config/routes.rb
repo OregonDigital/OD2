@@ -114,6 +114,10 @@ Rails.application.routes.draw do
 
   post 'bulk_review/:ids', to: 'oregon_digital/reviews#approve_items', as: 'bulk_review'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # bot detection challenge
+  get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
+  post "/challenge", to: "bot_detection#verify_challenge":w
+  
 end
 
 # OVERRIDE: Add in the download function towards the importers
@@ -143,7 +147,4 @@ Bulkrax::Engine.routes.draw do
     get :show_do_export
   end
   get '/importers_all', to: 'importers#importers_list', as: 'importers_all'
-  # bot detection challenge
-  get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
-  post "/challenge", to: "bot_detection#verify_challenge"
 end
