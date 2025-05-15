@@ -116,8 +116,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # bot detection challenge
   get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
-  post "/challenge", to: "bot_detection#verify_challenge":w
-  
+  post "/challenge", to: "bot_detection#verify_challenge"
 end
 
 # OVERRIDE: Add in the download function towards the importers
