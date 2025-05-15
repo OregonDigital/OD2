@@ -14,6 +14,9 @@ class CatalogController < ApplicationController
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
 
+  # Redirect for Bot Detection
+  before_action { |controller| BotDetectionController.bot_detection_enforce_filter(controller) }
+
   # Combine our search queries as they come in
   def index
     create_full_size_download_facet
