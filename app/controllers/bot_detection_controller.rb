@@ -25,6 +25,9 @@ class BotDetectionController < ApplicationController
   def self.bot_detection_enforce_filter(controller)
     return unless (enabled == 'true') && !controller.session[session_passed_key].try { |date| Time.new(date) < session_passed_good_for }
 
+    # Ignore all OAI routes
+    return if controller.request.original_fullpath.include?('oai')
+
     return unless controller.request.get?
 
     Rails.logger.info 'Redirecting for Turnstile'
