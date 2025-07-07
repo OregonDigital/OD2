@@ -11,104 +11,124 @@
 <% @secondary_facets = (facet_field_names - @main_facets).sort %>
 
 <% facets_from_request(@main_facets).each do |display_facet| %>
-    <% if should_render_facet?(display_facet) %>
-        <div class="advanced-search-facet">
-            <%= label_tag display_facet.name.parameterize, :class => "col-sm-12 dark-grey h6" do %>
-                <%= facet_field_label(display_facet.name) %>
-            <% end %>
-
-            <% unless display_facet.name == 'date_combined_year_label_ssim' %>
-                <div class="col-sm-12">
-                    <%= content_tag(:select, :multiple => true,
-                        :name   => "f[#{display_facet.name}][]",
-                        'data-placeholder' => 'Start typing or choose from list',
-                        :id     => display_facet.name.parameterize,
-                        :class  => "form-control advanced-search-facet-select") do %>
-                        <% display_facet.items.sort_by { |facet_item| facet_display_value(display_facet.name, facet_item) }.each do |facet_item| %>
-                            <%# OVERRIDE blacklight_advanced_search to suport facet value helper methods %>
-                            <%# If a helper_method exists in the base blacklight config for the advanced facet field name, send the helper_method. Otherwise use the existing value %>
-                            <% facet_item_label = facet_display_value(display_facet.name, facet_item) %>
-                            <%# END OVERRIDE %>
-                            <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
-                                <%= facet_item_label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
-                            <% end %>
-                        <% end %>
+  <div style="margin-left: 15px; margin-right: 15px;" aria-labelledby="<%= display_facet.name.parameterize %>-header" role="group" class="panel facet_limit blacklight-<%= display_facet.name %> <%= 'facet_limit-active' %>">
+    <div class="collapse-toggle panel-heading">
+      <h4 class="panel-header p-0 facet-field-heading" id="<%= display_facet.name.parameterize %>-header">
+        <button
+          type="button"
+          class="btn btn-block panel-title collapse-toggle <%= "collapsed" if true %>"
+          data-toggle="collapse"
+          data-target="#<%= display_facet.name.parameterize %>"
+          aria-expanded="<%= 'true' %>"
+          aria-controls="<%= display_facet.name.parameterize %>"
+        >
+          <%= facet_field_label(display_facet.name) %>
+        </button>
+      </h4>
+    </div>
+    <div id="<%= display_facet.name.parameterize %>" class="panel-collapse facet-content collapse <%= "in" unless true %>" aria-expanded="<%= 'true' %>">
+      <div class="panel-body">
+        <div class="advanced_search_facet"
+          <% unless display_facet.name == 'date_combined_year_label_ssim' %>
+            <div class="col-sm-12">
+              <%= content_tag(:select, :multiple => true,
+                  :name   => "f[#{display_facet.name}][]",
+                  'data-placeholder' => 'Start typing or choose from list',
+                  :id     => display_facet.name.parameterize,
+                  :class  => "form-control advanced-search-facet-select") do %>
+                  <% display_facet.items.sort_by { |facet_item| facet_display_value(display_facet.name, facet_item) }.each do |facet_item| %>
+                    <% facet_item_label = facet_display_value(display_facet.name, facet_item) %>
+                    <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
+                      <%= facet_item_label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
                     <% end %>
-                </div>
-            <% else %>
-                <div class="col-xs-5 v-center">
-                    <%= content_tag(:input, nil,
-                        :name   => "range[#{display_facet.name}][begin]",
-                        :type   => "number",
-                        :id     => display_facet.name.parameterize) %>
-                </div>
-                <div class="col-xs-2 v-center" style="text-align:center"> to </div>
-                <div class="col-xs-5 v-center">
-                    <%= content_tag(:input, nil,
-                        :name   => "range[#{display_facet.name}][end]",
-                        :type   => "number",
-                        :id     => display_facet.name.parameterize,
-                        :class  => "form-control") %>
-                </div>
-            <% end %>
+                  <% end %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="col-xs-5 v-center">
+              <%= content_tag(:input, nil,
+                  :name   => "range[#{display_facet.name}][begin]",
+                  :type   => "number",
+                  :id     => display_facet.name.parameterize) %>
+            </div>
+            <div class="col-xs-2 v-center" style="text-align:center"> to </div>
+            <div class="col-xs-5 v-center">
+              <%= content_tag(:input, nil,
+                  :name   => "range[#{display_facet.name}][end]",
+                  :type   => "number",
+                  :id     => display_facet.name.parameterize,
+                  :class  => "form-control") %>
+            </div>
+          <% end %>
         </div>
-    <% end %>
+      </div>
+    </div>
+  <% "Artifical DIV here for missing layout weirdness. Fixes Panel Problems. Layout somewhere has a mismatched div" %>
 <% end %>
 
-<%# ADD: Utilize a button to hide other searchs in advanced search %>
+<%# ADD: Utilize a button to hide other searches in advanced search %>
 <div class="advanced-search-more-facet">
-    <div class="col-sm-12">
-        <button type="button" class="btn btn-default btn-block secondary-advanced-facets" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" href="#dropdown-advanced-secondary-facets" data-more-text="<%= t('blacklight.facets.more_option') %>"
-  data-less-text="<%= t('blacklight.facets.less_option') %>">
-            <%= t('blacklight.facets.more_option') %>
-        </button>
-    </div>
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-default btn-block secondary-advanced-facets" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" href="#dropdown-advanced-secondary-facets" data-more-text="<%= t('blacklight.facets.more_option') %>" data-less-text="<%= t('blacklight.facets.less_option') %>">
+      <%= t('blacklight.facets.more_option') %>
+    </button>
+  </div>
 </div>
 
 <%# SECONDARY: Load the other options filter %>
 <div id="dropdown-advanced-secondary-facets" class="collapse panel-group">
-    <% facets_from_request(@secondary_facets).each do |display_facet| %>
-        <% if should_render_facet?(display_facet) %>
-            <div class="advanced-search-facet">
-                <%= label_tag display_facet.name.parameterize, :class => "col-sm-12 dark-grey h6" do %>
-                    <%= facet_field_label(display_facet.name) %>
+  <% facets_from_request(@secondary_facets).each do |display_facet| %>
+    <div style="margin-left: 15px; margin-right: 15px;" aria-labelledby="<%= display_facet.name.parameterize %>-header" role="group" class="panel facet_limit blacklight-<%= display_facet.name %> <%= 'facet_limit-active' %>">
+      <div class="collapse-toggle panel-heading">
+        <h4 class="panel-header p-0 facet-field-heading" id="<%= display_facet.name.parameterize %>-header">
+          <button
+            type="button"
+            class="btn btn-block panel-title collapse-toggle <%= "collapsed" if true %>"
+            data-toggle="collapse"
+            data-target="#<%= display_facet.name.parameterize %>"
+            aria-expanded="<%= 'true' %>"
+            aria-controls="<%= display_facet.name.parameterize %>"
+          >
+            <%= facet_field_label(display_facet.name) %>
+          </button>
+        </h4>
+     </div>
+      <div id="<%= display_facet.name.parameterize %>" class="panel-collapse facet-content collapse <%= "in" unless true %>" aria-expanded="<%= 'true' %>">
+        <div class="panel-body">
+          <div class="advanced_search_facet"
+            <% unless display_facet.name == 'date_combined_year_label_ssim' %>
+              <div class="col-sm-12">
+                <%= content_tag(:select, :multiple => true,
+                    :name   => "f[#{display_facet.name}][]",
+                    'data-placeholder' => 'Start typing or choose from list',
+                    :id     => display_facet.name.parameterize,
+                    :class  => "form-control advanced-search-facet-select") do %>
+                    <% display_facet.items.sort_by { |facet_item| facet_display_value(display_facet.name, facet_item) }.each do |facet_item| %>
+                      <% facet_item_label = facet_display_value(display_facet.name, facet_item) %>
+                      <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
+                        <%= facet_item_label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
+                      <% end %>
+                    <% end %>
                 <% end %>
-
-                <% unless display_facet.name == 'date_combined_year_label_ssim' %>
-                    <div class="col-sm-12">
-                        <%= content_tag(:select, :multiple => true,
-                            :name   => "f[#{display_facet.name}][]",
-                            'data-placeholder' => 'Start typing or choose from list',
-                            :id     => display_facet.name.parameterize,
-                            :class  => "form-control advanced-search-facet-select") do %>
-                            <% display_facet.items.sort_by { |facet_item| facet_display_value(display_facet.name, facet_item) }.each do |facet_item| %>
-                                <%# OVERRIDE blacklight_advanced_search to suport facet value helper methods %>
-                                <%# If a helper_method exists in the base blacklight config for the advanced facet field name, send the helper_method. Otherwise use the existing value %>
-                                <% facet_item_label = facet_display_value(display_facet.name, facet_item) %>
-                                <%# END OVERRIDE %>
-                                <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
-                                    <%= facet_item_label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                    </div>
-                <% else %>
-                    <div class="col-xs-5 v-center">
-                        <%= content_tag(:input, nil,
-                            :name   => "range[#{display_facet.name}][begin]",
-                            :type   => "number",
-                            :id     => display_facet.name.parameterize) %>
-                    </div>
-                    <div class="col-xs-2 v-center" style="text-align:center"> to </div>
-                    <div class="col-xs-5 v-center">
-                        <%= content_tag(:input, nil,
-                            :name   => "range[#{display_facet.name}][end]",
-                            :type   => "number",
-                            :id     => display_facet.name.parameterize,
-                            :class  => "form-control") %>
-                    </div>
-                <% end %>
-            </div>
-        <% end %>
-    <% end %>
+              </div>
+            <% else %>
+              <div class="col-xs-5 v-center">
+                <%= content_tag(:input, nil,
+                    :name   => "range[#{display_facet.name}][begin]",
+                    :type   => "number",
+                    :id     => display_facet.name.parameterize) %>
+              </div>
+              <div class="col-xs-2 v-center" style="text-align:center"> to </div>
+              <div class="col-xs-5 v-center">
+                <%= content_tag(:input, nil,
+                    :name   => "range[#{display_facet.name}][end]",
+                    :type   => "number",
+                    :id     => display_facet.name.parameterize,
+                    :class  => "form-control") %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  <% end %>
 </div>
