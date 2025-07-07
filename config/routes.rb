@@ -1,6 +1,9 @@
 # frozen_string_literal:true
 
 Rails.application.routes.draw do
+  # bot detection challenge
+  get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
+  post "/challenge", to: "bot_detection#verify_challenge"
 
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
