@@ -47,6 +47,7 @@ gem 'zip_tricks', '~> 5.3'
 gem 'bulkrax', github: 'samvera/bulkrax', ref: '62517e67876d96c7a0bedb288370a4f10eb0b4c4' #v8.2.0
 # gem 'willow_sword', github: 'notch8/willow_sword', branch: 'main'
 gem 'jquery-datatables-rails'
+gem 'concurrent-ruby', '1.3.4'
 
 # Security Audit updates
 gem 'loofah', '>= 2.2.3'
