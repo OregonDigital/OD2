@@ -5,6 +5,7 @@
 # failure to reindex doesn't stop the rest of the assets' reindex processes.
 class ReindexWorker
   include Sidekiq::Worker
+  include OregonDigital::TriplestoreHealth
   sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
   # pids must be ordered with access control objects first, then the actual
@@ -12,6 +13,8 @@ class ReindexWorker
   # rubocop:disable Metrics/AbcSize:
   # rubocop:disable Metrics/MethodLength:
   def perform(access_control_pids, asset_pid, contains_pids)
+    raise OregonDigital::TriplestoreHealth::TriplestoreHealthError unless triplestore_is_alive?
+
     access_control_pids.each do |pid|
       obj = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
       obj.permissions.each(&:update_index)

@@ -55,6 +55,15 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
 
       it { expect(resource.triplestore_fetch).to eq bg_graph }
     end
+
+    context 'when the triplestore is down' do
+      before do
+        allow(resource).to receive(:rdf_subject).and_return('http://www.blah.com')
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_raise(SocketError)
+      end
+
+      it { expect(resource.triplestore_fetch).to eq new_rdf_graph }
+    end
   end
 
   describe '#set_subject!' do
