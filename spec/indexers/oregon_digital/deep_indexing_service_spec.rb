@@ -60,5 +60,18 @@ RDFXML
         expect(solr_doc['location_combined_label_sim']).to eq ['http://sws.geonames.org/5037650']
       end
     end
+
+    context 'when the triplestore goes down' do
+      let(:location) { Hyrax::ControlledVocabularies::Location.new('http://sws.geonames.org/5037650') }
+
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_raise(SocketError)
+      end
+
+      it 'does not try to fetch from source' do
+        expect(location).not_to receive(:fetch)
+        service.send(:add_assertions, nil)
+      end
+    end
   end
 end
