@@ -3,11 +3,14 @@
 # Sidekiq Worker for fetching linked data labels
 class FetchFailedGraphWorker
   include Sidekiq::Worker
+  include OregonDigital::TriplestoreHealth
   sidekiq_options retry: 11 # Around 2.5 days of retries
   sidekiq_options queue: 'fetch' # Use the 'fetch' queue
 
   def perform(val)
     return unless val.respond_to?(:fetch)
+
+    raise OregonDigital::TriplestoreHealth::TriplestoreHealthError unless triplestore_is_alive?
 
     val.fetch(headers: { 'Accept' => default_accept_header })
     val.persist!
