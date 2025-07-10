@@ -151,6 +151,15 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
         location.fetch
       end
     end
+
+    context 'when the triplestore is down' do
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_raise(SocketError)
+        location.fetch
+      end
+
+      it { expect(location.graph).to eq RDF::Graph.new }
+    end
   end
 
   describe '#persist!' do
