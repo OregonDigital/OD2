@@ -60,5 +60,15 @@ RSpec.describe FetchGraphWorker, type: :worker do
         worker.perform(work.id, work.depositor)
       end
     end
+
+    context 'when the triplestore is down' do
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_raise(SocketError)
+      end
+
+      it 'throws an error' do
+        expect { worker.perform(work.id, work.depositor) }.to raise_error(OregonDigital::TriplestoreHealth::TriplestoreHealthError)
+      end
+    end
   end
 end
