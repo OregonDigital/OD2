@@ -7,6 +7,7 @@ module OregonDigital
       # Override ActiveTriples::Resource to enforce vocabulary membership
       #
       # @see ActiveTriples::Resource
+      include OregonDigital::TriplestoreHealth
       def initialize(*args, &block)
         super
         # If rdf_subject wasn't set, we're done
@@ -84,6 +85,8 @@ module OregonDigital
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
       # it should return an empty graph.
       def triplestore_fetch
+        return RDF::Graph.new unless triplestore_is_alive?
+
         URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
       end
 
