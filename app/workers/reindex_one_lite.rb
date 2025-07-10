@@ -5,10 +5,13 @@
 # For more thorough reindexing use ReindexWorker
 class ReindexOneLite
   include Sidekiq::Worker
+  include OregonDigital::TriplestoreHealth
   sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
   # A single pid is expected
   def perform(pid)
+    raise OregonDigital::TriplestoreHealth::TriplestoreHealthError unless triplestore_is_alive?
+
     w = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
     w.update_index
     # Enable once all model objects are fully valkyrized and indexing works again
