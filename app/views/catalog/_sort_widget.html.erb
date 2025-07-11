@@ -3,12 +3,12 @@
   <%= t('blacklight.search.sort.title') %>
   <span class="sr-only" id="search-sort"> Sort results by </span>
   <div class="btn-group">
-    <button type="button" id="search-sort-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-controls="search-sort-list" aria-expanded="false" aria-haspopup="true" aria-label="Sort by">
-      <%= t('blacklight.search.sort.button_label', :field =>sort_field_label(current_sort_field.key)) %> <span class="caret-dropdown"></span>
+    <button type="button" id="search-sort-button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-controls="search-sort-list" aria-expanded="false" aria-haspopup="true" aria-label="Sort by">
+      <%= t('blacklight.search.sort.button_label', :field =>sort_field_label(current_sort_field.key)) %>
     </button>
     <ul id="search-sort-list" class="dropdown-menu" role="menu" aria-labelledby="search-sort-button">
       <%- active_sort_fields.each do |sort_key, field_config| %>
-        <li role="none"><%= link_to(sort_field_label(sort_key), url_for(search_state.params_for_search(sort: sort_key)), role: 'menuitem', tabindex: -1) %></li>
+        <li role="none"><%= link_to(sort_field_label(sort_key), url_for(search_state.params_for_search(sort: sort_key)), class: 'dropdown-item', role: 'menuitem', tabindex: -1) %></li>
       <%- end -%>
     </ul>
   </div>

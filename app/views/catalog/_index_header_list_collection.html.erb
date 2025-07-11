@@ -1,4 +1,4 @@
-<div class="search-results-title-row col-xs-9 col-sm-7 col-md-7">
+<div class="search-results-title-row col-9 col-md-7 col-lg-7 float-left d-flex align-items-center">
   <% if document.has_highlight_field?('title_tesim') %>
     <h3 class="search-result-title"><%= link_to document.highlight_field('title_tesim').first, [hyrax, document] %></h3>
   <% else %>

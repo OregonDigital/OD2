@@ -1,7 +1,6 @@
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="col-12 col-md-4 col-lg-3 float-left">
   <div class="list-thumbnail <%= 'blurred-image' if document.mask_content.include?('Search Results Page') %>">
     <%# LINK: Add in a link to collection page on the thumbnail %>
     <%= link_to (render_thumbnail_tag document, alt: document.title_or_label.truncate_words(10), suppress_link: true), Hyrax::Engine.routes.url_helpers.collection_path(document) %>
   </div>
 </div>
-
