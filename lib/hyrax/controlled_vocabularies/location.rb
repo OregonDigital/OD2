@@ -96,17 +96,16 @@ module Hyrax
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
       def fetch(*_args, &_block)
+        unless triplestore_is_alive?
+          persistence_strategy.graph = RDF::Graph.new
+          return self
+        end
         graph = fetch_from_cache(rdf_subject)
         unless graph.nil?
           persistence_strategy.graph = graph
           fetch_parents unless top_level_element?
           return self
         end
-        unless triplestore_is_alive?
-          persistence_strategy.graph = RDF::Graph.new
-          return self
-        end
-
         resource = super
         fetch_parents unless top_level_element?
         store_graph
