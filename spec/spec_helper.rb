@@ -47,12 +47,10 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.before :each do
-    WebMock.globally_stub_request { |request|
-      if request.uri.to_s =~ /.*tshealth/
-        { status: 200, body: '', headers: {} }
-      end
-    }
+  config.before do
+    WebMock.globally_stub_request do |request|
+      { status: 200, body: '', headers: {} } if request.uri.to_s =~ /.*tshealth/
+    end
   end
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
