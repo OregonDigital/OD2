@@ -3,11 +3,14 @@
 # reindexes chunks of uris
 class ReindexChunkWorker
   include Sidekiq::Worker
+  include OregonDigital::TriplestoreHealth
   sidekiq_options queue: 'reindex' # Use the 'reindex' queue
 
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def perform(uris)
+    raise OregonDigital::TriplestoreHealth::TriplestoreHealthError unless triplestore_is_alive?
+
     counter = 0
 
     logger.info "Reindexing #{uris.count} URIs"

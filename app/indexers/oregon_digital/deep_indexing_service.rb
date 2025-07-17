@@ -5,6 +5,7 @@ require 'linkeddata'
 module OregonDigital
   # Used to index linked data
   class DeepIndexingService < Hyrax::DeepIndexingService
+    include OregonDigital::TriplestoreHealth
     class_attribute :stored_and_facetable_fields, :stored_fields, :symbol_fields
     self.stored_and_facetable_fields = %i[]
     self.stored_fields = %i[]
@@ -20,6 +21,8 @@ module OregonDigital
     # do not index unfetched labels
     # rubocop:disable Metrics/MethodLength
     def add_assertions(prefix_method, solr_doc = {})
+      return solr_doc unless triplestore_is_alive?
+
       fetch_external
       fields.each do |field_key, field_info|
         solr_field_key = solr_document_field_name(field_key, prefix_method)

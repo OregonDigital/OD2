@@ -35,5 +35,15 @@ RSpec.describe FetchFailedGraphWorker, type: :worker do
         expect { worker.perform(controlled_val) }.to raise_error TriplestoreAdapter::TriplestoreException
       end
     end
+
+    context 'when the triplestore is down' do
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_raise(SocketError)
+      end
+
+      it 'raises an exception' do
+        expect { worker.perform(controlled_val) }.to raise_error OregonDigital::TriplestoreHealth::TriplestoreHealthError
+      end
+    end
   end
 end
