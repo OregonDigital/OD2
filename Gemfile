@@ -54,7 +54,7 @@ gem 'loofah', '>= 2.2.3'
 
 # Login gems
 gem 'omniauth'
-gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'omniauth-cas'
 gem 'omniauth-saml'
 
