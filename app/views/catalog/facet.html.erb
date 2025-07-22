@@ -1,4 +1,4 @@
-<div class="modal-header">
+<div class="modal-header flex-wrap">
   <h3 id="modal-title" class="modal-title"><%= facet_field_label(@facet.key) %></h3>
   <button type="button" class="ajax-modal-close close" data-dismiss="modal" aria-label="<%= t('blacklight.modal.close') %>">
     <span>&times;</span>
@@ -12,7 +12,7 @@
     <% if @pagination.prefix && @display_facet.index? %>
       <h4><%= facet_field_label(@facet.key).pluralize %> starting with "<%= @pagination.prefix %>" </h4>
     <% elsif @display_facet.index? %>
-      <h4><%= t('blacklight.search.facets.all') %> <%= facet_field_label(@facet.key).pluralize %></h4> 
+      <h4><%= t('blacklight.search.facets.all') %> <%= facet_field_label(@facet.key).pluralize %></h4>
     <% end %>
   </div>
 
