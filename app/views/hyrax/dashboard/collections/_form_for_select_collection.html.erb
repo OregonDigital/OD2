@@ -46,7 +46,7 @@
                         data: { toggle: "modal", dismiss: "modal", target: "#collection-create-container" } %>
             <% end %>
           </div><!-- /.modal-body -->
-          <div class="modal-footer text-center lato-b">
+          <div class="modal-footer justify-content-center lato-b">
             <%# @TODO: Send this link to new My Collections page %>
             <%= link_to 'View My Collections', Rails.application.routes.url_helpers.my_collections_path(:anchor => OregonDigital::ExploreCollectionsController::TABS[:my]) %>
           </div>
