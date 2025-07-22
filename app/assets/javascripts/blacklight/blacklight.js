@@ -357,7 +357,7 @@ Blacklight.modal.triggerFormSelector = 'form[data-blacklight-modal~=trigger]'; /
 // be preserved. MUST be manually prefixed with the modal selector,
 // so they only apply to things inside a modal.
 
-Blacklight.modal.preserveLinkSelector = Blacklight.modal.modalSelector + ' button[data-blacklight-modal~=preserve]';
+Blacklight.modal.preserveLinkSelector = Blacklight.modal.modalSelector + ' a[data-blacklight-modal~=preserve]';
 Blacklight.modal.containerSelector = '[data-blacklight-modal~=container]';
 Blacklight.modal.modalCloseSelector = '[data-blacklight-modal~=close]'; // Called on fatal failure of ajax load, function returns content
 // to show to user in modal.  Right now called only for extreme
