@@ -223,7 +223,7 @@ en:
           date_modified: Modified
   hyrax:
     content_warning:
-      content_alert: 'This material contains content or imagery that may be harmful or difficult for some users. By clicking the ‘I Understand’ button you are acknowledging that you have been informed about the content you will view.' 
+      content_alert: 'This material contains content or imagery that may be harmful or difficult for some users. By clicking the ‘I Understand’ button you are acknowledging that you have been informed about the content you will view.'
     workflow:
       tombstoned: "This item has been deleted. It is no longer available."
     tombstone:
@@ -249,7 +249,7 @@ en:
         header: "Downloads"
     collection:
       select_form:
-        select_heading: 'My Collections()'
+        select_heading: 'My Collections'
         title: 'Add this item'
         update: 'Save'
         delete: 'Delete'

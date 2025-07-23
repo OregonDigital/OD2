@@ -1,13 +1,13 @@
 <nav id="az-index" aria-label="'A' to 'Z' <%= @facet.label %> filter">
-  <ol class="pagination pagination-sm justify-content-center">
+  <ol class="pagination pagination-sm justify-content-center flex-wrap">
     <li class="page-item <%= 'active' if @pagination.prefix.blank? %>" >
-      <a class="page-link" data-href="<%= url_for(@pagination.params_for_resort_url('index', search_state.to_h.except(@pagination.request_keys[:prefix]))) %>" data-ajax-modal="preserve" aria-controls="facet_list_header">
+      <a class="page-link" data-href="<%= url_for(@pagination.params_for_resort_url('index', search_state.to_h.except(@pagination.request_keys[:prefix]))) %>" data-blacklight-modal="preserve" aria-controls="facet_list_header">
         <%= t('blacklight.search.facets.all') %>
       </a>
     </li>
     <% @facet.index_range.each do |letter| %>
       <li class="page-item  <%= 'active' if @pagination.prefix == letter %>">
-        <a class="page-link" data-href="<%= url_for(@pagination.params_for_resort_url('index', search_state.to_h.merge(@pagination.request_keys[:prefix] => letter))) %>" data-ajax-modal="preserve" aria-controls="facet_sorted_list">
+        <a class="page-link" data-href="<%= url_for(@pagination.params_for_resort_url('index', search_state.to_h.merge(@pagination.request_keys[:prefix] => letter))) %>" data-blacklight-modal="preserve" aria-controls="facet_sorted_list">
           <%= letter  %>
         </a>
       </li>
