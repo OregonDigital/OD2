@@ -1,9 +1,8 @@
-<%# UPDATE: Slice out only the title/description and the creator field to display %>
-<%- search_fields_for_advanced_search.slice('title_desc_field', 'creator_field').each do |key, field_def| -%>
+<%- search_fields_for_advanced_search.each do |key, field_def| -%>
   <div class="form-group advanced-search-field">
-      <%= label_tag key, (field_def.label == 'Title' ? 'Title / Description' : field_def.label), :class => "col-sm-12 dark-grey h6" %>
-      <div class="col-sm-12">
-        <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control', placeholder: 'Type a keyword', 'aria-label': field_def.label %>
-      </div>
+    <%= label_tag key, "#{field_def.label }", :class => "col-sm-12 dark-grey h6" %>
+    <div class="col-sm-12">
+      <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control', placeholder: 'Type a keyword', 'aria-label': field_def.label %>
+    </div>
   </div>
 <%- end -%>

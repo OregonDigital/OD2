@@ -37,7 +37,9 @@ module OregonDigital
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
-
+        config.advanced_search[:form_solr_parameters] ||= {
+          'facet.field' => %w[non_user_collections_label_ssim non_user_collections_ssim copyright_combined_label_sim date_combined_year_label_ssim institution_label_sim language_label_sim]
+        }
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
         config.view.gallery.icon_class = 'fa fa-trello fa-lg'
@@ -114,7 +116,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = true
+            field.include_in_advanced_search = false
           end
         end
         Generic.generic_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -134,7 +136,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = true
+            field.include_in_advanced_search = false
           end
         end
         Image.image_properties.reject { |attr| rejected_fields.include? attr }.each do |prop|
@@ -154,7 +156,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = true
+            field.include_in_advanced_search = false
           end
         end
         # WE MAY NEED TO ADD VIDEO BACK HERE IF ITS METADATA CHANGES DOWN THE LINE
@@ -180,7 +182,7 @@ module OregonDigital
               qf: solr_name,
               pf: solr_name
             }
-            field.include_in_advanced_search = true
+            field.include_in_advanced_search = false
           end
         end
         config.add_show_field 'resource_type_label_tesim'
@@ -262,7 +264,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
-          field.include_in_advanced_search = true
+          field.include_in_advanced_search = false
         end
         config.add_search_field('language_label') do |field|
           solr_name = 'language_label_tesim'
@@ -271,7 +273,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
-          field.include_in_advanced_search = true
+          field.include_in_advanced_search = false
         end
         config.add_search_field('non_user_collections') do |field|
           solr_name = 'non_user_collections_tesim'
@@ -280,7 +282,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
-          field.include_in_advanced_search = true
+          field.include_in_advanced_search = false
         end
         config.add_search_field('all_fields', label: 'All Fields') do |field|
           all_names = search_fields.join(' ')
