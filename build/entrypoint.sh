@@ -15,6 +15,9 @@ fi
 # Create default roles
 bundle exec rails oregon_digital:create_roles
 
+# Create triplestore health graph
+bundle exec rails oregon_digital:create_triplestore_health
+
 # Submit a marker to honeycomb marking the time the application starts booting
 if [ "${RAILS_ENV}" = 'production' ]; then
   curl https://api.honeycomb.io/1/markers/od2-rails-${RAILS_ENV} -X POST -H "X-Honeycomb-Team: ${HONEYCOMB_WRITEKEY}" -d "{\"message\":\"${RAILS_ENV} - ${DEPLOYED_VERSION} - booting\", \"type\":\"deploy\"}"
