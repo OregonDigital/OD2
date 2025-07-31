@@ -5,8 +5,10 @@ module OregonDigital
   # Health check for triplestore
   module TriplestoreHealth
     def triplestore_is_alive?
-      triplestore.fetch_cached_term(ts_uri)
-      return true
+      return true unless triplestore.fetch_cached_term(ts_uri).nil?
+
+      Rails.logger.info 'Warning: TriplestoreHealthCheck is failing'
+      return false
     rescue SocketError
       Rails.logger.info 'Warning: TriplestoreHealthCheck is failing'
       return false

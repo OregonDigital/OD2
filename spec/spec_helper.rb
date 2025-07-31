@@ -49,9 +49,10 @@ RSpec.configure do |config|
 
   config.before do
     WebMock.globally_stub_request do |request|
-      { status: 200, body: '', headers: {} } if request.uri.to_s =~ /.*tshealth/
+      { status: 200, body: '<blah></blah>', headers: {} } if request.uri.to_s == 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://example.org/vocab/tshealth'
     end
   end
+
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
   # compatibility in RSpec 3). It causes shared context metadata to be

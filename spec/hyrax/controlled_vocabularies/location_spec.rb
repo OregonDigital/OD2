@@ -112,7 +112,8 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
       let(:provider) { instance_double('TriplestoreAdapter::Providers::Blazegraph', insert: true) }
 
       before do
-        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('http://example.org/vocab/tshealth').and_return(RDF::Graph.new)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('https://sws.geonames.org/3469034/').and_return(nil)
         allow(OregonDigital::Triplestore).to receive(:triplestore_client).and_return(triplestore_client)
         allow(location).to receive(:top_level_element?).and_return(true)
         location.fetch
@@ -126,7 +127,8 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
       let(:provider) { instance_double('TriplestoreAdapter::Providers::Blazegraph', insert: true) }
 
       before do
-        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('http://example.org/vocab/tshealth').and_return(RDF::Graph.new)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('https://sws.geonames.org/3469034/').and_return(nil)
         allow(OregonDigital::Triplestore).to receive(:triplestore_client).and_return(triplestore_client)
         allow(location).to receive(:top_level_element?).and_return(false)
         allow(location).to receive(:parent_hierarchy).and_return([[parent_adm1]])
@@ -142,7 +144,8 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
 
     context 'when a uri does not exist' do
       before do
-        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(nil)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('http://example.org/vocab/tshealth').and_return(RDF::Graph.new)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('https://sws.geonames.org/3469034/').and_return(nil)
         stub_request(:get, 'https://sws.geonames.org/3469034/').to_return(status: 500, body: '', headers: {})
       end
 

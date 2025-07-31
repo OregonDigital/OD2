@@ -53,6 +53,8 @@ RDFXML
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://sws.geonames.org/5037650%3E')
           .to_return(status: 500, body: '', headers: {})
         allow(location).to receive('fetch')
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('http://example.org/vocab/tshealth').and_return(RDF::Graph.new)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('http://sws.geonames.org/5037650')
       end
 
       it 'handles the error' do
