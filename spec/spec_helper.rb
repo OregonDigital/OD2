@@ -52,7 +52,8 @@ RSpec.configure do |config|
       { status: 200, body: '<http://example.org/vocab/tshealth><http://www.w3.org/2000/01/rdf-schema#label> "healthy" .', headers: {} } if request.uri.to_s == 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://example.org/vocab/tshealth%3E'
     end
     WebMock.globally_stub_request do |request|
-      j = JSON.parse(File.read('/data/spec/fixtures/health.jsonld'))
+      f = File.read(Rails.root.join('spec', 'fixtures', 'health.jsonld'))
+      j = JSON.parse(f)
       { status: 200, body: j, headers: {} } if request.uri.to_s == 'http://example.org/vocab/tshealth'
     end
   end
