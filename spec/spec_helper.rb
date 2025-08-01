@@ -49,10 +49,11 @@ RSpec.configure do |config|
 
   config.before do
     WebMock.globally_stub_request do |request|
-      { status: 200, body: '', headers: {} } if request.uri.to_s == 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://example.org/vocab/tshealth%3E'
+      { status: 200, body: '<http://example.org/vocab/tshealth><http://www.w3.org/2000/01/rdf-schema#label> "healthy" .', headers: {} } if request.uri.to_s == 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://example.org/vocab/tshealth%3E'
     end
     WebMock.globally_stub_request do |request|
-      { status: 200, body: '', headers: {} } if request.uri.to_s == 'http://example.org/vocab/tshealth'
+      j = JSON.parse(File.read('/data/spec/fixtures/health.jsonld'))
+      { status: 200, body: j, headers: {} } if request.uri.to_s == 'http://example.org/vocab/tshealth'
     end
   end
 
