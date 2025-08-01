@@ -49,7 +49,10 @@ RSpec.configure do |config|
 
   config.before do
     WebMock.globally_stub_request do |request|
-      { status: 200, body: '<blah></blah>', headers: {} } if request.uri.to_s == 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://example.org/vocab/tshealth%3E'
+      { status: 200, body: '', headers: {} } if request.uri.to_s == 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://example.org/vocab/tshealth%3E'
+    end
+    WebMock.globally_stub_request do |request|
+      { status: 200, body: '', headers: {} } if request.uri.to_s == 'http://example.org/vocab/tshealth'
     end
   end
 
