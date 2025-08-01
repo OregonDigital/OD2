@@ -5,6 +5,7 @@ module Hyrax
   module ControlledVocabularies
     # Location object
     class Location < ActiveTriples::Resource
+      include OregonDigital::TriplestoreHealth
       configure rdf_label: ::RDF::Vocab::GEONAMES.name
 
       attr_accessor :top_level_element
@@ -93,7 +94,12 @@ module Hyrax
 
       # Fetch parent features if they exist. Necessary for automatic population of rdf label.
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def fetch(*_args, &_block)
+        unless triplestore_is_alive?
+          persistence_strategy.graph = RDF::Graph.new
+          return self
+        end
         graph = fetch_from_cache(rdf_subject)
         unless graph.nil?
           persistence_strategy.graph = graph
@@ -104,10 +110,11 @@ module Hyrax
         fetch_parents unless top_level_element?
         store_graph
         resource
-      rescue IOError => e
+      rescue IOError, Net::ReadTimeout => e
         Rails.logger.warn("Failed fetching location: #{rdf_subject}: #{e.message}")
       end
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       def fetch_parents
         parent_hierarchy.each do |p|

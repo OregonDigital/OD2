@@ -51,9 +51,19 @@ RSpec.describe OregonDigital::ControlledVocabularies::Resource do
       before do
         allow(resource).to receive(:rdf_subject).and_return('http://www.blah.com')
         allow(resource.triplestore).to receive(:fetch).with('http://www.blah.com').and_return(bg_graph)
+        allow(resource.triplestore).to receive(:fetch_cached_term).with('http://example.org/vocab/tshealth').and_return(RDF::Graph.new)
       end
 
       it { expect(resource.triplestore_fetch).to eq bg_graph }
+    end
+
+    context 'when the triplestore is down' do
+      before do
+        allow(resource).to receive(:rdf_subject).and_return('http://www.blah.com')
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_raise(SocketError)
+      end
+
+      it { expect(resource.triplestore_fetch).to eq new_rdf_graph }
     end
   end
 

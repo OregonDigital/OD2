@@ -1,0 +1,1 @@
+{"@context":{"dc":"http://purl.org/dc/terms/","rdfs":"http://www.w3.org/2000/01/rdf-schema#","skos":"http://www.w3.org/2004/02/skos/core#"},"@id":"http://example.org/vocab/tshealth","@type":["skos:Concept","rdfs:Resource"],"rdfs:label":{"@value":"healthy","@language":"en"}}
