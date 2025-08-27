@@ -10,7 +10,7 @@ module OregonDigital
       before_action only: :show do |controller|
         BotDetectionController.bot_detection_enforce_filter(controller)
       end
-      
+
       def redirect_mismatched_work
         curation_concern = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
         redirect_to(main_app.polymorphic_path(curation_concern), status: :moved_permanently) and return if curation_concern.internal_resource.safe_constantize != _curation_concern_type
