@@ -15,7 +15,7 @@ module Hyrax
 
     # Redirect for Bot Detection
     before_action do |controller|
-      BotDetectionController.bot_detection_enforce_filter(controller)
+      Hyrax::BotDetectionController.bot_detection_enforce_filter(controller)
     end
 
     self.curation_concern_type = ::Document
