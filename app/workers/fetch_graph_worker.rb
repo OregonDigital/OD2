@@ -3,6 +3,7 @@
 # Sidekiq Worker for fetching linked data labels
 class FetchGraphWorker
   include Sidekiq::Worker
+  include OregonDigital::TriplestoreHealth
   sidekiq_options retry: 11 # Around 2.5 days of retries
   sidekiq_options queue: 'fetch' # Use the 'fetch' queue
 
@@ -13,6 +14,7 @@ class FetchGraphWorker
     # Create an array to store failed fetch & call method to check/create exist of tmp folder
     failed_cv = []
     create_and_check_directory
+    raise OregonDigital::TriplestoreHealth::TriplestoreHealthError unless triplestore_is_alive?
 
     # Here be dragons
     # A valkyrie work's controlled properties don't resolve to our OregonDigital::ControlledVocabularies::* objects

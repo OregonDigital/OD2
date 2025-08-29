@@ -53,11 +53,26 @@ RDFXML
         stub_request(:get, 'http://ci-test:8080/bigdata/namespace/rw/sparql?GETSTMTS&includeInferred=false&s=%3Chttp://sws.geonames.org/5037650%3E')
           .to_return(status: 500, body: '', headers: {})
         allow(location).to receive('fetch')
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('http://example.org/vocab/tshealth').and_return(RDF::Graph.new)
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).with('http://sws.geonames.org/5037650')
       end
 
       it 'handles the error' do
         solr_doc = service.send(:add_assertions, nil)
         expect(solr_doc['location_combined_label_sim']).to eq ['http://sws.geonames.org/5037650']
+      end
+    end
+
+    context 'when the triplestore goes down' do
+      let(:location) { Hyrax::ControlledVocabularies::Location.new('http://sws.geonames.org/5037650') }
+
+      before do
+        allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_raise(SocketError)
+      end
+
+      it 'does not try to fetch from source' do
+        expect(location).not_to receive(:fetch)
+        service.send(:add_assertions, nil)
       end
     end
   end
