@@ -28,7 +28,7 @@ class BotDetectionController < ApplicationController
     return unless controller.request.get?
 
     Rails.logger.info 'Redirecting for Turnstile'
-    controller.redirect_to controller: 'bot_detection', action: 'challenge', dest: controller.request.original_fullpath, status: 307
+    controller.redirect_to "/challenge?dest=#{controller.request.original_fullpath}", status: 307
   end
 
   def challenge
