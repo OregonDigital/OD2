@@ -5,7 +5,7 @@ module OregonDigital
   module ExportCollectionMembersBehavior
     def export_members
       OregonDigital::ExportCollectionMembersJob.perform_later(coll_id: @collection.id, email: current_user.email)
-      redirect_to collection_path(@collection.id), notice: 'Export job is enqueued.'
+      redirect_to collection_path(@collection.id), notice: 'Export job is enqueued. An email will be sent when the export job is completed.'
     end
 
     def download_members
