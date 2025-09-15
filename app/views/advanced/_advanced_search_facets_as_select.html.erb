@@ -8,7 +8,7 @@
 
 <%# SPLIT: Going through facet field name & split them up into two arrays & sort alphabetically %>
 <% @main_facets = %w[copyright_combined_label_sim topic_combined_label_sim creator_combined_label_sim date_combined_year_label_ssim location_combined_label_sim workType_label_sim resource_type_label_sim file_format_sim language_label_sim non_user_collections_label_ssim institution_label_sim] %>
-<% @secondary_facets = (facet_field_names - @main_facets).sort %>
+<% @secondary_facets = (facet_field_names - @main_facets).sort_by { |field| facet_field_label(field)} %>
 
 <% facets_from_request(@main_facets).each do |display_facet| %>
   <div style="margin-left: 15px; margin-right: 15px;" aria-labelledby="<%= display_facet.name.parameterize %>-header" role="group" class="panel facet_limit blacklight-<%= display_facet.name %> <%= 'facet_limit-active' %>">
