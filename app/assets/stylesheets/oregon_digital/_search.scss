@@ -311,7 +311,7 @@
       margin-left: 15px;
     }
   }
-  
+
 
   dl dd ul {
     padding-left: 0;
@@ -374,6 +374,11 @@ div.pagination {
   display: flex;
   justify-content: center;
   margin: 20px 0;
+}
+ol.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1em;
 }
 ul.pagination {
   align-items: center;
