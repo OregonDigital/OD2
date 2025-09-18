@@ -623,6 +623,15 @@ module OregonDigital
         index.as :stored_searchable, :facetable
       end
 
+      # NEW FIELD: Schema for the Accessibility Feature & Summary
+      property :accessibility_feature, predicate: ::RDF::URI.new('http://schema.org/accessibilityFeature'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
+      property :accessibility_summary, predicate: ::RDF::URI.new('http://schema.org/accessibilitySummary'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
       define_singleton_method :generic_properties do
         (properties.reject { |_k, v| v.class_name.nil? ? false : v.class_name.to_s.include?('ControlledVocabularies') }.keys - initial_properties)
       end
@@ -775,6 +784,8 @@ module OregonDigital
         { name: 'larger_work', is_controlled: false, collection_facetable: false },
         { name: 'art_series', is_controlled: false, collection_facetable: false },
         { name: 'related_url', is_controlled: false, collection_facetable: false },
+        { name: 'accessibility_feature', is_controlled: false, collection_facetable: false },
+        { name: 'accessibility_summary', is_controlled: false, collection_facetable: false },
         { name: 'resource_type_label', is_controlled: true, name_label: 'Media', collection_facetable: true },
         # SET
         { name: 'exhibit', is_controlled: false, collection_facetable: true },
@@ -932,6 +943,8 @@ module OregonDigital
         { name: :physical_extent, section_name: '' },
         { name: :technique, section_name: '' },
         { name: :conversion, section_name: 'Administratives' },
+        { name: :accessibility_feature, section_name: '' },
+        { name: :accessibility_summary, section_name: '' },
         { name: :full_text, section_name: '' },
         { name: :exhibit, section_name: '' },
         { name: :institution, section_name: '' },
