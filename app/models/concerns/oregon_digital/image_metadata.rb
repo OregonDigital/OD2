@@ -167,6 +167,8 @@ module OregonDigital
         { name: :technique, section_name: '' },
         { name: :color_content, section_name: 'Administratives' },
         { name: :conversion, section_name: '' },
+        { name: :accessibility_feature, section_name: '' },
+        { name: :accessibility_summary, section_name: '' },
         { name: :full_text, section_name: '' },
         { name: :exhibit, section_name: '' },
         { name: :institution, section_name: '' },
