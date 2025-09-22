@@ -85,6 +85,15 @@ module OregonDigital
         index.as :stored_searchable
       end
 
+      # NEW FIELD: Schema for the Accessibility Feature & Summary
+      property :accessibility_feature, predicate: ::RDF::URI.new('http://schema.org/accessibilityFeature'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
+      property :accessibility_summary, predicate: ::RDF::URI.new('http://schema.org/accessibilitySummary'), multiple: true, basic_searchable: true do |index|
+        index.as :stored_searchable
+      end
+
       id_blank = proc { |attributes| attributes[:id].blank? }
 
       class_attribute :controlled_properties
@@ -125,7 +134,9 @@ module OregonDigital
         { name: 'institution_label', is_controlled: true },
         { name: 'date_uploaded', is_controlled: false },
         { name: 'date_modified', is_controlled: false },
-        { name: 'local_contexts_label', is_controlled: true }
+        { name: 'local_contexts_label', is_controlled: true },
+        { name: 'accessibility_feature', is_controlled: false },
+        { name: 'accessibility_summary', is_controlled: false }
       ].freeze
 
       ORDERED_HEADER_PROPERTIES = [
@@ -154,6 +165,8 @@ module OregonDigital
         resource_type
         institution
         local_contexts
+        accessibility_feature
+        accessibility_summary
       ].freeze
     end
   end
