@@ -41,6 +41,7 @@ module OregonDigital
         super
       end
 
+      # rubocop:disable Metrics/MethodLength
       def primary_terms
         terms = %i[id title description
                    creator contributor
@@ -56,6 +57,7 @@ module OregonDigital
 
         terms
       end
+      # rubocop:enable Metrics/MethodLength
 
       def user_primary_terms
         %i[title description]
