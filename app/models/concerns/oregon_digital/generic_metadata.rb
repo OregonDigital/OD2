@@ -10,6 +10,10 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
+
+      # Provide each model a hook to set property defaults
+      after_initialize :set_defaults, unless: :persisted?
+
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
       property :relative_path, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#relativePath'), multiple: false
       property :import_url, predicate: ::RDF::URI.new('http://scholarsphere.psu.edu/ns#importUrl'), multiple: false

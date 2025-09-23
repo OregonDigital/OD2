@@ -16,4 +16,10 @@ class Generic < ActiveFedora::Base
   # schema (by adding accepts_nested_attributes)
   include ::OregonDigital::GenericMetadata
   include ::OregonDigital::ControlledPropertiesBehavior
+
+  private
+
+  def set_defaults
+    self.accessibility_feature = ['unknown']
+  end
 end

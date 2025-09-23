@@ -17,4 +17,10 @@ class Document < ActiveFedora::Base
   include ::OregonDigital::GenericMetadata
   include ::OregonDigital::DocumentMetadata
   include ::OregonDigital::ControlledPropertiesBehavior
+
+  private
+
+  def set_defaults
+    self.accessibility_feature = ['unknown']
+  end
 end

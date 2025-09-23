@@ -17,4 +17,10 @@ class Image < ActiveFedora::Base
   include ::OregonDigital::GenericMetadata
   include ::OregonDigital::ImageMetadata
   include ::OregonDigital::ControlledPropertiesBehavior
+
+  private
+
+  def set_defaults
+    self.accessibility_feature = ['unknown']
+  end
 end

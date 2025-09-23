@@ -9,6 +9,10 @@ module OregonDigital
 
     included do
       initial_properties = properties.keys
+
+      # Provide a model a hook to set property defaults
+      after_initialize :set_defaults, unless: :persisted?
+
       property :alternative_title, predicate: ::RDF::Vocab::DC.alternative
       property :title, predicate: RDF::Vocab::DC.title, multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
