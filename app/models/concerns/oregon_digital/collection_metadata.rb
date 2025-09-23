@@ -10,7 +10,7 @@ module OregonDigital
     included do
       initial_properties = properties.keys
 
-      # Provide a model a hook to set property defaults
+      # SETUP: Provide a model a hook to set property defaults in collection
       after_initialize :set_defaults, unless: :persisted?
 
       property :alternative_title, predicate: ::RDF::Vocab::DC.alternative

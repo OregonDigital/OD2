@@ -11,7 +11,7 @@ module OregonDigital
     included do
       initial_properties = properties.keys
 
-      # Provide each model a hook to set property defaults
+      # SETUP: Provide each model (works) a hook to set property defaults for accessibility
       after_initialize :set_defaults, unless: :persisted?
 
       property :label, predicate: ActiveFedora::RDF::Fcrepo::Model.downloadFilename, multiple: false
