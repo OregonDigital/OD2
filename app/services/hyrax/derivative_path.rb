@@ -38,6 +38,14 @@ module Hyrax
       end
     end
 
+    def pairs
+      @pairs ||= id.split('').each_slice(2).map(&:join)
+    end
+
+    def pair_directory
+      pairs[0..-2]
+    end
+
     private
 
     # @return [String] Returns the root path where derivatives will be generated into.
@@ -64,6 +72,8 @@ module Hyrax
       case destination_name
       when 'thumbnail'
         ".#{MIME::Types.type_for('jpg').first.extensions.first}"
+      when 'extracted_text'
+        ".#{MIME::Types.type_for('txt').first.extensions.first}"
       else
         ".#{destination_name}"
       end
