@@ -42,6 +42,7 @@ class Collection < ActiveFedora::Base
 
   private
 
+  # DEFAULT: Set value on default on new collection
   def set_defaults
     self.accessibility_feature = ['unknown']
   end

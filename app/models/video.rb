@@ -20,6 +20,7 @@ class Video < ActiveFedora::Base
 
   private
 
+  # DEFAULT: Set value on default on new work
   def set_defaults
     self.accessibility_feature = ['unknown']
   end
