@@ -32,7 +32,8 @@ module OregonDigital
       # Thumbnails are not supported by iiif_manifest V3
       # https://github.com/samvera/iiif_manifest/issues/34
       manifest_json['items'] = items_with_thumbnails(manifest_json['items'].to_json) unless manifest_json['items'].blank?
-      sanitize_manifest(JSON.parse(manifest_json.to_json))
+      # Don't sanitize
+      JSON.parse(manifest_json.to_json)
     end
 
     def redirect_json
@@ -67,33 +68,6 @@ module OregonDigital
       @jp2_work_presenter = OregonDigital::IIIFPresenter.new(solrdoc, current_ability, request)
       @jp2_work_presenter.file_sets = solrdoc.file_sets
       @jp2_work_presenter
-    end
-
-    def sanitize_manifest(hash)
-      sanitize_manifest_label(hash)
-      hash
-    end
-
-    def sanitize_manifest_label(hash)
-      hash['label']&.each do |lang, labels|
-        labels&.each_with_index do |label, i|
-          hash['label'][lang][i] = sanitize_value(label) if hash.key?('label')
-        end
-      end
-    end
-
-    def sanitize_manifest_items(hash)
-      hash['items']&.each do |item|
-        item['label']&.each do |lang, labels|
-          labels&.each_with_index do |label, i|
-            item['label'][lang][i] = sanitize_value(label)
-          end
-        end
-      end
-    end
-
-    def sanitize_value(text)
-      Loofah.fragment(text.to_s).scrub!(:prune).to_s
     end
 
     private
