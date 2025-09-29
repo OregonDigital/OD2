@@ -18,7 +18,7 @@ module Bulkrax
     end
 
     def accessibility_attributes
-      [:accessibility_feature, :accessibility_summary]
+      %i[accessibility_feature accessibility_summary]
     end
   end
 end
