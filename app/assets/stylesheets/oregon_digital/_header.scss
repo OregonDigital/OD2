@@ -75,7 +75,12 @@ header {
 
   .navbar-nav > li > a {
     padding-top:15px;
-    padding-bottom:15px
+    padding-bottom:15px;
+
+    &:hover {
+      text-decoration: none;
+      background-color: #eee;
+    }
   }
 
   #user_utility_links {
@@ -119,7 +124,7 @@ header {
       }
       .input-group {
         margin: auto;
-        @media (max-width: breakpoint-max(lg)) {
+        @media (max-width: breakpoint-min(lg)) {
           width: 75%;
         }
 
@@ -182,8 +187,18 @@ header {
       }
     }
     #user-util-links {
+      margin-top: -0.6em;
+      
       li {
-        font-size: 0.875rem;
+        font-size: 14px;
+
+        a {
+          color: #333;
+        }
+
+        & > a:hover{
+          text-decoration: none;
+        }
       }
       
       @media (max-width: breakpoint-max(sm)) {
