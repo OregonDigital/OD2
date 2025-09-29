@@ -628,11 +628,11 @@ module OregonDigital
       end
 
       # NEW FIELD: Schema for the Accessibility Feature & Summary
-      property :accessibility_feature, predicate: ::RDF::URI.new('http://schema.org/accessibilityFeature'), multiple: true, basic_searchable: true do |index|
+      property :accessibility_feature, predicate: RDF::URI.new('http://schema.org/accessibilityFeature'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
-      property :accessibility_summary, predicate: ::RDF::URI.new('http://schema.org/accessibilitySummary'), multiple: true, basic_searchable: true do |index|
+      property :accessibility_summary, predicate: RDF::URI.new('http://schema.org/accessibilitySummary'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
 
