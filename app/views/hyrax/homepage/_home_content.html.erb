@@ -39,8 +39,12 @@
         </span>
       <% end %>
     <% end %>
-    <div class="flex-container feature-collection-divider hidden-xs hidden-sm">
+    <div class="flex-container feature-collection-divider d-none d-lg-flex">
       <div class="featured-collection-border"></div>
+      <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
+      <div class="featured-collection-border"></div>
+    </div>
+    <div class="d-lg-none d-block center-text">
       <%= link_to 'View All Collections', Rails.application.routes.url_helpers.all_collections_path, class: 'btn btn-primary btn-lg all-collections-homepage' %>
       <div class="featured-collection-border"></div>
     </div>

@@ -4,7 +4,7 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-4 offset-md-4">
+      <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
         <%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "masthead-search-form-header", role: "search" do %>
           <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
           <%= hidden_field_tag :search_field, 'all_fields', id: 'masthead_search_field' %>

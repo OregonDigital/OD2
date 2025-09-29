@@ -141,42 +141,20 @@ body {
   background: none;
 }
 
-.advanced-link {
-      float: right;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      padding: 0;
-      top: -.75em;
-      color: white;
-}
-ul.nav.homepage-nav {
-  text-transform: unset;
-  width: 100%;
 
-  #masthead-search-field-header {
-    width: 100%;
+#masthead-search-form-header {
+  .advanced-link {
+    text-transform: unset;
+    float: right;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 0;
+    top: -.75em;
+    color: $white;
   }
-  #masthead-search-form-header {
-    .advanced-link {
-      text-transform: unset;
-    }
-  }
-  li {
-    background: none;
-    width: 100%;
-  }
-  form {
-    width: 100%;
-    a.advanced-link {
-      position: relative;
-      float: right;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      padding: 0;
-      top: -.75em;
-    }
+
+  .form-group {
     .input-group {
       width: 100%;
       button {
@@ -187,7 +165,6 @@ ul.nav.homepage-nav {
         border: unset;
         width: 3.25em;
         height: calc(100% - 1.25em);
-        margin-top: 10px;
         margin-bottom: 10px;
         border-right: 1.5px solid $very-light-grey;
         i {
@@ -225,10 +202,6 @@ ul.nav.homepage-nav {
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
-
-    @media (min-width: breakpoint-min(lg)) {
-      width: 100%;
-    }
   }
 }
 
@@ -243,7 +216,7 @@ ul.nav.homepage-nav {
 
 .home-content #showcase {
   h2 {
-    @media (max-width: breakpoint-min(md)) {
+    @media (max-width: breakpoint-min(lg)) {
       & {
         text-align: center;
         font-size: 32px;
@@ -251,7 +224,7 @@ ul.nav.homepage-nav {
       }
     }
   }
-  .visible-sm.visible-xs {
+  .d-lg-none.d-block {
     a.btn {
       margin-bottom: 3.5em;
     }
@@ -273,7 +246,7 @@ ul.nav.homepage-nav {
     font-size: 20px;
     font-weight: bold;
     line-height: 30px;
-    @media (max-width: breakpoint-min(md)) {
+    @media (max-width: breakpoint-min(lg)) {
       & {
         font-size: 28px;
       }
@@ -287,7 +260,7 @@ ul.nav.homepage-nav {
   }
 
   .collection-items {
-    @media (max-width: breakpoint-min(md)) {
+    @media (max-width: breakpoint-min(lg)) {
       & {
         font-size: 22px;
       }
@@ -326,7 +299,7 @@ ul.nav.homepage-nav {
 
 .about-oregondigital-container {
   img {
-    @media (max-width: breakpoint-min(md)) {
+    @media (max-width: breakpoint-min(lg)) {
       padding-bottom: 1em;
     }
   }
@@ -344,7 +317,7 @@ ul.nav.homepage-nav {
 
 .chevron-align {
   height: 1%;
-  @media (max-width: breakpoint-min(md)) {
+  @media (max-width: breakpoint-min(lg)) {
     margin-top: 13px;
   }
   margin-right: 5px;
