@@ -4,6 +4,7 @@
 <ul class="single-value-input">
   <li><%= link_to 'About Oregon Digital', :about, class: "#{current_page?(about_path) ? 'active' : nil}" %></li>
   <li><%= link_to 'Mission and Vision Statement', :mission, class: "#{current_page?(mission_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Accessibility Statement', :accessibility_statement, class: "#{current_page?(accessibility_statement_path) ? 'active' : nil}" %></li>
   <li><%= link_to 'How to Use This Website', :use, class: "#{current_page?(use_path) ? 'active' : nil}" %></li>
   <li><%= link_to 'Privacy Policy', :privacy, class: "#{current_page?(privacy_path) ? 'active' : nil}" %></li>
   <li><%= link_to 'Terms of Use', :terms, class: "#{current_page?(terms_path) ? 'active' : nil}" %></li>
@@ -11,18 +12,16 @@
 <h2> Dig deeper </h2>
 <ul class="single-value-input">
   <li><%= link_to 'Copyright and Usage Requests', :copyright, class: "#{current_page?(copyright_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Accessible Copy Request', '#' %></li>
   <li><%= link_to 'Harmful Content Statement', :harmful, class: "#{current_page?(harmful_path) ? 'active' : nil}" %></li>
   <li><%= link_to 'Take-Down Policy', :takedown, class: "#{current_page?(takedown_path) ? 'active' : nil}" %></li>
   <li><%= link_to 'Local Contexts Labels and Notices', :local_contexts, class: "#{current_page?(local_contexts_path) ? 'active' : nil}" %></li>
+  <li><%= link_to 'Trouble Viewing Oregon Digital?', :recommend, class: "#{current_page?(recommend_path) ? 'active' : nil}" %></li>
 </ul>
 <h2> Collection development policy </h2>
 <ul class="single-value-input">
   <li><%= link_to 'University of Oregon', 'https://github.com/OregonDigital/OD2/wiki/Collection-Development-Policy-(University-of-Oregon)' %></li>
   <li><%= link_to 'Oregon State University', 'https://github.com/OregonDigital/OD2/wiki/Collection-Development-Policy-(OSU)' %></li>
-</ul>
-<h2> Help guide </h2>
-<ul class="single-value-input">
-  <li><%= link_to 'Trouble Viewing Oregon Digital?', :recommend, class: "#{current_page?(recommend_path) ? 'active' : nil}" %></li>
 </ul>
 
 </div>
