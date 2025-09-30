@@ -87,6 +87,8 @@ Bulkrax.setup do |config|
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   fieldhash_csv['visibility'] = { from: ['visibility'] }
   fieldhash_csv['oembed_urls'] = { from:['oembed_urls'], split: true }
+  fieldhash_csv['accessibility_feature'] = { from:['schemaaccessibilityFeature'], split: true }
+  fieldhash_csv['accessibility_summary'] = { from:['schemaaccessibilitySummary'], split: true }
   fieldhash_csv['full_size_download_allowed'][:parsed] = true
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
@@ -120,9 +122,8 @@ Bulkrax::CsvEntry.class_eval do
 
     Array.wrap(content.to_s.strip).join('; ')
   end
-  
 
-  # override to use add_oembed
+  # override to use add_oembed & add_accessibilities
   def build_metadata
     validate_record
 
@@ -153,13 +154,18 @@ Bulkrax::CsvEntry.class_eval do
     # change: revert if it is a uri
     unnumbered_key = clean_key if unnumbered_key.start_with? 'http'
     # Bring the number back if there is one
+
+    if ['accessibilityFeature', 'accessibilitySummary'].include?(unnumbered_key)
+      unnumbered_key = "schema:#{unnumbered_key}"
+    end
+
     "#{unnumbered_key}#{key.sub(clean_key, '')}"
   end
 
   # check for empty vals: unless data.blank?
   def build_value(key, value)
     return unless hyrax_record.respond_to?(key.to_s)
-    
+
     data = hyrax_record.send(key.to_s)
 
     if data.is_a?(ActiveTriples::Relation)

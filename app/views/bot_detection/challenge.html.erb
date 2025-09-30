@@ -2,26 +2,26 @@
     <script src="<%= cf_turnstile_js_url %>" async defer></script>
     <meta name="robots" content="noindex">
   <% end %>
-  
-  
+
+
   <h1 class="brand-alt-h1 mb-4">Traffic control and bot detection...</h2>
-  
+
   <div
     class="cf-turnstile"
     data-sitekey="<%= cf_turnstile_sitekey %>"
     data-callback="turnstileCallback"
   ></div>
-  
+
   <noscript>
     <div class="alert alert-danger">Sorry, Javascript is required to be enabled for our traffic check, and does not appear available.</div>
   </noscript>
-  
-  
+
+
   <script type="text/javascript">
     async function turnstileCallback(token) {
       try {
         const csrfToken = document.querySelector("[name='csrf-token']");
-  
+
         const response = await fetch('<%= "/challenge" %>', {
           method: 'POST',
           headers: {
@@ -30,15 +30,15 @@
           },
           body: JSON.stringify({ cf_turnstile_response: token }),
         });
-  
+
         if (!response.ok) {
           throw new Error('bad response: ' + response.status + ": " + response.url);
           window.location.replace("/contact");
         }
-  
+
         result = await response.json();
         if (result["success"] == true) {
-          window.location.replace('<%= @dest %>');
+          window.location.href = '<%= raw @dest %>';
         } else {
           console.error("Turnstile response reported as failure: " + JSON.stringify(result))
           _displayChallengeError();
@@ -50,7 +50,7 @@
         window.location.replace("/contact");
       }
     }
-  
+
     function _displayChallengeError() {
       document.querySelector(".cf-turnstile").outerHTML = `
         <div class="alert alert-danger" role="alert">
