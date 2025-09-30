@@ -87,8 +87,8 @@ Bulkrax.setup do |config|
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   fieldhash_csv['visibility'] = { from: ['visibility'] }
   fieldhash_csv['oembed_urls'] = { from:['oembed_urls'], split: true }
-  fieldhash_csv['accessibility_feature'] = { from:['schemaaccessibilityFeature'], split: true }
-  fieldhash_csv['accessibility_summary'] = { from:['schemaaccessibilitySummary'], split: true }
+  fieldhash_csv['accessibility_feature'] = { from:['accessibilityFeature'], split: true }
+  fieldhash_csv['accessibility_summary'] = { from:['accessibilitySummary'], split: true }
   fieldhash_csv['full_size_download_allowed'][:parsed] = true
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
@@ -154,11 +154,6 @@ Bulkrax::CsvEntry.class_eval do
     # change: revert if it is a uri
     unnumbered_key = clean_key if unnumbered_key.start_with? 'http'
     # Bring the number back if there is one
-
-    if ['accessibilityFeature', 'accessibilitySummary'].include?(unnumbered_key)
-      unnumbered_key = "schema:#{unnumbered_key}"
-    end
-
     "#{unnumbered_key}#{key.sub(clean_key, '')}"
   end
 
