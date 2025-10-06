@@ -68,5 +68,10 @@ module OregonDigital
       add_breadcrumb t(:'hyrax.controls.home'), root_path
       add_breadcrumb t(:'hyrax.controls.about'), about_path
     end
+
+    def accessibility_copy_request
+      add_breadcrumb t(:'hyrax.controls.home'), root_path
+      add_breadcrumb t(:'hyrax.controls.about'), about_path
+    end
   end
 end
