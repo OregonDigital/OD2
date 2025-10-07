@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   get 'use' => 'oregon_digital/about#use'
   get 'recommend' => 'oregon_digital/about#recommend'
   get 'local-contexts' => 'oregon_digital/about#local_contexts'
+  get 'accessibility-statement' => 'oregon_digital/about#accessibility_statement'
+  get 'accessibility-copy-request' => 'oregon_digital/about#accessibility_copy_request'
 
   patch '/contentblock/update/:name', to: 'oregon_digital/content_blocks#update', as: 'update_content_blocks'
 
