@@ -17,7 +17,7 @@ class OaiSet < BlacklightOaiProvider::SolrSet
     def from_spec(spec)
       _, value = spec.split(':', 2)
       value = spec if value.nil?
-      raise OAI::ArgumentException unless ActiveFedora::SolrService.query("has_model_ssim:Collection AND id:#{value}", rows: 1).count.positive?
+      raise OAI::ArgumentException unless Hyrax::SolrService.query("has_model_ssim:Collection AND id:#{value}", rows: 1).count.positive?
 
       "member_of_collection_ids_ssim:#{value}"
     end
@@ -60,6 +60,6 @@ class OaiSet < BlacklightOaiProvider::SolrSet
     collection = Collection.find @value
     return nil if collection.collection_type.gid != Hyrax::CollectionType.find_by(machine_id: :oai_set).gid.to_s
 
-    ActiveFedora::SolrService.query("id:#{@value}", rows: 1).first['title_tesim'].first
+    Hyrax::SolrService.query("id:#{@value}", rows: 1).first['title_tesim'].first
   end
 end
