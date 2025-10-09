@@ -38,6 +38,10 @@ Rails.application.routes.draw do
   get 'recommend' => 'oregon_digital/about#recommend'
   get 'local-contexts' => 'oregon_digital/about#local_contexts'
 
+  # ACCESSIBILITY COPY FORM ROUTE: Setup the routes for the accessibility form
+  get 'accessibility_copy', to: 'scholars_archive/accessibility_copy_form#new', controller: 'oregon_digital/accessibility_copy_form'
+  post 'accessibility_copy', to: 'scholars_archive/accessibility_copy_form#create', as: :accessibility_copy_form_index, controller: 'oregon_digital/accessibility_copy_form'
+
   patch '/contentblock/update/:name', to: 'oregon_digital/content_blocks#update', as: 'update_content_blocks'
 
   concern :oai_provider, BlacklightOaiProvider::Routes.new
