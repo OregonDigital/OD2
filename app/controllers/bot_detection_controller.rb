@@ -27,8 +27,18 @@ class BotDetectionController < ApplicationController
 
     return unless controller.request.get?
 
+    return unless allow_listed_domain?
+
     Rails.logger.info 'Redirecting for Turnstile'
     controller.redirect_to "/challenge?dest=#{controller.request.original_fullpath}", status: 307
+  end
+
+  def allow_listed_domain?
+    true if allow_listed_domains.include?(request.base_url)
+  end
+
+  def allow_listed_domains
+    %w(https://tools.oregonexplorer.info https://oregondigital.org https://staging.oregondigital.org https://test.lib.oregonstate.edu:3000)
   end
 
   def challenge
