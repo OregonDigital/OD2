@@ -34,11 +34,11 @@ class BotDetectionController < ApplicationController
   # rubocop:enable Metrics/AbcSize
 
   def allow_listed_domain?
-    allow_listed_domains.include?(request.base_url)
+    allow_listed_domains.include?(request.domain)
   end
 
   def allow_listed_domains
-    %w[https://tools.oregonexplorer.info https://oregondigital.org https://staging.oregondigital.org https://test.lib.oregonstate.edu:3000]
+    %w[tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000]
   end
 
   def challenge
