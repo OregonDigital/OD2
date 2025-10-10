@@ -16,7 +16,7 @@ class CatalogController < ApplicationController
 
   # Redirect for Bot Detection while ignoring OAI
   before_action except: :oai do |controller|
-    BotDetectionController.bot_detection_enforce_filter(controller) unless %w[tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000].include?(request.domain)
+    BotDetectionController.bot_detection_enforce_filter(controller) unless %w[oregon-explorer.apps.geocortex.com tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000].include?(request.domain)
   end
 
   # Combine our search queries as they come in
