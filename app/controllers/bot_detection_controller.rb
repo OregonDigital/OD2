@@ -34,7 +34,7 @@ class BotDetectionController < ApplicationController
   end
 
   def allow_listed_domain?
-    true if allow_listed_domains.include?(request.base_url)
+    allow_listed_domains.include?(request.base_url)
   end
 
   def allow_listed_domains
