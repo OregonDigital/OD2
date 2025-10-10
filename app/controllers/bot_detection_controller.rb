@@ -22,23 +22,13 @@ class BotDetectionController < ApplicationController
   # key in rack env that says challenge is required
   class_attribute :env_challenge_trigger_key, default: 'bot_detect.should_challenge'
 
-  # rubocop:disable Metrics/AbcSize
   def self.bot_detection_enforce_filter(controller)
-    return unless (enabled == 'true') && !controller.session[session_passed_key].try { |date| Time.new(date) < session_passed_good_for } && allow_listed_domain?
+    return unless (enabled == 'true') && !controller.session[session_passed_key].try { |date| Time.new(date) < session_passed_good_for }
 
     return unless controller.request.get?
 
     Rails.logger.info 'Redirecting for Turnstile'
     controller.redirect_to "/challenge?dest=#{controller.request.original_fullpath}", status: 307
-  end
-  # rubocop:enable Metrics/AbcSize
-
-  def allow_listed_domain?
-    allow_listed_domains.include?(request.domain)
-  end
-
-  def allow_listed_domains
-    %w[tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000]
   end
 
   def challenge
