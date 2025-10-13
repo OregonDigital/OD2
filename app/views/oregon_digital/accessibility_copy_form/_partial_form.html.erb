@@ -1,0 +1,37 @@
+<p>Items in Oregon Digital may have accessible copies. Please check the download button for accessible copies, which will have a fieldname ending in "_ada". If no copy that meets your need exists, please use the form below to request one. The expected response time is 2-4 business days.</p>
+
+<%# FORM: Create the form view page to submit the accessibility form %>
+<%= form_for @accessibility_form, url: main_app.accessibility_copy_form_index_path, html: { class: 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%# NAME: Set the user's name box %>
+    <p> <%= f.label :name, 'Your Name', class: "col-sm-12 dark-grey h6", id: "name-label" %> </p>
+    <div class="col-sm-12">
+      <%= f.text_field :name, value: user_signed_in? ? current_user.name : '', required: true, 'aria-required': "true", 'aria-labelledby': "name-label", class: 'form-control accessibility-copy-form' %>
+    </div>
+
+
+    <%# EMAIL: Set the user's email box %>
+    <p> <%= f.label :email, 'Your Email', class: "col-sm-12 dark-grey h6", id: "email-label" %> </p>
+    <div class="col-sm-12">
+      <%= f.text_field :email, value: user_signed_in? ? current_user.name : '', required: true, 'aria-required': "true", 'aria-labelledby': "email-label", class: 'form-control accessibility-copy-form' %>
+    </div>
+
+    <%# LINK: Set the user's link to Item box %>
+    <p> <%= f.label :url_link, 'Link to Item', class: "col-sm-12 dark-grey h6", id: "url-link-label" %> </p>
+    <div class="col-sm-12">
+      <%= f.text_field :url_link, value: user_signed_in? ? current_user.name : '', required: true, 'aria-required': "true", 'aria-labelledby': "url-link-label", class: 'form-control accessibility-copy-form' %>
+    </div>
+
+    <%# DESC: Set the description box %>
+    <p> <%= f.label :description, 'Descripe', class: "col-sm-12 dark-grey h6", id: "description-label" %> </p>
+    <div class="col-sm-12">
+      <%= f.text_field :description, value: user_signed_in? ? current_user.name : '', 'aria-labelledby': "description-label", class: 'form-control accessibility-copy-form' %>
+    </div>
+
+    <%# DATE: Set the date box %>
+    <p> <%= f.label :date, 'Date Needed', class: "col-sm-12 dark-grey h6", id: "date-label" %> </p>
+    <div class="col-sm-12">
+      <%= f.text_field :date, value: user_signed_in? ? current_user.name : '', 'aria-labelledby': "date-label", class: 'form-control accessibility-copy-form' %>
+    </div>
+  </div>
+<% end %>

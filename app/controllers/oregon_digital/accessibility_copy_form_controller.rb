@@ -8,7 +8,9 @@ module OregonDigital
 
     def new; end
 
-    def create; end
+    def create
+      @accessibility_form = OregonDigital::AccessibilityCopyForm.new(accessibility_copy_form_params)
+    end
 
     # NOTE: Override if needed to perform after email delivery
     def after_deliver; end
