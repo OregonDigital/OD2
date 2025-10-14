@@ -360,8 +360,8 @@ module OregonDigital
             timestamp_field: 'system_create_dtsi',
             timestamp_method: 'system_created',
             set_fields: [
-              { 'label': 'title_tesim',
-                'solr_field': 'member_of_collection_ids_ssim' }
+              { label: 'id',
+                solr_field: 'member_of_collection_ids_ssim' }
             ],
             set_model: ::OaiSet
           }

@@ -139,11 +139,13 @@ class SolrDocument
     source: %w[source_tesim],
     relation: %w[local_collection_name_label_tesim citation_tesim art_series_tesim has_finding_aid_tesim has_part_tesim has_version_tesim isPartOf_tesim is_version_of_tesim larger_work_tesim relation_tesim collection_tesim],
     type: %w[media_tesim],
-    format: %w[measurements_tesim physical_extent_tesim format_label_tesim]
+    format: %w[measurements_tesim physical_extent_tesim format_label_tesim],
+    identifier: %w[identifier_tesim]
   )
 
   def sets
-    fetch('has_model', []).map { |m| BlacklightOaiProvider::Set.new("has_model_ssim:#{m}") }
+    OaiSet.fields = CatalogController.blacklight_config.oai[:document][:set_fields]
+    OaiSet.sets_for(self)
   end
 
   def hocr_text
