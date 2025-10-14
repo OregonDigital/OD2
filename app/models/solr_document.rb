@@ -97,7 +97,7 @@ class SolrDocument
   end
 
   def process_chunk(chunk)
-    SolrDocument.find(chunk).map do |document|
+    SolrDocument.find(chunk.reject(&:blank?)).map do |document|
       if document['has_model_ssim'].first.include?('FileSet')
         @file_sets << document
       else
