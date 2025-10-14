@@ -350,6 +350,13 @@ en:
         local_contexts: Local Contexts
         local_contexts_label: Local Contexts
         resource_type: Media
+    accessibility_copy_form:
+      name: Your Name
+      email: Your Email
+      url_link: Link to Item
+      description: Please describe the type of accommodation that you need (For example, written transcription, compatibility with a particular assistive device, preferred file formats, etc.). Include details about what particular parts of the content are inaccessible, if applicable.
+      date: Date Needed
+      button: Send
   howto:
     researchers:
       title: 'Researchers'

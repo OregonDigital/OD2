@@ -11,6 +11,11 @@ module OregonDigital
     validates :name, :email, :url_link, :description, :date, presence: true
     validates :email, format: /\A([\w.%+-]+)@([\w-]+\.)+(\w{2,})\z/i, allow_blank: true
 
+    # SPAM: Check to make sure this section isn't fill, if so, it might be a spam
+    def spam?
+      accessibility_form_method.present?
+    end
+
     # HEADER: Declare the e-mail headers. It accepts anything the mail method in ActionMailer accepts
     def headers
       {
