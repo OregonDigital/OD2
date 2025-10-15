@@ -372,6 +372,36 @@ Bulkrax::ObjectFactory.class_eval do
   end
 end
 
+# restore parent_record save from 9.0.2
+Bulkrax::CreateRelationshipsJob.class_eval do
+  def process_parent_as_work(parent_record:, parent_identifier:)
+    conditionally_acquire_lock_for(parent_record.id.to_s) do
+      ActiveRecord::Base.uncached do
+        Bulkrax::PendingRelationship.where(parent_id: parent_identifier, importer_run_id: @importer_run_id)
+                                    .ordered.find_each do |rel|
+          raise "#{rel} needs a child to create relationship" if rel.child_id.nil?
+          raise "#{rel} needs a parent to create relationship" if rel.parent_id.nil?
+          add_to_work(relationship: rel, parent_record: parent_record, ability: ability)
+          self.number_of_successes += 1
+          @parent_record_members_added = true
+        rescue => e
+          rel.update(status_message: e.message)
+          @number_of_failures += 1
+          @errors << e
+        end
+      end
+
+        # save record if members were added
+      if @parent_record_members_added
+        Bulkrax.object_factory.save!(resource: parent_record, user: user)
+        reloaded_parent = Bulkrax.object_factory.find(parent_record.id)
+        Bulkrax.object_factory.update_index(resources: [reloaded_parent])
+        Bulkrax.object_factory.publish(event: 'object.membership.updated', object: reloaded_parent, user: @user)
+      end
+    end
+  end
+end
+
 ## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
   def required_elements
