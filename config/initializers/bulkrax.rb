@@ -182,7 +182,7 @@ Bulkrax::CsvEntry.class_eval do
   def build_relationship_metadata
     # Includes all relationship methods for all exportable record types (works, Collections, FileSets)
     relationship_methods = {
-      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids],
+      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids, parent],
       related_children_parsed_mapping => %i[member_collection_ids member_ids]
     }
 
@@ -191,7 +191,9 @@ Bulkrax::CsvEntry.class_eval do
 
       values = []
       methods.each do |m|
-        values << hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+        value = hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+        value_id = value.try(:id)&.to_s || value # get the id if it's an object
+        values << value_id if value_id.present?
       end
       values = values.flatten.uniq
       next if values.blank?
