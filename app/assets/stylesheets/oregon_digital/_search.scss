@@ -108,7 +108,7 @@
   }
   .save-widgets button {
     color: $navy-blue;
-    font-size: 14pt;
+    font-size: 14px;
   }
 
   #sort-dropdown,
@@ -190,6 +190,10 @@
   .top-panel-heading {
     background: none;
     border-bottom: 0;
+  }
+
+  .more_facets_link {
+    font-size: 12px;
   }
 
   @media (max-width: breakpoint-min(md)) {
@@ -446,7 +450,7 @@ ul.pagination {
       background: none;
       padding-top: 1em;
       a {
-        text-align: left;
+        text-align: center;
 
         img {
           width: 100%;
