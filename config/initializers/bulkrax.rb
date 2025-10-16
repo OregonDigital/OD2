@@ -182,7 +182,7 @@ Bulkrax::CsvEntry.class_eval do
   def build_relationship_metadata
     # Includes all relationship methods for all exportable record types (works, Collections, FileSets)
     relationship_methods = {
-      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids],
+      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids, parent],
       related_children_parsed_mapping => %i[member_collection_ids member_ids]
     }
 
@@ -191,7 +191,9 @@ Bulkrax::CsvEntry.class_eval do
 
       values = []
       methods.each do |m|
-        values << hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+        value = hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+        value_id = value.try(:id)&.to_s || value # get the id if it's an object
+        values << value_id if value_id.present?
       end
       values = values.flatten.uniq
       next if values.blank?
@@ -366,6 +368,36 @@ Bulkrax::ObjectFactory.class_eval do
       Hyrax.index_field_mapper.solr_name(field_name)
     else
       ActiveFedora.index_field_mapper.solr_name(field_name)
+    end
+  end
+end
+
+# restore parent_record save from 9.0.2
+Bulkrax::CreateRelationshipsJob.class_eval do
+  def process_parent_as_work(parent_record:, parent_identifier:)
+    conditionally_acquire_lock_for(parent_record.id.to_s) do
+      ActiveRecord::Base.uncached do
+        Bulkrax::PendingRelationship.where(parent_id: parent_identifier, importer_run_id: @importer_run_id)
+                                    .ordered.find_each do |rel|
+          raise "#{rel} needs a child to create relationship" if rel.child_id.nil?
+          raise "#{rel} needs a parent to create relationship" if rel.parent_id.nil?
+          add_to_work(relationship: rel, parent_record: parent_record, ability: ability)
+          self.number_of_successes += 1
+          @parent_record_members_added = true
+        rescue => e
+          rel.update(status_message: e.message)
+          @number_of_failures += 1
+          @errors << e
+        end
+      end
+
+        # save record if members were added
+      if @parent_record_members_added
+        Bulkrax.object_factory.save!(resource: parent_record, user: user)
+        reloaded_parent = Bulkrax.object_factory.find(parent_record.id)
+        Bulkrax.object_factory.update_index(resources: [reloaded_parent])
+        Bulkrax.object_factory.publish(event: 'object.membership.updated', object: reloaded_parent, user: @user)
+      end
     end
   end
 end
