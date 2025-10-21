@@ -8,6 +8,7 @@ module OregonDigital
 
     def new; end
 
+    # rubocop:disable Metrics/AbcSize
     def create
       # SETUP: Build form with all the params and fill in the data once hit on 'send'
       @accessibility_form = OregonDigital::AccessibilityCopyForm.new(accessibility_copy_form_params)
@@ -16,16 +17,15 @@ module OregonDigital
       if @accessibility_form.valid?
         flash[:notice] = t('simple_form.accessibility_copy_form.success')
         after_deliver
-        # Redirect back to the page the user came from
-        redirect_to(params[:return_to].presence || root_path) and return
       else
         flash[:error] = t('simple_form.accessibility_copy_form.fail')
-        # Redirect back to the page the user came from
-        redirect_to(params[:return_to].presence || root_path) and return
       end
+      # Redirect back to the page the user came from
+      redirect_to(params[:return_to].presence || root_path) and return
     rescue RuntimeError => e
       handle_create_exception(e)
     end
+    # rubocop:enable Metrics/AbcSize
 
     # NOTE: Override if needed to perform after email delivery
     def after_deliver; end
