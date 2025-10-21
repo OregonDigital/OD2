@@ -1,10 +1,14 @@
+<%# SETUP: Have the URL fill in within the work show page itself %>
+<% @prefill_url = Rails.application.routes.url_helpers.url_for(only_path: false, action: 'show', controller: 'hyrax/' + @presenter.model_name.plural, host: request.host, protocol: "https", id: @presenter.id) if @presenter.present? %>
+
 <p>Items in Oregon Digital may have accessible copies. Please check the download button for accessible copies, which will have a fieldname ending in "_ada". If no copy that meets your need exists, please use the form below to request one. The expected response time is 2-4 business days.</p>
-<% @prefill_url = Rails.application.routes.url_helpers.url_for(only_path: false, action: 'show', controller: 'hyrax/' + @presenter.model_name.plural, host: request.host, protocol: "https", id: @presenter.id) %>
 
 <%# FORM: Create the form view page to submit the accessibility form %>
-<%= form_for @accessibility_form, url: main_app.accessibility_copy_form_index_path, html: { class: 'form-horizontal' } do |f| %>
+<%= form_for accessibility_form, url: main_app.accessibility_copy_form_index_path, html: { class: 'form-horizontal' } do |f| %>
   <%# HIDDEN FIELD: This field is hidden to check for spam %>
   <%= f.text_field :accessibility_form_method, class: 'hide' %>
+
+  <%= hidden_field_tag :return_to, '', id: 'return_to_page' %>
 
   <div class="form-group">
     <%# NAME: Set the user's name box %>

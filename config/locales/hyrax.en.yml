@@ -357,6 +357,8 @@ en:
       description: Please describe the type of accommodation that you need (For example, written transcription, compatibility with a particular assistive device, preferred file formats, etc.). Include details about what particular parts of the content are inaccessible, if applicable.
       date: Date Needed
       button: Send
+      success: Send Email Success
+      fail: Send Email Fail, Try Again
   howto:
     researchers:
       title: 'Researchers'

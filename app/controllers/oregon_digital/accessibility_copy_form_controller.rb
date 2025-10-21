@@ -9,11 +9,33 @@ module OregonDigital
     def new; end
 
     def create
+      # SETUP: Build form with all the params and fill in the data once hit on 'send'
       @accessibility_form = OregonDigital::AccessibilityCopyForm.new(accessibility_copy_form_params)
+
+      # CHECK: See if the form is valid
+      if @accessibility_form.valid?
+        flash[:notice] = t('simple_form.accessibility_copy_form.success')
+        after_deliver
+        # Redirect back to the page the user came from
+        redirect_to(params[:return_to].presence || root_path) and return
+      else
+        flash[:error] = t('simple_form.accessibility_copy_form.fail')
+        # Redirect back to the page the user came from
+        redirect_to(params[:return_to].presence || root_path) and return
+      end
+    rescue RuntimeError => e
+      handle_create_exception(e)
     end
 
     # NOTE: Override if needed to perform after email delivery
     def after_deliver; end
+
+    # METHOD: Create a handler for the exception
+    def handle_create_exception(exception)
+      logger.error("Accessibility Copy Form failed to send: #{exception.inspect}")
+      flash.now[:error] = 'Sorry, this message was not delivered.'
+      render :new
+    end
 
     private
 
