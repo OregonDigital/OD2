@@ -17,7 +17,6 @@
       <%= f.text_field :name, value: user_signed_in? ? current_user.name : '', required: true, 'aria-required': "true", 'aria-labelledby': "name-label", class: 'form-control accessibility-copy-form' %>
     </div>
 
-
     <%# EMAIL: Set the user's email box %>
     <p> <%= f.label :email, t('simple_form.accessibility_copy_form.email'), class: "col-sm-12 dark-grey h6", id: "email-label" %> </p>
     <div class="col-sm-12">
@@ -33,13 +32,13 @@
     <%# DESC: Set the description box %>
     <p> <%= f.label :description, t('simple_form.accessibility_copy_form.description'), class: "col-sm-12 dark-grey h6", id: "description-label" %> </p>
     <div class="col-sm-12">
-      <%= f.text_area :description, value: '', rows: 5, 'aria-labelledby': "description-label", class: 'form-control accessibility-copy-form' %>
+      <%= f.text_area :description, value: '', rows: 5, required: true, 'aria-required': "true", 'aria-labelledby': "description-label", class: 'form-control accessibility-copy-form' %>
     </div>
 
     <%# DATE: Set the date box %>
     <p> <%= f.label :date, t('simple_form.accessibility_copy_form.date'), class: "col-sm-12 dark-grey h6", id: "date-label" %> </p>
     <div class="col-sm-12">
-      <%= f.date_field :date, value: f.object.try(:strftime,"%m/%d/%Y"), 'aria-labelledby': "date-label", class: 'form-control accessibility-copy-form' %>
+      <%= f.date_field :date, value: f.object.try(:strftime,"%m/%d/%Y"), required: true, 'aria-required': "true", 'aria-labelledby': "date-label", class: 'form-control accessibility-copy-form' %>
     </div>
   </div>
 

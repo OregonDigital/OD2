@@ -33,8 +33,8 @@ module OregonDigital
     # METHOD: Create a handler for the exception
     def handle_create_exception(exception)
       logger.error("Accessibility Copy Form failed to send: #{exception.inspect}")
-      flash.now[:error] = 'Sorry, this message was not delivered.'
-      render :new
+      flash[:error] = 'Sorry, this message was not delivered.'
+      redirect_to(params[:return_to].presence || root_path) and return
     end
 
     private
