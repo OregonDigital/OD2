@@ -16,6 +16,8 @@ module OregonDigital
       # CHECK: See if the form is valid
       if @accessibility_form.valid?
         flash[:notice] = t('simple_form.accessibility_copy_form.success')
+        OregonDigital::AccessibilityCopyFormMailer.auto_contact(@accessibility_form).deliver_now
+        OregonDigital::AccessibilityCopyFormMailer.admin_contact(@accessibility_form).deliver_now
         after_deliver
       else
         flash[:error] = t('simple_form.accessibility_copy_form.fail')

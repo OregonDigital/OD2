@@ -19,9 +19,18 @@ module OregonDigital
     # HEADER: Declare the e-mail headers. It accepts anything the mail method in ActionMailer accepts
     def headers
       {
-        subject: 'OD2 Accessibility Copy Form: Request',
-        to: Hyrax.config.contact_email,
+        subject: 'Oregon Digital Accessible Copy Request',
+        to: "oregondigitalref@uoregon.edu",
         from: email
+      }
+    end
+
+    # HEADER: Declare the e-mail headers. It accepts anything the mail method in ActionMailer accepts
+    def auto_headers
+      {
+        subject: 'Oregon Digital Accessible Copy Request',
+        to: email,
+        from: "oregondigitalref@uoregon.edu"
       }
     end
   end
