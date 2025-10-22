@@ -47,6 +47,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] } # Index file formats from file sets for faceting
       # for bulkrax
       solr_doc['bulkrax_identifier_sim'] = object.bulkrax_identifier
+      solr_doc['bulkrax_importer_id_sim'] = object.bulkrax_identifier.map { |x| x.split('-').first }
     end
   end
   # rubocop:enable Metrics/AbcSize
