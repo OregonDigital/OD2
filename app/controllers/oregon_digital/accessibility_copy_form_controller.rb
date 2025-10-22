@@ -9,6 +9,7 @@ module OregonDigital
     def new; end
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def create
       # SETUP: Build form with all the params and fill in the data once hit on 'send'
       @accessibility_form = OregonDigital::AccessibilityCopyForm.new(accessibility_copy_form_params)
@@ -28,6 +29,7 @@ module OregonDigital
       handle_create_exception(e)
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     # NOTE: Override if needed to perform after email delivery
     def after_deliver; end
