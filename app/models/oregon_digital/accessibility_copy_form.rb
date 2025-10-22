@@ -20,7 +20,7 @@ module OregonDigital
     def headers
       {
         subject: 'Oregon Digital Accessible Copy Request',
-        to: "oregondigitalref@uoregon.edu",
+        to: 'oregondigitalref@uoregon.edu',
         from: email
       }
     end
@@ -30,7 +30,7 @@ module OregonDigital
       {
         subject: 'Oregon Digital Accessible Copy Request',
         to: email,
-        from: "oregondigitalref@uoregon.edu"
+        from: 'oregondigitalref@uoregon.edu'
       }
     end
   end
