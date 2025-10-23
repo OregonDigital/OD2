@@ -23,6 +23,7 @@ RSpec.describe OregonDigital::AccessibilityCopyFormController, type: :controller
   end
 
   # TEST #1: Check if recaptcha work on the controller
+  # rubocop:disable RSpec/NestedGroups
   describe '#check_recaptcha' do
     before do
       controller.instance_variable_set(:@accessibility_form, accessibility_form)
@@ -68,4 +69,5 @@ RSpec.describe OregonDigital::AccessibilityCopyFormController, type: :controller
       end
     end
   end
+  # rubocop:enable RSpec/NestedGroups
 end
