@@ -3,6 +3,7 @@
 module OregonDigital
   # CLASS: Accessibility Copy Form Controller
   class AccessibilityCopyFormController < ApplicationController
+    include OregonDigital::AccessibilityCopyFormRecaptchaBehavior
     # ACTION: Before page load, build the form with all the params
     before_action :build_accessibility_copy_form
 
@@ -14,8 +15,8 @@ module OregonDigital
       # SETUP: Build form with all the params and fill in the data once hit on 'send'
       @accessibility_form = OregonDigital::AccessibilityCopyForm.new(accessibility_copy_form_params)
 
-      # CHECK: See if the form is valid
-      if @accessibility_form.valid?
+      # CHECK: See if the form is valid & recaptcha
+      if @accessibility_form.valid? && check_recaptcha
         flash[:notice] = t('simple_form.accessibility_copy_form.success')
         OregonDigital::AccessibilityCopyFormMailer.auto_contact(@accessibility_form).deliver_now
         OregonDigital::AccessibilityCopyFormMailer.admin_contact(@accessibility_form).deliver_now

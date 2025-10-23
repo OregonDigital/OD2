@@ -42,7 +42,10 @@
     </div>
   </div>
 
-  <div class="accessibility-send-btn">
-    <%= f.submit value: t('simple_form.accessibility_copy_form.button'), class: "btn btn-primary", 'aria-label': "Send" %>
+  <div class="accessibility-send-btn pull-right">
+    <%# CAPTCHA: Add in the captcha on form %>
+    <%= recaptcha_tags if Hyrax.config.recaptcha? %>
+    <br/>
+    <%= f.submit value: t('simple_form.accessibility_copy_form.button'), class: "btn btn-primary btn-lg pull-right", 'aria-label': "Send" %>
   </div>
 <% end %>
