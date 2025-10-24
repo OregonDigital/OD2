@@ -611,11 +611,6 @@ module OregonDigital
         index.as :stored_searchable
       end
 
-      property :bulkrax_importer_id, predicate: RDF::URI.new('http://id.loc.gov/vocabulary/identifiers/local'), multiple: true, basic_searchable: false do |index|
-        index.as :stored_searchable, :facetable
-      end
-
-
       property :archival_object_id, predicate: RDF::URI.new('http://opaquenamespace.org/ns/archival_object_id'), multiple: true, basic_searchable: true do |index|
         index.as :stored_searchable
       end
