@@ -33,7 +33,7 @@ class BotDetectionController < ApplicationController
 
   def challenge
     @dest = request.query_parameters.delete('dest')
-    @dest += "&#{request.query_parameters.to_query}"
+    @dest += "&#{request.query_parameters.to_query}" unless request.query_parameters.to_query.empty?
     @dest = CGI.unescape(@dest)
   end
 
