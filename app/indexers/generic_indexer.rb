@@ -47,11 +47,21 @@ class GenericIndexer < Hyrax::WorkIndexer
       solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] } # Index file formats from file sets for faceting
       # for bulkrax
       solr_doc['bulkrax_identifier_sim'] = object.bulkrax_identifier
+      solr_doc['bulkrax_importer_id_sim'] = importer_lookup(object.bulkrax_identifier)
     end
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/BlockLength
+
+  def importer_lookup(identifier)
+    return [] if identifier.blank?
+
+    e = Bulkrax::Entry.find_by(identifier: identifier.first)
+    return [] if e.nil?
+
+    [e.importerexporter_id]
+  end
 
   def collection_indexing_key(machine_id)
     case machine_id
