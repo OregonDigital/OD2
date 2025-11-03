@@ -130,4 +130,5 @@ Rails.application.configure do
     OregonDigital::VerifyDerivativesService
   ]
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 100).to_i
+  config.bulkrax_create_relationships_wait = ENV.fetch('BULKRAX_CREATE_RELATIONSHIPS_WAIT', 10).to_i
 end
