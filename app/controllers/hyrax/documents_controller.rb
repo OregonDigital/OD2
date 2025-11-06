@@ -33,7 +33,7 @@ module Hyrax
       end
       false
     end
-    
+
     self.curation_concern_type = ::Document
 
     # Remove list view from child/sibling renders
