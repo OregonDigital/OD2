@@ -13,7 +13,7 @@ class CatalogController < ApplicationController
 
   # This filter applies the hydra access controls
   before_action :enforce_show_permissions, only: :show
-  
+
   # Redirect for Bot Detection while ignoring OAI
   before_action except: :oai do |controller|
     BotDetectionController.bot_detection_enforce_filter(controller) unless valid_bot? # oregon-explorer.apps.geocortex.com tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000
