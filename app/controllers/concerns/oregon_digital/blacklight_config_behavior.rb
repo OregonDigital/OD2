@@ -225,7 +225,6 @@ module OregonDigital
         config.add_facet_field 'series_name_sim', label: I18n.translate('simple_form.labels.defaults.series_name'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'series_number_sim', label: I18n.translate('simple_form.labels.defaults.series_number'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'exhibit_sim', label: I18n.translate('simple_form.labels.defaults.exhibit'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'bulkrax_importer_id_sim', label: I18n.translate('simple_form.labels.defaults.importer'), limit: 5
 
         # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
         # Do not show these facets, they're for collection configurable facets
