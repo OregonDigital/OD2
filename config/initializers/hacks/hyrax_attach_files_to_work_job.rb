@@ -5,13 +5,15 @@ Rails.application.config.to_prepare do
 
     private
     # modify the call to FileSet.create with the work id, prefixed with "f" and the file index
-    # to avoid collisions during migration. This can be removed once migration is complete
+    # Originally added to avoid collisions during migration; retaining as useful (until it isn't).
     def perform_af(work, uploaded_files, work_attributes)
       validate_files!(uploaded_files)
       depositor = proxy_or_depositor(work)
       user = User.find_by_user_key(depositor)
 
       work, work_permissions = create_permissions work, depositor
+      @offset = 0
+      @size = work.file_sets.size
       uploaded_files.each_with_index do |uploaded_file, i|
         next if uploaded_file.file_set_uri.present?
         attach_work(user, work, work_attributes, work_permissions, uploaded_file, i)
@@ -30,7 +32,28 @@ Rails.application.config.to_prepare do
     end
 
     def pid(index, work)
-      "f#{index + work.file_sets.size}#{work.id}"
+      (@offset..999).each do |i|
+        trial_fnum = index + i + @size
+        if usable? "f#{trial_fnum}#{work.id}"
+          @offset = i
+          return "f#{trial_fnum}#{work.id}"
+        end
+      end
+    end
+
+    # We need to be able to distinguish between a pid that results
+    # in an ObjectNotFound and one that is tombstoned. Once use_valkyrie==true,
+    # this may require a new query service that passes those errors through
+    # rather than replacing with Valkyrie::Persistence::ObjectNotFoundError
+    def usable?(id)
+      fs = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: id, use_valkyrie: false)
+      return false
+
+    rescue Ldp::Gone
+      return false
+
+    rescue ActiveFedora::ObjectNotFoundError
+      return true
     end
   end
 end
