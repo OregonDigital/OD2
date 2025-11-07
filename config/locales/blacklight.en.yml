@@ -4,6 +4,7 @@ en:
 
     search:
       facets:
+        clear: 'All'
         title: '<i class="fa fa-2x fa-filter"></i> Filters'
       filters:
         title: ''
