@@ -1,4 +1,7 @@
-<aside id="form-progress" class="form-progress panel panel-default">
+<aside id="form-progress" class="form-progress card">
+  <div class="card-header">
+    <h3 class="card-title"><%= t("hyrax.works.progress.header") %></h3>
+  </div>
   <div class="list-group">
     <div class="list-group-item">
       <fieldset>
@@ -24,11 +27,12 @@
           <%= f.input :on_behalf_of, label: t(".proxy_depositors"), collection: current_user.can_make_deposits_for, prompt: t(".yourself"), value_method: :user_key %>
         </div>
     <% end %>
+
     <% form_progress_sections_for(form: f.object).each do |section| %>
       <%= render "form_progress_#{section}", f: f %>
     <% end %>
   </div>
-  <div class="panel-footer text-center">
+  <div class="card-footer text-center">
     <% if ::Flipflop.show_deposit_agreement? %>
       <% if ::Flipflop.active_deposit_agreement_acceptance? %>
         <label class="small-font-size">
@@ -53,70 +57,72 @@
   </div>
 
   <%# Provide immediate feedback after the form is submitted while the subsequent page is loading %>
-  <div class="panel-footer hidden">
+  <div class="card-footer save-progress" hidden>
     <div class="progress">
-      <div class="progress-bar progress-bar-striped progress-bar-complete active">
+      <div class="progress-bar progress-bar-striped progress-bar-complete progress-bar-animated">
         <span id="form-feedback" aria-live="assertive"><%= t(".saving_your_work") %></span>
       </div>
     </div>
   </div>
 </aside>
-<div class="panel panel-default">
-  <div class="col-xs-6" style="margin-top: 0px;">
-    <nav id="toc-left" class="nav bs-docs-sidebar">
-      <ul id="sidebar-left" class="nav nav-stacked fixed">
-        <li>
-          <a class="toc-link" href="#Required Fields">Required Fields</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Titles">Titles</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Creators">Creators</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Descriptions">Descriptions</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Subjects">Subjects</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Scientifics">Scientifics</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Geographics">Geographics</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="col-xs-6" style="margin-top: 0px;">
-    <nav id="toc-right"class="nav bs-docs-sidebar">
-      <ul id="sidebar-right" class="nav nav-stacked fixed">
-        <li>
-          <a class="toc-link" href="#Dates">Dates</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Identifiers">Identifiers</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Rights">Rights</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Sources">Sources</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Relations">Relations</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Types">Types</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Formats">Formats</a>
-        </li>
-        <li>
-          <a class="toc-link" href="#Administratives">Administratives</a>
-        </li>
-      </ul>
-    </nav>
+<div class="card">
+  <div class="row">
+    <div class="col-6" style="margin-top: 0px;">
+      <nav id="toc-left" class="bs-docs-sidebar">
+        <ul id="sidebar-left" class="nav d-block list-unstyled fixed">
+          <li>
+            <a class="toc-link" href="#Required Fields">Required Fields</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Titles">Titles</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Creators">Creators</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Descriptions">Descriptions</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Subjects">Subjects</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Scientifics">Scientifics</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Geographics">Geographics</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-6" style="margin-top: 0px;">
+      <nav id="toc-right"class="bs-docs-sidebar">
+        <ul id="sidebar-right" class="nav d-block list-unstyled fixed">
+          <li>
+            <a class="toc-link" href="#Dates">Dates</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Identifiers">Identifiers</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Rights">Rights</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Sources">Sources</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Relations">Relations</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Types">Types</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Formats">Formats</a>
+          </li>
+          <li>
+            <a class="toc-link" href="#Administratives">Administratives</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
