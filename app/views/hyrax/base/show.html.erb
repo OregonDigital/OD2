@@ -178,13 +178,12 @@
           <div class='col-sm-12'>
             <h2 class='h4'>Administrative Metadata</h2>
             <br/><br/>
-            <% work_metadata = SolrDocument.find(@presenter.id) %>
-            <% entry = Bulkrax::Entry.find_by(identifier: work_metadata.bulkrax_identifier.first) if !work_metadata.bulkrax_identifier.blank? %>
+            <% entry = Bulkrax::Entry.find_by(identifier: @presenter.bulkrax_identifier.first) if !@presenter.bulkrax_identifier.blank? %>
             <ul>
-              <li><p><span style="font-weight: bold;">Last Indexed Date:</span> <%= work_metadata.timestamp %></p></li>
-              <li><p><span style="font-weight: bold;">Admin Set:</span> <%= work_metadata.admin_set.first %> (<%= link_to(work_metadata.fetch(:primarySet_ssim, []).first, CGI.unescape(admin_admin_set_url(work_metadata.dig(:primarySet_ssim, 0))), target: "_blank") %>)</p></li>
-              <li><p><span style="font-weight: bold;">Depositor:</span> <%= link_to(work_metadata.depositor, "#{request.base_url}#{admin_workflows_path(f: { depositor_ssim: [work_metadata.depositor] }, local: I18n.locale)}", target: "_blank") %></p></li>
-              <li><p><span style="font-weight: bold;">Bulkrax Importer ID:</span> <%= !work_metadata.bulkrax_identifier.blank? ? link_to(work_metadata.bulkrax_identifier.first, "#{request.base_url}#{bulkrax.importer_path(entry.importerexporter_id)}", target: "_blank") : 'None' %></p></li>
+              <li><p><span style="font-weight: bold;">Last Indexed Date:</span> <%= @presenter.solr_document['date_modified_dtsi'] %></p></li>
+              <li><p><span style="font-weight: bold;">Admin Set:</span> <%= @presenter.admin_set.first %> (<%= link_to(@presenter.solr_document['primarySet_ssim'].first, CGI.unescape(admin_admin_set_url(@presenter.solr_document['primarySet_ssim'].first)), target: "_blank") %>)</p></li>
+              <li><p><span style="font-weight: bold;">Depositor:</span> <%= link_to(@presenter.depositor, "#{request.base_url}#{admin_workflows_path(f: { depositor_ssim: [@presenter.depositor] }, local: I18n.locale)}", target: "_blank") %></p></li>
+              <li><p><span style="font-weight: bold;">Bulkrax Importer ID:</span> <%= !@presenter.bulkrax_identifier.blank? ? link_to(@presenter.bulkrax_identifier.first, "#{request.base_url}#{bulkrax.importer_path(entry.importerexporter_id)}", target: "_blank") : 'None' %></p></li>
             </ul>
           </div>
         </div>
