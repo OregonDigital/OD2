@@ -372,6 +372,24 @@ Bulkrax::ObjectFactory.class_eval do
   end
 end
 
+# added in 9.3.1, wait to schedule create_relationship_job
+Bulkrax::ScheduleRelationshipsJob.class_eval do
+  def perform(importer_id:)
+      importer = Bulkrax::Importer.find(importer_id)
+      pending_num = importer.entries.left_outer_joins(:latest_status)
+                            .where('bulkrax_statuses.status_message IS NULL ').count
+      return reschedule(importer_id) unless pending_num.zero?
+
+      wait_time = OD2::Application.config.bulkrax_create_relationships_wait
+      importer.last_run.parents.each do |parent_id|
+        Bulkrax.relationship_job_class.constantize
+                                      .set(wait: wait_time.minutes)
+                                      .perform_later(parent_identifier: parent_id,
+                                                     importer_run_id: importer.last_run.id)
+      end
+    end
+end
+
 # restore parent_record save from 9.0.2
 Bulkrax::CreateRelationshipsJob.class_eval do
   def process_parent_as_work(parent_record:, parent_identifier:)
