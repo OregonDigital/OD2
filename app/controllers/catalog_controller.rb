@@ -30,7 +30,7 @@ class CatalogController < ApplicationController
     ranges.each do |range|
       range = range.split('-')
       range = (IPAddr.new(range[0]).to_i..IPAddr.new(range[1]).to_i)
-      return true if range.include?(request.remote_ip)
+      return true if range.include?(IPAddr.new(request.remote_ip).to_i)
     end
     false
   end
