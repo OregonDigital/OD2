@@ -372,6 +372,32 @@ Bulkrax::ObjectFactory.class_eval do
   end
 end
 
+Bulkrax::ObjectFactoryInterface.class_eval do
+  # allow CSVCollectionEntry to handle
+  def collection_type(attrs)
+    attrs
+  end
+end
+
+Bulkrax::CsvCollectionEntry.class_eval do
+  # only add gid if collection is new; presence will fail a collection update
+  # default to Digital Collection: "gid://od2/Hyrax::CollectionType/3"
+  def add_collection_type_gid
+    return if update?
+
+    return if self.parsed_metadata['collection_type_gid'].present?
+
+    self.parsed_metadata['collection_type_gid'] = Hyrax::CollectionType.find_by(machine_id: 'digital_collection').to_global_id.to_s
+  end
+
+  # added for above
+  def update?
+    return false unless self.parsed_metadata['id'].present?
+
+    Collection.exists? self.parsed_metadata['id']
+  end
+end
+
 # added in 9.3.1, wait to schedule create_relationship_job
 Bulkrax::ScheduleRelationshipsJob.class_eval do
   def perform(importer_id:)
@@ -420,14 +446,7 @@ Bulkrax::CreateRelationshipsJob.class_eval do
   end
 end
 
-## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
-  def required_elements
-    elts = %w[title resource_type identifier rights_statement]
-    # added resource_type, identifier, and rights_statement
-    elts << source_identifier unless Bulkrax.fill_in_blank_source_identifiers
-    elts
-  end
 
   # parser_fields are set by the importer form
   # do not use a default value at this point
