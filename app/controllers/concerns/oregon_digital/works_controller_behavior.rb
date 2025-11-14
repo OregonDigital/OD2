@@ -59,7 +59,7 @@ module OregonDigital
 
     # METHOD: Check for mask_content not being check
     def set_content_alert
-      curation_concern.content_alert = nil if params[hash_key_for_curation_concern][:mask_content].all?(&:blank?)
+      curation_concern.content_alert = nil if params[hash_key_for_curation_concern][:mask_content]&.all?(&:blank?)
     end
 
     def after_update_response
