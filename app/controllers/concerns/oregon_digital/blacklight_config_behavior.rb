@@ -232,6 +232,9 @@ module OregonDigital
         config.add_facet_field 'series_number_sim', label: I18n.translate('simple_form.labels.defaults.series_number'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'exhibit_sim', label: I18n.translate('simple_form.labels.defaults.exhibit'), index_range: 'A'..'Z', limit: 5
 
+        config.add_facet_field 'non_user_collections_ssim', label: 'Collection', show: false
+        config.add_facet_field 'user_collections_ssim', label: 'User Collection', show: false
+
         # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
         # Do not show these facets, they're for collection configurable facets
         (Generic::ORDERED_PROPERTIES + Generic::UNORDERED_PROPERTIES).each do |prop|
