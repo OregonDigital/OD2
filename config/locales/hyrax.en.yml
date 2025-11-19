@@ -274,6 +274,12 @@ en:
     file_sets:
       actions:
         header: Actions
+      form:
+        attach_to: Attach to %{parent}
+        cancel: Cancel
+        save: Save
+        title: Title
+        accessibility_feature: Accessibility Feature
     search:
       form:
         facet:
