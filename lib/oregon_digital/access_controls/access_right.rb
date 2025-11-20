@@ -6,6 +6,7 @@ module OregonDigital
     class AccessRight
       PERMISSION_TEXT_VALUE_OSU = 'osu'
       PERMISSION_TEXT_VALUE_UO = 'uo'
+      ACCESSIBLE_TEXT_VALUE = 'accessible'
     end
   end
 end

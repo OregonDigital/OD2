@@ -12,7 +12,8 @@ module OregonDigital
       uo: 'label-warning',
       lease: 'label-warning',
       open: 'label-success',
-      restricted: 'label-danger'
+      restricted: 'label-danger',
+      accessible: 'label-info'
     }.freeze
 
     private
