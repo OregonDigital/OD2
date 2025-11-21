@@ -111,6 +111,26 @@ Bulkrax::ApplicationMatcher.class_eval do
   end
 end
 
+Bulkrax::CsvFileSetEntry.class_eval do
+  # turning off these validators in order to allow users to
+  # edit FileSet metadata, check presence of id
+  def validate_presence_of_filename!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata&.[](file_reference)&.map(&:present?)&.any?
+
+    raise FileNameError, 'File set must have a filename'
+  end
+
+  def validate_presence_of_parent!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata[related_parents_parsed_mapping]&.map(&:present?)&.any?
+
+    raise OrphanFileSetError, 'File set must be related to at least one work'
+  end
+end
+
 Bulkrax::CsvEntry.class_eval do
   # override this method from HasMatchers module, included in Entry
   def single_metadata(content)
