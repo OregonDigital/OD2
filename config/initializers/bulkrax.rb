@@ -464,6 +464,29 @@ Bulkrax::CreateRelationshipsJob.class_eval do
       end
     end
   end
+
+  # one-word tweak: authorize checks for ability to deposit for collection
+  def add_to_collection(relationship:, parent_record:, ability:)
+    ActiveRecord::Base.uncached do
+      _child_entry, child_record = find_record(relationship.child_id, @importer_run_id)
+      raise "#{relationship} could not find child record" unless child_record
+      raise "Cannot add child collection (ID=#{relationship.child_id}) to parent work (ID=#{relationship.parent_id})" if child_record.collection? && parent_record.work?
+      ability.authorize!(:edit, child_record) || check_group(parent_record)
+      # We could do this outside of the loop, but that could lead to odd counter failures.
+      ability.authorize!(:deposit, parent_record)
+      # It is important to lock the child records as they are the ones being saved.
+      # However, locking doesn't seem to be working so we will reload the child record before saving.
+      # This is a workaround for the fact that the lock manager doesn't seem to be working.
+      conditionally_acquire_lock_for(child_record.id.to_s) do
+        Bulkrax.object_factory.add_resource_to_collection(
+          collection: parent_record,
+          resource: child_record,
+          user: @user
+        )
+      end
+      relationship.destroy
+    end
+  end
 end
 
 Bulkrax::ApplicationParser.class_eval do
