@@ -111,6 +111,26 @@ Bulkrax::ApplicationMatcher.class_eval do
   end
 end
 
+Bulkrax::CsvFileSetEntry.class_eval do
+  # turning off these validators in order to allow users to
+  # edit FileSet metadata, check presence of id
+  def validate_presence_of_filename!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata&.[](file_reference)&.map(&:present?)&.any?
+
+    raise FileNameError, 'File set must have a filename'
+  end
+
+  def validate_presence_of_parent!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata[related_parents_parsed_mapping]&.map(&:present?)&.any?
+
+    raise OrphanFileSetError, 'File set must be related to at least one work'
+  end
+end
+
 Bulkrax::CsvEntry.class_eval do
   # override this method from HasMatchers module, included in Entry
   def single_metadata(content)
@@ -442,6 +462,29 @@ Bulkrax::CreateRelationshipsJob.class_eval do
         Bulkrax.object_factory.update_index(resources: [reloaded_parent])
         Bulkrax.object_factory.publish(event: 'object.membership.updated', object: reloaded_parent, user: @user)
       end
+    end
+  end
+
+  # one-word tweak: authorize checks for ability to deposit for collection
+  def add_to_collection(relationship:, parent_record:, ability:)
+    ActiveRecord::Base.uncached do
+      _child_entry, child_record = find_record(relationship.child_id, @importer_run_id)
+      raise "#{relationship} could not find child record" unless child_record
+      raise "Cannot add child collection (ID=#{relationship.child_id}) to parent work (ID=#{relationship.parent_id})" if child_record.collection? && parent_record.work?
+      ability.authorize!(:edit, child_record) || check_group(parent_record)
+      # We could do this outside of the loop, but that could lead to odd counter failures.
+      ability.authorize!(:deposit, parent_record)
+      # It is important to lock the child records as they are the ones being saved.
+      # However, locking doesn't seem to be working so we will reload the child record before saving.
+      # This is a workaround for the fact that the lock manager doesn't seem to be working.
+      conditionally_acquire_lock_for(child_record.id.to_s) do
+        Bulkrax.object_factory.add_resource_to_collection(
+          collection: parent_record,
+          resource: child_record,
+          user: @user
+        )
+      end
+      relationship.destroy
     end
   end
 end
