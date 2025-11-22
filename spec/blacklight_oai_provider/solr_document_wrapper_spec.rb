@@ -52,4 +52,14 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
       end
     end
   end
+
+  describe '#select_partial' do
+    let(:token) { BlacklightOaiProvider::ResumptionToken.new({ last: 0 }, nil, 1) }
+
+    it 'returns a document with show and thumb uris' do
+      partial_result = wrapper.select_partial(token)
+      expect(partial_result.records.first['identifier_tesim']).to include(uri_show)
+      expect(partial_result.records.first['identifier_tesim']).to include(uri_thumb)
+    end
+  end
 end
