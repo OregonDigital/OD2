@@ -2,7 +2,12 @@
   <td class="attribute attribute-thumbnail">
     <%= render_thumbnail_tag member, { alt: "file details" } %>
   </td>
-  <th scope="row" class="attribute attribute-filename ensure-wrapped"><%= link_to(member.link_name, contextual_path(member, @presenter)) %></td>
+  <th scope="row" class="attribute attribute-filename ensure-wrapped"><%= link_to(member.link_name, contextual_path(member, @presenter)) %> <br/><br/>
+    <% if !member.accessibility_feature.blank? %>
+      <%= visibility_badge(OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE) %> <br/>
+      <%= "Features: #{member.accessibility_feature.map { |a| accessibility_display(a) }.join(', ')}" %>
+    <% end %>
+  </td>
   <td class="attribute attribute-date_uploaded"><%= member.try(:date_uploaded) %></td>
   <td class="attribute attribute-permission"><%= member.permission_badge %></td>
   <td>

@@ -17,6 +17,8 @@ module OregonDigital::AccessControls
         osu_visibility!
       when OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO
         uo_visibility!
+      when OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE
+        accessible_visibility!
       when Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
         private_visibility!
       else
@@ -33,6 +35,8 @@ module OregonDigital::AccessControls
         OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU
       elsif read_groups.include? OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO
         OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO
+      elsif read_groups.include? OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE
+        OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE
       else
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
       end
@@ -45,7 +49,8 @@ module OregonDigital::AccessControls
       [Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_AUTHENTICATED,
        Hydra::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_PUBLIC,
        OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU,
-       OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO]
+       OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO,
+       OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE]
     end
 
     def osu_visibility!
@@ -58,6 +63,12 @@ module OregonDigital::AccessControls
       visibility_will_change! unless visibility == 'uo'
       remove_groups = represented_visibility - ['uo']
       set_read_groups(['uo'], remove_groups)
+    end
+
+    def accessible_visibility!
+      visibility_will_change! unless visibility == 'accessible'
+      remove_groups = represented_visibility - ['accessible']
+      set_read_groups(['accessible'], remove_groups)
     end
   end
 end

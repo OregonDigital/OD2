@@ -274,6 +274,12 @@ en:
     file_sets:
       actions:
         header: Actions
+      form:
+        attach_to: Attach to %{parent}
+        cancel: Cancel
+        save: Save
+        title: Title
+        accessibility_feature: Accessibility Feature
     search:
       form:
         facet:
@@ -310,6 +316,8 @@ en:
         text: 'Oregon State University'
       uo:
         text: 'University of Oregon'
+      accessible:
+        text: 'Accessible Copy'
     controls:
       advanced: 'Advanced Search'
       explore: 'Explore Collections'
