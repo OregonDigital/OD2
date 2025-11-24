@@ -7,10 +7,10 @@ module OregonDigital
     def triplestore_is_alive?(uri)
       return true unless triplestore.fetch_cached_term(uri).nil?
 
-      Rails.logger.info 'Warning: TriplestoreHealthCheck is failing'
+      Rails.logger.info "Warning: TriplestoreHealthCheck is failing with #{uri}"
       return false
     rescue StandardError
-      Rails.logger.info 'Warning: TriplestoreHealthCheck is failing'
+      Rails.logger.info "Warning: TriplestoreHealthCheck is failing with #{uri}"
       return false
     end
 

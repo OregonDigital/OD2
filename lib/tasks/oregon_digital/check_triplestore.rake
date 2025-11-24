@@ -7,20 +7,12 @@ namespace :oregon_digital do
     uri = uris[gen_random]
     return if OregonDigital::TriplestoreHealth.triplestore_is_alive?(uri)
 
-    post_message
+    post_message(uri)
   end
 end
 
-def post_message
-  url = OD2::Application.config.slack_ts_hook
-  params = { 'text' => 'Warning: triplestore is DOWN' }
-  conn = Faraday.new(
-    url: url,
-    headers: { 'Content-Type' => 'application/json' }
-  )
-  conn.post do |request|
-    request.body = params.to_json
-  end
+def post_message(uri)
+  "Triplestore is down; failed health check with #{uri}"
 end
 
 def gen_random
