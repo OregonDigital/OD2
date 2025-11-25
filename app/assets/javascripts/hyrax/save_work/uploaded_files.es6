@@ -14,7 +14,8 @@ export class UploadedFiles {
   }
 
   get inProgress() {
-    return this.element.fileupload('active') > 0
+    // OVERRIDE FROM HYRAX: increase allowed number of active file uploads to 1 because the fileuploadcompleted event fires before... file is completed uploading
+    return this.element.fileupload('active') > 1
   }
 
   get hasFiles() {
