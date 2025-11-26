@@ -61,6 +61,13 @@ module OregonDigital
       # use of the provided graph.
       def fetch(*_args, &_block)
         persistence_strategy.graph = triplestore_fetch
+
+        # Reset the rdf_subject if the rdf_subject doesn't match the rdf_subject from the fetched URI
+        # This is most common when this object is initialized with an 'https' scheme rather than 'http'
+        @rdf_subject = subjects.select do |subject_uri|
+          # Find subjects that match rdf_subject excluding the scheme. I think this should almost always be a length 1 array
+          subject_uri.is_a?(RDF::URI) && [rdf_subject.host, rdf_subject.path].join == [subject_uri.host, subject_uri.path].join
+        end[0]
       end
 
       # DISABLES RUBOCOP BECAUSE SET_SUBJECT! IS AN OVERRIDE FROM AT::RESOURCE
@@ -84,12 +91,18 @@ module OregonDigital
       # Sanity check for valid rdf_subject. Subject should never be blank but in the event,
       # it should return an empty graph.
       def triplestore_fetch
-        URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(rdf_subject) : RDF::Graph.new
+        URI.parse(rdf_subject).is_a?(URI::HTTP) ? triplestore.fetch(query_uri) : RDF::Graph.new
       end
 
       def in_triplestore?
         # Nil return from triplestore signifies that the term isnt in the cache
         !triplestore.fetch_cached_term(rdf_subject).nil?
+      end
+
+      # the linkeddata or rdf gem can't always recognize what content-type to use in the accept header
+      # this will be the same URI used to complete the QA autocomplete page, this is right more often
+      def query_uri
+        self.class.query_to_vocabulary(rdf_subject).as_query(rdf_subject)
       end
 
       def language_label(language)
