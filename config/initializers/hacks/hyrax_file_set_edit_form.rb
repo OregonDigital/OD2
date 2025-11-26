@@ -2,7 +2,7 @@
 
 Rails.application.config.to_prepare do
   Hyrax::Forms::FileSetEditForm.class_eval do
-    # Add oembed_url to permited FileSet terms
-    self.terms += [:oembed_url]
+    # Add oembed_url & accessibility_feature to permited FileSet terms
+    self.terms += %i[oembed_url accessibility_feature]
   end
 end

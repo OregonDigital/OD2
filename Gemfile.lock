@@ -28,10 +28,10 @@ GIT
 
 GIT
   remote: https://github.com/samvera/bulkrax.git
-  revision: dfed1bb796af4b864898cefcb5fedb939e2cb44d
-  ref: dfed1bb796af4b864898cefcb5fedb939e2cb44d
+  revision: c19534f3ec2bdf06a0313373ba68155c987616df
+  ref: c19534f3ec2bdf06a0313373ba68155c987616df
   specs:
-    bulkrax (9.0.2)
+    bulkrax (9.3.1)
       bagit (~> 0.6.0)
       coderay
       denormalize_fields
@@ -43,7 +43,7 @@ GIT
       marcel
       oai (>= 0.4, < 2.x)
       rack (>= 2.0.6)
-      rails (>= 5.1.6)
+      rails (>= 5.1.6, < 8.0.0)
       rdf (>= 2.0.2, < 4.0)
       rubyzip
       simple_form
@@ -632,7 +632,7 @@ GEM
       addressable (~> 2.0)
       excon
       http (>= 2.0, < 6.0)
-    libxml-ruby (5.0.3)
+    libxml-ruby (5.0.5)
     link_header (0.0.8)
     linkeddata (3.1.6)
       equivalent-xml (~> 0.6)

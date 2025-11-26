@@ -32,7 +32,9 @@ class BotDetectionController < ApplicationController
   end
 
   def challenge
-    @dest = params['dest']
+    @dest = request.query_parameters.delete('dest')
+    @dest += "&#{request.query_parameters.to_query}" unless request.query_parameters.to_query.empty?
+    @dest = CGI.unescape(@dest)
   end
 
   # rubocop:disable Metrics/MethodLength

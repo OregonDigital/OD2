@@ -87,6 +87,8 @@ Bulkrax.setup do |config|
   fieldhash_csv['bulkrax_identifier'] = { from: ['original_identifier'], source_identifier: true }
   fieldhash_csv['visibility'] = { from: ['visibility'] }
   fieldhash_csv['oembed_urls'] = { from:['oembed_urls'], split: true }
+  fieldhash_csv['accessibility_feature'] = { from:['accessibilityFeature'], split: true }
+  fieldhash_csv['accessibility_summary'] = { from:['accessibilitySummary'], split: true }
   fieldhash_csv['full_size_download_allowed'][:parsed] = true
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
@@ -109,6 +111,26 @@ Bulkrax::ApplicationMatcher.class_eval do
   end
 end
 
+Bulkrax::CsvFileSetEntry.class_eval do
+  # turning off these validators in order to allow users to
+  # edit FileSet metadata, check presence of id
+  def validate_presence_of_filename!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata&.[](file_reference)&.map(&:present?)&.any?
+
+    raise FileNameError, 'File set must have a filename'
+  end
+
+  def validate_presence_of_parent!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata[related_parents_parsed_mapping]&.map(&:present?)&.any?
+
+    raise OrphanFileSetError, 'File set must be related to at least one work'
+  end
+end
+
 Bulkrax::CsvEntry.class_eval do
   # override this method from HasMatchers module, included in Entry
   def single_metadata(content)
@@ -120,9 +142,8 @@ Bulkrax::CsvEntry.class_eval do
 
     Array.wrap(content.to_s.strip).join('; ')
   end
-  
 
-  # override to use add_oembed
+  # override to use add_oembed & add_accessibilities
   def build_metadata
     validate_record
 
@@ -159,7 +180,7 @@ Bulkrax::CsvEntry.class_eval do
   # check for empty vals: unless data.blank?
   def build_value(key, value)
     return unless hyrax_record.respond_to?(key.to_s)
-    
+
     data = hyrax_record.send(key.to_s)
 
     if data.is_a?(ActiveTriples::Relation)
@@ -181,7 +202,7 @@ Bulkrax::CsvEntry.class_eval do
   def build_relationship_metadata
     # Includes all relationship methods for all exportable record types (works, Collections, FileSets)
     relationship_methods = {
-      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids],
+      related_parents_parsed_mapping => %i[member_of_collection_ids member_of_work_ids, parent],
       related_children_parsed_mapping => %i[member_collection_ids member_ids]
     }
 
@@ -190,7 +211,9 @@ Bulkrax::CsvEntry.class_eval do
 
       values = []
       methods.each do |m|
-        values << hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+        value = hyrax_record.public_send(m) if hyrax_record.respond_to?(m)
+        value_id = value.try(:id)&.to_s || value # get the id if it's an object
+        values << value_id if value_id.present?
       end
       values = values.flatten.uniq
       next if values.blank?
@@ -369,14 +392,104 @@ Bulkrax::ObjectFactory.class_eval do
   end
 end
 
-## override CsvEntry#required_elements to include OD-specific required_fields
-Bulkrax::ApplicationParser.class_eval do
-  def required_elements
-    elts = %w[title resource_type identifier rights_statement]
-    # added resource_type, identifier, and rights_statement
-    elts << source_identifier unless Bulkrax.fill_in_blank_source_identifiers
-    elts
+Bulkrax::ObjectFactoryInterface.class_eval do
+  # allow CSVCollectionEntry to handle
+  def collection_type(attrs)
+    attrs
   end
+end
+
+Bulkrax::CsvCollectionEntry.class_eval do
+  # only add gid if collection is new; presence will fail a collection update
+  # default to Digital Collection: "gid://od2/Hyrax::CollectionType/3"
+  def add_collection_type_gid
+    return if update?
+
+    return if self.parsed_metadata['collection_type_gid'].present?
+
+    self.parsed_metadata['collection_type_gid'] = Hyrax::CollectionType.find_by(machine_id: 'digital_collection').to_global_id.to_s
+  end
+
+  # added for above
+  def update?
+    return false unless self.parsed_metadata['id'].present?
+
+    Collection.exists? self.parsed_metadata['id']
+  end
+end
+
+# added in 9.3.1, wait to schedule create_relationship_job
+Bulkrax::ScheduleRelationshipsJob.class_eval do
+  def perform(importer_id:)
+      importer = Bulkrax::Importer.find(importer_id)
+      pending_num = importer.entries.left_outer_joins(:latest_status)
+                            .where('bulkrax_statuses.status_message IS NULL ').count
+      return reschedule(importer_id) unless pending_num.zero?
+
+      wait_time = OD2::Application.config.bulkrax_create_relationships_wait
+      importer.last_run.parents.each do |parent_id|
+        Bulkrax.relationship_job_class.constantize
+                                      .set(wait: wait_time.minutes)
+                                      .perform_later(parent_identifier: parent_id,
+                                                     importer_run_id: importer.last_run.id)
+      end
+    end
+end
+
+# restore parent_record save from 9.0.2
+Bulkrax::CreateRelationshipsJob.class_eval do
+  def process_parent_as_work(parent_record:, parent_identifier:)
+    conditionally_acquire_lock_for(parent_record.id.to_s) do
+      ActiveRecord::Base.uncached do
+        Bulkrax::PendingRelationship.where(parent_id: parent_identifier, importer_run_id: @importer_run_id)
+                                    .ordered.find_each do |rel|
+          raise "#{rel} needs a child to create relationship" if rel.child_id.nil?
+          raise "#{rel} needs a parent to create relationship" if rel.parent_id.nil?
+          add_to_work(relationship: rel, parent_record: parent_record, ability: ability)
+          self.number_of_successes += 1
+          @parent_record_members_added = true
+        rescue => e
+          rel.update(status_message: e.message)
+          @number_of_failures += 1
+          @errors << e
+        end
+      end
+
+        # save record if members were added
+      if @parent_record_members_added
+        Bulkrax.object_factory.save!(resource: parent_record, user: user)
+        reloaded_parent = Bulkrax.object_factory.find(parent_record.id)
+        Bulkrax.object_factory.update_index(resources: [reloaded_parent])
+        Bulkrax.object_factory.publish(event: 'object.membership.updated', object: reloaded_parent, user: @user)
+      end
+    end
+  end
+
+  # one-word tweak: authorize checks for ability to deposit for collection
+  def add_to_collection(relationship:, parent_record:, ability:)
+    ActiveRecord::Base.uncached do
+      _child_entry, child_record = find_record(relationship.child_id, @importer_run_id)
+      raise "#{relationship} could not find child record" unless child_record
+      raise "Cannot add child collection (ID=#{relationship.child_id}) to parent work (ID=#{relationship.parent_id})" if child_record.collection? && parent_record.work?
+      ability.authorize!(:edit, child_record) || check_group(parent_record)
+      # We could do this outside of the loop, but that could lead to odd counter failures.
+      ability.authorize!(:deposit, parent_record)
+      # It is important to lock the child records as they are the ones being saved.
+      # However, locking doesn't seem to be working so we will reload the child record before saving.
+      # This is a workaround for the fact that the lock manager doesn't seem to be working.
+      conditionally_acquire_lock_for(child_record.id.to_s) do
+        Bulkrax.object_factory.add_resource_to_collection(
+          collection: parent_record,
+          resource: child_record,
+          user: @user
+        )
+      end
+      relationship.destroy
+    end
+  end
+end
+
+Bulkrax::ApplicationParser.class_eval do
 
   # parser_fields are set by the importer form
   # do not use a default value at this point
