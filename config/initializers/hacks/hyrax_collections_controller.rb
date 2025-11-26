@@ -62,10 +62,11 @@ Rails.application.config.to_prepare do
         end
         format.json { render json: @collection, status: :created, location: dashboard_collection_path(@collection) }
       end
+      add_members_to_collection unless batch.empty?
     end
 
     # Override after update method to redirect users back to where they updated the collection from
-    def after_update
+    def after_update_response
       respond_to do |format|
         format.html do
           case URI(request.referer).path.split('/')[1]
