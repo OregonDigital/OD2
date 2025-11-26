@@ -14,6 +14,12 @@ RSpec.describe FileSet, type: :model do
     end
   end
 
+  describe 'accessibility_metadata' do
+    it 'accepts accessibility_feature metadata' do
+      expect(model).to respond_to(:accessibility_feature)
+    end
+  end
+
   describe 'oembed?' do
     it 'returns false when an oembed_url is not present' do
       expect(model.oembed?).to be false

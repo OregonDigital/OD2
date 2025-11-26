@@ -36,11 +36,7 @@ module OregonDigital
         # config.advanced_search[:qt] ||= 'advanced'
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
-        config.advanced_search[:form_solr_parameters] ||= {
-          'facet.field' => %w[non_user_collections_ssim copyright_combined_label_sim date_combined_year_label_ssim institution_label_sim language_label_sim]
-        }
         config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
-
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
         config.view.gallery.icon_class = 'fa fa-trello fa-lg'
@@ -201,6 +197,7 @@ module OregonDigital
             http\://creativecommons.org/publicdomain/zero/1.0/ OR
             http\://creativecommons.org/publicdomain/mark/1.0/)' }
         }
+
         config.add_facet_field 'copyright_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.copyright_combined'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'file_format_sim', label: I18n.translate('simple_form.labels.defaults.file_format'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'resource_type_label_sim', label: I18n.translate('simple_form.labels.defaults.resource_type_label'), index_range: 'A'..'Z', limit: 5
@@ -212,12 +209,12 @@ module OregonDigital
         config.add_facet_field 'location_combined_label_sim', label: I18n.translate('simple_form.labels.defaults.location_combined'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'workType_label_sim', label: I18n.translate('simple_form.labels.defaults.workType'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'language_label_sim', label: I18n.translate('simple_form.labels.defaults.language'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'non_user_collections_ssim', limit: 5, label: 'Collection', helper_method: 'collection_title_from_id', index_range: 'A'..'Z'
+        config.add_facet_field 'non_user_collections_label_ssim', label: 'Collection', helper_method: 'collection_title_modify', index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'local_collection_name_label_sim', label: I18n.translate('simple_form.labels.defaults.local_collection'), index_range: 'A'..'Z', limit: 5
-        config.add_facet_field 'institution_label_sim', limit: 5, label: 'Institution', index_range: 'A'..'Z'
+        config.add_facet_field 'institution_label_sim', label: 'Institution', index_range: 'A'..'Z', limit: 5
+
         config.add_facet_field 'cultural_context_label_sim', label: I18n.translate('simple_form.labels.defaults.cultural_context_label'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'local_contexts_label_sim', label: I18n.translate('simple_form.labels.defaults.local_contexts'), index_range: 'A'..'Z', limit: 5
-
         config.add_facet_field 'former_owner_sim', label: I18n.translate('simple_form.labels.defaults.former_owner'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'mode_of_issuance_sim', label: I18n.translate('simple_form.labels.defaults.mode_of_issuance'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'box_number_sim', label: I18n.translate('simple_form.labels.defaults.box_number'), index_range: 'A'..'Z', limit: 5
@@ -300,6 +297,7 @@ module OregonDigital
             qf: title_name.to_s,
             pf: title_name.to_s
           }
+          field.include_in_advanced_search = true
         end
         config.add_search_field('creator_field', label: 'Creator') do |field|
           solr_name = 'creator_combined_label_tesim'
@@ -308,6 +306,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
+          field.include_in_advanced_search = true
         end
         config.add_search_field('description_field', label: 'Description') do |field|
           solr_name = 'description_tesim'
@@ -315,6 +314,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
+          field.include_in_advanced_search = true
         end
         config.add_search_field('subject_field', label: 'Subject') do |field|
           solr_name = 'subject_label_tesim'
@@ -329,6 +329,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
+          field.include_in_advanced_search = true
         end
 
         # 'sort results by' select (pulldown)
@@ -359,8 +360,8 @@ module OregonDigital
             timestamp_field: 'system_create_dtsi',
             timestamp_method: 'system_created',
             set_fields: [
-              { 'label': 'title_tesim',
-                'solr_field': 'member_of_collection_ids_ssim' }
+              { label: 'id',
+                solr_field: 'member_of_collection_ids_ssim' }
             ],
             set_model: ::OaiSet
           }

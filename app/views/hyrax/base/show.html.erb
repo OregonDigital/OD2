@@ -66,6 +66,13 @@
           </li>
           <li>
             <div class="tab-padding" role="heading" aria-level="2">
+              <a id="accessibility_copy_button"  href="#accessibility_copy" class="btn-link" aria-controls="accessibility_copy" aria-expanded="false" aria-disabled="false" role="button" data-toggle="tab">
+                <span class="h4"><%= t("oregon_digital.works.form.tab.accessibility_copy") %></span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="tab-padding" role="heading" aria-level="2">
               <a id="contact_us_button" href="#contact_us" class="btn-link" aria-controls="contact_us" aria-expanded="false" aria-disabled="false" role="button" data-toggle="tab">
                 <span class="h4"><%= t("oregon_digital.works.form.tab.contact_us") %></span>
               </a>
@@ -89,6 +96,12 @@
             <div class="form-tab-content">
               <% # metadata_tab is sometimes provided %>
               <%= render 'data_sources', presenter: @presenter %>
+            </div>
+          </div>
+          <div role="region" aria-labelledby="accessibility_copy_button" class="tab-pane" id="accessibility_copy">
+            <div class="form-tab-content">
+              <% # metadata_tab is sometimes provided %>
+              <%= render 'accessibility_copy', presenter: @presenter %>
             </div>
           </div>
           <div role="region" aria-labelledby="contact_us_button" class="tab-pane" id="contact_us">
@@ -157,6 +170,21 @@
           <!-- Renders user history -->
           <div class='col-sm-12'>
             <%= render 'hyrax/users/activity_log', events: @presenter.events %>
+          </div>
+        </div>
+      <% end %>
+      <% if current_ability.admin? %>
+        <div class='row'>
+          <div class='col-sm-12'>
+            <h2 class='h4'>Administrative Metadata</h2>
+            <br/><br/>
+            <% entry = Bulkrax::Entry.find_by(identifier: @presenter.bulkrax_identifier.first) if !@presenter.bulkrax_identifier.blank? %>
+            <ul>
+              <li><p><span style="font-weight: bold;">Last Indexed Date:</span> <%= @presenter.solr_document['date_modified_dtsi'] %></p></li>
+              <li><p><span style="font-weight: bold;">Admin Set:</span> <%= @presenter.admin_set.first %> (<%= link_to(@presenter.solr_document['primarySet_ssim'].first, CGI.unescape(admin_admin_set_url(@presenter.solr_document['primarySet_ssim'].first)), target: "_blank") %>)</p></li>
+              <li><p><span style="font-weight: bold;">Depositor:</span> <%= link_to(@presenter.depositor, "#{request.base_url}#{admin_workflows_path(f: { depositor_ssim: [@presenter.depositor] }, local: I18n.locale)}", target: "_blank") %></p></li>
+              <li><p><span style="font-weight: bold;">Bulkrax Importer ID:</span> <%= !@presenter.bulkrax_identifier.blank? ? link_to(@presenter.bulkrax_identifier.first, "#{request.base_url}#{bulkrax.importer_path(entry.importerexporter_id)}", target: "_blank") : 'None' %></p></li>
+            </ul>
           </div>
         </div>
       <% end %>

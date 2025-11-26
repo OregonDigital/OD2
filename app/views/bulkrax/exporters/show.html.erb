@@ -4,8 +4,8 @@
   <h1><span class='fa fa-cloud-download' aria-hidden='true'></span> Exporter: <%= @exporter.name %></h1>
 </div>
 
-<div class='panel panel-default'>
-  <div class='panel-body'>
+<div class='panel card panel-default'>
+  <div class='panel-body card-body'>
 
     <% if File.exist?(@exporter.exporter_export_zip_path) %>
       <%= simple_form_for @exporter, method: :get, url: exporter_download_path(@exporter), html: { class: 'form-inline bulkrax-p-align' } do |form| %>

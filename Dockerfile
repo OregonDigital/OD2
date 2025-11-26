@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine3.15 as bundler
+FROM ruby:2.7-alpine3.15 AS bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -6,7 +6,7 @@ ENV LC_ALL C.UTF-8
 
 RUN gem install bundler -v '2.3.26'
 
-FROM bundler as dependencies
+FROM bundler AS dependencies
 
 # The alpine way
 RUN apk --no-cache update && apk --no-cache upgrade && \
@@ -56,9 +56,9 @@ ARG UID=8083
 ARG GID=8083
 
 # Create an app user so our program doesn't run as root.
-RUN addgroup -g "$GID" app && adduser -h /data -u "$UID" -G app -D -H app
+RUN addgroup -g 8083 app && adduser -h /data -u 8083 -G app -D -H app
 
-FROM dependencies as gems
+FROM dependencies AS gems
 
 # Make sure the new user has complete control over all code, including
 # bundler's installed assets
@@ -76,7 +76,7 @@ COPY --chown=app:app build/install_gems.sh /data/build
 USER app
 RUN /data/build/install_gems.sh
 
-FROM gems as code
+FROM gems AS code
 
 # Add the rest of the code
 COPY --chown=app:app . /data

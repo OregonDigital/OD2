@@ -79,6 +79,7 @@ en:
           military_branch_label_sim: Military Branch
           subject_label_sim: Subject
           identifier_sim: Identifier
+          workflow_state_name_ssim: Workflow State
         index:
           all_text_timv: Full Text
           hocr_text_timv: Full Text
@@ -250,7 +251,7 @@ en:
       select_form:
         select_heading: 'My Collections()'
         title: 'Add this item'
-        update: 'Add'
+        update: 'Save'
         delete: 'Delete'
         export: 'Export'
         share: 'Share'
@@ -273,6 +274,12 @@ en:
     file_sets:
       actions:
         header: Actions
+      form:
+        attach_to: Attach to %{parent}
+        cancel: Cancel
+        save: Save
+        title: Title
+        accessibility_feature: Accessibility Feature
     search:
       form:
         facet:
@@ -309,6 +316,8 @@ en:
         text: 'Oregon State University'
       uo:
         text: 'University of Oregon'
+      accessible:
+        text: 'Accessible Copy'
     controls:
       advanced: 'Advanced Search'
       explore: 'Explore Collections'
@@ -348,6 +357,16 @@ en:
       defaults:
         local_contexts: Local Contexts
         local_contexts_label: Local Contexts
+        resource_type: Media
+    accessibility_copy_form:
+      name: Your Name
+      email: Your Email
+      url_link: Link to Item
+      description: Please describe the type of accommodation that you need (For example, written transcription, compatibility with a particular assistive device, preferred file formats, etc.). Include details about what particular parts of the content are inaccessible, if applicable.
+      date: Date Needed
+      button: Send
+      success: Thank you for your message!
+      fail: Sorry, this message was not sent successfully.
   howto:
     researchers:
       title: 'Researchers'

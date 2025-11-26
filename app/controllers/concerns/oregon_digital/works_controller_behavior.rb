@@ -7,6 +7,10 @@ module OregonDigital
     included do
       prepend_before_action :redirect_mismatched_work, only: [:show]
 
+      before_action only: :show do |controller|
+        BotDetectionController.bot_detection_enforce_filter(controller)
+      end
+
       def redirect_mismatched_work
         curation_concern = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
         redirect_to(main_app.polymorphic_path(curation_concern), status: :moved_permanently) and return if curation_concern.internal_resource.safe_constantize != _curation_concern_type
@@ -27,12 +31,14 @@ module OregonDigital
       # This helps failed form submissions to return to the form and display errors
       params[hash_key_for_curation_concern][:member_of_collection_ids] = nil if params[hash_key_for_curation_concern][:member_of_collection_ids].empty?
       set_permissions_to_work
+      set_content_alert
       super
     end
 
     # MODIFY: Add in a special method to help on updating the permissions
     def update
       set_permissions_to_work
+      set_content_alert
       super
     end
 
@@ -54,6 +60,11 @@ module OregonDigital
       curation_concern.permissions_attributes = (permission_arr) unless permission_arr.blank?
     end
     # rubocop:enable Metrics/AbcSize
+
+    # METHOD: Check for mask_content not being check
+    def set_content_alert
+      curation_concern.content_alert = nil if params[hash_key_for_curation_concern][:mask_content].all?(&:blank?)
+    end
 
     def after_update_response
       OregonDigital::PermissionChangeEventJob.perform_later(curation_concern, current_user) if permissions_changed?

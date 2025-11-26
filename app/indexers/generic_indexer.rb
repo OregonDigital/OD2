@@ -14,6 +14,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   # propogate downwards.
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/BlockLength
   def generate_solr_document
     super.tap do |solr_doc|
       index_rights_statement_label(solr_doc, object)
@@ -25,6 +26,8 @@ class GenericIndexer < Hyrax::WorkIndexer
       index_local_contexts_label(solr_doc, object)
       index_sort_options(solr_doc)
       label_fetch_properties_solr_doc(object, solr_doc)
+      accessibilities_label(solr_doc, object)
+      solr_doc['non_user_collections_label_ssim'] = []
       solr_doc['non_user_collections_ssim'] = []
       solr_doc['user_collections_ssim'] = []
       solr_doc['oai_collections_ssim'] = []
@@ -32,6 +35,7 @@ class GenericIndexer < Hyrax::WorkIndexer
         collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
         solr_doc[collection_index_key] << collection.id
         solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
+        solr_doc['non_user_collections_label_ssim'] << collection.title.first if collection_index_key == 'non_user_collections_ssim'
       end
       # removing index_topic_combined_label(solr_doc, object.keyword)
       # will be handled when indexing fetched labels
@@ -43,10 +47,21 @@ class GenericIndexer < Hyrax::WorkIndexer
       solr_doc['file_format_sim'] = object.file_sets.map { |file_set| file_set.to_solr['file_format_sim'] } # Index file formats from file sets for faceting
       # for bulkrax
       solr_doc['bulkrax_identifier_sim'] = object.bulkrax_identifier
+      solr_doc['bulkrax_importer_id_sim'] = importer_lookup(object.bulkrax_identifier)
     end
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/BlockLength
+
+  def importer_lookup(identifier)
+    return [] if identifier.blank?
+
+    e = Bulkrax::Entry.find_by(identifier: identifier.first)
+    return [] if e.nil?
+
+    [e.importerexporter_id]
+  end
 
   def collection_indexing_key(machine_id)
     case machine_id
@@ -117,6 +132,17 @@ class GenericIndexer < Hyrax::WorkIndexer
     solr_doc['local_contexts_label_ssim'] = local_context_labels
     solr_doc['local_contexts_label_tesim'] = local_context_labels
     solr_doc['local_contexts_parsable_label_ssim'] = object.local_contexts.map { |uri| "#{OregonDigital::LocalContextsService.new.label(uri)}$#{uri}" }
+  end
+
+  # METHOD: Create index for accessibility feature & summary
+  def accessibilities_label(solr_doc, object)
+    feature_labels = OregonDigital::AccessibilityFeatureService.new.all_labels(object.accessibility_feature)
+    solr_doc['accessibility_feature_label_sim'] = feature_labels
+    solr_doc['accessibility_feature_label_ssim'] = feature_labels
+    solr_doc['accessibility_feature_label_tesim'] = feature_labels
+    solr_doc['accessibility_summary_label_sim'] = object.accessibility_summary
+    solr_doc['accessibility_summary_label_ssim'] = object.accessibility_summary
+    solr_doc['accessibility_summary_label_tesim'] = object.accessibility_summary
   end
 
   def index_sort_options(solr_doc)

@@ -42,6 +42,11 @@ class Collection < ActiveFedora::Base
 
   private
 
+  # DEFAULT: Set value on default on new collection
+  def set_defaults
+    self.accessibility_feature = ['unknown']
+  end
+
   # Build new Facet objects that might not exist
   def generate_default_facets
     CatalogController.blacklight_config.facet_fields.each do |_k, facet|

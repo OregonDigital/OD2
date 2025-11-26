@@ -4,8 +4,16 @@
 class FileSet < ActiveFedora::Base
   before_save :resolve_oembed_errors
 
+  # SETUP: Provide FileSet to default on value
+  after_initialize :set_defaults
+
   property :oembed_url, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/oembed'), multiple: false
   property :bulkrax_identifier, predicate: ::RDF::URI.new('http://id.loc.gov/vocabulary/identifiers/local'), multiple: true, basic_searchable: true do |index|
+    index.as :stored_searchable
+  end
+
+  # NEW FIELD: Schema for the Accessibility Feature
+  property :accessibility_feature, predicate: ::RDF::URI.new('http://schema.org/accessibilityFeature'), multiple: true, basic_searchable: true do |index|
     index.as :stored_searchable
   end
 
@@ -53,5 +61,10 @@ class FileSet < ActiveFedora::Base
   def resolve_oembed_errors
     errors = OembedError.find_by(document_id: id)
     errors.delete if oembed_url_changed? && !errors.blank?
+  end
+
+  # Set defaults for accessibility_feature if blank
+  def set_defaults
+    self.accessibility_feature = ['unknown'] if accessibility_feature.blank?
   end
 end

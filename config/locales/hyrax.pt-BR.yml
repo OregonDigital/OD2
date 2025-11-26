@@ -13,6 +13,7 @@ pt-BR:
           publisher_sim: Editor
           subject_sim: Sujeito
           identifier_sim: Identificador
+          workflow_state_name_ssim: Estado do Workflow
         index:
           based_near_tesim: Localização
           contributor_tesim: Contribuinte
@@ -57,3 +58,9 @@ pt-BR:
     institution_name_full: O Nome da Instituição
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
+  simple_form:
+    labels:
+      defaults:
+        local_contexts: Contextos Locais
+        local_contexts_local: Contextos Locais
+        resource_type: Mídia

@@ -15,15 +15,6 @@ GIT
       sidekiq
 
 GIT
-  remote: https://github.com/notch8/willow_sword.git
-  revision: 74f7684ff9ca96251f341e50a3afc34b5bd312cc
-  specs:
-    willow_sword (0.2.0)
-      bagit (~> 0.4.1)
-      rails (>= 5.1.6)
-      rubyzip (>= 1.0.0)
-
-GIT
   remote: https://github.com/osulp/triplestore-adapter
   revision: 30081b1ff8beb169c88dd338f71ecb0e1bad8a73
   specs:
@@ -37,22 +28,22 @@ GIT
 
 GIT
   remote: https://github.com/samvera/bulkrax.git
-  revision: 62517e67876d96c7a0bedb288370a4f10eb0b4c4
-  ref: 62517e67876d96c7a0bedb288370a4f10eb0b4c4
+  revision: c19534f3ec2bdf06a0313373ba68155c987616df
+  ref: c19534f3ec2bdf06a0313373ba68155c987616df
   specs:
-    bulkrax (8.2.0)
-      bagit (~> 0.4.6)
+    bulkrax (9.3.1)
+      bagit (~> 0.6.0)
       coderay
       denormalize_fields
       iso8601 (~> 0.9.0)
       kaminari
       language_list (~> 1.2, >= 1.2.1)
-      libxml-ruby (~> 3.2.4)
+      libxml-ruby (~> 5.0)
       loofah (>= 2.2.3)
       marcel
       oai (>= 0.4, < 2.x)
       rack (>= 2.0.6)
-      rails (>= 5.1.6)
+      rails (>= 5.1.6, < 8.0.0)
       rdf (>= 2.0.2, < 4.0)
       rubyzip
       simple_form
@@ -166,7 +157,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bagit (0.4.6)
+    bagit (0.6.0)
       docopt (~> 0.5.0)
       validatable (~> 1.6)
     bcp47 (0.3.3)
@@ -641,7 +632,7 @@ GEM
       addressable (~> 2.0)
       excon
       http (>= 2.0, < 6.0)
-    libxml-ruby (3.2.4)
+    libxml-ruby (5.0.5)
     link_header (0.0.8)
     linkeddata (3.1.6)
       equivalent-xml (~> 0.6)
@@ -1244,7 +1235,6 @@ DEPENDENCIES
   vcr (~> 5.1)
   web-console (>= 3.3.0)
   webmock
-  willow_sword!
   yabeda
   yabeda-http_requests
   yabeda-prometheus
