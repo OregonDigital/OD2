@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
   post "/challenge", to: "bot_detection#verify_challenge"
 
+  # override ResourceSync routes from Hyrax, direct to homepage instead, issue 3495
+  get '/.well-known/resourcesync' => 'hyrax/homepage#index'
+  get '/capabilitylist' => 'hyrax/homepage#index'
+  get '/resourcelist' => 'hyrax/homepage#index'
+  get '/changelist' => 'hyrax/homepage#index'
+  
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
   resources :collections, controller: 'oregon_digital/explore_collections', only: [] do
