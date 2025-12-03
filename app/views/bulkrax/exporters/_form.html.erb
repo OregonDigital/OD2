@@ -69,7 +69,7 @@
 
   <%= form.input :limit,
     as: :integer,
-    hint: 'leave blank or 0 for all records',
+    hint: "Leave blank or 0 for all records. Note that exporters are currently limited to #{OD2::Application.config.large_export_size} records. If you need a larger export, Content Ops members may be able to assist. For larger Metadata Only exports, direct Solr queries may be an option.",
     label: t('bulkrax.exporter.labels.limit'),
     input_html: { class: 'form-control' } %>
 
