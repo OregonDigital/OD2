@@ -25,7 +25,6 @@ module OregonDigital
       @children = work.child_works
     end
 
-    # rubocop:disable Metrics/AbcSize
     def each(&chunks)
       writer = ZipTricks::BlockWrite.new(&chunks)
 
@@ -35,6 +34,5 @@ module OregonDigital
         @children.each { |child| @standard ? stream_works_low(child, zip) : stream_works(child, zip) }
       end
     end
-    # rubocop:enable Metrics/AbcSize
   end
 end
