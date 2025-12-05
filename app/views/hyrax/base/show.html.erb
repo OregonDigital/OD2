@@ -1,5 +1,12 @@
 <%= render 'shared/citations' %>
 
+<%# Add in smooth scrolling for specific only on show page %>
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
 <div class="row work-type">
   <%# OVERRIDE FROM HYRAX remove work type heading %>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
@@ -156,7 +163,7 @@
         <!-- Renders file manager -->
         <div class='col-sm-12'>
           <div id='work-show-file-sets' class='flex-container'>
-            <div class='flex-item file-set-title'>
+            <div class='flex-item file-set-title' id='file-set-individual'>
               <h2 class='h4'>Works and Files</h2>
             </div>
             <% if (@presenter.member_presenters.size > 1) && (current_ability.can?(:view, FileSet)) %>
