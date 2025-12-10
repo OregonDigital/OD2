@@ -5,7 +5,7 @@
     <div class="edit-button-sections">
       <div class="dropdown">
         <% file_sets_list = @presenter.file_set_presenters.map { |fs| fs.accessibility_feature }.flatten if !@presenter.file_set_presenters.blank? %>
-        <% @disable_link = (file_sets_list.include?('none')) || (file_sets_list == []) %>
+        <% @disable_link = file_sets_list&.include?('none') || file_sets_list.blank? %>
         <button id="download-button" class="btn btn-primary dropdown-toggle" style='width: 130%;' type="button" data-toggle="dropdown"  aria-controls="download-list" aria-expanded="false" aria-haspopup="true">Download
         <span class="caret-dropdown"></span></button>
         <ul id="download-list" class="dropdown-menu" role="menu" aria-labelledby="download-button">
