@@ -4,9 +4,12 @@
     <%= render_thumbnail_tag member, { alt: "file details", class: ("blurred-image" if !@presenter.mask_content.blank?) } %>
   </td>
   <th scope="row" class="attribute attribute-filename ensure-wrapped"><%= link_to(member.link_name, contextual_path(member, @presenter)) %> <br/><br/>
-    <% if !member.accessibility_feature.blank? %>
+    <% if (member.is_a?(Hyrax::FileSetPresenter)) && (!member.accessibility_feature.blank?) %>
       <%= visibility_badge(OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE) %> <br/>
       <%= "Features: #{member.accessibility_feature.map { |a| accessibility_display(a) }.join(', ')}" %>
+    <% elsif (member.is_a?(Hyrax::WorkShowPresenter)) && (!member.solr_document['accessibility_feature_tesim'].blank?) %>
+      <%= visibility_badge(OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE) %> <br/>
+      <%= "Features: #{member.solr_document['accessibility_feature_tesim'].map { |a| accessibility_display(a) }.join(', ')}" %>
     <% end %>
   </td>
   <td class="attribute attribute-date_uploaded"><%= member.try(:date_uploaded) %></td>
