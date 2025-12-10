@@ -4,13 +4,15 @@
     <div class='col-md-4 pull-right'>
     <div class="edit-button-sections">
       <div class="dropdown">
+        <% file_sets_list = @presenter.file_set_presenters.map { |fs| fs.accessibility_feature }.flatten if !@presenter.file_set_presenters.blank? %>
+        <% @disable_link = (file_sets_list.include?('none')) || (file_sets_list == []) %>
         <button id="download-button" class="btn btn-primary dropdown-toggle" style='width: 130%;' type="button" data-toggle="dropdown"  aria-controls="download-list" aria-expanded="false" aria-haspopup="true">Download
         <span class="caret-dropdown"></span></button>
         <ul id="download-list" class="dropdown-menu" role="menu" aria-labelledby="download-button">
           <% if current_ability.can? :download, Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: presenter.id) %>
-            <li><%= link_to "Files (High Quality)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
+            <li class="<%= 'disabled-link-dropdown' if !@disabled_link %>"><%= link_to "Files (High Quality)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
           <% end %>
-          <li><%= link_to "Files (Standard Quality)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/vnd.ms-'))  %></li>
+          <li class="<%= 'disabled-link-dropdown' if !@disabled_link %>"><%= link_to "Files (Standard Quality)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/vnd.ms-'))  %></li>
           <li><%= link_to "Individual Files", "#file-set-individual" %></li>
         </ul>
       </div>
