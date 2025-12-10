@@ -13,9 +13,11 @@ module OregonDigital
       @verification_errors
     end
 
+    # rubocop:disable Style/SymbolProc
     def coll_ids
-      @work.member_of_collection_ids
+      @work.member_of_collection_ids.map { |x| x.id }
     end
+    # rubocop:enable Style/SymbolProc
 
     def no_colls?
       coll_ids.blank?
