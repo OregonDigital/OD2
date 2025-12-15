@@ -37,13 +37,20 @@ module OregonDigital
     # Stream original quality files
     def stream_works(work, zip)
       work.file_sets.each do |file_set|
+        # Skip any file_set that has accessibility_feature other than "none"
+        next unless allow_by_accessibility?(file_set)
+
         stream_files_from_fileset(file_set, zip)
       end
     end
 
+    # rubocop:disable Metrics/MethodLength
     # Stream low quality files
     def stream_works_low(work, zip, folder = '')
       work.file_sets.each do |file_set|
+        # Skip any file_set that has accessibility_feature other than "none"
+        next unless allow_by_accessibility?(file_set)
+
         file_name = "#{folder}#{file_set.label}"
         deriv_name = derivative_name(file_set)
         # If this fileset doesn't have derivatives, stream in the original quality
@@ -57,6 +64,7 @@ module OregonDigital
         end
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     # Stream original quality files directly from Fedora
     def stream_files_from_fileset(file_set, zip, folder = '')
@@ -86,6 +94,12 @@ module OregonDigital
       elsif file_set.office_document?
         'thumbnail'
       end
+    end
+
+    # Determine if the file sets can be download due to accessibility
+    def allow_by_accessibility?(file_set)
+      access_vals = file_set.accessibility_feature
+      access_vals == ['none']
     end
   end
 end

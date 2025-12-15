@@ -14,7 +14,7 @@ describe OregonDigital::FileSetStreamer do
       service_class.stream(work) do
         chunk_count += 1
       end
-      expect(chunk_count).to eq 46
+      expect(chunk_count).to eq 9
     end
   end
 end

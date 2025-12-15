@@ -25,21 +25,14 @@ module OregonDigital
       @children = work.child_works
     end
 
-    # rubocop:disable Metrics/AbcSize
     def each(&chunks)
       writer = ZipTricks::BlockWrite.new(&chunks)
 
       ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
-        # Add metadata
-        zip.write_deflated_file('metadata.csv') do |file_writer|
-          file_writer << work.csv_metadata(self.class.metadata_keys, self.class.controlled_keys)
-        end
-
         # Stream work files and child work files, determining if low original quality
         @standard ? stream_works_low(work, zip) : stream_works(work, zip)
         @children.each { |child| @standard ? stream_works_low(child, zip) : stream_works(child, zip) }
       end
     end
-    # rubocop:enable Metrics/AbcSize
   end
 end
