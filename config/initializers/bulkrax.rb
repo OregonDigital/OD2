@@ -275,6 +275,7 @@ Bulkrax::CsvParser.class_eval do
   alias create_from_worktype create_new_entries
   alias create_from_all create_new_entries
   alias create_from_local_collection create_new_entries
+  alias create_from_importer_with_file_set create_new_entries
 
   def create_new_entries_in_batches
     current_records_for_export.in_groups_of(OD2::Application.config.batch_size) do |group|
@@ -317,6 +318,8 @@ end
 
 Bulkrax::Exporter.class_eval do
   delegate :create_from_local_collection, to: :parser
+  delegate :create_from_importer_with_file_set, to: :parser
+
   def replace_files
     false
   end
@@ -325,6 +328,7 @@ Bulkrax::Exporter.class_eval do
     current_run.total_work_entries > OD2::Application.config.large_export_size
   end
 
+  # adds exporter sources to the new exporter form
   def export_from_list
     if defined?(::Hyrax)
       [
@@ -332,6 +336,7 @@ Bulkrax::Exporter.class_eval do
         [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
         [I18n.t('bulkrax.exporter.labels.worktype'), 'worktype'],
         [I18n.t('bulkrax.exporter.labels.local_collection'), 'local_collection'],
+        [I18n.t('bulkrax.exporter.labels.importer_with_file_set'), 'importer_with_file_set'],
         [I18n.t('bulkrax.exporter.labels.all'), 'all']
       ]
     else
@@ -346,7 +351,12 @@ Bulkrax::Exporter.class_eval do
   def export_source_local_collection
     self.export_source if self.export_from == 'local_collection'
   end
+
+  def export_source_importer_with_file_set
+    self.export_source if self.export_from =='importer_with_file_set'
+  end
 end
+
 Bulkrax::Importer.class_eval do
   paginates_per OD2::Application.config.importer_pagination_per
 end

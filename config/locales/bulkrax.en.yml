@@ -3,3 +3,4 @@ en:
     exporter:
       labels:
         local_collection: Local Collection
+        importer_with_file_set: Importer with file sets

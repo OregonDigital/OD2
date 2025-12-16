@@ -37,6 +37,14 @@
     input_html: { class: 'importer export-source-option d-none hidden form-control' },
     collection:  form.object.importers_list.sort %>
 
+  <%= form.input :export_source_importer_with_file_set,
+    label: t('bulkrax.exporter.labels.importer_with_file_set'),
+    required: true,
+    prompt: 'Select from the list',
+    label_html: { class: 'importer_with_file_set export-source-option d-none hidden' },
+    input_html: { class: 'importer_with_file_set export-source-option d-none hidden form-control' },
+    collection:  form.object.importers_list.sort %>
+
   <%= form.input :export_source_collection,
     prompt: 'Start typing ...',
     label: t('bulkrax.exporter.labels.collection'),
