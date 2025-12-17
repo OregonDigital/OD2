@@ -90,7 +90,8 @@ Rails.application.configure do
   config.importer_pagination_per = ENV.fetch('BULKRAX_IMPORTER_PAGINATION_PER', 5).to_i
   config.verify_services = [
     OregonDigital::VerifyDerivativesService,
-    OregonDigital::VerifyCollectionsService
+    OregonDigital::VerifyCollectionsService,
+    OregonDigital::VerifyLabelsService
   ]
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
   config.bulkrax_create_relationships_wait = ENV.fetch('BULKRAX_CREATE_RELATIONSHIPS_WAIT', 5).to_i
