@@ -106,3 +106,11 @@ input[type=checkbox] {
 .label_and_uri_controlled_vocabulary .listing li:first-of-type .remove {
   display: inline-block;
 }
+
+// DISABLE: Disable clicking link
+.disabled-link-dropdown {
+  color: gray;
+  pointer-events: none;   /* makes it unclickable */
+  opacity: 0.6;           /* greys it out */
+  cursor: not-allowed;
+}
