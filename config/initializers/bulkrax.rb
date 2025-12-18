@@ -365,6 +365,18 @@ Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
   include OregonDigital::AspaceDigitalObjectExportBehavior
 
+  # insert flash re pending relationships
+  def show
+    if api_request?
+      json_response('show')
+    elsif defined?(::Hyrax)
+      add_importer_breadcrumbs
+      add_breadcrumb @importer.name
+    end
+    @first_entry = @importer.entries.first
+    flash[:notice] = "This importer still has pending relationships." if relationships_pending?
+  end
+
   # change values for default sort
   def importer_table
     @importers = Bulkrax::Importer.order("last_imported_at desc").page(table_page).per(table_per_page)
