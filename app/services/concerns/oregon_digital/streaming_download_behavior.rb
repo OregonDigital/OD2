@@ -98,8 +98,7 @@ module OregonDigital
 
     # Determine if the file sets can be download due to accessibility
     def allow_by_accessibility?(file_set)
-      access_vals = file_set.accessibility_feature
-      access_vals == ['none']
+      (file_set.accessibility_feature & %w[none unknown]).any?
     end
   end
 end
