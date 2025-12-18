@@ -41,6 +41,5 @@ module OregonDigital
     def relationships_pending?
       Bulkrax::PendingRelationship.where(importer_run_id: @importer.last_run.id).empty? ? false : true
     end
-
   end
 end
