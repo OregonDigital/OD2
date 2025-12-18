@@ -38,6 +38,7 @@ module OregonDigital
 
     private
 
+    # rubocop:disable Metrics/AbcSize
     def duration
       dur_array = @file_set.duration.first&.split(':')&.map(&:to_i) || [0, 0, -1]
 
@@ -47,6 +48,7 @@ module OregonDigital
         (dur_array.first / 1000).ceil
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # The path to the derivative download
     def default_content_path
