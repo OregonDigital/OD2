@@ -24,6 +24,7 @@ jobs:
             - app/*
             - app/**/*
   bundle:
+    resource_class: medium+
     docker:
       - image: cimg/ruby:3.2-browsers
     environment:
