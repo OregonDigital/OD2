@@ -64,3 +64,4 @@ es:
       defaults:
         local_contexts: Local Contexts
         local_contexts_label: Local Contexts
+        resource_type: Medios

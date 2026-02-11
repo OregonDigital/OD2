@@ -12,6 +12,12 @@ module Hyrax
     include OregonDigital::DownloadControllerBehavior
     include OregonDigital::WorksControllerBehavior
     include OregonDigital::WorkRelationPaginationBehavior
+
+    # Redirect for Bot Detection
+    before_action do |controller|
+      Hyrax::BotDetectionController.bot_detection_enforce_filter(controller) unless %w[oregon-explorer.apps.geocortex.com tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000].include?(request.domain)
+    end
+
     self.curation_concern_type = ::Generic
 
     # Remove list view from child/sibling renders

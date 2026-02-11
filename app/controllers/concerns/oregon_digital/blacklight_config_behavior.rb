@@ -40,7 +40,6 @@ module OregonDigital
           'facet.field' => %w[non_user_collections_label_ssim non_user_collections_ssim copyright_combined_label_sim date_combined_year_label_ssim institution_label_sim language_label_sim]
         }
         config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
-
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
         config.view.gallery.if = true
@@ -306,6 +305,7 @@ module OregonDigital
             qf: title_name.to_s,
             pf: title_name.to_s
           }
+          field.include_in_advanced_search = true
         end
         config.add_search_field('creator_field', label: 'Creator') do |field|
           solr_name = 'creator_combined_label_tesim'
@@ -314,6 +314,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
+          field.include_in_advanced_search = true
         end
         config.add_search_field('description_field', label: 'Description') do |field|
           solr_name = 'description_tesim'
@@ -321,6 +322,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
+          field.include_in_advanced_search = true
         end
         config.add_search_field('subject_field', label: 'Subject') do |field|
           solr_name = 'subject_label_tesim'
@@ -335,6 +337,7 @@ module OregonDigital
             qf: solr_name,
             pf: solr_name
           }
+          field.include_in_advanced_search = true
         end
 
         # 'sort results by' select (pulldown)
@@ -365,8 +368,8 @@ module OregonDigital
             timestamp_field: 'system_create_dtsi',
             timestamp_method: 'system_created',
             set_fields: [
-              { 'label': 'title_tesim',
-                'solr_field': 'member_of_collection_ids_ssim' }
+              { label: 'id',
+                solr_field: 'member_of_collection_ids_ssim' }
             ],
             set_model: ::OaiSet
           }

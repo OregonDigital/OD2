@@ -21,8 +21,7 @@ module OregonDigital
     end
 
     def video_thumb(pid)
-      doc = Hyrax::SolrService.query("id:#{pid}", rows: 1).first
-      URI.join(app_base_url, doc['thumbnail_path_ss']).to_s
+      app_base_url + thumbnail_path(pid)
     end
 
     # requires solr document to be decorated, i.e.
@@ -38,11 +37,18 @@ module OregonDigital
     end
 
     def iiif_server
-      ENV.fetch('IIIF_SERVER_BASE_URL')
+      uri = ENV.fetch('IIIF_SERVER_BASE_URL')
+      uri.ends_with?('/') ? uri : uri + '/'
     end
 
     def app_base_url
-      Rails.application.routes.url_helpers.root_url
+      uri = Rails.application.routes.url_helpers.root_url
+      uri.ends_with?('/') ? uri : uri + '/'
+    end
+
+    def thumbnail_path(pid)
+      doc = Hyrax::SolrService.query("id:#{pid}", rows: 1).first
+      URI.join(app_base_url, doc['thumbnail_path_ss']).to_s
     end
 
     def image_uri(doc)

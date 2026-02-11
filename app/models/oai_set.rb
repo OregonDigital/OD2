@@ -15,9 +15,19 @@ class OaiSet < BlacklightOaiProvider::SolrSet
 
     # Return a Solr filter query given a set spec
     def from_spec(spec)
-      raise OAI::ArgumentException unless ActiveFedora::SolrService.query("has_model_ssim:Collection AND id:#{spec}", rows: 1).count.positive?
+      _, value = spec.split(':', 2)
+      value = spec if value.nil?
+      raise OAI::ArgumentException unless Hyrax::SolrService.query("has_model_ssim:Collection AND id:#{value}", rows: 1).count.positive?
 
-      "member_of_collection_ids_ssim:#{spec}"
+      "member_of_collection_ids_ssim:#{value}"
+    end
+
+    def sets_for(record)
+      Array.wrap(@fields).map do |field|
+        record.fetch(field[:solr_field], []).map do |value|
+          new(value.to_s)
+        end
+      end.flatten
     end
 
     private
@@ -37,6 +47,8 @@ class OaiSet < BlacklightOaiProvider::SolrSet
 
   # Build a set object with, at minimum, a set spec string
   def initialize(spec, opts = {})
+    @label, @value = spec.split(':', 2)
+    @value = spec if @value.nil?
     @spec = spec
     @name = opts[:name] || name_from_spec
     @description = opts[:description]
@@ -48,6 +60,6 @@ class OaiSet < BlacklightOaiProvider::SolrSet
     collection = Collection.find @spec
     return nil if collection.collection_type.to_global_id.to_s != Hyrax::CollectionType.find_by(machine_id: :oai_set).to_global_id.to_s
 
-    ActiveFedora::SolrService.query("id:#{@spec}", rows: 1).first['title_tesim'].first
+    Hyrax::SolrService.query("id:#{@value}", rows: 1).first['title_tesim'].first
   end
 end

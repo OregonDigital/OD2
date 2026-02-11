@@ -17,14 +17,12 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
     # already supports it
     let(:manifest_builder) { {} }
     let(:hsh) { { foo: '1', bar: 2 } }
-    let(:sanitized) { '{"foo": "1", "bar": 2}' }
 
     before do
       allow(controller).to receive(:headers).and_return(headers)
       allow(controller).to receive(:manifest_builder).and_return(manifest_builder)
       allow(controller).to receive(:manifest_cache_key).and_return('key')
       allow(manifest_builder).to receive(:to_h).and_return(hsh)
-      allow(controller).to receive(:sanitize_manifest).and_return(sanitized)
       allow(controller).to receive(:respond_to).and_yield(OpenStruct.new(json: nil, html: nil))
     end
 
@@ -32,10 +30,19 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
       expect(headers).to receive(:[]=).with('Access-Control-Allow-Origin', '*')
       controller.manifest
     end
+  end
 
-    it 'sanitizes the IIIF manifest' do
-      expect(controller).to receive(:sanitize_manifest).with(JSON.parse(hsh.to_json))
-      controller.manifest
+  describe '.build_manifest' do
+    let(:hsh) { { 'label' => { 'none' => ['Thelma & Louise'] } } }
+    let(:manifest_builder) { {} }
+
+    before do
+      allow(controller).to receive(:manifest_builder).and_return(manifest_builder)
+      allow(manifest_builder).to receive(:to_h).and_return(hsh)
+    end
+
+    it 'does not scrub the label' do
+      expect(controller.build_manifest['label']).to eq({ 'none' => ['Thelma & Louise'] })
     end
   end
 
@@ -90,26 +97,6 @@ RSpec.describe OregonDigital::IIIFManifestControllerBehavior do
       it "assigns the asset's file sets to the presenter" do
         expect(controller.jp2_work_presenter.file_sets).to eq(file_sets)
       end
-    end
-  end
-
-  # sanitize_manifest was copied as-is from Hyrax, and has no documentation or
-  # testing there, and makes little sense to me, so this test is basically
-  # validating that it doesn't crash.
-  describe '.sanitize_manifest(hash)' do
-    let(:h) do
-      {
-        'summary' => %w[foo bar],
-        'label' => { '@none' => ['baz'] },
-        'items' => [
-          { 'items' => [{ 'label' => 'blah' }, { 'label' => 'blah 2' }] },
-          { 'items' => [{ 'label' => 'seriously, blah' }] }
-        ]
-      }
-    end
-
-    it 'works' do
-      controller.sanitize_manifest(h)
     end
   end
 end

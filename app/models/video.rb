@@ -17,4 +17,11 @@ class Video < ActiveFedora::Base
   include ::OregonDigital::GenericMetadata
   include ::OregonDigital::VideoMetadata
   include ::OregonDigital::ControlledPropertiesBehavior
+
+  private
+
+  # DEFAULT: Set value on default on new work
+  def set_defaults
+    self.accessibility_feature = ['unknown']
+  end
 end

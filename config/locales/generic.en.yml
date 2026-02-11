@@ -191,6 +191,8 @@ en:
         local_contexts: "Use for controlled indigenous knowledge labels as defined by Local Contexts."
         content_alert: "Use for trigger warning statement; defaults to predefined value."
         mask_content: "Use to identify display areas in the repository to mask the initial showing of harmful or difficult content."
+        accessibility_feature: "Use for specifying specific accessibility characteristics of files attached to work."
+        accessibility_summary: "Use for additional details or nuances related to accessibility features on files attached to work."
     labels:
       defaults:
         collections: "Collections"
@@ -423,3 +425,5 @@ en:
         oembed_urls: "oEmbed URL"
         local_collection: "Local Collection Name"
         archival_object_id: "Archival Object ID"
+        accessibility_feature: "Accessibility Feature"
+        accessibility_summary: "Accessibility Summary"

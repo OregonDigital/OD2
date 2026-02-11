@@ -44,7 +44,7 @@ gem 'faraday_middleware'
 gem 'blacklight_iiif_search', '~> 2.0'
 gem 'rubyzip', '~> 2'
 gem 'zip_tricks', '~> 5.3'
-gem 'bulkrax', github: 'samvera/bulkrax', ref: '62517e67876d96c7a0bedb288370a4f10eb0b4c4' #v8.2.0
+gem 'bulkrax', github: 'samvera/bulkrax', ref: 'c19534f3ec2bdf06a0313373ba68155c987616df' #v.9.3.1
 # gem 'willow_sword', github: 'notch8/willow_sword', branch: 'main'
 gem 'jquery-datatables-rails'
 gem 'concurrent-ruby', '1.3.4'

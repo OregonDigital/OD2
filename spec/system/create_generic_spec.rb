@@ -46,7 +46,7 @@ RSpec.describe 'Create a Generic', js: true, type: :system, clean_repo: true do
         fill_in('Identifier', with: 'Test ID')
       end
       within('div.generic_resource_type') do
-        select('Dataset', from: 'Resource type')
+        select('Dataset', from: 'Media')
       end
       select('In Copyright', from: 'Rights')
 
