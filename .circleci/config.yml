@@ -229,8 +229,9 @@ jobs:
             export APP_VERSION=$(cat lib/oregon_digital/version.rb | grep VERSION | cut -d "=" -f 2 | sed "s/['\" ]//g")
             export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
             export DATETIME=$(date "+%Y%m%d%H%M")
-            export TAG="$DATETIME-$GIT_SHORT_HASH"
-            export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH"
+            export GIT_BRANCH=$(git branch --show-current)
+            export TAG="$DATETIME-$GIT_SHORT_HASH-$GIT_BRANCH"
+            export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH-$GIT_BRANCH"
             echo export RAILS_ENV="$RAILS_ENV" >> $BASH_ENV
             echo export TAG="$TAG" >> $BASH_ENV
             echo export DEPLOYED_VERSION="$DEPLOYED_VERSION" >> $BASH_ENV
