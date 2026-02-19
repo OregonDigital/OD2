@@ -21,7 +21,7 @@ module OregonDigital
     end
 
     def video_thumb(pid)
-      app_base_url + thumbnail_path(pid)
+      thumbnail_path(pid)
     end
 
     # requires solr document to be decorated, i.e.
