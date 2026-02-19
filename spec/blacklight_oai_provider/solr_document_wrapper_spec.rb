@@ -25,6 +25,7 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
   let(:uri_thumb) { 'http://localhost:8080/iiif/f0/ab/cd/e1/23/4-jp2.jp2/full/430,/0/default.jpg' }
 
   before do
+    allow_any_instance_of(CatalogController).to receive(:repository).and_return(repository)
     allow(controller).to receive(:params).and_return({})
     allow(controller).to receive(:current_ability).and_return(ability)
     allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :oai_set).and_return(oai_collection_type)
