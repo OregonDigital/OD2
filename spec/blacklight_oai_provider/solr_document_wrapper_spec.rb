@@ -27,7 +27,6 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
   before do
     CatalogController.class_eval do
       def repository; end
-      end
     end
 
     allow(controller).to receive(:params).and_return({})
