@@ -7,7 +7,7 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
   let(:controller) { CatalogController.new }
   let(:repository) { double }
   let(:response) { double }
-  let(:doc) { SolrDocument.new(attributes) }
+  let(:doc) { attributes.deep_dup }
   let(:attributes) do
     {
       'id' => 'abcde1234',
@@ -37,6 +37,7 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
     allow(repository).to receive(:search).and_return(response)
     allow(response).to receive(:documents).and_return(documents)
     allow(response).to receive(:total).and_return(1)
+    allow(SolrDocument).to receive(:find).and_return(doc)
   end
 
   describe '#find' do
