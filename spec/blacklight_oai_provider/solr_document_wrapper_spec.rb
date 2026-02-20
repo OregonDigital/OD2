@@ -16,6 +16,11 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
       'member_ids_ssim' => ['f0abcde1234']
     }
   end
+
+  let(:search_service) { double }
+  let(:search_builder) { double }
+  let(:query) { double }
+
   let(:documents) { [doc] }
   let(:user) { create(:user) }
   let(:ability) { Ability.new(user) }
@@ -25,19 +30,21 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
   let(:uri_thumb) { 'http://localhost:8080/iiif/f0/ab/cd/e1/23/4-jp2.jp2/full/430,/0/default.jpg' }
 
   before do
-    CatalogController.class_eval do
-      def repository; end
-    end
-
     allow(controller).to receive(:params).and_return({})
     allow(controller).to receive(:current_ability).and_return(ability)
     allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :oai_set).and_return(oai_collection_type)
     allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :user_collection).and_return(user_collection_type)
-    allow(controller).to receive(:repository).and_return(repository)
+
+    allow(controller).to receive(:search_service).and_return(search_service)
+    allow(search_service).to receive(:search_builder).and_return(search_builder)
+    allow(search_builder).to receive(:where).and_return(search_builder)
+    allow(search_builder).to receive(:merge).and_return(search_builder)
+    allow(search_builder).to receive(:query).and_return(query)
+    allow(search_service).to receive(:repository).and_return(repository)
+
     allow(repository).to receive(:search).and_return(response)
     allow(response).to receive(:documents).and_return(documents)
     allow(response).to receive(:total).and_return(1)
-    allow(SolrDocument).to receive(:find).and_return(doc)
   end
 
   describe '#find' do
