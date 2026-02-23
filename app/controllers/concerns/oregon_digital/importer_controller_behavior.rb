@@ -37,5 +37,9 @@ module OregonDigital
     def importers_list
       render 'oregon_digital/importer/importers_list'
     end
+
+    def relationships_pending?
+      Bulkrax::PendingRelationship.where(importer_run_id: @importer.last_run.id).empty? ? false : true
+    end
   end
 end

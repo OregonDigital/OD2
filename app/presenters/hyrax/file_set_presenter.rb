@@ -34,6 +34,7 @@ module Hyrax
              :depositor, :keyword, :title_or_label, :keyword,
              :date_created, :date_modified, :itemtype,
              :original_file_id, :oembed_url, :all_text, :hocr_text,
+             :accessibility_feature,
              to: :solr_document
 
     def self.characterization_terms

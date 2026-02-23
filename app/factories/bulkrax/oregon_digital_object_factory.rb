@@ -14,7 +14,9 @@ module Bulkrax
     end
 
     def oembed_attribute
-      [:oembed_urls]
+      return [:oembed_urls] unless klass == Collection
+
+      return []
     end
 
     def accessibility_attributes

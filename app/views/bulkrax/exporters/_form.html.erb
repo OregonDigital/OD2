@@ -37,6 +37,14 @@
     input_html: { class: 'importer export-source-option d-none hidden form-control' },
     collection:  form.object.importers_list.sort %>
 
+  <%= form.input :export_source_importer_with_file_set,
+    label: t('bulkrax.exporter.labels.importer_with_file_set'),
+    required: true,
+    prompt: 'Select from the list',
+    label_html: { class: 'importer_with_file_set export-source-option d-none hidden' },
+    input_html: { class: 'importer_with_file_set export-source-option d-none hidden form-control' },
+    collection:  form.object.importers_list.sort %>
+
   <%= form.input :export_source_collection,
     prompt: 'Start typing ...',
     label: t('bulkrax.exporter.labels.collection'),
@@ -69,7 +77,7 @@
 
   <%= form.input :limit,
     as: :integer,
-    hint: 'leave blank or 0 for all records',
+    hint: "Leave blank or 0 for all records. Note that exporters are currently limited to #{OD2::Application.config.large_export_size} records. If you need a larger export, Content Ops members may be able to assist. For larger Metadata Only exports, direct Solr queries may be an option.",
     label: t('bulkrax.exporter.labels.limit'),
     input_html: { class: 'form-control' } %>
 

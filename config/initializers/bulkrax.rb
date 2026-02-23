@@ -111,6 +111,26 @@ Bulkrax::ApplicationMatcher.class_eval do
   end
 end
 
+Bulkrax::CsvFileSetEntry.class_eval do
+  # turning off these validators in order to allow users to
+  # edit FileSet metadata, check presence of id
+  def validate_presence_of_filename!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata&.[](file_reference)&.map(&:present?)&.any?
+
+    raise FileNameError, 'File set must have a filename'
+  end
+
+  def validate_presence_of_parent!
+    return true if parsed_metadata['id'].present?
+
+    return if parsed_metadata[related_parents_parsed_mapping]&.map(&:present?)&.any?
+
+    raise OrphanFileSetError, 'File set must be related to at least one work'
+  end
+end
+
 Bulkrax::CsvEntry.class_eval do
   # override this method from HasMatchers module, included in Entry
   def single_metadata(content)
@@ -255,6 +275,7 @@ Bulkrax::CsvParser.class_eval do
   alias create_from_worktype create_new_entries
   alias create_from_all create_new_entries
   alias create_from_local_collection create_new_entries
+  alias create_from_importer_with_file_set create_new_entries
 
   def create_new_entries_in_batches
     current_records_for_export.in_groups_of(OD2::Application.config.batch_size) do |group|
@@ -322,6 +343,8 @@ end
 
 Bulkrax::Exporter.class_eval do
   delegate :create_from_local_collection, to: :parser
+  delegate :create_from_importer_with_file_set, to: :parser
+
   def replace_files
     false
   end
@@ -330,6 +353,7 @@ Bulkrax::Exporter.class_eval do
     current_run.total_work_entries > OD2::Application.config.large_export_size
   end
 
+  # adds exporter sources to the new exporter form
   def export_from_list
     if defined?(::Hyrax)
       [
@@ -337,6 +361,7 @@ Bulkrax::Exporter.class_eval do
         [I18n.t('bulkrax.exporter.labels.collection'), 'collection'],
         [I18n.t('bulkrax.exporter.labels.worktype'), 'worktype'],
         [I18n.t('bulkrax.exporter.labels.local_collection'), 'local_collection'],
+        [I18n.t('bulkrax.exporter.labels.importer_with_file_set'), 'importer_with_file_set'],
         [I18n.t('bulkrax.exporter.labels.all'), 'all']
       ]
     else
@@ -351,7 +376,12 @@ Bulkrax::Exporter.class_eval do
   def export_source_local_collection
     self.export_source if self.export_from == 'local_collection'
   end
+
+  def export_source_importer_with_file_set
+    self.export_source if self.export_from =='importer_with_file_set'
+  end
 end
+
 Bulkrax::Importer.class_eval do
   paginates_per OD2::Application.config.importer_pagination_per
 end
@@ -359,6 +389,18 @@ end
 Bulkrax::ImportersController.class_eval do
   include OregonDigital::ImporterControllerBehavior
   include OregonDigital::AspaceDigitalObjectExportBehavior
+
+  # insert flash re pending relationships
+  def show
+    if api_request?
+      json_response('show')
+    elsif defined?(::Hyrax)
+      add_importer_breadcrumbs
+      add_breadcrumb @importer.name
+    end
+    @first_entry = @importer.entries.first
+    flash[:notice] = "This importer still has pending relationships." if relationships_pending?
+  end
 
   # change values for default sort
   def importer_table
@@ -397,6 +439,50 @@ Bulkrax::ObjectFactory.class_eval do
   end
 end
 
+Bulkrax::ObjectFactoryInterface.class_eval do
+  # allow CSVCollectionEntry to handle
+  def collection_type(attrs)
+    attrs
+  end
+end
+
+Bulkrax::CsvCollectionEntry.class_eval do
+  # only add gid if collection is new; presence will fail a collection update
+  # default to Digital Collection: "gid://od2/Hyrax::CollectionType/3"
+  def add_collection_type_gid
+    return if update?
+
+    return if self.parsed_metadata['collection_type_gid'].present?
+
+    self.parsed_metadata['collection_type_gid'] = Hyrax::CollectionType.find_by(machine_id: 'digital_collection').to_global_id.to_s
+  end
+
+  # added for above
+  def update?
+    return false unless self.parsed_metadata['id'].present?
+
+    Collection.exists? self.parsed_metadata['id']
+  end
+end
+
+# added in 9.3.1, wait to schedule create_relationship_job
+Bulkrax::ScheduleRelationshipsJob.class_eval do
+  def perform(importer_id:)
+      importer = Bulkrax::Importer.find(importer_id)
+      pending_num = importer.entries.left_outer_joins(:latest_status)
+                            .where('bulkrax_statuses.status_message IS NULL ').count
+      return reschedule(importer_id) unless pending_num.zero?
+
+      wait_time = OD2::Application.config.bulkrax_create_relationships_wait
+      importer.last_run.parents.each do |parent_id|
+        Bulkrax.relationship_job_class.constantize
+                                      .set(wait: wait_time.minutes)
+                                      .perform_later(parent_identifier: parent_id,
+                                                     importer_run_id: importer.last_run.id)
+      end
+    end
+end
+
 # restore parent_record save from 9.0.2
 Bulkrax::CreateRelationshipsJob.class_eval do
   def process_parent_as_work(parent_record:, parent_identifier:)
@@ -425,16 +511,32 @@ Bulkrax::CreateRelationshipsJob.class_eval do
       end
     end
   end
+
+  # one-word tweak: authorize checks for ability to deposit for collection
+  def add_to_collection(relationship:, parent_record:, ability:)
+    ActiveRecord::Base.uncached do
+      _child_entry, child_record = find_record(relationship.child_id, @importer_run_id)
+      raise "#{relationship} could not find child record" unless child_record
+      raise "Cannot add child collection (ID=#{relationship.child_id}) to parent work (ID=#{relationship.parent_id})" if child_record.collection? && parent_record.work?
+      ability.authorize!(:edit, child_record) || check_group(parent_record)
+      # We could do this outside of the loop, but that could lead to odd counter failures.
+      ability.authorize!(:deposit, parent_record)
+      # It is important to lock the child records as they are the ones being saved.
+      # However, locking doesn't seem to be working so we will reload the child record before saving.
+      # This is a workaround for the fact that the lock manager doesn't seem to be working.
+      conditionally_acquire_lock_for(child_record.id.to_s) do
+        Bulkrax.object_factory.add_resource_to_collection(
+          collection: parent_record,
+          resource: child_record,
+          user: @user
+        )
+      end
+      relationship.destroy
+    end
+  end
 end
 
-## override CsvEntry#required_elements to include OD-specific required_fields
 Bulkrax::ApplicationParser.class_eval do
-  def required_elements
-    elts = %w[title resource_type identifier rights_statement]
-    # added resource_type, identifier, and rights_statement
-    elts << source_identifier unless Bulkrax.fill_in_blank_source_identifiers
-    elts
-  end
 
   # parser_fields are set by the importer form
   # do not use a default value at this point

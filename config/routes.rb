@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   get "/challenge", to: "bot_detection#challenge", as: :bot_detect_challenge
   post "/challenge", to: "bot_detection#verify_challenge"
 
+  # override ResourceSync routes from Hyrax, direct to homepage instead, issue 3495
+  get '/.well-known/resourcesync' => 'hyrax/homepage#index'
+  get '/capabilitylist' => 'hyrax/homepage#index'
+  get '/resourcelist' => 'hyrax/homepage#index'
+  get '/changelist' => 'hyrax/homepage#index'
+  
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
   resources :collections, controller: 'oregon_digital/explore_collections', only: [] do
@@ -39,6 +45,10 @@ Rails.application.routes.draw do
   get 'local-contexts' => 'oregon_digital/about#local_contexts'
   get 'accessibility-statement' => 'oregon_digital/about#accessibility_statement'
   get 'accessibility-copy-request' => 'oregon_digital/about#accessibility_copy_request'
+
+  # ACCESSIBILITY COPY FORM ROUTE: Setup the routes for the accessibility form
+  get 'accessibility_copy', to: 'oregon_digital/accessibility_copy_form#new', controller: 'oregon_digital/accessibility_copy_form'
+  post 'accessibility_copy', to: 'oregon_digital/accessibility_copy_form#create', as: :accessibility_copy_form_index, controller: 'oregon_digital/accessibility_copy_form'
 
   patch '/contentblock/update/:name', to: 'oregon_digital/content_blocks#update', as: 'update_content_blocks'
 

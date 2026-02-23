@@ -15,7 +15,8 @@ module OregonDigital
       @services.each do |service|
         verifier = service.new(service_args)
         verifier.verify.each do |k, v|
-          v.blank? ? work.remove_errors(k) : add_errors(k, v)
+          work.remove_errors(k)
+          add_errors(k, v) unless v.blank?
         end
       end
     end

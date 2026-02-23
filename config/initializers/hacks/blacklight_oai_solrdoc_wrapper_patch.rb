@@ -28,6 +28,16 @@ Rails.application.config.to_prepare do
       end
     end
 
+    def select_partial(token)
+      records = @controller.repository.search(token_conditions(token)).documents
+      raise ::OAI::ResumptionTokenException unless records
+      # add requested urls to documents
+      records.each do |r|
+        r['identifier_tesim'] = construct_urls(r)
+      end
+      OAI::Provider::PartialResult.new(records, token.next(token.last + limit))
+    end
+
     def construct_urls(doc)
       assign_uris(Hyrax::SolrDocument::OrderedMembers.decorate(doc))
       [@asset_show_uri, @asset_image_uri]

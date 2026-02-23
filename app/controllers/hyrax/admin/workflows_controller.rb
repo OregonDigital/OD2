@@ -18,6 +18,7 @@ module Hyrax
     def self.configure_facets
       configure_blacklight do |config|
         config.add_facet_field 'depositor_ssim', limit: 5, label: 'Depositor'
+        config.add_facet_field 'bulkrax_importer_id_sim', limit: 5, label: 'Importer ID'
       end
     end
     configure_facets

@@ -1,0 +1,13 @@
+<%# DATE: Formatting the date %>
+<% date = Date.parse(@accessibility_form.date) unless @accessibility_form.date.blank? %>
+<% @formatted_date = date.strftime('%m/%d/%Y') unless @accessibility_form.date.blank? %>
+
+<p>Dear Admin,</p>
+<p>One of the user: <%= @accessibility_form.name%>, is asking to request an accessibility copy of a work on OD2.</p>
+<br/>
+<p>Here is a copy of the information that was provided about this request:</p>
+<br/>
+<p>User's Email: <%= @accessibility_form.email %></p>
+<p>Item's Link: <%= @accessibility_form.url_link %></p>
+<p>Request Detail: <%= @accessibility_form.description %></p>
+<p>Date Needed: <%= @accessibility_form.date.blank? ? 'None' : @formatted_date %></p>

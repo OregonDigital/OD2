@@ -61,4 +61,5 @@ Rails.application.configure do
     ]
   end
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
+  config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 50).to_i
 end

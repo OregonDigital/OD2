@@ -8,6 +8,7 @@ Rails.application.config.to_prepare do
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC,
         OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_OSU,
         OregonDigital::AccessControls::AccessRight::PERMISSION_TEXT_VALUE_UO,
+        OregonDigital::AccessControls::AccessRight::ACCESSIBLE_TEXT_VALUE,
         Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE
       ]
       case variant

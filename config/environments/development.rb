@@ -95,6 +95,11 @@ Rails.application.configure do
       OregonDigital::VerifyDerivativesService
     ]
   end
+  config.verify_services = [
+    OregonDigital::VerifyDerivativesService,
+    OregonDigital::VerifyCollectionsService,
+    OregonDigital::VerifyLabelsService
+  ]
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
-
+  config.bulkrax_create_relationships_wait = ENV.fetch('BULKRAX_CREATE_RELATIONSHIPS_WAIT', 5).to_i
 end

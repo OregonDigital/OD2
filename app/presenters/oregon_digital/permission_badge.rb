@@ -12,7 +12,8 @@ module OregonDigital
       uo: 'badge-warning',
       lease: 'badge-warning',
       open: 'badge-success',
-      restricted: 'badge-danger'
+      restricted: 'badge-danger',
+      accessible: 'badge-info'
     }.freeze
 
     private
