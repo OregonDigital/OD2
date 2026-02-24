@@ -15,9 +15,9 @@ class CatalogController < ApplicationController
   before_action :enforce_show_permissions, only: :show
 
   # Redirect for Bot Detection while ignoring OAI
-  before_action except: :oai do |controller|
-    BotDetectionController.bot_detection_enforce_filter(controller) unless valid_bot? # oregon-explorer.apps.geocortex.com tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000
-  end
+  #before_action except: :oai do |controller|
+    #BotDetectionController.bot_detection_enforce_filter(controller) unless valid_bot? oregon-explorer.apps.geocortex.com tools.oregonexplorer.info oregondigital.org staging.oregondigital.org test.lib.oregonstate.edu:3000
+  #end
 
   # 'ir.library.oregonstate.edu,ir-staging.library.oregonstate.edu,test.lib.oregonstate.edu:3000'
   def valid_bot?
