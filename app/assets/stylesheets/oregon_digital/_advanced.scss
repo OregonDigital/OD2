@@ -94,12 +94,17 @@
     background-repeat: no-repeat;
     background-position-x: 85%;
     background-position-y: 50%;
+
+    &:focus {
+      background-color: $very-light-grey;
+    }
   }
 
   form {
     label {
       margin-bottom: .5em;
       margin-top: 1em;
+      text-align: left;
     }
 
     input {
