@@ -7,9 +7,9 @@ module OregonDigital
     included do
       prepend_before_action :redirect_mismatched_work, only: [:show]
 
-      before_action only: :show do |controller|
-        BotDetectionController.bot_detection_enforce_filter(controller)
-      end
+      #before_action only: :show do |controller|
+        #BotDetectionController.bot_detection_enforce_filter(controller)
+      #end
 
       def redirect_mismatched_work
         curation_concern = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])
