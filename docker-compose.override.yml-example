@@ -1,5 +1,3 @@
-version: '3'
-
 services:
 
   # Map the application and debugging port to localhost
