@@ -5,6 +5,7 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
 
   let(:options) { {} }
   let(:controller) { CatalogController.new }
+  let(:search_service) { double }
   let(:repository) { double }
   let(:response) { double }
   let(:doc) { SolrDocument.new(attributes) }
@@ -29,7 +30,8 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
     allow(controller).to receive(:current_ability).and_return(ability)
     allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :oai_set).and_return(oai_collection_type)
     allow(Hyrax::CollectionType).to receive(:find).with(machine_id: :user_collection).and_return(user_collection_type)
-    allow(controller).to receive(:repository).and_return(repository)
+    allow(controller).to receive(:search_service).and_return(search_service)
+    allow(search_service).to receive(:repository).and_return(repository)
     allow(repository).to receive(:search).and_return(response)
     allow(response).to receive(:documents).and_return(documents)
     allow(response).to receive(:total).and_return(1)
