@@ -39,7 +39,6 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
     end
   end
 
-  # Temporarily skipped with xit
   describe '#find' do
     subject(:result) { wrapper.find(selector) }
 
@@ -62,7 +61,6 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
       end
     end
 
-    # Temporarily skipped with xit
     context 'when selector is an individual record' do
       let(:selector) { 'abcde1234' }
       let(:query) { {} }
@@ -81,7 +79,6 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
     end
   end
 
-  # Temporarily skipped with xit
   describe '#select_partial' do
     include_context 'with timestamp_searches'
     let(:token) { BlacklightOaiProvider::ResumptionToken.new({ last: 0 }, nil, 1) }
