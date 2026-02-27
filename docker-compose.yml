@@ -1,5 +1,3 @@
-version: '3'
-
 networks:
   external:
   internal:
@@ -44,6 +42,7 @@ services:
       - BROWSEEVERYTHING_FILESYSTEM_PATH=/data/tmp/shared
       - CAS_HOST=localhost
       - CAS_URL=https://localhost/cas
+      - CF_ENABLED=false
       - CONTENT_FILE_CAN_BE_NIL=false
       - CROSSWALK_OVERRIDES_FILE=/data/config/initializers/migrator/crosswalk_overrides.yml
       - INGEST_LOCAL_PATH=/data/tmp/shared
