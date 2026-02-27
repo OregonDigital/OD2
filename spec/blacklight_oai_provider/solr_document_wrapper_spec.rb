@@ -13,7 +13,7 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
   let(:uri_show) { 'https://localhost:3000/concern/images/abcde1234' }
   let(:uri_thumb) { 'http://localhost:8080/iiif/f0/ab/cd/e1/23/4-jp2.jp2/full/430,/0/default.jpg' }
 
-  shared_context "timestamp_searches" do
+  shared_context 'with timestamp_searches' do
     let(:expected_timestamp) { '2014-02-03 18:42:53.056000000 +0000' }
     let(:attributes) do
       {
@@ -40,9 +40,9 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
   end
 
   describe '#find' do
-    include_context "timestamp_searches"
-
     subject(:result) { wrapper.find(selector) }
+
+    include_context 'with timestamp_searches'
 
     context 'when selector is :all' do
       let(:selector) { :all }
@@ -68,7 +68,7 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
       before do
         allow(search_builder).to receive(:query).and_return(query)
         allow(repository).to receive(:search).with(query).and_return(response)
-        allow(search_builder).to receive(:where).with({'id' => selector}).and_return(search_builder)
+        allow(search_builder).to receive(:where).with({ 'id' => selector }).and_return(search_builder)
       end
 
       it 'returns a document with show and thumb uris' do
@@ -77,11 +77,10 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
         expect(results['identifier_tesim']).to include(uri_thumb)
       end
     end
-
   end
 
   describe '#select_partial' do
-    include_context "timestamp_searches"
+    include_context 'with timestamp_searches'
     let(:token) { BlacklightOaiProvider::ResumptionToken.new({ last: 0 }, nil, 1) }
     let(:next_response) { OpenStruct.new(documents: documents, total: documents.length) }
 

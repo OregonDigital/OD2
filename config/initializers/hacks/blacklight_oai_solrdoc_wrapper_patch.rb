@@ -4,15 +4,16 @@ Rails.application.config.to_prepare do
   BlacklightOaiProvider::SolrDocumentWrapper.class_eval do
     include OregonDigital::UriMethods
 
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def find(selector, options = {})
       return next_set(options[:resumption_token]) if options[:resumption_token]
 
       if selector == :all
         response = search_service.repository.search(conditions(options))
 
-        if limit && response.total > limit
-          return select_partial(BlacklightOaiProvider::ResumptionToken.new(options.merge(last: 0), nil, response.total))
-        end
+        return select_partial(BlacklightOaiProvider::ResumptionToken.new(options.merge(last: 0), nil, response.total)) if limit && response.total > limit
+
         # add requested urls to document
         docs = response.documents
         docs.map do |doc|
@@ -29,10 +30,13 @@ Rails.application.config.to_prepare do
         SolrDocument.new(doc_hash)
       end
     end
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     def select_partial(token)
       records = search_service.repository.search(token_conditions(token)).documents
       raise ::OAI::ResumptionTokenException unless records
+
       # add requested urls to documents
       records = records.map do |r|
         r_hash = r.to_h
