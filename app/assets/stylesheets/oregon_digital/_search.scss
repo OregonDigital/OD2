@@ -110,6 +110,11 @@
   .save-widgets button {
     color: $navy-blue;
     font-size: 14px;
+
+    &.select-button,
+    &.deselect-button {
+      font-size: 1.15em;
+    }
   }
 
   #sort-dropdown,
