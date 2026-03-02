@@ -40,7 +40,10 @@
                     ]
                 }, {
                     "name": "approve",
-                    "from_states": [{"names": ["pending_review"], "roles": ["approving"]}],
+                    "from_states": [
+                      {"names": ["pending_review"], "roles": ["approving"]},
+                      {"names": ["tombstoned"], "roles": ["approving"]}
+                    ],
                     "transition_to": "deposited",
                     "notifications": [
                         {

@@ -24,7 +24,7 @@ module Hyrax
 
     def operating_on_user_collection
       curation_concern ||= params['id'] ? ::SolrDocument.find(params['id']) : nil
-      (params[:collection_type_gid] || curation_concern&.collection_type_gid) == Hyrax::CollectionType.find_by(machine_id: :user_collection)&.gid&.to_s
+      (params[:collection_type_gid] || curation_concern&.collection_type_gid) == Hyrax::CollectionType.find_by(machine_id: :user_collection)&.to_global_id&.to_s
     end
   end
 end

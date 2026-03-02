@@ -314,6 +314,31 @@ Bulkrax::CsvParser.class_eval do
       end
     end
   end
+
+  # Open remote fileset file with URI#open
+  def store_files(identifier, folder_count)
+    record = Bulkrax.object_factory.find(identifier)
+    return unless record
+
+    file_sets = record.file_set? ? Array.wrap(record) : record.file_sets
+    file_sets << record.thumbnail if exporter.include_thumbnails && record.thumbnail.present? && record.work?
+    file_sets.each do |fs|
+      path = File.join(exporter_export_path, folder_count, 'files')
+      FileUtils.mkdir_p(path) unless File.exist? path
+      file = filename(fs)
+      next if file.blank? || fs.original_file.blank?
+
+      # OVERRIDE FROM BULKRAX: 'open-uri' used to override kernel#open to allow remote files
+      #   This was removed for obvious security reasons & needs to be deliberatly called with URI.open
+      io = URI.open(fs.original_file.uri)
+      File.open(File.join(path, file), 'wb') do |f|
+        f.write(io.read)
+        f.close
+      end
+    end
+  rescue Ldp::Gone
+    return
+  end
 end
 
 Bulkrax::Exporter.class_eval do

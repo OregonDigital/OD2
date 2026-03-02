@@ -25,3 +25,8 @@
     width: 100%;
   }
 }
+
+.form-group > label {
+  text-align: unset;
+  font-weight: bold;
+}

@@ -1,5 +1,5 @@
 .devise-container {
-  max-width: $container-tablet;
+  max-width: map-get($container-max-widths, "md");;
   margin: auto;
 
   .login-footer,
@@ -27,7 +27,7 @@
 
   .login-select,
   .devise-form {
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: breakpoint-max(xs)) {
 
       ul,
       .flex-item.action,

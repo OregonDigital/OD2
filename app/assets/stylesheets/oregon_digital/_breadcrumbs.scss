@@ -12,8 +12,10 @@
 .breadcrumb {
   background: none;
   border: none;
+  margin-top: 0;
   margin-bottom: 0;
-  padding: 1em 0;
+  padding-bottom: 1em;
+  padding-top: 1.5em;
 }
 
 // Dashboard nav needs to act like main content

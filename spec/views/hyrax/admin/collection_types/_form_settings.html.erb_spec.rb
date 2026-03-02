@@ -32,7 +32,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
   context 'when non-special collection types' do
     context 'when collection_type.collections? is false' do
       before do
-        allow(collection_type).to receive(:collections?).and_return(false)
+        allow(collection_type).to receive(:collections).and_return([])
         render partial: 'hyrax/admin/collection_types/form_settings', locals: { f: form }
       end
 
@@ -86,7 +86,7 @@ RSpec.describe 'hyrax/admin/collection_types/_form_settings.html.erb', type: :vi
   context 'when all_settings_disabled? is true (admin_set or user collection type)' do
     before do
       allow(collection_type_form).to receive(:all_settings_disabled?).and_return(true)
-      allow(collection_type).to receive(:collections?).and_return(false)
+      allow(collection_type).to receive(:collections).and_return([])
       render partial: 'hyrax/admin/collection_types/form_settings', locals: { f: form }
     end
 

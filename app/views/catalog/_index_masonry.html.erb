@@ -1,9 +1,9 @@
 <div class="masonry document collection">
   <div class="thumbnail">
-    <%= link_to(url_for_document(document), document_link_params(document, :counter => document_counter_with_offset(document_counter)))  do |body| %>
-      <span class="gradient-wrapper"><%= image_tag(thumbnail_url(document), alt: "")%></span>
-      <h3 class="visible-all-inline h5">
-        <%= truncate(index_presenter(document).label(document_show_link_field(document)), length: 89) %>
+    <%= link_to(url_for_document(document)) do |body| %>
+      <span class="gradient-wrapper"><%= image_tag thumbnail_url(document), alt: "" %></span>
+      <h3>
+        <%= document.title_or_label.truncate(89).html_safe %>
         <% if current_ability.admin? ? false : controller.institution_restricted?(document.id) %>
           <span class="glyphicon glyphicon-lock"></span>
         <% end %>

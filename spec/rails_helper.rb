@@ -14,6 +14,11 @@ Dir[File.join(Rails.root, 'spec/support/**/*.rb')].each { |f| require f }
 require 'shoulda/matchers'
 require 'triplestore_adapter'
 require 'cancan/matchers'
+require 'factory_bot_rails'
+require 'database_cleaner'
+require 'rspec/active_model/mocks'
+require 'webmock'
+WebMock.allow_net_connect!
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -97,13 +102,6 @@ RSpec.configure do |config|
       # may think the root path has already been created:
       ActiveFedora.fedora.connection.send(:init_base_path) if example.metadata[:js]
     end
-    Hyrax.config.nested_relationship_reindexer = if example.metadata[:with_nested_reindexing]
-                                                   # Use the default relationship reindexer (and the cascading reindexing of child documents)
-                                                   Hyrax.config.default_nested_relationship_reindexer
-                                                 else
-                                                   # Don't use the nested relationship reindexer. This slows everything down quite a bit.
-                                                   ->(id:, extent:) {}
-                                                 end
   end
 
   config.after do
