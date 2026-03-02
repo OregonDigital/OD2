@@ -2,35 +2,35 @@
   <ul class='nav nav-pills visible-all-inline-block'>
     <li class="<%= 'active' if tab == controller.class::TABS[:all] %>">
       <div class="stacker-container">
-        <%= link_to 'All', all_collections_path, class: 'btn btn-outline' %>
+        <%= link_to 'All', all_collections_path, class: 'btn btn-sm btn-outline' %>
         <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>
     <li class="<%= 'active' if tab == controller.class::TABS[:osu] %>">
       <div class="stacker-container">
-        <%= link_to osu_collections_path, class: 'btn btn-outline hidden-xs' do %>
+        <%= link_to osu_collections_path, class: 'btn btn-sm btn-outline d-none d-md-block' do %>
           Oregon State <br> University
         <% end %>
-        <%= link_to 'OSU', osu_collections_path, class: 'btn btn-outline visible-xs' %>
+        <%= link_to 'OSU', osu_collections_path, class: 'btn btn-sm btn-outline d-sm-block d-md-none' %>
         <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>
     <li class="<%= 'active' if tab == controller.class::TABS[:uo] %>">
       <div class="stacker-container">
-        <%= link_to uo_collections_path, class: 'btn btn-outline hidden-xs' do %>
+        <%= link_to uo_collections_path, class: 'btn btn-sm btn-outline d-none d-md-block' do %>
           University of <br> Oregon
         <% end %>
-        <%= link_to 'UO', uo_collections_path, class: 'btn btn-outline visible-xs' %>
+        <%= link_to 'UO', uo_collections_path, class: 'btn btn-sm btn-outline d-sm-block d-md-none' %>
         <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>
     <% unless current_user.nil? %>
     <li class="<%= 'active' if tab == controller.class::TABS[:my] %>">
       <div class="stacker-container">
-        <%= link_to my_collections_path, class: 'btn btn-outline hidden-xs' do %>
+        <%= link_to my_collections_path, class: 'btn btn-sm btn-outline d-none d-md-block' do %>
           My <br> Collections
         <% end %>
-        <%= link_to 'My', my_collections_path, class: 'btn btn-outline visible-xs hidden-sm' %>
+        <%= link_to 'My', my_collections_path, class: 'btn btn-sm btn-outline d-sm-block d-md-none' %>
         <div class="notch notch-xMiddle-yBottom"></div>
       </div>
     </li>

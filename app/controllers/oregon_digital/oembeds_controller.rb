@@ -16,15 +16,19 @@ module OregonDigital
       @errors = OembedError.all
     end
 
+    # rubocop:disable Metrics/AbcSize
     def edit
       load_curation_concern
-      authorize! :edit, @curation_concern
+      return unless can? :edit, @curation_concern
+
+      # authorize! :edit, @curation_concern
 
       add_breadcrumb t(:'hyrax.controls.home'), root_path
       add_breadcrumb t(:'hyrax.dashboard.breadcrumbs.admin'), hyrax.dashboard_path
       add_breadcrumb t(:'oregon_digital.oembeds.index.manage_oembeds'), Rails.application.routes.url_helpers.oembeds_path
       add_breadcrumb t(:'oregon_digital.oembeds.edit.oembed_update'), '#'
     end
+    # rubocop:enable Metrics/AbcSize
 
     def load_curation_concern
       @curation_concern = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: params[:id])

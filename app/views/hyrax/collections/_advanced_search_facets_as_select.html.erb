@@ -11,12 +11,12 @@
 <% facets_from_request(facet_field_names).each do |display_facet| %>
     <% if should_render_facet?(display_facet) %>
         <div class="advanced-search-facet">
-            <%= label_tag display_facet.name.parameterize, :class => "col-sm-12 dark-grey h6" do %>
+            <%= label_tag display_facet.name.parameterize, :class => "col-md-12 dark-grey h6" do %>
                 <%= facet_field_label(display_facet.name) %>
             <% end %>
 
             <% unless display_facet.name == 'date_combined_year_label_ssim' %>
-                <div class="col-sm-12">
+                <div class="col-md-12">
                     <%= content_tag(:select, :multiple => true,
                         :name   => "f[#{display_facet.name}][]",
                         'data-placeholder' => 'Start typing or choose from list',
@@ -34,15 +34,15 @@
                     <% end %>
                 </div>
             <% else %>
-                <div class="col-xs-5 v-center">
+                <div class="col-sm-5 v-center">
                     <%= content_tag(:input, nil,
                         :name   => "range[#{display_facet.name}][begin]",
                         :type   => "number",
                         :id     => display_facet.name.parameterize,
                         :class  => "form-control") %>
                 </div>
-                <div class="col-xs-2 v-center" style="text-align:center"> to </div>
-                <div class="col-xs-5 v-center">
+                <div class="col-sm-2 v-center" style="text-align:center"> to </div>
+                <div class="col-sm-5 v-center">
                     <%= content_tag(:input, nil,
                         :name   => "range[#{display_facet.name}][end]",
                         :type   => "number",

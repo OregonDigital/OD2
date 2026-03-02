@@ -23,7 +23,6 @@ Rails.application.config.to_prepare do
       return if err_msg.present?
 
       create_default_representative_images
-      @collection.try(:reindex_extent=, Hyrax::Adapters::NestingIndexAdapter::LIMITED_REINDEX)
       begin
         Hyrax::Collections::CollectionMemberService.add_members_by_ids(collection_id: collection_id,
                                                                        new_member_ids: batch_ids,

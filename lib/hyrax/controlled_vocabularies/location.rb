@@ -93,14 +93,14 @@ module Hyrax
 
       # Fetch parent features if they exist. Necessary for automatic population of rdf label.
       # rubocop:disable Metrics/MethodLength
-      def fetch(*_args, &_block)
+      def fetch(**_args, &_block)
         graph = fetch_from_cache(rdf_subject)
         unless graph.nil?
           persistence_strategy.graph = graph
           fetch_parents unless top_level_element?
           return self
         end
-        resource = super
+        resource = super()
         fetch_parents unless top_level_element?
         store_graph
         resource

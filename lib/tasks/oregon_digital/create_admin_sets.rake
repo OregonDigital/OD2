@@ -7,8 +7,8 @@ namespace :oregon_digital do
 
     create_initial_collection_types
 
-    user = User.where(email: Hyrax::Migrator.config.migration_user).first
-    abort "User with email #{Hyrax::Migrator.config.migration_user} does not exist. An existing migration_user is required for this task." if user.blank?
+    user = User.first
+    abort "In order to run this script a user must exist. Please login through the application and then run this again." if user.blank?
 
     puts 'Creating admin sets'
 

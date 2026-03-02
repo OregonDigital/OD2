@@ -23,11 +23,15 @@ class Hyrax::BotDetectionController < ApplicationController
   class_attribute :env_challenge_trigger_key, default: 'bot_detect.should_challenge'
 
   def self.bot_detection_enforce_filter(controller)
-    return unless (enabled == 'true') && !controller.session[session_passed_key].try { |date| Time.new(date) < session_passed_good_for }
+    return unless (enabled == 'true') && !token_valid?(controller.session)
 
     return unless controller.request.get?
 
     Rails.logger.info 'Redirecting for Turnstile'
     controller.redirect_to "/challenge?dest=#{controller.request.original_fullpath}", status: 307
+  end
+
+  def self.token_valid?(session)
+    session.key?(session_passed_key) && session[session_passed_key].try { |date| Time.new(date) >= session_passed_good_for }
   end
 end
