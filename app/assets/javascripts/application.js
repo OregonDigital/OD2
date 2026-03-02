@@ -12,7 +12,12 @@
 //
 
 // Required by Blacklight
-//= require jquery
+//= require rails-ujs
+//= require jquery3
+//= require jquery-ui
+//= require popper
+//= require twitter/typeahead
+//= require bootstrap-sprockets
 //= require chosen-jquery
 //= require 'blacklight_advanced_search'
 
@@ -20,10 +25,10 @@
 //= require jquery.treetable
 //= require browse_everything/behavior
 
-//= require jquery_ujs
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require jquery.dataTables
+//= require dataTables.bootstrap4
 //= require blacklight/blacklight
+//= require blacklight_gallery
 
 //= require_directory .
 //= require bulkrax/application
@@ -31,8 +36,7 @@
 //= require hyrax
 
 // Required for Hyrax override in assets/javascripts/hyrax/editor/controlled_vocabulary.es6
-//= require handlebars-v4.0.5
-
+//= require handlebars
 
 // For blacklight_range_limit built-in JS, if you don't want it you don't need
 // this:

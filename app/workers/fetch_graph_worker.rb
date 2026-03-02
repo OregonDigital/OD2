@@ -61,7 +61,6 @@ class FetchGraphWorker
     # SEARCH: Look for works to create a link & get URL path
     work = SolrDocument.find(pid)
     url_path = Rails.application.routes.url_helpers.polymorphic_url(work)
-
     # STORE: Add in data to txt file
     File.open(path, 'w+') do |f|
       f.puts('Failed Fetch Record')

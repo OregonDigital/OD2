@@ -10,10 +10,10 @@
 <span class="btn-group appliedFilter constraint <%= options[:classes].join(" ") if options[:classes] %>">
   <span class="constraint-value">
     <% unless label.blank? %>
-      <span class="filterName"><%= label %></span>
+      <span class="filter-name"><%= label %></span>
     <% end %>
     <% unless value.blank? %>
-      <%= content_tag :span, value, class: 'filterValue', title: value %>
+      <%= content_tag :span, value, class: 'filter-value', title: value %>
     <% end %>
   </span>
   <% unless options[:remove].blank? %>
@@ -25,9 +25,8 @@
         end
       end
     %>
-
-    <%= link_to(content_tag(:span, '', class: 'glyphicon glyphicon-remove') + accessible_remove_label,
-			options[:remove], class: 'dropdown-toggle'
+    <%= link_to(content_tag(:span, '✖', class: 'remove-icon', 'aria-hidden': true) + accessible_remove_label,
+			options[:remove]
 		) %>
   <%- end -%>
 </span>

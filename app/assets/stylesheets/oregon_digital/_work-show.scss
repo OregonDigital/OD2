@@ -6,20 +6,29 @@
   }
 }
 
-table.table-scrollable {
-  @media (max-width: $screen-sm-min) {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    height: 100%
+caption {
+  caption-side: unset;
+}
+table {
+  .table-scrollable {
+    @media (max-width: breakpoint-min(sm)) {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      height: 100%
+    }
+  }
+
+  &.table thead tr th {
+    border-top: none;
   }
 }
 
 .panel-workflow {
-  .panel-heading {
+  .card-header {
     background-color: $contrast-orange;
 
-    a {
+    h2 {
       color: $navy-blue;
     }
   }
@@ -31,11 +40,6 @@ table.table-scrollable {
 
 #copyright-work-show.copyright-header {
   margin-top: 25px;
-}
-
-.delete-button-show-page {
-  margin-left: 30px;
-  background-color: #E88F2A;
 }
 
 .show-actions {
@@ -71,8 +75,8 @@ dl.work-show {
   column-gap: 1em;
   overflow-wrap: anywhere;
 
-  @media (max-width: $screen-sm-min) {
-    grid-template: auto / max-content auto;
+  @media (max-width: breakpoint-min(md)) {
+    grid-template: auto / auto;
   }
 
   dd {
@@ -99,7 +103,7 @@ dl.work-show {
   column-gap: 2em;
   margin-bottom: 20px;
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     & {
       display: block;
       column-count: 1;
@@ -115,18 +119,18 @@ dl.work-show {
   padding: 14px 0;
 
   input {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    // border: ;
+    height: 38px;
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: 0;
-    height: 38px;
   }
 
   button {
-    margin-top: -4px;
+    margin-top: -5px;
+    @media (max-width: breakpoint-min(lg)) and (min-width: breakpoint-min(md)) {
+      margin-top: 5px;
+    }
   }
 }
 
@@ -144,7 +148,7 @@ dl.work-show {
     margin-bottom: 15px;
 
     li {
-      &.active a {
+      a.active {
         color: #555555;
         cursor: default;
         background-color: #fff;
@@ -180,6 +184,7 @@ dl.work-show {
         margin-right: 2px;
         line-height: 1.428571429;
         border: 1px solid transparent;
+        border-radius: 0;
 
         position: relative;
         display: block;
@@ -195,7 +200,7 @@ dl.work-show {
         }
       }
 
-      @media (max-width: $screen-sm-min) {
+      @media (max-width: breakpoint-min(sm)) {
         float: none;
         display: flex;
 
@@ -255,26 +260,15 @@ dl.work-show {
 }
 
 #work-show-tablist {
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(sm)) {
     display: flex;
     flex-basis: 50%;
     flex-wrap: wrap;
   }
 }
-.align-button {
-  width: 134%;
-  margin-left: -3px;
+.action-buttons .btn {
+  min-width: 9em;
 }
-
-.add-to-align {
-  width: 109%;
-  margin-left: 7px;
-}
-
-.print-button {
-  margin-right: -7px;
-}
-
 .no-left-padding {
   padding-left: 0px;
 }
@@ -310,7 +304,7 @@ dl.work-show {
 
 .workflow-actions-button {
   width: 100%;
-  background-color:#E88F2A;
+  background-color:$contrast-orange;
 }
 
   /* Add the blur effect */
@@ -354,6 +348,6 @@ dl.work-show {
 
 // CSS for the custom message text box to fit the div
 .content_alert_box {
-  width: 100%; 
+  width: 100%;
   height: 100%;
 }
