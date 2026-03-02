@@ -49,7 +49,7 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
     let(:base) { Rails.application.routes.url_helpers.root_url }
     let(:resp) do
       [{
-        'file_uri' => URI.join(iiif, 'f0/ab/cd/e2/34/5-jp2.jp2/full/430,/0/default.jpg').to_s,
+        'file_uri' => iiif + '/f0/ab/cd/e2/34/5-jp2.jp2/full/430,/0/default.jpg',
         'is_representative' => true,
         'publish' => true,
         'use_statement' => 'image-thumbnail',
@@ -57,7 +57,7 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
         'xlink_show_attribute' => 'embed'
       },
        {
-         'file_uri' => URI.join(base, 'concern/generics/abcde1234').to_s,
+         'file_uri' => base + 'concern/generics/abcde1234',
          'is_representative' => false,
          'publish' => true,
          'use_statement' => 'image-service',
