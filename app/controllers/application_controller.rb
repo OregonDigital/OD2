@@ -14,9 +14,6 @@ class ApplicationController < ActionController::Base
 
   with_themed_layout '1_column'
 
-  # Hyrax 2.1 migration
-  skip_after_action :discard_flash_if_xhr
-
   protect_from_forgery with: :exception
 
   # Send user to 401/403 page rather than forward with flash message

@@ -11,7 +11,7 @@
     justify-content: space-between;
     margin: 0;
     padding: 0;
-    @media (max-width: $screen-sm-max) {
+    @media (max-width: breakpoint-max(sm)) {
       & {
         background: $very-light-grey;
         border-radius: .25em;
@@ -28,13 +28,13 @@
       input {
         vertical-align: middle;
       }
-      @media (max-width: $screen-sm-max) {
+      @media (max-width: breakpoint-max(sm)) {
         & {
           border-right: 3px solid $light-grey;
           text-align: center;
         }
       }
-      @media (min-width: $screen-sm-max) {
+      @media (min-width: breakpoint-max(sm)) {
         & {
           max-width: 75px;
           width: 5%;
@@ -52,7 +52,7 @@
         height: 1.5em;
       }
 
-      @media (max-width: $screen-sm-max) {
+      @media (max-width: breakpoint-max(sm)) {
         & {
           flex-basis: 100%;
           flex-wrap: wrap;
@@ -84,7 +84,7 @@
         min-width: unset;
         text-align: center;
         width: 33%;
-        @media (min-width: $screen-xs-max) and (max-width: $screen-sm-max) {
+        @media (min-width: breakpoint-max(xs)) and (max-width: breakpoint-max(sm)) {
           width: unset;
         }
       }

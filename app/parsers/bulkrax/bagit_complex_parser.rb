@@ -33,7 +33,7 @@ module Bulkrax
             title: lookup_collection(collection),
             work_identifier => [collection],
             visibility: 'open',
-            collection_type_gid: Hyrax::CollectionType.find_or_create_default_collection_type.gid
+            collection_type_gid: Hyrax::CollectionType.find_or_create_default_collection_type.to_global_id
           }
           new_entry = find_or_create_entry(collection_entry_class, collection, 'Bulkrax::Importer', metadata)
           ImportWorkCollectionJob.perform_now(new_entry.id, current_importer_run.id)
@@ -154,7 +154,7 @@ module Bulkrax
           file_name = filename(fs)
           next if file_name.blank?
 
-          io = open(fs.original_file.uri)
+          io = URI.open(fs.original_file.uri)
           file = Tempfile.new([file_name, File.extname(file_name)], binmode: true)
           file.write(io.read)
           file.close

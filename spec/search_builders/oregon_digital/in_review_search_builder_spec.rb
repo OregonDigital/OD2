@@ -4,6 +4,11 @@ RSpec.describe OregonDigital::InReviewSearchBuilder do
   let(:context) { double }
   let(:search_builder) { described_class.new(context) }
 
+  # TODO: REMOVE WHEN WE FIGURE OUT WHATS WRONG WITH SEARCH BUILDERS
+  before do
+    allow(context).to receive(:blacklight_config)
+  end
+
   describe '#processor_chain' do
     subject { processor_chain }
 

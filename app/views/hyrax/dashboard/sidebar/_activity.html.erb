@@ -8,18 +8,18 @@
                                  icon_class: "fa fa-line-chart",
                                  id: 'activityCollapse',
                                  open: false do %>
-      <%= menu.nav_link(hyrax.dashboard_profile_path(current_user),
+      <%= menu.nav_link(hyrax.dashboard_profile_path(current_user, class: "nav-link"),
                         also_active_for: hyrax.edit_dashboard_profile_path(current_user)) do %>
         <span class="fa fa-id-card" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.profile') %></span>
       <% end %>
-      <%= menu.nav_link(hyrax.notifications_path) do %>
+      <%= menu.nav_link(hyrax.notifications_path, class: "nav-link") do %>
         <span class="fa fa-bell" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.notifications') %></span>
       <% end %>
-      <%= menu.nav_link(hyrax.transfers_path) do %>
+      <%= menu.nav_link(hyrax.transfers_path, class: "nav-link") do %>
         <span class="fa fa-arrows-h" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.transfers') %></span>
       <% end %>
       <% if Flipflop.proxy_deposit? %>
-        <%= menu.nav_link(hyrax.depositors_path) do %>
+        <%= menu.nav_link(hyrax.depositors_path, class: "nav-link") do %>
           <span class="fa fa-users" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.dashboard.manage_proxies') %></span>
         <% end %>
       <% end %>
@@ -27,7 +27,7 @@
   </li>
 
   <% if can? :read, :admin_dashboard %>
-    <%= menu.nav_link(hyrax.admin_stats_path) do %>
+    <%= menu.nav_link(hyrax.admin_stats_path, class: "nav-link") do %>
       <span class="fa fa-bar-chart" aria-hidden="true"></span> <span class="sidebar-action-text"><%= t('hyrax.admin.sidebar.statistics') %></span>
     <% end %>
   <% end %>

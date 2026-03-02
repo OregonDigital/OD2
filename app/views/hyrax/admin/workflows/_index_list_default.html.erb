@@ -1,5 +1,5 @@
 <!-- OVERRIDE FROM HYRAX -->
-<div class="col-xs-9 col-sm-7 col-md-7">
+<div class="col-9 col-md-7 col-lg-7 float-left">
   <div class="metadata-row row">
     <dl class="row">
     <% doc_presenter = index_presenter(document) %>
@@ -51,7 +51,7 @@
   </div>
 </div>
 <!-- ADD SAVE BUTTON AND MODAL -->
-<%= form_tag main_app.hyrax_workflow_action_path(document), method: :put, class: 'col-xs-12 col-sm-5 col-md-1' do %>
+<%= form_tag main_app.hyrax_workflow_action_path(document), method: :put do %>
   <%= hidden_field_tag 'workflow_action[name]', 'approve' %>
   <input class="btn btn-primary" type="submit" value="Approve" />
 <% end %>

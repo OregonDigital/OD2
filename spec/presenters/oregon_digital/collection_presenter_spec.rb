@@ -13,8 +13,6 @@ RSpec.describe OregonDigital::CollectionPresenter do
   let(:presenter) { described_class.new(solr_doc, ability) }
   let(:solr_doc) { SolrDocument.new(collection.to_solr) }
 
-  before { allow(collection).to receive(:bytes).and_return(0) }
-
   describe '.terms' do
     let(:terms) { described_class.terms }
 
@@ -40,8 +38,6 @@ RSpec.describe OregonDigital::CollectionPresenter do
       expect(presenter.representative_docs).to eq([solr_doc])
     end
   end
-
-  # Mock bytes so collection does not have to be saved.
 
   describe 'collection type methods' do
     let(:props) do
