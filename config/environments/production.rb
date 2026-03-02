@@ -98,7 +98,7 @@ Rails.application.configure do
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners.
-  config.active_support.deprecation = :notify
+  config.active_support.deprecation = :silence
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
@@ -118,19 +118,19 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Fix errors eg Psych::DisallowedClass: Tried to load unspecified class: Symbol
-  config.active_record.yaml_column_permitted_classes = [Symbol, ActiveSupport::HashWithIndifferentAccess, Time]
-
   config.local_path = ENV.fetch('LOCAL_PATH', 'tmp/shared')
   config.large_export_size = ENV.fetch('BULKRAX_LARGE_EXPORT', 5000).to_i
   config.batch_size = ENV.fetch('BULKRAX_BATCH_SIZE', 100).to_i
   config.importer_cap = ENV.fetch('BULKRAX_IMPORTER_CAP', 50).to_i
   config.importer_pagination_per = ENV.fetch('BULKRAX_IMPORTER_PAGINATION_PER', 50).to_i
-  config.verify_services = [
-    OregonDigital::VerifyDerivativesService,
-    OregonDigital::VerifyCollectionsService,
-    OregonDigital::VerifyLabelsService
-  ]
+
+  config.to_prepare do
+    Rails.application.config.verify_services = [
+      OregonDigital::VerifyDerivativesService,
+      OregonDigital::VerifyCollectionsService,
+      OregonDigital::VerifyLabelsService
+    ]
+  end
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 100).to_i
   config.bulkrax_create_relationships_wait = ENV.fetch('BULKRAX_CREATE_RELATIONSHIPS_WAIT', 10).to_i
 end

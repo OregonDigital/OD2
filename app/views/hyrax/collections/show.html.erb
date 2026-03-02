@@ -3,41 +3,43 @@
 <% view_all_url = "#{search_form_action.split('#')[0]}&f[#{collection_index_key}][]=#{@presenter.id}" %>
 <% footer_metadata = render 'attribute_rows_footer', presenter: @presenter %>
 
-<div class="hyc-container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
+<div class="hyc-container container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
     <%# Title, view, and description %>
     <div class="hyc-generic">
-      <div class="col-md-8 col-xs-12">
-        <div class="hyc-title">
-          <h1><%= @presenter.title.first %></h1>
-          <div class="collection-subtitle">
-            <span class="lg-border-right item-count">
-              <%= [ @presenter.total_viewable_items,  @members_count ].min %>
-              <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
-            </span>
-            <span>
-              <%= link_to "View all", view_all_url %>
-            </span>
+      <div class="row">
+        <div class="col-lg-8 col-sm-12">
+          <div class="hyc-title">
+            <h1><%= @presenter.title.first %></h1>
+            <div class="collection-subtitle">
+              <span class="lg-border-right item-count">
+                <%= [ @presenter.total_viewable_items,  @members_count ].min %>
+                <%= 'Item'.pluralize(@presenter.total_viewable_items) %>
+              </span>
+              <span>
+                <%= link_to "View all", view_all_url %>
+              </span>
+            </div>
+          </div>
+          <div class="hyc-desc mw-lg">
+            <%= render 'collection_description', presenter: @presenter unless @presenter.description.first.nil? %>
           </div>
         </div>
-        <div class="hyc-desc mw-lg">
-          <%= render 'collection_description', presenter: @presenter unless @presenter.description.first.nil? %>
+        <%# Institutional image %>
+        <div class="col-lg-4 text-right d-md-block d-sm-none institution-header">
+          <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
+          <% path, alt, style = controller.institution_image_info %>
+          <%= image_tag path, alt: alt, style: style %>
         </div>
       </div>
-      <%# Institutional image %>
-      <div class="col-sm-4 col-sm-offset-7 col-md-offset-0 text-right hidden-xs institution-header">
-        <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
-        <% path, alt, style = controller.institution_image_info %>
-        <%= image_tag path, alt: alt, style: style %>
-      </div>
       <%# Social media share icons %>
-      <div class="col-xs-12 text-right share-links">
+      <div class="text-right share-links">
         <div class="collapse" aria-expanded="false" id="collapsible-metadata">
           <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
             <%= render 'attribute_rows', presenter: @presenter %>
           </dl>
         </div>
-        <div class="flex-container">
+        <div class="flex-container flex-sm-column flex-md-row">
           <div class="metadata-expand flex-item text-left">
             <% unless @presenter.description.first.nil? %>
               <button class="btn-link lato-p" type="button" data-toggle="collapse" data-target="#collapsible-metadata" aria-expanded="false" aria-controls="collapsible-metadata">
@@ -52,12 +54,12 @@
               <br/>
             <% end %>
             <% unless footer_metadata.empty? %>
-              <a href="#footer-metadata" class="lato-p hidden-xs">
+              <a href="#footer-metadata" class="lato-p d-sm-none d-md-block">
                 Additional Collection Information
               </a>
             <% end %>
           </div>
-          <div class="institution-footer text-right visible-xs">
+          <div class="institution-footer text-left d-sm-block d-md-none">
             <%# check if institution is OSU or UO. OSU image needs 100px hieght, UO 55px %>
             <% path, alt, style = controller.institution_image_info %>
             <%= image_tag path, alt: alt, style: style %>
@@ -75,7 +77,7 @@
 <div class="hyc-container collection-main" itemscope itemtype="http://schema.org/CollectionPage">
   <h2 class="sr-only"> featured works</h2>
   <div class="row">
-    <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection">
+    <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection col-12">
       <div id="documents">
         <% # container for all documents in index view -%>
         <div class="<%= 'blurred-image' if @collection.mask_content.include?('Item Show Page') %>" id="thumbnails" data-behavior="masonry-gallery">
@@ -96,30 +98,32 @@
   </div>
 
   <%= render 'shared/colored_divider', color: 'lime-green' do %>
-    <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>View All</a>
-    <%# NEW BUTTON: Add in an edit button to collection rather than going through the dashboard %>
-    <% if user_signed_in? && current_ability.can?(:edit, @presenter.solr_document) && @presenter.collection_type.machine_id != 'user_collection' %>
-      <a href="<%= edit_dashboard_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Edit Collection</a>
-    <% end %>
-    <%# DOWNLOAD: Add in download button for user collection %>
-    <% if @collection.sharable? && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
-      <a href="<%= main_app.download_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-sm-10'>Download Collection</a>
-    <% end %>
+    <div class='btn-group' role="group">
+      <a href="<%= view_all_url %>" class='btn btn-lg btn-primary collection-landing-button text-nowrap col-md-10'>View All</a>
+      <%# NEW BUTTON: Add in an edit button to collection rather than going through the dashboard %>
+      <% if user_signed_in? && current_ability.can?(:edit, @presenter.solr_document) && @presenter.collection_type.machine_id != 'user_collection' %>
+        <a href="<%= edit_dashboard_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-md-10'>Edit Collection</a>
+      <% end %>
+      <%# DOWNLOAD: Add in download button for user collection %>
+      <% if @collection.sharable? && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
+        <a href="<%= main_app.download_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-md-10'>Download Collection</a>
+      <% end %>
+    </div>
   <% end %>
 
   <div class="row">
-    <div class="text-center"><h2 class="collection-search-header">OR, SEARCH THIS COLLECTION</h2></div>
+    <div class="text-center w-100"><h2 class="collection-search-header">OR, SEARCH THIS COLLECTION</h2></div>
   </div>
 
   <!-- Search bar -->
   <div class="hyc-blacklight hyc-bl-search hyc-body row advanced-search-form">
-    <div class="col-sm-12">
+    <div class="col-lg-12">
       <%= render 'advanced_search_form', presenter: @presenter, search_catalog_path: main_app.search_catalog_path %>
     </div>
   </div>
 
   <%= render 'shared/colored_divider', color: 'lime-green' do %>
-    <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-sm-10'><i class='glyphicon glyphicon-search'></i> Search</button>
+    <button type="submit" form="collection-search" class='btn btn-lg btn-primary collection-landing-button col-md-10 d-flex'><i class="fa fa-search mr-1"></i> Search</button>
   <% end %>
 
   <!-- Create render display for the Local Contexts Icon -->
@@ -132,7 +136,7 @@
 
   <% unless footer_metadata.empty? %>
     <div id="footer-metadata" class="row">
-      <div class="col-md-12">
+      <div class="col-lg-12">
         <h2 class="collection-metadata-header">Explore more about the collection</h2>
         <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
           <%= render 'attribute_rows_footer', presenter: @presenter %>

@@ -1,10 +1,11 @@
 <% content_for(:content) do %>
 <h1> About </h1>
+<br />
 
-<div class="about-pages">
+<div class="about-pages row">
   <%= render 'sidebar' %>
 
-  <div id="content" class="col-md-9 col-sm-8 col-xs-12">
+  <div id="content" class="col-lg-9 col-md-8 col-12">
     <%= yield %>
   </div>
 </div>

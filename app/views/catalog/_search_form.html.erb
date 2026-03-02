@@ -1,14 +1,19 @@
 <%= form_tag search_form_action, method: :get, class: "form-horizontal search-form", id: "facet-search-form-facet", role: "search", 'aria-label': "Filter Results" do %>
-  <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:search_field, :qt, :page, :utf8)) %>
+  <% search_state_fields = search_state.params_for_search.except(:search_field, :qt, :page, :utf8) %>
+  <% search_state_fields['q'] = search_state_fields['q'].split(' AND ') if search_state_fields['q'] %>
+  <%= render_hash_as_hidden_fields(search_state_fields) %>
   <%= hidden_field_tag :search_field, 'all_fields', id: 'facet_search_field' %>
   <div class="form-group">
     <div class="input-group">
+      <div class="prepend">
+        <button type="submit" class="input-group-text" id="facet-search-submit-facet">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <span class="sr-only">Search</span>
+        </button>
+      </div><!-- /. prepend -->
       <label class="sr-only" for="facet-search-field-facet">Search within the results</label>
-      <%= text_field_tag 'q[]', nil , class: "q form-control lato-b facet-search", id: "facet-search-field-facet", placeholder: "Search within" %>
-      <button type="submit" class="" id="facet-search-submit-facet">
-        <i class="fa fa-search" aria-hidden="true"></i>
-        <span class="sr-only">Search</span>
-      </button>
+      <%= text_field_tag 'q[]', nil , class: "q form-control lato-b facet-search w-100", id: "facet-search-field-facet", placeholder: "Search within" %>
+      
     </div><!-- /.input-group -->
 
   </div><!-- /.form-group -->

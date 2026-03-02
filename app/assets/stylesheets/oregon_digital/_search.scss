@@ -10,14 +10,14 @@
   background-color: $very-light-grey;
   height: 0.75em;
 
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: breakpoint-min(md)) {
     & {
       margin-top: 1em;
     }
   }
 }
 
-@media (max-width: $screen-sm-min) {
+@media (max-width: breakpoint-min(md)) {
   #appliedParams.explore-collection,
   #appliedParamsConstraint.explore-collection {
     position: absolute;
@@ -45,16 +45,17 @@
   position: relative;
 }
 
-.view-type .btn-default {
+.view-type .btn-outline-secondary {
   background-color: $very-light-grey;
   border-radius: 5px !important;
   border: none;
   box-shadow: none;
-  padding: .1em .25em;
+  padding: .2em .25em;
+  padding-top: 0;
   font-size: 18pt;
+  color: $navy-blue !important;
   &.active {
-    color: $navy-blue;
-    background-color: $contrast-orange;
+    background-color: $contrast-orange !important;
   }
   &.view-type-gallery,
   &.view-type-masonry {
@@ -73,7 +74,7 @@
     padding-right: 1em;
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(md)) {
     margin-bottom: 1em;
   }
 }
@@ -82,13 +83,14 @@
   margin-top: 2em;
 
   + .flex-container {
-    @media (max-width: $screen-sm-min) {
+    @media (max-width: breakpoint-min(md)) {
       flex-direction: column;
     }
   }
 }
 #sortAndPerPage {
   border: none;
+  flex-grow: 1;
 
   .search-widgets {
     margin-bottom: .75em;
@@ -96,10 +98,18 @@
     .btn {
       background-color: $very-light-grey;
     }
+
+    .dropdown-menu {
+      li > .dropdown-item {
+        padding: 3px 20px;
+        font-size: 14px;
+      }
+    }
+
   }
-  .save-widgets {
+  .save-widgets button {
     color: $navy-blue;
-    font-size: 14pt;
+    font-size: 14px;
   }
 
   #sort-dropdown,
@@ -114,23 +124,28 @@
     }
   }
   #sort-dropdown {
-    margin-right: 1.5em;
+    margin-right: 1.5em !important;
   }
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(lg)) {
     .search-widgets {
       text-align: right;
     }
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(md)) {
     #sort-dropdown {
-      margin-right: 0;
+      margin-right: 0 !important;
     }
     #search-sort-button,
     button.submits-batches.submits-batches-add {
       min-width: 13em;
       text-align: left !important;
+
+      &::after {
+        float: right;
+        margin-top: 0.5em;
+      }
     }
   }
 }
@@ -141,21 +156,23 @@
   font-style: italic;
   height: 54px;
 
-  @media (max-width: $screen-md-min) {
+  @media (max-width: breakpoint-min(lg)) {
     text-align: center;
   }
 }
 
 .panel.facet_limit {
-  background: none;
+  background: $very-light-grey;
   border: 2px solid $navy-blue;
   border-radius: 0;
+  margin-top: 5px;
 
   .panel-heading {
-    background: none;;
+    background: none;
   }
   .panel-body {
     background-color: white;
+    padding: 15px;
   }
 }
 
@@ -167,7 +184,20 @@
     padding: 1em;
   }
 
-  @media (max-width: $screen-sm-min) {
+  .facets-toggle {
+    display: none;
+  }
+
+  .top-panel-heading {
+    background: none;
+    border-bottom: 0;
+  }
+
+  .more_facets_link {
+    font-size: 12px;
+  }
+
+  @media (max-width: breakpoint-min(md)) {
     background: none;
     #facet-panel-collapse {
       display: block;
@@ -180,9 +210,6 @@
     .top-panel-heading {
       border: 0;
       border-top: 2px solid $light-grey;
-    }
-    .facets-toggle {
-      display: none;
     }
   }
 
@@ -207,8 +234,9 @@
   form {
     .input-group {
       margin: 1em;
-      margin-bottom: 6em;
+      margin-bottom: 2.25em;
       display: block;
+      width: inherit;
 
       button {
         position: absolute;
@@ -220,7 +248,6 @@
         height: calc(100% - 16px);
         margin-top: 8px;
         margin-bottom: 8px;
-        border-right: 1px solid $light-grey;
       }
       input {
         background-color: white;
@@ -236,6 +263,8 @@
 
 .search-result-wrapper {
   border-bottom: 0px solid $very-light-grey !important;
+  margin-bottom: 30px;
+  overflow: hidden;
 
   &:first-child {
     border-top: 2px solid $very-light-grey;
@@ -264,6 +293,10 @@
     }
     span {
       vertical-align: top;
+
+      span {
+        margin-left: 2px;
+      }
     }
     i,
     .children {
@@ -271,13 +304,19 @@
     }
   }
 
-  .search-results-title-row .search-result-title {
-    display: inline-block;
-    margin: 0;
+  .search-results-title-row {
+    padding: 0 0 15px;
+
+    .search-result-title {
+      display: inline-block;
+      margin: 0;
+    }
+
+    .badge {
+      margin-left: 15px;
+    }
   }
-  .search-results-title-row .label {
-    margin-left: 15px;
-  }
+
 
   dl dd ul {
     padding-left: 0;
@@ -339,38 +378,47 @@ em {
 div.pagination {
   display: flex;
   justify-content: center;
+  margin: 20px 0;
 }
-ul.pagination li {
-  &.active span {
-    background-color: $contrast-orange;
-    border: none;
-    color: $navy-blue;
-  }
-  &.next span,
-  &.next a,
-  &.previous span,
-  &.previous a {
-    background: none;
-  }
-  &.disabled {
-    span,
-    span:hover,
-    span:focus,
+ol.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1em;
+}
+ul.pagination {
+  align-items: center;
+  li {
+    &.active span.page-link {
+      background-color: $contrast-orange;
+      border: none;
+      color: $navy-blue;
+    }
+    &.next span,
+    &.next a,
+    &.previous span,
+    &.previous a {
+      background: none;
+    }
+    &.disabled {
+      span,
+      span:hover,
+      span:focus,
+      a,
+      a:hover,
+      a:focus {
+        color: $dark-grey;
+      }
+    }
+
     a,
-    a:hover,
-    a:focus {
-      color: $dark-grey;
+    span {
+      background-color: $very-light-grey;
+      border: none;
+      margin: 0 .25em;
+      padding: 6px 12px;
     }
   }
-
-  a,
-  span {
-    background-color: $very-light-grey;
-    border: none;
-    margin: 0 .25em;
-  }
 }
-
 /* Gallery specific */
 #content {
   flex-direction: column;
@@ -403,7 +451,7 @@ ul.pagination li {
       background: none;
       padding-top: 1em;
       a {
-        text-align: left;
+        text-align: center;
 
         img {
           width: 100%;
@@ -514,7 +562,7 @@ ul.pagination li {
     }
   }
 
-  @media (max-width: $screen-sm-min) {
+  @media (max-width: breakpoint-min(md)) {
     h3 {
       margin: 1em 0;
     }

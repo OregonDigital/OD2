@@ -2,14 +2,14 @@
 
 module OregonDigital
   # Finds parent works
-  class ParentsSearchBuilder < Blacklight::SearchBuilder
+  class ParentsSearchBuilder < Hyrax::SearchBuilder
     self.default_processor_chain += [:parent_works]
 
     attr_reader :work
 
-    def initialize(id:)
+    def initialize(*options, id:)
       @id = id
-      super
+      super(options.first)
     end
 
     def parent_works(solr_params)

@@ -3,70 +3,59 @@
   <div class="modal-dialog text-left">
       <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="login_account_title">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
-          <div class="clearfix"></div>
           <div class="modal-title text-center" id="login_account_title">LOGIN TO YOUR ACCOUNT</div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
         </div>
         <div class="modal-body login-modal">
-          <div class="row">
-            <ul>
-              <li class="osu-login">
-                <div class="col-sm-4 col-xs-12 login-radio">
-                  <label>
-                    <input type="radio" name="login-select" checked="checked" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-OSU-footer')">
-                    <%= image_tag('osu_logo.png', height: '50', width: '50', alt: 'Oregon State University Login') %>OSU
-                  </label>
-                </div>
-              </li>
-              <li class="uo-login">
-                <div class="col-sm-4 col-xs-12 login-radio">
-                  <label>
-                    <input type="radio" name="login-select" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-UO-footer')">
-                    <%= image_tag('uo.png', height: '50', width: '50', alt: 'University of Oregon Login') %>UO
-                  </label>
-                </div>
-              </li>
-              <li>
-                <div class="col-sm-4 col-xs-12 login-radio">
-                  <div>
-                    <label for="other-login">
-                    <div style="display:inline-block;height:50px;vertical-align:middle"></div><!-- Weird spacing formatter so radio is aligned -->
-                    <input id="other-login" type="radio" name="login-select" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-local-footer')">
-                      Other Affiliation
-                    </label>
-                  </div>
-              </div>
-              </li>
-            </ul>
+          <div class="d-flex flex-row justify-content-around">
+            <div class="osu-login">
+              <label>
+                <input type="radio" name="login-select" checked="checked" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-OSU-footer')">
+                <%= image_tag('osu_logo.png', height: '50', width: '50', alt: 'Oregon State University Login') %>OSU
+              </label>
+            </div>
+            <div class="uo-login">
+                <label>
+                  <input type="radio" name="login-select" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-UO-footer')">
+                  <%= image_tag('uo.png', height: '50', width: '50', alt: 'University of Oregon Login') %>UO
+                </label>
+            </div>
+            <div class="login-radio">
+              <label for="other-login">
+                <div style="display:inline-block;height:50px;vertical-align:middle"></div><!-- Weird spacing formatter so radio is aligned -->
+                <input id="other-login" type="radio" name="login-select" onclick="toggleFooter('#user-login-modal', '#login-modal-footer-local-footer')">
+                  Other Affiliation
+              </label>
+            </div>
           </div>
         </div>
         <div id="login-modal-footer-OSU-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
-          <div class='row'>
+          <div class='w-100'>
             <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
               <span class="university-login">CONTINUE TO <span class="visible-xs"></span> LOG IN</span>
             <% end %>
           </div>
-          <div class='row lato-p'>
+          <div class='w-100 lato-p'>
             Questions about logging in? <a href="/contact">Contact us.</a>
           </div>
         </div>
         <div id="login-modal-footer-UO-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
-          <div class='row'>
+          <div class='w-100'>
             <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
               <span class="university-login">CONTINUE TO <span class="visible-xs"></span> LOG IN</span>
             <% end %>
           </div>
-          <div class='row lato-p'>
+          <div class='w-100 lato-p'>
             Questions about logging in? <a href="/contact">Contact us.</a>
           </div>
         </div>
         <div id="login-modal-footer-local-footer" class="modal-footer login-modal-footer-border text-center" style='display: none;'>
-          <div class='row'>
+          <div class='w-100'>
             <%= link_to main_app.new_user_session_path, class: 'btn btn-primary' do %>
               <span class="university-login">CONTINUE TO <span class="visible-xs"></span> LOG IN</span>
             <% end %>
           </div>
-          <div class='row lato-p'>
+          <div class='w-100 lato-p'>
             Questions about logging in? <a href="/contact">Contact us.</a>
           </div>
         </div>

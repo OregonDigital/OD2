@@ -28,9 +28,7 @@ class SolrDocument
     return super(ids) unless ids.is_a? Array
     return [] if ids.blank?
 
-    solr_query = Hyrax::SolrQueryBuilderService.construct_query_for_ids(ids)
-    path = repository.blacklight_config.document_solr_path || repository.blacklight_config.solr_path
-    docs = repository.send_and_receive path, { fq: solr_query, rows: ids.count }
+    docs = repository.find(ids)
     docs.documents
   end
 
@@ -73,10 +71,9 @@ class SolrDocument
 
   # Find and return parent works
   def parents
-    config = ::CatalogController.new
-    repository = config.repository
-    search_builder = OregonDigital::ParentsSearchBuilder.new(id: self['id'])
-    @parents ||= repository.search(search_builder).docs
+    @parents ||= Hyrax::SolrService.get("{!field f=member_ids_ssim}#{id}")['response']['docs'].map do |doc|
+      SolrDocument.new(doc)
+    end
   end
 
   def parents?
@@ -100,7 +97,7 @@ class SolrDocument
   end
 
   def process_chunk(chunk)
-    SolrDocument.find(chunk).map do |document|
+    SolrDocument.find(chunk.reject(&:blank?)).map do |document|
       if document['has_model_ssim'].first.include?('FileSet')
         @file_sets << document
       else

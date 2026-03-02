@@ -16,8 +16,8 @@ class Hyrax::BootstrapBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Buil
   def render
     return '' if @elements.blank?
 
-    @context.tag.nav(breadcrumbs_options) do
-      @context.tag.ol do
+    @context.content_tag(:nav, breadcrumbs_options) do
+      @context.content_tag(:ol) do
         safe_join(@elements.uniq.collect { |e| render_element(e) })
       end
     end
@@ -27,7 +27,7 @@ class Hyrax::BootstrapBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Buil
     html_class = 'active' if @context.current_page?(compute_path(element)) || element.options['aria-current'] == 'page'
     element.options['aria-current'] = 'page' if html_class
 
-    @context.tag.li(class: html_class) do
+    @context.content_tag(:li, class: html_class) do
       @context.link_to(@context.truncate(compute_name(element), length: 30, separator: ' '), compute_path(element), element.options)
     end
   end
