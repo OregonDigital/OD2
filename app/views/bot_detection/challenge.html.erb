@@ -38,7 +38,7 @@
 
         result = await response.json();
         if (result["success"] == true) {
-          window.location.href = '<%= raw @dest %>';
+          window.location.href = "<%= raw @dest %>";
         } else {
           console.error("Turnstile response reported as failure: " + JSON.stringify(result))
           _displayChallengeError();
