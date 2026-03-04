@@ -13,6 +13,7 @@ class IiifSearchBuilder < Blacklight::SearchBuilder
     # set the highlighting parameters
     ocr_search_highlight_params(solr_parameters)
     # catalog controller puts params here when you call search_results
+    solr_parameters[:fq] ||= []
     solr_parameters[:fq] += blacklight_params[:fq]
   end
 
