@@ -68,10 +68,10 @@ class GenericIndexer < Hyrax::WorkIndexer
   def importer_lookup(identifier)
     return [] if identifier.blank?
 
-    e = Bulkrax::Entry.find_by(identifier: identifier.first)
-    return [] if e.nil?
+    e = Bulkrax::Entry.where(identifier: identifier.first, importerexporter_type: 'Bulkrax::Importer')
+    return [] if e.blank?
 
-    [e.importerexporter_id]
+    [e.map { |x| x[:importerexporter_id] }.min]
   end
 
   def collection_indexing_key(machine_id)
