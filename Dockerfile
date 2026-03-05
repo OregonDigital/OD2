@@ -1,4 +1,4 @@
-FROM ruby:3.2.1-alpine3.16 AS bundler
+FROM ruby:3.2.2-slim-bookworm AS bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -9,54 +9,36 @@ RUN gem install bundler -v '2.6.8'
 FROM bundler AS dependencies
 
 # The alpine way
-RUN apk --no-cache update && apk --no-cache upgrade && \
-  apk add --no-cache alpine-sdk nodejs unzip ghostscript vim yarn \
-  git sqlite sqlite-dev postgresql-dev libjpeg-turbo-dev libpng-dev \
-  libtool libgomp libreoffice libressl libressl-dev java-common libc6-compat  \
-  curl build-base tzdata zip autoconf automake libtool texinfo \
-  bash bash-completion java-common openjdk17-jre-headless graphicsmagick \
-  poppler-utils ffmpeg tesseract-ocr openjpeg-dev openjpeg-tools openjpeg less\
-  libffi libffi-dev xz gcompat tini tmux libxslt-dev libxml2-dev
+RUN apt update && apt -y upgrade && \
+  apt -y install nodejs unzip ghostscript vim less tmux yarn curl wget openssl \
+  git sqlite3 postgresql-client libpq-dev libjpeg62-turbo-dev libpng-dev libtool libgomp1 \
+  build-essential zip xz-utils autoconf automake libtool texinfo \
+  bash bash-completion java-common openjdk-17-jre-headless graphicsmagick ffmpeg \
+  poppler-utils tesseract-ocr libopenjp2-7-dev libopenjp2-tools libopenjp2-7 \
+  libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
-  echo 'America/Los_Angeles' > /etc/timezone && apk del tzdata --purge
+  echo 'America/Los_Angeles' > /etc/timezone
 
 # Install ImageMagick with jp2/tiff support
-RUN mkdir -p /tmp/im && \
-  curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
-  | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
-    ./configure \
-      --build=$CBUILD \
-      --host=$CHOST \
-      --prefix=/usr \
-      --sysconfdir=/etc \
-      --mandir=/usr/share/man \
-      --infodir=/usr/share/info \
-      --localstatedir=/var \
-      --enable-shared \
-      --disable-static \
-      --with-modules \
-      --with-threads \
-      --with-jp2=yes \
-      --with-tiff=yes \
-      --with-gs-font-dir=/usr/share/fonts/Type1 \
-      --with-quantum-depth=16 && \
-    make -j`nproc` && \
-    make install && \
-    rm -rf /tmp/im
+# Install ImageMagick with full support
+RUN t=$(mktemp) && \
+  wget 'https://raw.githubusercontent.com/SoftCreatR/imei/main/imei.sh' -qO "$t" && \
+  bash "$t" --imagemagick-version=7.1.0-27 && \
+  rm "$t"
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
-  curl -fSL -o /opt/fits-1.5.5.zip https://github.com/harvard-lts/fits/releases/download/1.5.5/fits-1.5.5.zip && \
-  cd /opt/fits && unzip /opt/fits-1.5.5.zip  && chmod +X /opt/fits/fits.sh && \
-  rm -f /opt/fits-1.5.5.zip
+  curl -fSL -o /opt/fits-1.6.0.zip https://github.com/harvard-lts/fits/releases/download/1.6.0/fits-1.6.0.zip && \
+  cd /opt/fits && unzip /opt/fits-1.6.0.zip  && chmod +X fits.sh && \
+  rm -f /opt/fits-1.6.0.zip
 
 ARG UID=8083
 ARG GID=8083
 
 # Create an app user so our program doesn't run as root.
-RUN addgroup -g 8083 app && adduser -h /data -u 8083 -G app -D -H app
+RUN groupadd app -g $GID && useradd app -u $UID -d /data -M -g app
 
 FROM dependencies AS gems
 
@@ -90,7 +72,7 @@ FROM code
 
 # Uninstall tools for compiling native code
 USER root
-RUN apk --no-cache update && apk del autoconf automake gcc g++ --purge && \
+RUN apt --purge -y autoremove autoconf automake gcc g++ tzdata && \
   rm -rf /data/docker-compose.override.yml-example /data/README.md \
   /data/.env.example /data/config/nginx /data/config/solr
 USER app
