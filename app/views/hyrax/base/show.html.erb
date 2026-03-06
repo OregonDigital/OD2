@@ -150,25 +150,6 @@
           </div>
         </div>
       <% end %>
-      <% if current_ability.can?(:view, FileSet) %>
-        <div class='row'>
-          <!-- Renders file manager -->
-          <div class='col-sm-12'>
-            <div id='work-show-file-sets' class='flex-container'>
-              <div class='flex-item file-set-title' id='file-set-individual'>
-                <h2 class='h4'>Works and Files</h2>
-              </div>
-              <% if @presenter.member_presenters.size > 1 %>
-                <div class='flex-item file-set-manager'>
-                  <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, @presenter]), class: 'btn btn-primary pull-right' %>
-                </div>
-              <% end %>
-            </div>
-              <hr style='border-width: 3px;'>
-              <%= render 'items', presenter: @presenter %>
-          </div>
-        </div>
-      <% end %>
 
       <%# PUBLIC: Make the Works & Files area public to all users %>
       <div class='row'>
