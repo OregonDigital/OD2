@@ -101,5 +101,5 @@ RUN if [ "${RAILS_ENV}" = "production" ]; then \
   echo "Precompiling assets with $RAILS_ENV environment"; \
   rm -rf /data/.cache; \
   RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=temporary bundle exec rails assets:precompile; \
-  for f in public/assets/4*.html; do cp $f public/${f:14:3}.html; done; \
+  for f in public/assets/4*.html; do cp "$f" public/$(echo "$f" | cut -c15-17).html; done; \
   fi
