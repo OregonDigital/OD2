@@ -12,10 +12,10 @@ FROM bundler AS dependencies
 RUN apt update && apt -y upgrade && \
   apt -y install nodejs unzip ghostscript vim less tmux yarn curl wget openssl \
   git sqlite3 postgresql-client libpq-dev libjpeg62-turbo-dev libpng-dev libtool libgomp1 \
-  build-essential zip xz-utils autoconf automake libtool texinfo \
+  build-essential zip xz-utils autoconf automake libtool texinfo libltdl7 \
   bash bash-completion java-common openjdk-17-jre-headless graphicsmagick ffmpeg \
   poppler-utils tesseract-ocr libopenjp2-7-dev libopenjp2-tools libopenjp2-7 \
-  libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release
+  libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release cmake
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
@@ -23,10 +23,28 @@ RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
 
 # Install ImageMagick with jp2/tiff support
 # Install ImageMagick with full support
-RUN t=$(mktemp) && \
-  wget 'https://raw.githubusercontent.com/SoftCreatR/imei/main/imei.sh' -qO "$t" && \
-  bash "$t" --imagemagick-version=7.1.0-27 && \
-  rm "$t"
+RUN mkdir -p /tmp/im && \
+  curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
+  | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
+  ./configure \
+  --build=$CBUILD \
+  --host=$CHOST \
+  --prefix=/usr \
+  --sysconfdir=/etc \
+  --mandir=/usr/share/man \
+  --infodir=/usr/share/info \
+  --localstatedir=/var \
+  --enable-shared \
+  --disable-static \
+  --with-modules \
+  --with-threads \
+  --with-jp2=yes \
+  --with-tiff=yes \
+  --with-gs-font-dir=/usr/share/fonts/Type1 \
+  --with-quantum-depth=16 && \
+  make -j`nproc` && \
+  make install && \
+  rm -rf /tmp/im
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
