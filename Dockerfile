@@ -10,7 +10,7 @@ FROM bundler AS dependencies
 
 # The alpine way
 RUN apt update && apt -y upgrade && \
-  apt -y install nodejs unzip ghostscript vim less tmux yarn curl wget openssl \
+  apt -y install nodejs unzip ghostscript vim less tmux yarnpkg curl wget openssl \
   git sqlite3 postgresql-client libpq-dev libjpeg62-turbo-dev libpng-dev libtool libgomp1 \
   build-essential zip xz-utils autoconf automake libtool texinfo libltdl7 \
   bash bash-completion java-common openjdk-17-jre-headless graphicsmagick ffmpeg \
