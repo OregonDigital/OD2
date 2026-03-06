@@ -292,5 +292,6 @@ workflows:
                 - master
                 - /infra\/.*/
                 - /staging\/.*/
+                - feature/debianDockerImage
           repo: od2_web
           environment: production
