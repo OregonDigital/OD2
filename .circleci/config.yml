@@ -281,6 +281,7 @@ workflows:
             branches:
               ignore:
                 - master
+                - feature/debianDockerImage
       - build_and_push_beavernetes:
           name: Build and push application image to Beavernetes image repository
           requires:
