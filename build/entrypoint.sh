@@ -9,7 +9,7 @@ if [ "${RAILS_ENV}" != 'production' ]; then
   ./build/validate_migrated.sh
   ./build/install_gems.sh
   # Install latest UniversalViewer package
-  yarn install
+  yarnpkg install
 fi
 
 # Create default roles
