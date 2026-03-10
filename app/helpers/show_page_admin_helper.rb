@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 # provide logic for building link to importer
+# note that if bulkrax_identifier_sim has more than one value, they likely are ordered from newest to oldest
+# the importer that is chosed for bulkrax_importer_id_sim is based on the oldest importer
+# in order to display the matching entry identifier, we are using the last value from bulkrax_identifier
 module ShowPageAdminHelper
   def show_importer_link(solr_doc, base_url)
     return 'not found' if solr_doc['bulkrax_identifier_sim'].blank?
