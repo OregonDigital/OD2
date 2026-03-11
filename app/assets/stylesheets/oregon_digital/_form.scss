@@ -15,3 +15,11 @@
     height: 100%;
     margin-bottom: 20px;
 }
+
+// MODIFY: Add in modification towards the form progress section
+#form-sidebar-card {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  float: right;
+}
