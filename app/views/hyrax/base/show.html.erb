@@ -150,25 +150,6 @@
           </div>
         </div>
       <% end %>
-      <% if current_ability.can?(:view, FileSet) %>
-        <div class='row'>
-          <!-- Renders file manager -->
-          <div class='col-sm-12'>
-            <div id='work-show-file-sets' class='flex-container'>
-              <div class='flex-item file-set-title' id='file-set-individual'>
-                <h2 class='h4'>Works and Files</h2>
-              </div>
-              <% if @presenter.member_presenters.size > 1 %>
-                <div class='flex-item file-set-manager'>
-                  <%= link_to t("hyrax.file_manager.link_text"), polymorphic_path([main_app, :file_manager, @presenter]), class: 'btn btn-primary pull-right' %>
-                </div>
-              <% end %>
-            </div>
-              <hr style='border-width: 3px;'>
-              <%= render 'items', presenter: @presenter %>
-          </div>
-        </div>
-      <% end %>
 
       <%# PUBLIC: Make the Works & Files area public to all users %>
       <div class='row'>
@@ -204,12 +185,12 @@
           <div class='col-sm-12'>
             <h2 class='h4'>Administrative Metadata</h2>
             <br/><br/>
-            <% entry = Bulkrax::Entry.find_by(identifier: @presenter.bulkrax_identifier.first) if !@presenter.bulkrax_identifier.blank? %>
             <ul>
               <li><p><span style="font-weight: bold;">Last Indexed Date:</span> <%= @presenter.solr_document['date_modified_dtsi'] %></p></li>
               <li><p><span style="font-weight: bold;">Admin Set:</span> <%= @presenter.admin_set.first %> (<%= link_to(@presenter.solr_document['primarySet_ssim'].first, CGI.unescape(admin_admin_set_url(@presenter.solr_document['primarySet_ssim'].first)), target: "_blank") %>)</p></li>
               <li><p><span style="font-weight: bold;">Depositor:</span> <%= link_to(@presenter.depositor, "#{request.base_url}#{admin_workflows_path(f: { depositor_ssim: [@presenter.depositor] }, local: I18n.locale)}", target: "_blank") %></p></li>
-              <li><p><span style="font-weight: bold;">Bulkrax Importer ID:</span> <%= !@presenter.bulkrax_identifier.blank? ? link_to(@presenter.bulkrax_identifier.first, "#{request.base_url}#{bulkrax.importer_path(entry.importerexporter_id)}", target: "_blank") : 'None' %></p></li>
+              <li><p><span style="font-weight: bold;">Bulkrax Importer ID:</span> <%= show_importer_link(@presenter.solr_document, request.base_url) %></p></li>
+              <li><p><span style="font-weight: bold;">Thumbnail:</span> <%= @presenter.solr_document['thumbnail_path_ss'] %></p></li>
             </ul>
           </div>
         </div>
