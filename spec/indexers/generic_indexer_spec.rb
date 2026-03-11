@@ -121,4 +121,58 @@ RSpec.describe GenericIndexer do
       end
     end
   end
+
+  describe 'importer_lookup' do
+    context 'when there are multiple importers available' do
+      let(:e_identifier) { "#{importer1.id}-0" }
+      let(:entry1) { Bulkrax::CsvEntry.create(importerexporter: importer1, identifier: e_identifier, id: 123) }
+      let(:entry2) { Bulkrax::CsvEntry.create(importerexporter: importer2, identifier: e_identifier, id: 126) }
+      let(:importer1) { FactoryBot.create(:bulkrax_importer_csv) }
+      let(:importer2) { FactoryBot.create(:bulkrax_importer_csv) }
+
+      before do
+        entry1.raw_metadata = {}
+        entry2.raw_metadata = {}
+      end
+
+      it 'returns the earliest importer id' do
+        expect(indexer.importer_lookup([e_identifier])).to eq([importer1.id])
+      end
+    end
+
+    context 'when there has also been an exporter' do
+      let(:e_identifier) { "#{exporter1.id}-0" }
+      let(:entry1) { Bulkrax::Entry.create(importerexporter: exporter1, identifier: e_identifier, id: 124) }
+      let(:entry2) { Bulkrax::Entry.create(importerexporter: importer1, identifier: e_identifier, id: 127) }
+      let(:importer1) { FactoryBot.create(:bulkrax_importer_csv, id: 2) }
+      let(:exporter1) { FactoryBot.create(:bulkrax_exporter_local_collection, id: 1) }
+
+      before do
+        entry1.raw_metadata = {}
+        entry2.raw_metadata = {}
+      end
+
+      it 'returns the importer id' do
+        expect(indexer.importer_lookup([e_identifier])).to eq([importer1.id])
+      end
+    end
+
+    context 'when there are multiple identifiers available' do
+      let(:e_identifier) { "#{importer1.id}-0" }
+      let(:e_identifier2) { "#{importer2.id}-0" }
+      let(:entry1) { Bulkrax::CsvEntry.create(importerexporter: importer1, identifier: e_identifier, id: 123) }
+      let(:entry2) { Bulkrax::CsvEntry.create(importerexporter: importer2, identifier: e_identifier2, id: 126) }
+      let(:importer1) { FactoryBot.create(:bulkrax_importer_csv) }
+      let(:importer2) { FactoryBot.create(:bulkrax_importer_csv) }
+
+      before do
+        entry1.raw_metadata = {}
+        entry2.raw_metadata = {}
+      end
+
+      it 'returns the earliest importer id' do
+        expect(indexer.importer_lookup([e_identifier2, e_identifier])).to eq([importer1.id])
+      end
+    end
+  end
 end

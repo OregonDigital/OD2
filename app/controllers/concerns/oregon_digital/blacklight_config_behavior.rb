@@ -23,6 +23,8 @@ module OregonDigital
       end
 
       configure_blacklight do |config|
+        config.filter_search_state_fields = true
+        config.search_state_fields << %i[id locale all_fields title_desc_field creator_field description_field subject_field identifier_field]
         # configuration for Blacklight IIIF Content Search
         config.iiif_search = {
           full_text_field: %w[all_text_timv hocr_text_timv],

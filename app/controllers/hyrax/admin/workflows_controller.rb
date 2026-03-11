@@ -19,6 +19,10 @@ module Hyrax
       configure_blacklight do |config|
         config.add_facet_field 'depositor_ssim', limit: 5, label: 'Depositor'
         config.add_facet_field 'bulkrax_importer_id_sim', limit: 5, label: 'Importer ID'
+
+        # REORG: Move the two fields to the beginning of the review queue
+        config.facet_fields = config.facet_fields.slice('depositor_ssim', 'bulkrax_importer_id_sim')
+                                    .merge(config.facet_fields.except('depositor_ssim', 'bulkrax_importer_id_sim'))
       end
     end
     configure_facets

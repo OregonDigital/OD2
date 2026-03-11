@@ -6,7 +6,7 @@
 <%# FORM: Create the form view page to submit the accessibility form %>
 <%= form_for accessibility_form, url: main_app.accessibility_copy_form_index_path, html: { class: 'form-horizontal' } do |f| %>
   <%# HIDDEN FIELD: This field is hidden to check for spam %>
-  <%= f.text_field :accessibility_form_method, class: 'hide' %>
+  <%= f.hidden_field :accessibility_form_method, class: 'hide' %>
 
   <%= hidden_field_tag :return_to, '', id: 'return_to_page' %>
 
