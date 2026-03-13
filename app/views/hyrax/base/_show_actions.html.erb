@@ -31,6 +31,7 @@
               <li class="<%= 'disabled-link-dropdown' if @disable_link == false %>"><%= link_to "Download Files (High Quality)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
             <% end %>
             <li class="<%= 'disabled-link-dropdown' if @disable_link == false %>"><%= link_to "Download Files (Standard Quality)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/vnd.ms-'))  %></li>
+            <li><%= link_to "Metadata Only (CSV)", main_app.send(:"metadata_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
             <li><%= link_to "Download Individual Files", "#file-set-individual" %></li>
           </ul>
         </div>
