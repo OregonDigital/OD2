@@ -2,13 +2,14 @@
 module Hyrax
 	# Draws a collapsable list widget using the Bootstrap 3 / Collapse.js plugin
 	class CollapsableSectionPresenter
-	  def initialize(view_context:, text:, id:, icon_class:, open:)
-	    @view_context = view_context
-	    @text = text
-	    @id = id
-	    @icon_class = icon_class
-	    @open = open
-	  end
+    def initialize(view_context:, text:, id:, icon_class:, open:, title: nil)
+      @view_context = view_context
+      @text = text
+      @id = id
+      @icon_class = icon_class
+      @open = open
+      @title = title
+    end
       
 	  attr_reader :view_context, :text, :id, :icon_class, :open
 	  delegate :content_tag, :safe_join, :tag, to: :view_context

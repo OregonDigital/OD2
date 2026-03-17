@@ -63,6 +63,11 @@ fr:
     institution_name_full: Nom de l'établissement
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
+  oregon_digital:
+    complex_objects:
+      actions:
+        header: Acciones
+        download: Télécharger
   simple_form:
     labels:
       defaults:

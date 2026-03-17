@@ -934,7 +934,16 @@
        A component to return terms and document frequency of those
        terms
     -->
-  <searchComponent name="terms" class="solr.TermsComponent"/>
+  <searchComponent name="termsComponent" class="solr.TermsComponent" />
+
+  <requestHandler name="/terms" class="solr.SearchHandler">
+    <lst name="defaults">
+      <bool name="terms">true</bool>
+    </lst>
+    <arr name="components">
+      <str>termsComponent</str>
+    </arr>
+  </requestHandler>
 
   <!-- Query Elevation Component
 

@@ -23,6 +23,8 @@ module OregonDigital
       end
 
       configure_blacklight do |config|
+        config.filter_search_state_fields = true
+        config.search_state_fields << %i[id locale all_fields title_desc_field creator_field description_field subject_field identifier_field]
         # configuration for Blacklight IIIF Content Search
         config.iiif_search = {
           full_text_field: %w[all_text_timv hocr_text_timv],
@@ -36,10 +38,12 @@ module OregonDigital
         # config.advanced_search[:qt] ||= 'advanced'
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
+        config.advanced_search[:form_solr_parameters] ||= {
+          'facet.field' => %w[non_user_collections_label_ssim non_user_collections_ssim copyright_combined_label_sim date_combined_year_label_ssim institution_label_sim language_label_sim]
+        }
         config.advanced_search[:form_facet_partial] = 'advanced_search_facets_as_select'
         config.view.list.partials = %i[thumbnail index_header index]
         config.view.gallery.partials = %i[metadata]
-        config.view.gallery.icon_class = 'fa fa-trello fa-lg'
         config.view.gallery.if = true
         config.view.slideshow.partials = %i[index]
         config.view.slideshow.if = false
@@ -49,6 +53,9 @@ module OregonDigital
         config.search_builder_class = OregonDigital::CatalogSearchBuilder
         config.http_method = :post
         config.per_page = [20, 60, 100]
+
+        config.add_results_collection_tool(:sort_widget)
+        config.add_results_collection_tool(:per_page_widget)
 
         ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
         config.default_solr_params = {
@@ -63,7 +70,7 @@ module OregonDigital
         config.index.thumbnail_field = 'thumbnail_path_ss'
 
         # Remove the view type selector (masonry, grid, list, etc) from the sort/show section so we can add it somewhere else
-        config.index.collection_actions.delete_field 'view_type_group'
+        # config.index.collection_actions.delete_field 'view_type_group'
 
         # The generic_type isn't displayed on the facet list
         # It's used to give a label to the filter that comes from the user profile
@@ -225,6 +232,9 @@ module OregonDigital
         config.add_facet_field 'series_name_sim', label: I18n.translate('simple_form.labels.defaults.series_name'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'series_number_sim', label: I18n.translate('simple_form.labels.defaults.series_number'), index_range: 'A'..'Z', limit: 5
         config.add_facet_field 'exhibit_sim', label: I18n.translate('simple_form.labels.defaults.exhibit'), index_range: 'A'..'Z', limit: 5
+
+        config.add_facet_field 'non_user_collections_ssim', label: 'Collection', show: false
+        config.add_facet_field 'user_collections_ssim', label: 'User Collection', show: false
 
         # Iterate all metadata and facet the properties that are configured for facets and not facetable yet
         # Do not show these facets, they're for collection configurable facets

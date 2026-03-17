@@ -9,6 +9,17 @@ class GenericIndexer < Hyrax::WorkIndexer
   include OregonDigital::StripsStopwords
   include OregonDigital::ParsableLabelBehavior
 
+  # Valkyrie compatibility hack to allow Hyrax.indexing_adapter to see AF based indexers
+  def initialize(obj)
+    obj = obj[:resource] if obj.is_a?(Hash) && obj.key?(:resource)
+    super(obj)
+  end
+
+  # Valkyrie compatibility hack to allow Hyrax.indexing_adapter to see AF based indexers
+  def to_solr
+    generate_solr_document
+  end
+
   # ABC Size is hard to avoid here because there are many types of fields we need to index.
   # Pulling them out of #generate_solr_document and creating their own methods causes this issue to
   # propogate downwards.
@@ -57,10 +68,14 @@ class GenericIndexer < Hyrax::WorkIndexer
   def importer_lookup(identifier)
     return [] if identifier.blank?
 
-    e = Bulkrax::Entry.find_by(identifier: identifier.first)
-    return [] if e.nil?
+    possibles = []
+    identifier.each do |id|
+      e = Bulkrax::Entry.where(identifier: id, importerexporter_type: 'Bulkrax::Importer')
+      next if e.blank?
 
-    [e.importerexporter_id]
+      possibles << e.map { |x| x[:importerexporter_id] }.min
+    end
+    possibles.min.nil? ? [] : [possibles.min]
   end
 
   def collection_indexing_key(machine_id)
