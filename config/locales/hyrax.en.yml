@@ -280,6 +280,12 @@ en:
         save: Save
         title: Title
         accessibility_feature: Accessibility Feature
+  oregon_digital:
+    complex_objects:
+      actions:
+        header: Actions
+        download: Download
+
     search:
       form:
         facet:
