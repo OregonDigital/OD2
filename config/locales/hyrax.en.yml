@@ -331,6 +331,11 @@ en:
       sessions:
         create:
           deactivated_url: 'Your account has been deactivated'
+  oregon_digital:
+    complex_objects:
+      actions:
+        header: Actions
+        download: Download
   simple_form:
     hints:
       collection:

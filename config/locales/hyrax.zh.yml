@@ -57,6 +57,11 @@ zh:
     institution_name_full: 机构名称
     product_name: 蹄兔
     product_twitter_handle: "@SamveraRepo"
+  oregon_digital:
+    complex_objects:
+      actions:
+        header: 操作
+        download: 下载
   simple_form:
     labels:
       defaults:
