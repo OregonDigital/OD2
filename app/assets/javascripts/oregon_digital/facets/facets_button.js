@@ -26,8 +26,15 @@ $(function () {
 
       // STRIP: Strip the URL for base URL
       const base_url = url.pathname.split('/facet/')[0];
-      const locale = url.searchParams.get('locale');
-      window.location.href = base_url + (locale ? '?locale=' + locale : '');
+
+      // CLONE: Clone search params
+      const params = new URLSearchParams(url.search);
+      // REMOVE: Remove facet-specific params
+      params.delete('facet.page');
+
+      // REDIRECT: Redirect with preserved params
+      const queryString = params.toString();
+      window.location.href = base_url + (queryString ? '?' + queryString : '');
     }
 
     // ELSE: Do it normally with the Bootstrap
