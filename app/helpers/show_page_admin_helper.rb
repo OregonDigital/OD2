@@ -6,11 +6,11 @@
 # in order to display the matching entry identifier, we are using the last value from bulkrax_identifier
 module ShowPageAdminHelper
   def show_importer_link(solr_doc, base_url)
-    return 'not found' if solr_doc['bulkrax_identifier_sim'].blank?
+    return 'not found' if solr_doc['bulkrax_identifier_tesim'].blank?
 
-    return "#{solr_doc['bulkrax_identifier_sim'].last}: not found" unless importer_exists?(solr_doc['bulkrax_importer_id_sim'])
+    return "#{solr_doc['bulkrax_identifier_tesim'].last}: not found" unless importer_exists?(solr_doc['bulkrax_importer_id_sim'])
 
-    return link_to(solr_doc['bulkrax_identifier_sim'].last, "#{base_url}#{bulkrax.importer_path(solr_doc['bulkrax_importer_id_sim'].last)}", target: '_blank')
+    return link_to(solr_doc['bulkrax_identifier_tesim'].last, "#{base_url}#{bulkrax.importer_path(solr_doc['bulkrax_importer_id_sim'].last)}", target: '_blank')
   end
 
   def importer_exists?(importer_id)
