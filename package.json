@@ -13,7 +13,7 @@
   },
   "scripts": {
     "preinstall": "rm -rf ./public/uv",
-    "postinstall": "yarn run uv-install && yarn run uv-config",
+    "postinstall": "yarnpkg run uv-install && yarnpkg run uv-config",
     "uv-install": "shx mkdir ./public/uv && cp -r ./node_modules/universalviewer/dist/* ./public/uv/",
     "uv-config": "shx cp ./config/uv/* ./public/uv/"
   }
