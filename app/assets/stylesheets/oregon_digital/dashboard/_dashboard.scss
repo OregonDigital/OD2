@@ -4,3 +4,129 @@
 #suppressed_bsi {
   display: none;
 }
+
+.dashboard .main-header h1 {
+  font-size: 30px;
+  margin-left: 5px;
+  margin-top: 6px;
+}
+
+.dashboard .count-display {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.dashboard .main-header .btn-sm {
+  margin-bottom: 6px;
+}
+
+.card-header,
+.spaced-rows .card-header h2 {
+  color: #4e4a42;
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.card-header .h2 {
+  font-size: 22px;
+}
+
+.card-subtitle,
+.card-header-message {
+  color: #333333;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.card-footer {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.nav-link.active {
+  border-top: 2px solid #073C5C !important;
+}
+
+.collections-list-table .btn-sm,
+.works-list .btn-sm,
+.collection-types-table .btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#add-new-collection-button,
+.list-filters .btn-group .btn,
+.adam .btn  {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 12px;
+}
+
+#collection-edit-controls,
+.card.tabs {
+  margin-top: 44px;
+  background-color: #fff;
+
+  .nav-tabs {
+    margin-top: -43px;
+    border-bottom: 0;
+  }
+}
+
+.show-more .fa {
+  padding-top: 3px;
+  padding-left: 4px;
+}
+
+.table-responsive {
+  overflow-x: scroll;
+}
+
+.form-control-sm {
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  font-size: 12px;
+
+  @media (max-width: breakpoint-min(md)) {
+    width: 100%;
+  }
+}
+
+table.dataTable td.dataTables_empty {
+  text-align: left;
+}
+
+#per_page-dropdown-xs {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.badge.dark-text, td.status span {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #777777;
+  border-radius: 10px;
+}
+
+.list-group-item > .badge, td.status .list-group-item > span {
+  float: right;
+}
