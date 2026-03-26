@@ -37,7 +37,10 @@ class CatalogController < ApplicationController
 
   # Combine our search queries as they come in
   def index
-    create_full_size_download_facet
+    # Dynamically add in SOLR query to the facet
+    facet = blacklight_config.facet_fields['full_size_download_allowed']
+    facet.query['allowed'][:fq] = full_size_download_facet_query
+    blacklight_config.facet_fields['full_size_download_allowed'] = facet
     super
   end
 
@@ -62,58 +65,35 @@ class CatalogController < ApplicationController
   # This can't be tied directly to user abilities and is deeply intertwined with solr fields
   # By nature it is long and complex
   # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
-  def create_full_size_download_facet
+  def full_size_download_facet_query
     # Admin sets we're going to prevent downloading
     uo_admin_set_ids = YAML.load_file("#{Rails.root}/config/download_restriction.yml")['uo']['admin_sets']
     # Select visibility based on current user's group visibilities
     visibility = ['open']
     visibility << current_user.groups unless current_user.blank?
-    roles = ['public'] + current_user&.roles.to_a.map(&:name)
     # Add private and in review if the user is an admin
     visibility << %w[restricted private] if current_user&.role?(Ability.manager_permission_roles)
+    visibility = visibility.flatten.uniq
+
     roles = ['public'] + current_user&.roles.to_a.map(&:name)
 
-    blacklight_config.configure do |config|
-      config.add_facet_field 'full_size_download_allowed', label: 'Full Size Download Allowed', query: {
-        # BIG SOLR QUERY HERE
-        allowed: {
-          label: 'Allowed',
-          fq: "full_size_download_allowed_sim:(1)
-            OR (
-              (
-                visibility_ssi:(#{visibility.join ' '})
-                OR read_access_group_ssim:(#{roles.join ' '})
-                OR read_access_person_ssim:(#{current_user&.name || 0})
-              )
-              AND *:* -primarySet_ssim:(#{uo_admin_set_ids.join ' '})
-              AND *:* -full_size_download_allowed_sim:(0)
-            )"
-        }
-        # Reverse query for debugging
-        # disallowed: { label: 'Disallowed', fq:
-        #   "full_size_download_allowed_sim:(0)
-        #   OR (
-        #     (
-        #       (
-        #         *:* -visibility_ssi:(#{visibility.join ' '})
-        #         AND *:* -read_access_group_ssim:(#{roles.join ' '})
-        #         AND *:* -read_access_person_ssim:(#{current_user.name})
-        #       )
-        #       OR primarySet_ssim:(#{uo_admin_set_ids.join ' '})
-        #     )
-        #     AND -full_size_download_allowed_sim:(1)
-        #   )"
-        # }
-      }
-    end
+    # QUERY: Add in the remaining fq query dynamically for the facet to work
+    <<~SOLR.squish
+      full_size_download_allowed_sim:(1)
+      OR (
+        (
+          visibility_ssi:(#{visibility.join(' ')})
+          OR read_access_group_ssim:(#{roles.join(' ')})
+          OR read_access_person_ssim:(#{current_user&.name || 0})
+        )
+        AND *:* -primarySet_ssim:(#{uo_admin_set_ids.join(' ')})
+        AND *:* -full_size_download_allowed_sim:(0)
+      )
+    SOLR
   end
   # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
 
   private
 
