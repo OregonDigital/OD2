@@ -1,9 +1,9 @@
 <!-- OVERRIDE FROM HYRAX TO ADD SAVE BUTTON AND MODAL -->
 
-<div id="sortAndPerPage" class="row sort-pagination d-md-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
-  <%= render_results_collection_tools wrapping_class: "search-widgets text-right" %>
+<div id="sortAndPerPage" class="sort-pagination d-lg-flex justify-content-between" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
+  <%= render_results_collection_tools wrapping_class: "search-widgets d-block col-lg-6 col-sm-12" %>
 
-  <div class="save-widgets text-right mr-5">
+  <div class="save-widgets text-right mr-3">
     <%= button_tag( class: 'select-button',
                     onclick: 'javascript:selectAllSearchResults()',
                     'aria-controls' => 'select-chosen' ) do %>
@@ -16,7 +16,7 @@
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.none') %></span>
                       <span class="sr-only"> Deselect all works for adding</span>
                     <% end %>
-    <%= button_tag( class: 'bulk-review-button btn-default',
+    <%= button_tag( class: 'bulk-review-button btn btn-default',
                     onclick: 'javascript:bulkReview(event)') do %>
                       <span aria-hidden='true'><%= t('hyrax.dashboard.my.action.review_selected') %></span>
                       <span class="sr-only"> Review Selected </span>
