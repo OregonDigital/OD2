@@ -78,15 +78,24 @@ module OregonDigital
     end
 
     def self.fetch_from_source(uri, triplestore)
-      Rails.logger.info "Fetching #{uri} from the authorative source. (this is slow)"
-      # CONDITION: Check on one of the CV is Homosaurus or BNE
-      graph = if uri.to_s.include?('homosaurus') || uri.to_s.include?('datos.bne.es')
-                triplestore.fetch(uri + '.jsonld', from_remote: true)
-              else
-                triplestore.fetch(uri, from_remote: true)
-              end
-      Rails.logger.info 'Fetched From Source'
-      graph
+      Rails.logger.info "Fetching #{uri} from the external source. (this is slow)"
+      Rails.logger.info "Checking Rails cache for prior failed external fetch: #{uri}"
+      cache_check = Rails.cache.read(uri)
+      return nil if cache_check == 'failed'
+
+      begin
+        # CONDITION: Check on one of the CV is Homosaurus or BNE
+        graph = if uri.to_s.include?('homosaurus') || uri.to_s.include?('datos.bne.es')
+                  triplestore.fetch(uri + '.jsonld', from_remote: true)
+                else
+                  triplestore.fetch(uri, from_remote: true)
+                end
+        Rails.logger.info "Fetch successful from external source: #{uri}"
+        graph
+      rescue TriplestoreAdapter::TriplestoreException
+        puts "Fetch failed from external source: #{uri}"
+        Rails.cache.write(uri, 'failed', expires_in: ENV.fetch('FETCH_EXTERNAL_FAILED_WAIT', 1.week).to_i)
+      end
     end
   end
 end
