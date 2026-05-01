@@ -77,6 +77,8 @@ module OregonDigital
       graph
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def self.fetch_from_source(uri, triplestore)
       Rails.logger.info "Fetching #{uri} from the external source. (this is slow)"
       Rails.logger.info "Checking Rails cache for prior failed external fetch: #{uri}"
@@ -97,5 +99,7 @@ module OregonDigital
         Rails.cache.write(uri, 'failed', expires_in: ENV.fetch('FETCH_EXTERNAL_FAILED_WAIT', 1.week).to_i)
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
   end
 end
