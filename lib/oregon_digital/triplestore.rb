@@ -93,7 +93,7 @@ module OregonDigital
         Rails.logger.info "Fetch successful from external source: #{uri}"
         graph
       rescue TriplestoreAdapter::TriplestoreException
-        puts "Fetch failed from external source: #{uri}"
+        Rails.logger.warn "Fetch failed from external source: #{uri}"
         Rails.cache.write(uri, 'failed', expires_in: ENV.fetch('FETCH_EXTERNAL_FAILED_WAIT', 1.week).to_i)
       end
     end
