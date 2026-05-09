@@ -97,6 +97,7 @@ module OregonDigital
       rescue TriplestoreAdapter::TriplestoreException
         Rails.logger.warn "Fetch failed from external source: #{uri}"
         Rails.cache.write(uri, 'failed', expires_in: ENV.fetch('FETCH_EXTERNAL_FAILED_WAIT', 1.week).to_i)
+        raise TriplestoreAdapter::TriplestoreException
       end
     end
     # rubocop:enable Metrics/AbcSize
