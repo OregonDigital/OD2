@@ -178,7 +178,7 @@ jobs:
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
       - run: bundle exec rake db:create db:migrate db:schema:load --trace
       - browser-tools/install_chrome:
-          replace-existing: true
+          replace_existing: true
           timeout: 5m
       - browser-tools/install_chromedriver:
           timeout: 5m
