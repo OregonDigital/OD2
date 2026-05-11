@@ -37,7 +37,7 @@ class CatalogController < ApplicationController
 
   # Combine our search queries as they come in
   def index
-    # Dynamically add in SOLR query to the facet
+    # ADD: Dynamically add in SOLR query to the facet of full download
     facet = blacklight_config.facet_fields['full_size_download_allowed']
     facet.query['allowed'][:fq] = full_size_download_facet_query
     blacklight_config.facet_fields['full_size_download_allowed'] = facet
