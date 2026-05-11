@@ -4,12 +4,12 @@
   <h1><span class="fa fa-sitemap"></span><%= t('.manage_oembeds') %></h1>
 <% end %>
 
-<div class="panel panel-default tabs">
+<div class="card tabs">
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#all" data-toggle="tab"><%= t('.all') %></a></li>
-    <li><a href="#errors" data-toggle="tab"><%= t('.errors') %></a></li>
+    <li><a class="nav-link active" href="#all" data-toggle="tab"><%= t('.all') %></a></li>
+    <li><a class="nav-link" href="#errors" data-toggle="tab"><%= t('.errors') %></a></li>
   </ul>
-  <div class="panel-body">
+  <div class="card-body">
     <div class="tab-content">
       <div class="tab-pane active" id="all">
         <%= render "table", file_sets: assets_with_oembed, show_error_list: false %>

@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  browser-tools: circleci/browser-tools@1.4.8
+  browser-tools: circleci/browser-tools@2.4.2
   docker: circleci/docker@2.7.1
 jobs:
   checkout_code:
@@ -177,9 +177,11 @@ jobs:
           name: Wait for Redis
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
       - run: bundle exec rake db:create db:migrate db:schema:load --trace
-      - browser-tools/install-chrome:
-          replace-existing: true
-      - browser-tools/install-chromedriver
+      - browser-tools/install_chrome:
+          replace_existing: true
+          timeout: 5m
+      - browser-tools/install_chromedriver:
+          timeout: 5m
       - run:
           command: |
             google-chrome --version

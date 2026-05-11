@@ -3,8 +3,36 @@
   color: white;
   width: 100%;
   text-align: left;
+  overflow: hidden;
   &:hover {
     background-color: #f0f0f0;
     color: black;
   }
 }
+
+.profile-data-name .h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.activity-dropdown.fa {
+  margin-top: 5px;
+  margin-right: 0px !important;
+}
+
+.sidebar {
+  li {
+    width: 100%;
+  }
+
+  .nav-link {
+    padding: 12px 10px 12px 12px;
+    width: 100%;
+
+    &:focus {
+      background-color:#505050 !important;
+      color: #fff;
+    }
+  }
+}
+
