@@ -13,6 +13,7 @@ zh:
           publisher_sim: 出版者
           subject_sim: 学科
           workflow_state_name_ssim: 流程状态
+          local_contexts_label_sim: 本地语境标签和提示
         index:
           based_near_tesim: 位置
           contributor_tesim: 贡献者
@@ -65,6 +66,6 @@ zh:
   simple_form:
     labels:
       defaults:
-        local_contexts: 在地脉络
-        local_contexts_local: 在地脉络
+        local_contexts: 本地语境标签和提示
+        local_contexts_local: 本地语境标签和提示
         resource_type: 媒体
