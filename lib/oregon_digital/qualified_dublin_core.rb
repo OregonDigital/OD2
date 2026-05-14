@@ -20,7 +20,7 @@ module OregonDigital::QualifiedDublinCore
   end
 
   # rubocop:disable Metrics/MethodLength
-  # qualified dublin core elements are mapped against the #qualified_dublin_core_field_names whitelist.
+  # qualified dublin core elements are mapped against the #qualified_dublin_core_field_names allowlist.
   def export_as_oai_qdc_xml
     xml = Builder::XmlMarkup.new
     xml.tag!('oai_dc:dc',
