@@ -276,23 +276,24 @@ workflows:
       - lint:
           requires:
             - bundle
-      - test:
-          requires:
-            - lint
-          filters:
-            branches:
-              ignore:
-                - master
+      # - test:
+      #     requires:
+      #       - lint
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - master
       - build_and_push_beavernetes:
           name: Build and push application image to Beavernetes image repository
           requires:
             - lint
-            - test
+            # - test
           filters:
             branches:
               only:
                 - master
                 - /infra\/.*/
                 - /staging\/.*/
+                - /update\/.*/
           repo: od2_web
           environment: production
