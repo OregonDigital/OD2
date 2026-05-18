@@ -134,7 +134,7 @@
   <!-- Create render display for the Local Contexts Icon -->
   <% if !@collection.local_contexts.blank? %>
     <br/>
-    <h2 class="h4">Explore More about the Collection</h2>
+    <h2 class="local-context-metadata-header">Explore More about the Collection</h2>
     <%= render 'oregon_digital/base/local_contexts', collection_lc: @collection, location_name: 'collection' %>
     <br/>
   <% end %>
@@ -142,7 +142,9 @@
   <% unless footer_metadata.empty? %>
     <div id="footer-metadata" class="row">
       <div class="col-lg-12">
-        <h2 class="collection-metadata-header">Explore more about the collection</h2>
+        <% if @collection.local_contexts.blank? %>
+          <h2 class="collection-metadata-header">Explore more about the collection</h2>
+        <% end %>
         <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
           <%= render 'attribute_rows_footer', presenter: @presenter %>
         </dl>
