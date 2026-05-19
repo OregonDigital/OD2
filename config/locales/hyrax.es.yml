@@ -12,7 +12,7 @@ es:
           language_sim: Idioma
           publisher_sim: Editor
           subject_sim: Tema
-          local_contexts_label_sim: Local Contexts
+          local_contexts_label_sim: Etiquetas y avisos de Contextos Locales
           identifier_sim: Identificador
           workflow_state_name_ssim: Estado del Workflow
         index:
@@ -67,6 +67,6 @@ es:
   simple_form:
     labels:
       defaults:
-        local_contexts: Local Contexts
-        local_contexts_label: Local Contexts
+        local_contexts: Etiquetas y avisos de Contextos Locales
+        local_contexts_label: Etiquetas y avisos de Contextos Locales
         resource_type: Medios
