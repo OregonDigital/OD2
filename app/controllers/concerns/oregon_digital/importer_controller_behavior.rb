@@ -24,7 +24,7 @@ module OregonDigital
     # rubocop:disable Metrics/AbcSize
     def verify
       @importer = Bulkrax::Importer.find(params[:importer_id])
-      Redis.current.del("verify_count:#{@importer.id}")
+      Hyrax.config.redis_connection.del("verify_count:#{@importer.id}")
       ids = work_ids.map { |x| x[:work_id] }.reject(&:nil?)
       redirect_to(importer_path(@importer.id), notice: 'Unable to find any items to verify.') and return if ids.empty?
 

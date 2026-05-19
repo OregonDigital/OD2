@@ -9,10 +9,10 @@ module OregonDigital
     # rubocop:disable Style/GuardClause
     after_perform do |job|
       args = job.arguments.first
-      count = Redis.current.incr("verify_count:#{args[:batch_id]}")
+      count = Hyrax.config.redis_connection.incr("verify_count:#{args[:batch_id]}")
       if count >= args[:size]
         follow_up(args)
-        Redis.current.expire("verify_count:#{args[:batch_id]}", 5)
+        Hyrax.config.redis_connection.expire("verify_count:#{args[:batch_id]}", 5)
       end
     end
 
