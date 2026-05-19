@@ -3,7 +3,6 @@
 module OregonDigital
   # Indexer that indexes fileset specific metadata
   class FileSetIndexer < Hyrax::FileSetIndexer
-
     # @param [#create_date, #modified_date, #has_model, #id, #to_json, #attached_files, #[]] obj
     # The class of obj must respond to these methods:
     #   inspect
@@ -15,7 +14,7 @@ module OregonDigital
     def to_solr
       # This is a temporary bridge between AF and Valkyrie indexing
       # This whole file should be removed once OD2 has proper valkyrie indexing support
-      self.generate_solr_document.tap do |solr_doc|
+      generate_solr_document.tap do |solr_doc|
         solr_doc['oembed_url_sim'] = object.oembed_url
         # Collapse possible extracted text with OCRd text for searching
         solr_doc['all_text_timv'] = find_all_text_value
