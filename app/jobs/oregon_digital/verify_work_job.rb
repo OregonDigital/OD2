@@ -9,10 +9,14 @@ module OregonDigital
     # rubocop:disable Style/GuardClause
     after_perform do |job|
       args = job.arguments.first
-      count = Hyrax.config.redis_connection.incr("verify_count:#{args[:batch_id]}")
+      Hyrax.config.redis_connection.with do |conn|
+        count = conn.incr("verify_count:#{args[:batch_id]}")
+      end
       if count >= args[:size]
         follow_up(args)
-        Hyrax.config.redis_connection.expire("verify_count:#{args[:batch_id]}", 5)
+        Hyrax.config.redis_connection.with do |conn|
+          conn.expire("verify_count:#{args[:batch_id]}", 5)
+        end
       end
     end
 
