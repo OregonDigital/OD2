@@ -44,6 +44,14 @@ Hyrax.config do |config|
   RDF::VOCABS.merge!({ons: {uri: "http://opaquenamespace.org/ns/", class_name: "ONS"}})
   config.admin_set_predicate = RDF::Vocabulary.new("http://opaquenamespace.org/ns/").primarySet
 
+  # Which RDF term should be used to relate objects to a rendering?
+  # If this is a new repository, you may want to set a custom predicate term here to
+  # avoid clashes if you plan to use the default (dct:hasFormat) for other relations.
+  # config.rendering_predicate = ::RDF::DC.hasFormat
+
+  # Configure the Logger for the Hyrax application; by default it is the Rails.logger.
+  # config.logger = Rails.logger
+
   # Email recipient of messages sent via the contact form
   config.contact_email = ENV.fetch('SYSTEM_EMAIL_ADDRESS', 'noreply@oregondigital.org')
 
@@ -89,13 +97,13 @@ Hyrax.config do |config|
 
   # Hyrax uses NOIDs for files and collections instead of Fedora UUIDs
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
-  # config.enable_noids = true
+  config.enable_noids = true
 
   # Template for your repository's NOID IDs
   # config.noid_template = ".reeddeeddk"
 
   # Use the database-backed minter class
-  # config.noid_minter_class = ActiveFedora::Noid::Minter::Db
+  config.noid_minter_class = Noid::Rails::Minter::Db
 
   # Store identifier minter's state in a file for later replayability
   # config.minter_statefile = '/tmp/minter-state'
@@ -141,6 +149,11 @@ Hyrax.config do |config|
   # Should a button with "Share my work" show on the front page to all users (even those not logged in)?
   config.display_share_button_when_not_logged_in = false
 
+  # This user is logged as the acting user for jobs and other processes that
+  # run without being attributed to a specific user (e.g. creation of the
+  # default admin set).
+  # config.system_user_key = 'systemuser@example.com'
+
   # The user who runs batch jobs. Update this if you aren't using emails
   # config.batch_user_key = 'batchuser@example.com'
 
@@ -157,6 +170,10 @@ Hyrax.config do |config|
   # These must be lambdas that return a Pathname. Can be configured separately
   config.upload_path = -> { Rails.root.join('tmp', 'shared', 'uploads') }
   config.cache_path = -> { Rails.root.join('tmp', 'shared', 'uploads', 'cache') }
+
+  # The registered candidate derivative services.  In the array, the first `valid?` candidate will
+  # handle the derivative generation.
+  config.derivative_services = [OregonDigital::FileSetDerivativesService]
 
   # Location on local file system where derivatives will be stored
   # If you use a multi-server architecture, this MUST be a shared volume
@@ -210,8 +227,68 @@ Hyrax.config do |config|
   # config.lock_time_to_live = 60_000
 
   ## Do not alter unless you understand how ActiveFedora handles URI/ID translation
-  # config.translate_id_to_uri = ActiveFedora::Noid.config.translate_id_to_uri
-  # config.translate_uri_to_id = ActiveFedora::Noid.config.translate_uri_to_id
+  # config.translate_id_to_uri = lambda do |uri|
+  #                                baseparts = 2 + [(Noid::Rails::Config.template.gsub(/\.[rsz]/, '').length.to_f / 2).ceil, 4].min
+  #                                uri.to_s.sub(baseurl, '').split('/', baseparts).last
+  #                              end
+  # config.translate_uri_to_id = lambda do |id|
+  #                                "#{ActiveFedora.fedora.host}#{ActiveFedora.fedora.base_path}/#{Noid::Rails.treeify(id)}"
+  #                              end
+
+  # Identify the model class name that will be used for Collections in your app
+  # (i.e. ::Collection for ActiveFedora, Hyrax::PcdmCollection for Valkyrie)
+  config.collection_model = '::Collection'
+  # config.collection_model = 'Hyrax::PcdmCollection'
+
+  # Identify the model class name that will be used for Admin Sets in your app
+  # (i.e. AdminSet for ActiveFedora, Hyrax::AdministrativeSet for Valkyrie)
+  config.admin_set_model = 'AdminSet'
+  # config.admin_set_model = 'Hyrax::AdministrativeSet'
+
+  # Identify the form that will be used for Admin Sets
+  # config.administrative_set_form = Hyrax::Forms::AdministrativeSetForm
+
+  # Identify the indexer that will be used for Admin Sets
+  # config.administrative_set_indexer = Hyrax::Indexers::AdministrativeSetIndexer
+
+  # Identify the form that will be used for File Sets
+  # config.file_set_form = Hyrax::Forms::FileSetForm
+
+  # Identify the indexer that will be used for File Sets
+  config.file_set_indexer = OregonDigital::FileSetIndexer
+
+  # Service for resolving {FileMetadata} nodes by status, e.g. "primary", rather
+  # than use.
+  # config.file_set_file_service = Hyrax::FileSetFileService
+
+  # Identify the form that will be used for Collections
+  # config.pcdm_collection_form = Hyrax::Forms::PcdmCollectionForm
+
+  # Identify the indexer that will be used for Collections
+  config.pcdm_collection_indexer = OregonDigital::CollectionIndexer
+
+  # Provide a proc for form generation for Objects
+  # config.pcdm_object_form_builder = lambda do |model_class|
+  #   Hyrax::Forms::PcdmObjectForm(model_class)
+  # end
+
+  # Provide a proc for indexer generation for Objects
+  config.pcdm_object_indexer_builder = lambda do |model_class|
+    "OregonDigital::#{model_class}Indexer".constantize.new
+    # Hyrax::Indexers::PcdmObjectIndexer(model_class)
+  end
+
+  ## Enable Valkyrie only mode
+  config.use_valkyrie = false
+  config.disable_wings = false
+
+  # When your application is ready to use the valkyrie index instead of the one
+  # maintained by active fedora, you will need to set this to true. You will
+  # also need to update your Blacklight configuration.
+  config.query_index_from_valkyrie = false
+
+  ## Configure index adapter for Valkyrie::Resources to use solr readonly indexer
+  config.index_adapter = :solr_index
 
   ## Fedora import/export tool
   #
@@ -232,7 +309,7 @@ Hyrax.config do |config|
     config.browse_everything = nil
   end
 
-  ## Whitelist all directories which can be used to ingest from the local file
+  ## Register all directories which can be used to ingest from the local file
   # system.
   #
   # Any file, and only those, that is anywhere under one of the specified
@@ -246,7 +323,7 @@ Hyrax.config do |config|
   # ingest files from the file system that are not part of the BrowseEverything
   # mount point.
   #
-  # config.whitelisted_ingest_dirs = []
+  # config.registered_ingest_dirs = []
 
   # Fields to display in the IIIF metadata section; default is the required fields
   config.iiif_metadata_fields = %i[
@@ -273,8 +350,13 @@ Hyrax.config do |config|
   # WARNING: KEEP THIS SECRET. DO NOT STORE IN REPOSITORY
   config.recaptcha_secret_key = ENV.fetch('RECAPTCHA_SECRET_KEY', 'xxxx_XXXXXXXXXXfffffffffff')
 
-  config.index_adapter = :solr_index
+  # Set the system-wide virus scanner
+  config.virus_scanner = Hyrax::VirusScanner
 
+  ## Remote identifiers configuration
+  # Add registrar implementations by uncommenting and adding to the hash below.
+  # See app/services/hyrax/identifier/registrar.rb for the registrar interface
+  # config.identifier_registrars = {}
 end
 
 Date::DATE_FORMATS[:standard] = '%m/%d/%Y'
@@ -284,8 +366,6 @@ Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::
 
 Hyrax::Engine.routes.default_url_options = Rails.application.config.action_mailer.default_url_options
 Rails.application.routes.default_url_options = Rails.application.config.action_mailer.default_url_options
-
-Hyrax::DerivativeService.services = [OregonDigital::FileSetDerivativesService]
 
 # set bulkrax default work type to first curation_concern if it isn't already set
 if Bulkrax.default_work_type.blank?

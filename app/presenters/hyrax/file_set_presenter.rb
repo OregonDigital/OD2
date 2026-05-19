@@ -22,7 +22,8 @@ module Hyrax
 
     # CurationConcern methods
     delegate :stringify_keys, :human_readable_type, :collection?, :image?, :video?,
-             :audio?, :pdf?, :office_document?, :representative_id, :to_s, to: :solr_document
+             :audio?, :pdf?, :office_document?, :representative_id, :to_s,
+             :extensions_and_mime_types, to: :solr_document
 
     # Methods used by blacklight helpers
     delegate :has?, :first, :fetch, to: :solr_document
@@ -36,6 +37,8 @@ module Hyrax
              :original_file_id, :oembed_url, :all_text, :hocr_text,
              :accessibility_feature,
              to: :solr_document
+
+    delegate :member_of_collection_ids, to: :parent
 
     def self.characterization_terms
       %i[
@@ -73,6 +76,11 @@ module Hyrax
       current_ability.can?(:read, id) ? first_title : 'File'
     end
 
+    ##
+    # @deprecated use `::Ability.can?(:edit, presenter)`. Hyrax views calling
+    #   presenter {#editor} methods will continue to call them until Hyrax
+    #   4.0.0. The deprecation time horizon for the presenter methods themselves
+    #   is 5.0.0.
     def editor?
       current_ability.can?(:edit, solr_document)
     end
@@ -113,6 +121,12 @@ module Hyrax
     def user_can_perform_any_action?
       Deprecation.warn("We're removing Hyrax::FileSetPresenter.user_can_perform_any_action? in Hyrax 4.0.0; Instead use can? in view contexts.")
       current_ability.can?(:edit, id) || current_ability.can?(:destroy, id) || current_ability.can?(:download, id)
+    end
+
+    ##
+    # @return [Array<String>]
+    def show_partials
+      ['show_details']
     end
 
     private
