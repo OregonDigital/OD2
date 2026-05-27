@@ -257,6 +257,11 @@ Hyrax.config do |config|
   # Identify the indexer that will be used for File Sets
   config.file_set_indexer = OregonDigital::FileSetIndexer
 
+  # Identify the model class name that will be used for File Sets in your app
+  # (i.e. FileSet for ActiveFedora, Hyrax::FileSet for Valkyrie)
+  # config.file_set_model = 'Hyrax::FileSet'
+  config.file_set_model = '::FileSet'
+
   # Service for resolving {FileMetadata} nodes by status, e.g. "primary", rather
   # than use.
   # config.file_set_file_service = Hyrax::FileSetFileService
