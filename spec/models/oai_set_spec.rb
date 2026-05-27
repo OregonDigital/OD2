@@ -10,7 +10,7 @@ RSpec.describe OaiSet do
     described_class.controller = controller
     described_class.fields = fields
     allow(controller).to receive(:params).and_return({})
-    allow(ActiveFedora::Base).to receive(:find).and_return(coll)
+    allow(SolrDocument).to receive(:find).and_return(coll)
   end
 
   describe 'from_spec' do

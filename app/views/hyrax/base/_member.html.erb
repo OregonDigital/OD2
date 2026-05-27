@@ -1,7 +1,8 @@
 <tr class="<%= dom_class(member) %> attributes">
   <td class="attribute attribute-thumbnail">
     <%# MODIFY: Add in a class label to let blurred image based on work's setting %>
-    <%= render_thumbnail_tag member, { alt: "file details", class: ("blurred-image" if !@presenter.mask_content.blank?) } %>
+    <% @mask_contents = member.is_a?(Hyrax::WorkShowPresenter) ? member.solr_document.mask_content : @presenter.mask_content %>
+    <%= render_thumbnail_tag member, { alt: "file details", class: ("blurred-image" if @mask_contents.present?) } %>
   </td>
   <th scope="row" class="attribute attribute-filename ensure-wrapped"><%= link_to(member.link_name, contextual_path(member, @presenter)) %> <br/><br/>
     <% if (member.is_a?(Hyrax::FileSetPresenter)) && (!member.accessibility_feature.blank?) %>
