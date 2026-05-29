@@ -15,11 +15,13 @@ RUN apt update && apt -y upgrade && \
   build-essential zip xz-utils autoconf automake libtool texinfo libltdl7 \
   bash bash-completion java-common openjdk-17-jre-headless graphicsmagick ffmpeg \
   poppler-utils tesseract-ocr libopenjp2-7-dev libopenjp2-tools libopenjp2-7 \
-  libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release cmake
+  libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release cmake mediainfo libmediainfo-dev
 
 # Set the timezone to America/Los_Angeles (Pacific) then get rid of tzdata
 RUN cp -f /usr/share/zoneinfo/America/Los_Angeles /etc/localtime && \
   echo 'America/Los_Angeles' > /etc/timezone
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Install ImageMagick with jp2/tiff support
 # Install ImageMagick with full support
@@ -49,8 +51,8 @@ RUN mkdir -p /tmp/im && \
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
   curl -fSL -o /opt/fits-1.6.0.zip https://github.com/harvard-lts/fits/releases/download/1.6.0/fits-1.6.0.zip && \
-  cd /opt/fits && unzip /opt/fits-1.6.0.zip  && chmod +X fits.sh && \
-  rm -f /opt/fits-1.6.0.zip
+  cd /opt/fits && unzip /opt/fits-1.6.0.zip  && chmod a+x fits.sh && \
+  rm -rf /opt/fits-1.6.0.zip /opt/fits/tools/mediainfo/linux
 
 ARG UID=8083
 ARG GID=8083

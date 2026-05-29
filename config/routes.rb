@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/capabilitylist' => 'hyrax/homepage#index'
   get '/resourcelist' => 'hyrax/homepage#index'
   get '/changelist' => 'hyrax/homepage#index'
-  
+
   concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   concern :iiif_search, BlacklightIiifSearch::Routes.new
   resources :collections, controller: 'oregon_digital/explore_collections', only: [] do
@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       namespaced_resources curation_concern_name, only: [] do
         member do
           get :download_low, :download, :metadata
+          post :reindex
         end
       end
     end
