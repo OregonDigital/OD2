@@ -4,17 +4,17 @@
       <a href="#description" class="nav-link active" role="tab" data-toggle="tab"><%= t('.tabs.description') %></a>
     </li>
     <% if @form.persisted? %>
-      <% if @collection.brandable? %>
+      <% if collection_brandable?(collection: @collection) %>
       <li class="nav-item" >
         <a href="#branding" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.branding') %></a>
       </li>
       <% end %>
-      <% if @collection.discoverable? %>
+      <% if collection_sharable?(collection: @collection) %>
       <li class="nav-item">
         <a href="#discovery" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.discovery') %></a>
       </li>
       <% end %>
-      <% if @collection.sharable? %>
+      <% if collection_sharable?(collection: @collection) %>
       <li class="nav-item">
         <a href="#sharing" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.sharing') %></a>
       </li>

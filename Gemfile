@@ -18,7 +18,7 @@ gem 'dalli', '~> 3.2.3'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
-gem 'hyrax', '~> 4.0'
+gem 'hyrax', '~> 5.2'
 # gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'sassc-rails'
@@ -77,7 +77,7 @@ gem 'blacklight_oai_provider'
 
 group :development do
   # listen is a requirement of puma but isn't part of its gemspec
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'web-console', '>= 3.3.0'
 end
 

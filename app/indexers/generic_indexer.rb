@@ -43,7 +43,7 @@ class GenericIndexer < Hyrax::WorkIndexer
       solr_doc['user_collections_ssim'] = []
       solr_doc['oai_collections_ssim'] = []
       object.member_of_collections.each do |collection|
-        collection_index_key = collection_indexing_key(collection.collection_type.machine_id)
+        collection_index_key = collection_indexing_key(Hyrax::CollectionType.for(collection: collection).machine_id)
         solr_doc[collection_index_key] << collection.id
         solr_doc[collection_index_key.gsub('_ssim', '_tesim')] = collection.title
         solr_doc['non_user_collections_label_ssim'] << collection.title.first if collection_index_key == 'non_user_collections_ssim'

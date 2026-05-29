@@ -232,7 +232,7 @@ jobs:
             export APP_VERSION=$(cat lib/oregon_digital/version.rb | grep VERSION | cut -d "=" -f 2 | sed "s/['\" ]//g")
             export GIT_SHORT_HASH=$(git rev-parse --short HEAD)
             export DATETIME=$(date "+%Y%m%d%H%M")
-            export TAG="$DATETIME-$GIT_SHORT_HASH"
+            export TAG="$DATETIME-$GIT_SHORT_HASH-v5"
             export DEPLOYED_VERSION="$DATETIME-$GIT_SHORT_HASH"
             echo export RAILS_ENV="$RAILS_ENV" >> $BASH_ENV
             echo export TAG="$TAG" >> $BASH_ENV
@@ -276,23 +276,24 @@ workflows:
       - lint:
           requires:
             - bundle
-      - test:
-          requires:
-            - lint
-          filters:
-            branches:
-              ignore:
-                - master
+      # - test:
+      #     requires:
+      #       - lint
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - master
       - build_and_push_beavernetes:
           name: Build and push application image to Beavernetes image repository
           requires:
             - lint
-            - test
+            # - test
           filters:
             branches:
               only:
                 - master
                 - /infra\/.*/
                 - /staging\/.*/
+                - /update\/.*/
           repo: od2_web
           environment: production

@@ -13,7 +13,6 @@ namespace :oregon_digital do
     puts 'Creating admin sets'
 
     admin_sets = YAML.load_file("#{Rails.root}/config/initializers/migrator/admin_sets_info.yml")['admin_sets']
-
     admin_sets.each do |admin_set|
       id = admin_set['id']
       title = admin_set['title']
@@ -24,7 +23,9 @@ namespace :oregon_digital do
       end
 
       admin_set_instance = AdminSet.new(id: id, title: [title], description: [description])
-      admin_set_record = Hyrax::AdminSetCreateService.call(admin_set: admin_set_instance, creating_user: user)
+      admin_set_record = admin_set_instance.save!
+      template = Hyrax::PermissionTemplate.find_or_create_by(source_id: admin_set_instance.id.to_s)
+      Hyrax::PermissionTemplateAccess.create!(permission_template: template,agent_type: Hyrax::PermissionTemplateAccess::USER,agent_id: user.user_key,access: Hyrax::PermissionTemplateAccess::MANAGE)
       if admin_set_record == true
         puts "Successfully created AdminSet with id \"#{id}\" title \"#{title}\" and description \"#{description}\""
       else
