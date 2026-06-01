@@ -31,13 +31,10 @@ class FileSet < ActiveFedora::Base
 
   def self.characterization_terms
     %i[
-      format_label file_size well_formed valid date_created fits_version
-      exif_version original_checksum byte_order compression height width color_space
-      profile_name profile_version orientation color_map image_producer capture_device
-      scanning_software gps_timestamp latitude longitude file_title creator page_count
+      valid date_created fits_version exif_version creator
       language word_count character_count line_count character_set markup_basis markup_language
       paragraph_count table_count graphics_count bit_depth channels data_format frame_rate
-      bit_rate duration sample_rate offset aspect_ratio
+      bit_rate offset aspect_ratio
     ]
   end
   delegate(*characterization_terms, to: :characterization_proxy)
