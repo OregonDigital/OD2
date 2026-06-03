@@ -29,15 +29,7 @@ class FileSet < ActiveFedora::Base
     !oembed_url.nil? && !oembed_url.empty?
   end
 
-  def self.characterization_terms
-    %i[
-      valid date_created fits_version exif_version creator
-      language word_count character_count line_count character_set markup_basis markup_language
-      paragraph_count table_count graphics_count bit_depth channels data_format frame_rate
-      bit_rate offset aspect_ratio
-    ]
-  end
-  delegate(*characterization_terms, to: :characterization_proxy)
+  delegate(*Hyrax::FileSetPresenter.characterization_terms, to: :characterization_proxy)
 
   def hocr_text
     # Use hocr derivative if available
