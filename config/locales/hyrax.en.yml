@@ -280,6 +280,8 @@ en:
         save: Save
         title: Title
         accessibility_feature: Accessibility Feature
+      show_details:
+        alt_text: Alternative Text
     search:
       form:
         facet:
