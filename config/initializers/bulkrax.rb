@@ -89,6 +89,7 @@ Bulkrax.setup do |config|
   fieldhash_csv['oembed_urls'] = { from:['oembed_urls'], split: true }
   fieldhash_csv['accessibility_feature'] = { from:['accessibilityFeature'], split: true }
   fieldhash_csv['accessibility_summary'] = { from:['accessibilitySummary'], split: true }
+  fieldhash_csv['alt_text'] = { from:['alt_text'], split: true }
   fieldhash_csv['full_size_download_allowed'][:parsed] = true
   config.field_mappings['Bulkrax::CsvParser'] = fieldhash_csv
 end
@@ -143,7 +144,7 @@ Bulkrax::CsvEntry.class_eval do
     Array.wrap(content.to_s.strip).join('; ')
   end
 
-  # override to use add_oembed & add_accessibilities
+  # override to use add_oembed & add_alt_text
   def build_metadata
     validate_record
 
@@ -159,12 +160,17 @@ Bulkrax::CsvEntry.class_eval do
     sanitize_controlled_uri_values!
     add_local
     add_oembed
+    add_alt_text
 
     self.parsed_metadata
   end
 
   def add_oembed
       self.parsed_metadata['oembed_urls'] = [record['oembed_urls']]
+  end
+
+  def add_alt_text
+      self.parsed_metadata['alt_text'] = [record['alt_text']]
   end
 
   # commented change to avoid urls in the export headers
