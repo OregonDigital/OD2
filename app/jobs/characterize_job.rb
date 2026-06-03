@@ -31,6 +31,7 @@ class CharacterizeJob < Hyrax::ApplicationJob
   # @param [String, NilClass] filepath the cached file within the Hyrax.config.working_path
   def perform(file_set, file_id, filepath = nil)
     raise "#{file_set.class.characterization_proxy} was not found for FileSet #{file_set.id}" unless file_set.characterization_proxy?
+
     # Ensure a fresh copy of the repo file's latest version is being worked on, if no filepath is directly provided
     filepath = Hyrax::WorkingDirectory.copy_repository_resource_to_working_directory(Hydra::PCDM::File.find(file_id), file_set.id) unless filepath && File.exist?(filepath)
     characterize(file_set, file_id, filepath)
@@ -63,6 +64,7 @@ class CharacterizeJob < Hyrax::ApplicationJob
     file_set.save!
   end
 
+  # rubocop:disable Metrics/MethodLength
   def characterize(file_set, _file_id, filepath) # rubocop:disable Metrics/AbcSize
     # store this so we can tell if the original_file is actually changing
     previous_checksum = file_set.characterization_proxy.original_checksum.first
@@ -87,7 +89,7 @@ class CharacterizeJob < Hyrax::ApplicationJob
     # mod time. This is done in the versioning code.
     file_set.date_modified = Hyrax::TimeService.time_in_utc if file_set.characterization_proxy.original_checksum.first != previous_checksum
 
-    file_set.characterization_proxy.original_name.force_encoding("UTF-8")
+    file_set.characterization_proxy.original_name.force_encoding('UTF-8')
     # set title to label (i.e. file name, `original_name`) if that's how it was before this characterization
     file_set.title = [file_set.characterization_proxy.original_name] if reset_title
     # always set the label to the original_name
@@ -95,6 +97,7 @@ class CharacterizeJob < Hyrax::ApplicationJob
 
     file_set.save!
   end
+  # rubocop:enable Metrics/MethodLength
 
   def clear_metadata(file_set)
     # The characterization of additional file versions adds new height/width/size/checksum values to un-orderable...
