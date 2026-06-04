@@ -178,7 +178,7 @@ class SolrDocument
   solrized_methods Video.video_properties
   solrized_methods Generic.controlled_properties
   solrized_methods Generic.controlled_property_labels
-  solrized_methods FileSet.characterization_terms
+  solrized_methods Hyrax::FileSetPresenter.characterization_terms
   solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
 end
 # rubocop:enable Metrics/ClassLength

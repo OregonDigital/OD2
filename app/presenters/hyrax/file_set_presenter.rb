@@ -42,8 +42,10 @@ module Hyrax
 
     def self.characterization_terms
       %i[
-        format_label file_size well_formed valid date_created fits_version
-        exif_version original_checksum byte_order compression height width color_space
+        file_format filename mime_type alpha_channels
+        last_modified date_created
+        format_label file_size well_formed
+        original_checksum byte_order compression height width color_space
         profile_name profile_version orientation color_map image_producer capture_device
         scanning_software gps_timestamp latitude longitude file_title creator page_count
         language word_count character_count line_count character_set markup_basis markup_language
