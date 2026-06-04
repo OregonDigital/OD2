@@ -2,7 +2,6 @@
 
 describe OregonDigital::FileSetAltTextsExtractorService do
   # SETUP: Create a test variable
-  let(:service) { described_class.new }
   let(:file_path) { '/path/image.tif' }
   let(:alt_text_value) { 'test value' }
 
@@ -15,7 +14,7 @@ describe OregonDigital::FileSetAltTextsExtractorService do
       end
 
       it 'returns the alt text value' do
-        result = service.extract(file_path)
+        result = described_class.extract(file_path)
         expect(result).to eq('test value')
       end
     end
