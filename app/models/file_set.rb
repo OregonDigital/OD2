@@ -33,6 +33,7 @@ class FileSet < ActiveFedora::Base
   def oembed?
     !oembed_url.nil? && !oembed_url.empty?
   end
+
   def self.characterization_terms
     Hyrax::FileSetPresenter.characterization_terms - %i[
       last_modified file_format
