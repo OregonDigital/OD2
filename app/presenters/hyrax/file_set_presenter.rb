@@ -35,7 +35,7 @@ module Hyrax
              :depositor, :keyword, :title_or_label, :keyword,
              :date_created, :date_modified, :itemtype,
              :original_file_id, :oembed_url, :all_text, :hocr_text,
-             :accessibility_feature,
+             :accessibility_feature, :alt_text,
              to: :solr_document
 
     delegate :member_of_collection_ids, to: :parent

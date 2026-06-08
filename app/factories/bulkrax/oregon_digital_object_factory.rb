@@ -5,7 +5,7 @@ module Bulkrax
   class OregonDigitalObjectFactory < ObjectFactory
     # Override to add the _attributes properties
     def permitted_attributes
-      attribute_properties + oembed_attribute + accessibility_attributes + super
+      attribute_properties + oembed_attribute + accessibility_attributes + alt_text_attributes + super
     end
 
     # Gather the attribute_properties
@@ -21,6 +21,11 @@ module Bulkrax
 
     def accessibility_attributes
       %i[accessibility_feature accessibility_summary]
+    end
+
+    # NEW: Add alt_text to permitted attributes
+    def alt_text_attributes
+      %i[alt_text]
     end
   end
 end

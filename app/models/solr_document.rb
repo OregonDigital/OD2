@@ -23,6 +23,11 @@ class SolrDocument
     end
   end
 
+  # METHOD: Fetch out :alt_text from SolrDocument
+  def alt_text
+    self['alt_text_label_ssim']
+  end
+
   # Add support for querying for multiple ids
   def self.find(ids)
     return super(ids) unless ids.is_a? Array
