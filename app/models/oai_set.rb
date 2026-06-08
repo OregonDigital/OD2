@@ -58,7 +58,7 @@ class OaiSet < BlacklightOaiProvider::SolrSet
 
   def name_from_spec
     collection = SolrDocument.find @spec
-    return nil if collection.collection_type_gid != Hyrax::CollectionType.find_by(machine_id: :oai_set).to_global_id
+    return nil if collection.collection_type_gid != Hyrax::CollectionType.find_by(machine_id: :oai_set).to_global_id.to_s
 
     Hyrax::SolrService.query("id:#{@value}", rows: 1).first['title_tesim'].first
   end
