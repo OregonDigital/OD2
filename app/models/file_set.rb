@@ -35,6 +35,8 @@ class FileSet < ActiveFedora::Base
   end
 
   delegate(*Hyrax::FileSetPresenter.characterization_terms, to: :characterization_proxy)
+  alias filename file_name
+  alias last_modified date_modified
 
   def hocr_text
     # Use hocr derivative if available
