@@ -34,6 +34,8 @@ RSpec.describe OregonDigital::IiifV2Presenter do
       allow(fsderivs2).to receive(:sorted_derivative_urls).with('jp2').and_return([])
       allow(fsderivs3).to receive(:sorted_derivative_urls).with('jp2').and_return(['third'])
       allow(fsderivs4).to receive(:sorted_derivative_urls).with('jp2').and_return(%w[4 andfive])
+      allow(fs1).to receive(:alt_text).and_return(['test value on alt text'])
+      allow(fs1).to receive(:title).and_return(['alt_text.jpg'])
     end
 
     it 'returns one presenter for each JP2 for each fileset' do
@@ -42,6 +44,17 @@ RSpec.describe OregonDigital::IiifV2Presenter do
 
     it "returns the expected JP2s' presenters" do
       expect(presenter.file_set_presenters.collect(&:jp2_path)).to eq(%w[one another third 4 andfive])
+    end
+
+    # TEST: Setup a test for alt_text metadata in manifest for v2
+    it 'return the file set title in the label' do
+      labels = presenter.manifest_metadata.map { |m| m['label'] }
+      expect(labels).to include(['alt_text.jpg - Alternative Text'])
+    end
+
+    it 'includes the alt text as the value' do
+      entry = presenter.manifest_metadata.find { |m| m['label'] == ['alt_text.jpg - Alternative Text'] }
+      expect(entry['value']).to eq(['test value on alt text'])
     end
   end
 
