@@ -49,11 +49,11 @@ RSpec.describe OregonDigital::IiifV2Presenter do
     # TEST: Setup a test for alt_text metadata in manifest for v2
     it 'return the file set title in the label' do
       labels = presenter.manifest_metadata.map { |m| m['label'] }
-      expect(labels).to include(['alt_text.jpg - Alternative Text'])
+      expect(labels).to include('alt_text.jpg - Alternative Text')
     end
 
     it 'includes the alt text as the value' do
-      entry = presenter.manifest_metadata.find { |m| m['label'] == ['alt_text.jpg - Alternative Text'] }
+      entry = presenter.manifest_metadata.find { |m| m['label'] == 'alt_text.jpg - Alternative Text' }
       expect(entry['value']).to eq(['test value on alt text'])
     end
   end
