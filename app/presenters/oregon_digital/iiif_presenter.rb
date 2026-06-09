@@ -14,7 +14,8 @@ module OregonDigital
 
     # Select out the metadata that doesn't have a value
     def manifest_metadata
-      super.select { |m| m['value'].present? }
+      metadata = super.select { |m| m['value'].present? }
+      metadata + alt_text_metadata
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -92,6 +93,20 @@ module OregonDigital
     end
 
     private
+
+    # METHOD: Add alt_text metadata to IIIF
+    def alt_text_metadata
+      file_sets.filter_map do |fs|
+        # SKIP: Check the loop if the FileSet contain no alt_text
+        next if fs.alt_text.blank?
+
+        # ELSE: Store the value and ingest into the manifest
+        {
+          'label' => ["#{fs.title.first} - Alternative Text"],
+          'value' => fs.alt_text
+        }
+      end
+    end
 
     def file_set_derivatives_service(file_set)
       OregonDigital::FileSetDerivativesService.new(file_set)
