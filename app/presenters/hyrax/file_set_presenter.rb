@@ -42,7 +42,7 @@ module Hyrax
 
     def self.characterization_terms
       %i[
-        file_format filename mime_type alpha_channels
+        file_format file_name filename mime_type alpha_channels
         last_modified date_created
         format_label file_size well_formed
         original_checksum byte_order compression height width color_space
