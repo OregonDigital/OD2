@@ -170,8 +170,7 @@ header {
 
   #top-navbar-collapse {
     letter-spacing: 2px;
-
-    @media (max-width: breakpoint-max(lg)) {
+    @media (max-width: breakpoint-max(md)) {
       justify-content: flex-start !important;
     }
 
