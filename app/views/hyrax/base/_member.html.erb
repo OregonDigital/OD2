@@ -17,9 +17,11 @@
       <%= "Accessibility Features: #{member.solr_document['accessibility_feature_tesim'].map { |a| accessibility_display(a) }.join(', ')}" %>
     <% end %>
     <%# FIELD: Add in the :alt_text field if the data was able to extract from it %>
-    <% if member.alt_text.present? %>
-      <br/><br/>
-      <span aria-label="Alternative Text">Alternative Text:</span> <span class="alt-text-display"><%= "#{member.alt_text.first}" %></span>
+    <% if member.is_a?(Hyrax::FileSetPresenter) %>
+      <% if member.alt_text.present? %>
+        <br/><br/>
+        <span aria-label="Alternative Text">Alternative Text:</span> <span class="alt-text-display"><%= "#{member.alt_text.first}" %></span>
+      <% end %>
     <% end %>
   </td>
   <td class="attribute attribute-date_uploaded"><%= member.try(:date_uploaded) %></td>
