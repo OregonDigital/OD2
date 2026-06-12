@@ -193,10 +193,16 @@ header {
 
         a {
           color: #333;
-        }
 
-        & > a:hover{
-          text-decoration: none;
+          &:active{
+            background-color: #f5f5f5;
+            outline: 2px auto Highlight !important;
+            outline: 2px auto -webkit-focus-ring-color !important;
+          }
+
+          &:hover{
+            text-decoration: none;
+          }
         }
       }
       
