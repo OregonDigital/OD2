@@ -152,6 +152,7 @@ header {
   }
 
   #masthead {
+    z-index: 1001;
     box-shadow: 0 0 10px $dark-grey;
     border-width: 0 0 5px 0;
     padding: 1em 2em;
