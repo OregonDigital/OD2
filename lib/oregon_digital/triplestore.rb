@@ -85,6 +85,10 @@ module OregonDigital
       cache_check = Rails.cache.read(uri)
       return nil if cache_check == 'failed'
 
+      # Create an array to store failed fetch & call method to check/create exist of tmp folder
+      failed_cv = []
+      create_and_check_directory
+
       begin
         # CONDITION: Check on one of the CV is Homosaurus or BNE
         graph = if uri.to_s.include?('homosaurus') || uri.to_s.include?('datos.bne.es')
@@ -94,13 +98,51 @@ module OregonDigital
                 end
         Rails.logger.info "Fetch successful from external source: #{uri}"
         graph
-      rescue TriplestoreAdapter::TriplestoreException
+      rescue TriplestoreAdapter::TriplestoreException => e
         Rails.logger.warn "Fetch failed from external source: #{uri}"
         Rails.cache.write(uri, 'failed', expires_in: ENV.fetch('FETCH_EXTERNAL_FAILED_WAIT', 1.week).to_i)
+        failed_cv << { uri: uri.to_s, error: e.message }
+
+        # GET: Fetch the id in thread
+        work_id = Thread.current[:work_id]
+
+        # CALL: Invoke the creation of failed_fetch file if array is not empty
+        store_failed_fetch(work_id, failed_cv) unless failed_cv.blank?
         raise TriplestoreAdapter::TriplestoreException
       end
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+
+    # METHOD: Create a method store all fails CV fetch
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
+    def self.store_failed_fetch(id, failed_cv)
+      # PATH: Setup a path for the txt file
+      path = Rails.root.join('tmp', 'failed_fetch', "#{id}.txt").to_s
+
+      # SEARCH: Look for works to create a link & get URL path
+      work = SolrDocument.find(id)
+      url_path = Rails.application.routes.url_helpers.polymorphic_url(work)
+
+      # STORE: Add in data to txt file & check on exist file
+      File.open(path, File.exist?(path) ? 'a' : 'w+') do |f|
+        f.puts('Failed Fetch Record')
+        f.puts("Work ID: #{id}")
+        f.puts("Work Link: #{url_path}")
+        failed_cv.each do |w|
+          f.puts("Error Placement: #{w[:uri]}   Error on Value: #{w[:error]}")
+        end
+        f.puts("Time Recorded: #{Time.now.strftime('%m-%d-%Y %I:%M %p')}")
+      end
+    end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
+
+    # METHOD: Create and check exist of folder
+    def self.create_and_check_directory
+      dir_path = Rails.root.join('tmp', 'failed_fetch').to_s
+      FileUtils.mkdir_p(dir_path)
+    end
   end
 end

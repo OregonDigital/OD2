@@ -57,6 +57,7 @@ module OregonDigital
 
     # override Hyrax fetch_value to get rid of misleading logging
     def fetch_value(value)
+      Thread.current[:work_id] = @object.id
       value.fetch(headers: { 'Accept' => default_accept_header })
     rescue IOError, SocketError, TriplestoreAdapter::TriplestoreException => e
       # IOError could result from a 500 error on the remote server
