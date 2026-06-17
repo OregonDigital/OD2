@@ -35,7 +35,7 @@ class FileSet < ActiveFedora::Base
   end
 
   self.characterization_terms = Hyrax::FileSetPresenter.characterization_terms - %i[filename]
-  delegate(*self.characterization_terms, to: :characterization_proxy)
+  delegate(*characterization_terms, to: :characterization_proxy)
   alias filename file_name
   alias last_modified date_modified
 
