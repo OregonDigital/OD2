@@ -8,7 +8,7 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
     {
       'id' => 'abcde1234',
       'date_tesim' => ['1920s'],
-      'archival_object_id_tesim' => ["['archival_objects/1234']"],
+      'archival_object_id_tesim' => ["['archival_objects/1234']"], # note garbage brackets
       'visibility_ssi' => 'open',
       'has_model_ssim' => ['Generic']
     }
@@ -37,10 +37,30 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
   end
 
   describe 'linked_instance' do
-    let(:resp) { { 'ref' => '/repositories/2/archival_objects/1234' } }
+    let(:resp) { { 'ref' => '/repositories/x/archival_objects/1234' } }
 
-    it 'returns path with correct id' do
-      expect(ado.linked_instance).to eq resp
+    context 'with valid AO id' do
+      it 'returns path with correct id' do
+        expect(ado.linked_instance).to eq resp
+      end
+    end
+
+    context 'with incomplete AO id' do
+      let(:attributes) do
+        {
+          'id' => 'abcde1234',
+          'date_tesim' => ['1920s'],
+          'archival_object_id_tesim' => ['1234'],
+          'visibility_ssi' => 'open',
+          'has_model_ssim' => ['Generic']
+        }
+      end
+
+      it 'returns empty hash' do
+        ref = ado.linked_instance
+        expect(ref).to eq({})
+        expect(ado.errors).to include('abcde1234 has invalid archival_object_id')
+      end
     end
   end
 
