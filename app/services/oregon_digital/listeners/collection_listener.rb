@@ -8,10 +8,6 @@ module OregonDigital
       def on_collection_metadata_updated(event)
         CollectionUpdateEventJob.perform_later(event[:collection].id, event[:user])
       end
-
-      def on_collection_metadata_created(event)
-        CollectionCreateEventJob.perform_later(event[:collection].id, event[:user])
-      end
     end
   end
 end
