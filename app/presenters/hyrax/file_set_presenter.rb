@@ -42,8 +42,8 @@ module Hyrax
 
     def self.characterization_terms
       %i[
-        file_format file_name filename mime_type alpha_channels
-        last_modified date_created
+        file_name filename mime_type alpha_channels
+        last_modified date_created valid
         format_label file_size well_formed
         original_checksum byte_order compression height width color_space
         profile_name profile_version orientation color_map image_producer capture_device
@@ -51,7 +51,7 @@ module Hyrax
         language word_count character_count line_count character_set markup_basis markup_language
         paragraph_count table_count graphics_count bit_depth channels data_format frame_rate
         bit_rate duration sample_rate offset aspect_ratio
-      ]
+      ].sort
     end
     delegate(*characterization_terms, to: :solr_document)
 

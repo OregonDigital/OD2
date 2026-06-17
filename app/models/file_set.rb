@@ -34,7 +34,8 @@ class FileSet < ActiveFedora::Base
     !oembed_url.nil? && !oembed_url.empty?
   end
 
-  delegate(*Hyrax::FileSetPresenter.characterization_terms, to: :characterization_proxy)
+  self.characterization_terms = Hyrax::FileSetPresenter.characterization_terms - %i[filename]
+  delegate(*characterization_terms, to: :characterization_proxy)
   alias filename file_name
   alias last_modified date_modified
 
