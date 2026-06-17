@@ -22,10 +22,5 @@ module Bulkrax
     def accessibility_attributes
       %i[accessibility_feature accessibility_summary]
     end
-
-    # NEW: Add alt_text to permitted attributes
-    def alt_text_attributes
-      %i[alt_text]
-    end
   end
 end

@@ -32,19 +32,25 @@ module OregonDigital
       record['digital_object_id'] = doc['identifier_tesim'].first
       add_visibility
     end
-    # rubocop:enable Metrics/AbcSize
 
+    # x is repository num placeholder
     def linked_instance
       if doc['archival_object_id_tesim'].blank?
         errors << "#{doc['id']} has no archival_object_id"
         return {}
-
       end
-      val = doc['archival_object_id_tesim'].first.split('/').last
-      id_match = /[0-9]+/.match val
-      return {} if id_match.nil?
+      val = doc['archival_object_id_tesim'].first
 
-      { 'ref' => "/repositories/2/archival_objects/#{id_match}" }
+      if id_match(val).nil?
+        errors << "#{doc['id']} has invalid archival_object_id"
+        return {}
+      end
+      { 'ref' => "/repositories/x/#{id_match(val)}" }
+    end
+    # rubocop:enable Metrics/AbcSize
+
+    def id_match(val)
+      %r{[a-z_]+/[0-9]+}.match val
     end
 
     def record

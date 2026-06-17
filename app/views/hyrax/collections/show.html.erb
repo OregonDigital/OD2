@@ -6,7 +6,7 @@
 <div class="hyc-container container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
     <%# Title, view, and description %>
-    <div class="hyc-generic">
+    <div class="hyc-generic w-100">
       <div class="row">
         <div class="col-lg-8 col-sm-12">
           <div class="hyc-title">
@@ -80,7 +80,7 @@
     <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection col-12">
       <div id="documents">
         <% # container for all documents in index view -%>
-        <div class="<%= 'blurred-image' if @collection.mask_content.include?('Item Show Page') %>" id="thumbnails" data-behavior="masonry-gallery">
+        <div class="<%= 'blurred-image' if @collection.mask_content.include?('Item Show Page') %> d-flex flex-sm-wrap justify-content-between h-100" id="thumbnails" data-behavior="masonry-gallery">
           <div id="masonry-sizer"></div>
           <div id="masonry-gutter-sizer"></div>
           <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
