@@ -1,7 +1,7 @@
 # frozen_string_literal:true
 
 # Similar to work event jobs except collections cannot be passed in
-class CollectionEventJob < Hyrax::EventJob
+class CollectionEventJob < EventJob
   attr_reader :collection
   def perform(collid, depositor)
     @collection = Collection.find(collid)
