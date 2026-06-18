@@ -11,6 +11,7 @@ module OregonDigital
     end
 
     # METHOD: Add user to the 'map_user' list
+    # rubocop:disable Metrics/MethodLength
     def add_list_of_users
       # CHECK: See if folder exist
       return unless folder_exist?
@@ -30,6 +31,7 @@ module OregonDigital
         user_map << { doc['depositor_ssim'].first => "#{doc['id']}.txt" }
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     # METHOD: Add method to fetch metadeities
     def fetch_metadeities
