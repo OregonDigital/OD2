@@ -22,7 +22,8 @@ module Hyrax
 
     # CurationConcern methods
     delegate :stringify_keys, :human_readable_type, :collection?, :image?, :video?,
-             :audio?, :pdf?, :office_document?, :representative_id, :to_s, to: :solr_document
+             :audio?, :pdf?, :office_document?, :representative_id, :to_s,
+             :extensions_and_mime_types, to: :solr_document
 
     # Methods used by blacklight helpers
     delegate :has?, :first, :fetch, to: :solr_document
@@ -37,16 +38,20 @@ module Hyrax
              :accessibility_feature, :alt_text,
              to: :solr_document
 
+    delegate :member_of_collection_ids, to: :parent
+
     def self.characterization_terms
       %i[
-        format_label file_size well_formed valid date_created fits_version
-        exif_version original_checksum byte_order compression height width color_space
+        file_name filename mime_type alpha_channels
+        last_modified date_created valid
+        format_label file_size well_formed
+        original_checksum byte_order compression height width color_space
         profile_name profile_version orientation color_map image_producer capture_device
         scanning_software gps_timestamp latitude longitude file_title creator page_count
         language word_count character_count line_count character_set markup_basis markup_language
         paragraph_count table_count graphics_count bit_depth channels data_format frame_rate
         bit_rate duration sample_rate offset aspect_ratio
-      ]
+      ].sort
     end
     delegate(*characterization_terms, to: :solr_document)
 
@@ -73,6 +78,11 @@ module Hyrax
       current_ability.can?(:read, id) ? first_title : 'File'
     end
 
+    ##
+    # @deprecated use `::Ability.can?(:edit, presenter)`. Hyrax views calling
+    #   presenter {#editor} methods will continue to call them until Hyrax
+    #   4.0.0. The deprecation time horizon for the presenter methods themselves
+    #   is 5.0.0.
     def editor?
       current_ability.can?(:edit, solr_document)
     end
@@ -113,6 +123,12 @@ module Hyrax
     def user_can_perform_any_action?
       Deprecation.warn("We're removing Hyrax::FileSetPresenter.user_can_perform_any_action? in Hyrax 4.0.0; Instead use can? in view contexts.")
       current_ability.can?(:edit, id) || current_ability.can?(:destroy, id) || current_ability.can?(:download, id)
+    end
+
+    ##
+    # @return [Array<String>]
+    def show_partials
+      ['show_details']
     end
 
     private
