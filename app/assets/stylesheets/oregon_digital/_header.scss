@@ -152,6 +152,7 @@ header {
   }
 
   #masthead {
+    z-index: 1001;
     box-shadow: 0 0 10px $dark-grey;
     border-width: 0 0 5px 0;
     padding: 1em 2em;
@@ -170,8 +171,7 @@ header {
 
   #top-navbar-collapse {
     letter-spacing: 2px;
-
-    @media (max-width: breakpoint-max(lg)) {
+    @media (max-width: breakpoint-max(md)) {
       justify-content: flex-start !important;
     }
 
@@ -194,10 +194,16 @@ header {
 
         a {
           color: #333;
-        }
 
-        & > a:hover{
-          text-decoration: none;
+          &:active{
+            background-color: #f5f5f5;
+            outline: 2px auto Highlight !important;
+            outline: 2px auto -webkit-focus-ring-color !important;
+          }
+
+          &:hover{
+            text-decoration: none;
+          }
         }
       }
       

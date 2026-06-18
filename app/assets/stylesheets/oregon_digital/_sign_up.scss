@@ -2,6 +2,10 @@
   max-width: map-get($container-max-widths, "md");;
   margin: auto;
 
+  h1 {
+    margin-top: 20px;
+  }
+
   .login-footer,
   .new_user {
     padding: 2em 0;
