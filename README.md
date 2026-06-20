@@ -1,11 +1,9 @@
-Oregon Digital
----
+# Oregon Digital
 
 [![CircleCI](https://circleci.com/gh/OregonDigital/OD2.svg?style=svg)](https://circleci.com/gh/OregonDigital/OD2)
 [![Coverage Status](https://coveralls.io/repos/github/OregonDigital/OD2/badge.svg?branch=master)](https://coveralls.io/github/OregonDigital/OD2?branch=master)
 
-Docker Setup
----
+## Docker Setup
 
 ### Requirements
 
@@ -14,8 +12,7 @@ The details provided assume that the official Docker daemon is running in the ba
 **Suggested:** If using ohmyzsh (http://ohmyz.sh/), add the docker-compose plugin to the .zshrc for better command-line aliases and integration.
 
 **Important:** _By default, docker will run the services in the context of
-`RAILS_ENV=development`_, and there is no valid AWS configuration.  You can
-copy the included `.env.example` to `.env` and override these things if desired.
+`RAILS_ENV=development`_. All environment variables are handled in the `docker-compose.yml` file or you may copy `docker-compose.override.yml-example` to `docker-compose.override.yml` to add additional docker configuration.
 
 **Important:** It's a known issue that Java, in docker images built for x86, ran through Apple's Rosetta2 for M1 chips cause constant errors & crashes.
 The `docker-compose.yml` has a `build` option for Blazegraph and FCrepo. If you're using an M1 mac you should comment out the `image` section and uncomment the `build` ones for these services.
@@ -23,17 +20,22 @@ This will build those images from the `m1` directory, which are copy+paste's fro
 
 ### Docker notes
 
+Here are some useful docker commands that may be relevant to you
+
 - `$ docker system prune` : A command that will reclaim disk space by deleting stopped containers, networks, dangling images and build cache.
 - `$ docker volume ls` : Show a list of named volumes which hold persistent data for containers.
 - `$ docker volume rm [VOLUME NAME]` : Remove a named volume, to force the system to rebuild and start that services persistent data from scratch.
+  And here are some useful docker-compose commands
+- `$ docker compose up server -d` : Start just the development environment
+- `$ docker compose down` : Stop all environments
+- `$ docker compose logs -f server` : Follow the logs from just the rails application
 
-Development Workflow
----
+## Development Workflow
 
 ### Starting from scratch
 
 You shouldn't need to do these steps often, but you **should** read them and
-understand them.  A "fresh start" can be necessary at times, especially when
+understand them. A "fresh start" can be necessary at times, especially when
 getting back to OD2 after a lot of development has taken place by others.
 
 First, clone OD2:
@@ -43,26 +45,21 @@ git clone git@github.com:OregonDigital/OD2.git
 cd OD2
 ```
 
-Next, build the app image *with your user id*, otherwise permissions will not work
-for development!  If your system doesn't have the `id` command, you'll need to
-manually determine your user id *and* your group id, otherwise things could get
+Next, build the app image _with your user id_, otherwise permissions will not work
+for development! If your system doesn't have the `id` command, you'll need to
+manually determine your user id _and_ your group id, otherwise things could get
 really weird.
 
 ```bash
 docker-compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g) server workers app test dev
 ```
 
-**Note**: This will take a *very* long time the first time you do it.
-Potentially 30 minutes or longer.  I'm not kidding, I'm timing it right now and
-it's ... well, kind of amazing but in a terrible way.  I'm at 20 minutes and
-still waiting on the "fits" download.  So go take a break.  Get a coffee.  Do
-whatever cliched things people do when waiting for a slow thing to occur.  You
-might have time for a short vacation.  Not like... a trip to Cabo, but maybe a
-local bed and breakfast.  That could be nice, right?
+**Note**: This will take a _very_ long time the first time you do it.
+Potentially 30 minutes or longer. We're not kidding.
 
 Once built, you shouldn't need to rebuild the image unless you're changing the
-`Dockerfile`, suspect a bad cached build, or can't get gems to install via
-in-container runs of `bundler`.  And subsequent builds will be a bit faster
+`Dockerfile` or `Gemfile`, suspect a bad cached build, or can't get gems to install via
+in-container runs of `bundler`. Subsequent builds will be a bit faster
 (usually) than the initial build, because you won't have to download things
 like the base Ruby image, and you typically won't have to reinstall core
 dependencies like libreoffice.
@@ -75,7 +72,7 @@ cp docker-compose.override.yml-example docker-compose.override.yml
 ```
 
 This file contains configuration you may expect and even require for typical
-development.  Feel free to tweak and override base settings here; this file is
+development. Feel free to tweak and override base settings here; this file is
 meant to hold all the custom environment that's particular to individual
 developers.
 
@@ -96,17 +93,16 @@ _Open another terminal window (unless you run the previous command `detached`)._
 On the first time building and starting the server, or any time you destroy the
 stack's data volumes, Hyrax defaults must be created and loaded:
 
-*("docker-compose exec" only works if the server is running.  The first-run
-command only works if the server has already been initialized.  **Make sure
-migrations have finished running** before you do these steps.)*
+_("docker-compose exec" only works if the server is running. The first-run
+command only works if the server has already been initialized. **Make sure
+migrations have finished running** before you do these steps.)_
 
 ```bash
 docker-compose exec server ./build/firstrun.sh
 ```
 
-This will take a few minutes.  Once it's done, you can visit
-`http://localhost:3000/users/sign_in?locale=en` and log in as
-"admin@example.org" with the password "admin123".
+This will take a few minutes. Once it's done, you can visit
+`http://localhost:3000/users/sign_in?locale=en` to
 
 ### Manual setup
 
@@ -131,8 +127,7 @@ Return to the server container shell session, start Rails console, create an `ad
 
 Login to the app, and continue configuration or depositing works using the Hyrax UI.
 
-Testing workflow
----
+## Testing workflow
 
 Testing the application amounts to running all of the required services along side an instance of the application and then running the testing framework against those containers. All of the `*-test` services have applicable environment variables injected to the containers during boot.
 
@@ -153,11 +148,10 @@ Start a session, and run `rspec` on the test (application) container. _(This met
 
     docker-compose exec test rspec
 
-Do *not* use `docker-compose run` - it will fire up the entrypoint script,
+Do _not_ use `docker-compose run` - it will fire up the entrypoint script,
 which starts up Puma for the capybara tests.
 
-Additional Notes
----
+## Additional Notes
 
 ### Controlling Workers
 
@@ -179,4 +173,3 @@ It may behoove you to create an alias for this kind of thing:
     alias dwork='docker-compose exec -u 1000 workers'
     dwork rake -T
     dwork rails generate ...
-
