@@ -42,6 +42,14 @@ module OregonDigital
       super
     end
 
+    # METHOD: Add in a reindexing method to the works
+    def reindex
+      curation_concern.update_index
+      redirect_to [main_app, curation_concern], notice: 'Reindex was completed successfully.'
+    rescue StandardError => e
+      redirect_to [main_app, curation_concern], alert: "Reindex Failed: #{e.message}"
+    end
+
     private
 
     # METHOD: Manually ingest in the group/user permission on work form

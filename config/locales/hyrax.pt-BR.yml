@@ -14,6 +14,7 @@ pt-BR:
           subject_sim: Sujeito
           identifier_sim: Identificador
           workflow_state_name_ssim: Estado do Workflow
+          local_contexts_label_sim: Rótulos e avisos de Contextos Locais
         index:
           based_near_tesim: Localização
           contributor_tesim: Contribuinte
@@ -58,9 +59,14 @@ pt-BR:
     institution_name_full: O Nome da Instituição
     product_name: Hyrax
     product_twitter_handle: "@SamveraRepo"
+  oregon_digital:
+    complex_objects:
+      actions:
+        header: Ações
+        download: Baixar
   simple_form:
     labels:
       defaults:
-        local_contexts: Contextos Locais
-        local_contexts_local: Contextos Locais
+        local_contexts: Rótulos e avisos de Contextos Locais
+        local_contexts_local: Rótulos e avisos de Contextos Locais
         resource_type: Mídia

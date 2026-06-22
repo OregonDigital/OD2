@@ -20,6 +20,12 @@ RSpec.describe FileSet, type: :model do
     end
   end
 
+  describe 'alt_text_metadata' do
+    it 'accepts alt_text metadata' do
+      expect(model).to respond_to(:alt_text)
+    end
+  end
+
   describe 'oembed?' do
     it 'returns false when an oembed_url is not present' do
       expect(model.oembed?).to be false

@@ -23,6 +23,13 @@
       <dd class="col-7"><%= @presenter.solr_document['oembed_url_sim'] %></dd>
     </div>
   <% end %>
+  <%# OVERRIDE FROM HYRAX to show :alt_text %>
+  <% if @presenter.solr_document['alt_text_label_sim'].present? %>
+    <div class="row">
+      <dt class="col-5"><%= t(".alt_text") %></dt>
+      <dd class="col-7"><%= @presenter.solr_document['alt_text_label_tesim'].first %></dd>
+    </div>
+  <% end %>
   <div class="row">
     <dt class="col-5"><%= t(".characterization") %></dt>
     <dd class="col-7">

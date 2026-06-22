@@ -1,31 +1,31 @@
 <div class="card card-default tabs" id="collection-edit-controls">
   <ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item active">
-      <a href="#description" role="tab" data-toggle="tab"><%= t('.tabs.description') %></a>
+    <li class="nav-item">
+      <a href="#description" class="nav-link active" role="tab" data-toggle="tab"><%= t('.tabs.description') %></a>
     </li>
     <% if @form.persisted? %>
       <% if @collection.brandable? %>
       <li class="nav-item" >
-        <a href="#branding" role="tab" data-toggle="tab"><%= t('.tabs.branding') %></a>
+        <a href="#branding" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.branding') %></a>
       </li>
       <% end %>
       <% if @collection.discoverable? %>
       <li class="nav-item">
-        <a href="#discovery" role="tab" data-toggle="tab"><%= t('.tabs.discovery') %></a>
+        <a href="#discovery" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.discovery') %></a>
       </li>
       <% end %>
       <% if @collection.sharable? %>
       <li class="nav-item">
-        <a href="#sharing" role="tab" data-toggle="tab"><%= t('.tabs.sharing') %></a>
+        <a href="#sharing" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.sharing') %></a>
       </li>
       <% end %>
       <% if @collection.facet_configurable? %>
       <li class="nav-item">
-        <a href="#configurable_facets" role="tab" data-toggle="tab"><%= t('.tabs.facets') %></a>
+        <a href="#configurable_facets" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.facets') %></a>
       </li>
       <% end %>
       <li class="nav-item">
-        <a href="#content_warning" role="tab" data-toggle="tab"><%= t('.tabs.content_warning') %></a>
+        <a href="#content_warning" class="nav-link" role="tab" data-toggle="tab"><%= t('.tabs.content_warning') %></a>
       </li>
     <% end %>
   </ul>

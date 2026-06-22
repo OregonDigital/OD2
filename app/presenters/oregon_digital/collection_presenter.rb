@@ -4,6 +4,8 @@ module OregonDigital
   # Override for collection presenter
   class CollectionPresenter < Hyrax::CollectionPresenter
     include OregonDigital::PresentsAttributes
+    include ActionView::Helpers::SanitizeHelper
+
     delegate :title, :description, :creator, :contributor, :subject, :publisher, :language, :embargo_release_date,
              :lease_expiration_date, :license, :date_created, :related_url, :thumbnail_path,
              :title_or_label, :collection_type_gid, :create_date, :modified_date, :visibility, :edit_groups, :edit_people,
@@ -26,6 +28,13 @@ module OregonDigital
 
     def export_as_nt
       Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: id).resource.dump(:ntriples)
+    end
+
+    # OVERRIDE: Override the method to ultilize the HTML markup tag to be use in the description for collection
+    def description
+      Array(solr_document.description).map do |val|
+        sanitize(CGI.unescapeHTML(val), tags: %w[p a abbr b i em strong br ul ol li], attributes: %w[href])
+      end
     end
   end
 end

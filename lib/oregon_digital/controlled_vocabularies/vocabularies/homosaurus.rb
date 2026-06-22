@@ -4,8 +4,9 @@ module OregonDigital
   module ControlledVocabularies::Vocabularies
     # Receives information pulled from the endpoint and can parse and generate queries
     class Homosaurus
+      # Accept either v3 or v4
       def self.expression
-        %r{^http[s]?:\/\/homosaurus.org\/v4\/.*}
+        %r{^http[s]?:\/\/homosaurus\.org\/v(3|4)\/.*}
       end
 
       def self.label(data)
@@ -13,6 +14,8 @@ module OregonDigital
 
         if labels.is_a?(Array)
           labels.map { |v| v['@value'] if v['@language'] == 'en' }.first
+        elsif labels.is_a?(String)
+          labels
         else
           labels['@value']
         end

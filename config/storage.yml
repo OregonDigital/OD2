@@ -1,0 +1,7 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join(ENV.fetch('LOCAL_PATH', 'tmp/shared')) %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join(ENV.fetch('LOCAL_PATH', 'tmp/shared')) %>

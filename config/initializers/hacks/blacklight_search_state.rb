@@ -1,5 +1,4 @@
 # frozen_string_literal:true
-
 Rails.application.config.to_prepare do
   Blacklight::SearchState.class_eval do
     # The SPARQL gem stomps on the Rails definition of deep_dup and gives us a Hash instead of

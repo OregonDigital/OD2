@@ -2,16 +2,16 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="title-link-local-contexts">
-      <p><%= link_to 'About Local Contexts', Rails.application.routes.url_helpers.local_contexts_path, 'aria-label': "Read more about Local Contexts", class: 'lato-p' %></p>
+      <p><%= link_to 'About Local Contexts Notices and Labels', Rails.application.routes.url_helpers.local_contexts_path, 'aria-label': "Read more about Local Contexts", class: 'lato-p' %></p>
     </div>
-    
+
     <%# FETCH: Get the array of the local contexts from work/collection %>
     <% if location_name.eql?('collection') %>
-      <h2 class='h6'>Local Contexts</h2>
+      <h2 class='h6'>Local Contexts Notices and Labels</h2>
       <% @lc_labels = OregonDigital::LocalContextsService.new.all_labels(collection_lc.local_contexts) %>
       <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@lc_labels) %>
     <% else %>
-      <h2 class='h4'>Local Contexts</h2>
+      <h2 class='h4'>Local Contexts Notices and Labels</h2>
       <% @lc_labels = work_lc.local_contexts_label %>
       <% @lc_arr = OregonDigital::LocalContextsService.new.parse_labels_for_image(@lc_labels) %>
     <% end %>
