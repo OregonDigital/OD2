@@ -130,3 +130,9 @@ table.dataTable td.dataTables_empty {
 .list-group-item > .badge, td.status .list-group-item > span {
   float: right;
 }
+
+#myTab {
+  .nav-link.active {
+    border-top: inherit !important;
+  }
+}
