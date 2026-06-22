@@ -15,3 +15,17 @@
     height: 100%;
     margin-bottom: 20px;
 }
+
+// MODIFY: Add in modification towards the form progress section
+#form-sidebar-card {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  float: right;
+}
+
+// fix blueimp jQuery-File-Upload display problems under Bootstrap 4+
+// found here: https://stackoverflow.com/a/48162651
+.fade.in {
+  opacity: 1
+}

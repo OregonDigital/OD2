@@ -1,15 +1,14 @@
 <!-- OVERRIDE FROM HYRAX -->
-<div class="col-9 col-md-7 col-lg-7 float-left">
+<div class="col-12 col-md-7 col-lg-7 float-left">
   <div class="metadata-row row">
-    <dl class="row">
     <% doc_presenter = index_presenter(document) %>
     <% index_fields(document).each do |field_name, field| -%>
       <% if should_render_index_field? document, field %>
-          <dt class="col-sm-3"><%= render_index_field_label document, field: field_name %></dt>
-          <dd class="col-sm-9"><%= doc_presenter.field_value field %></dd>
+          <span><%= render_index_field_label document, field: field_name %></span>
+          <span><%= doc_presenter.field_value field %></span>
+          <br />
       <% end %>
     <% end %>
-    </dl>
   </div>
   <% if document.collection? %>
     <% collection_presenter = OregonDigital::CollectionPresenter.new(document, current_ability) %>
@@ -24,16 +23,15 @@
   <% end %>
   <% if document.parents? %>
     <div class="metadata-row row">
-      <dl class="row">
-        <dt class="col-sm-3"> <%= t('hyrax.search.list.parents.header') %> </dt>
-        <dd class="col-sm-9">
-          <ul class="tabular">
-          <% document.parents.each do |parent| %>
+      <span class="children"> <%= t('hyrax.search.list.parents.header') %></span>
+      &nbsp;
+      <span>
+        <ul class="tabular">
+        <% document.parents.each do |parent| %>
             <li><%= link_to parent, Rails.application.routes.url_helpers.hyrax_image_path(parent) %></li>
           <% end %>
           </ul>
-        </dd>
-      </dl>
+      </span>
     </div>
   <% end %>
   <div class="metadata-row row">
@@ -53,5 +51,5 @@
 <!-- ADD SAVE BUTTON AND MODAL -->
 <%= form_tag main_app.hyrax_workflow_action_path(document), method: :put do %>
   <%= hidden_field_tag 'workflow_action[name]', 'approve' %>
-  <input class="btn btn-primary" type="submit" value="Approve" />
+  <input class="btn btn-primary submits-batches submits-batches-add float-left" type="submit" value="Approve" />
 <% end %>

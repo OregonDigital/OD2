@@ -16,3 +16,5 @@ production:
   - fetch
   - ingest
   - reindex
+  - mailers
+  - verify

@@ -93,6 +93,24 @@ a.toc-link {
   padding: 2px !important;
 }
 
+// HOVER: Hover effect and focus on active tab
+#form-sidebar-card a.toc-link:hover, #form-sidebar-card a.toc-link:focus {
+  color: #563d7c !important;
+  font-weight: bold !important;
+  text-decoration: underline;
+  border-left: 2px solid #563d7c !important;
+  padding-left: 18px !important;
+}
+
+// ACTIVE: Active tab color to match
+#form-sidebar-card a.toc-link.active {
+  color: #563d7c !important;
+  font-weight: bold !important;
+  text-decoration: underline;
+  border-left: 2px solid #563d7c !important;
+  padding-left: 18px !important;
+}
+
 #form-progress {
   margin-bottom: 0px;
 }

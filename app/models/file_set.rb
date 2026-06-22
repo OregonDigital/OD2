@@ -17,6 +17,11 @@ class FileSet < ActiveFedora::Base
     index.as :stored_searchable
   end
 
+  # NEW FIELD: Add predicate for image alt text
+  property :alt_text, predicate: ::RDF::URI.new('http://opaquenamespace.org/ns/altText'), multiple: false, basic_searchable: true do |index|
+    index.as :stored_searchable
+  end
+
   include ::Hyrax::FileSetBehavior
   include OregonDigital::AccessControls::Visibility
 

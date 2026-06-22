@@ -7,7 +7,7 @@ RSpec.describe OregonDigital::FailedFetchMailer do
   let(:filename) { 'somefile.txt' }
   let(:params) { { to: email, filename: filename } }
   let(:mail) { described_class.with(params).failed_fetch_email }
-  let(:path) { "#{Rails.root.join('tmp', 'failed_fetch')}/#{params[:filename]}" }
+  let(:path) { "#{Rails.root.join('tmp', 'shared', 'failed_fetch')}/#{params[:filename]}" }
 
   # MOCK: Mock the file existence to simulate real file checks
   before do

@@ -1,5 +1,5 @@
 <%# OVERRIDE: Override the Show page to add in a download button %>
-<div class="col-xs-12 main-header d-flex justify-content-between align-items-center">
+<div class="col-12 main-header d-flex justify-content-between align-items-center">
   <h1><span class="fa fa-cloud-upload" aria-hidden="true"></span> Importer: <%= @importer.name %></h1>
   <div class="pull-right">
     <%= link_to 'Download Original File', importer_original_file_path(@importer.id), class: 'btn btn-primary text-nowrap', data: { turbolinks: false } if @importer.original_file %>
@@ -9,8 +9,8 @@
     <% end %>
   </div>
 </div>
-<div class="panel card panel-default bulkrax-align-text">
-  <div class="panel-body card-body">
+<div class="card bulkrax-align-text">
+  <div class="card-body">
     <p class="bulkrax-p-align">
       <strong><%= t('bulkrax.importer.labels.name') %>:</strong>
       <%= @importer.name %>
@@ -98,10 +98,10 @@
     <%= render partial: 'oregon_digital/importer/digobj_export', locals: { item: @importer } %>
 
     <% if @importer.validate_only == true %>
-      <div class='pull-left'>
+      <div class='float-left'>
         <%= button_to 'Continue', importer_continue_path(@importer), method: :put, class: 'btn btn-primary' %>
       </div>
-      <div class='pull-right'>
+      <div class='float-right'>
         <%= button_to 'Discard', @importer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
       </div>
     <% end %>

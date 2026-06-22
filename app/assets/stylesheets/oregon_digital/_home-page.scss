@@ -38,8 +38,10 @@ td.toggle .input-group-btn:last-child > input[type=submit]:not(:last-child) {
     text-align: center;
   }
 
-  .background-container img {
-    width: 100%;
+  @media (min-width: breakpoint-max(lg)) {
+    .background-container img {
+      width: 100%;
+    }
   }
 }
 #masthead {

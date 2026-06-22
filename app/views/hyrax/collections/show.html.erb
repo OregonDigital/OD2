@@ -6,7 +6,7 @@
 <div class="hyc-container container collection-header" itemscope itemtype="http://schema.org/CollectionPage">
   <div class="row hyc-header">
     <%# Title, view, and description %>
-    <div class="hyc-generic">
+    <div class="hyc-generic w-100">
       <div class="row">
         <div class="col-lg-8 col-sm-12">
           <div class="hyc-title">
@@ -80,7 +80,7 @@
     <div class="hyc-blacklight hyc-bl-results hyc-bl-search hyc-bl-collection col-12">
       <div id="documents">
         <% # container for all documents in index view -%>
-        <div class="<%= 'blurred-image' if @collection.mask_content.include?('Item Show Page') %>" id="thumbnails" data-behavior="masonry-gallery">
+        <div class="<%= 'blurred-image' if @collection.mask_content.include?('Item Show Page') %> d-flex flex-sm-wrap justify-content-between h-100" id="thumbnails" data-behavior="masonry-gallery">
           <div id="masonry-sizer"></div>
           <div id="masonry-gutter-sizer"></div>
           <%= render collection: controller.collection.representative_docs, as: :document, partial: 'showcase_tile', locals: {count: @member_docs.length} %>
@@ -103,6 +103,11 @@
       <%# NEW BUTTON: Add in an edit button to collection rather than going through the dashboard %>
       <% if user_signed_in? && current_ability.can?(:edit, @presenter.solr_document) && @presenter.collection_type.machine_id != 'user_collection' %>
         <a href="<%= edit_dashboard_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-md-10'>Edit Collection</a>
+      <% elsif user_signed_in? && current_ability.can?(:edit, @presenter.solr_document) && current_user.role?('community_user') && @presenter.collection_type.machine_id == 'user_collection' %>
+        <%= button_tag "Edit User Collection",
+            class: "btn btn-lg btn-primary collection-landing-button col-md-10",
+            data: { toggle: "modal", target: "#collection-edit-container" },
+            onclick: "javascript:open_edit_my_collection_modal('#{@presenter.id}')" %>
       <% end %>
       <%# DOWNLOAD: Add in download button for user collection %>
       <% if @collection.sharable? && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
@@ -129,7 +134,7 @@
   <!-- Create render display for the Local Contexts Icon -->
   <% if !@collection.local_contexts.blank? %>
     <br/>
-    <h2 class="h4">Explore More about the Collection</h2>
+    <h2 class="local-context-metadata-header">Explore More about the Collection</h2>
     <%= render 'oregon_digital/base/local_contexts', collection_lc: @collection, location_name: 'collection' %>
     <br/>
   <% end %>
@@ -137,7 +142,9 @@
   <% unless footer_metadata.empty? %>
     <div id="footer-metadata" class="row">
       <div class="col-lg-12">
-        <h2 class="collection-metadata-header">Explore more about the collection</h2>
+        <% if @collection.local_contexts.blank? %>
+          <h2 class="collection-metadata-header">Explore more about the collection</h2>
+        <% end %>
         <dl class="work-show lato-p <%= dom_class(@presenter) %>" <%= @presenter.microdata_type_to_html %>>
           <%= render 'attribute_rows_footer', presenter: @presenter %>
         </dl>
@@ -151,3 +158,8 @@
     <%= link_to "Export members as RDF", main_app.export_members_collection_path(@collection.id), :class => 'lato-p' %>
   <% end %>
 </div>
+
+<%# RENDER: This is the modal to render when needed to edit from the community user to edit their collection %>
+<% @document_list = Array(@presenter.solr_document) %>
+<%= render 'oregon_digital/explore_collections/collection_edit_data' %>
+<%= render 'oregon_digital/explore_collections/form_for_edit_collection' %>
