@@ -11,7 +11,6 @@ module OregonDigital
     end
 
     # METHOD: Add user to the 'map_user' list
-    # rubocop:disable Metrics/MethodLength
     def add_list_of_users
       # CHECK: See if folder exist
       return unless folder_exist?
@@ -20,18 +19,12 @@ module OregonDigital
       pid_arr = fetch_pids
 
       # LOOP: Go through Solr Doc to find depositor to user_map
-      solr_docs = pid_arr.filter_map do |pid|
-        SolrDocument.find(pid)
-      rescue Blacklight::Exceptions::RecordNotFound
-        Rails.logger.warn "SolrDocument not found for pid: #{pid}"
-        nil
-      end
+      solr_docs = SolrDocument.find(pid_arr)
 
       solr_docs.each do |doc|
         user_map << { doc['depositor_ssim'].first => "#{doc['id']}.txt" }
       end
     end
-    # rubocop:enable Metrics/MethodLength
 
     # METHOD: Add method to fetch metadeities
     def fetch_metadeities
