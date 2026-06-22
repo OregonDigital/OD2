@@ -66,7 +66,13 @@ module OregonDigital
 
       solrdoc = SolrDocument.find(params['id'])
       @jp2_work_presenter = OregonDigital::IIIFPresenter.new(solrdoc, current_ability, request)
-      @jp2_work_presenter.file_sets = solrdoc.file_sets
+
+      # Filter out restricted filesets non-editors can't access
+      accessible_file_sets = solrdoc.file_sets.select do |fs|
+        fs['visibility_ssi'] == 'open' || (current_ability.can?(:edit, fs) && fs['visibility_ssi'] == 'restricted')
+      end
+
+      @jp2_work_presenter.file_sets = accessible_file_sets
       @jp2_work_presenter
     end
 
