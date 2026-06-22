@@ -11,6 +11,7 @@ class Collection < ActiveFedora::Base
   include OregonDigital::CollectionMetadata
   include OregonDigital::MetadataDownload
   include OregonDigital::AccessControls::Visibility
+  include Hyrax::WithEvents
   self.indexer = OregonDigital::CollectionIndexer
 
   delegate :facet_configurable?, to: :collection_type

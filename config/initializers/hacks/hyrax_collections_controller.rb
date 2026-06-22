@@ -8,6 +8,7 @@ Rails.application.config.to_prepare do
   end
 
   Hyrax::Dashboard::CollectionsController.class_eval do
+    include OregonDigital::CollectionsControllerBehavior
     self.form_class = OregonDigital::Forms::CollectionForm
     self.presenter_class = OregonDigital::CollectionPresenter
 
@@ -29,7 +30,8 @@ Rails.application.config.to_prepare do
       process_branding
       process_facets if collection.facet_configurable? && !params[:facet_configuration].blank?
       process_representative_images
-
+      # will need to save permissions on valkyrie colls eventually
+      save_permissions
       @collection.visibility = Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE unless Hyrax::CollectionType.for(collection: @collection).discoverable?
       if @collection.update(collection_params.except(:members))
         after_update_response
@@ -67,6 +69,9 @@ Rails.application.config.to_prepare do
 
     # Override after update method to redirect users back to where they updated the collection from
     def after_update_response
+      Hyrax.publisher.publish('collection.metadata.updated', collection: @collection, user: current_user)
+      # copying strategy for works permission change logging, enqueue job directly without pub/listen
+      OregonDigital::CollectionPermissionChangeEventJob.perform_later(collection.id, current_user) if permissions_changed?
       respond_to do |format|
         format.html do
           case URI(request.referer).path.split('/')[1]
