@@ -102,5 +102,36 @@ module OregonDigital
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+
+    # METHOD: Create a method store all fails CV fetch
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
+    def self.store_failed_fetch(id, failed_cv)
+      # PATH: Setup a path for the txt file
+      path = Rails.root.join('tmp', 'shared', 'failed_fetch', "#{id}.txt").to_s
+
+      # SEARCH: Look for works to create a link & get URL path
+      work = SolrDocument.find(id)
+      url_path = Rails.application.routes.url_helpers.polymorphic_url(work)
+
+      # STORE: Add in data to txt file & check on exist file
+      File.open(path, File.exist?(path) ? 'a' : 'w+') do |f|
+        f.puts('Failed Fetch Record')
+        f.puts("Work ID: #{id}")
+        f.puts("Work Link: #{url_path}")
+        failed_cv.each do |w|
+          f.puts("Error Placement: #{w[:uri]}   Error on Value: #{w[:error]}")
+        end
+        f.puts("Time Recorded: #{Time.now.strftime('%m-%d-%Y %I:%M %p')}")
+      end
+    end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
+
+    # METHOD: Create and check exist of folder
+    def self.create_and_check_directory
+      dir_path = Rails.root.join('tmp', 'shared', 'failed_fetch').to_s
+      FileUtils.mkdir_p(dir_path)
+    end
   end
 end

@@ -61,6 +61,9 @@ module OregonDigital
     rescue IOError, SocketError, TriplestoreAdapter::TriplestoreException => e
       # IOError could result from a 500 error on the remote server
       # SocketError results if there is no server to connect to
+      # Add in the fail fetch attempt to store the info what is being fail
+      OregonDigital::Triplestore.create_and_check_directory
+      OregonDigital::Triplestore.store_failed_fetch(@object.id, [{ uri: value.rdf_subject.to_s, error: e.message }])
       Rails.logger.error "Unable to fetch #{value.rdf_subject}.\n#{e.message}"
     end
 
