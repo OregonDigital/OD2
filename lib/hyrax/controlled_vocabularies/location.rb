@@ -32,25 +32,19 @@ module Hyrax
         return rdf_ons_label unless geonames?
 
         @label = super
-        @label = Array("#{@label.first} County") if us_county? && no_county_label
 
         unless valid_label
           return @label if top_level_element?
 
           @label = @label.first
           parent_hierarchy.each do |p|
-            p.each do |loc|
-              @label = "#{@label} >> #{loc.rdf_label.first}"
+            loc_label = p.map { |loc| loc.rdf_label.first }.sort.join('/')
+            if us_county? && no_county_label
+              county_label = loc_label.count > 1 ? 'Counties' : 'County'
+              loc_label = "#{loc_label} #{county_label}"
             end
+            @label = "#{@label} >> #{loc_label}"
           end
-          # Get all county names
-          counties = @label.split('>>').select { |c| c.include? ' County' }.sort.map(&:strip)
-          # Sort and Combine county names + append "County/Counties"
-          counties = counties.join('/').gsub(' County', '') + ' County'.pluralize(counties.count)
-          # Pad the county string
-          counties = " #{counties.strip} "
-          # Replace old counties with new county string and squash down to one whole string
-          @label = @label.split('>>').map { |c| c.include?(' County') ? counties : c }.uniq.join('>>').strip
         end
         Array(@label)
       end
