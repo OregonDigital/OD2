@@ -72,8 +72,6 @@ module OregonDigital
         fs['visibility_ssi'] == 'open' || (current_ability.can?(:edit, fs) && fs['visibility_ssi'] == 'restricted')
       end
 
-      Rails.logger.info("FILESET: #{accessible_file_sets}")
-
       @jp2_work_presenter.file_sets = accessible_file_sets
       @jp2_work_presenter
     end
