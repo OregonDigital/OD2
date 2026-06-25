@@ -72,6 +72,8 @@ module OregonDigital
         fs['visibility_ssi'] == 'open' || (current_ability.can?(:edit, fs) && fs['visibility_ssi'] == 'restricted')
       end
 
+      Rails.logger.info("FILESET: #{accessible_file_sets}")
+
       @jp2_work_presenter.file_sets = accessible_file_sets
       @jp2_work_presenter
     end
@@ -87,7 +89,11 @@ module OregonDigital
     # @return [String]
     def manifest_cache_key
       solrdoc = SolrDocument.find(params['id'])
-      "#{KEY_PREFIX}_#{solrdoc.id}/#{version_for(solrdoc)}"
+
+      # Add in a prefix to determine which cache to render
+      current_role = current_ability.can?(:edit, solrdoc) ? 'editor' : 'public'
+
+      "#{KEY_PREFIX}_#{solrdoc.id}/#{version_for(solrdoc)}/#{current_role}"
     end
 
     ##
