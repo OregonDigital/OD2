@@ -28,10 +28,23 @@
           <%= render 'workflow_actions_widget', presenter: @presenter %>
         <% end %>
         <% if @presenter.oembed_viewer? %>
-          <% @presenter.file_set_presenters.each do |presenter| %>
-            <%= render 'oembed_media', presenter: presenter %>
+          <%#
+            Either we have filesets or children with filesets that include oembed
+            member_presents returns presents for filesets + child works so we'll iterate that
+          %>
+          <% @presenter.member_presenters.each do |presenter| %>
+            <% if presenter.respond_to?(:oembed_url) %>
+              <%# we could be a fileset presenter, that's easy %>
+              <%= render 'oembed_media', presenter: presenter %>
+            <% else %>
+              <%# or we're a child work presenter, with oembed filesets. We'll have to iterate those filesets too %>
+              <% presenter.file_set_presenters.flatten.each do |fs_presenter| %>
+                <%= render 'oembed_media', presenter: fs_presenter unless fs_presenter.oembed_url.blank? %>
+              <% end %>
+            <% end %>
           <% end %>
-        <% elsif @presenter.iiif_viewer? %>
+        <% end %>
+        <% if @presenter.iiif_viewer? %>
           <div class="col-sm-12">
             <%= render 'representative_media', presenter: @presenter, viewer: true %>
           </div>
