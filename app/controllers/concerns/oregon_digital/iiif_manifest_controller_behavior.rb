@@ -87,7 +87,11 @@ module OregonDigital
     # @return [String]
     def manifest_cache_key
       solrdoc = SolrDocument.find(params['id'])
-      "#{KEY_PREFIX}_#{solrdoc.id}/#{version_for(solrdoc)}"
+
+      # Add in a prefix to determine which cache to render
+      current_role = current_ability.can?(:edit, solrdoc) ? 'editor' : 'public'
+
+      "#{KEY_PREFIX}_#{solrdoc.id}/#{version_for(solrdoc)}/#{current_role}"
     end
 
     ##
