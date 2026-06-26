@@ -6,7 +6,7 @@ RSpec.describe OregonDigital::OembedPresenter do
   let(:attributes) do
     {
       'title_tesim' => ['Hey guys!'],
-      'oembed_url_tesim' => ['https://www.youtube.com/watch?v=8ZtInClXe1Q'],
+      'oembed_url_sim' => ['https://www.youtube.com/watch?v=8ZtInClXe1Q'],
       'human_readable_type_tesim' => ['File']
     }
   end

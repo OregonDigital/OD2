@@ -168,6 +168,10 @@ class SolrDocument
     self['oai_collections_ssim']
   end
 
+  def oembed_url
+    self['oembed_url_sim']
+  end
+
   # METHOD: Fetch the ssim for 'label$uri'
   def label_uri_helpers(attribute_name)
     OregonDigital::LabelParserService.parse_label_uris(self["#{attribute_name}_parsable_label_ssim"])
@@ -184,6 +188,6 @@ class SolrDocument
   solrized_methods Generic.controlled_properties
   solrized_methods Generic.controlled_property_labels
   solrized_methods FileSet.characterization_terms
-  solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
+  solrized_methods %w[resource_type_label language_label rights_statement_label]
 end
 # rubocop:enable Metrics/ClassLength
