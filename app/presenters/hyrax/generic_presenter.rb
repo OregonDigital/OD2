@@ -28,10 +28,15 @@ module Hyrax
       fileset_viewable || work_viewable
     end
 
+    # Look for any direct filesets for oembed or any child works with oembed filesets
     def oembed_viewer?
-      file_set_presenters.any? do |presenter|
+      fileset_viewable = file_set_presenters.any? do |presenter|
         oembed?(presenter)
       end
+      work_viewable = work_presenters.any? do |presenter|
+        oembed?(presenter)
+      end
+      fileset_viewable || work_viewable
     end
 
     def page_title
@@ -86,9 +91,17 @@ module Hyrax
       (presenter.image? || presenter.pdf? || presenter.video? || presenter.audio?) && current_ability.can?(:read, presenter.id)
     end
 
+    # if the given presenter is an oEmbed the user is allowed to see
     def oembed?(presenter)
       curation_concern = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: presenter.id, use_valkyrie: false)
-      !curation_concern.oembed_url.nil? && !curation_concern.oembed_url.empty? && current_ability.can?(:read, presenter.id)
+
+      if curation_concern.respond_to?(:oembed_url)
+        # You're a fileset
+        !curation_concern.oembed_url.blank? && current_ability.can?(:read, presenter.id)
+      else
+        # Or you're a work with filesets
+        curation_concern.file_sets.any?(&:oembed_url) && current_ability.can?(:read, presenter.id)
+      end
     end
   end
 end

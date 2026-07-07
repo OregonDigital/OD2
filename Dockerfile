@@ -26,8 +26,8 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 # Install ImageMagick with jp2/tiff support
 # Install ImageMagick with full support
 RUN mkdir -p /tmp/im && \
-  curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
-  | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
+  curl -sL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-62.tar.gz \
+  | tar -xz -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-62 && \
   ./configure \
   --build=$CBUILD \
   --host=$CHOST \

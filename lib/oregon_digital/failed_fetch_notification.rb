@@ -20,6 +20,7 @@ module OregonDigital
 
       # LOOP: Go through Solr Doc to find depositor to user_map
       solr_docs = SolrDocument.find(pid_arr)
+
       solr_docs.each do |doc|
         user_map << { doc['depositor_ssim'].first => "#{doc['id']}.txt" }
       end
@@ -36,7 +37,7 @@ module OregonDigital
       pids = []
 
       # FETCH: Ensure the directory exists and is not empty
-      fetch_dir = Rails.root.join('tmp', 'failed_fetch').to_s
+      fetch_dir = Rails.root.join('tmp', 'shared', 'failed_fetch').to_s
 
       # LOOP: Loop through the directory to check on file
       Dir.foreach(fetch_dir) do |filename|
@@ -56,7 +57,7 @@ module OregonDigital
     # Create zip file to send to metadeities
     def create_zip_file
       # GET: Get path to folder
-      dir_path = Rails.root.join('tmp', 'failed_fetch').to_s
+      dir_path = Rails.root.join('tmp', 'shared', 'failed_fetch').to_s
 
       # CHECK: Ensure the directory exists and is not empty
       return unless folder_exist?
@@ -81,7 +82,7 @@ module OregonDigital
 
     # METHOD: Return a bool to see if folder exist
     def folder_exist?
-      dir_path = Rails.root.join('tmp', 'failed_fetch').to_s
+      dir_path = Rails.root.join('tmp', 'shared', 'failed_fetch').to_s
       File.exist?(dir_path) && !Dir.empty?(dir_path)
     end
 
@@ -95,7 +96,7 @@ module OregonDigital
     # METHOD: Delete all files in folder to clear up
     def delete_files
       # PATH: Define the folder path using Rails.root.join for safety
-      folder = Rails.root.join('tmp', 'failed_fetch').to_s
+      folder = Rails.root.join('tmp', 'shared', 'failed_fetch').to_s
 
       # CHECK: Check if the directory exists before trying to delete files
       return unless Dir.exist?(folder)

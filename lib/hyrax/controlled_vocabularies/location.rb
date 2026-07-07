@@ -32,25 +32,27 @@ module Hyrax
         return rdf_ons_label unless geonames?
 
         @label = super
-        @label = Array("#{@label.first} County") if us_county? && no_county_label
 
+        fetch
         unless valid_label
           return @label if top_level_element?
 
           @label = @label.first
+          # If this is a county to begin with, it needs it's own suffix
+          @label = "#{@label} County" if us_county?(self)
+
+          # For each parent:
+          #   Combine all the labels at this level
+          #   Append the correct ordinal of County if this parent is a US county
+          #   Append the parent to the previous parent/child
           parent_hierarchy.each do |p|
-            p.each do |loc|
-              @label = "#{@label} >> #{loc.rdf_label.first}"
+            loc_label = p.map { |loc| loc.rdf_label.first }.sort.join('/')
+            if us_county?(p.first)
+              county_label = p.count > 1 ? 'Counties' : 'County'
+              loc_label = "#{loc_label} #{county_label}"
             end
+            @label = "#{@label} >> #{loc_label}"
           end
-          # Get all county names
-          counties = @label.split('>>').select { |c| c.include? ' County' }.sort.map(&:strip)
-          # Sort and Combine county names + append "County/Counties"
-          counties = counties.join('/').gsub(' County', '') + ' County'.pluralize(counties.count)
-          # Pad the county string
-          counties = " #{counties.strip} "
-          # Replace old counties with new county string and squash down to one whole string
-          @label = @label.split('>>').map { |c| c.include?(' County') ? counties : c }.uniq.join('>>').strip
         end
         Array(@label)
       end
@@ -132,13 +134,11 @@ module Hyrax
 
       private
 
-      # Identify if this is a county in the USA
-      def us_county?
-        feature_code = featureCode.first
-        parent_country = parentCountry.first
+      # Identify if loc is a county in the USA
+      def us_county?(loc)
         sec_adm_level_code = 'www.geonames.org/ontology#A.ADM2'
         us_country_code = 'sws.geonames.org/6252001/'
-        feature_code.respond_to?(:rdf_subject) && feature_code.rdf_subject.to_s.include?(sec_adm_level_code) && parent_country.respond_to?(:rdf_subject) && parent_country.rdf_subject.to_s.include?(us_country_code)
+        loc.featureCode.first&.rdf_subject.to_s.include?(sec_adm_level_code) && parentCountry.first&.rdf_subject.to_s.include?(us_country_code)
       end
 
       def no_county_label
