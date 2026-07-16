@@ -11,6 +11,7 @@ RSpec.describe Hyrax::GenericPresenter do
 
   before do
     allow(presenter).to receive(:file_set_presenters).and_return(presenters)
+    allow(solr_document).to receive(:file_set?).and_return(false)
     allow(file_set).to receive(:id).and_return 'abcde1234'
     allow(file_set).to receive(:oembed_url).and_return 'google.com'
   end
