@@ -33,7 +33,7 @@
             member_presents returns presents for filesets + child works so we'll iterate that
           %>
           <% @presenter.member_presenters.each do |presenter| %>
-            <% if presenter.respond_to?(:oembed_url) %>
+            <% if presenter.is_a?(Hyrax::FileSetPresenter) %>
               <%# we could be a fileset presenter, that's easy %>
               <%= render 'oembed_media', presenter: presenter %>
             <% else %>
