@@ -101,7 +101,7 @@ module Hyrax
         !solr_doc.oembed_url.blank?
       else
         # Or you're a work with filesets
-        solr_doc.file_sets.any?(&:oembed_url)
+        solr_doc.file_sets.any? { |fs_sd| !fs_sd.oembed_url.blank? }
       end
     end
   end
