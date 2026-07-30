@@ -16,7 +16,7 @@ RSpec.describe OregonDigital::NonUserCollectionsSearchBuilder do
   describe '#show_only_collections_not_created_users' do
     subject { search_builder.show_only_collections_not_created_users({}).first }
 
-    it { is_expected.to include "{!raw f=collection_type_gid_ssim}#{user_collection_type.gid}" }
-    it { is_expected.to include "{!raw f=collection_type_gid_ssim}#{oai_collection_type.gid}" }
+    it { is_expected.to include "{!raw f=collection_type_gid_ssim}#{user_collection_type&.to_global_id}" }
+    it { is_expected.to include "{!raw f=collection_type_gid_ssim}#{oai_collection_type&.to_global_id}" }
   end
 end
