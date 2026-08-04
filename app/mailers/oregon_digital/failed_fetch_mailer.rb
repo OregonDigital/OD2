@@ -10,7 +10,7 @@ module OregonDigital
         file_path = "#{Rails.root.join('tmp')}/#{params[:filename]}"
         attachments[params[:filename]] = File.read(file_path) if File.exist?(file_path)
       else
-        file_text = "#{Rails.root.join('tmp', 'failed_fetch')}/#{params[:filename]}"
+        file_text = "#{Rails.root.join('tmp', 'shared', 'failed_fetch')}/#{params[:filename]}"
         attachments[params[:filename]] = File.read(file_text) if File.exist?(file_text)
       end
 
