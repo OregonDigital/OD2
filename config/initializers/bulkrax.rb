@@ -65,7 +65,7 @@ Bulkrax.setup do |config|
     next if property.nil?
     property = property.gsub('_attributes', '')
     fieldhash[property][:from] << c['predicate']
-    fieldhash[property][:split] = '|' if c['multiple']
+    fieldhash[property][:split] = '\|' if c['multiple']
   end
 
   # add model
