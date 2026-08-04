@@ -12,6 +12,7 @@ class GenericIndexer < Hyrax::WorkIndexer
   # Valkyrie compatibility hack to allow Hyrax.indexing_adapter to see AF based indexers
   def initialize(obj)
     obj = obj[:resource] if obj.is_a?(Hash) && obj.key?(:resource)
+    obj = Wings::ActiveFedoraConverter.new(resource: obj).convert if obj.is_a?(Valkyrie::Resource)
     super(obj)
   end
 
