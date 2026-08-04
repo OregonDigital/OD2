@@ -94,13 +94,14 @@ module Hyrax
     # if the given presenter is an oEmbed the user is allowed to see
     def oembed?(presenter)
       solr_doc = ::SolrDocument.find presenter.id
+      return false unless current_ability.can?(:read, presenter.id)
 
-      if solr_doc.respond_to?(:oembed_url)
+      if solr_doc.file_set?
         # You're a fileset
-        !solr_doc.oembed_url.blank? && current_ability.can?(:read, presenter.id)
+        !solr_doc.oembed_url.blank?
       else
         # Or you're a work with filesets
-        solr_doc.file_sets.any?(&:oembed_url) && current_ability.can?(:read, presenter.id)
+        solr_doc.file_sets.any? { |fs_sd| !fs_sd.oembed_url.blank? }
       end
     end
   end
