@@ -38,8 +38,10 @@ Rails.application.config.to_prepare do
       OregonDigital::CollectionStreamer.stream_col(current_ability, collection) do |chunk|
         response.stream.write(chunk)
       end
+    rescue => e
+      Rails.logger.error("Download failed for collection #{collection.id}: #{e.message}")
     ensure
-      response.stream.close
+      response.stream.close if response.stream
     end
 
     # Get the path to institutional branding imag
