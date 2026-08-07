@@ -179,6 +179,10 @@ RSpec.describe Hyrax::ControlledVocabularies::Location do
   end
 
   describe '#rdf_label' do
+    before do
+      allow(OregonDigital::Triplestore).to receive(:fetch_cached_term).and_return(graph)
+    end
+
     context 'when no parent administrative hierarchy exists' do
       before do
         allow(location).to receive(:parent_hierarchy).and_return([])
