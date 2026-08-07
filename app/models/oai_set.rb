@@ -38,6 +38,7 @@ class OaiSet < BlacklightOaiProvider::SolrSet
         sets.concat(terms.each_slice(2).map { |t| new(t.first) })
       end
       sets = sets.reject { |set| set.name.nil? }
+      sets.each { |set| set.spec = set.spec.sub('_oai', '') }
       sets.empty? ? nil : sets
     end
   end
