@@ -279,8 +279,9 @@ Hyrax.config do |config|
 
   # Provide a proc for indexer generation for Objects
   config.pcdm_object_indexer_builder = lambda do |model_class|
-    "OregonDigital::#{model_class}Indexer".constantize.new
-    # Hyrax::Indexers::PcdmObjectIndexer(model_class)
+    klass = "OregonDigital::#{model_class}Indexer"
+    klass = "::#{model_class}Indexer" unless Object.const_defined?(klass)
+    klass.constantize
   end
 
   ## Enable Valkyrie only mode
