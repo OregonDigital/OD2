@@ -41,7 +41,7 @@ Rails.application.config.to_prepare do
     rescue => e
       Rails.logger.error("Download failed for collection #{collection.id}: #{e.message}")
     ensure
-      response.stream.close if response.stream
+      response.stream&.close
     end
 
     # Get the path to institutional branding imag
