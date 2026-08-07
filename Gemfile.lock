@@ -1262,7 +1262,7 @@ GEM
       rdf (~> 3.3)
       rdf-xsd (~> 3.3)
     zeitwerk (2.7.1)
-    zip_tricks (5.6.0)
+    zip_kit (6.3.4)
 
 PLATFORMS
   aarch64-linux
@@ -1346,7 +1346,7 @@ DEPENDENCIES
   yabeda-puma-plugin
   yabeda-rails
   yabeda-sidekiq
-  zip_tricks (~> 5.3)
+  zip_kit (~> 6.3)
 
 BUNDLED WITH
    2.6.8
