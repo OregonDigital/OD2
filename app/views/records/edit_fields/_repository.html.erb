@@ -8,8 +8,9 @@
                       'field-type' => 'linked_data' }
             },
             ### Required for the ControlledVocabulary javascript:
-            wrapper_html: { data: { 'autocomplete-url' => "/authorities/search/repository",
+            wrapper_html: {
+                class: 'single_controlled_vocabulary',
+                data: { 'autocomplete-url' => "/authorities/search/repository",
                                     'field-name' => key,
                                     'field-type' => 'linked_data' }},
             required: f.object.required?(key) %>
-

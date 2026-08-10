@@ -122,6 +122,10 @@ input[type=checkbox] {
   display: inline-block;
 }
 
+.controlled_vocabulary .listing li .remove {
+  display: inline-block
+}
+
 // DISABLE: Disable clicking link
 .disabled-link-dropdown {
   color: gray;
