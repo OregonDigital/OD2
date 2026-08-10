@@ -1,5 +1,5 @@
 <% provide :page_title, construct_page_title(@presenter.title) %>
-<% collection_index_key = controller.collection.collection_type.machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
+<% collection_index_key = Hyrax::CollectionType.for(collection: controller.collection).machine_id == 'user_collection' ? 'user_collections_ssim' : 'non_user_collections_ssim' %>
 <% view_all_url = "#{search_form_action.split('#')[0]}&f[#{collection_index_key}][]=#{@presenter.id}" %>
 <% footer_metadata = render 'attribute_rows_footer', presenter: @presenter %>
 
@@ -65,7 +65,7 @@
             <%= image_tag path, alt: alt, style: style %>
           </div>
           <div class="flex-item social-links">
-            <%= render '/shared/fileset_collection_social_media' unless controller.collection.collection_type.machine_id == 'user_collection' && controller.collection.visibility != 'open' %>
+            <%= render '/shared/fileset_collection_social_media' unless Hyrax::CollectionType.for(collection: controller.collection).machine_id == 'user_collection' && controller.collection.visibility != 'open' %>
           </div>
         </div>
         <div class="lg-border-bottom clearfix"></div>
@@ -110,7 +110,7 @@
             onclick: "javascript:open_edit_my_collection_modal('#{@presenter.id}')" %>
       <% end %>
       <%# DOWNLOAD: Add in download button for user collection %>
-      <% if @collection.sharable? && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
+      <% if collection_sharable?(collection: @collection) && @collection.visibility == 'open' && current_ability.can?(:download, @collection) %>
         <a href="<%= main_app.download_collection_path %>" class='btn btn-lg btn-primary collection-landing-button col-md-10'>Download Collection</a>
       <% end %>
     </div>

@@ -12,7 +12,7 @@ FROM bundler AS dependencies
 RUN apt update && apt -y upgrade && \
   apt -y install nodejs unzip ghostscript vim less tmux yarnpkg curl wget openssl \
   git sqlite3 postgresql-client libpq-dev libjpeg62-turbo-dev libpng-dev libtool libgomp1 \
-  build-essential zip xz-utils autoconf automake libtool texinfo libltdl7 \
+  build-essential gcc zip xz-utils autoconf automake libtool texinfo libltdl7 \
   bash bash-completion java-common openjdk-17-jre-headless graphicsmagick ffmpeg \
   poppler-utils tesseract-ocr libopenjp2-7-dev libopenjp2-tools libopenjp2-7 \
   libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release cmake mediainfo libmediainfo-dev
