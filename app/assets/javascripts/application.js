@@ -34,6 +34,7 @@
 //= require bulkrax/application
 //= require_tree ./oregon_digital
 //= require hyrax
+//= require hyrax/editor/single_controlled_vocabulary
 
 // Required for Hyrax override in assets/javascripts/hyrax/editor/controlled_vocabulary.es6
 //= require handlebars
