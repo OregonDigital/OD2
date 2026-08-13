@@ -151,12 +151,12 @@ class SolrDocument
   end
 
   def hocr_text
-    '' unless file_set?
+    return '' unless file_set?
     @hocr_text ||= resource.hocr_text.presence
   end
 
   def all_text
-    '' unless file_set?
+    return '' unless file_set?
     @all_text ||= resource.extracted_text&.content.presence
   end
 
