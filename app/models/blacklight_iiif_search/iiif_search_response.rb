@@ -78,7 +78,7 @@ module BlacklightIiifSearch
 
     def all_words(solr_doc)
       # Get the bbox content
-      bbox_content = solr_doc.bbox&.content.presence
+      bbox_content = solr_doc&.bbox&.content.presence
 
       # Check for bbox first
       if !solr_doc.extracted_text&.content.blank? && !bbox_content.blank?
