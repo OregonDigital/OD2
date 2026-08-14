@@ -37,7 +37,7 @@ module OregonDigital
     end
 
     def stream_child_collections(collection, zip, folder, keys, controlled_keys)
-      child_collections = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND has_model_ssi:Collection", fl: 'id', rows: 1_000_000, start: 0)
+      child_collections = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND has_model_ssim:Collection", fl: 'id', rows: 1_000_000, start: 0)
       child_collections.map do |col|
         # Recursively drill down into sub-collections
         stream_collection(col, "#{folder}#{col.id}/", zip)
