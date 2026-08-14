@@ -37,7 +37,8 @@ module OregonDigital
     end
 
     def stream_child_collections(collection, zip, folder, keys, controlled_keys)
-      collection.child_collections.map do |col|
+      child_collections = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id} AND has_model_ssim:Collection", fl: 'id', rows: 1_000_000, start: 0)
+      child_collections.map do |col|
         # Recursively drill down into sub-collections
         stream_collection(col, "#{folder}#{col.id}/", zip)
         col.metadata_row(keys, controlled_keys)
@@ -45,10 +46,12 @@ module OregonDigital
     end
 
     def stream_child_works(collection, zip, folder, keys, controlled_keys)
-      collection.child_works.map do |work|
+      children = Hyrax::SolrService.query("member_of_collection_ids_ssim:#{collection.id}", rows: 1_000_000, start: 0)
+      children.map do |work|
+        work = ActiveFedora::Base.find(work.id)
         # Add low quality works from collection and append metadata
-        # Check if the work are able to download from user
-        next unless @ability.can?(:download_low, work)
+        # Check if the solr document are works and if the user is able to download_low
+        next unless work.work? && @ability.can?(:download_low, work)
 
         stream_works_low(work, zip, folder)
         work.metadata_row(keys, controlled_keys)
