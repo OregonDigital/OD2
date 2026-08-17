@@ -14,7 +14,7 @@
     "navigatorEnabled": false
   },
   "modules": {
-    "contentLeftPanel": {
+    "leftPanel": {
       "options": {
         "defaultToTreeEnabled": true
       }

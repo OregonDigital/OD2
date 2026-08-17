@@ -54,10 +54,13 @@ module OregonDigital
         file_name = "#{folder}#{file_set.label}"
         deriv_name = derivative_name(file_set)
         # If this fileset doesn't have derivatives, stream in the original quality
-        return stream_files_from_fileset(file_set, zip, folder) if deriv_name.blank?
+        stream_files_from_fileset(file_set, zip, folder) if deriv_name.blank?
+        next if deriv_name.blank?
 
         # Stream the file from derivative on disk
         zip.write_deflated_file(file_name) do |file_writer|
+          next unless File.exist?(Hyrax::DerivativePath.derivative_path_for_reference(file_set, deriv_name))
+
           File.open(Hyrax::DerivativePath.derivative_path_for_reference(file_set, deriv_name), 'rb') do |source|
             IO.copy_stream(source, file_writer)
           end

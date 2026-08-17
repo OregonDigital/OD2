@@ -70,12 +70,16 @@ module OregonDigital
 
       presenters = work_ids.map do |id|
         doc = SolrDocument.new(document_hash[id])
+        # We don't want the works that contain oembed to be put into the IIIF manifest
+        # They don't have a canvas and breaks the viewer
+        next unless doc.file_sets.map(&:oembed_url).flatten.compact.blank?
+
         presenter = IIIFPresenter.new(doc, current_ability, request)
         presenter.file_sets = doc.file_sets
         presenter.collections = cached_collections
         presenter
       end
-      presenters
+      presenters.compact
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength

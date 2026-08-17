@@ -4,24 +4,32 @@ module OregonDigital
   # adds error support using Redis
   module Errors
     def add_error(desc_key, message)
-      Redis.current.sadd(redis_key(desc_key), message)
+      Hyrax.config.redis_connection.with do |conn|
+        conn.sadd(redis_key(desc_key), message)
+      end
     end
 
     def error_keys
-      Redis.current.keys("#{base_error_key}:*")
+      Hyrax.config.redis_connection.with do |conn|
+        conn.keys("#{base_error_key}:*")
+      end
     end
 
     def all_errors
       errors = {}
       error_keys.each do |r_key|
-        errors[shorten(r_key)] = Redis.current.smembers(r_key)
+        Hyrax.config.redis_connection.with do |conn|
+          errors[shorten(r_key)] = conn.smembers(r_key)
+        end
       end
       errors
     end
 
     def remove_errors(desc_key)
-      Redis.current.smembers(redis_key(desc_key)).each do |message|
-        Redis.current.srem(redis_key(desc_key), message)
+      Hyrax.config.redis_connection.with do |conn|
+        conn.smembers(redis_key(desc_key)).each do |message|
+          conn.srem(redis_key(desc_key), message)
+        end
       end
     end
 

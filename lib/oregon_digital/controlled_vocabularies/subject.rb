@@ -37,8 +37,8 @@ module OregonDigital
           return self
         end
         store_statement(vocabulary.fetch(vocabulary, rdf_subject))
-      rescue ControlledVocabularyFetchError
-        raise ControlledVocabularyFetchError
+      rescue OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError
+        raise OregonDigital::ControlledVocabularies::ControlledVocabularyFetchError
       end
 
       def itis?

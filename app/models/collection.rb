@@ -13,13 +13,16 @@ class Collection < ActiveFedora::Base
   include OregonDigital::AccessControls::Visibility
   self.indexer = OregonDigital::CollectionIndexer
 
-  delegate :facet_configurable?, to: :collection_type
-
   # Identify facets available to configure
   def available_facets
     generate_default_facets
     facets = Facet.where(collection_id: id)
     facets.sort_by(&:order)
+  end
+
+  # Expand on Hyrax::CollectionsHelper for facet configurability
+  def facet_configurable?
+    Hyrax::CollectionType.for(collection: self).facet_configurable?
   end
 
   def insitution_restricted?(current_ability)
