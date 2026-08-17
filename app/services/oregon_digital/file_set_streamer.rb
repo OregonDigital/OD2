@@ -26,9 +26,9 @@ module OregonDigital
     end
 
     def each(&chunks)
-      writer = ZipTricks::BlockWrite.new(&chunks)
+      writer = ZipKit::BlockWrite.new(&chunks)
 
-      ZipTricks::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
+      ZipKit::Streamer.open(writer, auto_rename_duplicate_filenames: true) do |zip|
         # Stream work files and child work files, determining if low original quality
         @standard ? stream_works_low(work, zip) : stream_works(work, zip)
         @children.each { |child| @standard ? stream_works_low(child, zip) : stream_works(child, zip) }

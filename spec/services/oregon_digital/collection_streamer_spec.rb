@@ -7,6 +7,7 @@ describe OregonDigital::CollectionStreamer do
 
   describe '#stream' do
     before do
+      collection.id = 'foobarbaz'
       allow(collection).to receive(:metadata_row).and_return([])
     end
 

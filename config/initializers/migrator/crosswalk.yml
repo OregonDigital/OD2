@@ -2,15 +2,15 @@ crosswalk:
   - property: alternative
     predicate: http://purl.org/dc/terms/alternative
     multiple: true
-    function: 
+    function:
   - property: tribal_title
     predicate: http://opaquenamespace.org/ns/tribalTitle
     multiple: true
-    function: 
+    function:
   - property: title
     predicate: http://purl.org/dc/terms/title
     multiple: true
-    function: 
+    function:
   - property: creator_attributes
     predicate: http://purl.org/dc/elements/1.1/creator
     multiple: true
@@ -50,7 +50,7 @@ crosswalk:
   - property: creator_display
     predicate: http://opaquenamespace.org/ns/cco_creatorDisplay
     multiple: true
-    function: 
+    function:
   - property: contributor_attributes
     predicate: http://purl.org/dc/elements/1.1/contributor
     multiple: true
@@ -118,43 +118,43 @@ crosswalk:
   - property: description
     predicate: http://purl.org/dc/terms/description
     multiple: true
-    function: 
+    function:
   - property: abstract
     predicate: http://purl.org/dc/terms/abstract
     multiple: true
-    function: 
+    function:
   - property: biographical_information
     predicate: http://rdaregistry.info/Elements/a/P50113
     multiple: true
-    function: 
+    function:
   - property: compass_direction
     predicate: http://opaquenamespace.org/ns/compassDirection
     multiple: true
-    function: 
+    function:
   - property: cover_description
     predicate: http://opaquenamespace.org/ns/coverDescription
     multiple: true
-    function: 
+    function:
   - property: coverage
     predicate: http://purl.org/dc/elements/1.1/coverage
     multiple: true
-    function: 
+    function:
   - property: description_of_manifestation
     predicate: http://rdaregistry.info/Elements/w/P10271
     multiple: true
-    function: 
+    function:
   - property: designer_inscription
     predicate: http://opaquenamespace.org/ns/cdwa/InscriptionTranscription
     multiple: true
-    function: 
+    function:
   - property: first_line
     predicate: http://opaquenamespace.org/ns/sheetmusic_firstLine
     multiple: false
-    function: 
+    function:
   - property: first_line_chorus
     predicate: http://opaquenamespace.org/ns/sheetmusic_firstLineChorus
     multiple: false
-    function: 
+    function:
   - property: form_of_work_attributes
     predicate: http://rdaregistry.info/Elements/w/P10004
     multiple: true
@@ -162,71 +162,71 @@ crosswalk:
   - property: former_owner
     predicate: http://id.loc.gov/vocabulary/relators/fmo
     multiple: true
-    function: 
+    function:
   - property: inscription
     predicate: http://purl.org/vra/hasInscription
     multiple: true
-    function: 
+    function:
   - property: instrumentation
     predicate: http://opaquenamespace.org/ns/sheetmusic_instrumentation
     multiple: true
-    function: 
+    function:
   - property: layout
     predicate: http://rdaregistry.info/Elements/m/P30155
     multiple: true
-    function: 
+    function:
   - property: military_highest_rank
     predicate: http://opaquenamespace.org/ns/militaryHighestRank
     multiple: false
-    function: 
+    function:
   - property: military_occupation
     predicate: http://opaquenamespace.org/ns/militaryOccupation
     multiple: true
-    function: 
+    function:
   - property: military_service_location
     predicate: http://opaquenamespace.org/ns/militaryServiceLocation
     multiple: true
-    function: 
+    function:
   - property: mode_of_issuance
     predicate: http://rdaregistry.info/Elements/m/P30003
     multiple: true
-    function: 
+    function:
   - property: mods_note
     predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#note
     multiple: true
-    function: 
+    function:
   - property: motif
     predicate: http://opaquenamespace.org/ns/motif
     multiple: true
-    function: 
+    function:
   - property: object_orientation
     predicate: http://opaquenamespace.org/ns/objectOrientation
     multiple: false
-    function: 
+    function:
   - property: photograph_orientation
     predicate: http://opaquenamespace.org/ns/photographOrientation
     multiple: false
-    function: 
+    function:
   - property: tribal_notes
     predicate: http://opaquenamespace.org/ns/tribalNotes
     multiple: true
-    function: 
+    function:
   - property: source_condition
     predicate: http://opaquenamespace.org/ns/sourceCondition
     multiple: true
-    function: 
+    function:
   - property: table_of_contents
     predicate: http://purl.org/dc/terms/tableOfContents
     multiple: true
-    function: 
+    function:
   - property: temporal
     predicate: http://purl.org/dc/terms/temporal
     multiple: true
-    function: 
+    function:
   - property: view
     predicate: http://opaquenamespace.org/ns/cco_viewDescription
     multiple: true
-    function: 
+    function:
   - property: subject_attributes
     predicate: http://purl.org/dc/terms/subject
     multiple: true
@@ -234,7 +234,7 @@ crosswalk:
   - property: award
     predicate: http://schema.org/award
     multiple: true
-    function: 
+    function:
   - property: cultural_context_attributes
     predicate: http://purl.org/vra/hasCulture
     multiple: true
@@ -246,15 +246,15 @@ crosswalk:
   - property: event
     predicate: http://schema.org/event
     multiple: true
-    function: 
+    function:
   - property: keyword
     predicate: http://purl.org/dc/elements/1.1/subject
     multiple: true
-    function: 
+    function:
   - property: legal_name
     predicate: http://schema.org/legalName
     multiple: true
-    function: 
+    function:
   - property: military_branch_attributes
     predicate: http://opaquenamespace.org/ns/militaryBranch
     multiple: true
@@ -262,11 +262,11 @@ crosswalk:
   - property: sports_team
     predicate: http://opaquenamespace.org/ns/sportsTeam
     multiple: true
-    function: 
+    function:
   - property: state_or_edition
     predicate: http://opaquenamespace.org/ns/vra_stateEdition
     multiple: true
-    function: 
+    function:
   - property: style_or_period_attributes
     predicate: http://purl.org/vra/hasStylePeriod
     multiple: true
@@ -274,11 +274,11 @@ crosswalk:
   - property: tribal_classes
     predicate: http://opaquenamespace.org/ns/tribalClasses
     multiple: true
-    function: 
+    function:
   - property: tribal_terms
     predicate: http://opaquenamespace.org/ns/tribalTerms
     multiple: true
-    function: 
+    function:
   - property: phylum_or_division_attributes
     predicate: http://rs.tdwg.org/dwc/terms/phylum
     multiple: true
@@ -310,23 +310,23 @@ crosswalk:
   - property: accepted_name_usage
     predicate: http://rs.tdwg.org/dwc/terms/acceptedNameUsage
     multiple: true
-    function: 
+    function:
   - property: original_name_usage
     predicate: http://rs.tdwg.org/dwc/terms/originalNameUsage
     multiple: true
-    function: 
+    function:
   - property: scientific_name_authorship
     predicate: http://rs.tdwg.org/dwc/terms/scientificNameAuthorship
     multiple: true
-    function: 
+    function:
   - property: specimen_type
     predicate: http://opaquenamespace.org/ns/specimenType
     multiple: false
-    function: 
+    function:
   - property: identification_verification_status
     predicate: http://rs.tdwg.org/dwc/terms/identificationVerificationStatus
     multiple: false
-    function: 
+    function:
   - property: location_attributes
     predicate: http://purl.org/dc/terms/spatial
     multiple: true
@@ -334,15 +334,15 @@ crosswalk:
   - property: box
     predicate: http://schema.org/box
     multiple: true
-    function: 
+    function:
   - property: gps_latitude
     predicate: http://www.w3.org/2003/12/exif/ns#gpsLatitude
     multiple: false
-    function: 
+    function:
   - property: gps_longitude
     predicate: http://www.w3.org/2003/12/exif/ns#gpsLongitude
     multiple: false
-    function: 
+    function:
   - property: ranger_district_attributes
     predicate: http://opaquenamespace.org/ns/rangerDistrict
     multiple: true
@@ -350,7 +350,7 @@ crosswalk:
   - property: street_address
     predicate: http://www.loc.gov/mads/rdf/v1#streetAddress
     multiple: true
-    function: 
+    function:
   - property: tgn_attributes
     predicate: http://dbpedia.org/ontology/HistoricPlace
     multiple: true
@@ -362,63 +362,63 @@ crosswalk:
   - property: plss
     predicate: http://opaquenamespace.org/ns/plss
     multiple: true
-    function: 
+    function:
   - property: date
     predicate: http://purl.org/dc/terms/date
     multiple: true
-    function: 
+    function:
   - property: acquisition_date
     predicate: http://opaquenamespace.org/ns/acquisitionDate
     multiple: true
-    function: 
+    function:
   - property: award_date
     predicate: http://opaquenamespace.org/ns/awardDate
     multiple: true
-    function: 
+    function:
   - property: collected_date
     predicate: http://opaquenamespace.org/ns/collectedDate
     multiple: true
-    function: 
+    function:
   - property: date_created
     predicate: http://purl.org/dc/terms/created
     multiple: true
-    function: 
+    function:
   - property: issued
     predicate: http://purl.org/dc/terms/issued
     multiple: true
-    function: 
+    function:
   - property: view_date
     predicate: http://opaquenamespace.org/ns/cco_viewDate
     multiple: true
-    function: 
+    function:
   - property: accession_number
     predicate: http://opaquenamespace.org/ns/cco_accessionNumber
     multiple: true
-    function: 
+    function:
   - property: barcode
     predicate: http://id.loc.gov/ontologies/bibframe/Barcode
     multiple: true
-    function: 
+    function:
   - property: hydrologic_unit_code
     predicate: http://opaquenamespace.org/ns/hydrologicUnitCode
     multiple: true
-    function: 
+    function:
   - property: identifier
     predicate: http://purl.org/dc/terms/identifier
     multiple: true
-    function: 
+    function:
   - property: item_locator
     predicate: http://purl.org/ontology/holding#label
     multiple: true
-    function: 
+    function:
   - property: longitude_latitude_identification
     predicate: http://opaquenamespace.org/ns/llid
     multiple: true
-    function: 
+    function:
   - property: license
     predicate: http://purl.org/dc/terms/rights
     multiple: false
-    function: 
+    function:
   - property: access_restrictions_attributes
     predicate: http://purl.org/dc/terms/accessRights
     multiple: false
@@ -426,23 +426,23 @@ crosswalk:
   - property: copyright_claimant
     predicate: http://id.loc.gov/vocabulary/relators/cpc
     multiple: true
-    function: 
+    function:
   - property: rights_holder
     predicate: http://purl.org/dc/terms/rightsHolder
     multiple: true
-    function: 
+    function:
   - property: rights_note
     predicate: http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#rightsExpression
     multiple: true
-    function: 
+    function:
   - property: rights_statement
     predicate: http://www.europeana.edu/schemas/edm/rights
     multiple: false
-    function: 
+    function:
   - property: use_restrictions
     predicate: http://rdaregistry.info/Elements/u/P60497
     multiple: true
-    function: 
+    function:
   - property: repository_attributes
     predicate: http://id.loc.gov/vocabulary/relators/rps
     multiple: false
@@ -450,11 +450,11 @@ crosswalk:
   - property: copy_location
     predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#locationCopySublocation
     multiple: true
-    function: 
+    function:
   - property: location_copyshelf_location
     predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#locationCopyShelfLocator
     multiple: true
-    function: 
+    function:
   - property: local_collection_name_attributes
     predicate: http://opaquenamespace.org/ns/localCollectionName
     multiple: true
@@ -462,47 +462,47 @@ crosswalk:
   - property: box_number
     predicate: http://opaquenamespace.org/ns/boxNumber
     multiple: true
-    function: 
+    function:
   - property: citation
     predicate: http://schema.org/citation
     multiple: true
-    function: 
+    function:
   - property: contained_in_journal
     predicate: http://purl.org/net/nknouf/ns/bibtex#hasJournal
     multiple: true
-    function: 
+    function:
   - property: current_repository_id
     predicate: http://opaquenamespace.org/ns/vra_idCurrentRepository
     multiple: true
-    function: 
+    function:
   - property: folder_name
     predicate: http://opaquenamespace.org/ns/folderName
     multiple: true
-    function: 
+    function:
   - property: folder_number
     predicate: http://opaquenamespace.org/ns/folderNumber
     multiple: true
-    function: 
+    function:
   - property: has_number
     predicate: http://purl.org/net/nknouf/ns/bibtex#hasNumber
     multiple: true
-    function: 
+    function:
   - property: is_volume
     predicate: http://purl.org/net/nknouf/ns/bibtex#hasVolume
     multiple: true
-    function: 
+    function:
   - property: language
     predicate: http://purl.org/dc/terms/language
     multiple: true
-    function: 
+    function:
   - property: local_collection_id
     predicate: http://opaquenamespace.org/ns/localCollectionID
     multiple: true
-    function: 
+    function:
   - property: on_pages
     predicate: http://purl.org/net/nknouf/ns/bibtex#hasPages
     multiple: true
-    function: 
+    function:
   - property: publisher_attributes
     predicate: http://purl.org/dc/terms/publisher
     multiple: true
@@ -514,7 +514,7 @@ crosswalk:
   - property: provenance
     predicate: http://purl.org/dc/terms/provenance
     multiple: true
-    function: 
+    function:
   - property: publication_place_attributes
     predicate: http://id.loc.gov/vocabulary/relators/pup
     multiple: true
@@ -522,55 +522,55 @@ crosswalk:
   - property: series_name
     predicate: http://opaquenamespace.org/ns/seriesName
     multiple: true
-    function: 
+    function:
   - property: series_number
     predicate: http://opaquenamespace.org/ns/seriesNumber
     multiple: true
-    function: 
+    function:
   - property: source
     predicate: http://purl.org/dc/terms/source
     multiple: true
-    function: 
+    function:
   - property: art_series
     predicate: http://opaquenamespace.org/ns/artSeries
     multiple: true
-    function: 
+    function:
   - property: has_finding_aid
     predicate: http://lod.xdams.org/reload/oad/has_findingAid
     multiple: true
-    function: 
+    function:
   - property: has_part
     predicate: http://purl.org/dc/terms/hasPart
     multiple: true
-    function: 
+    function:
   - property: has_version
     predicate: http://purl.org/dc/terms/hasVersion
     multiple: true
-    function: 
+    function:
   - property: is_part_of
     predicate: http://purl.org/dc/terms/isPartOf
     multiple: true
-    function: 
+    function:
   - property: is_version_of
     predicate: http://purl.org/dc/terms/isVersionOf
     multiple: true
-    function: 
+    function:
   - property: larger_work
     predicate: http://opaquenamespace.org/ns/sheetmusic_largerWork
     multiple: true
-    function: 
+    function:
   - property: relation
     predicate: http://purl.org/dc/terms/relation
     multiple: true
-    function: 
+    function:
   - property: related_url
     predicate: http://www.w3.org/2000/01/rdf-schema#seeAlso
     multiple: true
-    function: 
+    function:
   - property: resource_type
     predicate: http://purl.org/dc/terms/type
     multiple: false
-    function: 
+    function:
   - property: workType_attributes
     predicate: http://rdaregistry.info/Elements/w/P10004
     multiple: true
@@ -578,35 +578,35 @@ crosswalk:
   - property: material
     predicate: http://purl.org/vra/material
     multiple: true
-    function: 
+    function:
   - property: measurements
     predicate: http://opaquenamespace.org/ns/vra_measurements
     multiple: true
-    function: 
+    function:
   - property: physical_extent
     predicate: http://www.loc.gov/standards/mods/modsrdf/v1/#physicalExtent
     multiple: true
-    function: 
+    function:
   - property: technique
     predicate: http://purl.org/vra/hasTechnique
     multiple: true
-    function: 
+    function:
   - property: color_content
     predicate: http://rdaregistry.info/Elements/e/P20224
     multiple: true
-    function: 
+    function:
   - property: conversion
     predicate: http://opaquenamespace.org/ns/conversionSpecifications
     multiple: true
-    function: 
+    function:
   - property: full_text
     predicate: http://opaquenamespace.org/ns/fullText
     multiple: false
-    function: 
+    function:
   - property: exhibit
     predicate: http://opaquenamespace.org/ns/exhibit
     multiple: true
-    function: 
+    function:
   - property: institution_attributes
     predicate: http://opaquenamespace.org/ns/contributingInstitution
     multiple: true
@@ -614,28 +614,40 @@ crosswalk:
   - property: original_filename
     predicate: http://www.loc.gov/premis/rdf/v3/originalName
     multiple: false
-    function: 
+    function:
   - property: replaces_url
     predicate: http://purl.org/dc/terms/replaces
     multiple: false
-    function: 
+    function:
   - property: resolution
     predicate: http://www.w3.org/2003/12/exif/ns#resolution
     multiple: false
-    function: 
+    function:
   - property: full_size_download_allowed
     predicate: http://opaquenamespace.org/ns/fullSizeDownloadAllowed
     multiple: false
-    function: 
+    function:
   - property: date_modified
     predicate: http://purl.org/dc/terms/modified
     multiple: false
-    function: 
+    function:
   - property: date_uploaded
     predicate: http://purl.org/dc/terms/dateSubmitted
     multiple: false
     function:
   - property: archival_object_id
     predicate: http://opaquenamespace.org/ns/archival_object_id
+    multiple: true
+    function:
+  - property: mask_content
+    predicate: http://opaquenamespace.org/ns/maskContent
+    multiple: true
+    function:
+  - property: accessibility_feature
+    predicate: http://schema.org/accessibilityFeature
+    multiple: true
+    function:
+  - property: accessibility_summary
+    predicate: http://schema.org/accessibilitySummary
     multiple: true
     function:
