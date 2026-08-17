@@ -11,6 +11,7 @@ export default class {
   // Dynamically load the file options into the "Thumbnail" select field.
   loadThumbnailOptions(url, field) {
     field.select2({
+      allowClear: true,  // Allow to remove thumbnail from Select2
       ajax: { // Use the jQuery.ajax wrapper provided by Select2
         url: url,
         dataType: "json",
