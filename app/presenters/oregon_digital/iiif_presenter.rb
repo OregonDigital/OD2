@@ -14,7 +14,8 @@ module OregonDigital
 
     # Select out the metadata that doesn't have a value
     def manifest_metadata
-      super.select { |m| m['value'].present? }
+      metadata = super.select { |m| m['value'].present? }
+      metadata + alt_text_metadata
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -69,12 +70,16 @@ module OregonDigital
 
       presenters = work_ids.map do |id|
         doc = SolrDocument.new(document_hash[id])
+        # We don't want the works that contain oembed to be put into the IIIF manifest
+        # They don't have a canvas and breaks the viewer
+        next unless doc.file_sets.map(&:oembed_url).flatten.compact.blank?
+
         presenter = IIIFPresenter.new(doc, current_ability, request)
         presenter.file_sets = doc.file_sets
         presenter.collections = cached_collections
         presenter
       end
-      presenters
+      presenters.compact
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
@@ -92,6 +97,20 @@ module OregonDigital
     end
 
     private
+
+    # METHOD: Add alt_text metadata to IIIF
+    def alt_text_metadata
+      file_sets.filter_map do |fs|
+        # SKIP: Check the loop if the FileSet contain no alt_text
+        next if fs.alt_text.blank?
+
+        # ELSE: Store the value and ingest into the manifest
+        {
+          'label' => ["#{fs.title.first} - Alternative Text"],
+          'value' => fs.alt_text
+        }
+      end
+    end
 
     def file_set_derivatives_service(file_set)
       OregonDigital::FileSetDerivativesService.new(file_set)

@@ -23,3 +23,9 @@
   z-index: 1000;
   float: right;
 }
+
+// fix blueimp jQuery-File-Upload display problems under Bootstrap 4+
+// found here: https://stackoverflow.com/a/48162651
+.fade.in {
+  opacity: 1
+}

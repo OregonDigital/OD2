@@ -81,7 +81,7 @@ Rails.application.configure do
 
   config.reindex_extent = ENV["MIGRATION_REINDEX_EXTENT"].present? ? 'limited' : 'full'
 
-  # Whitelist docker containers for webconsole during development
+  # Allowlist docker containers for webconsole during development
   config.web_console.allowed_ips = ['172.0.0.0/8', '192.0.0.0/8']
 
   config.local_path = ENV.fetch('LOCAL_PATH', 'tmp/shared')
@@ -92,14 +92,11 @@ Rails.application.configure do
 
   config.to_prepare do
     Rails.application.config.verify_services = [
-      OregonDigital::VerifyDerivativesService
+      OregonDigital::VerifyDerivativesService,
+      OregonDigital::VerifyCollectionsService,
+      OregonDigital::VerifyLabelsService
     ]
   end
-  config.verify_services = [
-    OregonDigital::VerifyDerivativesService,
-    OregonDigital::VerifyCollectionsService,
-    OregonDigital::VerifyLabelsService
-  ]
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
   config.bulkrax_create_relationships_wait = ENV.fetch('BULKRAX_CREATE_RELATIONSHIPS_WAIT', 5).to_i
 end

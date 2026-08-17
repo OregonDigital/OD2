@@ -50,6 +50,12 @@
       </div>
 
       <div class='px-2 py-1'>
+        <div class='edit-button-sections'>
+          <%= link_to "Reindex", polymorphic_path([main_app, :reindex, presenter]), method: :post, class: 'btn btn-default' %>
+        </div>
+      </div>
+
+      <div class='px-2 py-1'>
         <% if presenter.valid_child_concerns.length > 0 %>
           <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" type="button" id="attach-child-button" data-toggle="dropdown" aria-haspopup="true" aria-controls="attach-child-list"  aria-expanded="false">
@@ -66,15 +72,22 @@
       </div>
 
       <div class='px-2 py-1'>
-        <% if @presenter.workflow.actions.present? && @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Deposited' %>
+        <% workflow_state = @presenter.solr_document['workflow_state_name_ssim']&.first&.downcase %>
+        <% workflow_actions = @presenter.workflow.actions %>
+        <% if workflow_actions.present? && workflow_state == 'deposited' %>
           <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
             <%= hidden_field :workflow_action, :name, value: 'tombstone' %>
             <input class="btn btn-default" type="submit" value="Tombstone" data-confirm='<%= t('hyrax.tombstone.confirmation') %>'>
           <% end %>
-        <% else %>
+        <% elsif workflow_actions.present? && workflow_state == 'tombstoned' %>
           <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
             <%= hidden_field :workflow_action, :name, value: 'approve' %>
-            <input class="btn btn-default" type="submit" value="Reapprove" data-confirm='<%= t('hyrax.tombstone.revert') %>' <%= disabled='disabled' unless (@presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Tombstoned' && current_user.admin?) %>>
+            <input class="btn btn-default" type="submit" value="Reapprove" data-confirm='<%= t('hyrax.tombstone.revert') %>' <%= disabled='disabled' unless current_user.admin? %>>
+          <% end %>
+        <% elsif workflow_actions.present? && workflow_state != 'approved' %>
+          <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
+            <%= hidden_field :workflow_action, :name, value: 'approve' %>
+            <input class="btn btn-default" type="submit" value="Approve" data-confirm='<%= t('hyrax.workflow.approve') %>' <%= disabled='disabled' unless current_user.admin? %>>
           <% end %>
         <% end %>
       </div>

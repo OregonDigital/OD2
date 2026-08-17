@@ -1,0 +1,29 @@
+<%# ACTION: Create a unique action to download file if complex obj is attached as a child %>
+<% if (can?(:download, file_set.id) || can?(:destroy, file_set.id) || can?(:edit, file_set.id)) && !workflow_restriction?(@parent) %>
+  <% if can?(:download, file_set.id) && !(can?(:edit, file_set.id) || can?(:destroy, file_set.id)) %>
+    <%= link_to t('.download'),
+                main_app.send(:"download_hyrax_#{@presenter.model_name.name.downcase}_path", file_set.id),
+                target: "_blank",
+                id: "file_download",
+                data: { label: file_set.id, work_id: @presenter.id, collection_ids: @presenter.member_of_collection_ids } %>
+  <% else %>
+    <div class="btn-group">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button" id="dropdownMenu_<%= file_set.id %>" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"><%= t('.press_to') %> </span>
+        <%= t('.header') %>
+      </button>
+
+      <ul role="menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu_<%= file_set.id %>">
+        <% if can?(:download, file_set.id) %>
+          <li class="dropdown-item" role="menuitem" tabindex="-1">
+            <%= link_to t('.download'),
+                        main_app.send(:"download_hyrax_#{@presenter.model_name.name.downcase}_path", file_set.id),
+                        target: "_blank",
+                        id: "file_download",
+                        data: { label: file_set.id, work_id: @presenter.id, collection_ids: @presenter.member_of_collection_ids } %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

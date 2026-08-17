@@ -57,7 +57,9 @@ Rails.application.configure do
 
   config.to_prepare do
     Rails.application.config.verify_services = [
-      OregonDigital::VerifyDerivativesService
+      OregonDigital::VerifyDerivativesService,
+      OregonDigital::VerifyCollectionsService,
+      OregonDigital::VerifyLabelsService
     ]
   end
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i

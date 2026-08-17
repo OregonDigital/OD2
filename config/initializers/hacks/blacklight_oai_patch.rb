@@ -51,4 +51,33 @@ Rails.application.config.to_prepare do
       [@asset_show_uri, @asset_image_uri]
     end
   end
+
+
+
+  OAI::Provider::Base.class_eval do
+    # Override the process_request method to use the provider_context instance
+    # instead of self.class, so the real request URL is used in error responses.
+    def process_request(params = {})
+      begin
+
+        # Allow the request to pass in a url
+        provider_context.url = params['url'] ? params.delete('url') : self.url
+
+        verb = params.delete('verb') || params.delete(:verb)
+
+        unless verb and OAI::Const::VERBS.keys.include?(verb)
+          raise OAI::VerbException.new
+        end
+
+        send(methodize(verb), params)
+
+      rescue => err
+        if err.respond_to?(:code)
+          OAI::Provider::Response::Error.new(provider_context, err).to_xml
+        else
+          raise err
+        end
+      end
+    end
+  end
 end

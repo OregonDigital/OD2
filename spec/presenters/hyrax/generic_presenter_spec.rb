@@ -8,9 +8,15 @@ RSpec.describe Hyrax::GenericPresenter do
   let(:solr_document) { SolrDocument.new(model.attributes) }
   let(:props) { Generic.generic_properties.map(&:to_sym) }
   let(:file_set) { instance_double('FileSet') }
+  let(:fs_solr_document) { SolrDocument.new(file_set) }
 
   before do
     allow(presenter).to receive(:file_set_presenters).and_return(presenters)
+    allow(SolrDocument).to receive(:find).with(solr_document.id).and_return solr_document
+    allow(solr_document).to receive(:file_set?).and_return(false)
+    allow(solr_document).to receive(:file_sets).and_return([fs_solr_document])
+    allow(SolrDocument).to receive(:find).with(fs_solr_document.id).and_return fs_solr_document
+    allow(fs_solr_document).to receive(:file_set?).and_return(true)
     allow(file_set).to receive(:id).and_return 'abcde1234'
     allow(file_set).to receive(:oembed_url).and_return 'google.com'
   end
@@ -100,38 +106,38 @@ RSpec.describe Hyrax::GenericPresenter do
 
     before do
       presenters.each do |p|
-        allow(p).to receive(:id).and_return file_set.id
+        allow(p).to receive(:id).and_return solr_document.id
       end
-      allow(file_set).to receive(:oembed?).and_return false
+      allow(solr_document).to receive(:oembed_url).and_return nil
       allow(Hyrax.query_service).to receive(:find_by_alternate_identifier).with(alternate_identifier: file_set.id, use_valkyrie: false).and_return file_set
     end
 
     context 'when an oembed presenter exists' do
       before do
-        allow(file_set).to receive(:oembed?).and_return true
-        allow(ability).to receive(:can?).with(:read, file_set.id).and_return true
+        allow(solr_document).to receive(:oembed_url).and_return ['foo.com']
+        allow(ability).to receive(:can?).with(:read, solr_document.id).and_return true
       end
 
       it 'checks if the oembed can be read' do
-        expect(ability).to receive(:can?).with(:read, file_set.id)
+        expect(ability).to receive(:can?).with(:read, solr_document.id)
         presenter.oembed_viewer?
       end
 
       it 'returns true if the oembed is readable' do
-        allow(ability).to receive(:can?).with(:read, file_set.id).and_return true
+        allow(ability).to receive(:can?).with(:read, solr_document.id).and_return true
         expect(presenter.oembed_viewer?).to eq(true)
       end
 
       it 'returns false if the oembed is not readable' do
-        allow(ability).to receive(:can?).with(:read, file_set.id).and_return false
+        allow(ability).to receive(:can?).with(:read, solr_document.id).and_return false
         expect(presenter.oembed_viewer?).to eq(false)
       end
     end
 
     context 'when none are oembeds' do
       it 'returns false' do
-        allow(ability).to receive(:can?).with(:read, file_set.id).and_return true
-        allow(file_set).to receive(:oembed_url).and_return []
+        allow(ability).to receive(:can?).with(:read, solr_document.id).and_return true
+        allow(fs_solr_document).to receive(:oembed_url).and_return nil
         expect(presenter.oembed_viewer?).to eq(false)
       end
     end

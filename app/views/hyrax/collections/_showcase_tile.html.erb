@@ -1,4 +1,4 @@
-<div class="masonry collection document">
+<div class="masonry collection document position-static">
   <% parent = document.parents.first %>
   <div class="thumbnail">
     <%= link_to(url_for_document(parent), document_link_params(parent, :counter => document_counter_with_offset(document_counter)))  do |body| %>
