@@ -8,6 +8,7 @@ class SolrDocument
   include Hyrax::SolrDocumentBehavior
   include BlacklightOaiProvider::SolrDocument
   include OregonDigital::SolrDocumentBehavior
+  include OregonDigital::MetadataDownload
 
   SolrDocument.use_extension(Blacklight::Document::Email)
   SolrDocument.use_extension(Blacklight::Document::Sms)
@@ -151,12 +152,14 @@ class SolrDocument
   end
 
   def hocr_text
-    '' unless file_set?
+    return '' unless file_set?
+
     @hocr_text ||= resource.hocr_text.presence
   end
 
   def all_text
-    '' unless file_set?
+    return '' unless file_set?
+
     @all_text ||= resource.extracted_text&.content.presence
   end
 
@@ -166,6 +169,10 @@ class SolrDocument
 
   def oai_collections
     self['oai_collections_ssim']
+  end
+
+  def oembed_url
+    self['oembed_url_sim']
   end
 
   # METHOD: Fetch the ssim for 'label$uri'
@@ -184,6 +191,12 @@ class SolrDocument
   solrized_methods Generic.controlled_properties
   solrized_methods Generic.controlled_property_labels
   solrized_methods FileSet.characterization_terms
-  solrized_methods %w[resource_type_label language_label rights_statement_label oembed_url]
+  solrized_methods %w[resource_type_label language_label rights_statement_label]
+
+  # Override the default mime_type method to use the ssi field instead of the tesim field
+  # metadata fetch methods can only be overriden after the solrized_methods calls
+  def mime_type
+    self['mime_type_ssi']
+  end
 end
 # rubocop:enable Metrics/ClassLength

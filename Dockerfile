@@ -12,7 +12,7 @@ FROM bundler AS dependencies
 RUN apt update && apt -y upgrade && \
   apt -y install nodejs unzip ghostscript vim less tmux yarnpkg curl wget openssl \
   git sqlite3 postgresql-client libpq-dev libjpeg62-turbo-dev libpng-dev libtool libgomp1 \
-  build-essential zip xz-utils autoconf automake libtool texinfo libltdl7 \
+  build-essential gcc zip xz-utils autoconf automake libtool texinfo libltdl7 \
   bash bash-completion java-common openjdk-17-jre-headless graphicsmagick ffmpeg \
   poppler-utils tesseract-ocr libopenjp2-7-dev libopenjp2-tools libopenjp2-7 \
   libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release cmake mediainfo libmediainfo-dev
@@ -26,8 +26,8 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 # Install ImageMagick with jp2/tiff support
 # Install ImageMagick with full support
 RUN mkdir -p /tmp/im && \
-  curl -sL https://www.imagemagick.org/archive/releases/ImageMagick-7.1.0-27.tar.xz \
-  | tar -xJvf - -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-27 && \
+  curl -sL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-62.tar.gz \
+  | tar -xz -C /tmp/im && cd /tmp/im/ImageMagick-7.1.0-62 && \
   ./configure \
   --build=$CBUILD \
   --host=$CHOST \
