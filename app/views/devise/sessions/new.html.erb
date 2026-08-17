@@ -3,7 +3,7 @@
 
   <div class="login-select">
     <div class="row">
-      <ul class="flex-container">
+      <ul class="flex-container w-100 justify-content-between">
         <li class="osu-login flex-item">
           <div>
             <label>
@@ -34,23 +34,23 @@
 
   <div class="lime-green-hr" style="margin-bottom:1em"></div>
 
-  <div id="login-page-footer-OSU-footer" class=" login-footer text-center" style='display: none;'>
-    <div class='row'>
+  <div id="login-page-footer-OSU-footer" class=" login-footer" style='display: none;'>
+    <div class='row justify-content-center'>
       <%= button_to main_app.new_osu_session_path, method: :post, class: 'btn btn-primary' do %>
         <span class="university-login">CONTINUE TO OSU LOG IN</span>
       <% end %>
     </div>
-    <div class='row'>
+    <div class='row justify-content-center'>
       Questions about logging in? Contact us.
     </div>
   </div>
-  <div id="login-page-footer-UO-footer" class=" login-footer text-center" style='display: none;'>
-    <div class='row'>
+  <div id="login-page-footer-UO-footer" class=" login-footer" style='display: none;'>
+    <div class='row justify-content-center'>
       <%= button_to main_app.new_uo_session_path, method: :post, class: 'btn btn-primary' do %>
         <span class="university-login">CONTINUE TO UO LOG IN</span>
       <% end %>
     </div>
-    <div class='row'>
+    <div class='row justify-content-center'>
       Questions about logging in? Contact us.
     </div>
   </div>

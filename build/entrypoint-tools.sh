@@ -6,6 +6,6 @@ echo "Starting tools container ${RAILS_ENV}"
 echo "Installing gems..."
 ./build/install_gems.sh
 
-# Start init
-echo "Starting init"
-exec /sbin/init
+# Start sleep to keep pod running
+echo "Entering INFINITE sleep"
+exec sleep infinity

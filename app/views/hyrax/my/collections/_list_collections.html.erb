@@ -4,7 +4,7 @@
 <tr id="document_<%= id %>"
   data-source="my"
   data-id="<%= id %>"
-  data-colls-hash="<%= collection_presenter.available_parent_collections(scope: controller) %>"
+  data-colls-hash="<%= available_parent_collections_data(collection: collection_presenter) %>"
   data-post-url="<%= hyrax.dashboard_create_nest_collection_within_path(id) %>"
   data-post-delete-url="<%= is_admin_set ? hyrax.admin_admin_set_path(id) : hyrax.dashboard_collection_path(id) %>">
   <td>
@@ -31,7 +31,7 @@
       <% end %>
       <%# Expand arrow %>
       <a href="#" class="small show-more" title="Click for more details">
-        <i id="expand_<%= id %>" class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>
+        <i id="expand_<%= id %>" class="fa fa-chevron-right" aria-hidden="true"></i>
         <span class="sr-only"> <%= "#{t("hyrax.dashboard.my.sr.detail_label")} #{collection_presenter.title_or_label}" %></span>
       </a>
     </div>

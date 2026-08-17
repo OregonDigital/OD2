@@ -1,0 +1,130 @@
+import { FieldManager } from 'hydra-editor/field_manager'
+import Handlebars from 'handlebars'
+import Autocomplete from 'hyrax/autocomplete'
+
+/* based on OD2 controlled_vocabulary.es6
+*/
+export default class SingleControlledVocabulary extends FieldManager {
+
+  constructor(element, paramKey) {
+      let options = {
+        /* callback to run after remove is called */
+        remove: null,
+
+        controlsHtml:      '<span class=\"input-group-btn field-controls\">',
+        fieldWrapperClass: '.field-wrapper',
+        warningClass:      '.has-warning',
+        listClass:         '.listing',
+        inputTypeClass:    '.single_controlled_vocabulary',
+
+        removeHtml:        '<button type=\"button\" class=\"btn btn-link remove\"><span class=\"glyphicon glyphicon-remove\"></span><span class="controls-remove-text"></span> <span class=\"sr-only\"> previous <span class="controls-field-name-text">field</span></span></button>',
+        removeText:         'Remove',
+
+        labelControls:      true,
+      }
+      super(element, options)
+      this.paramKey = paramKey
+      this.fieldName = this.element.data('fieldName')
+      this.searchUrl = this.element.data('autocompleteUrl')
+      // OVERRIDE FROM HYRAX
+      this.fieldType = this.element.data('fieldType')
+      console.log("from constructor: " + this.fieldName);
+      // END OVERRIDE
+  }
+
+  // Overrides FieldManager in order to avoid doing a clone of the existing field
+  createNewField($activeField) {
+      let $newField = this._newFieldTemplate()
+      this._addBehaviorsToInput($newField)
+      this.element.trigger("managed_field:add", $newField);
+      return $newField
+  }
+
+  /* This gives the index for the editor */
+  _maxIndex() {
+      return $(this.fieldWrapperClass, this.element).length
+  }
+
+  // Overridden because we always want to permit adding another row
+  inputIsEmpty(activeField) {
+      return false
+  }
+
+  _newFieldTemplate() {
+      let index = this._maxIndex()
+      let rowTemplate = this._template()
+      let controls = this.controls.clone()//.append(this.remover)
+      let row =  $(rowTemplate({ "paramKey": this.paramKey,
+                                 "name": this.fieldName,
+                                 "index": index,
+                                 "class": "single_controlled_vocabulary" }))
+                  .append(controls)
+      return row
+  }
+
+  get _source() {
+      return "<li class=\"field-wrapper input-group input-append\">" +
+        "<input class=\"string {{class}} optional form-control {{paramKey}}_{{name}} form-control multi-text-field\" name=\"{{paramKey}}[{{name}}_attributes][{{index}}][hidden_label]\" value=\"\" id=\"{{paramKey}}_{{name}}_attributes_{{index}}_hidden_label\" data-attribute=\"{{name}}\" type=\"text\">" +
+        "<input name=\"{{paramKey}}[{{name}}_attributes][{{index}}][id]\" value=\"\" id=\"{{paramKey}}_{{name}}_attributes_{{index}}_id\" type=\"hidden\" data-id=\"remote\">" +
+        "<input name=\"{{paramKey}}[{{name}}_attributes][{{index}}][_destroy]\" id=\"{{paramKey}}_{{name}}_attributes_{{index}}__destroy\" value=\"\" data-destroy=\"true\" type=\"hidden\"></li>"
+  }
+
+  _template() {
+      return Handlebars.compile(this._source)
+  }
+
+  /**
+  * @param {jQuery} $newField - The <li> tag
+  */
+  _addBehaviorsToInput($newField) {
+      let $newInput = $('input.multi-text-field', $newField)
+      $newInput.focus()
+      this.addAutocompleteToEditor($newInput)
+      this.element.trigger("managed_field:add", $newInput)
+  }
+
+  /**
+  * Make new element have autocomplete behavior
+  * @param {jQuery} input - The <input type="text"> tag
+  */
+  addAutocompleteToEditor(input) {
+    var autocomplete = new Autocomplete()
+    // OVERRIDE FROM HYRAX
+    // Pass extra fieldType param
+    autocomplete.setup(input, this.fieldName, this.searchUrl, this.fieldType)
+    // END OVERRIDE
+  }
+
+  /** Overrides FieldManager
+  * Instead of removing the line, we override this method to add a
+  * '_destroy' hidden parameter
+  */
+  removeFromList( event ) {
+      event.preventDefault()
+      const inputElements = this.element.find('input' + this.inputTypeClass)
+      const parentsArray = Array.from(inputElements).map(element => element.parentElement)
+      const nonHiddenElements = parentsArray.filter(element => element.style.display !== 'none')
+      const nonHiddenCount = nonHiddenElements.length
+      if (nonHiddenCount < 2){
+        let $listing = $(event.target).closest(this.inputTypeClass).find(this.listClass)
+        let $activeField = $listing.children('li').last()
+        $listing.append(this.createNewField($activeField))
+        //this.postRemovalAdjustment += 1
+      }
+      let field = $(event.target).parents(this.fieldWrapperClass)
+
+      // OVERRIDE FROM HYRAX to prevent accidentally deleting original data if this is a duplicate
+      let value = field.find('[id$=id]').val()
+
+      // If there's more than one field with this value
+      if (field.parents('ul').find('[id$=id]').filter(`[value='${value}']`).length > 1) {
+        // Remove the value from the form as usual
+        super.removeFromList(event);
+        return;
+      }
+      // END OVERRIDE
+      field.find('[data-destroy]').val('true')
+      field.hide()
+      this.element.trigger("managed_field:remove", field)
+  }
+}

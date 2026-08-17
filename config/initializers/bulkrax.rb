@@ -143,7 +143,7 @@ Bulkrax::CsvEntry.class_eval do
     Array.wrap(content.to_s.strip).join('; ')
   end
 
-  # override to use add_oembed & add_accessibilities
+  # override to use add_oembed & add_alt_text
   def build_metadata
     validate_record
 

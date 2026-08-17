@@ -56,7 +56,7 @@ en:
           plss_sim: Public Land Survey System
           based_near_label_sim: Location
           cultural_context_label_sim: Cultural Context
-          local_contexts_label_sim: Local Contexts
+          local_contexts_label_sim: Local Contexts Labels and Notices
           ethnographic_term_label_sim: Ethnographic Term
           style_or_period_label_sim: Style / Period
           form_of_work_label_sim: Form of Work
@@ -225,6 +225,7 @@ en:
     content_warning:
       content_alert: 'This material contains content or imagery that may be harmful or difficult for some users. By clicking the ‘I Understand’ button you are acknowledging that you have been informed about the content you will view.'
     workflow:
+      approve: 'Are you sure you want to approve this item?'
       tombstoned: "This item has been deleted. It is no longer available."
     tombstone:
       confirmation: 'Are you sure you want to tombstone this item?'
@@ -280,6 +281,8 @@ en:
         save: Save
         title: Title
         accessibility_feature: Accessibility Feature
+      show_details:
+        alt_text: Alternative Text
     search:
       form:
         facet:
@@ -331,6 +334,11 @@ en:
       sessions:
         create:
           deactivated_url: 'Your account has been deactivated'
+  oregon_digital:
+    complex_objects:
+      actions:
+        header: Actions
+        download: Download
   simple_form:
     hints:
       collection:
@@ -355,8 +363,8 @@ en:
       collection_type:
         facet_configurable: FACET CONFIGURABLE
       defaults:
-        local_contexts: Local Contexts
-        local_contexts_label: Local Contexts
+        local_contexts: Local Contexts Labels and Notices
+        local_contexts_label: Local Contexts Labels and Notices
         resource_type: Media
     accessibility_copy_form:
       name: Your Name

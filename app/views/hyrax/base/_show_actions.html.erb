@@ -31,6 +31,7 @@
               <li class="<%= 'disabled-link-dropdown' if @disable_link == false %>"><%= link_to "Download Files (High Quality)", main_app.send(:"download_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
             <% end %>
             <li class="<%= 'disabled-link-dropdown' if @disable_link == false %>"><%= link_to "Download Files (Standard Quality)", main_app.send(:"download_low_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) unless (presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/pdf') || presenter.file_set_presenters.map { |p| p.mime_type }.include?('application/vnd.ms-'))  %></li>
+            <li><%= link_to "Metadata Only (CSV)", main_app.send(:"metadata_hyrax_#{presenter.model_name.name.downcase}_path", presenter.id) %></li>
             <li><%= link_to "Download Individual Files", "#file-set-individual" %></li>
           </ul>
         </div>
@@ -45,6 +46,12 @@
       <div class='px-2 py-1'>
         <div class='edit-button-sections'>
           <%= link_to "Edit", edit_polymorphic_path([main_app, presenter]), class: 'btn btn-default' %>
+        </div>
+      </div>
+
+      <div class='px-2 py-1'>
+        <div class='edit-button-sections'>
+          <%= link_to "Reindex", polymorphic_path([main_app, :reindex, presenter]), method: :post, class: 'btn btn-default' %>
         </div>
       </div>
 
@@ -65,15 +72,22 @@
       </div>
 
       <div class='px-2 py-1'>
-        <% if @presenter.workflow.actions.present? && @presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Deposited' %>
+        <% workflow_state = @presenter.solr_document['workflow_state_name_ssim']&.first&.downcase %>
+        <% workflow_actions = @presenter.workflow.actions %>
+        <% if workflow_actions.present? && workflow_state == 'deposited' %>
           <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
             <%= hidden_field :workflow_action, :name, value: 'tombstone' %>
             <input class="btn btn-default" type="submit" value="Tombstone" data-confirm='<%= t('hyrax.tombstone.confirmation') %>'>
           <% end %>
-        <% else %>
+        <% elsif workflow_actions.present? && workflow_state == 'tombstoned' %>
           <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
             <%= hidden_field :workflow_action, :name, value: 'approve' %>
-            <input class="btn btn-default" type="submit" value="Reapprove" data-confirm='<%= t('hyrax.tombstone.revert') %>' <%= disabled='disabled' unless (@presenter.solr_document['workflow_state_name_ssim']&.first&.capitalize == 'Tombstoned' && current_user.admin?) %>>
+            <input class="btn btn-default" type="submit" value="Reapprove" data-confirm='<%= t('hyrax.tombstone.revert') %>' <%= disabled='disabled' unless current_user.admin? %>>
+          <% end %>
+        <% elsif workflow_actions.present? && workflow_state != 'approved' %>
+          <%= form_tag main_app.hyrax_workflow_action_path(presenter), method: :put do %>
+            <%= hidden_field :workflow_action, :name, value: 'approve' %>
+            <input class="btn btn-default" type="submit" value="Approve" data-confirm='<%= t('hyrax.workflow.approve') %>' <%= disabled='disabled' unless current_user.admin? %>>
           <% end %>
         <% end %>
       </div>

@@ -18,14 +18,15 @@ gem 'dalli', '~> 3.2.3'
 gem 'devise'
 gem "edtf", "~> 3.0"
 gem 'hydra-role-management'
-gem 'hyrax', '~> 4.0'
+gem 'hyrax', '~> 5.2'
 # gem 'hyrax-migrator', github: 'OregonDigital/hyrax-migrator', branch: 'master'
 gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'chosen-rails'
 gem 'pg'
 gem 'puma', '~> 4.3.8'
-gem 'rails', '~> 6.0.6'
+gem 'posix-spawn', '~> 0.3.15'
+gem 'rails', '~> 6.1'
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sidekiq', '~> 6.0'
 gem 'sprockets', '3.7.2'
@@ -43,7 +44,7 @@ gem 'triplestore-adapter', git: 'https://github.com/osulp/triplestore-adapter'
 gem 'faraday_middleware'
 gem 'blacklight_iiif_search', '~> 2.0'
 gem 'rubyzip', '~> 2'
-gem 'zip_tricks', '~> 5.3'
+gem 'zip_kit', '~> 6.3'
 gem 'bulkrax', github: 'samvera/bulkrax', ref: 'c19534f3ec2bdf06a0313373ba68155c987616df' #v.9.3.1
 # gem 'willow_sword', github: 'notch8/willow_sword', branch: 'main'
 gem 'jquery-datatables-rails'
@@ -76,7 +77,7 @@ gem 'blacklight_oai_provider'
 
 group :development do
   # listen is a requirement of puma but isn't part of its gemspec
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'web-console', '>= 3.3.0'
 end
 

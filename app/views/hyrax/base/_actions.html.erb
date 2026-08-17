@@ -1,0 +1,6 @@
+<%# OVERRIDE: Override the file to add in the actions for complex oject %>
+<% if member.model_name.singular.to_sym == :file_set %>
+  <%= render "hyrax/file_sets/actions", file_set: member %>
+<% elsif member.model_name.singular.to_sym == :generic %>
+  <%= render "oregon_digital/complex_objects/actions", file_set: member %>
+<% end %>

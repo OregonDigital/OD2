@@ -9,7 +9,7 @@ RSpec.describe ShowPageAdminHelper do
       let(:attributes) do
         {
           'title' => ['everything is somewhere, at one time or another'],
-          'bulkrax_identifier_sim' => ['123-0'],
+          'bulkrax_identifier_tesim' => ['123-0'],
           'bulkrax_importer_id_sim' => ['123']
         }
       end
@@ -30,7 +30,7 @@ RSpec.describe ShowPageAdminHelper do
       let(:attributes) do
         {
           'title' => ['everything is out of whack, all at the same time'],
-          'bulkrax_identifier_sim' => ['123-0'],
+          'bulkrax_identifier_tesim' => ['123-0'],
           'bulkrax_importer_id_sim' => ['123']
         }
       end

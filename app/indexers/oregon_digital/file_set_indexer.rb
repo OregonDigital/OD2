@@ -10,8 +10,9 @@ module OregonDigital
         solr_doc['all_text_timv'] = find_all_text_value
         solr_doc['hocr_text_timv'] = find_hocr_text
         index_additional_characterization_terms(solr_doc)
-        # Add in an indexing to accessibility_feature
+        # Add in an indexing to accessibility_feature & alt_text
         accessibility_label(solr_doc, object)
+        alt_text_label(solr_doc, object)
       end
     end
 
@@ -36,6 +37,13 @@ module OregonDigital
       solr_doc['accessibility_feature_label_sim'] = feature_labels
       solr_doc['accessibility_feature_label_ssim'] = feature_labels
       solr_doc['accessibility_feature_label_tesim'] = feature_labels
+    end
+
+    # METHOD: Create index for alt_text
+    def alt_text_label(solr_doc, object)
+      solr_doc['alt_text_label_sim'] = object.alt_text
+      solr_doc['alt_text_label_ssim'] = object.alt_text
+      solr_doc['alt_text_label_tesim'] = object.alt_text
     end
   end
 end

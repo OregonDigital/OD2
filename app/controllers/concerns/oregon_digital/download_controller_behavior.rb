@@ -29,7 +29,7 @@ module OregonDigital
         response.stream.write(chunk)
       end
     ensure
-      response.stream.close
+      response.stream&.close
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength

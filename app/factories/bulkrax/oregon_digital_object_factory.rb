@@ -22,5 +22,9 @@ module Bulkrax
     def accessibility_attributes
       %i[accessibility_feature accessibility_summary]
     end
+
+    def related_parents_parsed_mapping
+      'parents'
+    end
   end
 end
