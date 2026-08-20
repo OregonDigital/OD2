@@ -36,6 +36,8 @@ class SolrDocument
 
     docs = repository.find(ids)
     docs.documents
+  rescue Blacklight::Exceptions::RecordNotFound
+    []
   end
 
   # Turn document type into FontAwesome icon class
