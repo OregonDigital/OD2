@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-# OVERRIDE FROM HYRAX: Upload of files does not stay in sync with multiple backends.
-#   Supposedly fixed in v5.3.0, so remove this when we upgrade to that version.
-#   See: https://github.com/OregonDigital/OD2/issues/3729
 module Hyrax
+  # OVERRIDE FROM HYRAX: Upload of files does not stay in sync with multiple backends.
+  #   Supposedly fixed in v5.3.0, so remove this when we upgrade to that version.
+  #   See: https://github.com/OregonDigital/OD2/issues/3729
   class UploadsController < ApplicationController
     load_and_authorize_resource class: Hyrax::UploadedFile
 
@@ -24,6 +24,8 @@ module Hyrax
 
     private
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def upload_with_chunking
       @upload = Hyrax::UploadedFile.find(params[:id])
       unpersisted_upload = Hyrax::UploadedFile.new(file: params[:files].first, user: current_user)
@@ -38,10 +40,12 @@ module Hyrax
 
       # Add the following chunk to the incomplete upload
       if @upload.file.present? && begin_of_chunk == current_size
-        File.open(@upload.file.path, "ab") { |f| f.write(params[:files].first.read) }
+        File.open(@upload.file.path, 'ab') { |f| f.write(params[:files].first.read) }
       else
         @upload.file = unpersisted_upload.file
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
   end
 end
