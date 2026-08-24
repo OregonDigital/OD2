@@ -69,7 +69,7 @@ module OregonDigital
 
       # Filter out restricted filesets non-editors can't access
       accessible_file_sets = solrdoc.file_sets.select do |fs|
-        fs['visibility_ssi'] == 'open' || (current_ability.can?(:edit, fs) && fs['visibility_ssi'] == 'restricted')
+        fs['visibility_ssi'] == 'open' || current_ability.can?(:edit, fs)
       end
 
       @jp2_work_presenter.file_sets = accessible_file_sets
