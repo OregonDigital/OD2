@@ -15,6 +15,7 @@ RSpec.describe OregonDigital::UriMethods do
   let(:correct_show_url) { base_url + 'concern/images/abcde1234' }
   let(:correct_iiif_doc_url) { iiif_url + 'ab/cd/e1/23/4-jp2-0000.jp2/full/430,/0/default.jpg' }
   let(:correct_video_url) { base_url + 'downloads/abcde1234?file=thumbnail' }
+  let(:placeholder) { iiif_url + 'f0/no/pr/ev/ie/w-jp2.jp2/full/430,/0/default.jpg' }
 
   describe 'iiif_server' do
     it 'ensures ending with slash' do
@@ -62,6 +63,45 @@ RSpec.describe OregonDigital::UriMethods do
 
     it 'delivers correct url' do
       expect(dummy.video_thumb(pid)).to eq correct_video_url
+    end
+  end
+
+  describe 'image_uri' do
+    let(:doc) { SolrDocument.new(attributes) }
+    let(:attributes) do
+      {
+        'id' => 'abcde1234',
+        'has_model_ssim' => ['Image'],
+        'visibility_ssi' => 'uo',
+        'member_ids_ssim' => ['f0abcde1234']
+      }
+    end
+
+    before do
+      allow(Hyrax::SolrService).to receive(:query).and_return([doc])
+      dummy.image_uri(doc)
+    end
+
+    context 'when image is restricted' do
+      it 'delivers correct url' do
+        expect(dummy.instance_variable_get(:@asset_image_uri)).to eq placeholder
+      end
+    end
+
+    context 'when image has sensitive content' do
+      let(:attributes) do
+        {
+          'id' => 'abcde1234',
+          'has_model_ssim' => ['Image'],
+          'mask_content_tesim' => 'show page',
+          'visibility_ssi' => 'open',
+          'member_ids_ssim' => ['f0abcde1234']
+        }
+      end
+
+      it 'delivers correct url' do
+        expect(dummy.instance_variable_get(:@asset_image_uri)).to eq placeholder
+      end
     end
   end
 end
