@@ -99,4 +99,5 @@ Rails.application.configure do
   end
   config.max_members_query = ENV.fetch('MAX_MEMBERS_QUERY', 5).to_i
   config.bulkrax_create_relationships_wait = ENV.fetch('BULKRAX_CREATE_RELATIONSHIPS_WAIT', 5).to_i
+  config.placeholder_thumb = ENV.fetch('PLACEHOLDER_THUMB', 'f0nopreview')
 end

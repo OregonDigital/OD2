@@ -116,7 +116,7 @@ module OregonDigital
     def file_versions
       assign_uris(doc)
       [].tap do |a|
-        a << build_file_version(file_version_embed, @asset_image_uri) if doc['visibility_ssi'] == 'open'
+        a << build_file_version(file_version_embed, @asset_image_uri)
         a << build_file_version(file_version_show, @asset_show_uri)
       end
     end

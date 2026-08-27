@@ -21,7 +21,8 @@ RSpec.describe BlacklightOaiProvider::SolrDocumentWrapper do
         'has_model_ssim' => ['Image'],
         'thumbnail_path_ss' => '/downloads/abcde1234?file=thumbnail',
         'member_ids_ssim' => ['f0abcde1234'],
-        'timestamp' => expected_timestamp
+        'timestamp' => expected_timestamp,
+        'visibility_ssi' => 'open'
       }
     end
     let(:repository) { instance_double(Blacklight::Solr::Repository) }

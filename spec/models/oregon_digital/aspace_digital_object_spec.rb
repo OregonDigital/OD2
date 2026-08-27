@@ -18,7 +18,8 @@ RSpec.describe OregonDigital::AspaceDigitalObject do
     {
       'id' => 'abcde2345',
       'has_model_ssim' => ['Image'],
-      'member_ids_ssim' => ['f0abcde2345']
+      'member_ids_ssim' => ['f0abcde2345'],
+      'visibility_ssi' => 'open'
     }
   end
 
