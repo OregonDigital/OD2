@@ -11,13 +11,15 @@
       <div class="col-md-2 left-border">
         <p><b> <%= link_to "How to Use This Website", main_app.use_path, method: :get, class: "homepage-info-text" %></b></p>
         <p><b> <%= link_to "About Oregon Digital", main_app.about_path, method: :get, class: "homepage-info-text" %></b></p>
-        <p><b> <%= link_to "OSU Accessibility Statement", main_app.accessibility_statement_path, method: :get, class: "homepage-info-text" %></b></p>
-        <p><b> <%= link_to "Copyright and Usage Request", main_app.copyright_path, method: :get, class: "homepage-info-text" %></b></p>
-        <p><b> <%= link_to "Harmful Content Statement", main_app.harmful_path, method: :get, class: "homepage-info-text" %></b></p>
         <p><b> <%= link_to "Trouble Viewing Oregon Digital?", main_app.recommend_path, method: :get, class: "homepage-info-text" %></b></p>
         <p><b> <%= link_to "Contact Us", hyrax.contact_path, method: :get, class: "homepage-info-text" %></b></p>
       </div>
-      <div class="col-md-2"></div>
+      <div class="horizontal-sm" ></div>
+      <div class="col-md-2 left-border">
+        <p><b> <%= link_to "OSU Accessibility Statement", main_app.accessibility_statement_path, method: :get, class: "homepage-info-text" %></b></p>
+        <p><b> <%= link_to "Copyright and Usage Request", main_app.copyright_path, method: :get, class: "homepage-info-text" %></b></p>
+        <p><b> <%= link_to "Harmful Content Statement", main_app.harmful_path, method: :get, class: "homepage-info-text" %></b></p>
+      </div>
       <div class="col-md-4">
         <p class="col-xs-12 right-align">
           <a href="https://oregonstate.edu"><img class='osu-logo' src='<%= image_url('OSU_horizontal_1C_B.png')%>' alt="Oregon State University"></a>
