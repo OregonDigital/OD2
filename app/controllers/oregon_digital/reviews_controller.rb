@@ -15,6 +15,8 @@ module OregonDigital
 
     private
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
     def approve(items_to_review)
       items_to_review.each do |pid|
         item = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
@@ -29,6 +31,8 @@ module OregonDigital
         Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def activate_asset(item, entity)
       Hyrax::Workflow::ActivateObject.call(target: item)
