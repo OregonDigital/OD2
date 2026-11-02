@@ -3,7 +3,11 @@
 module OregonDigital
   # Bulk Reviews items from the review page
   class ReviewsController < ApplicationController
+    before_action :authenticate_user!
+
     def approve_items
+      authorize! :review, :submissions
+
       items_to_review = params[:ids].split(',')
       approve(items_to_review)
       redirect_back fallback_location: root_path
@@ -11,9 +15,14 @@ module OregonDigital
 
     private
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
     def approve(items_to_review)
       items_to_review.each do |pid|
         item = Hyrax.query_service.find_by_alternate_identifier(alternate_identifier: pid, use_valkyrie: false)
+        next if item.nil?
+        next unless current_ability.admin? || current_ability.can?(:review, item)
+
         entity = Sipity::Entity(item)
         next if entity.nil? || entity.workflow_state_name != 'pending_review'
 
@@ -22,6 +31,8 @@ module OregonDigital
         Rails.logger.error "Unable to approve #{pid}: Error: #{e.message} : #{e.backtrace}"
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def activate_asset(item, entity)
       Hyrax::Workflow::ActivateObject.call(target: item)
