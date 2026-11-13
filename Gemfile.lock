@@ -12,10 +12,10 @@ GIT
 
 GIT
   remote: https://github.com/samvera/bulkrax.git
-  revision: c19534f3ec2bdf06a0313373ba68155c987616df
-  ref: c19534f3ec2bdf06a0313373ba68155c987616df
+  revision: 6739c35a90ff97d07e4fdb5dcaf6eb165ae88a6f
+  ref: 6739c35a90ff97d07e4fdb5dcaf6eb165ae88a6f
   specs:
-    bulkrax (9.3.1)
+    bulkrax (9.5.2)
       bagit (~> 0.6.0)
       coderay
       denormalize_fields
@@ -31,6 +31,7 @@ GIT
       rdf (>= 2.0.2, < 4.0)
       rubyzip
       simple_form
+      ssrf_filter (>= 1.0, < 2.0)
 
 GEM
   remote: https://rubygems.org/
