@@ -808,6 +808,7 @@ GEM
     omniauth-saml (2.2.1)
       omniauth (~> 2.1)
       ruby-saml (~> 1.17)
+    open3 (0.2.1)
     openseadragon (0.9.0)
       rails (> 6.1.0)
     orm_adapter (0.5.0)
@@ -824,7 +825,6 @@ GEM
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     popper_js (1.16.1)
-    posix-spawn (0.3.15)
     prometheus-client (4.2.3)
       base64
     pry (0.14.2)
@@ -1306,9 +1306,9 @@ DEPENDENCIES
   omniauth-cas
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth-saml
+  open3
   pg
   poltergeist
-  posix-spawn (~> 0.3.15)
   pry-byebug
   pry-rails
   puma (~> 4.3.8)

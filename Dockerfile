@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-slim-bookworm AS bundler
+FROM ruby:3.3.14-slim-trixie AS bundler
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -13,7 +13,7 @@ RUN apt update && apt -y upgrade && \
   apt -y install nodejs unzip ghostscript vim less tmux yarnpkg curl wget openssl \
   git sqlite3 postgresql-client libpq-dev libjpeg62-turbo-dev libpng-dev libtool libgomp1 \
   build-essential gcc zip xz-utils autoconf automake libtool texinfo libltdl7 \
-  bash bash-completion java-common openjdk-17-jre-headless graphicsmagick ffmpeg \
+  bash bash-completion java-common openjdk-21-jre-headless graphicsmagick ffmpeg \
   poppler-utils tesseract-ocr libopenjp2-7-dev libopenjp2-tools libopenjp2-7 \
   libffi-dev tini libxslt1-dev libxml2-dev tzdata lsb-release cmake mediainfo libmediainfo-dev
 
